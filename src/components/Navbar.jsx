@@ -1,9 +1,11 @@
-import logo from "../images/logo.png";
+
+import logo from '/logo.png'
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <header className="flex items-center justify-between px-6 py-4  w-full bg-white border-b">
+    <header className="sticky top-0 z-50 flex items-center justify-between px-6 py-4 w-full bg-white/80 backdrop-blur-md border-b shadow-sm">
+
       <div className="flex h-16 w-full   items-center justify-between px-6 ">
         {/* LEFT: Logo */}
         <div className="flex items-center">
@@ -12,9 +14,10 @@ const Navbar = () => {
 
         {/* CENTER: Navigation (even spacing between items) */}
         <nav className="mx-auto flex items-center gap-12 text-[14px] font-medium text-gray-700">
-          <Link to="/" className="hover:text-[#211fa9f8]">
-            Home
-          </Link>
+
+
+          <Link to="/" className="hover:text-[#211fa9f8]">Home</Link>
+
 
           <div className="relative group">
             <span className="cursor-pointer hover:text-[#211fa9f8]   whitespace-nowrap ">
@@ -171,12 +174,9 @@ const Navbar = () => {
             <div
               className="dropdown-menu absolute left-0 top-full mt-1 w-64 rounded-md bg-white shadow-lg
                           opacity-0 invisible group-hover:visible group-hover:opacity-100
-                          transition-all duration-200 z-50"
-            >
-              <Link
-                to="/registration-form"
-                className="block px-4 py-2 hover:bg-gray-100"
-              >
+                          transition-all duration-200 z-50">
+
+              <Link to="/registration-form" className="block px-4 py-2 hover:bg-gray-100">
                 Registration Form
               </Link>
 
@@ -190,21 +190,11 @@ const Navbar = () => {
             </div>
           </div>
 
-          <Link to="/notice" className="hover:text-[#211fa9f8]">
-            Notice
-          </Link>
-          <Link to="/tenders" className="hover:text-[#211fa9f8]">
-            Tenders
-          </Link>
-          <Link
-            to="/csr-policy"
-            className="hover:text-[#211fa9f8] whitespace-nowrap"
-          >
-            CSR Policy
-          </Link>
-          <Link to="/contact" className="hover:text-[#211fa9f8]">
-            Contact
-          </Link>
+          <Link to="/notice" className="hover:text-[#211fa9f8]">Notice</Link>
+          <Link to="/tenders" className="hover:text-[#211fa9f8]">Tenders</Link>
+          <Link to="/csr-policy" className="hover:text-[#211fa9f8] whitespace-nowrap">CSR Policy</Link>
+          <Link to="/contact" className="hover:text-[#211fa9f8]">Contact</Link>
+
         </nav>
 
         {/* RIGHT: Login Button */}

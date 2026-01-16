@@ -1,9 +1,12 @@
-import React from 'react'
+import Hero from '../components/Hero'
+import CoreMissions from '../components/CoreMissions'
 
 const Home = () => {
   return (
-    <div>
-      Home
+    <div className="bg-white">
+      <Hero />
+      <CoreMissions />
+      {/* Other sections will follow */}
     </div>
   )
 }

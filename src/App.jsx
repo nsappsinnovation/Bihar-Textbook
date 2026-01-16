@@ -47,6 +47,7 @@ import Employees from "./pages/our_employee.jsx";
 import OrgStructure from "./pages/organisational_struc.jsx";
 import RegisteredPrinters from "./pages/register_printer.jsx";
 
+
 function App() {
   return (
     <BrowserRouter>
