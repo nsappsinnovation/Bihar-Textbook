@@ -5,8 +5,10 @@ import Nav from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import FlagshipEvents from "./components/FlagshipEvents.jsx";
 import StakeHolder from "./components/StakeHolder.jsx";
+import KeyParticipant from "./components/KeyParticipant.jsx";
 
 import Home from "./pages/Home";
+import KeyParticipantsPage from "./pages/KeyParticipantsPage"; // Import the new page
 import Contact from "./pages/Contact";
 import Notice from "./pages/Notice";
 import Tenders from "./pages/Tenders";
@@ -55,6 +57,9 @@ function App() {
             {/* Home */}
             <Route path="/" element={<Home />} />
 
+            {/* Key Participants View All Page */}
+            <Route path="/key-participants" element={<KeyParticipantsPage />} />
+
             {/* Gallery */}
             <Route path="/photo-gallery" element={<PhotoGallery />} />
             <Route path="/video-gallery" element={<VideoGallery />} />
@@ -101,6 +106,8 @@ function App() {
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
+
+        <KeyParticipant />
 
         <FlagshipEvents />
 
