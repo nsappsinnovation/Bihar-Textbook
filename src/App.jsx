@@ -3,8 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Nav from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
+import FlagshipEvents from "./components/FlagshipEvents.jsx";
+import StakeHolder from "./components/StakeHolder.jsx";
 
-// Pages
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
 import Notice from "./pages/Notice";
@@ -49,7 +50,6 @@ function App() {
     <BrowserRouter>
       <div className="min-h-screen flex flex-col">
         <Nav />
-
         <main className="flex-grow">
           <Routes>
             {/* Home */}
@@ -91,6 +91,9 @@ function App() {
               element={<RegisteredPrinters />}
             />
 
+            {/* Flagship Events */}
+            <Route path="/flagship-events" element={<FlagshipEvents />} />
+
             {/* Other */}
             <Route path="/notice" element={<Notice />} />
             <Route path="/tenders" element={<Tenders />} />
@@ -98,6 +101,10 @@ function App() {
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
+
+        <FlagshipEvents />
+
+        <StakeHolder />
 
         <Footer />
       </div>
