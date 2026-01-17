@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Hero from '../components/Hero';
 import CoreMissions from '../components/CoreMissions';
 import EventsSection from '../components/EventsSection';
@@ -8,10 +8,6 @@ import StakeHolder from "../components/StakeHolder";
 
 const Home = () => {
   return (
-
-    <div>
-      <KeyParticipant />
-      <FlagshipEvents />
     <div className="bg-white">
       <Hero />
       <KeyParticipant />
