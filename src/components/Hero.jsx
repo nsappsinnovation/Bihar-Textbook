@@ -32,7 +32,7 @@ const Hero = () => {
     };
 
     return (
-        <section className="relative min-h-[95vh] flex items-center overflow-hidden bg-[#0d0e23]">
+        <section className="relative min-h-[100vh] flex items-center overflow-hidden bg-[#0d0e23]">
             {/* Background Pattern - Subtle dots/stars and grid */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#1a1b4b] via-[#0d0e23] to-[#050610]"></div>
@@ -68,13 +68,37 @@ const Hero = () => {
                                 <div className="absolute w-[80%] h-[80%] border-[1px] border-white/5 rounded-full animate-[spin_40s_linear_infinite_reverse]"></div>
                             </div>
 
-                            {/* Inner Graphic (Representing the spiral/chakra from ref) */}
-                            <div className="absolute inset-0 flex items-center justify-center p-8">
-                                <img
-                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Ashoka_Chakra.svg/1200px-Ashoka_Chakra.svg.png"
-                                    alt="Ashoka Chakra"
-                                    className="w-[40%] h-auto opacity-40 brightness-0 invert"
-                                />
+                            {/* Premium Inner Graphic (Custom SVG Knowledge Wheel) */}
+                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                <div className="relative w-[70%] h-[70%] flex items-center justify-center opacity-40">
+                                    <svg viewBox="0 0 100 100" className="w-full h-full animate-[spin_100s_linear_infinite]">
+                                        {/* Outer Halo */}
+                                        <circle cx="50" cy="50" r="48" fill="none" stroke="white" strokeWidth="0.5" strokeDasharray="1,3" opacity="0.3" />
+
+                                        {/* Rays of Knowledge (Inspired by 24 spokes) */}
+                                        {[...Array(24)].map((_, i) => (
+                                            <g key={i} transform={`rotate(${i * 15} 50 50)`}>
+                                                <line
+                                                    x1="50" y1="50"
+                                                    x2="50" y2="15"
+                                                    stroke="white"
+                                                    strokeWidth="0.4"
+                                                    opacity="0.5"
+                                                />
+                                                <circle cx="50" cy="15" r="0.5" fill="white" />
+                                            </g>
+                                        ))}
+
+                                        {/* Stylized Open Book Centerpiece */}
+                                        <g transform="translate(35, 35) scale(0.6)" fill="white">
+                                            <path d="M25 5C17.5 5 10 7.5 5 10V45C10 42.5 17.5 40 25 40C32.5 40 40 42.5 45 45V10C40 7.5 32.5 5 25 5Z" opacity="0.8" />
+                                            <path d="M25 5C32.5 5 40 7.5 45 10L45 45C40 42.5 32.5 40 25 40C17.5 40 10 42.5 5 45L5 10C10 7.5 17.5 5 25 5Z" opacity="0.6" />
+                                        </g>
+                                    </svg>
+
+                                    {/* Central Glow Aura */}
+                                    <div className="absolute inset-0 bg-blue-500/10 blur-[60px] rounded-full scale-110"></div>
+                                </div>
                             </div>
 
                             {/* Text integration inside graphic */}
