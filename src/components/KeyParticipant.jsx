@@ -114,8 +114,8 @@ export default function KeyParticipant() {
           <button
             onClick={() => setTab("industry")}
             className={`pb-3 text-sm font-bold tracking-wide transition-all ${tab === "industry"
-                ? "text-[#332F82] border-b-2 border-[#332F82]"
-                : "text-gray-400 hover:text-gray-600"
+              ? "text-[#332F82] border-b-2 border-[#332F82]"
+              : "text-gray-400 hover:text-gray-600"
               }`}
           >
             Industry
@@ -123,8 +123,8 @@ export default function KeyParticipant() {
           <button
             onClick={() => setTab("academia")}
             className={`pb-3 text-sm font-bold tracking-wide transition-all ${tab === "academia"
-                ? "text-[#332F82] border-b-2 border-[#332F82]"
-                : "text-gray-400 hover:text-gray-600"
+              ? "text-[#332F82] border-b-2 border-[#332F82]"
+              : "text-gray-400 hover:text-gray-600"
               }`}
           >
             Academia & Civil Society
