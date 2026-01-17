@@ -1,6 +1,9 @@
 import Hero from '../components/Hero'
 import CoreMissions from '../components/CoreMissions'
 import EventsSection from '../components/EventsSection'
+import KeyParticipant from "../components/KeyParticipant";
+import FlagshipEvents from "../components/FlagshipEvents";
+import StakeHolder from "../components/StakeHolder";
 
 const Home = () => {
   return (
@@ -8,7 +11,9 @@ const Home = () => {
       <Hero />
       <EventsSection />
       <CoreMissions />
-      {/* Other sections will follow */}
+      <KeyParticipant />
+      <FlagshipEvents />
+      <StakeHolder />
     </div>
   )
 }
