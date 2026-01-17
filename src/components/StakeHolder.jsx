@@ -21,25 +21,19 @@ const row2 = [
 
 export default function StakeHolder() {
   const Button = ({ text }) => (
-    <div
-      className="
-        inline-block px-6 py-4 rounded-xl text-sm md:text-base font-medium text-white
-        bg-white/10 backdrop-blur-md border border-white/15
-        transition-colors duration-300
-        hover:bg-gradient-to-r hover:from-indigo-500 hover:to-orange-400
-        whitespace-nowrap
-      "
-    >
+    <div className="inline-block px-6 py-4 rounded-xl text-sm md:text-base font-medium text-white
+      bg-white/10 backdrop-blur-md border border-white/15
+      transition-colors duration-300
+      hover:bg-gradient-to-r hover:from-indigo-500 hover:to-orange-400
+      whitespace-nowrap">
       {text}
     </div>
   );
 
   return (
     <section className="relative w-full overflow-hidden bg-gradient-to-b from-[#1a1f4a] via-[#0e1233] to-[#06081f] py-24 px-6">
-      {/* Background glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.35),transparent_65%)]" />
 
-      {/* Heading */}
       <div className="relative max-w-7xl mx-auto text-center mb-16">
         <p className="uppercase tracking-[0.3em] text-xs text-white">
           Global Participants & Stakeholders
@@ -50,48 +44,34 @@ export default function StakeHolder() {
         </h2>
       </div>
 
-      {/* IMPORTANT: force linear motion */}
-      <style>
-        {`
-          .swiper-wrapper {
-            transition-timing-function: linear !important;
-          }
-        `}
-      </style>
-
-      {/* ROW 1 → LEFT */}
+      {/* ROW 1 */}
       <Swiper
         modules={[Autoplay, FreeMode]}
         slidesPerView="auto"
         spaceBetween={24}
-        loop={true}
-        freeMode={true}
+        loop
+        freeMode
         freeModeMomentum={false}
         speed={6000}
-        autoplay={{
-          delay: 0,
-          disableOnInteraction: false,
-        }}
+        autoplay={{ delay: 0, disableOnInteraction: false }}
         allowTouchMove={false}
-        className="w-full"
       >
-        {[...row1, ...row1, ...row1, ...row1].map((item, i) => (
-          <SwiperSlide key={`r1-${i}`} className="!w-auto">
+        {[...row1, ...row1, ...row1].map((item, i) => (
+          <SwiperSlide key={i} className="!w-auto">
             <Button text={item} />
           </SwiperSlide>
         ))}
       </Swiper>
 
-      {/* GAP */}
       <div className="h-10" />
 
-      {/* ROW 2 → RIGHT */}
+      {/* ROW 2 */}
       <Swiper
         modules={[Autoplay, FreeMode]}
         slidesPerView="auto"
         spaceBetween={24}
-        loop={true}
-        freeMode={true}
+        loop
+        freeMode
         freeModeMomentum={false}
         speed={6000}
         autoplay={{
@@ -100,16 +80,14 @@ export default function StakeHolder() {
           reverseDirection: true,
         }}
         allowTouchMove={false}
-        className="w-full"
       >
         {[...row2, ...row2].map((item, i) => (
-          <SwiperSlide key={`r2-${i}`} className="!w-auto">
+          <SwiperSlide key={i} className="!w-auto">
             <Button text={item} />
           </SwiperSlide>
         ))}
       </Swiper>
 
-      {/* Bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#06081f] to-transparent pointer-events-none" />
     </section>
   );
