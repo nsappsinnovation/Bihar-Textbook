@@ -1,3 +1,4 @@
+
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -25,6 +26,10 @@ import Hrt from "./pages/Hrt";
 import Rti from "./pages/Rti";
 
 // Classes
+
+
+import Esec from './components/EventsSection.jsx'
+
 import Class1 from "./pages/classes/Class1";
 import Class2 from "./pages/classes/Class2";
 import Class3 from "./pages/classes/Class3";
@@ -51,11 +56,48 @@ import RegisteredPrinters from "./pages/register_printer.jsx";
 function App() {
   return (
     <BrowserRouter>
-      <div className="min-h-screen flex flex-col">
-        <Nav />
-        <main className="flex-grow">
-          <Routes>
+
+      
+    
             {/* Home */}
+
+    <div className='min-h-screen flex flex-col'>
+       <Esec ></Esec>
+    <main className="flex-grow">
+        <Routes>
+                  {/* Gallery */}
+          <Route path="/photo-gallery" element={<PhotoGallery />} />
+          <Route path="/video-gallery" element={<VideoGallery />} />
+          <Route path="/press-release" element={<PressRelease />} />
+
+          {/* Documents */}
+          <Route path="/registration-form" element={<RegistrationForm />} />
+          <Route path="/hrt" element={<Hrt />} />
+          <Route path="/rti" element={<Rti />} />
+
+          {/* Classes */}
+          <Route path="/class-1" element={<Class1 />} />
+          <Route path="/class-2" element={<Class2 />} />
+          <Route path="/class-3" element={<Class3 />} />
+          <Route path="/class-4" element={<Class4 />} />
+          <Route path="/class-5" element={<Class5 />} />
+          <Route path="/class-6" element={<Class6 />} />
+          <Route path="/class-7" element={<Class7 />} />
+          <Route path="/class-8" element={<Class8 />} />
+          <Route path="/class-9" element={<Class9 />} />
+          <Route path="/class-10" element={<Class10 />} />
+          <Route path="/class-11" element={<Class11 />} />
+          <Route path="/class-12" element={<Class12 />} />
+
+          {/* Management */}
+          <Route path="/md-message" element={<MdMessage />} />
+          <Route path="/board-of-directors" element={<BoardOfDirectors />} />
+          <Route path="/md-list" element={<MdList />} />
+          <Route path="/officers-list" element={<OfficersList />} />
+          <Route path="/employees" element={<Employees />} />
+          <Route path="/organisation-structure" element={<OrgStructure />} />
+          <Route path="/registered-printers" element={<RegisteredPrinters />} />
+
             <Route path="/" element={<Home />} />
 
             {/* Key Participants View All Page */}
