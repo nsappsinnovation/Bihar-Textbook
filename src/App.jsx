@@ -4,13 +4,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Nav from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
+
+import FlagshipEvents from "./components/FlagshipEvents";
+
 import FlagshipEvents from "./components/FlagshipEvents.jsx";
 import StakeHolder from "./components/StakeHolder.jsx";
 import KeyParticipant from "./components/KeyParticipant.jsx";
 import ContactUs from "./components/ContactUs.jsx";
 
+
 import Home from "./pages/Home";
-import KeyParticipantsPage from "./pages/KeyParticipantsPage"; // Import the new page
+import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
 import Contact from "./pages/Contact";
 import Notice from "./pages/Notice";
 import Tenders from "./pages/Tenders";
@@ -99,7 +103,7 @@ function App() {
             <Route path="/" element={<Home />} />
 
             {/* Key Participants View All Page */}
-            <Route path="/key-participants" element={<KeyParticipantsPage />} />
+            <Route path="/key-participants" element={<KeyParticipantViewAll />} />
 
             {/* Gallery */}
             <Route path="/photo-gallery" element={<PhotoGallery />} />
