@@ -4,37 +4,37 @@ const allParticipants = [
     {
         name: "Shri Nitish Kumar",
         category: "Leadership",
-        image: "https://www.cm.bihar.gov.in/assets/images/cm-image.png",
+        image: "/Avatar.jpg",
         description: "Hon'ble Chief Minister of Bihar, guiding the state towards educational excellence."
     },
     {
         name: "Shri Samrat Choudhary",
         category: "Leadership",
-        image: "https://ui-avatars.com/api/?name=Samrat+Choudhary&background=332F82&color=fff&size=512",
+        image: "/Avatar.jpg",
         description: "Hon'ble Deputy Chief Minister of Bihar."
     },
     {
         name: "Shri Vijay Kumar Chaudhary",
         category: "Leadership",
-        image: "https://ui-avatars.com/api/?name=Vijay+Kumar+Chaudhary&background=332F82&color=fff&size=512",
+        image: "/Avatar.jpg",
         description: "Minister of Education, Bihar, overseeing the state's literacy mission."
     },
     {
         name: "S. Siddharth",
         category: "Leadership",
-        image: "https://ui-avatars.com/api/?name=S+Siddharth&background=332F82&color=fff&size=512",
+        image: "/Avatar.jpg",
         description: "Additional Chief Secretary, Education Department, Bihar."
     },
     {
         name: "Anand Kumar",
         category: "Visionaries",
-        image: "https://ui-avatars.com/api/?name=Anand+Kumar&background=332F82&color=fff&size=512",
+        image: "/Avatar.jpg",
         description: "Founder of Super 30, world-renowned mathematician."
     },
     {
         name: "HC Verma",
         category: "Visionaries",
-        image: "https://ui-avatars.com/api/?name=HC+Verma&background=332F82&color=fff&size=512",
+        image: "/Avatar.jpg",
         description: "Renowned physicist and educator, known for concepts of physics."
     },
 ];

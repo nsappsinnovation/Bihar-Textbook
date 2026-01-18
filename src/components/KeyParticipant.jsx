@@ -5,22 +5,22 @@ const industryData = [
   {
     name: "Shri Nitish Kumar",
     role: "Hon'ble Chief Minister, Bihar",
-    image: "https://www.cm.bihar.gov.in/assets/images/cm-image.png", // Attempting a more official-looking fallback or placeholder
+    image: "/Avatar.jpg",
   },
   {
     name: "Shri Samrat Choudhary",
     role: "Hon'ble Deputy Chief Minister, Bihar",
-    image: "https://ui-avatars.com/api/?name=Samrat+Choudhary&background=332F82&color=fff&size=512",
+    image: "/Avatar.jpg",
   },
   {
     name: "Shri Vijay Kumar Chaudhary",
     role: "Minister of Education, Bihar",
-    image: "https://ui-avatars.com/api/?name=Vijay+Kumar+Chaudhary&background=332F82&color=fff&size=512",
+    image: "/Avatar.jpg",
   },
   {
     name: "S. Siddharth",
     role: "Additional Chief Secretary, Education Department",
-    image: "https://ui-avatars.com/api/?name=S+Siddharth&background=332F82&color=fff&size=512",
+    image: "/Avatar.jpg",
   },
 ];
 
@@ -28,22 +28,22 @@ const academiaData = [
   {
     name: "Anand Kumar",
     role: "Founder, Super 30 & Mathematician",
-    image: "https://ui-avatars.com/api/?name=Anand+Kumar&background=332F82&color=fff&size=512",
+    image: "/Avatar.jpg",
   },
   {
     name: "HC Verma",
     role: "Renowned Physicist & Educator, IIT Kanpur (Born in Bihar)",
-    image: "https://ui-avatars.com/api/?name=HC+Verma&background=332F82&color=fff&size=512",
+    image: "/Avatar.jpg",
   },
   {
     name: "Prof. Girish Kumar Choudhary",
     role: "Vice Chancellor, Patna University",
-    image: "https://ui-avatars.com/api/?name=Girish+Kumar+Choudhary&background=332F82&color=fff&size=512",
+    image: "/Avatar.jpg",
   },
   {
     name: "Abhayanand",
     role: "Former DGP Bihar & Co-founder of Super 30",
-    image: "https://ui-avatars.com/api/?name=Abhayanand&background=332F82&color=fff&size=512",
+    image: "/Avatar.jpg",
   },
 ];
 
