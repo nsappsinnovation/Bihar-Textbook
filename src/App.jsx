@@ -7,6 +7,7 @@ import Footer from "./components/Footer.jsx";
 import FlagshipEvents from "./components/FlagshipEvents.jsx";
 import StakeHolder from "./components/StakeHolder.jsx";
 import KeyParticipant from "./components/KeyParticipant.jsx";
+import ContactUs from "./components/ContactUs.jsx";
 
 import Home from "./pages/Home";
 import KeyParticipantsPage from "./pages/KeyParticipantsPage"; // Import the new page
@@ -143,15 +144,9 @@ function App() {
             <Route path="/notice" element={<Notice />} />
             <Route path="/tenders" element={<Tenders />} />
             <Route path="/csr-policy" element={<CsrPolicy />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/contact" element={<ContactUs />} />
           </Routes>
         </main>
-
-        <KeyParticipant />
-
-        <FlagshipEvents />
-
-        <StakeHolder />
 
         <Footer />
       </div>
