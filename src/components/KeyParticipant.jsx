@@ -5,22 +5,22 @@ const industryData = [
   {
     name: "Shri Nitish Kumar",
     role: "Hon'ble Chief Minister, Bihar",
-    image: "https://im.rediff.com/news/2023/jan/05nitish1.jpg",
+    image: "https://www.cm.bihar.gov.in/assets/images/cm-image.png", // Attempting a more official-looking fallback or placeholder
   },
   {
     name: "Shri Samrat Choudhary",
     role: "Hon'ble Deputy Chief Minister, Bihar",
-    image: "https://images.indianexpress.com/2024/01/Samrat-Choudhary-2.jpg",
+    image: "https://ui-avatars.com/api/?name=Samrat+Choudhary&background=332F82&color=fff&size=512",
   },
   {
     name: "Shri Vijay Kumar Chaudhary",
     role: "Minister of Education, Bihar",
-    image: "https://www.biharvidhanparishad.gov.in/Images/Members/VijayKumarChaudhary.jpg",
+    image: "https://ui-avatars.com/api/?name=Vijay+Kumar+Chaudhary&background=332F82&color=fff&size=512",
   },
   {
     name: "S. Siddharth",
     role: "Additional Chief Secretary, Education Department",
-    image: "https://images.hindustantimes.com/rf/image_size_960x540/HT/2019/12/31/Pictures/_55013bfc-2bb9-11ea-902e-c1e145b369c7.JPG",
+    image: "https://ui-avatars.com/api/?name=S+Siddharth&background=332F82&color=fff&size=512",
   },
 ];
 
@@ -28,22 +28,22 @@ const academiaData = [
   {
     name: "Anand Kumar",
     role: "Founder, Super 30 & Mathematician",
-    image: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Anand_Kumar_2019.jpg",
+    image: "https://ui-avatars.com/api/?name=Anand+Kumar&background=332F82&color=fff&size=512",
   },
   {
     name: "HC Verma",
     role: "Renowned Physicist & Educator, IIT Kanpur (Born in Bihar)",
-    image: "https://upload.wikimedia.org/wikipedia/commons/b/ba/H_C_Verma.jpg",
+    image: "https://ui-avatars.com/api/?name=HC+Verma&background=332F82&color=fff&size=512",
   },
   {
     name: "Prof. Girish Kumar Choudhary",
     role: "Vice Chancellor, Patna University",
-    image: "https://patnauniversity.ac.in/images/vc.jpg",
+    image: "https://ui-avatars.com/api/?name=Girish+Kumar+Choudhary&background=332F82&color=fff&size=512",
   },
   {
     name: "Abhayanand",
     role: "Former DGP Bihar & Co-founder of Super 30",
-    image: "https://images.hindustantimes.com/rf/image_size_630x354/HT/2021/04/18/Pictures/_4bf40974-9fec-11eb-9878-86f2b48e3549.jpg",
+    image: "https://ui-avatars.com/api/?name=Abhayanand&background=332F82&color=fff&size=512",
   },
 ];
 

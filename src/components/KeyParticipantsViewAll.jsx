@@ -2,30 +2,41 @@ import { useState } from "react";
 
 const allParticipants = [
     {
-        name: "S. Ramadorai",
-        category: "Industry",
-        image:
-            "https://impact.indiaai.gov.in/assets/images/key-participants/s-ramadorai.png",
+        name: "Shri Nitish Kumar",
+        category: "Leadership",
+        image: "https://www.cm.bihar.gov.in/assets/images/cm-image.png",
+        description: "Hon'ble Chief Minister of Bihar, guiding the state towards educational excellence."
     },
     {
-        name: "Aruna Sundararajan",
-        category: "Academia",
-        image:
-            "https://impact.indiaai.gov.in/assets/images/key-participants/aruna-sundararajan.png",
+        name: "Shri Samrat Choudhary",
+        category: "Leadership",
+        image: "https://ui-avatars.com/api/?name=Samrat+Choudhary&background=332F82&color=fff&size=512",
+        description: "Hon'ble Deputy Chief Minister of Bihar."
     },
     {
-        name: "Sanjeev Sanyal",
-        category: "Industry",
-        image:
-            "https://impact.indiaai.gov.in/assets/images/key-participants/sanjeev-sanyal.png",
+        name: "Shri Vijay Kumar Chaudhary",
+        category: "Leadership",
+        image: "https://ui-avatars.com/api/?name=Vijay+Kumar+Chaudhary&background=332F82&color=fff&size=512",
+        description: "Minister of Education, Bihar, overseeing the state's literacy mission."
     },
     {
-        name: "Andrew Ng",
-        category: "Academia",
-        image:
-            "https://impact.indiaai.gov.in/assets/images/key-participants/andrew-ng.png",
+        name: "S. Siddharth",
+        category: "Leadership",
+        image: "https://ui-avatars.com/api/?name=S+Siddharth&background=332F82&color=fff&size=512",
+        description: "Additional Chief Secretary, Education Department, Bihar."
     },
-    // Add more mock data if needed for testing search
+    {
+        name: "Anand Kumar",
+        category: "Visionaries",
+        image: "https://ui-avatars.com/api/?name=Anand+Kumar&background=332F82&color=fff&size=512",
+        description: "Founder of Super 30, world-renowned mathematician."
+    },
+    {
+        name: "HC Verma",
+        category: "Visionaries",
+        image: "https://ui-avatars.com/api/?name=HC+Verma&background=332F82&color=fff&size=512",
+        description: "Renowned physicist and educator, known for concepts of physics."
+    },
 ];
 
 export default function KeyParticipantViewAll() {
@@ -43,10 +54,10 @@ export default function KeyParticipantViewAll() {
             {/* TOP BANNER */}
             <div className="bg-gradient-to-r from-indigo-900 via-indigo-800 to-indigo-950 py-20 text-center">
                 <p className="uppercase tracking-widest text-xs  font-semibold text-orange-300">
-                    Key Participants
+                    Our Leadership & Visionaries
                 </p>
                 <h1 className="mt-4 text-3xl md:text-5xl font-semibold text-white">
-                    Visionaries on the Global Stage
+                    Guiding the Future of Education in Bihar
                 </h1>
             </div>
 
@@ -71,7 +82,7 @@ export default function KeyParticipantViewAll() {
 
                     {/* Filters (Right) */}
                     <div className="flex flex-wrap gap-6 text-sm font-bold">
-                        {["All", "Industry", "Academia"].map((item) => (
+                        {["All", "Leadership", "Visionaries"].map((item) => (
                             <button
                                 key={item}
                                 onClick={() => setFilter(item)}
@@ -80,9 +91,7 @@ export default function KeyParticipantViewAll() {
                                     : "text-gray-400 border-transparent hover:text-gray-600"
                                     }`}
                             >
-                                {item === "Academia"
-                                    ? "Academia & Civil Society"
-                                    : item}
+                                {item}
                             </button>
                         ))}
                     </div>
@@ -115,10 +124,7 @@ export default function KeyParticipantViewAll() {
 
                                 {/* Placeholder Description */}
                                 <p className="text-sm text-gray-500 leading-relaxed">
-                                    {p.name === "S. Ramadorai" ? "Former Vice Chairman, Tata Consultancy Services" :
-                                        p.name === "Aruna Sundararajan" ? "Former Secretary, Ministry of Electronics and IT" :
-                                            p.name === "Sanjeev Sanyal" ? "Member, Economic Advisory Council to the Prime Minister" :
-                                                "Leading expert in Artificial Intelligence and global tech policy."}
+                                    {p.description}
                                 </p>
                             </div>
                         </div>
