@@ -4,7 +4,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Nav from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
+
 import FlagshipEvents from "./components/FlagshipEvents";
+
+import FlagshipEvents from "./components/FlagshipEvents.jsx";
+import StakeHolder from "./components/StakeHolder.jsx";
+import KeyParticipant from "./components/KeyParticipant.jsx";
+import ContactUs from "./components/ContactUs.jsx";
+
 
 import Home from "./pages/Home";
 import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
@@ -141,7 +148,7 @@ function App() {
             <Route path="/notice" element={<Notice />} />
             <Route path="/tenders" element={<Tenders />} />
             <Route path="/csr-policy" element={<CsrPolicy />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/contact" element={<ContactUs />} />
           </Routes>
         </main>
 
