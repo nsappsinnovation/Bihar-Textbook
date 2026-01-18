@@ -9,19 +9,19 @@ const Footer = () => {
           <img
             src="/logo.png"
             alt="Bihar State Text Book Publishing Corporation Logo"
-            className="h-20 w-auto mb-3 object-contain brightness-0 invert"
+            className="h-20 w-auto mb-3 object-contain"
           />
 
           <div className="mt-4">
             <p className="font-semibold mb-2.5">Powered By</p>
             <div className="flex gap-4 items-center">
-              <img src="/assets/bstbpc.png" alt="bstbpc" className="h-10" />
+              <img src="/logo.png" alt="bstbpc" className="h-10 bg-white/10 rounded p-1" />
               <img
-                src="/assets/digital-india.png"
+                src="https://upload.wikimedia.org/wikipedia/en/thumb/9/95/Digital_India_logo.svg/1200px-Digital_India_logo.svg.png"
                 alt="digital-india"
-                className="h-10"
+                className="h-10 bg-white/10 rounded p-1"
               />
-              <img src="/assets/indiaai.png" alt="indiaai" className="h-10" />
+              <img src="https://indiaai.gov.in/assets/images/logo.png" alt="indiaai" className="h-10 bg-white/10 rounded p-1" />
             </div>
           </div>
         </div>
