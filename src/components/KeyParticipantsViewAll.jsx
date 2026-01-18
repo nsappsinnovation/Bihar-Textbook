@@ -100,17 +100,8 @@ export default function KeyParticipantViewAll() {
                 {/* Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-8">
                     {filtered.map((p, i) => (
-                        <div key={i} className="flex flex-col">
-                            {/* Image Container */}
-                            <div className="overflow-hidden rounded-[2rem] mb-6 shadow-sm">
-                                <img
-                                    src={p.image}
-                                    alt={p.name}
-                                    className="w-full aspect-[4/5] object-cover object-top"
-                                />
-                            </div>
-
-                            {/* Details Section (Below Image) */}
+                        <div key={i} className="flex flex-col bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                            {/* Details Section */}
                             <div className="flex flex-col items-start">
                                 {/* Category Tag */}
                                 <span className="mb-3 px-3 py-1 bg-gray-100 text-gray-600 text-xs font-semibold uppercase tracking-wider rounded-md">

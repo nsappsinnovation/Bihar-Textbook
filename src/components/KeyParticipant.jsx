@@ -152,9 +152,10 @@ function ParticipantCard({ item }) {
   return (
     <div
       className="
-        group relative h-[420px] overflow-hidden cursor-pointer
+        group relative h-[200px] overflow-hidden cursor-pointer
         rounded-2xl bg-white border border-gray-100
         shadow-sm hover:shadow-2xl transition-shadow duration-300
+        flex flex-col justify-center
       "
     >
       {/* ===== SMOOTH EXPANDING BACKGROUND (CLIP-PATH BASED) ===== */}
@@ -170,7 +171,7 @@ function ParticipantCard({ item }) {
       />
 
       {/* ===== CONTENT ===== */}
-      <div className="relative z-20 p-6">
+      <div className="relative z-20 p-8 text-center">
         <h3
           className="
             text-xl font-bold text-[#1a1a1a]
@@ -183,29 +184,13 @@ function ParticipantCard({ item }) {
 
         <p
           className="
-            mt-2 text-sm text-gray-500 font-medium
+            mt-3 text-sm text-gray-500 font-medium
             transition-colors duration-300 delay-150
             group-hover:text-indigo-100
           "
         >
           {item.role}
         </p>
-      </div>
-
-      {/* ===== IMAGE ===== */}
-      <div className="relative z-20 mt-auto flex h-[300px] items-end justify-center">
-        <img
-          src={item.image}
-          alt={item.name}
-          className="
-            h-[280px] object-contain drop-shadow-2xl
-            transition-transform duration-700
-            ease-[cubic-bezier(0.22,1,0.36,1)]
-            group-hover:scale-110
-            group-hover:-translate-y-2
-            origin-bottom
-          "
-        />
       </div>
     </div>
   );
