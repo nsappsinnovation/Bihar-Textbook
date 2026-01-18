@@ -1,7 +1,3 @@
-
-import Hero from '../components/Hero'
-import CoreMissions from '../components/CoreMissions'
-import EventsSection from '../components/EventsSection'
 import React from 'react';
 import Hero from '../components/Hero';
 import CoreMissions from '../components/CoreMissions';
@@ -18,9 +14,6 @@ const Home = () => {
       <EventsSection />
       <FlagshipEvents />
       <CoreMissions />
-
-      <KeyParticipant />
-      <FlagshipEvents />
       <StakeHolder />
     </div>
   )
