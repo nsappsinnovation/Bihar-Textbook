@@ -7,9 +7,9 @@ const Footer = () => {
         {/* LEFT SECTION */}
         <div className="">
           <img
-            src="/assets/bihar-logo.png"
+            src="/logo.png"
             alt="Bihar State Text Book Publishing Corporation Logo"
-            className="w-[200px] mb-3"
+            className="h-20 w-auto mb-3 object-contain brightness-0 invert"
           />
 
           <div className="mt-4">
