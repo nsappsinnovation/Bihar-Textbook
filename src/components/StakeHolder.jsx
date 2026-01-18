@@ -5,18 +5,18 @@ import "swiper/css";
 import "swiper/css/free-mode";
 
 const row1 = [
-  "Startups & Entrepreneurs",
-  "Academia & Research Institutions",
-  "Industry Leaders & CEOs",
-  "Heads Of State & Government Leaders",
+  "Students & Learners",
+  "Teachers & Educators",
+  "Educational Institutions",
+  "Department of Education, Bihar",
 ];
 
 const row2 = [
-  "Youth & Student Innovators",
-  "Women Leaders In AI",
-  "Technology Practitioners & Developers",
-  "Media & Thought Leaders",
-  "Investors & Venture Capitalists",
+  "Parents & Guardians",
+  "Printing & Logistics Partners",
+  "Curriculum Experts",
+  "CSR & NGO Partners",
+  "District Education Officers",
 ];
 
 export default function StakeHolder() {
@@ -36,11 +36,11 @@ export default function StakeHolder() {
 
       <div className="relative max-w-7xl mx-auto text-center mb-16">
         <p className="uppercase tracking-[0.3em] text-xs text-white">
-          Global Participants & Stakeholders
+          Our Valued Stakeholders & Partners
         </p>
         <h2 className="mt-5 text-3xl md:text-5xl font-bold text-white">
-          Uniting Minds from Across the World to <br />
-          <span className="text-indigo-300">Shape AI for Good</span>
+          Collaborating for a <br />
+          <span className="text-indigo-300">Educated & Empowered Bihar</span>
         </h2>
       </div>
 

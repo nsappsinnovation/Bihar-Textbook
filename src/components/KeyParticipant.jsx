@@ -3,47 +3,47 @@ import { Link } from "react-router-dom";
 
 const industryData = [
   {
-    name: "Jensen Huang",
-    role: "Founder and CEO, NVIDIA",
-    image: "https://impact.indiaai.gov.in/wp-content/uploads/2024/07/Jensen-Huang.png",
+    name: "Shri Nitish Kumar",
+    role: "Hon'ble Chief Minister, Bihar",
+    image: "https://im.rediff.com/news/2023/jan/05nitish1.jpg",
   },
   {
-    name: "Nandan Nilekani",
-    role: "Co-Founder and Chairman, Infosys Technologies Limited",
-    image: "https://impact.indiaai.gov.in/wp-content/uploads/2024/06/Nandan-Nilekani.png",
+    name: "Shri Samrat Choudhary",
+    role: "Hon'ble Deputy Chief Minister, Bihar",
+    image: "https://images.indianexpress.com/2024/01/Samrat-Choudhary-2.jpg",
   },
   {
-    name: "Rishad Premji",
-    role: "Executive Chairman, Wipro Limited",
-    image: "https://impact.indiaai.gov.in/wp-content/uploads/2024/06/Rishad-Premji.png",
+    name: "Shri Vijay Kumar Chaudhary",
+    role: "Minister of Education, Bihar",
+    image: "https://www.biharvidhanparishad.gov.in/Images/Members/VijayKumarChaudhary.jpg",
   },
   {
-    name: "Dr. P. Anandan",
-    role: "Former MD, Microsoft Research",
-    image: "https://impact.indiaai.gov.in/wp-content/uploads/2024/06/Dr-P-Anandan.png",
+    name: "S. Siddharth",
+    role: "Additional Chief Secretary, Education Department",
+    image: "https://images.hindustantimes.com/rf/image_size_960x540/HT/2019/12/31/Pictures/_55013bfc-2bb9-11ea-902e-c1e145b369c7.JPG",
   },
 ];
 
 const academiaData = [
   {
-    name: "Prof. Yoshua Bengio",
-    role: "Full Professor, Department of Computer Science and Operations Research, Université de Montréal",
-    image: "https://impact.indiaai.gov.in/wp-content/uploads/2024/07/Yoshua-Bengio.png",
+    name: "Anand Kumar",
+    role: "Founder, Super 30 & Mathematician",
+    image: "https://upload.wikimedia.org/wikipedia/commons/4/4e/Anand_Kumar_2019.jpg",
   },
   {
-    name: "Prof. Yejin Choi",
-    role: "Professor, Paul G. Allen School of Computer Science & Engineering at the University of Washington",
-    image: "https://impact.indiaai.gov.in/wp-content/uploads/2024/07/Yejin-Choi.png",
+    name: "HC Verma",
+    role: "Renowned Physicist & Educator, IIT Kanpur (Born in Bihar)",
+    image: "https://upload.wikimedia.org/wikipedia/commons/b/ba/H_C_Verma.jpg",
   },
   {
-    name: "Prof. Yann LeCun",
-    role: "VP & Chief AI Scientist, Meta",
-    image: "https://impact.indiaai.gov.in/wp-content/uploads/2024/07/Yann-LeCun.png",
+    name: "Prof. Girish Kumar Choudhary",
+    role: "Vice Chancellor, Patna University",
+    image: "https://patnauniversity.ac.in/images/vc.jpg",
   },
   {
-    name: "Prof. Fei-Fei Li",
-    role: "Sequoia Professor, Computer Science Department, Stanford University",
-    image: "https://impact.indiaai.gov.in/wp-content/uploads/2024/07/Fei-Fei-Li.png",
+    name: "Abhayanand",
+    role: "Former DGP Bihar & Co-founder of Super 30",
+    image: "https://images.hindustantimes.com/rf/image_size_630x354/HT/2021/04/18/Pictures/_4bf40974-9fec-11eb-9878-86f2b48e3549.jpg",
   },
 ];
 
@@ -75,7 +75,7 @@ export default function KeyParticipant() {
 
           <div className="flex flex-col md:flex-row justify-between items-end gap-4">
             <h2 className="text-4xl md:text-5xl font-bold text-[#1a1a1a] leading-tight">
-              Visionaries on the <span className="bg-gradient-to-r from-[#332F82] to-[#a87b3e] bg-clip-text text-transparent">Global Stage</span>
+              Leading the Way in <span className="bg-gradient-to-r from-[#332F82] to-[#a87b3e] bg-clip-text text-transparent">Educational Excellence</span>
             </h2>
 
             <div className="flex items-center gap-4">
@@ -118,7 +118,7 @@ export default function KeyParticipant() {
               : "text-gray-400 hover:text-gray-600"
               }`}
           >
-            Industry
+            Leadership
           </button>
           <button
             onClick={() => setTab("academia")}
@@ -127,7 +127,7 @@ export default function KeyParticipant() {
               : "text-gray-400 hover:text-gray-600"
               }`}
           >
-            Academia & Civil Society
+            Visionaries & Educators
           </button>
         </div>
 
@@ -144,7 +144,7 @@ export default function KeyParticipant() {
           ))}
         </div>
       </div>
-    </section>
+    </section >
   );
 }
 

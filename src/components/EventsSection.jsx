@@ -1,121 +1,63 @@
 import { useState } from "react";
-import EventCard from'./EventCard.jsx'
+import EventCard from './EventCard.jsx'
 const pastEvents = [
   {
     id: 1,
     date: "January 12, 2026",
-    location: "Solapur",
-    title: "Quantum machine learning for health care",
-    organizer: "MIT VPU",
+    location: "Patna",
+    title: "Bihar Diwas 2026 Education Fair",
+    organizer: "BSTPC",
     description:
-      "A six-day hybrid seminar exploring quantum machine learning applications in healthcare.",
+      "A celebration of Bihar's educational history with a showcase of local textbook heritage.",
     image:
-      "https://images.unsplash.com/photo-1581092160562-40aa08e78837",
+      "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f",
   },
-
   {
     id: 2,
-    date: "January 12, 2026",
-    location: "Delhi",
-    title: "AI in Education: Roundtable & Policy Dialogues",
-    organizer: "Central Square Foundation",
+    date: "January 15, 2026",
+    location: "Gaya",
+    title: "Community Outreach for Rural Literacy",
+    organizer: "District Education Office",
     description:
-      "Senior leaders discussed responsible AI adoption in education.",
+      "A massive textbook distribution camp for underprivileged students.",
     image:
-      "https://images.unsplash.com/photo-1521737604893-d14cc237f11d",
+      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b",
   },
   {
     id: 3,
-    date: "January 12, 2026",
-    location: "Solapur",
-    title: "Quantum machine learning for health care",
-    organizer: "MIT VPU",
+    date: "January 20, 2026",
+    location: "Muzaffarpur",
+    title: "Teacher Training: New Curriculum 2026",
+    organizer: "SCERT Bihar",
     description:
-      "A six-day hybrid seminar exploring quantum machine learning applications in healthcare.",
+      "A workshop focused on training teachers for the newly introduced textbooks.",
     image:
-      "https://images.unsplash.com/photo-1581092160562-40aa08e78837",
+      "https://images.unsplash.com/photo-1544928147-79a2dbc1f389",
   },
   {
     id: 4,
-    date: "January 12, 2026",
-    location: "Solapur",
-    title: "Quantum machine learning for health care",
-    organizer: "MIT VPU",
+    date: "January 25, 2026",
+    location: "Bhagalpur",
+    title: "Digital Literacy Workshop for Students",
+    organizer: "BSTPC Digital Team",
     description:
-      "A six-day hybrid seminar exploring quantum machine learning applications in healthcare.",
+      "Introducing students to e-Lotani and digital learning materials.",
     image:
-      "https://images.unsplash.com/photo-1581092160562-40aa08e78837",
+      "https://images.unsplash.com/photo-1531482615713-2afd69097998",
   },
-  {
-    id: 5,
-    date: "January 12, 2026",
-    location: "Solapur",
-    title: "Quantum machine learning for health care",
-    organizer: "MIT VPU",
-    description:
-      "A six-day hybrid seminar exploring quantum machine learning applications in healthcare.",
-    image:
-      "https://images.unsplash.com/photo-1581092160562-40aa08e78837",
-  },
-  {
-    id: 6,
-    date: "January 12, 2026",
-    location: "Solapur",
-    title: "Quantum machine learning for health care",
-    organizer: "MIT VPU",
-    description:
-      "A six-day hybrid seminar exploring quantum machine learning applications in healthcare.",
-    image:
-      "https://images.unsplash.com/photo-1581092160562-40aa08e78837",
-  },
-  {
-    id: 7,
-    date: "January 12, 2026",
-    location: "Solapur",
-    title: "Quantum machine learning for health care",
-    organizer: "MIT VPU",
-    description:
-      "A six-day hybrid seminar exploring quantum machine learning applications in healthcare.",
-    image:
-      "https://images.unsplash.com/photo-1581092160562-40aa08e78837",
-  },
-   {
-    id: 8,
-    date: "January 12, 2026",
-    location: "Solapur",
-    title: "Quantum machine learning for health care",
-    organizer: "MIT VPU",
-    description:
-      "A six-day hybrid seminar exploring quantum machine learning applications in healthcare.",
-    image:
-      "https://images.unsplash.com/photo-1581092160562-40aa08e78837",
-  },
-   {
-    id: 9,
-    date: "January 12, 2026",
-    location: "Solapur",
-    title: "Quantum machine learning for health care",
-    organizer: "MIT VPU",
-    description:
-      "A six-day hybrid seminar exploring quantum machine learning applications in healthcare.",
-    image:
-      "https://images.unsplash.com/photo-1581092160562-40aa08e78837",
-  },
-  
-  
 ];
 
 const upcomingEvents = [
   {
     id: 10,
     date: "February 5, 2026",
-    location: "Mumbai",
-    title: "AI Governance Summit",
-    organizer: "NITI Aayog",
+    location: "Patna",
+    title: "Launch of Academic Session 2026-27",
+    organizer: "Education Department, Bihar",
     description:
-      "A national dialogue on AI governance and policy frameworks.",
+      "Official launch ceremony and book distribution inauguration.",
     image:
-      "https://images.unsplash.com/photo-1551836022-d5d88e9218df",
+      "https://images.unsplash.com/photo-1497633762265-9d179a990aa6",
   },
 ];
 
@@ -128,35 +70,33 @@ export default function EventsSection() {
     <section className="max-w-7xl mx-auto px-4 py-12">
       {/* Header */}
       <p className="text-sm uppercase tracking-wide text-gray-500">
-        Pre-Summit Events
+        Educational Initiatives
       </p>
       <h2 className="text-3xl md:text-4xl font-semibold mt-2">
-        Exclusive Sessions and Dialogues Shaping{" "}
+        Empowering Minds through Comprehensive{" "}
         <span className="bg-gradient-to-r  from-indigo-500 to-orange-400 bg-clip-text text-transparent
     transition-all duration-300
-      ">the Future of AI</span>
+      ">Learning Resources</span>
       </h2>
 
       {/* Tabs */}
       <div className="flex gap-4 mt-8">
         <button
           onClick={() => setActiveTab("past")}
-          className={`px-5 py-2 rounded-full text-sm font-medium transition ${
-            activeTab === "past"
+          className={`px-5 py-2 rounded-full text-sm font-medium transition ${activeTab === "past"
               ? "bg-indigo-600 text-white"
               : "border border-gray-300 text-gray-600"
-          }`}
+            }`}
         >
           Past Events
         </button>
 
         <button
           onClick={() => setActiveTab("upcoming")}
-          className={`px-5 py-2 rounded-full text-sm font-medium transition ${
-            activeTab === "upcoming"
+          className={`px-5 py-2 rounded-full text-sm font-medium transition ${activeTab === "upcoming"
               ? "bg-indigo-600 text-white"
               : "border border-gray-300 text-gray-600"
-          }`}
+            }`}
         >
           Upcoming Events
         </button>
