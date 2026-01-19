@@ -15,9 +15,6 @@ const Home = () => {
       <EventsSection />
       <FlagshipEvents />
       <CoreMissions />
-
-      <KeyParticipant />
-      <FlagshipEvents />
       <StakeHolder />
     </div>
   )
