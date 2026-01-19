@@ -5,22 +5,22 @@ const industryData = [
   {
     name: "Shri Nitish Kumar",
     role: "Hon'ble Chief Minister, Bihar",
-    image: "https://www.cm.bihar.gov.in/assets/images/cm-image.png", // Attempting a more official-looking fallback or placeholder
+    image: "/profile.png",
   },
   {
     name: "Shri Samrat Choudhary",
     role: "Hon'ble Deputy Chief Minister, Bihar",
-    image: "https://ui-avatars.com/api/?name=Samrat+Choudhary&background=332F82&color=fff&size=512",
+    image: "/profile.png",
   },
   {
     name: "Shri Vijay Kumar Chaudhary",
     role: "Minister of Education, Bihar",
-    image: "https://ui-avatars.com/api/?name=Vijay+Kumar+Chaudhary&background=332F82&color=fff&size=512",
+    image: "/profile.png",
   },
   {
     name: "S. Siddharth",
     role: "Additional Chief Secretary, Education Department",
-    image: "https://ui-avatars.com/api/?name=S+Siddharth&background=332F82&color=fff&size=512",
+    image: "/profile.png",
   },
 ];
 
@@ -28,22 +28,22 @@ const academiaData = [
   {
     name: "Anand Kumar",
     role: "Founder, Super 30 & Mathematician",
-    image: "https://ui-avatars.com/api/?name=Anand+Kumar&background=332F82&color=fff&size=512",
+    image: "/profile.png",
   },
   {
     name: "HC Verma",
     role: "Renowned Physicist & Educator, IIT Kanpur (Born in Bihar)",
-    image: "https://ui-avatars.com/api/?name=HC+Verma&background=332F82&color=fff&size=512",
+    image: "/profile.png",
   },
   {
     name: "Prof. Girish Kumar Choudhary",
     role: "Vice Chancellor, Patna University",
-    image: "https://ui-avatars.com/api/?name=Girish+Kumar+Choudhary&background=332F82&color=fff&size=512",
+    image: "/profile.png",
   },
   {
     name: "Abhayanand",
     role: "Former DGP Bihar & Co-founder of Super 30",
-    image: "https://ui-avatars.com/api/?name=Abhayanand&background=332F82&color=fff&size=512",
+    image: "/profile.png",
   },
 ];
 
@@ -152,45 +152,46 @@ function ParticipantCard({ item }) {
   return (
     <div
       className="
-        group relative h-[200px] overflow-hidden cursor-pointer
-        rounded-2xl bg-white border border-gray-100
-        shadow-sm hover:shadow-2xl transition-shadow duration-300
-        flex flex-col justify-center
+        group relative h-[400px] w-full overflow-hidden
+        rounded-3xl bg-white
+        shadow-sm border border-gray-100
+        transition-all duration-300 hover:shadow-xl
       "
     >
-      {/* ===== SMOOTH EXPANDING BACKGROUND (CLIP-PATH BASED) ===== */}
+      {/* ===== TEXT CONTENT (Top Left) ===== */}
+      <div className="relative z-20 p-6 text-left transition-colors duration-300">
+        <h3 className="text-xl font-bold text-[#1a1a1a] leading-tight group-hover:text-white transition-colors duration-300">
+          {item.name}
+        </h3>
+        <p className="mt-2 text-sm text-gray-500 font-medium leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
+          {item.role}
+        </p>
+      </div>
+
+      {/* ===== CURVED BACKGROUND (Bottom) ===== */}
       <div
         className="
-          absolute inset-0 bg-[#332F82]
-          transition-[clip-path] duration-2000
-          ease-[cubic-bezier(0.22,1,0.36,1)]
+          absolute bottom-0 left-0 right-0
+          h-[180px] bg-[#332F82]
+          rounded-t-[80%] scale-x-125
           z-0
-          [clip-path:ellipse(60%_35%_at_50%_100%)]
-          group-hover:[clip-path:ellipse(150%_150%_at_50%_50%)]
+          transition-all duration-500 ease-in-out
+          group-hover:h-full group-hover:scale-x-100 group-hover:rounded-none
         "
       />
 
-      {/* ===== CONTENT ===== */}
-      <div className="relative z-20 p-8 text-center">
-        <h3
+      {/* ===== IMAGE (Bottom Center) ===== */}
+      <div className="absolute bottom-0 left-0 right-0 flex justify-center items-end z-10 w-full h-full pointer-events-none overflow-hidden rounded-3xl">
+        <img
+          src={item.image}
+          alt={item.name}
           className="
-            text-xl font-bold text-[#1a1a1a]
-            transition-colors duration-300 delay-100
-            group-hover:text-white
+            h-[350px] absolute top-32 w-auto object-contain object-bottom
+            transform transition-transform duration-500
+            scale-110 group-hover:scale-125 group-hover:-translate-y-4
+            drop-shadow-2xl
           "
-        >
-          {item.name}
-        </h3>
-
-        <p
-          className="
-            mt-3 text-sm text-gray-500 font-medium
-            transition-colors duration-300 delay-150
-            group-hover:text-indigo-100
-          "
-        >
-          {item.role}
-        </p>
+        />
       </div>
     </div>
   );

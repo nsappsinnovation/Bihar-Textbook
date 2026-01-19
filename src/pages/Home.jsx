@@ -12,9 +12,9 @@ const Home = () => {
     <div className="bg-white">
       <Hero />
       <KeyParticipant />
-      <EventsSection />
-      <FlagshipEvents />
       <CoreMissions />
+      <FlagshipEvents />
+      <EventsSection />
       <StakeHolder />
     </div>
   )
