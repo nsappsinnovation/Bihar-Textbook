@@ -5,8 +5,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Nav from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 
-import FlagshipEvents from "./components/FlagshipEvents";
-
 import FlagshipEvents from "./components/FlagshipEvents.jsx";
 import StakeHolder from "./components/StakeHolder.jsx";
 import KeyParticipant from "./components/KeyParticipant.jsx";
