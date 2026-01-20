@@ -18,7 +18,7 @@ const industryData = [
     image: "/profile.png",
   },
   {
-    name: "S. Siddharth",
+    name: "Dr. B. Rajender, I.A.S.",
     role: "Additional Chief Secretary, Education Department",
     image: "/profile.png",
   },
@@ -152,44 +152,58 @@ function ParticipantCard({ item }) {
   return (
     <div
       className="
-        group relative h-[400px] w-full overflow-hidden
-        rounded-3xl bg-white
-        shadow-sm border border-gray-100
-        transition-all duration-300 hover:shadow-xl
+        group relative h-[450px] overflow-hidden cursor-pointer
+        rounded-2xl bg-white border border-gray-100
+        shadow-sm hover:shadow-2xl transition-shadow duration-300
       "
     >
-      {/* ===== TEXT CONTENT (Top Left) ===== */}
-      <div className="relative z-20 p-6 text-left transition-colors duration-300">
-        <h3 className="text-xl font-bold text-[#1a1a1a] leading-tight group-hover:text-white transition-colors duration-300">
+      {/* ===== SMOOTH EXPANDING BACKGROUND (CLIP-PATH BASED) ===== */}
+      <div
+        className="
+          absolute inset-0 bg-[#332F82]
+          transition-[clip-path] duration-2000
+          ease-[cubic-bezier(0.22,1,0.36,1)]
+          z-0
+          [clip-path:ellipse(60%_35%_at_50%_100%)]
+          group-hover:[clip-path:ellipse(150%_150%_at_50%_50%)]
+        "
+      />
+
+      {/* ===== CONTENT ===== */}
+      <div className="relative z-20 p-6">
+        <h3
+          className="
+            text-xl font-bold text-[#1a1a1a]
+            transition-colors duration-300 delay-100
+            group-hover:text-white
+          "
+        >
           {item.name}
         </h3>
-        <p className="mt-2 text-sm text-gray-500 font-medium leading-relaxed group-hover:text-gray-200 transition-colors duration-300">
+
+        <p
+          className="
+            mt-2 text-sm text-gray-500 font-medium
+            transition-colors duration-300 delay-150
+            group-hover:text-indigo-100
+          "
+        >
           {item.role}
         </p>
       </div>
 
-      {/* ===== CURVED BACKGROUND (Bottom) ===== */}
-      <div
-        className="
-          absolute bottom-0 left-0 right-0
-          h-[180px] bg-[#332F82]
-          rounded-t-[80%] scale-x-125
-          z-0
-          transition-all duration-500 ease-in-out
-          group-hover:h-full group-hover:scale-x-100 group-hover:rounded-none
-        "
-      />
-
-      {/* ===== IMAGE (Bottom Center) ===== */}
-      <div className="absolute bottom-0 left-0 right-0 flex justify-center items-end z-10 w-full h-full pointer-events-none overflow-hidden rounded-3xl">
+      {/* ===== IMAGE ===== */}
+      <div className="relative z-20 mt-auto flex h-[350px] items-end justify-center">
         <img
           src={item.image}
           alt={item.name}
           className="
-            h-[350px] absolute top-32 w-auto object-contain object-bottom
-            transform transition-transform duration-500
-            scale-110 group-hover:scale-125 group-hover:-translate-y-4
-            drop-shadow-2xl
+            h-[330px] object-contain drop-shadow-2xl pt-14
+            transition-transform duration-700
+            ease-[cubic-bezier(0.22,1,0.36,1)]
+            group-hover:scale-110
+            group-hover:-translate-y-2
+            origin-bottom
           "
         />
       </div>

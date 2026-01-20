@@ -20,7 +20,7 @@ const events = [
     description:
       "Taking books to the remotest corners of Bihar via our state-of-the-art mobile library units.",
     image:
-      "https://images.unsplash.com/photo-1491845339678-2cf2af0c0989",
+      "https://i.dawn.com/primary/2020/11/5fa1c8942bb12.jpg",
   },
   {
     title: "Curriculum Modernization Expo",
@@ -28,6 +28,12 @@ const events = [
       "A showcase of modern pedagogies and interactive textbooks for the 21st-century learner.",
     image:
       "https://images.unsplash.com/photo-1509062522246-3755977927d7",
+  },
+  {
+    title: "Interactive E-Books",
+    description:
+      "Engaging digital versions of textbooks with interactive elements for enhanced learning.",
+    image: "https://pdcentrallibrary.home.blog/wp-content/uploads/2020/02/e-books.png",
   },
 ];
 

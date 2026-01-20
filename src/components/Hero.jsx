@@ -32,7 +32,7 @@ const Hero = () => {
     };
 
     return (
-        <section className="relative min-h-[100vh] flex items-center overflow-hidden bg-[#0d0e23]">
+        <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#0d0e23]">
             {/* Background Pattern - Subtle dots/stars and grid */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#1a1b4b] via-[#0d0e23] to-[#050610]"></div>
@@ -146,7 +146,7 @@ const Hero = () => {
 
                         <motion.h1 variants={itemVariants} className="text-4xl md:text-5xl font-bold leading-tight mb-4">
                             Bihar <span className="text-orange-400">State Text Book</span> <br />
-                            Publishing Corp. 2026
+                            Publishing Corporation
                         </motion.h1>
 
                         <motion.p variants={itemVariants} className="text-lg text-white/70 mb-8 max-w-xl font-light leading-relaxed">
@@ -156,7 +156,7 @@ const Hero = () => {
                         {/* Location/Info */}
                         <motion.div variants={itemVariants} className="flex items-center gap-3 mb-8 text-white/80">
                             <svg className="w-5 h-5 text-orange-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"></path></svg>
-                            <span className="font-semibold text-lg">Patna, Bihar | Annual Publication Cycle 2026</span>
+                            <span className="font-semibold text-lg">Patna, Bihar | Annual Publication Cycle </span>
                         </motion.div>
 
                         {/* Countdown Timer */}
@@ -217,7 +217,7 @@ const Hero = () => {
             </div>
 
             {/* Pagination Dots */}
-            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
+            <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-3 z-20">
                 <div className="w-3 h-3 rounded-full bg-white ring-4 ring-white/20"></div>
                 {[0, 1, 2, 3, 4].map((_, i) => (
                     <div key={i} className="w-2 h-2 rounded-full bg-white/30 hover:bg-white/50 cursor-pointer transition-colors"></div>

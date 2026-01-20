@@ -21,9 +21,8 @@ export default function EventCard({ event }) {
         <div className="border-t border-gray-200 mt-2 pt-2" />
 
         {/* Description */}
-        <p className="text-sm text-gray-500 mt-2">
-          The six-day hybrid seminar built foundational understanding of quantum
-          computing and quantum machine learning for health and technology
+        <p className="text-sm text-gray-500 mt-2 line-clamp-3">
+          {event.description}
         </p>
 
         {/* Image */}
