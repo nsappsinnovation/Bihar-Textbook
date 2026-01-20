@@ -1,0 +1,136 @@
+{
+  "classes": [
+    {
+      "id": 1,
+      "name": "Class 1",
+      "books": [
+        {
+          "id": "c1b1",
+          "title": "English",
+          "image": "/images/classes/1.png"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Class 2",
+      "books": [
+        {
+          "id": "c2b1",
+          "title": "English",
+          "image": "/images/classes/2.png"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Class 3",
+      "books": [
+        {
+          "id": "c3b1",
+          "title": "English",
+          "image": "/images/classes/3.png"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Class 4",
+      "books": [
+        {
+          "id": "c4b1",
+          "title": "English",
+          "image": "/images/classes/4.png"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Class 5",
+      "books": [
+        {
+          "id": "c5b1",
+          "title": "English",
+          "image": "/images/classes/5.png"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Class 6",
+      "books": [
+        {
+          "id": "c6b1",
+          "title": "English",
+          "image": "/images/classes/6.png"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Class 7",
+      "books": [
+        {
+          "id": "c7b1",
+          "title": "English",
+          "image": "/images/classes/7.png"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Class 8",
+      "books": [
+        {
+          "id": "c8b1",
+          "title": "English",
+          "image": "/images/classes/8.png"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Class 9",
+      "books": [
+        {
+          "id": "c9b1",
+          "title": "English",
+          "image": "/images/classes/9.png"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Class 10",
+      "books": [
+        {
+          "id": "c10b1",
+          "title": "English",
+          "image": "/images/classes/10.png"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Class 11",
+      "books": [
+        {
+          "id": "c11b1",
+          "title": "English",
+          "image": "/images/classes/11.png"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Class 12",
+      "books": [
+        {
+          "id": "c12b1",
+          "title": "English",
+          "image": "/images/classes/12.png"
+        }
+      ]
+    }
+  ]
+}
