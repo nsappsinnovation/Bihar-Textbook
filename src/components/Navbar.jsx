@@ -1,5 +1,3 @@
-
-import logo from '/logo.png'
 import { Link } from "react-router-dom";
 
 import { Knowconfig } from './knowus/Knowconfig';
@@ -12,7 +10,9 @@ const Navbar = () => {
       <div className="flex h-16 w-full   items-center justify-between px-6 ">
         {/* LEFT: Logo */}
         <div className="flex items-center">
-          <img src={logo} alt="Logo" className="h-15 w-auto" />
+          <Link to="/">
+            <img src="/logo.png" alt="BSTPC Logo" className="h-12 md:h-16 w-auto object-contain" />
+          </Link>
         </div>
 
         {/* CENTER: Navigation (even spacing between items) */}

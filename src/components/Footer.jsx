@@ -7,21 +7,21 @@ const Footer = () => {
         {/* LEFT SECTION */}
         <div className="">
           <img
-            src="/assets/bihar-logo.png"
+            src="/logo.png"
             alt="Bihar State Text Book Publishing Corporation Logo"
-            className="w-[200px] mb-3"
+            className="h-20 w-auto mb-3 object-contain"
           />
 
           <div className="mt-4">
             <p className="font-semibold mb-2.5">Powered By</p>
             <div className="flex gap-4 items-center">
-              <img src="/assets/bstbpc.png" alt="bstbpc" className="h-10" />
+              <img src="/logo.png" alt="bstbpc" className="h-10 bg-white/10 rounded p-1" />
               <img
-                src="/assets/digital-india.png"
+                src="https://upload.wikimedia.org/wikipedia/en/thumb/9/95/Digital_India_logo.svg/1200px-Digital_India_logo.svg.png"
                 alt="digital-india"
-                className="h-10"
+                className="h-10 bg-white/10 rounded p-1"
               />
-              <img src="/assets/indiaai.png" alt="indiaai" className="h-10" />
+              <img src="https://indiaai.gov.in/assets/images/logo.png" alt="indiaai" className="h-10 bg-white/10 rounded p-1" />
             </div>
           </div>
         </div>
@@ -86,25 +86,16 @@ const Footer = () => {
 
         {/* FLAGSHIP EVENTS */}
         <div>
-          <h4 className="text-lg font-semibold mb-3">Flagship Events</h4>
+          <h4 className="text-lg font-semibold mb-3">Key Initiatives</h4>
           <div className="w-[60px] h-[2px] bg-white/40 mb-4" />
           <ul className="list-none p-0">
-            <li className="mb-2.5 text-sm">
-              AI for ALL- Global Impact Challenge
-            </li>
-            <li className="mb-2.5 text-sm">
-              AI by HER: Global Impact Challenge
-            </li>
-            <li className="mb-2.5 text-sm">YUVAI: Global Youth Challenge</li>
-            <li className="mb-2.5 text-sm">Research Symposium</li>
-            <li className="mb-2.5 text-sm">India AI Impact Expo 2026</li>
-            <li className="mb-2.5 text-sm">India AI Tinkerpreneur</li>
-            <li className="mb-2.5 text-sm">Casebook on AI Health</li>
-            <li className="mb-2.5 text-sm">Casebook on AI in Energy</li>
-            <li className="mb-2.5 text-sm">
-              Casebook on AI &amp; Gender Empowerment
-            </li>
-            <li className="mb-2.5 text-sm">Casebook on AI in Education</li>
+            <li className="mb-2.5 text-sm">e-Lotani: Digital Portal</li>
+            <li className="mb-2.5 text-sm">Bihar Pustak Mela 2026</li>
+            <li className="mb-2.5 text-sm">Mobile Library Network</li>
+            <li className="mb-2.5 text-sm">Curriculum Modernization</li>
+            <li className="mb-2.5 text-sm">Free Textbook Distribution</li>
+            <li className="mb-2.5 text-sm">Inclusive Learning Access</li>
+            <li className="mb-2.5 text-sm">Teacher Training Workshops</li>
           </ul>
         </div>
 
@@ -116,16 +107,16 @@ const Footer = () => {
           <p className="text-sm">
             Email Us- <br />
             <a
-              href="mailto:xyz@gmail.com"
+              href="mailto:bstbpc.patna@gmail.com"
               className="text-white hover:underline"
             >
-              xyz@gmail.com
+              bstbpc.patna@gmail.com
             </a>
           </p>
 
           <div className="mt-4 text-sm">
-            <p>Bihar State Text Book Publishing Corporation Logo</p>
-            <p>Registered Office-</p>
+            <p>Bihar State Text Book Publishing Corporation Ltd.</p>
+            <p>Bhawan, Budh Marg, Patna - 800001</p>
             <p>State- Bihar</p>
             <p>Country-India</p>
           </div>

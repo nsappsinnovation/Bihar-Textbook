@@ -2,32 +2,38 @@ import React, { useState } from "react";
 
 const events = [
   {
-    title: "AI For ALL: Global Impact Challenge",
+    title: "e-Lotani: Digital Books Portal",
     description:
-      "The AI for All Global Impact Challenge strives to identify solutions that use AI to enable large-scale impact.",
+      "Access all Bihar state textbooks digitally through our comprehensive e-learning platform.",
     image:
-      "https://impact.indiaai.gov.in/wp-content/uploads/2024/07/AI-For-ALL-Global-Impact-Challenge.jpg",
+      "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f",
   },
   {
-    title: "AI by HER: Global Impact Challenge",
+    title: "Bihar State Pustak Mela",
     description:
-      "Focused on inclusive innovation and global impact, promoting gender equity and Global South innovation.",
+      "An annual event bringing students, publishers, and educators together for a literary feast.",
     image:
-      "https://impact.indiaai.gov.in/wp-content/uploads/2024/07/AI-by-HER-Global-Impact-Challenge.jpg",
+      "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8",
   },
   {
-    title: "Research Symposium",
+    title: "Mobile Library Initiative",
     description:
-      "An interdisciplinary forum bringing together leading researchers from India and the Global South.",
+      "Taking books to the remotest corners of Bihar via our state-of-the-art mobile library units.",
     image:
-      "https://impact.indiaai.gov.in/wp-content/uploads/2024/07/Research-Symposium.jpg",
+      "https://i.dawn.com/primary/2020/11/5fa1c8942bb12.jpg",
   },
   {
-    title: "India AI Impact Expo 2026",
+    title: "Curriculum Modernization Expo",
     description:
-      "Bringing together 300+ exhibitors from India and 30+ countries across thematic pavilions.",
+      "A showcase of modern pedagogies and interactive textbooks for the 21st-century learner.",
     image:
-      "https://impact.indiaai.gov.in/wp-content/uploads/2024/07/IndiaAI-Impact-Expo-2024.jpg",
+      "https://images.unsplash.com/photo-1509062522246-3755977927d7",
+  },
+  {
+    title: "Interactive E-Books",
+    description:
+      "Engaging digital versions of textbooks with interactive elements for enhanced learning.",
+    image: "https://pdcentrallibrary.home.blog/wp-content/uploads/2020/02/e-books.png",
   },
 ];
 
@@ -53,10 +59,10 @@ export default function FlagshipEvent() {
         </div>
 
         <h2 className="text-4xl md:text-5xl font-bold leading-tight">
-          Flagship Events that Shape the Future of
+          Flagship Initiatives Transforming
           <br />
           <span className="bg-gradient-to-r from-[#332F82] to-[#a87b3e] bg-clip-text text-transparent">
-            Humanity and Technology
+            the Learning Landscape in Bihar
           </span>
         </h2>
       </div>
