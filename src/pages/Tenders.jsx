@@ -1,12 +1,12 @@
-import React from 'react'
+import React from 'react';
+import TendersComponent from '../components/Tenders';
 
 const Tenders = () => {
   return (
-    <div>
-      Tenders
-      
-    </div>
-  )
-}
+    <>
+      <TendersComponent />
+    </>
+  );
+};
 
-export default Tenders
+export default Tenders;

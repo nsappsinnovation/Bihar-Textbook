@@ -39,8 +39,6 @@ function App() {
       {!isAuthPage && <Nav />}
 
       <div className="min-h-screen flex flex-col">
-        {!isAuthPage && <Esec />}
-
         <main className="flex-grow">
           <Routes>
             {/* Home */}
