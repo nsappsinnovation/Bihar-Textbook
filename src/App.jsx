@@ -7,7 +7,7 @@ import Footer from "./components/Footer.jsx";
 import Home from "./pages/Home";
 import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
 import ContactUs from "./components/ContactUs.jsx";
-import Notice from "./pages/Notice";
+import Notice from "./components/Notice.jsx";
 import Tenders from "./pages/Tenders";
 import CsrPolicy from "./pages/CsrPolicy";
 import Login from "./components/Login.jsx";
