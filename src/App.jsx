@@ -25,9 +25,9 @@ import Login from "./components/Login.jsx";
 import SignUp from "./components/SignUp.jsx";
 
 /* Gallery Pages */
-import PhotoGallery from "./pages/Photo_gallery";
-import VideoGallery from "./pages/Video_gallery";
-import PressRelease from "./pages/press_release";
+import PhotoGallery from "./components/gallery/sections/Photogallery";
+import VideoGallery from "./components/gallery/sections/Videogallery";
+import PressRelease from "./components/gallery/sections/Pressrelease";
 
 function App() {
   const location = useLocation();
