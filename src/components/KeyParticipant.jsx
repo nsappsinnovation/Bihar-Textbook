@@ -5,22 +5,22 @@ const industryData = [
   {
     name: "Shri Nitish Kumar",
     role: "Hon'ble Chief Minister, Bihar",
-    image: "https://www.cm.bihar.gov.in/assets/images/cm-image.png", // Attempting a more official-looking fallback or placeholder
+    image: "/profile.png",
   },
   {
     name: "Shri Samrat Choudhary",
     role: "Hon'ble Deputy Chief Minister, Bihar",
-    image: "https://ui-avatars.com/api/?name=Samrat+Choudhary&background=332F82&color=fff&size=512",
+    image: "/profile.png",
   },
   {
     name: "Shri Vijay Kumar Chaudhary",
     role: "Minister of Education, Bihar",
-    image: "https://ui-avatars.com/api/?name=Vijay+Kumar+Chaudhary&background=332F82&color=fff&size=512",
+    image: "/profile.png",
   },
   {
-    name: "S. Siddharth",
+    name: "Dr. B. Rajender, I.A.S.",
     role: "Additional Chief Secretary, Education Department",
-    image: "https://ui-avatars.com/api/?name=S+Siddharth&background=332F82&color=fff&size=512",
+    image: "/profile.png",
   },
 ];
 
@@ -28,22 +28,22 @@ const academiaData = [
   {
     name: "Anand Kumar",
     role: "Founder, Super 30 & Mathematician",
-    image: "https://ui-avatars.com/api/?name=Anand+Kumar&background=332F82&color=fff&size=512",
+    image: "/profile.png",
   },
   {
     name: "HC Verma",
     role: "Renowned Physicist & Educator, IIT Kanpur (Born in Bihar)",
-    image: "https://ui-avatars.com/api/?name=HC+Verma&background=332F82&color=fff&size=512",
+    image: "/profile.png",
   },
   {
     name: "Prof. Girish Kumar Choudhary",
     role: "Vice Chancellor, Patna University",
-    image: "https://ui-avatars.com/api/?name=Girish+Kumar+Choudhary&background=332F82&color=fff&size=512",
+    image: "/profile.png",
   },
   {
     name: "Abhayanand",
     role: "Former DGP Bihar & Co-founder of Super 30",
-    image: "https://ui-avatars.com/api/?name=Abhayanand&background=332F82&color=fff&size=512",
+    image: "/profile.png",
   },
 ];
 
@@ -152,10 +152,9 @@ function ParticipantCard({ item }) {
   return (
     <div
       className="
-        group relative h-[200px] overflow-hidden cursor-pointer
+        group relative h-[450px] overflow-hidden cursor-pointer
         rounded-2xl bg-white border border-gray-100
         shadow-sm hover:shadow-2xl transition-shadow duration-300
-        flex flex-col justify-center
       "
     >
       {/* ===== SMOOTH EXPANDING BACKGROUND (CLIP-PATH BASED) ===== */}
@@ -171,7 +170,7 @@ function ParticipantCard({ item }) {
       />
 
       {/* ===== CONTENT ===== */}
-      <div className="relative z-20 p-8 text-center">
+      <div className="relative z-20 p-6">
         <h3
           className="
             text-xl font-bold text-[#1a1a1a]
@@ -184,13 +183,29 @@ function ParticipantCard({ item }) {
 
         <p
           className="
-            mt-3 text-sm text-gray-500 font-medium
+            mt-2 text-sm text-gray-500 font-medium
             transition-colors duration-300 delay-150
             group-hover:text-indigo-100
           "
         >
           {item.role}
         </p>
+      </div>
+
+      {/* ===== IMAGE ===== */}
+      <div className="relative z-20 mt-auto flex h-[350px] items-end justify-center">
+        <img
+          src={item.image}
+          alt={item.name}
+          className="
+            h-[330px] object-contain drop-shadow-2xl pt-14
+            transition-transform duration-700
+            ease-[cubic-bezier(0.22,1,0.36,1)]
+            group-hover:scale-110
+            group-hover:-translate-y-2
+            origin-bottom
+          "
+        />
       </div>
     </div>
   );

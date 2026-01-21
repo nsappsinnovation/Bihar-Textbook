@@ -72,11 +72,11 @@ export default function EventsSection() {
       <p className="text-sm uppercase tracking-wide text-gray-500">
         Educational Initiatives
       </p>
-      <h2 className="text-3xl md:text-4xl font-semibold mt-2">
-        Empowering Minds through Comprehensive{" "}
-        <span className="bg-gradient-to-r  from-indigo-500 to-orange-400 bg-clip-text text-transparent
-    transition-all duration-300
-      ">Learning Resources</span>
+      <h2 className="text-4xl md:text-5xl font-bold mt-3 tracking-tight text-[#1a1a1a]">
+        Empowering Minds through <br className="hidden md:block" />
+        <span className="bg-gradient-to-r from-indigo-600 to-orange-500 bg-clip-text text-transparent italic">
+          Comprehensive Learning
+        </span>
       </h2>
 
       {/* Tabs */}
@@ -84,8 +84,8 @@ export default function EventsSection() {
         <button
           onClick={() => setActiveTab("past")}
           className={`px-5 py-2 rounded-full text-sm font-medium transition ${activeTab === "past"
-              ? "bg-indigo-600 text-white"
-              : "border border-gray-300 text-gray-600"
+            ? "bg-indigo-600 text-white"
+            : "border border-gray-300 text-gray-600"
             }`}
         >
           Past Events
@@ -94,8 +94,8 @@ export default function EventsSection() {
         <button
           onClick={() => setActiveTab("upcoming")}
           className={`px-5 py-2 rounded-full text-sm font-medium transition ${activeTab === "upcoming"
-              ? "bg-indigo-600 text-white"
-              : "border border-gray-300 text-gray-600"
+            ? "bg-indigo-600 text-white"
+            : "border border-gray-300 text-gray-600"
             }`}
         >
           Upcoming Events

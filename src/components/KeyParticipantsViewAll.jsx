@@ -20,7 +20,7 @@ const allParticipants = [
         description: "Minister of Education, Bihar, overseeing the state's literacy mission."
     },
     {
-        name: "S. Siddharth",
+        name: "Dr. B. Rajender",
         category: "Leadership",
         image: "https://ui-avatars.com/api/?name=S+Siddharth&background=332F82&color=fff&size=512",
         description: "Additional Chief Secretary, Education Department, Bihar."

@@ -83,38 +83,38 @@ const CoreMissions = () => {
         </div>
     );
 
-    // Optimized coordinate mapping for small nodes - Scaled down ~0.7x
+    // Optimized coordinate mapping - Expanded for larger layout
     const getFixedPosition = (pos) => {
         switch (pos) {
-            case 'top': return { x: 0, y: -170 };
-            case 'right-top': return { x: 230, y: -110 };
-            case 'right-bottom': return { x: 230, y: 110 };
-            case 'bottom': return { x: 0, y: 170 };
-            case 'left-bottom': return { x: -230, y: 110 };
-            case 'left-center': return { x: -270, y: 0 };
-            case 'left-top': return { x: -230, y: -110 };
+            case 'top': return { x: 0, y: -250 };
+            case 'right-top': return { x: 340, y: -160 };
+            case 'right-bottom': return { x: 340, y: 160 };
+            case 'bottom': return { x: 0, y: 250 };
+            case 'left-bottom': return { x: -340, y: 160 };
+            case 'left-center': return { x: -400, y: 0 };
+            case 'left-top': return { x: -340, y: -160 };
             default: return { x: 0, y: 0 };
         }
     };
 
-    // Hair-line path connections - Scaled down
+    // Hair-line path connections - Updated for new coordinates
     const getPath = (pos) => {
         const c = 500;
-        const offset = 45; // Increased from 35 to accommodate larger hub
+        const offset = 60; // Increased for larger hub
         switch (pos) {
-            case 'top': return `M ${c} ${c - offset} L ${c} ${c - 170} `;
-            case 'right-top': return `M ${c + offset} ${c} Q ${c + 130} ${c} ${c + 230} ${c - 110} `;
-            case 'right-bottom': return `M ${c + offset} ${c} Q ${c + 130} ${c} ${c + 230} ${c + 110} `;
-            case 'bottom': return `M ${c} ${c + offset} L ${c} ${c + 170} `;
-            case 'left-bottom': return `M ${c - offset} ${c} Q ${c - 130} ${c} ${c - 230} ${c + 110} `;
-            case 'left-center': return `M ${c - offset} ${c} L ${c - 270} ${c} `;
-            case 'left-top': return `M ${c - offset} ${c} Q ${c - 130} ${c} ${c - 230} ${c - 110} `;
+            case 'top': return `M ${c} ${c - offset} L ${c} ${c - 250} `;
+            case 'right-top': return `M ${c + offset} ${c} Q ${c + 180} ${c} ${c + 340} ${c - 160} `;
+            case 'right-bottom': return `M ${c + offset} ${c} Q ${c + 180} ${c} ${c + 340} ${c + 160} `;
+            case 'bottom': return `M ${c} ${c + offset} L ${c} ${c + 250} `;
+            case 'left-bottom': return `M ${c - offset} ${c} Q ${c - 180} ${c} ${c - 340} ${c + 160} `;
+            case 'left-center': return `M ${c - offset} ${c} L ${c - 400} ${c} `;
+            case 'left-top': return `M ${c - offset} ${c} Q ${c - 180} ${c} ${c - 340} ${c - 160} `;
             default: return '';
         }
     };
 
     return (
-        <section className="py-16 bg-white overflow-hidden relative min-h-[700px] flex items-center border-t border-gray-50/50">
+        <section className="py-24 bg-white overflow-hidden relative min-h-[800px] flex items-center border-t border-gray-50/50">
             {/* Minimal Grid */}
             <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
                 style={{
@@ -131,11 +131,11 @@ const CoreMissions = () => {
                         </span>
                     </div>
 
-                    <h2 className="text-3xl md:text-4xl font-bold text-[#0d0e23] mb-4 tracking-tight">
+                    <h2 className="text-4xl md:text-5xl font-bold text-[#0d0e23] mb-4 tracking-tight">
                         The Seven <span className="text-blue-600/80">Core Pillars</span>
                     </h2>
 
-                    <p className="max-w-xl mx-auto text-gray-400 text-sm font-light leading-relaxed">
+                    <p className="max-w-2xl mx-auto text-gray-400 text-base font-light leading-relaxed">
                         A refined framework for educational empowerment across Bihar.
                     </p>
                 </div>
@@ -145,24 +145,24 @@ const CoreMissions = () => {
                     {missions.map((mission) => (
                         <div
                             key={mission.id}
-                            className="bg-white p-3 rounded-lg border border-gray-50 flex items-center gap-3 group shadow-[0_2px_8px_-4px_rgba(0,0,0,0.05)]"
+                            className="bg-white p-4 rounded-xl border border-gray-50 flex items-center gap-4 group shadow-[0_2px_8px_-4px_rgba(0,0,0,0.05)]"
                         >
-                            <div className="w-8 h-8 shrink-0 rounded-full bg-gray-50 flex items-center justify-center text-[12px] opacity-80" style={{ color: mission.color }}>
+                            <div className="w-10 h-10 shrink-0 rounded-full bg-gray-50 flex items-center justify-center text-[14px] opacity-80" style={{ color: mission.color }}>
                                 {mission.icon}
                             </div>
                             <div>
-                                <h3 className="font-semibold text-xs text-[#0d0e23] mb-0.5">{mission.title}</h3>
-                                <p className="text-[10px] text-gray-400 leading-tight line-clamp-1">{mission.description}</p>
+                                <h3 className="font-semibold text-sm text-[#0d0e23] mb-0.5">{mission.title}</h3>
+                                <p className="text-[11px] text-gray-400 leading-tight line-clamp-1">{mission.description}</p>
                             </div>
                         </div>
                     ))}
                 </div>
 
-                {/* Desktop Ultra-Minimal Radial */}
-                <div className="hidden lg:flex justify-center items-center h-[500px] relative mt-8">
+                {/* Desktop Radial - Scaled Up */}
+                <div className="hidden lg:flex justify-center items-center h-[650px] relative mt-12">
 
                     {/* Larger Central Book Hub */}
-                    <div className="relative z-30 w-24 h-24 bg-white rounded-full border border-gray-100/50 flex items-center justify-center p-4 transition-all hover:scale-105 shadow-sm">
+                    <div className="relative z-30 w-32 h-32 bg-white rounded-full border border-gray-100/50 flex items-center justify-center p-6 transition-all hover:scale-105 shadow-sm">
                         <CentralBook />
                     </div>
 
@@ -198,21 +198,21 @@ const CoreMissions = () => {
                                                 pointerEvents: 'auto'
                                             }}
                                         >
-                                            <div className={`flex items-center gap-2 group ${isLeft ? 'flex-row-reverse text-right' : ''}`}>
+                                            <div className={`flex items-center gap-4 group ${isLeft ? 'flex-row-reverse text-right' : ''}`}>
 
                                                 {/* Mini Icon Pod */}
-                                                <div className="w-8 h-8 rounded-full bg-white border border-gray-100 flex items-center justify-center text-[11px] relative z-20 shadow-sm transition-all duration-500 group-hover:scale-110 group-hover:border-blue-200 group-hover:shadow-blue-50" style={{ color: mission.color }}>
+                                                <div className="w-12 h-12 rounded-full bg-white border border-gray-100 flex items-center justify-center text-lg relative z-20 shadow-sm transition-all duration-500 group-hover:scale-110 group-hover:border-blue-200 group-hover:shadow-blue-50" style={{ color: mission.color }}>
                                                     {mission.icon}
                                                 </div>
 
                                                 {/* Minimal Content */}
-                                                <div className="w-[160px]">
-                                                    <h4 className="font-semibold text-[12px] text-[#0d0e23] mb-0.5 transition-colors group-hover:text-blue-600">
+                                                <div className="w-[200px]">
+                                                    <h4 className="font-semibold text-base text-[#0d0e23] mb-0.5 transition-colors group-hover:text-blue-600">
                                                         {mission.title}
                                                     </h4>
 
                                                     <div className="h-0 group-hover:h-auto overflow-hidden transition-all duration-300 opacity-0 group-hover:opacity-100">
-                                                        <p className="text-[10px] text-gray-400 font-medium leading-normal pt-1">
+                                                        <p className="text-xs text-gray-400 font-medium leading-normal pt-1">
                                                             {mission.description}
                                                         </p>
                                                     </div>

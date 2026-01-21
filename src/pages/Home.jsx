@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Hero from '../components/Hero';
 import CoreMissions from '../components/CoreMissions';
 import EventsSection from '../components/EventsSection';
@@ -11,12 +12,12 @@ const Home = () => {
     <div className="bg-white">
       <Hero />
       <KeyParticipant />
-      <EventsSection />
-      <FlagshipEvents />
       <CoreMissions />
+      <FlagshipEvents />
+      <EventsSection />
       <StakeHolder />
     </div>
-  )
-}
+  );
+};
 
 export default Home;
