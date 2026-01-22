@@ -122,9 +122,11 @@ const Navbar = () => {
 
         {/* RIGHT: Login Button */}
         <div className="flex items-center">
-          <button className="bg-[#211fa9f8] w-48 text-white px-[18px] py-[10px] rounded-[6px] text-[14px] font-semibold">
-            Login
-          </button>
+          <Link to="/login">
+            <button className="bg-[#211fa9f8] w-48 text-white px-[18px] py-[10px] rounded-[6px] text-[14px] font-semibold">
+              Login
+            </button>
+          </Link>
         </div>
       </div>
     </header>
