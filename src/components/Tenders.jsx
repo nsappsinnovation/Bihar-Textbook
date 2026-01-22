@@ -1,26 +1,21 @@
 import React, { useState } from "react";
 import { FiSearch, FiFileText } from "react-icons/fi";
-
-import tendersData from "../data/tenders.json";
+import { tendersData } from "../data/tendersData.js";
 
 const Tenders = () => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const tendersPerPage = 10;
 
-  const filteredTenders = tendersData.filter(
-    (t) =>
-      t.title.toLowerCase().includes(search.toLowerCase()) ||
-      t.description.toLowerCase().includes(search.toLowerCase())
+  const filteredTenders = tendersData.filter((t) =>
+    t.title.toLowerCase().includes(search.toLowerCase())
   );
 
-  // Calculate pagination
   const totalPages = Math.ceil(filteredTenders.length / tendersPerPage);
   const indexOfLastTender = currentPage * tendersPerPage;
   const indexOfFirstTender = indexOfLastTender - tendersPerPage;
   const currentTenders = filteredTenders.slice(indexOfFirstTender, indexOfLastTender);
 
-  // Reset to page 1 when search changes
   const handleSearch = (e) => {
     setSearch(e.target.value);
     setCurrentPage(1);
@@ -33,7 +28,7 @@ const Tenders = () => {
 
   return (
     <>
-      {/* ================= HERO SECTION ================= */}
+      {/* HERO SECTION */}
       <section className="relative bg-[#0d0e23] py-20 text-center text-white overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#1a1b4b] via-[#0d0e23] to-[#050610]" />
         <div className="absolute inset-0 opacity-20" style={{
@@ -49,7 +44,7 @@ const Tenders = () => {
         </div>
       </section>
 
-      {/* ================= ANIMATED TICKER ================= */}
+      {/* ANIMATED TICKER */}
       <section className="bg-gradient-to-r from-orange-500 to-amber-500 py-3 overflow-hidden">
         <div className="flex items-center">
           <span className="px-6 font-bold text-white text-sm whitespace-nowrap">
@@ -57,10 +52,10 @@ const Tenders = () => {
           </span>
           <div className="ticker-wrapper flex-1 overflow-hidden">
             <div className="ticker-content">
-              {[...tendersData.slice(0, 2), ...tendersData.slice(0, 2), ...tendersData.slice(0, 2)].map((tender, idx) => (
+              {[...tendersData.slice(0, 3), ...tendersData.slice(0, 3), ...tendersData.slice(0, 3)].map((tender, idx) => (
                 <a
                   key={idx}
-                  href={tender.document}
+                  href={tender.link}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="ticker-item text-white text-sm hover:underline"
@@ -104,7 +99,7 @@ const Tenders = () => {
         }
       `}</style>
 
-      {/* ================= MAIN CONTENT ================= */}
+      {/* MAIN CONTENT */}
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-6">
           {/* SEARCH BAR */}
@@ -131,9 +126,7 @@ const Tenders = () => {
               <thead className="bg-gradient-to-r from-[#2a2b8d] to-[#3a3bbd] text-white">
                 <tr>
                   <th className="px-6 py-4 text-left font-semibold">S. No.</th>
-                  <th className="px-6 py-4 text-left font-semibold">Title</th>
-                  <th className="px-6 py-4 text-left font-semibold">Description</th>
-                  <th className="px-6 py-4 text-left font-semibold">Date</th>
+                  <th className="px-6 py-4 text-left font-semibold">Tender Title</th>
                   <th className="px-6 py-4 text-center font-semibold">Document</th>
                 </tr>
               </thead>
@@ -153,31 +146,27 @@ const Tenders = () => {
                         {tender.title}
                       </td>
 
-                      <td className="px-6 py-4 text-slate-600 max-w-md">
-                        {tender.description}
-                      </td>
-
-                      <td className="px-6 py-4 text-slate-500">
-                        {tender.date}
-                      </td>
-
                       <td className="px-6 py-4 text-center">
-                        <a
-                          href={tender.document}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#2a2b8d] hover:bg-[#3a3bbd] text-white text-xs font-semibold transition-all shadow-md hover:shadow-lg"
-                        >
-                          <FiFileText />
-                          View PDF
-                        </a>
+                        {tender.link ? (
+                          <a
+                            href={tender.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#2a2b8d] hover:bg-[#3a3bbd] text-white text-xs font-semibold transition-all shadow-md hover:shadow-lg"
+                          >
+                            <FiFileText />
+                            View PDF
+                          </a>
+                        ) : (
+                          <span className="text-slate-400 text-xs">N/A</span>
+                        )}
                       </td>
                     </tr>
                   ))
                 ) : (
                   <tr>
                     <td
-                      colSpan="5"
+                      colSpan="3"
                       className="px-6 py-12 text-center text-slate-500"
                     >
                       No tenders found matching your search
@@ -196,7 +185,6 @@ const Tenders = () => {
               </p>
 
               <div className="flex items-center gap-2">
-                {/* Previous Button */}
                 <button
                   onClick={() => goToPage(currentPage - 1)}
                   disabled={currentPage === 1}
@@ -209,7 +197,6 @@ const Tenders = () => {
                   Previous
                 </button>
 
-                {/* Page Numbers */}
                 <div className="flex gap-1">
                   {[...Array(totalPages)].map((_, index) => {
                     const pageNumber = index + 1;
@@ -241,7 +228,6 @@ const Tenders = () => {
                   })}
                 </div>
 
-                {/* Next Button */}
                 <button
                   onClick={() => goToPage(currentPage + 1)}
                   disabled={currentPage === totalPages}

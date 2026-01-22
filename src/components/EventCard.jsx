@@ -36,8 +36,7 @@ export default function EventCard({ event }) {
       </div>
 
       {/* Hover Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-violet-900 via-indigo-900 to-purple-950
-        text-white p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div className="absolute inset-0 bg-gradient-to-br from-violet-900 via-indigo-900 to-purple-950 text-white p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <p className="text-sm leading-relaxed">
           {event.description}
         </p>
