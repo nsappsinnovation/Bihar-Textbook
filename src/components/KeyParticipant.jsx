@@ -8,18 +8,19 @@ const industryData = [
     image: "/profile.png",
   },
   {
-    name: "Shri Samrat Choudhary",
-    role: "Hon'ble Deputy Chief Minister, Bihar",
+    name: "Shri Sunil Kumar",
+    role: "Hon'ble Education Minister, Bihar",
     image: "/profile.png",
   },
   {
-    name: "Shri Vijay Kumar Chaudhary",
-    role: "Minister of Education, Bihar",
-    image: "/profile.png",
-  },
-  {
-    name: "Dr. B. Rajender, I.A.S.",
+    name: "Shri Dr. B. Rajender, I.A.S.",
     role: "Additional Chief Secretary, Education Department",
+    image: "/profile.png",
+  },
+  ,
+  {
+    name: "Shri Yatendra Kumar Pal, I.A.S.",
+    role: "Managing Director, Bihar State Text Book Publishing Corporation (BSTBPC)",
     image: "/profile.png",
   },
 ];
