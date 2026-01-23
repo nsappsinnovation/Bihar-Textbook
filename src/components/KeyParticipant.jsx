@@ -5,7 +5,7 @@ const industryData = [
   {
     name: "Shri Nitish Kumar",
     role: "Hon'ble Chief Minister, Bihar",
-    image: "/profile.png",
+    image: "/images/KeyParticipants/Nitish_Kumar_1-removebg-preview.png",
   },
   {
     name: "Shri Sunil Kumar",
@@ -29,12 +29,12 @@ const academiaData = [
   {
     name: "Anand Kumar",
     role: "Founder, Super 30 & Mathematician",
-    image: "/profile.png",
+    image: "/images/KeyParticipants/Anand kumar pic.png",
   },
   {
     name: "HC Verma",
     role: "Renowned Physicist & Educator, IIT Kanpur (Born in Bihar)",
-    image: "/profile.png",
+    image: "/images/KeyParticipants/hc-verma-pic.png",
   },
   {
     name: "Prof. Girish Kumar Choudhary",
@@ -44,7 +44,7 @@ const academiaData = [
   {
     name: "Abhayanand",
     role: "Former DGP Bihar & Co-founder of Super 30",
-    image: "/profile.png",
+    image: "/images/KeyParticipants/abhyanand.png",
   },
 ];
 
@@ -76,7 +76,10 @@ export default function KeyParticipant() {
 
           <div className="flex flex-col md:flex-row justify-between items-end gap-4">
             <h2 className="text-4xl md:text-5xl font-bold text-[#1a1a1a] leading-tight">
-              Leading the Way in <span className="bg-gradient-to-r from-[#332F82] to-[#a87b3e] bg-clip-text text-transparent">Educational Excellence</span>
+              Leading the Way in{" "}
+              <span className="bg-gradient-to-r from-[#332F82] to-[#a87b3e] bg-clip-text text-transparent">
+                Educational Excellence
+              </span>
             </h2>
 
             <div className="flex items-center gap-4">
@@ -86,16 +89,38 @@ export default function KeyParticipant() {
                   onClick={() => scroll("left")}
                   className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-gray-600 hover:text-[#332F82] hover:bg-gray-50 transition-colors"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    className="w-5 h-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M15.75 19.5L8.25 12l7.5-7.5"
+                    />
                   </svg>
                 </button>
                 <button
                   onClick={() => scroll("right")}
                   className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-gray-600 hover:text-[#332F82] hover:bg-gray-50 transition-colors"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    className="w-5 h-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                    />
                   </svg>
                 </button>
               </div>
@@ -114,19 +139,21 @@ export default function KeyParticipant() {
         <div className="flex gap-8 border-b border-gray-200 mb-8">
           <button
             onClick={() => setTab("industry")}
-            className={`pb-3 text-sm font-bold tracking-wide transition-all ${tab === "industry"
-              ? "text-[#332F82] border-b-2 border-[#332F82]"
-              : "text-gray-400 hover:text-gray-600"
-              }`}
+            className={`pb-3 text-sm font-bold tracking-wide transition-all ${
+              tab === "industry"
+                ? "text-[#332F82] border-b-2 border-[#332F82]"
+                : "text-gray-400 hover:text-gray-600"
+            }`}
           >
             Leadership
           </button>
           <button
             onClick={() => setTab("academia")}
-            className={`pb-3 text-sm font-bold tracking-wide transition-all ${tab === "academia"
-              ? "text-[#332F82] border-b-2 border-[#332F82]"
-              : "text-gray-400 hover:text-gray-600"
-              }`}
+            className={`pb-3 text-sm font-bold tracking-wide transition-all ${
+              tab === "academia"
+                ? "text-[#332F82] border-b-2 border-[#332F82]"
+                : "text-gray-400 hover:text-gray-600"
+            }`}
           >
             Visionaries & Educators
           </button>
@@ -136,7 +163,7 @@ export default function KeyParticipant() {
         <div
           ref={scrollRef}
           className="flex overflow-x-auto gap-6 pb-8 snap-x scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {data.map((item, i) => (
             <div key={i} className="min-w-[300px] md:min-w-[350px] snap-center">
@@ -145,7 +172,7 @@ export default function KeyParticipant() {
           ))}
         </div>
       </div>
-    </section >
+    </section>
   );
 }
 
@@ -211,4 +238,3 @@ function ParticipantCard({ item }) {
     </div>
   );
 }
-

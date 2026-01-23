@@ -61,9 +61,7 @@ function App() {
             <Route path="/class/:classId/read/:bookSubject" element={<BookReader />} />
 
             {/* Gallery */}
-            <Route path="/photo-gallery" element={<PhotoGallery />} />
-            <Route path="/video-gallery" element={<VideoGallery />} />
-            <Route path="/press-release" element={<PressRelease />} />
+            
             <Route path="/gallery/:sectionId" element={<Gallery />} />
 
             {/* Documents */}
