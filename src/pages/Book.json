@@ -6,8 +6,51 @@
       "books": [
         {
           "id": "c1b1",
-          "title": "English",
-          "image": "/images/classes/1.png"
+          "title": "Hindi (ANKUR HINDI)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c1b2",
+          "title": "Hindi 2",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c1b3",
+          "title": "Ganit (ANKUR GANIT)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c1b4",
+          "title": "English (BLOSSOM ENGLISH)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c1b5",
+          "title": "Urdu (GULSHAN URDU)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c1b6",
+          "title": "Hisab (HISAB)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c1b7",
+          "title": "Bengali (Bengali)",
+          "language": "Bengali",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c1b8",
+          "title": "Maithili (Maithili)",
+          "language": "Maithili",
+          "image": "/images/Books/bookcover.png"
         }
       ]
     },
@@ -17,8 +60,45 @@
       "books": [
         {
           "id": "c2b1",
-          "title": "English",
-          "image": "/images/classes/2.png"
+          "title": "Ganit (ANKUR GANIT 2)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c2b2",
+          "title": "Hindi (ANKUR HINDI)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c2b3",
+          "title": "English (BLOSSOM ENGLISH)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c2b4",
+          "title": "Hisab (Hisab)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c2b5",
+          "title": "Gulshan a Urdu (GULSHAN A URDU)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c2b6",
+          "title": "Bengali (Bengali)",
+          "language": "Bengali",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c2b7",
+          "title": "Maithili (Maithili)",
+          "language": "Maithili",
+          "image": "/images/Books/bookcover.png"
         }
       ]
     },
@@ -28,8 +108,57 @@
       "books": [
         {
           "id": "c3b1",
-          "title": "English",
-          "image": "/images/classes/3.png"
+          "title": "Ganit (GANIT)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c3b2",
+          "title": "Kompal Hindi (KOMPAL HINDI)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c3b3",
+          "title": "Blossom English (BLOSSOM ENGLISH)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c3b4",
+          "title": "Paryawaran Aur Hum (PARYAWARAN AUR HUM)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c3b5",
+          "title": "Gulshan E Urdu (GULSHAN A URDU)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c3b6",
+          "title": "Hisab Urdu (HISAB)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c3b7",
+          "title": "Mahauliat Aur Hum (MAHAULIAT AUR HUM)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c3b8",
+          "title": "Bengali (Bengali)",
+          "language": "Bengali",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c3b9",
+          "title": "Maithili (Maithili)",
+          "language": "Maithili",
+          "image": "/images/Books/bookcover.png"
         }
       ]
     },
@@ -39,8 +168,57 @@
       "books": [
         {
           "id": "c4b1",
-          "title": "English",
-          "image": "/images/classes/4.png"
+          "title": "Ganit (ANKUR GANIT)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c4b2",
+          "title": "Blossom English (BLOSSOM ENGLISH)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c4b3",
+          "title": "Gulshan-E-Urdu (GULSHAN-E-URDU)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c4b4",
+          "title": "Hisab-Urdu (HISAB-URDU)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c4b5",
+          "title": "Mahuliyat-Urdu (MAHULIYAT-URDU)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c4b6",
+          "title": "Kompal (KOMPAL)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c4b7",
+          "title": "Paryawaran Aur Hum (PARYAWARAN AUR HUM)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c4b8",
+          "title": "Bengali (Bengali)",
+          "language": "Bengali",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c4b9",
+          "title": "Maithili (Maithili)",
+          "language": "Maithili",
+          "image": "/images/Books/bookcover.png"
         }
       ]
     },
@@ -50,8 +228,51 @@
       "books": [
         {
           "id": "c5b1",
-          "title": "English",
-          "image": "/images/classes/5.png"
+          "title": "Ganit (GANIT)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c5b2",
+          "title": "English (Blossom English)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c5b3",
+          "title": "Paryawaran Aur Hum (Paryawaran Aur Hum)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c5b4",
+          "title": "Kompal (KOMPAL)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c5b5",
+          "title": "Gusane-E-Urdu (GUSANE-E-URDU)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c5b6",
+          "title": "Hisab (HISAB - URDU)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c5b7",
+          "title": "Bengali (Bengali)",
+          "language": "Bengali",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c5b8",
+          "title": "Maithili (Maithili)",
+          "language": "Maithili",
+          "image": "/images/Books/bookcover.png"
         }
       ]
     },
@@ -61,8 +282,111 @@
       "books": [
         {
           "id": "c6b1",
-          "title": "English",
-          "image": "/images/classes/6.png"
+          "title": "Radiance (RADIANCE)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c6b2",
+          "title": "Samajik-Arthik (SAMAJIK-ARTHIK)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c6b3",
+          "title": "Hamari Duniya (HAMARI DUNIYA)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c6b4",
+          "title": "Aatit Se Vartaman (AATIT SE VARTAMAN)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c6b5",
+          "title": "Amrita-Sanskrit (AMRITA)",
+          "language": "Sanskrit",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c6b6",
+          "title": "Science (SCIENCE)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c6b7",
+          "title": "Ganit (GANIT)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c6b8",
+          "title": "Kislay Bhag (KISLAY BHAG)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c6b9",
+          "title": "Farozan (FAROZAN)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c6b10",
+          "title": "Hamari Duniya (U) (HAMARI DUNIYA (U))",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c6b11",
+          "title": "Hisab (HISAB)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c6b12",
+          "title": "Aatit Se Vartaman (U) (AATIT SE VARTAMAN (U))",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c6b13",
+          "title": "Misbahul Arabia (MISBAHUL ARABIA)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c6b14",
+          "title": "Samajik-Urdu (SAMAJIK-URDU)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c6b15",
+          "title": "Science-Urdu (SCIENCE-URDU)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c6b16",
+          "title": "Seema-E-Pharsi (SEEMA-E-PHARSI)",
+          "language": "Persian",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c6b17",
+          "title": "Bengali (Bengali)",
+          "language": "Bengali",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c6b18",
+          "title": "Maithili (Maithili)",
+          "language": "Maithili",
+          "image": "/images/Books/bookcover.png"
         }
       ]
     },
@@ -72,8 +396,99 @@
       "books": [
         {
           "id": "c7b1",
-          "title": "English",
-          "image": "/images/classes/7.png"
+          "title": "Ganit (Ganit)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c7b2",
+          "title": "Science (Science)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c7b3",
+          "title": "Radiance (Radiance)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c7b4",
+          "title": "Amrita (Amrita)",
+          "language": "Sanskrit",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c7b5",
+          "title": "Hamari Duniya (Hamari Duniya)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c7b6",
+          "title": "Atit Se Vartaman (Atit Se VARTAMAN)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c7b7",
+          "title": "Kislay (Kislay)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c7b8",
+          "title": "Atit Se Vartaman-Urdu (Atit Se Vartaman-Urdu)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c7b9",
+          "title": "Samajik-Urdu (Samajik-Urdu)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c7b10",
+          "title": "Samajik Arthik (Samajik Arthik)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c7b11",
+          "title": "Science-Urdu (Science-Urdu)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c7b12",
+          "title": "Farozan-Urdu (Farozan-Urdu)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c7b13",
+          "title": "Hamari Duniya-Urdu (Hamari Duniya-Urdu)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c7b14",
+          "title": "Hisab-Urdu (Hisab-Urdu)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c7b15",
+          "title": "Misbahul-Urdu (Misbahul-Urdu)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c7b16",
+          "title": "Seema-E-Pharsi (Seema-E-Pharsi)",
+          "language": "Persian",
+          "image": "/images/Books/bookcover.png"
         }
       ]
     },
@@ -83,8 +498,105 @@
       "books": [
         {
           "id": "c8b1",
-          "title": "English",
-          "image": "/images/classes/8.png"
+          "title": "Ganit (GANIT)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c8b2",
+          "title": "Science (Science)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c8b3",
+          "title": "Aatit Se vartaman (Aatit Se Vartaman)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c8b4",
+          "title": "Kislay (Kislay)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c8b5",
+          "title": "Radiance (Radiance)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c8b6",
+          "title": "Samajit Arthik Rajnetik jiwan (Samajit Arthik Rajnetik jiwan)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c8b7",
+          "title": "Geography (Amrita)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c8b8",
+          "title": "Geography (Geography)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c8b9",
+          "title": "Amrita (AMRITA)",
+          "language": "Sanskrit",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c8b10",
+          "title": "Hisab - Urdu (Hisab - Urdu)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c8b11",
+          "title": "Science Urdu (Science Urdu)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c8b12",
+          "title": "Hamari Duniya Urdu (Hamari Duniya Urdu)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c8b13",
+          "title": "Firozan (Firozan)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c8b14",
+          "title": "Misbahul Arabia (Misbahul Arabia)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c8b15",
+          "title": "Atit Se Vartaman Urdu (Atit Se Vartaman Urdu)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c8b16",
+          "title": "Samajit Arthik Rajneti Urdu (Samajit Arthik Rajneti Urdu)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c8b17",
+          "title": "Sima-e-Pharsi Pharsi (Sima-e-pharsi)",
+          "language": "Persian",
+          "image": "/images/Books/bookcover.png"
         }
       ]
     },
@@ -94,8 +606,1023 @@
       "books": [
         {
           "id": "c9b1",
-          "title": "English",
-          "image": "/images/classes/9.png"
+          "title": "Ganit (Ganit)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b2",
+          "title": "Maths (Maths (Mathematica))",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b3",
+          "title": "Vigyan (Vigyan)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b4",
+          "title": "Science (Science)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b5",
+          "title": "Kislay (Kislay)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b6",
+          "title": "English Reader (English Reader)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b7",
+          "title": "Bhugol (Bhugol (Bharat Bhumi yasan Kagi))",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b8",
+          "title": "History (History (Bharat Ki Danya))",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b9",
+          "title": "Godhuji (Godhuji)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b10",
+          "title": "Loktantrik Rajeeti (Loktantrik Rajeeti)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b11",
+          "title": "Economics-Hindi (Economics-Hindi)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b12",
+          "title": "Mihilak Dharchar (Mihilak Dharchar)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b13",
+          "title": "Pravasthika-Maithili (Pravasthika-Maithili)",
+          "language": "Maithili",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b14",
+          "title": "Mahua-Bhogpui (Mahua-Bhogpui)",
+          "language": "Bengali",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b15",
+          "title": "Pan-Phool (Pan-Phool I)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b16",
+          "title": "Pyusham (Pyusham)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b17",
+          "title": "Fyusham-Dwipathya (Fyusham-Dwipathya)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b18",
+          "title": "Nakhatul-Darsahul (Nakhatul-Darsahul)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b19",
+          "title": "Seema-E-Adab (Seema-E-Adab)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b20",
+          "title": "Aj-Ajhad-Arabia (Aj-Ajhad-Arabia)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b21",
+          "title": "Darakshahan (Darakshahan)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b22",
+          "title": "Lal O Gul (Lal O Gul)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b23",
+          "title": "Roshani (Roshani)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b24",
+          "title": "Anhad Bhag-1 (Anhad Bhag-1)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b25",
+          "title": "Manthanam (Manthanam)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b26",
+          "title": "Nupur (Nupur)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b27",
+          "title": "Uoch Ganit (Uoch Ganit)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b28",
+          "title": "Varnika (Varnika)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b29",
+          "title": "History-Eng (History-Eng)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b30",
+          "title": "Arthashastra (Arthashastra)",
+          "language": "Sanskrit",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c9b31",
+          "title": "Panorama Part-1 (Panorama Part-1)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Class 10",
+      "books": [
+        {
+          "id": "c10b1",
+          "title": "Maths (Maths (Mathi))",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b2",
+          "title": "Ganit (Ganit)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b3",
+          "title": "Science (Science)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b4",
+          "title": "Vigyan (Vigyan)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b5",
+          "title": "History (History)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b6",
+          "title": "Ithas (Ithas)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b7",
+          "title": "Ithas (Ithas Ki Duniya)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b8",
+          "title": "Bhugol (Bhugol (Bharat Sansthan Avem Abyasi))",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b9",
+          "title": "Geography (Geography (India Resources and Utility))",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b10",
+          "title": "Economics (Economics Our)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b11",
+          "title": "Ardhyayastha (Ardhyayastha)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b12",
+          "title": "Raneethasastra (Raneethasastra)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b13",
+          "title": "Civics (Civics (Democratic Politics))",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b14",
+          "title": "Godhuji (Godhuji)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b15",
+          "title": "Wamika (Wamika)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b16",
+          "title": "Panorama 2 (Panorama 2)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b17",
+          "title": "Panorama Reader (Panorama Reader)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b18",
+          "title": "Piyusham (Piyusham)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b19",
+          "title": "Darkshahan (Darkshahan)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b20",
+          "title": "Lal-O-Gul (Lal-O-Gul)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b21",
+          "title": "Seema-a-Adab (Seema-a-Adab)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b22",
+          "title": "Nakhbat-Arabia (Nakhbat-Arabia)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b23",
+          "title": "Mithila Vishudi (Mithila Vishudi)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b24",
+          "title": "Pan Phool (Pan Phool)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b25",
+          "title": "Bagaicha (Bagaicha)",
+          "language": "Maithili",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b26",
+          "title": "Kaushiki (Kaushiki)",
+          "language": "Maithili",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b27",
+          "title": "Kislay (Kislay)",
+          "language": "Maithili",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b28",
+          "title": "Praveshika Maithli (Praveshika Maithli)",
+          "language": "Maithili",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b29",
+          "title": "Uoch Ganit (Uoch Ganit)",
+          "language": "Bengali",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b30",
+          "title": "Aripan (Aripan)",
+          "language": "Bengali",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b31",
+          "title": "Pyusham anupurak putika (Pyusham anupurak putika)",
+          "language": "Bengali",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c10b32",
+          "title": "Griah Vigyan (Griah Vigyan)",
+          "language": "Bengali",
+          "image": "/images/Books/bookcover.png"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Class 11",
+      "books": [
+        {
+          "id": "c11b1",
+          "title": "Maths (MATHEMATIC 5)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b2",
+          "title": "Chemistry Part-1 (CHEMISTRY PART-1)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b3",
+          "title": "Chemistry Part-2 (CHEMISTRY PART-2)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b4",
+          "title": "Accountancy Part 1 (ACCOUNTANCY PART 1)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b5",
+          "title": "Accountancy Part 2 (ACCOUNTANCY PART 2)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b6",
+          "title": "Physics Part 1 (PHYSICS PART 1)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b7",
+          "title": "Physics Part 2 (PHYSICS PART 2)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b8",
+          "title": "Business Studies (BUSINESS STUDIES)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b9",
+          "title": "Fundamentals of Physical Geography (FUNDAMENTALS OF PHYSICAL GEOGRAPHY)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b10",
+          "title": "Indian Constitution (INDIAN CONSTITUTION)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b11",
+          "title": "Economic Development (ECONOMIC DEVELOPMENT)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b12",
+          "title": "Physical Environment (PHYSICAL ENVIRONMENT)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b13",
+          "title": "Sociology (SOCIOLOGY)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b14",
+          "title": "Al Hadiqat (AL HADIQAT)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b15",
+          "title": "Lal-O-Quhar (LAL-O-QUHAR)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b16",
+          "title": "Political Theory (POLITICAL THEORY)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b17",
+          "title": "Urdu Karkasa (URDU KARKASA)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b18",
+          "title": "Practical Geography (PRACTICAL GEOGRAPHY)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b19",
+          "title": "Urdu Literature History (URDU LITERATURE HISTORY)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b20",
+          "title": "Psychology (PSYCHOLOGY)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b21",
+          "title": "Urdu Grammar (URDU GRAMMAR)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b22",
+          "title": "Persian Grammar (PERSIAN GRAMMAR)",
+          "language": "Persian",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b23",
+          "title": "Persian Literature (PERSIAN LITERATURE)",
+          "language": "Persian",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b24",
+          "title": "Rainbow English (RAINBOW ENGLISH)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b25",
+          "title": "Rainbow Grammar (RAINBOW GRAMMAR)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b26",
+          "title": "Statistics - Economics (STATISTICS - ECONOMICS)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b27",
+          "title": "History (HISTORY)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b28",
+          "title": "Understanding Society (UNDERSTANDING SOCIETY)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b29",
+          "title": "Ganit (GANIT)",
+          "language": "Sanskrit",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b30",
+          "title": "Lekshasatra 1 (LEKSHASATRA 1)",
+          "language": "Sanskrit",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b31",
+          "title": "Lekshasatra 2 (LEKSHASATRA 2)",
+          "language": "Sanskrit",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b32",
+          "title": "Magahi Bhasha (MAGAHI BHASHA)",
+          "language": "Magahi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b33",
+          "title": "Magahi Vyakaran (MAGAHI VYAKARAN)",
+          "language": "Magahi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b34",
+          "title": "Bhautiki 2 (BHAUTIKI 2)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b35",
+          "title": "Rasayan Vigyan 1 (RASAYAN VIGYAN 1)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b36",
+          "title": "Rasayan Vigyan 2 (RASAYAN VIGYAN 2)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b37",
+          "title": "Jeev Vigyan (JEEV VIGYAN)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b38",
+          "title": "Magahi-Paatli (MAGAHI-PAATLI)",
+          "language": "Magahi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b39",
+          "title": "Bhojpuri Vyakaran (BHOJPURI VYAKARAN)",
+          "language": "Bhojpuri",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b40",
+          "title": "Bhojpuri Dubidhan (BHOJPURI DUBIDHAN)",
+          "language": "Bhojpuri",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c11b41",
+          "title": "Hindi Bhasha (HINDI BHASHA)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Class 12",
+      "books": [
+        {
+          "id": "c12b1",
+          "title": "Ganit Bhag1 (Ganit Bhag 1)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b2",
+          "title": "Ganit Bhag2 (Ganit Bhag 2)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b3",
+          "title": "Bhautiki Bhag 1 (Bhautuki Bhag 1)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b4",
+          "title": "Bhautiki Bhag 2 (Bhautuki Bhag 2)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b5",
+          "title": "Rasayan Vigyan 1 (Rasayan Series 1)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b6",
+          "title": "Rasayan Vigyan 2 (Rasayan Series 2)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b7",
+          "title": "Jiv Vigyan (Jiv Vigyan)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b8",
+          "title": "Ithas 1 (Ithas 1)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b9",
+          "title": "Ithas 2 (Ithas 2)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b10",
+          "title": "Ithas 3 (Ithas 3)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b11",
+          "title": "Chemistry Part1 (Chemistry Part1)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b12",
+          "title": "Chemistry Part2 (Chemistry Part2)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b13",
+          "title": "Accountancy 2 (Accountancy 2)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b14",
+          "title": "Biology (Biology)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b15",
+          "title": "Geography (Geography)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b16",
+          "title": "Bhugol (Bhugol Mein Prayogatmak Karya)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b17",
+          "title": "Maths Part1 (Maths Part1)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b18",
+          "title": "Physics Part1 (Physics Part1)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b19",
+          "title": "Physics Part2 (Physics Part2)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b20",
+          "title": "History (History)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b21",
+          "title": "History 2 (History 2)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b22",
+          "title": "History 3 (History 3)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b23",
+          "title": "Chemistry Part2 (Chemistry Part2)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b24",
+          "title": "Maths Part2 (Maths Part2)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b25",
+          "title": "Business Studies 1 (Business Studies 1)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b26",
+          "title": "Business Studies 2 (Business Studies 2)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b27",
+          "title": "Rajneetishastra 2 (Rajneetishastra 2)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b28",
+          "title": "Nagrik Shashtra (Nagrik Shashtra)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b29",
+          "title": "Lekhashastra Part 2 (Lekhashastra Part 2)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b30",
+          "title": "Rainbow English (Rainbow English)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b31",
+          "title": "Dingt (Dingt)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b32",
+          "title": "Urdu Kankahan (Urdu Kankahan)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b33",
+          "title": "Dhudhidhan (Dhudhidhan)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b34",
+          "title": "Kaustav bhag2 (Kaustav bhag2)",
+          "language": "Sanskrit",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b35",
+          "title": "Kaustav bhag2 (Kaustav bhag2)",
+          "language": "Sanskrit",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b36",
+          "title": "Patil Bhag2 (Patil Bhag2)",
+          "language": "Sanskrit",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b37",
+          "title": "TILKOR-BHAG-2 (Tilkor Bhag2)",
+          "language": "Sanskrit",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b38",
+          "title": "Lall O Guhar (Lall O Guhar)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b39",
+          "title": "Maithili vyakaran Rachna o Sahitya rup (Maithili vyakaran Rachna o Sahitya rup)",
+          "language": "Maithili",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b40",
+          "title": "Maithili vyakaran Rachna o Sahitya rup (Maithili vyakaran Rachna o Sahitya rup)",
+          "language": "Maithili",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b41",
+          "title": "SANKHSIFT BANGLA VYAKRAN (SANKHSIFT BANGLA VYAKRAN)",
+          "language": "Bengali",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b42",
+          "title": "SANKHSIFT BANGLA VYAKRAN (SANKHSIFT BANGLA VYAKRAN)",
+          "language": "Bengali",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b43",
+          "title": "SANKHSIFT BANGLA VYAKRAN (SANKHSIFT BANGLA VYAKRAN)",
+          "language": "Bengali",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b44",
+          "title": "Arbi Sahitya Ka Ithas (Arbi Sahitya Ka Ithas)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b45",
+          "title": "Arbi Sahitya Ka Ithas (Arbi Sahitya Ka Ithas)",
+          "language": "Urdu",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b46",
+          "title": "Manovigyan (Manovigyan)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b47",
+          "title": "Rajnit Shashtra (Rajnit Shashtra)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b48",
+          "title": "Geography 3 (Geography 3)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b49",
+          "title": "Political Science (Political Science)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b50",
+          "title": "Vyvasay Adhyan-1 (Vyvasay Adhyan-1)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b51",
+          "title": "Vyvasay Adhyan-2 (Vyvasay Adhyan-2)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b52",
+          "title": "Lekhashsatra Part 1 (Lekhashsatra Part 1)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b53",
+          "title": "Politics In India (Politics In India)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b54",
+          "title": "Ardhyayastha (Ardhyayastha)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b55",
+          "title": "Ardh-Niti (Ardh-Niti)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b56",
+          "title": "Indian Society (Indian Society)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b57",
+          "title": "Geography 2 (Geography 2)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b58",
+          "title": "Macroeconomics (Macroeconomics)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b59",
+          "title": "Samaj Shastra (Samaj Shastra)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b60",
+          "title": "Microeconomics (Microeconomics)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b61",
+          "title": "Samajshastra (Samajshastra)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b62",
+          "title": "Sociology (Sociology)",
+          "language": "English",
+          "image": "/images/Books/bookcover.png"
+        },
+        {
+          "id": "c12b63",
+          "title": "Bhugol 2 (Bhugol 2)",
+          "language": "Hindi",
+          "image": "/images/Books/bookcover.png"
         }
       ]
     },
