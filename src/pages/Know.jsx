@@ -7,7 +7,7 @@ import OfficersList from "../components/knowus/sections/OfficersList";
 import OurEmployee from "../components/knowus/sections/OurEmployee";
 import OrgStructure from "../components/knowus/sections/OrgStructure";
 import RegisterPrinters from "../components/knowus/sections/RegisterPrinters";
-
+import Wholesellers from "../components/knowus/sections/Wholesellerdepo";
 import { useParams } from "react-router-dom";
 import { Knowconfig } from "../components/knowus/Knowconfig";
 
@@ -18,6 +18,7 @@ const componentMap = {
   OfficersList,
   OurEmployee,
   OrgStructure,
+   Wholesellers,
   RegisterPrinters
 };
 

@@ -8,19 +8,20 @@ const industryData = [
     image: "/images/KeyParticipants/Nitish_Kumar_1-removebg-preview.png",
   },
   {
-    name: "Sri Yatendra Kumar Pal",
-    role: "Managing Director, Bihar",
+    name: "Shri Sunil Kumar",
+    role: "Hon'ble Education Minister, Bihar",
     image: "/profile.png",
   },
   {
-    name: "Sri Sunil Kumar Singh",
-    role: "Minister of Education, Bihar",
-    image: "/images/KeyParticipants/Sunil-Kumar.png",
-  },
-  {
-    name: "Dr. B. Rajender, I.A.S.",
+    name: "Shri Dr. B. Rajender, I.A.S.",
     role: "Additional Chief Secretary, Education Department",
-    image: "/images/KeyParticipants/B.Rajendra.png",
+    image: "/profile.png",
+  },
+  ,
+  {
+    name: "Shri Yatendra Kumar Pal, I.A.S.",
+    role: "Managing Director, Bihar State Text Book Publishing Corporation (BSTBPC)",
+    image: "/profile.png",
   },
 ];
 

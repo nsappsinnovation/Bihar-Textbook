@@ -109,7 +109,7 @@ const Hero = () => {
                                     transition={{ delay: 0.5 }}
                                 >
                                     <div className="text-6xl lg:text-8xl font-black text-white/90 tracking-tighter mb-0 leading-none">
-                                        BSTB
+                                        BSTBP
                                     </div>
                                     <div className="text-xl lg:text-3xl font-bold bg-gradient-to-r from-orange-400 to-amber-500 bg-clip-text text-transparent uppercase tracking-[0.2em]">
                                         Corporation
