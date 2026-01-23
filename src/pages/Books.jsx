@@ -196,4 +196,54 @@ const Books = () => {
   );
 };
 
+// --- Sub-Component: Book Card ---
+const BookCard = ({ book, placeholder, classId }) => {
+  const [imgSrc, setImgSrc] = useState(book.image);
+
+  return (
+    <div className="group relative flex flex-col bg-white rounded-2xl shadow-sm hover:shadow-2xl hover:shadow-blue-900/10 transition-all duration-300 ease-out border border-slate-200/60 overflow-hidden hover:-translate-y-2">
+
+      {/* Subject Badge (Top Left) */}
+      {book.subject && (
+        <div className="absolute top-3 left-3 z-10">
+          <span className="px-2.5 py-1 text-[10px] font-bold tracking-wide text-white uppercase bg-blue-600/90 backdrop-blur-sm rounded-md shadow-sm">
+            {book.subject}
+          </span>
+        </div>
+      )}
+
+      {/* Image Container */}
+      <div className="relative aspect-[2/3] w-full overflow-hidden bg-slate-100">
+        <img
+          src={imgSrc}
+          alt={book.title}
+          onError={() => setImgSrc(placeholder)} // Fallback logic
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          loading="lazy"
+        />
+
+        {/* Overlay on Hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+          <Link
+            to={`/class/${classId}/read/${book.subject || "General"}`}
+            className="bg-white text-slate-900 text-xs font-bold py-2 px-4 rounded-full shadow-lg transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300"
+          >
+            Read Now
+          </Link>
+        </div>
+      </div>
+
+      {/* Title & Info */}
+      <div className="p-4 flex-1 flex flex-col justify-between bg-white relative z-20">
+        <div>
+          <h3 className="text-sm font-bold text-slate-800 leading-snug line-clamp-2 mb-1 group-hover:text-blue-600 transition-colors">
+            {book.title}
+          </h3>
+          <p className="text-xs text-slate-400">Bihar Board</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default Books;
