@@ -9,8 +9,8 @@ import Home from "./pages/Home";
 import Tenders from "./pages/Tenders";
 import CsrPolicy from "./pages/CsrPolicy";
 import KnowUs from "./pages/Know";
-import Books from "./Pages/Books.jsx";
-import BookReader from "./Pages/BookReader.jsx";
+import Books from "./pages/Books.jsx";
+import BookReader from "./pages/BookReader.jsx";
 import Gallery from "./pages/Gallery.jsx";
 import Document from "./pages/Document.jsx";
 
@@ -61,7 +61,7 @@ function App() {
             <Route path="/class/:classId/read/:bookSubject" element={<BookReader />} />
 
             {/* Gallery */}
-            
+
             <Route path="/gallery/:sectionId" element={<Gallery />} />
 
             {/* Documents */}
