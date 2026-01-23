@@ -6,8 +6,51 @@
       "books": [
         {
           "id": "c1b1",
-          "title": "English",
-          "image": "/images/classes/1.png"
+          "title": "Hindi (ANKUR HINDI)",
+          "image": "/bookcover.png",
+          "subject": "Hindi"
+        },
+          {
+          "id": "c1b2",
+          "title": "Hindi 2",
+          "image": "/bookcover.png",
+          "subject": "()"
+        },
+        {
+          "id": "c1b3",
+          "title": "Ganit (ANKUR GANIT)",
+          "image": "/bookcover.png",
+          "subject": "Ganit"
+        },
+        {
+          "id": "c1b4",
+          "title": "English (BLOSSOM ENGLISH)",
+          "image": "/bookcover.png",
+          "subject": "English"
+        },
+        {
+          "id": "c1b5",
+          "title": "Urdu (GULSHAN URDU)",
+          "image": "/bookcover.png",
+          "subject": "Urdu"
+        },
+        {
+          "id": "c1b6",
+          "title": "Hisab (HISAB)",
+          "image": "/bookcover.png",
+          "subject": "Math"
+        },
+        {
+          "id": "c1b7",
+          "title": "Bengali (Bengali)",
+          "image": "/bookcover.png",
+          "subject": "Bengali"
+        },
+        {
+          "id": "c1b8",
+          "title": "Maithili (Maithili)",
+          "image": "/bookcover.png",
+          "subject": "Maithili"
         }
       ]
     },
