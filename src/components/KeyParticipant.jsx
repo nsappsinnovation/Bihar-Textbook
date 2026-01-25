@@ -67,66 +67,48 @@ export default function KeyParticipant() {
   return (
     <section className="bg-[#f8f9fa] py-16 px-6 font-sans">
       <div className="max-w-[1400px] mx-auto">
-        {/* Header Section */}
-        <div className="mb-8">
-          <p className="uppercase tracking-widest text-xs font-bold text-gray-500 mb-2">
-            KEY PARTICIPANTS
-          </p>
-
-          <div className="flex flex-col md:flex-row justify-between items-end gap-4">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#1a1a1a] leading-tight">
-              Leading the Way in{" "}
-              <span className="bg-gradient-to-r from-[#332F82] to-[#a87b3e] bg-clip-text text-transparent">
-                Educational Excellence
-              </span>
+        {/* --- Minimalist Header (Matching FlagshipEvents) --- */}
+        <div className="max-w-[1280px] mx-auto mb-16">
+          <div className="max-w-3xl">
+            <div className="flex items-center gap-2 mb-4">
+              <div className="h-px w-8 bg-indigo-500"></div>
+              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-[0.2em]">Leadership & Academia</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 mb-6">
+              Leading the Way in <br />
+              <span className="text-slate-400">Educational Excellence</span>
             </h2>
+            <p className="text-lg text-slate-500 font-normal leading-relaxed">
+              Meet the visionary leaders and esteemed educators shaping the future of learning in Bihar.
+            </p>
+          </div>
 
+          <div className="flex flex-col md:flex-row justify-between items-end gap-4 mt-8 md:-mt-12">
+            <div></div> {/* Spacer for grid alignment if needed */}
             <div className="flex items-center gap-4">
               {/* Navigation Arrows */}
-              <div className="flex gap-2">
+              <div className="flex gap-3">
                 <button
                   onClick={() => scroll("left")}
-                  className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-gray-600 hover:text-[#332F82] hover:bg-gray-50 transition-colors"
+                  className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-indigo-600 hover:border-indigo-600 transition-all"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2}
-                    stroke="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M15.75 19.5L8.25 12l7.5-7.5"
-                    />
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                   </svg>
                 </button>
                 <button
                   onClick={() => scroll("right")}
-                  className="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-gray-600 hover:text-[#332F82] hover:bg-gray-50 transition-colors"
+                  className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-indigo-600 hover:border-indigo-600 transition-all"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth={2}
-                    stroke="currentColor"
-                    className="w-5 h-5"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                    />
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                   </svg>
                 </button>
               </div>
 
               <Link
                 to="/key-participants"
-                className="px-6 py-3 bg-[#332F82] text-white text-sm font-semibold rounded-md hover:bg-[#262266] transition-colors shadow-lg flex items-center gap-2"
+                className="px-6 py-2.5 bg-slate-900 text-white text-xs font-bold rounded-xl hover:bg-slate-800 transition-colors shadow-lg shadow-slate-200 flex items-center gap-2 uppercase tracking-tight"
               >
                 View All
               </Link>
@@ -138,21 +120,19 @@ export default function KeyParticipant() {
         <div className="flex gap-8 border-b border-gray-200 mb-8">
           <button
             onClick={() => setTab("industry")}
-            className={`pb-3 text-sm font-bold tracking-wide transition-all ${
-              tab === "industry"
+            className={`pb-3 text-sm font-bold tracking-wide transition-all ${tab === "industry"
                 ? "text-[#332F82] border-b-2 border-[#332F82]"
                 : "text-gray-400 hover:text-gray-600"
-            }`}
+              }`}
           >
             Leadership
           </button>
           <button
             onClick={() => setTab("academia")}
-            className={`pb-3 text-sm font-bold tracking-wide transition-all ${
-              tab === "academia"
+            className={`pb-3 text-sm font-bold tracking-wide transition-all ${tab === "academia"
                 ? "text-[#332F82] border-b-2 border-[#332F82]"
                 : "text-gray-400 hover:text-gray-600"
-            }`}
+              }`}
           >
             Visionaries & Educators
           </button>

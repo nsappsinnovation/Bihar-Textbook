@@ -41,9 +41,9 @@ const Books = () => {
         </div>
 
         {/* --- Books Grid --- */}
-        {classData.books.length > 0 ? (
+        {classData.books.filter(b => !b.localOnly).length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
-            {classData.books.map((book) => (
+            {classData.books.filter(b => !b.localOnly).map((book) => (
               <BookCard key={book.id} book={book} placeholder={PLACEHOLDER_IMG} classId={classId} />
             ))}
           </div>

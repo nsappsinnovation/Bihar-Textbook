@@ -158,32 +158,12 @@ const Hero = () => {
                             <svg className="w-5 h-5 text-orange-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"></path></svg>
                             <span className="font-semibold text-lg">Patna, Bihar | Annual Publication Cycle </span>
                         </motion.div>
-
-                        {/* Countdown Timer */}
-                        <motion.div variants={itemVariants} className="flex items-center gap-4 mb-10">
-                            {[
-                                { label: 'DAYS', value: timeLeft.days },
-                                { label: 'HOURS', value: timeLeft.hours },
-                                { label: 'MINUTES', value: timeLeft.minutes }
-                            ].map((unit, idx) => (
-                                <React.Fragment key={idx}>
-                                    <div className="flex flex-col items-center">
-                                        <div className="w-20 h-16 bg-white text-[#0d0e23] rounded-xl flex items-center justify-center text-3xl font-black shadow-lg shadow-white/10">
-                                            {String(unit.value).padStart(2, '0')}
-                                        </div>
-                                        <span className="text-[10px] font-bold mt-2 tracking-widest text-white/50">{unit.label}</span>
-                                    </div>
-                                    {idx < 2 && <div className="text-3xl font-black mb-6">:</div>}
-                                </React.Fragment>
-                            ))}
-                        </motion.div>
-
                         {/* Button */}
                         <motion.button
                             variants={itemVariants}
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="bg-[#2a2b8d] hover:bg-[#3a3bbd] text-white px-10 py-4 rounded-xl font-bold text-lg flex items-center gap-3 transition-colors shadow-xl shadow-[#1a1b4b]/40"
+                            className="bg-[#2a2b8d] hover:bg-[#3a3bbd] text-white px-10 py-4 rounded-xl font-bold text-lg flex items-center gap-3 transition-colors"
                         >
                             Explore Library Now
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
@@ -210,7 +190,7 @@ const Hero = () => {
             <div className="absolute bottom-10 left-10 z-20">
                 <button
                     onClick={() => setIsPlaying(!isPlaying)}
-                    className="w-14 h-14 flex items-center justify-center rounded-full bg-white text-[#0d0e23] hover:bg-white/90 transition-all shadow-xl"
+                    className="w-14 h-14 flex items-center justify-center rounded-full bg-white text-[#0d0e23] hover:bg-white/90 transition-all font-bold"
                 >
                     {isPlaying ? <FaPause size={18} /> : <FaPlay size={18} className="translate-x-0.5" />}
                 </button>
@@ -228,4 +208,3 @@ const Hero = () => {
 };
 
 export default Hero;
-

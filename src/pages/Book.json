@@ -6,51 +6,49 @@
       "books": [
         {
           "id": "c1b1",
-          "title": "Hindi (ANKUR HINDI)",
+          "title": "Bengali",
           "image": "/bookcover.png",
-          "subject": "Hindi"
+          "subject": "bengali"
         },
-          {
+        {
           "id": "c1b2",
-          "title": "Hindi 2",
+          "title": "English",
           "image": "/bookcover.png",
-          "subject": "()"
+          "subject": "english"
         },
         {
           "id": "c1b3",
-          "title": "Ganit (ANKUR GANIT)",
+          "title": "Ganit",
           "image": "/bookcover.png",
-          "subject": "Ganit"
+          "subject": "ganit"
         },
         {
           "id": "c1b4",
-          "title": "English (BLOSSOM ENGLISH)",
+          "title": "Hindi",
           "image": "/bookcover.png",
-          "subject": "English"
+          "subject": "hindi",
+          "localOnly": true
         },
         {
           "id": "c1b5",
-          "title": "Urdu (GULSHAN URDU)",
+          "title": "Hisab",
           "image": "/bookcover.png",
-          "subject": "Urdu"
+          "subject": "hisab",
+          "localOnly": true
         },
         {
           "id": "c1b6",
-          "title": "Hisab (HISAB)",
+          "title": "Maithili",
           "image": "/bookcover.png",
-          "subject": "Math"
+          "subject": "maithili",
+          "localOnly": true
         },
         {
           "id": "c1b7",
-          "title": "Bengali (Bengali)",
+          "title": "Urdu",
           "image": "/bookcover.png",
-          "subject": "Bengali"
-        },
-        {
-          "id": "c1b8",
-          "title": "Maithili (Maithili)",
-          "image": "/bookcover.png",
-          "subject": "Maithili"
+          "subject": "urdu",
+          "localOnly": true
         }
       ]
     },
@@ -60,8 +58,49 @@
       "books": [
         {
           "id": "c2b1",
+          "title": "Bengali",
+          "image": "/bookcover.png",
+          "subject": "bengali"
+        },
+        {
+          "id": "c2b2",
           "title": "English",
-          "image": "/images/classes/2.png"
+          "image": "/bookcover.png",
+          "subject": "english"
+        },
+        {
+          "id": "c2b3",
+          "title": "Ganit",
+          "image": "/bookcover.png",
+          "subject": "ganit"
+        },
+        {
+          "id": "c2b4",
+          "title": "Gulshan_a_urdu",
+          "image": "/bookcover.png",
+          "subject": "gulshan_a_urdu",
+          "localOnly": true
+        },
+        {
+          "id": "c2b5",
+          "title": "Hindi",
+          "image": "/bookcover.png",
+          "subject": "hindi",
+          "localOnly": true
+        },
+        {
+          "id": "c2b6",
+          "title": "Hisab",
+          "image": "/bookcover.png",
+          "subject": "hisab",
+          "localOnly": true
+        },
+        {
+          "id": "c2b7",
+          "title": "Maithili",
+          "image": "/bookcover.png",
+          "subject": "maithili",
+          "localOnly": true
         }
       ]
     },
@@ -71,8 +110,63 @@
       "books": [
         {
           "id": "c3b1",
-          "title": "English",
-          "image": "/images/classes/3.png"
+          "title": "Bengali",
+          "image": "/bookcover.png",
+          "subject": "bengali"
+        },
+        {
+          "id": "c3b2",
+          "title": "Blossom_english",
+          "image": "/bookcover.png",
+          "subject": "blossom_english"
+        },
+        {
+          "id": "c3b3",
+          "title": "Ganit",
+          "image": "/bookcover.png",
+          "subject": "ganit"
+        },
+        {
+          "id": "c3b4",
+          "title": "Gulshan_e_urdu",
+          "image": "/bookcover.png",
+          "subject": "gulshan_e_urdu",
+          "localOnly": true
+        },
+        {
+          "id": "c3b5",
+          "title": "Hisab_urdu",
+          "image": "/bookcover.png",
+          "subject": "hisab_urdu",
+          "localOnly": true
+        },
+        {
+          "id": "c3b6",
+          "title": "Kompal_hindi",
+          "image": "/bookcover.png",
+          "subject": "kompal_hindi",
+          "localOnly": true
+        },
+        {
+          "id": "c3b7",
+          "title": "Mahauliat_aur_hum",
+          "image": "/bookcover.png",
+          "subject": "mahauliat_aur_hum",
+          "localOnly": true
+        },
+        {
+          "id": "c3b8",
+          "title": "Maithili",
+          "image": "/bookcover.png",
+          "subject": "maithili",
+          "localOnly": true
+        },
+        {
+          "id": "c3b9",
+          "title": "Paryawaran_aur_hum",
+          "image": "/bookcover.png",
+          "subject": "paryawaran_aur_hum",
+          "localOnly": true
         }
       ]
     },
@@ -82,8 +176,63 @@
       "books": [
         {
           "id": "c4b1",
-          "title": "English",
-          "image": "/images/classes/4.png"
+          "title": "Bengali",
+          "image": "/bookcover.png",
+          "subject": "bengali"
+        },
+        {
+          "id": "c4b2",
+          "title": "Blossom_english",
+          "image": "/bookcover.png",
+          "subject": "blossom_english"
+        },
+        {
+          "id": "c4b3",
+          "title": "Ganit",
+          "image": "/bookcover.png",
+          "subject": "ganit"
+        },
+        {
+          "id": "c4b4",
+          "title": "Gulshan_e_urdu",
+          "image": "/bookcover.png",
+          "subject": "gulshan_e_urdu",
+          "localOnly": true
+        },
+        {
+          "id": "c4b5",
+          "title": "Hisab_urdu",
+          "image": "/bookcover.png",
+          "subject": "hisab_urdu",
+          "localOnly": true
+        },
+        {
+          "id": "c4b6",
+          "title": "Kompal",
+          "image": "/bookcover.png",
+          "subject": "kompal",
+          "localOnly": true
+        },
+        {
+          "id": "c4b7",
+          "title": "Mahuliyat_urdu",
+          "image": "/bookcover.png",
+          "subject": "mahuliyat_urdu",
+          "localOnly": true
+        },
+        {
+          "id": "c4b8",
+          "title": "Maithili",
+          "image": "/bookcover.png",
+          "subject": "maithili",
+          "localOnly": true
+        },
+        {
+          "id": "c4b9",
+          "title": "Paryavaran_aur_hum",
+          "image": "/bookcover.png",
+          "subject": "paryavaran_aur_hum",
+          "localOnly": true
         }
       ]
     },
@@ -93,8 +242,56 @@
       "books": [
         {
           "id": "c5b1",
+          "title": "Bengali",
+          "image": "/bookcover.png",
+          "subject": "bengali"
+        },
+        {
+          "id": "c5b2",
           "title": "English",
-          "image": "/images/classes/5.png"
+          "image": "/bookcover.png",
+          "subject": "english"
+        },
+        {
+          "id": "c5b3",
+          "title": "Ganit",
+          "image": "/bookcover.png",
+          "subject": "ganit"
+        },
+        {
+          "id": "c5b4",
+          "title": "Gusane_e__urdu",
+          "image": "/bookcover.png",
+          "subject": "gusane_e__urdu",
+          "localOnly": true
+        },
+        {
+          "id": "c5b5",
+          "title": "Hisab",
+          "image": "/bookcover.png",
+          "subject": "hisab",
+          "localOnly": true
+        },
+        {
+          "id": "c5b6",
+          "title": "Kompal",
+          "image": "/bookcover.png",
+          "subject": "kompal",
+          "localOnly": true
+        },
+        {
+          "id": "c5b7",
+          "title": "Maithili",
+          "image": "/bookcover.png",
+          "subject": "maithili",
+          "localOnly": true
+        },
+        {
+          "id": "c5b8",
+          "title": "Paryawaran_aur_hum",
+          "image": "/bookcover.png",
+          "subject": "paryawaran_aur_hum",
+          "localOnly": true
         }
       ]
     },
@@ -104,8 +301,126 @@
       "books": [
         {
           "id": "c6b1",
-          "title": "English",
-          "image": "/images/classes/6.png"
+          "title": "Aatit_se_vartaman__u_",
+          "image": "/bookcover.png",
+          "subject": "aatit_se_vartaman__u_"
+        },
+        {
+          "id": "c6b2",
+          "title": "Aatit_se_vartaman",
+          "image": "/bookcover.png",
+          "subject": "aatit_se_vartaman"
+        },
+        {
+          "id": "c6b3",
+          "title": "Amrita_sanskrit",
+          "image": "/bookcover.png",
+          "subject": "amrita_sanskrit"
+        },
+        {
+          "id": "c6b4",
+          "title": "Bengali",
+          "image": "/bookcover.png",
+          "subject": "bengali",
+          "localOnly": true
+        },
+        {
+          "id": "c6b5",
+          "title": "Farozan",
+          "image": "/bookcover.png",
+          "subject": "farozan",
+          "localOnly": true
+        },
+        {
+          "id": "c6b6",
+          "title": "Ganit",
+          "image": "/bookcover.png",
+          "subject": "ganit",
+          "localOnly": true
+        },
+        {
+          "id": "c6b7",
+          "title": "Hamari_duniya__u_",
+          "image": "/bookcover.png",
+          "subject": "hamari_duniya__u_",
+          "localOnly": true
+        },
+        {
+          "id": "c6b8",
+          "title": "Hamari_duniya",
+          "image": "/bookcover.png",
+          "subject": "hamari_duniya",
+          "localOnly": true
+        },
+        {
+          "id": "c6b9",
+          "title": "Hisab",
+          "image": "/bookcover.png",
+          "subject": "hisab",
+          "localOnly": true
+        },
+        {
+          "id": "c6b10",
+          "title": "Kislay_bhag",
+          "image": "/bookcover.png",
+          "subject": "kislay_bhag",
+          "localOnly": true
+        },
+        {
+          "id": "c6b11",
+          "title": "Maithili",
+          "image": "/bookcover.png",
+          "subject": "maithili",
+          "localOnly": true
+        },
+        {
+          "id": "c6b12",
+          "title": "Misbahul_arabia",
+          "image": "/bookcover.png",
+          "subject": "misbahul_arabia",
+          "localOnly": true
+        },
+        {
+          "id": "c6b13",
+          "title": "Radiance",
+          "image": "/bookcover.png",
+          "subject": "radiance",
+          "localOnly": true
+        },
+        {
+          "id": "c6b14",
+          "title": "Samajik__arthik",
+          "image": "/bookcover.png",
+          "subject": "samajik__arthik",
+          "localOnly": true
+        },
+        {
+          "id": "c6b15",
+          "title": "Samajik_urdu",
+          "image": "/bookcover.png",
+          "subject": "samajik_urdu",
+          "localOnly": true
+        },
+        {
+          "id": "c6b16",
+          "title": "Science",
+          "image": "/bookcover.png",
+          "subject": "science",
+          "localOnly": true
+        },
+        {
+          "id": "c6b17",
+          "title": "Science_urdu",
+          "image": "/bookcover.png",
+          "subject": "science_urdu",
+          "localOnly": true
+        },
+        {
+          "id": "c6b18",
+          "title": "Seema_e_pharsi",
+          "image": "/bookcover.png",
+          "subject": "seema_e_pharsi",
+          "localOnly": true
         }
       ]
     },
@@ -115,8 +430,112 @@
       "books": [
         {
           "id": "c7b1",
-          "title": "English",
-          "image": "/images/classes/7.png"
+          "title": "Amrita",
+          "image": "/bookcover.png",
+          "subject": "amrita"
+        },
+        {
+          "id": "c7b2",
+          "title": "Atit_se_vartaman",
+          "image": "/bookcover.png",
+          "subject": "atit_se_vartaman"
+        },
+        {
+          "id": "c7b3",
+          "title": "Atit_se_vartaman_urdu",
+          "image": "/bookcover.png",
+          "subject": "atit_se_vartaman_urdu"
+        },
+        {
+          "id": "c7b4",
+          "title": "Farozan_urdu",
+          "image": "/bookcover.png",
+          "subject": "farozan_urdu",
+          "localOnly": true
+        },
+        {
+          "id": "c7b5",
+          "title": "Ganit",
+          "image": "/bookcover.png",
+          "subject": "ganit",
+          "localOnly": true
+        },
+        {
+          "id": "c7b6",
+          "title": "Hamari_duniya",
+          "image": "/bookcover.png",
+          "subject": "hamari_duniya",
+          "localOnly": true
+        },
+        {
+          "id": "c7b7",
+          "title": "Hamari_duniya_urdu",
+          "image": "/bookcover.png",
+          "subject": "hamari_duniya_urdu",
+          "localOnly": true
+        },
+        {
+          "id": "c7b8",
+          "title": "Hisab_urdu",
+          "image": "/bookcover.png",
+          "subject": "hisab_urdu",
+          "localOnly": true
+        },
+        {
+          "id": "c7b9",
+          "title": "Kislay",
+          "image": "/bookcover.png",
+          "subject": "kislay",
+          "localOnly": true
+        },
+        {
+          "id": "c7b10",
+          "title": "Misbahul_urdu",
+          "image": "/bookcover.png",
+          "subject": "misbahul_urdu",
+          "localOnly": true
+        },
+        {
+          "id": "c7b11",
+          "title": "Radiance",
+          "image": "/bookcover.png",
+          "subject": "radiance",
+          "localOnly": true
+        },
+        {
+          "id": "c7b12",
+          "title": "Samajik_arthik",
+          "image": "/bookcover.png",
+          "subject": "samajik_arthik",
+          "localOnly": true
+        },
+        {
+          "id": "c7b13",
+          "title": "Samajik_urdu",
+          "image": "/bookcover.png",
+          "subject": "samajik_urdu",
+          "localOnly": true
+        },
+        {
+          "id": "c7b14",
+          "title": "Science",
+          "image": "/bookcover.png",
+          "subject": "science",
+          "localOnly": true
+        },
+        {
+          "id": "c7b15",
+          "title": "Science_urdu",
+          "image": "/bookcover.png",
+          "subject": "science_urdu",
+          "localOnly": true
+        },
+        {
+          "id": "c7b16",
+          "title": "Seema_e_pharsi",
+          "image": "/bookcover.png",
+          "subject": "seema_e_pharsi",
+          "localOnly": true
         }
       ]
     },
@@ -126,8 +545,112 @@
       "books": [
         {
           "id": "c8b1",
-          "title": "English",
-          "image": "/images/classes/8.png"
+          "title": "Aatit_se_vartaman",
+          "image": "/bookcover.png",
+          "subject": "aatit_se_vartaman"
+        },
+        {
+          "id": "c8b2",
+          "title": "Amrita",
+          "image": "/bookcover.png",
+          "subject": "amrita"
+        },
+        {
+          "id": "c8b3",
+          "title": "Atit_se_vartaman_urdu",
+          "image": "/bookcover.png",
+          "subject": "atit_se_vartaman_urdu"
+        },
+        {
+          "id": "c8b4",
+          "title": "Firozan",
+          "image": "/bookcover.png",
+          "subject": "firozan",
+          "localOnly": true
+        },
+        {
+          "id": "c8b5",
+          "title": "Ganit",
+          "image": "/bookcover.png",
+          "subject": "ganit",
+          "localOnly": true
+        },
+        {
+          "id": "c8b6",
+          "title": "Geography",
+          "image": "/bookcover.png",
+          "subject": "geography",
+          "localOnly": true
+        },
+        {
+          "id": "c8b7",
+          "title": "Hamari_duniya_urdu",
+          "image": "/bookcover.png",
+          "subject": "hamari_duniya_urdu",
+          "localOnly": true
+        },
+        {
+          "id": "c8b8",
+          "title": "Hisab___urdu",
+          "image": "/bookcover.png",
+          "subject": "hisab___urdu",
+          "localOnly": true
+        },
+        {
+          "id": "c8b9",
+          "title": "Kislay",
+          "image": "/bookcover.png",
+          "subject": "kislay",
+          "localOnly": true
+        },
+        {
+          "id": "c8b10",
+          "title": "Misbahul_arabia",
+          "image": "/bookcover.png",
+          "subject": "misbahul_arabia",
+          "localOnly": true
+        },
+        {
+          "id": "c8b11",
+          "title": "Radiance",
+          "image": "/bookcover.png",
+          "subject": "radiance",
+          "localOnly": true
+        },
+        {
+          "id": "c8b12",
+          "title": "Samajit_arthik_rajneti_urdu",
+          "image": "/bookcover.png",
+          "subject": "samajit_arthik_rajneti_urdu",
+          "localOnly": true
+        },
+        {
+          "id": "c8b13",
+          "title": "Samajit_arthik_rajnetik_jiwan",
+          "image": "/bookcover.png",
+          "subject": "samajit_arthik_rajnetik_jiwan",
+          "localOnly": true
+        },
+        {
+          "id": "c8b14",
+          "title": "Science",
+          "image": "/bookcover.png",
+          "subject": "science",
+          "localOnly": true
+        },
+        {
+          "id": "c8b15",
+          "title": "Science_urdu",
+          "image": "/bookcover.png",
+          "subject": "science_urdu",
+          "localOnly": true
+        },
+        {
+          "id": "c8b16",
+          "title": "Sima_e_pharsi_pharsi",
+          "image": "/bookcover.png",
+          "subject": "sima_e_pharsi_pharsi",
+          "localOnly": true
         }
       ]
     },
@@ -137,8 +660,231 @@
       "books": [
         {
           "id": "c9b1",
-          "title": "English",
-          "image": "/images/classes/9.png"
+          "title": "Aj_ajharul_arabia",
+          "image": "/bookcover.png",
+          "subject": "aj_ajharul_arabia"
+        },
+        {
+          "id": "c9b2",
+          "title": "Anhad_bhag_1",
+          "image": "/bookcover.png",
+          "subject": "anhad_bhag_1"
+        },
+        {
+          "id": "c9b3",
+          "title": "Arthshastra",
+          "image": "/bookcover.png",
+          "subject": "arthshastra"
+        },
+        {
+          "id": "c9b4",
+          "title": "Bhugol",
+          "image": "/bookcover.png",
+          "subject": "bhugol",
+          "localOnly": true
+        },
+        {
+          "id": "c9b5",
+          "title": "Darakhshan",
+          "image": "/bookcover.png",
+          "subject": "darakhshan",
+          "localOnly": true
+        },
+        {
+          "id": "c9b6",
+          "title": "Democratic_politics",
+          "image": "/bookcover.png",
+          "subject": "democratic_politics",
+          "localOnly": true
+        },
+        {
+          "id": "c9b7",
+          "title": "Economics_hindi",
+          "image": "/bookcover.png",
+          "subject": "economics_hindi",
+          "localOnly": true
+        },
+        {
+          "id": "c9b8",
+          "title": "Economics",
+          "image": "/bookcover.png",
+          "subject": "economics",
+          "localOnly": true
+        },
+        {
+          "id": "c9b9",
+          "title": "English_reader",
+          "image": "/bookcover.png",
+          "subject": "english_reader",
+          "localOnly": true
+        },
+        {
+          "id": "c9b10",
+          "title": "Ganit",
+          "image": "/bookcover.png",
+          "subject": "ganit",
+          "localOnly": true
+        },
+        {
+          "id": "c9b11",
+          "title": "Geography",
+          "image": "/bookcover.png",
+          "subject": "geography",
+          "localOnly": true
+        },
+        {
+          "id": "c9b12",
+          "title": "Godhuli",
+          "image": "/bookcover.png",
+          "subject": "godhuli",
+          "localOnly": true
+        },
+        {
+          "id": "c9b13",
+          "title": "History_eng",
+          "image": "/bookcover.png",
+          "subject": "history_eng",
+          "localOnly": true
+        },
+        {
+          "id": "c9b14",
+          "title": "History",
+          "image": "/bookcover.png",
+          "subject": "history",
+          "localOnly": true
+        },
+        {
+          "id": "c9b15",
+          "title": "Kislay",
+          "image": "/bookcover.png",
+          "subject": "kislay",
+          "localOnly": true
+        },
+        {
+          "id": "c9b16",
+          "title": "Lal_o_gul",
+          "image": "/bookcover.png",
+          "subject": "lal_o_gul",
+          "localOnly": true
+        },
+        {
+          "id": "c9b17",
+          "title": "Loktantrik_rajneeti",
+          "image": "/bookcover.png",
+          "subject": "loktantrik_rajneeti",
+          "localOnly": true
+        },
+        {
+          "id": "c9b18",
+          "title": "Mahua_bhojpuri",
+          "image": "/bookcover.png",
+          "subject": "mahua_bhojpuri",
+          "localOnly": true
+        },
+        {
+          "id": "c9b19",
+          "title": "Manthanam",
+          "image": "/bookcover.png",
+          "subject": "manthanam",
+          "localOnly": true
+        },
+        {
+          "id": "c9b20",
+          "title": "Maths",
+          "image": "/bookcover.png",
+          "subject": "maths",
+          "localOnly": true
+        },
+        {
+          "id": "c9b21",
+          "title": "Mithilak_dharohar",
+          "image": "/bookcover.png",
+          "subject": "mithilak_dharohar",
+          "localOnly": true
+        },
+        {
+          "id": "c9b22",
+          "title": "Nakhatul_darsahul",
+          "image": "/bookcover.png",
+          "subject": "nakhatul_darsahul",
+          "localOnly": true
+        },
+        {
+          "id": "c9b23",
+          "title": "Nupur",
+          "image": "/bookcover.png",
+          "subject": "nupur",
+          "localOnly": true
+        },
+        {
+          "id": "c9b24",
+          "title": "Panorama_part_1",
+          "image": "/bookcover.png",
+          "subject": "panorama_part_1",
+          "localOnly": true
+        },
+        {
+          "id": "c9b25",
+          "title": "Piyusham_dwipathya",
+          "image": "/bookcover.png",
+          "subject": "piyusham_dwipathya",
+          "localOnly": true
+        },
+        {
+          "id": "c9b26",
+          "title": "Piyusham",
+          "image": "/bookcover.png",
+          "subject": "piyusham",
+          "localOnly": true
+        },
+        {
+          "id": "c9b27",
+          "title": "Praveshika_maithili",
+          "image": "/bookcover.png",
+          "subject": "praveshika_maithili",
+          "localOnly": true
+        },
+        {
+          "id": "c9b28",
+          "title": "Roshani",
+          "image": "/bookcover.png",
+          "subject": "roshani",
+          "localOnly": true
+        },
+        {
+          "id": "c9b29",
+          "title": "Science",
+          "image": "/bookcover.png",
+          "subject": "science",
+          "localOnly": true
+        },
+        {
+          "id": "c9b30",
+          "title": "Seema_e_adab",
+          "image": "/bookcover.png",
+          "subject": "seema_e_adab",
+          "localOnly": true
+        },
+        {
+          "id": "c9b31",
+          "title": "Ucch_ganit",
+          "image": "/bookcover.png",
+          "subject": "ucch_ganit",
+          "localOnly": true
+        },
+        {
+          "id": "c9b32",
+          "title": "Varnika",
+          "image": "/bookcover.png",
+          "subject": "varnika",
+          "localOnly": true
+        },
+        {
+          "id": "c9b33",
+          "title": "Vigyan",
+          "image": "/bookcover.png",
+          "subject": "vigyan",
+          "localOnly": true
         }
       ]
     },
@@ -148,8 +894,217 @@
       "books": [
         {
           "id": "c10b1",
-          "title": "English",
-          "image": "/images/classes/10.png"
+          "title": "Arthvyavastha",
+          "image": "/bookcover.png",
+          "subject": "arthvyavastha"
+        },
+        {
+          "id": "c10b2",
+          "title": "Bagaicha",
+          "image": "/bookcover.png",
+          "subject": "bagaicha"
+        },
+        {
+          "id": "c10b3",
+          "title": "Bhugol",
+          "image": "/bookcover.png",
+          "subject": "bhugol"
+        },
+        {
+          "id": "c10b4",
+          "title": "Civics",
+          "image": "/bookcover.png",
+          "subject": "civics",
+          "localOnly": true
+        },
+        {
+          "id": "c10b5",
+          "title": "Darkhashan",
+          "image": "/bookcover.png",
+          "subject": "darkhashan",
+          "localOnly": true
+        },
+        {
+          "id": "c10b6",
+          "title": "Economics",
+          "image": "/bookcover.png",
+          "subject": "economics",
+          "localOnly": true
+        },
+        {
+          "id": "c10b7",
+          "title": "Ganit",
+          "image": "/bookcover.png",
+          "subject": "ganit",
+          "localOnly": true
+        },
+        {
+          "id": "c10b8",
+          "title": "Geography",
+          "image": "/bookcover.png",
+          "subject": "geography",
+          "localOnly": true
+        },
+        {
+          "id": "c10b9",
+          "title": "Godhuli",
+          "image": "/bookcover.png",
+          "subject": "godhuli",
+          "localOnly": true
+        },
+        {
+          "id": "c10b10",
+          "title": "Griah_vigyan",
+          "image": "/bookcover.png",
+          "subject": "griah_vigyan",
+          "localOnly": true
+        },
+        {
+          "id": "c10b11",
+          "title": "History",
+          "image": "/bookcover.png",
+          "subject": "history",
+          "localOnly": true
+        },
+        {
+          "id": "c10b12",
+          "title": "Itihas",
+          "image": "/bookcover.png",
+          "subject": "itihas",
+          "localOnly": true
+        },
+        {
+          "id": "c10b13",
+          "title": "Kaushiki",
+          "image": "/bookcover.png",
+          "subject": "kaushiki",
+          "localOnly": true
+        },
+        {
+          "id": "c10b14",
+          "title": "Kislay",
+          "image": "/bookcover.png",
+          "subject": "kislay",
+          "localOnly": true
+        },
+        {
+          "id": "c10b15",
+          "title": "Lal_o_gul",
+          "image": "/bookcover.png",
+          "subject": "lal_o_gul",
+          "localOnly": true
+        },
+        {
+          "id": "c10b16",
+          "title": "Mantham_duitya_bhag",
+          "image": "/bookcover.png",
+          "subject": "mantham_duitya_bhag",
+          "localOnly": true
+        },
+        {
+          "id": "c10b17",
+          "title": "Maths",
+          "image": "/bookcover.png",
+          "subject": "maths",
+          "localOnly": true
+        },
+        {
+          "id": "c10b18",
+          "title": "Mithila_vibhuti",
+          "image": "/bookcover.png",
+          "subject": "mithila_vibhuti",
+          "localOnly": true
+        },
+        {
+          "id": "c10b19",
+          "title": "Nakhbat_arabia",
+          "image": "/bookcover.png",
+          "subject": "nakhbat_arabia",
+          "localOnly": true
+        },
+        {
+          "id": "c10b20",
+          "title": "Pan_phool",
+          "image": "/bookcover.png",
+          "subject": "pan_phool",
+          "localOnly": true
+        },
+        {
+          "id": "c10b21",
+          "title": "Panorama_2",
+          "image": "/bookcover.png",
+          "subject": "panorama_2",
+          "localOnly": true
+        },
+        {
+          "id": "c10b22",
+          "title": "Panorama_reader",
+          "image": "/bookcover.png",
+          "subject": "panorama_reader",
+          "localOnly": true
+        },
+        {
+          "id": "c10b23",
+          "title": "Piyusham",
+          "image": "/bookcover.png",
+          "subject": "piyusham",
+          "localOnly": true
+        },
+        {
+          "id": "c10b24",
+          "title": "Piyusum_anupurak_putika",
+          "image": "/bookcover.png",
+          "subject": "piyusum_anupurak_putika",
+          "localOnly": true
+        },
+        {
+          "id": "c10b25",
+          "title": "Praveshika_maithili",
+          "image": "/bookcover.png",
+          "subject": "praveshika_maithili",
+          "localOnly": true
+        },
+        {
+          "id": "c10b26",
+          "title": "Rajneetishashtra",
+          "image": "/bookcover.png",
+          "subject": "rajneetishashtra",
+          "localOnly": true
+        },
+        {
+          "id": "c10b27",
+          "title": "Science",
+          "image": "/bookcover.png",
+          "subject": "science",
+          "localOnly": true
+        },
+        {
+          "id": "c10b28",
+          "title": "Seema_a_adab",
+          "image": "/bookcover.png",
+          "subject": "seema_a_adab",
+          "localOnly": true
+        },
+        {
+          "id": "c10b29",
+          "title": "Ucch_ganit",
+          "image": "/bookcover.png",
+          "subject": "ucch_ganit",
+          "localOnly": true
+        },
+        {
+          "id": "c10b30",
+          "title": "Vigyan",
+          "image": "/bookcover.png",
+          "subject": "vigyan",
+          "localOnly": true
+        },
+        {
+          "id": "c10b31",
+          "title": "Warnika",
+          "image": "/bookcover.png",
+          "subject": "warnika",
+          "localOnly": true
         }
       ]
     },
@@ -159,21 +1114,245 @@
       "books": [
         {
           "id": "c11b1",
-          "title": "English",
-          "image": "/images/classes/11.png"
+          "title": "Accountancy_part_1",
+          "image": "/bookcover.png",
+          "subject": "accountancy_part_1"
+        },
+        {
+          "id": "c11b2",
+          "title": "Accountancy_part_2",
+          "image": "/bookcover.png",
+          "subject": "accountancy_part_2"
+        },
+        {
+          "id": "c11b3",
+          "title": "Al_hadiqat",
+          "image": "/bookcover.png",
+          "subject": "al_hadiqat"
+        },
+        {
+          "id": "c11b4",
+          "title": "Bhautiki_1",
+          "image": "/bookcover.png",
+          "subject": "bhautiki_1",
+          "localOnly": true
+        },
+        {
+          "id": "c11b5",
+          "title": "Business_studies",
+          "image": "/bookcover.png",
+          "subject": "business_studies",
+          "localOnly": true
+        },
+        {
+          "id": "c11b6",
+          "title": "Chemistry_part_1",
+          "image": "/bookcover.png",
+          "subject": "chemistry_part_1",
+          "localOnly": true
+        },
+        {
+          "id": "c11b7",
+          "title": "Chemistry_part_2",
+          "image": "/bookcover.png",
+          "subject": "chemistry_part_2",
+          "localOnly": true
+        },
+        {
+          "id": "c11b8",
+          "title": "Economic_development",
+          "image": "/bookcover.png",
+          "subject": "economic_development",
+          "localOnly": true
+        },
+        {
+          "id": "c11b9",
+          "title": "Fundamentals_of_physical_goegraphy",
+          "image": "/bookcover.png",
+          "subject": "fundamentals_of_physical_goegraphy",
+          "localOnly": true
+        },
+        {
+          "id": "c11b10",
+          "title": "Ganit",
+          "image": "/bookcover.png",
+          "subject": "ganit",
+          "localOnly": true
+        },
+        {
+          "id": "c11b11",
+          "title": "History",
+          "image": "/bookcover.png",
+          "subject": "history",
+          "localOnly": true
+        },
+        {
+          "id": "c11b12",
+          "title": "Indian_constitution",
+          "image": "/bookcover.png",
+          "subject": "indian_constitution",
+          "localOnly": true
+        },
+        {
+          "id": "c11b13",
+          "title": "Lal_o_guhar",
+          "image": "/bookcover.png",
+          "subject": "lal_o_guhar",
+          "localOnly": true
+        },
+        {
+          "id": "c11b14",
+          "title": "Lekhashastra_1",
+          "image": "/bookcover.png",
+          "subject": "lekhashastra_1",
+          "localOnly": true
+        },
+        {
+          "id": "c11b15",
+          "title": "Lekhashastra_2",
+          "image": "/bookcover.png",
+          "subject": "lekhashastra_2",
+          "localOnly": true
+        },
+        {
+          "id": "c11b16",
+          "title": "Magahi_bhasha",
+          "image": "/bookcover.png",
+          "subject": "magahi_bhasha",
+          "localOnly": true
+        },
+        {
+          "id": "c11b17",
+          "title": "Magahi_vyakaran",
+          "image": "/bookcover.png",
+          "subject": "magahi_vyakaran",
+          "localOnly": true
+        },
+        {
+          "id": "c11b18",
+          "title": "Maths",
+          "image": "/bookcover.png",
+          "subject": "maths",
+          "localOnly": true
+        },
+        {
+          "id": "c11b19",
+          "title": "Persian_grammar",
+          "image": "/bookcover.png",
+          "subject": "persian_grammar",
+          "localOnly": true
+        },
+        {
+          "id": "c11b20",
+          "title": "Persian_literature",
+          "image": "/bookcover.png",
+          "subject": "persian_literature",
+          "localOnly": true
+        },
+        {
+          "id": "c11b21",
+          "title": "Physical_environment",
+          "image": "/bookcover.png",
+          "subject": "physical_environment",
+          "localOnly": true
+        },
+        {
+          "id": "c11b22",
+          "title": "Physics_part_1",
+          "image": "/bookcover.png",
+          "subject": "physics_part_1",
+          "localOnly": true
+        },
+        {
+          "id": "c11b23",
+          "title": "Physics_part_2",
+          "image": "/bookcover.png",
+          "subject": "physics_part_2",
+          "localOnly": true
+        },
+        {
+          "id": "c11b24",
+          "title": "Political_theory",
+          "image": "/bookcover.png",
+          "subject": "political_theory",
+          "localOnly": true
+        },
+        {
+          "id": "c11b25",
+          "title": "Practical_geography",
+          "image": "/bookcover.png",
+          "subject": "practical_geography",
+          "localOnly": true
+        },
+        {
+          "id": "c11b26",
+          "title": "Psychology",
+          "image": "/bookcover.png",
+          "subject": "psychology",
+          "localOnly": true
+        },
+        {
+          "id": "c11b27",
+          "title": "Rainbow_english",
+          "image": "/bookcover.png",
+          "subject": "rainbow_english",
+          "localOnly": true
+        },
+        {
+          "id": "c11b28",
+          "title": "Rainbow_grammar",
+          "image": "/bookcover.png",
+          "subject": "rainbow_grammar",
+          "localOnly": true
+        },
+        {
+          "id": "c11b29",
+          "title": "Sociology",
+          "image": "/bookcover.png",
+          "subject": "sociology",
+          "localOnly": true
+        },
+        {
+          "id": "c11b30",
+          "title": "Statistics___economics",
+          "image": "/bookcover.png",
+          "subject": "statistics___economics",
+          "localOnly": true
+        },
+        {
+          "id": "c11b31",
+          "title": "Understanding_society",
+          "image": "/bookcover.png",
+          "subject": "understanding_society",
+          "localOnly": true
+        },
+        {
+          "id": "c11b32",
+          "title": "Urdu_grammar",
+          "image": "/bookcover.png",
+          "subject": "urdu_grammar",
+          "localOnly": true
+        },
+        {
+          "id": "c11b33",
+          "title": "Urdu_kahkasa",
+          "image": "/bookcover.png",
+          "subject": "urdu_kahkasa",
+          "localOnly": true
+        },
+        {
+          "id": "c11b34",
+          "title": "Urdu_literature_history",
+          "image": "/bookcover.png",
+          "subject": "urdu_literature_history",
+          "localOnly": true
         }
       ]
     },
     {
       "id": 12,
       "name": "Class 12",
-      "books": [
-        {
-          "id": "c12b1",
-          "title": "English",
-          "image": "/images/classes/12.png"
-        }
-      ]
+      "books": []
     }
   ]
 }

@@ -11,6 +11,7 @@ import CsrPolicy from "./pages/CsrPolicy";
 import KnowUs from "./pages/Know";
 import Books from "./pages/Books.jsx";
 import BookReader from "./pages/BookReader.jsx";
+import Flipbook from "./pages/Flipbook.jsx";
 import Gallery from "./pages/Gallery.jsx";
 import Document from "./pages/Document.jsx";
 
@@ -32,12 +33,14 @@ import PressRelease from "./components/gallery/sections/Pressrelease";
 
 function App() {
   const location = useLocation();
-  const isAuthPage =
-    location.pathname === "/login" || location.pathname === "/signup";
+  const isIsolatedPage =
+    location.pathname === "/login" ||
+    location.pathname === "/signup" ||
+    location.pathname.includes("/flip");
 
   return (
     <>
-      {!isAuthPage && <Nav />}
+      {!isIsolatedPage && <Nav />}
 
       <div className="min-h-screen flex flex-col">
         <main className="flex-grow">
@@ -79,6 +82,10 @@ function App() {
               element={<FlagshipEvents />}
             />
 
+            {/* Flipbook */}
+            <Route path="/book/:classId/:bookSubject/:chapterId/flip" element={<Flipbook />} />
+
+
             {/* Other */}
             <Route path="/notice" element={<Notice />} />
             <Route path="/tenders" element={<Tenders />} />
@@ -86,7 +93,7 @@ function App() {
           </Routes>
         </main>
 
-        {!isAuthPage && <Footer />}
+        {!isIsolatedPage && <Footer />}
       </div>
     </>
   );

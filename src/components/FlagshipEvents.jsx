@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const events = [
   {
@@ -71,11 +73,12 @@ const events = [
   },
 ];
 
+
 export default function FlagshipEvent() {
   const [index, setIndex] = useState(0);
 
-  // Card width(360) + gap(24 = gap-6)
-  const CARD_WIDTH = 384;
+  // Card width(380) + gap(32)
+  const CARD_WIDTH = 412;
   const VISIBLE = 3;
   const maxIndex = Math.max(0, events.length - VISIBLE);
 
@@ -83,150 +86,101 @@ export default function FlagshipEvent() {
   const next = () => setIndex((i) => Math.min(i + 1, maxIndex));
 
   return (
-    <section className="w-full bg-white py-20 font-sans">
-      {/* HEADER */}
-      <div className="max-w-[1400px] mx-auto px-6 mb-14">
-        {/* Subtitle with subtle animation */}
-        <div
-          className="flex items-center gap-3 mb-2 opacity-0 animate-[fadeSlideUp_0.8s_ease-out_forwards]"
-          style={{ animationDelay: "0.2s" }}
-        >
-          <span className="w-2.5 h-2.5 bg-[#332F82] rounded-full animate-[pulseDot_1.8s_ease-in-out_infinite]" />
-          <p className="uppercase tracking-widest text-sm font-bold text-gray-500">
-            Flagship Events
+    <section className="w-full bg-[#fcfcfd] py-24 px-6 md:px-12 lg:px-24 font-sans text-slate-900 border-t border-slate-100 overflow-hidden">
+      {/* --- Minimalist Header (Matching EventsSection) --- */}
+      <div className="max-w-[1280px] mx-auto mb-16">
+        <div className="max-w-3xl">
+          <div className="flex items-center gap-2 mb-4">
+            <div className="h-px w-8 bg-indigo-500"></div>
+            <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-[0.2em]">Flagship Programs</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 mb-6">
+            Transforming the <span className="text-slate-400">Learning Landscape</span> <br /> In Bihar
+          </h2>
+          <p className="text-lg text-slate-500 font-normal leading-relaxed">
+            Scalable initiatives designed to bring high-quality educational resources to every student across the state.
           </p>
         </div>
 
-        <h2 className="text-4xl md:text-5xl font-bold leading-tight">
-          Flagship Initiatives Transforming
-          <br />
-          <span className="bg-gradient-to-r from-[#332F82] to-[#a87b3e] bg-clip-text text-transparent">
-            the Learning Landscape in Bihar
-          </span>
-        </h2>
-      </div>
-
-      {/* CAROUSEL */}
-      <div className="relative max-w-[1400px] mx-auto px-6">
-        <div className="overflow-hidden">
-          <div
-            className="flex gap-6 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
-            style={{ transform: `translateX(-${index * CARD_WIDTH}px)` }}
-          >
-            {events.map((item, i) => (
-              <div
-                key={i}
-                className="
-                  group
-                  w-[360px] flex-shrink-0
-                  bg-[#F3F4F8]
-                  rounded-3xl
-                  p-4
-                  h-[440px]
-                  flex flex-col
-                  transition-all duration-500 ease-out
-                  hover:-translate-y-2 hover:scale-[1.015]
-                  hover:shadow-[0_30px_60px_-20px_rgba(51,47,130,0.35)]
-                "
-              >
-                <div className="relative h-[210px] rounded-2xl overflow-hidden">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="
-                      w-full h-full object-cover
-                      transition-transform duration-700 ease-out
-                      group-hover:scale-110
-                    "
-                  />
-                  <div
-                    className="
-                      absolute inset-0
-                      bg-gradient-to-r from-[#332F82]/80 to-[#a87b3e]/80
-                      mix-blend-multiply
-                      transition-opacity duration-500
-                      group-hover:opacity-60
-                    "
-                  />
-                </div>
-
-                <div className="flex flex-col flex-grow px-2 pt-6 pb-4">
-                  <h3
-                    className="
-                      text-lg font-bold mb-3 leading-snug
-                      transition-colors duration-300
-                      group-hover:text-[#332F82]
-                    "
-                  >
-                    {item.title}
-                  </h3>
-
-                  <p className="text-sm text-gray-600 mb-6 line-clamp-3">
-                    {item.description}
-                  </p>
-
-                  <button
-                    className="
-                      mt-auto
-                      text-[#332F82]
-                      text-sm font-semibold
-                      flex items-center gap-2
-                      transition-all duration-300
-                      group-hover:gap-3
-                    "
-                  >
-                    View Details →
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* CONTROLS */}
-        <div className="flex justify-center items-center gap-8 mt-10">
+        {/* --- Carousel Controls --- */}
+        <div className="flex items-center justify-end gap-3 mt-8 md:-mt-12">
           <button
             onClick={prev}
             disabled={index === 0}
-            className="w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center text-[#332F82]
-            disabled:opacity-40 hover:bg-[#332F82] hover:text-white transition"
+            className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-indigo-600 hover:border-indigo-600 disabled:opacity-30 disabled:hover:border-slate-200 disabled:hover:text-slate-400 transition-all"
           >
-            ‹
+            <ChevronLeft size={20} />
           </button>
-
-          <div className="flex gap-2">
-            {Array.from({ length: maxIndex + 1 }).map((_, i) => (
-              <span
-                key={i}
-                className={`h-3 rounded-full transition-all duration-300 ${
-                  i === index ? "w-10 bg-[#332F82]" : "w-3 bg-gray-300"
-                }`}
-              />
-            ))}
-          </div>
-
           <button
             onClick={next}
             disabled={index === maxIndex}
-            className="w-12 h-12 rounded-full bg-white shadow-md flex items-center justify-center text-[#332F82]
-            disabled:opacity-40 hover:bg-[#332F82] hover:text-white transition"
+            className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-indigo-600 hover:border-indigo-600 disabled:opacity-30 disabled:hover:border-slate-200 disabled:hover:text-slate-400 transition-all"
           >
-            ›
+            <ChevronRight size={20} />
           </button>
         </div>
       </div>
 
-      {/* Inline CSS (so you don't forget). You can move this to index.css */}
-      <style>{`
-        @keyframes fadeSlideUp {
-          0% { opacity: 0; transform: translateY(12px); }
-          100% { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes pulseDot {
-          0%,100% { transform: scale(1); opacity: 0.5; }
-          50% { transform: scale(1.6); opacity: 1; }
-        }
-      `}</style>
+      {/* --- Minimalist Carousel --- */}
+      <div className="max-w-[1280px] mx-auto overflow-hidden relative">
+        <motion.div
+          animate={{ x: -index * CARD_WIDTH }}
+          transition={{ type: "spring", damping: 20, stiffness: 100 }}
+          className="flex gap-8"
+        >
+          {events.map((item, i) => (
+            <div
+              key={i}
+              className="w-[380px] flex-shrink-0 group cursor-default"
+            >
+              <div className="relative aspect-[16/10] w-full rounded-lg overflow-hidden mb-6 bg-slate-100">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute top-4 left-4">
+                  <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-[9px] font-bold text-slate-600 uppercase tracking-wider shadow-sm border border-white/20">
+                    {item.tag}
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex-1">
+                <div className="flex items-center gap-2 text-[10px] font-bold text-indigo-500 uppercase tracking-widest mb-3">
+                  <div className="w-4 h-px bg-indigo-500"></div>
+                  <span>Initiative {i + 1}</span>
+                </div>
+
+                <h3 className="text-xl font-semibold text-slate-900 leading-tight mb-2 group-hover:text-indigo-600 transition-colors">
+                  {item.title}
+                </h3>
+
+                <p className="text-sm text-slate-500 font-medium leading-relaxed line-clamp-2 mb-4">
+                  {item.description}
+                </p>
+
+                <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+                  <button className="text-indigo-600 text-[11px] font-bold hover:gap-2 transition-all flex items-center gap-1.5 uppercase tracking-wider">
+                    Learn More <ArrowUpRight size={14} />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* --- Pagination Indicator --- */}
+      <div className="flex justify-center mt-12 gap-2">
+        {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+          <div
+            key={i}
+            className={`h-1 rounded-full transition-all duration-300 ${i === index ? "w-8 bg-indigo-600" : "w-1.5 bg-slate-200"}`}
+          />
+        ))}
+      </div>
     </section>
   );
 }
+

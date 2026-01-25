@@ -256,6 +256,7 @@ const CoreMissions = () => {
                             isLeft ? "flex-row-reverse text-right" : ""
                           }`}
                         >
+                            
                           {/* Icon pod */}
                           <div
                             className="w-12 h-12 rounded-full bg-white border border-gray-100 flex items-center justify-center text-lg relative z-20 shadow-sm transition-all duration-500 group-hover:scale-110 group-hover:border-blue-200 group-hover:shadow-[0_18px_35px_-22px_rgba(59,130,246,0.6)]"
