@@ -20,29 +20,55 @@ const BookReader = () => {
         setOpenSection(openSection === index ? null : index);
     };
 
-    const chapters = [
-        { id: "preface", title: "PREFACE", hindiTitle: "दो शब्द / प्राक्कथन", type: "intro" },
-        { id: "contents", title: "CONTENTS", hindiTitle: "विषय - सूची", type: "intro" },
-        { id: 1, title: "Chapter 1", hindiTitle: "हँसते-खेलते", type: "chapter" },
-        { id: 2, title: "Chapter 2", hindiTitle: "हमारा गाँव (चित्रपठन)", type: "chapter" },
-        { id: 3, title: "Chapter 3", hindiTitle: "हमारा शहर (चित्रपठन)", type: "chapter" },
-        { id: 4, title: "Chapter 4", hindiTitle: "प्रार्थना (कविता)", type: "chapter" },
-        { id: 5, title: "Chapter 5", hindiTitle: "आओ खेलें खेल (चित्रपठन)", type: "chapter" },
-        { id: 6, title: "Chapter 6", hindiTitle: "चंदा मामा (कविता)", type: "chapter" },
-        { id: 7, title: "Chapter 7", hindiTitle: "धम्मक धम्मक (कविता)", type: "chapter" },
-        { id: 8, title: "Chapter 8", hindiTitle: "पुनरावर्तन", type: "chapter" },
-        { id: 9, title: "Chapter 9", hindiTitle: "पतंग (कविता)", type: "chapter" },
-        { id: 10, title: "Chapter 10", hindiTitle: "मन करता है (कविता)", type: "chapter" },
-        { id: 11, title: "Chapter 11", hindiTitle: "पुनरावर्त्तन", type: "chapter" },
-        { id: 12, title: "Chapter 12", hindiTitle: "आलू का पराठा (कविता)", type: "chapter" },
-        { id: 13, title: "Chapter 13", hindiTitle: "पटना का चिड़ियाघर", type: "chapter" },
-        { id: 14, title: "Chapter 14", hindiTitle: "चालाक चीकू", type: "chapter" },
-        { id: 15, title: "Chapter 15", hindiTitle: "पुनरावर्तन", type: "chapter" },
-        { id: 16, title: "Chapter 16", hindiTitle: "हरे-पेड़ (वार्तालाप)", type: "chapter" },
-        { id: 17, title: "Chapter 17", hindiTitle: "लालची कुत्ता (चित्रकथा)", type: "chapter" },
-        { id: 18, title: "Chapter 18", hindiTitle: "दो दोस्त (कहानी)", type: "chapter" },
-        { id: 19, title: "Chapter 19", hindiTitle: "शेर और सियार (कहानी)", type: "chapter" },
-    ];
+    const [chapters, setChapters] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    // Fetch chapters from manifest
+    React.useEffect(() => {
+        const fetchChapters = async () => {
+            try {
+                // Sanitize slug to match scraper logic: replace non-alphanumeric with '_'
+                const subjectSlug = (bookSubject || "Hindi").toLowerCase().replace(/[^a-z0-9]/g, '_');
+                const manifestUrl = `/PDFs/Class_${classId}/${subjectSlug}_manifest.json`;
+
+                const response = await fetch(manifestUrl);
+                if (response.ok) {
+                    const data = await response.json();
+                    // Transform manifest chapters to BookReader format
+                    const mappedChapters = data.chapters.map(c => ({
+                        id: c.id,
+                        title: c.title, // Use title from scraper
+                        hindiTitle: c.title, // Fallback if no hindi title available yet
+                        type: "chapter"
+                    }));
+                    setChapters(mappedChapters);
+                } else {
+                    // Fallback static list only if fetch fails (e.g. for demo)
+                    console.warn("Manifest not found, using fallback chapters");
+                    setChapters([
+                        { id: "preface", title: "PREFACE", hindiTitle: "दो शब्द / प्राक्कथन", type: "intro" },
+                        { id: "contents", title: "CONTENTS", hindiTitle: "विषय - सूची", type: "intro" },
+                        { id: 1, title: "Chapter 1", hindiTitle: "हँसते-खेलते", type: "chapter" },
+                        { id: 2, title: "Chapter 2", hindiTitle: "हमारा गाँव (चित्रपठन)", type: "chapter" },
+                    ]);
+                }
+            } catch (err) {
+                console.error("Error fetching chapters:", err);
+                // Fallback on error
+                setChapters([
+                    { id: "preface", title: "PREFACE", hindiTitle: "दो शब्द / प्राक्कथन", type: "intro" },
+                    { id: "contents", title: "CONTENTS", hindiTitle: "विषय - सूची", type: "intro" },
+                    { id: 1, title: "Chapter 1", hindiTitle: "हँसते-खेलते", type: "chapter" },
+                    { id: 2, title: "Chapter 2", hindiTitle: "हमारा गाँव (चित्रपठन)", type: "chapter" },
+                    { id: 3, title: "Chapter 3 (Fallback)", hindiTitle: "...", type: "chapter" },
+                ]);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchChapters();
+    }, [classId, bookSubject]);
 
     return (
         <div className="min-h-screen bg-white py-12 px-4 sm:px-6 lg:px-8 font-sans">
@@ -123,7 +149,7 @@ const BookReader = () => {
                                                         Access interactive lessons, practice questions, and chapter summaries.
                                                     </p>
                                                     <Link
-                                                        to="#"
+                                                        to={`/book/${classId}/${bookSubject || "Hindi"}/${chapter.id}/flip`}
                                                         className="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-blue-600 text-white text-[11px] font-bold px-5 py-2 rounded transition-all active:scale-95"
                                                     >
                                                         READ NOW
