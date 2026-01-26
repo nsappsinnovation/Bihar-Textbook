@@ -76,7 +76,12 @@ function Flipbook({ pdfFile: propPdfFile }) {
                     setPdfPath(`/PDFs/Class_${classId}/${chapterData.fileName}`);
                 } else {
                     console.error("Chapter not found in manifest");
-                    setPdfPath(`/PDFs/Class_${classId}/${chapterId}_${subjectSlug}.pdf`); // Fallback
+                    // If it's a known non-existent chapter like preface or contents, don't guess
+                    if (chapterId === "preface" || chapterId === "contents") {
+                        setPdfPath(null); // Will trigger error state
+                    } else {
+                        setPdfPath(`/PDFs/Class_${classId}/${chapterId}_${subjectSlug}.pdf`); // Final fallback attempt
+                    }
                 }
 
             } catch (err) {
@@ -177,7 +182,19 @@ function Flipbook({ pdfFile: propPdfFile }) {
                         onLoadSuccess={onDocumentLoadSuccess}
                         className="flex items-center justify-center"
                         loading={<div className="text-slate-500 font-medium">Loading Document...</div>}
-                        error={<div className="text-red-500">Failed to load PDF</div>}
+                        error={
+                            <div className="flex flex-col items-center gap-4 text-center">
+                                <div className="text-6xl">⚠️</div>
+                                <div className="text-red-500 font-bold text-lg">Document Not Available</div>
+                                <p className="text-slate-500 text-sm max-w-xs">The requested chapter could not be found or is still being uploaded.</p>
+                                <button
+                                    onClick={() => navigate(-1)}
+                                    className="mt-2 text-blue-600 font-bold text-sm hover:underline"
+                                >
+                                    Go Back
+                                </button>
+                            </div>
+                        }
                     >
                         {/* White border container as seen in reference */}
                         <div className="bg-white p-1 shadow-2xl">
