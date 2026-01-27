@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SearchBar from './SearchBar';
 import BlogPost from './BlogPost';
-import { searchArticles } from './services/wikipedia';
+import { searchArticles } from '../services/wikipedia';
 
 function Blog() {
     const [results, setResults] = useState([]);
@@ -27,23 +27,23 @@ function Blog() {
         <div className="min-h-screen bg-white text-slate-900 font-sans">
             <header className="pt-6
             pb-10 px-4 text-center">
-               
-              
-                  <h2 className="text-3xl md:text-4xl font-semibold 
+
+
+                <h2 className="text-3xl md:text-4xl font-semibold 
                   ">
-       
-        <span className="bg-gradient-to-r  from-indigo-500 to-orange-400 bg-clip-text text-transparent
+
+                    <span className="bg-gradient-to-r  from-indigo-500 to-orange-400 bg-clip-text text-transparent
     transition-all duration-300
       ">Discover New Blogs
-      </span>
-      </h2>
-             
+                    </span>
+                </h2>
+
                 <p
-                 className="
+                    className="
                  m-2
                  text-md
                   text-slate-600 max-w-2xl mx-auto mb-10"
-                  >
+                >
                     Explore a vast library of knowledge generated from Wikipedia.
                     Search for any topic and read curated blog-style summaries.
                 </p>
@@ -58,7 +58,7 @@ function Blog() {
                     </div>
                 )}
 
-             
+
                 {loading ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-pulse">
                         {[...Array(6)].map((_, i) => (
@@ -94,7 +94,7 @@ function Blog() {
                 )}
             </main>
 
-           
+
         </div>
     );
 }

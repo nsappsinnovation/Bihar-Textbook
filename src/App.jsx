@@ -9,11 +9,13 @@ import Home from "./pages/Home";
 import Tenders from "./pages/Tenders";
 import CsrPolicy from "./pages/CsrPolicy";
 import KnowUs from "./pages/Know";
-import Books from "./pages/Books.jsx";
-import BookReader from "./pages/BookReader.jsx";
-import Flipbook from "./pages/Flipbook.jsx";
+import Books from "./Pages/Books.jsx";
+import BookReader from "./Pages/BookReader.jsx";
+import Flipbook from "./Pages/Flipbook.jsx";
 import Gallery from "./pages/Gallery.jsx";
 import Document from "./pages/Document.jsx";
+import EventDetails from "./pages/EventDetails.jsx";
+import Blog from "./components/Blog.jsx";
 
 /* Components */
 import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
@@ -47,6 +49,9 @@ function App() {
           <Routes>
             {/* Home */}
             <Route path="/" element={<Home />} />
+
+            {/* Blog */}
+            <Route path="/blog" element={<Blog />} />
 
             {/* Auth */}
             <Route path="/login" element={<Login />} />
@@ -90,6 +95,9 @@ function App() {
             <Route path="/notice" element={<Notice />} />
             <Route path="/tenders" element={<Tenders />} />
             <Route path="/csr-policy" element={<CsrPolicy />} />
+
+            {/* Event Details */}
+            <Route path="/events/:eventSlug" element={<EventDetails />} />
           </Routes>
         </main>
 
