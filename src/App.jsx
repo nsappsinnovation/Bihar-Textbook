@@ -14,6 +14,7 @@ import BookReader from "./pages/BookReader.jsx";
 import Flipbook from "./pages/Flipbook.jsx";
 import Gallery from "./pages/Gallery.jsx";
 import Document from "./pages/Document.jsx";
+import FlagshipDetail from "./pages/FlagshipDetail.jsx";
 
 /* Components */
 import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
@@ -80,6 +81,10 @@ function App() {
             <Route
               path="/flagship-events"
               element={<FlagshipEvents />}
+            />
+            <Route
+              path="/flagship-events/:id"
+              element={<FlagshipDetail />}
             />
 
             {/* Flipbook */}

@@ -1,78 +1,8 @@
 import React, { useState } from "react";
 import { ChevronLeft, ChevronRight, ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-
-const events = [
-  {
-    title: "e-Lotani: Digital Books Portal",
-    description:
-      "Access all Bihar state textbooks digitally through a centralized, student-friendly e-learning platform available anytime, anywhere.",
-    image: "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f",
-  },
-  {
-    title: "Bihar State Pustak Mela",
-    description:
-      "An annual flagship event bringing students, publishers, authors, and educators together to celebrate books, learning, and innovation.",
-    image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8",
-  },
-  {
-    title: "Mobile Library Initiative",
-    description:
-      "Reaching the remotest corners of Bihar with mobile library vans equipped with textbooks, reference books, and digital learning kiosks.",
-    image: "https://i.dawn.com/primary/2020/11/5fa1c8942bb12.jpg",
-  },
-  {
-    title: "Curriculum Modernization Expo",
-    description:
-      "A platform showcasing modern pedagogies, NEP-aligned curriculum reforms, and interactive textbooks for 21st-century learners.",
-    image: "https://images.unsplash.com/photo-1509062522246-3755977927d7",
-  },
-  {
-    title: "Interactive E-Books",
-    description:
-      "Smart digital textbooks enriched with videos, quizzes, animations, and practice exercises to enhance conceptual understanding.",
-    image:
-      "https://pdcentrallibrary.home.blog/wp-content/uploads/2020/02/e-books.png",
-  },
-  {
-    title: "Audio Books for Inclusive Learning",
-    description:
-      "Curriculum-based audiobooks in Hindi and regional languages to support visually impaired students, slow readers, and auditory learners.",
-    image: "https://images.unsplash.com/photo-1516979187457-637abb4f9353",
-  },
-  {
-    title: "AI-Powered Learning Tutorials",
-    description:
-      "Personalized AI-driven tutorials that help students understand difficult concepts, revise chapters, and prepare for exams at their own pace.",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995",
-  },
-  {
-    title: "VR Education Tours",
-    description:
-      "Immersive virtual reality experiences that take students on guided tours of historical sites, science labs, museums, and geography landscapes.",
-    image: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620",
-  },
-
-  {
-    title: "Student Assessment & Practice Platform",
-    description:
-      "An integrated digital assessment system offering chapter-wise tests, instant evaluation, performance analytics, and learning recommendations.",
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3",
-  },
-  {
-    title: "Local Language & Regional Content Drive",
-    description:
-      "Development and promotion of textbooks, audio content, and digital resources in Hindi and regional languages to strengthen learning outcomes.",
-    image: "https://images.unsplash.com/photo-1529070538774-1843cb3265df",
-  },
-  {
-    title: "Digital Archive of Bihar Textbooks",
-    description:
-      "A long-term digital repository preserving all editions of Bihar state textbooks for academic reference, research, and policy planning.",
-    image: "https://images.unsplash.com/photo-1507842217343-583bb7270b66",
-  },
-];
-
+import { Link } from "react-router-dom";
+import { flagshipEvents } from "../data/flagshipEventsData";
 
 export default function FlagshipEvent() {
   const [index, setIndex] = useState(0);
@@ -80,7 +10,7 @@ export default function FlagshipEvent() {
   // Card width(380) + gap(32)
   const CARD_WIDTH = 412;
   const VISIBLE = 3;
-  const maxIndex = Math.max(0, events.length - VISIBLE);
+  const maxIndex = Math.max(0, flagshipEvents.length - VISIBLE);
 
   const prev = () => setIndex((i) => Math.max(i - 1, 0));
   const next = () => setIndex((i) => Math.min(i + 1, maxIndex));
@@ -128,7 +58,7 @@ export default function FlagshipEvent() {
           transition={{ type: "spring", damping: 20, stiffness: 100 }}
           className="flex gap-8"
         >
-          {events.map((item, i) => (
+          {flagshipEvents.map((item, i) => (
             <div
               key={i}
               className="w-[380px] flex-shrink-0 group cursor-default"
@@ -161,9 +91,12 @@ export default function FlagshipEvent() {
                 </p>
 
                 <div className="flex items-center justify-between pt-4 border-t border-slate-100">
-                  <button className="text-indigo-600 text-[11px] font-bold hover:gap-2 transition-all flex items-center gap-1.5 uppercase tracking-wider">
+                  <Link 
+                    to={`/flagship-events/${item.id}`}
+                    className="text-indigo-600 text-[11px] font-bold hover:gap-2 transition-all flex items-center gap-1.5 uppercase tracking-wider"
+                  >
                     Learn More <ArrowUpRight size={14} />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
