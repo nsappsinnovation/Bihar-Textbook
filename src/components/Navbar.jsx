@@ -22,7 +22,7 @@ const Navbar = () => {
           <Link to="/" className="hover:text-[#211fa9f8]">Home</Link>
 
 
-            <div className="relative group">
+          <div className="relative group">
             <span className="cursor-pointer hover:text-[#211fa9f8]   whitespace-nowrap ">
               Know Us
               <span className="text-xs">▾</span>
@@ -31,45 +31,45 @@ const Navbar = () => {
                           opacity-0 invisible group-hover:visible group-hover:opacity-100
                           transition-all duration-200 z-50">
               {Knowconfig.map(item => (
-      <Link
-        key={item.id}
-        to={`/know-us/${item.id}`}
-        className="block px-4 py-2 text-black hover:bg-gray-100"
-      >
-        {item.label}
-      </Link>
-    ))}
+                <Link
+                  key={item.id}
+                  to={`/know-us/${item.id}`}
+                  className="block px-4 py-2 text-black hover:bg-gray-100"
+                >
+                  {item.label}
+                </Link>
+              ))}
 
             </div>
 
 
           </div>
           <div className="relative group">
-  <span className="cursor-pointer hover:text-[#211fa9f8]">
-    Books <span className="text-xs">▾</span>
-  </span>
+            <span className="cursor-pointer hover:text-[#211fa9f8]">
+              Books <span className="text-xs">▾</span>
+            </span>
 
-  <div
-    className="dropdown-menu absolute left-0 top-full mt-3 w-64 rounded-md bg-white shadow-lg
+            <div
+              className="dropdown-menu absolute left-0 top-full mt-3 w-64 rounded-md bg-white shadow-lg
     opacity-0 invisible group-hover:visible group-hover:opacity-100
     transition-all duration-200 z-50"
-  >
-    {[...Array(12)].map((_, index) => {
-      const classId = index + 1;
-      return (
-        <Link
-          key={classId}
-          to={`/books/${classId}`}
-          className="block px-4 py-2 hover:bg-gray-100"
-        >
-          Class {classId}
-        </Link>
-      );
-    })}
-  </div>
-</div>
+            >
+              {[...Array(12)].map((_, index) => {
+                const classId = index + 1;
+                return (
+                  <Link
+                    key={classId}
+                    to={`/books/${classId}`}
+                    className="block px-4 py-2 hover:bg-gray-100"
+                  >
+                    Class {classId}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
 
-         <div className="relative group">
+          <div className="relative group">
             <span className="cursor-pointer hover:text-[#211fa9f8]   whitespace-nowrap ">
               Gallery
               <span className="text-xs">▾</span>
@@ -78,20 +78,20 @@ const Navbar = () => {
                           opacity-0 invisible group-hover:visible group-hover:opacity-100
                           transition-all duration-200 z-50">
               {Galleryconfig.map(item => (
-      <Link
-        key={item.id}
-        to={`/gallery/${item.id}`}
-        className="block px-4 py-2 text-black hover:bg-gray-100"
-      >
-        {item.label}
-      </Link>
-    ))}
+                <Link
+                  key={item.id}
+                  to={`/gallery/${item.id}`}
+                  className="block px-4 py-2 text-black hover:bg-gray-100"
+                >
+                  {item.label}
+                </Link>
+              ))}
 
             </div>
 
 
           </div>
-            <div className="relative group">
+          <div className="relative group">
             <span className="cursor-pointer hover:text-[#211fa9f8]   whitespace-nowrap ">
               Documents
               <span className="text-xs">▾</span>
@@ -100,19 +100,20 @@ const Navbar = () => {
                           opacity-0 invisible group-hover:visible group-hover:opacity-100
                           transition-all duration-200 z-50">
               {Docuconfig.map(item => (
-      <Link
-        key={item.id}
-        to={`/documents/${item.id}`}
-        className="block px-4 py-2 text-black hover:bg-gray-100"
-      >
-        {item.label}
-      </Link>
-    ))}
+                <Link
+                  key={item.id}
+                  to={`/documents/${item.id}`}
+                  className="block px-4 py-2 text-black hover:bg-gray-100"
+                >
+                  {item.label}
+                </Link>
+              ))}
 
             </div>
 
 
           </div>
+          <Link to="/blog" className="hover:text-[#211fa9f8]">Blog</Link>
           <Link to="/notice" className="hover:text-[#211fa9f8]">Notice</Link>
           <Link to="/tenders" className="hover:text-[#211fa9f8]">Tenders</Link>
           <Link to="/csr-policy" className="hover:text-[#211fa9f8] whitespace-nowrap">CSR Policy</Link>
