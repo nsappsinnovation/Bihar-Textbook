@@ -91,6 +91,7 @@ const Navbar = () => {
 
 
           </div>
+                   
             <div className="relative group">
             <span className="cursor-pointer hover:text-[#211fa9f8]   whitespace-nowrap ">
               Documents
@@ -113,6 +114,7 @@ const Navbar = () => {
 
 
           </div>
+           <Link to="/blog" className="hover:text-[#211fa9f8]">Blog</Link>
           <Link to="/notice" className="hover:text-[#211fa9f8]">Notice</Link>
           <Link to="/tenders" className="hover:text-[#211fa9f8]">Tenders</Link>
           <Link to="/csr-policy" className="hover:text-[#211fa9f8] whitespace-nowrap">CSR Policy</Link>

@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 
 import Nav from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
-
+import Blog from "./components/Blog.jsx";
 /* Pages */
 import Home from "./pages/Home";
 import Tenders from "./pages/Tenders";
@@ -26,9 +26,7 @@ import Login from "./components/Login.jsx";
 import SignUp from "./components/SignUp.jsx";
 
 /* Gallery Pages */
-import PhotoGallery from "./components/gallery/sections/Photogallery";
-import VideoGallery from "./components/gallery/sections/Videogallery";
-import PressRelease from "./components/gallery/sections/Pressrelease";
+
 
 function App() {
   const location = useLocation();
@@ -41,6 +39,7 @@ function App() {
 
       <div className="min-h-screen flex flex-col">
         <main className="flex-grow">
+         
           <Routes>
             {/* Home */}
             <Route path="/" element={<Home />} />
@@ -80,6 +79,7 @@ function App() {
             />
 
             {/* Other */}
+             <Route path="/blog" element={<Blog />} />
             <Route path="/notice" element={<Notice />} />
             <Route path="/tenders" element={<Tenders />} />
             <Route path="/csr-policy" element={<CsrPolicy />} />

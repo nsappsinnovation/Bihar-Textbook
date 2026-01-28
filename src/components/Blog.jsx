@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SearchBar from './SearchBar';
 import BlogPost from './BlogPost';
-import { searchArticles } from './services/wikipedia';
+import { searchArticles } from '../services/wikipedia';
 
 function Blog() {
     const [results, setResults] = useState([]);
@@ -32,7 +32,7 @@ function Blog() {
                   <h2 className="text-3xl md:text-4xl font-semibold 
                   ">
        
-        <span className="bg-gradient-to-r  from-indigo-500 to-orange-400 bg-clip-text text-transparent
+        <span className="bg-gradient-to-r  text-indigo-900
     transition-all duration-300
       ">Discover New Blogs
       </span>
