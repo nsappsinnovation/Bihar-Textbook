@@ -92,7 +92,7 @@ const Hero = () => {
     };
 
     return (
-        <section className="relative h-[800px] md:h-[900px] flex items-center overflow-hidden bg-[#0d0e23] pt-16">
+        <section className="relative h-[700px] md:h-[710px] flex items-center overflow-hidden bg-[#0d0e23] ">
             {/* BACKGROUND ANIMATION */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#1a1b4b] via-[#0d0e23] to-[#050610]"></div>
@@ -181,35 +181,35 @@ const Hero = () => {
                                 exit="exit"
                                 className="text-white"
                             >
-                                <motion.div variants={itemVariants} className="flex items-center gap-4 mb-4">
-                                    <span className="px-4 py-1.5 rounded-full bg-white/10 border border-white/10 text-[10px] font-bold uppercase tracking-[3px] text-white/70">
+                                <motion.div variants={itemVariants} className="flex items-center gap-4 mb-3">
+                                    <span className="px-3.5 py-1 rounded-full bg-white/10 border border-white/10 text-[9px] font-bold uppercase tracking-[3px] text-white/70">
                                         {slides[activeSlide].label}
                                     </span>
-                                    <div className="h-[1px] w-12 bg-white/20"></div>
+                                    <div className="h-[1px] w-10 bg-white/20"></div>
                                 </motion.div>
 
-                                <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-bold leading-[1.1] mb-6 tracking-tight">
+                                <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-bold leading-[1.1] mb-5 tracking-tight">
                                     {slides[activeSlide].title}
                                 </motion.h1>
 
-                                <motion.p variants={itemVariants} className="text-xl text-white/60 mb-8 max-w-xl font-light leading-relaxed">
+                                <motion.p variants={itemVariants} className="text-lg md:text-xl text-white/60 mb-7 max-w-xl font-light leading-relaxed">
                                     {slides[activeSlide].description}
                                 </motion.p>
 
-                                <motion.div variants={itemVariants} className="flex items-center gap-3 mb-10 text-white/50">
-                                    <svg className="w-5 h-5 text-orange-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"></path></svg>
-                                    <span className="font-medium text-lg uppercase tracking-wider text-sm">{slides[activeSlide].location}</span>
+                                <motion.div variants={itemVariants} className="flex items-center gap-3 mb-8 text-white/50">
+                                    <svg className="w-4 h-4 text-orange-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"></path></svg>
+                                    <span className="font-medium uppercase tracking-wider text-xs">{slides[activeSlide].location}</span>
                                 </motion.div>
 
                                 <motion.div variants={itemVariants} className="flex items-center gap-6">
                                     <Link to={slides[activeSlide].link}>
                                         <motion.button
-                                            whileHover={{ scale: 1.05 }}
+                                            whileHover={{ scale: 1.05, backgroundColor: "#3a3bbd" }}
                                             whileTap={{ scale: 0.95 }}
-                                            className="bg-[#2a2b8d] hover:bg-[#3a3bbd] text-white px-10 py-5 rounded-2xl font-bold text-lg flex items-center gap-3 transition-all shadow-xl shadow-blue-900/20"
+                                            className="bg-[#2a2b8d] text-white px-7 py-3 rounded-xl font-bold text-base flex items-center gap-2.5 transition-all shadow-lg shadow-blue-900/10 border border-white/5"
                                         >
                                             {slides[activeSlide].buttonText}
-                                            <FaChevronRight size={14} />
+                                            <FaChevronRight size={12} className="opacity-70" />
                                         </motion.button>
                                     </Link>
                                 </motion.div>
@@ -238,7 +238,7 @@ const Hero = () => {
             </div>
 
             {/* PROGRESS DOTS - REPOSITIONED TO FIX OVERLAP */}
-            <div className="absolute bottom-16 left-8 lg:left-1/2 lg:-translate-x-1/2 flex items-center gap-4 z-30">
+            <div className="absolute bottom-6 left-8 lg:left-1/2 lg:-translate-x-1/2 flex items-center gap-4 z-30">
                 {slides.map((_, i) => (
                     <button
                         key={i}
