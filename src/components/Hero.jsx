@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { FaFacebookF, FaTwitter, FaYoutube, FaInstagram, FaLinkedinIn, FaPlay, FaPause, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const slides = [
@@ -19,7 +20,7 @@ const slides = [
         title: <>Immersive <span className="text-blue-400">VR Education</span> <br /> Virtual Field Trips</>,
         description: "Taking students beyond classrooms with immersive VR journeys to historical sites and scientific laboratories across the globe.",
         location: "State-wide Digital Initiative",
-        image: "/Users/manishmilando/.gemini/antigravity/brain/e242e5f7-8349-4a9b-8b59-430cae8bb63f/hero_vr_education_1769533294317.png",
+        image: "/images/hero_poster_vr.png",
         buttonText: "Start Virtual Tour",
         link: "/events/vr-education-tours"
     },
@@ -27,9 +28,9 @@ const slides = [
         id: 2,
         label: "Smart Learning",
         title: <>Adaptive <span className="text-indigo-400">AI-Powered</span> <br /> Learning Tutorials</>,
-        description: "Personalized AI-driven paths that adapt to every student's pace, ensuring master of difficult concepts through instant feedback.",
+        description: "Personalized AI-driven paths that adapt to every student's pace, ensuring mastery of difficult concepts through instant feedback.",
         location: "Personalized Digital Tutors",
-        image: "/Users/manishmilando/.gemini/antigravity/brain/e242e5f7-8349-4a9b-8b59-430cae8bb63f/hero_ai_learning_1769533315449.png",
+        image: "/images/hero_poster_ai.png",
         buttonText: "Try AI Tutor",
         link: "/events/ai-powered-learning"
     },
@@ -39,7 +40,7 @@ const slides = [
         title: <>Smart <span className="text-emerald-400">Interactive</span> <br /> Modern E-Books</>,
         description: "Rich digital textbooks enhanced with 3D models, videos, and interactive quizzes for a more engaging learning experience.",
         location: "Universal Digital Access",
-        image: "/Users/manishmilando/.gemini/antigravity/brain/e242e5f7-8349-4a9b-8b59-430cae8bb63f/hero_ebooks_interactive_1769533339210.png",
+        image: "/images/hero_poster_ebooks.png",
         buttonText: "Read Interactive Books",
         link: "/events/interactive-e-books"
     },
@@ -49,7 +50,7 @@ const slides = [
         title: <>The Digital <span className="text-amber-400">Bihar Archive</span> <br /> Knowledge Repository</>,
         description: "A centralized long-term digital repository preserving Bihar's educational heritage and textbook evolutions for all generations.",
         location: "Permanent Digital Archive",
-        image: "https://images.unsplash.com/photo-1507842217343-583bb7270b66",
+        image: "/images/hero_poster_archive.png",
         buttonText: "Browse Archive",
         link: "/events/digital-archive-textbooks"
     }
@@ -91,7 +92,7 @@ const Hero = () => {
     };
 
     return (
-        <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#0d0e23]">
+        <section className="relative h-[800px] md:h-[900px] flex items-center overflow-hidden bg-[#0d0e23] pt-16">
             {/* BACKGROUND ANIMATION */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#1a1b4b] via-[#0d0e23] to-[#050610]"></div>
@@ -100,12 +101,13 @@ const Hero = () => {
                         <motion.div
                             key={`bg-${activeSlide}`}
                             initial={{ opacity: 0 }}
-                            animate={{ opacity: 0.15 }}
+                            animate={{ opacity: 0.2 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 1.5 }}
                             className="absolute inset-0"
                         >
                             <img src={slides[activeSlide].image} className="w-full h-full object-cover" alt="slide-bg" />
+                            <div className="absolute inset-0 bg-[#0d0e23]/40"></div>
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -118,11 +120,11 @@ const Hero = () => {
                 </div>
             </div>
 
-            <div className="container mx-auto px-6 lg:px-24 relative z-10 w-full">
+            <div className="container mx-auto px-6 lg:px-24 relative z-10 w-full mb-20 lg:mb-0">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
                     {/* LEFT COLUMN: Graphic or Product Image */}
-                    <div className="order-2 lg:order-1 flex justify-center lg:justify-start h-[400px] lg:h-[600px] items-center">
+                    <div className="order-2 lg:order-1 flex justify-center lg:justify-start h-[350px] lg:h-[500px] items-center">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={`graphic-${activeSlide}`}
@@ -130,7 +132,7 @@ const Hero = () => {
                                 initial="hidden"
                                 animate="visible"
                                 exit="exit"
-                                className="relative w-full max-w-[500px] aspect-square flex items-center justify-center"
+                                className="relative w-full max-w-[450px] aspect-square flex items-center justify-center"
                             >
                                 {activeSlide === 0 ? (
                                     <>
@@ -159,7 +161,7 @@ const Hero = () => {
                                         </div>
                                     </>
                                 ) : (
-                                    <div className="relative group overflow-hidden rounded-[40px] border border-white/10 shadow-2xl">
+                                    <div className="relative group w-full h-full overflow-hidden rounded-[40px] border border-white/10 shadow-2xl">
                                         <img src={slides[activeSlide].image} className="w-full h-full object-cover rounded-[40px]" alt="Feature" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-[#0d0e23] via-transparent to-transparent opacity-60"></div>
                                     </div>
@@ -179,35 +181,37 @@ const Hero = () => {
                                 exit="exit"
                                 className="text-white"
                             >
-                                <motion.div variants={itemVariants} className="flex items-center gap-4 mb-6">
+                                <motion.div variants={itemVariants} className="flex items-center gap-4 mb-4">
                                     <span className="px-4 py-1.5 rounded-full bg-white/10 border border-white/10 text-[10px] font-bold uppercase tracking-[3px] text-white/70">
                                         {slides[activeSlide].label}
                                     </span>
                                     <div className="h-[1px] w-12 bg-white/20"></div>
                                 </motion.div>
 
-                                <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-bold leading-[1.1] mb-8 tracking-tight">
+                                <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-bold leading-[1.1] mb-6 tracking-tight">
                                     {slides[activeSlide].title}
                                 </motion.h1>
 
-                                <motion.p variants={itemVariants} className="text-xl text-white/60 mb-10 max-w-xl font-light leading-relaxed">
+                                <motion.p variants={itemVariants} className="text-xl text-white/60 mb-8 max-w-xl font-light leading-relaxed">
                                     {slides[activeSlide].description}
                                 </motion.p>
 
-                                <motion.div variants={itemVariants} className="flex items-center gap-3 mb-12 text-white/50">
+                                <motion.div variants={itemVariants} className="flex items-center gap-3 mb-10 text-white/50">
                                     <svg className="w-5 h-5 text-orange-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"></path></svg>
                                     <span className="font-medium text-lg uppercase tracking-wider text-sm">{slides[activeSlide].location}</span>
                                 </motion.div>
 
                                 <motion.div variants={itemVariants} className="flex items-center gap-6">
-                                    <motion.button
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.95 }}
-                                        className="bg-[#2a2b8d] hover:bg-[#3a3bbd] text-white px-10 py-5 rounded-2xl font-bold text-lg flex items-center gap-3 transition-all shadow-xl shadow-blue-900/20"
-                                    >
-                                        {slides[activeSlide].buttonText}
-                                        <FaChevronRight size={14} />
-                                    </motion.button>
+                                    <Link to={slides[activeSlide].link}>
+                                        <motion.button
+                                            whileHover={{ scale: 1.05 }}
+                                            whileTap={{ scale: 0.95 }}
+                                            className="bg-[#2a2b8d] hover:bg-[#3a3bbd] text-white px-10 py-5 rounded-2xl font-bold text-lg flex items-center gap-3 transition-all shadow-xl shadow-blue-900/20"
+                                        >
+                                            {slides[activeSlide].buttonText}
+                                            <FaChevronRight size={14} />
+                                        </motion.button>
+                                    </Link>
                                 </motion.div>
                             </motion.div>
                         </AnimatePresence>
@@ -215,8 +219,8 @@ const Hero = () => {
                 </div>
             </div>
 
-            {/* NAVIGATION CONTROLS */}
-            <div className="absolute left-10 lg:left-auto lg:right-24 bottom-12 z-30 flex items-center gap-6">
+            {/* NAVIGATION CONTROLS - REPOSITIONED TO FIX OVERLAP */}
+            <div className="absolute right-8 lg:right-24 bottom-16 z-30 flex items-center gap-6">
                 <div className="flex items-center gap-2">
                     <button onClick={prevSlide} className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 transition-all">
                         <FaChevronLeft />
@@ -233,8 +237,8 @@ const Hero = () => {
                 </button>
             </div>
 
-            {/* PROGRESS DOTS */}
-            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-4 z-30">
+            {/* PROGRESS DOTS - REPOSITIONED TO FIX OVERLAP */}
+            <div className="absolute bottom-16 left-8 lg:left-1/2 lg:-translate-x-1/2 flex items-center gap-4 z-30">
                 {slides.map((_, i) => (
                     <button
                         key={i}
