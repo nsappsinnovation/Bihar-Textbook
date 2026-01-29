@@ -5,6 +5,7 @@ import Nav from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 
 /* Pages */
+
 import Home from "./pages/Home";
 import Tenders from "./pages/Tenders";
 import CsrPolicy from "./pages/CsrPolicy";
@@ -46,6 +47,7 @@ function App() {
 
       <div className="min-h-screen flex flex-col">
         <main className="flex-grow">
+        
           <Routes>
             {/* Home */}
             <Route path="/" element={<Home />} />
