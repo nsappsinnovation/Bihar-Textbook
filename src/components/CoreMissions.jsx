@@ -111,7 +111,7 @@ const CoreMissions = () => {
   const RADIUS = 300; // Reduced distance to bring elements closer
 
   return (
-    <section className="py-24 bg-white overflow-hidden relative min-h-[850px] flex items-center border-t border-gray-50/50">
+    <section className="py-18 bg-white overflow-hidden relative min-h-[850px] flex items-center border-t border-gray-50/50">
       {/* Enhanced Technical Background Image */}
       <div
         className="absolute inset-0 opacity-[0.25] pointer-events-none bg-no-repeat bg-center mix-blend-multiply"
@@ -163,7 +163,7 @@ const CoreMissions = () => {
         </div>
 
         {/* --- DESKTOP ORBIT VIEW --- */}
-        <div className="hidden lg:flex justify-center items-center h-[900px] relative mt-12">
+        <div className="hidden lg:flex justify-center items-center h-[900px] relative -mt-32">
 
           {/* Main Container - Centered */}
           <div className="relative w-[1000px] h-[1000px] flex items-center justify-center">
@@ -214,7 +214,7 @@ const CoreMissions = () => {
                         </div>
 
                         {/* TEXT */}
-                        <div className="flex-1 opacity-80 group-hover:opacity-100 transition-opacity">
+                        <div className="flex-1  opacity-80 group-hover:opacity-100 transition-opacity">
                           <h4 className="font-semibold text-[14px] text-[#0d0e23] leading-tight mb-1 group-hover:text-blue-600 transition-colors">
                             {mission.title}
                           </h4>

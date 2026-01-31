@@ -16,7 +16,7 @@ import Flipbook from "./pages/Flipbook.jsx";
 import Gallery from "./pages/Gallery.jsx";
 import Document from "./pages/Document.jsx";
 import EventDetails from "./pages/EventDetails.jsx";
-import Blog from "./components/Blog.jsx";
+import PublishingMission from "./pages/PublishingMission.jsx";
 
 /* Components */
 import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
@@ -91,13 +91,16 @@ function App() {
 
 
             {/* Other */}
-             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog" element={<Blog />} />
             <Route path="/notice" element={<Notice />} />
             <Route path="/tenders" element={<Tenders />} />
             <Route path="/csr-policy" element={<CsrPolicy />} />
 
             {/* Event Details */}
             <Route path="/events/:eventSlug" element={<EventDetails />} />
+
+            {/* Missions */}
+            <Route path="/publishing-mission" element={<PublishingMission />} />
           </Routes>
         </main>
 

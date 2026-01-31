@@ -11,7 +11,7 @@ const slides = [
         subtitle: "TEXT BOOK PUBLISHING",
         description: "Full immersion with high-quality educational resources. Standardized textbooks designed for every student.",
         image: "/images/hero_classroom.png",
-        link: "/books"
+        link: "/publishing-mission"
     },
     {
         id: "slide-1",
@@ -19,7 +19,7 @@ const slides = [
         subtitle: "LEARNING ECOSYSTEM",
         description: "Innovative e-learning solutions that bridge the gap. Play with knowledge, not just buttons.",
         image: "/images/hero_digital.png",
-        link: "/digital-books"
+        link: "/events/e-lotani-digital-portal"
     },
     {
         id: "slide-2",
@@ -35,7 +35,7 @@ const slides = [
         subtitle: "VIRTUAL REALITY",
         description: "Step into a new dimension of learning. Immersive VR experiences that make education come alive.",
         image: "/images/hero_vr_new.png",
-        link: "/vr-learning"
+        link: "/events/vr-education-tours"
     },
     {
         id: "slide-4",
@@ -43,7 +43,7 @@ const slides = [
         subtitle: "AI TUTORING",
         description: "Personalized learning assistant for students. AI-powered tools to guide your educational journey.",
         image: "/images/hero_ai_new.png",
-        link: "/ai-tools"
+        link: "/events/ai-powered-learning"
     },
     {
         id: "slide-5",
@@ -51,7 +51,7 @@ const slides = [
         subtitle: "AUDIO BOOKS",
         description: "Learn anytime, anywhere. High-quality audio books for inclusive and dynamic learning.",
         image: "/images/hero_audio_new.png",
-        link: "/audio-books"
+        link: "/events/audio-books-inclusive"
     }
 ];
 
