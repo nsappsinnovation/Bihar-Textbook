@@ -30,7 +30,7 @@ const SearchBar = ({ onSearch, isLoading }) => {
                     type="submit"
                     disabled={isLoading}
                     className=
-                    "text-white bg-gradient-to-r from-indigo-500 to-orange-400 absolute right-2.5 bottom-2.5  font-medium rounded-full text-sm px-6 py-2.5 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed transform active:scale-95"
+                    "text-white bg-[#0047ab] absolute right-2.5 bottom-2.5  font-medium rounded-full text-sm px-6 py-2.5 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed transform active:scale-95"
                 > 
                     {isLoading ? 'Searching...' : 'Search'}
                 </button>
