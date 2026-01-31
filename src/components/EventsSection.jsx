@@ -205,7 +205,8 @@ export default function EventsSection() {
                 <img
                   src={event.image}
                   alt={event.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="w-full h-full object-cover transition-all duration-700 opacity-95 blur-[0.5px] group-hover:opacity-100 group-hover:blur-0 group-hover:scale-105"
+                  style={{ willChange: 'transform, filter, opacity' }}
                 />
                 <div className="absolute top-4 left-4">
                   <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-[9px] font-bold text-slate-600 uppercase tracking-wider shadow-sm border border-white/20">
@@ -252,87 +253,98 @@ export default function EventsSection() {
 
       <AnimatePresence>
         {selectedEvent && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 md:p-12">
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedEvent(null)}
-              className="absolute inset-0 bg-slate-900/40 backdrop-blur-md"
+              className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
             />
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative bg-white w-full max-w-4xl max-h-[90vh] rounded-[32px] shadow-2xl overflow-hidden flex flex-col md:flex-row"
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative bg-white w-full max-w-2xl rounded-[24px] shadow-2xl overflow-hidden flex flex-col"
             >
-              <button
-                onClick={() => setSelectedEvent(null)}
-                className="absolute top-6 right-6 z-10 w-10 h-10 bg-white shadow-sm border border-slate-100 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-900 hover:scale-110 transition-all"
-              >
-                <X size={20} />
-              </button>
-
-              <div className="w-full md:w-1/2 h-64 md:h-auto overflow-hidden">
+              {/* Header Image with Close Button */}
+              <div className="relative h-64 md:h-72 w-full overflow-hidden">
                 <img
                   src={selectedEvent.image}
                   alt={selectedEvent.title}
                   className="w-full h-full object-cover"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent" />
+
+                <button
+                  onClick={() => setSelectedEvent(null)}
+                  className="absolute top-5 right-5 w-9 h-9 bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-white transition-all hover:scale-110 active:scale-90"
+                >
+                  <X size={18} />
+                </button>
+
+                <div className="absolute bottom-6 left-8 right-8 text-white">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="px-2 py-0.5 bg-indigo-500 rounded text-[9px] font-bold uppercase tracking-wider">
+                      {selectedEvent.tag}
+                    </span>
+                    <span className="text-[10px] font-medium text-white/70 flex items-center gap-1">
+                      <Clock size={10} /> {selectedEvent.mode}
+                    </span>
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-bold leading-tight">
+                    {selectedEvent.title}
+                  </h2>
+                </div>
               </div>
 
-              <div className="w-full md:w-1/2 p-8 md:p-12 overflow-y-auto">
-                <div className="flex items-center gap-2 text-[10px] font-bold text-indigo-500 uppercase tracking-widest mb-6">
-                  <div className="h-px w-6 bg-indigo-500"></div>
-                  <span>Initiative Spotlight</span>
-                </div>
-
-                <h2 className="text-3xl font-bold text-slate-900 leading-tight mb-4">
-                  {selectedEvent.title}
-                </h2>
-
-                <div className="grid grid-cols-2 gap-6 mb-8 border-y border-slate-50 py-6">
+              {/* Content Panel */}
+              <div className="p-8 md:p-10 space-y-8">
+                {/* Info Bar */}
+                <div className="flex flex-wrap items-center gap-x-10 gap-y-4 pb-8 border-b border-slate-50">
                   <div className="space-y-1">
-                    <p className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                      <Calendar size={12} /> Date
-                    </p>
-                    <p className="text-sm font-bold text-slate-800">{selectedEvent.date}</p>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">When</p>
+                    <div className="flex items-center gap-2 text-sm font-semibold text-slate-700">
+                      <Calendar size={14} className="text-indigo-500" />
+                      <span>{selectedEvent.date}</span>
+                    </div>
                   </div>
                   <div className="space-y-1">
-                    <p className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                      <MapPin size={12} /> Location
-                    </p>
-                    <p className="text-sm font-bold text-slate-800">{selectedEvent.location}</p>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Where</p>
+                    <div className="flex items-center gap-2 text-sm font-semibold text-slate-700">
+                      <MapPin size={14} className="text-indigo-500" />
+                      <span>{selectedEvent.location}</span>
+                    </div>
                   </div>
                   <div className="space-y-1">
-                    <p className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                      <UserCheck size={12} /> Audience
-                    </p>
-                    <p className="text-sm font-bold text-slate-800">{selectedEvent.audience}</p>
-                  </div>
-                  <div className="space-y-1">
-                    <p className="flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                      <BarChart3 size={12} /> Est. Footfall
-                    </p>
-                    <p className="text-sm font-bold text-slate-800">{formatCompact(selectedEvent.estFootfall)}+</p>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Target Audience</p>
+                    <div className="flex items-center gap-2 text-sm font-semibold text-slate-700">
+                      <Users size={14} className="text-indigo-500" />
+                      <span>{selectedEvent.audience}</span>
+                    </div>
                   </div>
                 </div>
 
-                <div className="space-y-4">
-                  <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">About Initiative</p>
-                  <p className="text-sm text-slate-600 leading-relaxed">
+                {/* About Section */}
+                <div className="space-y-3">
+                  <h4 className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Overview</h4>
+                  <p className="text-base text-slate-600 leading-relaxed font-light">
                     {selectedEvent.description}
                   </p>
                 </div>
 
-                <div className="mt-10 flex items-center gap-4">
-                  <div className="px-6 py-2.5 bg-slate-900 text-white rounded-xl text-xs font-bold shadow-lg shadow-slate-200 cursor-pointer hover:bg-slate-800 transition-colors">
-                    Get Involved
-                  </div>
-                  <div className="flex items-center gap-2 text-xs font-bold text-slate-400 px-4 py-2 border border-slate-100 rounded-xl cursor-default uppercase tracking-tight">
-                    <Clock size={12} /> {selectedEvent.mode} Mode
-                  </div>
+                {/* Action Footer */}
+                <div className="pt-2 flex items-center justify-between">
+                  <Link to={`/events/${selectedEvent.id}`} className="w-full md:w-auto">
+                    <button className="w-full md:w-auto px-10 py-3.5 bg-indigo-600 text-white rounded-full text-sm font-bold shadow-lg shadow-indigo-100 hover:bg-indigo-700 hover:-translate-y-0.5 transition-all">
+                      Participate Now
+                    </button>
+                  </Link>
+                  <p className="hidden md:block text-[11px] font-medium text-slate-400 italic">
+                    Expected {formatCompact(selectedEvent.estFootfall)}+ attendees
+                  </p>
                 </div>
               </div>
             </motion.div>

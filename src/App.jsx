@@ -9,9 +9,9 @@ import Home from "./pages/Home";
 import Tenders from "./pages/Tenders";
 import CsrPolicy from "./pages/CsrPolicy";
 import KnowUs from "./pages/Know";
-import Books from "./Pages/Books.jsx";
-import BookReader from "./Pages/BookReader.jsx";
-import Flipbook from "./Pages/Flipbook.jsx";
+import Books from "./pages/Books.jsx";
+import BookReader from "./pages/BookReader.jsx";
+import Flipbook from "./pages/Flipbook.jsx";
 import Gallery from "./pages/Gallery.jsx";
 import Document from "./pages/Document.jsx";
 import EventDetails from "./pages/EventDetails.jsx";
@@ -43,8 +43,7 @@ function App() {
       {!isIsolatedPage && <Nav />}
 
       <div className="min-h-screen flex flex-col">
-        <main className="flex-grow">
-         
+        <main className={`flex-grow ${location.pathname !== '/' && !isIsolatedPage ? 'pt-24' : ''}`}>
           <Routes>
             {/* Home */}
             <Route path="/" element={<Home />} />

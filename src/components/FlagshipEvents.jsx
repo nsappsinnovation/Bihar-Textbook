@@ -76,7 +76,8 @@ export default function FlagshipEvent() {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-all duration-700 opacity-95 blur-[0.5px] brightness-95 group-hover:opacity-100 group-hover:blur-0 group-hover:brightness-100 group-hover:scale-105"
+                    style={{ willChange: 'transform, filter, opacity' }}
                   />
                   <div className="absolute top-4 left-4">
                     <span className="px-3 py-1 bg-white/90 backdrop-blur-md rounded-full text-[9px] font-bold text-slate-600 uppercase tracking-wider shadow-sm border border-white/20">
