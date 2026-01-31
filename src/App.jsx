@@ -5,6 +5,7 @@ import Nav from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import Blog from "./components/Blog.jsx";
 /* Pages */
+
 import Home from "./pages/Home";
 import Tenders from "./pages/Tenders";
 import CsrPolicy from "./pages/CsrPolicy";
