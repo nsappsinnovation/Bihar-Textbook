@@ -49,3 +49,26 @@ export const getArticleExtract = async (pageId) => {
         return { extract: '', thumbnail: null };
     }
 }
+
+export const getSuggestions = async (query) => {
+    if (!query) return [];
+
+    try {
+        const response = await axios.get(API_ENDPOINT, {
+            params: {
+                action: 'opensearch',
+                search: query,
+                limit: 5,
+                format: 'json',
+                origin: '*',
+            },
+        });
+        // Opensearch returns: [query, [titles], [descriptions], [links]]
+        // We just want the titles usually, or maybe titles and links.
+        // Let's return the titles (index 1).
+        return response.data[1] || [];
+    } catch (error) {
+        console.error('Error fetching suggestions:', error);
+        return [];
+    }
+};
