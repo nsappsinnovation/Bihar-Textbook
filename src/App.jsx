@@ -33,6 +33,7 @@ import SignUp from "./components/SignUp.jsx";
 import PhotoGallery from "./components/gallery/sections/Photogallery";
 import VideoGallery from "./components/gallery/sections/Videogallery";
 import PressRelease from "./components/gallery/sections/Pressrelease";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const location = useLocation();
@@ -43,6 +44,7 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       {!isIsolatedPage && <Nav />}
 
       <div className="min-h-screen flex flex-col">

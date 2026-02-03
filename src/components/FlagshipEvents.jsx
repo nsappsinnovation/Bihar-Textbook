@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { flagshipEvents } from "../data/flagshipEventsData";
 
-export default function FlagshipEvent() {
+export default function FlagshipEvents() {
   const [index, setIndex] = useState(0);
 
   // Card width(380) + gap(32)
