@@ -46,8 +46,6 @@ const BookReader = () => {
                     // Fallback static list only if fetch fails (e.g. for demo)
                     console.warn("Manifest not found, using fallback chapters");
                     setChapters([
-                        { id: "preface", title: "PREFACE", hindiTitle: "दो शब्द / प्राक्कथन", type: "intro" },
-                        { id: "contents", title: "CONTENTS", hindiTitle: "विषय - सूची", type: "intro" },
                         { id: 1, title: "Chapter 1", hindiTitle: "हँसते-खेलते", type: "chapter" },
                         { id: 2, title: "Chapter 2", hindiTitle: "हमारा गाँव (चित्रपठन)", type: "chapter" },
                     ]);
@@ -56,8 +54,6 @@ const BookReader = () => {
                 console.error("Error fetching chapters:", err);
                 // Fallback on error
                 setChapters([
-                    { id: "preface", title: "PREFACE", hindiTitle: "दो शब्द / प्राक्कथन", type: "intro" },
-                    { id: "contents", title: "CONTENTS", hindiTitle: "विषय - सूची", type: "intro" },
                     { id: 1, title: "Chapter 1", hindiTitle: "हँसते-खेलते", type: "chapter" },
                     { id: 2, title: "Chapter 2", hindiTitle: "हमारा गाँव (चित्रपठन)", type: "chapter" },
                     { id: 3, title: "Chapter 3 (Fallback)", hindiTitle: "...", type: "chapter" },

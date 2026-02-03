@@ -10,17 +10,17 @@ const industryData = [
   {
     name: "Shri Sunil Kumar",
     role: "Hon'ble Education Minister, Bihar",
-    image: "/images/KeyParticipants/Sunil_Kumar_1-removebg-preview.png",
+    image: "/images/KeyParticipants/Sunil-Kumar.png",
   },
   {
     name: "Shri Dr. B. Rajender, I.A.S.",
     role: "Additional Chief Secretary, Education Department",
-    image: "/images/KeyParticipants/Dr_B_Rajender_1-removebg-preview.png",
+    image: "/images/KeyParticipants/B.Rajendra.png",
   },
   {
     name: "Shri Yatendra Kumar Pal, I.A.S.",
     role: "Managing Director, Bihar State Text Book Publishing Corporation (BSTBPC)",
-    image: "/images/KeyParticipants/Yatendra_Kumar_Pal_1-removebg-preview.png",
+    image: "/images/KeyParticipants/shri_yatendra_pal.png",
   },
 ];
 
@@ -38,7 +38,7 @@ const academiaData = [
   {
     name: "Prof. Girish Kumar Choudhary",
     role: "Vice Chancellor, Patna University",
-    image: "/profile.png",
+    image: "/images/KeyParticipants/girish_kumar_choudhary.png",
   },
   {
     name: "Abhayanand",
