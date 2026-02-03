@@ -15,6 +15,7 @@ import BookReader from "./pages/BookReader.jsx";
 import Flipbook from "./pages/Flipbook.jsx";
 import Gallery from "./pages/Gallery.jsx";
 import Document from "./pages/Document.jsx";
+import FlagshipDetail from "./pages/FlagshipDetail.jsx";
 import EventDetails from "./pages/EventDetails.jsx";
 import PublishingMission from "./pages/PublishingMission.jsx";
 
@@ -30,7 +31,10 @@ import Login from "./components/Login.jsx";
 import SignUp from "./components/SignUp.jsx";
 
 /* Gallery Pages */
-
+import PhotoGallery from "./components/gallery/sections/Photogallery";
+import VideoGallery from "./components/gallery/sections/Videogallery";
+import PressRelease from "./components/gallery/sections/Pressrelease";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const location = useLocation();
@@ -41,6 +45,7 @@ function App() {
 
   return (
     <>
+      <ScrollToTop />
       {!isIsolatedPage && <Nav />}
 
       <div className="min-h-screen flex flex-col">
@@ -85,13 +90,17 @@ function App() {
               path="/flagship-events"
               element={<FlagshipEvents />}
             />
+            <Route
+              path="/flagship-events/:id"
+              element={<FlagshipDetail />}
+            />
 
             {/* Flipbook */}
             <Route path="/book/:classId/:bookSubject/:chapterId/flip" element={<Flipbook />} />
 
 
             {/* Other */}
-            <Route path="/blog" element={<Blog />} />
+// Duplicate route removed
             <Route path="/notice" element={<Notice />} />
             <Route path="/tenders" element={<Tenders />} />
             <Route path="/csr-policy" element={<CsrPolicy />} />
