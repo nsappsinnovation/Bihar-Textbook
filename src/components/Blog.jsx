@@ -4,7 +4,7 @@ import BlogPost from './BlogPost';
 import { searchArticles } from '../services/wikipedia';
 
 function Blog() {
-    const [results, setResults] = useState([]);
+      const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searched, setSearched] = useState(false);
     const [error, setError] = useState(null);
@@ -24,77 +24,80 @@ function Blog() {
     };
 
     return (
-        <div className="min-h-screen bg-white text-slate-900 font-sans">
-            <header className="pt-6
-            pb-10 px-4 text-center">
+        <div className="relative min-h-screen w-full bg-white text-slate-900 font-sans selection:bg-indigo-100 overflow-hidden">
+            {/* Background Elements */}
+            <div className="absolute inset-0 z-0 h-full w-full bg-white bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]">
+                <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-fuchsia-400 opacity-20 blur-[100px]"></div>
+                <div className="absolute right-0 top-0 -z-10 h-full w-full bg-[radial-gradient(circle_500px_at_50%_200px,#C9EBFF,transparent)]"></div>
+            </div>
+
+            <div className="relative z-10">
+                <header className="pt-16 pb-14 px-4 text-center">
+
+                    <h3 className="text-4xl md:text-6xl font-semibold tracking-tight mb-6">
+
+                        <span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent
+        transition-all duration-300">
+                            Discover New Blogs
+                        </span>
+                    </h3>
+
+                    <p
+                        className="
+                     mt-4
+                     text-lg
+                      text-slate-600 max-w-2xl mx-auto mb-12 leading-relaxed"
+                    >
+                        Explore a vast library of knowledge generated from Wikipedia.
+                        Search for any topic and read curated blog-style summaries.
+                    </p>
+
+                    <SearchBar onSearch={handleSearch} isLoading={loading} />
+                </header>
+
+                <main className="max-w-7xl mx-auto px-4 pb-24">
+                    {error && (
+                        <div className="text-center p-4 mb-8 bg-red-50 text-red-600 rounded-lg border border-red-100 max-w-md mx-auto">
+                            {error}
+                        </div>
+                    )}
 
 
-                <h2 className="text-3xl md:text-4xl font-semibold 
-                  ">
-
-                    <span className="bg-gradient-to-r  from-indigo-500 to-orange-400 bg-clip-text text-transparent
-    transition-all duration-300
-      ">Discover New Blogs
-                    </span>
-                </h2>
-
-                <p
-                    className="
-                 m-2
-                 text-md
-                  text-slate-600 max-w-2xl mx-auto mb-10"
-                >
-                    Explore a vast library of knowledge generated from Wikipedia.
-                    Search for any topic and read curated blog-style summaries.
-                </p>
-
-                <SearchBar onSearch={handleSearch} isLoading={loading} />
-            </header>
-
-            <main className="max-w-7xl mx-auto px-4 pb-24">
-                {error && (
-                    <div className="text-center p-4 mb-8 bg-red-50 text-red-600 rounded-lg border border-red-100 max-w-md mx-auto">
-                        {error}
-                    </div>
-                )}
-
-
-                {loading ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-pulse">
-                        {[...Array(6)].map((_, i) => (
-                            <div key={i} className="h-96 bg-white rounded-2xl shadow-sm border border-slate-200">
-                                <div className="h-48 bg-slate-200 rounded-t-2xl"></div>
-                                <div className="p-6">
-                                    <div className="h-4 bg-slate-200 rounded w-1/4 mb-4"></div>
-                                    <div className="h-6 bg-slate-200 rounded w-3/4 mb-4"></div>
-                                    <div className="h-4 bg-slate-200 rounded w-full mb-2"></div>
-                                    <div className="h-4 bg-slate-200 rounded w-full mb-2"></div>
+                    {loading ? (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-pulse">
+                            {[...Array(6)].map((_, i) => (
+                                <div key={i} className="h-96 bg-white/50 backdrop-blur-sm rounded-2xl shadow-sm border border-slate-200/60">
+                                    <div className="h-48 bg-slate-200/50 rounded-t-2xl"></div>
+                                    <div className="p-6">
+                                        <div className="h-4 bg-slate-200/50 rounded w-1/4 mb-4"></div>
+                                        <div className="h-6 bg-slate-200/50 rounded w-3/4 mb-4"></div>
+                                        <div className="h-4 bg-slate-200/50 rounded w-full mb-2"></div>
+                                        <div className="h-4 bg-slate-200/50 rounded w-full mb-2"></div>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
-                ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {results.map((result) => (
-                            <BlogPost
-                                key={result.pageid}
-                                title={result.title}
-                                snippet={result.snippet}
-                                timestamp={result.timestamp}
-                                pageid={result.pageid}
-                            />
-                        ))}
-                    </div>
-                )}
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {results.map((result) => (
+                                <BlogPost
+                                    key={result.pageid}
+                                    title={result.title}
+                                    snippet={result.snippet}
+                                    timestamp={result.timestamp}
+                                    pageid={result.pageid}
+                                />
+                            ))}
+                        </div>
+                    )}
 
-                {searched && !loading && results.length === 0 && (
-                    <div className="text-center py-20">
-                        <p className="text-xl text-slate-500">No results found. Try a different topic.</p>
-                    </div>
-                )}
-            </main>
-
-
+                    {searched && !loading && results.length === 0 && (
+                        <div className="text-center py-20">
+                            <p className="text-xl text-slate-500">No results found. Try a different topic.</p>
+                        </div>
+                    )}
+                </main>
+            </div>
         </div>
     );
 }

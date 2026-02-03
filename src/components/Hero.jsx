@@ -1,262 +1,253 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaFacebookF, FaTwitter, FaYoutube, FaInstagram, FaLinkedinIn, FaPlay, FaPause, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { FaPlay } from 'react-icons/fa';
 
+// --- DATA: Main Hero Slides ---
 const slides = [
     {
-        id: 0,
-        label: "Primary Mission",
-        title: <>Bihar <span className="text-orange-400">State Text Book</span> <br /> Publishing Corporation</>,
-        description: "Empowering millions through knowledge. Shaping the future of education with standardized, accessible, and affordable learning resources.",
-        location: "Patna, Bihar | Annual Publication Cycle",
-        image: null, // Uses the original graphic
-        buttonText: "Explore Library Now",
-        link: "/books/1"
+        id: "slide-0",
+        title: "BIHAR STATE",
+        subtitle: "TEXT BOOK PUBLISHING",
+        description: "Full immersion with high-quality educational resources. Standardized textbooks designed for every student.",
+        image: "/images/hero_classroom.png",
+        link: "/publishing-mission"
     },
     {
-        id: 1,
-        label: "Future Tech",
-        title: <>Immersive <span className="text-blue-400">VR Education</span> <br /> Virtual Field Trips</>,
-        description: "Taking students beyond classrooms with immersive VR journeys to historical sites and scientific laboratories across the globe.",
-        location: "State-wide Digital Initiative",
-        image: "/Users/manishmilando/.gemini/antigravity/brain/e242e5f7-8349-4a9b-8b59-430cae8bb63f/hero_vr_education_1769533294317.png",
-        buttonText: "Start Virtual Tour",
+        id: "slide-1",
+        title: "DIGITAL",
+        subtitle: "LEARNING ECOSYSTEM",
+        description: "Innovative e-learning solutions that bridge the gap. Play with knowledge, not just buttons.",
+        image: "/images/hero_digital.png",
+        link: "/events/e-lotani-digital-portal"
+    },
+    {
+        id: "slide-2",
+        title: "ACADEMIC",
+        subtitle: "HERITAGE ARCHIVE",
+        description: "Preserving the legacy of Bihar's education. A centralized digital repository for the future.",
+        image: "/images/hero_archive.png",
+        link: "/events/digital-archive-textbooks"
+    },
+    {
+        id: "slide-3",
+        title: "IMMERSIVE",
+        subtitle: "VIRTUAL REALITY",
+        description: "Step into a new dimension of learning. Immersive VR experiences that make education come alive.",
+        image: "/images/hero_vr_new.png",
         link: "/events/vr-education-tours"
     },
     {
-        id: 2,
-        label: "Smart Learning",
-        title: <>Adaptive <span className="text-indigo-400">AI-Powered</span> <br /> Learning Tutorials</>,
-        description: "Personalized AI-driven paths that adapt to every student's pace, ensuring master of difficult concepts through instant feedback.",
-        location: "Personalized Digital Tutors",
-        image: "/Users/manishmilando/.gemini/antigravity/brain/e242e5f7-8349-4a9b-8b59-430cae8bb63f/hero_ai_learning_1769533315449.png",
-        buttonText: "Try AI Tutor",
+        id: "slide-4",
+        title: "INTELLIGENT",
+        subtitle: "AI TUTORING",
+        description: "Personalized learning assistant for students. AI-powered tools to guide your educational journey.",
+        image: "/images/hero_ai_new.png",
         link: "/events/ai-powered-learning"
     },
     {
-        id: 3,
-        label: "Digital Innovation",
-        title: <>Smart <span className="text-emerald-400">Interactive</span> <br /> Modern E-Books</>,
-        description: "Rich digital textbooks enhanced with 3D models, videos, and interactive quizzes for a more engaging learning experience.",
-        location: "Universal Digital Access",
-        image: "/Users/manishmilando/.gemini/antigravity/brain/e242e5f7-8349-4a9b-8b59-430cae8bb63f/hero_ebooks_interactive_1769533339210.png",
-        buttonText: "Read Interactive Books",
-        link: "/events/interactive-e-books"
-    },
-    {
-        id: 4,
-        label: "Knowledge Hub",
-        title: <>The Digital <span className="text-amber-400">Bihar Archive</span> <br /> Knowledge Repository</>,
-        description: "A centralized long-term digital repository preserving Bihar's educational heritage and textbook evolutions for all generations.",
-        location: "Permanent Digital Archive",
-        image: "https://images.unsplash.com/photo-1507842217343-583bb7270b66",
-        buttonText: "Browse Archive",
-        link: "/events/digital-archive-textbooks"
+        id: "slide-5",
+        title: "ACCESSIBLE",
+        subtitle: "AUDIO BOOKS",
+        description: "Learn anytime, anywhere. High-quality audio books for inclusive and dynamic learning.",
+        image: "/images/hero_audio_new.png",
+        link: "/events/audio-books-inclusive"
     }
 ];
 
+// Animation Variants
+const textVariant = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    },
+    exit: {
+        opacity: 0,
+        y: -10,
+        transition: { duration: 0.4, ease: "easeIn" }
+    }
+};
+
 const Hero = () => {
-    const [activeSlide, setActiveSlide] = useState(0);
-    const [isPlaying, setIsPlaying] = useState(true);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
+    // Derived indices
+    const nextIndex = (currentIndex + 1) % slides.length;
+    const prevIndex = (currentIndex - 1 + slides.length) % slides.length;
+
+    const currentSlide = slides[currentIndex];
+    const nextSlide = slides[nextIndex];
+    const prevSlide = slides[prevIndex];
+
+    // Auto-rotate slides every 5 seconds
     useEffect(() => {
-        let timer;
-        if (isPlaying) {
-            timer = setInterval(() => {
-                setActiveSlide((prev) => (prev + 1) % slides.length);
-            }, 6000);
-        }
+        const timer = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % slides.length);
+        }, 5000);
         return () => clearInterval(timer);
-    }, [isPlaying]);
+    }, []);
 
-    const nextSlide = () => setActiveSlide((prev) => (prev + 1) % slides.length);
-    const prevSlide = () => setActiveSlide((prev) => (prev - 1 + slides.length) % slides.length);
-
-    // Animation variants
-    const contentVariants = {
-        hidden: { opacity: 0, x: 50 },
-        visible: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut", staggerChildren: 0.2 } },
-        exit: { opacity: 0, x: -50, transition: { duration: 0.5 } }
-    };
-
-    const graphicVariants = {
-        hidden: { opacity: 0, scale: 0.8 },
-        visible: { opacity: 1, scale: 1, transition: { duration: 1, ease: "easeOut" } },
-        exit: { opacity: 0, scale: 1.1, transition: { duration: 0.5 } }
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    const handleNext = () => {
+        setCurrentIndex((prev) => (prev + 1) % slides.length);
     };
 
     return (
-        <section className="relative min-h-[90vh] flex items-center overflow-hidden bg-[#0d0e23]">
-            {/* BACKGROUND ANIMATION */}
+        <section className="relative w-full h-screen bg-[#0f172a] text-white overflow-hidden font-sans">
+
+            {/* 0. PREVIOUS BACKGROUND (Buffer) */}
             <div className="absolute inset-0 z-0">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#1a1b4b] via-[#0d0e23] to-[#050610]"></div>
-                <AnimatePresence mode="wait">
-                    {slides[activeSlide].image && (
-                        <motion.div
-                            key={`bg-${activeSlide}`}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 0.15 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 1.5 }}
-                            className="absolute inset-0"
-                        >
-                            <img src={slides[activeSlide].image} className="w-full h-full object-cover" alt="slide-bg" />
-                        </motion.div>
-                    )}
+                <img
+                    key={prevSlide.id + "-static-bg"}
+                    src={prevSlide.image}
+                    alt=""
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0f1025]/90 via-[#0f1025]/60 to-transparent" />
+                <div className="absolute inset-0 bg-black/20" />
+            </div>
+
+            {/* 1. ACTIVE WALLPAPER (Crossfade Slide) */}
+            <div className="absolute inset-0 z-0 overflow-hidden">
+                <AnimatePresence mode="popLayout">
+                    <motion.div
+                        key={currentSlide.id + "-bg"}
+                        initial={{ opacity: 0, scale: 1.2 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{
+                            duration: 1.5,
+                            ease: [0.25, 1, 0.5, 1]
+                        }}
+                        className="absolute inset-0 w-full h-full z-10"
+                    >
+                        <img
+                            src={currentSlide.image}
+                            alt={currentSlide.title}
+                            className="w-full h-full object-cover opacity-95 blur-[0.5px] brightness-95 transition-all duration-700"
+                            style={{ willChange: 'transform, filter, opacity' }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-[#0f1025]/95 via-[#0f1025]/40 to-transparent" />
+                        <div className="absolute inset-0 bg-black/10" />
+                    </motion.div>
                 </AnimatePresence>
-
-                <div className="absolute inset-0 opacity-20"
-                    style={{
-                        backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.1) 1px, transparent 0)',
-                        backgroundSize: '30px 30px'
-                    }}>
-                </div>
             </div>
 
-            <div className="container mx-auto px-6 lg:px-24 relative z-10 w-full">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-
-                    {/* LEFT COLUMN: Graphic or Product Image */}
-                    <div className="order-2 lg:order-1 flex justify-center lg:justify-start h-[400px] lg:h-[600px] items-center">
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={`graphic-${activeSlide}`}
-                                variants={graphicVariants}
-                                initial="hidden"
-                                animate="visible"
-                                exit="exit"
-                                className="relative w-full max-w-[500px] aspect-square flex items-center justify-center"
-                            >
-                                {activeSlide === 0 ? (
-                                    <>
-                                        <div className="absolute inset-0 flex items-center justify-center">
-                                            <div className="w-full h-full border-[1px] border-white/10 rounded-full animate-[spin_60s_linear_infinite]"></div>
-                                            <div className="absolute w-[80%] h-[80%] border-[1px] border-white/5 rounded-full animate-[spin_40s_linear_infinite_reverse]"></div>
-                                        </div>
-                                        <div className="relative w-[70%] h-[70%] flex items-center justify-center opacity-40">
-                                            <svg viewBox="0 0 100 100" className="w-full h-full animate-[spin_100s_linear_infinite]">
-                                                <circle cx="50" cy="50" r="48" fill="none" stroke="white" strokeWidth="0.5" strokeDasharray="1,3" opacity="0.3" />
-                                                {[...Array(24)].map((_, i) => (
-                                                    <g key={i} transform={`rotate(${i * 15} 50 50)`}>
-                                                        <line x1="50" y1="50" x2="50" y2="15" stroke="white" strokeWidth="0.4" opacity="0.5" />
-                                                        <circle cx="50" cy="15" r="0.5" fill="white" />
-                                                    </g>
-                                                ))}
-                                                <g transform="translate(35, 35) scale(0.6)" fill="white">
-                                                    <path d="M25 5C17.5 5 10 7.5 5 10V45C10 42.5 17.5 40 25 40C32.5 40 40 42.5 45 45V10C40 7.5 32.5 5 25 5Z" opacity="0.8" />
-                                                    <path d="M25 5C32.5 5 40 7.5 45 10L45 45C40 42.5 32.5 40 25 40C17.5 40 10 42.5 5 45L5 10C10 7.5 17.5 5 25 5Z" opacity="0.6" />
-                                                </g>
-                                            </svg>
-                                        </div>
-                                        <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
-                                            <div className="text-6xl lg:text-8xl font-black text-white/90 tracking-tighter mb-0 leading-none">BSTBP</div>
-                                            <div className="text-xl lg:text-3xl font-bold bg-gradient-to-r from-orange-400 to-amber-500 bg-clip-text text-transparent uppercase tracking-[0.2em]">Corporation</div>
-                                        </div>
-                                    </>
-                                ) : (
-                                    <div className="relative group overflow-hidden rounded-[40px] border border-white/10 shadow-2xl">
-                                        <img src={slides[activeSlide].image} className="w-full h-full object-cover rounded-[40px]" alt="Feature" />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#0d0e23] via-transparent to-transparent opacity-60"></div>
-                                    </div>
-                                )}
-                            </motion.div>
-                        </AnimatePresence>
-                    </div>
-
-                    {/* RIGHT COLUMN: Text Content */}
-                    <div className="order-1 lg:order-2">
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={`content-${activeSlide}`}
-                                variants={contentVariants}
-                                initial="hidden"
-                                animate="visible"
-                                exit="exit"
-                                className="text-white"
-                            >
-                                <motion.div variants={itemVariants} className="flex items-center gap-4 mb-6">
-                                    <span className="px-4 py-1.5 rounded-full bg-white/10 border border-white/10 text-[10px] font-bold uppercase tracking-[3px] text-white/70">
-                                        {slides[activeSlide].label}
+            {/* 2. CONTENT */}
+            <div className="relative z-10 w-full h-full flex items-center px-6 lg:px-16 pt-20">
+                <div className="max-w-4xl">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={currentSlide.id + "-content"}
+                            variants={textVariant}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                        >
+                            <div className="overflow-hidden">
+                                <motion.h1 className="text-5xl md:text-7xl lg:text-[85px] uppercase font-black tracking-tighter leading-[0.95] mb-4">
+                                    <span className="block text-white drop-shadow-2xl">
+                                        {currentSlide.title}
                                     </span>
-                                    <div className="h-[1px] w-12 bg-white/20"></div>
-                                </motion.div>
-
-                                <motion.h1 variants={itemVariants} className="text-5xl md:text-7xl font-bold leading-[1.1] mb-8 tracking-tight">
-                                    {slides[activeSlide].title}
+                                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-white/90 to-blue-200">
+                                        {currentSlide.subtitle}
+                                    </span>
                                 </motion.h1>
+                            </div>
 
-                                <motion.p variants={itemVariants} className="text-xl text-white/60 mb-10 max-w-xl font-light leading-relaxed">
-                                    {slides[activeSlide].description}
-                                </motion.p>
+                            <motion.p
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.3, duration: 0.6 }}
+                                className="text-blue-100/70 text-lg md:text-xl max-w-xl font-light leading-relaxed mb-8"
+                            >
+                                {currentSlide.description}
+                            </motion.p>
 
-                                <motion.div variants={itemVariants} className="flex items-center gap-3 mb-12 text-white/50">
-                                    <svg className="w-5 h-5 text-orange-400" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"></path></svg>
-                                    <span className="font-medium text-lg uppercase tracking-wider text-sm">{slides[activeSlide].location}</span>
-                                </motion.div>
-
-                                <motion.div variants={itemVariants} className="flex items-center gap-6">
-                                    <motion.button
-                                        whileHover={{ scale: 1.05 }}
-                                        whileTap={{ scale: 0.95 }}
-                                        className="bg-[#2a2b8d] hover:bg-[#3a3bbd] text-white px-10 py-5 rounded-2xl font-bold text-lg flex items-center gap-3 transition-all shadow-xl shadow-blue-900/20"
-                                    >
-                                        {slides[activeSlide].buttonText}
-                                        <FaChevronRight size={14} />
-                                    </motion.button>
-                                </motion.div>
+                            <motion.div
+                                initial={{ opacity: 0, x: -20 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.5, duration: 0.6 }}
+                                className="flex items-center gap-5"
+                            >
+                                <Link to={currentSlide.link}>
+                                    <button className="group relative bg-white text-black px-8 py-3.5 rounded-full font-bold uppercase tracking-widest flex items-center gap-3 hover:bg-blue-50 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_40px_rgba(59,130,246,0.3)] hover:-translate-y-1">
+                                        Explore Now
+                                        <span className="bg-black text-white w-7 h-7 rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-500">
+                                            <FaPlay size={10} className="ml-0.5" />
+                                        </span>
+                                    </button>
+                                </Link>
                             </motion.div>
-                        </AnimatePresence>
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
+            </div>
+
+            {/* 3. PREVIEW CARD */}
+            <div
+                className="absolute bottom-12 right-6 lg:right-16 z-20 w-[240px] md:w-[320px] aspect-[16/9] cursor-pointer group"
+                onClick={handleNext}
+            >
+                {/* Standard hover effect only, no shared element transition */}
+                <div className="w-full h-full relative rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 group-hover:border-white/30 transition-all duration-500 transform group-hover:-translate-y-1">
+                    <div className="absolute inset-0 w-full h-full">
+                        <img
+                            src={nextSlide.image}
+                            alt={nextSlide.title}
+                            className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-all duration-700 opacity-98 blur-[0.3px]"
+                            style={{ willChange: 'transform, filter, opacity' }}
+                        />
+                        <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500" />
+                    </div>
+
+                    <div className="absolute inset-0 p-5 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/20 to-transparent">
+                        <motion.h4
+                            key={nextSlide.id}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-white font-bold uppercase text-base leading-none drop-shadow-md"
+                        >
+                            {nextSlide.title}
+                        </motion.h4>
+                        <p className="text-white/60 text-[10px] mt-1 uppercase tracking-widest font-medium">Coming Next</p>
+                    </div>
+
+                    {/* Progress Bar */}
+                    <div className="absolute bottom-0 left-0 h-1 bg-white/10 w-full">
+                        <motion.div
+                            key={currentIndex}
+                            initial={{ width: "0%" }}
+                            animate={{ width: "100%" }}
+                            transition={{ duration: 5, ease: "linear" }}
+                            className="h-full bg-blue-500 shadow-[0_0_10px_#3b82f6]"
+                        />
                     </div>
                 </div>
             </div>
 
-            {/* NAVIGATION CONTROLS */}
-            <div className="absolute left-10 lg:left-auto lg:right-24 bottom-12 z-30 flex items-center gap-6">
-                <div className="flex items-center gap-2">
-                    <button onClick={prevSlide} className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 transition-all">
-                        <FaChevronLeft />
-                    </button>
-                    <button onClick={nextSlide} className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 transition-all">
-                        <FaChevronRight />
-                    </button>
-                </div>
-                <button
-                    onClick={() => setIsPlaying(!isPlaying)}
-                    className="w-12 h-12 flex items-center justify-center rounded-xl bg-white text-[#0d0e23] hover:bg-white/90 transition-all"
-                >
-                    {isPlaying ? <FaPause size={14} /> : <FaPlay size={14} className="translate-x-0.5" />}
-                </button>
-            </div>
-
-            {/* PROGRESS DOTS */}
-            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-4 z-30">
-                {slides.map((_, i) => (
+            {/* Pagination Indicators */}
+            <div className="absolute left-6 lg:left-16 bottom-12 flex items-center gap-4 z-20">
+                {slides.map((_, idx) => (
                     <button
-                        key={i}
-                        onClick={() => setActiveSlide(i)}
-                        className={`h-2 rounded-full transition-all duration-500 ${activeSlide === i ? "w-12 bg-white" : "w-2 bg-white/20 hover:bg-white/40"}`}
-                    />
+                        key={idx}
+                        onClick={() => setCurrentIndex(idx)}
+                        className="relative h-2 group"
+                    >
+                        <div className={`transition-all duration-500 rounded-full h-full ${idx === currentIndex ? 'w-10 bg-white' : 'w-2 bg-white/30 group-hover:bg-white/50'}`} />
+                        {idx === currentIndex && (
+                            <motion.div
+                                layoutId="dot-outline"
+                                className="absolute -inset-2 border border-white/20 rounded-full"
+                            />
+                        )}
+                    </button>
                 ))}
             </div>
 
-            {/* SOCIAL FLOATER */}
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden xl:flex flex-col gap-1 px-4 py-8 bg-white/5 backdrop-blur-xl border border-white/10 rounded-l-3xl z-20">
-                {[FaLinkedinIn, FaTwitter, FaYoutube, FaInstagram, FaFacebookF].map((Icon, idx) => (
-                    <motion.a key={idx} href="#" whileHover={{ x: -5, color: "#fff" }} className="w-10 h-10 flex items-center justify-center text-white/40"><Icon /></motion.a>
-                ))}
-            </div>
-
-            <style>{`
-                @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-            `}</style>
         </section>
     );
 };
 
 export default Hero;
-

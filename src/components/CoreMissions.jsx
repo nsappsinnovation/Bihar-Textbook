@@ -8,6 +8,7 @@ import {
   FiZap,
 } from "react-icons/fi";
 import { RiGraduationCapLine, RiFlaskLine } from "react-icons/ri";
+import { motion } from "framer-motion";
 
 /**
  * ✅ Improvements:
@@ -80,15 +81,21 @@ const CoreMissions = () => {
   );
 
   const CentralBook = () => (
-    <div className="relative w-full h-full flex items-center justify-center text-[#222f6d]">
+    <motion.div
+      initial={{ rotateY: 0 }}
+      whileInView={{ rotateY: 360 }}
+      viewport={{ once: true }}
+      transition={{ duration: 1.5, ease: "easeInOut" }}
+      className="relative w-full h-full flex items-center justify-center text-[#222f6d]"
+    >
       <svg
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
-        strokeWidth="1"
+        strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="w-10 h-10"
+        className="w-12 h-12"
       >
         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
         <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
@@ -96,22 +103,21 @@ const CoreMissions = () => {
       {/* Decorative Rings */}
       <div className="absolute inset-0 border border-[#222f6d]/10 rounded-full animate-[spin_12s_linear_infinite]" />
       <div className="absolute inset-[-6px] border border-dashed border-[#222f6d]/10 rounded-full animate-[spin_18s_linear_infinite_reverse]" />
-    </div>
+    </motion.div>
   );
 
   // Constants
   const ORBIT_DURATION = 60; // seconds for full rotation
-  const RADIUS = 380; // Distance from center
+  const RADIUS = 300; // Reduced distance to bring elements closer
 
   return (
-    <section className="py-24 bg-white overflow-hidden relative min-h-[850px] flex items-center border-t border-gray-50/50">
-      {/* Background Grid */}
+    <section className="py-18 bg-white overflow-hidden relative min-h-[850px] flex items-center border-t border-gray-50/50">
+      {/* Enhanced Technical Background Image */}
       <div
-        className="absolute inset-0 opacity-[0.02] pointer-events-none"
+        className="absolute inset-0 opacity-[0.25] pointer-events-none bg-no-repeat bg-center mix-blend-multiply"
         style={{
-          backgroundImage:
-            "linear-gradient(#222f6d 1px, transparent 1px), linear-gradient(90deg, #222f6d 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
+          backgroundImage: "url('/images/core_mission_bg.png')",
+          backgroundSize: "75% auto",
         }}
       />
 
@@ -123,10 +129,10 @@ const CoreMissions = () => {
               Strategic Intent
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-[#0d0e23] mb-4 tracking-tight">
-            The Eight <span className="text-blue-600/80">Core Pillars</span>
+          <h2 className="text-5xl md:text-7xl font-bold text-[#0d0e23] mb-6 tracking-tight">
+            The Eight <span className="text-blue-600/90">Core Pillars</span>
           </h2>
-          <p className="max-w-2xl mx-auto text-gray-500 text-base font-light leading-relaxed">
+          <p className="max-w-3xl mx-auto text-gray-500 text-lg font-light leading-relaxed">
             A structured framework guiding BSTPC’s mission to strengthen learning outcomes across Bihar.
           </p>
         </div>
@@ -157,7 +163,7 @@ const CoreMissions = () => {
         </div>
 
         {/* --- DESKTOP ORBIT VIEW --- */}
-        <div className="hidden lg:flex justify-center items-center h-[900px] relative mt-12">
+        <div className="hidden lg:flex justify-center items-center h-[900px] relative -mt-32">
 
           {/* Main Container - Centered */}
           <div className="relative w-[1000px] h-[1000px] flex items-center justify-center">
@@ -208,7 +214,7 @@ const CoreMissions = () => {
                         </div>
 
                         {/* TEXT */}
-                        <div className="flex-1 opacity-80 group-hover:opacity-100 transition-opacity">
+                        <div className="flex-1  opacity-80 group-hover:opacity-100 transition-opacity">
                           <h4 className="font-semibold text-[14px] text-[#0d0e23] leading-tight mb-1 group-hover:text-blue-600 transition-colors">
                             {mission.title}
                           </h4>
