@@ -10,7 +10,7 @@ const MissionGrid = () => {
             color: "text-orange-500",
             bgHover: "group-hover:bg-orange-50",
             borderColor: "group-hover:border-orange-200",
-            image: "/images/missions/icon_vr_lab.png",
+            image: "/images/missions/icon_vr_lab_subtle.png",
             paths: {
                 active: "M2 8h20v10a2 2 0 01-2 2H4a2 2 0 01-2-2V8zm6 6c1.5 0 2-1 2-1s.5 1 2 1"
             }
@@ -82,7 +82,7 @@ const MissionGrid = () => {
             color: "text-amber-500",
             bgHover: "group-hover:bg-amber-50",
             borderColor: "group-hover:border-amber-200",
-            image: "/images/missions/icon_mobile_library.png",
+            image: "/images/missions/icon_mobile_library_subtle.png",
             paths: {
                 active: "M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0zM12 13a3 3 0 100-6 3 3 0 000 6z"
             }
@@ -146,11 +146,11 @@ const MissionCard = ({ mission }) => {
                 className={`relative w-32 h-32 rounded-full flex items-center justify-center mb-8 border transition-all duration-500 shadow-sm overflow-hidden
                 bg-white border-slate-100 group-hover:border-blue-200 group-hover:bg-blue-50/30 group-hover:scale-110`}
             >
-                {/* Illustration (Normal State) */}
+                {/* Illustration (Normal State) - Subtly Desaturated & Clipped to Circle */}
                 <motion.img
                     src={mission.image}
                     alt={mission.title}
-                    className="w-full h-full object-cover absolute"
+                    className="w-full h-full object-contain p-4 absolute saturate-[0.5] contrast-[1.1] group-hover:saturate-100 group-hover:contrast-100 transition-all duration-500 rounded-full"
                     animate={{
                         opacity: isHovered ? 0 : 1,
                         scale: isHovered ? 0.9 : 1
@@ -170,7 +170,7 @@ const MissionCard = ({ mission }) => {
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{
                         opacity: isHovered ? 1 : 0,
-                        scale: isHovered ? 1 : 0.5,
+                        scale: isHovered ? 1.05 : 0.5,
                         rotate: isHovered ? 0 : -10
                     }}
                     transition={{ duration: 0.4 }}
@@ -179,7 +179,7 @@ const MissionCard = ({ mission }) => {
                         d={mission.paths.active}
                         initial={{ pathLength: 0 }}
                         animate={{ pathLength: isHovered ? 1 : 0 }}
-                        transition={{ duration: 0.8, ease: "easeInOut" }}
+                        transition={{ duration: 0.6, ease: "circOut" }}
                     />
                 </motion.svg>
             </div>
