@@ -4,6 +4,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Nav from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import Blog from "./components/Blog.jsx";
+
 /* Pages */
 
 import Home from "./pages/Home";
@@ -18,13 +19,13 @@ import Document from "./pages/Document.jsx";
 import FlagshipDetail from "./pages/FlagshipDetail.jsx";
 import EventDetails from "./pages/EventDetails.jsx";
 import PublishingMission from "./pages/PublishingMission.jsx";
-
+import Sign from "./pages/Signlanguage.jsx";
 /* Components */
 import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
 import ContactUs from "./components/ContactUs.jsx";
 import Notice from "./components/Notice.jsx";
 import FlagshipEvents from "./components/FlagshipEvents.jsx";
-import Esec from "./components/EventsSection.jsx";
+import Video from "./components/Signcourses.jsx";
 
 /* Auth */
 import Login from "./components/Login.jsx";
@@ -56,6 +57,9 @@ function App() {
 
             {/* Blog */}
             <Route path="/blog" element={<Blog />} />
+           {/*Sign Lang*/}
+           <Route path="/sign" element={<Sign />} />
+            <Route path="/courses" element={<Video />}/>
 
             {/* Auth */}
             <Route path="/login" element={<Login />} />
