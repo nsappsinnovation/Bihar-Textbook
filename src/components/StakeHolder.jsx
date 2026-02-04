@@ -18,9 +18,9 @@ const row2 = [
 export default function StakeHolder() {
   const StakeholderCard = ({ text }) => (
     <div className="group relative inline-flex items-center gap-3 px-8 py-5 rounded-2xl text-sm font-bold text-slate-700
-      bg-white border border-slate-100
+      bg-white border border-slate-200
       transition-all duration-500 ease-out
-      hover:border-indigo-200
+      hover:border-indigo-300
       whitespace-nowrap cursor-default overflow-hidden">
 
       <div className="w-2 h-2 rounded-full bg-indigo-500 transition-transform duration-300 group-hover:scale-125" />

@@ -100,7 +100,7 @@ function App() {
 
 
             {/* Other */}
-// Duplicate route removed
+
             <Route path="/notice" element={<Notice />} />
             <Route path="/tenders" element={<Tenders />} />
             <Route path="/csr-policy" element={<CsrPolicy />} />
