@@ -233,7 +233,7 @@ import { motion } from 'framer-motion';
                                         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
                                         <div className="absolute bottom-10 left-10 text-white">
                                             <p className="text-[10px] font-black uppercase tracking-widest mb-2 opacity-80">Our Facility</p>
-                                            <h4 className="text-2xl font-bold">Standardized Manufacturing</h4>
+                                            <h4 className="text-2xl font-bold"></h4>
                                         </div>
                                     </div>
                                 </div>
