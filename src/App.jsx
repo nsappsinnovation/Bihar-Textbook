@@ -57,9 +57,9 @@ function App() {
 
             {/* Blog */}
             <Route path="/blog" element={<Blog />} />
-           {/*Sign Lang*/}
-           <Route path="/sign" element={<Sign />} />
-            <Route path="/courses" element={<Video />}/>
+            {/*Sign Lang*/}
+            <Route path="/sign" element={<Sign />} />
+            <Route path="/courses" element={<Video />} />
 
             {/* Auth */}
             <Route path="/login" element={<Login />} />

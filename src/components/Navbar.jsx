@@ -98,7 +98,7 @@ const Navbar = () => {
               ))}
             </div>
           </div>
-                    <Link to="/sign" className={`transition-colors ${isHomePage ? "hover:text-blue-300" : "hover:text-[#211fa9f8]"}`}>Signlanguage</Link>
+
           <Link to="/blog" className={`transition-colors ${isHomePage ? "hover:text-blue-300" : "hover:text-[#211fa9f8]"}`}>Blog</Link>
           <Link to="/notice" className={`transition-colors ${isHomePage ? "hover:text-blue-300" : "hover:text-[#211fa9f8]"}`}>Notice</Link>
           <Link to="/tenders" className={`transition-colors ${isHomePage ? "hover:text-blue-300" : "hover:text-[#211fa9f8]"}`}>Tenders</Link>

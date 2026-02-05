@@ -1,14 +1,14 @@
 export const flagshipEvents = [
   {
     id: "digital-books-portal",
-    title: "e-Lotani: Digital Books Portal",
+    title: "Digital Library: Digital Books Portal",
     tag: "Digital",
     image: "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f",
     description:
       "Access all Bihar state textbooks digitally through a centralized, student-friendly e-learning platform available anytime, anywhere.",
     fullContent: `
-      <h2>Introduction to e-Lotani</h2>
-      <p>The e-Lotani Digital Books Portal is a pioneering initiative by the Bihar State Textbook Publishing Corporation aimed at democratizing access to education across the state. In an era where digital literacy is as crucial as traditional literacy, e-Lotani serves as a bridge, connecting students from urban centers to remote villages with high-quality educational resources.</p>
+      <h2>Introduction to Digital Library</h2>
+      <p>The Digital Library Digital Books Portal is a pioneering initiative by the Bihar State Textbook Publishing Corporation aimed at democratizing access to education across the state. In an era where digital literacy is as crucial as traditional literacy, the Digital Library serves as a bridge, connecting students from urban centers to remote villages with high-quality educational resources.</p>
       
       <h3>Key Objectives</h3>
       <ul>
@@ -26,7 +26,7 @@ export const flagshipEvents = [
       </ul>
 
       <h3>Impact on Bihar's Education System</h3>
-      <p>Since its launch, e-Lotani has witnessed millions of downloads, significantly reducing the gap in resource availability. It has been particularly instrumental during times when physical schools were inaccessible, ensuring continuity in learning.</p>
+      <p>Since its launch, the Digital Library has witnessed millions of downloads, significantly reducing the gap in resource availability. It has been particularly instrumental during times when physical schools were inaccessible, ensuring continuity in learning.</p>
     `,
   },
   {
@@ -138,7 +138,7 @@ export const flagshipEvents = [
       </ul>
 
       <h3>Accessibility</h3>
-      <p>These audiobooks are available via the e-Lotani app and distributed on physical media (CDs/USBs) to schools for children with special needs. They also benefit auditory learners who retain information better through listening.</p>
+      <p>These audiobooks are available via the Digital Library app and distributed on physical media (CDs/USBs) to schools for children with special needs. They also benefit auditory learners who retain information better through listening.</p>
     `,
   },
   {
