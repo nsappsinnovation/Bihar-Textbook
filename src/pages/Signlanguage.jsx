@@ -1,6 +1,8 @@
  
  import React from 'react'
  import { Link } from "react-router-dom";
+import { useRef } from "react";
+
 
 
 
@@ -8,6 +10,17 @@
 import { motion } from 'framer-motion';
 
  const Signlanguage = () => {
+
+  const sliderRef = useRef(null);
+
+  const scrollLeft = () => {
+    sliderRef.current?.scrollBy({ left: -380, behavior: "smooth" });
+  };
+
+  const scrollRight = () => {
+    sliderRef.current?.scrollBy({ left: 380, behavior: "smooth" });
+  };
+
      const stats = [
             { label: "Accessibility", value: "25M+", sub: "Deaf & Hard-of-Hearing Learners", icon: <BookOpen size={20} /> },
             { label: "CONTENT", value: "120K+", sub: "Sign-Language Enabled Videos", icon: <Users size={20} /> },
@@ -240,55 +253,93 @@ import { motion } from 'framer-motion';
                             </div>
                         </div>
             </section>
-              <section className="py-32 bg-slate-900 px-6 rounded-[60px] mx-4 mb-4">
-                            <div className="max-w-7xl mx-auto">
-                                <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
-                                    <div className="space-y-4">
-                                        <h2 className="text-xs font-black uppercase tracking-[0.3em] text-blue-400">Workflow</h2>
-                                        <h3 className="text-4xl md:text-5xl font-black text-white tracking-tight">Expressing Meaning Visually <br /></h3>
-                                    </div>
-                                    <div></div>
-                                    
-                                </div>
-            
-                                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                                    {processSteps.map((step, i) => (
-                                        <motion.div
-                                            key={i}
-                                            initial="hidden"
-                                            whileInView="visible"
-                                            viewport={{ once: true }}
-                                            variants={fadeIn}
-                                            transition={{ delay: i * 0.1 }}
-                                            className="bg-white/5 backdrop-blur-md border border-white/10 p-12 rounded-[40px] hover:border-blue-500/50 transition-all duration-500 group"
-                                        >
-                                            {/* Image */}
-                                            <div className="mb-10 overflow-hidden rounded-3xl">
-                                                <img
-                                                    src={step.image}
-                                                    alt={step.title}
-                                                    loading="lazy"
-                                                  
-                                                    className="w-full h-auto max-h-56 object-cover transition-transform duration-700"
-            
-                                                />
-                                            </div>
-                                          
-                                            <h4 className="text-xl font-black text-white mb-6 uppercase tracking-tight">{step.title}</h4>
-                                            <p className="text-blue-100/60 leading-relaxed font-light mb-8 text-sm">{step.description}</p>
-                                            <div className="space-y-3 border-t border-white/5 pt-8">
-                                                {step.details.map((detail, j) => (
-                                                    <div key={j} className="flex items-center gap-3 text-[11px] font-bold text-blue-100/40 uppercase tracking-widest">
-                                                        <div className="w-1 h-1 rounded-full bg-blue-500" />
-                                                        {detail}
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </div>
-                        </section>
+               <section className="py-32 bg-slate-900 px-6 rounded-[60px] mx-4 mb-4">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+          <div className="space-y-4">
+            <h2 className="text-xs font-black uppercase tracking-[0.3em] text-blue-400">
+              Workflow
+            </h2>
+            <h3 className="text-4xl md:text-5xl font-black text-white tracking-tight">
+              Expressing Meaning Visually <br />
+            </h3>
+          </div>
+
+          {/* Buttons */}
+          <div className="flex gap-3">
+            <button
+              onClick={scrollLeft}
+              className="w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 transition"
+            >
+              ←
+            </button>
+            <button
+              onClick={scrollRight}
+              className="w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 transition"
+            >
+              →
+            </button>
+          </div>
+        </div>
+
+        {/* Carousel Track */}
+        <div
+          ref={sliderRef}
+          className="flex gap-8 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-6
+                     scrollbar-hide"
+        >
+          {processSteps.map((step, i) => (
+            <motion.div
+              key={i}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeIn}
+              transition={{ delay: i * 0.1 }}
+              className="snap-start flex-shrink-0 w-[85%] sm:w-[60%] lg:w-[32%]
+                         bg-white/5 backdrop-blur-md border border-white/10 p-12
+                         rounded-[40px] hover:border-blue-500/50 transition-all duration-500 group"
+            >
+              {/* Image */}
+           {/* Image */}
+              {/* Image */}
+<div className="mb-10 rounded-3xl bg-white flex items-center justify-center 
+                h-64 sm:h-72 lg:h-80 overflow-hidden">
+  <img
+    src={step.image}
+    alt={step.title}
+    loading="lazy"
+    className="h-full w-full object-contain p-4"
+  />
+</div>
+
+
+
+              <h4 className="text-xl font-black text-white mb-6 uppercase tracking-tight">
+                {step.title}
+              </h4>
+
+              <p className="text-blue-100/60 leading-relaxed font-light mb-8 text-sm">
+                {step.description}
+              </p>
+
+              <div className="space-y-3 border-t border-white/5 pt-8">
+                {step.details.map((detail, j) => (
+                  <div
+                    key={j}
+                    className="flex items-center gap-3 text-[11px] font-bold text-blue-100/40 uppercase tracking-widest"
+                  >
+                    <div className="w-1 h-1 rounded-full bg-blue-500" />
+                    {detail}
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
             
              <section className="py-32 px-6">
                             <div className="max-w-5xl mx-auto bg-slate-50 rounded-[48px] p-12 md:p-24 text-center border border-slate-100 shadow-sm relative overflow-hidden group">
