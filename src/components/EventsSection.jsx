@@ -49,7 +49,7 @@ const pastEvents = [
     location: "Bhagalpur",
     title: "Digital Literacy Workshop for Students",
     organizer: "BSTPC Digital Team",
-    description: "Introducing students to e-Lotani and digital learning materials, featuring hands-on training with interactive e-books and apps.",
+    description: "Introducing students to Digital Library and digital learning materials, featuring hands-on training with interactive e-books and apps.",
     image: "https://images.unsplash.com/photo-1531482615713-2afd69097998",
     tag: "Workshop",
     mode: "Offline",

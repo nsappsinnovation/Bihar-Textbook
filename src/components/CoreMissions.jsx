@@ -183,8 +183,6 @@ const CoreMissions = () => {
                 const y = Math.sin(angleRad) * RADIUS;
 
                 // Determine text alignment based on position
-                const isLeft = x < -10;
-
                 return (
                   <div
                     key={mission.id}
@@ -196,33 +194,32 @@ const CoreMissions = () => {
                     {/* 
                       3. NODE COUNTER-ROTATION (Rotates CCW)
                       This cancels the system rotation, keeping the node upright.
+                      The Icon is the absolute CENTER.
                     */}
-                    <div className="animate-[slowOrbitReverse_60s_linear_infinite] flex items-center justify-center relative group">
+                    <div className="animate-[slowOrbitReverse_60s_linear_infinite] relative group flex items-center justify-center w-12 h-12">
 
-                      {/* Connection Line to Center (Optional - can be added here if needed) */}
+                      {/* ICON (The Anchor) */}
+                      <div
+                        className="w-16 h-16 shrink-0 rounded-full bg-white border border-gray-100 flex items-center justify-center text-2xl shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:border-blue-200 group-hover:shadow-lg cursor-pointer relative z-20"
+                        style={{ color: mission.color }}
+                      >
+                        {mission.icon}
+                      </div>
 
-                      {/* CONTENT BUBBLE */}
-                      {/* Flex direction based on side to avoid text covering icon */}
-                      <div className={`flex items-center gap-3 w-[220px] transition-all duration-300 ${isLeft ? 'flex-row-reverse text-right' : 'flex-row text-left'}`}>
+                      {/* MAIN TEXT (Title) - Attached Permanent Below */}
+                      <div className="absolute top-[120%] left-1/2 -translate-x-1/2 w-[180px] text-center z-10 pointer-events-none">
+                        <h4 className="font-bold text-[13px] text-slate-600 leading-tight inline-block">
+                          {mission.title}
+                        </h4>
+                      </div>
 
-                        {/* ICON (The Anchor) */}
-                        <div
-                          className="w-12 h-12 shrink-0 rounded-full bg-white border border-gray-100 flex items-center justify-center text-lg shadow-sm transition-all duration-500 group-hover:scale-110 group-hover:border-blue-200 group-hover:shadow-[0_10px_25px_-5px_rgba(59,130,246,0.4)] cursor-pointer relative z-20"
-                          style={{ color: mission.color }}
-                        >
-                          {mission.icon}
-                        </div>
-
-                        {/* TEXT */}
-                        <div className="flex-1  opacity-80 group-hover:opacity-100 transition-opacity">
-                          <h4 className="font-semibold text-[14px] text-[#0d0e23] leading-tight mb-1 group-hover:text-blue-600 transition-colors">
-                            {mission.title}
-                          </h4>
-                          <p className="text-[11px] text-gray-500 leading-snug hidden group-hover:block absolute top-[120%] bg-white p-3 rounded-lg shadow-xl border border-gray-100 w-[200px] z-50">
+                      {/* HOVER DESCRIPTION - Optional Tooltip for extra info */}
+                      <div className="absolute top-full mt-8 flex flex-col items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 w-[220px]">
+                        <div className="bg-white p-3 rounded-xl shadow-xl border border-gray-100 text-center relative after:content-[''] after:absolute after:bottom-full after:left-1/2 after:-translate-x-1/2 after:border-8 after:border-transparent after:border-b-white">
+                          <p className="text-[11px] text-gray-500 leading-snug">
                             {mission.description}
                           </p>
                         </div>
-
                       </div>
 
                     </div>

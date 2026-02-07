@@ -1,113 +1,190 @@
-import { useState } from 'react';
-import Participantcard    from "./Participantcards"
-import { participants } from './participants';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { ArrowLeft, Search } from "lucide-react";
 
-function KeyParticipantsViewAll() {
-  const [filter, setFilter] = useState('All');
-  const [search, setSearch] = useState('');
+// Data from KeyParticipant.jsx
+const industryData = [
+  {
+    name: "Shri Nitish Kumar",
+    role: "Hon'ble Chief Minister, Bihar",
+    image: "/images/KeyParticipants/Nitish_Kumar_1-removebg-preview.png",
+    category: "Leadership",
+  },
+  {
+    name: "Shri Sunil Kumar",
+    role: "Hon'ble Education Minister, Bihar",
+    image: "/images/KeyParticipants/Sunil-Kumar.png",
+    category: "Leadership",
+  },
+  {
+    name: "Shri Dr. B. Rajender, I.A.S.",
+    role: "Additional Chief Secretary, Education Department",
+    image: "/images/KeyParticipants/B.Rajendra.png",
+    category: "Leadership",
+  },
+  {
+    name: "Shri Yatendra Kumar Pal, I.A.S.",
+    role: "Managing Director, Bihar State Text Book Publishing Corporation (BSTBPC)",
+    image: "/images/KeyParticipants/shri_yatendra_pal.png",
+    category: "Leadership",
+  },
+];
 
-  const filteredParticipants = participants.filter((person) => {
-    const matchesFilter =
-      filter === 'All' || person.role.toUpperCase() === filter.toUpperCase();
+const academiaData = [
+  {
+    name: "Anand Kumar",
+    role: "Founder, Super 30 & Mathematician",
+    image: "/images/KeyParticipants/Anand kumar pic.png",
+    category: "Visionaries",
+  },
+  {
+    name: "HC Verma",
+    role: "Renowned Physicist & Educator, IIT Kanpur (Born in Bihar)",
+    image: "/images/KeyParticipants/hc-verma-pic.png",
+    category: "Visionaries",
+  },
+  {
+    name: "Prof. Girish Kumar Choudhary",
+    role: "Vice Chancellor, Patna University",
+    image: "/images/KeyParticipants/girish_kumar_choudhary.png",
+    category: "Visionaries",
+  },
+  {
+    name: "Abhayanand",
+    role: "Former DGP Bihar & Co-founder of Super 30",
+    image: "/images/KeyParticipants/abhyanand.png",
+    category: "Visionaries",
+  },
+];
 
-    const matchesSearch = person.name
-      .toLowerCase()
-      .includes(search.toLowerCase());
+const allParticipants = [...industryData, ...academiaData];
 
-    return matchesFilter && matchesSearch;
+export default function KeyParticipantViewAll() {
+  const [filter, setFilter] = useState("All");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filtered = allParticipants.filter((p) => {
+    const matchesCategory = filter === "All" || p.category === filter;
+    const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearch;
   });
 
   return (
-    <section className="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-100">
-
-      {/* TOP BANNER */}
-      <div className="bg-gradient-to-r from-indigo-900 via-indigo-800 to-indigo-950 py-20 text-center">
-        <p className="uppercase tracking-widest text-xs font-semibold text-orange-300">
-          Our Leadership & Visionaries
-        </p>
-        <h1 className="mt-4 text-3xl md:text-5xl font-semibold text-white">
-          Guiding the Future of Education in Bihar
-        </h1>
+    <section className="min-h-screen bg-[#f8f9fa] font-sans">
+      {/* --- HERO SECTION --- */}
+      <div className="bg-[#1e1b4b] relative overflow-hidden py-24 px-6">
+          {/* Background Elements */}
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-600 rounded-full blur-[120px] opacity-20 translate-x-1/3 -translate-y-1/3"></div>
+          <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-sky-500 rounded-full blur-[100px] opacity-10 -translate-x-1/2 translate-y-1/2"></div>
+        
+          <div className="max-w-7xl mx-auto relative z-10">
+                <Link to="/" className="inline-flex items-center gap-2 text-indigo-300 hover:text-white transition-colors mb-8 font-medium text-sm">
+                    <ArrowLeft size={16} /> Back to Home
+                </Link>
+                
+                <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
+                    Shaping the Future <br/>
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-sky-300">
+                        Together
+                    </span>
+                </h1>
+                <p className="text-indigo-200/80 text-lg max-w-2xl leading-relaxed">
+                    Meet the distinguished leaders and visionary educators who are driving the transformation of Bihar's educational landscape.
+                </p>
+          </div>
       </div>
 
-      {/* CONTENT */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      {/* --- CONTENT SECTION --- */}
+      <div className="max-w-7xl mx-auto px-6 -mt-10 relative z-20 pb-20">
+            
+            {/* TOOLBAR */}
+            <div className="bg-white rounded-2xl p-4 shadow-xl shadow-slate-200/50 mb-12 flex flex-col md:flex-row items-center justify-between gap-6 border border-slate-100">
+                
+                {/* Search */}
+                <div className="relative w-full md:w-96 group">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <Search className="h-5 w-5 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
+                    </div>
+                    <input 
+                        type="text" 
+                        placeholder="Search by name..." 
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="block w-full pl-11 pr-4 py-3 bg-slate-50 border-none rounded-xl text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-100 focus:bg-white transition-all font-medium"
+                    />
+                </div>
 
-        {/* Controls */}
-        <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
+                {/* Filters */}
+                <div className="flex p-1 bg-slate-100/80 rounded-xl">
+                    {["All", "Leadership", "Visionaries"].map((item) => (
+                        <button
+                            key={item}
+                            onClick={() => setFilter(item)}
+                            className={`px-6 py-2.5 rounded-lg text-sm font-bold transition-all duration-300 ${
+                                filter === item
+                                ? "bg-white text-indigo-900 shadow-sm transform scale-105"
+                                : "text-slate-500 hover:text-slate-700"
+                            }`}
+                        >
+                            {item}
+                        </button>
+                    ))}
+                </div>
+            </div>
 
-          {/* Search */}
-          <div className="relative w-full md:w-96">
-            <input
-              type="text"
-              placeholder="Search participants..."
-              className="
-                w-full
-                pl-10 pr-4 py-2
-                rounded-full
-                bg-white
-                border border-gray-200
-                text-gray-700
-                shadow-none
-                focus:outline-none
-                focus:ring-2 focus:ring-blue-500
-              "
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-            <svg
-              className="w-5 h-5 text-gray-400 absolute left-3 top-2.5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
-          </div>
+            {/* GRID */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                {filtered.map((item, i) => (
+                    <ParticipantCard key={i} item={item} />
+                ))}
+            </div>
 
-          {/* Filter Tabs */}
-          <div className="flex space-x-2 bg-white p-1 rounded-full shadow-sm">
-            {['All', 'Leadership', 'Visionaries'].map((category) => (
-              <button
-                key={category}
-                onClick={() => setFilter(category)}
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                  filter === category
-                    ? 'bg-blue-600 text-white shadow-md'
-                    : 'text-gray-500 hover:text-blue-600 hover:bg-blue-50'
-                }`}
-              >
-                {category.toUpperCase()}
-              </button>
-            ))}
-          </div>
-        </div>
+            {filtered.length === 0 && (
+                <div className="text-center py-32">
+                    <div className="inline-block p-4 rounded-full bg-slate-100 mb-4">
+                        <Search className="h-8 w-8 text-slate-400" />
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-900">No participants found</h3>
+                    <p className="text-slate-500 mt-2">Try adjusting your search or filter criteria.</p>
+                </div>
+            )}
 
-        {/* Grid */}
-        {filteredParticipants.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredParticipants.map((participant) => (
-              <Participantcard
-                key={participant.id}
-                participant={participant}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-20">
-            <p className="text-xl text-gray-500">
-              No participants found matching your criteria.
-            </p>
-          </div>
-        )}
       </div>
     </section>
   );
 }
 
-export default KeyParticipantsViewAll;
+
+// --- Simplified Card Design ---
+function ParticipantCard({ item }) {
+    return (
+      <div className="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full">
+        {/* ===== IMAGE ON TOP ===== */}
+        <div className="h-[320px] w-full bg-[#f0f4f8] overflow-hidden relative group">
+          {/* Subtle gradient behind image */}
+          <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+          
+          <img
+            src={item.image}
+            alt={item.name}
+            className="w-full h-full object-cover object-top drop-shadow-lg"
+          />
+        </div>
+  
+        {/* ===== INFO AT BOTTOM ===== */}
+        <div className="p-6 flex flex-col flex-1 bg-white relative z-10">
+            <span className="self-start px-2.5 py-1 bg-indigo-50 text-indigo-600 text-[10px] font-bold uppercase tracking-widest rounded-md mb-3 border border-indigo-100">
+                {item.category}
+            </span>
+  
+            <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-2 leading-tight">
+                {item.name}
+            </h3>
+    
+            <p className="text-sm text-slate-500 font-medium leading-relaxed border-t border-slate-100 pt-3 mt-auto">
+                {item.role}
+            </p>
+        </div>
+      </div>
+    );
+  }
