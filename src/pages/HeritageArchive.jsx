@@ -229,11 +229,9 @@ const HeritageArchive = () => {
                             <h2 className="text-xs font-black uppercase tracking-[0.3em] text-slate-400">Workflow</h2>
                             <h3 className="text-4xl md:text-5xl font-black text-white tracking-tight">Preservation Process <br /></h3>
                         </div>
-                        <div></div>
-
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div className="flex overflow-x-auto gap-8 pb-12 no-scrollbar snap-x snap-mandatory">
                         {processSteps.map((step, i) => (
                             <motion.div
                                 key={i}
@@ -242,7 +240,7 @@ const HeritageArchive = () => {
                                 viewport={{ once: true }}
                                 variants={fadeIn}
                                 transition={{ delay: i * 0.1 }}
-                                className="bg-white/5 backdrop-blur-md border border-white/10 p-12 rounded-[40px] hover:border-slate-500/50 transition-all duration-500 group"
+                                className="min-w-[350px] md:min-w-[400px] bg-white/5 backdrop-blur-md border border-white/10 p-12 rounded-[40px] hover:border-slate-500/50 transition-all duration-500 group snap-center"
                             >
                                 {/* Image */}
                                 <div className="mb-10 overflow-hidden rounded-3xl">
@@ -250,7 +248,7 @@ const HeritageArchive = () => {
                                         src={step.image}
                                         alt={step.title}
                                         loading="lazy"
-                                        className="w-full h-auto max-h-56 object-cover transition-transform duration-700"
+                                        className="w-full h-auto max-h-56 object-cover transition-transform duration-700 group-hover:scale-110"
                                     />
                                 </div>
 
