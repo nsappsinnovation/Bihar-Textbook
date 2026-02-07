@@ -279,15 +279,15 @@ const MobileLibrary = () => {
                             </div>
                         </div>
                         <div className="space-y-4">
-                            <h3 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight">Find a Mobile Library</h3>
+                            <h3 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight">Explore the Courses</h3>
                             <p className="text-lg text-slate-500 font-light max-w-xl mx-auto leading-relaxed">
-                                Check the schedule to see when the mobile library will visit your area.
+                                Our community initiatives and educational resources are available for review. Access our digital library to learn more.
                             </p>
                         </div>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <Link to="/library-schedule" className="w-full sm:w-auto">
+                            <Link to="/mobile-courses" className="w-full sm:w-auto">
                                 <button className="w-full sm:w-auto px-12 py-5 bg-slate-900 text-white rounded-full text-xs font-black uppercase tracking-[0.2em] hover:bg-sky-600 hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-slate-200 flex items-center justify-center gap-3">
-                                    View Schedule <ArrowRight size={16} />
+                                    Enter course <ArrowRight size={16} />
                                 </button>
                             </Link>
                             <Link to="/" className="w-full sm:w-auto px-10 py-5 text-slate-400 hover:text-slate-900 text-xs font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2">
