@@ -69,7 +69,7 @@ const MissionGrid = () => {
             borderColor: "group-hover:border-rose-200",
             image: "/images/missions/ai.png",
             hoverImage: "/images/missions/aihov.png",
-            link: "/events/ai-powered-learning",
+            link: "/ai-intelligence",
             paths: {
                 active: "M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 18a8 8 0 118-8 8 8 0 01-8 8z"
             }
@@ -83,7 +83,7 @@ const MissionGrid = () => {
             borderColor: "group-hover:border-purple-200",
             image: "/images/missions/teacher.png",
             hoverImage: "/images/missions/teacherhov.png",
-            link: "/events/curriculum-modernization",
+            link: "/teacher-training",
             paths: {
                 active: "M12 14l9-5-9-5-9 5 9 5z"
             }
@@ -97,7 +97,7 @@ const MissionGrid = () => {
             borderColor: "group-hover:border-sky-200",
             image: "/images/missions/library.png",
             hoverImage: "/images/missions/libraryhov.png",
-            link: "/events/mobile-library",
+            link: "/mobile-library",
             paths: {
                 active: "M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"
             }
@@ -111,7 +111,7 @@ const MissionGrid = () => {
             borderColor: "group-hover:border-slate-300",
             image: "/images/missions/history.png",
             hoverImage: "/images/missions/historyhov.png",
-            link: "/events/digital-archive-textbooks",
+            link: "/heritage-archive",
             paths: {
                 active: "M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6m-8 4h4m-4 4h4"
             }

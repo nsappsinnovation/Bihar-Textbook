@@ -20,6 +20,10 @@ import FlagshipDetail from "./pages/FlagshipDetail.jsx";
 import EventDetails from "./pages/EventDetails.jsx";
 import PublishingMission from "./pages/PublishingMission.jsx";
 import Sign from "./pages/Signlanguage.jsx";
+import AiIntelligence from "./pages/AiIntelligence.jsx";
+import TeacherTraining from "./pages/TeacherTraining.jsx";
+import MobileLibrary from "./pages/MobileLibrary.jsx";
+import HeritageArchive from "./pages/HeritageArchive.jsx";
 /* Components */
 import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
 import ContactUs from "./components/ContactUs.jsx";
@@ -59,6 +63,10 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             {/*Sign Lang*/}
             <Route path="/sign" element={<Sign />} />
+            <Route path="/ai-intelligence" element={<AiIntelligence />} />
+            <Route path="/teacher-training" element={<TeacherTraining />} />
+            <Route path="/mobile-library" element={<MobileLibrary />} />
+            <Route path="/heritage-archive" element={<HeritageArchive />} />
             <Route path="/courses" element={<Video />} />
 
             {/* Auth */}
