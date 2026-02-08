@@ -13,7 +13,7 @@ const MissionGrid = () => {
             borderColor: "group-hover:border-orange-200",
             image: "/images/missions/headset.png",
             hoverImage: "/images/missions/headsethov.png",
-            link: "/events/vr-education-tours",
+            link: "/vr",
             paths: {
                 active: "M2 8h20v10a2 2 0 01-2 2H4a2 2 0 01-2-2V8zm6 6c1.5 0 2-1 2-1s.5 1 2 1"
             }
@@ -27,7 +27,7 @@ const MissionGrid = () => {
             borderColor: "group-hover:border-blue-200",
             image: "/images/missions/audio-book.png",
             hoverImage: "/images/missions/audio-bookhov.png",
-            link: "/events/audio-books-inclusive",
+            link: "/audio-books",
             paths: {
                 active: "M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
             }
@@ -55,7 +55,7 @@ const MissionGrid = () => {
             borderColor: "group-hover:border-blue-200",
             image: "/images/missions/portal.png",
             hoverImage: "/images/missions/portalhov.png",
-            link: "/events/e-lotani-digital-portal",
+            link: "/digital-portal",
             paths: {
                 active: "M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 18a8 8 0 118-8 8 8 0 01-8 8zM12 2c4 0 4 20 0 20M2 12h20"
             }

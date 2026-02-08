@@ -24,12 +24,19 @@ import AiIntelligence from "./pages/AiIntelligence.jsx";
 import TeacherTraining from "./pages/TeacherTraining.jsx";
 import MobileLibrary from "./pages/MobileLibrary.jsx";
 import HeritageArchive from "./pages/HeritageArchive.jsx";
+import Vr from "./pages/Vrlab.jsx";
+import Digital from "./pages/DigitalPortal.jsx";
+import Audio from "./pages/Audiolib.jsx";
+
 /* Components */
 import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
 import ContactUs from "./components/ContactUs.jsx";
 import Notice from "./components/Notice.jsx";
 import FlagshipEvents from "./components/FlagshipEvents.jsx";
 import Video from "./components/Signcourses.jsx";
+import Audiovideo from "./components/Audiovideo.jsx";
+import Digitalvideo from "./components/Digitalvideo.jsx";
+import Arvideo from "./components/Arvideo.jsx";
 
 /* Auth */
 import Login from "./components/Login.jsx";
@@ -63,11 +70,17 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             {/*Sign Lang*/}
             <Route path="/sign" element={<Sign />} />
+              <Route path="/vr" element={<Vr />} />
+               <Route path="/digital-portal" element={<Digital />} />
+                <Route path="/audio-books" element={<Audio />} />
             <Route path="/ai-intelligence" element={<AiIntelligence />} />
             <Route path="/teacher-training" element={<TeacherTraining />} />
             <Route path="/mobile-library" element={<MobileLibrary />} />
             <Route path="/heritage-archive" element={<HeritageArchive />} />
             <Route path="/courses" element={<Video />} />
+             <Route path="/ar-courses" element={<Arvideo />} />
+                   <Route path="/digital-courses" element={<Digitalvideo />} />
+                         <Route path="/audio-courses" element={<Audiovideo />} />
 
             {/* Auth */}
             <Route path="/login" element={<Login />} />
