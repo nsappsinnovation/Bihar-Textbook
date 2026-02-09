@@ -72,9 +72,9 @@ const TeacherTraining = () => {
                     {/* LEFT: Image */}
                     <div className="flex justify-center">
                         <img
-                            src="public/images/teacher/teacher training.jpeg"
+                            src="/images/teacher/teacher training.jpeg"
                             alt="Teacher Training Illustration"
-                            className="w-[620px] h-auto object-contain"
+                            className="w-[620px] h-[400px] object-cover rounded-3xl shadow-2xl"
                         />
                     </div>
 
@@ -229,11 +229,9 @@ const TeacherTraining = () => {
                             <h2 className="text-xs font-black uppercase tracking-[0.3em] text-purple-400">Workflow</h2>
                             <h3 className="text-4xl md:text-5xl font-black text-white tracking-tight">Training Modules <br /></h3>
                         </div>
-                        <div></div>
-
                     </div>
 
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div className="flex overflow-x-auto gap-8 pb-12 no-scrollbar snap-x snap-mandatory">
                         {processSteps.map((step, i) => (
                             <motion.div
                                 key={i}
@@ -242,7 +240,7 @@ const TeacherTraining = () => {
                                 viewport={{ once: true }}
                                 variants={fadeIn}
                                 transition={{ delay: i * 0.1 }}
-                                className="bg-white/5 backdrop-blur-md border border-white/10 p-12 rounded-[40px] hover:border-purple-500/50 transition-all duration-500 group"
+                                className="min-w-[350px] md:min-w-[400px] bg-white/5 backdrop-blur-md border border-white/10 p-12 rounded-[40px] hover:border-purple-500/50 transition-all duration-500 group snap-center"
                             >
                                 {/* Image */}
                                 <div className="mb-10 overflow-hidden rounded-3xl">
@@ -250,7 +248,7 @@ const TeacherTraining = () => {
                                         src={step.image}
                                         alt={step.title}
                                         loading="lazy"
-                                        className="w-full h-auto max-h-56 object-cover transition-transform duration-700"
+                                        className="w-full h-auto max-h-56 object-cover transition-transform duration-700 group-hover:scale-110"
                                     />
                                 </div>
 
@@ -281,15 +279,15 @@ const TeacherTraining = () => {
                             </div>
                         </div>
                         <div className="space-y-4">
-                            <h3 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight">Join the Training</h3>
+                            <h3 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight">Explore the Courses</h3>
                             <p className="text-lg text-slate-500 font-light max-w-xl mx-auto leading-relaxed">
-                                Enroll in our upcoming workshops and become a certified modern educator.
+                                Our standardized materials are available for review. Access the digital archive to understand our curriculum depth.
                             </p>
                         </div>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                             <Link to="/teacher-courses" className="w-full sm:w-auto">
                                 <button className="w-full sm:w-auto px-12 py-5 bg-slate-900 text-white rounded-full text-xs font-black uppercase tracking-[0.2em] hover:bg-purple-600 hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-slate-200 flex items-center justify-center gap-3">
-                                    Start Training <ArrowRight size={16} />
+                                    Enter course <ArrowRight size={16} />
                                 </button>
                             </Link>
                             <Link to="/" className="w-full sm:w-auto px-10 py-5 text-slate-400 hover:text-slate-900 text-xs font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2">
