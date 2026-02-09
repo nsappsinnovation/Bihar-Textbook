@@ -99,7 +99,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          <Link to="/blog" className={`transition-colors ${isHomePage ? "hover:text-blue-300" : "hover:text-[#211fa9f8]"}`}>Blog</Link>
+          <Link to="/blog" className={`transition-colors ${isHomePage ? "hover:text-blue-300" : "hover:text-[#211fa9f8]"}`}>Gyan Kendra</Link>
           <Link to="/notice" className={`transition-colors ${isHomePage ? "hover:text-blue-300" : "hover:text-[#211fa9f8]"}`}>Notice</Link>
           <Link to="/tenders" className={`transition-colors ${isHomePage ? "hover:text-blue-300" : "hover:text-[#211fa9f8]"}`}>Tenders</Link>
           <Link to="/csr-policy" className={`transition-colors whitespace-nowrap ${isHomePage ? "hover:text-blue-300" : "hover:text-[#211fa9f8]"}`}>CSR Policy</Link>

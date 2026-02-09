@@ -34,9 +34,10 @@ import ContactUs from "./components/ContactUs.jsx";
 import Notice from "./components/Notice.jsx";
 import FlagshipEvents from "./components/FlagshipEvents.jsx";
 import Video from "./components/Signcourses.jsx";
-import Audiovideo from "./components/Audiovideo.jsx";
-import Digitalvideo from "./components/Digitalvideo.jsx";
-import Arvideo from "./components/Arvideo.jsx";
+import AiCourses from "./components/AiCourses.jsx";
+import TeacherCourses from "./components/TeacherCourses.jsx";
+import MobileCourses from "./components/MobileCourses.jsx";
+import ArchiveCourses from "./components/ArchiveCourses.jsx";
 
 /* Auth */
 import Login from "./components/Login.jsx";
@@ -78,9 +79,10 @@ function App() {
             <Route path="/mobile-library" element={<MobileLibrary />} />
             <Route path="/heritage-archive" element={<HeritageArchive />} />
             <Route path="/courses" element={<Video />} />
-             <Route path="/ar-courses" element={<Arvideo />} />
-                   <Route path="/digital-courses" element={<Digitalvideo />} />
-                         <Route path="/audio-courses" element={<Audiovideo />} />
+            <Route path="/ai-courses" element={<AiCourses />} />
+            <Route path="/teacher-courses" element={<TeacherCourses />} />
+            <Route path="/mobile-courses" element={<MobileCourses />} />
+            <Route path="/archive-courses" element={<ArchiveCourses />} />
 
             {/* Auth */}
             <Route path="/login" element={<Login />} />
