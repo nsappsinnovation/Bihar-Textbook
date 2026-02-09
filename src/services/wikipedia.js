@@ -13,7 +13,7 @@ export const searchArticles = async (query) => {
                 srsearch: query,
                 format: 'json',
                 origin: '*',
-                srlimit: 12, // Fetch a few more to have a nice grid
+                srlimit: 6, // Fetch a few more to have a nice grid
             },
         });
 

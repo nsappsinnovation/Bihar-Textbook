@@ -24,6 +24,10 @@ import AiIntelligence from "./pages/AiIntelligence.jsx";
 import TeacherTraining from "./pages/TeacherTraining.jsx";
 import MobileLibrary from "./pages/MobileLibrary.jsx";
 import HeritageArchive from "./pages/HeritageArchive.jsx";
+import Vr from "./pages/Vrlab.jsx";
+import Digital from "./pages/DigitalPortal.jsx";
+import Audio from "./pages/Audiolib.jsx";
+
 /* Components */
 import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
 import ContactUs from "./components/ContactUs.jsx";
@@ -67,6 +71,9 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             {/*Sign Lang*/}
             <Route path="/sign" element={<Sign />} />
+              <Route path="/vr" element={<Vr />} />
+               <Route path="/digital-portal" element={<Digital />} />
+                <Route path="/audio-books" element={<Audio />} />
             <Route path="/ai-intelligence" element={<AiIntelligence />} />
             <Route path="/teacher-training" element={<TeacherTraining />} />
             <Route path="/mobile-library" element={<MobileLibrary />} />
