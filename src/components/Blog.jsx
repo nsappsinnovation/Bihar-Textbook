@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SearchBar from './SearchBar';
 import BlogPost from './BlogPost';
+import Back from './Background';
 import { searchArticles } from '../services/wikipedia';
 
 function Blog() {
@@ -26,13 +27,15 @@ function Blog() {
     return (
         <div className="relative min-h-screen w-full bg-white text-slate-900 font-sans selection:bg-indigo-100 overflow-hidden">
             {/* Background Elements */}
-            <div className="absolute inset-0 z-0 h-full w-full bg-white bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]">
-                <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-fuchsia-400 opacity-20 blur-[100px]"></div>
-                <div className="absolute right-0 top-0 -z-10 h-full w-full bg-[radial-gradient(circle_500px_at_50%_200px,#C9EBFF,transparent)]"></div>
-            </div>
-
+        
+            <div className="absolute inset-0 z-0">
+      <Back />
+    </div>
+              
             <div className="relative z-10">
+            
                 <header className="pt-16 pb-14 px-4 text-center">
+
 
                     <h3 className="text-4xl md:text-6xl font-semibold tracking-tight mb-6">
 
