@@ -72,7 +72,7 @@ const HeritageArchive = () => {
                     {/* LEFT: Image */}
                     <div className="flex justify-center">
                         <img
-                            src="https://img.freepik.com/free-vector/archive-concept-illustration_114360-3976.jpg?w=740"
+                            src="/images/heritage/heritage archive.png"
                             alt="Heritage Archive Illustration"
                             className="w-[620px] h-auto object-contain"
                         />

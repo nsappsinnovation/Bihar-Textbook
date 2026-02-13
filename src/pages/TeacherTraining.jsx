@@ -72,9 +72,9 @@ const TeacherTraining = () => {
                     {/* LEFT: Image */}
                     <div className="flex justify-center">
                         <img
-                            src="/images/teacher/teacher training.jpeg"
+                            src="/images/teacher/teacher training.png"
                             alt="Teacher Training Illustration"
-                            className="w-[620px] h-[400px] object-cover rounded-3xl shadow-2xl"
+                            className="w-[620px] h-auto object-contain"
                         />
                     </div>
 
