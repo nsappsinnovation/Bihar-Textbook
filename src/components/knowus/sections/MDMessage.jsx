@@ -43,7 +43,7 @@ const MDMessage = () => {
                         <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-[40px] opacity-10 blur-xl group-hover:opacity-20 transition-all duration-700" />
                         <div className="relative overflow-hidden rounded-[32px] aspect-[4/5] bg-slate-100 border border-slate-200 shadow-2xl">
                             <img 
-                                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800" 
+                                src="/images/KeyParticipants/shri_yatendra_pal.png" 
                                 alt="Managing Director" 
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                             />
@@ -52,7 +52,7 @@ const MDMessage = () => {
 
                     <div className="space-y-4 pt-4 border-l-4 border-blue-600 pl-6">
                         <h2 className="text-3xl font-black text-slate-900 tracking-tight leading-none">
-                            Shri / Smt. [Full Name]
+                            Shri Yatendra Kumar Pal
                         </h2>
                         <div className="space-y-1">
                             <p className="text-sm font-black uppercase tracking-widest text-blue-600">Managing Director</p>
@@ -142,24 +142,13 @@ const MDMessage = () => {
                             <div className="space-y-4">
                                 <p className="text-slate-400 font-medium italic">Let us work together to build a stronger educational ecosystem for the future generations of our state.</p>
                                 <div className="space-y-1">
-                                    <h4 className="text-xl font-black text-slate-900">Shri / Smt. [Full Name]</h4>
+                                    <h4 className="text-xl font-black text-slate-900"> Shri Yatendra Kumar Pal</h4>
                                     <p className="text-xs font-black uppercase text-blue-600 tracking-tighter">Managing Director, BSTPC</p>
                                 </div>
                             </div>
                             
-                            <div className="text-center space-y-2">
-                                <div className="h-20 w-48 bg-slate-50 border border-dashed border-slate-300 rounded-xl flex items-center justify-center text-slate-300 italic text-xs px-4 text-center">
-                                    Digital Signature Placeholder
-                                </div>
-                                <p className="text-[10px] uppercase font-bold text-slate-400">Authorized Signature</p>
-                            </div>
+                            
                         </div>
-
-                        {/* <div className="pt-10 flex gap-4">
-                             <button className="px-8 py-4 bg-slate-900 text-white rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-slate-200 flex items-center gap-3 group">
-                                Share Message <Send size={14} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                            </button>
-                        </div> */}
                     </div>
                 </motion.div>
             </motion.div>
