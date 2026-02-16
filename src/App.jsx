@@ -35,6 +35,9 @@ import Notice from "./components/Notice.jsx";
 import FlagshipEvents from "./components/FlagshipEvents.jsx";
 import Video from "./components/Signcourses.jsx";
 import AiCourses from "./components/AiCourses.jsx";
+import Audiovideo from "./components/Audiovideo.jsx";
+import Vrcourse from "./components/Arvideo.jsx"
+import Digitalcourse from "./components/Digitalvideo.jsx"
 import TeacherCourses from "./components/TeacherCourses.jsx";
 import MobileCourses from "./components/MobileCourses.jsx";
 import ArchiveCourses from "./components/ArchiveCourses.jsx";
@@ -48,6 +51,8 @@ import PhotoGallery from "./components/gallery/sections/Photogallery";
 import VideoGallery from "./components/gallery/sections/Videogallery";
 import PressRelease from "./components/gallery/sections/Pressrelease";
 import ScrollToTop from "./components/ScrollToTop";
+import Arvideo from "./components/Arvideo.jsx";
+
 
 function App() {
   const location = useLocation();
@@ -79,6 +84,9 @@ function App() {
             <Route path="/mobile-library" element={<MobileLibrary />} />
             <Route path="/heritage-archive" element={<HeritageArchive />} />
             <Route path="/courses" element={<Video />} />
+            <Route path="/audio-courses" element={< Audiovideo/>}/>
+              <Route path="/ar-courses" element={< Vrcourse/>}/>
+              <Route path="/digital-courses" element={< Digitalcourse/>}/>
             <Route path="/ai-courses" element={<AiCourses />} />
             <Route path="/teacher-courses" element={<TeacherCourses />} />
             <Route path="/mobile-courses" element={<MobileCourses />} />
