@@ -279,28 +279,13 @@ import { motion } from 'framer-motion';
 
           </div>
 
-          {/* Buttons */}
-          <div className="flex gap-3">
-            <button
-              onClick={scrollLeft}
-              className="w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 transition"
-            >
-              ←
-            </button>
-            <button
-              onClick={scrollRight}
-              className="w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 transition"
-            >
-              →
-            </button>
-          </div>
         </div>
 
         {/* Carousel Track */}
         <div
           ref={sliderRef}
           className="flex gap-8 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-6
-                     scrollbar-hide"
+                     no-scrollbar"
         >
           {processSteps.map((step, i) => (
             <motion.div
