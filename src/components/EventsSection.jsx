@@ -134,7 +134,7 @@ export default function EventsSection() {
             <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-[0.2em]">Latest Initiatives</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 mb-6">
-            Connecting Communities <br /> Through <span className="text-slate-400">Collaborative Learning</span>
+            Empowering Education <br /> Through <span className="text-slate-400">Events</span>
           </h2>
           <p className="text-lg text-slate-500 font-normal leading-relaxed">
             A centralized hub for tracking workshops, curriculum updates, and student-focused events across the state.

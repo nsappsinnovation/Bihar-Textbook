@@ -37,11 +37,8 @@ const Know = () => {
   const ActiveComponent = componentMap[sectionData.component];
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>{sectionData.title}</h2>
-
-      {/* Content Area — BOOKS STYLE */}
-      <div style={{ marginTop: "20px" }}>
+    <div className="min-h-screen bg-white">
+      <div className="mx-auto max-w-7xl px-0 sm:px-6 lg:px-8">
         <ActiveComponent />
       </div>
     </div>
