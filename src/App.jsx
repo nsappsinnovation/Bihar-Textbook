@@ -27,6 +27,12 @@ import HeritageArchive from "./pages/HeritageArchive.jsx";
 import Vr from "./pages/Vrlab.jsx";
 import Digital from "./pages/DigitalPortal.jsx";
 import Audio from "./pages/Audiolib.jsx";
+import Trend1 from "./pages/TrendingSkills.jsx";
+import Trend2 from "./pages/Trendingcyber.jsx";
+import Quiz1 from "./pages/Quizcyber.jsx";
+import Quiz2 from "./pages/Skillsquiz.jsx";
+import Cyber from "./pages/CyberSecurity"
+import Basicskill from "./pages/Basicskills.jsx"
 
 /* Components */
 import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
@@ -95,7 +101,15 @@ function App() {
             {/* Auth */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            {/*Basic skills page and cybersecurity*/}
+             <Route path="/basic-skills" element={<Basicskill />} />
 
+  <Route path="/trending/:slug" element={<Trend1 />} />
+  <Route path="/quiz/:slug" element={<Quiz1 />} />
+
+  <Route path="/cyber-security" element={<Cyber />} />
+  <Route path="/cyber/trending/:slug" element={<Trend2/>} />
+  <Route path="/cyber/quiz/:slug" element={<Quiz2 />} />
             {/* Key Participants */}
             <Route
               path="/key-participants"
