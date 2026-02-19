@@ -17,22 +17,23 @@
         ]
     },
     {
-        "id": "ai-powered-learning",
-        "title": "AI-Powered Learning Tutorials",
-        "description": "Personalized AI-driven tutorials that help students understand difficult concepts, revise chapters, and prepare for exams at their own pace.",
-        "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995",
-        "tag": "Artificial Intelligence",
-        "beneficiaries": "All Students",
-        "year": "2024",
-        "region": "State-wide Digital Access",
-        "impact_image": "https://images.unsplash.com/photo-1677442136019-21780ecad995",
-        "objectives": [
-            "Personalized learning paths",
-            "Instant doubt resolution",
-            "Adaptive assessment and feedback",
-            "Exam preparation assistance"
-        ]
-    },
+  "id": "linguistic-learning",
+  "title": "Diverse Linguistic Learning Programs",
+  "description": "Courses in foreign languages, Indian languages, and regional dialects help students develop strong communication skills, improve cultural understanding, and open new academic and career opportunities.This program encourages students to explore languages beyond their regular curriculum, making learning more inclusive, practical, and future-ready.",
+  "image": "https://moreland.edu/wp-content/uploads/2023/06/International-Image-Blog-Post-1024x665.jpg",
+  "tag": "Language Learning",
+  "beneficiaries": "All Students",
+  "year": "2024",
+  "region": "State-wide",
+  "impact_image": "https://moreland.edu/wp-content/uploads/2023/06/International-Image-Blog-Post-1024x665.jpg",
+  "objectives": [
+    "Foreign language courses",
+    "Indian language learning",
+    "Regional dialect awareness",
+    "Improved cultural understanding"
+  ]
+},
+
     {
         "id": "interactive-e-books",
         "title": "Interactive E-Books",

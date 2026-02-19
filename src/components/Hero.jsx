@@ -9,47 +9,41 @@ const slides = [
         id: "slide-0",
         title: "BIHAR STATE",
         subtitle: "TEXT BOOK PUBLISHING",
-        description: "Full immersion with high-quality educational resources. Standardized textbooks designed for every student.",
+        description: "Delivering reliable, well-designed textbooks so every Bihar Board student learns from clear and standardized academic resources.",
         image: "/images/hero_classroom.png",
         link: "/publishing-mission"
     },
-    {
+     {
         id: "slide-1",
-        title: "DIGITAL",
-        subtitle: "LEARNING ECOSYSTEM",
-        description: "Innovative e-learning solutions that bridge the gap. Play with knowledge, not just buttons.",
-        image: "/images/hero_digital.png",
-        link: "/events/e-lotani-digital-portal"
-    },
-    {
-        id: "slide-2",
-        title: "ACADEMIC",
-        subtitle: "HERITAGE ARCHIVE",
-        description: "Preserving the legacy of Bihar's education. A centralized digital repository for the future.",
-        image: "/images/hero_archive.png",
-        link: "/events/digital-archive-textbooks"
-    },
-    {
-        id: "slide-3",
-        title: "IMMERSIVE",
-        subtitle: "VIRTUAL REALITY",
-        description: "Step into a new dimension of learning. Immersive VR experiences that make education come alive.",
+        title: "IMMERSIVE Mobile",
+        subtitle: "VR Learning",
+        description: "Our travelling VR labs reach schools across the state, letting students explore science, space, and the human body through interactive experiences.",
         image: "/images/hero_vr_new.png",
         link: "/events/vr-education-tours"
     },
+    
     {
-        id: "slide-4",
-        title: "INTELLIGENT",
-        subtitle: "AI TUTORING",
-        description: "Personalized learning assistant for students. AI-powered tools to guide your educational journey.",
-        image: "/images/hero_ai_new.png",
-        link: "/events/ai-powered-learning"
+        id: "slide-2",
+        title: "Empowering Communication Through",
+        subtitle: "Sign Language",
+        description: "Structured programs help students communicate confidently and encourage a more inclusive and supportive school community.",
+        image: "/images/hero_sign.png",
+        link: "/sign"
+    },
+   
+    {
+        id: "slide-3",
+        title: "Diverse Linguistic",
+        subtitle: "Learning Programs",
+        description: "Courses in foreign languages, Indian languages, and regional dialects expand cultural understanding and learning opportunities.",
+        image: "/images/hero_linguistic.png",
+        link: "/events/linguistic-learning"
     },
     {
-        id: "slide-5",
-        title: "ACCESSIBLE",
-        subtitle: "AUDIO BOOKS",
-        description: "Learn anytime, anywhere. High-quality audio books for inclusive and dynamic learning.",
+        id: "slide-4",
+        title: "Accessible Learning",
+        subtitle: " with Audiobooks",
+        description: "Audio study materials assist special children and dyslexic learners, enabling comfortable and independent study.",
         image: "/images/hero_audio_new.png",
         link: "/events/audio-books-inclusive"
     }
@@ -171,8 +165,8 @@ const Hero = () => {
                                 transition={{ delay: 0.5, duration: 0.6 }}
                                 className="flex items-center gap-5"
                             >
-                                <Link to={currentSlide.link}>
-                                    <button className="group relative bg-white text-black px-8 py-3.5 rounded-full font-bold uppercase tracking-widest flex items-center gap-3 hover:bg-blue-50 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_40px_rgba(59,130,246,0.3)] hover:-translate-y-1">
+                                <Link to={currentSlide.link} className="cursor-pointer">
+                                    <button className="cursor-pointer group relative bg-white text-black px-8 py-3.5 rounded-full font-bold uppercase tracking-widest flex items-center gap-3 hover:bg-blue-50 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_40px_rgba(59,130,246,0.3)] hover:-translate-y-1">
                                         Explore Now
                                         <span className="bg-black text-white w-7 h-7 rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-500">
                                             <FaPlay size={10} className="ml-0.5" />
