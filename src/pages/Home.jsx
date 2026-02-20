@@ -7,15 +7,13 @@ import EventsSection from '../components/EventsSection';
 import KeyParticipant from "../components/KeyParticipant";
 import FlagshipEvents from "../components/FlagshipEvents";
 import StakeHolder from "../components/StakeHolder";
-import Cyber from "./CyberSecurity"
-import Basicskill from "./Basicskills.jsx"
+
 
 const Home = () => {
   return (
     <div className="bg-white">
       <Hero />
-      <Cyber/>
-      <Basicskill/>
+
       <MissionGrid />
       <FlagshipEvents />
       <EventsSection />

@@ -76,16 +76,16 @@ const MissionGrid = () => {
         },
         {
             id: 6,
-            title: "Teacher Training",
-            desc: "Advanced Pedagogy Support",
-            color: "text-purple-600",
-            bgHover: "group-hover:bg-purple-50",
-            borderColor: "group-hover:border-purple-200",
-            image: "/images/missions/teacher.png",
-            hoverImage: "/images/missions/teacherhov.png",
-            link: "/teacher-training",
+            title: "Cyber Security",
+            desc: "Online Safety & Scam Protection",
+            color: "text-amber-500",
+            bgHover: "group-hover:bg-amber-50",
+            borderColor: "group-hover:border-amber-200",
+            image: "/images/missions/cyber-criminal.png",
+            hoverImage: "/images/missions/cyber-criminalhov.png",
+            link: "/cyber-security",
             paths: {
-                active: "M12 14l9-5-9-5-9 5 9 5z"
+                active: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
             }
         },
         {
@@ -104,16 +104,16 @@ const MissionGrid = () => {
         },
         {
             id: 8,
-            title: "Heritage Archive",
-            desc: "Cultural Document Preservation",
-            color: "text-slate-700",
-            bgHover: "group-hover:bg-slate-50",
-            borderColor: "group-hover:border-slate-300",
-            image: "/images/missions/history.png",
-            hoverImage: "/images/missions/historyhov.png",
-            link: "/heritage-archive",
+            title: "Basic Learning Skills",
+            desc: "Communication & Life Skills",
+            color: "text-emerald-500",
+            bgHover: "group-hover:bg-emerald-50",
+            borderColor: "group-hover:border-emerald-200",
+            image: "/images/missions/abilities.png",
+            hoverImage: "/images/missions/abilitieshov.png",
+            link: "/basic-skills",
             paths: {
-                active: "M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8zM14 2v6h6m-8 4h4m-4 4h4"
+                active: "M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5L12 22l10-8.5-5-2.5-5 2.5z"
             }
         }
     ];

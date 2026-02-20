@@ -82,17 +82,17 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             {/*Sign Lang*/}
             <Route path="/sign" element={<Sign />} />
-              <Route path="/vr" element={<Vr />} />
-               <Route path="/digital-portal" element={<Digital />} />
-                <Route path="/audio-books" element={<Audio />} />
+            <Route path="/vr" element={<Vr />} />
+            <Route path="/digital-portal" element={<Digital />} />
+            <Route path="/audio-books" element={<Audio />} />
             <Route path="/ai-intelligence" element={<AiIntelligence />} />
             <Route path="/teacher-training" element={<TeacherTraining />} />
             <Route path="/mobile-library" element={<MobileLibrary />} />
             <Route path="/heritage-archive" element={<HeritageArchive />} />
             <Route path="/courses" element={<Video />} />
-            <Route path="/audio-courses" element={< Audiovideo/>}/>
-              <Route path="/ar-courses" element={< Vrcourse/>}/>
-              <Route path="/digital-courses" element={< Digitalcourse/>}/>
+            <Route path="/audio-courses" element={< Audiovideo />} />
+            <Route path="/ar-courses" element={< Vrcourse />} />
+            <Route path="/digital-courses" element={< Digitalcourse />} />
             <Route path="/ai-courses" element={<AiCourses />} />
             <Route path="/teacher-courses" element={<TeacherCourses />} />
             <Route path="/mobile-courses" element={<MobileCourses />} />
@@ -102,14 +102,14 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             {/*Basic skills page and cybersecurity*/}
-             <Route path="/basic-skills" element={<Basicskill />} />
+            <Route path="/basic-skills" element={<Basicskill />} />
 
-  <Route path="/trending/:slug" element={<Trend1 />} />
-  <Route path="/quiz/:slug" element={<Quiz1 />} />
+            <Route path="/trending/:slug" element={<Trend1 />} />
+            <Route path="/quiz/:slug" element={<Quiz1 />} />
 
-  <Route path="/cyber-security" element={<Cyber />} />
-  <Route path="/cyber/trending/:slug" element={<Trend2/>} />
-  <Route path="/cyber/quiz/:slug" element={<Quiz2 />} />
+            <Route path="/cyber-security" element={<Cyber />} />
+            <Route path="/cyber/trending/:slug" element={<Trend2 />} />
+            <Route path="/cyber/quiz/:slug" element={<Quiz2 />} />
             {/* Key Participants */}
             <Route
               path="/key-participants"
