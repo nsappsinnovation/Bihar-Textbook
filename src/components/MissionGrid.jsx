@@ -32,10 +32,10 @@ const MissionGrid = () => {
         },
         {
             id: 4,
-            title: "Digital Portal",
+            title: "Diverse language",
             desc: "Universal Digital Access",
-            image: "/images/missions/portal.png",
-            hoverImage: "/images/missions/portalhov.png",
+            image: "/images/missions/diverse.png",
+            hoverImage: "/images/missions/diversehov.png",
             link: "/digital-portal",
             accent: "blue"
         },

@@ -13,7 +13,7 @@ const slides = [
         image: "/images/hero_classroom.png",
         link: "/publishing-mission"
     },
-     {
+    {
         id: "slide-1",
         title: "IMMERSIVE Mobile",
         subtitle: "VR Learning",
@@ -21,7 +21,7 @@ const slides = [
         image: "/images/hero_vr_new.png",
         link: "/events/vr-education-tours"
     },
-    
+
     {
         id: "slide-2",
         title: "Empowering Communication Through",
@@ -30,7 +30,7 @@ const slides = [
         image: "/images/hero_sign.png",
         link: "/sign"
     },
-   
+
     {
         id: "slide-3",
         title: "Diverse Linguistic",
@@ -75,13 +75,13 @@ const Hero = () => {
     const nextSlide = slides[nextIndex];
     const prevSlide = slides[prevIndex];
 
-    // Auto-rotate slides every 5 seconds
+    // Auto-rotate slides every 12 seconds
     useEffect(() => {
         const timer = setInterval(() => {
             setCurrentIndex((prev) => (prev + 1) % slides.length);
-        }, 5000);
+        }, 12000);
         return () => clearInterval(timer);
-    }, []);
+    }, [currentIndex]);
 
     const handleNext = () => {
         setCurrentIndex((prev) => (prev + 1) % slides.length);
@@ -214,7 +214,7 @@ const Hero = () => {
                             key={currentIndex}
                             initial={{ width: "0%" }}
                             animate={{ width: "100%" }}
-                            transition={{ duration: 5, ease: "linear" }}
+                            transition={{ duration: 12, ease: "linear" }}
                             className="h-full bg-blue-500 shadow-[0_0_10px_#3b82f6]"
                         />
                     </div>

@@ -151,7 +151,7 @@ const BookCard = ({ book, placeholder, classId }) => {
   const [imgSrc, setImgSrc] = useState(book.image);
 
   return (
-    <div className="group relative flex flex-col bg-white rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 ease-out border border-slate-100 overflow-hidden hover:-translate-y-1">
+    <div className="group relative flex flex-col bg-white rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 ease-out border border-slate-100 overflow-hidden hover:-translate-y-1 aspect-[3/4.2]">
 
       {/* Subject Badge */}
       {book.subject && (
@@ -162,8 +162,8 @@ const BookCard = ({ book, placeholder, classId }) => {
         </div>
       )}
 
-      {/* Image Container */}
-      <div className="relative aspect-[3/4] w-full overflow-hidden bg-slate-50">
+      {/* Image Container (75%) */}
+      <div className="relative h-[75%] w-full overflow-hidden bg-slate-50">
         <img
           src={imgSrc}
           alt={book.title}
@@ -183,8 +183,8 @@ const BookCard = ({ book, placeholder, classId }) => {
         </div>
       </div>
 
-      {/* Title & Info */}
-      <div className="p-3 bg-white">
+      {/* Title & Info (25%) */}
+      <div className="h-[25%] p-4 bg-white flex flex-col justify-center">
         <h3 className="text-sm font-bold text-slate-800 leading-tight line-clamp-1 mb-1 group-hover:text-blue-600 transition-colors">
           {book.title}
         </h3>
