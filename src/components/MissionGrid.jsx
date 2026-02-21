@@ -8,9 +8,9 @@ const MissionGrid = () => {
             id: 1,
             title: "Virtual Reality Lab",
             desc: "Immersive Learning Experiences",
-            color: "text-blue-500",
-            bgHover: "group-hover:bg-blue-50",
-            borderColor: "group-hover:border-blue-200",
+            color: "text-blue-600",
+            bgHover: "hover:bg-blue-50/50",
+            borderColor: "hover:border-blue-200/50",
             image: "/images/missions/headset.png",
             hoverImage: "/images/missions/headsethov.png",
             link: "/vr",
@@ -22,9 +22,9 @@ const MissionGrid = () => {
             id: 2,
             title: "Audio Library",
             desc: "Accessible Digital Content",
-            color: "text-blue-500",
-            bgHover: "group-hover:bg-blue-50",
-            borderColor: "group-hover:border-blue-200",
+            color: "text-blue-600",
+            bgHover: "hover:bg-blue-50/50",
+            borderColor: "hover:border-blue-200/50",
             image: "/images/missions/audio-book.png",
             hoverImage: "/images/missions/audio-bookhov.png",
             link: "/audio-books",
@@ -37,8 +37,8 @@ const MissionGrid = () => {
             title: "Sign Language",
             desc: "Inclusive Educational Tools",
             color: "text-blue-600",
-            bgHover: "group-hover:bg-blue-50",
-            borderColor: "group-hover:border-blue-200",
+            bgHover: "hover:bg-blue-50/50",
+            borderColor: "hover:border-blue-200/50",
             image: "/images/missions/friend.png",
             hoverImage: "/images/missions/friendhov.png",
             link: "/sign",
@@ -51,8 +51,8 @@ const MissionGrid = () => {
             title: "Digital Portal",
             desc: "Universal Digital Access",
             color: "text-blue-600",
-            bgHover: "group-hover:bg-blue-50",
-            borderColor: "group-hover:border-blue-200",
+            bgHover: "hover:bg-blue-50/50",
+            borderColor: "hover:border-blue-200/50",
             image: "/images/missions/portal.png",
             hoverImage: "/images/missions/portalhov.png",
             link: "/digital-portal",
@@ -64,9 +64,9 @@ const MissionGrid = () => {
             id: 5,
             title: "AI Intelligence",
             desc: "Smart Adaptive Tutoring",
-            color: "text-blue-500",
-            bgHover: "group-hover:bg-blue-50",
-            borderColor: "group-hover:border-blue-200",
+            color: "text-blue-600",
+            bgHover: "hover:bg-blue-50/50",
+            borderColor: "hover:border-blue-200/50",
             image: "/images/missions/ai.png",
             hoverImage: "/images/missions/aihov.png",
             link: "/ai-intelligence",
@@ -79,8 +79,8 @@ const MissionGrid = () => {
             title: "Teacher Training",
             desc: "Advanced Pedagogy Support",
             color: "text-blue-600",
-            bgHover: "group-hover:bg-blue-50",
-            borderColor: "group-hover:border-blue-200",
+            bgHover: "hover:bg-blue-50/50",
+            borderColor: "hover:border-blue-200/50",
             image: "/images/missions/teacher.png",
             hoverImage: "/images/missions/teacherhov.png",
             link: "/teacher-training",
@@ -92,9 +92,9 @@ const MissionGrid = () => {
             id: 7,
             title: "Mobile Libraries",
             desc: "Rural Knowledge Outreach",
-            color: "text-blue-500",
-            bgHover: "group-hover:bg-blue-50",
-            borderColor: "group-hover:border-blue-200",
+            color: "text-blue-600",
+            bgHover: "hover:bg-blue-50/50",
+            borderColor: "hover:border-blue-200/50",
             image: "/images/missions/library.png",
             hoverImage: "/images/missions/libraryhov.png",
             link: "/mobile-library",
@@ -106,9 +106,9 @@ const MissionGrid = () => {
             id: 8,
             title: "Heritage Archive",
             desc: "Cultural Document Preservation",
-            color: "text-blue-700",
-            bgHover: "group-hover:bg-blue-50",
-            borderColor: "group-hover:border-blue-300",
+            color: "text-blue-600",
+            bgHover: "hover:bg-blue-50/50",
+            borderColor: "hover:border-blue-200/50",
             image: "/images/missions/history.png",
             hoverImage: "/images/missions/historyhov.png",
             link: "/heritage-archive",
@@ -119,9 +119,9 @@ const MissionGrid = () => {
     ];
 
     return (
-        <section className="py-24 px-6 bg-white overflow-hidden">
+        <section className="py-24 px-6 bg-white overflow-hidden border-t border-slate-100">
             <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-2 lg:grid-cols-4 [&>*]:border-slate-200 [&>*]:border-b [&>*]:border-r [&>*:nth-child(2n)]:border-r-0 lg:[&>*:nth-child(2n)]:border-r lg:[&>*:nth-child(4n)]:border-r-0 [&>*:nth-last-child(-n+2)]:border-b-0 lg:[&>*:nth-last-child(-n+4)]:border-b-0">
+                <div className="grid grid-cols-2 lg:grid-cols-4 [&>*]:border-slate-100 [&>*]:border-b [&>*]:border-r [&>*:nth-child(2n)]:border-r-0 lg:[&>*:nth-child(2n)]:border-r lg:[&>*:nth-child(4n)]:border-r-0 [&>*:nth-last-child(-n+2)]:border-b-0 lg:[&>*:nth-last-child(-n+4)]:border-b-0">
                     {missions.map((mission) => (
                         <div key={mission.id}>
                             <MissionCard mission={mission} />
@@ -137,14 +137,14 @@ const MissionCard = ({ mission }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <Link to={mission.link} className="block h-full">
+        <Link to={mission.link} className="block h-full group">
             <div
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
-                className="group bg-white p-12 hover:bg-slate-50 transition-all duration-500 cursor-pointer flex flex-col items-center text-center h-full hover:border-blue-100 hover:shadow-lg hover:shadow-blue-900/5 relative"
+                className={`bg-white p-12 ${mission.bgHover} transition-all duration-500 cursor-pointer flex flex-col items-center text-center h-full border-transparent border-b-2 hover:border-blue-600/10 hover:shadow-[0_20px_40px_-15px_rgba(29,78,216,0.05)] relative overflow-hidden`}
             >
                 <div
-                    className={`relative w-16 h-16 flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110`}
+                    className={`relative w-16 h-16 flex items-center justify-center mb-8 transition-all duration-500 group-hover:scale-110`}
                 >
                     {/* Illustration (Normal State) */}
                     <motion.img
@@ -155,7 +155,7 @@ const MissionCard = ({ mission }) => {
                             opacity: isHovered ? 0 : 1,
                             scale: isHovered ? 0.9 : 1
                         }}
-                        transition={{ duration: 0.4, delay: 0.1 }}
+                        transition={{ duration: 0.4, ease: "easeOut" }}
                     />
 
                     {/* Hover Image (If Exists - Takes Priority) */}
@@ -169,7 +169,7 @@ const MissionCard = ({ mission }) => {
                                 opacity: isHovered ? 1 : 0,
                                 scale: isHovered ? 1 : 0.9
                             }}
-                            transition={{ duration: 0.4, delay: 0.1 }}
+                            transition={{ duration: 0.4, ease: "easeOut" }}
                         />
                     ) : (
                         /* SVG Blueprint (Hover State) - Default Fallback */
@@ -180,7 +180,7 @@ const MissionCard = ({ mission }) => {
                             strokeWidth="1.5"
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            className="w-10 h-10 absolute text-blue-600"
+                            className={`w-10 h-10 absolute ${mission.color}`}
                             initial={{ opacity: 0, scale: 0.5 }}
                             animate={{
                                 opacity: isHovered ? 1 : 0,
@@ -199,15 +199,17 @@ const MissionCard = ({ mission }) => {
                     )}
                 </div>
 
-                <div className="space-y-2">
-                    {/* Title - Unifies to Blue on Hover */}
-                    <h4 className="text-lg font-semibold text-slate-600 tracking-tight transition-colors duration-300 group-hover:text-blue-600">
+                <div className="space-y-3 relative z-10">
+                    <h4 className="text-sm font-black text-[#0d0e23] uppercase tracking-wider transition-colors duration-300 group-hover:text-blue-600">
                         {mission.title}
                     </h4>
-                    <p className="text-sm font-normal text-slate-400 leading-relaxed group-hover:text-slate-500 transition-colors">
+                    <p className="text-xs font-bold text-slate-400 leading-relaxed group-hover:text-slate-500 transition-colors px-2">
                         {mission.desc}
                     </p>
                 </div>
+                
+                {/* Decorative Accent on Hover */}
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
             </div>
         </Link>
     );
