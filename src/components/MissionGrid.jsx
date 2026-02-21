@@ -48,13 +48,13 @@ const MissionGrid = () => {
         },
         {
             id: 4,
-            title: "Digital Portal",
+            title: "Diverse language",
             desc: "Universal Digital Access",
             color: "text-blue-600",
             bgHover: "group-hover:bg-blue-50",
             borderColor: "group-hover:border-blue-200",
-            image: "/images/missions/portal.png",
-            hoverImage: "/images/missions/portalhov.png",
+            image: "/images/missions/diverse.png",
+            hoverImage: "/images/missions/diversehov.png",
             link: "/digital-portal",
             paths: {
                 active: "M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 18a8 8 0 118-8 8 8 0 01-8 8zM12 2c4 0 4 20 0 20M2 12h20"
@@ -81,8 +81,8 @@ const MissionGrid = () => {
             color: "text-amber-500",
             bgHover: "group-hover:bg-amber-50",
             borderColor: "group-hover:border-amber-200",
-            image: "/images/missions/cyber-criminal.png",
-            hoverImage: "/images/missions/cyber-criminalhov.png",
+            image: "/images/missions/cyber-security.png",
+            hoverImage: "/images/missions/cyber-securityhov.png",
             link: "/cyber-security",
             paths: {
                 active: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
