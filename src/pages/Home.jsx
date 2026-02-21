@@ -8,10 +8,12 @@ import KeyParticipant from "../components/KeyParticipant";
 import FlagshipEvents from "../components/FlagshipEvents";
 import StakeHolder from "../components/StakeHolder";
 
+
 const Home = () => {
   return (
     <div className="bg-white">
       <Hero />
+
       <MissionGrid />
       <FlagshipEvents />
       <EventsSection />

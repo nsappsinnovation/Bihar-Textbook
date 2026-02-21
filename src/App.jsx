@@ -27,6 +27,12 @@ import HeritageArchive from "./pages/HeritageArchive.jsx";
 import Vr from "./pages/Vrlab.jsx";
 import Digital from "./pages/DigitalPortal.jsx";
 import Audio from "./pages/Audiolib.jsx";
+import Trend1 from "./pages/TrendingSkills.jsx";
+import Trend2 from "./pages/Trendingcyber.jsx";
+import Quiz1 from "./pages/Quizcyber.jsx";
+import Quiz2 from "./pages/Skillsquiz.jsx";
+import Cyber from "./pages/CyberSecurity"
+import Basicskill from "./pages/Basicskills.jsx"
 
 /* Components */
 import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
@@ -35,6 +41,9 @@ import Notice from "./components/Notice.jsx";
 import FlagshipEvents from "./components/FlagshipEvents.jsx";
 import Video from "./components/Signcourses.jsx";
 import AiCourses from "./components/AiCourses.jsx";
+import Audiovideo from "./components/Audiovideo.jsx";
+import Vrcourse from "./components/Arvideo.jsx"
+import Digitalcourse from "./components/Digitalvideo.jsx"
 import TeacherCourses from "./components/TeacherCourses.jsx";
 import MobileCourses from "./components/MobileCourses.jsx";
 import ArchiveCourses from "./components/ArchiveCourses.jsx";
@@ -45,6 +54,8 @@ import SignUp from "./components/SignUp.jsx";
 
 
 import ScrollToTop from "./components/ScrollToTop";
+import Arvideo from "./components/Arvideo.jsx";
+
 
 function App() {
   const location = useLocation();
@@ -68,14 +79,17 @@ function App() {
             <Route path="/blog" element={<Blog />} />
             {/*Sign Lang*/}
             <Route path="/sign" element={<Sign />} />
-              <Route path="/vr" element={<Vr />} />
-               <Route path="/digital-portal" element={<Digital />} />
-                <Route path="/audio-books" element={<Audio />} />
+            <Route path="/vr" element={<Vr />} />
+            <Route path="/digital-portal" element={<Digital />} />
+            <Route path="/audio-books" element={<Audio />} />
             <Route path="/ai-intelligence" element={<AiIntelligence />} />
             <Route path="/teacher-training" element={<TeacherTraining />} />
             <Route path="/mobile-library" element={<MobileLibrary />} />
             <Route path="/heritage-archive" element={<HeritageArchive />} />
             <Route path="/courses" element={<Video />} />
+            <Route path="/audio-courses" element={< Audiovideo />} />
+            <Route path="/ar-courses" element={< Vrcourse />} />
+            <Route path="/digital-courses" element={< Digitalcourse />} />
             <Route path="/ai-courses" element={<AiCourses />} />
             <Route path="/teacher-courses" element={<TeacherCourses />} />
             <Route path="/mobile-courses" element={<MobileCourses />} />
@@ -84,7 +98,15 @@ function App() {
             {/* Auth */}
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
+            {/*Basic skills page and cybersecurity*/}
+            <Route path="/basic-skills" element={<Basicskill />} />
 
+            <Route path="/trending/:slug" element={<Trend1 />} />
+            <Route path="/quiz/:slug" element={<Quiz1 />} />
+
+            <Route path="/cyber-security" element={<Cyber />} />
+            <Route path="/cyber/trending/:slug" element={<Trend2 />} />
+            <Route path="/cyber/quiz/:slug" element={<Quiz2 />} />
             {/* Key Participants */}
             <Route
               path="/key-participants"
