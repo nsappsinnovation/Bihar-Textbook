@@ -8,8 +8,8 @@ export const Docuconfig = [
     component: "Hrt"
   },
   {
-    id: "registeration-form",
-    label: "Registeration Forms",
+    id: "registration-form",
+    label: "Registration Forms",
     component: "Reg"
   },
   {

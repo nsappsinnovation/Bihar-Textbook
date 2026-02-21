@@ -30,7 +30,7 @@ import Audio from "./pages/Audiolib.jsx";
 
 /* Components */
 import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
-import ContactUs from "./components/ContactUs.jsx";
+import Contact from "./pages/Contact";
 import Notice from "./components/Notice.jsx";
 import FlagshipEvents from "./components/FlagshipEvents.jsx";
 import Video from "./components/Signcourses.jsx";
@@ -43,10 +43,7 @@ import ArchiveCourses from "./components/ArchiveCourses.jsx";
 import Login from "./components/Login.jsx";
 import SignUp from "./components/SignUp.jsx";
 
-/* Gallery Pages */
-import PhotoGallery from "./components/gallery/sections/Photogallery";
-import VideoGallery from "./components/gallery/sections/Videogallery";
-import PressRelease from "./components/gallery/sections/Pressrelease";
+
 import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
@@ -95,7 +92,7 @@ function App() {
             />
 
             {/* Contact */}
-            <Route path="/contact" element={<ContactUs />} />
+            <Route path="/contact" element={<Contact />} />
             {/* {Books} */}
             <Route path="/class/:classId/read/:bookSubject" element={<BookReader />} />
 
