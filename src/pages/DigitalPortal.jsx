@@ -350,7 +350,7 @@ import { motion } from 'framer-motion';
                                         </p>
                                     </div>
                                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                                        <Link to="/digital-courses" className="w-full sm:w-auto">
+                                        <Link to="/linguistic" className="w-full sm:w-auto">
                                             <button className="w-full sm:w-auto px-12 py-5 bg-slate-900 text-white rounded-full text-xs font-black uppercase tracking-[0.2em] hover:bg-blue-600 hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-slate-200 flex items-center justify-center gap-3">
                                                 Enter course <ArrowRight size={16} />
                                             </button>

@@ -25,6 +25,7 @@ import TeacherTraining from "./pages/TeacherTraining.jsx";
 import MobileLibrary from "./pages/MobileLibrary.jsx";
 import HeritageArchive from "./pages/HeritageArchive.jsx";
 import Vr from "./pages/Vrlab.jsx";
+import Linguistics from "./pages/Linguistics.jsx";
 import Digital from "./pages/DigitalPortal.jsx";
 import Audio from "./pages/Audiolib.jsx";
 import Trend1 from "./pages/TrendingSkills.jsx";
@@ -58,6 +59,7 @@ import VideoGallery from "./components/gallery/sections/Videogallery";
 import PressRelease from "./components/gallery/sections/Pressrelease";
 import ScrollToTop from "./components/ScrollToTop";
 import Arvideo from "./components/Arvideo.jsx";
+import Linguistic from "./pages/Linguistics.jsx";
 
 
 function App() {
@@ -83,6 +85,7 @@ function App() {
             {/*Sign Lang*/}
             <Route path="/sign" element={<Sign />} />
             <Route path="/vr" element={<Vr />} />
+             <Route path="/linguistic" element={<Linguistics />} />
             <Route path="/digital-portal" element={<Digital />} />
             <Route path="/audio-books" element={<Audio />} />
             <Route path="/ai-intelligence" element={<AiIntelligence />} />

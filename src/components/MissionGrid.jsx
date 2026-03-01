@@ -55,7 +55,7 @@ const MissionGrid = () => {
             borderColor: "group-hover:border-blue-200",
             image: "/images/missions/diverse.png",
             hoverImage: "/images/missions/diversehov.png",
-            link: "/digital-portal",
+            link: "/linguistic",
             paths: {
                 active: "M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 18a8 8 0 118-8 8 8 0 01-8 8zM12 2c4 0 4 20 0 20M2 12h20"
             }
