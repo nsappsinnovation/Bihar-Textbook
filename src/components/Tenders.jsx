@@ -1,20 +1,39 @@
-import React, { useState } from "react";
-import { FiSearch, FiFileText } from "react-icons/fi";
+import React, { useState, useMemo } from "react";
+import { FiSearch, FiFileText, FiBell, FiArrowRight, FiCalendar, FiClock, FiFilter } from "react-icons/fi";
+import { motion, AnimatePresence } from "framer-motion";
 import { tendersData } from "../data/tendersData.js";
 
 const Tenders = () => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [activeFilter, setActiveFilter] = useState("All");
   const tendersPerPage = 10;
 
-  const filteredTenders = tendersData.filter((t) =>
-    t.title.toLowerCase().includes(search.toLowerCase())
-  );
+  const filters = ["All", "Active", "E-Tender", "Procurement", "Services"];
+
+  const isNew = (dateStr) => {
+    try {
+      if (!dateStr) return false;
+      const parts = dateStr.split('/');
+      const d = new Date(parts[2], parts[1] - 1, parts[0]);
+      const now = new Date();
+      const diffTime = Math.abs(now - d);
+      return Math.ceil(diffTime / (1000 * 60 * 60 * 24)) <= 30;
+    } catch { return false; }
+  };
+
+  const filteredTenders = useMemo(() => {
+    return tendersData.filter((t) => {
+      const matchesSearch = t.title.toLowerCase().includes(search.toLowerCase());
+      const matchesFilter = activeFilter === "All" || 
+                           (activeFilter === "E-Tender" && t.title.toLowerCase().includes("e-tender")) ||
+                           (activeFilter === "Services" && t.title.toLowerCase().includes("service"));
+      return matchesSearch && matchesFilter;
+    });
+  }, [search, activeFilter]);
 
   const totalPages = Math.ceil(filteredTenders.length / tendersPerPage);
-  const indexOfLastTender = currentPage * tendersPerPage;
-  const indexOfFirstTender = indexOfLastTender - tendersPerPage;
-  const currentTenders = filteredTenders.slice(indexOfFirstTender, indexOfLastTender);
+  const currentTenders = filteredTenders.slice((currentPage - 1) * tendersPerPage, currentPage * tendersPerPage);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -23,232 +42,282 @@ const Tenders = () => {
 
   const goToPage = (pageNumber) => {
     setCurrentPage(pageNumber);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 400, behavior: 'smooth' });
+  };
+
+  const getPaginationGroup = () => {
+    let start = Math.floor((currentPage - 1) / 5) * 5;
+    return new Array(Math.min(5, totalPages - start)).fill().map((_, idx) => start + idx + 1);
   };
 
   return (
-    <>
-      {/* HERO SECTION */}
-      <section className="relative bg-[#0d0e23] py-20 text-center text-white overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#1a1b4b] via-[#0d0e23] to-[#050610]" />
-        <div className="absolute inset-0 opacity-20" style={{
+    <div className="min-h-screen bg-[#f8fafc]">
+      {/* ================= HERO SECTION ================= */}
+      <section className="relative bg-[#0d0e23] pt-16 pb-20 text-center text-white overflow-hidden border-b border-white/5">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="absolute inset-0 bg-[linear-gradient(135deg,#0F172A_0%,#1e3a8a_60%,#f1f5f9_100%)]" 
+        />
+        
+        <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
           backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.1) 1px, transparent 0)',
-          backgroundSize: '30px 30px'
+          backgroundSize: '40px 40px'
         }} />
-        
-        <div className="relative z-10 max-w-4xl mx-auto px-6">
-          <h1 className="text-4xl md:text-5xl font-bold">Tenders</h1>
-          <p className="mt-4 text-white/70 text-sm md:text-base">
-            Current tenders, e-tenders & procurement opportunities
-          </p>
+
+        <div className="relative z-10 max-w-5xl mx-auto px-6">
+          <motion.h1 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4"
+          >
+            Tenders & Bids
+          </motion.h1>
+          <motion.div 
+            initial={{ width: 0 }}
+            animate={{ width: 100 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="h-1.5 w-24 bg-gradient-to-r from-blue-500 to-indigo-600 mx-auto rounded-full mb-8 shadow-[0_0_15px_rgba(59,130,246,0.5)]"
+          />
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="text-white/60 text-xs md:text-sm max-w-xl mx-auto leading-relaxed font-light"
+          >
+            Explore current procurement opportunities, e-tenders, and strategic partnership proposals at BSTBPC.
+          </motion.p>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="mt-10 flex flex-wrap justify-center gap-4 text-sm"
+          >
+            <div className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 flex items-center gap-2 backdrop-blur-sm">
+              <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+              <span className="text-white/80">{tendersData.length} Active Opportunities</span>
+            </div>
+            <div className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 flex items-center gap-2 backdrop-blur-sm">
+              <FiClock className="text-blue-400" />
+              <span className="text-white/80">Last Updated Today</span>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* ANIMATED TICKER */}
-      <section className="bg-gradient-to-r from-orange-500 to-amber-500 py-3 overflow-hidden">
-        <div className="flex items-center">
-          <span className="px-6 font-bold text-white text-sm whitespace-nowrap">
-            Latest Tenders:
-          </span>
-          <div className="ticker-wrapper flex-1 overflow-hidden">
-            <div className="ticker-content">
-              {[...tendersData.slice(0, 3), ...tendersData.slice(0, 3), ...tendersData.slice(0, 3)].map((tender, idx) => (
-                <a
-                  key={idx}
-                  href={tender.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="ticker-item text-white text-sm hover:underline"
-                >
-                  • {tender.title}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <style>{`
-        .ticker-wrapper {
-          position: relative;
-          overflow: hidden;
-        }
-        
-        .ticker-content {
-          display: flex;
-          animation: scroll 40s linear infinite;
-          white-space: nowrap;
-        }
-        
-        .ticker-item {
-          display: inline-block;
-          padding: 0 2rem;
-        }
-        
-        @keyframes scroll {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-33.33%);
-          }
-        }
-        
-        .ticker-content:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
-
-      {/* MAIN CONTENT */}
-      <section className="bg-white py-16">
-        <div className="max-w-7xl mx-auto px-6">
-          {/* SEARCH BAR */}
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
-            <h2 className="text-3xl font-bold text-[#0d0e23]">
-              Active Tenders
-            </h2>
-            
-            <div className="relative w-full md:w-80">
-              <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
-              <input
-                type="text"
-                placeholder="Search tender..."
-                value={search}
-                onChange={handleSearch}
-                className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-orange-200 focus:border-orange-500 outline-none bg-slate-50 text-slate-700"
-              />
-            </div>
-          </div>
-
-          {/* TENDERS TABLE */}
-          <div className="overflow-x-auto bg-white rounded-2xl shadow-lg border border-slate-100">
-            <table className="min-w-full text-sm">
-              <thead className="bg-gradient-to-r from-[#2a2b8d] to-[#3a3bbd] text-white">
-                <tr>
-                  <th className="px-6 py-4 text-left font-semibold">S. No.</th>
-                  <th className="px-6 py-4 text-left font-semibold">Tender Title</th>
-                  <th className="px-6 py-4 text-center font-semibold">Document</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {currentTenders.length > 0 ? (
-                  currentTenders.map((tender, index) => (
-                    <tr
-                      key={tender.id}
-                      className="border-b last:border-none hover:bg-orange-50/50 transition-colors"
-                    >
-                      <td className="px-6 py-4 font-medium text-slate-700">
-                        {indexOfFirstTender + index + 1}
-                      </td>
-
-                      <td className="px-6 py-4 font-semibold text-[#0d0e23]">
-                        {tender.title}
-                      </td>
-
-                      <td className="px-6 py-4 text-center">
-                        {tender.link ? (
-                          <a
-                            href={tender.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#2a2b8d] hover:bg-[#3a3bbd] text-white text-xs font-semibold transition-all shadow-md hover:shadow-lg"
-                          >
-                            <FiFileText />
-                            View PDF
-                          </a>
-                        ) : (
-                          <span className="text-slate-400 text-xs">N/A</span>
-                        )}
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td
-                      colSpan="3"
-                      className="px-6 py-12 text-center text-slate-500"
-                    >
-                      No tenders found matching your search
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-
-          {/* PAGINATION */}
-          {totalPages > 1 && (
-            <div className="mt-8 flex items-center justify-between">
-              <p className="text-sm text-slate-600">
-                Showing {indexOfFirstTender + 1} to {Math.min(indexOfLastTender, filteredTenders.length)} of {filteredTenders.length} tenders
-              </p>
-
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => goToPage(currentPage - 1)}
-                  disabled={currentPage === 1}
-                  className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all ${
-                    currentPage === 1
-                      ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
-                      : 'bg-white text-[#2a2b8d] border border-slate-200 hover:bg-[#2a2b8d] hover:text-white'
-                  }`}
-                >
-                  Previous
-                </button>
-
-                <div className="flex gap-1">
-                  {[...Array(totalPages)].map((_, index) => {
-                    const pageNumber = index + 1;
-                    if (
-                      pageNumber === 1 ||
-                      pageNumber === totalPages ||
-                      (pageNumber >= currentPage - 1 && pageNumber <= currentPage + 1)
-                    ) {
-                      return (
-                        <button
-                          key={pageNumber}
-                          onClick={() => goToPage(pageNumber)}
-                          className={`w-10 h-10 rounded-lg font-semibold text-sm transition-all ${
-                            currentPage === pageNumber
-                              ? 'bg-[#2a2b8d] text-white shadow-md'
-                              : 'bg-white text-slate-700 border border-slate-200 hover:bg-orange-50'
-                          }`}
-                        >
-                          {pageNumber}
-                        </button>
-                      );
-                    } else if (
-                      pageNumber === currentPage - 2 ||
-                      pageNumber === currentPage + 2
-                    ) {
-                      return <span key={pageNumber} className="px-2 text-slate-400">...</span>;
-                    }
-                    return null;
-                  })}
+      {/* ================= MAIN CONTENT ================= */}
+      <section className="relative -mt-12 pb-24 px-6 z-20">
+        <div className="max-w-5xl mx-auto">
+          {/* ELEVATED CONTAINER */}
+          <div 
+            className="bg-white rounded-3xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-slate-200/50 p-4 md:p-8"
+          >
+            {/* FILTER & SEARCH SECTION (Static) */}
+            <div className="space-y-6 bg-slate-50/50 rounded-2xl p-4 border border-slate-100 mb-8">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-200">
+                    <FiBell className="text-xl text-white animate-bounce" />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-[#0d0e23]">Procurement Desk</h2>
+                    <p className="text-slate-500 text-xs">Transparent & competitive bidding portal</p>
+                  </div>
                 </div>
 
-                <button
-                  onClick={() => goToPage(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                  className={`px-4 py-2 rounded-lg font-semibold text-sm transition-all ${
-                    currentPage === totalPages
-                      ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
-                      : 'bg-white text-[#2a2b8d] border border-slate-200 hover:bg-[#2a2b8d] hover:text-white'
-                  }`}
-                >
-                  Next
-                </button>
+                <div className="relative w-full lg:w-[350px] group">
+                  <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors text-lg" />
+                  <input
+                    type="text"
+                    placeholder="Search by tender name or ID..."
+                    value={search}
+                    onChange={handleSearch}
+                    className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 bg-white focus:bg-white focus:ring-4 focus:ring-blue-100 focus:border-blue-600 outline-none transition-all text-xs text-slate-700 shadow-inner"
+                  />
+                </div>
+              </div>
+
+              {/* QUICK FILTERS */}
+              <div className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-none">
+                <FiFilter className="text-slate-400 mr-2 flex-shrink-0" />
+                {filters.map((filter) => (
+                  <button
+                    key={filter}
+                    onClick={() => { setActiveFilter(filter); setCurrentPage(1); }}
+                    className={`px-6 py-2.5 rounded-xl font-bold text-sm whitespace-nowrap transition-all duration-300 ${
+                      activeFilter === filter 
+                        ? 'bg-[#0d0e23] text-white shadow-xl shadow-slate-300 scale-105' 
+                        : 'bg-slate-100 text-slate-600 hover:bg-slate-200 active:scale-95'
+                    }`}
+                  >
+                    {filter}
+                  </button>
+                ))}
               </div>
             </div>
-          )}
 
-          <p className="mt-8 text-center text-sm text-slate-500">
-            Total {filteredTenders.length} tender{filteredTenders.length !== 1 ? 's' : ''} found
-          </p>
+            {/* ERROR / EMPTY STATE */}
+            <AnimatePresence mode="wait">
+              {currentTenders.length === 0 ? (
+                <motion.div 
+                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                  className="py-32 text-center"
+                >
+                  <div className="w-24 h-24 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <FiSearch className="text-4xl text-slate-300" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-slate-800">No tenders found</h3>
+                  <p className="text-slate-500 mt-2">Try adjusting your search terms or filters.</p>
+                  <button onClick={() => { setSearch(""); setActiveFilter("All"); }} className="mt-8 text-blue-600 font-bold hover:underline">Clear all filters</button>
+                </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                  className="space-y-8"
+                >
+                  {/* DESKTOP TABLE */}
+                  <div className="hidden lg:block overflow-hidden rounded-3xl border border-slate-100 bg-slate-50/50">
+                    <table className="w-full text-left">
+                      <thead>
+                        <tr className="border-b border-slate-200">
+                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">S.No</th>
+                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">Tender Details</th>
+                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400 text-right">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100 bg-white">
+                        {currentTenders.map((tender, index) => (
+                          <motion.tr 
+                            key={tender.id}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: index * 0.05 }}
+                            className="group hover:bg-blue-50/40 transition-all duration-200 cursor-default"
+                          >
+                            <td className="px-8 py-10">
+                              <span className="text-slate-400 font-mono text-sm leading-none">{(currentPage - 1) * tendersPerPage + index + 1}</span>
+                            </td>
+                            <td className="px-8 py-10">
+                              <div className="space-y-3">
+                                <div className="flex flex-wrap items-center gap-2">
+                                  {isNew(tender.date) && (
+                                    <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
+                                      <span className="w-1 h-1 bg-blue-500 rounded-full" /> NEW
+                                    </span>
+                                  )}
+                                  <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-wider">
+                                    {tender.title.toLowerCase().includes("e-tender") ? "Electronic" : "Physical"}
+                                  </span>
+                                </div>
+                                <h4 className="text-base font-bold text-slate-800 leading-tight group-hover:text-blue-700 transition-colors">
+                                  {tender.title}
+                                </h4>
+                                 <p className="text-[10px] text-slate-500 font-medium">
+                                   Posted: {tender.date || 'Active Opportunity'}
+                                 </p>
+                                </div>
+                             </td>
+                            <td className="px-8 py-10 text-right">
+                              <motion.a
+                                href={tender.link}
+                                target="_blank" rel="noopener noreferrer"
+                                whileHover={{ scale: 1.05, x: 5 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#0d0e23] text-white text-[10px] font-black shadow-lg shadow-slate-200 hover:shadow-blue-200 hover:bg-blue-600 transition-all uppercase tracking-widest"
+                              >
+                                <FiFileText className="text-base" />
+                                View Details
+                                <FiArrowRight className="transition-transform group-hover:translate-x-1" />
+                              </motion.a>
+                            </td>
+                          </motion.tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+
+                  {/* MOBILE CARD VIEW */}
+                  <div className="lg:hidden grid gap-6">
+                    {currentTenders.map((tender, index) => (
+                      <motion.div 
+                        key={tender.id}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: index * 0.1 }}
+                        className="bg-slate-50 rounded-3xl p-6 border border-slate-100 space-y-4"
+                      >
+                        <div className="flex justify-between items-start">
+                          <div className="flex gap-2">
+                             {isNew(tender.date) && (
+                                <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-600 text-[10px] font-black">NEW</span>
+                             )}
+                             <span className="px-2 py-0.5 rounded-md bg-blue-100 text-blue-700 text-[10px] font-black uppercase">TENDER</span>
+                          </div>
+                          <span className="text-slate-400 font-bold text-xs">{(currentPage - 1) * tendersPerPage + index + 1}</span>
+                        </div>
+                        <h4 className="font-bold text-slate-800 text-base leading-tight">{tender.title}</h4>
+                        <div className="flex items-center gap-2 text-slate-500 text-xs">
+                          <FiCalendar /> {tender.date || 'Ongoing'}
+                        </div>
+                        <a 
+                          href={tender.link}
+                          target="_blank" rel="noopener noreferrer"
+                          className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-blue-600 text-white font-black text-[10px] uppercase shadow-lg shadow-blue-100"
+                        >
+                          <FiFileText /> View PDF
+                        </a>
+                      </motion.div>
+                    ))}
+                  </div>
+
+                  {/* PAGINATION */}
+                  {totalPages > 1 && (
+                    <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-8 pt-10 border-t border-slate-100">
+                      <p className="text-slate-500 font-medium font-sans">
+                        Showing <span className="text-[#0d0e23] font-black">{(currentPage - 1) * tendersPerPage + 1}</span> to <span className="text-[#0d0e23] font-black">{Math.min(currentPage * tendersPerPage, filteredTenders.length)}</span> of <span className="text-[#0d0e23] font-black">{filteredTenders.length}</span> opportunities
+                      </p>
+                      
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => goToPage(currentPage - 1)}
+                          disabled={currentPage === 1}
+                          className="px-6 py-3 rounded-2xl bg-white border border-slate-200 text-slate-600 font-bold text-sm hover:border-blue-500 hover:text-blue-600 disabled:opacity-30 disabled:pointer-events-none transition-all"
+                        >
+                          Prev
+                        </button>
+                        <div className="flex gap-2">
+                          {getPaginationGroup().map((item) => (
+                             <button
+                               key={item}
+                               onClick={() => goToPage(item)}
+                               className={`w-12 h-12 rounded-2xl font-black text-sm transition-all ${
+                                 currentPage === item ? 'bg-blue-600 text-white shadow-lg shadow-blue-200' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                               }`}
+                             >
+                               {item}
+                             </button>
+                          ))}
+                        </div>
+                        <button
+                          onClick={() => goToPage(currentPage + 1)}
+                          disabled={currentPage === totalPages}
+                          className="px-6 py-3 rounded-2xl bg-white border border-slate-200 text-slate-600 font-bold text-sm hover:border-blue-500 hover:text-blue-600 disabled:opacity-30 disabled:pointer-events-none transition-all"
+                        >
+                          Next
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 

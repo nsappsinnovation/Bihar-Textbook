@@ -130,7 +130,7 @@ export default function EventsSection() {
         {/* --- Minimal Header --- */}
         <div className="max-w-3xl mb-16">
           <div className="flex items-center gap-2 mb-4">
-            <div className="h-px w-8 bg-indigo-500"></div>
+             <div className="h-px w-8 bg-indigo-500"></div>
             <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-[0.2em]">Latest Initiatives</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 mb-6">
@@ -147,17 +147,17 @@ export default function EventsSection() {
           <div className="flex items-center gap-8 text-center scrollbar-hide">
             <button
               onClick={() => setActiveTab("past")}
-              className={`pb-8 -mb-8 text-sm font-semibold transition-all duration-300 relative ${activeTab === "past" ? "text-indigo-600" : "text-slate-400 hover:text-slate-600"}`}
+              className={`pb-8 -mb-8 text-sm font-semibold transition-all duration-300 relative ${activeTab === "past" ? "text-blue-600" : "text-slate-400 hover:text-slate-600"}`}
             >
               Past Events
-              {activeTab === "past" && <motion.div layoutId="tab-underline" className="absolute bottom-0 left-0 w-full h-0.5 bg-indigo-600"></motion.div>}
+              {activeTab === "past" && <motion.div layoutId="tab-underline" className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600"></motion.div>}
             </button>
             <button
               onClick={() => setActiveTab("upcoming")}
-              className={`pb-8 -mb-8 text-sm font-semibold transition-all duration-300 relative ${activeTab === "upcoming" ? "text-indigo-600" : "text-slate-400 hover:text-slate-600"}`}
+              className={`pb-8 -mb-8 text-sm font-semibold transition-all duration-300 relative ${activeTab === "upcoming" ? "text-blue-600" : "text-slate-400 hover:text-slate-600"}`}
             >
               Upcoming Events
-              {activeTab === "upcoming" && <motion.div layoutId="tab-underline" className="absolute bottom-0 left-0 w-full h-0.5 bg-indigo-600"></motion.div>}
+              {activeTab === "upcoming" && <motion.div layoutId="tab-underline" className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600"></motion.div>}
             </button>
           </div>
 
@@ -169,7 +169,7 @@ export default function EventsSection() {
                 placeholder="Search by title or location..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                className="w-full pl-6 pr-4 py-2 bg-transparent text-sm focus:outline-none border-b border-slate-200 focus:border-indigo-500 transition-all placeholder:text-slate-300"
+                className="w-full pl-6 pr-4 py-2 bg-transparent text-sm focus:outline-none border-b border-slate-200 focus:border-blue-500 transition-all placeholder:text-slate-300"
               />
               {query && <X onClick={() => setQuery("")} className="absolute right-0 top-1/2 -translate-y-1/2 text-slate-300 cursor-pointer hover:text-slate-600" size={14} />}
             </div>
@@ -217,12 +217,12 @@ export default function EventsSection() {
               </div>
 
               <div className="flex-1">
-                <div className="flex items-center gap-2 text-[10px] font-bold text-indigo-500 uppercase tracking-widest mb-3">
+                <div className="flex items-center gap-2 text-[10px] font-bold text-blue-500 uppercase tracking-widest mb-3">
                   <Calendar size={12} strokeWidth={2.5} />
                   <span>{event.date}</span>
                 </div>
 
-                <h3 className="text-lg font-semibold text-slate-900 leading-tight mb-2 group-hover:text-indigo-600 transition-colors">
+                <h3 className="text-lg font-semibold text-slate-900 leading-tight mb-2 group-hover:text-blue-600 transition-colors">
                   {event.title}
                 </h3>
 
@@ -235,7 +235,7 @@ export default function EventsSection() {
                     <MapPin size={12} />
                     <span>{event.location}</span>
                   </div>
-                  <div className="flex items-center gap-1.5 text-indigo-600 text-xs font-bold group-hover:gap-2.5 transition-all">
+                  <div className="flex items-center gap-1.5 text-blue-600 text-xs font-bold group-hover:gap-2.5 transition-all">
                     DETAIL <ArrowUpRight size={14} />
                   </div>
                 </div>
