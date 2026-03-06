@@ -25,7 +25,7 @@ function Blog() {
     };
 
     return (
-        <div className="relative min-h-screen w-full bg-white text-slate-900 font-sans selection:bg-indigo-100 overflow-hidden">
+        <div className="relative min-h-screen w-full bg-white text-slate-900 font-sans selection:bg-blue-100 overflow-hidden">
             {/* Background Elements */}
         
             <div className="absolute inset-0 z-0">
@@ -39,7 +39,7 @@ function Blog() {
 
                     <h3 className="text-4xl md:text-6xl font-semibold tracking-tight mb-6">
 
-                        <span className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent
+                        <span className="bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent
         transition-all duration-300">
                           Gyan Kendra
                         </span>
@@ -59,7 +59,7 @@ function Blog() {
 
                 <main className="max-w-7xl mx-auto px-4 pb-24">
                     {error && (
-                        <div className="text-center p-4 mb-8 bg-red-50 text-red-600 rounded-lg border border-red-100 max-w-md mx-auto">
+                        <div className="text-center p-4 mb-8 bg-blue-50 text-blue-600 rounded-lg border border-blue-100 max-w-md mx-auto">
                             {error}
                         </div>
                     )}

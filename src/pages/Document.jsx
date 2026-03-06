@@ -1,42 +1,38 @@
 import { useState } from "react";
-
 import Hrt from "../components/documents/sections/Hrt";
 import Reg from "../components/documents/sections/Registerationform";
 import Rti from "../components/documents/sections/Rti";
-
 import { useParams } from "react-router-dom";
-
 import { Docuconfig } from "../components/documents/Docuconfig";
 
 const componentMap = {
   Hrt,
   Reg,
   Rti,
-  
 };
 
 const Document = () => {
   const { sectionId } = useParams();
 
-  // 🔥 EXACTLY LIKE books.json logic
   const sectionData = Docuconfig.find(
     section => section.id === sectionId
   );
 
   if (!sectionData) {
-    return <p>Invalid Know Us section</p>;
+    return (
+      <div className="min-h-screen pt-32 text-center">
+        <h2 className="text-2xl font-black text-slate-800">Invalid Document Section</h2>
+        <p className="text-slate-500 mt-2">The requested section could not be found.</p>
+      </div>
+    );
   }
 
   const ActiveComponent = componentMap[sectionData.component];
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2>{sectionData.title}</h2>
-
-      {/* Content Area — BOOKS STYLE */}
-      <div style={{ marginTop: "20px" }}>
-        <ActiveComponent />
-      </div>
+    <div className="min-h-screen bg-white">
+      {/* No extra wrappers, the components handle their own layout */}
+      <ActiveComponent />
     </div>
   );
 };

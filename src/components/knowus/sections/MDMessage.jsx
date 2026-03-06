@@ -63,7 +63,7 @@ const MDMessage = () => {
                     </div>
 
                     {/* Quick Stats or Highlights */}
-                    <div className="bg-slate-50 rounded-3xl p-8 space-y-6 border border-slate-100 italic text-slate-600 text-sm leading-relaxed relative">
+                    <div className="bg-slate-50 rounded-3xl p-8 space-y-6 border border-white/80 italic text-slate-600 text-sm leading-relaxed relative">
                         <Quote className="absolute -top-4 -left-4 text-blue-600/10 w-20 h-20 rotate-180" />
                         "Ensuring that textiles of knowledge reach every student in Bihar, timely and with uncompromised quality."
                     </div>
