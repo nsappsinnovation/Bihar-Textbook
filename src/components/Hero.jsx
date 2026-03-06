@@ -19,7 +19,7 @@ const slides = [
         subtitle: "VR Learning",
         description: "Our travelling VR labs reach schools across the state, letting students explore science, space, and the human body through interactive experiences.",
         image: "/images/hero_vr_new.png",
-        link: "/events/vr-education-tours"
+        link: "/vr"
     },
 
     {
@@ -37,7 +37,7 @@ const slides = [
         subtitle: "Learning Programs",
         description: "Courses in foreign languages, Indian languages, and regional dialects expand cultural understanding and learning opportunities.",
         image: "/images/hero_linguistic.png",
-        link: "/events/linguistic-learning"
+        link: "/linguistic"
     },
     {
         id: "slide-4",
@@ -45,7 +45,7 @@ const slides = [
         subtitle: " with Audiobooks",
         description: "Audio study materials assist special children and dyslexic learners, enabling comfortable and independent study.",
         image: "/images/hero_audio_new.png",
-        link: "/events/audio-books-inclusive"
+        link: "/audio-books"
     }
 ];
 

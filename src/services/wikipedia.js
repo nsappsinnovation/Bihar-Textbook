@@ -50,7 +50,7 @@ export const getArticleExtract = async (pageId) => {
     }
 }
 
-export const getSuggestions = async (query) => {
+export  const getSuggestions = async (query) => {
     if (!query) return [];
 
     try {
@@ -63,10 +63,12 @@ export const getSuggestions = async (query) => {
                 origin: '*',
             },
         });
-        // Opensearch returns: [query, [titles], [descriptions], [links]]
-        // We just want the titles usually, or maybe titles and links.
-        // Let's return the titles (index 1).
-        return response.data[1] || [];
+
+        if (response.data && Array.isArray(response.data[1])) {
+            return response.data[1];
+        }
+
+        return [];
     } catch (error) {
         console.error('Error fetching suggestions:', error);
         return [];

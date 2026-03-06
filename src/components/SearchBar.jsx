@@ -1,12 +1,80 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { getSuggestions } from '../services/wikipedia';
 
+const typingPhrases = [
+    "About Solar System",
+    "Prime Minister of India",
+    "Chief Minister of Bihar"
+];
+
 const SearchBar = ({ onSearch, isLoading }) => {
     const [term, setTerm] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
     const wrapperRef = useRef(null);
     const isSelection = useRef(false);
+    const inputRef = useRef(null); // only added ref
+
+    /* =========================
+       Typing Animation (No styling changes)
+    ========================== */
+    useEffect(() => {
+        let timeoutId;
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let isActive = true;
+
+        const type = () => {
+            if (!isActive || !inputRef.current) return;
+
+            const currentPhrase = typingPhrases[phraseIndex];
+
+            if (!isDeleting) {
+                inputRef.current.placeholder =
+                    currentPhrase.slice(0, charIndex + 1);
+                charIndex++;
+
+                if (charIndex === currentPhrase.length) {
+                    timeoutId = setTimeout(() => {
+                        isDeleting = true;
+                        type();
+                    }, 1500);
+                    return;
+                }
+            } else {
+                inputRef.current.placeholder =
+                    currentPhrase.slice(0, charIndex - 1);
+                charIndex--;
+
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex =
+                        (phraseIndex + 1) % typingPhrases.length;
+                }
+            }
+
+            timeoutId = setTimeout(type, isDeleting ? 80 : 120);
+        };
+
+        type();
+
+        const stopAnimation = () => {
+            isActive = false;
+            clearTimeout(timeoutId);
+            if (inputRef.current) {
+                inputRef.current.placeholder = "Search for interesting topics...";
+            }
+        };
+
+        inputRef.current?.addEventListener("focus", stopAnimation);
+
+        return () => {
+            isActive = false;
+            clearTimeout(timeoutId);
+            inputRef.current?.removeEventListener("focus", stopAnimation);
+        };
+    }, []);
 
     // Debounce effect for fetching suggestions
     useEffect(() => {
@@ -53,7 +121,7 @@ const SearchBar = ({ onSearch, isLoading }) => {
     const handleSuggestionClick = (suggestion) => {
         isSelection.current = true;
         setTerm(suggestion);
-        setSuggestions([]); // Clear suggestions to prevent reappearing on focus
+        setSuggestions([]);
         setShowSuggestions(false);
         onSearch(suggestion);
     };
@@ -67,14 +135,18 @@ const SearchBar = ({ onSearch, isLoading }) => {
                     </svg>
                 </div>
                 <input
+                    ref={inputRef}
                     type="search"
                     value={term}
                     onChange={(e) => setTerm(e.target.value)}
                     onFocus={() => {
                         if (suggestions.length > 0) setShowSuggestions(true);
                     }}
-                    className={`block w-full p-5 pl-12 text-sm text-gray-900 border border-gray-200 bg-white shadow-sm transition-all duration-300 outline-none hover:shadow-md ${showSuggestions && suggestions.length > 0 ? 'rounded-t-3xl rounded-b-none border-b-0' : 'rounded-full'
-                        }`}
+                    className={`block w-full p-5 pl-12 text-sm text-gray-900 border border-gray-200 bg-white shadow-sm transition-all duration-300 outline-none hover:shadow-md ${
+                        showSuggestions && suggestions.length > 0
+                            ? 'rounded-t-3xl rounded-b-none border-b-0'
+                            : 'rounded-full'
+                    }`}
                     placeholder="Search for interesting topics..."
                     required
                 />
@@ -87,7 +159,6 @@ const SearchBar = ({ onSearch, isLoading }) => {
                 </button>
             </form>
 
-            {/* Suggestions Dropdown */}
             {showSuggestions && suggestions.length > 0 && (
                 <div className="absolute z-20 w-full bg-white/95 backdrop-blur-md border border-gray-100 border-t-0 rounded-b-3xl shadow-xl animate-fadeIn origin-top overflow-hidden">
                     <ul className="py-2">

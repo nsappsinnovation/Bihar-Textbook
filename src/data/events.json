@@ -2,6 +2,8 @@
     {
         "id": "vr-education-tours",
         "title": "VR Education Tours",
+          "link": "/vr",
+        
         "description": "Immersive virtual reality experiences that take students on guided tours of historical sites, science labs, museums, and geography landscapes.",
         "image": "https://images.unsplash.com/photo-1593508512255-86ab42a8e620",
         "tag": "Virtual Reality",
@@ -18,6 +20,7 @@
     },
     {
   "id": "linguistic-learning",
+   "link": "/linguistic",
   "title": "Diverse Linguistic Learning Programs",
   "description": "Courses in foreign languages, Indian languages, and regional dialects help students develop strong communication skills, improve cultural understanding, and open new academic and career opportunities.This program encourages students to explore languages beyond their regular curriculum, making learning more inclusive, practical, and future-ready.",
   "image": "https://moreland.edu/wp-content/uploads/2023/06/International-Image-Blog-Post-1024x665.jpg",
@@ -138,6 +141,7 @@
     },
     {
         "id": "audio-books-inclusive",
+        "link":"/audio-books",
         "title": "Audio Books for Inclusive Learning",
         "description": "Curriculum-based audiobooks in Hindi and regional languages to support visually impaired students, slow readers, and auditory learners.",
         "image": "https://images.unsplash.com/photo-1516979187457-637abb4f9353",

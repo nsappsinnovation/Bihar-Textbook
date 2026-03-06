@@ -71,7 +71,7 @@ export default function FlagshipEvent() {
               key={item.id}
               className="w-[380px] flex-shrink-0 group cursor-default snap-start"
             >
-              <Link to={`/events/${item.id}`} className="block">
+              <Link to= {item.link || `/events/${item.id}`} className="block">
                 <div className="relative aspect-[16/10] w-full rounded-lg overflow-hidden mb-6 bg-slate-100 group-hover:shadow-lg transition-all duration-300">
                   <img
                     src={item.image}
@@ -93,7 +93,7 @@ export default function FlagshipEvent() {
                   <span>{item.year || "2026 Initiative"}</span>
                 </div>
 
-                <Link to={`/events/${item.id}`}>
+              <Link to={item.link || `/events/${item.id}`}>
                   <h3 className="text-xl font-semibold text-slate-900 leading-tight mb-2 group-hover:text-indigo-600 transition-colors">
                     {item.title}
                   </h3>
@@ -109,7 +109,7 @@ export default function FlagshipEvent() {
                     <span>{item.region || "State-wide"}</span>
                   </div>
                   <Link
-                    to={`/events/${item.id}`}
+                     to={item.link || `/events/${item.id}`}
                     className="flex items-center gap-1.5 text-indigo-600 text-xs font-bold group-hover:gap-2.5 transition-all"
                   >
                     DETAIL <ArrowUpRight size={14} />

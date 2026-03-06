@@ -41,7 +41,7 @@ function Blog() {
 
                         <span className="bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent
         transition-all duration-300">
-                            Discover New Blogs
+                          Gyan Kendra
                         </span>
                     </h3>
 
@@ -51,8 +51,7 @@ function Blog() {
                      text-lg
                       text-slate-600 max-w-2xl mx-auto mb-12 leading-relaxed"
                     >
-                        Explore a vast library of knowledge generated from Wikipedia.
-                        Search for any topic and read curated blog-style summaries.
+                        Your Center of Knowledge — where learning becomes simple, understanding becomes deeper, and every student is empowered to achieve their full potential
                     </p>
 
                     <SearchBar onSearch={handleSearch} isLoading={loading} />

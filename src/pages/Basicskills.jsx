@@ -95,76 +95,75 @@ const quizzes = [
             };
   const processSteps = [
   {
-    title: "Communication Skills: Speaking Clearly",
+    title: "Road Safety: Understanding Traffic Signals",
     image: "/images/skills/a1.png",
     description:
-      "Learn how to speak clearly and confidently so your message is understood in school, at home, and in daily life.",
+      "Learn the meaning of traffic lights and how to follow signals properly to stay safe.",
     details: [
-      "Speak with confidence and correct tone",
-      "Use simple and clear sentences",
-      "Improve pronunciation and voice clarity",
-      "Learn how to explain your thoughts properly",
-      "Practice speaking without fear or hesitation",
+      "Red light means STOP immediately",
+      "Yellow light means GET READY to move",
+      "Green light means GO safely",
+      "Follow traffic police instructions",
+      "Always respect road rules",
     ],
   },
 
   {
-    title: "Interpersonal Skills: Listening & Understanding",
+    title: "How to Cross the Road Safely",
     image: "/images/skills/a2.png",
     description:
-      "Build strong interpersonal skills by learning active listening, understanding others, and responding respectfully.",
+      "Understand the correct way to cross the road and avoid accidents.",
     details: [
-      "Learn active listening (not just hearing)",
-      "Understand emotions and feelings in conversation",
-      "Respond politely and respectfully",
-      "Improve social behavior in group discussions",
-      "Build stronger friendships and relationships",
+      "Always use zebra crossing",
+      "Look right → left → right before crossing",
+      "Do not run suddenly on the road",
+      "Avoid using mobile phones while crossing",
+      "Wait patiently for vehicles to stop",
     ],
   },
 
   {
-    title: "Confidence Building: Self Introduction",
+    title: "Walking Rules: Which Side to Walk On",
     image: "/images/skills/a3.png",
     description:
-      "Master self-introduction skills to feel confident while meeting new people, speaking in class, or presenting yourself.",
+      "Learn safe walking habits while using roads and public areas.",
     details: [
-      "How to introduce yourself confidently",
-      "Learn body language + eye contact",
-      "Speak without nervousness or fear",
-      "Build confidence for interviews and public speaking",
-      "Improve personality and communication style",
+      "Walk on the left side of the road",
+      "Use footpaths whenever available",
+      "Stay alert while walking",
+      "Avoid pushing or running in crowded places",
+      "Follow public safety signs",
     ],
   },
 
   {
-    title: "Teamwork Skills: Working with Others",
+    title: "How to Use an ATM Machine",
     image: "/images/skills/a4.png",
     description:
-      "Learn teamwork skills to collaborate in school projects, group activities, and daily life situations.",
+      "Step-by-step guide to safely using an ATM machine.",
     details: [
-      "How to work in groups effectively",
-      "Sharing responsibilities and helping others",
-      "Respecting others’ ideas and opinions",
-      "Building cooperation and team spirit",
-      "Improving leadership inside a group",
+      "Insert your ATM card properly",
+      "Enter your PIN secretly",
+      "Select withdrawal or balance inquiry",
+      "Collect cash and receipt carefully",
+      "Never share your PIN with anyone",
     ],
   },
 
   {
-    title: "Leadership Skills: Taking Initiative",
+    title: "Basic Money Handling Skills",
     image: "/images/skills/a5.png",
     description:
-      "Develop leadership qualities like decision-making, responsibility, and guiding others with confidence.",
+      "Learn how to manage money responsibly in daily life.",
     details: [
-      "Learn how to take responsibility and lead",
-      "Improve decision-making and problem solving",
-      "Become confident in taking initiative",
-      "Learn how to motivate and support others",
-      "Build discipline and strong personality skills",
+      "Count money carefully before paying",
+      "Check your balance before spending",
+      "Keep money safely in wallet or bank",
+      "Save small amounts regularly",
+      "Avoid unnecessary spending",
     ],
   },
 ];
-
    return (
      <div>
      <div className="min-h-screen bg-white flex items-center">
@@ -183,50 +182,59 @@ const quizzes = [
     <div>
       {/* Heading */}
       <h1 className="text-4xl md:text-5xl font-bold text-slate-900">
-        Basic Learning Skills
-      </h1>
+  Basic Life Skills
+</h1>
 
-      {/* Highlight text */}
-      <p className="mt-4 text-lg font-semibold text-yellow-500">
-        Build Confidence, Communication & Life Skills — in a Fun Way!
-      </p>
+<p className="mt-4 text-lg font-semibold text-yellow-400">
+  Learn Essential Daily Skills for Safe & Smart Living
+</p>
 
-      {/* Description */}
-      <p className="mt-4 text-slate-600 max-w-md">
-        Interactive and engaging lessons designed to improve communication,
-        interpersonal skills, leadership, teamwork, and everyday confidence for
-        students.
-      </p>
-
+<p className="mt-4 text-slate-600 max-w-md">
+  Practical lessons that teach students road safety, traffic rules,
+  ATM usage, money handling, and responsible everyday behavior.
+</p>
       {/* Feature Cards */}
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
 
         {/* Card 1 */}
-        <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl">🎯</div>
-          <div>
-            <h3 className="font-semibold text-slate-800">
-              Skill-Based Learning
-            </h3>
-            <p className="text-sm text-slate-600">
-              Focus on real-world skills like communication, confidence, and teamwork.
-            </p>
-          </div>
-        </div>
+      {/* Card 1 */}
+<div className="p-5 border rounded-xl shadow-sm flex gap-4">
+  <div className="text-yellow-500 text-xl">🚦</div>
+  <div>
+    <h3 className="font-semibold text-slate-800">
+      Road & Traffic Awareness
+    </h3>
+    <p className="text-sm text-slate-600">
+      Learn traffic signals, road crossing rules, and public safety.
+    </p>
+  </div>
+</div>
 
-        {/* Card 2 */}
-        <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl">🤝</div>
-          <div>
-            <h3 className="font-semibold text-slate-800">
-              Communication & Interpersonal
-            </h3>
-            <p className="text-sm text-slate-600">
-              Improve speaking, listening, expressing emotions, and social interaction.
-            </p>
-          </div>
-        </div>
+{/* Card 2 */}
+<div className="p-5 border rounded-xl shadow-sm flex gap-4">
+  <div className="text-yellow-500 text-xl">🏧</div>
+  <div>
+    <h3 className="font-semibold text-slate-800">
+      Financial Basics
+    </h3>
+    <p className="text-sm text-slate-600">
+      Understand ATM usage, money handling, and safe banking habits.
+    </p>
+  </div>
+</div>
 
+{/* Card 3 */}
+<div className="md:col-span-2 p-5 border rounded-xl shadow-sm flex gap-4">
+  <div className="text-yellow-500 text-xl">🛣</div>
+  <div>
+    <h3 className="font-semibold text-slate-800">
+      Everyday Responsibility Skills
+    </h3>
+    <p className="text-sm text-slate-600">
+      Build discipline, awareness, and responsible public behavior.
+    </p>
+  </div>
+</div>
         {/* Card 3 */}
         <div className="md:col-span-2 p-5 border rounded-xl shadow-sm flex gap-4">
           <div className="text-yellow-500 text-xl">🚀</div>
@@ -266,32 +274,22 @@ const quizzes = [
           </h3>
         </div>
 
-        <p className="text-lg text-slate-600 leading-relaxed font-light">
-          Basic Learning Skills is a student-focused program designed to build
-          strong foundations in communication, interpersonal behavior, teamwork,
-          leadership, confidence, and problem-solving. These are the real-world
-          skills that help students perform better in school, interact better in
-          society, and grow into responsible and confident individuals.
-        </p>
+    <p className="text-lg text-slate-600 leading-relaxed font-light">
+  Basic Life Skills focuses on essential everyday knowledge that every student
+  must know to stay safe, independent, and responsible in society.
+</p>
 
-        <p className="text-lg text-slate-600 leading-relaxed font-light">
-          Instead of only memorizing content, students learn how to express
-          themselves clearly, work with others respectfully, handle emotions,
-          take initiative, and improve their daily decision-making — skills that
-          are essential for both academics and future careers.
-        </p>
+
 
         <div className="space-y-4">
           {[
-            "Build strong communication: speaking, listening, and expressing ideas clearly",
-            "Develop interpersonal skills: respect, empathy, and social confidence",
-            "Learn teamwork and collaboration for school projects and group activities",
-            "Improve leadership qualities: initiative, responsibility, and decision-making",
-            "Boost confidence through self-introduction, presentation, and interaction practice",
-            "Strengthen problem-solving and critical thinking for real-life situations",
-            "Encourage discipline, time management, and goal setting for better growth",
-            "Support personality development and emotional intelligence in students",
-          ].map((item, i) => (
+  "Understand traffic signals and road safety rules",
+  "Learn safe road crossing techniques",
+  "Know which side of the road to walk on",
+  "Understand ATM machine usage step-by-step",
+  "Learn basic money management and saving habits",
+  
+].map((item, i) => (
             <div
               key={i}
               className="flex items-start gap-3 text-sm font-bold text-slate-700"
@@ -304,75 +302,25 @@ const quizzes = [
       </div>
 
       {/* Right Images */}
-      <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
-
-        {/* Image 1 */}
-        <div className="relative group overflow-hidden rounded-[40px] border border-slate-100 shadow-xl md:col-span-2">
-          <img
-            src="/images/skills/a4.png"
-            alt="Basic Skills Learning"
-            className="w-full aspect-[16/9] object-cover transition-transform duration-1000 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
-          <div className="absolute bottom-10 left-10 text-white">
-            <p className="text-[10px] font-black uppercase tracking-widest mb-2 opacity-80">
-              Core Skills Program
-            </p>
-          
-          </div>
-        </div>
+        <div className="lg:col-span-7 grid grid-cols-1 gap-4">
+                                    <div className="relative group overflow-hidden rounded-[40px] border border-slate-100 shadow-xl">
+                                        <img
+                                            src= "/images/skills/image.png"
+                                            alt="Facility"
+                                            className="w-full aspect-[4/3] object-cover transition-transform duration-1000 group-hover:scale-105"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
+                                        <div className="absolute bottom-10 left-10 text-white">
+                                            <p className="text-[10px] font-black uppercase tracking-widest mb-2 opacity-80">Our Facility</p>
+                                            <h4 className="text-2xl font-bold"></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
         {/* Image 2 */}
-        <div className="relative group overflow-hidden rounded-[40px] border border-slate-100 shadow-xl">
-          <img
-            src="/images/skills/a1.png"
-            alt="Communication Skills"
-            className="w-full aspect-[4/3] object-cover transition-transform duration-1000 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
-          <div className="absolute bottom-8 left-8 text-white">
-            <p className="text-[10px] font-black uppercase tracking-widest mb-2 opacity-80">
-              Communication
-            </p>
-            
-          </div>
-        </div>
-
-        {/* Image 3 */}
-        <div className="relative group overflow-hidden rounded-[40px] border border-slate-100 shadow-xl">
-          <img
-            src="/images/skills/a3.png"
-            alt="Teamwork Skills"
-            className="w-full aspect-[4/3] object-cover transition-transform duration-1000 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
-          <div className="absolute bottom-8 left-8 text-white">
-            <p className="text-[10px] font-black uppercase tracking-widest mb-2 opacity-80">
-              Teamwork
-            </p>
-            
-          </div>
-        </div>
-
-        {/* Image 4 */}
-        <div className="relative group overflow-hidden rounded-[40px] border border-slate-100 shadow-xl md:col-span-2">
-          <img
-            src="/images/skills/a2.png"
-            alt="Leadership Skills"
-            className="w-full aspect-[16/9] object-cover transition-transform duration-1000 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
-          <div className="absolute bottom-10 left-10 text-white">
-            <p className="text-[10px] font-black uppercase tracking-widest mb-2 opacity-80">
-              Leadership & Confidence
-            </p>
-           
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
+   
 </section>
 
                <section className="py-32 bg-slate-900 px-6 rounded-[60px] mx-4 mb-4">
@@ -462,93 +410,7 @@ const quizzes = [
         </div>
       </div>
     </section>
-      <section className="py-20 px-6 bg-white">
-  <div className="max-w-6xl mx-auto border border-slate-300">
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-
-      {/* LEFT */}
-      <div className="p-10 border-b md:border-b-0 border-slate-300">
-        <h2 className="text-red-600 font-bold text-lg uppercase tracking-wide mb-6">
-          Trending Pages on Basic Skills
-        </h2>
-
-        <div className="space-y-10">
-          {trendingPages.map((item, i) => (
-            <Link
-              key={i}
-              to={`/trending/${item.slug}`}
-              className="flex gap-4 group"
-            >
-              {/* Arrow */}
-              <span
-                className="mt-[6px] w-0 h-0 
-                border-t-[5px] border-b-[5px] border-l-[7px]
-                border-t-transparent border-b-transparent border-l-slate-700"
-              />
-
-              <div>
-                <h3 className="text-blue-900 font-bold uppercase group-hover:underline">
-                  {item.title}
-                </h3>
-
-                <p className="mt-2 text-slate-700 text-sm leading-relaxed">
-                  {item.description}
-                </p>
-
-                <p className="mt-2 text-slate-500 text-xs">
-                  {item.section}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-
-      {/* RIGHT */}
-      <div className="p-10">
-        <h2 className="text-red-600 font-bold text-lg uppercase tracking-wide mb-2">
-          Quizzes on Basic Skills
-        </h2>
-
-        <p className="text-slate-700 text-sm mb-6">
-          Develop your skills with our interactive quizzes
-        </p>
-
-        <div className="space-y-10">
-          {quizzes.map((quiz, i) => (
-            <Link
-              key={i}
-              to={`/quiz/${quiz.slug}`}
-              className="flex gap-4 group"
-            >
-              {/* Arrow */}
-              <span
-                className="mt-[6px] w-0 h-0 
-                border-t-[5px] border-b-[5px] border-l-[7px]
-                border-t-transparent border-b-transparent border-l-slate-700"
-              />
-
-              <div>
-                <h3 className="text-blue-900 font-bold uppercase group-hover:underline">
-                  {quiz.title}
-                </h3>
-
-                <p className="mt-2 text-slate-700 text-sm leading-relaxed">
-                  {quiz.description}
-                </p>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* Ad Box */}
-       
-      </div>
-
-    </div>
-  </div>
-</section>
-
+    
             
             
      </div>
