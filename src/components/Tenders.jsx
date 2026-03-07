@@ -120,7 +120,7 @@ const Tenders = () => {
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-200">
-                    <FiBell className="text-xl text-white animate-bounce" />
+                    <FiBell className="text-xl text-white" />
                   </div>
                   <div>
                     <h2 className="text-xl font-bold text-[#0d0e23]">Procurement Desk</h2>
@@ -226,7 +226,7 @@ const Tenders = () => {
                                 target="_blank" rel="noopener noreferrer"
                                 whileHover={{ scale: 1.05, x: 5 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#0d0e23] text-white text-[10px] font-black shadow-lg shadow-slate-200 hover:shadow-blue-200 hover:bg-blue-600 transition-all uppercase tracking-widest"
+                                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#0d0e23] text-white text-[10px] whitespace-nowrap font-black shadow-lg shadow-slate-200 hover:shadow-blue-200 hover:bg-blue-600 transition-all uppercase tracking-widest"
                               >
                                 <FiFileText className="text-base" />
                                 View Details
@@ -265,7 +265,7 @@ const Tenders = () => {
                         <a 
                           href={tender.link}
                           target="_blank" rel="noopener noreferrer"
-                          className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-blue-600 text-white font-black text-[10px] uppercase shadow-lg shadow-blue-100"
+                          className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-blue-600 text-white font-black text-[10px] uppercase shadow-lg shadow-blue-100 whitespace-nowrap"
                         >
                           <FiFileText /> View PDF
                         </a>
