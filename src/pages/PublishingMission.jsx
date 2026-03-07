@@ -100,7 +100,7 @@ const PublishingMission = () => {
             <section className="py-32 px-6">
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
-                        <div className="lg:col-span-5 space-y-10 sticky top-32">
+                        <div className="lg:col-span-5 space-y-10">
                             <div className="space-y-4">
                                 <h2 className="text-xs font-black uppercase tracking-[0.3em] text-blue-600">Institution Overview</h2>
                                 <h3 className="text-4xl font-extrabold text-slate-900 leading-tight">
@@ -121,7 +121,7 @@ const PublishingMission = () => {
                             </div>
                         </div>
 
-                        <div className="lg:col-span-7 grid grid-cols-1 gap-4">
+                        <div className="lg:col-span-7 lg:mt-[120px]">
                             <div className="relative group overflow-hidden rounded-[40px] border border-slate-100 shadow-xl">
                                 <img
                                     src="/images/hero_classroom.png"

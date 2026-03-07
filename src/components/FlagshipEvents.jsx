@@ -22,23 +22,23 @@ export default function FlagshipEvent() {
         {/* --- Minimal Header --- */}
         <div className="max-w-3xl mb-16">
           <div className="flex items-center gap-2 mb-4">
-            <div className="h-px w-8 bg-indigo-500"></div>
-            <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-[0.2em]">Latest Initiatives</span>
+            <div className="h-px w-8 bg-blue-500"></div>
+            <span className="text-[10px] font-bold text-blue-500 uppercase tracking-[0.2em]">Latest Initiatives</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 mb-6 leading-tight">
             Connecting Communities <br /> Through <span className="text-slate-400">Collaborative Learning</span>
           </h2>
           <p className="text-lg text-slate-500 font-normal leading-relaxed">
-            A centralized hub for tracking workshops, curriculum updates, and student-focused events across the state.
+            A centralized hub for tracking workshops, curriculum updates, and student-focused initiatives across the state.
           </p>
         </div>
 
         {/* --- Minimal Navigation & Search Bar (Placeholder UI to match design) --- */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12 border-b border-slate-100 pb-8">
           <div className="flex items-center gap-8">
-            <button className="pb-8 -mb-8 text-sm font-semibold text-indigo-600 relative">
+            <button className="pb-8 -mb-8 text-sm font-semibold text-blue-600 relative">
               All Initiatives
-              <div className="absolute bottom-0 left-0 w-full h-0.5 bg-indigo-600"></div>
+              <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600"></div>
             </button>
             <button className="pb-8 -mb-8 text-sm font-semibold text-slate-400 hover:text-slate-600 transition-colors">
               Upcoming
@@ -48,13 +48,13 @@ export default function FlagshipEvent() {
           <div className="flex gap-4">
             <button
               onClick={() => scroll("prev")}
-              className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-indigo-600 hover:border-indigo-600 transition-all active:scale-95 shadow-sm"
+              className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600 transition-all active:scale-95 shadow-sm"
             >
               <ChevronLeft size={20} />
             </button>
             <button
               onClick={() => scroll("next")}
-              className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-indigo-600 hover:border-indigo-600 transition-all active:scale-95 shadow-sm"
+              className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600 transition-all active:scale-95 shadow-sm"
             >
               <ChevronRight size={20} />
             </button>
@@ -88,13 +88,13 @@ export default function FlagshipEvent() {
               </Link>
 
               <div className="flex-1">
-                <div className="flex items-center gap-2 text-[10px] font-bold text-indigo-500 uppercase tracking-widest mb-3">
+                <div className="flex items-center gap-2 text-[10px] font-bold text-blue-500 uppercase tracking-widest mb-3">
                   <Calendar size={12} strokeWidth={2.5} />
                   <span>{item.year || "2026 Initiative"}</span>
                 </div>
 
               <Link to={item.link || `/events/${item.id}`}>
-                  <h3 className="text-xl font-semibold text-slate-900 leading-tight mb-2 group-hover:text-indigo-600 transition-colors">
+                  <h3 className="text-xl font-semibold text-slate-900 leading-tight mb-2 group-hover:text-blue-600 transition-colors">
                     {item.title}
                   </h3>
                 </Link>
@@ -110,7 +110,7 @@ export default function FlagshipEvent() {
                   </div>
                   <Link
                      to={item.link || `/events/${item.id}`}
-                    className="flex items-center gap-1.5 text-indigo-600 text-xs font-bold group-hover:gap-2.5 transition-all"
+                    className="flex items-center gap-1.5 text-blue-600 text-xs font-bold group-hover:gap-2.5 transition-all"
                   >
                     DETAIL <ArrowUpRight size={14} />
                   </Link>

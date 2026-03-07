@@ -237,15 +237,15 @@ const BookReader = () => {
                                         <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-3 mb-5">Resources</h4>
                                         <div className="group cursor-pointer">
                                             <div className="flex items-start gap-4 mb-3">
-                                                <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 transition-colors">
+                                                <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 transition-colors">
                                                     <FaFilePdf size={16} />
                                                 </div>
                                                 <div>
-                                                    <h5 className="text-[15px] font-bold text-slate-800 group-hover:text-purple-600 transition-colors mb-1.5">Full Book PDF</h5>
+                                                    <h5 className="text-[15px] font-bold text-slate-800 group-hover:text-blue-600 transition-colors mb-1.5">Full Book PDF</h5>
                                                     <p className="text-[12px] text-slate-500 leading-relaxed mb-3">
                                                         Download the complete book in high quality format.
                                                     </p>
-                                                    <button className="text-[10px] font-bold text-purple-600 tracking-[0.05em] flex items-center gap-1.5 uppercase transition-transform group-hover:translate-x-1">
+                                                    <button className="text-[10px] font-bold text-blue-600 tracking-[0.05em] flex items-center gap-1.5 uppercase transition-transform group-hover:translate-x-1">
                                                         DOWNLOAD PDF <FaChevronRight size={8} strokeWidth={3} className="ml-0.5" />
                                                     </button>
                                                 </div>

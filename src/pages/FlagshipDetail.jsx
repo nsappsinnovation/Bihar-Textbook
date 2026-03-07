@@ -19,7 +19,7 @@ const FlagshipDetail = () => {
       <div className="min-h-screen flex items-center justify-center bg-slate-50">
         <div className="text-center">
           <h2 className="text-2xl font-bold text-slate-800 mb-4">Program Not Found</h2>
-          <Link to="/" className="text-indigo-600 hover:underline">
+          <Link to="/" className="text-blue-600 hover:underline">
             Go back to Home
           </Link>
         </div>
@@ -57,7 +57,7 @@ const FlagshipDetail = () => {
                     </Link>
 
                     <div className="flex flex-wrap gap-3 mb-6">
-                        <span className="px-4 py-1 bg-indigo-600 text-white text-xs font-bold uppercase tracking-widest rounded-full shadow-lg shadow-indigo-900/20 border border-indigo-400/30">
+                        <span className="px-4 py-1 bg-blue-600 text-white text-xs font-bold uppercase tracking-widest rounded-full shadow-lg shadow-blue-900/20 border border-blue-400/30">
                             {event.tag}
                         </span>
                         <span className="px-4 py-1 bg-emerald-500/90 text-white text-xs font-bold uppercase tracking-widest rounded-full shadow-lg backdrop-blur-sm">
@@ -90,11 +90,11 @@ const FlagshipDetail = () => {
                             prose prose-lg max-w-none
                             prose-headings:font-bold prose-headings:text-slate-900 prose-headings:tracking-tight
                             prose-h2:text-3xl prose-h2:mt-8 prose-h2:mb-4
-                            prose-h3:text-xl prose-h3:text-indigo-900 prose-h3:mt-6
+                            prose-h3:text-xl prose-h3:text-blue-900 prose-h3:mt-6
                             prose-p:text-slate-600 prose-p:leading-relaxed
-                            prose-li:text-slate-600 prose-li:marker:text-indigo-500
+                            prose-li:text-slate-600 prose-li:marker:text-blue-500
                             prose-strong:text-slate-800 prose-strong:font-semibold
-                            prose-blockquote:border-l-4 prose-blockquote:border-indigo-500 prose-blockquote:bg-slate-50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg
+                            prose-blockquote:border-l-4 prose-blockquote:border-blue-500 prose-blockquote:bg-slate-50 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg
                         "
                         dangerouslySetInnerHTML={{ __html: event.fullContent }}
                     />
@@ -104,24 +104,24 @@ const FlagshipDetail = () => {
             {/* Sidebar */}
             <div className="lg:col-span-4 space-y-8">
                 {/* About Card */}
-                <div className="bg-indigo-50 p-8 rounded-3xl border border-indigo-100 shadow-sm">
-                    <h3 className="font-bold text-lg mb-4 text-indigo-950 flex items-center gap-2">
-                        <div className="bg-indigo-600 w-1.5 h-6 rounded-full" />
+                <div className="bg-blue-50 p-8 rounded-3xl border border-blue-100 shadow-sm">
+                    <h3 className="font-bold text-lg mb-4 text-blue-950 flex items-center gap-2">
+                        <div className="bg-blue-600 w-1.5 h-6 rounded-full" />
                         Outcome Focused
                     </h3>
-                    <p className="text-indigo-900/80 mb-6 leading-relaxed">
+                    <p className="text-blue-900/80 mb-6 leading-relaxed">
                         {event.description}
                     </p>
-                    <button className="w-full py-3.5 bg-indigo-600 text-white rounded-xl font-semibold hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-200 flex items-center justify-center gap-2 active:scale-95">
+                    <button className="w-full py-3.5 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all shadow-lg shadow-blue-200 flex items-center justify-center gap-2 active:scale-95">
                         <Share2 size={18} /> Share Focus
                     </button>
-                    <div className="mt-6 pt-6 border-t border-indigo-200/50 flex flex-col gap-3">
-                         <div className="flex items-center gap-3 text-sm text-indigo-900/70">
-                            <CheckCircle size={16} className="text-indigo-600" />
+                    <div className="mt-6 pt-6 border-t border-blue-200/50 flex flex-col gap-3">
+                         <div className="flex items-center gap-3 text-sm text-blue-900/70">
+                            <CheckCircle size={16} className="text-blue-600" />
                             <span>State-wide implementation</span>
                          </div>
-                         <div className="flex items-center gap-3 text-sm text-indigo-900/70">
-                            <CheckCircle size={16} className="text-indigo-600" />
+                         <div className="flex items-center gap-3 text-sm text-blue-900/70">
+                            <CheckCircle size={16} className="text-blue-600" />
                             <span>Student-centric approach</span>
                          </div>
                     </div>
@@ -133,17 +133,17 @@ const FlagshipDetail = () => {
                      <div className="space-y-4">
                         {relatedEvents.map(related => (
                             <Link key={related.id} to={`/flagship-events/${related.id}`} className="block group">
-                                <div className="bg-white p-4 rounded-2xl border border-slate-200 hover:border-indigo-300 transition-colors flex gap-4 items-center shadow-sm">
+                                <div className="bg-white p-4 rounded-2xl border border-slate-200 hover:border-blue-300 transition-colors flex gap-4 items-center shadow-sm">
                                     <img src={related.image} alt="" className="w-16 h-16 rounded-lg object-cover" />
                                     <div>
-                                        <h4 className="font-bold text-slate-800 text-sm group-hover:text-indigo-600 transition-colors line-clamp-2">
+                                        <h4 className="font-bold text-slate-800 text-sm group-hover:text-blue-600 transition-colors line-clamp-2">
                                             {related.title}
                                         </h4>
                                         <span className="text-[10px] uppercase font-bold text-slate-400 mt-1 block">
                                             {related.tag}
                                         </span>
                                     </div>
-                                    <div className="ml-auto text-slate-300 group-hover:text-indigo-500 transition-colors">
+                                    <div className="ml-auto text-slate-300 group-hover:text-blue-500 transition-colors">
                                         <ArrowRight size={20} />
                                     </div>
                                 </div>

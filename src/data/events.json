@@ -2,8 +2,7 @@
     {
         "id": "vr-education-tours",
         "title": "VR Education Tours",
-          "link": "/vr",
-        
+        "link": "/vr",
         "description": "Immersive virtual reality experiences that take students on guided tours of historical sites, science labs, museums, and geography landscapes.",
         "image": "https://images.unsplash.com/photo-1593508512255-86ab42a8e620",
         "tag": "Virtual Reality",
@@ -19,24 +18,23 @@
         ]
     },
     {
-  "id": "linguistic-learning",
-   "link": "/linguistic",
-  "title": "Diverse Linguistic Learning Programs",
-  "description": "Courses in foreign languages, Indian languages, and regional dialects help students develop strong communication skills, improve cultural understanding, and open new academic and career opportunities.This program encourages students to explore languages beyond their regular curriculum, making learning more inclusive, practical, and future-ready.",
-  "image": "https://moreland.edu/wp-content/uploads/2023/06/International-Image-Blog-Post-1024x665.jpg",
-  "tag": "Language Learning",
-  "beneficiaries": "All Students",
-  "year": "2024",
-  "region": "State-wide",
-  "impact_image": "https://moreland.edu/wp-content/uploads/2023/06/International-Image-Blog-Post-1024x665.jpg",
-  "objectives": [
-    "Foreign language courses",
-    "Indian language learning",
-    "Regional dialect awareness",
-    "Improved cultural understanding"
-  ]
-},
-
+        "id": "linguistic-learning",
+        "link": "/linguistic",
+        "title": "Diverse Linguistic Learning Programs",
+        "description": "Courses in foreign languages, Indian languages, and regional dialects help students develop strong communication skills, improve cultural understanding, and open new academic and career opportunities.",
+        "image": "https://moreland.edu/wp-content/uploads/2023/06/International-Image-Blog-Post-1024x665.jpg",
+        "tag": "Language Learning",
+        "beneficiaries": "All Students",
+        "year": "2024",
+        "region": "State-wide",
+        "impact_image": "https://moreland.edu/wp-content/uploads/2023/06/International-Image-Blog-Post-1024x665.jpg",
+        "objectives": [
+            "Foreign language courses",
+            "Indian language learning",
+            "Regional dialect awareness",
+            "Improved cultural understanding"
+        ]
+    },
     {
         "id": "interactive-e-books",
         "title": "Interactive E-Books",
@@ -90,7 +88,8 @@
     },
     {
         "id": "bihar-pustak-mela",
-        "title": "Bihar State Pustak Mela",
+        "title": "Bihar Pustak Mela",
+        "link": "/pustak-mela",
         "description": "An annual flagship event bringing students, publishers, authors, and educators together to celebrate books, learning, and innovation.",
         "image": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8",
         "tag": "Cultural Event",
@@ -108,6 +107,7 @@
     {
         "id": "mobile-library",
         "title": "Mobile Library Initiative",
+        "link": "/mobile-library",
         "description": "Reaching the remotest corners of Bihar with mobile library vans equipped with textbooks, reference books, and digital learning kiosks.",
         "image": "https://i.dawn.com/primary/2020/11/5fa1c8942bb12.jpg",
         "tag": "Outreach",
@@ -119,12 +119,13 @@
             "Reach unserved areas",
             "Promote literacy in villages",
             "Provide access to technology",
-            "encourage community learning"
+            "Encourage community learning"
         ]
     },
     {
         "id": "curriculum-modernization",
-        "title": "Curriculum Modernization Expo",
+        "title": "Curriculum Mobilization Expo",
+        "link": "/curriculum-expo",
         "description": "A platform showcasing modern pedagogies, NEP-aligned curriculum reforms, and interactive textbooks for 21st-century learners.",
         "image": "https://images.unsplash.com/photo-1509062522246-3755977927d7",
         "tag": "Education Reform",
@@ -141,8 +142,8 @@
     },
     {
         "id": "audio-books-inclusive",
-        "link":"/audio-books",
-        "title": "Audio Books for Inclusive Learning",
+        "link": "/audio-books",
+        "title": "Audio Book for Impulsive Learning",
         "description": "Curriculum-based audiobooks in Hindi and regional languages to support visually impaired students, slow readers, and auditory learners.",
         "image": "https://images.unsplash.com/photo-1516979187457-637abb4f9353",
         "tag": "Inclusive Education",
@@ -159,6 +160,7 @@
     },
     {
         "id": "student-assessment-platform",
+        "link": "/assessment-platform",
         "title": "Student Assessment & Practice Platform",
         "description": "An integrated digital assessment system offering chapter-wise tests, instant evaluation, performance analytics, and learning recommendations.",
         "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3",
@@ -176,6 +178,7 @@
     },
     {
         "id": "regional-content-drive",
+        "link": "/regional-content",
         "title": "Local Language & Regional Content Drive",
         "description": "Development and promotion of textbooks, audio content, and digital resources in Hindi and regional languages to strengthen learning outcomes.",
         "image": "https://images.unsplash.com/photo-1529070538774-1843cb3265df",

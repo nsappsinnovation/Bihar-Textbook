@@ -136,7 +136,7 @@ import { motion } from 'framer-motion';
      <h1 className="text-4xl md:text-5xl font-bold text-slate-900">Diverse Linguistic Learning Programs</h1>
 
       {/* Highlight text */}
-      <p className="mt-4 text-lg font-semibold text-yellow-500">
+      <p className="mt-4 text-lg font-semibold text-blue-500">
         Empowering Multilingual Education Through Immersion
       </p>
 
@@ -150,7 +150,7 @@ import { motion } from 'framer-motion';
 
         {/* Card 1 */}
         <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl">🎓</div>
+          <div className="text-blue-500 text-xl">🎓</div>
           <div>
             <h3 className="font-semibold text-slate-800">
               For Grades 8-12
@@ -163,7 +163,7 @@ import { motion } from 'framer-motion';
 
         {/* Card 2 */}
         <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl">✅</div>
+          <div className="text-blue-500 text-xl">✅</div>
           <div>
             <h3 className="font-semibold text-slate-800">
               Curriculum Aligned
@@ -176,7 +176,7 @@ import { motion } from 'framer-motion';
 
         {/* Card 3 */}
         <div className="md:col-span-2 p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl">🕶️</div>
+          <div className="text-blue-500 text-xl">🕶️</div>
           <div>
             <h3 className="font-semibold text-slate-800">
               Immersive VR Lessons
@@ -224,33 +224,28 @@ import { motion } from 'framer-motion';
 
           {/* ONE LINE HEADING */}
           <h3 className="text-4xl font-extrabold text-slate-900 leading-tight">
-            Empowering Learning Through{" "}
-            <span className="text-slate-400">VR Education Tours</span>
+            Preserving Bihar's{" "}
+            <span className="text-slate-400">Linguistic Heritage</span>
           </h3>
         </div>
 
         <p className="text-lg text-slate-600 leading-relaxed font-light">
-          Empowering Learning Through VR Education Tours means creating immersive
-          learning experiences built on visual clarity, guided exploration, and
-          accessibility. By combining virtual reality with thoughtfully designed
-          visuals and structured narration, we help learners of all abilities
-          understand, engage, and connect—without barriers caused by traditional
-          classroom limitations.
+          Our Linguistics initiative is dedicated to the documentation, study, and promotion of Bihar's diverse regional languages and dialects. By creating comprehensive educational resources, we foster an inclusive environment where students can stay rooted in their cultural identity while achieving academic excellence.
         </p>
 
         {/* Bullet Points */}
         <div className="space-y-4 pt-2">
           {[
-            "Supports learning through VR immersion, visuals, and guided structure",
-            "Bridges learning gaps through interactive and accessible virtual experiences",
-            "Makes education engaging through exploration, clarity, and storytelling",
-            "Designed to support understanding beyond textbooks and spoken-only instruction",
+            "Detailed documentation of endangered and native dialects",
+            "Creation of specialized textbooks for multilingual education",
+            "Promotes cultural pride and inclusive learning",
+            "Advanced research and language preservation strategies",
           ].map((item, i) => (
             <div
               key={i}
               className="flex items-start gap-3 text-sm font-bold text-slate-700"
             >
-              <CheckCircle2 size={18} className="text-yellow-600 mt-0.5" />
+              <CheckCircle2 size={18} className="text-blue-600 mt-0.5" />
               {item}
             </div>
           ))}

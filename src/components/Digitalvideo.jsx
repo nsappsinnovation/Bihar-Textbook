@@ -21,8 +21,8 @@ export default function  Digitalvideo() {
         {/* Header */}
         <div className="max-w-3xl mb-16">
           <div className="flex items-center gap-2 mb-4">
-            <div className="h-px w-8 bg-purple-600"></div>
-            <span className="text-[10px] font-bold text-purple-600 uppercase tracking-[0.2em]">
+            <div className="h-px w-8 bg-blue-600"></div>
+            <span className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em]">
               Full Course
             </span>
           </div>
@@ -61,7 +61,7 @@ export default function  Digitalvideo() {
 
               {/* Content */}
               <div className="p-5 flex flex-col flex-1">
-                <span className="text-xs font-bold text-purple-600 mb-2">
+                <span className="text-xs font-bold text-blue-600 mb-2">
                   Lesson {lesson.id}
                 </span>
 
@@ -73,7 +73,7 @@ export default function  Digitalvideo() {
                   href={`https://www.youtube.com/watch?v=${lesson.youtubeId}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-auto inline-flex items-center gap-1.5 text-purple-600 text-xs font-bold hover:underline"
+                  className="mt-auto inline-flex items-center gap-1.5 text-blue-600 text-xs font-bold hover:underline"
                 >
                   WATCH <ArrowUpRight size={14} />
                 </a>
