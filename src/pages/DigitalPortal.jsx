@@ -138,7 +138,7 @@ import { motion } from 'framer-motion';
 
         {/* Card 1 */}
         <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl">💻</div>
+          <div className="text-yellow-500 text-xl"></div>
           <div>
             <h3 className="font-semibold text-slate-800">
               Interactive Courses
@@ -151,7 +151,7 @@ import { motion } from 'framer-motion';
 
         {/* Card 2 */}
         <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl">📈</div>
+          <div className="text-yellow-500 text-xl"></div>
           <div>
             <h3 className="font-semibold text-slate-800">
               Skill Enhancement
@@ -164,7 +164,7 @@ import { motion } from 'framer-motion';
 
         {/* Card 3 */}
         <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl">⏰</div>
+          <div className="text-yellow-500 text-xl"></div>
           <div>
             <h3 className="font-semibold text-slate-800">
               Learn Anytime

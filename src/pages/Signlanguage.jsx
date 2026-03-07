@@ -131,7 +131,7 @@ import { motion } from 'framer-motion';
 
             {/* Card 1 */}
             <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-              <div className="text-yellow-500 text-xl">🎓</div>
+              <div className="text-yellow-500 text-xl"></div>
               <div>
                 <h3 className="font-semibold text-slate-800">
                   For Grades 8–12
@@ -144,7 +144,7 @@ import { motion } from 'framer-motion';
 
             {/* Card 2 */}
             <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-              <div className="text-yellow-500 text-xl">✅</div>
+              <div className="text-yellow-500 text-xl"></div>
               <div>
                 <h3 className="font-semibold text-slate-800">
                   Curriculum Aligned
@@ -157,7 +157,7 @@ import { motion } from 'framer-motion';
 
             {/* Card 3 */}
             <div className="md:col-span-2 p-5 border rounded-xl shadow-sm flex gap-4">
-              <div className="text-yellow-500 text-xl">🎥</div>
+              <div className="text-yellow-500 text-xl"></div>
               <div>
                 <h3 className="font-semibold text-slate-800">
                   100+ Video Lessons

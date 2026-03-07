@@ -26,25 +26,25 @@ import { motion } from 'framer-motion';
     label: "Audio Library",
     value: "10K+",
     sub: "Stories, lessons & knowledge",
-    icon: "📚",
+
   },
   {
     label: "Listening Time",
     value: "24/7",
     sub: "Learn anytime, anywhere",
-    icon: "🎧",
+    
   },
   {
     label: "Skill Growth",
     value: "100+",
     sub: "Topics for students & careers",
-    icon: "🚀",
+   
   },
   {
     label: "Family Learning",
     value: "Shared",
     sub: "Parents & kids can learn together",
-    icon: "👨‍👩‍👧",
+   
   },
 ];
 
@@ -139,7 +139,7 @@ import { motion } from 'framer-motion';
 
         {/* Card 1 */}
         <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl">🎧</div>
+          <div className="text-yellow-500 text-xl"></div>
           <div>
             <h3 className="font-semibold text-slate-800">
               Hands-Free Learning
@@ -152,7 +152,7 @@ import { motion } from 'framer-motion';
 
         {/* Card 2 */}
         <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl">📚</div>
+          <div className="text-yellow-500 text-xl"></div>
           <div>
             <h3 className="font-semibold text-slate-800">
               Huge Audio Library
@@ -165,7 +165,7 @@ import { motion } from 'framer-motion';
 
         {/* Card 3 */}
         <div className="md:col-span-2 p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl">🚀</div>
+          <div className="text-yellow-500 text-xl"></div>
           <div>
             <h3 className="font-semibold text-slate-800">
               Learn Anytime, Anywhere
@@ -187,9 +187,7 @@ import { motion } from 'framer-motion';
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
                         {stats.map((stat, i) => (
                             <div key={i} className="bg-white p-10 space-y-4 hover:bg-slate-50 transition-colors">
-                                <div className="p-3 bg-blue-50 text-blue-600 rounded-xl w-fit">
-                                    {stat.icon}
-                                </div>
+                              
                                 <div>
                                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{stat.label}</p>
                                     <h4 className="text-3xl font-black text-slate-900 tracking-tight">{stat.value}</h4>

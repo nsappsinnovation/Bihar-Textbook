@@ -107,7 +107,19 @@ const quizzes = [
       "Always respect road rules",
     ],
   },
-
+ {
+    title: "How to Use an ATM Machine",
+    image: "/images/skills/i1.png",
+    description:
+      "Step-by-step guide to safely using an ATM machine.",
+    details: [
+      "Insert your ATM card properly",
+      "Enter your PIN secretly",
+      "Select withdrawal or balance inquiry",
+      "Collect cash and receipt carefully",
+      "Never share your PIN with anyone",
+    ],
+  },
   {
     title: "How to Cross the Road Safely",
     image: "/images/skills/a2.png",
@@ -121,8 +133,8 @@ const quizzes = [
       "Wait patiently for vehicles to stop",
     ],
   },
-
-  {
+   
+   {
     title: "Walking Rules: Which Side to Walk On",
     image: "/images/skills/a3.png",
     description:
@@ -136,23 +148,11 @@ const quizzes = [
     ],
   },
 
-  {
-    title: "How to Use an ATM Machine",
-    image: "/images/skills/a4.png",
-    description:
-      "Step-by-step guide to safely using an ATM machine.",
-    details: [
-      "Insert your ATM card properly",
-      "Enter your PIN secretly",
-      "Select withdrawal or balance inquiry",
-      "Collect cash and receipt carefully",
-      "Never share your PIN with anyone",
-    ],
-  },
+ 
 
   {
     title: "Basic Money Handling Skills",
-    image: "/images/skills/a5.png",
+    image: "/images/skills/image.png",
     description:
       "Learn how to manage money responsibly in daily life.",
     details: [
@@ -199,7 +199,7 @@ const quizzes = [
         {/* Card 1 */}
       {/* Card 1 */}
 <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-  <div className="text-yellow-500 text-xl">🚦</div>
+  <div className="text-yellow-500 text-xl"></div>
   <div>
     <h3 className="font-semibold text-slate-800">
       Road & Traffic Awareness
@@ -212,7 +212,7 @@ const quizzes = [
 
 {/* Card 2 */}
 <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-  <div className="text-yellow-500 text-xl">🏧</div>
+  <div className="text-yellow-500 text-xl"></div>
   <div>
     <h3 className="font-semibold text-slate-800">
       Financial Basics
@@ -225,7 +225,7 @@ const quizzes = [
 
 {/* Card 3 */}
 <div className="md:col-span-2 p-5 border rounded-xl shadow-sm flex gap-4">
-  <div className="text-yellow-500 text-xl">🛣</div>
+  <div className="text-yellow-500 text-xl"></div>
   <div>
     <h3 className="font-semibold text-slate-800">
       Everyday Responsibility Skills
@@ -237,7 +237,7 @@ const quizzes = [
 </div>
         {/* Card 3 */}
         <div className="md:col-span-2 p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl">🚀</div>
+          <div className="text-yellow-500 text-xl"></div>
           <div>
             <h3 className="font-semibold text-slate-800">
               100+ Activities & Practice Tasks
@@ -305,7 +305,7 @@ const quizzes = [
         <div className="lg:col-span-7 grid grid-cols-1 gap-4">
                                     <div className="relative group overflow-hidden rounded-[40px] border border-slate-100 shadow-xl">
                                         <img
-                                            src= "/images/skills/image.png"
+                                            src= "/images/skills/i.png"
                                             alt="Facility"
                                             className="w-full aspect-[4/3] object-cover transition-transform duration-1000 group-hover:scale-105"
                                         />

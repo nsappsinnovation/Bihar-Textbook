@@ -26,25 +26,25 @@ import { motion } from 'framer-motion';
     label: "VR Tour Library",
     value: "120K+",
     sub: "Immersive educational experiences",
-    icon: "🌍",
+    
   },
   {
     label: "Anytime Learning",
     value: "24/7",
     sub: "Explore anytime, anywhere",
-    icon: "🕶️",
+    
   },
   {
     label: "Learning Categories",
     value: "100+",
     sub: "Science, history, careers & more",
-    icon: "🚀",
+  
   },
   {
     label: "Inclusive Access",
     value: "100%",
     sub: "WCAG compliant learning design",
-    icon: "♿",
+    
   },
 ];
 
@@ -137,52 +137,48 @@ import { motion } from 'framer-motion';
 
       {/* Highlight text */}
       <p className="mt-4 text-lg font-semibold text-yellow-500">
-        Empowering Multilingual Education Through Immersion
+      Support for learning and understanding multiple languages to build global communication skills.
       </p>
 
-      {/* Description */}
-      <p className="mt-4 text-slate-600 max-w-md">
-        Interactive multilingual learning programs designed for Grades 8–12 students, covering regional and global languages.
-      </p>
-
+    
       {/* Feature Cards */}
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
 
         {/* Card 1 */}
         <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl">🎓</div>
+          <div className="text-yellow-500 text-xl"></div>
           <div>
             <h3 className="font-semibold text-slate-800">
-              For Grades 8-12
+                 Multilingual Learning
             </h3>
             <p className="text-sm text-slate-600">
-              Tailored VR content for middle and high school students.
+                Support for learning and understanding multiple languages to build global communication skills.
             </p>
           </div>
         </div>
 
         {/* Card 2 */}
         <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl">✅</div>
+          <div className="text-yellow-500 text-xl"></div>
           <div>
             <h3 className="font-semibold text-slate-800">
-              Curriculum Aligned
+               Language Skill Development
             </h3>
             <p className="text-sm text-slate-600">
-              Meets educational standards for VR-based learning.
+                Focus on reading, writing, speaking, and listening skills to strengthen language proficiency.
             </p>
           </div>
         </div>
 
         {/* Card 3 */}
         <div className="md:col-span-2 p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl">🕶️</div>
+          <div className="text-yellow-500 text-xl"></div>
           <div>
             <h3 className="font-semibold text-slate-800">
-              Immersive VR Lessons
+               Cultural & Communication Awareness
             </h3>
             <p className="text-sm text-slate-600">
-              Explore science labs, history tours, and space adventures in 3D VR.
+             Learn languages alongside cultural context to improve communication and understanding across communities.
             </p>
           </div>
         </div>
@@ -198,9 +194,7 @@ import { motion } from 'framer-motion';
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
                         {stats.map((stat, i) => (
                             <div key={i} className="bg-white p-10 space-y-4 hover:bg-slate-50 transition-colors">
-                                <div className="p-3 bg-blue-50 text-blue-600 rounded-xl w-fit">
-                                    {stat.icon}
-                                </div>
+                                
                                 <div>
                                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{stat.label}</p>
                                     <h4 className="text-3xl font-black text-slate-900 tracking-tight">{stat.value}</h4>
@@ -225,26 +219,27 @@ import { motion } from 'framer-motion';
           {/* ONE LINE HEADING */}
           <h3 className="text-4xl font-extrabold text-slate-900 leading-tight">
             Empowering Learning Through{" "}
-            <span className="text-slate-400">VR Education Tours</span>
+            <span className="text-slate-400"> Diverse Linguistic Education</span>
           </h3>
         </div>
 
         <p className="text-lg text-slate-600 leading-relaxed font-light">
-          Empowering Learning Through VR Education Tours means creating immersive
-          learning experiences built on visual clarity, guided exploration, and
-          accessibility. By combining virtual reality with thoughtfully designed
-          visuals and structured narration, we help learners of all abilities
-          understand, engage, and connect—without barriers caused by traditional
-          classroom limitations.
+       Diverse Linguistic Learning Programs promote inclusive education by supporting 
+multilingual learning and effective communication. Through structured lessons, 
+interactive activities, and culturally rich content, learners develop strong 
+language skills while gaining a deeper understanding of different cultures and 
+communities.
         </p>
 
         {/* Bullet Points */}
         <div className="space-y-4 pt-2">
           {[
-            "Supports learning through VR immersion, visuals, and guided structure",
-            "Bridges learning gaps through interactive and accessible virtual experiences",
-            "Makes education engaging through exploration, clarity, and storytelling",
-            "Designed to support understanding beyond textbooks and spoken-only instruction",
+          
+  "Supports multilingual learning through structured language programs and interactive activities",
+  "Encourages communication skills through reading, writing, speaking, and listening practice",
+  "Promotes cultural understanding by exploring languages from diverse communities",
+  "Enhances language proficiency through engaging and accessible learning resources"
+
           ].map((item, i) => (
             <div
               key={i}
@@ -361,36 +356,7 @@ import { motion } from 'framer-motion';
   </div>
 </section>
             
-             <section className="py-32 px-6">
-                            <div className="max-w-5xl mx-auto bg-slate-50 rounded-[48px] p-12 md:p-24 text-center border border-slate-100 shadow-sm relative overflow-hidden group">
-                                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-100/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-1000" />
-            
-                                <div className="relative z-10 space-y-10">
-                                    <div className="flex justify-center">
-                                        <div className="p-4 bg-white rounded-2xl shadow-sm border border-slate-100">
-                                            <FileText size={32} className="text-blue-600" />
-                                        </div>
-                                    </div>
-                                    <div className="space-y-4">
-                                        <h3 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight">Explore the Courses</h3>
-                                        <p className="text-lg text-slate-500 font-light max-w-xl mx-auto leading-relaxed">
-                                            Our standardized materials are available for review. Access the digital archive to understand our curriculum depth.
-                                        </p>
-                                    </div>
-                                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                                        <Link to="/ar-courses" className="w-full sm:w-auto">
-                                            <button className="w-full sm:w-auto px-12 py-5 bg-slate-900 text-white rounded-full text-xs font-black uppercase tracking-[0.2em] hover:bg-blue-600 hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-slate-200 flex items-center justify-center gap-3">
-                                                Enter course <ArrowRight size={16} />
-                                            </button>
-                                        </Link>
-                                        <Link to="/" className="w-full sm:w-auto px-10 py-5 text-slate-400 hover:text-slate-900 text-xs font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2">
-                                            <ArrowLeft size={16} /> Back to Hub
-                                        </Link>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-            
+         
      </div>
      
    )

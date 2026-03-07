@@ -33,6 +33,7 @@ import Trend2 from "./pages/Trendingcyber.jsx";
 import Quiz1 from "./pages/Quizcyber.jsx";
 import Quiz2 from "./pages/Skillsquiz.jsx";
 import Cyber from "./pages/CyberSecurity"
+import Ebook  from "./pages/Ebook"
 import Basicskill from "./pages/Basicskills.jsx"
 
 /* Components */
@@ -83,7 +84,8 @@ function App() {
             <Route path="/sign" element={<Sign />} />
             <Route path="/vr" element={<Vr />} />
              <Route path="/linguistic" element={<Linguistics />} />
-            <Route path="/digital-portal" element={<Digital />} />
+              <Route path="/ebook" element={<Ebook />} />
+            <Route path="/digital" element={<Digital />} />
             <Route path="/audio-books" element={<Audio />} />
             <Route path="/ai-intelligence" element={<AiIntelligence />} />
             <Route path="/teacher-training" element={<TeacherTraining />} />

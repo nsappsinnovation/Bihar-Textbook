@@ -140,8 +140,9 @@ const Hero = () => {
                             exit="exit"
                         >
                             <div className="overflow-hidden">
-                                <motion.h1 className="text-5xl md:text-7xl lg:text-[85px] uppercase font-black tracking-tighter leading-[0.95] mb-4">
-                                    <span className="block text-white drop-shadow-2xl">
+                              <motion.h1 className="text-5xl md:text-6xl font-extrabold text-slate-900 leading-tight max-w-xl">
+  <span className="block text-white drop-shadow-2xl">
+                                        
                                         {currentSlide.title}
                                     </span>
                                     <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-white/90 to-blue-200">

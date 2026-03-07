@@ -96,19 +96,19 @@ const CyberSecurity = () => {
 
   // ✅ Process Steps (Carousel)
   const processSteps = [
-    {
-      title: "Cyber Awareness & Online Safety",
-      image: "/images/skills/c1.png",
-      description:
-        "Learn the most important cyber safety rules to stay protected while using mobile phones, apps, and websites.",
-      details: [
-        "Safe browsing habits",
-        "Avoid fake links and scams",
-        "Understand digital footprints",
-        "Privacy settings basics",
-        "Safe social media usage",
-      ],
-    },
+   {
+  title: "AI Deepfakes & Photo Safety",
+  image: "/images/skills/deep.png",
+  description:
+    "Learn how AI-generated images and deepfake photos can be misused online and how to protect yourself on social media.",
+  details: [
+    "Identify deepfake and AI-generated photos",
+    "Risks of fake social media profiles",
+    "Protect your personal photos online",
+    "Verify suspicious images and profiles",
+    "Safe social media sharing practices"
+  ]
+},
     {
       title: "Phishing, Scams & Social Engineering",
       image: "/images/skills/c2.png",
@@ -122,6 +122,19 @@ const CyberSecurity = () => {
         "Real-world scam examples",
       ],
     },
+    {
+  title: "AI-Generated Images & Online Safety",
+  image: "/images/skills/ai.png",
+  description:
+    "Learn how AI-generated images can be used to spread misinformation or create fake identities online, and how to recognize and verify them.",
+  details: [
+    "Understand how AI-generated images are created",
+    "Identify fake or AI-generated profile photos",
+    "Recognize manipulated or misleading images online",
+    "Learn tools and tips to verify image authenticity",
+    "Protect your photos from misuse on social media"
+  ]
+},
     {
       title: "Passwords & Account Protection",
       image: "/images/skills/cybert.png",
@@ -171,7 +184,7 @@ const CyberSecurity = () => {
           {/* LEFT: Image */}
           <div className="flex justify-center">
             <img
-              src= "/images/skills/c.png"
+              src="/images/skills/c.png"
               alt="Cyber Security Illustration"
               className="w-[620px] h-auto object-contain"
             />
@@ -195,7 +208,7 @@ const CyberSecurity = () => {
             {/* Feature Cards */}
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-                <div className="text-yellow-500 text-xl">🛡️</div>
+                <div className="text-yellow-500 text-xl"></div>
                 <div>
                   <h3 className="font-semibold text-slate-800">
                     Real-World Cyber Safety
@@ -207,7 +220,7 @@ const CyberSecurity = () => {
               </div>
 
               <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-                <div className="text-yellow-500 text-xl">🔐</div>
+                <div className="text-yellow-500 text-xl"></div>
                 <div>
                   <h3 className="font-semibold text-slate-800">
                     Account Protection Skills
@@ -219,7 +232,7 @@ const CyberSecurity = () => {
               </div>
 
               <div className="md:col-span-2 p-5 border rounded-xl shadow-sm flex gap-4">
-                <div className="text-yellow-500 text-xl">⚡</div>
+                <div className="text-yellow-500 text-xl"></div>
                 <div>
                   <h3 className="font-semibold text-slate-800">
                     Step-by-Step Learning Modules
@@ -238,6 +251,7 @@ const CyberSecurity = () => {
       <section className="py-32 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
+
             {/* Left Content */}
             <div className="lg:col-span-5 space-y-10 sticky top-32">
               <div className="space-y-4">
@@ -246,35 +260,32 @@ const CyberSecurity = () => {
                 </h2>
 
                 <h3 className="text-4xl font-extrabold text-slate-900 leading-tight">
-                  Protecting Students Through
+                  Empowering Students Through
                   <br />
-                  <span className="text-slate-400">Cyber Security Awareness</span>
+                  <span className="text-slate-400">
+                    Basic Learning Skills
+                  </span>
                 </h3>
               </div>
 
               <p className="text-lg text-slate-600 leading-relaxed font-light">
-                Cyber Security is not only for hackers or IT professionals — it
-                is a daily life skill. Students today use smartphones, social
-                media, online payments, email, and apps every day. This makes
-                them a target for scams, phishing, fraud, and malware.
+                Basic Life Skills focuses on essential everyday knowledge that every student
+                must know to stay safe, independent, and responsible in society.
               </p>
 
-              <p className="text-lg text-slate-600 leading-relaxed font-light">
-                This program helps learners build strong cyber awareness,
-                recognize threats early, protect personal data, secure accounts,
-                and develop safe online habits that prevent cyber attacks.
-              </p>
+
 
               <div className="space-y-4">
                 {[
-                  "Learn how cyber attacks happen in real life (not only theory)",
+
+
                   "Understand phishing, scam calls, OTP fraud and fake links",
                   "Build strong password habits and enable Two-Factor Authentication",
-                  "Learn safe browsing, safe downloads, and device protection",
-                  "Protect your identity, privacy, and personal data online",
-                  "Improve cyber hygiene for students, families, and daily life",
-                  "Understand malware, ransomware and basic cyber threats",
-                  "Become confident in online safety and responsible internet use",
+                  "Protect your identity, privacy, and personal data online","Understand malware, ransomware and basic cyber threats",
+                  "Understand risks of AI-generated images, deepfakes, and fake profiles on social media",
+                  "Learn how photos can be misused or edited using AI tools and how to verify authenticity",
+                  "Learn how to protect your photos and personal content from misuse online"
+
                 ].map((item, i) => (
                   <div
                     key={i}
@@ -288,67 +299,26 @@ const CyberSecurity = () => {
             </div>
 
             {/* Right Images */}
-            <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="relative group overflow-hidden rounded-[40px] border border-slate-100 shadow-xl md:col-span-2">
+            <div className="lg:col-span-7 grid grid-cols-1 gap-4">
+              <div className=" mt-24 relative group overflow-hidden rounded-[40px] bottomborder border-slate-100 shadow-xl">
                 <img
                   src="/images/skills/c1.png"
-                  alt="Cyber Security"
-                  className="w-full aspect-[16/9] object-cover transition-transform duration-1000 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
-                <div className="absolute bottom-10 left-10 text-white">
-                  <p className="text-[10px] font-black uppercase tracking-widest mb-2 opacity-80">
-                    Cyber Awareness
-                  </p>
-                </div>
-              </div>
-
-              <div className="relative group overflow-hidden rounded-[40px] border border-slate-100 shadow-xl">
-                <img
-                  src="/images/skills/c1.png"
-                  alt="Phishing"
+                  alt="Facility"
                   className="w-full aspect-[4/3] object-cover transition-transform duration-1000 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
-                <div className="absolute bottom-8 left-8 text-white">
-                  <p className="text-[10px] font-black uppercase tracking-widest mb-2 opacity-80">
-                    Phishing Protection
-                  </p>
-                </div>
-              </div>
-
-              <div className="relative group overflow-hidden rounded-[40px] border border-slate-100 shadow-xl">
-                <img
-                  src="/images/skills/cybert.png"
-                  alt="Passwords"
-                  className="w-full aspect-[4/3] object-cover transition-transform duration-1000 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
-                <div className="absolute bottom-8 left-8 text-white">
-                  <p className="text-[10px] font-black uppercase tracking-widest mb-2 opacity-80">
-                    Account Safety
-                  </p>
-                </div>
-              </div>
-
-              <div className="relative group overflow-hidden rounded-[40px] border border-slate-100 shadow-xl md:col-span-2">
-                <img
-                  src="/images/skills/c4.png"
-                  alt="Device Security"
-                  className="w-full aspect-[16/9] object-cover transition-transform duration-1000 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
                 <div className="absolute bottom-10 left-10 text-white">
-                  <p className="text-[10px] font-black uppercase tracking-widest mb-2 opacity-80">
-                    Malware & Device Protection
-                  </p>
+                  <p className="text-[10px] font-black uppercase tracking-widest mb-2 opacity-80">Our Facility</p>
+                  <h4 className="text-2xl font-bold"></h4>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
 
+        {/* Image 2 */}
+
+      </section>
       {/* ================= CAROUSEL ================= */}
       <section className="py-32 bg-slate-900 px-6 rounded-[60px] mx-4 mb-4">
         <div className="max-w-7xl mx-auto">
@@ -430,94 +400,7 @@ const CyberSecurity = () => {
       </section>
 
       {/* ================= TRENDING + QUIZZES ================= */}
-      <section className="py-20 px-6 bg-white">
-        <div className="max-w-6xl mx-auto border border-slate-300">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-            {/* LEFT */}
-            <div className="p-10 border-b md:border-b-0 border-slate-300">
-              <h2 className="text-red-600 font-bold text-lg uppercase tracking-wide mb-6">
-                Trending Pages on Cyber Security
-              </h2>
 
-              <div className="space-y-10">
-                {trendingPages.map((item, i) => (
-                  <Link
-                    key={i}
-                    to={`/cyber/trending/${item.slug}`}
-                    className="flex gap-4 group"
-                  >
-                    {/* Arrow like SkillsYouNeed */}
-                    <span
-                      className="mt-[6px] w-0 h-0 
-                      border-t-[5px] border-b-[5px] border-l-[7px]
-                      border-t-transparent border-b-transparent border-l-slate-700"
-                    />
-
-                    <div>
-                      <h3 className="text-blue-900 font-bold uppercase group-hover:underline">
-                        {item.title}
-                      </h3>
-
-                      <p className="mt-2 text-slate-700 text-sm leading-relaxed">
-                        {item.description}
-                      </p>
-
-                      <p className="mt-2 text-slate-500 text-xs">{item.section}</p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            {/* RIGHT */}
-            <div className="p-10">
-              <h2 className="text-red-600 font-bold text-lg uppercase tracking-wide mb-2">
-                Quizzes on Cyber Security
-              </h2>
-
-              <p className="text-slate-700 text-sm mb-6">
-                Develop your cyber safety skills with our interactive quizzes
-              </p>
-
-              <div className="space-y-10">
-                {quizzes.map((quiz, i) => (
-                  <Link
-                    key={i}
-                    to={`/cyber/quiz/${quiz.slug}`}
-                    className="flex gap-4 group"
-                  >
-                    {/* Arrow */}
-                    <span
-                      className="mt-[6px] w-0 h-0 
-                      border-t-[5px] border-b-[5px] border-l-[7px]
-                      border-t-transparent border-b-transparent border-l-slate-700"
-                    />
-
-                    <div>
-                      <h3 className="text-blue-900 font-bold uppercase group-hover:underline">
-                        {quiz.title}
-                      </h3>
-
-                      <p className="mt-2 text-slate-700 text-sm leading-relaxed">
-                        {quiz.description}
-                      </p>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-
-              {/* Optional banner image space */}
-              <div className="mt-10 rounded-xl overflow-hidden border border-slate-300">
-                <img
-                  src="/images/skills/c2.png"
-                  alt="Cyber Security Banner"
-                  className="w-full h-[250px] object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 };
