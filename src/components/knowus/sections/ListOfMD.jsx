@@ -85,16 +85,13 @@ const ListOfMD = () => {
 
       {/* ================= TABLE SECTION ================= */}
       <section className="max-w-6xl mx-auto px-6">
-        <div className="w-full bg-white rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden font-sans">
+        <div className="w-full bg-transparent border border-slate-300 overflow-hidden font-sans">
           {/* SEARCH & STATS BAR */}
-          <div className="bg-slate-50/50 border-b border-slate-100 p-8 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="bg-transparent border-b border-slate-300 p-6 flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-4">
-               <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-xl shadow-lg shadow-blue-100">
-                  <User />
-               </div>
                <div>
-                  <h3 className="text-lg font-black text-[#0d0e23]">Official Directory</h3>
-                  <p className="text-[10px] font-black uppercase tracking-widest text-slate-400">Chronological List of MDs</p>
+                  <h3 className="text-lg font-bold text-[#0d0e23]">Official Directory</h3>
+                  <p className="text-sm text-slate-500">Chronological List of MDs</p>
                </div>
             </div>
 
@@ -108,7 +105,7 @@ const ListOfMD = () => {
                  placeholder="Search by name..."
                  value={searchTerm}
                  onChange={(e) => setSearchTerm(e.target.value)}
-                 className="w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none font-medium"
+                 className="w-full pl-11 pr-4 py-2 bg-transparent border border-slate-300 text-sm focus:border-blue-500 transition-all outline-none text-[#0d0e23]"
                />
             </div>
           </div>
@@ -116,54 +113,33 @@ const ListOfMD = () => {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-slate-50/30 border-b border-slate-100">
-                  <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">#</th>
-                  <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Managing Director</th>
-                  <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Appointment Date</th>
-                  <th className="px-8 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest">Tenure End</th>
+                <tr className="bg-slate-200 border-b border-slate-300 text-[#0d0e23]">
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">#</th>
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Managing Director</th>
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Appointment Date</th>
+                  <th className="px-6 py-4 text-sm font-bold">Tenure End</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-50">
+              <tbody className="divide-y divide-slate-300">
                 {filteredList.map((md, index) => (
-                  <tr key={md.id} className="hover:bg-blue-50/30 transition-all group">
-                    <td className="px-8 py-6 text-sm text-slate-400 font-bold">
+                  <tr key={md.id} className="text-[#0d0e23]">
+                    <td className="px-6 py-4 text-sm border-r border-slate-300">
                       {md.id.toString().padStart(2, '0')}
                     </td>
 
-                    <td className="px-8 py-6">
-                      <div className="flex items-center gap-4">
-                        <div className="h-12 w-12 rounded-2xl flex-shrink-0 bg-blue-50 text-blue-600 flex items-center justify-center font-black text-xs ring-4 ring-white shadow-sm overflow-hidden group-hover:bg-blue-600 group-hover:text-white transition-all">
-                           {md.photo ? (
-                               <img src={md.photo} alt="" className="w-full h-full object-cover" />
-                           ) : (
-                               <span>{getInitials(md.name)}</span>
-                           )}
-                        </div>
-                        <div>
-                            <div className="text-sm font-black text-[#0d0e23] group-hover:text-blue-600 transition-colors">
-                                {md.name}
-                            </div>
-                            {index === 0 && !searchTerm && (
-                                 <span className="inline-flex mt-1.5 px-2 py-0.5 bg-blue-100 text-blue-700 text-[9px] uppercase font-black rounded-md tracking-tighter">
-                                    Current MD
-                                 </span>
-                            )}
-                        </div>
+                    <td className="px-6 py-4 text-sm border-r border-slate-300">
+                      <div className="flex flex-col">
+                          <span className="font-semibold">{md.name}</span>
+                          
                       </div>
                     </td>
 
-                    <td className="px-8 py-6">
-                        <div className="flex items-center gap-2.5 text-xs text-slate-600 font-bold">
-                            <Calendar size={14} className="text-blue-500" />
-                            {md.from}
-                        </div>
+                    <td className="px-6 py-4 text-sm border-r border-slate-300">
+                        {md.from}
                     </td>
 
-                    <td className="px-8 py-6">
-                        <div className="flex items-center gap-2.5 text-xs text-slate-500 font-medium">
-                            <Clock size={14} className="text-slate-300" />
-                            {md.to}
-                        </div>
+                    <td className="px-6 py-4 text-sm">
+                        {md.to}
                     </td>
                   </tr>
                 ))}
@@ -171,17 +147,15 @@ const ListOfMD = () => {
             </table>
 
             {filteredList.length === 0 && (
-               <div className="text-center py-20 bg-slate-50/20">
-                  <User className="h-12 w-12 text-slate-200 mx-auto mb-4" />
-                  <p className="text-slate-400 font-bold text-sm">No records matching "{searchTerm}"</p>
+               <div className="text-center py-10">
+                  <p className="text-slate-500 text-sm">No records matching "{searchTerm}"</p>
                </div>
             )}
           </div>
 
-          <div className="bg-slate-50/50 p-6 border-t border-slate-100 flex justify-between items-center px-8">
-             <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Archive Integrity Verified</span>
-             <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-100/50">
-                {mdList.length} Total Records
+          <div className="p-4 border-t border-slate-300 flex justify-end">
+             <span className="text-sm text-slate-600">
+                Total Records: {mdList.length}
              </span>
           </div>
         </div>

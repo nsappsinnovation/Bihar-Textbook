@@ -115,28 +115,33 @@ const Wholesellerdepo = () => {
         </div>
       </section>
 
-      {/* ================= DEPOT GRID ================= */}
+      {/* ================= DEPOT TABLE ================= */}
       <section className="max-w-6xl mx-auto px-6">
          <div className="text-center mb-12">
-            <h2 className="text-2xl font-black text-[#0d0e23]">Major Hubs</h2>
-            <p className="text-slate-400 text-sm font-medium">Strategic locations across Bihar for rapid distribution.</p>
+            <h2 className="text-xl font-bold text-[#0d0e23]">Major Hubs</h2>
+            <p className="text-slate-500 text-sm">Strategic locations across Bihar for rapid distribution.</p>
          </div>
-         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {wholesalers.map((item) => (
-              <div key={item.id} className="p-6 bg-white border border-slate-50 shadow-sm rounded-3xl hover:border-blue-200 transition-all hover:translate-y-[-5px]">
-                 <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-lg mb-6">
-                    <FiMapPin />
-                 </div>
-                 <h4 className="text-sm font-black text-[#0d0e23] mb-1">{item.name}</h4>
-                 <div className="text-[10px] text-slate-400 font-bold uppercase mb-4">{item.type}</div>
-                 <div className="space-y-2 pt-4 border-t border-slate-50">
-                    <div className="text-xs text-slate-600 font-medium flex items-center gap-2">
-                       <span className="w-1.5 h-1.5 rounded-full bg-green-500" /> {item.location}
-                    </div>
-                    <div className="text-xs text-slate-500 font-bold">{item.contact}</div>
-                 </div>
-              </div>
-            ))}
+         <div className="overflow-x-auto bg-transparent border border-slate-300">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-slate-200 border-b border-slate-300 text-[#0d0e23]">
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Depot Name</th>
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Type</th>
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Location</th>
+                  <th className="px-6 py-4 text-sm font-bold">Contact</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-300">
+                {wholesalers.map((item) => (
+                  <tr key={item.id} className="text-[#0d0e23]">
+                    <td className="px-6 py-4 text-sm border-r border-slate-300 font-semibold">{item.name}</td>
+                    <td className="px-6 py-4 text-sm border-r border-slate-300">{item.type}</td>
+                    <td className="px-6 py-4 text-sm border-r border-slate-300">{item.location}</td>
+                    <td className="px-6 py-4 text-sm">{item.contact}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
          </div>
       </section>
     </div>

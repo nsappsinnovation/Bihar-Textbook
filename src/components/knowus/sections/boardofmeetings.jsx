@@ -29,34 +29,29 @@ const BoardOfDirectors = () => {
         </p>
       </section>
 
-      {/* ================= DIRECTORS GRID ================= */}
+      {/* ================= DIRECTORS TABLE ================= */}
       <section className="max-w-6xl mx-auto px-6 mb-20">
-         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {directors.map((member, idx) => (
-              <motion.div 
-                key={member.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-200/50 hover:border-blue-200 transition-all group"
-              >
-                 <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center text-blue-600 text-2xl font-black mb-6 group-hover:scale-110 transition-transform">
-                    {member.photo ? <img src={member.photo} className="w-full h-full object-cover rounded-2xl" /> : <FiUser />}
-                 </div>
-                 <h3 className="text-xl font-black text-[#0d0e23] mb-1 group-hover:text-blue-600 transition-colors">{member.name}</h3>
-                 <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">{member.designation}</p>
-                 
-                 <div className="pt-6 border-t border-slate-50 flex justify-between items-center">
-                    <div className="flex items-center gap-2 text-xs font-bold text-slate-500">
-                       <FiCalendar className="text-blue-500" /> Since {member.from}
-                    </div>
-                    <span className="px-3 py-1 bg-blue-50 text-blue-600 text-[10px] font-black rounded-lg uppercase tracking-widest">
-                       {member.status}
-                    </span>
-                 </div>
-              </motion.div>
-            ))}
+         <div className="overflow-x-auto bg-transparent border border-slate-300">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-slate-200 border-b border-slate-300 text-[#0d0e23]">
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Name</th>
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Designation</th>
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Since</th>
+                  <th className="px-6 py-4 text-sm font-bold">Status</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-300">
+                {directors.map((member) => (
+                  <tr key={member.id} className="text-[#0d0e23]">
+                    <td className="px-6 py-4 text-sm border-r border-slate-300 font-semibold">{member.name}</td>
+                    <td className="px-6 py-4 text-sm border-r border-slate-300">{member.designation}</td>
+                    <td className="px-6 py-4 text-sm border-r border-slate-300">{member.from}</td>
+                    <td className="px-6 py-4 text-sm">{member.status}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
          </div>
       </section>
 
@@ -66,17 +61,16 @@ const BoardOfDirectors = () => {
            initial={{ opacity: 0, y: 40 }}
            whileInView={{ opacity: 1, y: 0 }}
            viewport={{ once: true }}
-           className="bg-[#0d0e23] rounded-[3rem] p-8 md:p-12 text-white relative overflow-hidden"
+           className="bg-transparent border border-slate-300 p-8 md:p-12 text-[#0d0e23] relative overflow-hidden"
          >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600/20 blur-[80px] -mr-20 -mt-20 rounded-full" />
             
             <div className="relative z-10 flex flex-col lg:flex-row justify-between items-center gap-12">
                <div className="max-w-md">
-                  <h2 className="text-2xl md:text-3xl font-black mb-6 flex items-center gap-4">
-                     <FiInfo className="text-blue-400" />
+                  <h2 className="text-2xl md:text-3xl font-bold mb-6 flex items-center gap-4">
+                     <FiInfo className="text-blue-600" />
                      Board Meetings
                   </h2>
-                  <p className="text-slate-400 text-sm leading-relaxed font-medium mb-8">
+                  <p className="text-slate-600 text-sm leading-relaxed mb-8">
                     The Board meets at regular intervals to review progress, approve budgets, and set policy directions for the upcoming academic cycles.
                   </p>
                   <div className="space-y-4">
@@ -101,21 +95,21 @@ const BoardOfDirectors = () => {
 
 /* Helper Components */
 const MeetingStat = ({ label, value }) => (
-  <div className="flex justify-between items-center py-3 border-b border-white/5">
-    <span className="text-[11px] font-bold text-slate-500 uppercase tracking-widest">{label}</span>
-    <span className="text-sm font-black text-blue-400">{value}</span>
+  <div className="flex justify-between items-center py-3 border-b border-slate-300">
+    <span className="text-sm font-bold text-slate-500">{label}</span>
+    <span className="text-sm font-bold text-[#0d0e23]">{value}</span>
   </div>
 );
 
 const DocumentCard = ({ title, size }) => (
-  <div className="p-6 bg-white/5 border border-white/10 rounded-2xl hover:bg-white/10 transition-all cursor-pointer group">
+  <div className="p-6 bg-transparent border border-slate-300 hover:bg-slate-50 transition-all cursor-pointer group">
     <div className="flex items-center gap-4">
-       <div className="w-10 h-10 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center text-lg">
+       <div className="w-10 h-10 text-blue-600 flex items-center justify-center text-lg">
           <FiInfo />
        </div>
        <div>
-          <h4 className="text-sm font-black text-white group-hover:text-blue-400 transition-colors">{title}</h4>
-          <span className="text-[10px] font-bold text-slate-500 uppercase">{size} • PDF</span>
+          <h4 className="text-sm font-bold text-[#0d0e23] group-hover:text-blue-600 transition-colors">{title}</h4>
+          <span className="text-xs text-slate-500">{size} • PDF</span>
        </div>
     </div>
   </div>
