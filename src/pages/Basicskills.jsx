@@ -185,7 +185,7 @@ const quizzes = [
   Basic Life Skills
 </h1>
 
-<p className="mt-4 text-lg font-semibold text-yellow-400">
+<p className="mt-4 text-lg font-semibold text-blue-400">
   Learn Essential Daily Skills for Safe & Smart Living
 </p>
 
@@ -199,7 +199,7 @@ const quizzes = [
         {/* Card 1 */}
       {/* Card 1 */}
 <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-  <div className="text-yellow-500 text-xl"></div>
+  <div className="text-blue-500 text-xl">🚦</div>
   <div>
     <h3 className="font-semibold text-slate-800">
       Road & Traffic Awareness
@@ -212,7 +212,7 @@ const quizzes = [
 
 {/* Card 2 */}
 <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-  <div className="text-yellow-500 text-xl"></div>
+  <div className="text-blue-500 text-xl">🏧</div>
   <div>
     <h3 className="font-semibold text-slate-800">
       Financial Basics
@@ -225,7 +225,7 @@ const quizzes = [
 
 {/* Card 3 */}
 <div className="md:col-span-2 p-5 border rounded-xl shadow-sm flex gap-4">
-  <div className="text-yellow-500 text-xl"></div>
+  <div className="text-blue-500 text-xl">🛣</div>
   <div>
     <h3 className="font-semibold text-slate-800">
       Everyday Responsibility Skills
@@ -237,7 +237,7 @@ const quizzes = [
 </div>
         {/* Card 3 */}
         <div className="md:col-span-2 p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl"></div>
+          <div className="text-blue-500 text-xl">🚀</div>
           <div>
             <h3 className="font-semibold text-slate-800">
               100+ Activities & Practice Tasks
@@ -259,7 +259,7 @@ const quizzes = [
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
 
       {/* Left Content */}
-      <div className="lg:col-span-5 space-y-10 sticky top-32">
+      <div className="lg:col-span-5 space-y-10">
         <div className="space-y-4">
           <h2 className="text-xs font-black uppercase tracking-[0.3em] text-blue-600">
             Program Overview
@@ -294,7 +294,7 @@ const quizzes = [
               key={i}
               className="flex items-start gap-3 text-sm font-bold text-slate-700"
             >
-              <CheckCircle2 size={18} className="text-yellow-600 mt-[2px]" />
+              <CheckCircle2 size={18} className="text-blue-600 mt-[2px]" />
               <span>{item}</span>
             </div>
           ))}
@@ -302,7 +302,7 @@ const quizzes = [
       </div>
 
       {/* Right Images */}
-        <div className="lg:col-span-7 grid grid-cols-1 gap-4">
+        <div className="lg:col-span-7 lg:mt-[120px]">
                                     <div className="relative group overflow-hidden rounded-[40px] border border-slate-100 shadow-xl">
                                         <img
                                             src= "/images/skills/i.png"

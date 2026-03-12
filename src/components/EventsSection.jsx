@@ -130,8 +130,8 @@ export default function EventsSection() {
         {/* --- Minimal Header --- */}
         <div className="max-w-3xl mb-16">
           <div className="flex items-center gap-2 mb-4">
-             <div className="h-px w-8 bg-indigo-500"></div>
-            <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-[0.2em]">Latest Initiatives</span>
+             <div className="h-px w-8 bg-blue-500"></div>
+            <span className="text-[10px] font-bold text-blue-500 uppercase tracking-[0.2em]">Latest Initiatives</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 mb-6">
             Empowering Education <br /> Through <span className="text-slate-400">Events</span>
@@ -268,7 +268,7 @@ export default function EventsSection() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.85, y: 40 }}
               transition={{ type: "spring", damping: 30, stiffness: 200, mass: 0.8 }}
-              className="relative bg-white w-full max-w-2xl rounded-[32px] shadow-[0_30px_100px_rgba(0,0,0,0.25)] overflow-hidden flex flex-col"
+              className="relative bg-white w-full max-w-2xl max-h-[95vh] rounded-[32px] shadow-[0_30px_100px_rgba(0,0,0,0.25)] overflow-y-auto scrollbar-hide flex flex-col"
             >
               {/* Header Image with Close Button */}
               <div className="relative h-72 md:h-80 w-full overflow-hidden">

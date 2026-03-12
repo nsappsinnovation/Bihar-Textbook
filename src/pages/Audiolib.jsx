@@ -6,7 +6,7 @@ import { useRef } from "react";
 
 
 
- import { BookOpen, Award, Users, Printer, Truck, ShieldCheck, ArrowLeft, ArrowRight, History, Target, CheckCircle2, FileText } from 'lucide-react';
+ import { BookOpen, Award, Users, Printer, Truck, ShieldCheck, ArrowLeft, ArrowRight, History, Target, CheckCircle2, FileText, Headphones, Rocket } from 'lucide-react';
 import { motion } from 'framer-motion';
 
  const Audiolib = () => {
@@ -26,25 +26,25 @@ import { motion } from 'framer-motion';
     label: "Audio Library",
     value: "10K+",
     sub: "Stories, lessons & knowledge",
-
+    icon: <BookOpen size={20} />,
   },
   {
     label: "Listening Time",
     value: "24/7",
     sub: "Learn anytime, anywhere",
-    
+    icon: <Headphones size={20} />,
   },
   {
     label: "Skill Growth",
     value: "100+",
     sub: "Topics for students & careers",
-   
+    icon: <Rocket size={20} />,
   },
   {
     label: "Family Learning",
     value: "Shared",
     sub: "Parents & kids can learn together",
-   
+    icon: <Users size={20} />,
   },
 ];
 
@@ -123,10 +123,10 @@ import { motion } from 'framer-motion';
     {/* RIGHT: Content */}
     <div>
       <h1 className="text-4xl md:text-5xl font-bold text-slate-900">
-        Learn with Audiobooks
+        Audio Book for Impulsive Learning
       </h1>
 
-      <p className="mt-4 text-lg font-semibold text-yellow-500">
+      <p className="mt-4 text-lg font-semibold text-blue-500">
         Learn through stories & lessons on the go!
       </p>
 
@@ -139,7 +139,7 @@ import { motion } from 'framer-motion';
 
         {/* Card 1 */}
         <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl"></div>
+          <div className="text-blue-500 text-xl"><Headphones /></div>
           <div>
             <h3 className="font-semibold text-slate-800">
               Hands-Free Learning
@@ -152,7 +152,7 @@ import { motion } from 'framer-motion';
 
         {/* Card 2 */}
         <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl"></div>
+          <div className="text-blue-500 text-xl"><BookOpen /></div>
           <div>
             <h3 className="font-semibold text-slate-800">
               Huge Audio Library
@@ -165,7 +165,7 @@ import { motion } from 'framer-motion';
 
         {/* Card 3 */}
         <div className="md:col-span-2 p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl"></div>
+          <div className="text-blue-500 text-xl"><Rocket /></div>
           <div>
             <h3 className="font-semibold text-slate-800">
               Learn Anytime, Anywhere
@@ -233,7 +233,7 @@ import { motion } from 'framer-motion';
               key={i}
               className="flex items-start gap-3 text-sm font-bold text-slate-700"
             >
-              <CheckCircle2 size={18} className="text-yellow-600 mt-0.5" />
+              <CheckCircle2 size={18} className="text-blue-600 mt-0.5" />
               {item}
             </div>
           ))}

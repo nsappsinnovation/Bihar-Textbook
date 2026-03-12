@@ -79,8 +79,8 @@ const MissionGrid = () => {
             id: 9,
             title: "Cyber Security",
             desc: "Online Safety & Scam Protection",
-            image: "/images/missions/cyber-criminal.png",
-            hoverImage: "/images/missions/cyber-criminalhov.png",
+            image: "/images/missions/cyber-security.png",
+            hoverImage: "/images/missions/cyber-securityhov.png",
             link: "/cyber-security",
             accent: "amber"
         },

@@ -41,10 +41,10 @@ const OfficersList = () => {
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-[2.5rem] shadow-xl border border-slate-200/60 overflow-hidden"
+          className="bg-transparent border border-slate-300 overflow-hidden font-sans"
         >
-          <div className="p-8 border-b border-slate-100 flex flex-col md:flex-row justify-between items-center gap-6 bg-slate-50/50">
-            <h3 className="text-lg font-black text-[#0d0e23] flex items-center gap-2">
+          <div className="p-6 border-b border-slate-300 flex flex-col md:flex-row justify-between items-center gap-6 bg-transparent">
+            <h3 className="text-lg font-bold text-[#0d0e23] flex items-center gap-2">
                Administrative Hierarchy
             </h3>
             <div className="relative w-full md:w-80">
@@ -54,7 +54,7 @@ const OfficersList = () => {
                 placeholder="Search by name or title..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 transition-all outline-none text-sm font-medium"
+                className="w-full pl-12 pr-4 py-2 bg-transparent border border-slate-300 focus:border-blue-500 transition-all outline-none text-sm text-[#0d0e23]"
               />
             </div>
           </div>
@@ -62,40 +62,28 @@ const OfficersList = () => {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="bg-white">
-                  <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">Officer Info</th>
-                  <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">Designation</th>
-                  <th className="px-8 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">Contact Details</th>
+                <tr className="bg-slate-200 border-b border-slate-300 text-[#0d0e23]">
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Officer Info</th>
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Designation</th>
+                  <th className="px-6 py-4 text-sm font-bold">Contact Details</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-300">
                 {filteredOfficers.map((officer) => (
-                  <tr key={officer.id} className="hover:bg-slate-50 transition-colors group">
-                    <td className="px-8 py-6">
-                      <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 border border-slate-100 flex items-center justify-center text-blue-600 text-xl font-black">
-                          {officer.photo ? <img src={officer.photo} className="w-full h-full object-cover rounded-2xl" /> : <FiUser />}
-                        </div>
-                        <div>
-                          <div className="text-sm font-black text-[#0d0e23] group-hover:text-blue-600 transition-colors">{officer.name}</div>
-                          <div className="text-[10px] font-bold text-slate-400 uppercase tracking-tight">Bihar Education Dept.</div>
-                        </div>
+                  <tr key={officer.id} className="text-[#0d0e23]">
+                    <td className="px-6 py-4 text-sm border-r border-slate-300">
+                      <div className="flex flex-col">
+                        <span className="font-semibold">{officer.name}</span>
+                        <span className="text-xs text-slate-500 mt-1">Bihar Education Dept.</span>
                       </div>
                     </td>
-                    <td className="px-8 py-6">
-                      <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 text-xs font-bold border border-slate-200/50">
-                        <FiBriefcase className="text-blue-500" />
-                        {officer.designation}
-                      </div>
+                    <td className="px-6 py-4 text-sm border-r border-slate-300">
+                      <span>{officer.designation}</span>
                     </td>
-                    <td className="px-8 py-6">
-                      <div className="space-y-1.5">
-                        <div className="flex items-center gap-2 text-xs font-medium text-slate-600 hover:text-blue-600 transition-colors cursor-pointer">
-                          <FiMail className="text-slate-400" /> {officer.email}
-                        </div>
-                        <div className="flex items-center gap-2 text-xs font-medium text-slate-600">
-                          <FiPhone className="text-slate-400" /> {officer.phone}
-                        </div>
+                    <td className="px-6 py-4 text-sm">
+                      <div className="flex flex-col gap-1">
+                        <span className="flex items-center gap-2"><FiMail className="text-slate-400" /> {officer.email}</span>
+                        <span className="flex items-center gap-2"><FiPhone className="text-slate-400" /> {officer.phone}</span>
                       </div>
                     </td>
                   </tr>
@@ -105,9 +93,8 @@ const OfficersList = () => {
           </div>
 
           {filteredOfficers.length === 0 && (
-            <div className="py-20 text-center text-slate-400">
-              <FiUser className="text-5xl mx-auto mb-4 opacity-20" />
-              <p className="font-bold">No officers found matching your search.</p>
+            <div className="py-10 text-center text-slate-500">
+               <p className="text-sm">No officers found matching your search.</p>
             </div>
           )}
         </motion.div>

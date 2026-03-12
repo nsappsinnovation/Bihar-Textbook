@@ -26,7 +26,7 @@ const OrgStructure = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="bg-white rounded-[2.5rem] shadow-[0_30px_60px_-12px_rgba(0,0,0,0.08)] border border-slate-200/60 p-4 md:p-12 relative group"
+          className="bg-transparent border border-slate-300 p-4 md:p-12 relative group"
         >
           
 

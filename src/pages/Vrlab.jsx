@@ -129,7 +129,7 @@ import { motion } from 'framer-motion';
       </h1>
 
       {/* Highlight text */}
-      <p className="mt-4 text-lg font-semibold text-yellow-500">
+      <p className="mt-4 text-lg font-semibold text-blue-500">
         Explore Interactive VR Educational Adventures!
       </p>
 
@@ -144,7 +144,7 @@ import { motion } from 'framer-motion';
 
         {/* Card 1 */}
         <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl"></div>
+          <div className="text-blue-500 text-xl">🎓</div>
           <div>
             <h3 className="font-semibold text-slate-800">
               For Grades 8-12
@@ -157,7 +157,7 @@ import { motion } from 'framer-motion';
 
         {/* Card 2 */}
         <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl"></div>
+          <div className="text-blue-500 text-xl">✅</div>
           <div>
             <h3 className="font-semibold text-slate-800">
               Curriculum Aligned
@@ -170,7 +170,7 @@ import { motion } from 'framer-motion';
 
         {/* Card 3 */}
         <div className="md:col-span-2 p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-yellow-500 text-xl"></div>
+          <div className="text-blue-500 text-xl">🕶️</div>
           <div>
             <h3 className="font-semibold text-slate-800">
               Immersive VR Lessons
@@ -242,7 +242,7 @@ import { motion } from 'framer-motion';
               key={i}
               className="flex items-start gap-3 text-sm font-bold text-slate-700"
             >
-              <CheckCircle2 size={18} className="text-yellow-600 mt-0.5" />
+              <CheckCircle2 size={18} className="text-blue-600 mt-0.5" />
               {item}
             </div>
           ))}
