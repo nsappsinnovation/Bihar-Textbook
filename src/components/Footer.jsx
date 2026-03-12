@@ -66,7 +66,7 @@ const Footer = () => {
 
           <div className="space-y-4 text-sm">
             <div className="flex items-start gap-3">
-              <MapPin className="text-orange-400 mt-1 flex-shrink-0" size={18} />
+              <MapPin className="text-blue-400 mt-1 flex-shrink-0" size={18} />
               <span>
                 Bihar State Text Book Publishing Corporation Ltd.<br />
                 Bhawan, Budh Marg, Patna - 800001
@@ -74,14 +74,14 @@ const Footer = () => {
             </div>
 
             <div className="flex items-center gap-3">
-              <Mail className="text-orange-400 flex-shrink-0" size={18} />
+              <Mail className="text-blue-400 flex-shrink-0" size={18} />
               <a href="mailto:bstbpc.patna@gmail.com" className="hover:text-white transition-colors">
                 bstbpc.patna@gmail.com
               </a>
             </div>
 
             <div className="flex items-center gap-3">
-              <Phone className="text-orange-400 flex-shrink-0" size={18} />
+              <Phone className="text-blue-400 flex-shrink-0" size={18} />
               <span>+91 612 222 1234</span>
             </div>
           </div>
@@ -116,7 +116,7 @@ const FooterLink = ({ to, label, highlight }) => (
     <Link
       to={to}
       className={`text-sm transition-colors duration-200 block ${highlight
-          ? "text-yellow-400 font-medium hover:text-yellow-300"
+          ? "text-blue-400 font-medium hover:text-blue-300"
           : "text-sky-200/80 hover:text-white hover:translate-x-1"
         }`}
     >

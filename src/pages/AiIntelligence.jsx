@@ -91,7 +91,7 @@ const AiIntelligence = () => {
                         </h1>
 
                         {/* Highlight text */}
-                        <p className="mt-4 text-lg font-semibold text-indigo-600">
+                        <p className="mt-4 text-lg font-semibold text-blue-600">
                             Smart Adaptive Tutoring for Every Student
                         </p>
 
@@ -105,7 +105,7 @@ const AiIntelligence = () => {
 
                             {/* Card 1 */}
                             <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-                                <div className="text-indigo-600 text-xl">🤖</div>
+                                <div className="text-blue-600 text-xl">🤖</div>
                                 <div>
                                     <h3 className="font-semibold text-slate-800">
                                         Adaptive Learning
@@ -118,7 +118,7 @@ const AiIntelligence = () => {
 
                             {/* Card 2 */}
                             <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-                                <div className="text-indigo-600 text-xl">📊</div>
+                                <div className="text-blue-600 text-xl">📊</div>
                                 <div>
                                     <h3 className="font-semibold text-slate-800">
                                         Data Driven
@@ -131,7 +131,7 @@ const AiIntelligence = () => {
 
                             {/* Card 3 */}
                             <div className="md:col-span-2 p-5 border rounded-xl shadow-sm flex gap-4">
-                                <div className="text-indigo-600 text-xl">💡</div>
+                                <div className="text-blue-600 text-xl">💡</div>
                                 <div>
                                     <h3 className="font-semibold text-slate-800">
                                         Smart Recommendations
@@ -153,7 +153,7 @@ const AiIntelligence = () => {
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
                         {stats.map((stat, i) => (
                             <div key={i} className="bg-white p-10 space-y-4 hover:bg-slate-50 transition-colors">
-                                <div className="p-3 bg-indigo-50 text-indigo-600 rounded-xl w-fit">
+                                <div className="p-3 bg-blue-50 text-blue-600 rounded-xl w-fit">
                                     {stat.icon}
                                 </div>
                                 <div>
@@ -172,9 +172,9 @@ const AiIntelligence = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
 
                         {/* Left Content */}
-                        <div className="lg:col-span-5 space-y-10 sticky top-32">
+                        <div className="lg:col-span-5 space-y-10">
                             <div className="space-y-4">
-                                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-indigo-600">
+                                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-blue-600">
                                     Program Overview
                                 </h2>
                                 <h3 className="text-4xl font-extrabold text-slate-900 leading-tight">
@@ -201,7 +201,7 @@ const AiIntelligence = () => {
                                         key={i}
                                         className="flex items-center gap-3 text-sm font-bold text-slate-700"
                                     >
-                                        <CheckCircle2 size={18} className="text-indigo-600" />
+                                        <CheckCircle2 size={18} className="text-blue-600" />
                                         {item}
                                     </div>
                                 ))}
@@ -209,7 +209,7 @@ const AiIntelligence = () => {
                         </div>
 
                         {/* Right Image */}
-                        <div className="lg:col-span-7 grid grid-cols-1 gap-4">
+                        <div className="lg:col-span-7 lg:mt-[120px]">
                             <div className="relative group overflow-hidden rounded-[40px] border border-slate-100 shadow-xl">
                                 <img
                                     src="/images/ai/program_overview.png"
@@ -231,7 +231,7 @@ const AiIntelligence = () => {
                 <div className="max-w-7xl mx-auto">
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
                         <div className="space-y-4">
-                            <h2 className="text-xs font-black uppercase tracking-[0.3em] text-indigo-400">Workflow</h2>
+                            <h2 className="text-xs font-black uppercase tracking-[0.3em] text-blue-400">Workflow</h2>
                             <h3 className="text-4xl md:text-5xl font-black text-white tracking-tight">Smart Learning Process <br /></h3>
                         </div>
                     </div>
@@ -245,7 +245,7 @@ const AiIntelligence = () => {
                                 viewport={{ once: true }}
                                 variants={fadeIn}
                                 transition={{ delay: i * 0.1 }}
-                                className="min-w-[350px] md:min-w-[400px] bg-white/5 backdrop-blur-md border border-white/10 p-12 rounded-[40px] hover:border-indigo-500/50 transition-all duration-500 group snap-center"
+                                className="min-w-[350px] md:min-w-[400px] bg-white/5 backdrop-blur-md border border-white/10 p-12 rounded-[40px] hover:border-blue-500/50 transition-all duration-500 group snap-center"
                             >
                                 {/* Image */}
                                 <div className="mb-10 overflow-hidden rounded-3xl">
@@ -259,11 +259,11 @@ const AiIntelligence = () => {
                                 </div>
 
                                 <h4 className="text-xl font-black text-white mb-6 uppercase tracking-tight">{step.title}</h4>
-                                <p className="text-indigo-100/60 leading-relaxed font-light mb-8 text-sm">{step.description}</p>
+                                <p className="text-blue-100/60 leading-relaxed font-light mb-8 text-sm">{step.description}</p>
                                 <div className="space-y-3 border-t border-white/5 pt-8">
                                     {step.details.map((detail, j) => (
-                                        <div key={j} className="flex items-center gap-3 text-[11px] font-bold text-indigo-100/40 uppercase tracking-widest">
-                                            <div className="w-1 h-1 rounded-full bg-indigo-500" />
+                                        <div key={j} className="flex items-center gap-3 text-[11px] font-bold text-blue-100/40 uppercase tracking-widest">
+                                            <div className="w-1 h-1 rounded-full bg-blue-500" />
                                             {detail}
                                         </div>
                                     ))}
@@ -276,12 +276,12 @@ const AiIntelligence = () => {
 
             <section className="py-32 px-6">
                 <div className="max-w-5xl mx-auto bg-slate-50 rounded-[48px] p-12 md:p-24 text-center border border-slate-100 shadow-sm relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-indigo-100/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-1000" />
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-blue-100/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-1000" />
 
                     <div className="relative z-10 space-y-10">
                         <div className="flex justify-center">
                             <div className="p-4 bg-white rounded-2xl shadow-sm border border-slate-100">
-                                <Cpu size={32} className="text-indigo-600" />
+                                <Cpu size={32} className="text-blue-600" />
                             </div>
                         </div>
                         <div className="space-y-4">
@@ -292,7 +292,7 @@ const AiIntelligence = () => {
                         </div>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                             <Link to="/ai-courses" className="w-full sm:w-auto">
-                                <button className="w-full sm:w-auto px-12 py-5 bg-slate-900 text-white rounded-full text-xs font-black uppercase tracking-[0.2em] hover:bg-indigo-600 hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-slate-200 flex items-center justify-center gap-3">
+                                <button className="w-full sm:w-auto px-12 py-5 bg-slate-900 text-white rounded-full text-xs font-black uppercase tracking-[0.2em] hover:bg-blue-600 hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-slate-200 flex items-center justify-center gap-3">
                                     Enter course <ArrowRight size={16} />
                                 </button>
                             </Link>

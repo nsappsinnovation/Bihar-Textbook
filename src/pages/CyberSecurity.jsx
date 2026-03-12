@@ -183,7 +183,7 @@ const CyberSecurity = () => {
               Cyber Security
             </h1>
 
-            <p className="mt-4 text-lg font-semibold text-yellow-500">
+            <p className="mt-4 text-lg font-semibold text-blue-500">
               Learn Online Safety, Scam Protection & Secure Digital Habits!
             </p>
 
@@ -195,7 +195,7 @@ const CyberSecurity = () => {
             {/* Feature Cards */}
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-                <div className="text-yellow-500 text-xl">🛡️</div>
+                <div className="text-blue-500 text-xl">🛡️</div>
                 <div>
                   <h3 className="font-semibold text-slate-800">
                     Real-World Cyber Safety
@@ -207,7 +207,7 @@ const CyberSecurity = () => {
               </div>
 
               <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-                <div className="text-yellow-500 text-xl">🔐</div>
+                <div className="text-blue-500 text-xl">🔐</div>
                 <div>
                   <h3 className="font-semibold text-slate-800">
                     Account Protection Skills
@@ -219,7 +219,7 @@ const CyberSecurity = () => {
               </div>
 
               <div className="md:col-span-2 p-5 border rounded-xl shadow-sm flex gap-4">
-                <div className="text-yellow-500 text-xl">⚡</div>
+                <div className="text-blue-500 text-xl">⚡</div>
                 <div>
                   <h3 className="font-semibold text-slate-800">
                     Step-by-Step Learning Modules
@@ -239,7 +239,7 @@ const CyberSecurity = () => {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
             {/* Left Content */}
-            <div className="lg:col-span-5 space-y-10 sticky top-32">
+            <div className="lg:col-span-5 space-y-10">
               <div className="space-y-4">
                 <h2 className="text-xs font-black uppercase tracking-[0.3em] text-blue-600">
                   Program Overview
@@ -280,7 +280,7 @@ const CyberSecurity = () => {
                     key={i}
                     className="flex items-start gap-3 text-sm font-bold text-slate-700"
                   >
-                    <CheckCircle2 size={18} className="text-yellow-600 mt-[2px]" />
+                    <CheckCircle2 size={18} className="text-blue-600 mt-[2px]" />
                     <span>{item}</span>
                   </div>
                 ))}
@@ -288,7 +288,7 @@ const CyberSecurity = () => {
             </div>
 
             {/* Right Images */}
-            <div className="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="lg:col-span-7 lg:mt-[120px]">
               <div className="relative group overflow-hidden rounded-[40px] border border-slate-100 shadow-xl md:col-span-2">
                 <img
                   src="/images/skills/c1.png"

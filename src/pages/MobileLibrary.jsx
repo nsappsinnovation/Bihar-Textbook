@@ -100,7 +100,7 @@ const MobileLibrary = () => {
 
                             {/* Card 1 */}
                             <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-                                <div className="text-sky-500 text-xl">🚚</div>
+                                <div className="text-sky-500 text-xl"><Truck /></div>
                                 <div>
                                     <h3 className="font-semibold text-slate-800">
                                         Accessibility
@@ -113,7 +113,7 @@ const MobileLibrary = () => {
 
                             {/* Card 2 */}
                             <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-                                <div className="text-sky-500 text-xl">📚</div>
+                                <div className="text-sky-500 text-xl"><BookOpen /></div>
                                 <div>
                                     <h3 className="font-semibold text-slate-800">
                                         Diverse Collection
@@ -126,7 +126,7 @@ const MobileLibrary = () => {
 
                             {/* Card 3 */}
                             <div className="md:col-span-2 p-5 border rounded-xl shadow-sm flex gap-4">
-                                <div className="text-sky-500 text-xl">🌍</div>
+                                <div className="text-sky-500 text-xl"><Globe /></div>
                                 <div>
                                     <h3 className="font-semibold text-slate-800">
                                         Community Impact
@@ -167,7 +167,7 @@ const MobileLibrary = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
 
                         {/* Left Content */}
-                        <div className="lg:col-span-5 space-y-10 sticky top-32">
+                        <div className="lg:col-span-5 space-y-10">
                             <div className="space-y-4">
                                 <h2 className="text-xs font-black uppercase tracking-[0.3em] text-sky-600">
                                     Program Overview
@@ -204,7 +204,7 @@ const MobileLibrary = () => {
                         </div>
 
                         {/* Right Image */}
-                        <div className="lg:col-span-7 grid grid-cols-1 gap-4">
+                        <div className="lg:col-span-7 lg:mt-[120px]">
                             <div className="relative group overflow-hidden rounded-[40px] border border-slate-100 shadow-xl">
                                 <img
                                     src="images/mobile/mobile_library_outreach.jpg"

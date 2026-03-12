@@ -34,6 +34,10 @@ import Quiz1 from "./pages/Quizcyber.jsx";
 import Quiz2 from "./pages/Skillsquiz.jsx";
 import Cyber from "./pages/CyberSecurity"
 import Basicskill from "./pages/Basicskills.jsx"
+import PustakMela from "./pages/PustakMela.jsx"
+import AssessmentPlatform from "./pages/AssessmentPlatform.jsx"
+import RegionalContent from "./pages/RegionalContent.jsx"
+import CurriculumExpo from "./pages/CurriculumExpo.jsx"
 
 /* Components */
 import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
@@ -159,6 +163,10 @@ function App() {
 
             {/* Missions */}
             <Route path="/publishing-mission" element={<PublishingMission />} />
+            <Route path="/pustak-mela" element={<PustakMela />} />
+            <Route path="/assessment-platform" element={<AssessmentPlatform />} />
+            <Route path="/regional-content" element={<RegionalContent />} />
+            <Route path="/curriculum-expo" element={<CurriculumExpo />} />
           </Routes>
         </main>
 

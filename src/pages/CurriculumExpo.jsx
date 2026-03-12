@@ -1,15 +1,18 @@
 
 import React from 'react'
 import { Link } from "react-router-dom";
-import { BookOpen, Award, Users, ShieldCheck, ArrowLeft, ArrowRight, CheckCircle2, FileText, GraduationCap, PenTool, Layout, Calendar } from 'lucide-react';
+import { useRef } from "react";
+import { BookOpen, Award, Users, Search, Target, CheckCircle2, FileText, ArrowLeft, ArrowRight, Zap, Monitor, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const TeacherTraining = () => {
+const CurriculumExpo = () => {
+    const sliderRef = useRef(null);
+
     const stats = [
-        { label: "Educators", value: "25K+", sub: "Certified Teachers", icon: <GraduationCap size={20} /> },
-        { label: "Workshops", value: "150+", sub: "Hands-on Sessions", icon: <Users size={20} /> },
-        { label: "Modules", value: "50+", sub: "Modern Pedagogy", icon: <BookOpen size={20} /> },
-        { label: "Impact", value: "100%", sub: "Classroom Improvement", icon: <Award size={20} /> }
+        { label: "EXHIBITS", value: "150+", sub: "Pedagogical Innovations", icon: <Zap size={20} /> },
+        { label: "ATTENDEES", value: "10K+", sub: "Educators & Leaders", icon: <Users size={20} /> },
+        { label: "WORKSHOPS", value: "40+", sub: "Interactive Sessions", icon: <BookOpen size={20} /> },
+        { label: "LEGACY", value: "3Yrs+", sub: "Modernizing Education", icon: <Award size={20} /> }
     ];
 
     const fadeIn = {
@@ -23,43 +26,43 @@ const TeacherTraining = () => {
 
     const processSteps = [
         {
-            title: "Digital Literacy",
-            image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=600", 
-            description: "Equipping teachers with essential digital skills to navigate modern educational technology.",
+            title: "NEP Integration",
+            image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=600",
+            description: "Showcasing how the National Education Policy 2020 is being implemented in Bihar's curriculum.",
             details: [
-                "Computer Basics",
-                "Educational Software",
-                "Online Resources"
+                "NEP Framework",
+                "Skill-Based Learning",
+                "Holistic Pedagogy"
             ],
         },
         {
-            title: "Modern Pedagogy",
-            image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=600",
-            description: "Training on student-centered teaching methods and active learning strategies.",
+            title: "Interactive Textbooks",
+            image: "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?auto=format&fit=crop&q=80&w=600",
+            description: "Demos of next-gen textbooks with QR codes, AR features, and embedded digital assets.",
             details: [
-                "Active Learning",
-                "Inclusive Classrooms",
-                "Engagement Techniques"
+                "QR Integration",
+                "AR Demos",
+                "Digital Assets"
             ],
         },
         {
-            title: "Classroom Management",
-            image: "/images/teacher/classroom_management.png",
-            description: "Strategies for creating a positive and productive learning environment.",
+            title: "Teacher Empowerment",
+            image: "https://images.unsplash.com/photo-1544928147-79a2dbc1f389?auto=format&fit=crop&q=80&w=600",
+            description: "Workshops focused on equipping teachers with modern tools and classroom management techniques.",
             details: [
-                "Behavioral Guidance",
-                "Time Management",
-                "Conflict Resolution"
+                "Smart Tools",
+                "Pedagogy Training",
+                "Peer Networking"
             ],
         },
         {
-            title: "Leadership Skills",
-            image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=600",
-            description: "Developing leadership qualities to inspire students and colleagues alike.",
+            title: "Future of Learning",
+            image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=600",
+            description: "Exhibitions on AI in education, coding for kids, and remote learning solutions.",
             details: [
-                "Mentorship",
-                "Community Building",
-                "Vision Setting"
+                "AI in Classroom",
+                "Coding Modules",
+                "Hybrid Models"
             ],
         },
     ];
@@ -68,78 +71,44 @@ const TeacherTraining = () => {
         <div>
             <div className="min-h-screen bg-white flex items-center">
                 <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-
                     {/* LEFT: Image */}
                     <div className="flex justify-center">
                         <img
-                            src="/images/teacher/teacher training.png"
-                            alt="Teacher Training Illustration"
-                            className="w-[620px] h-auto object-contain"
+                            src="public/images/curriculam expo/curriculam mobilization.png"
+                            alt="Curriculum Mobilization Expo"
+                            className="w-[620px] h-auto object-cover"
                         />
                     </div>
 
                     {/* RIGHT: Content */}
                     <div>
-                        {/* Heading */}
                         <h1 className="text-4xl md:text-5xl font-bold text-slate-900">
-                            Teacher Training
+                            Curriculum Mobilization Expo
                         </h1>
-
-                        {/* Highlight text */}
-                        <p className="mt-4 text-lg font-semibold text-blue-600">
-                            Empowering Educators with Modern Skills
+                        <p className="mt-4 text-lg font-semibold text-blue-500">
+                            Innovating Education for the 21st Century
                         </p>
-
-                        {/* Description */}
                         <p className="mt-4 text-slate-600 max-w-md">
-                            Comprehensive training programs designed to enhance teaching effectiveness and student outcomes.
+                            The Curriculum Mobilization Expo is a showcase of Bihar's commitment to modernization, alignment with NEP 2020, and the introduction of interactive learning tools.
                         </p>
 
-                        {/* Feature Cards */}
                         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                            {/* Card 1 */}
                             <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-                                <div className="text-blue-600 text-xl">🎓</div>
+                                <div className="text-blue-500 text-xl"><Monitor size={20} /></div>
                                 <div>
-                                    <h3 className="font-semibold text-slate-800">
-                                        Certified
-                                    </h3>
-                                    <p className="text-sm text-slate-600">
-                                        Recognized certification courses.
-                                    </p>
+                                    <h3 className="font-semibold text-slate-800">Tech Integration</h3>
+                                    <p className="text-sm text-slate-600">Demos of digital and AR learning.</p>
                                 </div>
                             </div>
-
-                            {/* Card 2 */}
                             <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-                                <div className="text-blue-600 text-xl">🛠️</div>
+                                <div className="text-blue-500 text-xl"><Globe size={20} /></div>
                                 <div>
-                                    <h3 className="font-semibold text-slate-800">
-                                        Practical
-                                    </h3>
-                                    <p className="text-sm text-slate-600">
-                                        Hands-on workshops and tools.
-                                    </p>
+                                    <h3 className="font-semibold text-slate-800">NEP Aligned</h3>
+                                    <p className="text-sm text-slate-600">Bringing policy to practice.</p>
                                 </div>
                             </div>
-
-                            {/* Card 3 */}
-                            <div className="md:col-span-2 p-5 border rounded-xl shadow-sm flex gap-4">
-                                <div className="text-blue-600 text-xl">🚀</div>
-                                <div>
-                                    <h3 className="font-semibold text-slate-800">
-                                        Career Growth
-                                    </h3>
-                                    <p className="text-sm text-slate-600">
-                                        Opportunities for professional development and advancement.
-                                    </p>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
-
                 </div>
             </div>
 
@@ -151,7 +120,7 @@ const TeacherTraining = () => {
                                 <div className="p-3 bg-blue-50 text-blue-600 rounded-xl w-fit">
                                     {stat.icon}
                                 </div>
-                                <div>
+                                <div className="overflow-hidden">
                                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{stat.label}</p>
                                     <h4 className="text-3xl font-black text-slate-900 tracking-tight">{stat.value}</h4>
                                     <p className="text-xs font-semibold text-slate-500">{stat.sub}</p>
@@ -162,10 +131,9 @@ const TeacherTraining = () => {
                 </div>
             </section>
 
-            <section className="py-32 px-6">
+             <section className="py-32 px-6">
                 <div className="max-w-7xl mx-auto">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
-
                         {/* Left Content */}
                         <div className="lg:col-span-5 space-y-10">
                             <div className="space-y-4">
@@ -173,24 +141,24 @@ const TeacherTraining = () => {
                                     Program Overview
                                 </h2>
                                 <h3 className="text-4xl font-extrabold text-slate-900 leading-tight">
-                                    Building Future With
+                                    Modernizing Educational
                                     <br />
                                     <span className="text-slate-400">
-                                        Skilled Teachers
+                                        Pedagogy
                                     </span>
                                 </h3>
                             </div>
 
                             <p className="text-lg text-slate-600 leading-relaxed font-light">
-                                Our Teacher Training initiative focuses on upskilling educators to meet the demands of the 21st-century classroom. By integrating technology, modern psychology, and leadership training, we ensure that every teacher is equipped to inspire and guide the next generation.
+                                The Curriculum Mobilization Expo is more than just an exhibition; it's a movement to bring modern, student-centered learning to every classroom in Bihar. By showcasing the latest pedagogical innovations and aligning them with NEP 2020, we empower educators to create engaging and effective learning experiences.
                             </p>
 
                             <div className="space-y-4">
                                 {[
-                                    "Workshops on digital tools and platforms",
-                                    "Advanced classroom management techniques",
-                                    "Inclusive education strategies",
-                                    "Continuous professional development"
+                                    "Showcase of interactive and AR-powered textbooks",
+                                    "Integration strategies for NEP 2020 guidelines",
+                                    "Collaborative workshops for teacher empowerment",
+                                    "Demonstrations of digital assets and smart classroom tools"
                                 ].map((item, i) => (
                                     <div
                                         key={i}
@@ -207,14 +175,14 @@ const TeacherTraining = () => {
                         <div className="lg:col-span-7 lg:mt-[120px]">
                             <div className="relative group overflow-hidden rounded-[40px] border border-slate-100 shadow-xl">
                                 <img
-                                    src="https://img.freepik.com/free-vector/online-tutorials-concept_52683-37480.jpg?w=996"
-                                    alt="Professional Growth"
-                                    className="w-full aspect-[4/3] object-contain bg-white transition-transform duration-1000 group-hover:scale-105"
+                                    src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?auto=format&fit=crop&q=80&w=800"
+                                    alt="Curriculum Mobilization Expo"
+                                    className="w-full aspect-[4/3] object-cover transition-transform duration-1000 group-hover:scale-105"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
                                 <div className="absolute bottom-10 left-10 text-white">
-                                    <p className="text-[10px] font-black uppercase tracking-widest mb-2 opacity-80">Development</p>
-                                    <h4 className="text-2xl font-bold">Professional Growth</h4>
+                                    <p className="text-[10px] font-black uppercase tracking-widest mb-2 opacity-80">Our Facility</p>
+                                    <h4 className="text-2xl font-bold">Innovation Hub</h4>
                                 </div>
                             </div>
                         </div>
@@ -226,12 +194,12 @@ const TeacherTraining = () => {
                 <div className="max-w-7xl mx-auto">
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
                         <div className="space-y-4">
-                            <h2 className="text-xs font-black uppercase tracking-[0.3em] text-blue-400">Workflow</h2>
-                            <h3 className="text-4xl md:text-5xl font-black text-white tracking-tight">Training Modules <br /></h3>
+                            <h2 className="text-xs font-black uppercase tracking-[0.3em] text-blue-400">Exhibition</h2>
+                            <h3 className="text-4xl md:text-5xl font-black text-white tracking-tight">Modernizing Pedagogy<br /></h3>
                         </div>
                     </div>
 
-                    <div className="flex overflow-x-auto gap-8 pb-12 no-scrollbar snap-x snap-mandatory">
+                    <div ref={sliderRef} className="flex gap-8 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-6 no-scrollbar">
                         {processSteps.map((step, i) => (
                             <motion.div
                                 key={i}
@@ -240,18 +208,11 @@ const TeacherTraining = () => {
                                 viewport={{ once: true }}
                                 variants={fadeIn}
                                 transition={{ delay: i * 0.1 }}
-                                className="min-w-[350px] md:min-w-[400px] bg-white/5 backdrop-blur-md border border-white/10 p-12 rounded-[40px] hover:border-blue-500/50 transition-all duration-500 group snap-center"
+                                className="snap-start flex-shrink-0 w-[85%] sm:w-[60%] lg:w-[32%] bg-white/5 backdrop-blur-md border border-white/10 p-12 rounded-[40px] hover:border-blue-500/50 transition-all duration-500 group"
                             >
-                                {/* Image */}
-                                <div className="mb-10 overflow-hidden rounded-3xl">
-                                    <img
-                                        src={step.image}
-                                        alt={step.title}
-                                        loading="lazy"
-                                        className="w-full h-auto max-h-56 object-cover transition-transform duration-700 group-hover:scale-110"
-                                    />
+                                <div className="mb-10 rounded-3xl bg-white flex items-center justify-center h-64 overflow-hidden">
+                                    <img src={step.image} alt={step.title} loading="lazy" className="h-full w-full object-cover" />
                                 </div>
-
                                 <h4 className="text-xl font-black text-white mb-6 uppercase tracking-tight">{step.title}</h4>
                                 <p className="text-blue-100/60 leading-relaxed font-light mb-8 text-sm">{step.description}</p>
                                 <div className="space-y-3 border-t border-white/5 pt-8">
@@ -271,36 +232,28 @@ const TeacherTraining = () => {
             <section className="py-32 px-6">
                 <div className="max-w-5xl mx-auto bg-slate-50 rounded-[48px] p-12 md:p-24 text-center border border-slate-100 shadow-sm relative overflow-hidden group">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-blue-100/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-1000" />
-
                     <div className="relative z-10 space-y-10">
                         <div className="flex justify-center">
                             <div className="p-4 bg-white rounded-2xl shadow-sm border border-slate-100">
-                                <PenTool size={32} className="text-blue-600" />
+                                <FileText size={32} className="text-blue-600" />
                             </div>
                         </div>
                         <div className="space-y-4">
-                            <h3 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight">Explore the Courses</h3>
+                            <h3 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight">Explore the Expo</h3>
                             <p className="text-lg text-slate-500 font-light max-w-xl mx-auto leading-relaxed">
-                                Our standardized materials are available for review. Access the digital archive to understand our curriculum depth.
+                                Join us at the next Expo and see the future of education in Bihar firsthand.
                             </p>
                         </div>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <Link to="/teacher-courses" className="w-full sm:w-auto">
-                                <button className="w-full sm:w-auto px-12 py-5 bg-slate-900 text-white rounded-full text-xs font-black uppercase tracking-[0.2em] hover:bg-blue-600 hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-slate-200 flex items-center justify-center gap-3">
-                                    Enter course <ArrowRight size={16} />
-                                </button>
-                            </Link>
-                            <Link to="/" className="w-full sm:w-auto px-10 py-5 text-slate-400 hover:text-slate-900 text-xs font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2">
-                                <ArrowLeft size={16} /> Back to Hub
+                            <Link to="/" className="w-full sm:w-auto px-12 py-5 bg-slate-900 text-white rounded-full text-xs font-black uppercase tracking-[0.2em] hover:bg-blue-600 hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-slate-200 flex items-center justify-center gap-3">
+                                Back to Home <ArrowRight size={16} />
                             </Link>
                         </div>
                     </div>
                 </div>
             </section>
-
         </div>
-
     )
 }
 
-export default TeacherTraining
+export default CurriculumExpo

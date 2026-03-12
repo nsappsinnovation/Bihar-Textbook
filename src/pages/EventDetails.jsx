@@ -17,7 +17,7 @@ const EventDetails = () => {
             <div className="min-h-screen flex flex-col items-center justify-center p-6 bg-slate-50">
                 <h2 className="text-2xl font-bold text-slate-800 mb-4">Event Not Found</h2>
                 <p className="text-slate-600 mb-8">The event you are looking for does not exist or has been moved.</p>
-                <Link to="/" className="px-6 py-2 bg-indigo-600 text-white rounded-full font-semibold hover:bg-indigo-700 transition-colors">
+                <Link to="/" className="px-6 py-2 bg-blue-600 text-white rounded-full font-semibold hover:bg-blue-700 transition-colors">
                     Return Home
                 </Link>
             </div>
@@ -25,7 +25,7 @@ const EventDetails = () => {
     }
 
     return (
-        <div className="min-h-screen bg-white font-sans selection:bg-indigo-100 italic">
+        <div className="min-h-screen bg-white font-sans selection:bg-blue-100 italic">
             {/* Hero Section */}
             <div className="relative h-[50vh] min-h-[400px] w-full overflow-hidden">
                 <img
@@ -46,7 +46,7 @@ const EventDetails = () => {
                 {/* Hero Content */}
                 <div className="absolute bottom-12 left-8 md:left-16 lg:left-24 right-8 max-w-4xl text-white">
                     <div className="flex items-center gap-3 mb-4">
-                        <span className="px-4 py-1 bg-indigo-600 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">
+                        <span className="px-4 py-1 bg-blue-600 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">
                             {event.tag}
                         </span>
                         <div className="h-px w-12 bg-white/30" />
@@ -74,7 +74,7 @@ const EventDetails = () => {
                                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     {event.objectives.map((item, i) => (
                                         <li key={i} className="flex items-start gap-3 text-slate-600 text-[15px] font-medium leading-normal italic">
-                                            <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-indigo-500 shrink-0" />
+                                            <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0" />
                                             {item}
                                         </li>
                                     ))}
@@ -88,7 +88,7 @@ const EventDetails = () => {
                                 alt="Impact"
                                 className="w-full h-full object-cover"
                             />
-                            <div className="absolute inset-0 bg-indigo-900/10" />
+                            <div className="absolute inset-0 bg-blue-900/10" />
                         </div>
                     </div>
                 </div>
@@ -100,7 +100,7 @@ const EventDetails = () => {
 
                         <div className="space-y-6">
                             <div className="flex gap-4">
-                                <div className="p-3 bg-indigo-50 rounded-xl text-indigo-600">
+                                <div className="p-3 bg-blue-50 rounded-xl text-blue-600">
                                     <Calendar size={20} />
                                 </div>
                                 <div>
@@ -110,7 +110,7 @@ const EventDetails = () => {
                             </div>
 
                             <div className="flex gap-4">
-                                <div className="p-3 bg-indigo-50 rounded-xl text-indigo-600">
+                                <div className="p-3 bg-blue-50 rounded-xl text-blue-600">
                                     <MapPin size={20} />
                                 </div>
                                 <div>
@@ -120,7 +120,7 @@ const EventDetails = () => {
                             </div>
 
                             <div className="flex gap-4">
-                                <div className="p-3 bg-indigo-50 rounded-xl text-indigo-600">
+                                <div className="p-3 bg-blue-50 rounded-xl text-blue-600">
                                     <Tag size={20} />
                                 </div>
                                 <div>
