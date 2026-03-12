@@ -26,25 +26,25 @@ import { motion } from 'framer-motion';
     label: "VR Tour Library",
     value: "120K+",
     sub: "Immersive educational experiences",
-    icon: "🌍",
+   
   },
   {
     label: "Anytime Learning",
     value: "24/7",
     sub: "Explore anytime, anywhere",
-    icon: "🕶️",
+    
   },
   {
     label: "Learning Categories",
     value: "100+",
     sub: "Science, history, careers & more",
-    icon: "🚀",
+
   },
   {
     label: "Inclusive Access",
     value: "100%",
     sub: "WCAG compliant learning design",
-    icon: "♿",
+    
   },
 ];
 
@@ -192,9 +192,7 @@ import { motion } from 'framer-motion';
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
                         {stats.map((stat, i) => (
                             <div key={i} className="bg-white p-10 space-y-4 hover:bg-slate-50 transition-colors">
-                                <div className="p-3 bg-blue-50 text-blue-600 rounded-xl w-fit">
-                                    {stat.icon}
-                                </div>
+                                
                                 <div>
                                     <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{stat.label}</p>
                                     <h4 className="text-3xl font-black text-slate-900 tracking-tight">{stat.value}</h4>
