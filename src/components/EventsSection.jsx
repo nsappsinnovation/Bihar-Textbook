@@ -268,7 +268,7 @@ export default function EventsSection() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.85, y: 40 }}
               transition={{ type: "spring", damping: 30, stiffness: 200, mass: 0.8 }}
-              className="relative bg-white w-full max-w-2xl rounded-[32px] shadow-[0_30px_100px_rgba(0,0,0,0.25)] overflow-hidden flex flex-col"
+              className="relative bg-white w-full max-w-2xl max-h-[95vh] rounded-[32px] shadow-[0_30px_100px_rgba(0,0,0,0.25)] overflow-y-auto scrollbar-hide flex flex-col"
             >
               {/* Header Image with Close Button */}
               <div className="relative h-72 md:h-80 w-full overflow-hidden">
