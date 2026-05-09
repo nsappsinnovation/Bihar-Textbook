@@ -38,6 +38,8 @@ import PustakMela from "./pages/PustakMela.jsx"
 import AssessmentPlatform from "./pages/AssessmentPlatform.jsx"
 import RegionalContent from "./pages/RegionalContent.jsx"
 import CurriculumExpo from "./pages/CurriculumExpo.jsx"
+import EventsViewAll from "./pages/EventsViewAll.jsx";
+import CollaborativeLearningViewAll from "./pages/CollaborativeLearningViewAll.jsx";
 
 /* Components */
 import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
@@ -172,6 +174,9 @@ function App() {
             <Route path="/assessment-platform" element={<AssessmentPlatform />} />
             <Route path="/regional-content" element={<RegionalContent />} />
             <Route path="/curriculum-expo" element={<CurriculumExpo />} />
+            
+            <Route path="/events-all" element={<EventsViewAll />} />
+            <Route path="/collaborative-learning" element={<CollaborativeLearningViewAll />} />
           </Routes>
         </main>
 

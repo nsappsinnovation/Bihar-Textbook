@@ -121,6 +121,17 @@ export default function FlagshipEvent() {
           {/* Spacer for right padding */}
           <div className="w-12 shrink-0" />
         </div>
+
+        {/* --- View All Button --- */}
+        <div className="mt-12 flex justify-center">
+          <Link 
+            to="/collaborative-learning"
+            className="group flex items-center gap-3 px-8 py-4 bg-white border border-slate-200 rounded-full text-sm font-bold text-slate-700 hover:border-blue-600 hover:text-blue-600 transition-all shadow-sm hover:shadow-md"
+          >
+            VIEW ALL INITIATIVES
+            <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+          </Link>
+        </div>
       </div>
     </section>
   );

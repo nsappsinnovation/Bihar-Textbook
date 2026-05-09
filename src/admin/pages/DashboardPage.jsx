@@ -57,46 +57,9 @@ export default function DashboardPage() {
       {/* Analytics Charts */}
       <AnalyticsCharts />
 
-      {/* Recent Activities & Website Sections */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
-        <div className="lg:col-span-2">
-          <RecentActivities activities={recentActivities} />
-        </div>
-        
-        <div className="bg-white rounded-2xl p-6 shadow-card border border-gray-100 flex flex-col">
-          <div className="flex items-center justify-between mb-6">
-            <h3 className="text-base font-bold text-gray-800">Website Sections</h3>
-            <p className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-md uppercase">Live Editor</p>
-          </div>
-          
-          <div className="grid grid-cols-2 gap-4 flex-1">
-            {[
-              { label: 'Collaborative Learning', icon: 'Plus' },
-              { label: 'Events (View All)', icon: 'Plus' },
-              { label: 'Education Excellence', icon: 'Plus' },
-              { label: 'Gallery', icon: 'Plus' },
-              { label: 'Documents', icon: 'Plus' },
-              { label: 'Notice & Tenders', icon: 'Plus' },
-            ].map((section, idx) => (
-              <motion.button
-                key={idx}
-                whileHover={{ scale: 1.02, backgroundColor: '#EFF6FF' }}
-                whileTap={{ scale: 0.98 }}
-                className="flex flex-col items-center justify-center p-4 rounded-xl border border-gray-100 bg-gray-50/50 group transition-all"
-              >
-                <div className="w-8 h-8 rounded-full bg-white shadow-sm border border-gray-100 flex items-center justify-center text-blue-600 mb-2 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                  <Plus className="w-4 h-4" />
-                </div>
-                <p className="text-[11px] font-bold text-gray-700 text-center leading-tight">{section.label}</p>
-                <p className="text-[9px] text-gray-400 mt-1 uppercase tracking-tighter font-semibold">Edit / Add / Remove</p>
-              </motion.button>
-            ))}
-          </div>
-          
-          <button className="w-full mt-6 py-2.5 rounded-xl border border-dashed border-gray-200 text-xs font-semibold text-gray-400 hover:border-blue-400 hover:text-blue-500 transition-all">
-            + Manage More Sections
-          </button>
-        </div>
+      {/* Recent Activities */}
+      <div className="mt-6">
+        <RecentActivities activities={recentActivities} />
       </div>
     </motion.div>
   );

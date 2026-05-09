@@ -1,20 +1,23 @@
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   LayoutDashboard,
-  BookOpen,
   Users,
   Bell,
-  MessageSquare,
   Building2,
   UserCog,
-  BarChart3,
   Settings,
   LogOut,
   ChevronLeft,
   Moon,
-  ChevronRight,
   BookMarked,
   CreditCard,
+  Globe,
+  ChevronDown,
+  FileText,
+  Image as ImageIcon,
+  Info,
+  Shield,
 } from 'lucide-react';
 
 /**
@@ -25,17 +28,74 @@ const navGroups = [
     title: 'MANAGEMENT',
     items: [
       { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
-      { id: 'books', label: 'Books Management', icon: BookMarked },
-      { id: 'officers', label: 'Officers Management', icon: Users },
-      { id: 'notices', label: 'Notices & Tenders', icon: Bell },
-    ]
-  },
-  {
-    title: 'ORGANIZATION',
-    items: [
-      { id: 'departments', label: 'Departments', icon: Building2 },
-      { id: 'users', label: 'Users & Roles', icon: UserCog },
-      { id: 'reports', label: 'Reports & Ledger', icon: CreditCard },
+      { 
+        id: 'website-management', 
+        label: 'Website Management', 
+        icon: Globe,
+        hasSubItems: true,
+        subItems: [
+          { id: 'tr', label: 'Tools & Resources' },
+          { id: 'cl', label: 'Latest Initiatives' },
+          { id: 'ev', label: 'Events' },
+          { id: 'ee', label: 'Leaders and Educators' },
+        ]
+      },
+      { 
+        id: 'ku', 
+        label: 'Know Us', 
+        icon: Info,
+        hasSubItems: true,
+        subItems: [
+          { id: 'ku-md-message', label: 'MD Message' },
+          { id: 'ku-board', label: 'Board of Directors' },
+          { id: 'ku-list-md', label: 'List of MD' },
+          { id: 'ku-officers', label: 'Officers List' },
+          { id: 'ku-employee', label: 'Our Employee' },
+          { id: 'ku-structure', label: 'Organisational Structure' },
+          { id: 'ku-wholeseller', label: 'Wholeseller/Depo' },
+          { id: 'ku-printers', label: 'Register Printers' },
+        ]
+      },
+      { 
+        id: 'books', 
+        label: 'Books Management', 
+        icon: BookMarked,
+        hasSubItems: true,
+        subItems: Array.from({ length: 12 }, (_, i) => ({ id: `book-class-${i + 1}`, label: `Class ${i + 1}` })),
+      },
+      { 
+        id: 'gl', 
+        label: 'Gallery', 
+        icon: ImageIcon,
+        hasSubItems: true,
+        subItems: [
+          { id: 'gl-photo', label: 'Photo Gallery' },
+          { id: 'gl-video', label: 'Video Gallery' },
+          { id: 'gl-press', label: 'Press Release' },
+        ]
+      },
+      { 
+        id: 'dc', 
+        label: 'Documents', 
+        icon: FileText,
+        hasSubItems: true,
+        subItems: [
+          { id: 'dc-hrt', label: 'HRT' },
+          { id: 'dc-reg-forms', label: 'Registration Forms' },
+          { id: 'dc-rti', label: 'RTI' },
+        ]
+      },
+      { 
+        id: 'notice-tender', 
+        label: 'Notice & Tender', 
+        icon: Bell,
+        hasSubItems: true,
+        subItems: [
+          { id: 'notices', label: 'Notices' },
+          { id: 'tenders', label: 'Tenders' },
+        ]
+      },
+      { id: 'csr', label: 'CSR Policy', icon: Shield },
     ]
   },
   {
@@ -47,9 +107,33 @@ const navGroups = [
 ];
 
 export default function Sidebar({ activePage, setActivePage, isMobileOpen, setIsMobileOpen }) {
-  const handleNavClick = (id) => {
-    setActivePage(id);
-    if (isMobileOpen) setIsMobileOpen(false);
+  const [expandedItems, setExpandedItems] = useState(['notice-tender', 'website-management']); // Default open
+  const [userSettings, setUserSettings] = useState(() => {
+    const saved = localStorage.getItem('adminSettings');
+    return saved ? JSON.parse(saved) : { firstName: 'Admin', lastName: 'User', bio: 'Senior Manager' };
+  });
+
+  useEffect(() => {
+    const handleUpdate = () => {
+      const saved = localStorage.getItem('adminSettings');
+      if (saved) setUserSettings(JSON.parse(saved));
+    };
+
+    window.addEventListener('settingsUpdated', handleUpdate);
+    return () => window.removeEventListener('settingsUpdated', handleUpdate);
+  }, []);
+
+  const handleNavClick = (item) => {
+    if (item.hasSubItems) {
+      setExpandedItems(prev => 
+        prev.includes(item.id) 
+          ? prev.filter(i => i !== item.id) 
+          : [...prev, item.id]
+      );
+    } else {
+      setActivePage(item.id);
+      if (isMobileOpen) setIsMobileOpen(false);
+    }
   };
 
   const sidebarContent = (
@@ -57,10 +141,10 @@ export default function Sidebar({ activePage, setActivePage, isMobileOpen, setIs
       {/* Brand Header */}
       <div className="flex items-center justify-between px-5 py-8">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 flex items-center justify-center">
-            <img src="/bstbpc_logo.png" alt="Logo" className="w-full h-full object-contain" />
+          <div className="w-8 h-8 flex items-center justify-center">
+            <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
           </div>
-          <span className="text-xl font-extrabold text-[#064E3B] tracking-tight">BSTBPC</span>
+          <span className="text-lg font-extrabold text-[#064E3B] tracking-tight">BSTBPC</span>
         </div>
         <button className="p-1.5 rounded-lg bg-white border border-gray-100 shadow-sm text-gray-400 hover:text-gray-600 transition-colors">
           <ChevronLeft className="w-3.5 h-3.5" />
@@ -74,27 +158,59 @@ export default function Sidebar({ activePage, setActivePage, isMobileOpen, setIs
             <p className="px-4 text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em] mb-5">
               {group.title}
             </p>
-            <div className="space-y-3">
+            <div className="space-y-1.5">
               {group.items.map((item) => {
                 const Icon = item.icon;
                 const isActive = activePage === item.id;
+                const isExpanded = expandedItems.includes(item.id);
 
                 return (
-                  <button
-                    key={item.id}
-                    onClick={() => handleNavClick(item.id)}
-                    className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-[13px] font-semibold transition-all duration-200 group
-                      ${isActive 
-                        ? 'bg-[#ECFDF5] text-[#065F46] shadow-sm' 
-                        : 'text-[#6B7280] hover:bg-gray-100 hover:text-gray-900'
-                      }
-                    `}
-                  >
-                    <div className="flex items-center gap-3">
-                      <Icon className={`w-[18px] h-[18px] ${isActive ? 'text-[#059669]' : 'text-gray-400 group-hover:text-gray-500'}`} />
-                      <span>{item.label}</span>
-                    </div>
-                  </button>
+                  <div key={item.id} className="space-y-1">
+                    <button
+                      onClick={() => handleNavClick(item)}
+                      className={`w-full flex items-center justify-between px-4 py-2.5 rounded-xl text-[13px] font-semibold transition-all duration-200 group
+                        ${isActive 
+                          ? 'bg-[#ECFDF5] text-[#065F46] shadow-sm' 
+                          : 'text-[#6B7280] hover:bg-gray-100 hover:text-gray-900'
+                        }
+                      `}
+                    >
+                      <div className="flex items-center gap-3">
+                        <Icon className={`w-[18px] h-[18px] ${isActive ? 'text-[#059669]' : 'text-gray-400 group-hover:text-gray-500'}`} />
+                        <span>{item.label}</span>
+                      </div>
+                      {item.hasSubItems && (
+                        <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} />
+                      )}
+                    </button>
+
+                    {/* Sub Items */}
+                    <AnimatePresence>
+                      {item.hasSubItems && isExpanded && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="overflow-hidden pl-11 space-y-1"
+                        >
+                          {item.subItems.map((sub) => (
+                            <button
+                              key={sub.id}
+                              onClick={() => { setActivePage(sub.id); if (isMobileOpen) setIsMobileOpen(false); }}
+                              className={`w-full text-left px-3 py-2 rounded-lg text-[12px] font-medium transition-colors
+                                ${activePage === sub.id 
+                                  ? 'text-[#059669] bg-[#ECFDF5]/50' 
+                                  : 'text-gray-500 hover:text-gray-900 hover:bg-gray-100/50'
+                                }
+                              `}
+                            >
+                              {sub.label}
+                            </button>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
                 );
               })}
             </div>
@@ -106,12 +222,16 @@ export default function Sidebar({ activePage, setActivePage, isMobileOpen, setIs
       <div className="p-3 mt-auto space-y-4">
         {/* User Card */}
         <div className="px-3 py-3 rounded-xl bg-white border border-gray-100 shadow-sm flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full overflow-hidden bg-emerald-50 flex items-center justify-center text-[#065F46] font-bold text-xs border border-emerald-100">
-            AU
+          <div className="w-9 h-9 rounded-full overflow-hidden bg-emerald-50 flex items-center justify-center text-[#065F46] font-bold text-xs border border-emerald-100 uppercase">
+            {userSettings.firstName[0]}{userSettings.lastName[0]}
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-[13px] font-bold text-[#064E3B] truncate">Admin User</p>
-            <p className="text-[11px] font-medium text-gray-400 truncate leading-none mt-0.5">Senior Manager</p>
+            <p className="text-[13px] font-bold text-[#064E3B] truncate">
+              {userSettings.firstName} {userSettings.lastName}
+            </p>
+            <p className="text-[11px] font-medium text-gray-400 truncate leading-none mt-0.5">
+              {userSettings.bio}
+            </p>
           </div>
         </div>
 
@@ -126,7 +246,7 @@ export default function Sidebar({ activePage, setActivePage, isMobileOpen, setIs
 
   return (
     <>
-      <aside className="hidden lg:block fixed left-0 top-0 h-screen w-55 z-40">
+      <aside className="hidden lg:block fixed left-0 top-0 h-screen w-64 z-40">
         {sidebarContent}
       </aside>
 

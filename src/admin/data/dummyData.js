@@ -518,5 +518,5 @@ export const departmentOptions = [
 ];
 
 export const noticeCategories = [
-  'All', 'Academic', 'Operations', 'Training', 'Finance', 'General', 'Distribution',
+  'All', 'Notice', 'Tender', 'Academic', 'Operations', 'Training', 'Finance', 'General', 'Distribution',
 ];

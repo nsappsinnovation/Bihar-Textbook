@@ -11,6 +11,11 @@ import DepartmentsPage from './pages/DepartmentsPage';
 import UsersPage from './pages/UsersPage';
 import ReportsPage from './pages/ReportsPage';
 import SettingsPage from './pages/SettingsPage';
+import CollaborativeLearningPage from './pages/CollaborativeLearningPage';
+import EventsManagementPage from './pages/EventsManagementPage';
+import EducationExcellencePage from './pages/EducationExcellencePage';
+import WebsiteEditorPage from './pages/WebsiteEditorPage';
+import WebsiteManagementHub from './pages/WebsiteManagementHub';
 import ToastContainer from './components/ToastContainer';
 import { useToast } from './hooks/useCustomHooks';
 
@@ -27,20 +32,35 @@ function App() {
         return <BooksPage addToast={addToast} />;
       case 'officers':
         return <OfficersPage addToast={addToast} />;
+      case 'website-management':
+        return <WebsiteManagementHub setActivePage={setActivePage} />;
       case 'notices':
-        return <NoticesPage addToast={addToast} />;
-      case 'messages':
-        return <MessagesPage addToast={addToast} />;
-      case 'departments':
-        return <DepartmentsPage addToast={addToast} />;
-      case 'users':
-        return <UsersPage addToast={addToast} />;
-      case 'reports':
-        return <ReportsPage addToast={addToast} />;
+        return <NoticesPage addToast={addToast} forcedCategory="Notice" />;
+      case 'tenders':
+        return <NoticesPage addToast={addToast} forcedCategory="Tender" />;
       case 'settings':
         return <SettingsPage addToast={addToast} />;
+      case 'cl':
+        return <CollaborativeLearningPage addToast={addToast} />;
+      case 'ev':
+        return <EventsManagementPage addToast={addToast} />;
+      case 'ee':
+        return <EducationExcellencePage addToast={addToast} />;
+      case 'opmp':
+      case 'ku':
+      case 'gl':
+      case 'dc':
+      case 'csr':
       default:
-        return <DashboardPage addToast={addToast} />;
+        // Handle all sub-items and generic website modules
+        if (activePage.startsWith('ku-') || 
+            activePage.startsWith('book-') || 
+            activePage.startsWith('gl-') || 
+            activePage.startsWith('dc-') ||
+            ['opmp', 'ku', 'gl', 'dc', 'csr', 'tr'].includes(activePage)) {
+          return <WebsiteEditorPage module={activePage} addToast={addToast} />;
+        }
+        return <DashboardPage addToast={addToast} setActivePage={setActivePage} />;
     }
   };
 

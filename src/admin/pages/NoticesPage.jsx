@@ -23,27 +23,86 @@ const priorityIcons = {
 /**
  * Notices & Announcements Page
  */
-export default function NoticesPage({ addToast }) {
+export default function NoticesPage({ addToast, forcedCategory }) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState(forcedCategory || 'All');
   const [showAddModal, setShowAddModal] = useState(false);
-  const [isPinned, setIsPinned] = useState(false);
-  const [isScheduled, setIsScheduled] = useState(false);
+  const [editingNotice, setEditingNotice] = useState(null);
+  
+  // Local state for notices with persistence
+  const [noticeList, setNoticeList] = useState(() => {
+    const saved = localStorage.getItem('website_notices');
+    return saved ? JSON.parse(saved) : notices;
+  });
+
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    category: forcedCategory || 'Notice',
+    priority: 'Low',
+    pinned: false,
+    date: new Date().toISOString(),
+    author: 'Admin'
+  });
 
   const debouncedSearch = useDebounce(searchQuery);
 
   const filteredNotices = useMemo(() => {
-    return notices.filter((notice) => {
+    return noticeList.filter((notice) => {
       const matchesSearch = notice.title.toLowerCase().includes(debouncedSearch.toLowerCase());
-      const matchesCategory = selectedCategory === 'All' || notice.category === selectedCategory;
+      const matchesCategory = forcedCategory 
+        ? notice.category === forcedCategory 
+        : (selectedCategory === 'All' || notice.category === selectedCategory);
       return matchesSearch && matchesCategory;
     });
-  }, [debouncedSearch, selectedCategory]);
+  }, [debouncedSearch, selectedCategory, noticeList, forcedCategory]);
 
   // Sort pinned notices first
   const sortedNotices = useMemo(() => {
     return [...filteredNotices].sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
   }, [filteredNotices]);
+
+  const handleSaveNotice = () => {
+    let updatedList;
+    if (editingNotice) {
+      updatedList = noticeList.map(n => n.id === editingNotice.id ? { ...formData, id: n.id } : n);
+      addToast('Updated', 'success');
+    } else {
+      const newNotice = { ...formData, id: Date.now() };
+      updatedList = [newNotice, ...noticeList];
+      addToast('Notice published successfully!', 'success');
+    }
+    setNoticeList(updatedList);
+    localStorage.setItem('website_notices', JSON.stringify(updatedList));
+    setShowAddModal(false);
+    setEditingNotice(null);
+    resetForm();
+  };
+
+  const handleDelete = (id) => {
+    const updatedList = noticeList.filter(n => n.id !== id);
+    setNoticeList(updatedList);
+    localStorage.setItem('website_notices', JSON.stringify(updatedList));
+    addToast('Notice deleted', 'error');
+  };
+
+  const resetForm = () => {
+    setFormData({
+      title: '',
+      description: '',
+      category: forcedCategory || 'Notice',
+      priority: 'Low',
+      pinned: false,
+      date: new Date().toISOString(),
+      author: 'Admin'
+    });
+  };
+
+  const handleEdit = (notice) => {
+    setEditingNotice(notice);
+    setFormData(notice);
+    setShowAddModal(true);
+  };
 
   return (
     <motion.div
@@ -55,18 +114,22 @@ export default function NoticesPage({ addToast }) {
       {/* Header */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">Notices & Announcements</h1>
-          <p className="text-sm text-gray-500 mt-0.5">Manage official notices and announcements</p>
+          <h1 className="text-2xl font-bold text-gray-800">
+            {forcedCategory ? `Manage ${forcedCategory}s` : 'Notices & Announcements'}
+          </h1>
+          <p className="text-sm text-gray-500 mt-0.5">
+            {forcedCategory ? `Add and edit official ${forcedCategory.toLowerCase()}s` : 'Manage official notices and announcements'}
+          </p>
         </div>
         <motion.button
-          onClick={() => setShowAddModal(true)}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl gradient-primary text-white text-sm font-semibold shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-shadow"
+          onClick={() => { resetForm(); setEditingNotice(null); setShowAddModal(true); }}
+          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 transition-shadow"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           id="add-notice-btn"
         >
           <Plus className="w-4 h-4" />
-          Add Notice
+          {forcedCategory ? `Add ${forcedCategory}` : 'Add Notice'}
         </motion.button>
       </div>
 
@@ -77,29 +140,31 @@ export default function NoticesPage({ addToast }) {
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
             <input
               type="text"
-              placeholder="Search notices..."
+              placeholder={`Search ${forcedCategory?.toLowerCase() || 'notices'}...`}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-300 transition-all"
               id="search-notices"
             />
           </div>
-          {/* Category pills */}
-          <div className="flex items-center gap-2 flex-wrap">
-            {noticeCategories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                  selectedCategory === cat
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
+          {/* Category pills - Only show if not forced */}
+          {!forcedCategory && (
+            <div className="flex items-center gap-2 flex-wrap">
+              {noticeCategories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                    selectedCategory === cat
+                      ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
@@ -115,7 +180,7 @@ export default function NoticesPage({ addToast }) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05, duration: 0.3 }}
               whileHover={{ x: 4 }}
-              className={`bg-white rounded-2xl p-5 shadow-card hover:shadow-card-hover border transition-all duration-300 cursor-pointer ${
+              className={`bg-white rounded-2xl p-5 shadow-card hover:shadow-card-hover border transition-all duration-300 ${
                 notice.pinned ? 'border-blue-200 bg-blue-50/20' : 'border-gray-100/50'
               }`}
             >
@@ -148,30 +213,23 @@ export default function NoticesPage({ addToast }) {
                       <Calendar className="w-3 h-3" />
                       {new Date(notice.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
                     </span>
-                    {notice.hasAttachment && (
-                      <span className="text-xs text-gray-400 flex items-center gap-1">
-                        <Paperclip className="w-3 h-3" />
-                        Attachment
-                      </span>
-                    )}
                     <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
                       {notice.category}
                     </span>
-                    <span className="text-xs text-gray-400">by {notice.author}</span>
                   </div>
                 </div>
 
                 {/* Actions */}
                 <div className="flex items-center gap-1 flex-shrink-0">
                   <button
-                    onClick={() => addToast(`Editing: ${notice.title}`, 'info')}
+                    onClick={() => handleEdit(notice)}
                     className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-blue-50 hover:text-blue-600 transition-colors"
                     title="Edit"
                   >
                     <Edit3 className="w-3.5 h-3.5" />
                   </button>
                   <button
-                    onClick={() => addToast(`Deleted: ${notice.title}`, 'error')}
+                    onClick={() => handleDelete(notice.id)}
                     className="w-8 h-8 rounded-lg bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-red-50 hover:text-red-500 transition-colors"
                     title="Delete"
                   >
@@ -188,52 +246,83 @@ export default function NoticesPage({ addToast }) {
         <div className="py-16 text-center bg-white rounded-2xl shadow-card">
           <Bell className="w-12 h-12 text-gray-300 mx-auto mb-3" />
           <p className="text-sm font-medium text-gray-500">No notices found</p>
-          <p className="text-xs text-gray-400 mt-1">Try adjusting your search or category filter</p>
         </div>
       )}
 
       {/* Add Notice Modal */}
-      <Modal isOpen={showAddModal} onClose={() => setShowAddModal(false)} title="Add New Notice" size="lg">
-        <FormInput label="Title" placeholder="Enter notice title" required id="notice-title" />
-        <FormInput label="Description" type="textarea" placeholder="Enter notice content..." required id="notice-description" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Category</label>
-            <select className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-300 transition-all bg-white" id="notice-category">
-              {noticeCategories.filter(c => c !== 'All').map(cat => <option key={cat}>{cat}</option>)}
-            </select>
+      <Modal 
+        isOpen={showAddModal} 
+        onClose={() => setShowAddModal(false)} 
+        title={editingNotice ? "Edit Notice" : "Add New Notice"} 
+        size="lg"
+      >
+        <div className="space-y-4">
+          <FormInput 
+            label="Title" 
+            placeholder="Enter notice title" 
+            required 
+            value={formData.title}
+            onChange={(val) => setFormData(prev => ({ ...prev, title: val }))}
+            id="notice-title" 
+          />
+          <FormInput 
+            label="Description" 
+            type="textarea" 
+            placeholder="Enter notice content..." 
+            required 
+            value={formData.description}
+            onChange={(val) => setFormData(prev => ({ ...prev, description: val }))}
+            id="notice-description" 
+          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Category</label>
+              <select 
+                value={formData.category}
+                onChange={(e) => setFormData(prev => ({ ...prev, category: e.target.value }))}
+                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-300 transition-all bg-white" 
+                id="notice-category"
+              >
+                {noticeCategories.filter(c => c !== 'All').map(cat => <option key={cat} value={cat}>{cat}</option>)}
+              </select>
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Priority</label>
+              <select 
+                value={formData.priority}
+                onChange={(e) => setFormData(prev => ({ ...prev, priority: e.target.value }))}
+                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-300 transition-all bg-white" 
+                id="notice-priority"
+              >
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+            </div>
           </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Priority</label>
-            <select className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-300 transition-all bg-white" id="notice-priority">
-              <option>Low</option>
-              <option>Medium</option>
-              <option>High</option>
-            </select>
+          <ToggleSwitch 
+            label="Pin this notice" 
+            checked={formData.pinned} 
+            onChange={(val) => setFormData(prev => ({ ...prev, pinned: val }))} 
+            id="notice-pin" 
+          />
+          
+          <div className="flex items-center justify-end gap-3 mt-6 pt-4 border-t border-gray-100">
+            <button
+              onClick={() => setShowAddModal(false)}
+              className="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors"
+            >
+              Cancel
+            </button>
+            <motion.button
+              onClick={handleSaveNotice}
+              className="px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold shadow-lg shadow-blue-500/20"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              {editingNotice ? "Update Notice" : "Publish Notice"}
+            </motion.button>
           </div>
-        </div>
-        <ToggleSwitch label="Pin this notice" checked={isPinned} onChange={setIsPinned} id="notice-pin" />
-        <ToggleSwitch label="Schedule publishing" checked={isScheduled} onChange={setIsScheduled} id="notice-schedule" />
-        <FormInput label="Upload Attachment (PDF)" type="file" id="notice-attachment" />
-
-        <div className="flex items-center justify-end gap-3 mt-6 pt-4 border-t border-gray-100">
-          <button
-            onClick={() => setShowAddModal(false)}
-            className="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors"
-          >
-            Cancel
-          </button>
-          <motion.button
-            onClick={() => {
-              setShowAddModal(false);
-              addToast('Notice published successfully!', 'success');
-            }}
-            className="px-5 py-2.5 rounded-xl gradient-primary text-white text-sm font-semibold shadow-lg shadow-blue-500/20"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            Publish Notice
-          </motion.button>
         </div>
       </Modal>
     </motion.div>

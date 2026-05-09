@@ -1,24 +1,57 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Save, User, Bell, Shield, PaintBucket, Globe } from 'lucide-react';
 import { FormInput, ToggleSwitch } from '../components/Modal';
 
+const tabs = [
+  { id: 'profile', label: 'Profile', icon: User },
+  { id: 'notifications', label: 'Notifications', icon: Bell },
+  { id: 'security', label: 'Security', icon: Shield },
+  { id: 'appearance', label: 'Appearance', icon: PaintBucket },
+  { id: 'system', label: 'System', icon: Globe },
+];
+
 export default function SettingsPage({ addToast }) {
   const [activeTab, setActiveTab] = useState('profile');
-  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
-  const [emailAlerts, setEmailAlerts] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
+  
+  // Load settings from localStorage or use defaults
+  const [settings, setSettings] = useState(() => {
+    const saved = localStorage.getItem('adminSettings');
+    return saved ? JSON.parse(saved) : {
+      firstName: 'Admin',
+      lastName: 'User',
+      email: 'admin@bstbpc.gov.in',
+      phone: '+91 9876543210',
+      bio: 'System administrator for BSTBPC portal.',
+      notificationsEnabled: true,
+      emailAlerts: true,
+      darkMode: false,
+      siteName: 'BSTBPC Admin Portal',
+      supportEmail: 'support@bstbpc.gov.in'
+    };
+  });
 
-  const tabs = [
-    { id: 'profile', label: 'Profile', icon: User },
-    { id: 'notifications', label: 'Notifications', icon: Bell },
-    { id: 'security', label: 'Security', icon: Shield },
-    { id: 'appearance', label: 'Appearance', icon: PaintBucket },
-    { id: 'system', label: 'System', icon: Globe },
-  ];
+  const handleChange = (id, value) => {
+    setSettings(prev => ({
+      ...prev,
+      [id]: value
+    }));
+  };
 
   const handleSave = () => {
-    addToast('Settings saved successfully', 'success');
+    localStorage.setItem('adminSettings', JSON.stringify(settings));
+    
+    // Reflect changes globally
+    if (settings.darkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    
+    // Dispatch a custom event to notify other components (like Sidebar)
+    window.dispatchEvent(new Event('settingsUpdated'));
+    
+    addToast('Settings saved successfully and reflected across dashboard', 'success');
   };
 
   return (
@@ -35,7 +68,7 @@ export default function SettingsPage({ addToast }) {
         </div>
         <motion.button
           onClick={handleSave}
-          className="flex items-center gap-2 px-5 py-2.5 rounded-xl gradient-primary text-white text-sm font-semibold shadow-lg shadow-blue-500/20"
+          className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition-all"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >
@@ -75,8 +108,8 @@ export default function SettingsPage({ addToast }) {
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
                 <h3 className="text-lg font-bold text-gray-800 mb-6 border-b border-gray-100 pb-4">Profile Settings</h3>
                 <div className="flex items-center gap-6 mb-8">
-                  <div className="w-24 h-24 rounded-2xl gradient-primary flex items-center justify-center text-white text-3xl font-bold shadow-lg">
-                    AD
+                  <div className="w-24 h-24 rounded-2xl bg-blue-600 flex items-center justify-center text-white text-3xl font-bold shadow-lg uppercase">
+                    {settings.firstName[0]}{settings.lastName[0]}
                   </div>
                   <div>
                     <button className="px-4 py-2 rounded-xl border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors mb-2">
@@ -86,13 +119,13 @@ export default function SettingsPage({ addToast }) {
                   </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <FormInput label="First Name" value="Admin" onChange={() => {}} id="fname" />
-                  <FormInput label="Last Name" value="User" onChange={() => {}} id="lname" />
-                  <FormInput label="Email Address" value="admin@bstbpc.gov.in" type="email" onChange={() => {}} id="email" />
-                  <FormInput label="Phone Number" value="+91 9876543210" onChange={() => {}} id="phone" />
+                  <FormInput label="First Name" value={settings.firstName} onChange={(val) => handleChange('firstName', val)} id="fname" />
+                  <FormInput label="Last Name" value={settings.lastName} onChange={(val) => handleChange('lastName', val)} id="lname" />
+                  <FormInput label="Email Address" value={settings.email} type="email" onChange={(val) => handleChange('email', val)} id="email" />
+                  <FormInput label="Phone Number" value={settings.phone} onChange={(val) => handleChange('phone', val)} id="phone" />
                 </div>
                 <div className="mt-4">
-                  <FormInput label="Bio" type="textarea" value="System administrator for BSTBPC portal." onChange={() => {}} id="bio" />
+                  <FormInput label="Bio" type="textarea" value={settings.bio} onChange={(val) => handleChange('bio', val)} id="bio" />
                 </div>
               </motion.div>
             )}
@@ -101,10 +134,10 @@ export default function SettingsPage({ addToast }) {
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
                 <h3 className="text-lg font-bold text-gray-800 mb-6 border-b border-gray-100 pb-4">Notification Preferences</h3>
                 <div className="space-y-6 max-w-lg">
-                  <ToggleSwitch label="Push Notifications" checked={notificationsEnabled} onChange={setNotificationsEnabled} id="push" />
+                  <ToggleSwitch label="Push Notifications" checked={settings.notificationsEnabled} onChange={(val) => handleChange('notificationsEnabled', val)} id="push" />
                   <p className="text-sm text-gray-500 -mt-4 mb-4">Receive notifications in your browser</p>
                   
-                  <ToggleSwitch label="Email Alerts" checked={emailAlerts} onChange={setEmailAlerts} id="email-alerts" />
+                  <ToggleSwitch label="Email Alerts" checked={settings.emailAlerts} onChange={(val) => handleChange('emailAlerts', val)} id="email-alerts" />
                   <p className="text-sm text-gray-500 -mt-4 mb-4">Receive daily summary emails</p>
                 </div>
               </motion.div>
@@ -128,7 +161,7 @@ export default function SettingsPage({ addToast }) {
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
                 <h3 className="text-lg font-bold text-gray-800 mb-6 border-b border-gray-100 pb-4">Appearance Settings</h3>
                 <div className="space-y-6 max-w-lg">
-                   <ToggleSwitch label="Dark Mode" checked={darkMode} onChange={setDarkMode} id="dark-mode" />
+                   <ToggleSwitch label="Dark Mode" checked={settings.darkMode} onChange={(val) => handleChange('darkMode', val)} id="dark-mode" />
                    <p className="text-sm text-gray-500 -mt-4 mb-4">Toggle dark theme across the application</p>
                 </div>
               </motion.div>
@@ -139,8 +172,8 @@ export default function SettingsPage({ addToast }) {
                 <h3 className="text-lg font-bold text-gray-800 mb-6 border-b border-gray-100 pb-4">System Settings</h3>
                 <p className="text-sm text-gray-500 mb-6">Manage global system configurations.</p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <FormInput label="Site Name" value="BSTBPC Admin Portal" onChange={() => {}} id="site-name" />
-                    <FormInput label="Support Email" value="support@bstbpc.gov.in" onChange={() => {}} id="support-email" />
+                    <FormInput label="Site Name" value={settings.siteName} onChange={(val) => handleChange('siteName', val)} id="site-name" />
+                    <FormInput label="Support Email" value={settings.supportEmail} onChange={(val) => handleChange('supportEmail', val)} id="support-email" />
                 </div>
               </motion.div>
             )}
