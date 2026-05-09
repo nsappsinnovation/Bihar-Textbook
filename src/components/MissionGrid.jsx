@@ -37,7 +37,7 @@ const MissionGrid = () => {
             desc: "Universal Digital Access",
             image: "/images/missions/diverse.png",
             hoverImage: "/images/missions/diversehov.png",
-            link: "/digital-portal",
+            link: "/linguistic",
             accent: "blue"
         },
         {
