@@ -37,6 +37,7 @@
     },
     {
         "id": "interactive-e-books",
+        "link":"ebook",
         "title": "Interactive E-Books",
         "description": "Smart digital textbooks enriched with videos, quizzes, animations, and practice exercises to enhance conceptual understanding.",
         "image": "https://pdcentrallibrary.home.blog/wp-content/uploads/2020/02/e-books.png",
@@ -54,6 +55,7 @@
     },
     {
         "id": "e-lotani-digital-portal",
+        "link":"digital",
         "title": "Digital Library: Digital Books Portal",
         "description": "Access all Bihar state textbooks digitally through a centralized, student-friendly e-learning platform available anytime, anywhere.",
         "image": "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f",
@@ -69,23 +71,7 @@
             "Environmentally friendly solution"
         ]
     },
-    {
-        "id": "digital-archive-textbooks",
-        "title": "Digital Archive of Bihar Textbooks",
-        "description": "A long-term digital repository preserving all editions of Bihar state textbooks for academic reference, research, and policy planning.",
-        "image": "https://images.unsplash.com/photo-1507842217343-583bb7270b66",
-        "tag": "Archival",
-        "beneficiaries": "Researchers & Policymakers",
-        "year": "2023",
-        "region": "State-wide",
-        "impact_image": "https://images.unsplash.com/photo-1507842217343-583bb7270b66",
-        "objectives": [
-            "Preserve educational history",
-            "Facilitate educational research",
-            "Reference for policy making",
-            "Maintain digital heritage"
-        ]
-    },
+
     {
         "id": "bihar-pustak-mela",
         "title": "Bihar Pustak Mela",

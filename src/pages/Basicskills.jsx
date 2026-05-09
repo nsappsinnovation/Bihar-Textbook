@@ -107,7 +107,19 @@ const quizzes = [
       "Always respect road rules",
     ],
   },
-
+ {
+    title: "How to Use an ATM Machine",
+    image: "/images/skills/i1.png",
+    description:
+      "Step-by-step guide to safely using an ATM machine.",
+    details: [
+      "Insert your ATM card properly",
+      "Enter your PIN secretly",
+      "Select withdrawal or balance inquiry",
+      "Collect cash and receipt carefully",
+      "Never share your PIN with anyone",
+    ],
+  },
   {
     title: "How to Cross the Road Safely",
     image: "/images/skills/a2.png",
@@ -121,8 +133,8 @@ const quizzes = [
       "Wait patiently for vehicles to stop",
     ],
   },
-
-  {
+   
+   {
     title: "Walking Rules: Which Side to Walk On",
     image: "/images/skills/a3.png",
     description:
@@ -136,23 +148,11 @@ const quizzes = [
     ],
   },
 
-  {
-    title: "How to Use an ATM Machine",
-    image: "/images/skills/a4.png",
-    description:
-      "Step-by-step guide to safely using an ATM machine.",
-    details: [
-      "Insert your ATM card properly",
-      "Enter your PIN secretly",
-      "Select withdrawal or balance inquiry",
-      "Collect cash and receipt carefully",
-      "Never share your PIN with anyone",
-    ],
-  },
+ 
 
   {
     title: "Basic Money Handling Skills",
-    image: "/images/skills/a5.png",
+    image: "/images/skills/image.png",
     description:
       "Learn how to manage money responsibly in daily life.",
     details: [
@@ -305,7 +305,7 @@ const quizzes = [
         <div className="lg:col-span-7 lg:mt-[120px]">
                                     <div className="relative group overflow-hidden rounded-[40px] border border-slate-100 shadow-xl">
                                         <img
-                                            src= "/images/skills/image.png"
+                                            src= "/images/skills/i.png"
                                             alt="Facility"
                                             className="w-full aspect-[4/3] object-cover transition-transform duration-1000 group-hover:scale-105"
                                         />
