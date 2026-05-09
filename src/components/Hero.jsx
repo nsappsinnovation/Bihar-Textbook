@@ -8,15 +8,15 @@ const slides = [
     {
         id: "slide-0",
         title: "BIHAR STATE",
-        subtitle: "TEXT BOOK PUBLISHING",
+        subtitle: "TEXT BOOK\nPUBLISHING",
         description: "Delivering reliable, well-designed textbooks so every Bihar Board student learns from clear and standardized academic resources.",
         image: "/images/hero_classroom.png",
         link: "/publishing-mission"
     },
     {
         id: "slide-1",
-        title: "IMMERSIVE Mobile",
-        subtitle: "VR Learning",
+        title: "IMMERSIVE",
+        subtitle: "Mobile\nVR Learning",
         description: "Our travelling VR labs reach schools across the state, letting students explore science, space, and the human body through interactive experiences.",
         image: "/images/hero_vr_new.png",
         link: "/vr"
@@ -24,8 +24,8 @@ const slides = [
 
     {
         id: "slide-2",
-        title: "Empowering Communication Through",
-        subtitle: "Sign Language",
+        title: "Empowering Communication",
+        subtitle: "Through\nSign Language",
         description: "Structured programs help students communicate confidently and encourage a more inclusive and supportive school community.",
         image: "/images/hero_sign.png",
         link: "/sign"
@@ -33,16 +33,16 @@ const slides = [
 
     {
         id: "slide-3",
-        title: "Diverse Linguistic",
-        subtitle: "Learning Programs",
+        title: "Multilingual",
+        subtitle: "Learning\nPrograms",
         description: "Courses in foreign languages, Indian languages, and regional dialects expand cultural understanding and learning opportunities.",
         image: "/images/hero_linguistic.png",
         link: "/linguistic"
     },
     {
         id: "slide-4",
-        title: "Accessible Learning",
-        subtitle: " with Audiobooks",
+        title: "Accessible",
+        subtitle: " Learning with\nAudiobooks",
         description: "Audio study materials assist special children and dyslexic learners, enabling comfortable and independent study.",
         image: "/images/hero_audio_new.png",
         link: "/audio-books"
@@ -140,11 +140,11 @@ const Hero = () => {
                             exit="exit"
                         >
                             <div className="overflow-hidden">
-                                <motion.h1 className="text-5xl md:text-7xl lg:text-[85px] uppercase font-black tracking-tighter leading-[0.95] mb-4">
+                                <motion.h1 className={`uppercase font-black tracking-tighter leading-[0.95] mb-4 ${currentSlide.id === 'slide-2' ? 'text-4xl md:text-5xl lg:text-[60px]' : 'text-5xl md:text-6xl lg:text-[80px]'}`}>
                                     <span className="block text-white drop-shadow-2xl">
                                         {currentSlide.title}
                                     </span>
-                                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-white/90 to-blue-200">
+                                    <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-white/90 to-blue-200 whitespace-pre-line">
                                         {currentSlide.subtitle}
                                     </span>
                                 </motion.h1>
@@ -154,7 +154,7 @@ const Hero = () => {
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3, duration: 0.6 }}
-                                className="text-blue-100/70 text-lg md:text-xl max-w-xl font-light leading-relaxed mb-8"
+                                className="text-blue-100/70 text-base md:text-lg max-w-xl font-light leading-relaxed mb-6"
                             >
                                 {currentSlide.description}
                             </motion.p>
@@ -166,10 +166,10 @@ const Hero = () => {
                                 className="flex items-center gap-5"
                             >
                                 <Link to={currentSlide.link} className="cursor-pointer">
-                                    <button className="cursor-pointer group relative bg-white text-black px-8 py-3.5 rounded-full font-bold uppercase tracking-widest flex items-center gap-3 hover:bg-blue-50 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_40px_rgba(59,130,246,0.3)] hover:-translate-y-1">
+                                    <button className="cursor-pointer group relative bg-white text-black px-6 py-2.5 text-sm rounded-full font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-blue-50 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_40px_rgba(59,130,246,0.3)] hover:-translate-y-1">
                                         Explore Now
-                                        <span className="bg-black text-white w-7 h-7 rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-500">
-                                            <FaPlay size={10} className="ml-0.5" />
+                                        <span className="bg-black text-white w-6 h-6 rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-500">
+                                            <FaPlay size={8} className="ml-0.5" />
                                         </span>
                                     </button>
                                 </Link>

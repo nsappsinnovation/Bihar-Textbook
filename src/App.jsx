@@ -61,6 +61,7 @@ import SignUp from "./components/SignUp.jsx";
 import ScrollToTop from "./components/ScrollToTop";
 import Arvideo from "./components/Arvideo.jsx";
 import Linguistic from "./pages/Linguistics.jsx";
+import AdminPortal from "./admin/AdminPortal.jsx";
 
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
   const isIsolatedPage =
     location.pathname === "/login" ||
     location.pathname === "/signup" ||
+    location.pathname.startsWith("/admin") ||
     location.pathname.includes("/flip");
 
   return (
@@ -80,6 +82,9 @@ function App() {
           <Routes>
             {/* Home */}
             <Route path="/" element={<Home />} />
+            
+            {/* Admin Portal */}
+            <Route path="/admin/*" element={<AdminPortal />} />
 
             {/* Blog */}
             <Route path="/blog" element={<Blog />} />
