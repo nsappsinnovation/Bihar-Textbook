@@ -69,7 +69,7 @@ export default function Modal({ isOpen, onClose, title, children, size = 'md' })
 /**
  * Reusable Form Input
  */
-export function FormInput({ label, type = 'text', placeholder, value, onChange, required = false, id }) {
+export function FormInput({ label, type = 'text', placeholder, value, onChange, required = false, id, options }) {
   return (
     <div className="mb-4">
       <label htmlFor={id} className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -99,7 +99,11 @@ export function FormInput({ label, type = 'text', placeholder, value, onChange, 
           className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-300 transition-all bg-white"
         >
           {placeholder && <option value="">{placeholder}</option>}
-          {(value || []).map && null}
+          {options && options.map(opt => (
+            <option key={opt.value || opt} value={opt.value || opt}>
+              {opt.label || opt}
+            </option>
+          ))}
         </select>
       ) : (
         <input

@@ -1,53 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Search, Calendar, User, Clock } from 'lucide-react';
 import { motion } from 'framer-motion'; 
 
-const mdList = [
-  { id: 1, name: "Sri Sunny Sinha", from: "29/11/2023", to: "29/04/2024", photo: "", current: false },
-  { id: 2, name: "Sri Baidya Nath Yadav, IAS", from: "09/04/2023", to: "29/11/2023", photo: "", current: false },
-  { id: 3, name: "Shri Manoj Kumar I.A.S", from: "05/08/2021", to: "31/12/2022", photo: "", current: false },
-  { id: 4, name: "Dr. Ranjit Kumar Singh I.A.S", from: "18/09/2019", to: "30/07/2021", photo: "", current: false },
-  { id: 5, name: "Shri Arvind Kumar Verma I.A.S", from: "14/05/2018", to: "31/08/2019", photo: "", current: false },
-  { id: 6, name: "Shri M. Ramchandrudu I.A.S", from: "31/10/2016", to: "14/05/2018", photo: "", current: false },
-  { id: 7, name: "Shri Vishaw Mohan Patel I.A.S", from: "04/07/2015", to: "31/10/2016", photo: "", current: false },
-  { id: 8, name: "Shri K. Senthil Kumar I.A.S", from: "06/04/2015", to: "04/07/2015", photo: "", current: false },
-  { id: 9, name: "Shri Dilip Kumar I.A.S", from: "18/12/2014", to: "06/04/2015", photo: "", current: false },
-  { id: 10, name: "Shri J.K.P. Singh I.R.P.S", from: "28/09/2011", to: "18/12/2014", photo: "", current: false },
-  { id: 11, name: "Shri Ashutosh I.A.S", from: "06/05/2009", to: "28/09/2011", photo: "", current: false },
-  { id: 12, name: "Hasnain Ahmad I.A.S", from: "18/03/2008", to: "30/04/2009", photo: "", current: false },
-  { id: 13, name: "Freaq Ahmad I.A.S", from: "11/06/2007", to: "17/03/2008", photo: "", current: false },
-  { id: 14, name: "Shri Ashok Kumar Singh I.A.S", from: "07/05/2007", to: "30/06/2007", photo: "", current: false },
-  { id: 15, name: "Shri Vaidhnath Mishra I.A.S", from: "04/03/2006", to: "30/04/2007", photo: "", current: false },
-  { id: 16, name: "Shri Ashok Kumar Singh I.A.S", from: "10/02/2006", to: "23/02/2006", photo: "", current: false },
-  { id: 17, name: "Shri R.S.B. Singh I.A.S", from: "15/04/2005", to: "31/12/2005", photo: "", current: false },
-  { id: 18, name: "Shri Maheshwar Prasad Singh I.A.S", from: "04/01/2001", to: "14/04/2005", photo: "", current: false },
-  { id: 19, name: "Shri Vaidhnath Prasad I.A.S", from: "16/12/2000", to: "03/01/2001", photo: "", current: false },
-  { id: 20, name: "Shri Avinash Kumar I.A.S", from: "19/05/2000", to: "27/11/2000", photo: "", current: false },
-  { id: 21, name: "Shri Arvind Kumar Choudhary I.A.S", from: "20/08/1999", to: "14/05/2000", photo: "", current: false },
-  { id: 22, name: "Shri W.N. Singh B.A.S", from: "06/10/1998", to: "19/08/1999", photo: "", current: false },
-  { id: 23, name: "Shri Dipak Kumar I.A.S", from: "09/07/1998", to: "05/10/1998", photo: "", current: false },
-  { id: 24, name: "Shri S. Shamimuddin I.A.S", from: "01/12/1997", to: "08/07/1998", photo: "", current: false },
-  { id: 25, name: "Shri Badunath Prasad Rai I.A.S", from: "26/09/1996", to: "30/11/1997", photo: "", current: false },
-  { id: 26, name: "Shri Vishnu Kumar I.A.S", from: "26/07/1996", to: "21/09/1996", photo: "", current: false },
-  { id: 27, name: "Shri Vijay Prakash I.A.S", from: "03/06/1995", to: "26/07/1996", photo: "", current: false },
-  { id: 28, name: "Shri Ram Krishan Khandelwal I.A.S", from: "13/07/1994", to: "13/06/1995", photo: "", current: false },
-  { id: 29, name: "Shri B.P. Choudhary I.A.S", from: "07/12/1992", to: "15/04/1993", photo: "", current: false },
-  { id: 30, name: "Shri Indu Shekhar Chaturvedi I.A.S", from: "01/10/1992", to: "07/12/1992", photo: "", current: false },
-  { id: 31, name: "Shri A.B. Chaturvedi I.A.S", from: "28/02/1992", to: "01/10/1992", photo: "", current: false },
-  { id: 32, name: "Shri Phool Singh I.A.S", from: "28/08/1991", to: "28/02/1992", photo: "", current: false },
-  { id: 33, name: "Shri N.K. Sinha I.A.S", from: "05/06/1991", to: "28/08/1991", photo: "", current: false },
-  { id: 34, name: "Shri B. Ram", from: "14/10/1977", to: "16/12/1977", photo: "", current: false },
-  { id: 35, name: "Shri B.P. Sinha", from: "17/07/1975", to: "14/10/1977", photo: "", current: false },
-  { id: 36, name: "Shri Mithilesh Kumar I.A.S", from: "13/06/1989", to: "05/06/1991", photo: "", current: false },
-  { id: 37, name: "Shri H.K. Prasad I.A.S", from: "07/12/1986", to: "13/06/1989", photo: "", current: false },
-  { id: 38, name: "Shri A.K. Dubey I.A.S", from: "06/12/1986", to: "07/12/1986", photo: "", current: false },
-  { id: 39, name: "Shri Pancham Lal I.A.S", from: "22/05/1986", to: "25/11/1986", photo: "", current: false },
-  { id: 40, name: "Shri B.N. Choudhary I.A.S", from: "12/09/1984", to: "22/05/1986", photo: "", current: false },
-  { id: 41, name: "Shri R.C.P. Verma", from: "15/10/1980", to: "08/06/1981", photo: "", current: false },
-  { id: 42, name: "Shrimati Krishna Singh I.A.S", from: "16/12/1977", to: "07/06/1978", photo: "", current: false },
-  { id: 43, name: "Shri R.N. Rai", from: "08/06/1981", to: "14/07/1981", photo: "", current: false },
-  { id: 44, name: "Shri R.S. Chaube", from: "05/03/1975", to: "17/07/1975", photo: "", current: false }
-];
+
 
 // Helper to generate initials
 const getInitials = (name) => {
@@ -61,8 +16,73 @@ const getInitials = (name) => {
 
 const ListOfMD = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [list, setList] = useState([
+    { id: 1, name: "Sri Sunny Sinha", from: "29/11/2023", to: "29/04/2024" },
+    { id: 2, name: "Sri Baidya Nath Yadav, IAS", from: "09/04/2023", to: "29/11/2023" },
+    { id: 3, name: "Shri Manoj Kumar I.A.S", from: "05/08/2021", to: "31/12/2022" },
+    { id: 4, name: "Dr. Ranjit Kumar Singh I.A.S", from: "18/09/2019", to: "30/07/2021" },
+    { id: 5, name: "Shri Arvind Kumar Verma I.A.S", from: "14/05/2018", to: "31/08/2019" },
+    { id: 6, name: "Shri M. Ramchandrudu I.A.S", from: "31/10/2016", to: "14/05/2018" },
+    { id: 7, name: "Shri Vishaw Mohan Patel I.A.S", from: "04/07/2015", to: "31/10/2016" },
+    { id: 8, name: "Shri K. Senthil Kumar I.A.S", from: "06/04/2015", to: "04/07/2015" },
+    { id: 9, name: "Shri Dilip Kumar I.A.S", from: "18/12/2014", to: "06/04/2015" },
+    { id: 10, name: "Shri J.K.P. Singh I.R.P.S", from: "28/09/2011", to: "18/12/2014" },
+    { id: 11, name: "Shri Ashutosh I.A.S", from: "06/05/2009", to: "28/09/2011" },
+    { id: 12, name: "Hasnain Ahmad I.A.S", from: "18/03/2008", to: "30/04/2009" },
+    { id: 13, name: "Freaq Ahmad I.A.S", from: "11/06/2007", to: "17/03/2008" },
+    { id: 14, name: "Shri Ashok Kumar Singh I.A.S", from: "07/05/2007", to: "30/06/2007" },
+    { id: 15, name: "Shri Vaidhnath Mishra I.A.S", from: "04/03/2006", to: "30/04/2007" },
+    { id: 16, name: "Shri Ashok Kumar Singh I.A.S", from: "10/02/2006", to: "23/02/2006" },
+    { id: 17, name: "Shri R.S.B. Singh I.A.S", from: "15/04/2005", to: "31/12/2005" },
+    { id: 18, name: "Shri Maheshwar Prasad Singh I.A.S", from: "04/01/2001", to: "14/04/2005" },
+    { id: 19, name: "Shri Vaidhnath Prasad I.A.S", from: "16/12/2000", to: "03/01/2001" },
+    { id: 20, name: "Shri Avinash Kumar I.A.S", from: "19/05/2000", to: "27/11/2000" },
+    { id: 21, name: "Shri Arvind Kumar Choudhary I.A.S", from: "20/08/1999", to: "14/05/2000" },
+    { id: 22, name: "Shri W.N. Singh B.A.S", from: "06/10/1998", to: "19/08/1999" },
+    { id: 23, name: "Shri Dipak Kumar I.A.S", from: "09/07/1998", to: "05/10/1998" },
+    { id: 24, name: "Shri S. Shamimuddin I.A.S", from: "01/12/1997", to: "08/07/1998" },
+    { id: 25, name: "Shri Badunath Prasad Rai I.A.S", from: "26/09/1996", to: "30/11/1997" },
+    { id: 26, name: "Shri Vishnu Kumar I.A.S", from: "26/07/1996", to: "21/09/1996" },
+    { id: 27, name: "Shri Vijay Prakash I.A.S", from: "03/06/1995", to: "26/07/1996" },
+    { id: 28, name: "Shri Ram Krishan Khandelwal I.A.S", from: "13/07/1994", to: "13/06/1995" },
+    { id: 29, name: "Shri B.P. Choudhary I.A.S", from: "07/12/1992", to: "15/04/1993" },
+    { id: 30, name: "Shri Indu Shekhar Chaturvedi I.A.S", from: "01/10/1992", to: "07/12/1992" },
+    { id: 31, name: "Shri A.B. Chaturvedi I.A.S", from: "28/02/1992", to: "01/10/1992" },
+    { id: 32, name: "Shri Phool Singh I.A.S", from: "28/08/1991", to: "28/02/1992" },
+    { id: 33, name: "Shri N.K. Sinha I.A.S", from: "05/06/1991", to: "28/08/1991" },
+    { id: 34, name: "Shri B. Ram", from: "14/10/1977", to: "16/12/1977" },
+    { id: 35, name: "Shri B.P. Sinha", from: "17/07/1975", to: "14/10/1977" },
+    { id: 36, name: "Shri Mithilesh Kumar I.A.S", from: "13/06/1989", to: "05/06/1991" },
+    { id: 37, name: "Shri H.K. Prasad I.A.S", from: "07/12/1986", to: "13/06/1989" },
+    { id: 38, name: "Shri A.K. Dubey I.A.S", from: "06/12/1986", to: "07/12/1986" },
+    { id: 39, name: "Shri Pancham Lal I.A.S", from: "22/05/1986", to: "25/11/1986" },
+    { id: 40, name: "Shri B.N. Choudhary I.A.S", from: "12/09/1984", to: "22/05/1986" },
+    { id: 41, name: "Shri R.C.P. Verma", from: "15/10/1980", to: "08/06/1981" },
+    { id: 42, name: "Shrimati Krishna Singh I.A.S", from: "16/12/1977", to: "07/06/1978" },
+    { id: 43, name: "Shri R.N. Rai", from: "08/06/1981", to: "14/07/1981" },
+    { id: 44, name: "Shri R.S. Chaube", from: "05/03/1975", to: "17/07/1975" }
+  ]);
 
-  const filteredList = mdList.filter(md => 
+  useEffect(() => {
+    const saved = localStorage.getItem('module_content_ku-list-md');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          setList(parsed.map(item => ({
+            id: item.id,
+            name: item.title,
+            from: item.from,
+            to: item.to
+          })));
+        }
+      } catch (e) {
+        console.error("Error loading MD list", e);
+      }
+    }
+  }, []);
+
+  const filteredList = list.filter(md => 
     md.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -155,7 +175,7 @@ const ListOfMD = () => {
 
           <div className="p-4 border-t border-slate-300 flex justify-end">
              <span className="text-sm text-slate-600">
-                Total Records: {mdList.length}
+                Total Records: {list.length}
              </span>
           </div>
         </div>

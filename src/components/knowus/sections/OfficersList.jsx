@@ -1,19 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiUser, FiMail, FiPhone, FiMapPin, FiSearch, FiBriefcase } from 'react-icons/fi';
 
-const officersData = [
-  { id: 1, name: "Shri. Rajesh Kumar", designation: "Chief Administrative Officer", email: "rajesh.cao@bihar.gov.in", phone: "+91 612 222 1975", photo: "" },
-  { id: 2, name: "Ms. Neha Sharma", designation: "General Manager (Sales)", email: "neha.gm@bstbpc.in", phone: "+91 612 222 1976", photo: "" },
-  { id: 3, name: "Shri. Amit Singh", designation: "Finance Controller", email: "amit.finance@bstbpc.in", phone: "+91 612 222 1977", photo: "" },
-  { id: 4, name: "Shri. Vipul Agarwal", designation: "Production Manager", email: "vipul.prod@bstbpc.in", phone: "+91 612 222 1978", photo: "" },
-  { id: 5, name: "Ms. Priyanka Verma", designation: "Academic Coordinator", email: "priyanka.acad@bstbpc.in", phone: "+91 612 222 1979", photo: "" },
-];
-
 const OfficersList = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [officers, setOfficers] = useState([
+    { id: 1, name: "Shri. Rajesh Kumar", designation: "Chief Administrative Officer", email: "rajesh.cao@bihar.gov.in", phone: "+91 612 222 1975", photo: "" },
+    { id: 2, name: "Ms. Neha Sharma", designation: "General Manager (Sales)", email: "neha.gm@bstbpc.in", phone: "+91 612 222 1976", photo: "" },
+    { id: 3, name: "Shri. Amit Singh", designation: "Finance Controller", email: "amit.finance@bstbpc.in", phone: "+91 612 222 1977", photo: "" },
+    { id: 4, name: "Shri. Vipul Agarwal", designation: "Production Manager", email: "vipul.prod@bstbpc.in", phone: "+91 612 222 1978", photo: "" },
+    { id: 5, name: "Ms. Priyanka Verma", designation: "Academic Coordinator", email: "priyanka.acad@bstbpc.in", phone: "+91 612 222 1979", photo: "" },
+  ]);
 
-  const filteredOfficers = officersData.filter(off => 
+  useEffect(() => {
+    const saved = localStorage.getItem('module_content_ku-officers');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          setOfficers(parsed.map(item => ({
+            id: item.id,
+            name: item.title,
+            designation: item.designation,
+            email: item.email,
+            phone: item.phone,
+            photo: item.document || ""
+          })));
+        }
+      } catch (e) {
+        console.error("Error loading officers data", e);
+      }
+    }
+  }, []);
+
+  const filteredOfficers = officers.filter(off => 
     off.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
     off.designation.toLowerCase().includes(searchTerm.toLowerCase())
   );

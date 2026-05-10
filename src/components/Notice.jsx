@@ -3,7 +3,7 @@ import { FiSearch, FiFileText, FiBell, FiArrowRight, FiCalendar, FiClock, FiFilt
 import { motion, AnimatePresence } from "framer-motion";
 
 // All 33 notices extracted from https://bstbpc.bihar.gov.in/Notice_Circulars.aspx
-const noticesData = [
+export const noticesData = [
   {
     id: 1,
     title: "Selection under application for walk-in interview ADVT No BSTBPC/851/2025",

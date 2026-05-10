@@ -21,7 +21,7 @@ const statusStyles = {
  */
 export default function BooksPage({ addToast }) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedClass, setSelectedClass] = useState('All Classes');
+  const [selectedClass, setSelectedClass] = useState(forcedClass || 'All Classes');
   const [selectedSubject, setSelectedSubject] = useState('All Subjects');
   const [viewMode, setViewMode] = useState('table');
   const [showAddModal, setShowAddModal] = useState(false);

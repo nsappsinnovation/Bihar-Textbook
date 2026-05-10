@@ -1,4 +1,6 @@
 // ===== Dummy Data for BSTBPC Admin Portal =====
+import { tendersData } from '../../data/tendersData';
+import { noticesData } from '../../components/Notice';
 
 export const dashboardStats = [
   {
@@ -319,74 +321,44 @@ export const officers = [
   },
 ];
 
-export const notices = [
-  {
-    id: 1,
-    title: 'Annual Textbook Revision Schedule 2026-27',
-    description: 'The annual textbook revision schedule for academic year 2026-27 has been finalized. All departments are requested to submit their revision proposals by the end of this month.',
-    date: '2026-05-08',
-    priority: 'High',
-    category: 'Academic',
-    pinned: true,
-    hasAttachment: true,
-    author: 'Dr. Rajendra Prasad Yadav',
-  },
-  {
-    id: 2,
-    title: 'New Printing Guidelines Released',
-    description: 'Updated printing guidelines for textbook production have been released. All printing partners must comply with the new quality standards effective immediately.',
-    date: '2026-05-06',
+const formattedNotices = noticesData.map((item) => {
+  let isoDate = new Date().toISOString();
+  if (item.date) {
+    const parts = item.date.split('/');
+    if (parts.length === 3) {
+      isoDate = `${parts[2]}-${parts[1]}-${parts[0]}T00:00:00.000Z`;
+    }
+  }
+  return {
+    id: `notice_${item.id}`,
+    title: item.title,
+    description: item.description,
+    date: isoDate,
+    priority: item.isUrgent ? 'High' : 'Medium',
+    category: 'Notice',
+    pinned: item.isUrgent || false,
+    hasAttachment: !!item.document,
+    author: 'Admin',
+    document: item.document
+  };
+});
+
+const formattedTenders = tendersData.map((item) => {
+  return {
+    id: `tender_${item.id}`,
+    title: item.title,
+    description: item.title,
+    date: new Date().toISOString(),
     priority: 'Medium',
-    category: 'Operations',
-    pinned: true,
-    hasAttachment: true,
-    author: 'Smt. Anita Kumari',
-  },
-  {
-    id: 3,
-    title: 'Staff Training Workshop on Digital Publishing',
-    description: 'A three-day workshop on digital publishing tools and e-book creation will be conducted next week. All editorial staff are required to attend.',
-    date: '2026-05-04',
-    priority: 'Medium',
-    category: 'Training',
+    category: 'Tender',
     pinned: false,
-    hasAttachment: false,
-    author: 'Shri Manoj Kumar',
-  },
-  {
-    id: 4,
-    title: 'Budget Allocation for Q2 2026',
-    description: 'The quarterly budget allocation report for Q2 2026 has been prepared and is pending approval from the Finance Committee.',
-    date: '2026-05-02',
-    priority: 'High',
-    category: 'Finance',
-    pinned: false,
-    hasAttachment: true,
-    author: 'Shri Arvind Mishra',
-  },
-  {
-    id: 5,
-    title: 'Holiday Notice - Buddha Purnima',
-    description: 'The office will remain closed on May 12, 2026, on account of Buddha Purnima. All pending submissions should be completed before the holiday.',
-    date: '2026-05-01',
-    priority: 'Low',
-    category: 'General',
-    pinned: false,
-    hasAttachment: false,
-    author: 'Admin Office',
-  },
-  {
-    id: 6,
-    title: 'Textbook Distribution Status Report',
-    description: 'Monthly distribution status report for April 2026 is now available. Districts with pending deliveries are requested to expedite the process.',
-    date: '2026-04-28',
-    priority: 'Medium',
-    category: 'Distribution',
-    pinned: false,
-    hasAttachment: true,
-    author: 'Smt. Kavita Devi',
-  },
-];
+    hasAttachment: !!item.link,
+    author: 'Admin',
+    document: item.link
+  };
+});
+
+export const notices = [...formattedNotices, ...formattedTenders];
 
 export const messages = [
   {

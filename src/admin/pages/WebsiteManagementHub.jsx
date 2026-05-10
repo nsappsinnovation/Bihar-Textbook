@@ -23,6 +23,7 @@ export default function WebsiteManagementHub({ setActivePage }) {
     { id: 'gl', label: 'Media Gallery', sub: 'GL Visuals & Photo Albums', icon: ImageIcon, color: 'text-purple-600', bg: 'bg-purple-50' },
     { id: 'dc', label: 'Documents/PDFs', sub: 'DC Repository & Downloads', icon: FileText, color: 'text-cyan-600', bg: 'bg-cyan-50' },
     { id: 'nt', label: 'Notices & Tenders', sub: 'NT Official Updates', icon: Bell, color: 'text-orange-600', bg: 'bg-orange-50' },
+    { id: 'csr', label: 'CSR Policy', sub: 'CSR Impact & Governance', icon: Shield, color: 'text-blue-700', bg: 'bg-blue-100' },
   ];
 
   return (

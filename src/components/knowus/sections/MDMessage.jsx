@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Quote, Send, CheckCircle2, Award, Zap, ShieldCheck } from 'lucide-react';
 
 const MDMessage = () => {
+    const [data, setData] = useState({
+        name: 'Shri Yatendra Kumar Pal',
+        designation: 'Managing Director',
+        photo: '/images/KeyParticipants/shri_yatendra_pal.png',
+        quote: 'Ensuring that textiles of knowledge reach every student in Bihar, timely and with uncompromised quality.',
+        welcomeNote: 'It gives me immense pleasure to connect with all stakeholders through this platform. The Bihar State Text Book Publishing Corporation Ltd. plays a pivotal role in strengthening the foundation of education by ensuring the timely production and distribution of quality textbooks across the state.',
+        qualityNote: 'Quality remains at the core of our operations. From manuscript approval to final printing, every stage undergoes strict supervision and inspection.',
+        collaboration: 'The successful execution of our responsibilities is possible through the collective efforts of our officers, employees, registered printers, wholesalers, depot staff, and education departments across districts.',
+        movingForward: 'As we move ahead, our vision remains clear — to ensure that every student in Bihar receives quality textbooks on time, without compromise.'
+    });
+
+    useEffect(() => {
+        const saved = localStorage.getItem('module_content_ku-md-message');
+        if (saved) {
+            try {
+                const parsed = JSON.parse(saved);
+                if (parsed && typeof parsed === 'object' && parsed.name) {
+                    setData(parsed);
+                }
+            } catch (e) {
+                console.error("Error loading MD data", e);
+            }
+        }
+    }, []);
     const fadeIn = {
         hidden: { opacity: 0, y: 20 },
         visible: { 
@@ -43,8 +67,8 @@ const MDMessage = () => {
                         <div className="absolute -inset-4 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-[40px] opacity-10 blur-xl group-hover:opacity-20 transition-all duration-700" />
                         <div className="relative overflow-hidden rounded-[32px] aspect-[4/5] bg-slate-100 border border-slate-200 shadow-2xl">
                             <img 
-                                src="/images/KeyParticipants/shri_yatendra_pal.png" 
-                                alt="Managing Director" 
+                                src={data.photo} 
+                                alt={data.name} 
                                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                             />
                         </div>
@@ -52,10 +76,10 @@ const MDMessage = () => {
 
                     <div className="space-y-4 pt-4 border-l-4 border-blue-600 pl-6">
                         <h2 className="text-3xl font-black text-slate-900 tracking-tight leading-none">
-                            Shri Yatendra Kumar Pal
+                            {data.name}
                         </h2>
                         <div className="space-y-1">
-                            <p className="text-sm font-black uppercase tracking-widest text-blue-600">Managing Director</p>
+                            <p className="text-sm font-black uppercase tracking-widest text-blue-600">{data.designation}</p>
                             <p className="text-sm font-medium text-slate-500 leading-tight">
                                 Bihar State Text Book Publishing Corporation Ltd.
                             </p>
@@ -65,7 +89,7 @@ const MDMessage = () => {
                     {/* Quick Stats or Highlights */}
                     <div className="bg-slate-50 rounded-3xl p-8 space-y-6 border border-white/80 italic text-slate-600 text-sm leading-relaxed relative">
                         <Quote className="absolute -top-4 -left-4 text-blue-600/10 w-20 h-20 rotate-180" />
-                        "Ensuring that textiles of knowledge reach every student in Bihar, timely and with uncompromised quality."
+                        "{data.quote}"
                     </div>
                 </motion.div>
 
@@ -87,10 +111,7 @@ const MDMessage = () => {
                                 <div className="w-8 h-[2px] bg-blue-600" /> Welcome Note
                             </h3>
                             <p>
-                                It gives me immense pleasure to connect with all stakeholders through this platform. The Bihar State Text Book Publishing Corporation Ltd. plays a pivotal role in strengthening the foundation of education by ensuring the timely production and distribution of quality textbooks across the state.
-                            </p>
-                            <p>
-                                Education is the backbone of a progressive society, and access to well-designed, affordable, and curriculum-aligned textbooks is essential for academic excellence. Our corporation remains committed to supporting the Government of Bihar in its mission to provide equitable and inclusive education to every child.
+                                {data.welcomeNote}
                             </p>
                         </section>
 
@@ -116,7 +137,7 @@ const MDMessage = () => {
                                 <div className="w-8 h-[2px] bg-blue-600" /> Focus on Quality & Innovation
                             </h3>
                             <p>
-                                Quality remains at the core of our operations. From manuscript approval to final printing, every stage undergoes strict supervision and inspection. We are progressively integrating modern printing technologies and digital tracking systems to enhance efficiency and reduce delays.
+                                {data.qualityNote}
                             </p>
                             <p className="font-bold text-slate-800 border-l-4 border-indigo-600 pl-6 italic">
                                 Our goal is not only to meet present demands but also to build a robust, technology-driven framework for the future.
@@ -127,13 +148,13 @@ const MDMessage = () => {
                             <div className="space-y-4">
                                 <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest">Collaboration</h3>
                                 <p className="text-sm">
-                                    The successful execution of our responsibilities is possible through the collective efforts of our officers, employees, registered printers, wholesalers, depot staff, and education departments across districts.
+                                    {data.collaboration}
                                 </p>
                             </div>
                             <div className="space-y-4">
                                 <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest">Moving Forward</h3>
                                 <p className="text-sm">
-                                    As we move ahead, our vision remains clear — to ensure that every student in Bihar receives quality textbooks on time, without compromise. We remain committed to transparency, efficiency, and excellence in service.
+                                    {data.movingForward}
                                 </p>
                             </div>
                         </section>
@@ -142,8 +163,8 @@ const MDMessage = () => {
                             <div className="space-y-4">
                                 <p className="text-slate-400 font-medium italic">Let us work together to build a stronger educational ecosystem for the future generations of our state.</p>
                                 <div className="space-y-1">
-                                    <h4 className="text-xl font-black text-slate-900"> Shri Yatendra Kumar Pal</h4>
-                                    <p className="text-xs font-black uppercase text-blue-600 tracking-tighter">Managing Director, BSTPC</p>
+                                    <h4 className="text-xl font-black text-slate-900">{data.name}</h4>
+                                    <p className="text-xs font-black uppercase text-blue-600 tracking-tighter">{data.designation}, BSTPC</p>
                                 </div>
                             </div>
                             

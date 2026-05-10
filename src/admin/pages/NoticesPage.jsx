@@ -31,7 +31,7 @@ export default function NoticesPage({ addToast, forcedCategory }) {
   
   // Local state for notices with persistence
   const [noticeList, setNoticeList] = useState(() => {
-    const saved = localStorage.getItem('website_notices');
+    const saved = localStorage.getItem('website_notices_v2');
     return saved ? JSON.parse(saved) : notices;
   });
 
@@ -73,7 +73,7 @@ export default function NoticesPage({ addToast, forcedCategory }) {
       addToast('Notice published successfully!', 'success');
     }
     setNoticeList(updatedList);
-    localStorage.setItem('website_notices', JSON.stringify(updatedList));
+    localStorage.setItem('website_notices_v2', JSON.stringify(updatedList));
     setShowAddModal(false);
     setEditingNotice(null);
     resetForm();
@@ -82,7 +82,7 @@ export default function NoticesPage({ addToast, forcedCategory }) {
   const handleDelete = (id) => {
     const updatedList = noticeList.filter(n => n.id !== id);
     setNoticeList(updatedList);
-    localStorage.setItem('website_notices', JSON.stringify(updatedList));
+    localStorage.setItem('website_notices_v2', JSON.stringify(updatedList));
     addToast('Notice deleted', 'error');
   };
 

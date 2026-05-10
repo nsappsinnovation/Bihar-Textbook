@@ -4,7 +4,6 @@ import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
 import DashboardPage from './pages/DashboardPage';
 import BooksPage from './pages/BooksPage';
-import OfficersPage from './pages/OfficersPage';
 import NoticesPage from './pages/NoticesPage';
 import MessagesPage from './pages/MessagesPage';
 import DepartmentsPage from './pages/DepartmentsPage';
@@ -15,6 +14,7 @@ import CollaborativeLearningPage from './pages/CollaborativeLearningPage';
 import EventsManagementPage from './pages/EventsManagementPage';
 import EducationExcellencePage from './pages/EducationExcellencePage';
 import WebsiteEditorPage from './pages/WebsiteEditorPage';
+import CSRPolicyPage from './pages/CSRPolicyPage';
 import WebsiteManagementHub from './pages/WebsiteManagementHub';
 import ToastContainer from './components/ToastContainer';
 import { useToast } from './hooks/useCustomHooks';
@@ -30,8 +30,6 @@ function App() {
         return <DashboardPage addToast={addToast} />;
       case 'books':
         return <BooksPage addToast={addToast} />;
-      case 'officers':
-        return <OfficersPage addToast={addToast} />;
       case 'website-management':
         return <WebsiteManagementHub setActivePage={setActivePage} />;
       case 'notices':
@@ -46,20 +44,24 @@ function App() {
         return <EventsManagementPage addToast={addToast} />;
       case 'ee':
         return <EducationExcellencePage addToast={addToast} />;
-      case 'opmp':
-      case 'ku':
-      case 'gl':
-      case 'dc':
       case 'csr':
+        return <CSRPolicyPage addToast={addToast} />;
       default:
-        // Handle all sub-items and generic website modules
+        // Handle Books Sub-items (Class 1-12)
+        if (activePage.startsWith('book-class-')) {
+          const className = `Class ${activePage.split('-').pop()}`;
+          return <BooksPage addToast={addToast} forcedClass={className} />;
+        }
+        
+        // Handle all other modules (Know Us, Gallery, Documents, etc.)
         if (activePage.startsWith('ku-') || 
-            activePage.startsWith('book-') || 
             activePage.startsWith('gl-') || 
             activePage.startsWith('dc-') ||
-            ['opmp', 'ku', 'gl', 'dc', 'csr', 'tr'].includes(activePage)) {
+            ['opmp', 'ku', 'gl', 'dc', 'tr'].includes(activePage)) {
           return <WebsiteEditorPage module={activePage} addToast={addToast} />;
         }
+
+        // Default to dashboard
         return <DashboardPage addToast={addToast} setActivePage={setActivePage} />;
     }
   };
@@ -75,7 +77,7 @@ function App() {
       />
 
       {/* Main Content Area */}
-      <div className="flex-1 lg:ml-64 min-h-screen transition-all duration-300 ease-in-out p-4 md:p-6 bg-[#F8FAFC]">
+      <div className="flex-1 lg:ml-64 min-h-screen transition-all duration-300 ease-in-out p-4 md:p-6 bg-[#F8FAFC] overflow-hidden">
         {/* The Card Container */}
         <div className="flex flex-col min-h-[calc(100vh-3rem)] bg-white rounded-[2.5rem] shadow-sm border border-gray-100 overflow-hidden">
           {/* Navbar inside the card */}
@@ -86,7 +88,7 @@ function App() {
           />
 
           {/* Page Content inside the card */}
-          <main className="flex-1 p-6 md:p-8 overflow-y-auto overflow-x-hidden">
+          <main className="flex-1 p-6 md:p-8 overflow-y-auto overflow-x-hidden scrollbar-hide">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activePage}

@@ -80,7 +80,6 @@ const navGroups = [
         icon: FileText,
         hasSubItems: true,
         subItems: [
-          { id: 'dc-hrt', label: 'HRT' },
           { id: 'dc-reg-forms', label: 'Registration Forms' },
           { id: 'dc-rti', label: 'RTI' },
         ]
@@ -107,7 +106,7 @@ const navGroups = [
 ];
 
 export default function Sidebar({ activePage, setActivePage, isMobileOpen, setIsMobileOpen }) {
-  const [expandedItems, setExpandedItems] = useState(['notice-tender', 'website-management']); // Default open
+  const [expandedItems, setExpandedItems] = useState([]); // All sections closed by default
   const [userSettings, setUserSettings] = useState(() => {
     const saved = localStorage.getItem('adminSettings');
     return saved ? JSON.parse(saved) : { firstName: 'Admin', lastName: 'User', bio: 'Senior Manager' };
