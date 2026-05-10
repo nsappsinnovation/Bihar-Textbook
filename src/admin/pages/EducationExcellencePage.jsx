@@ -2,48 +2,57 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Trash2, Edit2, Save, X, LayoutGrid } from 'lucide-react';
 import Modal, { FormInput } from '../components/Modal';
+import { useActivityLog } from '../hooks/useCustomHooks';
 
-export default function EducationExcellencePage({ addToast }) {
+export default function EducationExcellencePage({ addToast, title = "Tools & Resources", storageKey = "website_missions" }) {
+  const { logActivity } = useActivityLog();
   const [missions, setMissions] = useState(() => {
-    const saved = localStorage.getItem('website_missions');
+    const saved = localStorage.getItem(storageKey);
     return saved ? JSON.parse(saved) : [
-      { id: 1, title: 'VIRTUAL REALITY LAB', desc: 'Immersive Learning Experiences', image: '/images/missions/headset.png' },
-      { id: 2, title: 'AUDIO LIBRARY', desc: 'Accessible Digital Content', image: '/images/missions/audio-book.png' },
-      { id: 3, title: 'SIGN LANGUAGE', desc: 'Inclusive Educational Tools', image: '/images/missions/friend.png' },
-      { id: 4, title: 'DIVERSE LANGUAGE', desc: 'Universal Digital Access', image: '/images/missions/diverse.png' },
-      { id: 5, title: 'AI INTELLIGENCE', desc: 'Smart Adaptive Tutoring', image: '/images/missions/ai.png' },
-      { id: 6, title: 'TEACHER TRAINING', desc: 'Advanced Pedagogy Support', image: '/images/missions/teacher.png' },
-      { id: 7, title: 'MOBILE LIBRARIES', desc: 'Rural Knowledge Outreach', image: '/images/missions/library.png' },
-      { id: 8, title: 'HERITAGE ARCHIVE', desc: 'Cultural Document Preservation', image: '/images/missions/history.png' },
-      { id: 9, title: 'CYBER SECURITY', desc: 'Online Safety & Scam Protection', image: '/images/missions/cyber-security.png' },
-      { id: 10, title: 'BASIC LEARNING SKILLS', desc: 'Communication & Life Skills', image: '/images/missions/abilities.png' },
+      { id: 1, title: 'VIRTUAL REALITY LAB', desc: 'Immersive Learning Experiences', image: '/images/missions/headset.png', content: 'Our VR Lab provides students with cutting-edge immersive learning experiences across various subjects.' },
+      { id: 2, title: 'AUDIO LIBRARY', desc: 'Accessible Digital Content', image: '/images/missions/audio-book.png', content: 'A comprehensive collection of audiobooks and podcasts designed for accessibility and on-the-go learning.' },
     ];
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
-  const [formData, setFormData] = useState({ title: '', desc: '', image: '' });
+  const [formData, setFormData] = useState({ title: '', desc: '', image: '', content: '' });
 
   const saveToStorage = (updated) => {
     setMissions(updated);
-    localStorage.setItem('website_missions', JSON.stringify(updated));
+    localStorage.setItem(storageKey, JSON.stringify(updated));
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 1024 * 1024) {
+        addToast?.('Image is too large (Max 1MB)', 'error');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData(prev => ({ ...prev, image: reader.result }));
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleOpenAdd = () => {
     setEditingItem(null);
-    setFormData({ title: '', desc: '', image: '/images/missions/headset.png' });
+    setFormData({ title: '', desc: '', image: '', content: '' });
     setIsModalOpen(true);
   };
 
   const handleOpenEdit = (item) => {
     setEditingItem(item);
-    setFormData({ title: item.title, desc: item.desc, image: item.image });
+    setFormData({ title: item.title, desc: item.desc, image: item.image, content: item.content || '' });
     setIsModalOpen(true);
   };
 
   const handleSave = () => {
-    if (!formData.title || !formData.desc) {
-      addToast?.('Please fill all fields', 'error');
+    if (!formData.title || !formData.desc || !formData.image) {
+      addToast?.('Please fill required fields', 'error');
       return;
     }
 
@@ -51,18 +60,24 @@ export default function EducationExcellencePage({ addToast }) {
     if (editingItem) {
       updated = missions.map(m => m.id === editingItem.id ? { ...m, ...formData } : m);
       addToast?.('Item Updated', 'success');
+      logActivity(`Updated ${title}: ${formData.title}`, 'Admin', 'edit');
     } else {
       updated = [...missions, { id: Date.now(), ...formData }];
       addToast?.('Item Added', 'success');
+      logActivity(`Added new ${title}: ${formData.title}`, 'Admin', 'create');
     }
     saveToStorage(updated);
     setIsModalOpen(false);
   };
 
   const handleDelete = (id) => {
+    const itemToDelete = missions.find(m => m.id === id);
     const updated = missions.filter(m => m.id !== id);
     saveToStorage(updated);
     addToast?.('Item Deleted', 'info');
+    if (itemToDelete) {
+      logActivity(`Deleted ${title}: ${itemToDelete.title}`, 'Admin', 'delete');
+    }
   };
 
   return (
@@ -74,19 +89,19 @@ export default function EducationExcellencePage({ addToast }) {
       {/* Header Area */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">Education Excellence</h1>
-          <p className="text-sm text-gray-500 mt-1">Manage tools and resources displayed on the homepage</p>
+          <h1 className="text-3xl font-black text-gray-900 tracking-tight">{title}</h1>
+          <p className="text-sm text-gray-500 mt-1 font-medium">Manage entries and detailed content for this section</p>
         </div>
         <button 
           onClick={handleOpenAdd}
-          className="flex items-center gap-2 px-5 py-2.5 bg-emerald-600 text-white rounded-xl font-bold text-sm shadow-sm hover:bg-emerald-700 transition-all"
+          className="flex items-center gap-2 px-6 py-3.5 bg-gray-900 text-white rounded-2xl font-bold text-sm shadow-xl shadow-gray-900/10 hover:bg-black transition-all"
         >
           <Plus className="w-4 h-4" />
-          <span>Add New Tool</span>
+          <span>Add New Entry</span>
         </button>
       </div>
 
-      {/* Grid Container matching the reference image */}
+      {/* Grid Container */}
       <div className="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm p-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-16">
           <AnimatePresence>
@@ -99,7 +114,6 @@ export default function EducationExcellencePage({ addToast }) {
                 exit={{ opacity: 0, scale: 0.9 }}
                 className="flex flex-col items-center group relative text-center"
               >
-                {/* Admin Actions (Visible on hover) */}
                 <div className="absolute -top-4 right-0 flex gap-2 opacity-0 group-hover:opacity-100 transition-all z-20">
                   <button 
                     onClick={() => handleOpenEdit(mission)}
@@ -115,85 +129,101 @@ export default function EducationExcellencePage({ addToast }) {
                   </button>
                 </div>
 
-                {/* Icon Wrapper */}
-                <div className="w-24 h-24 mb-6 flex items-center justify-center relative transition-transform duration-300 group-hover:scale-110">
+                <div className="w-28 h-28 mb-6 flex items-center justify-center relative transition-transform duration-300 group-hover:scale-105 overflow-hidden rounded-2xl bg-gray-50 border border-gray-100">
                   <img 
                     src={mission.image} 
                     alt={mission.title} 
-                    className="w-full h-full object-contain"
+                    className="w-full h-full object-cover"
                   />
                 </div>
                 
-                {/* Text Content */}
                 <div className="space-y-2">
-                  <h4 className="text-[#1e293b] text-sm font-extrabold uppercase tracking-tight">
+                  <h4 className="text-sm font-black text-gray-900 uppercase tracking-tight">
                     {mission.title}
                   </h4>
-                  <p className="text-[11px] text-[#64748b] font-medium leading-relaxed max-w-[160px]">
+                  <p className="text-[11px] text-gray-400 font-bold leading-relaxed max-w-[160px]">
                     {mission.desc}
                   </p>
+                  {mission.content && (
+                    <p className="text-[10px] text-gray-300 italic line-clamp-1 mt-1 font-medium">
+                      {mission.content}
+                    </p>
+                  )}
                 </div>
               </motion.div>
             ))}
           </AnimatePresence>
 
           {missions.length === 0 && (
-            <div className="col-span-full py-20 text-center text-gray-400 font-medium border-2 border-dashed border-gray-100 rounded-3xl">
-              No tools added yet. Click "Add New Tool" to get started.
+            <div className="col-span-full py-24 text-center">
+              <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-dashed border-gray-200">
+                <LayoutGrid className="w-10 h-10 text-gray-300" />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900">No Entries Found</h3>
+              <p className="text-gray-400 text-sm mt-1">Start by adding a new entry to this section.</p>
             </div>
           )}
         </div>
       </div>
 
-      {/* Modal for Adding/Editing */}
       <Modal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
-        title={editingItem ? "Edit Tool" : "Add New Tool"} 
+        title={editingItem ? "Edit Entry" : "Create New Entry"} 
       >
-        <div className="space-y-4">
+        <div className="space-y-5">
           <FormInput 
-            label="Title (Uppercase recommended)" 
+            label="Title" 
             placeholder="e.g. VIRTUAL REALITY LAB" 
             value={formData.title}
             onChange={(val) => setFormData(prev => ({ ...prev, title: val }))}
           />
           <FormInput 
-            label="Description" 
+            label="Short Tagline / Description" 
             placeholder="e.g. Immersive Learning Experiences" 
             value={formData.desc}
             onChange={(val) => setFormData(prev => ({ ...prev, desc: val }))}
           />
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700 mb-2">Select Icon Image</label>
-            <div className="grid grid-cols-5 gap-2">
-              {[
-                'headset.png', 'audio-book.png', 'friend.png', 'diverse.png', 'ai.png',
-                'teacher.png', 'library.png', 'history.png', 'cyber-security.png', 'abilities.png'
-              ].map(img => (
-                <button
-                  key={img}
-                  onClick={() => setFormData(prev => ({ ...prev, image: `/images/missions/${img}` }))}
-                  className={`p-2 rounded-lg border-2 transition-all ${formData.image.includes(img) ? 'border-emerald-500 bg-emerald-50' : 'border-gray-100 hover:border-gray-200'}`}
-                >
-                  <img src={`/images/missions/${img}`} alt="icon" className="w-8 h-8 object-contain mx-auto" />
-                </button>
-              ))}
+          
+          <div>
+            <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-2">Detailed Content</label>
+            <textarea
+              className="w-full px-4 py-3 rounded-2xl bg-gray-50 border-none text-sm font-medium text-gray-800 placeholder-gray-400 focus:ring-2 focus:ring-blue-500/20 transition-all min-h-[120px]"
+              placeholder="Provide 'proper detail' about this initiative here..."
+              value={formData.content}
+              onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
+            />
+          </div>
+
+          <div>
+            <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-3">Upload Image</label>
+            <div className="flex flex-col items-center justify-center w-full">
+              <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-200 rounded-3xl cursor-pointer bg-gray-50/50 hover:bg-gray-50 transition-all overflow-hidden">
+                {formData.image ? (
+                  <img src={formData.image} alt="Preview" className="w-full h-full object-cover" />
+                ) : (
+                  <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                    <Plus className="w-8 h-8 text-gray-300 mb-2" />
+                    <p className="text-xs font-bold text-gray-400 uppercase">Select File</p>
+                  </div>
+                )}
+                <input type="file" className="hidden" accept="image/*" onChange={handleImageChange} />
+              </label>
             </div>
           </div>
 
-          <div className="flex items-center justify-end gap-3 mt-8 pt-4 border-t border-gray-100">
+          <div className="flex items-center justify-end gap-3 mt-8 pt-6 border-t border-gray-100">
             <button
               onClick={() => setIsModalOpen(false)}
-              className="px-5 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-100 transition-colors"
+              className="px-6 py-3 rounded-2xl text-sm font-bold text-gray-500 hover:bg-gray-100 transition-colors"
             >
               Cancel
             </button>
             <button
               onClick={handleSave}
-              className="px-5 py-2.5 rounded-xl bg-emerald-600 text-white text-sm font-semibold shadow-lg shadow-emerald-500/20 hover:bg-emerald-700 transition-all"
+              className="px-6 py-3 rounded-2xl bg-blue-600 text-white text-sm font-black shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-all"
             >
-              Save Changes
+              Save Entry
             </button>
           </div>
         </div>

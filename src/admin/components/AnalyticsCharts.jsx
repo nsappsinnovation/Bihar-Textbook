@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area, PieChart, Pie, Cell, LineChart, Line, Legend } from 'recharts';
-import { chartData } from '../data/dummyData';
-import { TrendingUp, BarChart3, PieChart as PieChartIcon, Activity } from 'lucide-react';
+import { chartData, yearOptions } from '../data/dummyData';
+import { TrendingUp, BarChart3, PieChart as PieChartIcon, Activity, Package } from 'lucide-react';
 
 /**
  * Custom tooltip for charts
@@ -14,7 +14,7 @@ const CustomTooltip = ({ active, payload, label }) => {
         {payload.map((entry, i) => (
           <p key={i} className="text-xs text-gray-600">
             <span className="inline-block w-2 h-2 rounded-full mr-2" style={{ backgroundColor: entry.color }} />
-            {entry.name}: <span className="font-semibold">{entry.value.toLocaleString()}</span>
+            {entry.name}: <span className="font-semibold">{entry.value.toLocaleString()}{entry.name === 'Distribution' || entry.name === 'Uploads' ? '' : '%'}</span>
           </p>
         ))}
       </div>
@@ -48,9 +48,8 @@ export default function AnalyticsCharts() {
             </h3>
             <p className="text-xs text-gray-500 mt-1 ml-10">Distribution vs target overview</p>
           </div>
-          <select className="text-xs bg-gray-50 border border-gray-200 rounded-lg px-3 py-1.5 text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
-            <option>This Year</option>
-            <option>Last Year</option>
+          <select className="text-xs bg-gray-50 border border-gray-200 rounded-lg px-3 py-1.5 text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500/20 cursor-pointer hover:bg-gray-100 transition-colors">
+            {yearOptions.map(year => <option key={year} value={year}>{year}</option>)}
           </select>
         </div>
         <ResponsiveContainer width="100%" height={240}>
@@ -58,7 +57,7 @@ export default function AnalyticsCharts() {
             <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" />
             <XAxis dataKey="month" tick={{ fill: '#94A3B8', fontSize: 11 }} axisLine={false} tickLine={false} />
             <YAxis tick={{ fill: '#94A3B8', fontSize: 11 }} axisLine={false} tickLine={false} />
-            <Tooltip content={<CustomTooltip />} />
+            <Tooltip content={<CustomTooltip />} cursor={{ fill: '#F8FAFC' }} />
             <Bar dataKey="distributed" name="Distributed" fill="#3B82F6" radius={[4, 4, 0, 0]} />
             <Bar dataKey="target" name="Target" fill="#E2E8F0" radius={[4, 4, 0, 0]} />
           </BarChart>
@@ -82,9 +81,8 @@ export default function AnalyticsCharts() {
             </h3>
             <p className="text-xs text-gray-500 mt-1 ml-10">Books uploaded per month</p>
           </div>
-          <select className="text-xs bg-gray-50 border border-gray-200 rounded-lg px-3 py-1.5 text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
-            <option>This Year</option>
-            <option>Last Year</option>
+          <select className="text-xs bg-gray-50 border border-gray-200 rounded-lg px-3 py-1.5 text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500/20 cursor-pointer hover:bg-gray-100 transition-colors">
+            {yearOptions.map(year => <option key={year} value={year}>{year}</option>)}
           </select>
         </div>
         <ResponsiveContainer width="100%" height={240}>
@@ -104,7 +102,7 @@ export default function AnalyticsCharts() {
         </ResponsiveContainer>
       </motion.div>
 
-      {/* Department Activity */}
+      {/* Content Type Distribution */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -115,38 +113,49 @@ export default function AnalyticsCharts() {
           <div>
             <h3 className="text-base font-bold text-gray-800 flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center">
-                <PieChartIcon className="w-4 h-4 text-indigo-600" />
+                <Package className="w-4 h-4 text-indigo-600" />
               </div>
-              Department Activity
+              Content Distribution
             </h3>
-            <p className="text-xs text-gray-500 mt-1 ml-10">Activity distribution by department</p>
+            <p className="text-xs text-gray-500 mt-1 ml-10">Asset type allocation breakdown</p>
           </div>
         </div>
-        <div className="flex items-center gap-4">
-          <ResponsiveContainer width="50%" height={200}>
-            <PieChart>
-              <Pie
-                data={chartData.departmentActivity}
-                cx="50%"
-                cy="50%"
-                innerRadius={50}
-                outerRadius={80}
-                paddingAngle={3}
-                dataKey="value"
-              >
-                {chartData.departmentActivity.map((_, index) => (
-                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                ))}
-              </Pie>
-              <Tooltip content={<CustomTooltip />} />
-            </PieChart>
-          </ResponsiveContainer>
-          <div className="flex-1 space-y-2">
-            {chartData.departmentActivity.map((dept, index) => (
-              <div key={dept.name} className="flex items-center gap-2">
-                <div className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: COLORS[index] }} />
-                <span className="text-xs text-gray-600 flex-1 truncate">{dept.name}</span>
-                <span className="text-xs font-semibold text-gray-800">{dept.value}%</span>
+        <div className="flex flex-col lg:flex-row items-center gap-8">
+          <div className="w-full lg:w-1/2 h-[220px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={chartData.contentTypeDistribution}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={65}
+                  outerRadius={90}
+                  paddingAngle={5}
+                  dataKey="value"
+                  animationBegin={0}
+                  animationDuration={1500}
+                >
+                  {chartData.contentTypeDistribution.map((_, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip content={<CustomTooltip />} />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+          
+          <div className="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3">
+            {chartData.contentTypeDistribution.map((item, index) => (
+              <div key={item.name} className="flex items-center justify-between p-2.5 rounded-xl hover:bg-gray-50 transition-colors group">
+                <div className="flex items-center gap-3">
+                  <div className="w-3 h-3 rounded-full shadow-sm flex-shrink-0" style={{ backgroundColor: COLORS[index] }} />
+                  <span className="text-sm text-gray-600 font-semibold group-hover:text-gray-900 transition-colors truncate max-w-[100px] sm:max-w-none">
+                    {item.name}
+                  </span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span className="text-xs font-bold text-gray-800 bg-gray-100/50 px-2 py-0.5 rounded-md">{item.value}%</span>
+                </div>
               </div>
             ))}
           </div>

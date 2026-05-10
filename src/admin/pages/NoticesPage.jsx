@@ -20,10 +20,13 @@ const priorityIcons = {
   Low: Bell,
 };
 
+import { useActivityLog } from '../hooks/useCustomHooks';
+
 /**
  * Notices & Announcements Page
  */
 export default function NoticesPage({ addToast, forcedCategory }) {
+  const { logActivity } = useActivityLog();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(forcedCategory || 'All');
   const [showAddModal, setShowAddModal] = useState(false);
@@ -67,10 +70,12 @@ export default function NoticesPage({ addToast, forcedCategory }) {
     if (editingNotice) {
       updatedList = noticeList.map(n => n.id === editingNotice.id ? { ...formData, id: n.id } : n);
       addToast('Updated', 'success');
+      logActivity(`Updated notice: ${formData.title}`, 'Admin', 'edit');
     } else {
       const newNotice = { ...formData, id: Date.now() };
       updatedList = [newNotice, ...noticeList];
       addToast('Notice published successfully!', 'success');
+      logActivity(`Published new notice: ${formData.title}`, 'Admin', 'upload');
     }
     setNoticeList(updatedList);
     localStorage.setItem('website_notices_v2', JSON.stringify(updatedList));
@@ -80,10 +85,14 @@ export default function NoticesPage({ addToast, forcedCategory }) {
   };
 
   const handleDelete = (id) => {
+    const itemToDelete = noticeList.find(n => n.id === id);
     const updatedList = noticeList.filter(n => n.id !== id);
     setNoticeList(updatedList);
     localStorage.setItem('website_notices_v2', JSON.stringify(updatedList));
     addToast('Notice deleted', 'error');
+    if (itemToDelete) {
+      logActivity(`Deleted notice: ${itemToDelete.title}`, 'Admin', 'delete');
+    }
   };
 
   const resetForm = () => {

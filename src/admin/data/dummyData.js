@@ -425,15 +425,18 @@ export const chartData = {
     { month: 'Nov', uploads: 38 },
     { month: 'Dec', uploads: 42 },
   ],
-  departmentActivity: [
-    { name: 'Administration', value: 35 },
-    { name: 'Publishing', value: 28 },
-    { name: 'Editorial', value: 22 },
-    { name: 'IT Department', value: 18 },
-    { name: 'Finance', value: 15 },
-    { name: 'Distribution', value: 25 },
+  contentTypeDistribution: [
+    { name: 'Textbooks', value: 45 },
+    { name: 'Notices', value: 20 },
+    { name: 'Tenders', value: 15 },
+    { name: 'Gallery', value: 12 },
+    { name: 'Documents', value: 8 },
   ],
 };
+
+export const yearOptions = [
+  '2026', '2025', '2024', '2023', '2022'
+];
 
 export const classOptions = [
   'All Classes', 'Class 1', 'Class 2', 'Class 3', 'Class 4', 'Class 5',

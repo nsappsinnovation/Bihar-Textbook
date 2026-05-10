@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Save, Plus, Trash2, Edit2, Image as ImageIcon, Link as LinkIcon, FileText } from 'lucide-react';
+import { Save, Plus, Trash2, Edit2, Image as ImageIcon, User as UserIcon, FileText } from 'lucide-react';
 import Modal, { FormInput } from '../components/Modal';
 
 export default function WebsiteEditorPage({ module, addToast }) {
@@ -454,7 +454,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
                         {item.document && (module.startsWith('gl-') || module.startsWith('book-')) ? (
                           <img src={item.document} alt="Thumb" className="w-full h-full object-cover" />
                         ) : (
-                          module === 'gl' ? <ImageIcon size={20} /> : module === 'dc' ? <FileText size={20} /> : <LinkIcon size={20} />
+                          module === 'gl' ? <ImageIcon size={20} /> : module === 'dc' ? <FileText size={20} /> : <UserIcon size={20} />
                         )}
                       </div>
                       {module !== 'gl-photo' && (

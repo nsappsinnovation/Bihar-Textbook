@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Shield, Save, Eye, X, Download, Plus, Trash2, 
   CheckCircle2, ArrowRight, Zap, Target, BookOpen, Globe, Heart, Activity,
-  Handshake, Coins
+  Handshake, Coins, Clock
 } from 'lucide-react';
 
 export default function CSRPolicyPage({ addToast }) {
@@ -342,18 +342,46 @@ export default function CSRPolicyPage({ addToast }) {
 
         {/* Section 6: Partner With Us */}
         <div className="space-y-4">
-          <h3 className="text-xs font-black text-cyan-600 uppercase tracking-widest px-2 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-cyan-600" />
-            6. Partner With Us
+          <h3 className="text-xs font-black text-blue-600 uppercase tracking-widest px-2 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-blue-600" />
+            6. Partnership Call-to-Action
           </h3>
-          <div className="bg-white rounded-[2.5rem] p-8 border border-gray-100 shadow-sm space-y-6">
-            <div className="flex gap-6 items-center">
-               <div className="w-16 h-16 rounded-2xl bg-cyan-50 flex items-center justify-center text-cyan-600 shrink-0">
+          <div className="bg-[#0F172A] rounded-[2.5rem] p-12 border border-slate-800 shadow-xl relative overflow-hidden group">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '24px 24px' }} />
+            
+            <div className="relative z-10 flex flex-col items-center text-center max-w-2xl mx-auto space-y-6">
+               <div className="w-16 h-16 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400">
                   <Handshake className="w-8 h-8" />
                </div>
-               <div className="flex-1 space-y-4">
-                  <input name="partnerTitle" value={formData.partnerTitle} onChange={handleChange} className="w-full text-xl font-black text-gray-800 bg-transparent outline-none" />
-                  <textarea name="partnerDesc" value={formData.partnerDesc} onChange={handleChange} rows={2} className="w-full text-sm text-gray-500 bg-transparent outline-none resize-none leading-relaxed" />
+               
+               <div className="space-y-4 w-full">
+                  <input 
+                    name="partnerTitle" 
+                    value={formData.partnerTitle} 
+                    onChange={handleChange} 
+                    className="w-full text-3xl font-black text-white bg-transparent outline-none text-center" 
+                    placeholder="Partner With Us"
+                  />
+                  <textarea 
+                    name="partnerDesc" 
+                    value={formData.partnerDesc} 
+                    onChange={handleChange} 
+                    rows={2} 
+                    className="w-full text-base text-slate-400 bg-transparent outline-none resize-none leading-relaxed text-center font-medium"
+                    placeholder="We welcome collaboration with educational institutions, NGOs, and community organizations..."
+                  />
+               </div>
+
+               <div className="pt-4 w-full flex flex-col items-center gap-4">
+                  <button className="px-10 py-4 bg-white text-[#0F172A] rounded-full font-black text-xs uppercase tracking-widest flex items-center gap-3 shadow-2xl hover:scale-105 transition-all">
+                    Explore Partnership
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                  <p className="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em] flex items-center gap-2">
+                    <Clock className="w-3 h-3" />
+                    Response time: ~48 Hours
+                  </p>
                </div>
             </div>
           </div>
@@ -574,15 +602,30 @@ export default function CSRPolicyPage({ addToast }) {
                 </section>
 
                 {/* 6. PARTNER WITH US */}
-                <section className="py-32 px-20 bg-cyan-600 text-white text-center">
-                    <div className="max-w-4xl mx-auto space-y-8">
-                       <Handshake className="w-20 h-20 mx-auto opacity-50" />
-                       <h3 className="text-5xl font-black">{formData.partnerTitle}</h3>
-                       <p className="text-2xl font-light opacity-80 leading-relaxed">{formData.partnerDesc}</p>
-                       <button className="px-10 py-5 bg-white text-cyan-600 rounded-full font-black uppercase tracking-widest hover:scale-105 transition-all shadow-2xl">
-                          Contact Our CSR Team
-                       </button>
-                    </div>
+                <section className="py-32 px-10">
+                   <div className="max-w-6xl mx-auto bg-[#0F172A] rounded-[4rem] p-24 text-white text-center relative overflow-hidden shadow-2xl">
+                      {/* Grid Dots Pattern */}
+                      <div className="absolute inset-0 opacity-[0.05]" style={{ backgroundImage: 'radial-gradient(#fff 1.2px, transparent 1.2px)', backgroundSize: '32px 32px' }} />
+                      
+                      <div className="relative z-10 max-w-3xl mx-auto space-y-10">
+                         <div className="w-20 h-20 bg-blue-500/10 rounded-3xl flex items-center justify-center mx-auto text-blue-400">
+                            <Handshake className="w-10 h-10" />
+                         </div>
+                         <h3 className="text-6xl font-black tracking-tight">{formData.partnerTitle}</h3>
+                         <p className="text-xl font-medium text-slate-400 leading-relaxed mx-auto max-w-2xl">{formData.partnerDesc}</p>
+                         
+                         <div className="pt-6 flex flex-col items-center gap-6">
+                            <button className="px-12 py-6 bg-white text-slate-900 rounded-full font-black text-sm uppercase tracking-widest hover:scale-105 transition-all shadow-2xl flex items-center gap-3">
+                               Explore Partnership
+                               <ArrowRight className="w-5 h-5" />
+                            </button>
+                            <div className="flex items-center gap-2 text-[11px] font-bold text-slate-500 uppercase tracking-[0.25em]">
+                               <Clock className="w-4 h-4" />
+                               Our team typically responds within 48 business hours.
+                            </div>
+                         </div>
+                      </div>
+                   </div>
                 </section>
 
                 {/* 7. CSR INVESTMENT */}

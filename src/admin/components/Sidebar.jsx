@@ -51,7 +51,6 @@ const navGroups = [
           { id: 'ku-list-md', label: 'List of MD' },
           { id: 'ku-officers', label: 'Officers List' },
           { id: 'ku-employee', label: 'Our Employee' },
-          { id: 'ku-structure', label: 'Organisational Structure' },
           { id: 'ku-wholeseller', label: 'Wholeseller/Depo' },
           { id: 'ku-printers', label: 'Register Printers' },
         ]
@@ -109,7 +108,7 @@ export default function Sidebar({ activePage, setActivePage, isMobileOpen, setIs
   const [expandedItems, setExpandedItems] = useState([]); // All sections closed by default
   const [userSettings, setUserSettings] = useState(() => {
     const saved = localStorage.getItem('adminSettings');
-    return saved ? JSON.parse(saved) : { firstName: 'Admin', lastName: 'User', bio: 'Senior Manager' };
+    return saved ? JSON.parse(saved) : { firstName: 'Anushka', lastName: 'Nandan', bio: 'ADMIN' };
   });
 
   useEffect(() => {
@@ -145,9 +144,7 @@ export default function Sidebar({ activePage, setActivePage, isMobileOpen, setIs
           </div>
           <span className="text-lg font-extrabold text-[#064E3B] tracking-tight">BSTBPC</span>
         </div>
-        <button className="p-1.5 rounded-lg bg-white border border-gray-100 shadow-sm text-gray-400 hover:text-gray-600 transition-colors">
-          <ChevronLeft className="w-3.5 h-3.5" />
-        </button>
+
       </div>
 
       {/* Navigation Groups */}

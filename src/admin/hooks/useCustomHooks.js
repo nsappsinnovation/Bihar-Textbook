@@ -115,3 +115,81 @@ export function useClickOutside(ref, handler) {
     };
   }, [ref, handler]);
 }
+/**
+ * Hook to manage real-time activity logging
+ */
+export function useActivityLog() {
+  const [activities, setActivities] = useState(() => {
+    const saved = localStorage.getItem('admin_activities');
+    if (saved) return JSON.parse(saved);
+    
+    // Default initial activities
+    return [
+      { id: 1, user: 'Rajesh Kumar Singh', action: 'Updated officer profile information', type: 'update', time: '2 minutes ago', avatar: 'RK', status: 'completed', read: false },
+      { id: 2, user: 'Priya Sharma', action: 'Uploaded new notice regarding exam schedule', type: 'upload', time: '15 minutes ago', avatar: 'PS', status: 'completed', read: true },
+      { id: 3, user: 'Amit Verma', action: 'Added new textbook - Mathematics Class 10', type: 'create', time: '1 hour ago', avatar: 'AV', status: 'completed', read: true },
+    ];
+  });
+
+  const logActivity = useCallback((action, user = 'Admin', type = 'system', link = null, status = 'completed') => {
+    const newActivity = {
+      id: Date.now(),
+      user,
+      action,
+      type,
+      status,
+      link,
+      time: 'Just now',
+      read: false,
+      avatar: user.split(' ').map(n => n[0]).join('').toUpperCase()
+    };
+    
+    setActivities(prev => {
+      const updated = [newActivity, ...prev].slice(0, 30); // Keep last 30 for view all
+      localStorage.setItem('admin_activities', JSON.stringify(updated));
+      window.dispatchEvent(new Event('activitiesUpdated'));
+      return updated;
+    });
+  }, []);
+
+  const markAsRead = useCallback((id) => {
+    setActivities(prev => {
+      const updated = prev.map(a => a.id === id ? { ...a, read: true } : a);
+      localStorage.setItem('admin_activities', JSON.stringify(updated));
+      window.dispatchEvent(new Event('activitiesUpdated'));
+      return updated;
+    });
+  }, []);
+
+  const removeActivity = useCallback((id) => {
+    setActivities(prev => {
+      const updated = prev.filter(a => a.id !== id);
+      localStorage.setItem('admin_activities', JSON.stringify(updated));
+      window.dispatchEvent(new Event('activitiesUpdated'));
+      return updated;
+    });
+  }, []);
+
+  const clearAllActivities = useCallback(() => {
+    setActivities([]);
+    localStorage.removeItem('admin_activities');
+    window.dispatchEvent(new Event('activitiesUpdated'));
+  }, []);
+
+  useEffect(() => {
+    const handleUpdate = () => {
+      const saved = localStorage.getItem('admin_activities');
+      if (saved) setActivities(JSON.parse(saved));
+      else setActivities([]);
+    };
+
+    window.addEventListener('activitiesUpdated', handleUpdate);
+    window.addEventListener('storage', handleUpdate);
+    return () => {
+      window.removeEventListener('activitiesUpdated', handleUpdate);
+      window.removeEventListener('storage', handleUpdate);
+    };
+  }, []);
+
+  return { activities, logActivity, markAsRead, removeActivity, clearAllActivities };
+}

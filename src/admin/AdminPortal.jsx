@@ -13,9 +13,14 @@ import SettingsPage from './pages/SettingsPage';
 import CollaborativeLearningPage from './pages/CollaborativeLearningPage';
 import EventsManagementPage from './pages/EventsManagementPage';
 import EducationExcellencePage from './pages/EducationExcellencePage';
+import LeadersManagementPage from './pages/LeadersManagementPage';
 import WebsiteEditorPage from './pages/WebsiteEditorPage';
+import EmployeesManagementPage from './pages/EmployeesManagementPage';
+import WholesalerDepotPage from './pages/WholesalerDepotPage';
+import RegisterPrintersPage from './pages/RegisterPrintersPage';
 import CSRPolicyPage from './pages/CSRPolicyPage';
 import WebsiteManagementHub from './pages/WebsiteManagementHub';
+import NotificationsPage from './pages/NotificationsPage';
 import ToastContainer from './components/ToastContainer';
 import { useToast } from './hooks/useCustomHooks';
 
@@ -27,7 +32,7 @@ function App() {
   const renderPage = () => {
     switch (activePage) {
       case 'dashboard':
-        return <DashboardPage addToast={addToast} />;
+        return <DashboardPage addToast={addToast} setActivePage={setActivePage} />;
       case 'books':
         return <BooksPage addToast={addToast} />;
       case 'website-management':
@@ -36,16 +41,24 @@ function App() {
         return <NoticesPage addToast={addToast} forcedCategory="Notice" />;
       case 'tenders':
         return <NoticesPage addToast={addToast} forcedCategory="Tender" />;
+      case 'notifications':
+        return <NotificationsPage setActivePage={setActivePage} />;
       case 'settings':
         return <SettingsPage addToast={addToast} />;
       case 'cl':
-        return <CollaborativeLearningPage addToast={addToast} />;
+        return <EducationExcellencePage addToast={addToast} title="Latest Initiatives" storageKey="website_initiatives" />;
       case 'ev':
         return <EventsManagementPage addToast={addToast} />;
       case 'ee':
-        return <EducationExcellencePage addToast={addToast} />;
+        return <LeadersManagementPage addToast={addToast} />;
       case 'csr':
         return <CSRPolicyPage addToast={addToast} />;
+      case 'ku-employee':
+        return <EmployeesManagementPage addToast={addToast} />;
+      case 'ku-wholeseller':
+        return <WholesalerDepotPage addToast={addToast} />;
+      case 'ku-printers':
+        return <RegisterPrintersPage addToast={addToast} />;
       default:
         // Handle Books Sub-items (Class 1-12)
         if (activePage.startsWith('book-class-')) {
@@ -57,8 +70,12 @@ function App() {
         if (activePage.startsWith('ku-') || 
             activePage.startsWith('gl-') || 
             activePage.startsWith('dc-') ||
-            ['opmp', 'ku', 'gl', 'dc', 'tr'].includes(activePage)) {
+            ['opmp', 'ku', 'gl', 'dc'].includes(activePage)) {
           return <WebsiteEditorPage module={activePage} addToast={addToast} />;
+        }
+
+        if (activePage === 'tr') {
+          return <EducationExcellencePage addToast={addToast} title="Tools & Resources" storageKey="website_missions" />;
         }
 
         // Default to dashboard
@@ -85,6 +102,7 @@ function App() {
             isMobileOpen={isMobileMenuOpen} 
             setIsMobileOpen={setIsMobileMenuOpen}
             activePage={activePage}
+            setActivePage={setActivePage}
           />
 
           {/* Page Content inside the card */}
