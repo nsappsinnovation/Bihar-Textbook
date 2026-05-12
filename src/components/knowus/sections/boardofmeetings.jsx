@@ -2,15 +2,37 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FiUsers, FiAward, FiCalendar, FiUser, FiInfo } from 'react-icons/fi';
 
-const directors = [
-  { id: 1, name: "Shri. S. Siddharth, IAS", designation: "ACS, Dept. of Education (Chairman)", from: "Current", status: "Active" },
-  { id: 2, name: "Shri. Sunny Sinha", designation: "Managing Director", from: "Current", status: "Active" },
-  { id: 3, name: "Shri. Anand Sharma", designation: "Director, Primary Education", from: "2023", status: "Active" },
-  { id: 4, name: "Ms. Rekha Kumari", designation: "Director, Secondary Education", from: "2022", status: "Active" },
-  { id: 5, name: "Shri. Manoj Kumar", designation: "Spl. Secretary, Finance Dept.", from: "2023", status: "Active" },
-];
+
 
 const BoardOfDirectors = () => {
+  const [items, setItems] = React.useState([
+    { id: 1, name: "Shri. S. Siddharth, IAS", designation: "ACS, Dept. of Education (Chairman)", from: "Current", status: "Active" },
+    { id: 2, name: "Shri. Sunny Sinha", designation: "Managing Director", from: "Current", status: "Active" },
+    { id: 3, name: "Shri. Anand Sharma", designation: "Director, Primary Education", from: "2023", status: "Active" },
+    { id: 4, name: "Ms. Rekha Kumari", designation: "Director, Secondary Education", from: "2022", status: "Active" },
+    { id: 5, name: "Shri. Manoj Kumar", designation: "Spl. Secretary, Finance Dept.", from: "2023", status: "Active" },
+  ]);
+
+  React.useEffect(() => {
+    const saved = localStorage.getItem('module_content_ku-board');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          setItems(parsed.map(item => ({
+            id: item.id,
+            name: item.title,
+            designation: item.designation,
+            from: item.since,
+            status: item.status
+          })));
+        }
+      } catch (e) {
+        console.error("Error loading board data", e);
+      }
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#f8fafc] py-12">
       {/* ================= HERO SECTION ================= */}
@@ -42,7 +64,7 @@ const BoardOfDirectors = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-300">
-                {directors.map((member) => (
+                {items.map((member) => (
                   <tr key={member.id} className="text-[#0d0e23]">
                     <td className="px-6 py-4 text-sm border-r border-slate-300 font-semibold">{member.name}</td>
                     <td className="px-6 py-4 text-sm border-r border-slate-300">{member.designation}</td>

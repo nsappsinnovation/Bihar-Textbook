@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const MissionGrid = () => {
-    const missions = [
+    const defaultMissions = [
         {
             id: 1,
             title: "Virtual Reality Lab",
@@ -32,7 +32,7 @@ const MissionGrid = () => {
         },
         {
             id: 4,
-            title: "Diverse language",
+            title: "Diverse Language",
             desc: "Universal Digital Access",
             image: "/images/missions/diverse.png",
             hoverImage: "/images/missions/diversehov.png",
@@ -95,76 +95,46 @@ const MissionGrid = () => {
         }
     ];
 
+    const missions = defaultMissions;
+
     return (
-        <section className="py-24 px-6 bg-white border-t border-slate-100">
-            <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-2 lg:grid-cols-4 border border-slate-100">
+        <section className="py-24 px-4 md:px-8 bg-white font-sans">
+            <div className="max-w-[1200px] mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-16">
                     {missions.map((mission) => (
-                        <MissionCard key={mission.id} mission={mission} />
+                        <Link 
+                            key={mission.id} 
+                            to={mission.link || '#'}
+                            className="flex flex-col items-center group text-center"
+                        >
+                            {/* Icon Container */}
+                            <div className="w-24 h-24 mb-6 flex items-center justify-center relative transition-transform duration-300 group-hover:scale-110">
+                                <img 
+                                    src={mission.image} 
+                                    alt={mission.title} 
+                                    className="w-full h-full object-contain transition-opacity duration-300 group-hover:opacity-0 absolute"
+                                />
+                                <img 
+                                    src={mission.hoverImage || mission.image} 
+                                    alt={`${mission.title} hover`} 
+                                    className="w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100 absolute"
+                                />
+                            </div>
+                            
+                            {/* Text Content */}
+                            <div className="space-y-2">
+                                <h4 className="text-[#1e293b] text-sm font-extrabold uppercase tracking-tight group-hover:text-blue-600 transition-colors duration-300">
+                                    {mission.title}
+                                </h4>
+                                <p className="text-[11px] text-[#64748b] font-medium leading-relaxed max-w-[160px]">
+                                    {mission.desc}
+                                </p>
+                            </div>
+                        </Link>
                     ))}
                 </div>
             </div>
         </section>
-    );
-};
-
-const MissionCard = ({ mission }) => {
-    const accentStyles = {
-        blue: {
-            text: "group-hover:text-blue-600",
-            bg: "group-hover:bg-blue-50/40",
-            line: "bg-blue-600"
-        },
-        amber: {
-            text: "group-hover:text-amber-500",
-            bg: "group-hover:bg-amber-50",
-            line: "bg-amber-500"
-        },
-        emerald: {
-            text: "group-hover:text-emerald-500",
-            bg: "group-hover:bg-emerald-50",
-            line: "bg-emerald-500"
-        }
-    };
-
-    const accent = accentStyles[mission.accent];
-
-    return (
-        <Link to={mission.link} className="group block">
-            <div className={`relative p-12 text-center bg-white transition-all duration-500 border border-transparent hover:shadow-xl overflow-hidden ${accent.bg}`}>
-                
-                {/* ICON WRAPPER */}
-                <div className="relative w-16 h-16 mx-auto mb-8 transition-transform duration-500 group-hover:scale-110">
-                    
-                    {/* Default Image */}
-                    <img
-                        src={mission.image}
-                        alt={mission.title}
-                        className="absolute inset-0 w-full h-full object-contain transition-opacity duration-300 group-hover:opacity-0"
-                    />
-
-                    {/* Hover Image */}
-                    <img
-                        src={mission.hoverImage}
-                        alt={`${mission.title} hover`}
-                        className="absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                    />
-                </div>
-
-                {/* TITLE */}
-                <h4 className={`text-sm font-black uppercase tracking-wider text-[#0d0e23] transition-colors duration-300 ${accent.text}`}>
-                    {mission.title}
-                </h4>
-
-                {/* DESCRIPTION */}
-                <p className="text-xs font-bold text-slate-400 mt-3 transition-colors duration-300 group-hover:text-slate-500">
-                    {mission.desc}
-                </p>
-
-                {/* BOTTOM ACCENT LINE */}
-                <div className={`absolute bottom-0 left-0 w-full h-[3px] ${accent.line} translate-y-full group-hover:translate-y-0 transition-transform duration-500`} />
-            </div>
-        </Link>
     );
 };
 
