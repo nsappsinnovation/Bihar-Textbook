@@ -95,14 +95,7 @@ const MissionGrid = () => {
         }
     ];
 
-    const [missions, setMissions] = useState(defaultMissions);
-
-    useEffect(() => {
-        const saved = localStorage.getItem('website_missions');
-        if (saved) {
-            setMissions(JSON.parse(saved));
-        }
-    }, []);
+    const missions = defaultMissions;
 
     return (
         <section className="py-24 px-4 md:px-8 bg-white font-sans">

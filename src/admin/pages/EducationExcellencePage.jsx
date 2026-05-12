@@ -9,14 +9,14 @@ export default function EducationExcellencePage({ addToast, title = "Tools & Res
   const [missions, setMissions] = useState(() => {
     const saved = localStorage.getItem(storageKey);
     return saved ? JSON.parse(saved) : [
-      { id: 1, title: 'VIRTUAL REALITY LAB', desc: 'Immersive Learning Experiences', image: '/images/missions/headset.png', content: 'Our VR Lab provides students with cutting-edge immersive learning experiences across various subjects.' },
-      { id: 2, title: 'AUDIO LIBRARY', desc: 'Accessible Digital Content', image: '/images/missions/audio-book.png', content: 'A comprehensive collection of audiobooks and podcasts designed for accessibility and on-the-go learning.' },
+      { id: 1, title: 'VIRTUAL REALITY LAB', desc: 'Immersive Learning Experiences', image: '/images/missions/headset.png', link: '/vr', content: 'Our VR Lab provides students with cutting-edge immersive learning experiences across various subjects.' },
+      { id: 2, title: 'AUDIO LIBRARY', desc: 'Accessible Digital Content', image: '/images/missions/audio-book.png', link: '/audio-books', content: 'A comprehensive collection of audiobooks and podcasts designed for accessibility and on-the-go learning.' },
     ];
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
-  const [formData, setFormData] = useState({ title: '', desc: '', image: '', content: '' });
+  const [formData, setFormData] = useState({ title: '', desc: '', link: '', image: '', content: '' });
 
   const saveToStorage = (updated) => {
     setMissions(updated);
@@ -40,13 +40,13 @@ export default function EducationExcellencePage({ addToast, title = "Tools & Res
 
   const handleOpenAdd = () => {
     setEditingItem(null);
-    setFormData({ title: '', desc: '', image: '', content: '' });
+    setFormData({ title: '', desc: '', link: '', image: '', content: '' });
     setIsModalOpen(true);
   };
 
   const handleOpenEdit = (item) => {
     setEditingItem(item);
-    setFormData({ title: item.title, desc: item.desc, image: item.image, content: item.content || '' });
+    setFormData({ title: item.title, desc: item.desc, link: item.link || '', image: item.image, content: item.content || '' });
     setIsModalOpen(true);
   };
 
@@ -183,6 +183,12 @@ export default function EducationExcellencePage({ addToast, title = "Tools & Res
             placeholder="e.g. Immersive Learning Experiences" 
             value={formData.desc}
             onChange={(val) => setFormData(prev => ({ ...prev, desc: val }))}
+          />
+          <FormInput 
+            label="Navigation Link" 
+            placeholder="e.g. /vr or /audio-books" 
+            value={formData.link}
+            onChange={(val) => setFormData(prev => ({ ...prev, link: val }))}
           />
           
           <div>
