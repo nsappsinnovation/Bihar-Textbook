@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FiFileText, FiDownload, FiSearch, FiFilter, FiBriefcase, FiUser, FiHome, FiCheckCircle } from "react-icons/fi";
 import { motion } from "framer-motion";
 
-const formsData = [
+const defaultFormsData = [
   { id: 1, title: "Vendor Registration Form", category: "Stakeholder", type: "PDF", size: "1.2 MB" },
   { id: 2, title: "Author Empanelment Application", category: "Educational", type: "PDF", size: "850 KB" },
   { id: 3, title: "Publisher Registration Portal Form", category: "Corporate", type: "DOCX", size: "450 KB" },
@@ -14,6 +14,11 @@ const formsData = [
 const RegistrationForms = () => {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
+  
+  const [formsData, setFormsData] = useState(() => {
+    const saved = localStorage.getItem('module_content_dc-reg-forms');
+    return saved ? JSON.parse(saved) : defaultFormsData;
+  });
 
   const filteredForms = formsData.filter(form => 
     (filter === "All" || form.category === filter) &&

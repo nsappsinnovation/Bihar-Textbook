@@ -40,6 +40,8 @@ import PustakMela from "./pages/PustakMela.jsx"
 import AssessmentPlatform from "./pages/AssessmentPlatform.jsx"
 import RegionalContent from "./pages/RegionalContent.jsx"
 import CurriculumExpo from "./pages/CurriculumExpo.jsx"
+import EventsViewAll from "./pages/EventsViewAll.jsx";
+import CollaborativeLearningViewAll from "./pages/CollaborativeLearningViewAll.jsx";
 
 /* Components */
 import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
@@ -63,6 +65,7 @@ import SignUp from "./components/SignUp.jsx";
 import ScrollToTop from "./components/ScrollToTop";
 import Arvideo from "./components/Arvideo.jsx";
 import Linguistic from "./pages/Linguistics.jsx";
+import AdminPortal from "./admin/AdminPortal.jsx";
 
 
 function App() {
@@ -70,6 +73,7 @@ function App() {
   const isIsolatedPage =
     location.pathname === "/login" ||
     location.pathname === "/signup" ||
+    location.pathname.startsWith("/admin") ||
     location.pathname.includes("/flip");
 
   return (
@@ -82,6 +86,9 @@ function App() {
           <Routes>
             {/* Home */}
             <Route path="/" element={<Home />} />
+            
+            {/* Admin Portal */}
+            <Route path="/admin/*" element={<AdminPortal />} />
 
             {/* Blog */}
             <Route path="/blog" element={<Blog />} />
@@ -171,6 +178,9 @@ function App() {
             <Route path="/assessment-platform" element={<AssessmentPlatform />} />
             <Route path="/regional-content" element={<RegionalContent />} />
             <Route path="/curriculum-expo" element={<CurriculumExpo />} />
+            
+            <Route path="/events-all" element={<EventsViewAll />} />
+            <Route path="/collaborative-learning" element={<CollaborativeLearningViewAll />} />
           </Routes>
         </main>
 

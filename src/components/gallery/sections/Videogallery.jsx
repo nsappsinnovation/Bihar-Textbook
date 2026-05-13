@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaPlay } from 'react-icons/fa';
 
@@ -91,6 +91,22 @@ const videoItems = [
 ];
 
 const Videogallery = () => {
+  const [items, setItems] = useState(videoItems);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('module_content_gl-video');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      setItems(parsed.map(item => ({
+        type: "video",
+        src: item.document, // Thumbnail
+        videoUrl: item.videoUrl || "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        span: "col-span-1 md:col-span-1 row-span-1",
+        alt: item.title
+      })));
+    }
+  }, []);
+
   return (
     <section className="w-full bg-white relative py-12 lg:py-20">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 font-sans">
@@ -130,7 +146,7 @@ const Videogallery = () => {
         {/* Grid Container */}
         <div className="grid grid-flow-dense grid-cols-1 md:grid-cols-4 auto-rows-[250px] gap-4 md:gap-6">
           {/* Items */}
-          {videoItems.map((item, index) => (
+          {items.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
@@ -138,6 +154,7 @@ const Videogallery = () => {
               transition={{ duration: 0.6, delay: index * 0.05 }}
               viewport={{ once: true, margin: "-50px" }}
               className={`group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer ${item.span}`}
+              onClick={() => window.open(item.videoUrl, '_blank')}
             >
               {/* Thumbnail */}
               <img

@@ -3,6 +3,20 @@ import { FiInfo, FiUser, FiPhone, FiMail, FiMapPin, FiExternalLink, FiShield, Fi
 import { motion } from "framer-motion";
 
 const RTI = () => {
+  const [rtiData, setRtiData] = React.useState({ 
+    officer: 'Shri. Rajesh Kumar', 
+    phone: '+91 612 222 1975', 
+    email: 'rti.bstbpc@bihar.gov.in', 
+    address: 'Budh Marg, Patna - 800001' 
+  });
+
+  React.useEffect(() => {
+    const saved = localStorage.getItem('module_content_dc-rti');
+    if (saved) {
+      setRtiData(JSON.parse(saved));
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#f8fafc] -mt-24">
       {/* ================= HERO SECTION ================= */}
@@ -50,10 +64,10 @@ const RTI = () => {
                 <h3 className="text-lg font-black text-[#0d0e23] mb-8">Nodal Officer</h3>
                 
                 <div className="space-y-6">
-                  <ContactItem icon={<FiUser />} label="Public Information Officer" value="Shri. Rajesh Kumar" />
-                  <ContactItem icon={<FiPhone />} label="Contact Number" value="+91 612 222 1975" />
-                  <ContactItem icon={<FiMail />} label="Email Address" value="rti.bstbpc@bihar.gov.in" />
-                  <ContactItem icon={<FiMapPin />} label="Office Address" value="Budh Marg, Patna - 800001" />
+                  <ContactItem icon={<FiUser />} label="Public Information Officer" value={rtiData.officer} />
+                  <ContactItem icon={<FiPhone />} label="Contact Number" value={rtiData.phone} />
+                  <ContactItem icon={<FiMail />} label="Email Address" value={rtiData.email} />
+                  <ContactItem icon={<FiMapPin />} label="Office Address" value={rtiData.address} />
                 </div>
 
                 <div className="mt-8 pt-8 border-t border-slate-100">

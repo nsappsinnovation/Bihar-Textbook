@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const galleryItems = [
@@ -90,6 +90,21 @@ const galleryItems = [
 
 const Photogallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [items, setItems] = useState(galleryItems);
+
+  useEffect(() => {
+    const saved = localStorage.getItem('module_content_gl-photo');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      // Map stored format back to component format
+      setItems(parsed.map(item => ({
+        type: "image",
+        src: item.document,
+        span: item.span || "col-span-1 md:col-span-1 row-span-1",
+        alt: item.title
+      })));
+    }
+  }, []);
 
   return (
     <section className="w-full bg-white relative py-12 lg:py-20">
@@ -130,7 +145,7 @@ const Photogallery = () => {
         {/* Grid Container */}
         <div className="grid grid-flow-dense grid-cols-1 md:grid-cols-4 auto-rows-[250px] gap-4 md:gap-6">
           {/* Items */}
-          {galleryItems.map((item, index) => (
+          {items.map((item, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}

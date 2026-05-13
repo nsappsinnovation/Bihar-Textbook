@@ -250,6 +250,15 @@ export default function EventsSection() {
           </div>
         )}
 
+        <div className="mt-20 flex justify-center">
+          <Link 
+            to="/events-all"
+            className="group flex items-center gap-3 px-10 py-4 bg-slate-900 text-white rounded-full text-sm font-bold hover:bg-blue-700 transition-all shadow-xl hover:shadow-blue-500/20"
+          >
+            VIEW ALL EVENTS
+            <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+          </Link>
+        </div>
       </div>
 
       <AnimatePresence>
