@@ -18,6 +18,7 @@ import Gallery from "./pages/Gallery.jsx";
 import Document from "./pages/Document.jsx";
 import FlagshipDetail from "./pages/FlagshipDetail.jsx";
 import EventDetails from "./pages/EventDetails.jsx";
+import Ling from "./pages/Ling.jsx";
 import PublishingMission from "./pages/PublishingMission.jsx";
 import Sign from "./pages/Signlanguage.jsx";
 import AiIntelligence from "./pages/AiIntelligence.jsx";
@@ -99,6 +100,7 @@ function App() {
             <Route path="/audio-courses" element={< Audiovideo />} />
             <Route path="/ar-courses" element={< Vrcourse />} />
             <Route path="/digital-courses" element={< Digitalcourse />} />
+             <Route path="/ling" element={<Ling />} />
             <Route path="/ai-courses" element={<AiCourses />} />
             <Route path="/teacher-courses" element={<TeacherCourses />} />
             <Route path="/mobile-courses" element={<MobileCourses />} />

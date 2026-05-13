@@ -199,7 +199,7 @@ const quizzes = [
         {/* Card 1 */}
       {/* Card 1 */}
 <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-  <div className="text-blue-500 text-xl">🚦</div>
+  <div className="text-blue-500 text-xl"></div>
   <div>
     <h3 className="font-semibold text-slate-800">
       Road & Traffic Awareness
@@ -212,7 +212,7 @@ const quizzes = [
 
 {/* Card 2 */}
 <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-  <div className="text-blue-500 text-xl">🏧</div>
+  <div className="text-blue-500 text-xl"></div>
   <div>
     <h3 className="font-semibold text-slate-800">
       Financial Basics
@@ -225,7 +225,7 @@ const quizzes = [
 
 {/* Card 3 */}
 <div className="md:col-span-2 p-5 border rounded-xl shadow-sm flex gap-4">
-  <div className="text-blue-500 text-xl">🛣</div>
+  <div className="text-blue-500 text-xl"></div>
   <div>
     <h3 className="font-semibold text-slate-800">
       Everyday Responsibility Skills
