@@ -151,7 +151,7 @@ import { motion } from 'framer-motion';
 
         {/* Card 1 */}
         <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-blue-500 text-xl">🎓</div>
+          <div className="text-blue-500 text-xl"></div>
           <div>
             <h3 className="font-semibold text-slate-800">
                  Multilingual Learning
@@ -164,7 +164,7 @@ import { motion } from 'framer-motion';
 
         {/* Card 2 */}
         <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-blue-500 text-xl">✅</div>
+          <div className="text-blue-500 text-xl"></div>
           <div>
             <h3 className="font-semibold text-slate-800">
                Language Skill Development
@@ -177,7 +177,7 @@ import { motion } from 'framer-motion';
 
         {/* Card 3 */}
         <div className="md:col-span-2 p-5 border rounded-xl shadow-sm flex gap-4">
-          <div className="text-blue-500 text-xl">🕶️</div>
+          <div className="text-blue-500 text-xl"></div>
           <div>
             <h3 className="font-semibold text-slate-800">
                Cultural & Communication Awareness
@@ -351,10 +351,40 @@ import { motion } from 'framer-motion';
         </motion.div>
       ))}
     </div>
+     
+                                        
 
   </div>
 </section>
-            
+     <section className="py-32 px-6">
+                                 <div className="max-w-5xl mx-auto bg-slate-50 rounded-[48px] p-12 md:p-24 text-center border border-slate-100 shadow-sm relative overflow-hidden group">
+                                     <div className="absolute top-0 right-0 w-64 h-64 bg-blue-100/50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-1000" />
+                 
+                                     <div className="relative z-10 space-y-10">
+                                         <div className="flex justify-center">
+                                             <div className="p-4 bg-white rounded-2xl shadow-sm border border-slate-100">
+                                                 <FileText size={32} className="text-blue-600" />
+                                             </div>
+                                         </div>
+                                         <div className="space-y-4">
+                                             <h3 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight">Explore the Courses</h3>
+                                             <p className="text-lg text-slate-500 font-light max-w-xl mx-auto leading-relaxed">
+                                                 Our standardized materials are available for review. Access the digital archive to understand our curriculum depth.
+                                             </p>
+                                         </div>
+                                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                                             <Link to="/ling" className="w-full sm:w-auto">
+                                                 <button className="w-full sm:w-auto px-12 py-5 bg-slate-900 text-white rounded-full text-xs font-black uppercase tracking-[0.2em] hover:bg-blue-600 hover:-translate-y-1 transition-all duration-300 shadow-xl shadow-slate-200 flex items-center justify-center gap-3">
+                                                     Enter course <ArrowRight size={16} />
+                                                 </button>
+                                             </Link>
+                                             <Link to="/" className="w-full sm:w-auto px-10 py-5 text-slate-400 hover:text-slate-900 text-xs font-black uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2">
+                                                 <ArrowLeft size={16} /> Back to Hub
+                                             </Link>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </section>       
          
      </div>
      

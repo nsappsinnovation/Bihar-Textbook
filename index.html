@@ -1,16 +1,112 @@
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/logo.png" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Bihar Text Book</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Nunito:wght@500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ["Baloo 2", "cursive"],
+              body: ["Nunito", "sans-serif"],
+            },
+
+            colors: {
+              leaf: "#4fc68a",
+              sky: "#5ba7f7",
+              mango: "#ffb84d",
+              rose: "#ffb4c8",
+              ink: "#263238",
+            },
+
+            boxShadow: {
+              soft: "0 18px 45px rgba(66, 83, 100, 0.14)",
+            },
+
+            animation: {
+              bob: "bob 2.4s ease-in-out infinite",
+              flap: "flap 1.8s ease-in-out infinite",
+              pop: "pop 360ms ease both",
+              wiggle: "wiggle 700ms ease both",
+            },
+
+            keyframes: {
+              bob: {
+                "0%, 100%": {
+                  transform: "translateY(0) rotate(-2deg)",
+                },
+
+                "50%": {
+                  transform: "translateY(-10px) rotate(2deg)",
+                },
+              },
+
+              flap: {
+                "0%, 100%": {
+                  transform: "scaleX(1)",
+                },
+
+                "50%": {
+                  transform: "scaleX(.78)",
+                },
+              },
+
+              pop: {
+                "0%": {
+                  transform: "scale(.95)",
+                  opacity: ".5",
+                },
+
+                "100%": {
+                  transform: "scale(1)",
+                  opacity: "1",
+                },
+              },
+
+              wiggle: {
+                "0%, 100%": {
+                  transform: "rotate(0deg)",
+                },
+
+                "30%": {
+                  transform: "rotate(-3deg)",
+                },
+
+                "60%": {
+                  transform: "rotate(3deg)",
+                },
+              },
+            },
+          },
+        },
+      };
+    </script>
   </head>
-  <body>
+
+  <body
+    class="font-body text-ink bg-[radial-gradient(circle_at_12%_15%,rgba(255,232,130,.55),transparent_27%),radial-gradient(circle_at_84%_8%,rgba(183,221,255,.75),transparent_30%),linear-gradient(135deg,#f8fbff_0%,#fff9ed_100%)]"
+  >
     <div id="root"></div>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
