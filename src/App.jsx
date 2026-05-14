@@ -19,6 +19,7 @@ import Document from "./pages/Document.jsx";
 import FlagshipDetail from "./pages/FlagshipDetail.jsx";
 import EventDetails from "./pages/EventDetails.jsx";
 import Ling from "./pages/Ling.jsx";
+import LingModule from "./pages/LingModule.jsx";
 import PublishingMission from "./pages/PublishingMission.jsx";
 import Sign from "./pages/Signlanguage.jsx";
 import AiIntelligence from "./pages/AiIntelligence.jsx";
@@ -76,13 +77,26 @@ function App() {
     location.pathname.startsWith("/admin") ||
     location.pathname.includes("/flip");
 
+  const isMissionPage = [
+    "/ling", "/linguistic", "/vr", "/sign", 
+    "/ai-intelligence", "/digital", "/audio-books", 
+    "/teacher-training", "/mobile-library", "/heritage-archive", 
+    "/cyber-security", "/basic-skills", "/ebook", "/ling/words", "/ling/phrases", "/ling/conversations"
+  ].includes(location.pathname);
+
+  // Pages with NO Navbar
+  const isNoNavPage = isIsolatedPage || location.pathname.startsWith("/ling");
+  
+  // Pages with NO Footer
+  const isNoFooterPage = isIsolatedPage || isMissionPage;
+
   return (
     <>
       <ScrollToTop />
-      {!isIsolatedPage && <Nav />}
+      {!isNoNavPage && <Nav />}
 
       <div className="min-h-screen flex flex-col">
-        <main className={`flex-grow ${location.pathname !== '/' && !isIsolatedPage ? 'pt-24' : ''}`}>
+        <main className={`flex-grow ${location.pathname !== '/' && !isNoNavPage ? 'pt-24' : ''}`}>
           <Routes>
             {/* Home */}
             <Route path="/" element={<Home />} />
@@ -108,6 +122,9 @@ function App() {
             <Route path="/ar-courses" element={< Vrcourse />} />
             <Route path="/digital-courses" element={< Digitalcourse />} />
              <Route path="/ling" element={<Ling />} />
+             <Route path="/ling/words" element={<LingModule type="words" />} />
+             <Route path="/ling/phrases" element={<LingModule type="phrases" />} />
+             <Route path="/ling/conversations" element={<LingModule type="conversations" />} />
             <Route path="/ai-courses" element={<AiCourses />} />
             <Route path="/teacher-courses" element={<TeacherCourses />} />
             <Route path="/mobile-courses" element={<MobileCourses />} />
@@ -184,7 +201,7 @@ function App() {
           </Routes>
         </main>
 
-        {!isIsolatedPage && <Footer />}
+        {!isNoFooterPage && <Footer />}
       </div>
     </>
   );
