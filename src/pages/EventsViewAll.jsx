@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom';
 const allEvents = [
   { id: 1, title: 'Bihar Diwas 2026', date: 'March 22, 2026', location: 'Gandhi Maidan, Patna', type: 'State Event', image: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f' },
   { id: 2, title: 'Textbook Distribution Drive', date: 'April 05, 2026', location: 'North Bihar Districts', type: 'Social', image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b' },
-  { id: 3, title: 'Teacher Training Conclave', date: 'May 12, 2026', location: 'Virtual', type: 'Training', image: 'https://images.unsplash.com/photo-1544928147-79a2dbc1f389' },
   { id: 4, title: 'Digital Literacy Workshop', date: 'June 20, 2026', location: 'Regional Centers', type: 'Workshop', image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998' },
   { id: 5, title: 'Science Exhibition 2026', date: 'July 15, 2026', location: 'Patna', type: 'Academic', image: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d' },
 ];

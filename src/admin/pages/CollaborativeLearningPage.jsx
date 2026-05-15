@@ -13,7 +13,6 @@ export default function CollaborativeLearningPage({ addToast }) {
   const [clItems, setClItems] = useState(() => {
     const saved = localStorage.getItem('website_cl_modules');
     return saved ? JSON.parse(saved) : [
-      { id: 1, title: 'Teacher Training Workshop', category: 'Training', date: '2026-05-10', status: 'Active' },
       { id: 2, title: 'Student Innovation Hub', category: 'Innovation', date: '2026-05-12', status: 'Draft' },
       { id: 3, title: 'Digital Literacy Campaign', category: 'Literacy', date: '2026-05-15', status: 'Active' },
       { id: 4, title: 'Global Learning Exchange', category: 'Exchange', date: '2026-05-20', status: 'Active' },

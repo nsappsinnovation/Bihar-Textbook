@@ -4,7 +4,6 @@ import { BookOpen, ArrowLeft, ArrowUpRight, Target, Users, Zap } from 'lucide-re
 import { Link } from 'react-router-dom';
 
 const initiatives = [
-  { id: 1, title: 'Teacher Training Workshop', desc: 'Comprehensive digital pedagogy training for state teachers.', icon: Users, color: 'bg-blue-500' },
   { id: 2, title: 'Innovation Lab Setup', desc: 'Establishing state-of-the-art labs for student research.', icon: Zap, color: 'bg-amber-500' },
   { id: 3, title: 'Regional Curriculum Hub', desc: 'Localized content development for diverse learning needs.', icon: BookOpen, color: 'bg-emerald-500' },
   { id: 4, title: 'Global Exchange Program', desc: 'Connecting Bihar students with global educational experts.', icon: Target, color: 'bg-purple-500' },

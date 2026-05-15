@@ -22,8 +22,8 @@ import Ling from "./pages/Ling.jsx";
 import LingModule from "./pages/LingModule.jsx";
 import PublishingMission from "./pages/PublishingMission.jsx";
 import Sign from "./pages/Signlanguage.jsx";
+import SignLearn from "./pages/SignLearn.jsx";
 import AiIntelligence from "./pages/AiIntelligence.jsx";
-import TeacherTraining from "./pages/TeacherTraining.jsx";
 import MobileLibrary from "./pages/MobileLibrary.jsx";
 import HeritageArchive from "./pages/HeritageArchive.jsx";
 import Vr from "./pages/Vrlab.jsx";
@@ -31,12 +31,10 @@ import Linguistics from "./pages/Linguistics.jsx";
 import Digital from "./pages/DigitalPortal.jsx";
 import Audio from "./pages/Audiolib.jsx";
 import Trend1 from "./pages/TrendingSkills.jsx";
-import Trend2 from "./pages/Trendingcyber.jsx";
-import Quiz1 from "./pages/Quizcyber.jsx";
 import Quiz2 from "./pages/Skillsquiz.jsx";
-import Cyber from "./pages/CyberSecurity"
 import Ebook  from "./pages/Ebook"
 import Basicskill from "./pages/Basicskills.jsx"
+import SignModule from "./pages/SignModule.jsx";
 import PustakMela from "./pages/PustakMela.jsx"
 import AssessmentPlatform from "./pages/AssessmentPlatform.jsx"
 import RegionalContent from "./pages/RegionalContent.jsx"
@@ -54,7 +52,6 @@ import AiCourses from "./components/AiCourses.jsx";
 import Audiovideo from "./components/Audiovideo.jsx";
 import Vrcourse from "./components/Arvideo.jsx"
 import Digitalcourse from "./components/Digitalvideo.jsx"
-import TeacherCourses from "./components/TeacherCourses.jsx";
 import MobileCourses from "./components/MobileCourses.jsx";
 import ArchiveCourses from "./components/ArchiveCourses.jsx";
 
@@ -78,14 +75,14 @@ function App() {
     location.pathname.includes("/flip");
 
   const isMissionPage = [
-    "/ling", "/linguistic", "/vr", "/sign", 
+    "/ling", "/linguistic", "/vr", "/sign", "/sign-learn", "/sign-module",
     "/ai-intelligence", "/digital", "/audio-books", 
-    "/teacher-training", "/mobile-library", "/heritage-archive", 
-    "/cyber-security", "/basic-skills", "/ebook", "/ling/words", "/ling/phrases", "/ling/conversations"
+    "/mobile-library", "/heritage-archive", 
+    "/basic-skills", "/ebook", "/ling/words", "/ling/phrases", "/ling/conversations"
   ].includes(location.pathname);
 
   // Pages with NO Navbar
-  const isNoNavPage = isIsolatedPage || location.pathname.startsWith("/ling");
+  const isNoNavPage = isIsolatedPage || location.pathname.startsWith("/ling") || location.pathname === "/sign" || location.pathname === "/sign-learn" || location.pathname === "/sign-module";
   
   // Pages with NO Footer
   const isNoFooterPage = isIsolatedPage || isMissionPage;
@@ -106,15 +103,15 @@ function App() {
 
             {/* Blog */}
             <Route path="/blog" element={<Blog />} />
-            {/*Sign Lang*/}
             <Route path="/sign" element={<Sign />} />
+            <Route path="/sign-learn" element={<SignLearn />} />
+            <Route path="/sign-module" element={<SignModule />} />
             <Route path="/vr" element={<Vr />} />
              <Route path="/linguistic" element={<Linguistics />} />
               <Route path="/ebook" element={<Ebook />} />
             <Route path="/digital" element={<Digital />} />
             <Route path="/audio-books" element={<Audio />} />
             <Route path="/ai-intelligence" element={<AiIntelligence />} />
-            <Route path="/teacher-training" element={<TeacherTraining />} />
             <Route path="/mobile-library" element={<MobileLibrary />} />
             <Route path="/heritage-archive" element={<HeritageArchive />} />
             <Route path="/courses" element={<Video />} />
@@ -126,7 +123,6 @@ function App() {
              <Route path="/ling/phrases" element={<LingModule type="phrases" />} />
              <Route path="/ling/conversations" element={<LingModule type="conversations" />} />
             <Route path="/ai-courses" element={<AiCourses />} />
-            <Route path="/teacher-courses" element={<TeacherCourses />} />
             <Route path="/mobile-courses" element={<MobileCourses />} />
             <Route path="/archive-courses" element={<ArchiveCourses />} />
 
@@ -137,11 +133,8 @@ function App() {
             <Route path="/basic-skills" element={<Basicskill />} />
 
             <Route path="/trending/:slug" element={<Trend1 />} />
-            <Route path="/quiz/:slug" element={<Quiz1 />} />
 
-            <Route path="/cyber-security" element={<Cyber />} />
-            <Route path="/cyber/trending/:slug" element={<Trend2 />} />
-            <Route path="/cyber/quiz/:slug" element={<Quiz2 />} />
+            <Route path="/quiz/:slug" element={<Quiz2 />} />
             {/* Key Participants */}
             <Route
               path="/key-participants"
