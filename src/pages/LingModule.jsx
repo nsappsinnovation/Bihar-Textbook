@@ -420,7 +420,7 @@ export default function LingModule({ type }) {
       <div className="min-h-screen bg-white flex flex-col items-center justify-center p-6 text-center">
         <Trophy size={100} className="text-[#0BB562] mb-8 animate-bounce" />
         <h1 className="text-4xl font-black mb-4">{t.lesson_complete}</h1>
-        <button onClick={() => navigate("/ling")} className="bg-[#0BB562] text-white px-10 py-4 rounded-2xl font-bold">{t.back_home}</button>
+        <button onClick={() => navigate("/")} className="bg-[#0BB562] text-white px-10 py-4 rounded-2xl font-bold">{t.back_home}</button>
       </div>
     );
   }
@@ -459,7 +459,7 @@ export default function LingModule({ type }) {
       )}
 
        <main className={`flex-1 ${type === 'conversations' ? 'flex flex-col' : 'grid grid-cols-[1fr_1fr_1fr] items-center px-4 md:px-12 pb-5 gap-2'} min-h-0 relative max-w-[1400px] mx-auto w-full z-10`}>
-        <button onClick={() => navigate("/ling")} className="absolute top-4 left-8 w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full shadow-sm flex items-center justify-center text-slate-400 hover:text-slate-600 transition-all border border-slate-50 z-50">
+        <button onClick={() => navigate("/")} className="absolute top-4 left-8 w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full shadow-sm flex items-center justify-center text-slate-400 hover:text-slate-600 transition-all border border-slate-50 z-50">
           <ArrowLeft size={20} strokeWidth={2.5} />
         </button>
 
