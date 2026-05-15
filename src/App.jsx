@@ -82,7 +82,7 @@ function App() {
   ].includes(location.pathname);
 
   // Pages with NO Navbar
-  const isNoNavPage = isIsolatedPage || location.pathname.startsWith("/ling") || location.pathname === "/sign" || location.pathname === "/sign-learn" || location.pathname === "/sign-module";
+  const isNoNavPage = isIsolatedPage || isMissionPage || location.pathname.startsWith("/ling") || location.pathname === "/sign" || location.pathname === "/sign-learn" || location.pathname === "/sign-module";
   
   // Pages with NO Footer
   const isNoFooterPage = isIsolatedPage || isMissionPage;
