@@ -111,37 +111,37 @@ export default function EventsSection() {
   }, [baseEvents, query, filterMode]);
 
   return (
-    <section className="w-full bg-[#fcfcfd] py-24 px-6 md:px-12 lg:px-24 font-sans text-slate-900 border-t border-slate-100 relative">
+    <section className="w-full bg-[#fcfcfd] pt-12 pb-8 px-6 md:px-12 lg:px-24 font-sans text-slate-900 border-t border-slate-100 relative">
       <div className="max-w-[1280px] mx-auto">
 
         {/* --- Minimal Header --- */}
-        <div className="max-w-3xl mb-16">
+        <div className="max-w-3xl mb-4">
           <div className="flex items-center gap-2 mb-4">
              <div className="h-px w-8 bg-blue-500"></div>
             <span className="text-[10px] font-bold text-blue-500 uppercase tracking-[0.2em]">Latest Initiatives</span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 mb-6">
+          <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 mb-4">
             Empowering Education <br /> Through <span className="text-slate-400">Events</span>
           </h2>
-          <p className="text-lg text-slate-500 font-normal leading-relaxed">
+          <p className="text-base text-slate-500 font-normal leading-relaxed">
             A centralized hub for tracking workshops, curriculum updates, and student-focused events across the state.
           </p>
         </div>
 
         {/* --- Minimal Navigation & Search --- */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-12 border-b border-slate-100 pb-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8 border-b border-slate-100 pb-4">
 
           <div className="flex items-center gap-8 text-center scrollbar-hide">
             <button
               onClick={() => setActiveTab("past")}
-              className={`pb-8 -mb-8 text-sm font-semibold transition-all duration-300 relative ${activeTab === "past" ? "text-blue-600" : "text-slate-400 hover:text-slate-600"}`}
+              className={`pb-4 -mb-4 text-xs font-semibold transition-all duration-300 relative ${activeTab === "past" ? "text-blue-600" : "text-slate-400 hover:text-slate-600"}`}
             >
               Past Events
               {activeTab === "past" && <motion.div layoutId="tab-underline" className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600"></motion.div>}
             </button>
             <button
               onClick={() => setActiveTab("upcoming")}
-              className={`pb-8 -mb-8 text-sm font-semibold transition-all duration-300 relative ${activeTab === "upcoming" ? "text-blue-600" : "text-slate-400 hover:text-slate-600"}`}
+              className={`pb-4 -mb-4 text-xs font-semibold transition-all duration-300 relative ${activeTab === "upcoming" ? "text-blue-600" : "text-slate-400 hover:text-slate-600"}`}
             >
               Upcoming Events
               {activeTab === "upcoming" && <motion.div layoutId="tab-underline" className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600"></motion.div>}
@@ -178,7 +178,7 @@ export default function EventsSection() {
         </div>
 
         {/* --- Minimalist Grid --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filtered.map((event, idx) => (
             <motion.div
               key={event.id}
@@ -189,7 +189,7 @@ export default function EventsSection() {
               onClick={() => setSelectedEvent(event)}
               className="flex flex-col group cursor-pointer"
             >
-              <div className="relative aspect-[16/10] w-full rounded-lg overflow-hidden mb-6 bg-slate-100">
+              <div className="relative aspect-[16/10] w-full rounded-lg overflow-hidden mb-5 bg-slate-100">
                 <img
                   src={event.image}
                   alt={event.title}
@@ -213,11 +213,11 @@ export default function EventsSection() {
                   {event.title}
                 </h3>
 
-                <p className="text-sm text-slate-500 font-medium leading-relaxed line-clamp-2 mb-4">
+                <p className="text-xs text-slate-500 font-medium leading-relaxed line-clamp-2 mb-3">
                   {event.description}
                 </p>
 
-                <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+                <div className="flex items-center justify-between pt-3 border-t border-slate-100">
                   <div className="flex items-center gap-2 text-[11px] font-semibold text-slate-400">
                     <MapPin size={12} />
                     <span>{event.location}</span>
@@ -237,15 +237,7 @@ export default function EventsSection() {
           </div>
         )}
 
-        <div className="mt-20 flex justify-center">
-          <Link 
-            to="/events-all"
-            className="group flex items-center gap-3 px-10 py-4 bg-slate-900 text-white rounded-full text-sm font-bold hover:bg-blue-700 transition-all shadow-xl hover:shadow-blue-500/20"
-          >
-            VIEW ALL EVENTS
-            <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-          </Link>
-        </div>
+
       </div>
 
       <AnimatePresence>

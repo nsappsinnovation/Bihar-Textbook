@@ -39,7 +39,7 @@ import PustakMela from "./pages/PustakMela.jsx"
 import AssessmentPlatform from "./pages/AssessmentPlatform.jsx"
 import RegionalContent from "./pages/RegionalContent.jsx"
 import CurriculumExpo from "./pages/CurriculumExpo.jsx"
-import EventsViewAll from "./pages/EventsViewAll.jsx";
+
 import CollaborativeLearningViewAll from "./pages/CollaborativeLearningViewAll.jsx";
 
 /* Components */
@@ -82,7 +82,7 @@ function App() {
   ].includes(location.pathname);
 
   // Pages with NO Navbar
-  const isNoNavPage = isIsolatedPage || location.pathname.startsWith("/ling") || location.pathname === "/sign" || location.pathname === "/sign-learn" || location.pathname === "/sign-module";
+  const isNoNavPage = isIsolatedPage || isMissionPage || location.pathname.startsWith("/ling") || location.pathname === "/sign" || location.pathname === "/sign-learn" || location.pathname === "/sign-module";
   
   // Pages with NO Footer
   const isNoFooterPage = isIsolatedPage || isMissionPage;
@@ -189,7 +189,7 @@ function App() {
             <Route path="/regional-content" element={<RegionalContent />} />
             <Route path="/curriculum-expo" element={<CurriculumExpo />} />
             
-            <Route path="/events-all" element={<EventsViewAll />} />
+
             <Route path="/collaborative-learning" element={<CollaborativeLearningViewAll />} />
           </Routes>
         </main>

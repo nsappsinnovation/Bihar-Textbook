@@ -4,16 +4,16 @@ import { Facebook, Twitter, Instagram, Linkedin, Mail, MapPin, Phone } from "luc
 
 const Footer = () => {
   return (
-    <footer className="bg-[#0d0e23] text-white/70 py-16 px-6 md:px-12 font-sans border-t border-white/10">
-      <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+    <footer className="bg-[#0d0e23] text-white/70 pt-10 pb-6 px-6 md:px-12 font-sans border-t border-white/10">
+      <div className="max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {/* BRAND & LOGOS */}
         <div>
-          <Link to="/" className="inline-block mb-6">
+          <Link to="/" className="inline-block mb-4">
             <div className="flex items-center gap-3">
               <img
                 src="/bstbpc_logo.png"
                 alt="BSTBPC Logo"
-                className="h-16 w-auto object-contain bg-white/5 rounded-lg p-1 border border-white/10"
+                className="h-12 w-auto object-contain bg-white/5 rounded-lg p-1 border border-white/10"
               />
               <div className="flex flex-col">
                 <span className="text-white font-bold text-lg leading-tight tracking-tight">BSTBPC</span>
@@ -22,7 +22,7 @@ const Footer = () => {
             </div>
           </Link>
 
-          <p className="text-white/60 text-sm leading-relaxed mb-6">
+          <p className="text-white/60 text-sm leading-relaxed mb-4">
             Empowering the future of Bihar through accessible, high-quality, and modern educational resources.
           </p>
 
@@ -36,7 +36,7 @@ const Footer = () => {
 
         {/* SITE NAVIGATION */}
         <div>
-          <h4 className="text-white font-semibold mb-6 tracking-wide text-sm uppercase">Quick Navigation</h4>
+          <h4 className="text-white font-semibold mb-4 tracking-wide text-sm uppercase">Quick Navigation</h4>
           <ul className="space-y-3">
             <FooterLink to="/" label="Home" />
             <FooterLink to="/know-us/board_of_directors" label="About Us" />
@@ -49,7 +49,7 @@ const Footer = () => {
 
         {/* KEY INITIATIVES */}
         <div>
-          <h4 className="text-white font-semibold mb-6 tracking-wide text-sm uppercase">Key Initiatives</h4>
+          <h4 className="text-white font-semibold mb-4 tracking-wide text-sm uppercase">Key Initiatives</h4>
           <ul className="space-y-3">
             <FooterLink to="/flagship-events/digital-books-portal" label="Digital Library Portal" />
             <FooterLink to="/flagship-events/bihar-state-pustak-mela" label="Bihar Pustak Mela" />
@@ -62,7 +62,7 @@ const Footer = () => {
 
         {/* CONTACT INFO */}
         <div>
-          <h4 className="text-white font-semibold mb-6 tracking-wide text-sm uppercase">Contact Information</h4>
+          <h4 className="text-white font-semibold mb-4 tracking-wide text-sm uppercase">Contact Information</h4>
 
           <div className="space-y-4 text-sm">
             <div className="flex items-start gap-3">
@@ -86,8 +86,8 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="mt-8 pt-6 border-t border-white/10">
-            <p className="text-xs text-white/40 uppercase tracking-wider font-semibold mb-3">Partnered With</p>
+          <div className="mt-6 pt-4 border-t border-white/10">
+            <p className="text-[10px] text-white/40 uppercase tracking-wider font-semibold mb-2">Partnered With</p>
             <div className="flex gap-4 items-center opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300">
               <img src="/logo.png" alt="Gov" className="h-8" />
               <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/95/Digital_India_logo.svg/1200px-Digital_India_logo.svg.png" alt="Digital India" className="h-6" />
@@ -98,7 +98,7 @@ const Footer = () => {
       </div>
 
       {/* BOTTOM BAR */}
-      <div className="max-w-[1280px] mx-auto mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/50">
+      <div className="max-w-[1280px] mx-auto mt-6 pt-4 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/50">
         <p>© 2026 BSTBPC. All rights reserved.</p>
         <div className="flex gap-6">
           <Link to="/csr-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
