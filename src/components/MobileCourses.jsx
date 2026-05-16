@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const lessons = [
   { id: 1, title: "Mobile Library Service Launch", youtubeId: "5rG6S_C1G5E" },
@@ -11,25 +12,36 @@ const lessons = [
 ];
 
 export default function MobileCourses() {
+  const navigate = useNavigate();
+
   return (
     <section className="w-full bg-white py-24 px-6 md:px-12 lg:px-24 font-sans text-slate-900 mt-20">
       <div className="max-w-[1280px] mx-auto">
+        
+        {/* Back Button */}
+        <button 
+          onClick={() => navigate("/mobile-library-dashboard")}
+          className="mb-8 flex items-center gap-2 text-slate-500 hover:text-green-600 transition-colors font-bold group"
+        >
+          <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+          Back to Dashboard
+        </button>
 
         {/* Header */}
         <div className="max-w-3xl mb-16">
           <div className="flex items-center gap-2 mb-4">
-            <div className="h-px w-8 bg-blue-600"></div>
-            <span className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em]">
+            <div className="h-px w-8 bg-green-600"></div>
+            <span className="text-[10px] font-bold text-green-600 uppercase tracking-[0.2em]">
               Community Engagement
             </span>
           </div>
 
-          <h1 className="text-4xl md:text-5xl font-semibold mb-6">
+          <h1 className="text-4xl md:text-5xl font-black mb-6">
             Mobile Library Network <br />
             <span className="text-slate-400">Knowledge on Wheels</span>
           </h1>
 
-          <p className="text-lg text-slate-500 leading-relaxed">
+          <p className="text-lg text-slate-500 leading-relaxed font-medium">
             Discover the impact of our mobile libraries and how they are fostering a reading culture in remote areas.
           </p>
         </div>
@@ -43,10 +55,10 @@ export default function MobileCourses() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.04 }}
-              className="flex flex-col bg-white border rounded-2xl overflow-hidden hover:shadow-lg transition-shadow"
+              className="flex flex-col bg-white border rounded-3xl overflow-hidden hover:shadow-xl transition-all duration-300 group"
             >
               {/* Video */}
-              <div className="aspect-video bg-slate-100">
+              <div className="aspect-video bg-slate-100 relative overflow-hidden">
                 <iframe
                   src={`https://www.youtube.com/embed/${lesson.youtubeId}`}
                   title={lesson.title}
@@ -57,12 +69,12 @@ export default function MobileCourses() {
               </div>
 
               {/* Content */}
-              <div className="p-5 flex flex-col flex-1">
-                <span className="text-xs font-bold text-blue-600 mb-2">
+              <div className="p-6 flex flex-col flex-1">
+                <span className="text-xs font-bold text-green-600 mb-2 uppercase tracking-widest">
                   Part {lesson.id}
                 </span>
 
-                <h3 className="font-semibold text-slate-900 mb-4 flex-1">
+                <h3 className="font-black text-slate-900 mb-4 flex-1 text-lg leading-tight group-hover:text-green-600 transition-colors">
                   {lesson.title}
                 </h3>
 
@@ -70,9 +82,9 @@ export default function MobileCourses() {
                   href={`https://www.youtube.com/watch?v=${lesson.youtubeId}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-auto inline-flex items-center gap-1.5 text-blue-600 text-xs font-bold hover:underline"
+                  className="mt-auto inline-flex items-center gap-1.5 text-slate-900 text-xs font-black hover:text-green-600 transition-colors uppercase tracking-widest"
                 >
-                  WATCH <ArrowUpRight size={14} />
+                  WATCH ON YOUTUBE <ArrowUpRight size={14} />
                 </a>
               </div>
             </motion.div>

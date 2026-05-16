@@ -42,6 +42,7 @@ import CurriculumExpo from "./pages/CurriculumExpo.jsx"
 
 import LifeSkills from "./pages/LifeSkills.jsx";
 import HeritageDashboard from "./pages/HeritageDashboard.jsx";
+import MobileLibraryDashboard from "./pages/MobileLibraryDashboard.jsx";
 import CollaborativeLearningViewAll from "./pages/CollaborativeLearningViewAll.jsx";
 
 /* Components */
@@ -84,10 +85,10 @@ function App() {
   ].includes(location.pathname);
 
   // Pages with NO Navbar
-  const isNoNavPage = isIsolatedPage || isMissionPage || location.pathname.startsWith("/ling") || location.pathname === "/sign" || location.pathname === "/sign-learn" || location.pathname === "/sign-module" || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard";
+  const isNoNavPage = isIsolatedPage || isMissionPage || location.pathname.startsWith("/ling") || location.pathname === "/sign" || location.pathname === "/sign-learn" || location.pathname === "/sign-module" || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/mobile-library-dashboard";
   
   // Pages with NO Footer
-  const isNoFooterPage = isIsolatedPage || isMissionPage || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard";
+  const isNoFooterPage = isIsolatedPage || isMissionPage || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/mobile-library-dashboard";
 
   return (
     <>
@@ -127,6 +128,7 @@ function App() {
              <Route path="/ling/conversations" element={<LingModule type="conversations" />} />
             <Route path="/ai-courses" element={<AiCourses />} />
             <Route path="/mobile-courses" element={<MobileCourses />} />
+            <Route path="/mobile-library-dashboard" element={<MobileLibraryDashboard />} />
             <Route path="/archive-courses" element={<ArchiveCourses />} />
 
             {/* Auth */}
