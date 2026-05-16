@@ -1,4 +1,46 @@
+@import "tailwindcss";
 
+/* =========================
+   Theme Configuration
+   ========================= */
+@theme {
+  --color-leaf: #4fc68a;
+  --color-sky: #5ba7f7;
+  --color-mango: #ffb84d;
+  --color-rose: #ffb4c8;
+  --color-ink: #263238;
+
+  --font-display: "Baloo 2", cursive;
+  --font-body: "Nunito", sans-serif;
+
+  --shadow-soft: 0 18px 45px rgba(66, 83, 100, 0.14);
+
+  --animate-bob: bob 2.4s ease-in-out infinite;
+  --animate-flap: flap 1.8s ease-in-out infinite;
+  --animate-pop: pop 360ms ease both;
+  --animate-wiggle: wiggle 700ms ease both;
+
+  @keyframes bob {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-10px) rotate(2deg); }
+  }
+
+  @keyframes flap {
+    0%, 100% { transform: scaleX(1); }
+    50% { transform: scaleX(.78); }
+  }
+
+  @keyframes pop {
+    0% { transform: scale(.95); opacity: .5; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    30% { transform: rotate(-3deg); }
+    60% { transform: rotate(3deg); }
+  }
+}
 
 /* =========================
    Theme Animations

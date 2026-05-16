@@ -125,6 +125,15 @@ const Basicskills = () => {
               Practical lessons teaching students road safety, traffic rules, ATM usage, and responsible everyday behavior in modern society.
             </p>
 
+            {/* Action Button */}
+            <div className="mt-8">
+              <Link to="/life-skills">
+                <button className="px-8 py-4 bg-blue-600 text-white rounded-full text-sm font-black uppercase tracking-widest hover:bg-slate-900 hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-blue-200 flex items-center gap-2">
+                  Start Learning <ArrowRight size={18} />
+                </button>
+              </Link>
+            </div>
+
             {/* Feature Cards */}
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
 

@@ -40,6 +40,7 @@ import AssessmentPlatform from "./pages/AssessmentPlatform.jsx"
 import RegionalContent from "./pages/RegionalContent.jsx"
 import CurriculumExpo from "./pages/CurriculumExpo.jsx"
 
+import LifeSkills from "./pages/LifeSkills.jsx";
 import CollaborativeLearningViewAll from "./pages/CollaborativeLearningViewAll.jsx";
 
 /* Components */
@@ -82,10 +83,10 @@ function App() {
   ].includes(location.pathname);
 
   // Pages with NO Navbar
-  const isNoNavPage = isIsolatedPage || isMissionPage || location.pathname.startsWith("/ling") || location.pathname === "/sign" || location.pathname === "/sign-learn" || location.pathname === "/sign-module";
+  const isNoNavPage = isIsolatedPage || isMissionPage || location.pathname.startsWith("/ling") || location.pathname === "/sign" || location.pathname === "/sign-learn" || location.pathname === "/sign-module" || location.pathname === "/life-skills";
   
   // Pages with NO Footer
-  const isNoFooterPage = isIsolatedPage || isMissionPage;
+  const isNoFooterPage = isIsolatedPage || isMissionPage || location.pathname === "/life-skills";
 
   return (
     <>
@@ -131,6 +132,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             {/*Basic skills page and cybersecurity*/}
             <Route path="/basic-skills" element={<Basicskill />} />
+            <Route path="/life-skills" element={<LifeSkills />} />
 
             <Route path="/trending/:slug" element={<Trend1 />} />
 
