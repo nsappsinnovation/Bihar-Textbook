@@ -49,15 +49,6 @@ const MissionGrid = () => {
             accent: "blue"
         },
         {
-            id: 6,
-            title: "Teacher Training",
-            desc: "Advanced Pedagogy Support",
-            image: "/images/missions/teacher.png",
-            hoverImage: "/images/missions/teacherhov.png",
-            link: "/teacher-training",
-            accent: "blue"
-        },
-        {
             id: 7,
             title: "Mobile Libraries",
             desc: "Rural Knowledge Outreach",
@@ -74,15 +65,6 @@ const MissionGrid = () => {
             hoverImage: "/images/missions/historyhov.png",
             link: "/heritage-archive",
             accent: "blue"
-        },
-        {
-            id: 9,
-            title: "Cyber Security",
-            desc: "Online Safety & Scam Protection",
-            image: "/images/missions/cyber-security.png",
-            hoverImage: "/images/missions/cyber-securityhov.png",
-            link: "/cyber-security",
-            accent: "amber"
         },
         {
             id: 10,

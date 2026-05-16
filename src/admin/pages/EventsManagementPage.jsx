@@ -32,15 +32,6 @@ export default function EventsManagementPage({ addToast }) {
         image: '/images/events/event2.jpg',
         tag: 'OUTREACH'
       },
-      { 
-        id: 3, 
-        title: 'Teacher Training: New Curriculum 2026', 
-        desc: 'A workshop focused on training teachers for the newly introduced textbooks and pedagogical shift...', 
-        date: '20 JAN, 2026', 
-        location: 'Muzaffarpur', 
-        image: '/images/events/event3.jpg',
-        tag: 'WORKSHOP'
-      },
     ];
   });
 

@@ -49,22 +49,23 @@ export default function LinguisticApp() {
     <div className="min-h-screen bg-[#FDFDFD] font-sans text-[#2D3142] flex flex-col overflow-x-hidden">
       {/* Main Content Area */}
       <main className="flex-1 px-4 md:px-12 lg:px-24 pb-8 max-w-[1400px] mx-auto w-full overflow-hidden relative">
-        {/* Back Button */}
-        <button 
-          onClick={() => navigate("/linguistic")} 
-          className="absolute top-6 left-6 md:left-12 lg:left-24 w-11 h-11 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-[#0BB562] hover:shadow-lg transition-all border border-slate-50 z-50 group"
-        >
-          <ArrowLeft size={22} strokeWidth={2.5} className="group-hover:-translate-x-1 transition-transform" />
-        </button>
+       {/* Back Button */}
+             <button
+               onClick={() => navigate("/linguistic")}
+               className="fixed top-5 left-5 z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group"
+             >
+               <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
+             </button>
 
         {/* Hero Section */}
         <div className="flex flex-col lg:flex-row justify-between items-center mb-24 relative mt-0">
           <div className="space-y-1 z-10 w-[45%]">
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900">
-              Let's learn <br /> a new language
+           <h1 className="text-4xl md:text-5xl font-black leading-tight">
+              Let's learn <br />
+              <span className="text-[#22C55E]">a new language</span>
             </h1>
-            <p className="text-[20px] text-[#64748B] font-medium leading-snug pt-2">
-              Have a conversation in <br /> different languages
+           <p className="text-slate-500 text-base leading-relaxed max-w-xs">
+              Have a conversation in different languages
             </p>
           </div>
           <div className="relative flex items-end justify-center w-full lg:w-[55%] min-h-[340px] mt-12 lg:mt-0">
