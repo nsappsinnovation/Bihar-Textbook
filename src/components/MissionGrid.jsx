@@ -80,17 +80,17 @@ const MissionGrid = () => {
     const missions = defaultMissions;
 
     return (
-        <section className="pt-12 pb-8 px-4 md:px-8 bg-white font-sans">
-            <div className="max-w-[1200px] mx-auto">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-10">
+        <section className="pt-12 pb-16 px-4 md:px-8 bg-white font-sans">
+            <div className="max-w-[1200px] mx-auto overflow-hidden">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 -mt-px -ml-px">
                     {missions.map((mission) => (
                         <Link 
                             key={mission.id} 
                             to={mission.link || '#'}
-                            className="flex flex-col items-center group text-center"
+                            className="flex flex-col items-center group text-center py-12 px-6 border-t border-l border-gray-100 hover:bg-slate-50/40 transition-colors duration-300"
                         >
                             {/* Icon Container */}
-                            <div className="w-16 h-16 mb-4 flex items-center justify-center relative transition-transform duration-300 group-hover:scale-110">
+                            <div className="w-14 h-14 mb-5 flex items-center justify-center relative transition-transform duration-300 group-hover:-translate-y-1">
                                 <img 
                                     src={mission.image} 
                                     alt={mission.title} 
@@ -104,11 +104,11 @@ const MissionGrid = () => {
                             </div>
                             
                             {/* Text Content */}
-                            <div className="space-y-2">
-                                <h4 className="text-[#1e293b] text-sm font-extrabold uppercase tracking-tight group-hover:text-blue-600 transition-colors duration-300">
+                            <div className="space-y-1.5">
+                                <h4 className="text-[#1e293b] text-[15px] font-bold tracking-tight group-hover:text-blue-600 transition-colors duration-300">
                                     {mission.title}
                                 </h4>
-                                <p className="text-[11px] text-[#64748b] font-medium leading-relaxed max-w-[160px]">
+                                <p className="text-[12px] text-[#64748b] font-medium leading-relaxed max-w-[180px] mx-auto">
                                     {mission.desc}
                                 </p>
                             </div>

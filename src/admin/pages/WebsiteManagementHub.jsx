@@ -10,7 +10,8 @@ import {
   FileText, 
   Bell, 
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  Shield
 } from 'lucide-react';
 
 export default function WebsiteManagementHub({ setActivePage }) {
