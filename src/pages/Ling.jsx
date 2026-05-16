@@ -1,592 +1,384 @@
+import React, { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { 
+  Home, BookOpen, MessageSquare, Compass, BarChart2, User, 
+  Settings, Flame, Star, Search, ArrowRight, ArrowLeft, ArrowRightLeft, Check, Calendar, Shield, Languages
+} from "lucide-react";
 
-import { useMemo, useState } from "react";
-
-const knownLanguages = ["Hindi", "English", "Bhojpuri", "Maithili", "Magahi"];
-const targetLanguages = ["English", "Hindi", "German", "French", "Bhojpuri", "Maithili"];
-const lessons = [
-  {
-    id: "greetings",
-    title: "Friendly greetings",
-    scene: "Morning at school",
-    color: "from-emerald-100 to-sky-100",
-    words: [
-      { id: "hello", word: "Hello", native: "Namaste", hindi: "नमस्ते", use: "Use it when you meet someone.", sound: "heh-low" },
-      { id: "morning", word: "Good morning", native: "Shubh prabhat", hindi: "शुभ प्रभात", use: "Use it before school starts.", sound: "good mor-ning" },
-      { id: "friend", word: "Friend", native: "Dost", hindi: "दोस्त", use: "Use it for someone you like learning with.", sound: "frend" },
-      { id: "teacher", word: "Teacher", native: "Shikshak", hindi: "शिक्षक", use: "Use it for your class guide.", sound: "tee-cher" }
-    ],
-    phrases: [
-      { target: "Hello, friend!", support: "Namaste, dost!", hindi: "नमस्ते, दोस्त!" },
-      { target: "Good morning, teacher.", support: "Shubh prabhat, shikshak.", hindi: "शुभ प्रभात, शिक्षक।" },
-      { target: "I am ready to learn.", support: "Main seekhne ke liye taiyar hoon.", hindi: "मैं सीखने के लिए तैयार हूँ।" }
-    ]
-  },
-  {
-    id: "classroom",
-    title: "Classroom words",
-    scene: "Inside the classroom",
-    color: "from-amber-100 to-rose-100",
-    words: [
-      { id: "book", word: "Book", native: "Kitaab", hindi: "किताब", use: "Use it when asking for reading material.", sound: "book" },
-      { id: "water", word: "Water", native: "Paani", hindi: "पानी", use: "A daily word you can use everywhere.", sound: "waa-ter" },
-      { id: "school", word: "School", native: "Vidyalaya", hindi: "विद्यालय", use: "Use it when talking about learning place.", sound: "skool" },
-      { id: "write", word: "Write", native: "Likhna", hindi: "लिखना", use: "Use it when practicing notebooks.", sound: "ryt" }
-    ],
-    phrases: [
-      { target: "This is my book.", support: "Yeh meri kitaab hai.", hindi: "यह मेरी किताब है।" },
-      { target: "May I drink water?", support: "Kya main paani pee sakta/sakti hoon?", hindi: "क्या मैं पानी पी सकता/सकती हूँ?" },
-      { target: "I go to school.", support: "Main vidyalaya jaata/jaati hoon.", hindi: "मैं विद्यालय जाता/जाती हूँ।" }
-    ]
-  },
-  {
-    id: "market",
-    title: "Market talk",
-    scene: "Buying fruit in Bihar",
-    color: "from-lime-100 to-orange-100",
-    words: [
-      { id: "apple", word: "Apple", native: "Seb", hindi: "सेब", use: "Use it in fruit market conversations.", sound: "ap-pul" },
-      { id: "price", word: "Price", native: "Daam", hindi: "दाम", use: "Use it when asking cost politely.", sound: "prys" },
-      { id: "please", word: "Please", native: "Kripya", hindi: "कृपया", use: "A soft word for polite requests.", sound: "pleez" },
-      { id: "thanks", word: "Thank you", native: "Dhanyavaad", hindi: "धन्यवाद", use: "Use it after someone helps you.", sound: "thank yoo" }
-    ],
-    phrases: [
-      { target: "What is the price?", support: "Iska daam kya hai?", hindi: "इसका दाम क्या है?" },
-      { target: "Please give me an apple.", support: "Kripya mujhe seb dijiye.", hindi: "कृपया मुझे सेब दीजिए।" },
-      { target: "Thank you!", support: "Dhanyavaad!", hindi: "धन्यवाद!" }
-    ]
-  }
+// Mock data matching the screenshot
+const LANGUAGES = [
+  { id: "hi", name: "Hindi", flag: "https://flagcdn.com/w40/in.png" },
+  { id: "en", name: "English", flag: "https://flagcdn.com/w40/us.png" },
+  { id: "de", name: "German", flag: "https://flagcdn.com/w40/de.png" },
+  { id: "fr", name: "French", flag: "https://flagcdn.com/w40/fr.png" },
+  { id: "es", name: "Spanish", flag: "https://flagcdn.com/w40/es.png" },
+  { id: "ja", name: "Japanese", flag: "https://flagcdn.com/w40/jp.png" },
+  { id: "zh", name: "Chinese", flag: "https://flagcdn.com/w40/cn.png" },
+  { id: "ar", name: "Arabic", flag: "https://flagcdn.com/w40/sa.png" },
+  { id: "ru", name: "Russian", flag: "https://flagcdn.com/w40/ru.png" },
+  { id: "ko", name: "Korean", flag: "https://flagcdn.com/w40/kr.png" }
 ];
 
-const mascotTips = [
-  "Learn in tiny bites. First see it, then say it, then play with it.",
-  "Bihar has many home languages. Your first language is a superpower, not a problem.",
-  "Speak softly at first if you feel shy. Practice still counts.",
-  "A useful phrase is better than ten words you never use.",
-  "When you make a mistake, your brain just found a new clue."
-];
+export default function LinguisticApp() {
+  const navigate = useNavigate();
+  const [sourceLang, setSourceLang] = useState(null);
+  const [targetLang, setTargetLang] = useState(null);
+  const [activeNav, setActiveNav] = useState("Home");
+  const [lastModule, setLastModule] = useState("words");
+  
+  // Real-time states
+  const [streak, setStreak] = useState(0);
+  const [dailyProgress, setDailyProgress] = useState(0);
+  const [wordsProgress, setWordsProgress] = useState(0);
+  const [phrasesProgress, setPhrasesProgress] = useState(0);
+  const [convProgress, setConvProgress] = useState(0);
 
-const stages = [
-  { id: "setup", label: "Choose", sub: "Your path" },
-  { id: "learn", label: "Learn", sub: "Words + scenes" },
-  { id: "speak", label: "Speak", sub: "Repeat phrases" },
-  { id: "play", label: "Play", sub: "Mini games" },
-  { id: "quiz", label: "Practice", sub: "Gentle check" },
-  { id: "reward", label: "Reward", sub: "Badge" }
-];
+  useEffect(() => {
+    const saved = localStorage.getItem("ling_last_module");
+    if (saved) setLastModule(saved);
 
-function Ling() {
-  const [known, setKnown] = useState("Hindi");
-  const [target, setTarget] = useState("English");
-  const [activeStage, setActiveStage] = useState("setup");
-  const [unlocked, setUnlocked] = useState(0);
-  const [lessonIndex, setLessonIndex] = useState(0);
-  const [selectedWord, setSelectedWord] = useState("hello");
-  const [phraseIndex, setPhraseIndex] = useState(0);
-  const [matchScore, setMatchScore] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState("");
-  const [quizAnswer, setQuizAnswer] = useState("");
-  const [toast, setToast] = useState("");
-  const [mascotMood, setMascotMood] = useState("happy");
-  const [bubble, setBubble] = useState({
-    label: "Namaste!",
-    text: "I am Mithu. Choose your language path and I will unlock one fun activity at a time."
-  });
-
-  const lesson = lessons[lessonIndex];
-  const currentWord = lesson.words.find((item) => item.id === selectedWord) || lesson.words[0];
-  const currentPhrase = lesson.phrases[phraseIndex];
-  const matchQuestion = lesson.words[matchScore % lesson.words.length];
-  const progress = Math.round(((stages.findIndex((stage) => stage.id === activeStage) + 1) / stages.length) * 100);
-
-  const dailyPlan = useMemo(() => [
-    { title: "See", detail: `Look at ${lesson.scene.toLowerCase()} words`, done: unlocked >= 1 },
-    { title: "Say", detail: "Repeat 3 useful phrases", done: unlocked >= 2 },
-    { title: "Play", detail: "Match meaning and sound", done: unlocked >= 3 },
-    { title: "Try", detail: "Take a friendly quiz", done: unlocked >= 4 }
-  ], [lesson, unlocked]);
-
-  function celebrate(message, label = "Mithu says") {
-    setBubble({ label, text: message });
-    setMascotMood("excited");
-    setToast(message);
-    window.setTimeout(() => setMascotMood("happy"), 700);
-    window.setTimeout(() => setToast(""), 1700);
-  }
-
-  function unlockStage(stageId) {
-    const index = stages.findIndex((stage) => stage.id === stageId);
-    setUnlocked((value) => Math.max(value, index));
-    setActiveStage(stageId);
-  }
-
-  function goStage(stageId) {
-    const index = stages.findIndex((stage) => stage.id === stageId);
-    if (index > unlocked) {
-      celebrate("Finish the current step first. Tiny wins unlock the next door.", "Not yet");
-      return;
-    }
-    setActiveStage(stageId);
-    setBubble({
-      label: stages[index].label,
-      text: stageId === "learn"
-        ? "Look at each word card. Tap one to see when you can use it."
-        : stageId === "speak"
-          ? "Say the phrase slowly. Then try it again like you are talking to a friend."
-          : stageId === "play"
-            ? "Now play with meanings. This is practice hiding inside a game."
-            : stageId === "quiz"
-              ? "You have learned first, so the quiz is just a small check."
-              : "Choose your path and begin."
-    });
-  }
-
-  function chooseLesson(nextIndex) {
-    setLessonIndex(nextIndex);
-    setSelectedWord(lessons[nextIndex].words[0].id);
-    setPhraseIndex(0);
-    setMatchScore(0);
-    setSelectedAnswer("");
-    setQuizAnswer("");
-    celebrate(`Great choice. ${lessons[nextIndex].title} is ready.`, "New lesson");
-  }
-
-  function checkMatch(answerId) {
-    setSelectedAnswer(answerId);
-    if (answerId === matchQuestion.id) {
-      const nextScore = matchScore + 1;
-      setMatchScore(nextScore);
-      celebrate("Correct match. Your word power is growing.", "Shabash!");
-      window.setTimeout(() => setSelectedAnswer(""), 650);
-      if (nextScore >= 4) {
-        window.setTimeout(() => unlockStage("quiz"), 800);
-      }
-    } else {
-      celebrate("Almost. Look at the Hindi meaning and try once more.", "Helpful clue");
-      window.setTimeout(() => setSelectedAnswer(""), 750);
-    }
-  }
-
-  function checkQuiz(answerId) {
-    setQuizAnswer(answerId);
-    if (answerId === "correct") {
-      celebrate("Badge unlocked. You learned, spoke, played, and practiced.", "Badge earned");
-      window.setTimeout(() => unlockStage("reward"), 900);
-    } else {
-      celebrate("Good try. Go back to the phrase card if you want a clue.", "Try again");
-    }
-  }
+    // Load dynamic data
+    setStreak(parseInt(localStorage.getItem("ling_streak") || "0"));
+    setDailyProgress(parseInt(localStorage.getItem("ling_daily_progress") || "0"));
+    setWordsProgress(parseInt(localStorage.getItem("ling_words_progress") || "0"));
+    setPhrasesProgress(parseInt(localStorage.getItem("ling_phrases_progress") || "0"));
+    setConvProgress(parseInt(localStorage.getItem("ling_conversations_progress") || "0"));
+  }, []);
 
   return (
-    <div className="min-h-screen p-4 sm:p-6">
-      <div className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[260px_1fr]">
-        <aside className="rounded-[28px] border border-white/70 bg-white/75 p-4 shadow-soft backdrop-blur">
-          <div className="flex items-center gap-3">
-            <div className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-leaf to-sky font-display text-2xl font-bold text-white shadow-lg">भ</div>
-            <div>
-              <p className="font-display text-xl font-bold leading-none">Bhasha Buddy</p>
-              <p className="text-sm font-bold text-slate-500">Bihar language journey</p>
-            </div>
+    <div className="min-h-screen bg-[#FDFDFD] font-sans text-[#2D3142] flex flex-col overflow-x-hidden">
+      {/* Main Content Area */}
+      <main className="flex-1 px-4 md:px-12 lg:px-24 pb-8 max-w-[1400px] mx-auto w-full overflow-hidden relative">
+        {/* Back Button */}
+        <button 
+          onClick={() => navigate("/linguistic")} 
+          className="absolute top-6 left-6 md:left-12 lg:left-24 w-11 h-11 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-[#0BB562] hover:shadow-lg transition-all border border-slate-50 z-50 group"
+        >
+          <ArrowLeft size={22} strokeWidth={2.5} className="group-hover:-translate-x-1 transition-transform" />
+        </button>
+
+        {/* Hero Section */}
+        <div className="flex flex-col lg:flex-row justify-between items-center mb-24 relative mt-0">
+          <div className="space-y-1 z-10 w-[45%]">
+            <h1 className="text-4xl md:text-5xl font-bold text-slate-900">
+              Let's learn <br /> a new language
+            </h1>
+            <p className="text-[20px] text-[#64748B] font-medium leading-snug pt-2">
+              Have a conversation in <br /> different languages
+            </p>
+          </div>
+          <div className="relative flex items-end justify-center w-full lg:w-[55%] min-h-[340px] mt-12 lg:mt-0">
+             {/* Background soft blob */}
+             <div className="absolute left-[-10%] top-[-10%] w-[450px] h-[450px] bg-[#F1FAED] rounded-full -z-10 blur-3xl opacity-90"></div>
+             
+             {/* Combined RHS Image */}
+             <div className="relative z-10 mr-10">
+                <img 
+                  src="/images/linguistic/rhs.png" 
+                  alt="Learning Characters" 
+                  className="w-[500px] xl:w-[800px] h-auto object-contain" 
+                />
+             </div>
+             
+             {/* Background Decoration Leaves */}
+             <div className="absolute right-0 -bottom-16 opacity-60 -z-10">
+                <LeafIcon className="w-72 h-72 text-[#C8E6C9] fill-[#C8E6C9]" />
+             </div>
+          </div>
+        </div>
+
+        {/* Selection Cards Grid */}
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-12 relative z-30 -mt-40">
+          
+          {/* Know Language Card */}
+          <div className="bg-white border border-[slate-500] rounded-[40px] px-10 py-7 shadow-xl shadow-slate-100/50">
+             <div className="flex justify-between items-center mb-4">
+               <h3 className="text-[15px] font-bold text-[#1A1C2E]">Choose the language <span className="text-[#0BB562]">you know</span></h3>
+               
+             </div>
+
+             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                {LANGUAGES.map(lang => (
+                  <LanguagePill 
+                    key={`src-${lang.id}`} 
+                    lang={lang} 
+                    selected={sourceLang === lang.id}
+                    onClick={() => {
+                      setSourceLang(lang.id);
+                      if (targetLang === lang.id) setTargetLang(null);
+                    }} 
+                  />
+                ))}
+             </div>
           </div>
 
-          <div className="mt-6 grid gap-2">
-            {stages.map((stage, index) => (
-              <button
-                key={stage.id}
-                onClick={() => goStage(stage.id)}
-                className={`flex items-center gap-3 rounded-2xl px-3 py-3 text-left transition hover:translate-x-1 ${
-                  activeStage === stage.id ? "bg-white shadow-md" : "bg-transparent"
-                } ${index > unlocked ? "opacity-45" : ""}`}
-              >
-                <span className={`grid h-8 w-8 place-items-center rounded-full text-sm font-black text-white ${index <= unlocked ? "bg-leaf" : "bg-slate-300"}`}>
-                  {index + 1}
-                </span>
-                <span>
-                  <span className="block font-black">{stage.label}</span>
-                  <span className="block text-xs font-bold text-slate-500">{stage.sub}</span>
-                </span>
+          {/* Swap Middle Button */}
+          <div 
+            onClick={() => {
+              if (!sourceLang || !targetLang) return;
+              const temp = sourceLang;
+              setSourceLang(targetLang);
+              setTargetLang(temp);
+            }}
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-white border border-[#F0F0F0] rounded-full flex items-center justify-center text-[#0BB562] shadow-xl z-40 hidden xl:flex hover:scale-110 transition-transform cursor-pointer ${(!sourceLang || !targetLang) && 'opacity-30 cursor-not-allowed'}`}
+          >
+            <ArrowRightLeft size={20} strokeWidth={2.5} />
+          </div>
+
+          {/* Target Language Card */}
+          <div className="bg-white border border-[slate-500] rounded-[40px] px-10 py-7 shadow-xl shadow-slate-100/50">
+             <div className="flex justify-between items-center mb-4">
+               <h3 className="text-[15px] font-bold text-[#1A1C2E]">Choose the language <span className="text-[#0BB562]">you want to learn</span></h3>
+               
+             </div>
+
+             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+                {LANGUAGES.map(lang => (
+                  <LanguagePill 
+                    key={`tgt-${lang.id}`} 
+                    lang={lang} 
+                    selected={targetLang === lang.id}
+                    disabled={sourceLang === lang.id}
+                    onClick={() => setTargetLang(lang.id)} 
+                  />
+                ))}
+             </div>
+          </div>
+
+        </div>
+
+        {/* Primary CTA */}
+        <div className="flex justify-center mb-8 -mt-6">
+          <button 
+            disabled={!sourceLang || !targetLang}
+            onClick={() => navigate(`/ling/${lastModule}`, { state: { source: sourceLang, target: targetLang } })}
+            className={`bg-[#0BB562] hover:bg-[#099A52] text-white font-bold px-12 py-4 rounded-full shadow-[0_8px_20px_rgba(11,181,98,0.2)] flex items-center gap-3 transition-all hover:-translate-y-0.5 group ${(!sourceLang || !targetLang) && 'opacity-50 cursor-not-allowed grayscale'}`}
+          >
+            {lastModule === 'words' ? 'Start Learning' : `Continue ${lastModule.charAt(0).toUpperCase() + lastModule.slice(1)}`} <ArrowRight size={20} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform" />
+          </button>
+        </div>
+
+        {/* Modules Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <ModuleCard 
+            title="Basic Words"
+            desc="Learn everyday words with interactive practice"
+            icon={<PlantIcon />}
+            bg="#F1FAF6"
+            titleColor="#065F46"
+            linkColor="#10B981"
+            imgSrc="/images/linguistic/plant_3d.png"
+            onClick={() => navigate("/ling/words", { state: { source: sourceLang, target: targetLang } })}
+          />
+          <ModuleCard 
+            title="Basic Phrases"
+            desc={<>Learn useful phrases for<br /> daily conversations</>}
+            icon={<ChatBubbleIcon />}
+            bg="#FFF8EA"
+            titleColor="#92400E"
+            linkColor="#F59E0B"
+            imgSrc="/images/linguistic/l4.png"
+            onClick={() => navigate("/ling/phrases", { state: { source: sourceLang, target: targetLang } })}
+          />
+          <ModuleCard 
+            title="Conversations"
+            desc={<>Practice real conversations<br /> with AI characters</>}
+            icon={<CharactersIcon />}
+            bg="#F5F3FF"
+            titleColor="#5B21B6"
+            linkColor="#8B5CF6"
+            imgSrc="/images/linguistic/hero_3d.png"
+            onClick={() => navigate("/ling/conversations", { state: { source: sourceLang, target: targetLang } })}
+          />
+        </div>
+
+        {/* Footer Section */}
+        <div className="pb-7">
+           <div className="flex justify-between items-center mb-5">
+              <h3 className="text-2xl font-black text-[#1A1C2E]">Continue learning</h3>
+              <button className="text-[15px] font-bold text-[#0BB562] flex items-center gap-1.5 hover:opacity-80 transition-opacity">
+                See all <ArrowRight size={18} strokeWidth={2.5} />
               </button>
-            ))}
-          </div>
+           </div>
 
-          <div className="mt-6 rounded-3xl bg-gradient-to-br from-yellow-100 to-orange-100 p-4">
-            <div className="flex items-center justify-between">
-              <p className="font-black">Daily plan</p>
-              <span className="rounded-full bg-white px-3 py-1 text-sm font-black text-amber-600">24 ★</span>
-            </div>
-            <div className="mt-3 grid gap-2">
-              {dailyPlan.map((item) => (
-                <div key={item.title} className="flex gap-2 text-sm">
-                  <span className={`mt-0.5 grid h-5 w-5 place-items-center rounded-full text-xs font-black ${item.done ? "bg-leaf text-white" : "bg-white text-slate-400"}`}>
-                    {item.done ? "✓" : ""}
-                  </span>
-                  <div>
-                    <p className="font-black">{item.title}</p>
-                    <p className="text-xs font-bold text-slate-500">{item.detail}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </aside>
+           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <ContinueItem icon={<BookOpen size={18} />} color="#0BB562" bg="#E8F5E9" title="Basic Words" progress={(wordsProgress / 20) * 100} text={`${wordsProgress} / 20`} onClick={() => navigate("/ling/words", { state: { source: sourceLang, target: targetLang } })} />
+              <ContinueItem icon={<MessageSquare size={18} />} color="#FF9800" bg="#FFF3E0" title="Basic Phrases" progress={(phrasesProgress / 20) * 100} text={`${phrasesProgress} / 20`} onClick={() => navigate("/ling/phrases", { state: { source: sourceLang, target: targetLang } })} />
+              <ContinueItem icon={<User size={18} />} color="#9C27B0" bg="#F3E5F5" title="Conversations" progress={(convProgress / 10) * 100} text={`${convProgress} / 10`} onClick={() => navigate("/ling/conversations", { state: { source: sourceLang, target: targetLang } })} />
+           </div>
+        </div>
 
-        <main className="min-w-0">
-          <header className="mb-4 flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
-            <div>
-              <p className="text-xs font-black uppercase text-emerald-700">Bihar learning website</p>
-              <h1 className="font-display text-4xl font-bold leading-none sm:text-5xl">Learn languages with Mithu</h1>
-            </div>
-            <div className="rounded-full bg-white px-4 py-3 shadow-md">
-              <div className="flex items-center gap-3">
-                <div className="h-2 w-24 rounded-full bg-slate-100">
-                  <div className="h-2 rounded-full bg-leaf transition-all" style={{ width: `${progress}%` }} />
-                </div>
-                <span className="text-sm font-black">{progress}%</span>
-              </div>
-            </div>
-          </header>
+      </main>
 
-          <section className="mb-4 grid items-center gap-4 overflow-hidden rounded-[30px] border border-white/70 bg-white/75 p-4 shadow-soft backdrop-blur md:grid-cols-[150px_1fr]">
-            <Mascot mood={mascotMood} />
-            <div className="relative rounded-[34px] bg-white p-5 shadow-lg before:absolute before:-left-4 before:top-8 before:h-9 before:w-9 before:rounded-full before:bg-white after:absolute after:-left-9 after:top-20 after:h-4 after:w-4 after:rounded-full after:bg-white">
-              <p className="font-black text-mango">{bubble.label}</p>
-              <p className="mt-1 max-w-3xl font-bold text-slate-600">{bubble.text}</p>
-            </div>
-          </section>
+      <style jsx>{`
+        @keyframes bounce-subtle {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-8px); }
+        }
+        .animate-bounce-subtle {
+          animation: bounce-subtle 3s ease-in-out infinite;
+        }
+        .delay-100 {
+          animation-delay: 0.5s;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background-color: #E2E8F0;
+          border-radius: 10px;
+        }
+        .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+          background-color: #CBD5E1;
+        }
+      `}</style>
+    </div>
+  );
+}
 
-          <div className="mb-4 flex gap-2 overflow-x-auto pb-1">
-            {stages.map((stage, index) => (
-              <button
-                key={stage.id}
-                onClick={() => goStage(stage.id)}
-                className={`min-w-36 rounded-2xl border border-white/80 px-4 py-3 text-left shadow-sm transition ${
-                  activeStage === stage.id ? "bg-white" : "bg-white/60"
-                } ${index > unlocked ? "opacity-45" : "hover:-translate-y-0.5"}`}
-              >
-                <span className="block font-black">{stage.label}</span>
-                <span className="text-sm font-bold text-slate-500">{stage.sub}</span>
-              </button>
-            ))}
-          </div>
+/* Helper Components */
 
-          <section className="rounded-[30px] border border-white/70 bg-white/75 p-4 shadow-soft backdrop-blur">
-            {activeStage === "setup" && (
-              <SetupStage
-                known={known}
-                target={target}
-                setKnown={setKnown}
-                setTarget={setTarget}
-                onStart={() => {
-                  celebrate(`Lovely. We will use ${known} to learn ${target}.`, "Path ready");
-                  unlockStage("learn");
-                }}
-              />
-            )}
+function SidebarItem({ icon, label, active, onClick }) {
+  return (
+    <button 
+      onClick={onClick}
+      className={`w-full flex items-center gap-4 px-5 py-3.5 rounded-2xl font-bold transition-all relative
+        ${active ? "bg-[#E8F5E9] text-[#0BB562]" : "text-[#B0B0B0] hover:bg-slate-50 hover:text-slate-600"}`}
+    >
+      {icon}
+      <span className="text-[13px]">{label}</span>
+    </button>
+  );
+}
 
-            {activeStage === "learn" && (
-              <LearnStage
-                lesson={lesson}
-                lessonIndex={lessonIndex}
-                chooseLesson={chooseLesson}
-                currentWord={currentWord}
-                selectedWord={selectedWord}
-                setSelectedWord={setSelectedWord}
-                onNext={() => unlockStage("speak")}
-              />
-            )}
-
-            {activeStage === "speak" && (
-              <SpeakStage
-                lesson={lesson}
-                phraseIndex={phraseIndex}
-                setPhraseIndex={setPhraseIndex}
-                currentPhrase={currentPhrase}
-                onNext={() => unlockStage("play")}
-                celebrate={celebrate}
-              />
-            )}
-
-            {activeStage === "play" && (
-              <PlayStage
-                lesson={lesson}
-                matchQuestion={matchQuestion}
-                selectedAnswer={selectedAnswer}
-                matchScore={matchScore}
-                checkMatch={checkMatch}
-              />
-            )}
-
-            {activeStage === "quiz" && (
-              <QuizStage
-                lesson={lesson}
-                quizAnswer={quizAnswer}
-                checkQuiz={checkQuiz}
-              />
-            )}
-
-            {activeStage === "reward" && (
-              <RewardStage
-                lesson={lesson}
-                onNextLesson={() => {
-                  const next = (lessonIndex + 1) % lessons.length;
-                  chooseLesson(next);
-                  setUnlocked(1);
-                  setActiveStage("learn");
-                }}
-              />
-            )}
-          </section>
-        </main>
+function LanguagePill({ lang, selected, disabled, onClick }) {
+  return (
+    <button 
+      onClick={!disabled ? onClick : undefined}
+      disabled={disabled}
+      className={`flex flex-col items-center justify-center gap-2 p-3 rounded-2xl border-2 transition-all relative overflow-hidden
+        ${disabled ? "opacity-30 cursor-not-allowed grayscale" : ""}
+        ${selected 
+          ? "border-[#0BB562] bg-[#F1F8F1] shadow-sm" 
+          : "border-[#F0F0F0] bg-white hover:border-slate-300"}`}
+    >
+      <div className="w-8 h-8 rounded-full overflow-hidden border border-slate-100">
+        <img src={lang.flag} alt={lang.name} className="w-full h-full object-cover scale-150" />
       </div>
-
-      {toast && (
-        <div className="fixed bottom-5 left-1/2 z-10 -translate-x-1/2 animate-pop rounded-full bg-ink px-5 py-3 text-sm font-black text-white shadow-lg">
-          {toast}
+      <span className={`text-[12px] font-bold ${selected ? "text-[#2E7D32]" : "text-slate-600"}`}>{lang.name}</span>
+      
+      {selected && (
+        <div className="absolute top-1.5 right-1.5 w-4 h-4 bg-[#0BB562] rounded-full flex items-center justify-center text-white">
+          <Check size={10} strokeWidth={4} />
         </div>
       )}
-    </div>
+    </button>
   );
 }
 
-function Mascot({ mood }) {
+function ModuleCard({ title, desc, icon, bg, titleColor, linkColor, imgSrc, onClick }) {
   return (
-    <div className="relative mx-auto h-36 w-36">
-      <div className={`absolute left-5 top-2 h-28 w-24 animate-bob rounded-[50%_50%_44%_44%] bg-gradient-to-br from-emerald-300 to-leaf ${mood === "excited" ? "animate-wiggle" : ""}`}>
-        <div className="absolute -top-4 left-9 h-7 w-6 rotate-[-22deg] rounded-[80%_20%_80%_20%] bg-emerald-500" />
-        <div className="absolute -left-3 top-11 h-12 w-8 animate-flap rounded-full bg-emerald-300" />
-        <div className="absolute -right-3 top-11 h-12 w-8 animate-flap rounded-full bg-emerald-300" />
-        <div className="absolute left-7 top-9 h-4 w-3 rounded-full bg-slate-800 after:absolute after:left-1 after:top-1 after:h-1 after:w-1 after:rounded-full after:bg-white" />
-        <div className="absolute right-7 top-9 h-4 w-3 rounded-full bg-slate-800 after:absolute after:left-1 after:top-1 after:h-1 after:w-1 after:rounded-full after:bg-white" />
-        <div className="absolute left-10 top-14 h-4 w-5 bg-amber-400 [clip-path:polygon(0_0,100%_50%,0_100%)]" />
-        <div className="absolute bottom-[-7px] left-8 h-3 w-10 rounded-full bg-amber-400" />
-      </div>
-      <div className="absolute bottom-1 left-7 h-5 w-24 rounded-full bg-slate-900/10" />
-    </div>
-  );
-}
-
-function SetupStage({ known, target, setKnown, setTarget, onStart }) {
-  return (
-    <div className="animate-pop">
-      <StageTitle eyebrow="Start here" title="Tell Mithu what you know and what you want to learn" badge={`${known} to ${target}`} />
-      <div className="grid gap-4 md:grid-cols-2">
-        <LanguagePicker title="I know" items={knownLanguages} value={known} onChange={setKnown} />
-        <LanguagePicker title="I want to learn" items={targetLanguages} value={target} onChange={setTarget} />
-      </div>
-      <div className="mt-5 grid gap-3 rounded-3xl bg-gradient-to-br from-sky-50 to-emerald-50 p-4 md:grid-cols-3">
-        {["Visual words", "Speak slowly", "Play before quiz"].map((item) => (
-          <div key={item} className="rounded-2xl bg-white p-4 shadow-sm">
-            <p className="font-black">{item}</p>
-            <p className="mt-1 text-sm font-bold text-slate-500">A child learns better when the step feels small, clear, and playful.</p>
-          </div>
-        ))}
-      </div>
-      <ActionBar primary="Start learning" onPrimary={onStart} />
-    </div>
-  );
-}
-
-function LearnStage({ lesson, lessonIndex, chooseLesson, currentWord, selectedWord, setSelectedWord, onNext }) {
-  return (
-    <div className="animate-pop">
-      <StageTitle eyebrow="Learn visually first" title={lesson.title} badge={lesson.scene} />
-      <div className="mb-4 grid gap-3 md:grid-cols-3">
-        {lessons.map((item, index) => (
-          <button
-            key={item.id}
-            onClick={() => chooseLesson(index)}
-            className={`rounded-3xl p-4 text-left font-bold shadow-sm transition hover:-translate-y-1 ${
-              lessonIndex === index ? "bg-gradient-to-br from-leaf to-sky text-white" : "bg-white"
-            }`}
-          >
-            <span className="text-sm opacity-80">Lesson {index + 1}</span>
-            <span className="block font-display text-2xl">{item.title}</span>
-            <span className="text-sm opacity-80">{item.scene}</span>
-          </button>
-        ))}
-      </div>
-      <div className={`rounded-[28px] bg-gradient-to-br ${lesson.color} p-4`}>
-        <div className="grid gap-3 md:grid-cols-4">
-          {lesson.words.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => setSelectedWord(item.id)}
-              className={`rounded-3xl border-2 p-4 text-left transition hover:-translate-y-1 ${
-                selectedWord === item.id ? "border-leaf bg-white shadow-md" : "border-transparent bg-white/70"
-              }`}
-            >
-              <p className="text-sm font-black text-emerald-700">{item.sound}</p>
-              <p className="font-display text-2xl font-bold">{item.word}</p>
-              <p className="font-black text-slate-500">{item.hindi}</p>
-            </button>
-          ))}
-        </div>
-        <div className="mt-4 rounded-3xl bg-white p-4 shadow-sm">
-          <p className="text-sm font-black uppercase text-mango">When will I use this?</p>
-          <p className="mt-1 text-xl font-black">{currentWord.word} means {currentWord.hindi}</p>
-          <p className="mt-1 font-bold text-slate-600">{currentWord.use}</p>
-        </div>
-      </div>
-      <ActionBar primary="Practice speaking" onPrimary={onNext} />
-    </div>
-  );
-}
-
-function SpeakStage({ lesson, phraseIndex, setPhraseIndex, currentPhrase, onNext, celebrate }) {
-  return (
-    <div className="animate-pop">
-      <StageTitle eyebrow="Speak and understand" title="Build real phrases, not just isolated words" badge={`${phraseIndex + 1} / ${lesson.phrases.length}`} />
-      <div className="grid gap-4 lg:grid-cols-[1fr_320px]">
-        <div className="rounded-[28px] bg-gradient-to-br from-yellow-100 to-orange-100 p-5">
-          <p className="text-sm font-black uppercase text-amber-700">Listen in your mind</p>
-          <h3 className="mt-2 font-display text-4xl font-bold">{currentPhrase.target}</h3>
-          <p className="mt-2 text-xl font-black text-slate-600">{currentPhrase.hindi}</p>
-          <p className="mt-1 font-bold text-slate-500">{currentPhrase.support}</p>
-          <div className="mt-5 flex flex-wrap gap-2">
-            <button onClick={() => celebrate("Say it once slowly. Now say it like you are greeting a friend.", "Speaking tip")} className="rounded-2xl bg-white px-4 py-3 font-black shadow-sm">Hear / Repeat</button>
-            <button onClick={() => celebrate("Nice. Try changing one word and make your own sentence.", "Creative try")} className="rounded-2xl bg-white px-4 py-3 font-black shadow-sm">I said it</button>
+    <div 
+      onClick={onClick}
+      style={{ backgroundColor: bg }} 
+      className="rounded-[36px] px-6 pt-6 pb-5 relative overflow-hidden group cursor-pointer transition-all hover:shadow-xl hover:-translate-y-1 min-h-[140px] flex flex-col border border-black/5 w-full"
+    >
+      <div className="flex items-start gap-2 mb-2">
+        {/* Triple-layer Icon container */}
+       <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm shrink-0 -ml-2 -mt-2">
+          <div className="w-9 h-9 rounded-2xl flex items-center justify-center" style={{ backgroundColor: linkColor }}>
+             <div className="text-white scale-90">
+               {icon}
+             </div>
           </div>
         </div>
-        <div className="grid gap-2">
-          {lesson.phrases.map((phrase, index) => (
-            <button
-              key={phrase.target}
-              onClick={() => setPhraseIndex(index)}
-              className={`rounded-2xl p-4 text-left font-bold transition ${phraseIndex === index ? "bg-ink text-white" : "bg-white shadow-sm"}`}
-            >
-              {phrase.target}
-              <span className="block text-sm opacity-70">{phrase.hindi}</span>
-            </button>
-          ))}
+        <div className="-mt-3 pr-5 text-left">
+          <h4 className="text-[16px] font-black leading-tight mb-1" style={{ color: titleColor }}>{title}</h4>
+          <p className="text-[12px] font-medium text-slate-500 leading-relaxed max-w-[200px]">{desc}</p>
         </div>
       </div>
-      <ActionBar primary="Play meaning game" onPrimary={onNext} />
-    </div>
-  );
-}
-
-function PlayStage({ lesson, matchQuestion, selectedAnswer, matchScore, checkMatch }) {
-  return (
-    <div className="animate-pop">
-      <StageTitle eyebrow="Mini game" title="Match the Hindi meaning to the correct word" badge={`${Math.min(matchScore, 4)} / 4`} />
-      <div className="rounded-[28px] bg-gradient-to-br from-sky-100 to-emerald-100 p-5">
-        <p className="text-sm font-black uppercase text-sky-700">Question</p>
-        <h3 className="mt-1 font-display text-4xl font-bold">Which word means {matchQuestion.hindi}?</h3>
-        <div className="mt-5 grid gap-3 md:grid-cols-4">
-          {lesson.words.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => checkMatch(item.id)}
-              className={`rounded-3xl p-4 text-left font-black shadow-sm transition hover:-translate-y-1 ${
-                selectedAnswer === item.id
-                  ? item.id === matchQuestion.id
-                    ? "bg-emerald-200"
-                    : "bg-rose-200"
-                  : "bg-white"
-              }`}
-            >
-              <span className="block text-sm text-slate-500">{item.sound}</span>
-              <span className="block text-2xl">{item.word}</span>
-              <span className="text-slate-500">{item.native}</span>
-            </button>
-          ))}
-        </div>
+      
+      <div className="mt-auto">
+        <button style={{ color: linkColor }} className="flex items-center gap-2 text-[15px] font-black group-hover:gap-3 transition-all">
+          Start learning <ArrowRight size={18} strokeWidth={3} />
+        </button>
       </div>
-      <p className="mt-4 rounded-2xl bg-white p-4 text-sm font-bold text-slate-500 shadow-sm">Complete 4 correct matches to unlock the gentle quiz.</p>
-    </div>
-  );
-}
 
-function QuizStage({ lesson, quizAnswer, checkQuiz }) {
-  const phrase = lesson.phrases[0];
-  return (
-    <div className="animate-pop">
-      <StageTitle eyebrow="Gentle quiz" title="Now check what you learned" badge="No pressure" />
-      <div className="rounded-[28px] bg-gradient-to-br from-rose-100 to-yellow-100 p-5">
-        <p className="text-sm font-black uppercase text-rose-700">Scenario</p>
-        <h3 className="mt-1 font-display text-3xl font-bold">You meet a classmate in the morning. What can you say?</h3>
-        <div className="mt-5 grid gap-3">
-          {[
-            { id: "wrong1", text: "What is the price?", sub: "Market question" },
-            { id: "correct", text: phrase.target, sub: phrase.hindi },
-            { id: "wrong2", text: "May I drink water?", sub: "Classroom request" }
-          ].map((option) => (
-            <button
-              key={option.id}
-              onClick={() => checkQuiz(option.id)}
-              className={`rounded-2xl p-4 text-left font-black shadow-sm transition hover:-translate-y-1 ${
-                quizAnswer === option.id
-                  ? option.id === "correct"
-                    ? "bg-emerald-200"
-                    : "bg-rose-200"
-                  : "bg-white"
-              }`}
-            >
-              {option.text}
-              <span className="block text-sm text-slate-500">{option.sub}</span>
-            </button>
-          ))}
-        </div>
+      {/* 3D Graphic at Bottom Right */}
+      <div className="absolute -right-4 -bottom-6 w-32 h-40 transition-transform duration-700 pointer-events-none flex items-end justify-end p-2">
+        {imgSrc && <img src={imgSrc} alt="" className="w-full h-full object-contain" onError={(e) => e.target.style.display='none'} />}
       </div>
     </div>
   );
 }
 
-function RewardStage({ lesson, onNextLesson }) {
+function ContinueItem({ icon, color, bg, title, sub, progress, text, onClick }) {
   return (
-    <div className="animate-pop text-center">
-      <div className="mx-auto grid h-24 w-24 place-items-center rounded-full bg-gradient-to-br from-yellow-200 to-orange-300 text-5xl shadow-lg">★</div>
-      <h2 className="mt-4 font-display text-5xl font-bold">Badge unlocked!</h2>
-      <p className="mx-auto mt-2 max-w-xl font-bold text-slate-600">You completed {lesson.title}: you saw words, spoke phrases, played a game, and finished practice.</p>
-      <div className="mx-auto mt-5 grid max-w-2xl gap-3 md:grid-cols-3">
-        {["Curious Learner", "Word Matcher", "Brave Speaker"].map((badge) => (
-          <div key={badge} className="rounded-3xl bg-white p-4 font-black shadow-sm">{badge}</div>
-        ))}
-      </div>
-      <ActionBar primary="Start next lesson" onPrimary={onNextLesson} />
+    <div onClick={onClick} className="bg-white border border-[#F0F0F0] rounded-3xl p-6 flex items-center justify-between shadow-sm hover:shadow-md transition-all cursor-pointer group">
+       <div className="flex items-center gap-4">
+          <div style={{ backgroundColor: bg, color: color }} className="w-12 h-12 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+            {icon}
+          </div>
+          <div className="space-y-1">
+            <h4 className="text-[15px] font-bold text-[#1A1C2E]">{title} <span className="text-slate-300 font-medium">- {sub}</span></h4>
+            <div className="w-32 h-1.5 bg-[#F5F5F5] rounded-full overflow-hidden">
+               <div style={{ width: `${progress}%`, backgroundColor: color }} className="h-full rounded-full" />
+            </div>
+          </div>
+       </div>
+       <span className="text-[14px] font-bold text-slate-400 group-hover:text-[#0BB562] transition-colors">{text}</span>
     </div>
   );
 }
 
-function LanguagePicker({ title, items, value, onChange }) {
+/* Custom Icons */
+function LanguagesIcon() {
   return (
-    <div>
-      <p className="mb-2 font-black text-slate-600">{title}</p>
-      <div className="flex flex-wrap gap-2">
-        {items.map((item) => (
-          <button
-            key={item}
-            onClick={() => onChange(item)}
-            className={`rounded-full border-2 px-4 py-2 font-black transition hover:-translate-y-0.5 ${
-              value === item ? "border-leaf bg-white text-ink shadow-sm" : "border-transparent bg-sky-50 text-slate-600"
-            }`}
-          >
-            {item}
-          </button>
-        ))}
-      </div>
-    </div>
+    <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="m5 8 6 6" /><path d="m4 14 6-6 2-3" /><path d="M2 5h12" /><path d="M7 2h1" /><path d="m22 22-5-10-5 10" /><path d="M14 18h6" />
+    </svg>
   );
 }
 
-function StageTitle({ eyebrow, title, badge }) {
+function CalendarIcon({ size }) {
+  return <Calendar size={size} />;
+}
+
+function ShieldIcon({ size }) {
+  return <Shield size={size} strokeWidth={2.5} />;
+}
+
+function LeafIcon({ className }) {
   return (
-    <div className="mb-4 flex flex-col justify-between gap-3 sm:flex-row sm:items-start">
-      <div>
-        <p className="text-xs font-black uppercase text-emerald-700">{eyebrow}</p>
-        <h2 className="font-display text-3xl font-bold leading-none sm:text-4xl">{title}</h2>
-      </div>
-      <span className="w-fit rounded-full bg-white px-4 py-2 text-sm font-black shadow-sm">{badge}</span>
-    </div>
+    <svg viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8a7 7 0 0 1-10 10Z" /><path d="M11 20c-1.5.5-3 1-5 1a4 4 0 0 1-4-4c0-2 1.5-3.5 1-5 2.5 0 4 1.5 5 1" /><path d="M11 20l1-5" />
+    </svg>
   );
 }
 
-function ActionBar({ primary, onPrimary }) {
+function PlantIcon() {
   return (
-    <div className="mt-5 flex justify-end">
-      <button onClick={onPrimary} className="rounded-2xl bg-gradient-to-br from-leaf to-sky px-5 py-3 font-black text-white shadow-lg transition hover:-translate-y-0.5">
-        {primary}
-      </button>
-    </div>
+    <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 text-[#4CAF50]" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M7 10v12" /><path d="M15 14v8" /><path d="M10 22h4" /><path d="M10 15c0-3 2.5-5 5-5s5 2 5 5" /><path d="M7 10c0-3-2.5-5-5-5s-5 2-5 5" /><path d="M12 2v6" />
+    </svg>
   );
 }
-export default Ling;
+
+function ChatBubbleIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 text-[#FF9800]" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    </svg>
+  );
+}
+
+function CharactersIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className="w-6 h-6 text-[#9C27B0]" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="9" cy="7" r="4" /><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2" /><circle cx="17" cy="11" r="3" /><path d="M13 21v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1" />
+    </svg>
+  );
+}
