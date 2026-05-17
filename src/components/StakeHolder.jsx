@@ -17,22 +17,22 @@ const row2 = [
 
 export default function StakeHolder() {
   const StakeholderCard = ({ text }) => (
-    <div className="group relative inline-flex items-center gap-3 px-8 py-5 rounded-2xl text-sm font-bold text-slate-700
+    <div className="group relative inline-flex items-center gap-2.5 px-6 py-4 rounded-xl text-[13px] font-bold text-slate-700
       bg-white border border-slate-200
       transition-all duration-500 ease-out
       hover:border-indigo-300
       whitespace-nowrap cursor-default overflow-hidden">
 
-      <div className="w-2 h-2 rounded-full bg-indigo-500 transition-transform duration-300 group-hover:scale-125" />
+      <div className="w-1.5 h-1.5 rounded-full bg-indigo-500 transition-transform duration-300 group-hover:scale-125" />
       <span className="relative z-10">{text}</span>
     </div>
   );
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#fcfcfd] py-24 px-6 md:px-12 lg:px-24 border-t border-slate-100">
+    <section className="relative w-full overflow-hidden bg-[#fcfcfd] py-20 px-6 md:px-12 lg:px-24 border-t border-slate-100">
 
       {/* --- Standardized Header (Simple Like Others) --- */}
-      <div className="max-w-[1280px] mx-auto mb-20">
+      <div className="max-w-[1280px] mx-auto mb-12">
         <div className="max-w-3xl">
           <div className="flex items-center gap-2 mb-4">
             <div className="h-px w-8 bg-indigo-500"></div>
@@ -49,11 +49,11 @@ export default function StakeHolder() {
       </div>
 
       {/* Marquee Rows Container */}
-      <div className="flex flex-col gap-10">
+      <div className="max-w-[1280px] mx-auto flex flex-col gap-6">
 
         {/* ROW 1 - Right to Left */}
         <div className="flex overflow-hidden">
-          <div className="flex gap-8 animate-marquee whitespace-nowrap">
+          <div className="flex gap-5 animate-marquee whitespace-nowrap">
             {[...row1, ...row1, ...row1].map((item, i) => (
               <StakeholderCard key={`row1-1-${i}`} text={item} />
             ))}
@@ -62,7 +62,7 @@ export default function StakeHolder() {
 
         {/* ROW 2 - Left to Right */}
         <div className="flex overflow-hidden">
-          <div className="flex gap-8 animate-marquee-reverse whitespace-nowrap">
+          <div className="flex gap-5 animate-marquee-reverse whitespace-nowrap">
             {[...row2, ...row2, ...row2].map((item, i) => (
               <StakeholderCard key={`row2-1-${i}`} text={item} />
             ))}
@@ -72,8 +72,8 @@ export default function StakeHolder() {
       </div>
 
       {/* Edge Fades */}
-      <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-[#fcfcfd] to-transparent z-10 pointer-events-none" />
-      <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-[#fcfcfd] to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-[#fcfcfd] to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-[#fcfcfd] to-transparent z-10 pointer-events-none" />
 
     </section>
   );

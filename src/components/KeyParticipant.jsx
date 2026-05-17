@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 const industryData = [
   {
-    name: "Shri Nitish Kumar",
+    name: "Shri Samrat Choudhary",
     role: "Hon'ble Chief Minister, Bihar",
-    image: "/images/KeyParticipants/Nitish_Kumar_1-removebg-preview.png",
+    image: "/images/KeyParticipants/samrat.png",
   },
   {
     name: "Shri Sunil Kumar",
@@ -55,7 +55,7 @@ export default function KeyParticipant() {
   const scroll = (direction) => {
     if (scrollRef.current) {
       const { current } = scrollRef;
-      const scrollAmount = 350; // Approx card width
+      const scrollAmount = 320; // Approx card width
       if (direction === "left") {
         current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
       } else {
@@ -65,15 +65,16 @@ export default function KeyParticipant() {
   };
 
   return (
-    <section className="bg-[#f8f9fa] py-16 px-6 font-sans">
+    <section className="bg-[#f8f9fa] py-14 px-6 font-sans">
       <div className="max-w-[1400px] mx-auto">
         {/* --- Minimalist Header (Matching FlagshipEvents) --- */}
-        <div className="max-w-[1280px] mx-auto mb-16">
+        <div className="max-w-[1280px] mx-auto mb-12">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 mb-4">
               <div className="h-px w-8 bg-indigo-500"></div>
               <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-[0.2em]">Leadership & Academia</span>
             </div>
+            
             <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 mb-6">
               Leading the Way in <br />
               <span className="text-slate-400">Educational Excellence</span>
@@ -116,39 +117,41 @@ export default function KeyParticipant() {
           </div>
         </div>
 
-        {/* Tabs */}
-        <div className="flex gap-8 border-b border-gray-200 mb-8">
-          <button
-            onClick={() => setTab("industry")}
-            className={`pb-3 text-sm font-bold tracking-wide transition-all ${tab === "industry"
-                ? "text-[#332F82] border-b-2 border-[#332F82]"
-                : "text-gray-400 hover:text-gray-600"
-              }`}
-          >
-            Leadership
-          </button>
-          <button
-            onClick={() => setTab("academia")}
-            className={`pb-3 text-sm font-bold tracking-wide transition-all ${tab === "academia"
-                ? "text-[#332F82] border-b-2 border-[#332F82]"
-                : "text-gray-400 hover:text-gray-600"
-              }`}
-          >
-            Visionaries & Educators
-          </button>
-        </div>
+        <div className="max-w-[1280px] mx-auto">
+          {/* Tabs */}
+          <div className="flex gap-8 border-b border-gray-200 mb-6">
+            <button
+              onClick={() => setTab("industry")}
+              className={`pb-3 text-sm font-bold tracking-wide transition-all ${tab === "industry"
+                  ? "text-[#332F82] border-b-2 border-[#332F82]"
+                  : "text-gray-400 hover:text-gray-600"
+                }`}
+            >
+              Leadership
+            </button>
+            <button
+              onClick={() => setTab("academia")}
+              className={`pb-3 text-sm font-bold tracking-wide transition-all ${tab === "academia"
+                  ? "text-[#332F82] border-b-2 border-[#332F82]"
+                  : "text-gray-400 hover:text-gray-600"
+                }`}
+            >
+              Visionaries & Educators
+            </button>
+          </div>
 
-        {/* Carousel */}
-        <div
-          ref={scrollRef}
-          className="flex overflow-x-auto gap-6 pb-8 snap-x scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          {data.map((item, i) => (
-            <div key={i} className="min-w-[300px] md:min-w-[350px] snap-center">
-              <ParticipantCard item={item} />
-            </div>
-          ))}
+          {/* Carousel */}
+          <div
+            ref={scrollRef}
+            className="flex overflow-x-auto gap-5 pb-6 snap-x scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            {data.map((item, i) => (
+              <div key={i} className="min-w-[280px] md:min-w-[310px] snap-center">
+                <ParticipantCard item={item} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -159,7 +162,7 @@ function ParticipantCard({ item }) {
   return (
     <div
       className="
-        group relative h-[450px] overflow-hidden cursor-pointer
+        group relative h-[390px] overflow-hidden cursor-pointer
         rounded-2xl bg-white border border-gray-100
         shadow-sm hover:shadow-2xl transition-shadow duration-300
       "
@@ -177,10 +180,10 @@ function ParticipantCard({ item }) {
       />
 
       {/* ===== CONTENT ===== */}
-      <div className="relative z-20 p-6">
+      <div className="relative z-20 p-5">
         <h3
           className="
-            text-xl font-bold text-[#1a1a1a]
+            text-lg font-bold text-[#1a1a1a] leading-snug
             transition-colors duration-300 delay-100
             group-hover:text-white
           "
@@ -190,7 +193,7 @@ function ParticipantCard({ item }) {
 
         <p
           className="
-            mt-2 text-sm text-gray-500 font-medium
+            mt-2 text-[13px] leading-relaxed text-gray-500 font-medium
             transition-colors duration-300 delay-150
             group-hover:text-indigo-100
           "
@@ -200,15 +203,15 @@ function ParticipantCard({ item }) {
       </div>
 
       {/* ===== IMAGE ===== */}
-      <div className="relative z-20 mt-auto flex h-[350px] items-end justify-center">
+      <div className="relative z-20 flex h-[275px] items-end justify-center px-4">
         <img
           src={item.image}
           alt={item.name}
           className="
-            h-[330px] object-contain drop-shadow-2xl pt-14
+            h-[255px] max-w-full object-contain drop-shadow-2xl
             transition-transform duration-700
             ease-[cubic-bezier(0.22,1,0.36,1)]
-            group-hover:scale-110
+            group-hover:scale-105
             group-hover:-translate-y-2
             origin-bottom
           "
