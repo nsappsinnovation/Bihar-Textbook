@@ -1,13 +1,14 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link, useNavigate } from "react-router-dom";
 import { useRef } from "react";
 
-
-import { CheckCircle2 } from "lucide-react";
-import { motion } from "framer-motion";
+import { BookOpen, Award, Users, Printer, Truck, ShieldCheck, ArrowLeft, ArrowRight, History, Target, CheckCircle2, FileText, Globe, Lock, Shield, Zap } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const CyberSecurity = () => {
+
   const sliderRef = useRef(null);
+  const navigate = useNavigate();
 
   const scrollLeft = () => {
     sliderRef.current?.scrollBy({ left: -380, behavior: "smooth" });
@@ -17,71 +18,30 @@ const CyberSecurity = () => {
     sliderRef.current?.scrollBy({ left: 380, behavior: "smooth" });
   };
 
-  // ✅ Trending Pages (Cyber Security)
-  const trendingPages = [
+  const stats = [
     {
-      title: "Phishing Attacks",
-      slug: "phishing-attacks",
-      description:
-        "Learn how phishing works, how scammers trap users, and how to identify fake links, emails, and OTP scams.",
-      section: "From our Cyber Awareness section.",
+      label: "Cyber Awareness",
+      value: "50K+",
+      sub: "Students trained in safety",
+      icon: <Users size={20} />
     },
     {
-      title: "Malware & Viruses",
-      slug: "malware-and-viruses",
-      description:
-        "Understand malware types like viruses, trojans, spyware, and worms — and how they infect systems.",
-      section: "From our Threats & Malware section.",
+      label: "Safety Rating",
+      value: "100%",
+      sub: "Secure practices taught",
+      icon: <ShieldCheck size={20} />
     },
     {
-      title: "Ransomware Attacks",
-      slug: "ransomware-attacks",
-      description:
-        "Learn how ransomware locks files, demands payment, and how backups + safe habits prevent damage.",
-      section: "From our Cyber Threats section.",
+      label: "Learning Modules",
+      value: "10+",
+      sub: "Topics covered in detail",
+      icon: <BookOpen size={20} />
     },
     {
-      title: "Password Security",
-      slug: "password-security",
-      description:
-        "Learn how to create strong passwords, avoid password reuse, and protect accounts from hacking.",
-      section: "From our Digital Safety section.",
-    },
-    {
-      title: "OTP & UPI Fraud",
-      slug: "otp-upi-fraud",
-      description:
-        "Understand how OTP scams and UPI fraud happen and how to protect your money and identity online.",
-      section: "From our Online Scam Protection section.",
-    },
-    {
-      title: "Two-Factor Authentication (2FA)",
-      slug: "two-factor-authentication",
-      description:
-        "Understand why 2FA is essential and how it protects your account even if passwords leak.",
-      section: "From our Account Protection section.",
-    },
-  ];
-
-  // ✅ Quizzes (Cyber Security)
-  const quizzes = [
-    {
-      title: "Cyber Security Awareness Quiz",
-      slug: "cyber-security-awareness-quiz",
-      description:
-        "Test your cyber safety knowledge: scams, phishing, passwords, and safe browsing habits.",
-    },
-    {
-      title: "Can You Spot a Phishing Link?",
-      slug: "spot-a-phishing-link",
-      description:
-        "Check if you can detect fake links, suspicious emails, and scam messages like a pro.",
-    },
-    {
-      title: "Password Strength Self Assessment",
-      slug: "password-strength-self-assessment",
-      description:
-        "Find out how secure your password habits are and learn how to improve them.",
+      label: "Threat Protection",
+      value: "24/7",
+      sub: "Active monitoring tips",
+      icon: <Shield size={20} />
     },
   ];
 
@@ -90,51 +50,44 @@ const CyberSecurity = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-    },
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+    }
   };
 
-  // ✅ Process Steps (Carousel)
   const processSteps = [
-   {
-  title: "AI Deepfakes & Photo Safety",
-  image: "/images/skills/deep.png",
-  description:
-    "Learn how AI-generated images and deepfake photos can be misused online and how to protect yourself on social media.",
-  details: [
-    "Identify deepfake and AI-generated photos",
-    "Risks of fake social media profiles",
-    "Protect your personal photos online",
-    "Verify suspicious images and profiles",
-    "Safe social media sharing practices"
-  ]
-},
     {
-      title: "Phishing, Scams & Social Engineering",
+      title: "AI Deepfakes & Photo Safety",
+      image: "/images/skills/deep.png",
+      description:
+        "Learn how AI-generated images and deepfake photos can be misused online and how to protect yourself on social media.",
+      details: [
+        "Identify deepfake photos",
+        "Risks of fake profiles",
+        "Protect personal photos",
+      ],
+    },
+    {
+      title: "Phishing & Scams",
       image: "/images/skills/c2.png",
       description:
         "Understand how attackers trick humans using fake emails, calls, messages, and emotional pressure.",
       details: [
         "Email & SMS phishing",
-        "Fake job & loan scams",
         "UPI/OTP scam patterns",
-        "Suspicious message detection",
-        "Real-world scam examples",
+        "Suspicious link detection",
       ],
     },
     {
-  title: "AI-Generated Images & Online Safety",
-  image: "/images/skills/ai.png",
-  description:
-    "Learn how AI-generated images can be used to spread misinformation or create fake identities online, and how to recognize and verify them.",
-  details: [
-    "Understand how AI-generated images are created",
-    "Identify fake or AI-generated profile photos",
-    "Recognize manipulated or misleading images online",
-    "Learn tools and tips to verify image authenticity",
-    "Protect your photos from misuse on social media"
-  ]
-},
+      title: "AI-Generated Images",
+      image: "/images/skills/ai.png",
+      description:
+        "Learn how AI-generated images can be used to spread misinformation and how to recognize them.",
+      details: [
+        "Understand AI creation",
+        "Identify fake profile photos",
+        "Verify image authenticity",
+      ],
+    },
     {
       title: "Passwords & Account Protection",
       image: "/images/skills/cybert.png",
@@ -143,9 +96,7 @@ const CyberSecurity = () => {
       details: [
         "Strong password rules",
         "Password reuse dangers",
-        "Password manager basics",
         "Secure login habits",
-        "Account recovery safety",
       ],
     },
     {
@@ -156,13 +107,11 @@ const CyberSecurity = () => {
       details: [
         "Why 2FA matters",
         "OTP vs Authenticator apps",
-        "Avoid SIM swap attacks",
-        "Secure backup codes",
         "Best 2FA practices",
       ],
     },
     {
-      title: "Malware, Ransomware & Device Security",
+      title: "Malware & Device Security",
       image: "/images/skills/c5.png",
       description:
         "Understand how malware infects devices and how antivirus, updates, and backups protect your system.",
@@ -170,17 +119,23 @@ const CyberSecurity = () => {
         "Virus vs Trojan vs Spyware",
         "Ransomware basics",
         "Safe downloads rules",
-        "Updates & patching importance",
-        "Backup and recovery habits",
       ],
     },
   ];
 
   return (
-    <div>
-      {/* ================= HERO ================= */}
-      <div className="min-h-screen bg-white flex items-center">
+    <div className="relative">
+      {/* Back Button */}
+      <button 
+        onClick={() => navigate("/")} 
+        className="absolute top-6 left-6 md:left-12 lg:left-16 w-11 h-11 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-500 hover:shadow-lg transition-all border border-slate-50 z-50 group"
+      >
+        <ArrowLeft size={22} strokeWidth={2.5} className="group-hover:-translate-x-1 transition-transform" />
+      </button>
+
+      <div className="min-h-screen bg-white flex items-center py-5 pt-20">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+
           {/* LEFT: Image */}
           <div className="flex justify-center">
             <img
@@ -192,166 +147,168 @@ const CyberSecurity = () => {
 
           {/* RIGHT: Content */}
           <div>
+            {/* Heading */}
             <h1 className="text-4xl md:text-5xl font-bold text-slate-900">
-              Cyber Security
+              Cyber Security Awareness
             </h1>
 
-            <p className="mt-4 text-lg font-semibold text-blue-500">
+            {/* Highlight text */}
+            <p className="mt-4 text-lg font-semibold text-emerald-500">
               Learn Online Safety, Scam Protection & Secure Digital Habits!
             </p>
 
+            {/* Description */}
             <p className="mt-4 text-slate-600 max-w-md">
-              Practical cyber security lessons designed to protect students from
-              phishing, malware, OTP fraud, fake links, and online threats.
+              Practical cyber security lessons designed to protect students from phishing, malware, OTP fraud, fake links, and online threats.
             </p>
+
+            {/* Action Button */}
+            <div className="mt-8">
+              <Link to="/cyber-security-dashboard">
+                <button className="px-8 py-4 bg-emerald-600 text-white rounded-full text-sm font-black uppercase tracking-widest hover:bg-slate-900 hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-emerald-200 flex items-center gap-2">
+                  Start Learning <ArrowRight size={18} />
+                </button>
+              </Link>
+            </div>
 
             {/* Feature Cards */}
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+              {/* Card 1 */}
               <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-                <div className="text-blue-500 text-xl">🛡️</div>
+                <div className="text-emerald-500 text-xl"><Shield size={24} /></div>
                 <div>
                   <h3 className="font-semibold text-slate-800">
-                    Real-World Cyber Safety
+                    Scam Protection
                   </h3>
                   <p className="text-sm text-slate-600">
-                    Learn safety rules for phones, apps, UPI, email, and social media.
+                    Learn to identify and avoid common online scams and phishing attacks.
                   </p>
                 </div>
               </div>
 
+              {/* Card 2 */}
               <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-                <div className="text-blue-500 text-xl">🔐</div>
+                <div className="text-emerald-500 text-xl"><Lock size={24} /></div>
                 <div>
                   <h3 className="font-semibold text-slate-800">
-                    Account Protection Skills
+                    Account Security
                   </h3>
                   <p className="text-sm text-slate-600">
-                    Strong passwords, 2FA, privacy settings, and scam detection.
+                    Master password management and two-factor authentication.
                   </p>
                 </div>
               </div>
 
+              {/* Card 3 */}
               <div className="md:col-span-2 p-5 border rounded-xl shadow-sm flex gap-4">
-                <div className="text-blue-500 text-xl">⚡</div>
+                <div className="text-emerald-500 text-xl"><Zap size={24} /></div>
                 <div>
                   <h3 className="font-semibold text-slate-800">
-                    Step-by-Step Learning Modules
+                    Device Protection
                   </h3>
                   <p className="text-sm text-slate-600">
-                    Lessons + real examples + quizzes to build cyber awareness.
+                    Understand malware and how to keep your devices clean and updated.
                   </p>
                 </div>
               </div>
+
             </div>
           </div>
+
         </div>
       </div>
 
-      {/* ================= PROGRAM OVERVIEW ================= */}
-      <section className="py-32 px-6">
+      {/* Program Overview */}
+      <section className="py-10 bg-white px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-20 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
             {/* Left Content */}
-            <div className="lg:col-span-5 space-y-10">
+            <div className="space-y-10">
               <div className="space-y-4">
-                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-blue-600">
+                <h2 className="text-xs font-black uppercase tracking-[0.3em] text-emerald-600">
                   Program Overview
                 </h2>
-
                 <h3 className="text-4xl font-extrabold text-slate-900 leading-tight">
-                  Empowering Students Through
+                  Protecting Students in the{" "}
                   <br />
                   <span className="text-slate-400">
-                    Basic Learning Skills
+                    Digital Age
                   </span>
                 </h3>
               </div>
 
               <p className="text-lg text-slate-600 leading-relaxed font-light">
-                Basic Life Skills focuses on essential everyday knowledge that every student
-                must know to stay safe, independent, and responsible in society.
+                Our Cyber Security initiative is dedicated to educating students about the risks of the digital world. By teaching practical safety habits, we empower the next generation to use technology responsibly and safely.
               </p>
-
-
 
               <div className="space-y-4">
                 {[
-
-
-                  "Understand phishing, scam calls, OTP fraud and fake links",
-                  "Build strong password habits and enable Two-Factor Authentication",
-                  "Protect your identity, privacy, and personal data online","Understand malware, ransomware and basic cyber threats",
-                  "Understand risks of AI-generated images, deepfakes, and fake profiles on social media",
-                  "Learn how photos can be misused or edited using AI tools and how to verify authenticity",
-                  "Learn how to protect your photos and personal content from misuse online"
-
+                  "Understand phishing, scam calls, and fake links",
+                  "Build strong password habits and enable 2FA",
+                  "Protect your identity and personal data online",
+                  "Learn to recognize AI deepfakes and fake profiles"
                 ].map((item, i) => (
                   <div
                     key={i}
-                    className="flex items-start gap-3 text-sm font-bold text-slate-700"
+                    className="flex items-center gap-3 text-sm font-bold text-slate-700"
                   >
-                    <CheckCircle2 size={18} className="text-blue-600 mt-[2px]" />
-                    <span>{item}</span>
+                    <CheckCircle2 size={18} className="text-emerald-600" />
+                    {item}
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Right Images */}
-            <div className="lg:col-span-7 lg:mt-[120px]">
-              <div className="relative group overflow-hidden rounded-[40px] border border-slate-100 shadow-xl md:col-span-2">
-                <img
-                  src="/images/skills/c1.png"
-                  alt="Facility"
-                  className="w-full aspect-[4/3] object-cover transition-transform duration-1000 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
-                <div className="absolute bottom-10 left-10 text-white">
-                  <p className="text-[10px] font-black uppercase tracking-widest mb-2 opacity-80">Our Facility</p>
-                  <h4 className="text-2xl font-bold"></h4>
-                </div>
-              </div>
+            {/* Right Image */}
+            <div className="relative group overflow-hidden rounded-[40px] shadow-xl border border-slate-100">
+              <img
+                src="/images/skills/c1.png"
+                alt="Cyber Security Overview"
+                className="w-full aspect-[4/3] object-cover transition-transform duration-1000 group-hover:scale-105"
+              />
             </div>
+
           </div>
         </div>
-
-        {/* Image 2 */}
-
       </section>
-      {/* ================= CAROUSEL ================= */}
-      <section className="py-32 bg-slate-900 px-6 rounded-[60px] mx-4 mb-4">
+
+      {/* Carousel Section */}
+      <section className="py-10 bg-white px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
             <div className="space-y-4">
-              <h2 className="text-xs font-black uppercase tracking-[0.3em] text-blue-400">
-                Learning Path
+              <h2 className="text-xs font-black uppercase tracking-[0.3em] text-emerald-600">
+                Security Modules
               </h2>
-              <h3 className="text-4xl md:text-5xl font-black text-white tracking-tight">
-                Learn Cyber Security <br />
-                Step-by-Step
+             <h3 className="text-4xl font-extrabold text-slate-900 leading-tight">
+                Interactive Security Journey
               </h3>
             </div>
 
-            <div className="flex gap-3">
+            {/* Navigation Buttons */}
+            <div className="flex gap-4">
               <button
                 onClick={scrollLeft}
-                className="w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 transition"
+                className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition-all duration-300"
               >
-                ←
+                <ArrowLeft size={20} />
               </button>
               <button
                 onClick={scrollRight}
-                className="w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 transition"
+                className="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-slate-600 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300"
               >
-                →
+                <ArrowRight size={20} />
               </button>
             </div>
           </div>
 
+          {/* Carousel Track */}
           <div
             ref={sliderRef}
-            className="flex gap-8 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-6 scrollbar-hide"
+            className="flex gap-8 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-8 no-scrollbar"
           >
             {processSteps.map((step, i) => (
               <motion.div
@@ -361,48 +318,38 @@ const CyberSecurity = () => {
                 viewport={{ once: true }}
                 variants={fadeIn}
                 transition={{ delay: i * 0.1 }}
-                className="snap-start flex-shrink-0 w-[85%] sm:w-[60%] lg:w-[32%]
-                           bg-white/5 backdrop-blur-md border border-white/10 p-12
-                           rounded-[40px] hover:border-blue-500/50 transition-all duration-500 group"
+                className="snap-start flex-shrink-0 w-[75%] sm:w-[50%] lg:w-[23%]
+                         bg-white border border-slate-200 p-8 rounded-[32px] 
+                         shadow-xl hover:shadow-xl transition-all duration-500 group relative flex flex-col"
               >
-                <div className="mb-10 rounded-3xl bg-white flex items-center justify-center h-64 sm:h-72 lg:h-80 overflow-hidden">
+                {/* Image */}
+                <div className="mb-8 rounded-2xl overflow-hidden aspect-[4/3] bg-slate-50 flex items-center justify-center">
                   <img
                     src={step.image}
                     alt={step.title}
                     loading="lazy"
-                    className="h-full w-full object-cover "
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
 
-                <h4 className="text-xl font-black text-white mb-6 uppercase tracking-tight">
-                  {step.title}
-                </h4>
-
-                <p className="text-blue-100/60 leading-relaxed font-light mb-8 text-sm">
-                  {step.description}
-                </p>
-
-                <div className="space-y-3 border-t border-white/5 pt-8">
-                  {step.details.map((detail, j) => (
-                    <div
-                      key={j}
-                      className="flex items-center gap-3 text-[11px] font-bold text-blue-100/40 uppercase tracking-widest"
-                    >
-                      <div className="w-1 h-1 rounded-full bg-blue-500" />
-                      {detail}
-                    </div>
-                  ))}
+                <div className="space-y-4 mb-8 flex-grow">
+                  <h4 className="text-xl font-bold text-slate-900 leading-tight">
+                    {step.title}
+                  </h4>
+                  <p className="text-slate-500 text-sm leading-relaxed">
+                    {step.description}
+                  </p>
                 </div>
+
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ================= TRENDING + QUIZZES ================= */}
-
     </div>
-  );
-};
+
+  )
+}
 
 export default CyberSecurity;

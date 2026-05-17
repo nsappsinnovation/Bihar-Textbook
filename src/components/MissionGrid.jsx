@@ -50,11 +50,11 @@ const MissionGrid = () => {
         },
         {
             id: 7,
-            title: "Mobile Libraries",
-            desc: "Rural Knowledge Outreach",
-            image: "/images/missions/library.png",
-            hoverImage: "/images/missions/libraryhov.png",
-            link: "/mobile-library",
+            title: "Cyber Security",
+            desc: "Digital Safety & Ethics",
+            image: "/images/missions/cyber-security.png",
+            hoverImage: "/images/missions/cyber-securityhov.png",
+            link: "/cyber-security",
             accent: "blue"
         },
         {
