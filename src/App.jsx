@@ -44,6 +44,7 @@ import LifeSkills from "./pages/LifeSkills.jsx";
 import HeritageDashboard from "./pages/HeritageDashboard.jsx";
 import MobileLibraryDashboard from "./pages/MobileLibraryDashboard.jsx";
 import AudioLibraryDashboard from "./pages/AudioLibraryDashboard.jsx";
+import AiIntelligenceDashboard from "./pages/AiIntelligenceDashboard.jsx";
 import CollaborativeLearningViewAll from "./pages/CollaborativeLearningViewAll.jsx";
 
 /* Components */
@@ -86,10 +87,10 @@ function App() {
   ].includes(location.pathname);
 
   // Pages with NO Navbar
-  const isNoNavPage = isIsolatedPage || isMissionPage || location.pathname.startsWith("/ling") || location.pathname === "/sign" || location.pathname === "/sign-learn" || location.pathname === "/sign-module" || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/mobile-library-dashboard" || location.pathname === "/audio-library-dashboard";
+  const isNoNavPage = isIsolatedPage || isMissionPage || location.pathname.startsWith("/ling") || location.pathname === "/sign" || location.pathname === "/sign-learn" || location.pathname === "/sign-module" || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/mobile-library-dashboard" || location.pathname === "/audio-library-dashboard" || location.pathname === "/ai-intelligence-dashboard";
   
   // Pages with NO Footer
-  const isNoFooterPage = isIsolatedPage || isMissionPage || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/mobile-library-dashboard" || location.pathname === "/audio-library-dashboard";
+  const isNoFooterPage = isIsolatedPage || isMissionPage || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/mobile-library-dashboard" || location.pathname === "/audio-library-dashboard" || location.pathname === "/ai-intelligence-dashboard";
 
   return (
     <>
@@ -116,6 +117,7 @@ function App() {
             <Route path="/digital" element={<Digital />} />
             <Route path="/audio-books" element={<Audio />} />
             <Route path="/ai-intelligence" element={<AiIntelligence />} />
+            <Route path="/ai-intelligence-dashboard" element={<AiIntelligenceDashboard />} />
             <Route path="/mobile-library" element={<MobileLibrary />} />
             <Route path="/heritage-archive" element={<HeritageArchive />} />
             <Route path="/heritage-dashboard" element={<HeritageDashboard />} />
