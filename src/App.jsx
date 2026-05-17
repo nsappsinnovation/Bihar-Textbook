@@ -45,6 +45,7 @@ import HeritageDashboard from "./pages/HeritageDashboard.jsx";
 import MobileLibraryDashboard from "./pages/MobileLibraryDashboard.jsx";
 import AudioLibraryDashboard from "./pages/AudioLibraryDashboard.jsx";
 import AiIntelligenceDashboard from "./pages/AiIntelligenceDashboard.jsx";
+import VrDashboard from "./pages/VrDashboard.jsx";
 import CollaborativeLearningViewAll from "./pages/CollaborativeLearningViewAll.jsx";
 
 /* Components */
@@ -87,10 +88,10 @@ function App() {
   ].includes(location.pathname);
 
   // Pages with NO Navbar
-  const isNoNavPage = isIsolatedPage || isMissionPage || location.pathname.startsWith("/ling") || location.pathname === "/sign" || location.pathname === "/sign-learn" || location.pathname === "/sign-module" || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/mobile-library-dashboard" || location.pathname === "/audio-library-dashboard" || location.pathname === "/ai-intelligence-dashboard";
+  const isNoNavPage = isIsolatedPage || isMissionPage || location.pathname.startsWith("/ling") || location.pathname === "/sign" || location.pathname === "/sign-learn" || location.pathname === "/sign-module" || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/mobile-library-dashboard" || location.pathname === "/audio-library-dashboard" || location.pathname === "/ai-intelligence-dashboard" || location.pathname === "/vr-dashboard";
   
   // Pages with NO Footer
-  const isNoFooterPage = isIsolatedPage || isMissionPage || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/mobile-library-dashboard" || location.pathname === "/audio-library-dashboard" || location.pathname === "/ai-intelligence-dashboard";
+  const isNoFooterPage = isIsolatedPage || isMissionPage || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/mobile-library-dashboard" || location.pathname === "/audio-library-dashboard" || location.pathname === "/ai-intelligence-dashboard" || location.pathname === "/vr-dashboard";
 
   return (
     <>
@@ -112,6 +113,7 @@ function App() {
             <Route path="/sign-learn" element={<SignLearn />} />
             <Route path="/sign-module" element={<SignModule />} />
             <Route path="/vr" element={<Vr />} />
+            <Route path="/vr-dashboard" element={<VrDashboard />} />
              <Route path="/linguistic" element={<Linguistics />} />
               <Route path="/ebook" element={<Ebook />} />
             <Route path="/digital" element={<Digital />} />
