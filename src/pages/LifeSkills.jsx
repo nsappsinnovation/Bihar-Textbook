@@ -67,7 +67,7 @@ const LifeSkills = () => {
               <main className="flex-1 px-4 md:px-12 lg:px-24 pb-10 max-w-[1400px] mx-auto w-full overflow-hidden relative">
                {/* Back Button */}
                      <button
-                       onClick={() => navigate("/basic-skill")}
+                       onClick={() => navigate("/basic-skills")}
                        className="fixed top-5 left-5 z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group"
                      >
                        <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />

@@ -43,6 +43,7 @@ import CurriculumExpo from "./pages/CurriculumExpo.jsx"
 import LifeSkills from "./pages/LifeSkills.jsx";
 import HeritageDashboard from "./pages/HeritageDashboard.jsx";
 import MobileLibraryDashboard from "./pages/MobileLibraryDashboard.jsx";
+import AudioLibraryDashboard from "./pages/AudioLibraryDashboard.jsx";
 import CollaborativeLearningViewAll from "./pages/CollaborativeLearningViewAll.jsx";
 
 /* Components */
@@ -85,10 +86,10 @@ function App() {
   ].includes(location.pathname);
 
   // Pages with NO Navbar
-  const isNoNavPage = isIsolatedPage || isMissionPage || location.pathname.startsWith("/ling") || location.pathname === "/sign" || location.pathname === "/sign-learn" || location.pathname === "/sign-module" || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/mobile-library-dashboard";
+  const isNoNavPage = isIsolatedPage || isMissionPage || location.pathname.startsWith("/ling") || location.pathname === "/sign" || location.pathname === "/sign-learn" || location.pathname === "/sign-module" || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/mobile-library-dashboard" || location.pathname === "/audio-library-dashboard";
   
   // Pages with NO Footer
-  const isNoFooterPage = isIsolatedPage || isMissionPage || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/mobile-library-dashboard";
+  const isNoFooterPage = isIsolatedPage || isMissionPage || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/mobile-library-dashboard" || location.pathname === "/audio-library-dashboard";
 
   return (
     <>
@@ -118,6 +119,7 @@ function App() {
             <Route path="/mobile-library" element={<MobileLibrary />} />
             <Route path="/heritage-archive" element={<HeritageArchive />} />
             <Route path="/heritage-dashboard" element={<HeritageDashboard />} />
+            <Route path="/audio-library-dashboard" element={<AudioLibraryDashboard />} />
             <Route path="/courses" element={<Video />} />
             <Route path="/audio-courses" element={< Audiovideo />} />
             <Route path="/ar-courses" element={< Vrcourse />} />
