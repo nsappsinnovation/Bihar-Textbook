@@ -128,12 +128,12 @@ const CyberSecurity = () => {
       {/* Back Button */}
       <button 
         onClick={() => navigate("/")} 
-        className="absolute top-6 left-6 md:left-12 lg:left-16 w-11 h-11 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-500 hover:shadow-lg transition-all border border-slate-50 z-50 group"
+        className="absolute top-25 left-4 md:left-6 lg:left-8 w-11 h-11 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-500 hover:shadow-lg transition-all border border-slate-50 z-50 group"
       >
         <ArrowLeft size={22} strokeWidth={2.5} className="group-hover:-translate-x-1 transition-transform" />
       </button>
 
-      <div className="min-h-screen bg-white flex items-center py-5 pt-20">
+      <div className="bg-white flex items-center pt-0 pb-0 -mt-20">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
           {/* LEFT: Image */}
@@ -220,13 +220,13 @@ const CyberSecurity = () => {
       </div>
 
       {/* Program Overview */}
-      <section className="py-10 bg-white px-6">
+      <section className="pt-2 pb-10 bg-white px-6 -mt-20">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
             {/* Left Content */}
             <div className="space-y-10">
-              <div className="space-y-4">
+              <div className="space-y-2">
                 <h2 className="text-xs font-black uppercase tracking-[0.3em] text-emerald-600">
                   Program Overview
                 </h2>
@@ -239,11 +239,11 @@ const CyberSecurity = () => {
                 </h3>
               </div>
 
-              <p className="text-lg text-slate-600 leading-relaxed font-light">
+              <p className="text-lg text-slate-600 leading-relaxed font-light -mt-6">
                 Our Cyber Security initiative is dedicated to educating students about the risks of the digital world. By teaching practical safety habits, we empower the next generation to use technology responsibly and safely.
               </p>
 
-              <div className="space-y-4">
+              <div className="space-y-4 -mt-5">
                 {[
                   "Understand phishing, scam calls, and fake links",
                   "Build strong password habits and enable 2FA",
@@ -275,7 +275,7 @@ const CyberSecurity = () => {
       </section>
 
       {/* Carousel Section */}
-      <section className="py-10 bg-white px-6">
+      <section className="py-10 bg-white px-6 -mt-10">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">

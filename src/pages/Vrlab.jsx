@@ -107,12 +107,12 @@ const Vrlab = () => {
       {/* Back Button */}
       <button 
         onClick={() => navigate("/")} 
-        className="absolute top-6 left-6 md:left-12 lg:left-16 w-11 h-11 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-500 hover:shadow-lg transition-all border border-slate-50 z-50 group"
+        className="absolute top-4 left-4 md:left-6 lg:left-8 w-11 h-11 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-500 hover:shadow-lg transition-all border border-slate-50 z-50 group"
       >
         <ArrowLeft size={22} strokeWidth={2.5} className="group-hover:-translate-x-1 transition-transform" />
       </button>
 
-      <div className="min-h-screen bg-white flex items-center py-5 pt-20">
+      <div className="bg-white flex items-center pt-0 pb-0">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
           {/* LEFT: Image */}
@@ -199,7 +199,7 @@ const Vrlab = () => {
       </div>
 
       
-      <section className="py-10 bg-white px-6">
+      <section className="pt-2 pb-10 bg-white px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
