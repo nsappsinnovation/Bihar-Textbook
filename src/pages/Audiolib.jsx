@@ -112,11 +112,11 @@ const Audiolib = () => {
         <ArrowLeft size={22} strokeWidth={2.5} className="group-hover:-translate-x-1 transition-transform" />
       </button>
 
-      <div className="bg-white flex items-center pt-0 pb-0">
+      <div className="bg-white flex items-center pt-16 pb-0">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
           {/* LEFT: Image */}
-          <div className="flex justify-center">
+          <div className="flex justify-center -mt-20">
             <img
               src="/images/audio/audio.png"
               alt="Audiobook Learning Illustration"

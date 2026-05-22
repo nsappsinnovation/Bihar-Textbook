@@ -116,7 +116,7 @@ const HeritageArchive = () => {
             <img
               src="/images/heritage/heritage archive.png"
               alt="Heritage Archive Illustration"
-              className="w-[620px] h-auto object-contain"
+              className="w-[720px] h-auto object-contain transform scale-110 transition-transform duration-300"
             />
           </div>
 

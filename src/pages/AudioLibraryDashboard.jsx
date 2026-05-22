@@ -71,7 +71,7 @@ const AudioLibraryDashboard = () => {
       
 
       {/* Main Content */}
-      <main className="flex-1 min-h-screen pb-10">
+      <main className="flex-1 min-h-screen pb-0">
         {/* Back Button */}
                              <button
                                onClick={() => navigate("/audio-books")}

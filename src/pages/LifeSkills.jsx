@@ -61,52 +61,60 @@ const LifeSkills = () => {
    
   ];
 
+  const quickStats = [
+    { label: "Interactive Lessons", value: "24+ Topics", icon: <BookOpen />, color: "bg-blue-50 text-blue-600", path: "/skill-learn" },
+    { label: "Daily Practicals", value: "10+ Tasks", icon: <Target />, color: "bg-purple-50 text-purple-600", path: "/skill-learn" },
+    { label: "Skill Badges", value: "Earn 15+", icon: <Star />, color: "bg-amber-50 text-amber-600", path: "/skill-learn" },
+    { label: "Your Progress", value: "Level 2", icon: <BarChart2 />, color: "bg-emerald-50 text-emerald-600", path: "/skill-learn" }
+  ];
+
   return (
-    <div className="flex min-h-screen bg-[#F8FAFC] font-sans text-slate-900">
+    <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden">
+      
       {/* Main Content */}
-              <main className="flex-1 px-4 md:px-12 lg:px-24 pb-10 max-w-[1400px] mx-auto w-full overflow-hidden relative">
-               {/* Back Button */}
-                     <button
-                       onClick={() => navigate("/basic-skills")}
-                       className="fixed top-5 left-5 z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group"
-                     >
-                       <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
-                     </button>
-        {/* Hero Section */}
-                        <div className="flex flex-col lg:flex-row justify-between items-center mb-4 relative mt-0">
-                        <div className="space-y-1 z-10 w-[45%]">
-                           <h1 className="text-4xl md:text-5xl font-black leading-tight">
-               Let's build <br />
-              <span className="text-[#22C55E]">Life Skills</span>
-            </h1>
-                           <p className="text-slate-500 text-lg md:text-xl font-medium leading-relaxed max-w-xs">
-              Learn practical skills for a better and independent life.
-            </p>
-              <button
-                onClick={() => navigate("/skill-learn")}
-                 className="mt-2 px-7 py-3 bg-[#22C55E] text-white rounded-full font-bold text-sm flex items-center gap-2 hover:bg-green-600 transition-all shadow-lg shadow-green-200 hover:-translate-y-0.5"
-              >
-                Start learning <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </button>
-          </div>
+    <main className="flex-1 min-h-screen pb-4 overflow-y-auto">
+        {/* Back Button */}
+        <button
+          onClick={() => navigate("/basic-skills")}
+          className="fixed top-5 left-5 z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:shadow-lg transition-all border border-slate-100 group"
+        >
+          <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
+        </button>
+
+        <div className="px-6 md:px-12 lg:px-24 max-w-[1400px] mx-auto space-y-8 pt-4">
           
-                            <div className="relative flex items-end justify-center w-full lg:w-[55%] min-h-[300px] mt-8 lg:mt-0">
-            {/* Background soft blob */}
-            <div className="absolute left-[-10%] top-[-10%] w-[120%] h-[120%] bg-[#F1FAED] rounded-full -z-10 blur-3xl opacity-60"></div>
+          {/* Hero & Stats Section */}
+          <div className="relative">
+            {/* Hero Section */}
+            <section className="bg-white rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[300px] pb-6">
+              <div className="relative z-10 p-8 md:p-10 lg:w-1/2 space-y-4">
+                 <h1 className="text-[32px] md:text-[42px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
+                    Learn, grow & <br /> master <br />
+                    <span className="text-emerald-600">Life Skills</span>
+                 </h1>
+                 <p className="text-slate-500 text-[15px] md:text-[16px] font-medium leading-relaxed max-w-sm">
+                   Practical lessons for a better, independent life.
+                 </p>
+                 
+                 <div className="pt-2">
+                   <button 
+                     onClick={() => navigate("/skill-learn")}
+                     className="px-6 py-3 bg-emerald-600 text-white rounded-full font-bold text-[14px] flex items-center gap-2 hover:bg-emerald-700 transition-colors w-max shadow-sm shadow-emerald-200"
+                   >
+                     Start Learning <ArrowRight size={16} />
+                   </button>
+                 </div>
+              </div>
+
+              <div className="hidden lg:block absolute top-0 right-0 w-[55%] h-full">
+                 <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
+                 <img src="/images/life skill/right.png" alt="Life Skills" className="w-full h-full object-contain object-right" />
+                
+              </div>
+            </section>
+
             
-            {/* Combined RHS Image */}
-            <div className="relative z-10 w-full max-w-[700px]">
-              <img 
-                src="/images/life skill/right.png" 
-                alt="Learning Characters" 
-                className="w-full h-auto object-contain transform lg:translate-x-12" 
-              />
-            </div>
-            <div className="absolute -right-12 -bottom-12 opacity-30 -z-10 hidden md:block">
-              <LeafIcon className="w-80 h-80 text-[#C8E6C9] fill-[#C8E6C9]" />
-            </div>
           </div>
-        </div>
 
         {/* Choose Section */}
         <section className="mb-10">
@@ -239,7 +247,7 @@ const LifeSkills = () => {
             </div>
         </div>
 
-        
+        </div>
       </main>
     </div>
   );

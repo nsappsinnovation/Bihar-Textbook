@@ -46,9 +46,9 @@ export default function LinguisticApp() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#FDFDFD] font-sans text-[#2D3142] flex flex-col overflow-x-hidden">
+    <div className="min-h-screen bg-[#FDFDFD] font-sans text-[#2D3142] flex flex-col overflow-x-hidden -mt-6">
       {/* Main Content Area */}
-      <main className="flex-1 px-4 md:px-12 lg:px-24 pb-8 max-w-[1400px] mx-auto w-full overflow-hidden relative">
+      <main className="flex-1 px-2 md:px-4 lg:px-8 pb-8 max-w-[1400px] mx-auto w-full overflow-hidden relative">
        {/* Back Button */}
              <button
                onClick={() => navigate("/linguistic")}
@@ -59,7 +59,7 @@ export default function LinguisticApp() {
 
         {/* Hero Section */}
         <div className="flex flex-col lg:flex-row justify-between items-center mb-24 relative mt-0">
-          <div className="space-y-1 z-10 w-[45%]">
+          <div className="space-y-1 z-10 w-[45%] mx-10">
            <h1 className="text-4xl md:text-5xl font-black leading-tight">
               Let's learn <br />
               <span className="text-[#22C55E]">a new language</span>
