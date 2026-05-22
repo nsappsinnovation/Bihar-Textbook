@@ -60,10 +60,10 @@ const AudioLibraryDashboard = () => {
   ];
 
   const quickStats = [
-    { label: 'My Library', value: `${libraryCount} items`, icon: <Library className="text-purple-600" />, color: 'bg-purple-50', path: '/audio-courses?filter=library' },
-    { label: 'Favorites', value: `${favoritesCount} saved`, icon: <Heart className={`transition-colors ${isBookmarked ? 'text-rose-500 fill-rose-500' : 'text-rose-500'}`} />, color: 'bg-rose-50', path: '/audio-courses?filter=favorites' },
-    { label: 'Downloads', value: `${downloadsCount} offline`, icon: <Download className="text-emerald-500" />, color: 'bg-emerald-50', path: '/audio-courses?filter=downloads' },
-    { label: 'Recently Played', value: `${recentlyPlayedCount} today`, icon: <Clock className="text-blue-500" />, color: 'bg-blue-50', path: '/audio-courses?filter=recent' },
+    { label: 'My Library', value: `${libraryCount} items`, icon: <Library className="text-purple-600" />, color: 'bg-purple-50', path: '/my-audio-library?filter=all' },
+    { label: 'Favorites', value: `${favoritesCount} saved`, icon: <Heart className={`transition-colors ${isBookmarked ? 'text-rose-500 fill-rose-500' : 'text-rose-500'}`} />, color: 'bg-rose-50', path: '/my-audio-library?filter=favorites' },
+    { label: 'Downloads', value: `${downloadsCount} offline`, icon: <Download className="text-emerald-500" />, color: 'bg-emerald-50', path: '/my-audio-library?filter=completed' },
+    { label: 'Recently Played', value: `${recentlyPlayedCount} today`, icon: <Clock className="text-blue-500" />, color: 'bg-blue-50', path: '/my-audio-library?filter=progress' },
   ];
 
   return (
@@ -71,7 +71,7 @@ const AudioLibraryDashboard = () => {
       
 
       {/* Main Content */}
-      <main className="flex-1 min-h-screen pb-10">
+      <main className="flex-1 min-h-screen pb-0">
         {/* Back Button */}
                              <button
                                onClick={() => navigate("/audio-books")}
@@ -97,7 +97,7 @@ const AudioLibraryDashboard = () => {
                  
                  <div className="pt-2">
                    <button 
-                     onClick={() => navigate("/audio-courses")}
+                     onClick={() => navigate("/my-audio-library")}
                      className="px-6 py-3 bg-purple-600 text-white rounded-full font-bold text-[14px] flex items-center gap-2 hover:bg-purple-700 transition-colors w-max shadow-sm shadow-purple-200"
                    >
                      Start Listening <ArrowRight size={16} />
@@ -149,7 +149,7 @@ const AudioLibraryDashboard = () => {
             <div className="lg:col-span-8">
                <div className="flex items-center justify-between px-1 mb-4">
                  <h3 className="text-[16px] font-bold text-[#1e1b4b]">Continue Listening</h3>
-                 <button onClick={() => navigate('/audio-courses?filter=recent')} className="text-[13px] font-medium text-[#1e1b4b] hover:text-purple-600 flex items-center gap-1 transition-colors">See all <ArrowRight size={14} /></button>
+                 <button onClick={() => navigate('/my-audio-library?filter=progress')} className="text-[13px] font-medium text-[#1e1b4b] hover:text-purple-600 flex items-center gap-1 transition-colors">See all <ArrowRight size={14} /></button>
                </div>
                
                <div className="bg-white rounded-[24px] p-4 border border-slate-200 shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-col sm:flex-row items-center sm:items-stretch gap-6">
@@ -198,14 +198,14 @@ const AudioLibraryDashboard = () => {
                  <div className="relative z-10">
                     <div className="flex items-center justify-between mb-4 px-1">
                       <h3 className="text-[15px] font-bold text-[#1e1b4b]">Browse by Category</h3>
-                      <button onClick={() => navigate('/audio-courses')} className="text-[13px] font-semibold text-purple-600 flex items-center gap-1">See all <ArrowRight size={12} /></button>
+                      <button onClick={() => navigate('/my-audio-library')} className="text-[13px] font-semibold text-purple-600 flex items-center gap-1">See all <ArrowRight size={12} /></button>
                     </div>
                     
                     <div className="flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-slate-100/80">
                       {categories.map((cat, i) => (
                         <button 
                           key={i}
-                          onClick={() => { setSelectedCategory(cat.label); navigate(`/audio-courses?category=${encodeURIComponent(cat.label)}`); }}
+                          onClick={() => { setSelectedCategory(cat.label); navigate(`/my-audio-library`); }}
                           className="flex-1 flex flex-col items-center justify-center gap-1.5 px-1 py-3 md:py-1.5 group hover:bg-slate-50/50 transition-colors cursor-pointer"
                         >
                           <div className={`w-[56px] h-[46px] ${cat.color} rounded-xl flex items-center justify-center ${cat.iconColor} group-hover:scale-105 transition-transform`}>
@@ -234,7 +234,7 @@ const AudioLibraryDashboard = () => {
                         </p>
                      </div>
                      
-                     <button onClick={() => navigate('/audio-courses?filter=picks')} className="mt-auto px-6 py-3 bg-white text-slate-900 rounded-full font-bold text-[14px] flex items-center justify-center gap-3 shadow-md shadow-purple-100 group/pick w-max hover:bg-slate-50 transition-colors cursor-pointer">
+                     <button onClick={() => navigate('/my-audio-library?filter=all')} className="mt-auto px-6 py-3 bg-white text-slate-900 rounded-full font-bold text-[14px] flex items-center justify-center gap-3 shadow-md shadow-purple-100 group/pick w-max hover:bg-slate-50 transition-colors cursor-pointer">
                         Explore Picks <ArrowRight size={16} className="group-hover/pick:translate-x-1 transition-transform" />
                      </button>
                   </div>

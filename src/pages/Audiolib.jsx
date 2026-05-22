@@ -107,16 +107,16 @@ const Audiolib = () => {
       {/* Back Button */}
       <button 
         onClick={() => navigate("/")} 
-        className="absolute top-6 left-6 md:left-12 lg:left-16 w-11 h-11 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-500 hover:shadow-lg transition-all border border-slate-50 z-50 group"
+        className="absolute top-4 left-4 md:left-6 lg:left-8 w-11 h-11 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-500 hover:shadow-lg transition-all border border-slate-50 z-50 group"
       >
         <ArrowLeft size={22} strokeWidth={2.5} className="group-hover:-translate-x-1 transition-transform" />
       </button>
 
-      <div className="min-h-screen bg-white flex items-center py-5 pt-20">
+      <div className="bg-white flex items-center pt-16 pb-0">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
           {/* LEFT: Image */}
-          <div className="flex justify-center">
+          <div className="flex justify-center -mt-20">
             <img
               src="/images/audio/audio.png"
               alt="Audiobook Learning Illustration"
@@ -127,7 +127,7 @@ const Audiolib = () => {
           {/* RIGHT: Content */}
           <div>
             {/* Heading */}
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900">
+            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mt-10">
               Enriching Audio Learning Programs
             </h1>
 
@@ -199,7 +199,7 @@ const Audiolib = () => {
       </div>
 
       
-      <section className="py-10 bg-white px-6">
+      <section className="pt-12 pb-10 bg-white px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
@@ -253,7 +253,7 @@ const Audiolib = () => {
         </div>
       </section>
 
-      <section className="py-10 bg-white px-6">
+      <section className="py-6 bg-white px-6">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
