@@ -157,7 +157,6 @@ export default function KeyParticipant() {
     </section>
   );
 }
-
 function ParticipantCard({ item }) {
   return (
     <div
@@ -167,24 +166,24 @@ function ParticipantCard({ item }) {
         shadow-sm hover:shadow-2xl transition-shadow duration-300
       "
     >
-      {/* ===== SMOOTH EXPANDING BACKGROUND (CLIP-PATH BASED) ===== */}
+      {/* BLUE BACKGROUND */}
       <div
         className="
           absolute inset-0 bg-[#332F82]
-          transition-[clip-path] duration-2000
+          transition-[clip-path] duration-700
           ease-[cubic-bezier(0.22,1,0.36,1)]
           z-0
-          [clip-path:ellipse(60%_35%_at_50%_100%)]
-          group-hover:[clip-path:ellipse(150%_150%_at_50%_50%)]
+          [clip-path:ellipse(95%_45%_at_50%_100%)]
+          group-hover:[clip-path:ellipse(180%_180%_at_50%_50%)]
         "
       />
 
-      {/* ===== CONTENT ===== */}
+      {/* TEXT */}
       <div className="relative z-20 p-5">
         <h3
           className="
             text-lg font-bold text-[#1a1a1a] leading-snug
-            transition-colors duration-300 delay-100
+            transition-colors duration-300
             group-hover:text-white
           "
         >
@@ -194,7 +193,7 @@ function ParticipantCard({ item }) {
         <p
           className="
             mt-2 text-[13px] leading-relaxed text-gray-500 font-medium
-            transition-colors duration-300 delay-150
+            transition-colors duration-300
             group-hover:text-indigo-100
           "
         >
@@ -202,17 +201,17 @@ function ParticipantCard({ item }) {
         </p>
       </div>
 
-      {/* ===== IMAGE ===== */}
-      <div className="relative z-20 flex h-[275px] items-end justify-center px-4">
+      {/* IMAGE FIXED TO CARD BOTTOM */}
+      <div className="absolute bottom-0 left-0 right-0 z-20 flex h-[285px] items-end justify-center px-0">
         <img
           src={item.image}
           alt={item.name}
           className="
-            h-[255px] max-w-full object-contain drop-shadow-2xl
+            block h-[270px] max-w-full object-contain object-bottom drop-shadow-2xl
             transition-transform duration-700
             ease-[cubic-bezier(0.22,1,0.36,1)]
             group-hover:scale-105
-            group-hover:-translate-y-2
+            group-hover:translate-y-0
             origin-bottom
           "
         />
@@ -220,3 +219,4 @@ function ParticipantCard({ item }) {
     </div>
   );
 }
+  
