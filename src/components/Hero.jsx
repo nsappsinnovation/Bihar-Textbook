@@ -10,7 +10,7 @@ const slides = [
         title: "BIHAR STATE",
         subtitle: "TEXT BOOK\nPUBLISHING",
         description: "Delivering reliable, well-designed textbooks so every Bihar Board student learns from clear and standardized academic resources.",
-        image: "/images/hero_classroom.png",
+        image: "/images/hero/classroom.png",
         link: "/publishing-mission"
     },
     {
@@ -18,7 +18,7 @@ const slides = [
         title: "IMMERSIVE",
         subtitle: "Mobile\nVR Learning",
         description: "Our travelling VR labs reach schools across the state, letting students explore science, space, and the human body through interactive experiences.",
-        image: "/images/hero_vr_new.png",
+        image: "/images/hero/vr.png",
         link: "/vr"
     },
 
@@ -27,7 +27,7 @@ const slides = [
         title: "Empowering Communication",
         subtitle: "Through\nSign Language",
         description: "Structured programs help students communicate confidently and encourage a more inclusive and supportive school community.",
-        image: "/images/hero_sign.png",
+        image: "/images/hero/sign.png",
         link: "/sign"
     },
 
@@ -36,7 +36,7 @@ const slides = [
         title: "Multilingual",
         subtitle: "Learning\nPrograms",
         description: "Courses in foreign languages, Indian languages, and regional dialects expand cultural understanding and learning opportunities.",
-        image: "/images/hero_linguistic.png",
+        image: "/images/hero/linguistic.png",
         link: "/linguistic"
     },
     {
@@ -44,7 +44,7 @@ const slides = [
         title: "Accessible",
         subtitle: " Learning with\nAudiobooks",
         description: "Audio study materials assist special children and dyslexic learners, enabling comfortable and independent study.",
-        image: "/images/hero_audio_new.png",
+        image: "/images/hero/audio.png",
         link: "/audio-books"
     }
 ];
