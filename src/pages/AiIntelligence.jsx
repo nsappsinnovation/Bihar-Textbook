@@ -128,14 +128,15 @@ const AiIntelligence = () => {
             </h1>
 
             {/* Highlight text */}
-            <p className="mt-4 text-lg font-semibold text-blue-500">
-              Smart Adaptive Tutoring for Every Student
+            <p className="mt-4 text-lg font-semi bold text-blue-600">
+             Smart Adaptive Tutoring for Every Student
             </p>
 
             {/* Description */}
             <p className="mt-4 text-slate-600 max-w-md">
               Leveraging artificial intelligence to provide personalized learning experiences and real-time support for 21st-century learners.
             </p>
+           
 
             {/* Action Button */}
             <div className="mt-8">

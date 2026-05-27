@@ -12,13 +12,13 @@ import { useNavigate } from 'react-router-dom';
 const AiIntelligenceDashboard = () => {
   const navigate = useNavigate();
   const [isBookmarked, setIsBookmarked] = useState(true);
-  const [selectedTopic, setSelectedTopic] = useState('Machine Learning');
+  const [selectedTopic, setSelectedTopic] = useState('Create with AI');
 
   // Per-topic course data for Continue Learning card
   const topicCourses = {
-    'Machine Learning': {
-      title: 'Introduction to ML',
-      desc: 'Learn supervised & unsupervised learning fundamentals.',
+    'Create with AI': {
+      title: 'Create with AI',
+      desc: 'Write your own stories, design cartoons, create comics and build presentations — all with just one click!',
       icon: <Brain size={64} className="text-blue-400 z-20" />,
       cardBg: 'bg-slate-900',
       gradientFrom: 'from-blue-900/40',
@@ -26,9 +26,9 @@ const AiIntelligenceDashboard = () => {
       progress: 65,
       accentColor: 'bg-blue-600 hover:bg-blue-700',
     },
-    'Deep Learning': {
-      title: 'Neural Networks 101',
-      desc: 'Understand layers, activation functions & backpropagation.',
+    'Meet AI Robots': {
+      title: 'Meet AI Robots',
+      desc: 'Discover how robots think, make decisions and learn on their own — just like a smart student!',
       icon: <Cpu size={64} className="text-purple-400 z-20" />,
       cardBg: 'bg-purple-950',
       gradientFrom: 'from-purple-900/40',
@@ -36,9 +36,9 @@ const AiIntelligenceDashboard = () => {
       progress: 40,
       accentColor: 'bg-purple-600 hover:bg-purple-700',
     },
-    'Natural Language': {
-      title: 'NLP Fundamentals',
-      desc: 'Explore text processing, tokenization & sentiment analysis.',
+    'Chat with AI': {
+      title: 'Chat with AI',
+      desc: 'Build your own chatbot that can answer questions — learn to talk with AI and make it smarter!',
       icon: <MessageSquare size={64} className="text-emerald-400 z-20" />,
       cardBg: 'bg-emerald-950',
       gradientFrom: 'from-emerald-900/40',
@@ -46,9 +46,9 @@ const AiIntelligenceDashboard = () => {
       progress: 25,
       accentColor: 'bg-emerald-600 hover:bg-emerald-700',
     },
-    'Computer Vision': {
-      title: 'Image Recognition',
-      desc: 'Learn CNNs, object detection & image classification.',
+    'AI Vision Lab': {
+      title: 'AI Vision Lab',
+      desc: 'Give AI eyes! Learn how computers can recognize things in photos — like traffic signs, animals and classroom items!',
       icon: <Eye size={64} className="text-sky-400 z-20" />,
       cardBg: 'bg-sky-950',
       gradientFrom: 'from-sky-900/40',
@@ -56,9 +56,9 @@ const AiIntelligenceDashboard = () => {
       progress: 15,
       accentColor: 'bg-sky-600 hover:bg-sky-700',
     },
-    'Data Science': {
-      title: 'Data Analysis & Viz',
-      desc: 'Master pandas, matplotlib & statistical thinking.',
+    'Fun with Data': {
+      title: 'Fun with Data',
+      desc: 'Numbers hide magic inside! Build graphs, find patterns and predict how many marks you will score in your next exam!',
       icon: <BarChart3 size={64} className="text-indigo-400 z-20" />,
       cardBg: 'bg-indigo-950',
       gradientFrom: 'from-indigo-900/40',
@@ -71,18 +71,18 @@ const AiIntelligenceDashboard = () => {
   const currentCourse = topicCourses[selectedTopic];
 
   const quickStats = [
-    { label: 'Learn Concepts', value: 'Step by step', icon: <Lightbulb className="text-blue-600" />, color: 'bg-blue-50' },
-    { label: 'Practice & Build', value: 'With projects', icon: <FlaskConical className="text-emerald-600" />, color: 'bg-emerald-50' },
-    { label: 'Explore Tools', value: 'AI powered', icon: <Cpu className="text-purple-600" />, color: 'bg-purple-50' },
-    { label: 'Take Challenges', value: 'Test skills', icon: <Trophy className="text-orange-500" />, color: 'bg-orange-50' },
+    { label: 'Learn Concepts', value: 'Step by step', icon: <Lightbulb className="text-blue-600" />, color: 'bg-blue-50', path: '/ai-courses', state: { activeSection: 'learn' } },
+    { label: 'Practice & Build', value: 'With projects', icon: <FlaskConical className="text-emerald-600" />, color: 'bg-emerald-50', path: '/ai-courses', state: { activeSection: 'practice' } },
+    { label: 'Explore Tools', value: 'AI powered', icon: <Cpu className="text-purple-600" />, color: 'bg-purple-50', path: '/explore-ai-tools' },
+    { label: 'Take Challenges', value: 'Test skills', icon: <Trophy className="text-orange-500" />, color: 'bg-orange-50', path: '/ai-quiz-challenge', state: { activeTab: 'quiz' } },
   ];
 
   const topics = [
-    { label: 'Machine Learning', sub: 'Basics of ML', icon: <Brain size={20} className="text-blue-600" />, bg: 'bg-blue-50' },
-    { label: 'Deep Learning', sub: 'Neural Networks', icon: <Cpu size={20} className="text-purple-600" />, bg: 'bg-purple-50' },
-    { label: 'Natural Language', sub: 'Understand Text', icon: <MessageSquare size={20} className="text-emerald-600" />, bg: 'bg-emerald-50' },
-    { label: 'Computer Vision', sub: 'See and recognize', icon: <Eye size={20} className="text-blue-500" />, bg: 'bg-blue-50' },
-    { label: 'Data Science', sub: 'Analyze and predict', icon: <BarChart3 size={20} className="text-indigo-600" />, bg: 'bg-indigo-50' },
+    { label: 'Create with AI', sub: 'Make art, stories, comics and more', icon: <Brain size={20} className="text-blue-600" />, bg: 'bg-blue-50' },
+    { label: 'Meet AI Robots', sub: 'Learn how robots think and learn', icon: <Cpu size={20} className="text-purple-600" />, bg: 'bg-purple-50' },
+    { label: 'Chat with AI', sub: 'Build chatbots and talk with AI', icon: <MessageSquare size={20} className="text-emerald-600" />, bg: 'bg-emerald-50' },
+    { label: 'AI Vision Lab', sub: 'Explore AI that sees the world', icon: <Eye size={20} className="text-blue-500" />, bg: 'bg-blue-50' },
+    { label: 'Fun with Data', sub: 'Make graphs, predictions and discover patterns', icon: <BarChart3 size={20} className="text-indigo-600" />, bg: 'bg-indigo-50' },
   ];
 
   const handleTopicSelect = (topicLabel) => {
@@ -138,7 +138,7 @@ const AiIntelligenceDashboard = () => {
               {quickStats.map((stat, i) => (
                 <div 
                   key={i} 
-                  onClick={() => navigate(stat.path)}
+                  onClick={() => navigate(stat.path, { state: stat.state })}
                   className="bg-white rounded-[16px] p-3 md:p-4 border border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex items-center gap-3 md:gap-4 hover:shadow-md transition-shadow cursor-pointer group"
                 >
                    <div className={`w-[44px] h-[44px] ${stat.color} rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5`}>
@@ -227,11 +227,21 @@ const AiIntelligenceDashboard = () => {
 
                         {/* Controls */}
                         <div className="flex items-center gap-3 mt-auto">
-                           <button onClick={() => navigate('/ai-courses')} className={`px-6 py-2.5 ${currentCourse.accentColor} text-white rounded-full font-bold text-xs flex items-center gap-2 shadow-sm transition-all active:scale-95`}>
+                           <button 
+                             onClick={() => {
+                               const topicIdMap = {
+                                 'Create with AI': 'ml',
+                                 'Meet AI Robots': 'dl',
+                                 'Chat with AI': 'nlp',
+                                 'AI Vision Lab': 'cv',
+                                 'Fun with Data': 'ds'
+                               };
+                               navigate('/ai-courses', { state: { topicId: topicIdMap[selectedTopic] } });
+                             }} 
+                             className={`px-6 py-2.5 ${currentCourse.accentColor} text-white rounded-full font-bold text-xs flex items-center gap-2 shadow-sm transition-all active:scale-95`}
+                           >
                               Continue <ArrowRight size={14} />
                            </button>
-                           
-                           
                         </div>
                      </div>
                   </div>
@@ -260,7 +270,7 @@ const AiIntelligenceDashboard = () => {
                         <h4 className="text-lg font-bold text-slate-900 tracking-tight leading-tight">AI Quiz Challenge</h4>
                         <p className="text-xs font-medium text-slate-500 mt-1 mb-6">Test your understanding with a quick quiz.</p>
                         
-                        <button onClick={() => navigate('/ai-courses')} className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full font-bold text-xs flex items-center justify-center sm:justify-start gap-2 shadow-sm transition-all active:scale-95 w-max mx-auto sm:mx-0">
+                        <button onClick={() => navigate('/ai-quiz-challenge')} className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full font-bold text-xs flex items-center justify-center sm:justify-start gap-2 shadow-sm transition-all active:scale-95 w-max mx-auto sm:mx-0">
                            Start Challenge <ArrowRight size={14} />
                         </button>
                      </div>

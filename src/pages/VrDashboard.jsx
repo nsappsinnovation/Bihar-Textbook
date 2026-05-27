@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowLeft, ArrowRight, BookOpen, Flame, Star, 
   Clock, Award, Globe, Landmark, Rocket, Microscope,
   Code, Eye, Compass, Layers, MapPin, Bookmark,
-  Palette, GraduationCap, FlaskConical, Trophy
+  Palette, GraduationCap, FlaskConical, Trophy, X, Play
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const VrDashboard = () => {
   const navigate = useNavigate();
   const [selectedTopic, setSelectedTopic] = useState('Science');
+  const [activeVideo, setActiveVideo] = useState(null);
 
   // Per-topic course data for Continue Learning card
   const topicCourses = {
@@ -21,6 +22,7 @@ const VrDashboard = () => {
       progress: 60,
       timeLeft: '35 min left',
       level: 'Beginner',
+      youtubeId: 'y3_v0a74L58',
     },
     'History': {
       title: 'Ancient Civilizations',
@@ -29,6 +31,7 @@ const VrDashboard = () => {
       progress: 45,
       timeLeft: '50 min left',
       level: 'Intermediate',
+      youtubeId: 'sPyAQQkMc1s',
     },
     'Geography': {
       title: 'World Landscapes',
@@ -37,6 +40,7 @@ const VrDashboard = () => {
       progress: 30,
       timeLeft: '40 min left',
       level: 'Beginner',
+      youtubeId: '2OzlSjhW8qo',
     },
     'Technology': {
       title: 'Inside a Computer',
@@ -45,6 +49,7 @@ const VrDashboard = () => {
       progress: 20,
       timeLeft: '55 min left',
       level: 'Advanced',
+      youtubeId: 'aF0dY20qgOM',
     },
     'Art & Culture': {
       title: 'Museum Gallery Tour',
@@ -53,6 +58,7 @@ const VrDashboard = () => {
       progress: 55,
       timeLeft: '25 min left',
       level: 'Beginner',
+      youtubeId: 'IOVMgEWY7og',
     },
     'Math': {
       title: '3D Geometry Lab',
@@ -61,29 +67,30 @@ const VrDashboard = () => {
       progress: 35,
       timeLeft: '45 min left',
       level: 'Intermediate',
+      youtubeId: 'G0TfT21YmLY',
     },
   };
 
   const currentCourse = topicCourses[selectedTopic];
 
   const quickStats = [
-    { label: 'VR Courses', value: 'Curriculum-based', icon: <Rocket className="text-blue-600" />, color: 'bg-blue-50' },
-    { label: 'Virtual Labs', value: 'Practice in VR', icon: <FlaskConical className="text-emerald-600" />, color: 'bg-emerald-50' },
-    { label: '360° Worlds', value: 'Explore places', icon: <Globe className="text-purple-600" />, color: 'bg-purple-50' },
-    { label: 'Create & Learn', value: 'Build & visualize', icon: <Compass className="text-orange-500" />, color: 'bg-orange-50' },
+    { label: 'VR Courses', value: 'Curriculum-based', icon: <Rocket className="text-blue-600" />, color: 'bg-blue-50', path: '/ar-courses' },
+    { label: 'Virtual Labs', value: 'Practice in VR', icon: <FlaskConical className="text-emerald-600" />, color: 'bg-emerald-50', path: '/vr-labs-worlds' },
+    { label: '360° Worlds', value: 'Explore places', icon: <Globe className="text-purple-600" />, color: 'bg-purple-50', path: '/vr-labs-worlds' },
   ];
 
   const topics = [
-    { label: 'Science', sub: '24 Courses', icon: <Microscope size={20} className="text-blue-600" />, bg: 'bg-blue-50' },
-    { label: 'History', sub: '18 Courses', icon: <Landmark size={20} className="text-amber-600" />, bg: 'bg-amber-50' },
-    { label: 'Geography', sub: '20 Courses', icon: <MapPin size={20} className="text-emerald-600" />, bg: 'bg-emerald-50' },
-    { label: 'Technology', sub: '15 Courses', icon: <Layers size={20} className="text-purple-600" />, bg: 'bg-purple-50' },
-    { label: 'Art & Culture', sub: '12 Courses', icon: <Palette size={20} className="text-rose-500" />, bg: 'bg-rose-50' },
-    { label: 'Math', sub: '14 Courses', icon: <GraduationCap size={20} className="text-sky-600" />, bg: 'bg-sky-50' },
+    { label: 'Science', sub: '4 Experiences', icon: <Microscope size={20} className="text-blue-600" />, bg: 'bg-blue-50' },
+    { label: 'History', sub: '1 Experience', icon: <Landmark size={20} className="text-amber-600" />, bg: 'bg-amber-50' },
+    { label: 'Geography', sub: '2 Experiences', icon: <MapPin size={20} className="text-emerald-600" />, bg: 'bg-emerald-50' },
+    { label: 'Technology', sub: '1 Experience', icon: <Layers size={20} className="text-purple-600" />, bg: 'bg-purple-50' },
+    { label: 'Art & Culture', sub: '1 Experience', icon: <Palette size={20} className="text-rose-500" />, bg: 'bg-rose-50' },
+    { label: 'Math', sub: '1 Experience', icon: <GraduationCap size={20} className="text-sky-600" />, bg: 'bg-sky-50' },
   ];
 
   const handleTopicSelect = (topicLabel) => {
     setSelectedTopic(topicLabel);
+    navigate(`/vr-labs-worlds?subject=${encodeURIComponent(topicLabel)}`);
   };
 
   return (
@@ -130,18 +137,19 @@ const VrDashboard = () => {
             </section>
 
             {/* Quick Stats Row */}
-            <section className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 relative z-20 -mt-8 px-4 md:px-12">
+            <section className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 relative z-20 -mt-8 px-4 md:px-12">
               {quickStats.map((stat, i) => (
                 <div 
-                  
-                  className="bg-white rounded-[16px] p-3 md:p-4 border border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex items-center gap-3 md:gap-4 hover:shadow-md transition-shadow cursor-pointer group"
+                  key={i}
+                  onClick={() => navigate(stat.path)}
+                  className="bg-white rounded-[16px] p-4 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex items-center gap-4 hover:shadow-lg hover:border-blue-100 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer group"
                 >
-                   <div className={`w-[44px] h-[44px] ${stat.color} rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5`}>
+                   <div className={`w-[48px] h-[48px] ${stat.color} rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform [&>svg]:w-5 [&>svg]:h-5`}>
                       {stat.icon}
                    </div>
                    <div>
-                      <h4 className="text-[13px] font-bold text-[#1e1b4b] leading-tight ">{stat.label}</h4>
-                      <p className="text-[11px] font-medium text-slate-500 mt-0.5">{stat.value}</p>
+                      <h4 className="text-[14px] font-extrabold text-[#1E293B] leading-tight transition-colors group-hover:text-blue-600">{stat.label}</h4>
+                      <p className="text-[11px] font-medium text-slate-400 mt-0.5">{stat.value}</p>
                    </div>
                 </div>
               ))}
@@ -229,7 +237,10 @@ const VrDashboard = () => {
                         </div>
 
                         {/* Resume Button - outlined style */}
-                        <button onClick={() => navigate('/ar-courses')} className="px-6 py-2.5 border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white rounded-full font-bold text-xs flex items-center gap-2 transition-all active:scale-95 w-max">
+                        <button 
+                           onClick={() => setActiveVideo({ title: currentCourse.title, youtubeId: currentCourse.youtubeId })} 
+                           className="px-6 py-2.5 border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white rounded-full font-bold text-xs flex items-center gap-2 transition-all active:scale-95 w-max"
+                        >
                            Resume <ArrowRight size={14} />
                         </button>
                      </div>
@@ -257,7 +268,10 @@ const VrDashboard = () => {
                         <p className="text-xs font-medium text-slate-500 mt-1 mb-2">Understand the human body in 3D</p>
                         <p className="text-[11px] font-bold text-orange-500 flex items-center gap-1.5 mb-5">Popular</p>
                         
-                        <button onClick={() => navigate('/ar-courses')} className="px-6 py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-full font-bold text-xs flex items-center gap-2 shadow-sm transition-all active:scale-95 w-max">
+                        <button 
+                           onClick={() => setActiveVideo({ title: 'Human Anatomy', youtubeId: 'kw9EJbezlK4' })} 
+                           className="px-6 py-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-full font-bold text-xs flex items-center gap-2 shadow-sm transition-all active:scale-95 w-max"
+                        >
                            Start Learning <ArrowRight size={14} />
                         </button>
                      </div>
@@ -269,6 +283,73 @@ const VrDashboard = () => {
 
         </div>
       </main>
+
+      {/* Video Overlay Modal */}
+      <AnimatePresence>
+        {activeVideo && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 md:p-6"
+          >
+            <motion.div 
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="bg-white rounded-[24px] overflow-hidden shadow-2xl w-full max-w-2xl border border-slate-100 relative max-h-[90vh] flex flex-col"
+            >
+               {/* Close Button */}
+               <button
+                 onClick={() => setActiveVideo(null)}
+                 className="absolute top-4 right-4 z-10 w-9 h-9 bg-white/90 hover:bg-white text-slate-700 hover:text-slate-900 rounded-full flex items-center justify-center shadow transition-colors cursor-pointer"
+               >
+                 <X size={18} strokeWidth={2.5} />
+               </button>
+
+               {/* YouTube Video Embed */}
+               <div className="aspect-video w-full bg-black shrink-0">
+                 <iframe
+                   src={`https://www.youtube.com/embed/${activeVideo.youtubeId}?autoplay=1`}
+                   title={activeVideo.title}
+                   className="w-full h-full"
+                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                   allowFullScreen
+                 />
+               </div>
+
+               {/* Details in Modal */}
+               <div className="p-5 md:p-6 space-y-3 overflow-y-auto">
+                 <div className="flex items-center gap-3">
+                   <span className="px-3 py-1 rounded-full text-xs font-bold text-white bg-gradient-to-r from-blue-500 to-purple-500">
+                     VR Immersive Lesson
+                   </span>
+                   <span className="text-xs font-bold text-blue-600 px-2.5 py-0.5 rounded-md bg-blue-50">
+                     Topic: {selectedTopic}
+                   </span>
+                 </div>
+
+                 <h2 className="text-lg md:text-xl font-extrabold text-[#1E293B]">
+                   {activeVideo.title}
+                 </h2>
+                 <p className="text-slate-500 text-xs md:text-sm font-medium leading-relaxed">
+                   Experience this educational topic in complete 3D immersive video standard. Perfect for visual learning.
+                 </p>
+
+                 <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] md:text-xs font-bold text-slate-500">
+                   <span>Category: <span className="text-slate-800">VR Course</span></span>
+                   <button 
+                     onClick={() => setActiveVideo(null)}
+                     className="px-4 py-2 bg-slate-900 text-white rounded-full font-bold hover:bg-blue-600 transition-colors"
+                   >
+                     Done Learning
+                   </button>
+                 </div>
+               </div>
+             </motion.div>
+           </motion.div>
+         )}
+       </AnimatePresence>
 
     </div>
   );
