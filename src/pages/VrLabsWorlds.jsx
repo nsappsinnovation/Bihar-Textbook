@@ -11,8 +11,9 @@ const VrLabsWorlds = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const initialSubject = queryParams.get('subject') || 'All Subjects';
+  const initialTab = queryParams.get('tab') || 'all';
 
-  const [activeTab, setActiveTab] = useState('all'); // 'all', 'labs', 'worlds', 'courses'
+  const [activeTab, setActiveTab] = useState(initialTab); // 'all', 'labs', 'worlds', 'courses'
   const [activeSubject, setActiveSubject] = useState(initialSubject);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedVideo, setSelectedVideo] = useState(null);

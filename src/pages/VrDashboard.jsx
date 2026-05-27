@@ -74,7 +74,7 @@ const VrDashboard = () => {
   const currentCourse = topicCourses[selectedTopic];
 
   const quickStats = [
-    { label: 'VR Courses', value: 'Curriculum-based', icon: <Rocket className="text-blue-600" />, color: 'bg-blue-50', path: '/ar-courses' },
+    { label: 'VR Courses', value: 'Curriculum-based', icon: <Rocket className="text-blue-600" />, color: 'bg-blue-50', path: '/vr-labs-worlds?tab=courses' },
     { label: 'Virtual Labs', value: 'Practice in VR', icon: <FlaskConical className="text-emerald-600" />, color: 'bg-emerald-50', path: '/vr-labs-worlds' },
     { label: '360° Worlds', value: 'Explore places', icon: <Globe className="text-purple-600" />, color: 'bg-purple-50', path: '/vr-labs-worlds' },
   ];
@@ -121,7 +121,7 @@ const VrDashboard = () => {
                  
                  <div className="pt-2">
                    <button 
-                     onClick={() => navigate('/ar-courses')}
+                     onClick={() => navigate('/vr-labs-worlds?tab=courses')}
                      className="px-6 py-3 bg-blue-600 text-white rounded-full font-bold text-[14px] flex items-center gap-2 hover:bg-blue-700 transition-colors w-max shadow-sm shadow-blue-200"
                    >
                      Explore Now <ArrowRight size={16} />
@@ -160,7 +160,7 @@ const VrDashboard = () => {
           <div>
             <div className="flex items-center justify-between px-1 mb-4">
                <h3 className="text-base font-bold text-slate-900">Explore by Category</h3>
-               <button onClick={() => navigate('/ar-courses')} className="text-xs font-bold text-blue-600 hover:underline">View all</button>
+               <button onClick={() => navigate('/vr-labs-worlds?tab=courses')} className="text-xs font-bold text-blue-600 hover:underline">View all</button>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
