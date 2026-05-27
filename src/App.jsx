@@ -45,7 +45,10 @@ import HeritageDashboard from "./pages/HeritageDashboard.jsx";
 import AudioLibraryDashboard from "./pages/AudioLibraryDashboard.jsx";
 import MyAudioLibrary from "./pages/MyAudioLibrary.jsx";
 import AiIntelligenceDashboard from "./pages/AiIntelligenceDashboard.jsx";
+import AiQuizChallenge from "./pages/AiQuizChallenge.jsx";
+import ExploreAiTools from "./pages/ExploreAiTools.jsx";
 import VrDashboard from "./pages/VrDashboard.jsx";
+import VrLabsWorlds from "./pages/VrLabsWorlds.jsx";
 import CyberSecurityDashboard from "./pages/CyberSecurityDashboard.jsx";
 import CollaborativeLearningViewAll from "./pages/CollaborativeLearningViewAll.jsx";
 
@@ -89,10 +92,10 @@ function App() {
   ].includes(location.pathname);
 
   // Pages with NO Navbar
-  const isNoNavPage = isIsolatedPage || isMissionPage || location.pathname.startsWith("/ling") || location.pathname === "/sign" || location.pathname === "/sign-learn" || location.pathname === "/sign-module" || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/audio-library-dashboard" || location.pathname === "/my-audio-library" || location.pathname === "/ai-intelligence-dashboard" || location.pathname === "/vr-dashboard" || location.pathname === "/cyber-security-dashboard" || location.pathname === "/ai-courses";
+  const isNoNavPage = isIsolatedPage || isMissionPage || location.pathname.startsWith("/ling") || location.pathname === "/sign" || location.pathname === "/sign-learn" || location.pathname === "/sign-module" || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/audio-library-dashboard" || location.pathname === "/my-audio-library" || location.pathname === "/ai-intelligence-dashboard" || location.pathname === "/vr-dashboard" || location.pathname === "/vr-labs-worlds" || location.pathname === "/cyber-security-dashboard" || location.pathname === "/ai-courses" || location.pathname === "/ai-quiz-challenge" || location.pathname === "/explore-ai-tools";
   
   // Pages with NO Footer
-  const isNoFooterPage = isIsolatedPage || isMissionPage || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/audio-library-dashboard" || location.pathname === "/my-audio-library" || location.pathname === "/ai-intelligence-dashboard" || location.pathname === "/vr-dashboard" || location.pathname === "/cyber-security-dashboard" || location.pathname === "/ai-courses";
+  const isNoFooterPage = isIsolatedPage || isMissionPage || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/audio-library-dashboard" || location.pathname === "/my-audio-library" || location.pathname === "/ai-intelligence-dashboard" || location.pathname === "/vr-dashboard" || location.pathname === "/vr-labs-worlds" || location.pathname === "/cyber-security-dashboard" || location.pathname === "/ai-courses" || location.pathname === "/ai-quiz-challenge" || location.pathname === "/explore-ai-tools";
 
   return (
     <>
@@ -115,6 +118,7 @@ function App() {
             <Route path="/sign-module" element={<SignModule />} />
             <Route path="/vr" element={<Vr />} />
             <Route path="/vr-dashboard" element={<VrDashboard />} />
+            <Route path="/vr-labs-worlds" element={<VrLabsWorlds />} />
             <Route path="/cyber-security-dashboard" element={<CyberSecurityDashboard />} />
              <Route path="/linguistic" element={<Linguistics />} />
               <Route path="/ebook" element={<Ebook />} />
@@ -136,6 +140,8 @@ function App() {
              <Route path="/ling/phrases" element={<LingModule type="phrases" />} />
              <Route path="/ling/conversations" element={<LingModule type="conversations" />} />
             <Route path="/ai-courses" element={<AiCourses />} />
+            <Route path="/ai-quiz-challenge" element={<AiQuizChallenge />} />
+            <Route path="/explore-ai-tools" element={<ExploreAiTools />} />
             <Route path="/mobile-courses" element={<MobileCourses />} />
             <Route path="/archive-courses" element={<ArchiveCourses />} />
 

@@ -5,21 +5,21 @@ import {
   Play, RotateCcw, Award, CheckCircle2, ChevronRight, 
   HelpCircle, Sparkles, Send, Activity, Star, Settings, X, Check, Gamepad2
 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 // Sidebar Navigation Data
 const topicsData = [
   {
     id: 'ml',
-    title: 'Fruit Sorter (Machine Learning) 🍎🍋',
-    sub: 'Teaching robots to sort by color & size!',
+    title: 'AI se Creative Projects 🚀✨',
+    sub: 'Story, Cartoon, Comic, Presentation!',
     icon: <Brain className="w-5 h-5" />,
     color: 'from-amber-400/20 to-orange-500/20',
     textAccent: 'text-amber-600',
     bgLight: 'bg-amber-50',
     pillColor: 'bg-amber-500',
     buttonColor: 'bg-amber-500 hover:bg-amber-600 shadow-amber-200',
-    synopsis: "Machine Learning is like teaching a puppy! 🐶 We show the computer lots of examples (like 'Big Red fruit is an Apple') until it learns to sort them automatically!"
+    synopsis: "Learn to create amazing projects with AI! You can write beautiful stories ✍️, design cartoon images 🎨, create comic books 📕, and build stunning presentations 📊! Imagine you want to write a superhero story — just tell AI and it will write the whole thing. Or design your own cartoon character — AI will turn your ideas into real images!"
   },
   {
     id: 'dl',
@@ -31,7 +31,7 @@ const topicsData = [
     bgLight: 'bg-pink-50',
     pillColor: 'bg-pink-500',
     buttonColor: 'bg-pink-500 hover:bg-pink-600 shadow-pink-200',
-    synopsis: "Deep Learning uses artificial neural networks—which are like millions of tiny lightbulbs (thinking cells) in a computer brain! Let's train them to light up!"
+    synopsis: "Deep Learning is a computer's mini-brain — imagine millions of tiny bulbs lighting up together! When you show AI some photos, these bulbs learn patterns. At first AI gets confused, but with practice it gets smarter — just like you when you learned to ride a bicycle! Here we will train these 'thinking bulbs' step by step!"
   },
   {
     id: 'nlp',
@@ -43,7 +43,7 @@ const topicsData = [
     bgLight: 'bg-emerald-50',
     pillColor: 'bg-emerald-500',
     buttonColor: 'bg-emerald-500 hover:bg-emerald-600 shadow-emerald-200',
-    synopsis: "Natural Language Processing (NLP) helps computers read our messages, understand our talk, and even guess if we are happy, sad, or super excited!"
+    synopsis: "Have you ever talked to Google? It uses NLP! With NLP, computers understand your language — they can tell if you are happy or sad. Imagine you typed 'Today was so much fun!' — AI will instantly know you're happy and suggest a smile emoji! Here we will teach AI to understand our language!"
   },
   {
     id: 'cv',
@@ -55,7 +55,7 @@ const topicsData = [
     bgLight: 'bg-sky-50',
     pillColor: 'bg-sky-500',
     buttonColor: 'bg-sky-500 hover:bg-sky-600 shadow-sky-200',
-    synopsis: "Computer Vision gives robot eyes to cameras! It helps self-driving cars spot traffic signs and helps robots identify classroom items instantly!"
+    synopsis: "Computer Vision is AI's eyes! Just like you can spot your friend in a crowd, AI can identify things in photos and videos too. Self-driving cars use it to read traffic lights, doctors use it to read X-rays! Here you will teach AI to find a school bag in a classroom and understand what a traffic sign means!"
   },
   {
     id: 'ds',
@@ -67,7 +67,7 @@ const topicsData = [
     bgLight: 'bg-indigo-50',
     pillColor: 'bg-indigo-500',
     buttonColor: 'bg-indigo-500 hover:bg-indigo-600 shadow-indigo-200',
-    synopsis: "Data Science is like playing detective! 🕵️‍♂️ We collect numbers (data) like study hours, connect the dots on charts, and predict your future quiz scores!"
+    synopsis: "Data Science is a detective game! Imagine you have marks of 100 students — with Data Science you can find patterns like 'students who study more score higher'. We will build colorful graphs, connect the dots, and predict how many marks you might get in your next test!"
   }
 ];
 
@@ -75,8 +75,8 @@ const topicsData = [
 const challengesData = [
   {
     id: 'ml_ch',
-    title: 'Challenge 1: Mixed Fruit Sorter 🧺🍎',
-    desc: 'Help the robot sort a basket of mixed fruits perfectly!',
+    title: 'Challenge 1: Creative Director 🎨✨',
+    desc: 'Help Pippo match each creative prompt to the best AI tool!',
     icon: <Brain className="w-5 h-5" />,
     color: 'border-amber-200 bg-amber-50/50 hover:bg-amber-50',
     accentText: 'text-amber-700'
@@ -101,19 +101,40 @@ const challengesData = [
 
 export default function AiCourses() {
   const navigate = useNavigate();
+  const location = useLocation();
   
   // Sidebar select & layout state
   const [activeTopic, setActiveTopic] = useState(topicsData[0]);
   const [activeChallenge, setActiveChallenge] = useState(null); // 'ml_ch', 'nlp_ch', 'cv_ch' or null
+
+  // Handle routing state when coming from Quick Stats Dashboard cards
+  useEffect(() => {
+    if (location.state) {
+      const { activeSection, topicId } = location.state;
+      if (topicId) {
+        const targetTopic = topicsData.find(t => t.id === topicId);
+        if (targetTopic) setActiveTopic(targetTopic);
+      }
+      if (activeSection === 'learn') {
+        setActiveChallenge(null);
+      } else if (activeSection === 'practice') {
+        setActiveChallenge(null);
+      } else if (activeSection === 'tools') {
+        const mlTopic = topicsData.find(t => t.id === 'ml');
+        if (mlTopic) setActiveTopic(mlTopic);
+        setActiveChallenge(null);
+      }
+    }
+  }, [location.state]);
 
   // Score stats
   const [xp, setXp] = useState(100);
   const [showXpAlert, setShowXpAlert] = useState(false);
   const [lastXpGain, setLastXpGain] = useState(0);
 
-  // 1. ML Fruit Sorter States
-  const [mlFruitSize, setMlFruitSize] = useState('Medium');
-  const [mlFruitColor, setMlFruitColor] = useState('Red');
+  // 1. Creative AI Project States (reused old state variables to maintain compatibility)
+  const [mlFruitSize, setMlFruitSize] = useState('Story');
+  const [mlFruitColor, setMlFruitColor] = useState('Jungle Adventure');
   const [mlClassification, setMlClassification] = useState(null);
 
   // 2. DL Neural Brain Train States
@@ -138,13 +159,13 @@ export default function AiCourses() {
 
   // ==================== CHALLENGES STATE MANAGEMENT ====================
   
-  // Challenge 1: ML Mixed Sorter State
+  // Challenge 1: Creative Director State
   const mlBasket = [
-    { size: 'Large', color: 'Green', name: 'Watermelon 🍉' },
-    { size: 'Small', color: 'Yellow', name: 'Lemon 🍋' },
-    { size: 'Medium', color: 'Red', name: 'Juicy Apple 🍎' },
-    { size: 'Small', color: 'Red', name: 'Little Cherry 🍒' },
-    { size: 'Large', color: 'Red', name: 'Large Apple 🍎' }
+    { size: 'Creative Text', color: 'A flying turtle finding a secret island', name: 'Story Maker 📖' },
+    { size: 'Avatar Picture', color: 'A cute vector puppy wearing a spacesuit', name: 'Cartoon Generator 🎨' },
+    { size: 'Multi-Panel Script', color: 'A superhero cat saving the school library', name: 'Comic Builder 🎭' },
+    { size: 'Slide Deck', color: 'Water conservation ideas for science exhibition', name: 'Presentation Creator 📊' },
+    { size: 'Creative Text', color: 'A crystal castle floating above purple clouds', name: 'Story Maker 📖' }
   ];
   const [mlChIndex, setMlChIndex] = useState(0);
   const [mlChCorrectCount, setMlChCorrectCount] = useState(0);
@@ -181,48 +202,77 @@ export default function AiCourses() {
     setActiveChallenge(null); // exit any active challenges to restore default simulator
   };
 
-  // Simulator 1: ML Fruit Sorter prediction logic
+  // Simulator 1: Creative AI Project Generator logic
   const runMlFruitSorter = () => {
-    let fruit = "Unknown Fruit ❓";
-    let emoji = "❓";
-    
-    if (mlFruitSize === 'Large') {
-      if (mlFruitColor === 'Green') {
-        fruit = "Big Watermelon";
-        emoji = "🍉";
-      } else if (mlFruitColor === 'Red') {
-        fruit = "Large Apple";
-        emoji = "🍎";
+    let fruit = "";
+    let emoji = "";
+    let content = "";
+    let details = [];
+
+    if (mlFruitSize === 'Story') {
+      fruit = `Story: Pippo and the ${mlFruitColor}`;
+      emoji = "📖✨";
+      if (mlFruitColor === 'Jungle Adventure') {
+        content = "Once upon a time in a glowing neon forest, a tiny robot named Pippo found a secret map. Together with a friendly lion, they discovered a hidden tree that bore crystal fruits of wisdom!";
+      } else if (mlFruitColor === 'Robot School') {
+        content = "It was Pippo's first day at Robo-Academy! He was nervous about his oil leaking, but his teacher, Mr. Circuit, showed the class Pippo's incredible talent for drawing starry constellations!";
+      } else if (mlFruitColor === 'Space Journey') {
+        content = "Zooming past asteroid belts, Pippo's starship steered towards a mysterious purple planet. Suddenly, a cosmic puppy floated by, inviting Pippo to a zero-gravity soccer game!";
       } else {
-        fruit = "Big Banana";
-        emoji = "🍌";
+        content = "Deep within the Whispering Valley, a magical castle floated in mid-air. Inside, Pippo found a paint brush that brought any cartoon image he drew on the walls to life!";
       }
-    } else if (mlFruitSize === 'Small') {
-      if (mlFruitColor === 'Yellow') {
-        fruit = "Sweet Lemon";
-        emoji = "🍋";
-      } else if (mlFruitColor === 'Red') {
-        fruit = "Little Cherry";
-        emoji = "🍒";
+    } else if (mlFruitSize === 'Cartoon') {
+      fruit = `Cartoon Image: ${mlFruitColor}`;
+      emoji = "🎨🐱";
+      if (mlFruitColor === 'Jungle Adventure') {
+        content = "AI Generated: A vibrant, colorful cartoon vector of Pippo the robot holding hands with a smiling baby lion in a tropical forest under a rainbow.";
+      } else if (mlFruitColor === 'Robot School') {
+        content = "AI Generated: A funny cartoon scene of a robot classroom with desks, smartboards, and robotic kids cheerily raising their mechanical hands.";
+      } else if (mlFruitColor === 'Space Journey') {
+        content = "AI Generated: A cute illustration of a cosmic space puppy wearing a little astronaut helmet, happily chasing stars next to Saturn's rings.";
       } else {
-        fruit = "Green Grapes";
-        emoji = "🍇";
+        content = "AI Generated: A majestic glass castle floating above glowing pink clouds with butterflies flying around its towering crystal minarets.";
       }
-    } else { // Medium size
-      if (mlFruitColor === 'Red') {
-        fruit = "Juicy Apple";
-        emoji = "🍎";
-      } else if (mlFruitColor === 'Yellow') {
-        fruit = "Ripe Banana";
-        emoji = "🍌";
+    } else if (mlFruitSize === 'Comic') {
+      fruit = `Comic: ${mlFruitColor}`;
+      emoji = "🎭⚡";
+      if (mlFruitColor === 'Jungle Adventure') {
+        details = [
+          "Panel 1: Pippo enters the lush green jungle. 'Wow, it is so green here!'",
+          "Panel 2: A rustle in the bushes... A friendly baby lion jumps out! 'Hello, explorer!'",
+          "Panel 3: Pippo shares his charging pack, and Lion shares a fruit. 'Best friends forever!'"
+        ];
+      } else if (mlFruitColor === 'Robot School') {
+        details = [
+          "Panel 1: Pippo enters the high-tech classroom. 'I hope they like my metal frame.'",
+          "Panel 2: Mr. Circuit gives a math quiz. Pippo answers instantly: '42!'",
+          "Panel 3: Classmates cheer and high-five! 'You are the ultimate math wizard!'"
+        ];
+      } else if (mlFruitColor === 'Space Journey') {
+        details = [
+          "Panel 1: Starship dashboard lights flashing. 'Entering unknown space zone!'",
+          "Panel 2: A space puppy floats past the window, barking through a helmet: 'Bark!'",
+          "Panel 3: Pippo goes on a space-walk to play catch with a shooting star!"
+        ];
       } else {
-        fruit = "Green Pear";
-        emoji = "🍐";
+        details = [
+          "Panel 1: Looking at the sky, Pippo spots a floating castle. 'How is it staying up there?'",
+          "Panel 2: Pippo finds a flying magic broomstick. 'Hold on tight, let's fly!'",
+          "Panel 3: Reaching the castle gate, the door opens with a warm welcome chime."
+        ];
       }
+    } else { // Presentation
+      fruit = `Presentation: AI and ${mlFruitColor}`;
+      emoji = "📊💡";
+      details = [
+        `Slide 1: Welcome to ${mlFruitColor} - Designed by AI Assistant.`,
+        "Slide 2: Objectives - How smart technology helps students visualize wild scenarios.",
+        "Slide 3: Key Learnings - Storytelling, image rendering, and slide generation made easy!"
+      ];
     }
 
-    setMlClassification({ fruit, emoji });
-    triggerXpGain(20);
+    setMlClassification({ fruit, emoji, content, details });
+    triggerXpGain(25);
   };
 
   // Simulator 2: DL brain train live epochs loop
@@ -582,48 +632,48 @@ export default function AiCourses() {
                   </button>
                 </div>
 
-                {/* CHALLENGE 1: ML MIXED FRUIT SORTER */}
+                {/* CHALLENGE 1: CREATIVE DIRECTOR */}
                 {activeChallenge === 'ml_ch' && (
                   <div className="flex-1 flex flex-col justify-center py-4">
                     {!mlChCompleted ? (
                       <div className="space-y-6 max-w-lg mx-auto w-full text-center">
                         <div className="space-y-2">
-                          <span className="text-[10px] font-black text-amber-600 uppercase tracking-widest block">Basket Fruit {mlChIndex + 1} of 5</span>
-                          <h3 className="text-sm font-bold text-slate-600">The robot holds a fruit with these specs:</h3>
+                          <span className="text-[10px] font-black text-amber-600 uppercase tracking-widest block">Prompt {mlChIndex + 1} of 5</span>
+                          <h3 className="text-sm font-bold text-slate-600">Match this creative request to the correct AI tool:</h3>
                         </div>
-
+ 
                         {/* Specs display */}
-                        <div className="bg-slate-50 border border-slate-150 rounded-2xl p-4 flex justify-center items-center gap-8 shadow-inner max-w-sm mx-auto">
-                          <div>
-                            <span className="text-[9px] font-bold text-slate-400 block uppercase">Size</span>
-                            <span className="text-sm font-black text-slate-800">{mlBasket[mlChIndex].size === 'Small' ? '🔎 Small' : mlBasket[mlChIndex].size === 'Medium' ? '👌 Medium' : '👑 Large'}</span>
+                        <div className="bg-slate-50 border border-slate-150 rounded-2xl p-4 flex flex-col justify-center items-center gap-3 shadow-inner max-w-sm mx-auto">
+                          <div className="flex items-center gap-2">
+                            <span className="text-[9px] font-bold text-slate-400 block uppercase">Required Output:</span>
+                            <span className="text-xs font-black text-slate-700 bg-amber-100 px-2 py-0.5 rounded-full">{mlBasket[mlChIndex].size}</span>
                           </div>
-                          <div className="w-px h-8 bg-slate-200" />
-                          <div>
-                            <span className="text-[9px] font-bold text-slate-400 block uppercase">Color</span>
-                            <span className="text-sm font-black text-slate-800">{mlBasket[mlChIndex].color === 'Red' ? '❤️ Red' : mlBasket[mlChIndex].color === 'Yellow' ? '💛 Yellow' : '💚 Green'}</span>
+                          <div className="w-full h-px bg-slate-200/60" />
+                          <div className="text-center">
+                            <span className="text-[9px] font-bold text-slate-400 block uppercase mb-1">Creative Prompt:</span>
+                            <span className="text-sm font-black text-slate-800 italic">"{mlBasket[mlChIndex].color}"</span>
                           </div>
                         </div>
-
+ 
                         {/* Action buttons */}
                         <div className="space-y-2">
-                          <label className="text-[10px] font-bold text-slate-450 uppercase block tracking-wider">Sort this fruit to its correct tray!</label>
-                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 max-w-md mx-auto pt-1">
-                            {['Apple 🍎', 'Lemon 🍋', 'Watermelon 🍉', 'Cherry 🍒', 'Banana 🍌'].map((opt) => {
+                          <label className="text-[10px] font-bold text-slate-455 uppercase block tracking-wider">Select the correct AI Tool Tray!</label>
+                          <div className="grid grid-cols-2 gap-2.5 max-w-md mx-auto pt-1">
+                            {['Story Maker 📖', 'Cartoon Generator 🎨', 'Comic Builder 🎭', 'Presentation Creator 📊'].map((opt) => {
                               const isSelected = mlChSelectedAns === opt.split(' ')[0];
                               const isCorrect = mlBasket[mlChIndex].name.includes(opt.split(' ')[0]);
-
+ 
                               let btnClass = "border-slate-200 bg-white hover:bg-slate-50 text-slate-700";
                               if (mlChSelectedAns !== null) {
-                                if (isCorrect) {
-                                  btnClass = "border-green-500 bg-green-50 text-green-900 font-extrabold";
-                                } else if (isSelected) {
-                                  btnClass = "border-rose-400 bg-rose-50 text-rose-900";
-                                } else {
-                                  btnClass = "border-slate-100 opacity-60 text-slate-400";
-                                }
+                                  if (isCorrect) {
+                                    btnClass = "border-green-500 bg-green-50 text-green-900 font-extrabold";
+                                  } else if (isSelected) {
+                                    btnClass = "border-rose-400 bg-rose-50 text-rose-900";
+                                  } else {
+                                    btnClass = "border-slate-100 opacity-60 text-slate-400";
+                                  }
                               }
-
+ 
                               return (
                                 <button
                                   key={opt}
@@ -637,7 +687,7 @@ export default function AiCourses() {
                             })}
                           </div>
                         </div>
-
+ 
                         {/* score preview */}
                         <p className="text-[10px] font-semibold text-slate-400">Score: {mlChCorrectCount} / {mlChIndex} correct</p>
                       </div>
@@ -649,11 +699,11 @@ export default function AiCourses() {
                       >
                         <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center text-3xl mx-auto shadow-sm">🏆</div>
                         <div className="space-y-1">
-                          <h3 className="text-base font-bold text-slate-800">Challenge Perfect Sorter Completed!</h3>
-                          <p className="text-xs text-amber-700 font-bold">You successfully sorted {mlChCorrectCount} / 5 fruits correctly!</p>
+                          <h3 className="text-base font-bold text-slate-800">Creative Director Challenge Completed!</h3>
+                          <p className="text-xs text-amber-700 font-bold">You successfully matched {mlChCorrectCount} / 5 prompts correctly!</p>
                         </div>
                         <p className="text-[11px] text-slate-500 leading-relaxed">
-                          Great job! Your data sorting algorithm was fully verified. You gained +100 bonus XP points!
+                          Great job! Your prompt matching logic was fully verified. You gained +100 bonus XP points!
                         </p>
                         <button
                           onClick={() => resetChallenge('ml_ch')}
@@ -822,47 +872,57 @@ export default function AiCourses() {
                 {/* SIMULATOR VIEWS */}
                 <div className="flex-1 py-4 relative z-10 flex flex-col justify-center">
                   
-                  {/* MACHINE LEARNING (Fruit Sorter 🍎🍋) */}
+                  {/* CREATIVE AI PROJECTS (Story, Cartoon, Comic, Presentation) */}
                   {activeTopic.id === 'ml' && (
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                       
                       {/* Controllers */}
                       <div className="md:col-span-5 space-y-4">
                         <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                          <Settings className="w-3.5 h-3.5 text-amber-500" /> Fruit Specs
+                          <Settings className="w-3.5 h-3.5 text-amber-500" /> Project Settings
                         </h3>
                         
-                        {/* Size Select */}
+                        {/* Project Type Select */}
                         <div className="space-y-1">
-                          <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">How big is the fruit?</label>
-                          <div className="grid grid-cols-3 gap-1.5">
-                            {['Small', 'Medium', 'Large'].map(sz => (
+                          <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">1. Choose AI Tool Type</label>
+                          <div className="grid grid-cols-2 gap-1.5">
+                            {[
+                              { id: 'Story', label: 'Story 📖' },
+                              { id: 'Cartoon', label: 'Cartoon 🎨' },
+                              { id: 'Comic', label: 'Comic 🎭' },
+                              { id: 'Presentation', label: 'Presentation 📊' }
+                            ].map(tool => (
                               <button
-                                key={sz}
-                                onClick={() => setMlFruitSize(sz)}
-                                className={`py-1.5 rounded-lg text-[10px] font-bold border transition-colors cursor-pointer ${
-                                  mlFruitSize === sz ? 'bg-amber-500 border-amber-600 text-white shadow-sm shadow-amber-100' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                                key={tool.id}
+                                onClick={() => setMlFruitSize(tool.id)}
+                                className={`py-2 rounded-lg text-[10px] font-bold border transition-colors cursor-pointer ${
+                                  mlFruitSize === tool.id ? 'bg-amber-500 border-amber-600 text-white shadow-sm shadow-amber-100' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
                                 }`}
                               >
-                                {sz}
+                                {tool.label}
                               </button>
                             ))}
                           </div>
                         </div>
 
-                        {/* Color Select */}
+                        {/* Theme Select */}
                         <div className="space-y-1">
-                          <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">What color is it?</label>
-                          <div className="grid grid-cols-3 gap-1.5">
-                            {['Yellow', 'Red', 'Green'].map(col => (
+                          <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">2. Select Project Theme</label>
+                          <div className="grid grid-cols-2 gap-1.5">
+                            {[
+                              { id: 'Jungle Adventure', label: 'Jungle 🌴' },
+                              { id: 'Robot School', label: 'Robo School 🏫' },
+                              { id: 'Space Journey', label: 'Space 🚀' },
+                              { id: 'Magical Castle', label: 'Castle 🏰' }
+                            ].map(theme => (
                               <button
-                                key={col}
-                                onClick={() => setMlFruitColor(col)}
-                                className={`py-1.5 rounded-lg text-[10px] font-bold border transition-colors cursor-pointer ${
-                                  mlFruitColor === col ? 'bg-amber-500 border-amber-600 text-white shadow-sm shadow-amber-100' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                                key={theme.id}
+                                onClick={() => setMlFruitColor(theme.id)}
+                                className={`py-2 rounded-lg text-[10px] font-bold border transition-colors cursor-pointer ${
+                                  mlFruitColor === theme.id ? 'bg-amber-500 border-amber-600 text-white shadow-sm shadow-amber-100' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
                                 }`}
                               >
-                                {col}
+                                {theme.label}
                               </button>
                             ))}
                           </div>
@@ -872,39 +932,52 @@ export default function AiCourses() {
                           onClick={runMlFruitSorter}
                           className="w-full py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shadow shadow-amber-100 transition-all border-b border-amber-700 active:translate-y-0.5"
                         >
-                          <Play className="w-3.5 h-3.5 fill-white" /> Teach Sorter! 🤖
+                          <Play className="w-3.5 h-3.5 fill-white" /> Generate with AI! 🚀
                         </button>
                       </div>
 
                       {/* Visual Output */}
-                      <div className="md:col-span-7 bg-amber-50/30 border border-amber-100 rounded-[20px] p-5 flex flex-col items-center justify-center text-center min-h-[220px] relative overflow-hidden shadow-inner">
+                      <div className="md:col-span-7 bg-amber-50/30 border border-amber-100 rounded-[20px] p-5 flex flex-col items-center justify-center text-center min-h-[220px] max-h-[360px] overflow-y-auto custom-scrollbar relative shadow-inner">
                         {mlClassification ? (
                           <motion.div 
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            className="space-y-3.5 w-full"
+                            className="space-y-3.5 w-full text-left"
                           >
-                            <h4 className="text-[9px] font-bold uppercase tracking-wider text-amber-600">Robot Sorter Output</h4>
+                            <div className="flex items-center justify-between">
+                              <h4 className="text-[9px] font-bold uppercase tracking-wider text-amber-600">AI Creative Engine Output</h4>
+                              <span className="text-2xl">{mlClassification.emoji}</span>
+                            </div>
                             
-                            <div className="w-20 h-20 rounded-full bg-white border border-amber-300 flex items-center justify-center mx-auto shadow-sm text-3xl">
-                              {mlClassification.emoji}
+                            <div className="space-y-1 bg-white border border-amber-100 rounded-xl p-4 shadow-sm">
+                              <div className="text-sm font-black text-slate-800">{mlClassification.fruit}</div>
+                              
+                              {/* If Story or Cartoon (has content) */}
+                              {mlClassification.content && (
+                                <p className="text-xs text-slate-600 leading-relaxed font-medium mt-2 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                                  {mlClassification.content}
+                                </p>
+                              )}
+
+                              {/* If Comic or Presentation (has details) */}
+                              {mlClassification.details && mlClassification.details.length > 0 && (
+                                <div className="space-y-2 mt-2">
+                                  {mlClassification.details.map((item, idx) => (
+                                    <div key={idx} className="text-xs text-slate-600 bg-slate-50 p-2 rounded-lg border border-slate-100 font-semibold flex items-start gap-2">
+                                      <span className="bg-amber-100 text-amber-800 text-[10px] font-extrabold px-1.5 py-0.5 rounded shrink-0">#{idx + 1}</span>
+                                      <span>{item}</span>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
                             </div>
 
-                            <div className="space-y-0.5">
-                              <div className="text-sm font-bold text-slate-800">AI prediction: "{mlClassification.fruit}"</div>
-                              <p className="text-[10px] font-bold text-amber-600">Sorting accuracy: 100% Labeled! 🎯</p>
-                            </div>
-
-                            <div className="bg-white border border-amber-100 rounded-xl p-2.5 text-[9px] font-mono text-left text-slate-500 space-y-0.5">
-                              <div>IF Color matches <span className="font-bold text-red-500">"{mlFruitColor}"</span></div>
-                              <div>AND Size matches <span className="font-bold text-blue-500">"{mlFruitSize}"</span></div>
-                              <div>THEN Robot Sorter ➔ <span className="font-black text-green-600">{mlClassification.fruit}</span></div>
-                            </div>
+                            <p className="text-[10px] font-bold text-amber-600 text-center">AI Generation Quality: 100% Verified! ✨</p>
                           </motion.div>
                         ) : (
-                          <div className="text-slate-400 space-y-2">
-                            <Brain className="w-10 h-10 text-amber-300 mx-auto" />
-                            <p className="text-[10px] font-bold">Configure specs & teach our puppy robot!</p>
+                          <div className="text-slate-400 space-y-2 text-center">
+                            <Sparkles className="w-10 h-10 text-amber-400 mx-auto animate-pulse" />
+                            <p className="text-[10px] font-bold">Configure options & click "Generate with AI"!</p>
                           </div>
                         )}
                       </div>
