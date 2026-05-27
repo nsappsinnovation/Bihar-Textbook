@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
+import { ReactLenis } from "lenis/react";
 
 import Nav from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
@@ -98,7 +99,7 @@ function App() {
   const isNoFooterPage = isIsolatedPage || isMissionPage || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/audio-library-dashboard" || location.pathname === "/my-audio-library" || location.pathname === "/ai-intelligence-dashboard" || location.pathname === "/vr-dashboard" || location.pathname === "/vr-labs-worlds" || location.pathname === "/cyber-security-dashboard" || location.pathname === "/ai-courses" || location.pathname === "/ai-quiz-challenge" || location.pathname === "/explore-ai-tools";
 
   return (
-    <>
+    <ReactLenis root>
       <ScrollToTop />
       {!isNoNavPage && <Nav />}
 
@@ -216,7 +217,7 @@ function App() {
 
         {!isNoFooterPage && <Footer />}
       </div>
-    </>
+    </ReactLenis>
   );
 }
 
