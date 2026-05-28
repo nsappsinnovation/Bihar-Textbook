@@ -97,32 +97,32 @@ const VrDashboard = () => {
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden ">
       <button
         onClick={() => navigate("/vr")}
-        className="fixed top-5 left-5 z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group"
+        className="fixed top-3 left-3 md:top-5 md:left-5 z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group"
       >
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
       </button>
       
       {/* Main Content */}
       <main className="flex-1 min-h-screen pb-4 overflow-y-auto">
-        <div className="px-6 md:px-12 space-y-8 pt-4">
+        <div className="px-4 sm:px-6 md:px-12 2xl:px-20 space-y-6 md:space-y-8 pt-4 2xl:max-w-[1600px] 2xl:mx-auto">
 
           {/* Hero & Stats Section */}
           <div className="relative">
             {/* Hero Section */}
-            <section className="bg-white rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[300px] pb-6">
-              <div className="relative z-10 p-8 md:p-10 lg:w-1/2 space-y-4">
-                 <h1 className="text-[32px] md:text-[42px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
+            <section className="bg-white rounded-[16px] md:rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[200px] sm:min-h-[260px] md:min-h-[300px] 2xl:min-h-[380px] pb-4 md:pb-6">
+              <div className="relative z-10 p-5 sm:p-8 md:p-10 lg:w-1/2 space-y-3 md:space-y-4">
+                 <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
                     Step into <br /> Imagination. <br />
                     <span className="text-blue-600">Learn in VR.</span>
                  </h1>
-                 <p className="text-slate-500 text-[15px] md:text-[16px] font-medium leading-relaxed max-w-sm">
+                 <p className="text-slate-500 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed max-w-sm">
                    Explore, interact and understand difficult concepts through immersive VR experiences.
                  </p>
                  
                  <div className="pt-2">
                    <button 
                      onClick={() => navigate('/vr-labs-worlds?tab=courses')}
-                     className="px-6 py-3 bg-blue-600 text-white rounded-full font-bold text-[14px] flex items-center gap-2 hover:bg-blue-700 transition-colors w-max shadow-sm shadow-blue-200"
+                      className="px-5 py-2.5 sm:px-6 sm:py-3 bg-blue-600 text-white rounded-full font-bold text-[12px] sm:text-[14px] flex items-center gap-2 hover:bg-blue-700 transition-colors w-max shadow-sm shadow-blue-200"
                    >
                      Explore Now <ArrowRight size={16} />
                    </button>
@@ -137,7 +137,7 @@ const VrDashboard = () => {
             </section>
 
             {/* Quick Stats Row */}
-            <section className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 relative z-20 -mt-8 px-4 md:px-12">
+            <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 lg:gap-6 relative z-20 -mt-6 md:-mt-8 px-3 sm:px-4 md:px-12">
               {quickStats.map((stat, i) => (
                 <div 
                   key={i}
@@ -163,7 +163,7 @@ const VrDashboard = () => {
                <button onClick={() => navigate('/vr-labs-worlds?tab=courses')} className="text-xs font-bold text-blue-600 hover:underline">View all</button>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
                {topics.map((topic, i) => (
                  <div 
                    key={i} 
@@ -189,7 +189,7 @@ const VrDashboard = () => {
           </div>
 
           {/* Middle Split Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
             
             {/* Continue Learning */}
             <div className="lg:col-span-7 flex flex-col">
@@ -203,7 +203,7 @@ const VrDashboard = () => {
                   {/* Card Body */}
                   <div className="flex flex-col sm:flex-row items-stretch gap-5 flex-1">
                      {/* Image with badge */}
-                     <div className="w-[160px] h-[160px] rounded-[16px] shrink-0 relative overflow-hidden shadow-md">
+                      <div className="w-full sm:w-[140px] md:w-[160px] h-[180px] sm:h-[140px] md:h-[160px] rounded-[16px] shrink-0 relative overflow-hidden shadow-md">
                         <img src={currentCourse.image} alt={currentCourse.title} className="w-full h-full object-cover" />
                         <span className="absolute top-3 left-3 px-2.5 py-1 bg-purple-600 text-white text-[10px] font-bold rounded-full shadow-sm">In Progress</span>
                      </div>
@@ -259,7 +259,7 @@ const VrDashboard = () => {
                   
                   {/* Card Body */}
                   <div className="flex flex-col sm:flex-row items-stretch gap-5 flex-1">
-                     <div className="w-[140px] h-[160px] rounded-[16px] shrink-0 overflow-hidden shadow-md group-hover:shadow-lg transition-shadow">
+                      <div className="w-full sm:w-[130px] md:w-[140px] h-[180px] sm:h-[140px] md:h-[160px] rounded-[16px] shrink-0 overflow-hidden shadow-md group-hover:shadow-lg transition-shadow">
                         <img src="/images/vr/v2.png" alt="Human Anatomy" className="w-full h-full object-cover  transition-transform duration-500" />
                      </div>
 

@@ -491,37 +491,36 @@ export default function AiCourses() {
       </AnimatePresence>
 
       {/* SOBER ELEGANT HEADER */}
-      <header className="sticky top-0 bg-white/90 backdrop-blur-md border-b border-slate-100 z-40 px-6 py-4 flex items-center justify-between shadow-[0_1px_15px_rgba(0,0,0,0.02)]">
+      <header className="sticky top-0 bg-white/90 backdrop-blur-md border-b border-slate-100 z-40 px-3 sm:px-6 py-3 sm:py-4 flex items-center justify-between shadow-[0_1px_15px_rgba(0,0,0,0.02)] gap-2">
         <div className="flex items-center gap-3">
           <button 
             onClick={() => navigate('/ai-intelligence-dashboard')} 
-            className="w-10 h-10 bg-white border border-slate-150 rounded-full shadow-sm flex items-center justify-center text-slate-400 hover:text-purple-600 hover:shadow transition-all group active:scale-95 cursor-pointer"
+            className="w-8 h-8 sm:w-10 sm:h-10 bg-white border border-slate-150 rounded-full shadow-sm flex items-center justify-center text-slate-400 hover:text-purple-600 hover:shadow transition-all group active:scale-95 cursor-pointer"
           >
             <ArrowLeft size={18} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
           </button>
           
           <div>
-            <h1 className="text-xl font-bold text-slate-900 flex items-center gap-2">
+            <h1 className="text-sm sm:text-xl font-bold text-slate-900 flex items-center gap-2">
               <span>AI Intelligence Playground</span>
             </h1>
-            <p className="text-[10px] text-slate-400 font-semibold tracking-wide uppercase">Interactive AI Lab for Kids</p>
+            <p className="text-[8px] sm:text-[10px] text-slate-400 font-semibold tracking-wide uppercase hidden sm:block">Interactive AI Lab for Kids</p>
           </div>
         </div>
 
         {/* Sober XP score tracker */}
         <div className="flex items-center gap-2">
-          <div className="bg-purple-50/80 border border-purple-200 px-4 py-2 rounded-2xl flex items-center gap-2 shadow-sm">
-            <Star className="w-5 h-5 text-purple-600 fill-purple-400" />
+          <div className="bg-purple-50/80 border border-purple-200 px-2 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-2xl flex items-center gap-1.5 sm:gap-2 shadow-sm">
+            <Star className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 fill-purple-400" />
             <div>
-              <span className="text-[9px] font-bold text-purple-500 uppercase tracking-wider block leading-none">MY XP SCORE</span>
-              <span className="text-sm font-black text-slate-800 leading-none mt-0.5 block">{xp} XP</span>
+              <span className="text-sm font-black text-slate-800 leading-none mt-0.5 block">{xp}</span>
             </div>
           </div>
         </div>
       </header>
 
       {/* CORE GRID */}
-      <div className="max-w-7xl mx-auto px-6 mt-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="max-w-7xl 2xl:max-w-[1600px] mx-auto px-3 sm:px-6 mt-4 sm:mt-8 grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-8">
         
         {/* LEFT COLUMN: Sidebar Navigation & Challenge Selector */}
         <div className="lg:col-span-4 space-y-6">
@@ -607,7 +606,7 @@ export default function AiCourses() {
         <div className="lg:col-span-8 space-y-6">
           
           {/* Main Workspace Card */}
-          <div className="bg-white rounded-[24px] border border-slate-150 shadow-[0_2px_10px_rgba(0,0,0,0.02)] p-6 sm:p-8 relative overflow-hidden flex flex-col min-h-[460px]">
+          <div className="bg-white rounded-[16px] sm:rounded-[24px] border border-slate-150 shadow-[0_2px_10px_rgba(0,0,0,0.02)] p-4 sm:p-6 md:p-8 relative overflow-hidden flex flex-col min-h-[300px] sm:min-h-[400px] lg:min-h-[460px]">
             
             {/* Active Challenge View */}
             {activeChallenge !== null ? (
