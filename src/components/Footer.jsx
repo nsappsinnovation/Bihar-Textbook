@@ -53,7 +53,6 @@ const Footer = () => {
           <ul className="space-y-3">
             <FooterLink to="/flagship-events/digital-books-portal" label="Digital Library Portal" />
             <FooterLink to="/flagship-events/bihar-state-pustak-mela" label="Bihar Pustak Mela" />
-            <FooterLink to="/flagship-events/mobile-library-initiative" label="Mobile Library" />
             <FooterLink to="/flagship-events/audio-books-inclusive" label="Audio Books (Inclusive)" />
             <FooterLink to="/flagship-events/regional-content-drive" label="Regional Content" />
             <FooterLink to="/flagship-events" label="View All Programs →" highlight />

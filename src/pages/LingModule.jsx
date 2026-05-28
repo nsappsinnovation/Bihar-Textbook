@@ -299,6 +299,46 @@ export default function LingModule({ type }) {
     return [currentItem.target, ...currentItem.distractors];
   }, [currentItem, type]);
 
+  const handleSpeak = (text, langCode) => {
+    if (!window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    const langMap = {
+      'de': 'de-DE', 'fr': 'fr-FR', 'es': 'es-ES', 'hi': 'hi-IN', 'en': 'en-US', 
+      'ja': 'ja-JP', 'ko': 'ko-KR', 'it': 'it-IT', 'ru': 'ru-RU', 'zh': 'zh-CN', 'ar': 'ar-SA'
+    };
+    utterance.lang = langMap[langCode] || 'en-US';
+    utterance.rate = 1.0;
+    utterance.pitch = 1.1; 
+    const voices = window.speechSynthesis.getVoices();
+    if (voices.length > 0) {
+      const voice = voices.find(v => v.lang.startsWith(utterance.lang));
+      if (voice) utterance.voice = voice;
+    }
+    window.speechSynthesis.speak(utterance);
+  };
+
+  const handleNext = () => {
+    if (step < items.length - 1) {
+      const nextStep = step + 1;
+      setStep(nextStep);
+      setInputValue("");
+      setShowFeedback(false);
+      setIsCorrect(null);
+      if (type === 'conversations') {
+        const newDailyProgress = dailyProgress + 1;
+        setDailyProgress(newDailyProgress);
+        localStorage.setItem("ling_daily_progress", newDailyProgress);
+        const moduleKey = `ling_${type}_progress`;
+        localStorage.setItem(moduleKey, (parseInt(localStorage.getItem(moduleKey) || "0")) + 1);
+        setTimeout(() => handleSpeak(items[nextStep].text, targetLang), 500);
+      } else {
+        handleSpeak(t.question_main(targetLangName), sourceLang);
+        setTimeout(() => handleSpeak(items[nextStep].target, targetLang), 1800);
+      }
+    } else setIsCompleted(true);
+  };
+
   useEffect(() => {
     const savedStreak = localStorage.getItem("ling_streak") || "7";
     const savedProgress = localStorage.getItem("ling_daily_progress") || "5";
@@ -335,25 +375,6 @@ export default function LingModule({ type }) {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleSpeak = (text, langCode) => {
-    if (!window.speechSynthesis) return;
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
-    const langMap = {
-      'de': 'de-DE', 'fr': 'fr-FR', 'es': 'es-ES', 'hi': 'hi-IN', 'en': 'en-US', 
-      'ja': 'ja-JP', 'ko': 'ko-KR', 'it': 'it-IT', 'ru': 'ru-RU', 'zh': 'zh-CN', 'ar': 'ar-SA'
-    };
-    utterance.lang = langMap[langCode] || 'en-US';
-    utterance.rate = 1.0;
-    utterance.pitch = 1.1; 
-    const voices = window.speechSynthesis.getVoices();
-    if (voices.length > 0) {
-      const voice = voices.find(v => v.lang.startsWith(utterance.lang));
-      if (voice) utterance.voice = voice;
-    }
-    window.speechSynthesis.speak(utterance);
-  };
-
   useEffect(() => {
     let timer;
     if (isCorrect === true && type !== 'conversations') {
@@ -376,27 +397,6 @@ export default function LingModule({ type }) {
       setIsCorrect(false);
       setShowFeedback(true);
     }
-  };
-
-  const handleNext = () => {
-    if (step < items.length - 1) {
-      const nextStep = step + 1;
-      setStep(nextStep);
-      setInputValue("");
-      setShowFeedback(false);
-      setIsCorrect(null);
-      if (type === 'conversations') {
-        const newDailyProgress = dailyProgress + 1;
-        setDailyProgress(newDailyProgress);
-        localStorage.setItem("ling_daily_progress", newDailyProgress);
-        const moduleKey = `ling_${type}_progress`;
-        localStorage.setItem(moduleKey, (parseInt(localStorage.getItem(moduleKey) || "0")) + 1);
-        setTimeout(() => handleSpeak(items[nextStep].text, targetLang), 500);
-      } else {
-        handleSpeak(t.question_main(targetLangName), sourceLang);
-        setTimeout(() => handleSpeak(items[nextStep].target, targetLang), 1800);
-      }
-    } else setIsCompleted(true);
   };
 
   const handleTryAgain = () => {

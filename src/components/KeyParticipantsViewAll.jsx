@@ -5,9 +5,9 @@ import { ArrowLeft, Search } from "lucide-react";
 // Data from KeyParticipant.jsx
 const industryData = [
   {
-    name: "Shri Nitish Kumar",
+    name: "Shri Samrat Choudhary",
     role: "Hon'ble Chief Minister, Bihar",
-    image: "/images/KeyParticipants/Nitish_Kumar_1-removebg-preview.png",
+    image: "/images/KeyParticipants/samrat.png",
     category: "Leadership",
   },
   {

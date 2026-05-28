@@ -1,22 +1,17 @@
 import React, { useState } from "react";
-import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [role, setRole] = useState("user");
-  const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("admin"); // Default to admin for convenience
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (role === "admin") {
-      // Simulate login success and redirect to admin dashboard
       navigate("/admin");
     } else {
-      // Logic for regular user login
-      console.log("Logging in as user:", { email, password });
+      // Simulate user login by going back to the home page or a default route
+      navigate("/");
     }
   };
 
@@ -52,8 +47,8 @@ const Login = () => {
           </div>
 
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Welcome Back</h2>
-            <p className="text-gray-500 text-sm mt-1 font-medium">Please enter your details to sign in</p>
+            <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Select Portal Role</h2>
+            <p className="text-gray-500 text-sm mt-1 font-medium">Choose your role and sign in instantly without any password.</p>
           </div>
 
           {/* Role Toggle */}
@@ -61,7 +56,7 @@ const Login = () => {
             <button
               type="button"
               onClick={() => setRole("user")}
-              className={`px-8 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300
+              className={`px-8 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer
                 ${role === "user" ? "bg-white text-indigo-700 shadow-md scale-[1.02]" : "text-gray-500 hover:text-gray-700"}`}
             >
               User
@@ -69,7 +64,7 @@ const Login = () => {
             <button
               type="button"
               onClick={() => setRole("admin")}
-              className={`px-8 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300
+              className={`px-8 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer
                 ${role === "admin" ? "bg-white text-indigo-700 shadow-md scale-[1.02]" : "text-gray-500 hover:text-gray-700"}`}
             >
               Admin
@@ -77,52 +72,22 @@ const Login = () => {
           </div>
 
           {/* ================= FORM ================= */}
-          <form className="space-y-5" onSubmit={handleSubmit}>
-            <div className="space-y-1.5">
-              <label className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em] ml-1">Account ID / Email</label>
-              <div className="relative group">
-                <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-indigo-500 transition-colors" />
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@example.com"
-                  className="w-full pl-11 pr-4 py-3.5 rounded-2xl border border-gray-200 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:border-indigo-500 transition-all bg-gray-50/30 font-medium text-gray-700"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-1.5">
-              <label className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em] ml-1">Secret Password</label>
-              <div className="relative group">
-                <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-indigo-500 transition-colors" />
-                <input
-                  type={showPassword ? "text" : "password"}
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="w-full pl-11 pr-11 py-3.5 rounded-2xl border border-gray-200 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:border-indigo-500 transition-all bg-gray-50/30 font-medium text-gray-700"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-indigo-600 transition-colors"
-                >
-                  {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
-                </button>
-              </div>
-              <div className="flex justify-end pr-1">
-                <a href="#" className="text-[11px] font-bold text-indigo-600 hover:text-indigo-800 transition-colors underline decoration-indigo-200 underline-offset-4">Forgot ID or Password?</a>
-              </div>
+          <form className="space-y-6" onSubmit={handleSubmit}>
+            <div className="bg-indigo-50/50 border border-indigo-100 rounded-2xl p-6 text-center">
+              <span className="text-xs font-bold text-indigo-600 uppercase tracking-widest block mb-1">Selected Access</span>
+              <p className="text-lg font-extrabold text-indigo-900 capitalize">
+                {role === "admin" ? "🛡️ Administrator Dashboard" : "🎓 Regular User Portal"}
+              </p>
+              <p className="text-xs text-gray-500 mt-2">
+                Clicking the button below will immediately log you into the portal.
+              </p>
             </div>
 
             <button
               type="submit"
-              className="w-full py-4 rounded-2xl bg-indigo-900 hover:bg-indigo-800 text-white font-bold text-base shadow-[0_10px_30px_-10px_rgba(49,46,129,0.5)] hover:shadow-[0_20px_40px_-10px_rgba(49,46,129,0.6)] transition-all duration-300 transform hover:-translate-y-1 active:scale-[0.98] mt-2"
+              className="w-full py-4 rounded-2xl bg-indigo-900 hover:bg-indigo-800 text-white font-bold text-base shadow-[0_10px_30px_-10px_rgba(49,46,129,0.5)] hover:shadow-[0_20px_40px_-10px_rgba(49,46,129,0.6)] transition-all duration-300 transform hover:-translate-y-1 active:scale-[0.98] cursor-pointer mt-2"
             >
-              Sign In to Dashboard
+              Sign In as {role === "admin" ? "Admin" : "User"}
             </button>
           </form>
 

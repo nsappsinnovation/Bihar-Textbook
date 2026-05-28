@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Galleryconfig } from "../components/gallery/Galleryconfig";
+import PhotoGallery from "../components/gallery/sections/Photogallery";
+import VideoGallery from "../components/gallery/sections/Videogallery";
+import PressRelease from "../components/gallery/sections/Pressrelease";
 
 const componentMap = {
-  // Components for gallery sections would go here
+  PhotoGallery: PhotoGallery,
+  VideoGallery: VideoGallery,
+  PressRelease: PressRelease,
 };
 
 const Gallery = () => {
