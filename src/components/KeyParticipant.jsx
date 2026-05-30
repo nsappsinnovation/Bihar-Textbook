@@ -74,8 +74,7 @@ export default function KeyParticipant() {
               <div className="h-px w-8 bg-indigo-500"></div>
               <span className="text-[9px] font-bold text-blue-500 uppercase tracking-[0.2em]">Leadership & Academia</span>
             </div>
-            
-            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 mb-4 leading-tight">
+            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 mb-6">
               Leading the Way in <br />
               <span className="text-slate-400">Educational Excellence</span>
             </h2>
@@ -123,8 +122,8 @@ export default function KeyParticipant() {
             <button
               onClick={() => setTab("industry")}
               className={`pb-3 text-sm font-bold tracking-wide transition-all ${tab === "industry"
-                  ? "text-[#332F82] border-b-2 border-[#332F82]"
-                  : "text-gray-400 hover:text-gray-600"
+                ? "text-[#332F82] border-b-2 border-[#332F82]"
+                : "text-gray-400 hover:text-gray-600"
                 }`}
             >
               Leadership
@@ -132,8 +131,8 @@ export default function KeyParticipant() {
             <button
               onClick={() => setTab("academia")}
               className={`pb-3 text-sm font-bold tracking-wide transition-all ${tab === "academia"
-                  ? "text-[#332F82] border-b-2 border-[#332F82]"
-                  : "text-gray-400 hover:text-gray-600"
+                ? "text-[#332F82] border-b-2 border-[#332F82]"
+                : "text-gray-400 hover:text-gray-600"
                 }`}
             >
               Visionaries & Educators
@@ -219,4 +218,3 @@ function ParticipantCard({ item }) {
     </div>
   );
 }
-  

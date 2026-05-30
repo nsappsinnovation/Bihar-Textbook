@@ -94,32 +94,32 @@ const AiIntelligenceDashboard = () => {
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden">
       <button
               onClick={() => navigate("/ai-intelligence")}
-              className="fixed top-5 left-5 z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-green-600 hover:shadow-lg transition-all border border-slate-100 group"
+              className="fixed top-3 left-3 md:top-5 md:left-5 z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-green-600 hover:shadow-lg transition-all border border-slate-100 group"
             >
               <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
             </button>
       
       {/* Main Content */}
       <main className="flex-1 min-h-screen pb-4 overflow-y-auto">
-        <div className="px-6 md:px-12 space-y-8 pt-4">
+        <div className="px-4 sm:px-6 md:px-12 2xl:px-20 space-y-6 md:space-y-8 pt-4 2xl:max-w-[1600px] 2xl:mx-auto">
 
           {/* Hero & Stats Section */}
           <div className="relative">
             {/* Hero Section - AudioLibrary style */}
-            <section className="bg-white rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[300px] pb-6">
-              <div className="relative z-10 p-8 md:p-10 lg:w-1/2 space-y-4">
-                 <h1 className="text-[32px] md:text-[42px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
+            <section className="bg-white rounded-[16px] md:rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[200px] sm:min-h-[260px] md:min-h-[300px] 2xl:min-h-[380px] pb-4 md:pb-6">
+              <div className="relative z-10 p-5 sm:p-8 md:p-10 lg:w-1/2 space-y-3 md:space-y-4">
+                 <h1 className="text-[22px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
                     Build. Learn. &amp; <br /> Think Smarter with <br />
                     <span className="text-purple-600">AI Intelligence</span>
                  </h1>
-                 <p className="text-slate-500 text-[15px] md:text-[16px] font-medium leading-relaxed max-w-sm">
+                 <p className="text-slate-500 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed max-w-sm">
                    Your AI-powered learning hub for skills and knowledge.
                  </p>
                  
                  <div className="pt-2">
                    <button 
                      onClick={() => navigate('/ai-courses')}
-                     className="px-6 py-3 bg-purple-600 text-white rounded-full font-bold text-[14px] flex items-center gap-2 hover:bg-purple-700 transition-colors w-max shadow-sm shadow-purple-200"
+                      className="px-5 py-2.5 sm:px-6 sm:py-3 bg-purple-600 text-white rounded-full font-bold text-[12px] sm:text-[14px] flex items-center gap-2 hover:bg-purple-700 transition-colors w-max shadow-sm shadow-purple-200"
                    >
                      Start Learning <ArrowRight size={16} />
                    </button>
@@ -160,7 +160,7 @@ const AiIntelligenceDashboard = () => {
                <button onClick={() => navigate('/ai-courses')} className="text-xs font-bold text-purple-600 hover:underline">View all</button>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 md:gap-4">
                {topics.map((topic, i) => (
                  <div 
                    key={i} 
@@ -186,7 +186,7 @@ const AiIntelligenceDashboard = () => {
           </div>
 
           {/* Middle Split Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
             
             {/* Continue Learning */}
             <div className="lg:col-span-7 flex flex-col">

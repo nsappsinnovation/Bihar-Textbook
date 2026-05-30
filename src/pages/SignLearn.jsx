@@ -48,43 +48,42 @@ export default function SignLearn() {
       {/* Back Button */}
       <button
         onClick={() => navigate("/sign")}
-        className="fixed top-5 left-5 z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-green-600 hover:shadow-lg transition-all border border-slate-100 group"
+        className="fixed top-3 left-3 md:top-5 md:left-5 z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-green-600 hover:shadow-lg transition-all border border-slate-100 group"
       >
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
       </button>
 
       {/* ─── HERO ──────────────────────────────────────────────── */}
-      <section className="bg-white px-16 pt-10 pb-4 max-w-7xl mx-auto">
+      <section className="bg-white px-4 sm:px-8 lg:px-16 pt-10 pb-4 max-w-7xl 2xl:max-w-[1600px] mx-auto">
         <div className="flex flex-col lg:flex-row gap-8 items-center">
 
           {/* Left text */}
-          <div className="flex-1 space-y-4 min-w-[240px]">
-            <h1 className="text-4xl md:text-4xl font-black leading-tight">
+          <div className="flex-1 space-y-4 min-w-[240px] text-center lg:text-left">
+            <h1 className="text-3xl md:text-4xl lg:text-[45px] font-black leading-tight">
               Let's learn<br /><span className="text-[#22C55E]">Sign Language</span>
-              
             </h1>
-            <p className="text-slate-500 text-base leading-relaxed max-w-xs">
+            <p className="text-slate-500 text-sm sm:text-base leading-relaxed max-w-xs mx-auto lg:mx-0">
               Have real conversations using signs and expressions.
             </p>
             <button
               onClick={() => navigate("/sign-module", { state: { type: "conversations" } })}
-              className="mt-2 px-7 py-3 bg-[#22C55E] text-white rounded-full font-bold text-sm flex items-center gap-2 hover:bg-green-600 transition-all shadow-lg shadow-green-200 hover:-translate-y-0.5"
+              className="mt-2 px-7 py-3 bg-[#22C55E] text-white rounded-full font-bold text-sm flex items-center gap-2 hover:bg-green-600 transition-all shadow-lg shadow-green-200 hover:-translate-y-0.5 mx-auto lg:mx-0"
             >
               Start a Conversation <ArrowRight size={18} />
             </button>
           </div>
 
           {/* Hero cards carousel */}
-          <div className="flex-[2] flex items-center justify-center gap-4 relative">
-            <div className="relative flex items-end gap-2">
-              <img src="/images/signlanguage/rhs.png" alt="Characters" className="w-[520px] md:w-[640px] h-auto object-contain" />
+          <div className="flex-[2] flex items-center justify-center gap-4 relative w-full">
+            <div className="relative flex items-end gap-2 w-full justify-center">
+              <img src="/images/signlanguage/rhs.png" alt="Characters" className="w-full max-w-[420px] md:max-w-[540px] lg:max-w-[640px] h-auto object-contain" />
             </div>
           </div>
         </div>
       </section>
 
       {/* ─── CATEGORIES ─────────────────────────────────────────── */}
-      <section className="px-6 py-6 max-w-7xl mx-auto">
+      <section className="px-4 sm:px-6 py-6 max-w-7xl 2xl:max-w-[1600px] mx-auto">
         <h2 className="text-lg font-black text-slate-800 mb-5">Choose what you want to learn</h2>
         <div className="flex gap-4 overflow-x-auto no-scrollbar pb-1">
           {CATEGORIES.map((cat, i) => (
@@ -106,7 +105,7 @@ export default function SignLearn() {
       </section>
 
       {/* ─── MAIN CARDS ROW ─────────────────────────────────────── */}
-      <section className="px-6 pb-6 max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-5">
+      <section className="px-4 sm:px-6 pb-6 max-w-7xl 2xl:max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-5">
 
         {/* LEFT: Let's start a conversation */}
         <div className="bg-white rounded-3xl p-5 shadow-sm border border-slate-100">
@@ -117,48 +116,49 @@ export default function SignLearn() {
           </div>
 
           {/* Cards Row */}
-          <div className="flex items-center justify-center gap-3">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
 
-            {/* Boy avatar */}
-            <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-green-100 bg-green-50 flex-shrink-0">
-              <img src="/images/signlanguage/boy.png" alt="Boy" className="w-10 h-15 object-cover object-top" />
-            </div>
+            {/* Boy avatar & signs */}
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-green-100 bg-green-50 flex-shrink-0">
+                <img src="/images/signlanguage/boy.png" alt="Boy" className="w-10 h-15 object-cover object-top" />
+              </div>
 
-            {/* HE SIGNS card */}
-            <div className="relative bg-[#EDFFF5] rounded-2xl p-4 flex flex-col items-center w-48 border border-green-100">
-              <p className="text-[10px] font-black text-[#22C55E] uppercase tracking-widest mb-3">He Signs</p>
-              <img src="/images/signlanguage/hand.png" alt="Thank you" className="w-28 h-28 object-contain" />
-              
+              {/* HE SIGNS card */}
+              <div className="relative bg-[#EDFFF5] rounded-2xl p-4 flex flex-col items-center w-36 sm:w-44 border border-green-100">
+                <p className="text-[9px] font-black text-[#22C55E] uppercase tracking-widest mb-2">He Signs</p>
+                <img src="/images/signlanguage/hand.png" alt="Thank you" className="w-20 h-20 sm:w-24 sm:h-24 object-contain" />
+              </div>
             </div>
 
             {/* Circular arrows */}
-            <div className="flex flex-col items-center gap-1 text-slate-300 flex-shrink-0">
-              <svg width="36" height="50" viewBox="0 0 36 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M28 8C28 8 34 14 34 22C34 30 28 35 18 35" stroke="#CBD5E1" strokeWidth="2" strokeLinecap="round" fill="none"/>
-                <path d="M22 32L18 36L22 40" stroke="#CBD5E1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M8 42C8 42 2 36 2 28C2 20 8 15 18 15" stroke="#CBD5E1" strokeWidth="2" strokeLinecap="round" fill="none"/>
-                <path d="M14 18L18 14L14 10" stroke="#CBD5E1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            <div className="flex items-center justify-center gap-1 text-slate-300 flex-shrink-0 rotate-90 sm:rotate-0">
+              <svg width="30" height="40" viewBox="0 0 36 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M28 8C28 8 34 14 34 22C34 30 28 35 18 35" stroke="#CBD5E1" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+                <path d="M22 32L18 36L22 40" stroke="#CBD5E1" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M8 42C8 42 2 36 2 28C2 20 8 15 18 15" stroke="#CBD5E1" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+                <path d="M14 18L18 14L14 10" stroke="#CBD5E1" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
 
-            {/* SHE REPLIES card */}
-            <div className="relative bg-[#FFF8E8] rounded-2xl p-4 flex flex-col items-center w-48 border border-yellow-100">
-              <p className="text-[10px] font-black text-[#F59E0B] uppercase tracking-widest mb-3">She Replies</p>
-              <img src="/images/signlanguage/handl.png" alt="You're welcome" className="w-28 h-28 object-contain" />
-             
-            </div>
+            {/* Girl avatar & signs */}
+            <div className="flex items-center gap-3">
+              {/* SHE REPLIES card */}
+              <div className="relative bg-[#FFF8E8] rounded-2xl p-4 flex flex-col items-center w-36 sm:w-44 border border-yellow-100">
+                <p className="text-[9px] font-black text-[#F59E0B] uppercase tracking-widest mb-2">She Replies</p>
+                <img src="/images/signlanguage/handl.png" alt="You're welcome" className="w-20 h-20 sm:w-24 sm:h-24 object-contain" />
+              </div>
 
-            {/* Girl avatar */}
-            <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-yellow-100 bg-yellow-50 flex-shrink-0">
-              <img src="/images/signlanguage/girl.png" alt="Girl" className="w-11 h-15 object-cover object-right" />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-yellow-100 bg-yellow-50 flex-shrink-0">
+                <img src="/images/signlanguage/girl.png" alt="Girl" className="w-11 h-15 object-cover object-right" />
+              </div>
             </div>
           </div>
 
           {/* Labels */}
-          <div className="flex justify-center gap-3 mt-3 px-14">
-            <p className="text-sm font-bold text-slate-700 w-48 text-center">Thank you</p>
-            <div className="w-12" />
-            <p className="text-sm font-bold text-slate-700 w-48 text-center">You're welcome</p>
+          <div className="flex justify-between sm:justify-center gap-3 sm:gap-16 mt-3 px-2 sm:px-14">
+            <p className="text-xs sm:text-sm font-bold text-slate-700 w-36 sm:w-44 text-center">Thank you</p>
+            <p className="text-xs sm:text-sm font-bold text-slate-700 w-36 sm:w-44 text-center">You're welcome</p>
           </div>
 
           {/* Continue button */}
@@ -182,13 +182,13 @@ export default function SignLearn() {
             </button>
           </div>
 
-          <div className="flex gap-4 mt-5">
+          <div className="flex flex-col sm:flex-row gap-4 mt-5">
             {/* Thumbs up sign */}
-            <div className="flex-1 bg-slate-50 rounded-2xl flex items-center justify-center h-48 p-4">
+            <div className="flex-1 bg-slate-50 rounded-2xl flex items-center justify-center h-36 sm:h-48 p-4">
               <img src="/images/signlanguage/thumb.png" alt="Practice" className="w-full h-full object-contain" />
             </div>
             {/* Outline / ghost hand */}
-            <div className="flex-1 bg-slate-50 rounded-2xl flex items-center justify-center h-48 p-4 ">
+            <div className="flex-1 bg-slate-50 rounded-2xl flex items-center justify-center h-36 sm:h-48 p-4">
               <img src="/images/signlanguage/ghosthand.png" alt="Try" className="w-full h-full object-contain grayscale" />
             </div>
           </div>
@@ -220,7 +220,7 @@ export default function SignLearn() {
       </section>
 
       {/* ─── CONTINUE LEARNING ──────────────────────────────────── */}
-      <section className="px-6 pb-12 max-w-7xl mx-auto">
+      <section className="px-4 sm:px-6 pb-12 max-w-7xl 2xl:max-w-[1600px] mx-auto">
          <div className="flex justify-between items-center mb-5">
             <h3 className="text-2xl font-black text-[#1A1C2E]">Continue learning</h3>
             <button className="text-[15px] font-bold text-[#22C55E] flex items-center gap-1.5 hover:opacity-80 transition-opacity">
@@ -228,7 +228,7 @@ export default function SignLearn() {
             </button>
          </div>
 
-         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             <ContinueItem icon={<BookOpen size={18} />} color="#0BB562" bg="#E8F5E9" title="Greetings" progress={66} text="8 / 12" onClick={() => navigate("/sign-module", { state: { category: "greetings", type: "practice" } })} />
             <ContinueItem icon={<MessageSquare size={18} />} color="#FF9800" bg="#FFF3E0" title="Daily Life" progress={40} text="6 / 15" onClick={() => navigate("/sign-module", { state: { category: "daily life", type: "practice" } })} />
             <ContinueItem icon={<User size={18} />} color="#9C27B0" bg="#F3E5F5" title="Emotions" progress={33} text="4 / 12" onClick={() => navigate("/sign-module", { state: { category: "emotions", type: "practice" } })} />
