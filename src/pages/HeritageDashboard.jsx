@@ -361,7 +361,9 @@ const HeritageDashboard = () => {
                         className={`absolute flex flex-col items-center justify-center ${isVisible ? 'pointer-events-auto' : 'pointer-events-none'}`}
                       >
                         <div
-                          className="relative w-56 h-56 md:w-[320px] md:h-[320px] overflow-hidden shadow-2xl border-[4px] md:border-[6px] border-white bg-slate-900 cursor-pointer group transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] flex flex-col rounded-full"
+                          className={`relative overflow-hidden shadow-2xl border-[4px] md:border-[6px] border-white bg-slate-900 cursor-pointer group transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] flex flex-col rounded-full ${
+                            isCenter ? 'w-56 h-56 md:w-[320px] md:h-[320px] hover:w-[280px] hover:h-[280px] md:hover:w-[400px] md:hover:h-[400px]' : 'w-56 h-56 md:w-[320px] md:h-[320px]'
+                          }`}
                           onClick={() => !isCenter && (offset > 0 ? setCurrentIndex(prev => (prev + 1) % len) : setCurrentIndex(prev => (prev - 1 + len) % len))}
                         >
                           {/* Image */}
