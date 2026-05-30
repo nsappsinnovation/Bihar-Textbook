@@ -72,14 +72,14 @@ export default function KeyParticipant() {
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 mb-4">
               <div className="h-px w-8 bg-indigo-500"></div>
-              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-[0.2em]">Leadership & Academia</span>
+              <span className="text-[9px] font-bold text-blue-500 uppercase tracking-[0.2em]">Leadership & Academia</span>
             </div>
             
-            <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 mb-6">
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-slate-900 mb-4 leading-tight">
               Leading the Way in <br />
               <span className="text-slate-400">Educational Excellence</span>
             </h2>
-            <p className="text-lg text-slate-500 font-normal leading-relaxed">
+            <p className="text-base text-slate-500 font-normal leading-relaxed">
               Meet the visionary leaders and esteemed educators shaping the future of learning in Bihar.
             </p>
           </div>
