@@ -107,27 +107,27 @@ const Vrlab = () => {
       {/* Back Button */}
       <button 
         onClick={() => navigate("/")} 
-        className="absolute top-4 left-4 md:left-6 lg:left-8 w-11 h-11 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-500 hover:shadow-lg transition-all border border-slate-50 z-50 group"
+        className="fixed top-3 left-3 md:top-4 md:left-6 lg:left-8 w-9 h-9 md:w-11 md:h-11 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-500 hover:shadow-lg transition-all border border-slate-50 z-50 group"
       >
-        <ArrowLeft size={22} strokeWidth={2.5} className="group-hover:-translate-x-1 transition-transform" />
+        <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-1 transition-transform" />
       </button>
 
-      <div className="bg-white flex items-center pt-16 pb-0">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <div className="bg-white flex items-center pt-10 pb-0">
+        <div className="max-w-7xl 2xl:max-w-[1600px] mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center relative z-10 mt-6 sm:mt-10 md:-mt-8 lg:-mt-12">
 
           {/* LEFT: Image */}
-          <div className="flex justify-center -mt-20">
+          <div className="flex justify-center">
             <img
               src="/images/vr/vr.png"
               alt="VR Education Illustration"
-              className="w-[620px] h-auto object-contain"
+              className="w-full max-w-[320px] sm:max-w-[420px] md:max-w-[520px] lg:max-w-[620px] h-auto object-contain mx-auto"
             />
           </div>
 
           {/* RIGHT: Content */}
           <div>
             {/* Heading */}
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl font-bold text-slate-900 mt-4 md:-mt-8">
               Immersive Virtual Reality Lab
             </h1>
 
@@ -199,8 +199,8 @@ const Vrlab = () => {
       </div>
 
       
-      <section className="pt-2 pb-10 bg-white px-6">
-        <div className="max-w-7xl mx-auto">
+      <section className="pt-8 pb-10 bg-white px-4 sm:px-6 mt-8 md:mt-12 lg:mt-16">
+        <div className="max-w-7xl 2xl:max-w-[1600px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
             {/* Left Content */}
@@ -209,7 +209,7 @@ const Vrlab = () => {
                 <h2 className="text-xs font-black uppercase tracking-[0.3em] text-blue-600">
                   Program Overview
                 </h2>
-                <h3 className="text-4xl font-extrabold text-slate-900 leading-tight">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight">
                   Empowering Learning Through{" "}
                   <br />
                   <span className="text-slate-400">
@@ -253,8 +253,8 @@ const Vrlab = () => {
         </div>
       </section>
 
-      <section className="py-10 bg-white px-6">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-10 bg-white px-4 sm:px-6">
+        <div className="max-w-7xl 2xl:max-w-[1600px] mx-auto">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
             <div className="space-y-4">

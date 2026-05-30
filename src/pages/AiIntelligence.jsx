@@ -103,37 +103,37 @@ const AiIntelligence = () => {
       {/* Back Button */}
       <button 
         onClick={() => navigate("/")} 
-        className="absolute top-4 left-4 md:left-6 lg:left-8 w-11 h-11 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-500 hover:shadow-lg transition-all border border-slate-50 z-50 group"
+        className="absolute top-3 left-3 md:top-4 md:left-4 lg:left-8 w-9 h-9 md:w-11 md:h-11 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-500 hover:shadow-lg transition-all border border-slate-50 z-50 group"
       >
         <ArrowLeft size={22} strokeWidth={2.5} className="group-hover:-translate-x-1 transition-transform" />
       </button>
 
       <div className="bg-white flex items-center pt-0 pb-0">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl 2xl:max-w-[1600px] mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
 
           {/* LEFT: Image */}
           <div className="flex justify-center">
             <img
               src="/images/ai/hero_new.png"
               alt="AI Intelligence Illustration"
-              className="w-[620px] h-auto object-contain"
+              className="w-full max-w-[320px] sm:max-w-[420px] md:max-w-[520px] lg:max-w-[620px] h-auto object-contain mx-auto"
             />
           </div>
 
           {/* RIGHT: Content */}
           <div>
             {/* Heading */}
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mt-10">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl font-bold text-slate-900 mt-6 md:mt-10">
               AI Intelligence Programs
             </h1>
 
             {/* Highlight text */}
-            <p className="mt-4 text-lg font-semi bold text-blue-600">
+            <p className="mt-3 md:mt-4 text-base sm:text-lg font-semi bold text-blue-600">
              Smart Adaptive Tutoring for Every Student
             </p>
 
             {/* Description */}
-            <p className="mt-4 text-slate-600 max-w-md">
+            <p className="mt-3 md:mt-4 text-sm sm:text-base text-slate-600 max-w-md">
               Leveraging artificial intelligence to provide personalized learning experiences and real-time support for 21st-century learners.
             </p>
            
@@ -141,7 +141,7 @@ const AiIntelligence = () => {
             {/* Action Button */}
             <div className="mt-8">
               <Link to="/ai-intelligence-dashboard">
-                <button className="px-8 py-4 bg-blue-600 text-white rounded-full text-sm font-black uppercase tracking-widest hover:bg-slate-900 hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-blue-200 flex items-center gap-2">
+                <button className="px-6 py-3 sm:px-8 sm:py-4 bg-blue-600 text-white rounded-full text-xs sm:text-sm font-black uppercase tracking-widest hover:bg-slate-900 hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-blue-200 flex items-center gap-2">
                   Start Learning <ArrowRight size={18} />
                 </button>
               </Link>
@@ -197,8 +197,8 @@ const AiIntelligence = () => {
 
       
       <section className="pt-2 pb-10 bg-white px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl 2xl:max-w-[1600px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
 
             {/* Left Content */}
             <div className="space-y-10">
@@ -206,7 +206,7 @@ const AiIntelligence = () => {
                 <h2 className="text-xs font-black uppercase tracking-[0.3em] text-blue-600 mt-16">
                   Program Overview
                 </h2>
-                <h3 className="text-4xl font-extrabold text-slate-900 leading-tight">
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 leading-tight">
                   The Future of Learning with{" "}
                   <br />
                   <span className="text-slate-400">
@@ -251,7 +251,7 @@ const AiIntelligence = () => {
       </section>
 
       <section className="py-10 bg-white px-6 -mt-4">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl 2xl:max-w-[1600px] mx-auto">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
             <div className="space-y-4">

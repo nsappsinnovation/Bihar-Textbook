@@ -184,7 +184,7 @@ const AiQuizChallenge = () => {
   const badgesData = getBadgesData();
 
   return (
-    <div className="h-screen w-screen overflow-hidden relative font-sans select-none">
+    <div className="min-h-screen w-screen overflow-x-hidden overflow-y-auto lg:overflow-hidden relative font-sans select-none bg-[#0b1528]">
       {/* Full BG Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -195,52 +195,52 @@ const AiQuizChallenge = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950/50 via-transparent to-slate-950/60" />
 
       {/* Main Container */}
-      <div className="relative z-10 h-full w-full flex flex-col justify-between p-4 md:p-6 lg:p-8">
+      <div className="relative z-10 min-h-screen lg:h-full w-full flex flex-col justify-between p-3 sm:p-4 md:p-6 lg:p-8">
 
         {/* ──── HEADER AREA ──── */}
-        <header className="w-full flex items-center justify-between shrink-0 gap-4">
+        <header className="w-full flex flex-col md:flex-row items-center justify-between shrink-0 gap-4">
           
           {/* Left: Score & Level Cards */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center justify-center flex-wrap gap-2 sm:gap-3 w-full md:w-auto">
             {/* Back Button */}
             <button
               onClick={() => navigate('/ai-intelligence-dashboard')}
-              className="w-10 h-10 bg-[#071330]/80 backdrop-blur-md rounded-full flex items-center justify-center text-white/80 hover:bg-white/10 transition-all border border-blue-500/30 shadow-[0_0_12px_rgba(59,130,246,0.2)]"
+              className="w-8 h-8 sm:w-10 sm:h-10 bg-[#071330]/80 backdrop-blur-md rounded-full flex items-center justify-center text-white/80 hover:bg-white/10 transition-all border border-blue-500/30 shadow-[0_0_12px_rgba(59,130,246,0.2)] shrink-0"
             >
-              <ArrowLeft size={18} />
+              <ArrowLeft size={16} />
             </button>
 
             {/* Score Card */}
-            <div className="bg-[#071330]/80 backdrop-blur-md border border-blue-500/30 rounded-2xl p-2 px-4 flex items-center gap-3 shadow-[0_0_15px_rgba(59,130,246,0.15)] min-w-[110px]">
-              <Trophy className="w-7 h-7 text-yellow-400 fill-yellow-400/20" />
+            <div className="bg-[#071330]/80 backdrop-blur-md border border-blue-500/30 rounded-xl sm:rounded-2xl p-1.5 px-3 sm:p-2 sm:px-4 flex items-center gap-2 sm:gap-3 shadow-[0_0_15px_rgba(59,130,246,0.15)] min-w-[90px] sm:min-w-[110px]">
+              <Trophy className="w-5 h-5 sm:w-7 sm:h-7 text-yellow-400 fill-yellow-400/20" />
               <div className="flex flex-col">
-                <span className="text-[9px] font-black text-slate-400 tracking-wider uppercase">Score</span>
-                <span className="text-base font-black text-white leading-none mt-0.5">{score}</span>
+                <span className="text-[8px] sm:text-[9px] font-black text-slate-400 tracking-wider uppercase">Score</span>
+                <span className="text-sm sm:text-base font-black text-white leading-none mt-0.5">{score}</span>
               </div>
             </div>
 
             {/* Level Card */}
-            <div className="bg-[#071330]/80 backdrop-blur-md border border-blue-500/30 rounded-2xl p-2 px-4 flex items-center gap-3 shadow-[0_0_15px_rgba(59,130,246,0.15)] min-w-[100px]">
-              <Star className="w-7 h-7 text-yellow-400 fill-yellow-400" />
+            <div className="bg-[#071330]/80 backdrop-blur-md border border-blue-500/30 rounded-xl sm:rounded-2xl p-1.5 px-3 sm:p-2 sm:px-4 flex items-center gap-2 sm:gap-3 shadow-[0_0_15px_rgba(59,130,246,0.15)] min-w-[80px] sm:min-w-[100px]">
+              <Star className="w-5 h-5 sm:w-7 sm:h-7 text-yellow-400 fill-yellow-400" />
               <div className="flex flex-col">
-                <span className="text-[9px] font-black text-slate-400 tracking-wider uppercase">Level</span>
-                <span className="text-base font-black text-white leading-none mt-0.5">{level}</span>
+                <span className="text-[8px] sm:text-[9px] font-black text-slate-400 tracking-wider uppercase">Level</span>
+                <span className="text-sm sm:text-base font-black text-white leading-none mt-0.5">{level}</span>
               </div>
             </div>
           </div>
 
           {/* Center: Title & Subtitle */}
-          <div className="text-center flex flex-col items-center">
-            <h1 className="text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-none">
+          <div className="text-center flex flex-col items-center w-full md:w-auto">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight leading-none">
               AI QUIZ
             </h1>
-            <h2 className="text-lg lg:text-xl font-extrabold text-cyan-400 tracking-[0.2em] leading-none mt-1">
+            <h2 className="text-sm sm:text-lg lg:text-xl font-extrabold text-cyan-400 tracking-[0.2em] leading-none mt-1">
               CHALLENGE
             </h2>
           </div>
 
           {/* Right: Round Menu Tabs (Fully Functional) */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center justify-center gap-3 sm:gap-4 w-full md:w-auto">
             {[
               
               { id: 'quiz', label: 'Quiz', icon: <HelpCircle className="w-4 h-4 text-blue-400" /> },
@@ -261,7 +261,7 @@ const AiQuizChallenge = () => {
                 }}
                 className="flex flex-col items-center gap-1 group cursor-pointer focus:outline-none"
               >
-                <div className={`w-9 h-9 rounded-full bg-[#071330]/80 backdrop-blur-md border transition-all group-hover:scale-105 flex items-center justify-center ${
+                <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-[#071330]/80 backdrop-blur-md border transition-all group-hover:scale-105 flex items-center justify-center ${
                   activeTab === tab.id 
                     ? 'border-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.4)] bg-cyan-950/40' 
                     : 'border-blue-500/25'
@@ -277,10 +277,10 @@ const AiQuizChallenge = () => {
 
         </header>
 
-        <div className="flex-1 w-full flex items-center mt-4 mb-4 justify-end pr-0 lg:pr-8 xl:pr-16">
+        <div className="flex-1 w-full flex items-center mt-6 mb-6 justify-center lg:justify-end pr-0 lg:pr-8 xl:pr-16">
           
           {/* Content Card Wrapper */}
-          <div className="w-full max-w-[370px] lg:max-w-[390px] shrink-0 transition-all duration-300">
+          <div className="w-full max-w-[370px] sm:max-w-[420px] lg:max-w-[390px] shrink-0 transition-all duration-300">
             <AnimatePresence mode="wait">
               
 
