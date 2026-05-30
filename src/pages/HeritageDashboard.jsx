@@ -1,223 +1,440 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 import { 
-  ArrowLeft, ArrowRight, CheckCircle2, Star, Flame, Trophy, 
-  Search, Landmark, Scroll, Database, Globe, History, Compass, 
-  Map, User, MessageCircle, Shield, LayoutGrid, Clock, Award,
-  Milestone, BookOpen, Heart, UserCircle, Briefcase, Flag
+  ArrowLeft, ArrowRight, ChevronLeft, ChevronRight,
+  Landmark, MapPin, Globe, Box, BookOpen, Flag, Palette
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const HeritageDashboard = () => {
   const navigate = useNavigate();
 
-  // Content mapping for different categories
-  const contentMap = {
-    'Ancient Civilizations': {
-      title: 'The Indus Valley',
-      desc: 'Discover the advanced urban planning of Harappa and Mohenjo-daro.',
-      image: '/images/heritage/indus.png',
-      progress: 45,
-      color: 'bg-[#F8F9FF]'
-    },
-    'Indian Heritage': {
-      title: 'The Chola Dynasty',
-      desc: 'Learn about the powerful Chola empire, their art and architecture.',
-      image: 'images/heritage/chola.png',
-      progress: 65,
-      color: 'bg-[#F8F9FF]'
-    },
-    'World Heritage': {
-      title: 'The Great Wall',
-      desc: 'Explore the history and construction of the majestic Great Wall of China.',
-      image: 'https://images.unsplash.com/photo-1508804185872-d7badad00f7d?auto=format&fit=crop&q=80&w=400',
-      progress: 20,
-      color: 'bg-[#F8F9FF]'
-    },
-    'Artifacts': {
-      title: 'Terracotta Warriors',
-      desc: 'Uncover the secrets of the massive underground army of the first Emperor.',
-      image: 'https://images.unsplash.com/photo-1599507591144-66a1ef8a1e8a?auto=format&fit=crop&q=80&w=400',
-      progress: 10,
-      color: 'bg-[#F8F9FF]'
-    },
-    'Manuscripts': {
-      title: 'Vedic Scripts',
-      desc: 'Understand the ancient wisdom preserved in the oldest Sanskrit texts.',
-      image: 'https://images.unsplash.com/photo-1544652478-6653e09f18a2?auto=format&fit=crop&q=80&w=400',
-      progress: 85,
-      color: 'bg-[#F8F9FF]'
-    },
-    'Freedom Struggle': {
-      title: 'The Salt March',
-      desc: 'Trace the path of non-violent resistance that changed the world.',
-      image: 'https://images.unsplash.com/photo-1589182373726-e4f658ab50f0?auto=format&fit=crop&q=80&w=400',
-      progress: 90,
-      color: 'bg-[#F8F9FF]'
-    },
-    'Folk Culture': {
-      title: 'Madhubani Art',
-      desc: 'Learn the vibrant storytelling traditions of Bihar through mural paintings.',
-      image: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&q=80&w=400',
-      progress: 30,
-      color: 'bg-[#F8F9FF]'
-    }
-  };
-
-  const [selectedCategory, setSelectedCategory] = useState('Indian Heritage');
-  const activeContent = contentMap[selectedCategory] || contentMap['Indian Heritage'];
-
   const categories = [
-    { label: 'Ancient Civilizations', icon: '🏺', color: 'bg-amber-50' },
-    { label: 'Indian Heritage', icon: '🏰', color: 'bg-orange-50' },
-    { label: 'World Heritage', icon: '🌍', color: 'bg-blue-50' },
-    { label: 'Artifacts', icon: '🗿', color: 'bg-slate-50' },
-    { label: 'Manuscripts', icon: '📜', color: 'bg-emerald-50' },
-    { label: 'Freedom Struggle', icon: '🇮🇳', color: 'bg-red-50' },
-    { label: 'Folk Culture', icon: '🎨', color: 'bg-purple-50' },
+    { label: 'Ancient Civilizations', color: 'bg-amber-50', icon: <Landmark className="text-amber-600 w-4 h-4 md:w-5 md:h-5" /> },
+    { label: 'Indian Heritage', color: 'bg-amber-50', icon: <MapPin className="text-amber-600 w-4 h-4 md:w-5 md:h-5" /> },
+    { label: 'World Heritage', color: 'bg-amber-50', icon: <Globe className="text-amber-600 w-4 h-4 md:w-5 md:h-5" /> },
+    { label: 'Artifacts', color: 'bg-amber-50', icon: <Box className="text-amber-600 w-4 h-4 md:w-5 md:h-5" /> },
+    { label: 'Manuscripts', color: 'bg-amber-50', icon: <BookOpen className="text-amber-600 w-4 h-4 md:w-5 md:h-5" /> },
+    { label: 'Freedom Struggle', color: 'bg-amber-50', icon: <Flag className="text-amber-600 w-4 h-4 md:w-5 md:h-5" /> },
+    { label: 'Folk Culture', color: 'bg-amber-50', icon: <Palette className="text-amber-600 w-4 h-4 md:w-5 md:h-5" /> },
   ];
 
-  const eras = [
-    { name: 'Indus Valley', date: '3300 BCE – 1300 BCE', image: 'https://images.unsplash.com/photo-1599507591144-66a1ef8a1e8a?auto=format&fit=crop&q=80&w=200' },
-    { name: 'Maurya Empire', date: '322 BCE – 185 BCE', image: 'https://images.unsplash.com/photo-1564507595616-b35231df6d4d?auto=format&fit=crop&q=80&w=200' },
-    { name: 'Gupta Period', date: '320 CE – 550 CE', image: 'https://images.unsplash.com/photo-1548013146-72479768bbaa?auto=format&fit=crop&q=80&w=200' },
-    { name: 'Medieval India', date: '1206 CE – 1707 CE', image: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&q=80&w=200' },
+  const flashcards = [
+    // 1. Ancient Civilizations
+    {
+      category: 'Ancient Civilizations',
+      title: 'The Indus Valley',
+      desc: 'Discover the advanced urban planning of Harappa and Mohenjo-daro. They featured baked brick houses, elaborate drainage systems, and water supply systems.',
+      image: '/images/heritage/indus.png'
+    },
+    {
+      category: 'Ancient Civilizations',
+      title: 'Mesopotamia',
+      desc: 'Known as the cradle of civilization, located between the Tigris and Euphrates rivers, famous for the invention of writing.',
+      image: '/images/heritage/meso.png'
+    },
+    {
+      category: 'Ancient Civilizations',
+      title: 'Ancient Egypt',
+      desc: 'Explore the civilization of the Nile Valley, known for its monumental pyramids, pharaohs, and hieroglyphic writing system.',
+      image: '/images/heritage/ancient egypt.png'
+    },
+    {
+      category: 'Ancient Civilizations',
+      title: 'Ancient Rome',
+      desc: 'A massive empire that shaped Western civilization, known for its engineering, architecture, and complex legal and political systems.',
+      image: '/images/heritage/ancient rome.png'
+    },
+    {
+      category: 'Ancient Civilizations',
+      title: 'Mayan Civilization',
+      desc: 'A Mesoamerican civilization noted for its fully developed writing system, art, architecture, mathematics, and astronomical system.',
+      image: '/images/heritage/mayan.png'
+    },
+
+    // 2. Indian Heritage
+    {
+      category: 'Indian Heritage',
+      title: 'The Chola Dynasty',
+      desc: 'Learn about the powerful Chola empire, their art, and architecture. They were known for building grand temples like the Brihadeeswarar Temple.',
+      image: '/images/heritage/chola.png'
+    },
+    {
+      category: 'Indian Heritage',
+      title: 'Taj Mahal',
+      desc: 'An immense mausoleum of white marble, built in Agra by Mughal emperor Shah Jahan in memory of his favorite wife.',
+      image: '/images/heritage/taj mahal.png'
+    },
+    {
+      category: 'Indian Heritage',
+      title: 'Ajanta & Ellora',
+      desc: 'Ancient rock-cut caves featuring magnificent Buddhist, Hindu, and Jain sculptures and paintings dating back to the 2nd century BCE.',
+      image: '/images/heritage/ajanta ellora.png'
+    },
+    {
+      category: 'Indian Heritage',
+      title: 'Vijayanagara Empire',
+      desc: 'The ruins of Hampi tell the story of a prosperous and wealthy empire known for its intricate temple architecture and grand bazaars.',
+      image: '/images/heritage/vijaynagar.png'
+    },
+    {
+      category: 'Indian Heritage',
+      title: 'Khajuraho Temples',
+      desc: 'Famous for their nagara-style architectural symbolism and intricate, expressive sculptures built by the Chandela dynasty.',
+      image: '/images/heritage/khajuraho.png'
+    },
+
+    // 3. World Heritage
+    {
+      category: 'World Heritage',
+      title: 'The Great Wall',
+      desc: 'Explore the history and construction of the majestic Great Wall of China, built to protect against nomadic intrusions.',
+      image: '/images/heritage/greatwall.png'
+    },
+    {
+      category: 'World Heritage',
+      title: 'Machu Picchu',
+      desc: 'An Incan citadel set high in the Andes Mountains in Peru, renowned for its sophisticated dry-stone walls and panoramic views.',
+      image: '/images/heritage/machu picchu.png'
+    },
+    {
+      category: 'World Heritage',
+      title: 'Petra',
+      desc: 'A famous archaeological site in Jordan\'s southwestern desert, known for its rock-cut architecture and water conduit system.',
+      image: '/images/heritage/petra.png'
+    },
+    {
+      category: 'World Heritage',
+      title: 'Colosseum',
+      desc: 'An oval amphitheater in the centre of the city of Rome, Italy, built of travertine limestone, tuff, and brick-faced concrete.',
+      image: '/images/heritage/colosseum.png'
+    },
+    {
+      category: 'World Heritage',
+      title: 'Chichen Itza',
+      desc: 'A complex of Mayan ruins on Mexico\'s Yucatán Peninsula, dominated by the massive El Castillo step pyramid.',
+      image: '/images/heritage/chichen itza.png'
+    },
+
+    // 4. Artifacts
+    {
+      category: 'Artifacts',
+      title: 'Terracotta Warriors',
+      desc: 'Uncover the secrets of the massive underground army of the first Emperor of China, buried with him to protect him in the afterlife.',
+      image: '/images/heritage/terracotta.png'
+    },
+    {
+      category: 'Artifacts',
+      title: 'Rosetta Stone',
+      desc: 'A granodiorite stele inscribed with three versions of a decree that became the key to deciphering Egyptian hieroglyphs.',
+      image: '/images/heritage/rosetta.png'
+    },
+    {
+      category: 'Artifacts',
+      title: 'Tutankhamun\'s Mask',
+      desc: 'The gold death mask of the 18th-dynasty ancient Egyptian Pharaoh Tutankhamun, discovered by Howard Carter in 1925.',
+      image: '/images/heritage/tutankhamun.png'
+    },
+    {
+      category: 'Artifacts',
+      title: 'Dancing Girl',
+      desc: 'A prehistoric bronze sculpture made in lost-wax casting, found in Mohenjo-daro, a symbol of the Indus Valley civilization.',
+      image: '/images/heritage/dancing girl.png'
+    },
+    {
+      category: 'Artifacts',
+      title: 'Venus de Milo',
+      desc: 'An ancient Greek marble sculpture, one of the most famous works of ancient Greek sculpture, depicting Aphrodite.',
+      image: '/images/heritage/venus de milo.png'
+    },
+
+    // 5. Manuscripts
+    {
+      category: 'Manuscripts',
+      title: 'Vedic Scripts',
+      desc: 'Understand the ancient wisdom preserved in the oldest Sanskrit texts, encompassing philosophy, rituals, and hymns.',
+      image: '/images/heritage/vedic.png'
+    },
+    {
+      category: 'Manuscripts',
+      title: 'Dead Sea Scrolls',
+      desc: 'Ancient Jewish religious manuscripts found in the Qumran Caves in the Judaean Desert, of great historical and religious significance.',
+      image: '/images/heritage/dead sea scrolls.png'
+    },
+    {
+      category: 'Manuscripts',
+      title: 'Magna Carta',
+      desc: 'A royal charter of rights agreed to by King John of England, laying the foundation for modern democracy and constitutional law.',
+      image: '/images/heritage/magna carta.png'
+    },
+    {
+      category: 'Manuscripts',
+      title: 'Book of Kells',
+      desc: 'An illuminated manuscript Gospel book in Latin, containing the four Gospels of the New Testament, renowned for its intricate artwork.',
+      image: '/images/heritage/book of kells.png'
+    },
+    {
+      category: 'Manuscripts',
+      title: 'Gutenberg Bible',
+      desc: 'The first major book printed using mass-produced movable metal type in Europe, marking the start of the printing revolution.',
+      image: '/images/heritage/gutenberg bible.png'
+    },
+
+    // 6. Freedom Struggle
+    {
+      category: 'Freedom Struggle',
+      title: 'The Salt March',
+      desc: 'Trace the path of non-violent resistance that changed the world, led by Mahatma Gandhi against the British salt monopoly.',
+      image: '/images/heritage/salt march.png'
+    },
+    {
+      category: 'Freedom Struggle',
+      title: 'Revolt of 1857',
+      desc: 'Also known as the First War of Independence, it was a major uprising in India against the rule of the British East India Company.',
+      image: '/images/heritage/revolt of 1857.png'
+    },
+    {
+      category: 'Freedom Struggle',
+      title: 'Quit India Movement',
+      desc: 'Launched by Mahatma Gandhi in 1942, demanding an end to British rule in India during World War II.',
+      image: '/images/heritage/quit india movement.png'
+    },
+    {
+      category: 'Freedom Struggle',
+      title: 'Jallianwala Bagh',
+      desc: 'A turning point in the Indian independence movement where peaceful protestors were fired upon by British colonial troops.',
+      image: '/images/heritage/jallianwala bagh.png'
+    },
+    {
+      category: 'Freedom Struggle',
+      title: 'Partition of India',
+      desc: 'The division of British India into two independent dominions, India and Pakistan, marking the end of colonial rule.',
+      image: '/images/heritage/partition of india.png'
+    },
+
+    // 7. Folk Culture
+    {
+      category: 'Folk Culture',
+      title: 'Madhubani Art',
+      desc: 'Learn the vibrant storytelling traditions of Bihar through mural paintings, traditionally created by women in the Mithila region.',
+      image: '/images/heritage/madhubani art.png'
+    },
+    {
+      category: 'Folk Culture',
+      title: 'Warli Painting',
+      desc: 'A tribal art form from Maharashtra that uses geometric shapes to depict social life, deeply rooted in nature and community.',
+      image: '/images/heritage/warli painting.png'
+    },
+    {
+      category: 'Folk Culture',
+      title: 'Kalbelia Dance',
+      desc: 'A sensuous folk dance performed by the women of the Kalbelia snake-charming community in Rajasthan, India.',
+      image: '/images/heritage/kalbelia dance.png'
+    },
+    {
+      category: 'Folk Culture',
+      title: 'Kathputli Puppetry',
+      desc: 'A string puppet theatre native to Rajasthan, known for its vibrant storytelling, colorful dolls, and traditional music.',
+      image: '/images/heritage/kathputli puppetry.png'
+    },
+    {
+      category: 'Folk Culture',
+      title: 'Baul Singers',
+      desc: 'Mystic minstrels from Bengal whose music blends various religious influences, emphasizing a search for the inner divine.',
+      image: '/images/heritage/baul singers.png'
+    }
   ];
+
+  const [selectedCategory, setSelectedCategory] = useState('Ancient Civilizations');
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const filteredCards = flashcards.filter(card => card.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] font-sans text-slate-900 pb-2">
+    <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden">
       {/* Back Button */}
       <button
         onClick={() => navigate("/heritage-archive")}
-        className="fixed top-5 left-5 z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-[#B45309] hover:shadow-lg transition-all border border-slate-100 group"
+        className="fixed top-5 left-5 md:top-5 md:left-5 z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-[#B45309] hover:shadow-lg transition-all border border-slate-100 group"
       >
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
       </button>
 
-      {/* Hero Section - Reduced height and padding */}
-      <section className="relative pt-0 pb-0 px-6 md:px-12 lg:px-12 bg-white overflow-hidden">
-        <div className="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10 py-2">
-          <div className="space-y-6">
-            <h1 className="text-4xl md:text-5xl font-black text-[#1E293B] leading-[1.1]">
-              Let's explore <br />
-              <span className="text-[#B45309]">Heritage Archive</span>
-            </h1>
-            <p className="text-slate-500 text-lg md:text-xl font-medium max-w-md">
-              Discover, learn and preserve our rich history and cultural heritage.
-            </p>
-            <button 
-              onClick={() => navigate("/heritage-detail")}
-              className="px-8 py-3.5 bg-[#B45309] text-white rounded-full font-bold text-base flex items-center gap-3 hover:bg-[#92400E] transition-all active:scale-95 group"
-            >
-              Start exploring <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
-
-          <div className="relative h-[300px] flex items-center justify-center">
-            {/* Characters */}
-            <div className="relative z-20 w-full h-full">
-              <img src="/images/heritage/rhs.png" alt="Heritage Explorers" className="w-full h-full object-contain object-center scale-110" />
+      {/* Main Content */}
+      <main className="flex-1 min-h-screen pb-4 overflow-y-auto">
+        <div className="px-4 sm:px-6 md:px-12 2xl:px-20 space-y-6 md:space-y-8 pt-8 md:pt-6 2xl:max-w-[1600px] 2xl:mx-auto">
+          
+          {/* Hero Section */}
+          <section className="bg-white rounded-[16px] md:rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[200px] sm:min-h-[260px] md:min-h-[300px] 2xl:min-h-[380px] shadow-[0_4px_20px_rgba(0,0,0,0.04)] pb-4 md:pb-6">
+            <div className="relative z-10 p-5 sm:p-8 md:p-10 lg:w-1/2 space-y-3 md:space-y-4">
+              <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1E293B]">
+                Let's explore <br />
+                <span className="text-[#B45309]">Heritage Archive</span>
+              </h1>
+              <p className="text-slate-500 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed max-w-sm">
+                Discover, learn and preserve our rich history and cultural heritage in a new interactive way.
+              </p>
+              <div className="pt-2">
+                   <button 
+                     onClick={() => navigate('')}
+                      className="px-5 py-2.5 sm:px-6 sm:py-3 bg-[#B45309] text-white rounded-full font-bold text-[12px] sm:text-[14px] flex items-center gap-2 hover:bg-brown-500 transition-colors w-max shadow-sm shadow-orange-200"
+                   >
+                     Explore Now <ArrowRight size={16} />
+                   </button>
+                 </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Category Selection */}
-      <section className="px-6 md:px-12 lg:px-12 py-0">
-        <div className="max-w-[1400px] mx-auto">
-          <h2 className="text-xl font-black text-slate-900 mb-4 tracking-tight">Choose what you want to explore</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+            <div className="hidden lg:block absolute top-0 right-0 w-[55%] h-full">
+              <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white via-white/40 to-transparent z-10" />
+              <img src="/images/heritage/rhs.png" alt="Heritage Explorers" className="w-full h-full object-cover object-[center_20%]" />
+            </div>
+            
+            {/* Mobile Image (Optional) */}
+            <div className="lg:hidden absolute bottom-0 right-0 w-[40%] h-[80%] opacity-10 pointer-events-none">
+              <img src="/images/heritage/rhs.png" alt="Heritage Explorers" className="w-full h-full object-contain object-bottom" />
+            </div>
+          </section>
+
+          {/* Category Selection - Overlapping Hero like Quick Stats */}
+          <section className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5 md:gap-3 relative z-20 -mt-12 md:-mt-12 px-3 sm:px-4 md:px-12">
             {categories.map((cat, i) => (
               <div 
                 key={i} 
-                onClick={() => setSelectedCategory(cat.label)}
-                className={`px-3 py-1.5 rounded-xl border flex items-center gap-2.5 transition-all cursor-pointer group hover:shadow-sm ${
-                  selectedCategory === cat.label ? 'bg-amber-50 border-amber-200 shadow-sm' : 'bg-white border-slate-100'
+                onClick={() => {
+                  setSelectedCategory(cat.label);
+                  setCurrentIndex(0);
+                }}
+                className={`bg-white rounded-[16px] p-2.5 md:p-3 border shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex items-center gap-2.5 transition-all duration-300 cursor-pointer group hover:-translate-y-1 hover:shadow-lg ${
+                  selectedCategory === cat.label ? 'border-amber-400 bg-amber-50/20 shadow-md ring-2 ring-amber-100' : 'border-slate-100 hover:border-amber-200'
                 }`}
               >
-                <div className={`w-8 h-8 rounded-lg flex items-center justify-center transition-transform group-hover:scale-110 text-base shadow-inner ${cat.color}`}>
-                  {cat.icon}
+                <div className={`w-8 h-8 md:w-10 md:h-10 rounded-[10px] md:rounded-[12px] flex items-center justify-center shrink-0 transition-transform group-hover:scale-110 ${cat.color}`}>
+                   {cat.icon}
                 </div>
-                <span className="text-[12px] font-black text-slate-700 leading-tight text-left">
+                <h4 className={`text-[11px] md:text-[12px] font-extrabold leading-tight transition-colors pr-1 ${
+                  selectedCategory === cat.label ? 'text-[#B45309]' : 'text-slate-700 group-hover:text-[#B45309]'
+                }`}>
                   {cat.label}
-                </span>
+                </h4>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
+          </section>
 
-      {/* Dashboard Grid - Reduced padding */}
-      <section className="px-6 md:px-12 lg:px-12 py-6">
-        <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-4">
-          
-          {/* Continue Learning - Dynamic Content */}
-          <div className="lg:col-span-5 bg-white rounded-[40px] p-4 border border-slate-100 shadow-sm flex flex-col min-h-[170px] justify-center">
-            <h3 className="text-xs font-black mb-2 text-slate-700 tracking-widest uppercase">Continue Learning</h3>
-            <div className={`${activeContent.color} rounded-[24px] p-4 flex flex-row items-center gap-4 flex-1`}>
-              <div className="w-40 h-40 rounded-xl overflow-hidden bg-slate-50 border border-slate-100 shadow-inner shrink-0">
-                <img src={activeContent.image} alt={activeContent.title} className="w-full h-full object-cover" />
+          {/* Carousel Section */}
+          <div className="relative w-full max-w-[1400px] mx-auto h-[400px] md:h-[500px] flex items-center justify-center mt-2 md:-mt-2">
+            {/* Carousel Container */}
+              <div className="relative w-full h-[350px] md:h-[450px] flex items-center justify-center">
+                
+                {(() => {
+                  let displayCards = [...filteredCards];
+                  if (displayCards.length === 0) return (
+                    <div className="text-center text-slate-500 font-medium z-50">No flashcards found for this category yet.</div>
+                  );
+
+                  if (displayCards.length > 0) {
+                    while (displayCards.length < 5) {
+                      displayCards = [...displayCards, ...filteredCards];
+                    }
+                  }
+
+                  return displayCards.map((card, i) => {
+                    const len = displayCards.length;
+                    let offset = i - currentIndex;
+                    if (offset > Math.floor(len / 2)) offset -= len;
+                    if (offset < -Math.floor(len / 2)) offset += len;
+
+                    const isVisible = Math.abs(offset) <= 1;
+                    const isCenter = offset === 0;
+                    
+                    // Responsiveness for 3D spacing
+                    const xBase = typeof window !== 'undefined' && window.innerWidth < 768 ? 120 : 250;
+                    const x = offset * xBase; 
+                    const scale = isCenter ? 1 : 0.75;
+                    const zIndex = isCenter ? 30 : (isVisible ? 10 : 0);
+                    const opacity = isVisible ? (isCenter ? 1 : 0.6) : 0;
+
+                    return (
+                      <motion.div
+                        key={i}
+                        animate={{ x, scale, zIndex, opacity }}
+                        transition={{ type: "spring", stiffness: 260, damping: 25 }}
+                        className={`absolute flex flex-col items-center justify-center ${isVisible ? 'pointer-events-auto' : 'pointer-events-none'}`}
+                      >
+                        <div
+                          className={`relative w-56 h-56 md:w-[320px] md:h-[320px] overflow-hidden shadow-2xl border-[4px] md:border-[6px] border-white bg-slate-900 cursor-pointer group transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] flex flex-col ${
+                            isCenter ? 'rounded-full hover:rounded-[28px] hover:h-[380px] md:hover:h-[460px]' : 'rounded-full'
+                          }`}
+                          onClick={() => !isCenter && (offset > 0 ? setCurrentIndex(prev => (prev + 1) % len) : setCurrentIndex(prev => (prev - 1 + len) % len))}
+                        >
+                          {/* Image */}
+                          <img 
+                            src={card.image} 
+                            alt={card.title} 
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                          />
+                          <div className="absolute inset-0 bg-black/40 transition-colors duration-500 group-hover:bg-black/20" />
+                          
+                          {/* Content when collapsed (Circle) */}
+                          <div className="absolute inset-0 flex flex-col items-center justify-end pb-6 md:pb-8 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+                            <h3 className="text-white font-black text-lg md:text-2xl mb-1 text-center px-4 drop-shadow-md">{card.title}</h3>
+                            <p className="text-white/80 text-[9px] md:text-xs font-bold uppercase tracking-widest">{card.category}</p>
+                            {isCenter && (
+                              <button className="mt-3 md:mt-5 px-5 md:px-6 py-2 md:py-2.5 bg-white text-black font-black rounded-full text-[11px] md:text-sm hover:bg-amber-50 transition-colors shadow-lg">
+                                Explore
+                              </button>
+                            )}
+                          </div>
+
+                          {/* Content when hovered (Expanded Card) - Only rendered for center */}
+                          {isCenter && (
+                            <div className="absolute inset-x-0 bottom-0 top-[160px] md:top-[200px] bg-white p-5 md:p-6 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col transform translate-y-full group-hover:translate-y-0 z-20">
+                               <div className="inline-block px-3 py-1 bg-amber-100 text-amber-800 text-[10px] font-black uppercase tracking-widest rounded-full w-max mb-2">
+                                 {card.category}
+                               </div>
+                               <h3 className="text-lg md:text-xl font-black text-[#1E293B] mb-2">{card.title}</h3>
+                               <p className="text-slate-600 text-xs md:text-sm font-medium leading-relaxed overflow-y-auto custom-scrollbar pr-2 flex-1">
+                                 {card.desc}
+                               </p>
+                            </div>
+                          )}
+                        </div>
+                      </motion.div>
+                    );
+                  });
+                })()}
               </div>
-              <div className="flex-1 space-y-2">
-                <h4 className="font-black text-slate-900 text-base -mt-6 tracking-tight leading-tight">{activeContent.title}</h4>
-                <div className="flex items-center gap-2">
-                  <div className="flex-1 h-1 bg-slate-100 rounded-full overflow-hidden">
-                    <div className={`h-full bg-[#B45309] rounded-full shadow-sm transition-all duration-1000`} style={{ width: `${activeContent.progress}%` }} />
-                  </div>
-                  <span className="text-[12px] font-black text-slate-400">{activeContent.progress}%</span>
-                </div>
-                <p className="text-[14px] text-slate-500 leading-tight font-medium line-clamp-2">
-                  {activeContent.desc}
-                </p>
-                <button 
-                  onClick={() => navigate("/heritage-detail")}
-                  className="px-4 py-2 bg-[#B45309] text-white rounded-xl font-bold text-[10px] flex items-center gap-2 hover:bg-[#92400E] transition-all active:scale-95 w-max"
-                >
-                  Continue <ArrowRight size={18} />
-                </button>
-              </div>
-            </div>
-          </div>
 
-          {/* Explore by Era - Cleaned Layout - Ultra Compact */}
-          <div className="lg:col-span-3 bg-white rounded-[40px] p-4 border border-slate-100 shadow-sm flex flex-col min-h-[170px]">
-            <h3 className="text-xs font-black mb-2 text-slate-700 tracking-widest uppercase">Explore by Era</h3>
-            <div className="space-y-1.5 flex-1 overflow-y-auto pr-1 custom-scrollbar">
-              {eras.map((era, i) => (
-                <div key={i} className="flex items-center gap-3 p-1 hover:bg-slate-50 rounded-xl transition-colors cursor-pointer group">
-                  <div className="w-8 h-8 rounded-lg overflow-hidden bg-slate-100 shrink-0 border border-slate-100">
-                    <img src={era.image} alt={era.name} className="w-full h-full object-cover " />
-                  </div>
-                  <div className="min-w-0">
-                    <h5 className="text-[11px] font-black text-slate-800 truncate leading-none mb-1">{era.name}</h5>
-                    <p className="text-[8px] font-bold text-slate-400 uppercase tracking-widest leading-none">{era.date}</p>
-                  </div>
+              {/* Navigation Arrows */}
+              {filteredCards.length > 0 && (
+                <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-2 md:px-12 z-40 pointer-events-none">
+                   <button 
+                     onClick={() => setCurrentIndex(prev => {
+                       let tempLen = filteredCards.length;
+                       while (tempLen > 0 && tempLen < 5) tempLen += filteredCards.length;
+                       const len = tempLen || 1;
+                       return (prev - 1 + len) % len;
+                     })} 
+                     className="w-10 h-10 md:w-14 md:h-14 rounded-full bg-white shadow-xl flex items-center justify-center text-slate-800 hover:text-[#B45309] hover:scale-110 transition-all pointer-events-auto border border-slate-100"
+                   >
+                     <ChevronLeft size={24} strokeWidth={3} className="w-5 h-5 md:w-6 md:h-6" />
+                   </button>
+                   <button 
+                     onClick={() => setCurrentIndex(prev => {
+                       let tempLen = filteredCards.length;
+                       while (tempLen > 0 && tempLen < 5) tempLen += filteredCards.length;
+                       const len = tempLen || 1;
+                       return (prev + 1) % len;
+                     })} 
+                     className="w-10 h-10 md:w-14 md:h-14 rounded-full bg-white shadow-xl flex items-center justify-center text-slate-800 hover:text-[#B45309] hover:scale-110 transition-all pointer-events-auto border border-slate-100"
+                   >
+                     <ChevronRight size={24} strokeWidth={3} className="w-5 h-5 md:w-6 md:h-6" />
+                   </button>
                 </div>
-              ))}
+              )}
             </div>
-            <button className="w-full mt-2 text-[9px] font-black text-amber-600 hover:text-amber-700 transition-colors flex items-center justify-center gap-1">
-              View all eras <ArrowRight size={10} />
-            </button>
-          </div>
-
-          {/* Daily Discovery - Standardized - Ultra Compact */}
-          <div className="lg:col-span-4 bg-white rounded-[40px] p-4 border border-slate-100 shadow-sm flex flex-col min-h-[170px] justify-center">
-             <h3 className="text-xs font-black mb-2 text-slate-700 tracking-widest uppercase">Daily Discovery</h3>
-             <div className="bg-[#FFF9ED] rounded-[24px] p-4 flex flex-row items-center gap-4 flex-1">
-                <div className="flex-1 space-y-2">
-                  <h4 className="text-base font-black text-[#92400E] -mt-12 mb-6">Did you know?</h4>
-                  <p className="text-[14px] text-[#92400E]/80 font-medium leading-tight">
-                    The Konark Sun Temple was designed like a giant chariot with 24 wheels.
-                  </p>
-                </div>
-                <div className="w-40 h-full rounded-xl overflow-hidden shadow-md border-2 border-white shrink-0 relative group">
-                   <img src="/images/heritage/konark.png" alt="Konark" className="w-full h-full object-cover" />
-                </div>
-             </div>
-          </div>
 
         </div>
-      </section>
+      </main>
     </div>
   );
 };
