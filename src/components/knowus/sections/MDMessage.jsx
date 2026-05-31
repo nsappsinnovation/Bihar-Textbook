@@ -1,32 +1,32 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion';
-import { Quote, Award, Zap, ShieldCheck, CheckCircle2, MessageSquare, ArrowUpRight, Shield } from 'lucide-react';
+import { Quote, Award, Zap, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 const MDMessage = () => {
-    const [data, setData] = useState({
-        name: 'Shri Yatendra Kumar Pal',
-        designation: 'Managing Director',
-        photo: '/images/KeyParticipants/shri_yatendra_pal.png',
-        quote: 'Ensuring that textbooks of knowledge reach every student in Bihar, timely and with uncompromised quality.',
-        welcomeNote: 'It gives me immense pleasure to connect with all stakeholders through this platform. The Bihar State Text Book Publishing Corporation Ltd. plays a pivotal role in strengthening the foundation of education by ensuring the timely production and distribution of quality textbooks across the state.',
-        qualityNote: 'Quality remains at the core of our operations. From manuscript approval to final printing, every stage undergoes strict supervision and inspection.',
-        collaboration: 'The successful execution of our responsibilities is possible through the collective efforts of our officers, employees, registered printers, wholesalers, depot staff, and education departments across districts.',
-        movingForward: 'As we move ahead, our vision remains clear — to ensure that every student in Bihar receives quality textbooks on time, without compromise.'
-    });
-
-    useEffect(() => {
+    const [data] = useState(() => {
         const saved = localStorage.getItem('module_content_ku-md-message');
         if (saved) {
             try {
                 const parsed = JSON.parse(saved);
                 if (parsed && typeof parsed === 'object' && parsed.name) {
-                    setData(parsed);
+                    return parsed;
                 }
             } catch (e) {
                 console.error("Error loading MD data", e);
             }
         }
-    }, []);
+        return {
+            name: 'Shri Yatendra Kumar Pal',
+            designation: 'Managing Director',
+            photo: '/images/KeyParticipants/shri_yatendra_pal.png',
+            quote: 'Ensuring that textbooks of knowledge reach every student in Bihar, timely and with uncompromised quality.',
+            welcomeNote: 'It gives me immense pleasure to connect with all stakeholders through this platform. The Bihar State Text Book Publishing Corporation Ltd. plays a pivotal role in strengthening the foundation of education by ensuring the timely production and distribution of quality textbooks across the state.',
+            qualityNote: 'Quality remains at the core of our operations. From manuscript approval to final printing, every stage undergoes strict supervision and inspection.',
+            collaboration: 'The successful execution of our responsibilities is possible through the collective efforts of our officers, employees, registered printers, wholesalers, depot staff, and education departments across districts.',
+            movingForward: 'As we move ahead, our vision remains clear — to ensure that every student in Bihar receives quality textbooks on time, without compromise.'
+        };
+    });
 
     const containerVariants = {
         hidden: { opacity: 0 },
