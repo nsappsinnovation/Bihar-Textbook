@@ -46,8 +46,7 @@ import HeritageDashboard from "./pages/HeritageDashboard.jsx";
 import AudioLibraryDashboard from "./pages/AudioLibraryDashboard.jsx";
 import MyAudioLibrary from "./pages/MyAudioLibrary.jsx";
 import AiIntelligenceDashboard from "./pages/AiIntelligenceDashboard.jsx";
-import AiQuizChallenge from "./pages/AiQuizChallenge.jsx";
-import ExploreAiTools from "./pages/ExploreAiTools.jsx";
+
 import VrDashboard from "./pages/VrDashboard.jsx";
 import VrLabsWorlds from "./pages/VrLabsWorlds.jsx";
 import CyberSecurityDashboard from "./pages/CyberSecurityDashboard.jsx";
@@ -141,8 +140,7 @@ function App() {
              <Route path="/ling/phrases" element={<LingModule type="phrases" />} />
              <Route path="/ling/conversations" element={<LingModule type="conversations" />} />
             <Route path="/ai-courses" element={<AiCourses />} />
-            <Route path="/ai-quiz-challenge" element={<AiQuizChallenge />} />
-            <Route path="/explore-ai-tools" element={<ExploreAiTools />} />
+
             <Route path="/mobile-courses" element={<MobileCourses />} />
             <Route path="/archive-courses" element={<ArchiveCourses />} />
 
