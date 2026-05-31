@@ -37,10 +37,8 @@ const Know = () => {
   const ActiveComponent = componentMap[sectionData.component];
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="mx-auto max-w-7xl px-0 sm:px-6 lg:px-8">
-        <ActiveComponent />
-      </div>
+    <div className="min-h-screen">
+      <ActiveComponent />
     </div>
   );
 };
