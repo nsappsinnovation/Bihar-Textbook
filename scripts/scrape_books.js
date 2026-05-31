@@ -91,6 +91,7 @@ async function scrapeClass(classId) {
             console.log(`  Processing Subject: ${subject.title} (${subjectName})`);
 
             const subjectPage = await browser.newPage();
+            let bookManifest;
             try {
                 await subjectPage.goto(subject.href, { waitUntil: 'domcontentloaded' });
 
@@ -107,7 +108,7 @@ async function scrapeClass(classId) {
                 console.log(`    Found ${chapterLinks.length} chapters.`);
 
                 // Manifest to store chapter mapping
-                const bookManifest = {
+                bookManifest = {
                     classId: classId,
                     subject: subject.title,
                     subjectSlug: subjectName,

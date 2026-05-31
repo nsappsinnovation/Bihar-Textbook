@@ -1,126 +1,122 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { FaPlay } from 'react-icons/fa';
 
-// Reusing the same grid layout logic, but for videos
-const videoItems = [
+const defaultVideoItems = [
   {
     type: "video",
-    src: "/gallery/biharFilmCityMeeting.jpeg",
-    span: "col-span-1 md:col-span-2 row-span-2",
-    alt: "Bihar Film City Meeting"
+    src: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    alt: "Bihar Digital Classrooms Launch Highlights"
   },
   {
     type: "video",
-    src: "/gallery/WhatsApp Image 2025-12-12 at 17.01.59.jpeg",
-    span: "col-span-1 md:col-span-1 row-span-1",
-    alt: "Video Gallery Image"
+    src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    alt: "Rural Literacy Outreach & Community Distribution Drives"
   },
   {
     type: "video",
-    src: "/gallery/WhatsApp Image 2025-12-12 at 17.02.01.jpeg",
-    span: "col-span-1 md:col-span-1 row-span-1",
-    alt: "Video Gallery Image"
+    src: "https://images.unsplash.com/photo-1531482615713-2afd69097998",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    alt: "Teacher Training Workshop on Interactive Smart Textbooks"
   },
   {
     type: "video",
-    src: "/gallery/rubymam.jpeg",
-    span: "col-span-1 md:col-span-1 row-span-2",
-    alt: "Ruby Mam"
+    src: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    alt: "Academic Session 2026-27 High-Level Inauguration Ceremony"
   },
   {
     type: "video",
-    src: "/gallery/rubymam2.jpeg",
-    span: "col-span-1 md:col-span-2 row-span-1",
-    alt: "Ruby Mam"
+    src: "https://images.unsplash.com/photo-1516979187457-637abb4f9353",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    alt: "Accessible Audio Books and Inclusive Pedagogy Program"
   },
   {
     type: "video",
-    src: "/gallery/WhatsApp Image 2025-12-12 at 17.02.07.jpeg",
-    span: "col-span-1 md:col-span-1 row-span-1",
-    alt: "Video Gallery Image"
-  },
-  {
-    type: "video",
-    src: "/gallery/WhatsApp Image 2025-12-12 at 17.02.09.jpeg",
-    span: "col-span-1 md:col-span-2 row-span-2",
-    alt: "Video Gallery Image"
-  },
-  {
-    type: "video",
-    src: "/gallery/WhatsApp Image 2025-12-12 at 17.02.10.jpeg",
-    span: "col-span-1 md:col-span-1 row-span-1",
-    alt: "Video Gallery Image"
-  },
-  {
-    type: "video",
-    src: "/gallery/WhatsApp Image 2025-12-12 at 17.02.12.jpeg",
-    span: "col-span-1 md:col-span-1 row-span-1",
-    alt: "Video Gallery Image"
-  },
-  {
-    type: "video",
-    src: "/gallery/WhatsApp Image 2025-12-12 at 17.02.13.jpeg",
-    span: "col-span-1 md:col-span-2 row-span-1",
-    alt: "Video Gallery Image"
-  },
-  {
-    type: "video",
-    src: "/gallery/WhatsApp Image 2025-12-12 at 17.02.04.jpeg",
-    span: "col-span-1 md:col-span-1 row-span-2",
-    alt: "Video Gallery Image"
-  },
-  {
-    type: "video",
-    src: "/gallery/WhatsApp Image 2025-12-12 at 17.02.15.jpeg",
-    span: "col-span-1 md:col-span-2 row-span-2",
-    alt: "Video Gallery Image"
-  },
-  {
-    type: "video",
-    src: "/gallery/WhatsApp Image 2025-12-12 at 17.02.17.jpeg",
-    span: "col-span-1 md:col-span-1 row-span-1",
-    alt: "Video Gallery Image"
-  },
-  {
-    type: "video",
-    src: "/gallery/WhatsApp Image 2025-12-12 at 17.02.15.jpeg",
-    span: "col-span-1 md:col-span-1 row-span-1",
-    alt: "Video Gallery Image"
-  },
+    src: "https://images.unsplash.com/photo-1677442136019-21780ecad995",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    alt: "Smart AI Revision Modules Student Pilot Feedback"
+  }
 ];
 
 const Videogallery = () => {
-  const [items, setItems] = useState(videoItems);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [items, setItems] = useState(defaultVideoItems);
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     const saved = localStorage.getItem('module_content_gl-video');
     if (saved) {
-      const parsed = JSON.parse(saved);
-      setItems(parsed.map(item => ({
-        type: "video",
-        src: item.document, // Thumbnail
-        videoUrl: item.videoUrl || "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        span: "col-span-1 md:col-span-1 row-span-1",
-        alt: item.title
-      })));
+      try {
+        const parsed = JSON.parse(saved);
+        setItems(parsed.map(item => ({
+          type: "video",
+          src: item.document, // Thumbnail
+          videoUrl: item.videoUrl || "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          alt: item.title || "Video Highlight"
+        })));
+      } catch (e) {
+        console.error("Error parsing video gallery items", e);
+      }
     }
   }, []);
 
+  const itemsPerPage = 6;
+  const totalPages = Math.ceil(items.length / itemsPerPage);
+
+  // Get items for the current page
+  const pageItems = items.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages - 1) {
+      setCurrentPage(prev => prev + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 0) {
+      setCurrentPage(prev => prev - 1);
+    }
+  };
+
+  function getEmbedUrl(url) {
+    if (!url) return "";
+    let id = "";
+    if (url.includes("youtube.com/watch?v=")) {
+      id = url.split("v=")[1]?.split("&")[0];
+    } else if (url.includes("youtu.be/")) {
+      id = url.split("youtu.be/")[1]?.split("?")[0];
+    } else if (url.includes("youtube.com/embed/")) {
+      return url;
+    } else {
+      return url; // fallback for other formats
+    }
+    return `https://www.youtube.com/embed/${id}`;
+  }
+
   return (
-    <section className="w-full bg-white relative py-12 lg:py-20">
+    <section className="w-full bg-[#fdfbf9] relative py-16 lg:py-24 overflow-hidden min-h-screen">
+
+      {/* Background patterns */}
+      <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-75 pointer-events-none" />
+      <div className="absolute left-[-100px] top-1/4 w-80 h-80 border border-slate-200/50 rounded-[48px] rotate-[15deg] pointer-events-none" />
+      <div className="absolute right-[-150px] bottom-1/4 w-[400px] h-[400px] border border-slate-200/40 rounded-full pointer-events-none" />
+
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 font-sans">
+
         {/* Header */}
-        <div className="mb-14 text-center">
+        <div className="mb-16 text-center">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-blue-50 border border-blue-100 mb-6 shadow-sm"
+            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-blue-50/80 backdrop-blur-sm border border-blue-100 mb-6 shadow-sm"
           >
             <span className="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse"></span>
-            <span className="text-blue-800 text-sm font-semibold tracking-wide uppercase">
-              Video Testimonials & Highlights
+            <span className="text-blue-800 text-xs font-bold tracking-wider uppercase">
+              Video Highlights & Testimonials
             </span>
           </motion.div>
 
@@ -128,7 +124,7 @@ const Videogallery = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1a202c] tracking-tight leading-tight mb-6"
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-800 tracking-tight leading-tight mb-6"
           >
             Video <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Gallery</span>
           </motion.h2>
@@ -137,57 +133,276 @@ const Videogallery = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-gray-600 text-lg md:text-xl max-w-3xl mx-auto font-light leading-relaxed"
+            className="text-slate-500 text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed"
           >
-            Watch our initiatives come to life through exclusive footage and recorded events.
+            Watch our academic programs, smart textbook launches, and rural distribution initiatives unfold in real time.
           </motion.p>
         </div>
 
-        {/* Grid Container */}
-        <div className="grid grid-flow-dense grid-cols-1 md:grid-cols-4 auto-rows-[250px] gap-4 md:gap-6">
-          {/* Items */}
-          {items.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.05 }}
-              viewport={{ once: true, margin: "-50px" }}
-              className={`group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 cursor-pointer ${item.span}`}
-              onClick={() => window.open(item.videoUrl, '_blank')}
-            >
-              {/* Thumbnail */}
-              <img
-                src={item.src}
-                alt={item.alt}
-                className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
-                loading="lazy"
-              />
+        {/* --- 6-Card Asymmetric Collage Grid (Video Version) --- */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentPage}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.5 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-center"
+          >
 
-              {/* Always visible gradient for contrast */}
-              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors duration-500" />
-
-              {/* Play Button Overlay */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center group-hover:scale-110 group-hover:bg-blue-600 transition-all duration-500 shadow-xl">
-                  <FaPlay className="text-white ml-1.5 w-6 h-6" />
-                </div>
-              </div>
-
-              {/* Hover info */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end">
-                <div className="p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-1.5 w-max">
-                    <span className="text-white text-xs font-semibold tracking-wider uppercase">
-                      Watch Video
+            {/* Column 1: Card 1 */}
+            <div className="lg:col-span-3 py-6 flex flex-col justify-center">
+              {pageItems[0] && (
+                <div
+                  onClick={() => setSelectedVideo(pageItems[0])}
+                  className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-slate-100 aspect-[4/3] w-full"
+                >
+                  <img
+                    src={pageItems[0].src}
+                    alt={pageItems[0].alt}
+                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors duration-300 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-white/25 backdrop-blur-md border border-white/40 flex items-center justify-center text-white scale-90 group-hover:scale-100 group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 shadow-xl">
+                      <FaPlay className="text-white ml-0.5 text-sm" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-4 left-4 right-4 text-white pointer-events-none">
+                    <span className="text-[10px] font-bold line-clamp-1 bg-black/40 px-2.5 py-1 rounded-full w-fit backdrop-blur-sm">
+                      {pageItems[0].alt}
                     </span>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+              )}
+            </div>
+
+            {/* Column 2: Card 2 & Card 4 */}
+            <div className="lg:col-span-3 flex flex-col gap-8">
+              {/* Card 2 - Tall portrait */}
+              {pageItems[1] && (
+                <div
+                  onClick={() => setSelectedVideo(pageItems[1])}
+                  className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-slate-100 aspect-[3/4] w-full"
+                >
+                  <img
+                    src={pageItems[1].src}
+                    alt={pageItems[1].alt}
+                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors duration-300 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-white/25 backdrop-blur-md border border-white/40 flex items-center justify-center text-white scale-90 group-hover:scale-100 group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 shadow-xl">
+                      <FaPlay className="text-white ml-0.5 text-sm" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-4 left-4 right-4 text-white pointer-events-none">
+                    <span className="text-[10px] font-bold line-clamp-1 bg-black/40 px-2.5 py-1 rounded-full w-fit backdrop-blur-sm">
+                      {pageItems[1].alt}
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {/* Card 4 - Square/Medium */}
+              {pageItems[3] && (
+                <div
+                  onClick={() => setSelectedVideo(pageItems[3])}
+                  className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-slate-100 aspect-square w-full"
+                >
+                  <img
+                    src={pageItems[3].src}
+                    alt={pageItems[3].alt}
+                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors duration-300 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-white/25 backdrop-blur-md border border-white/40 flex items-center justify-center text-white scale-90 group-hover:scale-100 group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 shadow-xl">
+                      <FaPlay className="text-white ml-0.5 text-sm" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-4 left-4 right-4 text-white pointer-events-none">
+                    <span className="text-[10px] font-bold line-clamp-1 bg-black/40 px-2.5 py-1 rounded-full w-fit backdrop-blur-sm">
+                      {pageItems[3].alt}
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Column 3: Card 3 & Card 5 */}
+            <div className="lg:col-span-3 flex flex-col gap-8">
+              {/* Card 3 - Landscape */}
+              {pageItems[2] && (
+                <div
+                  onClick={() => setSelectedVideo(pageItems[2])}
+                  className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-slate-100 aspect-[4/3] w-full"
+                >
+                  <img
+                    src={pageItems[2].src}
+                    alt={pageItems[2].alt}
+                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors duration-300 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-white/25 backdrop-blur-md border border-white/40 flex items-center justify-center text-white scale-90 group-hover:scale-100 group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 shadow-xl">
+                      <FaPlay className="text-white ml-0.5 text-sm" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-4 left-4 right-4 text-white pointer-events-none">
+                    <span className="text-[10px] font-bold line-clamp-1 bg-black/40 px-2.5 py-1 rounded-full w-fit backdrop-blur-sm">
+                      {pageItems[2].alt}
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {/* Card 5 - Medium */}
+              {pageItems[4] && (
+                <div
+                  onClick={() => setSelectedVideo(pageItems[4])}
+                  className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-slate-100 aspect-[4/3] w-full"
+                >
+                  <img
+                    src={pageItems[4].src}
+                    alt={pageItems[4].alt}
+                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors duration-300 flex items-center justify-center">
+                    <div className="w-12 h-12 rounded-full bg-white/25 backdrop-blur-md border border-white/40 flex items-center justify-center text-white scale-90 group-hover:scale-100 group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 shadow-xl">
+                      <FaPlay className="text-white ml-0.5 text-sm" />
+                    </div>
+                  </div>
+                  <div className="absolute bottom-4 left-4 right-4 text-white pointer-events-none">
+                    <span className="text-[10px] font-bold line-clamp-1 bg-black/40 px-2.5 py-1 rounded-full w-fit backdrop-blur-sm">
+                      {pageItems[4].alt}
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Column 4: Card 6 (with expand icon overlay) */}
+            <div className="lg:col-span-3 py-6 flex flex-col justify-center">
+              {pageItems[5] && (
+                <div
+                  onClick={() => setSelectedVideo(pageItems[5])}
+                  className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-slate-100 aspect-[4/3] w-full"
+                >
+                  <img
+                    src={pageItems[5].src}
+                    alt={pageItems[5].alt}
+                    className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
+                    loading="lazy"
+                  />
+
+                  {/* Expand / Play button overlay matching reference layout */}
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/15 group-hover:bg-black/35 transition-colors duration-300">
+                    <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center text-white scale-90 group-hover:scale-100 group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 shadow-xl">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4M4 20l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div className="absolute bottom-4 left-4 right-4 text-white pointer-events-none">
+                    <span className="text-[10px] font-bold line-clamp-1 bg-black/40 px-2.5 py-1 rounded-full w-fit backdrop-blur-sm">
+                      {pageItems[5].alt}
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Custom Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="mt-16 flex items-center justify-center gap-6">
+            <button
+              onClick={handlePrevPage}
+              disabled={currentPage === 0}
+              className="px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 bg-white hover:bg-slate-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed font-bold text-xs uppercase tracking-widest shadow-sm"
+            >
+              Prev
+            </button>
+            <div className="flex gap-2">
+              {[...Array(totalPages)].map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentPage(i)}
+                  className={`w-3.5 h-3.5 rounded-full transition-all ${currentPage === i ? "bg-blue-600 w-8" : "bg-slate-200 hover:bg-slate-300"
+                    }`}
+                />
+              ))}
+            </div>
+            <button
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages - 1}
+              className="px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 bg-white hover:bg-slate-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed font-bold text-xs uppercase tracking-widest shadow-sm"
+            >
+              Next
+            </button>
+          </div>
+        )}
+
       </div>
+
+      {/* Full-Screen Video Lightbox Modal */}
+      <AnimatePresence>
+        {selectedVideo && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-slate-950/95 p-4 md:p-8 backdrop-blur-md"
+            onClick={() => setSelectedVideo(null)}
+          >
+            {/* Close Button */}
+            <button
+              className="absolute top-6 right-6 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 rounded-full p-3 backdrop-blur-md transition-all z-50"
+              onClick={() => setSelectedVideo(null)}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+
+            {/* Video Box Container */}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative max-w-4xl w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <iframe
+                src={getEmbedUrl(selectedVideo.videoUrl)}
+                title={selectedVideo.alt}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+              />
+            </motion.div>
+
+            {/* Video Description */}
+            {selectedVideo.alt && (
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                className="mt-6 text-center max-w-2xl px-6 pointer-events-none"
+              >
+                <p className="text-white/90 text-sm font-semibold leading-relaxed drop-shadow-md">
+                  {selectedVideo.alt}
+                </p>
+              </motion.div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

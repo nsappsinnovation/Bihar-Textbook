@@ -19,7 +19,7 @@ const statusStyles = {
  * Books Management Page
  * Full CRUD interface with search, filters, table/grid toggle, and add modal
  */
-export default function BooksPage({ addToast }) {
+export default function BooksPage({ addToast, forcedClass }) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedClass, setSelectedClass] = useState(forcedClass || 'All Classes');
   const [selectedSubject, setSelectedSubject] = useState('All Subjects');
