@@ -58,7 +58,7 @@ const MobileLibrary = () => {
   const processSteps = [
     {
       title: "Route Planning",
-      image: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=600", 
+      image: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&q=80&w=600",
       description: "Strategically planning routes to reach the most remote and underserved areas across Bihar.",
       details: [
         "GPS Mapping",
@@ -101,8 +101,8 @@ const MobileLibrary = () => {
   return (
     <div className="relative">
       {/* Back Button */}
-      <button 
-        onClick={() => navigate("/")} 
+      <button
+        onClick={() => navigate("/")}
         className="absolute top-4 left-4 md:left-6 lg:left-8 w-11 h-11 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-500 hover:shadow-lg transition-all border border-slate-50 z-50 group"
       >
         <ArrowLeft size={22} strokeWidth={2.5} className="group-hover:-translate-x-1 transition-transform" />
@@ -194,7 +194,7 @@ const MobileLibrary = () => {
         </div>
       </div>
 
-      
+
       <section className="pt-2 pb-10 bg-white px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -257,7 +257,7 @@ const MobileLibrary = () => {
               <h2 className="text-xs font-black uppercase tracking-[0.3em] text-blue-600">
                 Library Operations
               </h2>
-             <h3 className="text-4xl font-extrabold text-slate-900 leading-tight">
+              <h3 className="text-4xl font-extrabold text-slate-900 leading-tight">
                 Knowledge on Wheels Journey
               </h3>
             </div>

@@ -87,7 +87,7 @@ const MissionLandingLayout = ({ themeName = 'blue', hero, overview, modules }) =
       <div className="max-w-[1300px] mx-auto px-6 relative">
         <div className="absolute top-6 left-6 z-50">
           <button 
-            onClick={() => navigate("/")} 
+            onClick={() => navigate("/#missions-grid")} 
             className="w-12 h-12 bg-white/80 backdrop-blur-md rounded-full shadow-sm border border-slate-200 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:shadow-md transition-all group"
           >
             <ArrowLeft size={22} strokeWidth={2.5} className="group-hover:-translate-x-1 transition-transform" />
@@ -96,29 +96,29 @@ const MissionLandingLayout = ({ themeName = 'blue', hero, overview, modules }) =
       </div>
 
       {/* Hero Section */}
-      <section className="relative pt-20 lg:pt-24 pb-20 px-6">
-        <div className="max-w-[1300px] mx-auto">
-          <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-16">
+      <section className="relative min-h-screen flex items-center pt-32 pb-16 px-6">
+        <div className="max-w-[1300px] mx-auto w-full">
+          <div className="flex flex-col lg:flex-row items-center lg:items-center justify-between gap-12">
             
             {/* Left: Text Content */}
-            <div className="lg:w-[45%] space-y-8 z-10">
+            <div className="lg:w-[48%] space-y-5 z-10">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="space-y-6"
+                className="space-y-4"
               >
-                <h1 className="text-[44px] lg:text-[64px] font-extrabold text-[#111827] leading-[1.05] tracking-tight">
+                <h1 className="text-[36px] lg:text-[46px] font-extrabold text-[#111827] leading-[1.1] tracking-tight">
                   {hero.title.split(' ').map((word, i, arr) => (
                     <React.Fragment key={i}>
                       {i === arr.length - 1 ? <span className={theme.text}>{word}</span> : word}{" "}
                     </React.Fragment>
                   ))}
                 </h1>
-                <p className="text-[20px] font-bold text-slate-700 leading-snug max-w-lg">
+                <p className="text-[17px] font-bold text-slate-700 leading-snug max-w-lg">
                   {hero.highlight}
                 </p>
-                <p className="text-[17px] text-slate-500 leading-relaxed font-medium max-w-md">
+                <p className="text-[14px] text-slate-500 leading-relaxed font-medium max-w-md">
                   {hero.description}
                 </p>
               </motion.div>
@@ -129,9 +129,9 @@ const MissionLandingLayout = ({ themeName = 'blue', hero, overview, modules }) =
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
                 <Link to={hero.action.path}>
-                  <button className={`px-8 py-4 ${theme.primary} ${theme.primaryHover} ${theme.glow} text-white rounded-full text-[15px] font-bold shadow-xl transition-all duration-300 flex items-center gap-2 group`}>
+                  <button className={`px-6 py-3 ${theme.primary} ${theme.primaryHover} ${theme.glow} text-white rounded-full text-[14px] font-bold shadow-lg transition-all duration-300 flex items-center gap-2 group`}>
                     {hero.action.label} 
-                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                   </button>
                 </Link>
               </motion.div>
@@ -141,20 +141,20 @@ const MissionLandingLayout = ({ themeName = 'blue', hero, overview, modules }) =
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12"
+                className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6"
               >
                 {hero.features.map((feature, idx) => (
-                  <div key={idx} className={`bg-white/60 backdrop-blur-xl border border-slate-200 ${theme.borderHover} p-5 rounded-[20px] shadow-sm hover:shadow-md transition-all duration-300 ${idx === 2 ? 'sm:col-span-2' : ''}`}>
-                    <div className={`${theme.textLight} mb-3 [&>svg]:w-6 [&>svg]:h-6`}>{feature.icon}</div>
-                    <h3 className="text-[16px] font-bold text-slate-900 mb-1 tracking-tight">{feature.title}</h3>
-                    <p className="text-[14px] text-slate-500 font-medium leading-relaxed">{feature.description}</p>
+                  <div key={idx} className={`bg-white/60 backdrop-blur-xl border border-slate-200 ${theme.borderHover} p-4 rounded-[16px] shadow-sm hover:shadow-md transition-all duration-300 ${idx === 2 ? 'sm:col-span-2' : ''}`}>
+                    <div className={`${theme.textLight} mb-2 [&>svg]:w-5 [&>svg]:h-5`}>{feature.icon}</div>
+                    <h3 className="text-[14px] font-bold text-slate-900 mb-0.5 tracking-tight">{feature.title}</h3>
+                    <p className="text-[12.5px] text-slate-500 font-medium leading-relaxed">{feature.description}</p>
                   </div>
                 ))}
               </motion.div>
             </div>
 
             {/* Right: Immersive Image */}
-            <div className="lg:w-[50%] relative z-10 flex justify-center lg:justify-end">
+            <div className="lg:w-[48%] relative z-10 flex justify-center lg:justify-end">
               <motion.div 
                 animate={{ y: [-10, 10, -10] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -165,7 +165,7 @@ const MissionLandingLayout = ({ themeName = 'blue', hero, overview, modules }) =
                 <img
                   src={hero.image}
                   alt={hero.title}
-                  className="w-full max-w-[650px] object-contain drop-shadow-2xl"
+                  className="w-full max-w-[460px] object-contain drop-shadow-2xl"
                 />
               </motion.div>
             </div>
@@ -174,7 +174,7 @@ const MissionLandingLayout = ({ themeName = 'blue', hero, overview, modules }) =
       </section>
 
       {/* Overview Parallax Section */}
-      <section className="py-24 px-6 relative z-20">
+      <section className="py-16 px-6 relative z-20">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
             
@@ -238,25 +238,25 @@ const MissionLandingLayout = ({ themeName = 'blue', hero, overview, modules }) =
       </section>
 
       {/* Modules Grid */}
-      <section className="py-20 px-6 relative z-20">
+      <section className="py-14 px-6 relative z-20">
         <div className="max-w-[1200px] mx-auto">
           
-          <div className="mb-12 space-y-3">
+          <div className="mb-8 space-y-2">
             <h2 className={`${theme.text} text-[13px] font-black uppercase tracking-[0.25em]`}>
               {modules.title}
             </h2>
-            <h3 className="text-[36px] lg:text-[42px] font-extrabold text-slate-900 leading-tight tracking-tight">
+            <h3 className="text-[28px] lg:text-[32px] font-extrabold text-slate-900 leading-tight tracking-tight">
               {modules.heading}
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {modules.items.map((item, i) => (
               <div
                 key={i}
-                className="bg-white border border-slate-100 rounded-[20px] p-4 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col"
+                className="bg-white border border-slate-100 rounded-[16px] p-3 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col"
               >
-                <div className="w-full aspect-[16/9] rounded-[14px] overflow-hidden bg-slate-50 mb-4 shrink-0">
+                <div className="w-full aspect-[16/9] rounded-[10px] overflow-hidden bg-slate-50 mb-3 shrink-0">
                   <img
                     src={item.image}
                     alt={item.title}
@@ -266,10 +266,10 @@ const MissionLandingLayout = ({ themeName = 'blue', hero, overview, modules }) =
                 </div>
 
                 <div className="flex-1 px-1">
-                  <h4 className="text-[17px] font-bold text-slate-900 leading-snug mb-2 tracking-tight">
+                  <h4 className="text-[15px] font-bold text-slate-900 leading-snug mb-1.5 tracking-tight">
                     {item.title}
                   </h4>
-                  <p className="text-[14px] text-slate-500 font-medium leading-relaxed">
+                  <p className="text-[12.5px] text-slate-500 font-medium leading-relaxed">
                     {item.description}
                   </p>
                 </div>

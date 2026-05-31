@@ -80,7 +80,7 @@ const MissionGrid = () => {
     const missions = defaultMissions;
 
     return (
-        <section className="pt-12 pb-16 px-4 md:px-8 bg-white font-sans">
+        <section id="missions-grid" className="pt-12 pb-16 px-4 md:px-8 bg-white font-sans">
             <div className="max-w-[1200px] mx-auto overflow-hidden">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 -mt-px -ml-px">
                     {missions.map((mission) => (
