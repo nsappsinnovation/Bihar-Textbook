@@ -166,13 +166,13 @@ const VrLabsWorlds = () => {
       {/* Back Button */}
       <button
         onClick={() => navigate('/vr-dashboard')}
-        className="fixed top-5 left-5 z-50 w-11 h-11 bg-white rounded-full shadow-md flex items-center justify-center text-slate-500 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group"
+        className="fixed top-3 left-3 md:top-5 md:left-5 z-50 w-9 h-9 md:w-11 md:h-11 bg-white rounded-full shadow-md flex items-center justify-center text-slate-500 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group"
       >
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
       </button>
 
       {/* Hero Section: Full screen size width background header */}
-      <header className="relative w-full min-h-[220px] lg:min-h-[50px] flex items-center overflow-hidden bg-[#EBF0FF]">
+      <header className="relative w-full min-h-[260px] sm:min-h-[280px] md:min-h-[320px] lg:min-h-[50px] flex items-center overflow-hidden bg-[#EBF0FF]">
         {/* Background Image filling the entire header */}
         <div className="absolute inset-0 z-0">
           <motion.img 
@@ -189,14 +189,14 @@ const VrLabsWorlds = () => {
         </div>
 
         {/* Hero Content centered to page width */}
-        <div className="max-w-7xl mx-auto w-full px-4 md:px-8 lg:px-12 py-16 md:py-20 relative z-10 text-left">
+        <div className="max-w-7xl 2xl:max-w-[1600px] mx-auto w-full px-4 sm:px-6 md:px-8 lg:px-12 py-10 sm:py-14 md:py-16 lg:py-20 relative z-10 text-left">
           <div className="max-w-2xl space-y-6">
             
             <motion.h1 
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-3xl md:text-3xl lg:text-[50px] font-extrabold tracking-tight text-[#1E293B] leading-[1.15]"
+              className="text-2xl sm:text-3xl md:text-3xl lg:text-[50px] 2xl:text-[60px] font-extrabold tracking-tight text-[#1E293B] leading-[1.15]"
             >
               Virtual Labs & <br /> 
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
@@ -218,7 +218,7 @@ const VrLabsWorlds = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center gap-4 pt-4"
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 md:gap-4 pt-4"
             >
               {[
                 { id: 'all', title: 'All Activities', sub: 'Explore everything', icon: <Layers size={20} /> },
@@ -229,17 +229,17 @@ const VrLabsWorlds = () => {
                 <div
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-3 px-5 py-4 rounded-[20px] transition-all cursor-pointer w-full sm:flex-1 ${
+                  className={`flex items-center gap-2 sm:gap-3 px-3 sm:px-4 md:px-5 py-3 sm:py-4 rounded-[16px] md:rounded-[20px] transition-all cursor-pointer w-full sm:flex-1 ${
                     activeTab === tab.id
                       ? 'bg-gradient-to-r from-[#4F46E5] to-[#3B82F6] text-white shadow-lg shadow-blue-500/20 scale-[1.02]'
                       : 'bg-white border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-blue-100 hover:shadow-md text-slate-800'
                   }`}
                 >
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${activeTab === tab.id ? 'bg-white/20' : 'bg-slate-50'}`}>
+                  <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0 ${activeTab === tab.id ? 'bg-white/20' : 'bg-slate-50'}`}>
                     {activeTab === tab.id ? React.cloneElement(tab.icon, { className: 'text-white' }) : tab.icon}
                   </div>
                   <div className="flex-1 min-w-0 text-left">
-                    <h4 className={`text-sm font-bold leading-tight ${activeTab === tab.id ? 'text-white' : 'text-slate-900'}`}>{tab.title}</h4>
+                    <h4 className={`text-xs sm:text-sm font-bold leading-tight ${activeTab === tab.id ? 'text-white' : 'text-slate-900'}`}>{tab.title}</h4>
                     <p className={`text-[10px] font-medium mt-0.5 truncate ${activeTab === tab.id ? 'text-white/80' : 'text-slate-500'}`}>{tab.sub}</p>
                   </div>
                   <ChevronRight size={14} className={activeTab === tab.id ? 'text-white/70 shrink-0' : 'text-slate-300 shrink-0'} />
@@ -251,10 +251,10 @@ const VrLabsWorlds = () => {
       </header>
 
       {/* Main content container for the video list and filters */}
-      <main className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 pb-16 relative z-10 -mt-8">
+      <main className="max-w-7xl 2xl:max-w-[1600px] mx-auto px-3 sm:px-4 md:px-8 lg:px-12 pb-12 md:pb-16 relative z-10 -mt-6 md:-mt-8">
         
         {/* Main Content Container (Neeche Section) */}
-        <div className="bg-gradient-to-b from-white to-[#F8FAFC]/80 rounded-[32px] p-6 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative z-20">
+        <div className="bg-gradient-to-b from-white to-[#F8FAFC]/80 rounded-[20px] md:rounded-[32px] p-3 sm:p-4 md:p-6 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative z-20">
           
           {/* Filters Row - hidden on VR Courses tab */}
           {activeTab !== 'courses' && (
