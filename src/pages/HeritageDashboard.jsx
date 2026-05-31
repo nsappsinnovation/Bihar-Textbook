@@ -95,7 +95,7 @@ const HeritageDashboard = () => {
       category: 'World Heritage',
       title: 'Machu Picchu',
       desc: 'An Incan citadel set high in the Andes Mountains in Peru, renowned for its sophisticated dry-stone walls and panoramic views.',
-      image: '/images/heritage/machu picchu.png'
+      image: '/images/heritage/machu-picchu.png'
     },
     {
       category: 'World Heritage',
@@ -113,7 +113,7 @@ const HeritageDashboard = () => {
       category: 'World Heritage',
       title: 'Chichen Itza',
       desc: 'A complex of Mayan ruins on Mexico\'s Yucatán Peninsula, dominated by the massive El Castillo step pyramid.',
-      image: '/images/heritage/chichen itza.png'
+      image: '/images/heritage/chichen-itza.png'
     },
 
     // 4. Artifacts
@@ -251,7 +251,7 @@ const HeritageDashboard = () => {
   const filteredCards = flashcards.filter(card => card.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden">
+    <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-hidden scrollbar-hide">
       {/* Back Button */}
       <button
         onClick={() => navigate("/heritage-archive")}
@@ -261,7 +261,7 @@ const HeritageDashboard = () => {
       </button>
 
       {/* Main Content */}
-      <main className="flex-1 min-h-screen pb-4 overflow-y-auto">
+      <main className="flex-1 min-h-screen pb-4 overflow-y-auto overflow-x-hidden scrollbar-hide">
         <div className="px-4 sm:px-6 md:px-12 2xl:px-20 space-y-6 md:space-y-8 pt-8 md:pt-6 2xl:max-w-[1600px] 2xl:mx-auto">
           
           {/* Hero Section */}
@@ -321,9 +321,19 @@ const HeritageDashboard = () => {
           </section>
 
           {/* Carousel Section */}
-          <div className="relative w-full max-w-[1400px] mx-auto h-[400px] md:h-[500px] flex items-center justify-center mt-2 md:-mt-2">
+          <div className="relative w-full max-w-[1400px] mx-auto h-[400px] md:h-[500px] flex items-center justify-center mt-2 md:-mt-1">
+            
+            {/* Bihar Map Background */}
+            <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none opacity-50 mix-blend-multiply">
+              <img 
+                src="/images/heritage/bihar.png" 
+                alt="Bihar Map Background" 
+                className="w-[280px] sm:w-[420px] md:w-[420px] lg:w-[800px] h-auto object-contain mt-14 scale-107"
+              />
+            </div>
+
             {/* Carousel Container */}
-              <div className="relative w-full h-[350px] md:h-[450px] flex items-center justify-center">
+              <div className="relative z-10 w-full h-[350px] md:h-[450px] flex items-center justify-center">
                 
                 {(() => {
                   let displayCards = [...filteredCards];
@@ -392,7 +402,7 @@ const HeritageDashboard = () => {
                                  {card.category}
                                </div>
                                <h3 className="text-lg md:text-xl font-black text-[#1E293B] mb-2">{card.title}</h3>
-                               <p className="text-slate-600 text-xs md:text-sm font-medium leading-relaxed overflow-y-auto custom-scrollbar pr-2 flex-1">
+                               <p className="text-slate-600 text-xs md:text-sm font-medium leading-relaxed overflow-y-auto scrollbar-hide pr-2 flex-1">
                                  {card.desc}
                                </p>
                             </div>
