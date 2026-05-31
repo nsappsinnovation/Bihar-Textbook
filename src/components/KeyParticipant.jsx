@@ -72,14 +72,14 @@ export default function KeyParticipant() {
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 mb-4">
               <div className="h-px w-8 bg-indigo-500"></div>
-              <span className="text-[10px] font-bold text-indigo-500 uppercase tracking-[0.2em]">Leadership & Academia</span>
+              <span className="text-[9px] font-bold text-blue-500 uppercase tracking-[0.2em]">Leadership & Academia</span>
             </div>
 
             <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 mb-6">
               Leading the Way in <br />
               <span className="text-slate-400">Educational Excellence</span>
             </h2>
-            <p className="text-lg text-slate-500 font-normal leading-relaxed">
+            <p className="text-base text-slate-500 font-normal leading-relaxed">
               Meet the visionary leaders and esteemed educators shaping the future of learning in Bihar.
             </p>
           </div>
@@ -163,17 +163,16 @@ function ParticipantCard({ item }) {
       className="
         group relative h-[390px] overflow-hidden cursor-pointer
         rounded-2xl bg-white border border-gray-100
-        shadow-sm hover:shadow-2xl transition-shadow duration-300
       "
     >
       {/* BLUE BACKGROUND */}
       <div
         className="
           absolute inset-0 bg-[#332F82]
-          transition-[clip-path] duration-700
+          transition-[clip-path] duration-1500
           ease-[cubic-bezier(0.22,1,0.36,1)]
           z-0
-          [clip-path:ellipse(95%_45%_at_50%_100%)]
+          [clip-path:ellipse(75%_50%_at_50%_100%)]
           group-hover:[clip-path:ellipse(180%_180%_at_50%_50%)]
         "
       />
