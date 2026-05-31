@@ -54,16 +54,7 @@ const OurEmployee = () => {
         </p>
       </section>
 
-      {/* ================= STATS SECTION ================= */}
-      <section className="max-w-6xl mx-auto px-6 mb-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <StatCard icon={<FiUsers />} value={`${employees.length}+`} label="Total Staff" color="blue" />
-          <StatCard icon={<FiAward />} value="15+" label="Dept Heads" color="blue" />
-          <StatCard icon={<FiHeart />} value="10yrs" label="Avg Tenure" color="blue" />
-          <StatCard icon={<FiTrendingUp />} value="98%" label="Satisfaction" color="blue" />
-        </div>
-      </section>
-
+      
       {/* ================= EMPLOYEE LIST SECTION ================= */}
       <section className="max-w-6xl mx-auto px-6 mb-20">
         <div className="bg-transparent border border-slate-300 overflow-hidden font-sans">
