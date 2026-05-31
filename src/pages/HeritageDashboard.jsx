@@ -361,21 +361,19 @@ const HeritageDashboard = () => {
                         className={`absolute flex flex-col items-center justify-center ${isVisible ? 'pointer-events-auto' : 'pointer-events-none'}`}
                       >
                         <div
-                          className={`relative w-56 h-56 md:w-[320px] md:h-[320px] overflow-hidden shadow-2xl border-[4px] md:border-[6px] border-white bg-slate-900 cursor-pointer group transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] flex flex-col ${
-                            isCenter ? 'rounded-full hover:rounded-[28px] hover:h-[380px] md:hover:h-[460px]' : 'rounded-full'
-                          }`}
+                          className="relative w-56 h-56 md:w-[320px] md:h-[320px] overflow-hidden shadow-2xl border-[4px] md:border-[6px] border-white bg-slate-900 cursor-pointer group transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] flex flex-col rounded-full"
                           onClick={() => !isCenter && (offset > 0 ? setCurrentIndex(prev => (prev + 1) % len) : setCurrentIndex(prev => (prev - 1 + len) % len))}
                         >
                           {/* Image */}
                           <img 
                             src={card.image} 
                             alt={card.title} 
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                           />
-                          <div className="absolute inset-0 bg-black/40 transition-colors duration-500 group-hover:bg-black/20" />
+                          <div className="absolute inset-0 bg-black/40 transition-colors duration-500 group-hover:bg-black/80 z-10" />
                           
                           {/* Content when collapsed (Circle) */}
-                          <div className="absolute inset-0 flex flex-col items-center justify-end pb-6 md:pb-8 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+                          <div className="absolute inset-0 flex flex-col items-center justify-end pb-6 md:pb-8 opacity-100 group-hover:opacity-0 transition-opacity duration-300 z-20">
                             <h3 className="text-white font-black text-lg md:text-2xl mb-1 text-center px-4 drop-shadow-md">{card.title}</h3>
                             <p className="text-white/80 text-[9px] md:text-xs font-bold uppercase tracking-widest">{card.category}</p>
                             {isCenter && (
@@ -387,12 +385,12 @@ const HeritageDashboard = () => {
 
                           {/* Content when hovered (Expanded Card) - Only rendered for center */}
                           {isCenter && (
-                            <div className="absolute inset-x-0 bottom-0 top-[160px] md:top-[200px] bg-white p-5 md:p-6 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col transform translate-y-full group-hover:translate-y-0 z-20">
-                               <div className="inline-block px-3 py-1 bg-amber-100 text-amber-800 text-[10px] font-black uppercase tracking-widest rounded-full w-max mb-2">
+                            <div className="absolute inset-0 p-5 md:p-8 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center text-center z-30 scale-95 group-hover:scale-100">
+                               <div className="inline-block px-3 py-1 bg-amber-500/20 text-amber-300 text-[10px] font-black uppercase tracking-widest rounded-full mb-2 md:mb-3 border border-amber-500/30 backdrop-blur-sm">
                                  {card.category}
                                </div>
-                               <h3 className="text-lg md:text-xl font-black text-[#1E293B] mb-2">{card.title}</h3>
-                               <p className="text-slate-600 text-xs md:text-sm font-medium leading-relaxed overflow-y-auto custom-scrollbar pr-2 flex-1">
+                               <h3 className="text-lg md:text-2xl font-black text-white mb-2 drop-shadow-md">{card.title}</h3>
+                               <p className="text-white/90 text-xs md:text-sm font-medium leading-relaxed overflow-y-auto custom-scrollbar scrollbar-hide px-2">
                                  {card.desc}
                                </p>
                             </div>

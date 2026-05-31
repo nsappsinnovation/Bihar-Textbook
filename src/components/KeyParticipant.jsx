@@ -74,7 +74,6 @@ export default function KeyParticipant() {
               <div className="h-px w-8 bg-indigo-500"></div>
               <span className="text-[9px] font-bold text-blue-500 uppercase tracking-[0.2em]">Leadership & Academia</span>
             </div>
-
             <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-slate-900 mb-6">
               Leading the Way in <br />
               <span className="text-slate-400">Educational Excellence</span>
