@@ -1,5 +1,6 @@
 import React from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
+import { ReactLenis } from "lenis/react";
 
 import Nav from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
@@ -24,7 +25,7 @@ import PublishingMission from "./pages/PublishingMission.jsx";
 import Sign from "./pages/Signlanguage.jsx";
 import SignLearn from "./pages/SignLearn.jsx";
 import AiIntelligence from "./pages/AiIntelligence.jsx";
-import MobileLibrary from "./pages/MobileLibrary.jsx";
+import CyberSecurity from "./pages/CyberSecurity.jsx";
 import HeritageArchive from "./pages/HeritageArchive.jsx";
 import Vr from "./pages/Vrlab.jsx";
 import Linguistics from "./pages/Linguistics.jsx";
@@ -42,9 +43,13 @@ import CurriculumExpo from "./pages/CurriculumExpo.jsx"
 
 import LifeSkills from "./pages/LifeSkills.jsx";
 import HeritageDashboard from "./pages/HeritageDashboard.jsx";
-import MobileLibraryDashboard from "./pages/MobileLibraryDashboard.jsx";
 import AudioLibraryDashboard from "./pages/AudioLibraryDashboard.jsx";
+import MyAudioLibrary from "./pages/MyAudioLibrary.jsx";
 import AiIntelligenceDashboard from "./pages/AiIntelligenceDashboard.jsx";
+
+import VrDashboard from "./pages/VrDashboard.jsx";
+import VrLabsWorlds from "./pages/VrLabsWorlds.jsx";
+import CyberSecurityDashboard from "./pages/CyberSecurityDashboard.jsx";
 import CollaborativeLearningViewAll from "./pages/CollaborativeLearningViewAll.jsx";
 
 /* Components */
@@ -82,18 +87,18 @@ function App() {
   const isMissionPage = [
     "/ling", "/linguistic", "/vr", "/sign", "/sign-learn", "/sign-module",
     "/ai-intelligence", "/digital", "/audio-books", 
-    "/mobile-library", "/heritage-archive", 
+    "/cyber-security", "/heritage-archive", 
     "/basic-skills", "/ebook", "/ling/words", "/ling/phrases", "/ling/conversations"
   ].includes(location.pathname);
 
   // Pages with NO Navbar
-  const isNoNavPage = isIsolatedPage || isMissionPage || location.pathname.startsWith("/ling") || location.pathname === "/sign" || location.pathname === "/sign-learn" || location.pathname === "/sign-module" || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/mobile-library-dashboard" || location.pathname === "/audio-library-dashboard" || location.pathname === "/ai-intelligence-dashboard";
+  const isNoNavPage = isIsolatedPage || isMissionPage || location.pathname.startsWith("/ling") || location.pathname === "/sign" || location.pathname === "/sign-learn" || location.pathname === "/sign-module" || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/audio-library-dashboard" || location.pathname === "/my-audio-library" || location.pathname === "/ai-intelligence-dashboard" || location.pathname === "/vr-dashboard" || location.pathname === "/vr-labs-worlds" || location.pathname === "/cyber-security-dashboard" || location.pathname === "/ai-courses" || location.pathname === "/ai-quiz-challenge" || location.pathname === "/explore-ai-tools";
   
   // Pages with NO Footer
-  const isNoFooterPage = isIsolatedPage || isMissionPage || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/mobile-library-dashboard" || location.pathname === "/audio-library-dashboard" || location.pathname === "/ai-intelligence-dashboard";
+  const isNoFooterPage = isIsolatedPage || isMissionPage || location.pathname === "/life-skills" || location.pathname === "/heritage-dashboard" || location.pathname === "/audio-library-dashboard" || location.pathname === "/my-audio-library" || location.pathname === "/ai-intelligence-dashboard" || location.pathname === "/vr-dashboard" || location.pathname === "/vr-labs-worlds" || location.pathname === "/cyber-security-dashboard" || location.pathname === "/ai-courses" || location.pathname === "/ai-quiz-challenge" || location.pathname === "/explore-ai-tools";
 
   return (
-    <>
+    <ReactLenis root>
       <ScrollToTop />
       {!isNoNavPage && <Nav />}
 
@@ -112,16 +117,20 @@ function App() {
             <Route path="/sign-learn" element={<SignLearn />} />
             <Route path="/sign-module" element={<SignModule />} />
             <Route path="/vr" element={<Vr />} />
+            <Route path="/vr-dashboard" element={<VrDashboard />} />
+            <Route path="/vr-labs-worlds" element={<VrLabsWorlds />} />
+            <Route path="/cyber-security-dashboard" element={<CyberSecurityDashboard />} />
              <Route path="/linguistic" element={<Linguistics />} />
               <Route path="/ebook" element={<Ebook />} />
             <Route path="/digital" element={<Digital />} />
             <Route path="/audio-books" element={<Audio />} />
             <Route path="/ai-intelligence" element={<AiIntelligence />} />
             <Route path="/ai-intelligence-dashboard" element={<AiIntelligenceDashboard />} />
-            <Route path="/mobile-library" element={<MobileLibrary />} />
+            <Route path="/cyber-security" element={<CyberSecurity />} />
             <Route path="/heritage-archive" element={<HeritageArchive />} />
             <Route path="/heritage-dashboard" element={<HeritageDashboard />} />
             <Route path="/audio-library-dashboard" element={<AudioLibraryDashboard />} />
+            <Route path="/my-audio-library" element={<MyAudioLibrary />} />
             <Route path="/courses" element={<Video />} />
             <Route path="/audio-courses" element={< Audiovideo />} />
             <Route path="/ar-courses" element={< Vrcourse />} />
@@ -131,8 +140,8 @@ function App() {
              <Route path="/ling/phrases" element={<LingModule type="phrases" />} />
              <Route path="/ling/conversations" element={<LingModule type="conversations" />} />
             <Route path="/ai-courses" element={<AiCourses />} />
+
             <Route path="/mobile-courses" element={<MobileCourses />} />
-            <Route path="/mobile-library-dashboard" element={<MobileLibraryDashboard />} />
             <Route path="/archive-courses" element={<ArchiveCourses />} />
 
             {/* Auth */}
@@ -206,7 +215,7 @@ function App() {
 
         {!isNoFooterPage && <Footer />}
       </div>
-    </>
+    </ReactLenis>
   );
 }
 
