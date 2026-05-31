@@ -111,7 +111,7 @@ const ListOfMD = () => {
             <div className="flex items-center gap-4">
                <div>
                   <h3 className="text-lg font-bold text-[#0d0e23]">Official Directory</h3>
-                  <p className="text-sm text-slate-500">Chronological List of MDs</p>
+                 
                </div>
             </div>
 
@@ -134,7 +134,7 @@ const ListOfMD = () => {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-slate-200 border-b border-slate-300 text-[#0d0e23]">
-                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">#</th>
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">S.No.</th>
                   <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Managing Director</th>
                   <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Appointment Date</th>
                   <th className="px-6 py-4 text-sm font-bold">Tenure End</th>
