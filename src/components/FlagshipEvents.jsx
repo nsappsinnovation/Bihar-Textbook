@@ -35,28 +35,7 @@ export default function FlagshipEvent() {
 
         {/* --- Minimal Navigation --- */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-6 border-b border-slate-100 pb-3">
-          <div className="flex items-center gap-6">
-            <button className="pb-6 -mb-6 text-xs font-semibold text-blue-600 relative">
-              All Initiatives
-              <div className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600"></div>
-            </button>
-           
-          </div>
-
-          <div className="flex gap-3">
-            <button
-              onClick={() => scroll("prev")}
-              className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600 transition-all active:scale-95 shadow-sm"
-            >
-              <ChevronLeft size={18} />
-            </button>
-            <button
-              onClick={() => scroll("next")}
-              className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-blue-600 hover:border-blue-600 transition-all active:scale-95 shadow-sm"
-            >
-              <ChevronRight size={18} />
-            </button>
-          </div>
+          
         </div>
 
         {/* --- Scrollable Content --- */}

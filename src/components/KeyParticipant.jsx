@@ -162,17 +162,16 @@ function ParticipantCard({ item }) {
       className="
         group relative h-[390px] overflow-hidden cursor-pointer
         rounded-2xl bg-white border border-gray-100
-        shadow-sm hover:shadow-2xl transition-shadow duration-300
       "
     >
       {/* BLUE BACKGROUND */}
       <div
         className="
           absolute inset-0 bg-[#332F82]
-          transition-[clip-path] duration-700
+          transition-[clip-path] duration-1500
           ease-[cubic-bezier(0.22,1,0.36,1)]
           z-0
-          [clip-path:ellipse(95%_45%_at_50%_100%)]
+          [clip-path:ellipse(75%_50%_at_50%_100%)]
           group-hover:[clip-path:ellipse(180%_180%_at_50%_50%)]
         "
       />
