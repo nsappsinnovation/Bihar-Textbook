@@ -254,10 +254,21 @@ const AiIntelligenceDashboard = () => {
   const [selectedItem, setSelectedItem] = useState(null);
 
   const aiVideos = [
-    { id: 1, title: 'What is Artificial Intelligence?', desc: 'A simple introduction to what AI is and how it helps us.', image: '/images/ai/rhs.png', duration: '4:20', level: 'Beginner', content: "Artificial Intelligence is like giving a computer a brain! It helps computers learn how to see, talk, and solve problems just like humans do." },
-    { id: 2, title: 'How do Robots Learn?', desc: 'Discover how machines are trained with data.', image: '/images/ai/challenge.png', duration: '5:15', level: 'Beginner', content: "Just like you learn by reading books, robots learn by looking at lots of data (like pictures or text). The more data they see, the smarter they get!" },
-    { id: 3, title: 'Computer Vision Magic', desc: 'Learn how computers can see and recognize objects.', image: '/images/ai/rhs.png', duration: '6:10', level: 'Intermediate', content: "Computer Vision is when AI uses cameras to understand what it's looking at. It can recognize dogs, cats, faces, and even read traffic signs!" },
-    { id: 4, title: 'Talking to AI (Chatbots)', desc: 'Understand how AI can chat and answer questions.', image: '/images/ai/challenge.png', duration: '3:45', level: 'Beginner', content: "Chatbots use something called Natural Language Processing (NLP) to understand what you type or say, and then they figure out the best way to reply to you!" },
+    { id: 1, title: 'What is Artificial Intelligence?', desc: 'Learn the basics of Artificial Intelligence and how machines can think.', image: 'https://img.youtube.com/vi/Q4JKii6cJK4/hqdefault.jpg', duration: '5:00', level: 'Beginner', content: 'Join us on a fun journey to understand Artificial Intelligence! You will learn how computers are trained to see, hear, and solve problems.', youtubeUrl: 'https://www.youtube.com/embed/Q4JKii6cJK4?autoplay=1' },
+    { id: 2, title: 'How do Robots Learn?', desc: 'Discover how machines are trained with data to become smarter.', image: 'https://img.youtube.com/vi/alrIxT_ozKA/hqdefault.jpg', duration: '4:15', level: 'Beginner', content: 'Just like you learn by reading books, robots learn by looking at lots of data (like pictures or text). The more data they see, the smarter they get!', youtubeUrl: 'https://www.youtube.com/embed/alrIxT_ozKA?autoplay=1' },
+    { id: 3, title: 'Computer Vision Magic', desc: 'Learn how computers can see and recognize objects in pictures.', image: 'https://img.youtube.com/vi/YnJ0dxOuaqk/hqdefault.jpg', duration: '6:10', level: 'Intermediate', content: "Computer Vision is when AI uses cameras to understand what it's looking at. It can recognize dogs, cats, faces, and even read traffic signs!", youtubeUrl: 'https://www.youtube.com/embed/YnJ0dxOuaqk?autoplay=1' },
+    { id: 4, title: 'Talking to AI (Chatbots)', desc: 'Understand how AI can chat and answer your questions intelligently.', image: 'https://img.youtube.com/vi/jwJ7YH_pKu8/hqdefault.jpg', duration: '3:45', level: 'Beginner', content: 'Chatbots use something called Natural Language Processing (NLP) to understand what you type or say, and then they figure out the best way to reply to you!', youtubeUrl: 'https://www.youtube.com/embed/jwJ7YH_pKu8?autoplay=1' },
+    { id: 5, title: 'Machine Learning Basics', desc: 'Dive into the world of machine learning and data patterns.', image: 'https://img.youtube.com/vi/gM782sItczs/hqdefault.jpg', duration: '5:30', level: 'Intermediate', content: 'Machine learning is a way of teaching computers to learn from examples and experiences, rather than writing a program for every single step.', youtubeUrl: 'https://www.youtube.com/embed/gM782sItczs?autoplay=1' },
+    { id: 6, title: 'The Future of AI', desc: 'Explore the exciting possibilities of Artificial Intelligence in the future.', image: 'https://img.youtube.com/vi/76v_EvCnIf8/hqdefault.jpg', duration: '7:20', level: 'Advanced', content: 'From self-driving cars to space exploration, see how AI is shaping the future of technology and human life in amazing ways.', youtubeUrl: 'https://www.youtube.com/embed/76v_EvCnIf8?autoplay=1' },
+    { id: 7, title: 'AI in Everyday Life', desc: 'Find out how you are already using AI every single day.', image: 'https://img.youtube.com/vi/vTkn_ce4_qo/hqdefault.jpg', duration: '4:40', level: 'Beginner', content: 'Did you know Netflix recommendations and smartphone face unlock use AI? Let’s explore all the hidden AI around us!', youtubeUrl: 'https://www.youtube.com/embed/vTkn_ce4_qo?autoplay=1' },
+    { id: 8, title: 'Understanding Algorithms', desc: 'Learn the secret recipes that make computer programs work.', image: 'https://img.youtube.com/vi/Fvt-Wwl6SMU/hqdefault.jpg', duration: '6:00', level: 'Beginner', content: 'An algorithm is just a step-by-step set of instructions. Discover how computers use these instructions to solve huge problems quickly.', youtubeUrl: 'https://www.youtube.com/embed/Fvt-Wwl6SMU?autoplay=1' },
+    { id: 9, title: 'Neural Networks Explained', desc: 'How do computer brains mimic human brains? Let’s find out.', image: 'https://img.youtube.com/vi/_jY3RGb46yY/hqdefault.jpg', duration: '8:15', level: 'Advanced', content: 'Neural networks are designed to work just like our own brains. Learn about neurons, layers, and how they connect to make smart decisions.', youtubeUrl: 'https://www.youtube.com/embed/_jY3RGb46yY?autoplay=1' },
+    { id: 10, title: 'Deep Learning for Kids', desc: 'A fun introduction to the deepest parts of machine learning.', image: 'https://img.youtube.com/vi/FU15Eul9KJw/hqdefault.jpg', duration: '5:50', level: 'Intermediate', content: 'Deep learning uses many layers of artificial neurons to understand complex things like human speech and detailed images.', youtubeUrl: 'https://www.youtube.com/embed/FU15Eul9KJw?autoplay=1' },
+    { id: 11, title: 'AI and Ethics', desc: 'Why is it important to use Artificial Intelligence responsibly?', image: 'https://img.youtube.com/vi/g7LwR5ZNupg/hqdefault.jpg', duration: '4:55', level: 'Intermediate', content: 'As AI gets smarter, we must make sure it is fair, unbiased, and helpful for everyone. Learn the rules of responsible AI.', youtubeUrl: 'https://www.youtube.com/embed/g7LwR5ZNupg?autoplay=1' },
+    { id: 12, title: 'How AI Generates Art', desc: 'Can computers be creative? Discover how AI creates paintings and music.', image: 'https://img.youtube.com/vi/jWDf3l1G9HI/hqdefault.jpg', duration: '6:30', level: 'Beginner', content: 'AI can analyze millions of paintings to learn styles and create brand new artwork from simple text prompts. Let’s see the magic of generative AI!', youtubeUrl: 'https://www.youtube.com/embed/jWDf3l1G9HI?autoplay=1' },
+    { id: 13, title: 'Voice Assistants & NLP', desc: 'How does Alexa or Siri understand what you are saying?', image: 'https://img.youtube.com/vi/SfLzvl1yEzA/hqdefault.jpg', duration: '5:10', level: 'Intermediate', content: 'Natural Language Processing helps computers hear your voice, turn it into text, figure out what you mean, and speak back to you.', youtubeUrl: 'https://www.youtube.com/embed/SfLzvl1yEzA?autoplay=1' },
+    { id: 14, title: 'Robotics and AI', desc: 'What happens when you put an AI brain into a robot body?', image: 'https://img.youtube.com/vi/Cty3wcYIYgw/hqdefault.jpg', duration: '7:45', level: 'Intermediate', content: 'Robots need AI to navigate, pick up objects, and interact with humans safely. Explore the cool intersection of robotics and AI.', youtubeUrl: 'https://www.youtube.com/embed/Cty3wcYIYgw?autoplay=1' },
+    { id: 15, title: 'Building Your First AI', desc: 'Ready to create your own AI? Here is how you can start.', image: 'https://img.youtube.com/vi/y1ef7C8RqBk/hqdefault.jpg', duration: '9:00', level: 'Advanced', content: 'You do not need to be a genius to build AI. Learn about simple tools and block-coding platforms that let anyone create their first smart model!', youtubeUrl: 'https://www.youtube.com/embed/y1ef7C8RqBk?autoplay=1' }
   ];
 
   const quickStats = [
@@ -395,17 +406,17 @@ const AiIntelligenceDashboard = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
+            className="fixed inset-0 z-50 flex p-4 sm:p-6 overflow-y-auto"
           >
             <div 
-              className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+              className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm"
               onClick={() => setSelectedItem(null)}
             />
             <motion.div
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              className="relative w-full max-w-4xl bg-white rounded-[24px] overflow-hidden shadow-2xl z-10 flex flex-col max-h-[90vh]"
+              className="relative w-full max-w-4xl bg-white rounded-[24px] overflow-hidden shadow-2xl z-10 flex flex-col m-auto h-auto"
             >
               <div className="p-4 sm:p-6 border-b border-slate-100 flex items-center justify-between bg-white shrink-0">
                 <div className="flex items-center gap-3">
@@ -429,20 +440,32 @@ const AiIntelligenceDashboard = () => {
                 </button>
               </div>
 
-              <div className="flex-1 overflow-y-auto">
+              <div className="flex-1 flex flex-col">
                 <div className="w-full aspect-video bg-slate-900 relative group">
-                  <img src={selectedItem.image} alt={selectedItem.title} className="w-full h-full object-cover opacity-50" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-16 h-16 rounded-full bg-blue-600/90 text-white flex items-center justify-center shadow-lg shadow-blue-500/30 cursor-pointer hover:scale-110 hover:bg-blue-600 transition-all">
-                      <Play className="ml-1.5 w-8 h-8 fill-current" />
-                    </div>
-                  </div>
-                  <div className="absolute bottom-4 left-4 right-4 flex items-center gap-4">
-                    <div className="h-1 flex-1 bg-white/30 rounded-full overflow-hidden">
-                      <div className="h-full w-1/3 bg-blue-500 rounded-full" />
-                    </div>
-                    <span className="text-xs text-white font-medium font-mono text-shadow">01:23 / {selectedItem.duration}</span>
-                  </div>
+                  {selectedItem.youtubeUrl ? (
+                    <iframe 
+                      src={selectedItem.youtubeUrl} 
+                      title={selectedItem.title}
+                      className="w-full h-full border-0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  ) : (
+                    <>
+                      <img src={selectedItem.image} alt={selectedItem.title} className="w-full h-full object-cover opacity-50" />
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-16 h-16 rounded-full bg-blue-600/90 text-white flex items-center justify-center shadow-lg shadow-blue-500/30 cursor-pointer hover:scale-110 hover:bg-blue-600 transition-all">
+                          <Play className="ml-1.5 w-8 h-8 fill-current" />
+                        </div>
+                      </div>
+                      <div className="absolute bottom-4 left-4 right-4 flex items-center gap-4">
+                        <div className="h-1 flex-1 bg-white/30 rounded-full overflow-hidden">
+                          <div className="h-full w-1/3 bg-blue-500 rounded-full" />
+                        </div>
+                        <span className="text-xs text-white font-medium font-mono text-shadow">01:23 / {selectedItem.duration}</span>
+                      </div>
+                    </>
+                  )}
                 </div>
 
                 <div className="p-6 sm:p-8">
