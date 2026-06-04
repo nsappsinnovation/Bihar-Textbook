@@ -71,7 +71,7 @@ const HRD = () => {
               {/* Right Column - Training & Development */}
               <div className="bg-slate-50/50 rounded-2xl p-6 md:p-8 border border-slate-100">
                 <h3 className="text-lg font-black text-[#0d0e23] mb-6 flex items-center gap-3">
-                  <FiBookOpen className="text-blue-600" />
+                  
                   Development Programs
                 </h3>
                 <div className="space-y-8">
