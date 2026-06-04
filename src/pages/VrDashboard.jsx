@@ -212,25 +212,10 @@ const VrDashboard = () => {
                         <h4 className="text-[17px] font-bold text-slate-900 tracking-tight leading-tight">{currentCourse.title}</h4>
                         <p className="text-xs font-medium text-slate-500 mt-1 mb-3">{currentCourse.desc}</p>
 
-                        {/* Progress */}
-                        <div className="flex items-center gap-3 mb-3">
-                           <div className="flex-1 h-[5px] bg-slate-100 rounded-full overflow-hidden relative">
-                              <motion.div 
-                                 key={selectedTopic}
-                                 initial={{ width: 0 }}
-                                 animate={{ width: `${currentCourse.progress}%` }}
-                                 transition={{ duration: 0.6, ease: 'easeOut' }}
-                                 className="h-full bg-blue-600 rounded-full" 
-                              />
-                           </div>
-                           <span className="text-xs font-bold text-slate-700 shrink-0">{currentCourse.progress}%</span>
-                        </div>
+
 
                         {/* Meta Info */}
                         <div className="flex items-center gap-4 mb-4">
-                           <span className="flex items-center gap-1.5 text-[11px] font-medium text-slate-500">
-                              <Clock size={12} className="text-slate-400" /> {currentCourse.timeLeft}
-                           </span>
                            <span className="flex items-center gap-1.5 text-[11px] font-medium text-slate-500">
                               <GraduationCap size={12} className="text-slate-400" /> {currentCourse.level}
                            </span>
