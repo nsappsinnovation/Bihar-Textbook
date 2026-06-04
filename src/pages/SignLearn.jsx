@@ -2,19 +2,20 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowLeft, ArrowRight, BookOpen, Clock, 
-  Hand, Play, GraduationCap, XCircle, Keyboard
+  Hand, Play, GraduationCap, XCircle, Keyboard,
+  HeartHandshake, Heart, Smile, Frown, Utensils, Users
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const toolsDataList = [
-  { name: 'Hello', tag: 'Greeting', desc: 'Wave your hand gently from side to side to say hello.', image: '/images/signlanguage/hand.png', color: 'bg-green-50 text-green-600', categories: ['Greetings', 'Daily'] },
-  { name: 'Thank You', tag: 'Greeting', desc: 'Touch your chin with fingers, then move hand forward towards the person.', image: '/images/signlanguage/handl.png', color: 'bg-emerald-50 text-emerald-600', categories: ['Greetings', 'Daily'] },
-  { name: 'Mother', tag: 'Family', desc: 'Tap your thumb on your chin with an open hand facing sideways.', image: '/images/signlanguage/hand.png', color: 'bg-pink-50 text-pink-600', categories: ['Family'] },
-  { name: 'Happy', tag: 'Emotion', desc: 'Brush both flat hands upward on your chest to show joy.', image: '/images/signlanguage/thumb.png', color: 'bg-yellow-50 text-yellow-600', categories: ['Emotions'] },
-  { name: 'Sorry', tag: 'Greeting', desc: 'Rub a closed fist in a circular motion over your heart.', image: '/images/signlanguage/ghosthand.png', color: 'bg-blue-50 text-blue-600', categories: ['Greetings', 'Emotions'] },
-  { name: 'Eat', tag: 'Daily', desc: 'Bring your flattened O-hand to your mouth a few times.', image: '/images/signlanguage/hand.png', color: 'bg-orange-50 text-orange-600', categories: ['Daily'] },
-  { name: 'Father', tag: 'Family', desc: 'Tap your thumb on your forehead with an open hand facing sideways.', image: '/images/signlanguage/handl.png', color: 'bg-cyan-50 text-cyan-600', categories: ['Family'] },
-  { name: 'Sad', tag: 'Emotion', desc: 'Place both hands in front of your face and pull them down while making a sad face.', image: '/images/signlanguage/ghosthand.png', color: 'bg-purple-50 text-purple-600', categories: ['Emotions'] }
+  { name: 'Hello', tag: 'Greeting', desc: 'Wave your hand gently from side to side to say hello.', image: '/images/signlanguage/hand.png', color: 'bg-green-50 text-green-600', icon: <Hand size={28} />, categories: ['Greetings', 'Daily'] },
+  { name: 'Thank You', tag: 'Greeting', desc: 'Touch your chin with fingers, then move hand forward towards the person.', image: '/images/signlanguage/handl.png', color: 'bg-green-50 text-green-600', icon: <HeartHandshake size={28} />, categories: ['Greetings', 'Daily'] },
+  { name: 'Mother', tag: 'Family', desc: 'Tap your thumb on your chin with an open hand facing sideways.', image: '/images/signlanguage/hand.png', color: 'bg-green-50 text-green-600', icon: <Users size={28} />, categories: ['Family'] },
+  { name: 'Happy', tag: 'Emotion', desc: 'Brush both flat hands upward on your chest to show joy.', image: '/images/signlanguage/thumb.png', color: 'bg-green-50 text-green-600', icon: <Smile size={28} />, categories: ['Emotions'] },
+  { name: 'Sorry', tag: 'Greeting', desc: 'Rub a closed fist in a circular motion over your heart.', image: '/images/signlanguage/ghosthand.png', color: 'bg-green-50 text-green-600', icon: <Heart size={28} />, categories: ['Greetings', 'Emotions'] },
+  { name: 'Eat', tag: 'Daily', desc: 'Bring your flattened O-hand to your mouth a few times.', image: '/images/signlanguage/hand.png', color: 'bg-green-50 text-green-600', icon: <Utensils size={28} />, categories: ['Daily'] },
+  { name: 'Father', tag: 'Family', desc: 'Tap your thumb on your forehead with an open hand facing sideways.', image: '/images/signlanguage/handl.png', color: 'bg-green-50 text-green-600', icon: <Users size={28} />, categories: ['Family'] },
+  { name: 'Sad', tag: 'Emotion', desc: 'Place both hands in front of your face and pull them down while making a sad face.', image: '/images/signlanguage/ghosthand.png', color: 'bg-green-50 text-green-600', icon: <Frown size={28} />, categories: ['Emotions'] }
 ];
 
 const ExploreSignsComponent = () => {
@@ -30,14 +31,14 @@ const ExploreSignsComponent = () => {
       
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {toolsDataList.map(tool => (
-          <div key={tool.name} className="relative w-full h-[240px] group perspective-1000 cursor-pointer">
+        {toolsDataList.map((tool, index) => (
+          <div key={tool.name} className="relative w-full aspect-[1.1] group perspective-1000 cursor-pointer">
             <div className="w-full h-full relative preserve-3d transition-transform duration-500 group-hover:rotate-y-180">
               
               {/* Front of Card */}
               <div className="absolute inset-0 backface-hidden bg-white rounded-[20px] border border-slate-100 p-5 flex flex-col items-center text-center shadow-[0_4px_20px_rgba(0,0,0,0.03)] group-hover:border-green-200 transition-colors">
-                <div className={`w-14 h-14 rounded-full flex items-center justify-center text-xl mb-4 ${tool.color.replace('text-', 'bg-').replace('-50', '-100')} text-slate-700`}>
-                  <span className="font-black text-slate-700 opacity-60 text-2xl">{tool.name.charAt(0)}</span>
+                <div className={`w-14 h-14 rounded-full flex items-center justify-center text-xl mb-4 bg-green-100 text-green-600`}>
+                  {tool.icon ? React.cloneElement(tool.icon, { className: "opacity-80" }) : <span className="font-black opacity-60 text-2xl">{tool.name.charAt(0)}</span>}
                 </div>
                 <h4 className="text-lg font-black text-slate-900 leading-tight">{tool.name}</h4>
                 <span className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md mt-1.5 inline-block ${tool.color}`}>
@@ -50,12 +51,15 @@ const ExploreSignsComponent = () => {
               </div>
               
               {/* Back of Card */}
-              <div className="absolute inset-0 backface-hidden bg-green-50 rounded-[20px] border-2 border-green-200 p-4 flex flex-col items-center justify-center rotate-y-180 shadow-lg shadow-green-100/50">
-                <div className="w-full h-32 bg-white rounded-[12px] p-2 flex items-center justify-center mb-3 overflow-hidden border border-green-100">
-                   <img src={tool.image} alt={tool.name} className="w-full h-full object-contain mix-blend-multiply" />
-                </div>
-                <h4 className="text-[15px] font-black text-green-700 leading-tight">{tool.name}</h4>
-                
+              <div className="absolute inset-0 backface-hidden rounded-[20px] shadow-lg shadow-green-100/50 transition-all overflow-hidden rotate-y-180 border-2 border-green-200">
+                <div 
+                  className="w-full h-full bg-no-repeat bg-white" 
+                  style={{ 
+                    backgroundImage: "url('/images/signlanguage/common.png')", 
+                    backgroundSize: "400% 200%", 
+                    backgroundPosition: `${(index % 4) * 33.3333}% ${Math.floor(index / 4) * 100}%` 
+                  }}
+                />
               </div>
               
             </div>

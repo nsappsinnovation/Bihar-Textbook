@@ -38,37 +38,9 @@ const RegisterPrinters = () => {
       </section>
 
       {/* ================= SEARCH & LIST ================= */}
-      <section className="max-w-6xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row gap-8 items-start">
-           
-           {/* Sidebar Info */}
-           <div className="w-full md:w-80 space-y-6">
-              <div className="bg-transparent p-6 border border-slate-300">
-                 <h3 className="text-lg font-bold text-[#0d0e23] mb-4">Empanelment Status</h3>
-                 <p className="text-sm text-slate-500 mb-6">
-                   BSTBPC invites applications for registration of printers for the academic cycle.
-                 </p>
-                 <div className="space-y-4">
-                    <StatusInfo label="Total Registered" value="48" color="blue" />
-                    <StatusInfo label="In Evaluation" value="12" color="blue" />
-                    <StatusInfo label="Capacity (P.A)" value="50M+" color="slate" />
-                 </div>
-                 <button className="w-full mt-8 py-3 bg-blue-600 text-white text-sm font-bold transition-all">
-                    Apply for Empanelment
-                 </button>
-              </div>
-
-              <div className="p-6 bg-transparent border border-slate-300">
-                 <FiShield className="text-blue-600 text-2xl mb-4" />
-                 <h4 className="text-base font-bold text-[#0d0e23] mb-2">Quality Assurance</h4>
-                 <p className="text-sm text-slate-600">
-                    All registered printers must comply with BSTBPC's rigorous quality and security standards for textbook production.
-                 </p>
-              </div>
-           </div>
-
-           {/* Main List */}
-           <div className="flex-grow space-y-6 w-full">
+      <section className="max-w-5xl mx-auto px-6">
+         {/* Main List */}
+         <div className="w-full space-y-6">
               <div className="relative">
                 <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg" />
                 <input 
@@ -116,18 +88,9 @@ const RegisterPrinters = () => {
                 </table>
               </div>
            </div>
-        </div>
       </section>
     </div>
   );
 };
-
-/* Helper Components */
-const StatusInfo = ({ label, value, color }) => (
-  <div className="flex justify-between items-center py-3 border-b border-slate-50 last:border-0">
-    <span className="text-[11px] font-bold text-slate-500">{label}</span>
-    <span className={`text-xs font-black text-${color}-600 bg-${color}-50 px-3 py-1 rounded-lg`}>{value}</span>
-  </div>
-);
 
 export default RegisterPrinters;

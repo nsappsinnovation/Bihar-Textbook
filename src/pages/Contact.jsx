@@ -70,9 +70,7 @@ const Contact = () => {
               {/* LEFT SIDE - Info */}
               <div className="lg:w-[45%] flex flex-col">
                 <div className="mb-10">
-                    <div className="w-14 h-14 rounded-2xl bg-[#EEF5FF] flex items-center justify-center text-blue-600 mb-6">
-                        <GraduationCap className="w-7 h-7" />
-                    </div>
+                   
                     <h2 className="text-2xl md:text-[28px] font-black text-slate-900 leading-tight mb-4">
                         Committed to <br />
                         <span className="text-blue-600">Educational Success</span>
@@ -117,9 +115,7 @@ const Contact = () => {
               <div className="lg:w-[55%]">
                 <div className="bg-[#FAFAFA] rounded-[32px] p-8 md:p-10 border border-slate-100">
                     <div className="flex items-center gap-4 mb-2">
-                        <div className="w-12 h-12 rounded-full bg-[#EEF5FF] flex items-center justify-center text-blue-600">
-                            <PenTool className="w-5 h-5" />
-                        </div>
+                        
                         <div>
                             <h3 className="text-xl font-black text-slate-900">Quick Query Form</h3>
                             <p className="text-[13px] text-slate-500 font-medium">We'll get back to you as soon as possible.</p>

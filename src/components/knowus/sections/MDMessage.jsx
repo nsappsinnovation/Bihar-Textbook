@@ -113,8 +113,8 @@ const MdMessage = () => {
             
             {/* Commitment 2 */}
             <div className="flex flex-col items-center text-center px-2">
-              <div className="w-16 h-16 rounded-full bg-amber-50 flex items-center justify-center mb-5 border border-amber-100">
-                <ShieldCheck className="text-amber-500 w-7 h-7" />
+              <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-5 border border-blue-100">
+                <ShieldCheck className="text-blue-600 w-7 h-7" />
               </div>
               <p className="text-[13px] font-bold text-slate-700 leading-relaxed">
                 Maintaining the highest standards of quality
@@ -123,8 +123,8 @@ const MdMessage = () => {
 
             {/* Commitment 3 */}
             <div className="flex flex-col items-center text-center px-2">
-              <div className="w-16 h-16 rounded-full bg-purple-50 flex items-center justify-center mb-5 border border-purple-100">
-                <UserCheck className="text-purple-600 w-7 h-7" />
+              <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-5 border border-blue-100">
+                <UserCheck className="text-blue-600 w-7 h-7" />
               </div>
               <p className="text-[13px] font-bold text-slate-700 leading-relaxed">
                 Strengthening transparency and accountability
@@ -133,8 +133,8 @@ const MdMessage = () => {
 
             {/* Commitment 4 */}
             <div className="flex flex-col items-center text-center px-2">
-              <div className="w-16 h-16 rounded-full bg-indigo-50 flex items-center justify-center mb-5 border border-indigo-100">
-                <Monitor className="text-indigo-500 w-7 h-7" />
+              <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-5 border border-blue-100">
+                <Monitor className="text-blue-600 w-7 h-7" />
               </div>
               <p className="text-[13px] font-bold text-slate-700 leading-relaxed">
                 Adopting digital systems for efficient supply chain management
@@ -158,7 +158,7 @@ const MdMessage = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 max-w-5xl mx-auto">
             {/* Feature 1 */}
             <div className="flex flex-col items-center text-center">
-              <Target className="text-blue-500 w-12 h-12 mb-4" strokeWidth={1.5} />
+              <Target className="text-blue-600 w-12 h-12 mb-4" strokeWidth={1.5} />
               <h4 className="text-[12px] font-black text-slate-900 tracking-wider uppercase mb-3">COLLABORATION</h4>
               <p className="text-[14px] text-slate-600 font-medium leading-relaxed">
                 Working together with all stakeholders to achieve our shared goals.
@@ -167,7 +167,7 @@ const MdMessage = () => {
 
             {/* Feature 2 */}
             <div className="flex flex-col items-center text-center">
-              <TrendingUp className="text-amber-500 w-12 h-12 mb-4" strokeWidth={1.5} />
+              <TrendingUp className="text-blue-600 w-12 h-12 mb-4" strokeWidth={1.5} />
               <h4 className="text-[12px] font-black text-slate-900 tracking-wider uppercase mb-3">QUALITY FIRST</h4>
               <p className="text-[14px] text-slate-600 font-medium leading-relaxed">
                 Every stage is carefully supervised to deliver excellence.
@@ -176,7 +176,7 @@ const MdMessage = () => {
 
             {/* Feature 3 */}
             <div className="flex flex-col items-center text-center">
-              <ChevronsRight className="text-purple-500 w-12 h-12 mb-4" strokeWidth={1.5} />
+              <ChevronsRight className="text-blue-600 w-12 h-12 mb-4" strokeWidth={1.5} />
               <h4 className="text-[12px] font-black text-slate-900 tracking-wider uppercase mb-3">MOVING FORWARD</h4>
               <p className="text-[14px] text-slate-600 font-medium leading-relaxed">
                 Committed to timely delivery and better learning outcomes for every student.
@@ -198,8 +198,11 @@ const MdMessage = () => {
           </div>
           
           <div className="md:pl-10 md:border-l-2 border-slate-100 flex items-center">
-            <p className="text-[14px] text-slate-500 font-medium leading-relaxed text-center md:text-left">
-              Let us work together to build a stronger educational ecosystem for the future generations of our state.
+            <p 
+              className="text-[18px] md:text-[20px] text-blue-700 font-semibold leading-relaxed text-center md:text-left"
+              style={{ fontFamily: '"Brush Script MT", "Lucida Handwriting", cursive' }}
+            >
+              Bihar State Text Book Publishing Corporation
             </p>
           </div>
         </div>

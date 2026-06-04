@@ -66,7 +66,7 @@ const CsrPolicy = () => {
         <div 
             className="absolute inset-0 z-0 opacity-80" 
             style={{
-                backgroundImage: `url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')`,
+                backgroundImage: `url('images/csr.png')`,
                 backgroundPosition: 'right center',
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat'
@@ -126,9 +126,7 @@ const CsrPolicy = () => {
                 <div className="lg:w-7/12 space-y-6">
                     {/* Vision Card */}
                     <div className="bg-[#FAFAFA] border border-slate-200 rounded-3xl p-8 flex gap-6 items-start">
-                        <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shrink-0 border border-slate-100 shadow-sm">
-                            <Eye className="text-blue-600 w-7 h-7" />
-                        </div>
+                        
                         <div>
                             <h3 className="text-[17px] font-black text-slate-900 mb-2">Our CSR Vision</h3>
                             <p className="text-[14px] text-slate-600 font-medium italic leading-relaxed">
@@ -139,9 +137,7 @@ const CsrPolicy = () => {
 
                     {/* Mission Card */}
                     <div className="bg-blue-50/50 border border-blue-100 rounded-3xl p-8 flex gap-6 items-start">
-                        <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shrink-0 border border-blue-50 shadow-sm">
-                            <Target className="text-blue-600 w-7 h-7" />
-                        </div>
+                        
                         <div>
                             <h3 className="text-[17px] font-black text-slate-900 mb-4">Our CSR Mission</h3>
                             <ul className="space-y-3">
@@ -198,7 +194,7 @@ const CsrPolicy = () => {
         {/* CSR Governance */}
         <div className="bg-white border border-slate-200 rounded-[32px] p-8 shadow-sm">
             <div className="flex items-center gap-3 mb-6">
-                <FileText className="text-blue-600 w-6 h-6" />
+               
                 <h3 className="text-[16px] font-black text-slate-900">CSR Governance</h3>
             </div>
             <p className="text-[13px] text-slate-600 font-medium leading-relaxed mb-8">
@@ -219,7 +215,7 @@ const CsrPolicy = () => {
             <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl"></div>
             
             <div className="flex items-center gap-3 mb-6 relative z-10">
-                <TrendingUp className="text-blue-400 w-6 h-6" />
+                
                 <h3 className="text-[16px] font-black text-white">CSR Investment</h3>
             </div>
             <p className="text-[13px] text-slate-300 font-medium leading-relaxed mb-10 relative z-10">
@@ -227,7 +223,7 @@ const CsrPolicy = () => {
             </p>
             
             <div className="bg-white/10 border border-white/20 rounded-2xl p-4 flex items-center gap-4 relative z-10 backdrop-blur-sm">
-                <ShieldCheck className="text-white w-8 h-8 opacity-80" strokeWidth={1.5} />
+                
                 <div>
                     <div className="text-[12px] font-black text-white tracking-wider">AUDITED</div>
                     <div className="text-[9px] font-bold text-blue-300 uppercase tracking-widest mt-0.5">Annual Expenditure</div>
@@ -238,7 +234,7 @@ const CsrPolicy = () => {
         {/* Future Roadmap */}
         <div className="bg-white border border-slate-200 rounded-[32px] p-8 shadow-sm">
             <div className="flex items-center gap-3 mb-6">
-                <Map className="text-blue-600 w-6 h-6" />
+                
                 <h3 className="text-[16px] font-black text-slate-900">Future Roadmap</h3>
             </div>
             <ul className="space-y-5">
@@ -264,19 +260,19 @@ const CsrPolicy = () => {
         <div className="bg-slate-50 border border-slate-100 rounded-[32px] p-8 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center shadow-sm">
             
             <div className="flex flex-col items-center">
-                <Calendar className="text-blue-600 w-6 h-6 mb-3 opacity-80" strokeWidth={1.5} />
+                
                 <div className="text-2xl font-black text-slate-900 mb-1">{csrData.strategyYear}</div>
                 <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Strategy Year</div>
             </div>
 
             <div className="flex flex-col items-center border-t sm:border-t-0 sm:border-l border-slate-200 pt-6 sm:pt-0">
-                <Users className="text-blue-600 w-6 h-6 mb-3 opacity-80" strokeWidth={1.5} />
+                
                 <div className="text-2xl font-black text-slate-900 mb-1">{csrData.livesImpacted}</div>
                 <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Lives Impacted</div>
             </div>
 
             <div className="flex flex-col items-center border-t sm:border-t-0 sm:border-l border-slate-200 pt-6 sm:pt-0">
-                <ShieldCheck className="text-blue-600 w-6 h-6 mb-3 opacity-80" strokeWidth={1.5} />
+                
                 <div className="text-2xl font-black text-slate-900 mb-1">{csrData.govtApproval}</div>
                 <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Govt Approval</div>
             </div>
