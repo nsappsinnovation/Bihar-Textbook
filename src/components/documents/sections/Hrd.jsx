@@ -2,7 +2,7 @@ import React from "react";
 import { FiUsers, FiAward, FiBookOpen, FiFileText, FiClock, FiCheckCircle, FiArrowRight } from "react-icons/fi";
 import { motion } from "framer-motion";
 
-const HRT = () => {
+const HRD = () => {
   return (
     <div className="min-h-screen bg-[#f8fafc] -mt-24">
       {/* ================= HERO SECTION ================= */}
@@ -21,7 +21,7 @@ const HRT = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4"
           >
-            Human Resources & <span className="text-blue-500">Training</span>
+            Human Resources & <span className="text-blue-500">Development</span>
           </motion.h1>
           <motion.div 
             initial={{ width: 0 }}
@@ -46,23 +46,20 @@ const HRT = () => {
               <div className="space-y-10">
                 <div className="space-y-6">
                   <h2 className="text-xl md:text-2xl font-black text-[#0d0e23] leading-tight">
-                    Our People, <br />
-                    <span className="text-blue-600">Our Strength</span>
+                    Nurturing Talent, <br />
+                    <span className="text-blue-600">Fostering Excellence</span>
                   </h2>
                   <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                    At BSTBPC, we believe in nurturing talent and fostering a culture of innovation and integrity. Our HR policies are designed to support professional growth while maintaining the highest standards of public service.
+                    At BSTBPC, we believe in holistic employee development and fostering a culture of continuous learning. Our HRD strategies are focused on capacity building, professional growth, and maintaining the highest standards of educational publishing.
                   </p>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <StatCard icon={<FiUsers />} label="Employees" value="250+" color="blue" />
-                  <StatCard icon={<FiAward />} label="Programs" value="12" color="indigo" />
-                </div>
+              
 
                 <div className="space-y-4">
-                  <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest">Key HR Pillars</h3>
+                  <h3 className="text-sm font-black text-slate-400 uppercase tracking-widest">Key Development Pillars</h3>
                   <div className="space-y-3">
-                    {["Merit-based Recruitment", "Continuous Skill Enhancement", "Employee Welfare Initiatives", "Performance Recognition"].map((pillar, idx) => (
+                    {["Talent Acquisition & Planning", "Capacity Building & Upskilling", "Holistic Employee Wellness", "Career Progression & Appraisal"].map((pillar, idx) => (
                       <div key={idx} className="flex items-center gap-3 text-xs font-bold text-slate-700">
                         <FiCheckCircle className="text-blue-500" /> {pillar}
                       </div>
@@ -75,31 +72,27 @@ const HRT = () => {
               <div className="bg-slate-50/50 rounded-2xl p-6 md:p-8 border border-slate-100">
                 <h3 className="text-lg font-black text-[#0d0e23] mb-6 flex items-center gap-3">
                   <FiBookOpen className="text-blue-600" />
-                  Training Roadmap
+                  Development Programs
                 </h3>
                 <div className="space-y-8">
                   <TimelineItem 
-                    title="Orientation & Induction" 
-                    desc="Comprehensive onboarding for new team members to understand BSTBPC mission." 
+                    title="Foundation & Induction" 
+                    desc="Comprehensive onboarding for new team members to align with BSTBPC's educational mission." 
                     status="Ongoing"
                   />
                   <TimelineItem 
-                    title="Digital Literacy" 
-                    desc="Training on modern publishing tools and ERP systems used in our workflow." 
+                    title="Technical & Digital Upskilling" 
+                    desc="Advanced skill training on modern publishing technologies and digital workflow integration." 
                     status="Upcoming"
                   />
                   <TimelineItem 
-                    title="Leadership Development" 
-                    desc="Specialized workshops for mid-level managers on strategic governance." 
+                    title="Leadership & Capacity Building" 
+                    desc="Specialized workshops empowering mid-level managers in strategic educational governance." 
                     status="Quarterly"
                   />
                 </div>
 
-                <div className="mt-10 pt-8 border-t border-slate-200">
-                   <button className="w-full py-4 rounded-xl bg-[#0d0e23] text-white text-[11px] font-black uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-blue-600 transition-all shadow-lg shadow-slate-200">
-                      View Open Positions <FiArrowRight />
-                   </button>
-                </div>
+                
               </div>
             </div>
           </div>
@@ -133,4 +126,4 @@ const TimelineItem = ({ title, desc, status }) => (
   </div>
 );
 
-export default HRT;
+export default HRD;
