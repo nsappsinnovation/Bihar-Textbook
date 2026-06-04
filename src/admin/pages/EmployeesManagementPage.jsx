@@ -105,12 +105,6 @@ export default function EmployeesManagementPage({ addToast }) {
     emp.department.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const stats = [
-    { label: 'TOTAL STAFF', value: `${employees.length}+`, icon: Users, color: 'text-blue-600', bg: 'bg-blue-50' },
-    { label: 'DEPT HEADS', value: '15+', icon: Award, color: 'text-indigo-600', bg: 'bg-indigo-50' },
-    { label: 'AVG TENURE', value: '10yrs', icon: Heart, color: 'text-blue-500', bg: 'bg-blue-50/50' },
-    { label: 'SATISFACTION', value: '98%', icon: TrendingUp, color: 'text-sky-500', bg: 'bg-sky-50' },
-  ];
 
   return (
     <motion.div
@@ -118,24 +112,6 @@ export default function EmployeesManagementPage({ addToast }) {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-8"
     >
-      {/* Stats Section */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat, idx) => (
-          <motion.div
-            key={stat.label}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.1 }}
-            className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm flex flex-col items-center text-center group hover:shadow-xl hover:shadow-gray-200/40 transition-all duration-300"
-          >
-            <div className={`p-4 rounded-2xl ${stat.bg} ${stat.color} mb-6 group-hover:scale-110 transition-transform`}>
-              <stat.icon className="w-6 h-6" />
-            </div>
-            <h4 className="text-3xl font-black text-gray-900 mb-1">{stat.value}</h4>
-            <p className="text-[10px] font-black text-gray-400 tracking-[0.2em] uppercase">{stat.label}</p>
-          </motion.div>
-        ))}
-      </div>
 
       {/* Directory Section */}
       <div className="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden">
@@ -161,7 +137,7 @@ export default function EmployeesManagementPage({ addToast }) {
               className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3.5 bg-blue-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-all"
             >
               <Plus className="w-4 h-4" />
-              <span>Add Employee</span>
+              <span>Add</span>
             </button>
           </div>
         </div>
@@ -174,7 +150,6 @@ export default function EmployeesManagementPage({ addToast }) {
                 <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-50">Name</th>
                 <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-50">Designation</th>
                 <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-50">Department</th>
-                <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-50 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
@@ -206,22 +181,6 @@ export default function EmployeesManagementPage({ addToast }) {
                       <span className="px-3 py-1 bg-gray-100 text-[10px] font-black text-gray-500 rounded-lg uppercase tracking-wider">
                         {emp.department}
                       </span>
-                    </td>
-                    <td className="px-8 py-5 text-right">
-                      <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button 
-                          onClick={() => handleOpenEdit(emp)}
-                          className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"
-                        >
-                          <Edit2 className="w-4 h-4" />
-                        </button>
-                        <button 
-                          onClick={() => handleDelete(emp.id)}
-                          className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
                     </td>
                   </motion.tr>
                 ))}

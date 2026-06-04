@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { 
   BookOpen, Monitor, Heart, Leaf, FileText, 
@@ -36,6 +36,26 @@ const CsrPolicy = () => {
     { title: "Teacher Digital\nWorkshops", desc: "Conducted 100+ digital literacy workshops training educators in modern pedagogical tools." },
     { title: "Inclusive Content\nSupport", desc: "Developed specialized educational materials for differently-abled students for inclusive learning." }
   ];
+
+  const [csrData, setCsrData] = useState({
+    aboutDescription: 'Bihar State Text Book Publishing Corporation Ltd. (BSTBPC) is committed to advancing social responsibility beyond educational publishing. Our CSR initiatives are designed to contribute meaningfully to inclusive growth, environmental sustainability, and community development across Bihar.',
+    aboutSecondaryDesc: 'We believe that education is a powerful catalyst for change. Through our CSR programs, we aim to support underserved communities, promote equitable access to learning resources, and strengthen institutional capacities at the grassroots level.',
+    strategyYear: '2026',
+    livesImpacted: '15M+',
+    govtApproval: '100%'
+  });
+
+  useEffect(() => {
+    const fetchCsrData = () => {
+      const saved = localStorage.getItem('website_csr_data');
+      if (saved) {
+        setCsrData(prev => ({ ...prev, ...JSON.parse(saved) }));
+      }
+    };
+    fetchCsrData();
+    window.addEventListener('websiteDataUpdated', fetchCsrData);
+    return () => window.removeEventListener('websiteDataUpdated', fetchCsrData);
+  }, []);
 
   return (
     <div className="bg-[#FAFAFA] min-h-screen font-sans text-slate-800 pb-20">
@@ -94,10 +114,10 @@ const CsrPolicy = () => {
                     </h2>
                     <div className="space-y-4 text-[16px] text-slate-600 font-medium leading-relaxed">
                         <p>
-                            Bihar State Text Book Publishing Corporation Ltd. (BSTBPC) is committed to advancing social responsibility beyond educational publishing. Our CSR initiatives are designed to contribute meaningfully to inclusive growth, environmental sustainability, and community development across Bihar.
+                            {csrData.aboutDescription}
                         </p>
                         <p>
-                            We believe that education is a powerful catalyst for change. Through our CSR programs, we aim to support underserved communities, promote equitable access to learning resources, and strengthen institutional capacities at the grassroots level.
+                            {csrData.aboutSecondaryDesc}
                         </p>
                     </div>
                 </div>
@@ -245,19 +265,19 @@ const CsrPolicy = () => {
             
             <div className="flex flex-col items-center">
                 <Calendar className="text-blue-600 w-6 h-6 mb-3 opacity-80" strokeWidth={1.5} />
-                <div className="text-2xl font-black text-slate-900 mb-1">2026</div>
+                <div className="text-2xl font-black text-slate-900 mb-1">{csrData.strategyYear}</div>
                 <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Strategy Year</div>
             </div>
 
             <div className="flex flex-col items-center border-t sm:border-t-0 sm:border-l border-slate-200 pt-6 sm:pt-0">
                 <Users className="text-blue-600 w-6 h-6 mb-3 opacity-80" strokeWidth={1.5} />
-                <div className="text-2xl font-black text-slate-900 mb-1">15M+</div>
+                <div className="text-2xl font-black text-slate-900 mb-1">{csrData.livesImpacted}</div>
                 <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Lives Impacted</div>
             </div>
 
             <div className="flex flex-col items-center border-t sm:border-t-0 sm:border-l border-slate-200 pt-6 sm:pt-0">
                 <ShieldCheck className="text-blue-600 w-6 h-6 mb-3 opacity-80" strokeWidth={1.5} />
-                <div className="text-2xl font-black text-slate-900 mb-1">100%</div>
+                <div className="text-2xl font-black text-slate-900 mb-1">{csrData.govtApproval}</div>
                 <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Govt Approval</div>
             </div>
 

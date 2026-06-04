@@ -65,7 +65,7 @@ export default function BooksPage({ addToast, forcedClass }) {
           id="add-book-btn"
         >
           <Plus className="w-4 h-4" />
-          Add Book
+          Add
         </motion.button>
       </div>
 
@@ -344,7 +344,7 @@ export default function BooksPage({ addToast, forcedClass }) {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            Add Book
+            Add
           </motion.button>
         </div>
       </Modal>

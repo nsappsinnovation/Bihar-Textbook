@@ -338,11 +338,6 @@ export default function WebsiteEditorPage({ module, addToast }) {
                 value={mdData.name}
                 onChange={(val) => setMdData(prev => ({ ...prev, name: val }))}
               />
-              <FormInput 
-                label="Designation" 
-                value={mdData.designation}
-                onChange={(val) => setMdData(prev => ({ ...prev, designation: val }))}
-              />
               <div className="mb-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">MD Photo</label>
                 <div className="flex items-center gap-4">
@@ -360,12 +355,6 @@ export default function WebsiteEditorPage({ module, addToast }) {
                   </div>
                 </div>
               </div>
-              <FormInput 
-                label="Sidebar Short Quote" 
-                type="textarea"
-                value={mdData.quote}
-                onChange={(val) => setMdData(prev => ({ ...prev, quote: val }))}
-              />
             </div>
 
             <div className="space-y-4">
@@ -375,24 +364,6 @@ export default function WebsiteEditorPage({ module, addToast }) {
                 type="textarea"
                 value={mdData.welcomeNote}
                 onChange={(val) => setMdData(prev => ({ ...prev, welcomeNote: val }))}
-              />
-              <FormInput 
-                label="Quality & Innovation Note" 
-                type="textarea"
-                value={mdData.qualityNote}
-                onChange={(val) => setMdData(prev => ({ ...prev, qualityNote: val }))}
-              />
-              <FormInput 
-                label="Collaboration Text" 
-                type="textarea"
-                value={mdData.collaboration}
-                onChange={(val) => setMdData(prev => ({ ...prev, collaboration: val }))}
-              />
-              <FormInput 
-                label="Moving Forward Text" 
-                type="textarea"
-                value={mdData.movingForward}
-                onChange={(val) => setMdData(prev => ({ ...prev, movingForward: val }))}
               />
             </div>
           </div>
@@ -415,7 +386,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
               className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg font-bold text-[11px] uppercase tracking-wider hover:bg-blue-100 transition-all"
             >
               <Plus className="w-3 h-3" />
-              Add Item
+              Add
             </button>
           </div>
 
@@ -468,9 +439,17 @@ export default function WebsiteEditorPage({ module, addToast }) {
                               <span className="text-[10px] text-gray-400 font-semibold uppercase">
                                 {module === 'gl-photo' ? 'Image' : 'Video'}
                               </span>
+                            ) : module === 'ku-list-md' ? (
+                              <span className="text-[10px] text-gray-400 font-semibold uppercase">
+                                {item.from && item.to ? `${item.from} - ${item.to}` : (item.from ? `From ${item.from}` : '')}
+                              </span>
+                            ) : module === 'ku-officers' || module === 'ku-employees' ? (
+                              <span className="text-[10px] text-gray-400 font-semibold uppercase">
+                                {item.designation || item.department || ''}
+                              </span>
                             ) : (
                               <span className="text-[10px] text-gray-400 font-semibold uppercase">
-                                {item.since ? `Since ${item.since}` : (item.size || '1.2 MB')}
+                                {item.since ? `Since ${item.since}` : (module.startsWith('dc-') || item.size ? (item.size || '1.2 MB') : '')}
                               </span>
                             )}
                           </div>

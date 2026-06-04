@@ -50,9 +50,7 @@ export default function Navbar({ isMobileOpen, setIsMobileOpen, activePage, setA
 
   const handleNotifClick = (notif) => {
     markAsRead(notif.id);
-    if (notif.link) {
-      setActivePage(notif.link);
-    }
+    setActivePage('notifications');
     setShowNotifications(false);
   };
 
@@ -63,7 +61,7 @@ export default function Navbar({ isMobileOpen, setIsMobileOpen, activePage, setA
   ].filter(s => s.title.toLowerCase().includes(searchQuery.toLowerCase()) && searchQuery.length > 1);
 
   return (
-    <header className="sticky top-0 z-30 bg-white/80 backdrop-blur-xl border-b border-gray-100 shadow-sm shadow-black/[0.02]">
+    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-100 shadow-sm shadow-black/[0.02]">
       <div className="flex items-center justify-between h-[80px] px-4 lg:px-10">
         {/* Left Section */}
         <div className="flex items-center gap-6">
@@ -155,11 +153,11 @@ export default function Navbar({ isMobileOpen, setIsMobileOpen, activePage, setA
                   <div className="px-6 py-5 bg-gray-50/50 border-b border-gray-100">
                     <div className="flex items-center justify-between">
                       <h3 className="text-base font-bold text-gray-900">Notifications</h3>
-                      <span className="px-2 py-1 bg-blue-100 text-blue-700 text-[10px] font-black rounded-lg uppercase">Real-time</span>
+                      
                     </div>
                   </div>
-                  <div className="max-h-[400px] overflow-y-auto">
-                    {activities.slice(0, 6).map((notif) => (
+                  <div className="max-h-[400px] overflow-y-auto scrollbar-hide">
+                    {activities.map((notif) => (
                       <div
                         key={notif.id}
                         onClick={() => handleNotifClick(notif)}
@@ -204,9 +202,13 @@ export default function Navbar({ isMobileOpen, setIsMobileOpen, activePage, setA
               className="flex items-center gap-3 pl-2 pr-4 py-2 rounded-2xl hover:bg-gray-50 transition-all border border-transparent hover:border-gray-100"
               whileTap={{ scale: 0.98 }}
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white text-xs font-black shadow-lg shadow-blue-500/20">
-                {userInitials}
-              </div>
+              {userSettings.avatar ? (
+                <img src={userSettings.avatar} alt="Avatar" className="w-10 h-10 rounded-xl object-cover" />
+              ) : (
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white text-xs font-black">
+                  {userInitials}
+                </div>
+              )}
               <div className="hidden sm:block text-left">
                 <p className="text-sm font-bold text-gray-900 leading-tight">{userSettings.firstName} {userSettings.lastName}</p>
                 <p className="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mt-0.5">{userSettings.bio}</p>
@@ -230,7 +232,6 @@ export default function Navbar({ isMobileOpen, setIsMobileOpen, activePage, setA
                   <div className="py-2">
                     {[
                       { icon: User, label: 'My Profile', action: () => setActivePage('settings') },
-                      { icon: Settings, label: 'Settings', action: () => setActivePage('settings') },
                     ].map((item) => (
                       <button
                         key={item.label}

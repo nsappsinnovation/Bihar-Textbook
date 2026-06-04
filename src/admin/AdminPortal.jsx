@@ -106,7 +106,7 @@ function App() {
           />
 
           {/* Page Content inside the card */}
-          <main className="flex-1 p-6 md:p-8 overflow-y-auto overflow-x-hidden scrollbar-hide">
+          <main className="flex-1 p-6 md:p-8 overflow-y-auto overflow-x-hidden scrollbar-hide" data-lenis-prevent="true">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activePage}

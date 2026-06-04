@@ -296,7 +296,7 @@ const formattedNotices = noticesData.map((item) => {
     description: item.description,
     date: isoDate,
     priority: item.isUrgent ? 'High' : 'Medium',
-    category: 'Notice',
+    category: item.category || 'Notice',
     pinned: item.isUrgent || false,
     hasAttachment: !!item.document,
     author: 'Admin',

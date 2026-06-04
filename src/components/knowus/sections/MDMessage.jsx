@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
   BookOpen, CalendarCheck, ShieldCheck, UserCheck, 
@@ -7,6 +7,24 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 const MdMessage = () => {
+  const [mdData, setMdData] = useState({
+    name: 'Shri Yatendra Kumar Pal',
+    photo: '/images/KeyParticipants/shri_yatendra_pal.png',
+    welcomeNote: 'It gives me immense pleasure to connect with all stakeholders through this platform. The Bihar State Text Book Publishing Corporation Ltd. plays a pivotal role in strengthening the foundation of education by ensuring the timely production and distribution of quality textbooks across the state.'
+  });
+
+  useEffect(() => {
+    const saved = localStorage.getItem('module_content_ku-md-message');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed) {
+          setMdData(prev => ({ ...prev, ...parsed }));
+        }
+      } catch (e) {}
+    }
+  }, []);
+
   return (
     <div className="bg-white text-slate-800 pb-8">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 pt-6 md:pt-10">
@@ -23,8 +41,8 @@ const MdMessage = () => {
               {/* MD Photo */}
               <div className="relative z-10 w-64 lg:w-full max-w-[280px] aspect-[4/5] rounded-[32px] overflow-hidden bg-slate-100 shadow-sm border border-slate-100">
                 <img 
-                  src="/images/KeyParticipants/shri_yatendra_pal.png" 
-                  alt="Shri Yatendra Kumar Pal" 
+                  src={mdData.photo} 
+                  alt={mdData.name} 
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     e.target.src = 'https://ui-avatars.com/api/?name=Yatendra+Kumar+Pal&background=f1f5f9&color=0f172a&size=512';
@@ -33,7 +51,7 @@ const MdMessage = () => {
               </div>
             </div>
 
-            <h2 className="text-2xl font-black text-slate-900 mb-1">Shri Yatendra Kumar Pal</h2>
+            <h2 className="text-2xl font-black text-slate-900 mb-1">{mdData.name}</h2>
             <p className="text-sm font-bold text-blue-600 tracking-wide uppercase mb-2">Managing Director</p>
             <p className="text-sm text-slate-600 leading-snug mb-6">
               Bihar State Text Book Publishing<br className="hidden lg:block"/> Corporation Ltd.
@@ -66,13 +84,8 @@ const MdMessage = () => {
               <h3 className="text-[13px] font-black text-slate-800 tracking-[0.2em] uppercase mb-5">
                 Welcome Note
               </h3>
-              <div className="prose prose-slate prose-lg max-w-none text-slate-600">
-                <p className="mb-6 font-medium leading-relaxed">
-                  It gives me immense pleasure to connect with all stakeholders through this platform.
-                </p>
-                <p className="leading-relaxed">
-                  The Bihar State Text Book Publishing Corporation Ltd. plays a pivotal role in strengthening the foundation of education by ensuring the timely production and distribution of quality textbooks across the state.
-                </p>
+              <div className="prose prose-slate prose-lg max-w-none text-slate-600 whitespace-pre-wrap font-medium leading-relaxed">
+                {mdData.welcomeNote}
               </div>
             </div>
           </div>
@@ -179,7 +192,7 @@ const MdMessage = () => {
               <Award className="text-blue-600 w-6 h-6" />
             </div>
             <div>
-              <h4 className="text-[16px] font-black text-slate-900 leading-tight">Shri Yatendra Kumar Pal</h4>
+              <h4 className="text-[16px] font-black text-slate-900 leading-tight">{mdData.name}</h4>
               <p className="text-[11px] font-bold text-blue-600 uppercase tracking-wide mt-1">MANAGING DIRECTOR, BSTPC</p>
             </div>
           </div>

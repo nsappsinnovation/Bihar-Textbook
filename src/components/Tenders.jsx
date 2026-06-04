@@ -2,8 +2,28 @@ import React, { useState, useMemo } from "react";
 import { FiSearch, FiFileText, FiBell, FiArrowRight, FiCalendar, FiClock, FiFilter } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import { tendersData } from "../data/tendersData.js";
+import { useEffect } from "react";
 
 const Tenders = () => {
+  const [liveTenders, setLiveTenders] = useState(() => {
+    const saved = localStorage.getItem('website_notices_v2');
+    if (saved) {
+      return JSON.parse(saved).filter(t => t.category.toLowerCase().includes('tender') || t.title.toLowerCase().includes('tender'));
+    }
+    return tendersData;
+  });
+
+  useEffect(() => {
+    const handleUpdate = () => {
+      const saved = localStorage.getItem('website_notices_v2');
+      if (saved) {
+        setLiveTenders(JSON.parse(saved).filter(t => t.category.toLowerCase().includes('tender') || t.title.toLowerCase().includes('tender')));
+      }
+    };
+    window.addEventListener('websiteDataUpdated', handleUpdate);
+    return () => window.removeEventListener('websiteDataUpdated', handleUpdate);
+  }, []);
+
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [activeFilter, setActiveFilter] = useState("All");
@@ -14,16 +34,30 @@ const Tenders = () => {
   const isNew = (dateStr) => {
     try {
       if (!dateStr) return false;
-      const parts = dateStr.split('/');
-      const d = new Date(parts[2], parts[1] - 1, parts[0]);
+      let d;
+      if (dateStr.includes('/')) {
+        const parts = dateStr.split('/');
+        d = new Date(parts[2], parts[1] - 1, parts[0]);
+      } else {
+        d = new Date(dateStr);
+      }
       const now = new Date();
       const diffTime = Math.abs(now - d);
       return Math.ceil(diffTime / (1000 * 60 * 60 * 24)) <= 30;
     } catch { return false; }
   };
 
+  const formatDate = (dateStr) => {
+    try {
+      if (!dateStr) return '';
+      if (dateStr.includes('/')) return dateStr;
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    } catch { return dateStr; }
+  };
+
   const filteredTenders = useMemo(() => {
-    return tendersData.filter((t) => {
+    return liveTenders.filter((t) => {
       const matchesSearch = t.title.toLowerCase().includes(search.toLowerCase());
       const matchesFilter = activeFilter === "All" || 
                            (activeFilter === "E-Tender" && t.title.toLowerCase().includes("e-tender")) ||
@@ -98,7 +132,7 @@ const Tenders = () => {
           >
             <div className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 flex items-center gap-2 backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-              <span className="text-white/80">{tendersData.length} Active Opportunities</span>
+              <span className="text-white/80">{liveTenders.length} Active Opportunities</span>
             </div>
             <div className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 flex items-center gap-2 backdrop-blur-sm">
               <FiClock className="text-blue-400" />
@@ -149,7 +183,7 @@ const Tenders = () => {
                     onClick={() => { setActiveFilter(filter); setCurrentPage(1); }}
                     className={`px-6 py-2.5 rounded-xl font-bold text-sm whitespace-nowrap transition-all duration-300 ${
                       activeFilter === filter 
-                        ? 'bg-[#0d0e23] text-white shadow-xl shadow-slate-300 scale-105' 
+                        ? 'bg-[#0d0e23] text-white scale-105' 
                         : 'bg-slate-100 text-slate-600 hover:bg-slate-200 active:scale-95'
                     }`}
                   >
@@ -185,6 +219,7 @@ const Tenders = () => {
                         <tr className="border-b border-slate-200">
                           <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">S.No</th>
                           <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">Tender Details</th>
+                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">Date</th>
                           <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400 text-right">Action</th>
                         </tr>
                       </thead>
@@ -215,14 +250,18 @@ const Tenders = () => {
                                 <h4 className="text-base font-bold text-slate-800 leading-tight group-hover:text-blue-700 transition-colors">
                                   {tender.title}
                                 </h4>
-                                 <p className="text-[10px] text-slate-500 font-medium">
-                                   Posted: {tender.date || 'Active Opportunity'}
-                                 </p>
                                 </div>
                              </td>
+                            <td className="px-8 py-10 whitespace-nowrap">
+                              <div className="flex flex-col">
+                                <span className="text-slate-700 font-bold bg-slate-100 px-3 py-1 rounded-lg text-sm">
+                                  {formatDate(tender.date) || 'Active Opportunity'}
+                                </span>
+                              </div>
+                            </td>
                             <td className="px-8 py-10 text-right">
                               <motion.a
-                                href={tender.link}
+                                href={tender.link || tender.document}
                                 target="_blank" rel="noopener noreferrer"
                                 whileHover={{ scale: 1.05, x: 5 }}
                                 whileTap={{ scale: 0.95 }}
@@ -260,10 +299,10 @@ const Tenders = () => {
                         </div>
                         <h4 className="font-bold text-slate-800 text-base leading-tight">{tender.title}</h4>
                         <div className="flex items-center gap-2 text-slate-500 text-xs">
-                          <FiCalendar /> {tender.date || 'Ongoing'}
+                          <FiCalendar /> {formatDate(tender.date) || 'Ongoing'}
                         </div>
                         <a 
-                          href={tender.link}
+                          href={tender.link || tender.document}
                           target="_blank" rel="noopener noreferrer"
                           className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-blue-600 text-white font-black text-[10px] uppercase shadow-lg shadow-blue-100 whitespace-nowrap"
                         >

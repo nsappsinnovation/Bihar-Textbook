@@ -132,7 +132,7 @@ export default function LeadersManagementPage({ addToast }) {
           className="flex items-center gap-2 px-6 py-3.5 bg-indigo-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-indigo-600/20 hover:bg-indigo-700 transition-all"
         >
           <Plus className="w-4 h-4" />
-          <span>Add New Leader</span>
+          <span>Add</span>
         </button>
       </div>
 
