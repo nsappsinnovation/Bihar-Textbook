@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FileText, Download, Eye, Upload } from 'lucide-react';
+import { FileText, Download, Eye, Upload, Trash2 } from 'lucide-react';
 import Modal from '../components/Modal';
 import { useActivityLog } from '../hooks/useCustomHooks';
 
@@ -51,6 +51,13 @@ export default function RegisterPrintersPage({ addToast }) {
       logActivity('Updated Registered Printers PDF', 'Admin', 'upload');
     };
     reader.readAsDataURL(file);
+  };
+
+  const handleDeletePdf = () => {
+    const updated = { officialList: { pdfUrl: '', fileName: 'No PDF Uploaded' } };
+    saveToStorage(updated);
+    addToast?.('Registered Printers PDF deleted successfully', 'success');
+    logActivity('Deleted Registered Printers PDF', 'Admin', 'delete');
   };
 
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
@@ -125,6 +132,15 @@ export default function RegisterPrintersPage({ addToast }) {
                 onChange={handleFileUpload}
               />
             </label>
+            {data.officialList.pdfUrl && (
+              <button 
+                onClick={handleDeletePdf}
+                className="flex items-center gap-2 px-6 py-3 bg-red-50 text-red-600 rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-red-100 transition-all"
+              >
+                <Trash2 className="w-4 h-4" />
+                <span>Delete PDF</span>
+              </button>
+            )}
           </div>
         </div>
       </div>

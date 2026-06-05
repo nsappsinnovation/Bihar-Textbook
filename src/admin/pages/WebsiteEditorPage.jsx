@@ -7,7 +7,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
   const [content, setContent] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
-  const [formData, setFormData] = useState({ title: '', desc: '', type: '', category: '', size: '', document: '' });
+  const [formData, setFormData] = useState({ title: '', desc: '', type: '', category: '', document: '' });
   const [rtiData, setRtiData] = useState({ 
     officer: 'Shri. Rajesh Kumar', 
     phone: '+91 612 222 1975', 
@@ -90,12 +90,12 @@ export default function WebsiteEditorPage({ module, addToast }) {
       let dummy = [];
       if (module === 'dc-reg-forms') {
         dummy = [
-          { id: 1, title: "Vendor Registration Form", category: "Stakeholder", type: "PDF", size: "1.2 MB" },
-          { id: 2, title: "Author Empanelment Application", category: "Educational", type: "PDF", size: "850 KB" },
-          { id: 3, title: "Publisher Registration Portal Form", category: "Corporate", type: "DOCX", size: "450 KB" },
-          { id: 4, title: "School Textbook Requisition Form", category: "Stakeholder", type: "PDF", size: "1.5 MB" },
-          { id: 5, title: "Employee Benefit Claim Form", category: "HR", type: "PDF", size: "620 KB" },
-          { id: 6, title: "New Distribution Agency Request", category: "Corporate", type: "PDF", size: "2.1 MB" },
+          { id: 1, title: "Vendor Registration Form", category: "Stakeholder", type: "PDF" },
+          { id: 2, title: "Author Empanelment Application", category: "Educational", type: "PDF" },
+          { id: 3, title: "Publisher Registration Portal Form", category: "Corporate", type: "DOCX" },
+          { id: 4, title: "School Textbook Requisition Form", category: "Stakeholder", type: "PDF" },
+          { id: 5, title: "Employee Benefit Claim Form", category: "HR", type: "PDF" },
+          { id: 6, title: "New Distribution Agency Request", category: "Corporate", type: "PDF" },
         ];
       } else if (module === 'ku-board') {
         dummy = [
@@ -205,21 +205,22 @@ export default function WebsiteEditorPage({ module, addToast }) {
 
   const openAddModal = () => {
     setEditingItem(null);
-    setFormData({ title: '', desc: '', type: 'PDF', category: 'Stakeholder', size: '1.2 MB', document: '' });
+    setFormData({ title: '', desc: '', type: 'PDF', category: 'Stakeholder', document: '' });
     setIsModalOpen(true);
   };
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // Create a local URL for preview purposes
-      const localUrl = URL.createObjectURL(file);
-      setFormData(prev => ({ 
-        ...prev, 
-        document: localUrl, 
-        size: `${(file.size / (1024 * 1024)).toFixed(1)} MB` 
-      }));
-      addToast?.('File Ready for Preview', 'success');
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData(prev => ({ 
+          ...prev, 
+          document: reader.result 
+        }));
+        addToast?.('File Ready', 'success');
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -230,7 +231,6 @@ export default function WebsiteEditorPage({ module, addToast }) {
       desc: item.desc || '', 
       type: item.type || 'PDF', 
       category: item.category || 'Stakeholder', 
-      size: item.size || '1.2 MB',
       document: item.document || '',
       designation: item.designation || '',
       since: item.since || '',
@@ -449,7 +449,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
                               </span>
                             ) : (
                               <span className="text-[10px] text-gray-400 font-semibold uppercase">
-                                {item.since ? `Since ${item.since}` : (module.startsWith('dc-') || item.size ? (item.size || '1.2 MB') : '')}
+                                {item.since ? `Since ${item.since}` : ''}
                               </span>
                             )}
                           </div>
@@ -616,15 +616,34 @@ export default function WebsiteEditorPage({ module, addToast }) {
                           onChange={handleFileUpload} 
                         />
                         <div className="px-6 py-8 rounded-2xl border-2 border-dashed border-gray-200 text-center hover:border-blue-400 hover:bg-blue-50 transition-all flex flex-col items-center justify-center gap-2">
-                          <ImageIcon className="w-8 h-8 text-gray-300" />
+                          {module.startsWith('gl-') ? <ImageIcon className="w-8 h-8 text-gray-300" /> : <FileText className="w-8 h-8 text-gray-300" />}
                           <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">
-                            {formData.document ? "Change Selected Photo" : "Click to Choose Photo"}
+                            {formData.document 
+                              ? (module.startsWith('gl-') ? "Change Selected Photo" : "Change Selected PDF") 
+                              : (module.startsWith('gl-') ? "Click to Choose Photo" : "Click to Choose PDF")}
                           </span>
                         </div>
                       </label>
-                      {formData.document && (
-                        <div className="w-24 h-24 rounded-2xl overflow-hidden border-2 border-blue-100 shadow-sm">
+                      {formData.document && module.startsWith('gl-') && (
+                        <div className="relative w-24 h-24 rounded-2xl overflow-hidden border-2 border-blue-100 shadow-sm group">
                           <img src={formData.document} alt="Preview" className="w-full h-full object-cover" />
+                          <button 
+                            onClick={(e) => { e.preventDefault(); setFormData(prev => ({ ...prev, document: '' })); }}
+                            className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all text-white hover:text-red-400"
+                          >
+                            <Trash2 className="w-6 h-6" />
+                          </button>
+                        </div>
+                      )}
+                      {formData.document && !module.startsWith('gl-') && (
+                        <div className="relative w-24 h-24 rounded-2xl overflow-hidden border-2 border-blue-100 shadow-sm flex items-center justify-center bg-blue-50 text-blue-600 group">
+                          <FileText className="w-10 h-10" />
+                          <button 
+                            onClick={(e) => { e.preventDefault(); setFormData(prev => ({ ...prev, document: '' })); }}
+                            className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all text-white hover:text-red-400"
+                          >
+                            <Trash2 className="w-6 h-6" />
+                          </button>
                         </div>
                       )}
                     </div>
