@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiPackage, FiMapPin, FiTruck, FiExternalLink, FiDownload, FiSearch } from 'react-icons/fi';
 
-const wholesalers = [
+const defaultHubs = [
   { id: 1, name: "Patna Central Depot", location: "Budh Marg, Patna", contact: "+91 612 222 1975", capacity: "High", type: "Main Depot" },
   { id: 2, name: "Muzaffarpur Regional Centre", location: "Mithanpura, Muzaffarpur", contact: "+91 621 224 5678", capacity: "Medium", type: "Regional" },
   { id: 3, name: "Gaya Distribution Point", location: "Civil Lines, Gaya", contact: "+91 631 222 3456", capacity: "Medium", type: "Regional" },
@@ -11,9 +11,35 @@ const wholesalers = [
 
 const Wholesellerdepo = () => {
   const [isInteracting, setIsInteracting] = useState(false);
+  const [pdfUrl, setPdfUrl] = useState('/whole.pdf');
+  const [fileName, setFileName] = useState('Wholesaler_Directory.pdf');
+  const [hubs, setHubs] = useState(defaultHubs);
+  const [stats, setStats] = useState({ depots: '38', wholesalers: '450+' });
+
+  useEffect(() => {
+    const loadData = () => {
+      const saved = localStorage.getItem('website_wholesaler_depot');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed.officialList && parsed.officialList.pdfUrl) {
+            setPdfUrl(parsed.officialList.pdfUrl);
+            setFileName(parsed.officialList.fileName || 'Wholesaler_Directory.pdf');
+          }
+          if (parsed.hubs) setHubs(parsed.hubs);
+          if (parsed.stats) setStats(parsed.stats);
+        } catch (e) {
+          console.error('Failed to parse wholesaler data from storage');
+        }
+      }
+    };
+    loadData();
+    window.addEventListener('storage', loadData);
+    return () => window.removeEventListener('storage', loadData);
+  }, []);
 
   const handleDownload = () => {
-    window.open('/whole.pdf', '_blank');
+    window.open(pdfUrl, '_blank');
   };
 
   return (
@@ -38,7 +64,7 @@ const Wholesellerdepo = () => {
       <section className="max-w-5xl mx-auto px-6 mb-12">
         <div className="bg-white rounded-[2.5rem] shadow-2xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
            <div className="bg-slate-50 p-6 border-b border-slate-100 flex items-center justify-between">
-              <span className="text-xs font-black uppercase text-slate-400 tracking-tighter">Document Preview: Wholesaler_Directory.pdf</span>
+              <span className="text-xs font-black uppercase text-slate-400 tracking-tighter">Document Preview: {fileName}</span>
               <div className="flex gap-2">
                  <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
@@ -47,7 +73,7 @@ const Wholesellerdepo = () => {
            </div>
            <div className="h-[700px] w-full bg-slate-100 flex items-center justify-center relative overflow-hidden group">
               <iframe
-                src="/whole.pdf#toolbar=1"
+                src={`${pdfUrl}#toolbar=1`}
                 title="Wholesaler Details"
                 className="w-full h-full border-none"
               />
@@ -82,11 +108,11 @@ const Wholesellerdepo = () => {
       <section className="max-w-3xl mx-auto px-6 mb-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="p-5 bg-blue-600 rounded-3xl text-white shadow-lg shadow-blue-200/50 flex flex-col justify-center items-center text-center transform transition-all hover:scale-[1.02]">
-                <div className="text-4xl font-black mb-1.5">38</div>
+                <div className="text-4xl font-black mb-1.5">{stats.depots}</div>
                 <div className="text-xs font-bold uppercase tracking-widest opacity-90">District Depots</div>
             </div>
             <div className="p-5 bg-slate-800 rounded-3xl text-white shadow-lg flex flex-col justify-center items-center text-center transform transition-all hover:scale-[1.02]">
-                <div className="text-4xl font-black mb-1.5">450+</div>
+                <div className="text-4xl font-black mb-1.5">{stats.wholesalers}</div>
                 <div className="text-xs font-bold uppercase tracking-widest opacity-90">Authorized Wholesalers</div>
             </div>
         </div>
@@ -109,7 +135,7 @@ const Wholesellerdepo = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {wholesalers.map((item) => (
+                {hubs.map((item) => (
                   <tr key={item.id} className="hover:bg-slate-50/50 transition-colors">
                     <td className="px-8 py-5 text-sm font-bold text-[#0d0e23]">{item.name}</td>
                     <td className="px-8 py-5">

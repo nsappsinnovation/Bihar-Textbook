@@ -28,9 +28,9 @@ export default function OfficersPage({ addToast }) {
   const [officers, setOfficers] = useState(() => {
     const saved = localStorage.getItem(storageKey);
     return saved ? JSON.parse(saved) : [
-      { id: 1, name: 'Shri. Rajesh Kumar', designation: 'General Manager', department: 'ADMINISTRATION', email: 'gm.admin@bstbpc.gov.in', phone: '+91-612-2221975' },
-      { id: 2, name: 'Shri. Vinay Singh', designation: 'Deputy Manager', department: 'PRODUCTION', email: 'dm.prod@bstbpc.gov.in', phone: '+91-612-2221976' },
-      { id: 3, name: 'Ms. Priya Sahay', designation: 'Finance Officer', department: 'FINANCE', email: 'fo@bstbpc.gov.in', phone: '+91-612-2221977' },
+      { id: 1, name: 'Shri. Rajesh Kumar', designation: 'General Manager', department: 'ADMINISTRATION', email: 'gm.admin@bstbpc.gov.in', phone: '+91 612 222 1975' },
+      { id: 2, name: 'Shri. Vinay Singh', designation: 'Deputy Manager', department: 'PRODUCTION', email: 'dm.prod@bstbpc.gov.in', phone: '+91 612 222 1976' },
+      { id: 3, name: 'Ms. Priya Sahay', designation: 'Finance Officer', department: 'FINANCE', email: 'fo@bstbpc.gov.in', phone: '+91 612 222 1977' },
     ];
   });
 

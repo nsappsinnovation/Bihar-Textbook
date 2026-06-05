@@ -64,22 +64,27 @@ const ListOfMD = () => {
   ]);
 
   useEffect(() => {
-    const saved = localStorage.getItem('module_content_ku-list-md');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) {
-          setList(parsed.map(item => ({
-            id: item.id,
-            name: item.title,
-            from: item.from,
-            to: item.to
-          })));
+    const loadList = () => {
+      const saved = localStorage.getItem('module_content_ku-list-md');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) {
+            setList(parsed.map(item => ({
+              id: item.id,
+              name: item.name || item.title,
+              from: item.from,
+              to: item.to
+            })));
+          }
+        } catch (e) {
+          console.error("Error loading MD list", e);
         }
-      } catch (e) {
-        console.error("Error loading MD list", e);
       }
-    }
+    };
+    loadList();
+    window.addEventListener('storage', loadList);
+    return () => window.removeEventListener('storage', loadList);
   }, []);
 
   const filteredList = list.filter(md => 
@@ -144,7 +149,7 @@ const ListOfMD = () => {
                 {filteredList.map((md, index) => (
                   <tr key={md.id} className="text-[#0d0e23]">
                     <td className="px-6 py-4 text-sm border-r border-slate-300">
-                      {md.id.toString().padStart(2, '0')}
+                      {(index + 1).toString().padStart(2, '0')}
                     </td>
 
                     <td className="px-6 py-4 text-sm border-r border-slate-300">

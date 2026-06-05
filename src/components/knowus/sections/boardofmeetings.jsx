@@ -14,23 +14,28 @@ const BoardOfDirectors = () => {
   ]);
 
   React.useEffect(() => {
-    const saved = localStorage.getItem('module_content_ku-board');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) {
-          setItems(parsed.map(item => ({
-            id: item.id,
-            name: item.title,
-            designation: item.designation,
-            from: item.since,
-            status: item.status
-          })));
+    const loadBoard = () => {
+      const saved = localStorage.getItem('module_content_ku-board');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) {
+            setItems(parsed.map(item => ({
+              id: item.id,
+              name: item.name || item.title,
+              designation: item.designation,
+              from: item.organization || item.since || "Current",
+              status: item.status || "Active"
+            })));
+          }
+        } catch (e) {
+          console.error("Error loading board data", e);
         }
-      } catch (e) {
-        console.error("Error loading board data", e);
       }
-    }
+    };
+    loadBoard();
+    window.addEventListener('storage', loadBoard);
+    return () => window.removeEventListener('storage', loadBoard);
   }, []);
 
   return (

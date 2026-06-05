@@ -1,29 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FiPrinter, FiCheckCircle, FiSearch, FiShield, FiBriefcase, FiMapPin } from 'react-icons/fi';
-
-const printersData = [
-  { id: 1, name: "Bihar State Corrugated Boxes Ltd.", type: "Packaging & Printing", location: "Patna", status: "Active", capacity: "High" },
-  { id: 2, name: "Ganga Digital Offset", type: "Textbook Production", location: "Hajipur", status: "Active", capacity: "Medium" },
-  { id: 3, name: "Prabhat Printing Press", type: "Security Printing", location: "Bhagalpur", status: "Under Review", capacity: "Medium" },
-  { id: 4, name: "Modern Paper Converters", type: "Notebooks & Forms", location: "Muzaffarpur", status: "Active", capacity: "Low" },
-  
-];
+import { FiSearch, FiExternalLink } from 'react-icons/fi';
 
 const RegisterPrinters = () => {
-  const [search, setSearch] = useState("");
+  const [isInteracting, setIsInteracting] = useState(false);
+  const [pdfUrl, setPdfUrl] = useState('/printer.pdf'); // Fallback PDF if none exists
+  const [fileName, setFileName] = useState('REGISTERED_PRINTERS.PDF');
 
-  const filteredPrinters = printersData.filter(p => 
-    p.name.toLowerCase().includes(search.toLowerCase()) || 
-    p.location.toLowerCase().includes(search.toLowerCase())
-  );
+  useEffect(() => {
+    const loadPdfData = () => {
+      const saved = localStorage.getItem('website_registered_printers_pdf');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed.officialList && parsed.officialList.pdfUrl) {
+            setPdfUrl(parsed.officialList.pdfUrl);
+            setFileName(parsed.officialList.fileName || 'REGISTERED_PRINTERS.PDF');
+          }
+        } catch (e) {
+          console.error('Failed to parse registered printers data from storage');
+        }
+      }
+    };
+    loadPdfData();
+    window.addEventListener('storage', loadPdfData);
+    return () => window.removeEventListener('storage', loadPdfData);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#f8fafc] py-12">
       {/* ================= HERO SECTION ================= */}
       <section className="relative text-center mb-16 px-6">
-        
-        
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -37,57 +44,48 @@ const RegisterPrinters = () => {
         </p>
       </section>
 
-      {/* ================= SEARCH & LIST ================= */}
-      <section className="max-w-5xl mx-auto px-6">
-         {/* Main List */}
-         <div className="w-full space-y-6">
-              <div className="relative">
-                <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg" />
-                <input 
-                  type="text" 
-                  placeholder="Search by printer name or location..."
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  className="w-full pl-12 pr-6 py-3 bg-transparent border border-slate-300 focus:border-blue-500 outline-none transition-all text-sm text-[#0d0e23]"
-                />
-              </div>
-
-              <div className="overflow-x-auto bg-transparent border border-slate-300">
-                <table className="w-full text-left border-collapse">
-                  <thead>
-                    <tr className="bg-slate-200 border-b border-slate-300 text-[#0d0e23]">
-                      <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Printer Info</th>
-                      <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Location</th>
-                      <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Status</th>
-                      <th className="px-6 py-4 text-sm font-bold">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-300">
-                    {filteredPrinters.map((printer) => (
-                      <tr key={printer.id} className="text-[#0d0e23]">
-                        <td className="px-6 py-4 text-sm border-r border-slate-300">
-                          <div className="flex flex-col">
-                            <span className="font-semibold">{printer.name}</span>
-                            <span className="text-xs text-slate-500 mt-1">{printer.type}</span>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 text-sm border-r border-slate-300">
-                          {printer.location}
-                        </td>
-                        <td className="px-6 py-4 text-sm border-r border-slate-300">
-                          {printer.status}
-                        </td>
-                        <td className="px-6 py-4 text-sm">
-                          <button className="px-4 py-2 border border-slate-300 text-xs font-bold hover:bg-slate-100 transition-all">
-                             Profile
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+      {/* ================= PDF VIEWER PREVIEW ================= */}
+      <section className="max-w-5xl mx-auto px-6 mb-12">
+        <div className="bg-white rounded-[2.5rem] shadow-2xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
+           <div className="bg-slate-50 p-6 border-b border-slate-100 flex items-center justify-between">
+              <span className="text-xs font-black uppercase text-slate-400 tracking-tighter">Document Preview: {fileName}</span>
+              <div className="flex gap-2">
+                 <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
+                 <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+                 <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
               </div>
            </div>
+           <div className="h-[700px] w-full bg-slate-100 flex items-center justify-center relative overflow-hidden group">
+              <iframe
+                src={`${pdfUrl}#toolbar=1`}
+                title="Registered Printers Directory"
+                className="w-full h-full border-none"
+              />
+              
+              {!isInteracting && (
+                <div 
+                  className="absolute inset-0 bg-[#0d0e23]/5 backdrop-blur-[2px] flex items-center justify-center cursor-pointer group/overlay transition-all duration-500"
+                  onClick={() => setIsInteracting(true)}
+                >
+                  <div className="absolute bottom-12 left-1/2 -translate-x-1/2">
+                    <button className="px-8 py-4 bg-white rounded-2xl shadow-2xl border border-slate-200 font-bold text-sm flex items-center gap-3 group-hover/overlay:scale-105 transition-transform pointer-events-none text-slate-700">
+                        <FiSearch className="text-blue-600" /> Click to interact with PDF
+                    </button>
+                  </div>
+                </div>
+              )}
+              
+              {isInteracting && (
+                <button 
+                  onClick={() => setIsInteracting(false)}
+                  className="absolute top-6 right-6 z-50 p-3 bg-white/90 backdrop-blur-md rounded-xl border border-slate-200 shadow-xl text-slate-600 hover:bg-white hover:text-blue-600 transition-all"
+                  title="Close Interaction"
+                >
+                  <FiExternalLink className="rotate-180" />
+                </button>
+              )}
+           </div>
+        </div>
       </section>
     </div>
   );
