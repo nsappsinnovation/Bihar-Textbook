@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Search } from "lucide-react";
+import { motion } from "framer-motion";
 
 // Data from KeyParticipant.jsx
 const industryData = [
@@ -76,32 +77,56 @@ export default function KeyParticipantViewAll() {
   });
 
   return (
-    <section className="min-h-screen bg-[#f8f9fa] font-sans">
+    <section className="min-h-screen bg-[#fdfbf9] font-sans relative overflow-hidden">
       {/* --- HERO SECTION --- */}
-      <div className="bg-[#1e1b4b] relative overflow-hidden py-24 px-6">
-          {/* Background Elements */}
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-600 rounded-full blur-[120px] opacity-20 translate-x-1/3 -translate-y-1/3"></div>
-          <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-sky-500 rounded-full blur-[100px] opacity-10 -translate-x-1/2 translate-y-1/2"></div>
+      <div className="relative pt-24 pb-16 px-6">
+          {/* Background Elements matching Photo Gallery */}
+          <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-75 pointer-events-none" />
+          <div className="absolute right-[-100px] top-1/4 w-80 h-80 border border-slate-200/50 rounded-[48px] rotate-[22deg] pointer-events-none" />
+          <div className="absolute left-[-150px] bottom-1/4 w-[400px] h-[400px] border border-slate-200/40 rounded-full pointer-events-none" />
         
-          <div className="max-w-7xl mx-auto relative z-10">
-                <Link to="/" className="inline-flex items-center gap-2 text-indigo-300 hover:text-white transition-colors mb-8 font-medium text-sm">
+          <div className="max-w-7xl mx-auto relative z-10 text-center flex flex-col items-center">
+                <Link to="/" className="inline-flex items-center gap-2 text-slate-500 hover:text-indigo-600 transition-colors mb-8 font-medium text-sm self-start md:absolute md:left-0 md:top-0">
                     <ArrowLeft size={16} /> Back to Home
                 </Link>
+
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-indigo-50/80 backdrop-blur-sm border border-indigo-100 mb-6 shadow-sm"
+                >
+                  <span className="w-2.5 h-2.5 rounded-full bg-indigo-600 animate-pulse"></span>
+                  <span className="text-indigo-800 text-xs font-bold tracking-wider uppercase">
+                    Leadership & Academia
+                  </span>
+                </motion.div>
                 
-                <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight">
-                    Shaping the Future <br/>
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-300 to-sky-300">
+                <motion.h1 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-800 tracking-tight leading-tight mb-6"
+                >
+                    Shaping the Future <br className="hidden md:block" />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
                         Together
                     </span>
-                </h1>
-                <p className="text-indigo-200/80 text-lg max-w-2xl leading-relaxed">
+                </motion.h1>
+
+                <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="text-slate-500 text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed"
+                >
                     Meet the distinguished leaders and visionary educators who are driving the transformation of Bihar's educational landscape.
-                </p>
+                </motion.p>
           </div>
       </div>
 
       {/* --- CONTENT SECTION --- */}
-      <div className="max-w-7xl mx-auto px-6 -mt-10 relative z-20 pb-20">
+      <div className="max-w-7xl mx-auto px-6 relative z-20 pb-20">
             
             {/* TOOLBAR */}
             <div className="bg-white rounded-2xl p-4 shadow-xl shadow-slate-200/50 mb-12 flex flex-col md:flex-row items-center justify-between gap-6 border border-slate-100">
