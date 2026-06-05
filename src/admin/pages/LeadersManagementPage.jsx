@@ -11,36 +11,65 @@ import { useActivityLog } from '../hooks/useCustomHooks';
 export default function LeadersManagementPage({ addToast }) {
   const { logActivity } = useActivityLog();
   
+  const storageKey = 'website_leaders_v2';
   const [leaders, setLeaders] = useState(() => {
-    const saved = localStorage.getItem('website_leaders');
+    const saved = localStorage.getItem(storageKey);
     return saved ? JSON.parse(saved) : [
       { 
         id: 1, 
-        name: 'Anand Kumar', 
-        role: 'Founder, Super 30 & Mathematician', 
-        tag: 'VISIONARIES', 
-        image: '/images/leaders/anand.jpg' 
+        name: 'Shri Samrat Choudhary', 
+        role: "Hon'ble Chief Minister, Bihar", 
+        tag: 'LEADERSHIP', 
+        image: '/images/KeyParticipants/samrat.png' 
       },
       { 
         id: 2, 
-        name: 'HC Verma', 
-        role: 'Renowned Physicist & Educator, IIT Kanpur (Born in Bihar)', 
-        tag: 'VISIONARIES', 
-        image: '/images/leaders/hcverma.jpg' 
+        name: 'Shri Sunil Kumar', 
+        role: "Hon'ble Education Minister, Bihar", 
+        tag: 'LEADERSHIP', 
+        image: '/images/KeyParticipants/Sunil-Kumar.png' 
       },
       { 
         id: 3, 
-        name: 'Shri Nitish Kumar', 
-        role: "Hon'ble Chief Minister, Bihar", 
+        name: 'Shri Dr. B. Rajender, I.A.S.', 
+        role: 'Additional Chief Secretary, Education Department', 
         tag: 'LEADERSHIP', 
-        image: '/images/leaders/nitish.jpg' 
+        image: '/images/KeyParticipants/B.Rajendra.png' 
+      },
+      { 
+        id: 4, 
+        name: 'Shri Yatendra Kumar Pal, I.A.S.', 
+        role: 'Managing Director, Bihar State Text Book Publishing Corporation (BSTBPC)', 
+        tag: 'LEADERSHIP', 
+        image: '/images/KeyParticipants/shri_yatendra_pal.png' 
       },
       { 
         id: 5, 
+        name: 'Anand Kumar', 
+        role: 'Founder, Super 30 & Mathematician', 
+        tag: 'VISIONARIES', 
+        image: '/images/KeyParticipants/Anand kumar pic.png' 
+      },
+      { 
+        id: 6, 
+        name: 'HC Verma', 
+        role: 'Renowned Physicist & Educator, IIT Kanpur (Born in Bihar)', 
+        tag: 'VISIONARIES', 
+        image: '/images/KeyParticipants/hc-verma-pic.png' 
+      },
+      { 
+        id: 7, 
         name: 'Prof. Girish Kumar Choudhary', 
         role: 'Vice Chancellor, Patna University', 
-        tag: 'EDUCATORS', 
-        image: '/images/leaders/girish.jpg' 
+        tag: 'VISIONARIES', 
+        image: '/images/KeyParticipants/girish_kumar_choudhary.png' 
+      },
+      { 
+        id: 8, 
+        name: 'Abhayanand', 
+        role: 'Former DGP Bihar & Co-founder of Super 30', 
+        tag: 'VISIONARIES', 
+        image: '/images/KeyParticipants/abhyanand.png' 
       }
     ];
   });
@@ -56,7 +85,7 @@ export default function LeadersManagementPage({ addToast }) {
 
   const saveToStorage = (updated) => {
     setLeaders(updated);
-    localStorage.setItem('website_leaders', JSON.stringify(updated));
+    localStorage.setItem(storageKey, JSON.stringify(updated));
   };
 
   const handleImageChange = (e) => {

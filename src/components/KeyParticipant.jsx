@@ -49,8 +49,22 @@ const academiaData = [
 
 export default function KeyParticipant() {
   const [tab, setTab] = useState("industry");
-  const data = tab === "industry" ? industryData : academiaData;
   const scrollRef = useRef(null);
+
+  const [allData, setAllData] = useState(() => {
+    const saved = localStorage.getItem('website_leaders_v2');
+    if (saved) {
+      return JSON.parse(saved);
+    }
+    return [
+      ...industryData.map(i => ({...i, tag: 'LEADERSHIP'})),
+      ...academiaData.map(a => ({...a, tag: 'VISIONARIES'}))
+    ];
+  });
+
+  const industryList = allData.filter(d => d.tag === 'LEADERSHIP');
+  const academiaList = allData.filter(d => d.tag === 'VISIONARIES' || d.tag === 'EDUCATORS');
+  const data = tab === "industry" ? industryList : academiaList;
 
   const scroll = (direction) => {
     if (scrollRef.current) {

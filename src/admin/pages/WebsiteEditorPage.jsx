@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Save, Plus, Trash2, Edit2, Image as ImageIcon, User as UserIcon, FileText } from 'lucide-react';
 import Modal, { FormInput } from '../components/Modal';
+import { useActivityLog } from '../hooks/useCustomHooks';
 
 export default function WebsiteEditorPage({ module, addToast }) {
+  const { logActivity } = useActivityLog();
   const [content, setContent] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
@@ -201,6 +203,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
     const dataToSave = module === 'dc-rti' ? rtiData : module === 'ku-md-message' ? mdData : content;
     localStorage.setItem(`module_content_${module}`, JSON.stringify(dataToSave));
     addToast?.(module === 'dc-rti' || module === 'ku-md-message' ? 'Details Updated' : 'Layout Updated', 'success');
+    logActivity(`Updated ${getModuleName(module)}`, 'Admin', 'edit');
   };
 
   const openAddModal = () => {
@@ -250,9 +253,11 @@ export default function WebsiteEditorPage({ module, addToast }) {
     if (editingItem) {
       updated = content.map(i => i.id === editingItem.id ? { ...editingItem, ...formData } : i);
       addToast?.('Item Updated', 'success');
+      logActivity(`Updated ${formData.title || 'Item'} in ${getModuleName(module)}`, 'Admin', 'edit');
     } else {
       updated = [...content, { id: Date.now(), ...formData }];
       addToast?.('Item Added', 'success');
+      logActivity(`Added ${formData.title || 'Item'} to ${getModuleName(module)}`, 'Admin', 'create');
     }
     setContent(updated);
     localStorage.setItem(`module_content_${module}`, JSON.stringify(updated));
@@ -260,10 +265,14 @@ export default function WebsiteEditorPage({ module, addToast }) {
   };
 
   const removeItem = (id) => {
+    const itemToDelete = content.find(i => i.id === id);
     const updated = content.filter(i => i.id !== id);
     setContent(updated);
     localStorage.setItem(`module_content_${module}`, JSON.stringify(updated));
     addToast?.('Item Removed', 'error');
+    if (itemToDelete) {
+      logActivity(`Removed ${itemToDelete.title || 'Item'} from ${getModuleName(module)}`, 'Admin', 'delete');
+    }
   };
 
   return (

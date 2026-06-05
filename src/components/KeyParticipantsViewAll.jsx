@@ -63,8 +63,14 @@ export default function KeyParticipantViewAll() {
   const [filter, setFilter] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filtered = allParticipants.filter((p) => {
-    const matchesCategory = filter === "All" || p.category === filter;
+  const [allData, setAllData] = useState(() => {
+    const saved = localStorage.getItem('website_leaders_v2');
+    if (saved) return JSON.parse(saved);
+    return allParticipants.map(p => ({ ...p, tag: p.category ? p.category.toUpperCase() : 'LEADERSHIP' }));
+  });
+
+  const filtered = allData.filter((p) => {
+    const matchesCategory = filter === "All" || (p.tag && p.tag.toLowerCase() === filter.toLowerCase());
     const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesCategory && matchesSearch;
   });
@@ -174,7 +180,7 @@ function ParticipantCard({ item }) {
         {/* ===== INFO AT BOTTOM ===== */}
         <div className="p-6 flex flex-col flex-1 bg-white relative z-10">
             <span className="self-start px-2.5 py-1 bg-indigo-50 text-indigo-600 text-[10px] font-bold uppercase tracking-widest rounded-md mb-3 border border-indigo-100">
-                {item.category}
+                {item.category || item.tag}
             </span>
   
             <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-2 leading-tight">
