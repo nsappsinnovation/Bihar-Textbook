@@ -22,6 +22,10 @@ import EventDetails from "./pages/EventDetails.jsx";
 import Ling from "./pages/Ling.jsx";
 import LingModule from "./pages/LingModule.jsx";
 import PublishingMission from "./pages/PublishingMission.jsx";
+import VrMission from "./pages/VrMission.jsx";
+import SignLanguageMission from "./pages/SignLanguageMission.jsx";
+import MultilingualMission from "./pages/MultilingualMission.jsx";
+import AudiobooksMission from "./pages/AudiobooksMission.jsx";
 import Sign from "./pages/Signlanguage.jsx";
 import SignLearn from "./pages/SignLearn.jsx";
 import AiIntelligence from "./pages/AiIntelligence.jsx";
@@ -88,7 +92,8 @@ function App() {
     "/ling", "/linguistic", "/vr", "/sign", "/sign-learn", "/sign-module",
     "/ai-intelligence", "/digital", "/audio-books", 
     "/cyber-security", "/heritage-archive", 
-    "/basic-skills", "/ebook", "/ling/words", "/ling/phrases", "/ling/conversations"
+    "/basic-skills", "/ebook", "/ling/words", "/ling/phrases", "/ling/conversations",
+    "/publishing-mission", "/vr-mission", "/sign-language-mission", "/multilingual-mission", "/audiobooks-mission"
   ].includes(location.pathname);
 
   // Pages with NO Navbar
@@ -203,6 +208,10 @@ function App() {
 
             {/* Missions */}
             <Route path="/publishing-mission" element={<PublishingMission />} />
+            <Route path="/vr-mission" element={<VrMission />} />
+            <Route path="/sign-language-mission" element={<SignLanguageMission />} />
+            <Route path="/multilingual-mission" element={<MultilingualMission />} />
+            <Route path="/audiobooks-mission" element={<AudiobooksMission />} />
             <Route path="/pustak-mela" element={<PustakMela />} />
             <Route path="/assessment-platform" element={<AssessmentPlatform />} />
             <Route path="/regional-content" element={<RegionalContent />} />
