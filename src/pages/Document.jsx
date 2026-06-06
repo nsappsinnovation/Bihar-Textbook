@@ -1,12 +1,12 @@
 import { useState } from "react";
-import Hrt from "../components/documents/sections/Hrt";
+import Hrd from "../components/documents/sections/Hrd";
 import Reg from "../components/documents/sections/Registerationform";
 import Rti from "../components/documents/sections/Rti";
 import { useParams } from "react-router-dom";
 import { Docuconfig } from "../components/documents/Docuconfig";
 
 const componentMap = {
-  Hrt,
+  Hrd,
   Reg,
   Rti,
 };

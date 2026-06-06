@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowLeft, ArrowRight, BookOpen, Clock, 
   Brain, Lightbulb, Cpu, Trophy, CheckCircle2, 
-  Play, GraduationCap, XCircle
+  Play, GraduationCap, XCircle,
+  MessageSquare, Sparkles, Palette, Bot, Volume2, Globe
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,12 +18,12 @@ const toolsCategories = [
 ];
 
 const toolsDataList = [
-  { name: 'ChatGPT', tag: 'Writing Assistant', desc: 'AI chatbot that helps answer questions, write content, and explain ideas.', icon: '💬', color: 'bg-emerald-50 text-emerald-600', iconBg: 'bg-emerald-100 text-emerald-600', categories: ['Writing', 'Learning'] },
-  { name: 'Google Gemini', tag: 'Learning Assistant', desc: 'AI assistant by Google that helps with writing, learning, and exploring ideas.', icon: '✨', color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Writing', 'Learning', 'Productivity'] },
-  { name: 'Canva AI', tag: 'Image Creator', desc: 'AI design tool that helps create posters, presentations, and images easily.', icon: '🎨', color: 'bg-cyan-50 text-cyan-600', iconBg: 'bg-cyan-100 text-cyan-600', categories: ['Image', 'Productivity'] },
-  { name: 'QuillBot', tag: 'Writing Helper', desc: 'AI writing tool that helps paraphrase, summarize, and improve your writing.', icon: '🤖', color: 'bg-teal-50 text-teal-600', iconBg: 'bg-teal-100 text-teal-600', categories: ['Writing'] },
-  { name: 'ElevenLabs', tag: 'Voice AI', desc: 'AI voice tool that converts text into natural-sounding speech.', icon: '🔊', color: 'bg-pink-50 text-pink-600', iconBg: 'bg-pink-100 text-pink-600', categories: ['Voice'] },
-  { name: 'DeepL', tag: 'Translation', desc: 'AI tool that helps translate text more accurately and naturally.', icon: '🌐', color: 'bg-blue-50 text-blue-600', iconBg: 'bg-blue-100 text-blue-600', categories: ['Writing', 'Productivity'] }
+  { name: 'ChatGPT', tag: 'Writing Assistant', desc: 'AI chatbot that helps answer questions, write content, and explain ideas.', icon: <MessageSquare size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Writing', 'Learning'] },
+  { name: 'Google Gemini', tag: 'Learning Assistant', desc: 'AI assistant by Google that helps with writing, learning, and exploring ideas.', icon: <Sparkles size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Writing', 'Learning', 'Productivity'] },
+  { name: 'Canva AI', tag: 'Image Creator', desc: 'AI design tool that helps create posters, presentations, and images easily.', icon: <Palette size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Image', 'Productivity'] },
+  { name: 'QuillBot', tag: 'Writing Helper', desc: 'AI writing tool that helps paraphrase, summarize, and improve your writing.', icon: <Bot size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Writing'] },
+  { name: 'ElevenLabs', tag: 'Voice AI', desc: 'AI voice tool that converts text into natural-sounding speech.', icon: <Volume2 size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Voice'] },
+  { name: 'DeepL', tag: 'Translation', desc: 'AI tool that helps translate text more accurately and naturally.', icon: <Globe size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Writing', 'Productivity'] }
 ];
 
 const quizQuestions = [
@@ -104,7 +105,7 @@ const QuizComponent = () => {
     if (isAnswered) return;
     setSelectedOption(idx);
     setIsAnswered(true);
-    if (idx === quizQuestions[currentQ].correct) setScore(prev => prev + 100);
+    if (idx === quizQuestions[currentQ].correct) setScore(prev => prev + 10);
   };
 
   const handleNext = () => {
@@ -161,8 +162,8 @@ const QuizComponent = () => {
                       <Brain size={16} />
                     </div>
                     <div>
-                      <h3 className="text-xs font-bold text-slate-900">Question {currentQ + 1}/{quizQuestions.length}</h3>
-                      <p className="text-[10px] font-bold text-slate-400">AI Knowledge Test</p>
+                      <h3 className="text-xs font-bold text-white">Question {currentQ + 1}/{quizQuestions.length}</h3>
+                      <p className="text-[10px] font-bold text-white/80">AI Knowledge Test</p>
                     </div>
                   </div>
                   <div className="bg-slate-50/80 px-3 py-1.5 rounded-lg border border-slate-200/60 text-center">
@@ -175,7 +176,7 @@ const QuizComponent = () => {
                   <motion.div animate={{ width: `${progress}%` }} className="h-full bg-orange-500 rounded-full" />
                 </div>
 
-                <h2 className="text-[15px] font-bold text-slate-900 leading-snug mb-5">
+                <h2 className="text-[15px] font-bold text-white leading-snug mb-5">
                   {q.question}
                 </h2>
 
@@ -225,13 +226,13 @@ const QuizComponent = () => {
                 <div className="w-16 h-16 bg-orange-50 text-orange-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-inner">
                   <Trophy size={32} />
                 </div>
-                <h2 className="text-xl font-bold text-slate-900 mb-1">Challenge Completed!</h2>
-                <p className="text-xs text-slate-800 mb-6 font-medium">You've successfully finished the AI Knowledge Challenge.</p>
+                <h2 className="text-xl font-bold text-white mb-1">Challenge Completed!</h2>
+                <p className="text-xs text-white/80 mb-6 font-medium">You've successfully finished the AI Knowledge Challenge.</p>
 
                 <div className="bg-slate-50/80 rounded-[16px] p-5 mb-6 border border-slate-200/60 inline-block min-w-[180px]">
                   <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Total Score</span>
                   <span className="text-3xl font-black text-orange-600">{score}</span>
-                  <span className="text-[10px] font-bold text-slate-400 block mt-1">out of {quizQuestions.length * 100}</span>
+                  <span className="text-[10px] font-bold text-slate-400 block mt-1">out of {quizQuestions.length * 10}</span>
                 </div>
 
                 <div className="flex justify-center">

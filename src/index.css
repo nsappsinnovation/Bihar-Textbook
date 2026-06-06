@@ -1,5 +1,25 @@
 @import "tailwindcss";
 
+@layer base {
+  /* Make sure html and body are scrollable */
+  html, body {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  
+  /* Hide scrollbar globally but keep functionality */
+  * {
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* IE and Edge */
+  }
+  
+  *::-webkit-scrollbar {
+    width: 0px !important;
+    height: 0px !important;
+    background: transparent !important;
+  }
+}
+
 /* =========================
    Theme Configuration
    ========================= */

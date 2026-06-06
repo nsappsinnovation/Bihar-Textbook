@@ -31,12 +31,12 @@ export default function WholesalerDepotPage({ addToast }) {
     const saved = localStorage.getItem(storageKey);
     return saved ? JSON.parse(saved) : {
       stats: { depots: '38', wholesalers: '450+' },
-      officialList: { pdfUrl: '', fileName: 'WHOLESALER_DIRECTORY.PDF' },
+      officialList: { pdfUrl: '/whole.pdf', fileName: 'WHOLESALER_DIRECTORY.PDF' },
       hubs: [
-        { id: 1, name: 'Patna Central Depot', type: 'Main Depot', location: 'Budh Marg, Patna', contact: '0612-2221975' },
-        { id: 2, name: 'Muzaffarpur Regional Centre', type: 'Regional', location: 'Mithanpura, Muzaffarpur', contact: '0621-2245678' },
-        { id: 3, name: 'Gaya Distribution Point', type: 'Regional', location: 'Civil Lines, Gaya', contact: '0631-2223456' },
-        { id: 4, name: 'Bhagalpur Storage Hub', type: 'Regional', location: 'Adampur, Bhagalpur', contact: '0641-2227890' },
+        { id: 1, name: 'Patna Central Depot', type: 'Main Depot', location: 'Budh Marg, Patna', contact: '+91 612 222 1975' },
+        { id: 2, name: 'Muzaffarpur Regional Centre', type: 'Regional', location: 'Mithanpura, Muzaffarpur', contact: '+91 621 224 5678' },
+        { id: 3, name: 'Gaya Distribution Point', type: 'Regional', location: 'Civil Lines, Gaya', contact: '+91 631 222 3456' },
+        { id: 4, name: 'Bhagalpur Storage Hub', type: 'Regional', location: 'Adampur, Bhagalpur', contact: '+91 641 222 7890' },
       ]
     };
   });
@@ -97,8 +97,13 @@ export default function WholesalerDepotPage({ addToast }) {
     }
 
     try {
-      const base64 = data.officialList.pdfUrl;
-      const bin = atob(base64.split(',')[1]);
+      const pdfUrl = data.officialList.pdfUrl;
+      if (pdfUrl.startsWith('/')) {
+        setViewUrl(pdfUrl);
+        setIsViewModalOpen(true);
+        return;
+      }
+      const bin = atob(pdfUrl.split(',')[1]);
       const array = new Uint8Array(bin.length);
       for (let i = 0; i < bin.length; i++) {
         array[i] = bin.charCodeAt(i);
@@ -169,7 +174,7 @@ export default function WholesalerDepotPage({ addToast }) {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-black text-gray-900 tracking-tight">Wholeseller & Depot Network</h1>
+          <h1 className="text-3xl font-bold text-gray-900 tracking-tight">Wholeseller & Depot Network</h1>
           <p className="text-sm text-gray-500 mt-1 font-medium">Manage distribution hubs and official directory PDF</p>
         </div>
       </div>
@@ -180,10 +185,7 @@ export default function WholesalerDepotPage({ addToast }) {
         <div className="lg:col-span-1">
           <div className="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm h-full flex flex-col justify-between space-y-6">
             <div className="space-y-4">
-              <div className="p-4 bg-indigo-50 text-indigo-600 rounded-2xl w-fit">
-                <FileText className="w-8 h-8" />
-              </div>
-              <h3 className="text-xl font-black text-gray-900">Official Directory</h3>
+              <h3 className="text-xl font-bold text-gray-900">Official Directory</h3>
               <p className="text-xs text-gray-400 font-bold leading-relaxed">
                 Upload the latest PDF directory of authorized wholesalers and depots for public access.
               </p>
@@ -196,7 +198,7 @@ export default function WholesalerDepotPage({ addToast }) {
                     <Download className="w-4 h-4 text-blue-600" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Active File</p>
+                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Active File</p>
                     <p className="text-sm font-bold text-gray-700 truncate">{data.officialList.fileName}</p>
                   </div>
                   <button 
@@ -211,7 +213,7 @@ export default function WholesalerDepotPage({ addToast }) {
 
               <label className="block w-full cursor-pointer group">
                 <input type="file" accept=".pdf" className="hidden" onChange={handleFileUpload} />
-                <div className="flex items-center justify-center gap-3 px-6 py-4 bg-indigo-600 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-600/20">
+                <div className="flex items-center justify-center gap-3 px-6 py-4 bg-indigo-600 text-white rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-xl shadow-indigo-600/20">
                   <Upload className="w-4 h-4" />
                   <span>Update Directory</span>
                 </div>
@@ -222,29 +224,24 @@ export default function WholesalerDepotPage({ addToast }) {
 
         {/* Stats Summary Cards */}
         <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6 h-fit">
-          <div className="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm relative group">
-            <div className="p-4 bg-blue-50 text-blue-600 rounded-2xl w-fit mb-6">
-              <Building2 className="w-6 h-6" />
-            </div>
-            <h4 className="text-3xl font-black text-gray-900 mb-1">{data.stats.depots}</h4>
-            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">District Depots</p>
+          <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm relative group">
+           
+            <h4 className="text-2xl font-bold text-gray-900 mb-1">{data.stats.depots}</h4>
+            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">District Depots</p>
             <button 
               onClick={handleOpenStats}
-              className="absolute top-8 right-8 p-2.5 text-gray-300 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all opacity-0 group-hover:opacity-100"
+              className="absolute top-6 right-6 p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all opacity-0 group-hover:opacity-100"
             >
               <Edit2 className="w-4 h-4" />
             </button>
           </div>
           
-          <div className="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-sm relative group">
-            <div className="p-4 bg-emerald-50 text-emerald-600 rounded-2xl w-fit mb-6">
-              <Users className="w-6 h-6" />
-            </div>
-            <h4 className="text-3xl font-black text-gray-900 mb-1">{data.stats.wholesalers}</h4>
-            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Authorized Wholesalers</p>
+          <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm relative group">
+            <h4 className="text-2xl font-bold text-gray-900 mb-1">{data.stats.wholesalers}</h4>
+            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Authorized Wholesalers</p>
             <button 
               onClick={handleOpenStats}
-              className="absolute top-8 right-8 p-2.5 text-gray-300 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all opacity-0 group-hover:opacity-100"
+              className="absolute top-6 right-6 p-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all opacity-0 group-hover:opacity-100"
             >
               <Edit2 className="w-4 h-4" />
             </button>
@@ -256,15 +253,15 @@ export default function WholesalerDepotPage({ addToast }) {
       <div className="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden">
         <div className="p-8 border-b border-gray-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h3 className="text-xl font-black text-gray-900 uppercase tracking-widest">Major Hubs Registry</h3>
+            <h3 className="text-xl font-bold text-gray-900 uppercase tracking-widest">Major Hubs Registry</h3>
             <p className="text-sm text-gray-400 font-medium mt-1">Manage strategic distribution locations across Bihar</p>
           </div>
           <button 
             onClick={handleOpenAddHub}
-            className="flex items-center justify-center gap-2 px-6 py-3.5 bg-gray-900 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-black transition-all shadow-xl shadow-gray-900/10"
+            className="flex items-center justify-center gap-2 px-6 py-3.5 bg-gray-900 text-white rounded-2xl font-bold text-xs uppercase tracking-widest hover:bg-black transition-all shadow-xl shadow-gray-900/10"
           >
             <Plus className="w-4 h-4" />
-            <span>Register New Hub</span>
+            <span>Add</span>
           </button>
         </div>
 
@@ -272,10 +269,10 @@ export default function WholesalerDepotPage({ addToast }) {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-gray-50/50">
-                <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-50">Depot Name</th>
-                <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-50">Type</th>
-                <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-50">Location</th>
-                <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-50 text-right">Actions</th>
+                <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50">Depot Name</th>
+                <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50">Type</th>
+                <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50">Location</th>
+                <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
@@ -289,10 +286,10 @@ export default function WholesalerDepotPage({ addToast }) {
                     className="group hover:bg-gray-50/30 transition-colors"
                   >
                     <td className="px-8 py-5">
-                      <span className="text-sm font-black text-gray-900">{hub.name}</span>
+                      <span className="text-sm font-bold text-gray-900">{hub.name}</span>
                     </td>
                     <td className="px-8 py-5">
-                      <span className={`px-3 py-1 text-[10px] font-black rounded-lg uppercase tracking-wider ${
+                      <span className={`px-3 py-1 text-[10px] font-bold rounded-lg uppercase tracking-wider ${
                         hub.type === 'Main Depot' ? 'bg-blue-50 text-blue-600' : 'bg-indigo-50 text-indigo-600'
                       }`}>
                         {hub.type}
@@ -306,10 +303,16 @@ export default function WholesalerDepotPage({ addToast }) {
                     </td>
                     <td className="px-8 py-5 text-right">
                       <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button onClick={() => handleOpenEditHub(hub)} className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all">
+                        <button 
+                          onClick={() => handleOpenEditHub(hub)}
+                          className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"
+                        >
                           <Edit2 className="w-4 h-4" />
                         </button>
-                        <button onClick={() => handleDeleteHub(hub.id)} className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all">
+                        <button 
+                          onClick={() => handleDeleteHub(hub.id)}
+                          className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all"
+                        >
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
@@ -337,7 +340,7 @@ export default function WholesalerDepotPage({ addToast }) {
           />
           <div className="grid grid-cols-2 gap-4">
              <div>
-              <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-2">Hub Type</label>
+              <label className="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-2">Hub Type</label>
               <select 
                 className="w-full px-4 py-3 rounded-2xl bg-gray-50 border-none text-sm font-bold text-gray-700 focus:ring-2 focus:ring-blue-500/20 transition-all"
                 value={hubFormData.type}
@@ -350,7 +353,7 @@ export default function WholesalerDepotPage({ addToast }) {
             </div>
             <FormInput 
               label="Contact Number" 
-              placeholder="e.g. 0612-2221975" 
+              placeholder="e.g. +91 612 222 1975" 
               value={hubFormData.contact}
               onChange={(val) => setHubFormData(prev => ({ ...prev, contact: val }))}
             />
@@ -364,7 +367,7 @@ export default function WholesalerDepotPage({ addToast }) {
 
           <div className="flex items-center justify-end gap-3 mt-8 pt-6 border-t border-gray-100">
             <button onClick={() => setIsHubModalOpen(false)} className="px-6 py-3 rounded-2xl text-sm font-bold text-gray-500 hover:bg-gray-100 transition-colors">Cancel</button>
-            <button onClick={handleSaveHub} className="px-6 py-3 rounded-2xl bg-blue-600 text-white text-sm font-black shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-all">
+            <button onClick={handleSaveHub} className="px-6 py-3 rounded-2xl bg-blue-600 text-white text-sm font-bold shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-all">
               {editingHub ? "Update Hub" : "Register Hub"}
             </button>
           </div>
@@ -392,7 +395,7 @@ export default function WholesalerDepotPage({ addToast }) {
           />
           <div className="flex items-center justify-end gap-3 mt-8 pt-6 border-t border-gray-100">
             <button onClick={() => setIsStatsModalOpen(false)} className="px-6 py-3 rounded-2xl text-sm font-bold text-gray-500 hover:bg-gray-100 transition-colors">Cancel</button>
-            <button onClick={handleSaveStats} className="px-6 py-3 rounded-2xl bg-blue-600 text-white text-sm font-black shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-all">Save Stats</button>
+            <button onClick={handleSaveStats} className="px-6 py-3 rounded-2xl bg-blue-600 text-white text-sm font-bold shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-all">Save Stats</button>
           </div>
         </div>
       </Modal>

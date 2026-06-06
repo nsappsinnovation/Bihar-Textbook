@@ -96,7 +96,7 @@ const QuizComponent = () => {
     if (isAnswered) return;
     setSelectedOption(idx);
     setIsAnswered(true);
-    if (idx === quizQuestions[currentQ].correct) setScore(prev => prev + 100);
+    if (idx === quizQuestions[currentQ].correct) setScore(prev => prev + 10);
   };
 
   const handleNext = () => {
@@ -222,7 +222,7 @@ const QuizComponent = () => {
                 <div className="bg-slate-50/80 rounded-[16px] p-5 mb-6 border border-slate-200/60 inline-block min-w-[180px]">
                   <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Total Score</span>
                   <span className="text-3xl font-black text-emerald-600">{score}</span>
-                  <span className="text-[10px] font-bold text-slate-400 block mt-1">out of {quizQuestions.length * 100}</span>
+                  <span className="text-[10px] font-bold text-slate-400 block mt-1">out of {quizQuestions.length * 10}</span>
                 </div>
 
                 <div className="flex justify-center">

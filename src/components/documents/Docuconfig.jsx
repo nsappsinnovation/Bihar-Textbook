@@ -3,9 +3,9 @@ export const Docuconfig = [
   {
     
   
-    id: "hrt",
-    label: "HRT",
-    component: "Hrt"
+    id: "hrd",
+    label: "HRD",
+    component: "Hrd"
   },
   {
     id: "registration-form",

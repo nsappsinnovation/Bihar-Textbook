@@ -13,24 +13,29 @@ const OfficersList = () => {
   ]);
 
   useEffect(() => {
-    const saved = localStorage.getItem('module_content_ku-officers');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) {
-          setOfficers(parsed.map(item => ({
-            id: item.id,
-            name: item.title,
-            designation: item.designation,
-            email: item.email,
-            phone: item.phone,
-            photo: item.document || ""
-          })));
+    const loadOfficers = () => {
+      const saved = localStorage.getItem('module_content_ku-officers');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) {
+            setOfficers(parsed.map(item => ({
+              id: item.id,
+              name: item.name || item.title,
+              designation: item.designation,
+              email: item.email,
+              phone: item.phone,
+              photo: item.document || ""
+            })));
+          }
+        } catch (e) {
+          console.error("Error loading officers data", e);
         }
-      } catch (e) {
-        console.error("Error loading officers data", e);
       }
-    }
+    };
+    loadOfficers();
+    window.addEventListener('storage', loadOfficers);
+    return () => window.removeEventListener('storage', loadOfficers);
   }, []);
 
   const filteredOfficers = officers.filter(off => 

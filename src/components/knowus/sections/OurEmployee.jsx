@@ -12,23 +12,28 @@ const OurEmployee = () => {
   ]);
 
   useEffect(() => {
-    const saved = localStorage.getItem('module_content_ku-employees');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) {
-          setEmployees(parsed.map(item => ({
-            id: item.id,
-            name: item.title,
-            designation: item.designation,
-            department: item.department,
-            employeeId: item.employeeId
-          })));
+    const loadEmployees = () => {
+      const saved = localStorage.getItem('module_content_ku-employee');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) {
+            setEmployees(parsed.map(item => ({
+              id: item.id,
+              name: item.name || item.title,
+              designation: item.designation,
+              department: item.department,
+              employeeId: item.employeeId
+            })));
+          }
+        } catch (e) {
+          console.error("Error loading employee data", e);
         }
-      } catch (e) {
-        console.error("Error loading employee data", e);
       }
-    }
+    };
+    loadEmployees();
+    window.addEventListener('storage', loadEmployees);
+    return () => window.removeEventListener('storage', loadEmployees);
   }, []);
 
   const filteredEmployees = employees.filter(emp => 

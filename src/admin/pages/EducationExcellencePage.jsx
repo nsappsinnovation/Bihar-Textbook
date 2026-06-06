@@ -97,7 +97,7 @@ export default function EducationExcellencePage({ addToast, title = "Tools & Res
           className="flex items-center gap-2 px-6 py-3.5 bg-gray-900 text-white rounded-2xl font-bold text-sm shadow-xl shadow-gray-900/10 hover:bg-black transition-all"
         >
           <Plus className="w-4 h-4" />
-          <span>Add New Entry</span>
+          <span>Add</span>
         </button>
       </div>
 

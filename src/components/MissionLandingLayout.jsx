@@ -145,7 +145,6 @@ const MissionLandingLayout = ({ themeName = 'blue', hero, overview, modules }) =
               >
                 {hero.features.map((feature, idx) => (
                   <div key={idx} className={`bg-white/60 backdrop-blur-xl border border-slate-200 ${theme.borderHover} p-4 rounded-[16px] shadow-sm hover:shadow-md transition-all duration-300 ${idx === 2 ? 'sm:col-span-2' : ''}`}>
-                    <div className={`${theme.textLight} mb-2 [&>svg]:w-5 [&>svg]:h-5`}>{feature.icon}</div>
                     <h3 className="text-[14px] font-bold text-slate-900 mb-0.5 tracking-tight">{feature.title}</h3>
                     <p className="text-[12.5px] text-slate-500 font-medium leading-relaxed">{feature.description}</p>
                   </div>
