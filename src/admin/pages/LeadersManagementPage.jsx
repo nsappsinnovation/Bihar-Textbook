@@ -11,7 +11,7 @@ import { useActivityLog } from '../hooks/useCustomHooks';
 export default function LeadersManagementPage({ addToast }) {
   const { logActivity } = useActivityLog();
   
-  const storageKey = 'website_leaders_v2';
+  const storageKey = 'website_leaders_v3';
   const [leaders, setLeaders] = useState(() => {
     const saved = localStorage.getItem(storageKey);
     return saved ? JSON.parse(saved) : [
@@ -31,14 +31,14 @@ export default function LeadersManagementPage({ addToast }) {
       },
       { 
         id: 3, 
-        name: 'Shri Dr. B. Rajender, I.A.S.', 
+        name: 'Shri Dr. B. Rajender, IAS', 
         role: 'Additional Chief Secretary, Education Department', 
         tag: 'LEADERSHIP', 
         image: '/images/KeyParticipants/B.Rajendra.png' 
       },
       { 
         id: 4, 
-        name: 'Shri Yatendra Kumar Pal, I.A.S.', 
+        name: 'Shri Yatendra Kumar Pal, IAS', 
         role: 'Managing Director, Bihar State Text Book Publishing Corporation (BSTBPC)', 
         tag: 'LEADERSHIP', 
         image: '/images/KeyParticipants/shri_yatendra_pal.png' 
