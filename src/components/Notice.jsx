@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { FiSearch, FiFileText, FiBell, FiArrowRight, FiCalendar, FiClock, FiFilter } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -168,6 +168,22 @@ export const noticesData = [
 ];
 
 const Notice = () => {
+  const [liveNotices, setLiveNotices] = useState(() => {
+    const saved = localStorage.getItem('website_notices_v2');
+    return saved ? JSON.parse(saved) : noticesData;
+  });
+
+  useEffect(() => {
+    const handleUpdate = () => {
+      const saved = localStorage.getItem('website_notices_v2');
+      if (saved) {
+        setLiveNotices(JSON.parse(saved));
+      }
+    };
+    window.addEventListener('websiteDataUpdated', handleUpdate);
+    return () => window.removeEventListener('websiteDataUpdated', handleUpdate);
+  }, []);
+
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [activeFilter, setActiveFilter] = useState("All");
@@ -177,8 +193,14 @@ const Notice = () => {
 
   const isNew = (dateStr) => {
     try {
-      const parts = dateStr.split('/');
-      const d = new Date(parts[2], parts[1] - 1, parts[0]);
+      if (!dateStr) return false;
+      let d;
+      if (dateStr.includes('/')) {
+        const parts = dateStr.split('/');
+        d = new Date(parts[2], parts[1] - 1, parts[0]);
+      } else {
+        d = new Date(dateStr);
+      }
       const now = new Date();
       const diffTime = Math.abs(now - d);
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -186,8 +208,17 @@ const Notice = () => {
     } catch { return false; }
   };
 
+  const formatDate = (dateStr) => {
+    try {
+      if (!dateStr) return '';
+      if (dateStr.includes('/')) return dateStr;
+      const d = new Date(dateStr);
+      return d.toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    } catch { return dateStr; }
+  };
+
   const filteredNotices = useMemo(() => {
-    return noticesData.filter((n) => {
+    return liveNotices.filter((n) => {
       const matchesSearch = n.title.toLowerCase().includes(search.toLowerCase()) ||
                           n.description.toLowerCase().includes(search.toLowerCase());
       const matchesFilter = activeFilter === "All" || n.category === activeFilter;
@@ -261,11 +292,11 @@ const Notice = () => {
           >
             <div className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 flex items-center gap-2 backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-              <span className="text-white/80">{noticesData.length} Total Notices</span>
+              <span className="text-white/80">{liveNotices.length} Total Notices</span>
             </div>
             <div className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 flex items-center gap-2 backdrop-blur-sm">
               <FiClock className="text-blue-400" />
-              <span className="text-white/80">Last Updated: {noticesData[0].date}</span>
+              <span className="text-white/80">Last Updated: {liveNotices.length > 0 ? formatDate(liveNotices[0].date) : 'N/A'}</span>
             </div>
           </motion.div>
         </div>
@@ -312,7 +343,7 @@ const Notice = () => {
                     onClick={() => { setActiveFilter(filter); setCurrentPage(1); }}
                     className={`px-6 py-2.5 rounded-xl font-bold text-sm whitespace-nowrap transition-all duration-300 ${
                       activeFilter === filter 
-                        ? 'bg-[#0d0e23] text-white shadow-xl shadow-slate-300 scale-105' 
+                        ? 'bg-[#0d0e23] text-white scale-105' 
                         : 'bg-slate-100 text-slate-600 hover:bg-slate-200 active:scale-95'
                     }`}
                   >
@@ -393,7 +424,7 @@ const Notice = () => {
                             </td>
                             <td className="px-8 py-8 whitespace-nowrap">
                               <div className="flex flex-col">
-                                <span className="text-slate-700 font-bold bg-slate-100 px-3 py-1 rounded-lg text-sm">{notice.date}</span>
+                                <span className="text-slate-700 font-bold bg-slate-100 px-3 py-1 rounded-lg text-sm">{formatDate(notice.date)}</span>
                               </div>
                             </td>
                             <td className="px-8 py-8 text-right">
@@ -437,7 +468,7 @@ const Notice = () => {
                         <h4 className="font-bold text-slate-800 text-lg leading-tight">{notice.title}</h4>
                         <div className="flex items-center gap-2 text-slate-500 text-sm">
                           <FiCalendar />
-                          {notice.date}
+                          {formatDate(notice.date)}
                         </div>
                         <a 
                           href={notice.document}

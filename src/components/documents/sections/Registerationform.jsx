@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { FiFileText, FiDownload, FiSearch, FiFilter, FiBriefcase, FiUser, FiHome, FiCheckCircle } from "react-icons/fi";
+import { FiFileText, FiDownload, FiSearch, FiFilter, FiBriefcase, FiUser, FiHome, FiCheckCircle, FiEye } from "react-icons/fi";
 import { motion } from "framer-motion";
 
 const defaultFormsData = [
-  { id: 1, title: "Vendor Registration Form", category: "Stakeholder", type: "PDF", size: "1.2 MB" },
-  { id: 2, title: "Author Empanelment Application", category: "Educational", type: "PDF", size: "850 KB" },
-  { id: 3, title: "Publisher Registration Portal Form", category: "Corporate", type: "DOCX", size: "450 KB" },
-  { id: 4, title: "School Textbook Requisition Form", category: "Stakeholder", type: "PDF", size: "1.5 MB" },
-  { id: 5, title: "Employee Benefit Claim Form", category: "HR", type: "PDF", size: "620 KB" },
-  { id: 6, title: "New Distribution Agency Request", category: "Corporate", type: "PDF", size: "2.1 MB" },
+  { id: 1, title: "Vendor Registration Form", category: "Stakeholder", type: "PDF" },
+  { id: 2, title: "Author Empanelment Application", category: "Educational", type: "PDF" },
+  { id: 3, title: "Publisher Registration Portal Form", category: "Corporate", type: "DOCX" },
+  { id: 4, title: "School Textbook Requisition Form", category: "Stakeholder", type: "PDF" },
+  { id: 5, title: "Employee Benefit Claim Form", category: "HR", type: "PDF" },
+  { id: 6, title: "New Distribution Agency Request", category: "Corporate", type: "PDF" },
 ];
 
 const RegistrationForms = () => {
@@ -24,6 +24,43 @@ const RegistrationForms = () => {
     (filter === "All" || form.category === filter) &&
     form.title.toLowerCase().includes(search.toLowerCase())
   );
+
+  const handlePreview = (form) => {
+    if (!form.document) {
+      alert("No document available for preview.");
+      return;
+    }
+    try {
+      if (form.document.startsWith('data:')) {
+        const bin = atob(form.document.split(',')[1]);
+        const array = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) {
+          array[i] = bin.charCodeAt(i);
+        }
+        const blob = new Blob([array], { type: form.type === 'PDF' ? 'application/pdf' : 'application/octet-stream' });
+        const url = URL.createObjectURL(blob);
+        window.open(url, '_blank');
+      } else {
+        window.open(form.document, '_blank');
+      }
+    } catch (err) {
+      console.error('View Error:', err);
+      alert('Error preparing document preview');
+    }
+  };
+
+  const handleDownload = (form) => {
+    if (!form.document) {
+      alert("No document available for download.");
+      return;
+    }
+    const link = document.createElement('a');
+    link.href = form.document;
+    link.download = form.title + (form.type === 'PDF' ? '.pdf' : '');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="min-h-screen bg-[#f8fafc] -mt-24">
@@ -102,12 +139,17 @@ const RegistrationForms = () => {
                   </div>
                   <h4 className="text-sm font-black text-[#0d0e23] mb-2 leading-tight h-10 line-clamp-2">{form.title}</h4>
                   <div className="flex items-center justify-between text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-6 pt-4 border-t border-slate-50">
-                    <span>{form.type} • {form.size}</span>
+                    <span>{form.type}</span>
                     <span className="text-blue-500">{form.category}</span>
                   </div>
-                  <button className="w-full py-3 rounded-xl bg-slate-50 text-[#0d0e23] border border-slate-200 font-black text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all">
-                    <FiDownload /> Download File
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <button onClick={() => handlePreview(form)} className="flex-1 py-3 rounded-xl bg-slate-50 text-[#0d0e23] border border-slate-200 font-black text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all">
+                      <FiEye /> Preview
+                    </button>
+                    <button onClick={() => handleDownload(form)} className="flex-1 py-3 rounded-xl bg-blue-50 text-blue-600 border border-blue-100 font-black text-[10px] uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-blue-600 hover:text-white transition-all">
+                      <FiDownload /> Download
+                    </button>
+                  </div>
                 </motion.div>
               ))}
             </div>

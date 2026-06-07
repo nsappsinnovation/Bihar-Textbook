@@ -46,7 +46,7 @@ const Navbar = () => {
             <span className={`cursor-pointer whitespace-nowrap transition-colors flex items-center gap-1 ${isHomePage ? "hover:text-blue-300" : "hover:text-[#211fa9f8]"}`}>
               Know Us <ChevronDown size={14} />
             </span>
-            <div className="dropdown-menu absolute left-0 top-full mt-3 w-64 rounded-md bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50">
+            <div data-lenis-prevent="true" className="dropdown-menu absolute left-0 top-full mt-3 w-64 rounded-md bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50 max-h-96 overflow-y-auto scrollbar-hide">
               {Knowconfig.map(item => (
                 <Link
                   key={item.id}
@@ -63,7 +63,7 @@ const Navbar = () => {
             <span className={`cursor-pointer transition-colors flex items-center gap-1 ${isHomePage ? "hover:text-blue-300" : "hover:text-[#211fa9f8]"}`}>
               Books <ChevronDown size={14} />
             </span>
-            <div className="dropdown-menu absolute left-0 top-full mt-3 w-64 rounded-md bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50 max-h-96 overflow-y-auto">
+            <div data-lenis-prevent="true" className="dropdown-menu absolute left-0 top-full mt-3 w-64 rounded-md bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50 max-h-96 overflow-y-auto scrollbar-hide">
               {[...Array(12)].map((_, index) => {
                 const classId = index + 1;
                 return (
@@ -83,7 +83,7 @@ const Navbar = () => {
             <span className={`cursor-pointer whitespace-nowrap transition-colors flex items-center gap-1 ${isHomePage ? "hover:text-blue-300" : "hover:text-[#211fa9f8]"}`}>
               Gallery <ChevronDown size={14} />
             </span>
-            <div className="dropdown-menu absolute left-0 top-full mt-3 w-64 rounded-md bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50">
+            <div data-lenis-prevent="true" className="dropdown-menu absolute left-0 top-full mt-3 w-64 rounded-md bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50 max-h-96 overflow-y-auto scrollbar-hide">
               {Galleryconfig.map(item => (
                 <Link
                   key={item.id}
@@ -100,7 +100,7 @@ const Navbar = () => {
             <span className={`cursor-pointer whitespace-nowrap transition-colors flex items-center gap-1 ${isHomePage ? "hover:text-blue-300" : "hover:text-[#211fa9f8]"}`}>
               Documents <ChevronDown size={14} />
             </span>
-            <div className="dropdown-menu absolute left-0 top-full mt-3 w-64 rounded-md bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50">
+            <div data-lenis-prevent="true" className="dropdown-menu absolute left-0 top-full mt-3 w-64 rounded-md bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50 max-h-96 overflow-y-auto scrollbar-hide">
               {Docuconfig.map(item => (
                 <Link
                   key={item.id}
@@ -156,7 +156,7 @@ const Navbar = () => {
 
       {/* Mobile Slide-out Menu Overlay */}
       {isOpen && (
-        <div className="fixed inset-0 top-[80px] z-40 bg-white border-t border-slate-100 lg:hidden flex flex-col overflow-y-auto px-6 py-6 space-y-4 animate-fade-in shadow-2xl h-[calc(100vh-80px)]">
+        <div data-lenis-prevent="true" className="fixed inset-0 top-[80px] z-40 bg-white border-t border-slate-100 lg:hidden flex flex-col overflow-y-auto scrollbar-hide px-6 py-6 space-y-4 animate-fade-in shadow-2xl h-[calc(100vh-80px)]">
           <Link to="/" onClick={() => setIsOpen(false)} className="text-base font-bold text-slate-800 py-2 border-b border-slate-50">Home</Link>
           
           {/* Dropdown 1 */}

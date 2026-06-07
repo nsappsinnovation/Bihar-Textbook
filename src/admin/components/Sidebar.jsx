@@ -29,16 +29,9 @@ const navGroups = [
     items: [
       { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
       { 
-        id: 'website-management', 
-        label: 'Website Management', 
-        icon: Globe,
-        hasSubItems: true,
-        subItems: [
-          { id: 'tr', label: 'Tools & Resources' },
-          { id: 'cl', label: 'Latest Initiatives' },
-          { id: 'ev', label: 'Events' },
-          { id: 'ee', label: 'Leaders and Educators' },
-        ]
+        id: 'ee', 
+        label: 'Leaders and Educators', 
+        icon: Users,
       },
       { 
         id: 'ku', 
@@ -135,7 +128,7 @@ export default function Sidebar({ activePage, setActivePage, isMobileOpen, setIs
   };
 
   const sidebarContent = (
-    <div className="flex flex-col h-full bg-[#F9FAFB] border-r border-gray-200">
+    <div className="flex flex-col h-full bg-[#F9FAFB] border-r border-gray-200 overflow-hidden">
       {/* Brand Header */}
       <div className="flex items-center justify-between px-5 py-8">
         <div className="flex items-center gap-3">
@@ -148,7 +141,7 @@ export default function Sidebar({ activePage, setActivePage, isMobileOpen, setIs
       </div>
 
       {/* Navigation Groups */}
-      <div className="flex-1 overflow-y-auto px-3 py-2 space-y-10 scrollbar-hide">
+      <div className="flex-1 overflow-y-auto px-3 py-2 space-y-10 min-h-0 scrollbar-hide" data-lenis-prevent="true">
         {navGroups.map((group) => (
           <div key={group.title}>
             <p className="px-4 text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em] mb-5">
@@ -216,23 +209,11 @@ export default function Sidebar({ activePage, setActivePage, isMobileOpen, setIs
 
       {/* User Profile & Logout */}
       <div className="p-3 mt-auto space-y-4">
-        {/* User Card */}
-        <div className="px-3 py-3 rounded-xl bg-white border border-gray-100 shadow-sm flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full overflow-hidden bg-emerald-50 flex items-center justify-center text-[#065F46] font-bold text-xs border border-emerald-100 uppercase">
-            {userSettings.firstName[0]}{userSettings.lastName[0]}
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-[13px] font-bold text-[#064E3B] truncate">
-              {userSettings.firstName} {userSettings.lastName}
-            </p>
-            <p className="text-[11px] font-medium text-gray-400 truncate leading-none mt-0.5">
-              {userSettings.bio}
-            </p>
-          </div>
-        </div>
-
         {/* Log out */}
-        <button className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-[13px] font-semibold text-[#6B7280] hover:bg-red-50 hover:text-red-600 transition-all group">
+        <button 
+          onClick={() => window.location.href = '/'}
+          className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-[13px] font-semibold text-[#6B7280] hover:bg-red-50 hover:text-red-600 transition-all group"
+        >
           <LogOut className="w-[18px] h-[18px] text-gray-400 group-hover:text-red-500" />
           <span>Log out</span>
         </button>

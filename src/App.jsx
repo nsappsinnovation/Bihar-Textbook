@@ -139,6 +139,7 @@ function App() {
       "/ai-courses",
       "/ai-quiz-challenge",
       "/explore-ai-tools",
+      "/know-us/md-message",
     ].includes(location.pathname);
 
   return (

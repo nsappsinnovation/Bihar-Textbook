@@ -92,7 +92,7 @@ const CyberSecurityQuiz = () => {
     setTimerActive(false);
     const isCorrect = idx === quizQuestions[currentQ].correct;
     if (isCorrect) {
-      const addedPoints = 50 + timeLeft * 3 + streak * 10;
+      const addedPoints = 10;
       setScore(prev => prev + addedPoints);
       const newStreak = streak + 1;
       setStreak(newStreak);
@@ -250,7 +250,7 @@ const CyberSecurityQuiz = () => {
                   </div>
                   <div className="bg-[#06241b]/70 rounded-xl p-2.5 border border-emerald-500/20">
                     <div className="text-base font-black text-purple-300">
-                      {Math.round((score / (quizQuestions.length * 140)) * 100)}%
+                      {Math.round((score / (quizQuestions.length * 10)) * 100)}%
                     </div>
                     <div className="text-[7px] font-black text-slate-400 uppercase mt-0.5">Accuracy</div>
                   </div>
@@ -258,7 +258,7 @@ const CyberSecurityQuiz = () => {
 
                 <div className="bg-[#06241b]/40 rounded-xl p-2.5 mb-4 border border-emerald-500/10">
                   <p className="text-xs text-slate-355 font-bold leading-relaxed">
-                    {score >= 800 ? " Outstanding! You're a certified Cyber Defender!" : "Great job! Try again for a perfect score!"}
+                    {score >= 80 ? " Outstanding! You're a certified Cyber Defender!" : "Great job! Try again for a perfect score!"}
                   </p>
                 </div>
 

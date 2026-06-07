@@ -14,23 +14,28 @@ const BoardOfDirectors = () => {
   ]);
 
   React.useEffect(() => {
-    const saved = localStorage.getItem('module_content_ku-board');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) {
-          setItems(parsed.map(item => ({
-            id: item.id,
-            name: item.title,
-            designation: item.designation,
-            from: item.since,
-            status: item.status
-          })));
+    const loadBoard = () => {
+      const saved = localStorage.getItem('module_content_ku-board');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) {
+            setItems(parsed.map(item => ({
+              id: item.id,
+              name: item.name || item.title,
+              designation: item.designation,
+              from: item.organization || item.since || "Current",
+              status: item.status || "Active"
+            })));
+          }
+        } catch (e) {
+          console.error("Error loading board data", e);
         }
-      } catch (e) {
-        console.error("Error loading board data", e);
       }
-    }
+    };
+    loadBoard();
+    window.addEventListener('storage', loadBoard);
+    return () => window.removeEventListener('storage', loadBoard);
   }, []);
 
   return (
@@ -77,40 +82,7 @@ const BoardOfDirectors = () => {
          </div>
       </section>
 
-      {/* ================= BOARD MEETINGS SECTION ================= */}
-      <section className="max-w-6xl mx-auto px-6">
-         <motion.div 
-           initial={{ opacity: 0, y: 40 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true }}
-           className="bg-transparent border border-slate-300 p-8 md:p-12 text-[#0d0e23] relative overflow-hidden"
-         >
-            
-            <div className="relative z-10 flex flex-col lg:flex-row justify-between items-center gap-12">
-               <div className="max-w-md">
-                  <h2 className="text-2xl md:text-3xl font-bold mb-6 flex items-center gap-4">
-                     <FiInfo className="text-blue-600" />
-                     Board Meetings
-                  </h2>
-                  <p className="text-slate-600 text-sm leading-relaxed mb-8">
-                    The Board meets at regular intervals to review progress, approve budgets, and set policy directions for the upcoming academic cycles.
-                  </p>
-                  <div className="space-y-4">
-                     <MeetingStat label="Last Meeting" value="24 Jan 2024" />
-                     <MeetingStat label="Upcoming" value="To be scheduled" />
-                     <MeetingStat label="Venue" value="Patna, HQ" />
-                  </div>
-               </div>
-
-               <div className="w-full lg:w-auto grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <DocumentCard title="2023-24 Minutes" size="1.4 MB" />
-                  <DocumentCard title="Annual Report 21-22" size="4.8 MB" />
-                  <DocumentCard title="Policy Guidelines" size="850 KB" />
-                  <DocumentCard title="Board Charter" size="2.1 MB" />
-               </div>
-            </div>
-         </motion.div>
-      </section>
+      
     </div>
   );
 };

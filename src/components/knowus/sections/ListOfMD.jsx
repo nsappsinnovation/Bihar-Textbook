@@ -64,22 +64,27 @@ const ListOfMD = () => {
   ]);
 
   useEffect(() => {
-    const saved = localStorage.getItem('module_content_ku-list-md');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) {
-          setList(parsed.map(item => ({
-            id: item.id,
-            name: item.title,
-            from: item.from,
-            to: item.to
-          })));
+    const loadList = () => {
+      const saved = localStorage.getItem('module_content_ku-list-md');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) {
+            setList(parsed.map(item => ({
+              id: item.id,
+              name: item.name || item.title,
+              from: item.from,
+              to: item.to
+            })));
+          }
+        } catch (e) {
+          console.error("Error loading MD list", e);
         }
-      } catch (e) {
-        console.error("Error loading MD list", e);
       }
-    }
+    };
+    loadList();
+    window.addEventListener('storage', loadList);
+    return () => window.removeEventListener('storage', loadList);
   }, []);
 
   const filteredList = list.filter(md => 
@@ -111,7 +116,7 @@ const ListOfMD = () => {
             <div className="flex items-center gap-4">
                <div>
                   <h3 className="text-lg font-bold text-[#0d0e23]">Official Directory</h3>
-                  <p className="text-sm text-slate-500">Chronological List of MDs</p>
+                 
                </div>
             </div>
 
@@ -134,7 +139,7 @@ const ListOfMD = () => {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-slate-200 border-b border-slate-300 text-[#0d0e23]">
-                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">#</th>
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">S.No.</th>
                   <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Managing Director</th>
                   <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Appointment Date</th>
                   <th className="px-6 py-4 text-sm font-bold">Tenure End</th>
@@ -144,7 +149,7 @@ const ListOfMD = () => {
                 {filteredList.map((md, index) => (
                   <tr key={md.id} className="text-[#0d0e23]">
                     <td className="px-6 py-4 text-sm border-r border-slate-300">
-                      {md.id.toString().padStart(2, '0')}
+                      {(index + 1).toString().padStart(2, '0')}
                     </td>
 
                     <td className="px-6 py-4 text-sm border-r border-slate-300">
