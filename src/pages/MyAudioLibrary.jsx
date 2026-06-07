@@ -6,223 +6,59 @@ import {
   Library, RotateCcw, Award, CheckCircle2, ChevronRight, Layers, FileText
 } from 'lucide-react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import ReactPlayer from 'react-player';
 
 const booksData = [
   {
     id: 1,
-    title: "The Alchemist",
-    author: "Paulo Coelho",
+    title: "Wisdom For Sale Story",
+    author: "Hindi Fairy Tales",
     category: "Stories",
-    rating: 4.9,
+    rating: 4.8,
     reviews: "1,240",
-    duration: "4h 15m",
-    chaptersCount: 5,
-    cover: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-    youtubeId: "N-0g3D2r1nE",
-    description: "A magical story about Santiago, an Andalusian shepherd boy who yearns to travel in search of a worldly treasure. His quest will lead him to riches far different—and far more satisfying—than he ever imagined.",
-    chapters: ["Santiago's Dream & The Fortune Teller", "The Old King of Salem", "Crossing the Desert & The Oasis", "Meeting the Alchemist", "The Pyramids & The Real Treasure"],
-    progress: 45,
-    color: "from-amber-500/20 to-orange-600/20",
-    accent: "text-amber-600"
+    duration: "10m 15s",
+    chaptersCount: 1,
+    cover: "https://img.youtube.com/vi/fGcV3xj6xSs/hqdefault.jpg",
+    audioUrl: "https://www.youtube.com/watch?v=fGcV3xj6xSs",
+    description: "समझदारी यहाँ बिकती है | Wisdom For Sale Story in Hindi.",
+    chapters: ["Full Story"],
+    progress: 0,
+    color: "from-purple-500/20 to-indigo-600/20",
+    accent: "text-purple-600"
   },
   {
     id: 2,
-    title: "Atomic Habits",
-    author: "James Clear",
-    category: "Self Growth",
-    rating: 4.8,
-    reviews: "3,820",
-    duration: "5h 30m",
-    chaptersCount: 4,
-    cover: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-    youtubeId: "PZ7lDrwYdZc",
-    description: "No matter your goals, Atomic Habits offers a proven framework for improving every day. James Clear, one of the world's leading experts on habit formation, reveals practical strategies to build good habits and break bad ones.",
-    chapters: ["The Surprising Power of Atomic Habits", "How Your Habits Shape Your Identity", "The 1st & 2nd Laws: Make it Obvious & Attractive", "The 3rd & 4th Laws: Make it Easy & Satisfying"],
-    progress: 10,
-    color: "from-blue-500/20 to-indigo-600/20",
+    title: "Price of Food",
+    author: "Hindi Stories",
+    category: "Stories",
+    rating: 4.6,
+    reviews: "850",
+    duration: "12m 30s",
+    chaptersCount: 1,
+    cover: "https://img.youtube.com/vi/3xmT-F46kWU/hqdefault.jpg",
+    audioUrl: "https://www.youtube.com/watch?v=3xmT-F46kWU",
+    description: "Price of food | Hindi stories | Hindi story 2025 | Story in Hindi.",
+    chapters: ["Full Story"],
+    progress: 0,
+    color: "from-blue-500/20 to-teal-600/20",
     accent: "text-blue-600"
   },
   {
     id: 3,
-    title: "Rich Dad Poor Dad",
-    author: "Robert Kiyosaki",
-    category: "Business",
-    rating: 4.7,
-    reviews: "2,980",
-    duration: "6h 12m",
-    chaptersCount: 6,
-    cover: "https://images.unsplash.com/photo-1592492159418-09f31333cca8?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-    youtubeId: "Juzmup72H8I",
-    description: "Robert Kiyosaki's legendary book explodes the myth that you need to earn a high income to be rich and explains the difference between working for money and having your money work for you.",
-    chapters: ["Lesson 1: The Rich Don't Work for Money", "Lesson 2: Why Teach Financial Literacy?", "Lesson 3: Mind Your Own Business", "Lesson 4: The History of Taxes & Power of Corporations", "Lesson 5: The Rich Invent Money", "Lesson 6: Work to Learn—Don't Work for Money"],
-    progress: 85,
-    color: "from-emerald-500/20 to-teal-600/20",
+    title: "School Homework Moral Story",
+    author: "PunToon Kids",
+    category: "Stories",
+    rating: 4.9,
+    reviews: "2,100",
+    duration: "8m 45s",
+    chaptersCount: 1,
+    cover: "https://img.youtube.com/vi/6TDTzNyF2As/hqdefault.jpg",
+    audioUrl: "https://www.youtube.com/watch?v=6TDTzNyF2As",
+    description: "स्कूल का होमवर्क | घर का पाठ | Moral Values For Kids | नैतिक कहानी | PunToon Kids - Hindi.",
+    chapters: ["Full Story"],
+    progress: 0,
+    color: "from-emerald-500/20 to-green-600/20",
     accent: "text-emerald-600"
-  },
-  {
-    id: 4,
-    title: "The Little Prince",
-    author: "Antoine de Saint-Exupéry",
-    category: "Stories",
-    rating: 4.9,
-    reviews: "950",
-    duration: "2h 45m",
-    chaptersCount: 4,
-    cover: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
-    youtubeId: "A5qWuP22D8s",
-    description: "A beautiful moral tale about a pilot stranded in the desert who meets a young prince fallen to Earth from a tiny asteroid. A story about friendship, love, and what is truly important in life.",
-    chapters: ["The Pilot in the Sahara Desert", "Meeting the Asteroid Prince", "The Journey Across Six Planets", "The Fox's Golden Secret & Earth"],
-    progress: 100,
-    color: "from-purple-500/20 to-pink-600/20",
-    accent: "text-purple-600"
-  },
-  {
-    id: 5,
-    title: "Sherlock Holmes",
-    author: "Arthur Conan Doyle",
-    category: "Stories",
-    rating: 4.6,
-    reviews: "1,110",
-    duration: "4h 50m",
-    chaptersCount: 5,
-    cover: "https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
-    youtubeId: "V6WcZ3u5wYw",
-    description: "The classic introduction to the world's most famous consulting detective, Sherlock Holmes, and his companion Dr. John Watson, as they solve their first mystery: the Lauriston Gardens murder.",
-    chapters: ["Meet Mr. Sherlock Holmes", "The Science of Deduction", "The Murder in Lauriston Gardens", "What John Rance Had to Tell", "Solving the Mystery"],
-    progress: 0,
-    color: "from-rose-500/20 to-red-600/20",
-    accent: "text-rose-600"
-  },
-  {
-    id: 6,
-    title: "Think and Grow Rich",
-    author: "Napoleon Hill",
-    category: "Business",
-    rating: 4.7,
-    reviews: "2,450",
-    duration: "7h 20m",
-    chaptersCount: 6,
-    cover: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-6.mp3",
-    youtubeId: "813tQ526_C4",
-    description: "The landmark success manual based on Hill's conversations with 500 of the world's most successful individuals. It outlines the 13 principles of personal achievement and wealth generation.",
-    chapters: ["Introduction: The Power of Thought", "Step 1: Intense Desire", "Step 2: Absolute Faith", "Step 3: Auto-Suggestion", "Step 4: Specialized Knowledge", "Step 5: Organized Planning"],
-    progress: 100,
-    color: "from-yellow-500/20 to-amber-600/20",
-    accent: "text-yellow-600"
-  },
-  {
-    id: 7,
-    title: "Sapiens: A Brief History",
-    author: "Yuval Noah Harari",
-    category: "History",
-    rating: 4.8,
-    reviews: "2,150",
-    duration: "8h 45m",
-    chaptersCount: 4,
-    cover: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-7.mp3",
-    youtubeId: "B3l43sSg18c",
-    description: "Sapiens integrates history and science to reconsider accepted narratives, connect past developments with contemporary concerns, and examine what the future might hold.",
-    chapters: ["Part 1: The Cognitive Revolution", "Part 2: The Agricultural Revolution", "Part 3: The Unification of Humankind", "Part 4: The Scientific Revolution"],
-    progress: 30,
-    color: "from-amber-600/20 to-orange-700/20",
-    accent: "text-amber-700"
-  },
-  {
-    id: 8,
-    title: "Cosmos",
-    author: "Carl Sagan",
-    category: "Science",
-    rating: 4.9,
-    reviews: "1,820",
-    duration: "6h 15m",
-    chaptersCount: 5,
-    cover: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3",
-    youtubeId: "d7y9V-K3_D4",
-    description: "The iconic science exploration that details human consciousness, cosmic evolution, and the deep mysteries of the universe, explained by world-renowned astronomer Carl Sagan.",
-    chapters: ["The Shores of the Cosmic Ocean", "One Voice in the Cosmic Fugue", "The Harmony of Worlds", "Heaven and Hell", "Blues for a Red Planet"],
-    progress: 0,
-    color: "from-cyan-500/20 to-sky-600/20",
-    accent: "text-cyan-600"
-  },
-  {
-    id: 9,
-    title: "Steve Jobs",
-    author: "Walter Isaacson",
-    category: "Biographies",
-    rating: 4.8,
-    reviews: "3,110",
-    duration: "9h 30m",
-    chaptersCount: 5,
-    cover: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-9.mp3",
-    youtubeId: "eH65s78v1_8",
-    description: "The exclusive biography of Apple's visionary co-founder Steve Jobs, detailing his creative passion and the revolutionary products that changed the world.",
-    chapters: ["Childhood & Silicon Valley", "The Birth of Apple", "The Exile & NeXT", "The Return & Think Different", "The Legacy of a Visionary"],
-    progress: 15,
-    color: "from-slate-500/20 to-zinc-700/20",
-    accent: "text-slate-700"
-  },
-  {
-    id: 10,
-    title: "A Brief History of Time",
-    author: "Stephen Hawking",
-    category: "Science",
-    rating: 4.7,
-    reviews: "1,550",
-    duration: "5h 10m",
-    chaptersCount: 6,
-    cover: "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
-    youtubeId: "T3J0S0n3kQ8",
-    description: "Stephen Hawking's landmark introduction to the origins and nature of our universe, covering gravity, black holes, the Big Bang, and the search for a unified theory.",
-    chapters: ["Our Picture of the Universe", "Space and Time", "The Expanding Universe", "The Uncertainty Principle", "Elementary Particles", "Black Holes"],
-    progress: 100,
-    color: "from-violet-500/20 to-fuchsia-600/20",
-    accent: "text-violet-600"
-  },
-  {
-    id: 11,
-    title: "Elon Musk",
-    author: "Walter Isaacson",
-    category: "Biographies",
-    rating: 4.6,
-    reviews: "2,780",
-    duration: "10h 15m",
-    chaptersCount: 5,
-    cover: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-11.mp3",
-    youtubeId: "aF0Q8_1x51U",
-    description: "The astonishingly intimate biography of the world's most controversial and fascinating innovator, tracing his journey from a difficult childhood to leading Tesla and SpaceX.",
-    chapters: ["South Africa & Escape", "Zip2 & PayPal Days", "SpaceX: Reaching the Stars", "Tesla: Electric Revolution", "The Drive for Mars & AI"],
-    progress: 0,
-    color: "from-blue-600/20 to-cyan-700/20",
-    accent: "text-blue-700"
-  },
-  {
-    id: 12,
-    title: "Gandhi: Experiments with Truth",
-    author: "Mahatma Gandhi",
-    category: "History",
-    rating: 4.9,
-    reviews: "1,940",
-    duration: "7h 40m",
-    chaptersCount: 5,
-    cover: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-12.mp3",
-    youtubeId: "N1e_Q67h5nE",
-    description: "The timeless autobiography of Mohandas K. Gandhi, detailing his early childhood, spiritual evolution, and his path of non-violent resistance.",
-    chapters: ["Birth and Childhood", "Studies in London", "The Struggle in South Africa", "Birth of Satyagraha", "Return to India & Independence"],
-    progress: 50,
-    color: "from-orange-500/20 to-yellow-600/20",
-    accent: "text-orange-600"
   }
 ];
 
@@ -244,7 +80,7 @@ const MyAudioLibrary = () => {
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(0.8);
   const [isMuted, setIsMuted] = useState(false);
-  const [favorites, setFavorites] = useState([1, 3, 4]); // Book IDs favorited
+  const [favorites, setFavorites] = useState([1]); // Book IDs favorited
   
   // Video Modal State
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
@@ -261,47 +97,16 @@ const MyAudioLibrary = () => {
     }
   }, [filterParam]);
 
-  // Load selected book audio source
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.src = selectedBook.audioUrl;
-      audioRef.current.load();
-      if (isPlaying) {
-        audioRef.current.play().catch(err => console.log("Audio playback error:", err));
-      }
-    }
-  }, [selectedBook]);
-
   // Sync play state
   const handlePlayPause = () => {
-    if (!audioRef.current) return;
-    if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      audioRef.current.play()
-        .then(() => setIsPlaying(true))
-        .catch(err => console.log("Audio play error:", err));
-    }
-  };
-
-  const handleTimeUpdate = () => {
-    if (audioRef.current) {
-      setCurrentTime(audioRef.current.currentTime);
-    }
-  };
-
-  const handleLoadedMetadata = () => {
-    if (audioRef.current) {
-      setDuration(audioRef.current.duration);
-    }
+    setIsPlaying(!isPlaying);
   };
 
   const handleScrubberChange = (e) => {
     const newTime = parseFloat(e.target.value);
     setCurrentTime(newTime);
     if (audioRef.current) {
-      audioRef.current.currentTime = newTime;
+      audioRef.current.seekTo(newTime, 'seconds');
     }
   };
 
@@ -309,18 +114,10 @@ const MyAudioLibrary = () => {
     const newVol = parseFloat(e.target.value);
     setVolume(newVol);
     setIsMuted(newVol === 0);
-    if (audioRef.current) {
-      audioRef.current.volume = newVol;
-      audioRef.current.muted = newVol === 0;
-    }
   };
 
   const toggleMute = () => {
-    if (audioRef.current) {
-      const nextMute = !isMuted;
-      setIsMuted(nextMute);
-      audioRef.current.muted = nextMute;
-    }
+    setIsMuted(!isMuted);
   };
 
   const selectBook = (book) => {
@@ -395,12 +192,20 @@ const MyAudioLibrary = () => {
 
   return (
     <div className="min-h-screen bg-[#FAF9FF] text-slate-800 font-sans pb-32">
-      {/* Hidden audio tag */}
-      <audio
+      {/* Hidden ReactPlayer for audio playback */}
+      <ReactPlayer
         ref={audioRef}
-        onTimeUpdate={handleTimeUpdate}
-        onLoadedMetadata={handleLoadedMetadata}
+        url={selectedBook.audioUrl}
+        playing={isPlaying}
+        volume={volume}
+        muted={isMuted}
+        onProgress={({ playedSeconds }) => setCurrentTime(playedSeconds)}
+        onDuration={(d) => setDuration(d)}
         onEnded={handleNextTrack}
+        style={{ position: 'absolute', opacity: 0, pointerEvents: 'none' }}
+        width="1px"
+        height="1px"
+        config={{ youtube: { playerVars: { origin: window.location.origin } } }}
       />
 
       {/* Header Bar */}
@@ -587,12 +392,14 @@ const MyAudioLibrary = () => {
                           )}
                         </button>
 
-                        <button
-                          onClick={() => openVideo(book)}
-                          className="h-9 px-3 bg-purple-50 hover:bg-purple-100 text-purple-600 rounded-xl text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors"
-                        >
-                          <Film className="w-3.5 h-3.5" /> Video
-                        </button>
+                        {book.youtubeId && (
+                          <button
+                            onClick={() => openVideo(book)}
+                            className="h-9 px-3 bg-purple-50 hover:bg-purple-100 text-purple-600 rounded-xl text-xs font-bold flex items-center gap-1 cursor-pointer transition-colors"
+                          >
+                            <Film className="w-3.5 h-3.5" /> Video
+                          </button>
+                        )}
 
                         <button
                           onClick={() => toggleFavorite(book.id)}
@@ -639,12 +446,14 @@ const MyAudioLibrary = () => {
             <div className="text-center space-y-4">
               <div className="w-36 h-48 rounded-2xl overflow-hidden mx-auto shadow-md border border-slate-100 relative group">
                 <img src={selectedBook.cover} alt={selectedBook.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                <button
-                  onClick={() => openVideo(selectedBook)}
-                  className="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-slate-900/80 hover:bg-purple-600 text-white flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 shadow-lg cursor-pointer"
-                >
-                  <Film className="w-4 h-4" />
-                </button>
+                {selectedBook.youtubeId && (
+                  <button
+                    onClick={() => openVideo(selectedBook)}
+                    className="absolute bottom-3 right-3 w-8 h-8 rounded-full bg-slate-900/80 hover:bg-purple-600 text-white flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 shadow-lg cursor-pointer"
+                  >
+                    <Film className="w-4 h-4" />
+                  </button>
+                )}
               </div>
 
               <div>
@@ -695,12 +504,14 @@ const MyAudioLibrary = () => {
                 <Headphones className="w-4 h-4" /> Start Audio Playback
               </button>
               
-              <button 
-                onClick={() => openVideo(selectedBook)}
-                className="py-3 px-4 bg-purple-50 hover:bg-purple-100 text-purple-600 rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer"
-              >
-                <Film className="w-4 h-4" /> Play Video
-              </button>
+              {selectedBook.youtubeId && (
+                <button 
+                  onClick={() => openVideo(selectedBook)}
+                  className="py-3 px-4 bg-purple-50 hover:bg-purple-100 text-purple-600 rounded-xl text-xs font-bold flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <Film className="w-4 h-4" /> Play Video
+                </button>
+              )}
             </div>
 
           </div>
@@ -779,13 +590,15 @@ const MyAudioLibrary = () => {
           {/* Volume, Video Modal Trigger & Extra Actions */}
           <div className="hidden md:flex items-center justify-end gap-6 w-full md:w-1/4 shrink-0">
             {/* Play Video Trigger */}
-            <button 
-              onClick={() => openVideo(selectedBook)}
-              className="text-slate-500 hover:text-purple-600 font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer border border-slate-200 px-3 py-2 rounded-xl"
-              title="Watch Summary Video"
-            >
-              <Film className="w-4 h-4" /> Watch Video
-            </button>
+            {selectedBook.youtubeId && (
+              <button 
+                onClick={() => openVideo(selectedBook)}
+                className="text-slate-500 hover:text-purple-600 font-bold text-xs flex items-center gap-1.5 transition-colors cursor-pointer border border-slate-200 px-3 py-2 rounded-xl"
+                title="Watch Summary Video"
+              >
+                <Film className="w-4 h-4" /> Watch Video
+              </button>
+            )}
 
             {/* Favorite toggle */}
             <button 
