@@ -13,12 +13,12 @@ const industryData = [
     image: "/images/KeyParticipants/Sunil-Kumar.png",
   },
   {
-    name: "Shri Dr. B. Rajender, I.A.S.",
+    name: "Shri Dr. B. Rajender, IAS",
     role: "Additional Chief Secretary, Education Department",
     image: "/images/KeyParticipants/B.Rajendra.png",
   },
   {
-    name: "Shri Yatendra Kumar Pal, I.A.S.",
+    name: "Shri Yatendra Kumar Pal, IAS",
     role: "Managing Director, Bihar State Text Book Publishing Corporation (BSTBPC)",
     image: "/images/KeyParticipants/shri_yatendra_pal.png",
   },
@@ -52,7 +52,7 @@ export default function KeyParticipant() {
   const scrollRef = useRef(null);
 
   const [allData, setAllData] = useState(() => {
-    const saved = localStorage.getItem('website_leaders_v2');
+    const saved = localStorage.getItem('website_leaders_v3');
     if (saved) {
       return JSON.parse(saved);
     }
