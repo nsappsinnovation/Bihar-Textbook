@@ -3,8 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowLeft, Brain, Cpu, MessageSquare, Eye, BarChart3, 
   Play, RotateCcw, Award, CheckCircle2, ChevronRight, 
-  HelpCircle, Sparkles, Send, Activity, Star, Settings, X, Check, Gamepad2,
-  Trophy, Frown, Smile, BookOpen, Image as ImageIcon, Flame, Presentation
+  HelpCircle, Sparkles, Send, Activity, Star, Settings, X, Check, Gamepad2
 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -12,63 +11,63 @@ import { useNavigate, useLocation } from 'react-router-dom';
 const topicsData = [
   {
     id: 'ml',
-    title: 'AI se Creative Projects',
-    sub: 'Story, Cartoon, Comic, Presentation',
+    title: 'AI se Creative Projects ',
+    sub: 'Story, Cartoon, Comic, Presentation!',
     icon: <Brain className="w-5 h-5" />,
-    color: 'from-slate-100/50 to-slate-200/50',
-    textAccent: 'text-indigo-900',
-    bgLight: 'bg-slate-50',
-    pillColor: 'bg-indigo-900',
-    buttonColor: 'bg-indigo-900 hover:bg-indigo-950 shadow-indigo-150',
-    synopsis: "Learn to create amazing projects with AI! You can write stories, design cartoon images, create comic books, and build presentations. Imagine you want to write a superhero story — just tell AI and it will generate the text. Or design your own cartoon character — AI will turn your ideas into images."
+    color: 'from-amber-400/20 to-orange-500/20',
+    textAccent: 'text-amber-600',
+    bgLight: 'bg-amber-50',
+    pillColor: 'bg-amber-500',
+    buttonColor: 'bg-amber-500 hover:bg-amber-600 shadow-amber-200',
+    synopsis: "Learn to create amazing projects with AI! You can write beautiful stories , design cartoon images , create comic books , and build stunning presentations ! Imagine you want to write a superhero story — just tell AI and it will write the whole thing. Or design your own cartoon character — AI will turn your ideas into real images!"
   },
   {
     id: 'dl',
-    title: 'Brain Train (Deep Learning)',
-    sub: 'How a computer\'s mini-brain learns secrets',
+    title: 'Brain Train (Deep Learning) ',
+    sub: 'How a computer\'s mini-brain learns secrets!',
     icon: <Cpu className="w-5 h-5" />,
-    color: 'from-slate-100/50 to-slate-200/50',
-    textAccent: 'text-indigo-900',
-    bgLight: 'bg-slate-50',
-    pillColor: 'bg-indigo-900',
-    buttonColor: 'bg-indigo-900 hover:bg-indigo-950 shadow-indigo-150',
-    synopsis: "Deep Learning is a computer's mini-brain — imagine millions of tiny nodes working together. When you show AI photos, these nodes learn patterns. At first AI gets confused, but with practice it gets smarter — just like when you learn to ride a bicycle. Here we will train these layers step by step."
+    color: 'from-pink-400/20 to-purple-500/20',
+    textAccent: 'text-pink-600',
+    bgLight: 'bg-pink-50',
+    pillColor: 'bg-pink-500',
+    buttonColor: 'bg-pink-500 hover:bg-pink-600 shadow-pink-200',
+    synopsis: "Deep Learning is a computer's mini-brain — imagine millions of tiny bulbs lighting up together! When you show AI some photos, these bulbs learn patterns. At first AI gets confused, but with practice it gets smarter — just like you when you learned to ride a bicycle! Here we will train these 'thinking bulbs' step by step!"
   },
   {
     id: 'nlp',
-    title: 'Mood Matcher (NLP)',
-    sub: 'How computers read and understand our talk',
+    title: 'Emoji Mood Matcher (NLP) ',
+    sub: 'How computers read and understand our talk!',
     icon: <MessageSquare className="w-5 h-5" />,
-    color: 'from-slate-100/50 to-slate-200/50',
-    textAccent: 'text-indigo-900',
-    bgLight: 'bg-slate-50',
-    pillColor: 'bg-indigo-900',
-    buttonColor: 'bg-indigo-900 hover:bg-indigo-950 shadow-indigo-150',
-    synopsis: "Have you ever talked to Google? It uses NLP! With NLP, computers understand your language — they can tell if you are happy or sad. Imagine you typed 'Today was so much fun!' — AI will instantly know you are happy. Here we will teach AI to understand our language."
+    color: 'from-emerald-400/20 to-teal-500/20',
+    textAccent: 'text-emerald-600',
+    bgLight: 'bg-emerald-50',
+    pillColor: 'bg-emerald-500',
+    buttonColor: 'bg-emerald-500 hover:bg-emerald-600 shadow-emerald-200',
+    synopsis: "Have you ever talked to Google? It uses NLP! With NLP, computers understand your language — they can tell if you are happy or sad. Imagine you typed 'Today was so much fun!' — AI will instantly know you're happy and suggest a smile emoji! Here we will teach AI to understand our language!"
   },
   {
     id: 'cv',
-    title: 'Robot Eyes (Computer Vision)',
-    sub: 'How cameras spot and label objects',
+    title: 'Robot Eyes (Computer Vision) ',
+    sub: 'How cameras spot and label objects!',
     icon: <Eye className="w-5 h-5" />,
-    color: 'from-slate-100/50 to-slate-200/50',
-    textAccent: 'text-indigo-900',
-    bgLight: 'bg-slate-50',
-    pillColor: 'bg-indigo-900',
-    buttonColor: 'bg-indigo-900 hover:bg-indigo-950 shadow-indigo-150',
-    synopsis: "Computer Vision is AI's eyes. Just like you can spot your friend in a crowd, AI can identify things in photos and videos. Self-driving cars use it to read traffic lights, doctors use it to read scan images. Here you will teach AI to find a school bag in a classroom."
+    color: 'from-sky-400/20 to-blue-500/20',
+    textAccent: 'text-sky-600',
+    bgLight: 'bg-sky-50',
+    pillColor: 'bg-sky-500',
+    buttonColor: 'bg-sky-500 hover:bg-sky-600 shadow-sky-200',
+    synopsis: "Computer Vision is AI's eyes! Just like you can spot your friend in a crowd, AI can identify things in photos and videos too. Self-driving cars use it to read traffic lights, doctors use it to read X-rays! Here you will teach AI to find a school bag in a classroom and understand what a traffic sign means!"
   },
   {
     id: 'ds',
-    title: 'Star Chart (Data Science)',
-    sub: 'Finding patterns in student data',
+    title: 'Star Chart (Data Science) ',
+    sub: 'Finding magic patterns in student data!',
     icon: <BarChart3 className="w-5 h-5" />,
-    color: 'from-slate-100/50 to-slate-200/50',
-    textAccent: 'text-indigo-900',
-    bgLight: 'bg-slate-50',
-    pillColor: 'bg-indigo-900',
-    buttonColor: 'bg-indigo-900 hover:bg-indigo-950 shadow-indigo-150',
-    synopsis: "Data Science is a detective game. Imagine you have marks of 100 students — with Data Science you can find patterns like 'students who study more score higher'. We will build clear graphs, connect the dots, and predict how many marks you might get."
+    color: 'from-indigo-400/20 to-violet-500/20',
+    textAccent: 'text-indigo-600',
+    bgLight: 'bg-indigo-50',
+    pillColor: 'bg-indigo-500',
+    buttonColor: 'bg-indigo-500 hover:bg-indigo-600 shadow-indigo-200',
+    synopsis: "Data Science is a detective game! Imagine you have marks of 100 students — with Data Science you can find patterns like 'students who study more score higher'. We will build colorful graphs, connect the dots, and predict how many marks you might get in your next test!"
   }
 ];
 
@@ -76,27 +75,27 @@ const topicsData = [
 const challengesData = [
   {
     id: 'ml_ch',
-    title: 'Challenge 1: Creative Director',
-    desc: 'Help match each creative prompt to the best AI tool!',
+    title: 'Challenge 1: Creative Director ',
+    desc: 'Help Pippo match each creative prompt to the best AI tool!',
     icon: <Brain className="w-5 h-5" />,
-    color: 'border-slate-200 bg-slate-50/50 hover:bg-slate-50',
-    accentText: 'text-indigo-900'
+    color: 'border-amber-200 bg-amber-50/50 hover:bg-amber-50',
+    accentText: 'text-amber-700'
   },
   {
     id: 'nlp_ch',
-    title: 'Challenge 2: Mood Detective',
-    desc: 'Identify the sentiment inside three sentences!',
+    title: 'Challenge 2: Mood Detective ',
+    desc: 'Identify the emoji emotions inside three sentences!',
     icon: <MessageSquare className="w-5 h-5" />,
-    color: 'border-slate-200 bg-slate-50/50 hover:bg-slate-50',
-    accentText: 'text-indigo-900'
+    color: 'border-emerald-200 bg-emerald-50/50 hover:bg-emerald-50',
+    accentText: 'text-emerald-700'
   },
   {
     id: 'cv_ch',
-    title: 'Challenge 3: Spot the School Bag',
+    title: 'Challenge 3: Spot the School Bag ',
     desc: 'Click on the hidden school bag in a digital classroom image!',
     icon: <Eye className="w-5 h-5" />,
-    color: 'border-slate-200 bg-slate-50/50 hover:bg-slate-50',
-    accentText: 'text-indigo-900'
+    color: 'border-sky-200 bg-sky-50/50 hover:bg-sky-50',
+    accentText: 'text-sky-700'
   }
 ];
 
@@ -146,7 +145,7 @@ export default function AiCourses() {
   const [dlAcc, setDlAcc] = useState(40);
 
   // 3. NLP Emotion Matcher States
-  const [nlpInputText, setNlpInputText] = useState("I am super excited and happy to learn robotics today!");
+  const [nlpInputText, setNlpInputText] = useState("I am super excited and happy to learn robotics today! ");
   const [nlpMoodResult, setNlpMoodResult] = useState(null);
 
   // 4. CV Robot Eyes States
@@ -162,11 +161,11 @@ export default function AiCourses() {
   
   // Challenge 1: Creative Director State
   const mlBasket = [
-    { size: 'Creative Text', color: 'A flying turtle finding a secret island', name: 'Story Maker' },
-    { size: 'Avatar Picture', color: 'A cute vector puppy wearing a spacesuit', name: 'Cartoon Generator' },
-    { size: 'Multi-Panel Script', color: 'A superhero cat saving the school library', name: 'Comic Builder' },
-    { size: 'Slide Deck', color: 'Water conservation ideas for science exhibition', name: 'Presentation Creator' },
-    { size: 'Creative Text', color: 'A crystal castle floating above purple clouds', name: 'Story Maker' }
+    { size: 'Creative Text', color: 'A flying turtle finding a secret island', name: 'Story Maker ' },
+    { size: 'Avatar Picture', color: 'A cute vector puppy wearing a spacesuit', name: 'Cartoon Generator ' },
+    { size: 'Multi-Panel Script', color: 'A superhero cat saving the school library', name: 'Comic Builder ' },
+    { size: 'Slide Deck', color: 'Water conservation ideas for science exhibition', name: 'Presentation Creator ' },
+    { size: 'Creative Text', color: 'A crystal castle floating above purple clouds', name: 'Story Maker ' }
   ];
   const [mlChIndex, setMlChIndex] = useState(0);
   const [mlChCorrectCount, setMlChCorrectCount] = useState(0);
@@ -175,9 +174,9 @@ export default function AiCourses() {
 
   // Challenge 2: NLP Mood Detective State
   const nlpSentences = [
-    { text: "I lost my favorite drawing book and I feel a bit sad today.", correct: 'Sad' },
-    { text: "I am super excited and happy for our school picnic holiday!", correct: 'Happy' },
-    { text: "Why does the computer brain think, and how was it made?", correct: 'Curious' }
+    { text: "I lost my favorite drawing book and I feel a bit sad today. ", correct: 'Sad' },
+    { text: "I am super excited and happy for our school picnic holiday! ", correct: 'Happy' },
+    { text: "Why does the computer brain think, and how was it made? ", correct: 'Curious' }
   ];
   const [nlpChIndex, setNlpChIndex] = useState(0);
   const [nlpChCorrectCount, setNlpChCorrectCount] = useState(0);
@@ -206,37 +205,37 @@ export default function AiCourses() {
   // Simulator 1: Creative AI Project Generator logic
   const runMlFruitSorter = () => {
     let fruit = "";
-    let emoji = null;
+    let emoji = "";
     let content = "";
     let details = [];
 
     if (mlFruitSize === 'Story') {
       fruit = `Story: Pippo and the ${mlFruitColor}`;
-      emoji = <BookOpen className="w-5 h-5 text-indigo-700" />;
+      emoji = "";
       if (mlFruitColor === 'Jungle Adventure') {
-        content = "Once upon a time in a forest, a tiny robot named Pippo found a secret map. Together with a friendly lion, they discovered a hidden tree that bore crystal fruits of wisdom!";
+        content = "Once upon a time in a glowing neon forest, a tiny robot named Pippo found a secret map. Together with a friendly lion, they discovered a hidden tree that bore crystal fruits of wisdom!";
       } else if (mlFruitColor === 'Robot School') {
-        content = "It was Pippo's first day at Robo-Academy! He was nervous, but his teacher, Mr. Circuit, showed the class Pippo's incredible talent for drawing starry constellations!";
+        content = "It was Pippo's first day at Robo-Academy! He was nervous about his oil leaking, but his teacher, Mr. Circuit, showed the class Pippo's incredible talent for drawing starry constellations!";
       } else if (mlFruitColor === 'Space Journey') {
-        content = "Zooming past asteroid belts, Pippo's starship steered towards a mysterious planet. Suddenly, a cosmic puppy floated by, inviting Pippo to a zero-gravity soccer game!";
+        content = "Zooming past asteroid belts, Pippo's starship steered towards a mysterious purple planet. Suddenly, a cosmic puppy floated by, inviting Pippo to a zero-gravity soccer game!";
       } else {
         content = "Deep within the Whispering Valley, a magical castle floated in mid-air. Inside, Pippo found a paint brush that brought any cartoon image he drew on the walls to life!";
       }
     } else if (mlFruitSize === 'Cartoon') {
       fruit = `Cartoon Image: ${mlFruitColor}`;
-      emoji = <ImageIcon className="w-5 h-5 text-indigo-700" />;
+      emoji = "";
       if (mlFruitColor === 'Jungle Adventure') {
-        content = "AI Generated: A vibrant cartoon vector of Pippo the robot holding hands with a baby lion in a forest under a rainbow.";
+        content = "AI Generated: A vibrant, colorful cartoon vector of Pippo the robot holding hands with a smiling baby lion in a tropical forest under a rainbow.";
       } else if (mlFruitColor === 'Robot School') {
-        content = "AI Generated: A cartoon scene of a robot classroom with desks, smartboards, and robotic kids cheerily raising their mechanical hands.";
+        content = "AI Generated: A funny cartoon scene of a robot classroom with desks, smartboards, and robotic kids cheerily raising their mechanical hands.";
       } else if (mlFruitColor === 'Space Journey') {
-        content = "AI Generated: An illustration of a cosmic space puppy wearing a little astronaut helmet, chasing stars next to Saturn's rings.";
+        content = "AI Generated: A cute illustration of a cosmic space puppy wearing a little astronaut helmet, happily chasing stars next to Saturn's rings.";
       } else {
-        content = "AI Generated: A majestic glass castle floating above clouds with butterflies flying around its towering crystal minarets.";
+        content = "AI Generated: A majestic glass castle floating above glowing pink clouds with butterflies flying around its towering crystal minarets.";
       }
     } else if (mlFruitSize === 'Comic') {
       fruit = `Comic: ${mlFruitColor}`;
-      emoji = <Flame className="w-5 h-5 text-indigo-700" />;
+      emoji = "";
       if (mlFruitColor === 'Jungle Adventure') {
         details = [
           "Panel 1: Pippo enters the lush green jungle. 'Wow, it is so green here!'",
@@ -264,7 +263,7 @@ export default function AiCourses() {
       }
     } else { // Presentation
       fruit = `Presentation: AI and ${mlFruitColor}`;
-      emoji = <Presentation className="w-5 h-5 text-indigo-700" />;
+      emoji = "";
       details = [
         `Slide 1: Welcome to ${mlFruitColor} - Designed by AI Assistant.`,
         "Slide 2: Objectives - How smart technology helps students visualize wild scenarios.",
@@ -282,7 +281,7 @@ export default function AiCourses() {
     setIsTrainingDl(true);
     setDlEpoch(0);
     setDlAcc(35);
-    setDlBrainLog("Plugging in thinking layers...");
+    setDlBrainLog("Plugging in thinking bulbs... ");
 
     const maxEpochs = 15;
     let epoch = 0;
@@ -291,11 +290,11 @@ export default function AiCourses() {
       epoch += 1;
       setDlEpoch(epoch);
 
-      if (epoch === 3) setDlBrainLog("Finding edges of ears and whiskers...");
-      if (epoch === 6) setDlBrainLog("Robot is identifying shape structures...");
-      if (epoch === 9) setDlBrainLog("Testing model accuracy with training files...");
-      if (epoch === 12) setDlBrainLog("Connecting brain layers perfectly...");
-      if (epoch === 15) setDlBrainLog("Brain fully trained! Model successfully identifies target.");
+      if (epoch === 3) setDlBrainLog("Finding edges of ears & whiskers... ");
+      if (epoch === 6) setDlBrainLog("Robot is identifying nose shape... ");
+      if (epoch === 9) setDlBrainLog("Testing model accuracy with sound files... ");
+      if (epoch === 12) setDlBrainLog("Connecting brain layers perfectly... ");
+      if (epoch === 15) setDlBrainLog("Brain fully trained! Eureka, it knows a Cat! ");
 
       const delta = epoch / maxEpochs;
       const powerMultiplier = dlBrainPower === 'Super' ? 1.2 : dlBrainPower === 'Low' ? 0.8 : 1.0;
@@ -314,26 +313,26 @@ export default function AiCourses() {
   const scanNlpMood = () => {
     const text = nlpInputText.toLowerCase();
     
-    let mood = "Thinking Mode";
-    let emoji = <HelpCircle className="w-6 h-6 text-slate-705" />;
+    let mood = "Thinking Mode ";
+    let emoji = "";
     let meter = "Curious / Neutral";
-    let color = "text-slate-700 bg-slate-50 border-slate-200";
+    let color = "text-amber-500 bg-amber-50 border-amber-100";
     
     if (text.includes("happy") || text.includes("excited") || text.includes("love") || text.includes("fun") || text.includes("picnic")) {
-      mood = "Super Happy!";
-      emoji = <Smile className="w-6 h-6 text-indigo-750" />;
+      mood = "Super Happy! ";
+      emoji = "";
       meter = "98% Positive Energy!";
-      color = "text-indigo-850 bg-indigo-50 border-indigo-150";
+      color = "text-green-600 bg-green-50 border-green-100";
     } else if (text.includes("sad") || text.includes("lost") || text.includes("cry") || text.includes("hurt") || text.includes("bad")) {
-      mood = "Feeling Sad...";
-      emoji = <Frown className="w-6 h-6 text-slate-705" />;
-      meter = "92% Muted Energy";
-      color = "text-slate-800 bg-slate-50/80 border-slate-200";
+      mood = "Feeling Sad... ";
+      emoji = "";
+      meter = "92% Blue Energy... (Sending virtual hug!)";
+      color = "text-rose-600 bg-rose-50 border-rose-100";
     } else if (text.includes("why") || text.includes("how") || text.includes("question") || text.includes("robot") || text.includes("learn")) {
-      mood = "Curious Learner!";
-      emoji = <HelpCircle className="w-6 h-6 text-indigo-750" />;
+      mood = "Curious Learner! ";
+      emoji = "";
       meter = "95% Brain Power Alert!";
-      color = "text-indigo-850 bg-indigo-50 border-indigo-150";
+      color = "text-blue-600 bg-blue-50 border-blue-100";
     }
 
     setNlpMoodResult({ mood, emoji, meter, color });
@@ -352,21 +351,21 @@ export default function AiCourses() {
 
       if (cvFeedType === 'Classroom') {
         itemsList = [
-          { label: 'School Bag', confidence: 99, style: 'top-[35%] left-[10%] w-[35%] h-[40%] border-indigo-550 bg-indigo-500/10 text-indigo-750' },
-          { label: 'Class Smartboard', confidence: 96, style: 'top-[10%] left-[25%] w-[55%] h-[20%] border-slate-500 bg-slate-500/10 text-slate-700' },
-          { label: 'Math book', confidence: 95, style: 'top-[65%] left-[65%] w-[25%] h-[20%] border-indigo-400 bg-indigo-400/10 text-indigo-700' }
+          { label: 'School Bag ', confidence: 99, style: 'top-[35%] left-[10%] w-[35%] h-[40%] border-amber-500 bg-amber-500/10 text-amber-500' },
+          { label: 'Class Smartboard ', confidence: 96, style: 'top-[10%] left-[25%] w-[55%] h-[20%] border-blue-500 bg-blue-500/10 text-blue-500' },
+          { label: 'Math book ', confidence: 95, style: 'top-[65%] left-[65%] w-[25%] h-[20%] border-purple-500 bg-purple-500/10 text-purple-500' }
         ];
       } else if (cvFeedType === 'Playground') {
         itemsList = [
-          { label: 'Football', confidence: 98, style: 'top-[60%] left-[45%] w-[20%] h-[25%] border-slate-500 bg-slate-500/10 text-slate-700' },
-          { label: 'Puppy', confidence: 97, style: 'top-[45%] left-[15%] w-[28%] h-[35%] border-indigo-550 bg-indigo-500/10 text-indigo-750' },
-          { label: 'Swing Set', confidence: 94, style: 'top-[15%] left-[55%] w-[35%] h-[55%] border-indigo-400 bg-indigo-400/10 text-indigo-700' }
+          { label: 'Football ', confidence: 98, style: 'top-[60%] left-[45%] w-[20%] h-[25%] border-emerald-500 bg-emerald-500/10 text-emerald-500' },
+          { label: 'Puppy ', confidence: 97, style: 'top-[45%] left-[15%] w-[28%] h-[35%] border-amber-600 bg-amber-600/10 text-amber-600' },
+          { label: 'Swing Set ', confidence: 94, style: 'top-[15%] left-[55%] w-[35%] h-[55%] border-sky-500 bg-sky-500/10 text-sky-500' }
         ];
       } else { // Zoo Animals
         itemsList = [
-          { label: 'Friendly Lion', confidence: 99, style: 'top-[30%] left-[15%] w-[35%] h-[45%] border-indigo-550 bg-indigo-500/10 text-indigo-750' },
-          { label: 'Playful Monkey', confidence: 95, style: 'top-[15%] left-[55%] w-[25%] h-[35%] border-slate-500 bg-slate-500/10 text-slate-700' },
-          { label: 'Tall Giraffe', confidence: 98, style: 'top-[5%] left-[75%] w-[20%] h-[90%] border-indigo-400 bg-indigo-400/10 text-indigo-700' }
+          { label: 'Friendly Lion ', confidence: 99, style: 'top-[30%] left-[15%] w-[35%] h-[45%] border-amber-500 bg-amber-500/10 text-amber-500' },
+          { label: 'Playful Monkey ', confidence: 95, style: 'top-[15%] left-[55%] w-[25%] h-[35%] border-emerald-500 bg-emerald-500/10 text-emerald-500' },
+          { label: 'Tall Giraffe ', confidence: 98, style: 'top-[5%] left-[75%] w-[20%] h-[90%] border-orange-500 bg-orange-500/10 text-orange-500' }
         ];
       }
 
@@ -380,9 +379,9 @@ export default function AiCourses() {
     let score = 50 + (dsPracticeDays * 9.5);
     score = Math.min(100, Math.round(score));
     
-    let rewardMessage = "Good job! Keep practicing!";
-    if (score >= 90) rewardMessage = "Superstar Learner! A+ Guaranteed!";
-    else if (score >= 75) rewardMessage = "Awesome Progress! Very Close to A+!";
+    let rewardMessage = "Good job! Keep practicing! ";
+    if (score >= 90) rewardMessage = "Superstar Learner! A+ Guaranteed! ";
+    else if (score >= 75) rewardMessage = "Awesome Progress! Very Close to A+! ";
 
     setDsRegressionPlot({
       score,
@@ -483,10 +482,10 @@ export default function AiCourses() {
             initial={{ opacity: 0, y: -20, scale: 0.9 }}
             animate={{ opacity: 1, y: 10, scale: 1 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed top-20 left-1/2 -translate-x-1/2 bg-indigo-900 text-white px-6 py-2.5 rounded-full font-black text-xs shadow-md z-50 flex items-center gap-2 border border-indigo-950"
+            className="fixed top-20 left-1/2 -translate-x-1/2 bg-yellow-400 text-slate-900 px-6 py-2.5 rounded-full font-black text-xs shadow-md z-50 flex items-center gap-2 border border-yellow-300"
           >
-            <Star className="w-4 h-4 fill-white stroke-white animate-bounce" />
-            <span>+{lastXpGain} XP Earned! Great job!</span>
+            <Star className="w-4 h-4 fill-yellow-900 stroke-yellow-950 animate-bounce" />
+            <span>+{lastXpGain} XP Earned! Great job! </span>
           </motion.div>
         )}
       </AnimatePresence>
@@ -496,7 +495,7 @@ export default function AiCourses() {
         <div className="flex items-center gap-3">
           <button 
             onClick={() => navigate('/ai-intelligence-dashboard')} 
-            className="w-8 h-8 sm:w-10 sm:h-10 bg-white border border-slate-150 rounded-full shadow-sm flex items-center justify-center text-slate-400 hover:text-indigo-850 hover:shadow transition-all group active:scale-95 cursor-pointer"
+            className="w-8 h-8 sm:w-10 sm:h-10 bg-white border border-slate-150 rounded-full shadow-sm flex items-center justify-center text-slate-400 hover:text-purple-600 hover:shadow transition-all group active:scale-95 cursor-pointer"
           >
             <ArrowLeft size={18} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
           </button>
@@ -505,14 +504,14 @@ export default function AiCourses() {
             <h1 className="text-sm sm:text-xl font-bold text-slate-900 flex items-center gap-2">
               <span>AI Intelligence Playground</span>
             </h1>
-            <p className="text-[8px] sm:text-[10px] text-slate-400 font-semibold tracking-wide uppercase hidden sm:block">Interactive AI Lab</p>
+            <p className="text-[8px] sm:text-[10px] text-slate-400 font-semibold tracking-wide uppercase hidden sm:block">Interactive AI Lab for Kids</p>
           </div>
         </div>
 
         {/* Sober XP score tracker */}
         <div className="flex items-center gap-2">
-          <div className="bg-indigo-50/80 border border-indigo-200 px-2 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-2xl flex items-center gap-1.5 sm:gap-2 shadow-sm">
-            <Star className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-900 fill-indigo-400" />
+          <div className="bg-purple-50/80 border border-purple-200 px-2 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-2xl flex items-center gap-1.5 sm:gap-2 shadow-sm">
+            <Star className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 fill-purple-400" />
             <div>
               <span className="text-sm font-black text-slate-800 leading-none mt-0.5 block">{xp}</span>
             </div>
@@ -539,19 +538,19 @@ export default function AiCourses() {
                   onClick={() => handleTopicSwitch(topic)}
                   className={`w-full flex items-center justify-between p-3 rounded-xl transition-all cursor-pointer group text-left border ${
                     isActive 
-                      ? 'bg-indigo-900 border-indigo-950 text-white shadow-sm shadow-indigo-100' 
+                      ? 'bg-purple-600 border-purple-700 text-white shadow-sm shadow-purple-100' 
                       : 'hover:bg-slate-50 border-transparent bg-white text-slate-700'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 border ${
-                      isActive ? 'bg-white/20 border-white/20 text-white' : 'bg-indigo-50 border-indigo-100 text-indigo-750 group-hover:scale-102 transition-transform'
+                      isActive ? 'bg-white/20 border-white/20 text-white' : 'bg-purple-50 border-purple-100 text-purple-600 group-hover:scale-102 transition-transform'
                     }`}>
                       {topic.icon}
                     </div>
                     <div>
-                      <h4 className="text-xs font-bold leading-tight">{topic.title}</h4>
-                      <p className={`text-[9px] font-medium mt-0.5 ${isActive ? 'text-indigo-200' : 'text-slate-400'}`}>{topic.sub}</p>
+                      <h4 className="text-xs font-bold leading-tight">{topic.title.split(' (')[0]}</h4>
+                      <p className={`text-[9px] font-medium mt-0.5 ${isActive ? 'text-purple-100' : 'text-slate-400'}`}>{topic.sub}</p>
                     </div>
                   </div>
                   <ChevronRight className={`w-3.5 h-3.5 shrink-0 transition-transform group-hover:translate-x-0.5 ${isActive ? 'text-white' : 'text-slate-350'}`} />
@@ -562,8 +561,8 @@ export default function AiCourses() {
 
           {/* AI Challenge Center (Clean, sober selectors replacing simple quizzes) */}
           <div className="bg-white rounded-[20px] border border-slate-150 shadow-[0_2px_10px_rgba(0,0,0,0.02)] p-5 space-y-4">
-            <div className="flex items-center gap-2 text-indigo-900 font-bold text-xs uppercase tracking-wider px-1">
-              <Gamepad2 className="w-4 h-4 text-indigo-750" /> AI Challenge Center
+            <div className="flex items-center gap-2 text-purple-600 font-bold text-xs uppercase tracking-wider px-1">
+              <Gamepad2 className="w-4 h-4 text-purple-500" /> AI Challenge Center 
             </div>
 
             <p className="text-[11px] text-slate-500 leading-relaxed px-1">
@@ -580,18 +579,18 @@ export default function AiCourses() {
                     onClick={() => startChallenge(ch.id)}
                     className={`w-full p-3 rounded-xl border text-left cursor-pointer transition-all ${
                       isActive 
-                        ? 'border-indigo-500 bg-indigo-50/50 shadow-sm' 
+                        ? 'border-purple-500 bg-purple-50/50 shadow-sm' 
                         : 'border-slate-200 bg-white hover:bg-slate-50'
                     }`}
                   >
                     <div className="flex items-center gap-3">
                       <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${
-                        isActive ? 'bg-indigo-100 text-indigo-750' : 'bg-slate-50 text-slate-500'
+                        isActive ? 'bg-purple-100 text-purple-600' : 'bg-slate-50 text-slate-500'
                       }`}>
                         {ch.icon}
                       </div>
                       <div>
-                        <h4 className={`text-xs font-bold ${isActive ? 'text-indigo-850' : 'text-slate-800'}`}>{ch.title}</h4>
+                        <h4 className={`text-xs font-bold ${isActive ? 'text-purple-700' : 'text-slate-800'}`}>{ch.title}</h4>
                         <p className="text-[9px] text-slate-400 mt-0.5 leading-tight">{ch.desc}</p>
                       </div>
                     </div>
@@ -616,8 +615,8 @@ export default function AiCourses() {
                 {/* Challenge Header */}
                 <div className="flex items-center justify-between pb-4 border-b border-slate-100">
                   <div>
-                    <span className="inline-block px-3 py-0.5 bg-indigo-50 text-indigo-750 border border-indigo-100 rounded-full text-[9px] font-bold uppercase tracking-wider">
-                      Interactive Challenge Mode
+                    <span className="inline-block px-3 py-0.5 bg-purple-50 text-purple-600 border border-purple-100 rounded-full text-[9px] font-bold uppercase tracking-wider">
+                      Interactive Challenge Mode 
                     </span>
                     <h2 className="text-base font-bold text-slate-900 mt-2">
                       {challengesData.find(c => c.id === activeChallenge)?.title}
@@ -638,7 +637,7 @@ export default function AiCourses() {
                     {!mlChCompleted ? (
                       <div className="space-y-6 max-w-lg mx-auto w-full text-center">
                         <div className="space-y-2">
-                          <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block">Prompt {mlChIndex + 1} of 5</span>
+                          <span className="text-[10px] font-black text-amber-600 uppercase tracking-widest block">Prompt {mlChIndex + 1} of 5</span>
                           <h3 className="text-sm font-bold text-slate-600">Match this creative request to the correct AI tool:</h3>
                         </div>
  
@@ -646,7 +645,7 @@ export default function AiCourses() {
                         <div className="bg-slate-50 border border-slate-150 rounded-2xl p-4 flex flex-col justify-center items-center gap-3 shadow-inner max-w-sm mx-auto">
                           <div className="flex items-center gap-2">
                             <span className="text-[9px] font-bold text-slate-400 block uppercase">Required Output:</span>
-                            <span className="text-xs font-black text-slate-700 bg-indigo-50 px-2 py-0.5 rounded-full">{mlBasket[mlChIndex].size}</span>
+                            <span className="text-xs font-black text-slate-700 bg-amber-100 px-2 py-0.5 rounded-full">{mlBasket[mlChIndex].size}</span>
                           </div>
                           <div className="w-full h-px bg-slate-200/60" />
                           <div className="text-center">
@@ -659,7 +658,7 @@ export default function AiCourses() {
                         <div className="space-y-2">
                           <label className="text-[10px] font-bold text-slate-455 uppercase block tracking-wider">Select the correct AI Tool Tray!</label>
                           <div className="grid grid-cols-2 gap-2.5 max-w-md mx-auto pt-1">
-                            {['Story Maker', 'Cartoon Generator', 'Comic Builder', 'Presentation Creator'].map((opt) => {
+                            {['Story Maker ', 'Cartoon Generator ', 'Comic Builder ', 'Presentation Creator '].map((opt) => {
                               const isSelected = mlChSelectedAns === opt.split(' ')[0];
                               const isCorrect = mlBasket[mlChIndex].name.includes(opt.split(' ')[0]);
  
@@ -695,23 +694,21 @@ export default function AiCourses() {
                       <motion.div 
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="max-w-md mx-auto w-full text-center space-y-5 p-6 bg-indigo-50 border border-indigo-100 rounded-3xl"
+                        className="max-w-md mx-auto w-full text-center space-y-5 p-6 bg-amber-50/50 border border-amber-100 rounded-3xl"
                       >
-                        <div className="w-16 h-16 bg-indigo-100 text-indigo-750 rounded-full flex items-center justify-center mx-auto shadow-sm">
-                          <Trophy size={28} />
-                        </div>
+                        <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center text-3xl mx-auto shadow-sm"></div>
                         <div className="space-y-1">
                           <h3 className="text-base font-bold text-slate-800">Creative Director Challenge Completed!</h3>
-                          <p className="text-xs text-indigo-750 font-bold">You successfully matched {mlChCorrectCount} / 5 prompts correctly!</p>
+                          <p className="text-xs text-amber-700 font-bold">You successfully matched {mlChCorrectCount} / 5 prompts correctly!</p>
                         </div>
                         <p className="text-[11px] text-slate-500 leading-relaxed">
                           Great job! Your prompt matching logic was fully verified. You gained +100 bonus XP points!
                         </p>
                         <button
                           onClick={() => resetChallenge('ml_ch')}
-                          className="px-6 py-2.5 bg-indigo-900 hover:bg-indigo-950 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer shadow shadow-indigo-150"
+                          className="px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer shadow shadow-amber-250"
                         >
-                          Play Challenge Again!
+                          Play Challenge Again! 
                         </button>
                       </motion.div>
                     )}
@@ -724,7 +721,7 @@ export default function AiCourses() {
                     {!nlpChCompleted ? (
                       <div className="space-y-6 max-w-lg mx-auto w-full text-center">
                         <div className="space-y-2">
-                          <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block">Sentence {nlpChIndex + 1} of 3</span>
+                          <span className="text-[10px] font-black text-emerald-600 uppercase tracking-widest block">Sentence {nlpChIndex + 1} of 3</span>
                           <h3 className="text-sm font-bold text-slate-600">The NLP analyzer receives this sentence:</h3>
                         </div>
 
@@ -761,7 +758,7 @@ export default function AiCourses() {
                                   onClick={() => handleNlpChDetect(opt)}
                                   className={`py-3 rounded-xl border-2 text-xs font-bold transition-all cursor-pointer ${btnClass}`}
                                 >
-                                  {opt}
+                                  {opt === 'Happy' ? ' Happy' : opt === 'Sad' ? ' Sad' : ' Curious'}
                                 </button>
                               );
                             })}
@@ -775,23 +772,21 @@ export default function AiCourses() {
                       <motion.div 
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="max-w-md mx-auto w-full text-center space-y-5 p-6 bg-indigo-50 border border-indigo-100 rounded-3xl"
+                        className="max-w-md mx-auto w-full text-center space-y-5 p-6 bg-emerald-50/50 border border-emerald-100 rounded-3xl"
                       >
-                        <div className="w-16 h-16 bg-indigo-100 text-indigo-750 rounded-full flex items-center justify-center mx-auto shadow-sm">
-                          <Trophy size={28} />
-                        </div>
+                        <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center text-3xl mx-auto shadow-sm"></div>
                         <div className="space-y-1">
                           <h3 className="text-base font-bold text-slate-800">Challenge Mood Detective Completed!</h3>
-                          <p className="text-xs text-indigo-750 font-bold">You successfully detected {nlpChCorrectCount} / 3 moods correctly!</p>
+                          <p className="text-xs text-emerald-700 font-bold">You successfully detected {nlpChCorrectCount} / 3 moods correctly!</p>
                         </div>
                         <p className="text-[11px] text-slate-500 leading-relaxed">
                           Awesome! Your sentence classification algorithms worked perfectly. You gained +100 bonus XP points!
                         </p>
                         <button
                           onClick={() => resetChallenge('nlp_ch')}
-                          className="px-6 py-2.5 bg-indigo-900 hover:bg-indigo-950 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer shadow shadow-indigo-150"
+                          className="px-6 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer shadow shadow-emerald-250"
                         >
-                          Play Challenge Again!
+                          Play Challenge Again! 
                         </button>
                       </motion.div>
                     )}
@@ -804,8 +799,8 @@ export default function AiCourses() {
                     {!cvChSpotted ? (
                       <div className="space-y-4 text-center w-full max-w-md">
                         <div className="space-y-1">
-                          <span className="text-[10px] font-black text-indigo-500 uppercase tracking-widest block">Computer Vision Hunt</span>
-                          <h3 className="text-sm font-bold text-slate-600">Scan and click on the School Bag!</h3>
+                          <span className="text-[10px] font-black text-sky-600 uppercase tracking-widest block">Computer Vision Hunt</span>
+                          <h3 className="text-sm font-bold text-slate-600">Scan and click on the School Bag !</h3>
                         </div>
 
                         {/* Interactive map classroom */}
@@ -822,33 +817,31 @@ export default function AiCourses() {
                               setCvChSpotted(true);
                               triggerXpGain(100); // Grand prize XP
                             }}
-                            className="absolute top-[35%] left-[10%] w-[35%] h-[40%] bg-transparent border-2 border-transparent hover:border-indigo-400 hover:bg-indigo-500/10 rounded-xl transition-all cursor-crosshair focus:outline-none"
+                            className="absolute top-[35%] left-[10%] w-[35%] h-[40%] bg-transparent border-2 border-transparent hover:border-sky-400 hover:bg-sky-500/10 rounded-xl transition-all cursor-crosshair focus:outline-none"
                             title="Locate item here"
                           />
                         </div>
-                        <p className="text-[10px] font-semibold text-slate-400">Hint: Look on the shelves on the left side of the classroom!</p>
+                        <p className="text-[10px] font-semibold text-slate-400">Hint: Look on the shelves on the left side of the classroom! </p>
                       </div>
                     ) : (
                       <motion.div 
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="max-w-md mx-auto w-full text-center space-y-5 p-6 bg-indigo-50 border border-indigo-100 rounded-3xl"
+                        className="max-w-md mx-auto w-full text-center space-y-5 p-6 bg-sky-50/50 border border-sky-100 rounded-3xl"
                       >
-                        <div className="w-16 h-16 bg-indigo-100 text-indigo-750 rounded-full flex items-center justify-center mx-auto shadow-sm">
-                          <Eye size={28} />
-                        </div>
+                        <div className="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center text-3xl mx-auto shadow-sm"></div>
                         <div className="space-y-1">
                           <h3 className="text-base font-bold text-slate-800">School Bag Spotted successfully!</h3>
-                          <p className="text-xs text-indigo-700 font-bold">Confidence score: 99% Identified!</p>
+                          <p className="text-xs text-sky-700 font-bold">Confidence score: 99% Identified! </p>
                         </div>
                         <p className="text-[11px] text-slate-500 leading-relaxed">
                           Incredible! You played the role of Computer Vision perfectly, immediately drawing a high-accuracy box around the target item. You gained +100 bonus XP points!
                         </p>
                         <button
                           onClick={() => resetChallenge('cv_ch')}
-                          className="px-6 py-2.5 bg-indigo-900 hover:bg-indigo-950 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer shadow shadow-indigo-150"
+                          className="px-6 py-2.5 bg-sky-500 hover:bg-sky-600 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer shadow shadow-sky-250"
                         >
-                          Play Hunt Again!
+                          Play Hunt Again! 
                         </button>
                       </motion.div>
                     )}
@@ -863,8 +856,8 @@ export default function AiCourses() {
                 {/* Header section */}
                 <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
                   <div>
-                    <span className={`inline-block px-3 py-0.5 ${activeTopic.bgLight} ${activeTopic.textAccent} border border-indigo-200 rounded-full text-[9px] font-bold uppercase tracking-wider`}>
-                      Sober Playground
+                    <span className={`inline-block px-3 py-0.5 ${activeTopic.bgLight} ${activeTopic.textAccent} border border-purple-200 rounded-full text-[9px] font-bold uppercase tracking-wider`}>
+                      Sober Playground 
                     </span>
                     <h2 className="text-base font-bold text-slate-900 mt-2">
                       {activeTopic.title}
@@ -885,7 +878,7 @@ export default function AiCourses() {
                       {/* Controllers */}
                       <div className="md:col-span-5 space-y-4">
                         <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                          <Settings className="w-3.5 h-3.5 text-indigo-900" /> Project Settings
+                          <Settings className="w-3.5 h-3.5 text-amber-500" /> Project Settings
                         </h3>
                         
                         {/* Project Type Select */}
@@ -893,16 +886,16 @@ export default function AiCourses() {
                           <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">1. Choose AI Tool Type</label>
                           <div className="grid grid-cols-2 gap-1.5">
                             {[
-                              { id: 'Story', label: 'Story' },
-                              { id: 'Cartoon', label: 'Cartoon' },
-                              { id: 'Comic', label: 'Comic' },
-                              { id: 'Presentation', label: 'Presentation' }
+                              { id: 'Story', label: 'Story ' },
+                              { id: 'Cartoon', label: 'Cartoon ' },
+                              { id: 'Comic', label: 'Comic ' },
+                              { id: 'Presentation', label: 'Presentation ' }
                             ].map(tool => (
                               <button
                                 key={tool.id}
                                 onClick={() => setMlFruitSize(tool.id)}
                                 className={`py-2 rounded-lg text-[10px] font-bold border transition-colors cursor-pointer ${
-                                  mlFruitSize === tool.id ? 'bg-indigo-900 border-indigo-950 text-white shadow-sm shadow-indigo-100' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                                  mlFruitSize === tool.id ? 'bg-amber-500 border-amber-600 text-white shadow-sm shadow-amber-100' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
                                 }`}
                               >
                                 {tool.label}
@@ -916,16 +909,16 @@ export default function AiCourses() {
                           <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">2. Select Project Theme</label>
                           <div className="grid grid-cols-2 gap-1.5">
                             {[
-                              { id: 'Jungle Adventure', label: 'Jungle' },
-                              { id: 'Robot School', label: 'Robo School' },
-                              { id: 'Space Journey', label: 'Space' },
-                              { id: 'Magical Castle', label: 'Castle' }
+                              { id: 'Jungle Adventure', label: 'Jungle ' },
+                              { id: 'Robot School', label: 'Robo School ' },
+                              { id: 'Space Journey', label: 'Space ' },
+                              { id: 'Magical Castle', label: 'Castle ' }
                             ].map(theme => (
                               <button
                                 key={theme.id}
                                 onClick={() => setMlFruitColor(theme.id)}
                                 className={`py-2 rounded-lg text-[10px] font-bold border transition-colors cursor-pointer ${
-                                  mlFruitColor === theme.id ? 'bg-indigo-900 border-indigo-950 text-white shadow-sm shadow-indigo-100' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                                  mlFruitColor === theme.id ? 'bg-amber-500 border-amber-600 text-white shadow-sm shadow-amber-100' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
                                 }`}
                               >
                                 {theme.label}
@@ -936,14 +929,14 @@ export default function AiCourses() {
 
                         <button
                           onClick={runMlFruitSorter}
-                          className="w-full py-2.5 bg-indigo-900 hover:bg-indigo-950 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shadow shadow-indigo-100 transition-all border-b border-indigo-950 active:translate-y-0.5"
+                          className="w-full py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shadow shadow-amber-100 transition-all border-b border-amber-700 active:translate-y-0.5"
                         >
-                          <Play className="w-3.5 h-3.5 fill-white" /> Generate with AI!
+                          <Play className="w-3.5 h-3.5 fill-white" /> Generate with AI! 
                         </button>
                       </div>
 
                       {/* Visual Output */}
-                      <div className="md:col-span-7 bg-slate-50/50 border border-slate-200 rounded-[20px] p-5 flex flex-col items-center justify-center text-center min-h-[220px] max-h-[360px] overflow-y-auto custom-scrollbar relative shadow-inner">
+                      <div className="md:col-span-7 bg-amber-50/30 border border-amber-100 rounded-[20px] p-5 flex flex-col items-center justify-center text-center min-h-[220px] max-h-[360px] overflow-y-auto custom-scrollbar relative shadow-inner">
                         {mlClassification ? (
                           <motion.div 
                             initial={{ opacity: 0, scale: 0.95 }}
@@ -951,11 +944,11 @@ export default function AiCourses() {
                             className="space-y-3.5 w-full text-left"
                           >
                             <div className="flex items-center justify-between">
-                              <h4 className="text-[9px] font-bold uppercase tracking-wider text-indigo-900">AI Creative Engine Output</h4>
+                              <h4 className="text-[9px] font-bold uppercase tracking-wider text-amber-600">AI Creative Engine Output</h4>
                               <span className="text-2xl">{mlClassification.emoji}</span>
                             </div>
                             
-                            <div className="space-y-1 bg-white border border-slate-200 rounded-xl p-4 shadow-sm">
+                            <div className="space-y-1 bg-white border border-amber-100 rounded-xl p-4 shadow-sm">
                               <div className="text-sm font-black text-slate-800">{mlClassification.fruit}</div>
                               
                               {/* If Story or Cartoon (has content) */}
@@ -970,7 +963,7 @@ export default function AiCourses() {
                                 <div className="space-y-2 mt-2">
                                   {mlClassification.details.map((item, idx) => (
                                     <div key={idx} className="text-xs text-slate-600 bg-slate-50 p-2 rounded-lg border border-slate-100 font-semibold flex items-start gap-2">
-                                      <span className="bg-indigo-55 text-indigo-900 text-[10px] font-extrabold px-1.5 py-0.5 rounded shrink-0">#{idx + 1}</span>
+                                      <span className="bg-amber-100 text-amber-800 text-[10px] font-extrabold px-1.5 py-0.5 rounded shrink-0">#{idx + 1}</span>
                                       <span>{item}</span>
                                     </div>
                                   ))}
@@ -978,11 +971,11 @@ export default function AiCourses() {
                               )}
                             </div>
 
-                            <p className="text-[10px] font-bold text-indigo-900 text-center">AI Generation Quality: 100% Verified!</p>
+                            <p className="text-[10px] font-bold text-amber-600 text-center">AI Generation Quality: 100% Verified! </p>
                           </motion.div>
                         ) : (
                           <div className="text-slate-400 space-y-2 text-center">
-                            <Sparkles className="w-10 h-10 text-indigo-900 mx-auto animate-pulse" />
+                            <Sparkles className="w-10 h-10 text-amber-400 mx-auto animate-pulse" />
                             <p className="text-[10px] font-bold">Configure options & click "Generate with AI"!</p>
                           </div>
                         )}
@@ -991,14 +984,14 @@ export default function AiCourses() {
                     </div>
                   )}
 
-                  {/* DEEP LEARNING (Brain Train) */}
+                  {/* DEEP LEARNING (Brain Train ) */}
                   {activeTopic.id === 'dl' && (
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                       
                       {/* Controllers */}
                       <div className="md:col-span-5 space-y-4">
                         <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                          <Settings className="w-3.5 h-3.5 text-indigo-900" /> Brain Config
+                          <Settings className="w-3.5 h-3.5 text-pink-500" /> Brain Config
                         </h3>
 
                         <div className="space-y-1">
@@ -1009,7 +1002,7 @@ export default function AiCourses() {
                                 key={pwr}
                                 onClick={() => setDlBrainPower(pwr)}
                                 className={`py-1.5 rounded-lg text-[10px] font-bold border transition-colors cursor-pointer ${
-                                  dlBrainPower === pwr ? 'bg-indigo-900 border-indigo-950 text-white shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                                  dlBrainPower === pwr ? 'bg-pink-500 border-pink-600 text-white shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
                                 }`}
                               >
                                 {pwr}
@@ -1024,11 +1017,11 @@ export default function AiCourses() {
                           className={`w-full py-2.5 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shadow border-b transition-all ${
                             isTrainingDl 
                               ? 'bg-slate-200 border-slate-350 shadow-none cursor-not-allowed translate-y-0.5 text-slate-400' 
-                              : 'bg-indigo-900 hover:bg-indigo-950 border-indigo-950 shadow-indigo-150 active:translate-y-0.5'
+                              : 'bg-pink-500 hover:bg-pink-600 border-pink-700 shadow-pink-100 active:translate-y-0.5'
                           }`}
                         >
                           <Activity className={`w-3.5 h-3.5 ${isTrainingDl ? 'animate-spin' : ''}`} />
-                          {isTrainingDl ? `Training network...` : 'Train Robot Brain!'}
+                          {isTrainingDl ? `Training network...` : 'Train Robot Brain! '}
                         </button>
                       </div>
 
@@ -1042,7 +1035,7 @@ export default function AiCourses() {
                             <div className="w-4 h-4 rounded-full bg-slate-700 border border-slate-500" />
                           </div>
                           
-                          <div className="text-indigo-400/40 text-[8px] font-mono shrink-0">➔</div>
+                          <div className="text-pink-400/40 text-[8px] font-mono shrink-0"></div>
 
                           <div className="flex flex-col gap-3">
                             {[1, 2, 3].map(n => (
@@ -1051,21 +1044,21 @@ export default function AiCourses() {
                                 animate={isTrainingDl ? { scale: [1, 1.12, 1], opacity: [0.7, 1, 0.7] } : {}}
                                 transition={{ repeat: Infinity, duration: 0.8, delay: n * 0.15 }}
                                 className={`w-5 h-5 rounded-full border flex items-center justify-center text-[8px] ${
-                                  isTrainingDl ? 'bg-indigo-500 border-indigo-300 shadow-[0_0_8px_rgba(49,46,129,0.5)]' : 'bg-slate-800 border-slate-650'
+                                  isTrainingDl ? 'bg-pink-500 border-pink-300 shadow-[0_0_8px_rgba(244,63,94,0.5)]' : 'bg-slate-800 border-slate-650'
                                 }`}
                               >
-                                <span className="w-1.5 h-1.5 rounded-full bg-white" />
+                                
                               </motion.div>
                             ))}
                           </div>
 
-                          <div className="text-indigo-400/40 text-[8px] font-mono shrink-0">➔</div>
+                          <div className="text-pink-400/40 text-[8px] font-mono shrink-0"></div>
 
                           <div className="flex flex-col gap-2">
-                            <div className={`w-6 h-6 rounded-full border flex items-center justify-center ${
-                              dlAcc > 80 ? 'bg-indigo-900 border-indigo-300' : 'bg-slate-800 border-slate-600'
+                            <div className={`w-6 h-6 rounded-full border flex items-center justify-center text-xs ${
+                              dlAcc > 80 ? 'bg-green-500 border-green-300' : 'bg-slate-800 border-slate-600'
                             }`}>
-                              <Brain size={12} className="text-white" />
+                              
                             </div>
                           </div>
                         </div>
@@ -1077,8 +1070,8 @@ export default function AiCourses() {
                             <span>Intelligence score</span>
                           </div>
                           <div className="flex justify-between items-center">
-                            <div className="font-extrabold text-indigo-400">Round {dlEpoch} / 15</div>
-                            <div className="font-black text-indigo-400">{dlAcc}% Smart!</div>
+                            <div className="font-extrabold text-pink-400">Round {dlEpoch} / 15</div>
+                            <div className="font-black text-green-400">{dlAcc}% Smart!</div>
                           </div>
                           <p className="text-[9px] text-slate-400 italic text-center border-t border-slate-900 pt-1 leading-none">{dlBrainLog}</p>
                         </div>
@@ -1088,7 +1081,7 @@ export default function AiCourses() {
                     </div>
                   )}
 
-                  {/* NATURAL LANGUAGE (Mood Matcher) */}
+                  {/* NATURAL LANGUAGE (Emoji Mood Matcher ) */}
                   {activeTopic.id === 'nlp' && (
                     <div className="space-y-4">
                       {/* Message Input */}
@@ -1099,11 +1092,11 @@ export default function AiCourses() {
                             value={nlpInputText}
                             onChange={(e) => setNlpInputText(e.target.value)}
                             placeholder="Type a friendly statement..."
-                            className="w-full min-h-[80px] p-3 border border-slate-200 rounded-xl text-xs outline-none focus:border-indigo-400 focus:bg-white transition-all font-bold pr-16 shadow-inner"
+                            className="w-full min-h-[80px] p-3 border border-slate-200 rounded-xl text-xs outline-none focus:border-emerald-400 focus:bg-white transition-all font-bold pr-16 shadow-inner"
                           />
                           <button
                             onClick={scanNlpMood}
-                            className="absolute bottom-3 right-3 bg-indigo-900 hover:bg-indigo-950 text-white rounded-lg py-1.5 px-3 text-[10px] font-bold cursor-pointer flex items-center gap-1 transition-transform active:scale-95 border-b border-indigo-950 shadow-sm"
+                            className="absolute bottom-3 right-3 bg-emerald-500 hover:bg-emerald-600 text-white rounded-lg py-1.5 px-3 text-[10px] font-bold cursor-pointer flex items-center gap-1 transition-transform active:scale-95 border-b border-emerald-700 shadow-sm"
                           >
                             <Send className="w-3 h-3" /> Check Mood!
                           </button>
@@ -1114,9 +1107,9 @@ export default function AiCourses() {
                       <div className="flex gap-1.5 items-center flex-wrap">
                         <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Samples:</span>
                         {[
-                          "Tomorrow is a school holiday! Yay!",
-                          "I lost my drawing book at the playground.",
-                          "Why does the computer brain think, and how was it made?"
+                          "Tomorrow is a school holiday! Yay! ",
+                          "I lost my drawing book at the playground. ",
+                          "Why does the computer brain think, and how was it made? "
                         ].map((pst, pIdx) => (
                           <button
                             key={pIdx}
@@ -1138,15 +1131,7 @@ export default function AiCourses() {
                           animate={{ opacity: 1, y: 0 }}
                           className={`rounded-xl p-3 border-2 flex items-center gap-3.5 ${nlpMoodResult.color}`}
                         >
-                          <div className="p-1 bg-white/50 rounded-lg">
-                            {nlpMoodResult.mood === 'Happy' ? (
-                              <Smile className="w-8 h-8 text-indigo-900" />
-                            ) : nlpMoodResult.mood === 'Sad' ? (
-                              <Frown className="w-8 h-8 text-indigo-900" />
-                            ) : (
-                              <Eye className="w-8 h-8 text-indigo-900" />
-                            )}
-                          </div>
+                          <span className="text-3xl">{nlpMoodResult.emoji}</span>
                           <div>
                             <div className="text-[9px] font-bold uppercase tracking-wider opacity-75 leading-none">Mood Analyzer Prediction</div>
                             <h4 className="text-xs font-bold leading-snug mt-1">AI says: "{nlpMoodResult.mood}"</h4>
@@ -1157,14 +1142,14 @@ export default function AiCourses() {
                     </div>
                   )}
 
-                  {/* COMPUTER VISION (Robot Eyes) */}
+                  {/* COMPUTER VISION (Robot Eyes ) */}
                   {activeTopic.id === 'cv' && (
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                       
                       {/* Controllers */}
                       <div className="md:col-span-5 space-y-4">
                         <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                          <Settings className="w-3.5 h-3.5 text-indigo-900" /> Robot Feeds
+                          <Settings className="w-3.5 h-3.5 text-sky-500" /> Robot Feeds
                         </h3>
 
                         <div className="space-y-1">
@@ -1175,7 +1160,7 @@ export default function AiCourses() {
                                 key={fd}
                                 onClick={() => setCvFeedType(fd)}
                                 className={`py-1.5 rounded-lg text-[10px] font-bold border transition-colors cursor-pointer ${
-                                  cvFeedType === fd ? 'bg-indigo-900 border-indigo-950 text-white shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
+                                  cvFeedType === fd ? 'bg-sky-500 border-sky-600 text-white shadow-sm' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50'
                                 }`}
                               >
                                 {fd}
@@ -1190,11 +1175,11 @@ export default function AiCourses() {
                           className={`w-full py-2.5 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1 cursor-pointer shadow border-b transition-all ${
                             isCvDetecting 
                               ? 'bg-slate-200 border-slate-350 shadow-none cursor-not-allowed translate-y-0.5 text-slate-400' 
-                              : 'bg-indigo-900 hover:bg-indigo-950 border-indigo-950 shadow-indigo-150 active:translate-y-0.5'
+                              : 'bg-sky-500 hover:bg-sky-600 border-sky-700 shadow-sky-100 active:translate-y-0.5'
                           }`}
                         >
                           <Eye className="w-3.5 h-3.5" />
-                          {isCvDetecting ? 'Scanning feed...' : 'Activate Robot Eyes!'}
+                          {isCvDetecting ? 'Scanning feed...' : 'Activate Robot Eyes! '}
                         </button>
                       </div>
 
@@ -1216,7 +1201,7 @@ export default function AiCourses() {
                             initial={{ y: 0 }}
                             animate={{ y: '140px' }}
                             transition={{ repeat: Infinity, duration: 1.0, ease: "linear" }}
-                            className="absolute left-0 right-0 h-1 bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,1)] z-20 pointer-events-none"
+                            className="absolute left-0 right-0 h-1 bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,1)] z-20 pointer-events-none"
                           />
                         )}
 
@@ -1236,7 +1221,7 @@ export default function AiCourses() {
 
                         {!cvDetections && !isCvDetecting && (
                           <div className="absolute z-20 text-white text-center p-4">
-                            <Eye className="w-8 h-8 text-indigo-350 mx-auto mb-1.5 drop-shadow-sm" />
+                            <Eye className="w-8 h-8 text-sky-300 mx-auto mb-1.5 drop-shadow-sm" />
                             <p className="text-[10px] font-bold drop-shadow">Click Activate Robot Eyes above to run scanners!</p>
                           </div>
                         )}
@@ -1245,14 +1230,14 @@ export default function AiCourses() {
                     </div>
                   )}
 
-                  {/* DATA SCIENCE (Star Chart) */}
+                  {/* DATA SCIENCE (Star Chart ) */}
                   {activeTopic.id === 'ds' && (
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                       
                       {/* Controllers */}
                       <div className="md:col-span-5 space-y-4">
                         <h3 className="text-xs font-bold text-slate-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                          <Settings className="w-3.5 h-3.5 text-indigo-900" /> Data Points
+                          <Settings className="w-3.5 h-3.5 text-indigo-500" /> Data Points
                         </h3>
 
                         {/* Practice Slider */}
@@ -1265,37 +1250,37 @@ export default function AiCourses() {
                             step={1}
                             value={dsPracticeDays}
                             onChange={(e) => setDsPracticeDays(parseInt(e.target.value))}
-                            className="w-full h-1.5 bg-slate-100 rounded-full appearance-none cursor-pointer accent-indigo-900"
+                            className="w-full h-1.5 bg-slate-100 rounded-full appearance-none cursor-pointer accent-indigo-500"
                           />
                           <div className="flex justify-between text-[7px] font-bold text-slate-400 uppercase tracking-wider">
                             <span>1 Day</span>
                             <span>3 Days</span>
-                            <span>5 Days</span>
+                            <span>5 Days </span>
                           </div>
                         </div>
 
                         <button
                           onClick={calculateStarPredictions}
-                          className="w-full py-2.5 bg-indigo-900 hover:bg-indigo-950 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shadow shadow-indigo-150 border-b border-indigo-950 active:translate-y-0.5 transition-all"
+                          className="w-full py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shadow shadow-indigo-100 border-b border-indigo-700 active:translate-y-0.5 transition-all"
                         >
-                          <BarChart3 className="w-3.5 h-3.5" /> Plot Magic Line!
+                          <BarChart3 className="w-3.5 h-3.5" /> Plot Magic Line! 
                         </button>
                       </div>
 
                       {/* Star Chart */}
-                      <div className="md:col-span-7 bg-white border border-indigo-200 rounded-[20px] p-5 min-h-[200px] flex flex-col justify-between shadow-inner">
+                      <div className="md:col-span-7 bg-white border border-indigo-100 rounded-[20px] p-5 min-h-[200px] flex flex-col justify-between shadow-inner">
                         
                         <div className="w-full h-32 relative flex items-center justify-center">
                           <svg className="w-full h-full" viewBox="0 0 200 100">
                             <line x1="20" y1="90" x2="190" y2="90" stroke="#e2e8f0" strokeWidth="1.5" />
                             <line x1="20" y1="10" x2="20" y2="90" stroke="#e2e8f0" strokeWidth="1.5" />
                             
-                            <g opacity="0.9" fill="#4f46e5">
-                              <circle cx="35" cy="83" r="3" />
-                              <circle cx="75" cy="68" r="3" />
-                              <circle cx="115" cy="53" r="3" />
-                              <circle cx="155" cy="38" r="3" />
-                              {dsRegressionPlot && dsPracticeDays >= 5 && <circle cx="178" cy="18" r="4" fill="#312e81" className="animate-bounce" />}
+                            <g opacity="0.9">
+                              <text x="35" y="83" fontSize="8"></text>
+                              <text x="75" y="68" fontSize="8"></text>
+                              <text x="115" y="53" fontSize="8"></text>
+                              <text x="155" y="38" fontSize="8"></text>
+                              {dsRegressionPlot && dsPracticeDays >= 5 && <text x="178" y="18" fontSize="10" className="animate-bounce"></text>}
                             </g>
 
                             {dsRegressionPlot && (
@@ -1303,7 +1288,7 @@ export default function AiCourses() {
                                 initial={{ x2: 20, y2: 85 }}
                                 animate={{ x2: 20 + (dsPracticeDays * 32), y2: 85 - (dsPracticeDays * 13) }}
                                 transition={{ duration: 0.5 }}
-                                x1="20" y1="85" stroke="#312e81" strokeWidth="2.5" 
+                                x1="20" y1="85" stroke="#6366f1" strokeWidth="2.5" 
                               />
                             )}
                           </svg>
@@ -1315,8 +1300,8 @@ export default function AiCourses() {
                             animate={{ opacity: 1 }}
                             className="bg-indigo-50/50 border border-indigo-100 rounded-xl p-2.5 text-center text-[10px] mt-1 space-y-0.5"
                           >
-                            <div className="text-[8px] font-bold text-indigo-900 uppercase tracking-wider leading-none">AI Star Prediction</div>
-                            <div className="text-xs font-black text-indigo-950 leading-none mt-1">Predicted Score: {dsRegressionPlot.score}%</div>
+                            <div className="text-[8px] font-bold text-indigo-500 uppercase tracking-wider leading-none">AI Star Prediction</div>
+                            <div className="text-xs font-black text-indigo-900 leading-none mt-1">Predicted Score: {dsRegressionPlot.score}%</div>
                             <p className="text-[9px] font-bold text-slate-500 italic mt-0.5 leading-none">{dsRegressionPlot.rewardMessage}</p>
                           </motion.div>
                         )}

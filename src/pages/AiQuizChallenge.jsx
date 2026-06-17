@@ -49,17 +49,18 @@ const AiQuizChallenge = () => {
     setCurrentQ(0); setSelectedOption(null); setIsAnswered(false);
     setScore(0); setShowResult(false);
   };
+
   const getOptionStyle = (idx) => {
     if (!isAnswered) return selectedOption === idx 
-      ? 'bg-indigo-50 border-indigo-500 text-indigo-750' 
-      : 'bg-white border-slate-200 text-slate-700 hover:border-indigo-300 hover:bg-indigo-50/50';
+      ? 'bg-orange-50 border-orange-500 text-orange-700' 
+      : 'bg-white border-slate-200 text-slate-700 hover:border-orange-300 hover:bg-orange-50/50';
     if (idx === quizQuestions[currentQ].correct) return 'bg-emerald-50 border-emerald-500 text-emerald-700';
     if (idx === selectedOption) return 'bg-rose-50 border-rose-500 text-rose-700';
     return 'bg-slate-50 border-slate-100 text-slate-400';
   };
 
   const getLabelBg = (idx) => {
-    if (!isAnswered) return selectedOption === idx ? 'bg-indigo-900 text-white' : 'bg-slate-100 text-slate-500';
+    if (!isAnswered) return selectedOption === idx ? 'bg-orange-500 text-white' : 'bg-slate-100 text-slate-500';
     if (idx === quizQuestions[currentQ].correct) return 'bg-emerald-500 text-white';
     if (idx === selectedOption) return 'bg-rose-500 text-white';
     return 'bg-slate-200 text-slate-400';
@@ -73,7 +74,7 @@ const AiQuizChallenge = () => {
       {/* Floating Back Button */}
       <button
         onClick={() => navigate("/ai-intelligence-dashboard")}
-        className="fixed top-5 left-5 z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-indigo-850 hover:shadow-lg transition-all border border-slate-100 group"
+        className="fixed top-5 left-5 z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-orange-600 hover:shadow-lg transition-all border border-slate-100 group"
       >
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
       </button>
@@ -86,7 +87,7 @@ const AiQuizChallenge = () => {
                 
                 <div className="flex items-center justify-between mb-5">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-indigo-50 text-indigo-700 flex items-center justify-center shadow-inner">
+                    <div className="w-8 h-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center shadow-inner">
                       <Brain size={16} />
                     </div>
                     <div>
@@ -96,12 +97,12 @@ const AiQuizChallenge = () => {
                   </div>
                   <div className="bg-slate-50/80 px-3 py-1.5 rounded-lg border border-slate-200/60 text-center">
                     <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider block mb-0.5">Score</span>
-                    <span className="text-sm font-black text-indigo-750 leading-none">{score}</span>
+                    <span className="text-sm font-black text-orange-600 leading-none">{score}</span>
                   </div>
                 </div>
 
                 <div className="w-full h-1 bg-slate-100 rounded-full mb-5 overflow-hidden">
-                  <motion.div animate={{ width: `${progress}%` }} className="h-full bg-indigo-900 rounded-full" />
+                  <motion.div animate={{ width: `${progress}%` }} className="h-full bg-orange-500 rounded-full" />
                 </div>
 
                 <h2 className="text-[15px] font-bold text-slate-900 leading-snug mb-5 min-h-[50px]">
@@ -138,7 +139,7 @@ const AiQuizChallenge = () => {
 
                   {isAnswered && (
                     <button onClick={handleNext}
-                      className="flex items-center gap-1.5 px-5 py-2 bg-gradient-to-r from-indigo-850 to-indigo-900 hover:from-indigo-900 hover:to-indigo-950 text-white rounded-full text-xs font-bold transition-all shadow-md shadow-indigo-150 active:scale-95 cursor-pointer"
+                      className="flex items-center gap-1.5 px-5 py-2 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-full text-xs font-bold transition-all shadow-md shadow-orange-200 active:scale-95 cursor-pointer"
                     >
                       {currentQ < quizQuestions.length - 1 ? 'Next' : 'Results'} <ArrowRight size={14} />
                     </button>
@@ -151,7 +152,7 @@ const AiQuizChallenge = () => {
           {showResult && (
             <motion.div key="quiz-results" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="w-full">
               <div className="bg-white rounded-[24px] p-6 sm:p-8 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] text-center">
-                <div className="w-16 h-16 bg-indigo-50 text-indigo-750 rounded-full flex items-center justify-center mx-auto mb-3 shadow-inner">
+                <div className="w-16 h-16 bg-orange-50 text-orange-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-inner">
                   <Trophy size={32} />
                 </div>
                 <h2 className="text-xl font-bold text-slate-900 mb-1">Challenge Completed!</h2>
@@ -159,12 +160,12 @@ const AiQuizChallenge = () => {
 
                 <div className="bg-slate-50/80 rounded-[16px] p-5 mb-6 border border-slate-200/60 inline-block min-w-[180px]">
                   <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Total Score</span>
-                  <span className="text-3xl font-black text-indigo-850">{score}</span>
+                  <span className="text-3xl font-black text-orange-600">{score}</span>
                   <span className="text-[10px] font-bold text-slate-400 block mt-1">out of {quizQuestions.length * 100}</span>
                 </div>
 
                 <div className="flex justify-center">
-                  <button onClick={handleRestart} className="px-6 py-2.5 bg-gradient-to-r from-indigo-850 to-indigo-900 hover:from-indigo-900 hover:to-indigo-950 text-white rounded-full text-xs font-bold transition-all shadow-md shadow-indigo-150 active:scale-95 cursor-pointer">
+                  <button onClick={handleRestart} className="px-6 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-full text-xs font-bold transition-all shadow-md shadow-orange-200 active:scale-95 cursor-pointer">
                     Play Again
                   </button>
                 </div>

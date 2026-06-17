@@ -83,6 +83,56 @@ const dictionary = [
   { word: 'GOOD AFTERNOON', image: '/images/signlanguage/goodafternoon.png', desc: 'Make a thumbs-up sign, then place one hand flat with the other pointing down at it.' },
   { word: 'GOOD EVENING', image: '/images/signlanguage/goodevening.png', desc: 'Make a thumbs-up sign, then cover one hand over the other in a setting sun motion.' },
   { word: 'GOOD NIGHT', image: '/images/signlanguage/goodnight.png', desc: 'Make a thumbs-up sign, then close your eyes and lay your head on folded hands.' },
+  { word: 'WELCOME', image: '/images/signlanguage/welcome.png', desc: 'Bring both hands towards your chest in a welcoming motion.' },
+  { word: 'PLEASE', image: '/images/signlanguage/please.png', desc: 'Place your flat palm on your chest and move it in a circular motion.' },
+  { word: 'YES', image: '/images/signlanguage/yes.png', desc: 'Make a fist and nod it up and down like a head nodding yes.' },
+  { word: 'NO', image: '/images/signlanguage/no.png', desc: 'Extend your index and middle fingers and tap them against your thumb.' },
+  { word: 'HELP', image: '/images/signlanguage/help.png', desc: 'Place your closed fist with thumb up on top of your flat open palm.' },
+  { word: 'PLAY', image: '/images/signlanguage/play.png', desc: 'Extend your thumb and pinky fingers, then shake your hands gently.' },
+  { word: 'SCHOOL', image: '/images/signlanguage/school.png', desc: 'Clap your flat hands together twice horizontally.' },
+  { word: 'TEACHER', image: '/images/signlanguage/teacher.png', desc: 'Bring your fingertips to your forehead and move them forward twice.' },
+  { word: 'STUDENT', image: '/images/signlanguage/student.png', desc: 'Touch your forehead with fingertips, then mimic holding a book.' },
+  { word: 'FRIEND', image: '/images/signlanguage/friend.png', desc: 'Clasp your hands together in an interlocking hook gesture.' },
+  { word: 'FAMILY', image: '/images/signlanguage/family.png', desc: 'Form circles with thumb and index fingers of both hands, touching them, then circle outwards.' },
+  { word: 'HOME', image: '/images/signlanguage/home.png', desc: 'Touch your flat palms together overhead to form a roof shape.' },
+  { word: 'BOOK', image: '/images/signlanguage/book.png', desc: 'Place palms together, then open them up like opening a book.' },
+  { word: 'WATER', image: '/images/signlanguage/water.png', desc: 'Form a \'W\' shape with index, middle, and ring fingers and touch it to your chin.' },
+  { word: 'FOOD', image: '/images/signlanguage/food.png', desc: 'Bring fingertips of your hand to your mouth repeatedly.' },
+  { word: 'DRINK', image: '/images/signlanguage/drink.png', desc: 'Mimic holding a cup and tipping it towards your mouth.' },
+  { word: 'MORE', image: '/images/signlanguage/more.png', desc: 'Bring your fingertips of both hands together to touch repeatedly.' },
+  { word: 'SLEEP', image: '/images/signlanguage/sleep.png', desc: 'Place both hands together beside your cheek, tilting your head.' },
+  { word: 'BATH', image: '/images/signlanguage/bath.png', desc: 'Rub both closed fists up and down your chest.' },
+  { word: 'TOILET', image: '/images/signlanguage/toilet.png', desc: 'Shake your closed fist with the thumb tucked under the index finger.' },
+  { word: 'COME', image: '/images/signlanguage/come.png', desc: 'Beckon forward with your palm facing upwards.' },
+  { word: 'GO', image: '/images/signlanguage/go.png', desc: 'Point your index finger in the direction you want to go.' },
+  { word: 'STOP', image: '/images/signlanguage/stop.png', desc: 'Extend one hand flat, palm facing forward, in a blocking motion.' },
+  { word: 'TODAY', image: '/images/signlanguage/today.png', desc: 'Bring both hands in \'Y\' shape (thumb and pinky extended) downward twice.' },
+  { word: 'TOMORROW', image: '/images/signlanguage/tomorrow.png', desc: 'Place your thumb on your cheek and flick it forward.' },
+  { word: 'YESTERDAY', image: '/images/signlanguage/yesterday.png', desc: 'Touch your chin with your index finger, then point backward over your shoulder.' },
+  { word: 'TIME', image: '/images/signlanguage/time.png', desc: 'Tap your index finger on your opposite wrist, as if pointing to a watch.' },
+  { word: 'NAME', image: '/images/signlanguage/name.png', desc: 'Touch your index and middle fingers to your forehead, then point forward.' },
+  { word: 'AGE', image: '/images/signlanguage/age.png', desc: 'Place your hand at your chin and pull downward as if showing a beard.' },
+  { word: 'HOT', image: '/images/signlanguage/hot.png', desc: 'Place a clawed hand near your mouth, then quickly turn it away and open it.' },
+  { word: 'COLD', image: '/images/signlanguage/cold.png', desc: 'Hug yourself and shiver slightly with closed fists.' },
+  { word: 'BIG', image: '/images/signlanguage/big.png', desc: 'Hold both flat hands in front of you, then pull them far apart.' },
+  { word: 'SMALL', image: '/images/signlanguage/small.png', desc: 'Hold your index finger and thumb close together to show a tiny gap.' },
+  { word: 'LOVE', image: '/images/signlanguage/love.png', desc: 'Cross both arms over your chest, placing hands on opposite shoulders.' },
+  { word: 'ANGRY', image: '/images/signlanguage/angry.png', desc: 'Bring a clawed hand in front of your face with a frowning expression.' },
+  { word: 'LAUGH', image: '/images/signlanguage/laugh.png', desc: 'Point both index fingers towards your mouth and smile widely.' },
+  { word: 'CRY', image: '/images/signlanguage/cry.png', desc: 'Trace your index fingers down your cheeks to mimic tears falling.' },
+  { word: 'CLEAN', image: '/images/signlanguage/clean.png', desc: 'Slide the palm of your dominant hand across the palm of your other hand.' },
+  { word: 'DIRTY', image: '/images/signlanguage/dirty.png', desc: 'Place the back of your hand under your chin and wiggle your fingers.' },
+  { word: 'SUN', image: '/images/signlanguage/sun.png', desc: 'Draw a circle in the air with your index finger, then open your fingers wide like rays.' },
+  { word: 'MOON', image: '/images/signlanguage/moon.png', desc: 'Form a \'C\' shape with index finger and thumb, then hold it up near your eye.' },
+  { word: 'STAR', image: '/images/signlanguage/star.png', desc: 'Point your index fingers upward alternately towards the sky.' },
+  { word: 'RAIN', image: '/images/signlanguage/rain.png', desc: 'Bring both open hands downward from head level while wiggling all fingers.' },
+  { word: 'WIND', image: '/images/signlanguage/wind.png', desc: 'Wave both flat hands back and forth in front of your face.' },
+  { word: 'RUN', image: '/images/signlanguage/run.png', desc: 'Hook the index finger of one hand onto the thumb of the other, and move both forward.' },
+  { word: 'WALK', image: '/images/signlanguage/walk.png', desc: 'Mimic two legs walking by moving your flat hands back and forth.' },
+  { word: 'WRITE', image: '/images/signlanguage/write.png', desc: 'Mimic writing with a pen on the open palm of your other hand.' },
+  { word: 'READ', image: '/images/signlanguage/read.png', desc: 'Move your index and middle fingers down your open palm like scanning a page.' },
+  { word: 'HAPPY NEW YEAR', image: '/images/signlanguage/happynewyear.png', desc: 'Brush hands upward on your chest, then raise flat hands forward.' },
+  { word: 'CONGRATULATIONS', image: '/images/signlanguage/congratulations.png', desc: 'Clap hands and shake them forward in a celebratory gesture.' },
 ];
 
 const FingerspellComponent = () => {
@@ -94,6 +144,7 @@ const FingerspellComponent = () => {
   const handleInputChange = (val) => {
     const uppercaseVal = val.toUpperCase().replace(/[^A-Z ]/g, '');
     setText(uppercaseVal);
+    setIsFocused(true);
     if (selectedWordSign && uppercaseVal !== selectedWordSign.word) {
       setSelectedWordSign(null);
     }
@@ -129,7 +180,7 @@ const FingerspellComponent = () => {
             value={text}
             onChange={(e) => handleInputChange(e.target.value)}
             onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
+            onBlur={() => setTimeout(() => setIsFocused(false), 200)}
             maxLength={15}
             placeholder="TYPE A WORD..."
             className="w-full px-8 py-5 rounded-full bg-white border-2 border-slate-200 text-center text-2xl font-black text-slate-800 placeholder-slate-300 focus:outline-none focus:border-purple-400 focus:ring-4 ring-purple-100 transition-all tracking-[0.2em] shadow-sm"
@@ -228,7 +279,7 @@ const FingerspellComponent = () => {
                     className="w-16 h-20 md:w-20 md:h-24 bg-white rounded-[16px] border-2 border-green-100 flex flex-col items-center justify-center relative shadow-[0_4px_15px_rgb(34,197,94,0.1)] overflow-hidden group hover:border-green-400 hover:shadow-[0_8px_20px_rgb(34,197,94,0.2)] hover:-translate-y-1 transition-all cursor-pointer"
                   >
                     <img
-                      src={`/images/signlanguage/alphabets/${char}.svg`}
+                      src={`/images/signlanguage/alphabets/${char}.png`}
                       onError={(e) => { e.target.onerror = null; e.target.src = '/images/signlanguage/hand.png'; }}
                       alt={`Sign for ${char}`}
                       className="w-10 h-10 md:w-12 md:h-12 object-contain mix-blend-multiply opacity-80 mb-3 group-hover:scale-110 group-hover:opacity-100 transition-all"
@@ -281,7 +332,7 @@ const FingerspellComponent = () => {
               <div className="w-56 h-56 bg-slate-50 rounded-[24px] border-2 border-slate-100 flex items-center justify-center p-6 mb-8 shadow-inner relative overflow-hidden">
                 <div className="absolute inset-0 bg-green-500/5 mix-blend-multiply pointer-events-none" />
                 <img
-                  src={`/images/signlanguage/alphabets/${zoomedChar}.svg`}
+                  src={`/images/signlanguage/alphabets/${zoomedChar}.png`}
                   onError={(e) => { e.target.onerror = null; e.target.src = '/images/signlanguage/hand.png'; }}
                   alt={`Zoomed sign for ${zoomedChar}`}
                   className="w-full h-full object-contain mix-blend-multiply drop-shadow-md"
