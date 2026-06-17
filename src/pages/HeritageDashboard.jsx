@@ -402,9 +402,19 @@ const HeritageDashboard = () => {
                                  {card.category}
                                </div>
                                <h3 className="text-lg md:text-xl font-black text-[#1E293B] mb-2">{card.title}</h3>
-                               <p className="text-slate-600 text-xs md:text-sm font-medium leading-relaxed overflow-y-auto scrollbar-hide pr-2 flex-1">
+                               <p className="text-slate-600 text-xs md:text-sm font-medium leading-relaxed overflow-y-auto scrollbar-hide pr-2 flex-1 mb-2">
                                  {card.desc}
                                </p>
+                               <a
+                                 href={`https://www.google.com/search?q=${encodeURIComponent(card.title + ' ' + (card.category || ''))}`}
+                                 target="_blank"
+                                 rel="noopener noreferrer"
+                                 className="self-start px-4 py-1.5 bg-[#B45309] hover:bg-amber-800 text-white rounded-full text-[10px] font-black uppercase tracking-wider flex items-center gap-1 transition-all duration-200 shadow-sm shadow-orange-200 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0"
+                                 onClick={(e) => e.stopPropagation()}
+                               >
+                                 Read More
+                                 <ArrowRight size={12} strokeWidth={2.5} />
+                               </a>
                             </div>
                           )}
                         </div>

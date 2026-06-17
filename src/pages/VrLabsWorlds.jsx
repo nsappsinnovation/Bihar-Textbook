@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowLeft, Play, X, Search, Globe, FlaskConical, 
@@ -17,6 +17,13 @@ const VrLabsWorlds = () => {
   const [activeSubject, setActiveSubject] = useState(initialSubject);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [isAnimationDone, setIsAnimationDone] = useState(false);
+
+  useEffect(() => {
+    if (!selectedVideo) {
+      setIsAnimationDone(false);
+    }
+  }, [selectedVideo]);
 
   // Easily customizable array of YouTube videos
   const videoItems = [
@@ -296,8 +303,8 @@ const VrLabsWorlds = () => {
              
 
               {/* Course Cards Grid */}
-              <AnimatePresence mode="popLayout">
-                <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                <AnimatePresence mode="popLayout">
                   {vrCourseItems.map((item, idx) => (
                     <motion.div
                       layout
@@ -305,7 +312,7 @@ const VrLabsWorlds = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 0.3, delay: idx * 0.04 }}
+                      transition={{ duration: 0.25 }}
                       className="group flex flex-col bg-white border border-slate-100 rounded-[20px] overflow-hidden hover:shadow-xl hover:border-emerald-100 transition-all cursor-pointer"
                       onClick={() => setSelectedVideo({ ...item, category: 'courses', subject: 'VR/AR' })}
                     >
@@ -320,9 +327,9 @@ const VrLabsWorlds = () => {
 
                         {/* Play overlay */}
                         <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 flex items-center justify-center transition-all duration-300">
-                          <motion.div whileHover={{ scale: 1.1 }} className="w-12 h-12 rounded-full bg-white text-emerald-600 flex items-center justify-center shadow-xl group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">
+                          <div className="w-12 h-12 rounded-full bg-white text-emerald-600 flex items-center justify-center shadow-xl group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">
                             <Play size={20} className="ml-1 fill-current" />
-                          </motion.div>
+                          </div>
                         </div>
 
                         {/* Duration */}
@@ -357,14 +364,14 @@ const VrLabsWorlds = () => {
                       </div>
                     </motion.div>
                   ))}
-                </motion.div>
-              </AnimatePresence>
+                </AnimatePresence>
+              </div>
             </>
           ) : (
             <>
               {/* Video Cards Grid View */}
-              <AnimatePresence mode="popLayout">
-                <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                <AnimatePresence mode="popLayout">
                   {filteredItems.map((item, idx) => (
                     <motion.div
                       layout
@@ -372,7 +379,7 @@ const VrLabsWorlds = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 0.3, delay: idx * 0.05 }}
+                      transition={{ duration: 0.25 }}
                       className="group flex flex-col bg-white border border-slate-100 rounded-[20px] overflow-hidden hover:shadow-xl hover:border-blue-100 transition-all cursor-pointer"
                       onClick={() => setSelectedVideo(item)}
                     >
@@ -392,12 +399,9 @@ const VrLabsWorlds = () => {
 
                         {/* Play Button Overlay */}
                         <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 flex items-center justify-center transition-all duration-300">
-                          <motion.div 
-                            whileHover={{ scale: 1.1 }}
-                            className="w-12 h-12 rounded-full bg-white text-blue-600 flex items-center justify-center shadow-xl group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300"
-                          >
+                          <div className="w-12 h-12 rounded-full bg-white text-blue-600 flex items-center justify-center shadow-xl group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
                             <Play size={20} className="ml-1 fill-current" />
-                          </motion.div>
+                          </div>
                         </div>
 
                         {/* Bottom badges */}
@@ -436,8 +440,8 @@ const VrLabsWorlds = () => {
                       </div>
                     </motion.div>
                   ))}
-                </motion.div>
-              </AnimatePresence>
+                </AnimatePresence>
+              </div>
 
               {/* Empty state when no search result */}
               {filteredItems.length === 0 && (
@@ -474,6 +478,7 @@ const VrLabsWorlds = () => {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
+              onAnimationComplete={() => setIsAnimationDone(true)}
               className="bg-white rounded-[24px] overflow-hidden shadow-2xl w-full max-w-2xl border border-slate-100 relative max-h-[90vh] flex flex-col"
             >
               {/* Close Button */}
@@ -485,14 +490,32 @@ const VrLabsWorlds = () => {
               </button>
 
               {/* YouTube Video Embed Container */}
-              <div className="aspect-video w-full bg-black shrink-0">
-                <iframe
-                  src={`https://www.youtube.com/embed/${selectedVideo.youtubeId}?autoplay=1`}
-                  title={selectedVideo.title}
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
+              <div className="aspect-video w-full bg-black shrink-0 relative flex items-center justify-center overflow-hidden">
+                {isAnimationDone ? (
+                  <iframe
+                    src={`https://www.youtube.com/embed/${selectedVideo.youtubeId}?autoplay=1`}
+                    title={selectedVideo.title}
+                    className="w-full h-full border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center bg-slate-950">
+                    {selectedVideo.thumbnail && (
+                      <img 
+                        src={selectedVideo.thumbnail} 
+                        alt="" 
+                        className="absolute inset-0 w-full h-full object-cover opacity-40 blur-[2px]"
+                      />
+                    )}
+                    <div className="relative z-10 flex flex-col items-center gap-3">
+                      <div className="w-12 h-12 rounded-full border-4 border-slate-800 border-t-blue-500 animate-spin" />
+                      <span className="text-white text-xs font-semibold tracking-wider uppercase opacity-80 animate-pulse">
+                        Loading Experience...
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Details in Modal */}
