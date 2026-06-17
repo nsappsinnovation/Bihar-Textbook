@@ -89,6 +89,7 @@ const FingerspellComponent = () => {
   const [text, setText] = useState('HELLO');
   const [zoomedChar, setZoomedChar] = useState(null);
   const [selectedWordSign, setSelectedWordSign] = useState(null);
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleInputChange = (val) => {
     const uppercaseVal = val.toUpperCase().replace(/[^A-Z ]/g, '');
@@ -101,9 +102,10 @@ const FingerspellComponent = () => {
   const selectWord = (item) => {
     setText(item.word);
     setSelectedWordSign(item);
+    setIsFocused(false);
   };
 
-  const suggestions = text.trim() && (!selectedWordSign || text !== selectedWordSign.word)
+  const suggestions = isFocused && text.trim() && (!selectedWordSign || text !== selectedWordSign.word)
     ? dictionary.filter(item => item.word.includes(text.toUpperCase()))
     : [];
 
@@ -126,6 +128,8 @@ const FingerspellComponent = () => {
             type="text"
             value={text}
             onChange={(e) => handleInputChange(e.target.value)}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
             maxLength={15}
             placeholder="TYPE A WORD..."
             className="w-full px-8 py-5 rounded-full bg-white border-2 border-slate-200 text-center text-2xl font-black text-slate-800 placeholder-slate-300 focus:outline-none focus:border-purple-400 focus:ring-4 ring-purple-100 transition-all tracking-[0.2em] shadow-sm"
@@ -140,7 +144,10 @@ const FingerspellComponent = () => {
               {suggestions.map(item => (
                 <div
                   key={item.word}
-                  onClick={() => selectWord(item)}
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    selectWord(item);
+                  }}
                   className="flex items-center gap-3 px-4 py-3 hover:bg-green-50 rounded-[14px] cursor-pointer text-left transition-colors group"
                 >
                   <div className="w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0 font-bold text-[10px]">
@@ -221,7 +228,7 @@ const FingerspellComponent = () => {
                     className="w-16 h-20 md:w-20 md:h-24 bg-white rounded-[16px] border-2 border-green-100 flex flex-col items-center justify-center relative shadow-[0_4px_15px_rgb(34,197,94,0.1)] overflow-hidden group hover:border-green-400 hover:shadow-[0_8px_20px_rgb(34,197,94,0.2)] hover:-translate-y-1 transition-all cursor-pointer"
                   >
                     <img
-                      src={`/images/signlanguage/alphabets/${char}.png`}
+                      src={`/images/signlanguage/alphabets/${char}.svg`}
                       onError={(e) => { e.target.onerror = null; e.target.src = '/images/signlanguage/hand.png'; }}
                       alt={`Sign for ${char}`}
                       className="w-10 h-10 md:w-12 md:h-12 object-contain mix-blend-multiply opacity-80 mb-3 group-hover:scale-110 group-hover:opacity-100 transition-all"
@@ -274,7 +281,7 @@ const FingerspellComponent = () => {
               <div className="w-56 h-56 bg-slate-50 rounded-[24px] border-2 border-slate-100 flex items-center justify-center p-6 mb-8 shadow-inner relative overflow-hidden">
                 <div className="absolute inset-0 bg-green-500/5 mix-blend-multiply pointer-events-none" />
                 <img
-                  src={`/images/signlanguage/alphabets/${zoomedChar}.png`}
+                  src={`/images/signlanguage/alphabets/${zoomedChar}.svg`}
                   onError={(e) => { e.target.onerror = null; e.target.src = '/images/signlanguage/hand.png'; }}
                   alt={`Zoomed sign for ${zoomedChar}`}
                   className="w-full h-full object-contain mix-blend-multiply drop-shadow-md"
