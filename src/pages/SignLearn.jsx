@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft, ArrowRight, BookOpen, Clock,
   Hand, Play, GraduationCap, XCircle, Keyboard,
-  HeartHandshake, Heart, Smile, Frown, Utensils, Users
+  HeartHandshake, Heart, Smile, Frown, Utensils, Users, ChevronRight
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -70,9 +70,42 @@ const ExploreSignsComponent = () => {
   );
 };
 
+const dictionary = [
+  { word: 'HELLO', image: '/images/signlanguage/hello.png', desc: 'Wave your hand gently from side to side to say hello.' },
+  { word: 'THANK YOU', image: '/images/signlanguage/thankyou.png', desc: 'Touch your chin with fingers, then move hand forward towards the person.' },
+  { word: 'SORRY', image: '/images/signlanguage/sorry.png', desc: 'Rub a closed fist in a circular motion over your heart.' },
+  { word: 'HAPPY', image: '/images/signlanguage/happy.png', desc: 'Brush both flat hands upward on your chest to show joy.' },
+  { word: 'SAD', image: '/images/signlanguage/sad.png', desc: 'Place both hands in front of your face and pull them down while making a sad face.' },
+  { word: 'MOTHER', image: '/images/signlanguage/mother.png', desc: 'Tap your thumb on your chin with an open hand facing sideways.' },
+  { word: 'FATHER', image: '/images/signlanguage/father.png', desc: 'Tap your thumb on your forehead with an open hand facing sideways.' },
+  { word: 'EAT', image: '/images/signlanguage/eat.png', desc: 'Bring your flattened O-hand to your mouth a few times.' },
+  { word: 'GOOD MORNING', image: '/images/signlanguage/goodmorning.png', desc: 'Make a thumbs-up sign, then bring your hands up in a rising sun motion.' },
+  { word: 'GOOD AFTERNOON', image: '/images/signlanguage/goodafternoon.png', desc: 'Make a thumbs-up sign, then place one hand flat with the other pointing down at it.' },
+  { word: 'GOOD EVENING', image: '/images/signlanguage/goodevening.png', desc: 'Make a thumbs-up sign, then cover one hand over the other in a setting sun motion.' },
+  { word: 'GOOD NIGHT', image: '/images/signlanguage/goodnight.png', desc: 'Make a thumbs-up sign, then close your eyes and lay your head on folded hands.' },
+];
+
 const FingerspellComponent = () => {
   const [text, setText] = useState('HELLO');
   const [zoomedChar, setZoomedChar] = useState(null);
+  const [selectedWordSign, setSelectedWordSign] = useState(null);
+
+  const handleInputChange = (val) => {
+    const uppercaseVal = val.toUpperCase().replace(/[^A-Z ]/g, '');
+    setText(uppercaseVal);
+    if (selectedWordSign && uppercaseVal !== selectedWordSign.word) {
+      setSelectedWordSign(null);
+    }
+  };
+
+  const selectWord = (item) => {
+    setText(item.word);
+    setSelectedWordSign(item);
+  };
+
+  const suggestions = text.trim() && (!selectedWordSign || text !== selectedWordSign.word)
+    ? dictionary.filter(item => item.word.includes(text.toUpperCase()))
+    : [];
 
   return (
     <div className="w-full bg-white rounded-[24px] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-8 md:p-12 flex flex-col items-center text-center relative overflow-hidden min-h-[400px]">
@@ -92,7 +125,7 @@ const FingerspellComponent = () => {
           <input
             type="text"
             value={text}
-            onChange={(e) => setText(e.target.value.toUpperCase().replace(/[^A-Z ]/g, ''))}
+            onChange={(e) => handleInputChange(e.target.value)}
             maxLength={15}
             placeholder="TYPE A WORD..."
             className="w-full px-8 py-5 rounded-full bg-white border-2 border-slate-200 text-center text-2xl font-black text-slate-800 placeholder-slate-300 focus:outline-none focus:border-purple-400 focus:ring-4 ring-purple-100 transition-all tracking-[0.2em] shadow-sm"
@@ -100,44 +133,116 @@ const FingerspellComponent = () => {
           <div className="absolute -bottom-6 left-0 right-0 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center">
             Max 15 characters
           </div>
+
+          {/* Autocomplete Suggestions Dropdown */}
+          {suggestions.length > 0 && (
+            <div className="absolute left-0 right-0 top-full mt-2 bg-white rounded-[20px] border border-slate-100 shadow-xl z-30 max-h-60 overflow-y-auto p-2">
+              {suggestions.map(item => (
+                <div
+                  key={item.word}
+                  onClick={() => selectWord(item)}
+                  className="flex items-center gap-3 px-4 py-3 hover:bg-green-50 rounded-[14px] cursor-pointer text-left transition-colors group"
+                >
+                  <div className="w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0 font-bold text-[10px]">
+                    ISL
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-sm font-bold text-slate-800 group-hover:text-green-600 transition-colors">{item.word}</span>
+                    <p className="text-[10px] text-slate-400 truncate">{item.desc}</p>
+                  </div>
+                  <ChevronRight size={14} className="text-slate-300 group-hover:text-green-500 group-hover:translate-x-0.5 transition-all" />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
-        <div className="flex flex-wrap justify-center gap-3 md:gap-4 min-h-[140px] p-4 bg-slate-50/80 backdrop-blur-sm border border-slate-100 rounded-[24px] w-full shadow-inner">
-          <AnimatePresence mode="popLayout">
-            {text.split('').map((char, index) => {
-              if (char === ' ') return <div key={`space-${index}`} className="w-6 md:w-8" />;
-              return (
-                <motion.div
-                  key={`${char}-${index}`}
-                  initial={{ opacity: 0, y: 20, scale: 0.8, rotate: -10 }}
-                  animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
-                  exit={{ opacity: 0, scale: 0.5, y: -20 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20, delay: index * 0.03 }}
-                  onClick={() => setZoomedChar(char)}
-                  className="w-16 h-20 md:w-20 md:h-24 bg-white rounded-[16px] border-2 border-green-100 flex flex-col items-center justify-center relative shadow-[0_4px_15px_rgb(34,197,94,0.1)] overflow-hidden group hover:border-green-400 hover:shadow-[0_8px_20px_rgb(34,197,94,0.2)] hover:-translate-y-1 transition-all cursor-pointer"
-                >
-                  <img
-                    src={`/images/signlanguage/alphabets/${char}.png`}
-                    onError={(e) => { e.target.onerror = null; e.target.src = '/images/signlanguage/hand.png'; }}
-                    alt={`Sign for ${char}`}
-                    className="w-10 h-10 md:w-12 md:h-12 object-contain mix-blend-multiply opacity-80 mb-3 group-hover:scale-110 group-hover:opacity-100 transition-all"
-                  />
-                  <span className="absolute bottom-2 md:bottom-3 text-lg md:text-xl font-black text-green-700 bg-green-50/90 w-full text-center py-0.5 border-t border-green-100 group-hover:bg-green-100">{char}</span>
-                </motion.div>
-              )
-            })}
-            {text.length === 0 && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="w-full h-full flex flex-col items-center justify-center text-slate-400 py-8"
+        {selectedWordSign ? (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="w-full max-w-md bg-white rounded-[24px] border-2 border-green-500/20 p-6 flex flex-col items-center text-center shadow-lg relative overflow-hidden"
+          >
+            {/* Decorative background circle */}
+            <div className="absolute -right-10 -top-10 w-32 h-32 rounded-full bg-green-50/50 -z-10" />
+            <div className="absolute -left-10 -bottom-10 w-32 h-32 rounded-full bg-purple-50/50 -z-10" />
+
+            <span className="text-[10px] font-black text-green-600 bg-green-50 px-3 py-1 rounded-full uppercase tracking-wider mb-4">
+              Whole Word Sign
+            </span>
+
+            <h4 className="text-xl font-black text-slate-900 mb-4">{selectedWordSign.word}</h4>
+
+            <div className="w-56 h-56 bg-slate-50 rounded-[20px] border border-slate-100 flex items-center justify-center p-4 mb-5 shadow-inner relative overflow-hidden">
+              <img
+                src={selectedWordSign.image}
+                onError={(e) => { e.target.onerror = null; e.target.src = '/images/signlanguage/hand.png'; }}
+                alt={`ISL Sign for ${selectedWordSign.word}`}
+                className="w-full h-full object-contain mix-blend-multiply drop-shadow-sm"
+              />
+            </div>
+
+            <p className="text-slate-500 text-xs font-semibold leading-relaxed mb-6 px-4">
+              {selectedWordSign.desc}
+            </p>
+
+            <div className="flex gap-3 w-full">
+              <button
+                onClick={() => setSelectedWordSign(null)}
+                className="flex-1 py-3 px-4 rounded-full border border-slate-200 hover:border-slate-300 text-slate-500 hover:text-slate-700 font-bold text-xs transition-colors"
               >
-                <Hand size={32} className="mb-3 opacity-20" />
-                <span className="text-sm font-bold uppercase tracking-wider">Start typing to see signs</span>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+                Fingerspell it
+              </button>
+              <button
+                onClick={() => {
+                  setText('');
+                  setSelectedWordSign(null);
+                }}
+                className="flex-1 py-3 px-4 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-colors"
+              >
+                Clear Search
+              </button>
+            </div>
+          </motion.div>
+        ) : (
+          <div className="flex flex-wrap justify-center gap-3 md:gap-4 min-h-[140px] p-4 bg-slate-50/80 backdrop-blur-sm border border-slate-100 rounded-[24px] w-full shadow-inner">
+            <AnimatePresence mode="popLayout">
+              {text.split('').map((char, index) => {
+                if (char === ' ') return <div key={`space-${index}`} className="w-6 md:w-8" />;
+                return (
+                  <motion.div
+                    key={`${char}-${index}`}
+                    initial={{ opacity: 0, y: 20, scale: 0.8, rotate: -10 }}
+                    animate={{ opacity: 1, y: 0, scale: 1, rotate: 0 }}
+                    exit={{ opacity: 0, scale: 0.5, y: -20 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20, delay: index * 0.03 }}
+                    onClick={() => setZoomedChar(char)}
+                    className="w-16 h-20 md:w-20 md:h-24 bg-white rounded-[16px] border-2 border-green-100 flex flex-col items-center justify-center relative shadow-[0_4px_15px_rgb(34,197,94,0.1)] overflow-hidden group hover:border-green-400 hover:shadow-[0_8px_20px_rgb(34,197,94,0.2)] hover:-translate-y-1 transition-all cursor-pointer"
+                  >
+                    <img
+                      src={`/images/signlanguage/alphabets/${char}.png`}
+                      onError={(e) => { e.target.onerror = null; e.target.src = '/images/signlanguage/hand.png'; }}
+                      alt={`Sign for ${char}`}
+                      className="w-10 h-10 md:w-12 md:h-12 object-contain mix-blend-multiply opacity-80 mb-3 group-hover:scale-110 group-hover:opacity-100 transition-all"
+                    />
+                    <span className="absolute bottom-2 md:bottom-3 text-lg md:text-xl font-black text-green-700 bg-green-50/90 w-full text-center py-0.5 border-t border-green-100 group-hover:bg-green-100">{char}</span>
+                  </motion.div>
+                );
+              })}
+              {text.length === 0 && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="w-full h-full flex flex-col items-center justify-center text-slate-400 py-8"
+                >
+                  <Hand size={32} className="mb-3 opacity-20" />
+                  <span className="text-sm font-bold uppercase tracking-wider">Start typing to see signs</span>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        )}
       </div>
 
       {/* Zoom Modal */}
