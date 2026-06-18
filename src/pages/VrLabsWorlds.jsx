@@ -74,10 +74,10 @@ const VrLabsWorlds = () => {
     },
     {
       id: 'world-5',
-      title: 'Launch Into Space 360° Hyperlapse',
+      title: 'The Solar System',
       category: 'worlds',
-      subject: 'Technology',
-      desc: 'Journey from the Earth\'s surface to the edge of space in this spectacular 360-degree hyperlapse.',
+      subject: 'Science',
+      desc: 'Explore planets and beyond in this spectacular 360-degree space launch and solar system tour.',
       youtubeId: 'PsSvqvK_3Zo',
       duration: '6 mins',
       difficulty: 'Beginner',

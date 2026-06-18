@@ -22,7 +22,7 @@ const VrDashboard = () => {
       progress: 60,
       timeLeft: '35 min left',
       level: 'Beginner',
-      youtubeId: 'y3_v0a74L58',
+      youtubeId: 'PsSvqvK_3Zo',
     },
     'History': {
       title: 'Ancient Civilizations',
