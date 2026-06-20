@@ -133,7 +133,7 @@ const AiQuizChallenge = () => {
                       selectedOption === q.correct ? 'text-emerald-600' 
                       : selectedOption === null ? 'text-amber-600' : 'text-rose-600'
                     }`}>
-                      {selectedOption === q.correct ? '🎉 Correct!' : selectedOption === null ? "Time is up!" : '❌ Wrong answer'}
+                      {selectedOption === q.correct ? 'Correct!' : selectedOption === null ? "Time is up!" : 'Wrong answer'}
                     </span>
                   ) : <div />}
 

@@ -11,7 +11,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 const topicsData = [
   {
     id: 'ml',
-    title: 'AI se Creative Projects 🚀✨',
+    title: 'AI se Creative Projects ',
     sub: 'Story, Cartoon, Comic, Presentation!',
     icon: <Brain className="w-5 h-5" />,
     color: 'from-amber-400/20 to-orange-500/20',
@@ -19,11 +19,11 @@ const topicsData = [
     bgLight: 'bg-amber-50',
     pillColor: 'bg-amber-500',
     buttonColor: 'bg-amber-500 hover:bg-amber-600 shadow-amber-200',
-    synopsis: "Learn to create amazing projects with AI! You can write beautiful stories ✍️, design cartoon images 🎨, create comic books 📕, and build stunning presentations 📊! Imagine you want to write a superhero story — just tell AI and it will write the whole thing. Or design your own cartoon character — AI will turn your ideas into real images!"
+    synopsis: "Learn to create amazing projects with AI! You can write beautiful stories , design cartoon images , create comic books , and build stunning presentations ! Imagine you want to write a superhero story — just tell AI and it will write the whole thing. Or design your own cartoon character — AI will turn your ideas into real images!"
   },
   {
     id: 'dl',
-    title: 'Brain Train (Deep Learning) 🧠🚂',
+    title: 'Brain Train (Deep Learning) ',
     sub: 'How a computer\'s mini-brain learns secrets!',
     icon: <Cpu className="w-5 h-5" />,
     color: 'from-pink-400/20 to-purple-500/20',
@@ -35,7 +35,7 @@ const topicsData = [
   },
   {
     id: 'nlp',
-    title: 'Emoji Mood Matcher (NLP) 🎭💬',
+    title: 'Emoji Mood Matcher (NLP) ',
     sub: 'How computers read and understand our talk!',
     icon: <MessageSquare className="w-5 h-5" />,
     color: 'from-emerald-400/20 to-teal-500/20',
@@ -47,7 +47,7 @@ const topicsData = [
   },
   {
     id: 'cv',
-    title: 'Robot Eyes (Computer Vision) 👁️🤖',
+    title: 'Robot Eyes (Computer Vision) ',
     sub: 'How cameras spot and label objects!',
     icon: <Eye className="w-5 h-5" />,
     color: 'from-sky-400/20 to-blue-500/20',
@@ -59,7 +59,7 @@ const topicsData = [
   },
   {
     id: 'ds',
-    title: 'Star Chart (Data Science) 📊⭐',
+    title: 'Star Chart (Data Science) ',
     sub: 'Finding magic patterns in student data!',
     icon: <BarChart3 className="w-5 h-5" />,
     color: 'from-indigo-400/20 to-violet-500/20',
@@ -75,7 +75,7 @@ const topicsData = [
 const challengesData = [
   {
     id: 'ml_ch',
-    title: 'Challenge 1: Creative Director 🎨✨',
+    title: 'Challenge 1: Creative Director ',
     desc: 'Help Pippo match each creative prompt to the best AI tool!',
     icon: <Brain className="w-5 h-5" />,
     color: 'border-amber-200 bg-amber-50/50 hover:bg-amber-50',
@@ -83,7 +83,7 @@ const challengesData = [
   },
   {
     id: 'nlp_ch',
-    title: 'Challenge 2: Mood Detective 🕵️‍♂️💬',
+    title: 'Challenge 2: Mood Detective ',
     desc: 'Identify the emoji emotions inside three sentences!',
     icon: <MessageSquare className="w-5 h-5" />,
     color: 'border-emerald-200 bg-emerald-50/50 hover:bg-emerald-50',
@@ -91,7 +91,7 @@ const challengesData = [
   },
   {
     id: 'cv_ch',
-    title: 'Challenge 3: Spot the School Bag 🎒👁️',
+    title: 'Challenge 3: Spot the School Bag ',
     desc: 'Click on the hidden school bag in a digital classroom image!',
     icon: <Eye className="w-5 h-5" />,
     color: 'border-sky-200 bg-sky-50/50 hover:bg-sky-50',
@@ -145,7 +145,7 @@ export default function AiCourses() {
   const [dlAcc, setDlAcc] = useState(40);
 
   // 3. NLP Emotion Matcher States
-  const [nlpInputText, setNlpInputText] = useState("I am super excited and happy to learn robotics today! 🎉");
+  const [nlpInputText, setNlpInputText] = useState("I am super excited and happy to learn robotics today! ");
   const [nlpMoodResult, setNlpMoodResult] = useState(null);
 
   // 4. CV Robot Eyes States
@@ -161,11 +161,11 @@ export default function AiCourses() {
   
   // Challenge 1: Creative Director State
   const mlBasket = [
-    { size: 'Creative Text', color: 'A flying turtle finding a secret island', name: 'Story Maker 📖' },
-    { size: 'Avatar Picture', color: 'A cute vector puppy wearing a spacesuit', name: 'Cartoon Generator 🎨' },
-    { size: 'Multi-Panel Script', color: 'A superhero cat saving the school library', name: 'Comic Builder 🎭' },
-    { size: 'Slide Deck', color: 'Water conservation ideas for science exhibition', name: 'Presentation Creator 📊' },
-    { size: 'Creative Text', color: 'A crystal castle floating above purple clouds', name: 'Story Maker 📖' }
+    { size: 'Creative Text', color: 'A flying turtle finding a secret island', name: 'Story Maker ' },
+    { size: 'Avatar Picture', color: 'A cute vector puppy wearing a spacesuit', name: 'Cartoon Generator ' },
+    { size: 'Multi-Panel Script', color: 'A superhero cat saving the school library', name: 'Comic Builder ' },
+    { size: 'Slide Deck', color: 'Water conservation ideas for science exhibition', name: 'Presentation Creator ' },
+    { size: 'Creative Text', color: 'A crystal castle floating above purple clouds', name: 'Story Maker ' }
   ];
   const [mlChIndex, setMlChIndex] = useState(0);
   const [mlChCorrectCount, setMlChCorrectCount] = useState(0);
@@ -174,9 +174,9 @@ export default function AiCourses() {
 
   // Challenge 2: NLP Mood Detective State
   const nlpSentences = [
-    { text: "I lost my favorite drawing book and I feel a bit sad today. 😢", correct: 'Sad' },
-    { text: "I am super excited and happy for our school picnic holiday! 🥳", correct: 'Happy' },
-    { text: "Why does the computer brain think, and how was it made? 🧐", correct: 'Curious' }
+    { text: "I lost my favorite drawing book and I feel a bit sad today. ", correct: 'Sad' },
+    { text: "I am super excited and happy for our school picnic holiday! ", correct: 'Happy' },
+    { text: "Why does the computer brain think, and how was it made? ", correct: 'Curious' }
   ];
   const [nlpChIndex, setNlpChIndex] = useState(0);
   const [nlpChCorrectCount, setNlpChCorrectCount] = useState(0);
@@ -211,7 +211,7 @@ export default function AiCourses() {
 
     if (mlFruitSize === 'Story') {
       fruit = `Story: Pippo and the ${mlFruitColor}`;
-      emoji = "📖✨";
+      emoji = "";
       if (mlFruitColor === 'Jungle Adventure') {
         content = "Once upon a time in a glowing neon forest, a tiny robot named Pippo found a secret map. Together with a friendly lion, they discovered a hidden tree that bore crystal fruits of wisdom!";
       } else if (mlFruitColor === 'Robot School') {
@@ -223,7 +223,7 @@ export default function AiCourses() {
       }
     } else if (mlFruitSize === 'Cartoon') {
       fruit = `Cartoon Image: ${mlFruitColor}`;
-      emoji = "🎨🐱";
+      emoji = "";
       if (mlFruitColor === 'Jungle Adventure') {
         content = "AI Generated: A vibrant, colorful cartoon vector of Pippo the robot holding hands with a smiling baby lion in a tropical forest under a rainbow.";
       } else if (mlFruitColor === 'Robot School') {
@@ -235,7 +235,7 @@ export default function AiCourses() {
       }
     } else if (mlFruitSize === 'Comic') {
       fruit = `Comic: ${mlFruitColor}`;
-      emoji = "🎭⚡";
+      emoji = "";
       if (mlFruitColor === 'Jungle Adventure') {
         details = [
           "Panel 1: Pippo enters the lush green jungle. 'Wow, it is so green here!'",
@@ -263,7 +263,7 @@ export default function AiCourses() {
       }
     } else { // Presentation
       fruit = `Presentation: AI and ${mlFruitColor}`;
-      emoji = "📊💡";
+      emoji = "";
       details = [
         `Slide 1: Welcome to ${mlFruitColor} - Designed by AI Assistant.`,
         "Slide 2: Objectives - How smart technology helps students visualize wild scenarios.",
@@ -281,7 +281,7 @@ export default function AiCourses() {
     setIsTrainingDl(true);
     setDlEpoch(0);
     setDlAcc(35);
-    setDlBrainLog("Plugging in thinking bulbs... 🔌");
+    setDlBrainLog("Plugging in thinking bulbs... ");
 
     const maxEpochs = 15;
     let epoch = 0;
@@ -290,11 +290,11 @@ export default function AiCourses() {
       epoch += 1;
       setDlEpoch(epoch);
 
-      if (epoch === 3) setDlBrainLog("Finding edges of ears & whiskers... 🐱");
-      if (epoch === 6) setDlBrainLog("Robot is identifying nose shape... 👃");
-      if (epoch === 9) setDlBrainLog("Testing model accuracy with sound files... 🔊");
-      if (epoch === 12) setDlBrainLog("Connecting brain layers perfectly... ⚡");
-      if (epoch === 15) setDlBrainLog("Brain fully trained! Eureka, it knows a Cat! 🎉");
+      if (epoch === 3) setDlBrainLog("Finding edges of ears & whiskers... ");
+      if (epoch === 6) setDlBrainLog("Robot is identifying nose shape... ");
+      if (epoch === 9) setDlBrainLog("Testing model accuracy with sound files... ");
+      if (epoch === 12) setDlBrainLog("Connecting brain layers perfectly... ");
+      if (epoch === 15) setDlBrainLog("Brain fully trained! Eureka, it knows a Cat! ");
 
       const delta = epoch / maxEpochs;
       const powerMultiplier = dlBrainPower === 'Super' ? 1.2 : dlBrainPower === 'Low' ? 0.8 : 1.0;
@@ -313,24 +313,24 @@ export default function AiCourses() {
   const scanNlpMood = () => {
     const text = nlpInputText.toLowerCase();
     
-    let mood = "Thinking Mode 🤔";
-    let emoji = "🤔";
+    let mood = "Thinking Mode ";
+    let emoji = "";
     let meter = "Curious / Neutral";
     let color = "text-amber-500 bg-amber-50 border-amber-100";
     
     if (text.includes("happy") || text.includes("excited") || text.includes("love") || text.includes("fun") || text.includes("picnic")) {
-      mood = "Super Happy! 🥳";
-      emoji = "🥳";
+      mood = "Super Happy! ";
+      emoji = "";
       meter = "98% Positive Energy!";
       color = "text-green-600 bg-green-50 border-green-100";
     } else if (text.includes("sad") || text.includes("lost") || text.includes("cry") || text.includes("hurt") || text.includes("bad")) {
-      mood = "Feeling Sad... ❤️";
-      emoji = "😢";
+      mood = "Feeling Sad... ";
+      emoji = "";
       meter = "92% Blue Energy... (Sending virtual hug!)";
       color = "text-rose-600 bg-rose-50 border-rose-100";
     } else if (text.includes("why") || text.includes("how") || text.includes("question") || text.includes("robot") || text.includes("learn")) {
-      mood = "Curious Learner! 🧐";
-      emoji = "🧐";
+      mood = "Curious Learner! ";
+      emoji = "";
       meter = "95% Brain Power Alert!";
       color = "text-blue-600 bg-blue-50 border-blue-100";
     }
@@ -351,21 +351,21 @@ export default function AiCourses() {
 
       if (cvFeedType === 'Classroom') {
         itemsList = [
-          { label: 'School Bag 🎒', confidence: 99, style: 'top-[35%] left-[10%] w-[35%] h-[40%] border-amber-500 bg-amber-500/10 text-amber-500' },
-          { label: 'Class Smartboard 📺', confidence: 96, style: 'top-[10%] left-[25%] w-[55%] h-[20%] border-blue-500 bg-blue-500/10 text-blue-500' },
-          { label: 'Math book 📚', confidence: 95, style: 'top-[65%] left-[65%] w-[25%] h-[20%] border-purple-500 bg-purple-500/10 text-purple-500' }
+          { label: 'School Bag ', confidence: 99, style: 'top-[35%] left-[10%] w-[35%] h-[40%] border-amber-500 bg-amber-500/10 text-amber-500' },
+          { label: 'Class Smartboard ', confidence: 96, style: 'top-[10%] left-[25%] w-[55%] h-[20%] border-blue-500 bg-blue-500/10 text-blue-500' },
+          { label: 'Math book ', confidence: 95, style: 'top-[65%] left-[65%] w-[25%] h-[20%] border-purple-500 bg-purple-500/10 text-purple-500' }
         ];
       } else if (cvFeedType === 'Playground') {
         itemsList = [
-          { label: 'Football ⚽', confidence: 98, style: 'top-[60%] left-[45%] w-[20%] h-[25%] border-emerald-500 bg-emerald-500/10 text-emerald-500' },
-          { label: 'Puppy 🐶', confidence: 97, style: 'top-[45%] left-[15%] w-[28%] h-[35%] border-amber-600 bg-amber-600/10 text-amber-600' },
-          { label: 'Swing Set 🛝', confidence: 94, style: 'top-[15%] left-[55%] w-[35%] h-[55%] border-sky-500 bg-sky-500/10 text-sky-500' }
+          { label: 'Football ', confidence: 98, style: 'top-[60%] left-[45%] w-[20%] h-[25%] border-emerald-500 bg-emerald-500/10 text-emerald-500' },
+          { label: 'Puppy ', confidence: 97, style: 'top-[45%] left-[15%] w-[28%] h-[35%] border-amber-600 bg-amber-600/10 text-amber-600' },
+          { label: 'Swing Set ', confidence: 94, style: 'top-[15%] left-[55%] w-[35%] h-[55%] border-sky-500 bg-sky-500/10 text-sky-500' }
         ];
       } else { // Zoo Animals
         itemsList = [
-          { label: 'Friendly Lion 🦁', confidence: 99, style: 'top-[30%] left-[15%] w-[35%] h-[45%] border-amber-500 bg-amber-500/10 text-amber-500' },
-          { label: 'Playful Monkey 🐒', confidence: 95, style: 'top-[15%] left-[55%] w-[25%] h-[35%] border-emerald-500 bg-emerald-500/10 text-emerald-500' },
-          { label: 'Tall Giraffe 🦒', confidence: 98, style: 'top-[5%] left-[75%] w-[20%] h-[90%] border-orange-500 bg-orange-500/10 text-orange-500' }
+          { label: 'Friendly Lion ', confidence: 99, style: 'top-[30%] left-[15%] w-[35%] h-[45%] border-amber-500 bg-amber-500/10 text-amber-500' },
+          { label: 'Playful Monkey ', confidence: 95, style: 'top-[15%] left-[55%] w-[25%] h-[35%] border-emerald-500 bg-emerald-500/10 text-emerald-500' },
+          { label: 'Tall Giraffe ', confidence: 98, style: 'top-[5%] left-[75%] w-[20%] h-[90%] border-orange-500 bg-orange-500/10 text-orange-500' }
         ];
       }
 
@@ -379,9 +379,9 @@ export default function AiCourses() {
     let score = 50 + (dsPracticeDays * 9.5);
     score = Math.min(100, Math.round(score));
     
-    let rewardMessage = "Good job! Keep practicing! 📚";
-    if (score >= 90) rewardMessage = "Superstar Learner! A+ Guaranteed! 🌟🎉";
-    else if (score >= 75) rewardMessage = "Awesome Progress! Very Close to A+! 🚀";
+    let rewardMessage = "Good job! Keep practicing! ";
+    if (score >= 90) rewardMessage = "Superstar Learner! A+ Guaranteed! ";
+    else if (score >= 75) rewardMessage = "Awesome Progress! Very Close to A+! ";
 
     setDsRegressionPlot({
       score,
@@ -485,7 +485,7 @@ export default function AiCourses() {
             className="fixed top-20 left-1/2 -translate-x-1/2 bg-yellow-400 text-slate-900 px-6 py-2.5 rounded-full font-black text-xs shadow-md z-50 flex items-center gap-2 border border-yellow-300"
           >
             <Star className="w-4 h-4 fill-yellow-900 stroke-yellow-950 animate-bounce" />
-            <span>+{lastXpGain} XP Earned! Great job! 🌟</span>
+            <span>+{lastXpGain} XP Earned! Great job! </span>
           </motion.div>
         )}
       </AnimatePresence>
@@ -562,7 +562,7 @@ export default function AiCourses() {
           {/* AI Challenge Center (Clean, sober selectors replacing simple quizzes) */}
           <div className="bg-white rounded-[20px] border border-slate-150 shadow-[0_2px_10px_rgba(0,0,0,0.02)] p-5 space-y-4">
             <div className="flex items-center gap-2 text-purple-600 font-bold text-xs uppercase tracking-wider px-1">
-              <Gamepad2 className="w-4 h-4 text-purple-500" /> AI Challenge Center 🏆
+              <Gamepad2 className="w-4 h-4 text-purple-500" /> AI Challenge Center 
             </div>
 
             <p className="text-[11px] text-slate-500 leading-relaxed px-1">
@@ -616,7 +616,7 @@ export default function AiCourses() {
                 <div className="flex items-center justify-between pb-4 border-b border-slate-100">
                   <div>
                     <span className="inline-block px-3 py-0.5 bg-purple-50 text-purple-600 border border-purple-100 rounded-full text-[9px] font-bold uppercase tracking-wider">
-                      Interactive Challenge Mode ⚔️
+                      Interactive Challenge Mode 
                     </span>
                     <h2 className="text-base font-bold text-slate-900 mt-2">
                       {challengesData.find(c => c.id === activeChallenge)?.title}
@@ -658,7 +658,7 @@ export default function AiCourses() {
                         <div className="space-y-2">
                           <label className="text-[10px] font-bold text-slate-455 uppercase block tracking-wider">Select the correct AI Tool Tray!</label>
                           <div className="grid grid-cols-2 gap-2.5 max-w-md mx-auto pt-1">
-                            {['Story Maker 📖', 'Cartoon Generator 🎨', 'Comic Builder 🎭', 'Presentation Creator 📊'].map((opt) => {
+                            {['Story Maker ', 'Cartoon Generator ', 'Comic Builder ', 'Presentation Creator '].map((opt) => {
                               const isSelected = mlChSelectedAns === opt.split(' ')[0];
                               const isCorrect = mlBasket[mlChIndex].name.includes(opt.split(' ')[0]);
  
@@ -696,7 +696,7 @@ export default function AiCourses() {
                         animate={{ opacity: 1, scale: 1 }}
                         className="max-w-md mx-auto w-full text-center space-y-5 p-6 bg-amber-50/50 border border-amber-100 rounded-3xl"
                       >
-                        <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center text-3xl mx-auto shadow-sm">🏆</div>
+                        <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center text-3xl mx-auto shadow-sm"></div>
                         <div className="space-y-1">
                           <h3 className="text-base font-bold text-slate-800">Creative Director Challenge Completed!</h3>
                           <p className="text-xs text-amber-700 font-bold">You successfully matched {mlChCorrectCount} / 5 prompts correctly!</p>
@@ -708,7 +708,7 @@ export default function AiCourses() {
                           onClick={() => resetChallenge('ml_ch')}
                           className="px-6 py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer shadow shadow-amber-250"
                         >
-                          Play Challenge Again! 🎮
+                          Play Challenge Again! 
                         </button>
                       </motion.div>
                     )}
@@ -758,7 +758,7 @@ export default function AiCourses() {
                                   onClick={() => handleNlpChDetect(opt)}
                                   className={`py-3 rounded-xl border-2 text-xs font-bold transition-all cursor-pointer ${btnClass}`}
                                 >
-                                  {opt === 'Happy' ? '🥳 Happy' : opt === 'Sad' ? '😢 Sad' : '🧐 Curious'}
+                                  {opt === 'Happy' ? ' Happy' : opt === 'Sad' ? ' Sad' : ' Curious'}
                                 </button>
                               );
                             })}
@@ -774,7 +774,7 @@ export default function AiCourses() {
                         animate={{ opacity: 1, scale: 1 }}
                         className="max-w-md mx-auto w-full text-center space-y-5 p-6 bg-emerald-50/50 border border-emerald-100 rounded-3xl"
                       >
-                        <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center text-3xl mx-auto shadow-sm">🕵️‍♂️</div>
+                        <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center text-3xl mx-auto shadow-sm"></div>
                         <div className="space-y-1">
                           <h3 className="text-base font-bold text-slate-800">Challenge Mood Detective Completed!</h3>
                           <p className="text-xs text-emerald-700 font-bold">You successfully detected {nlpChCorrectCount} / 3 moods correctly!</p>
@@ -786,7 +786,7 @@ export default function AiCourses() {
                           onClick={() => resetChallenge('nlp_ch')}
                           className="px-6 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer shadow shadow-emerald-250"
                         >
-                          Play Challenge Again! 🎮
+                          Play Challenge Again! 
                         </button>
                       </motion.div>
                     )}
@@ -800,7 +800,7 @@ export default function AiCourses() {
                       <div className="space-y-4 text-center w-full max-w-md">
                         <div className="space-y-1">
                           <span className="text-[10px] font-black text-sky-600 uppercase tracking-widest block">Computer Vision Hunt</span>
-                          <h3 className="text-sm font-bold text-slate-600">Scan and click on the School Bag 🎒!</h3>
+                          <h3 className="text-sm font-bold text-slate-600">Scan and click on the School Bag !</h3>
                         </div>
 
                         {/* Interactive map classroom */}
@@ -821,7 +821,7 @@ export default function AiCourses() {
                             title="Locate item here"
                           />
                         </div>
-                        <p className="text-[10px] font-semibold text-slate-400">Hint: Look on the shelves on the left side of the classroom! 🔎</p>
+                        <p className="text-[10px] font-semibold text-slate-400">Hint: Look on the shelves on the left side of the classroom! </p>
                       </div>
                     ) : (
                       <motion.div 
@@ -829,10 +829,10 @@ export default function AiCourses() {
                         animate={{ opacity: 1, scale: 1 }}
                         className="max-w-md mx-auto w-full text-center space-y-5 p-6 bg-sky-50/50 border border-sky-100 rounded-3xl"
                       >
-                        <div className="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center text-3xl mx-auto shadow-sm">🎒</div>
+                        <div className="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center text-3xl mx-auto shadow-sm"></div>
                         <div className="space-y-1">
                           <h3 className="text-base font-bold text-slate-800">School Bag Spotted successfully!</h3>
-                          <p className="text-xs text-sky-700 font-bold">Confidence score: 99% Identified! 🎯</p>
+                          <p className="text-xs text-sky-700 font-bold">Confidence score: 99% Identified! </p>
                         </div>
                         <p className="text-[11px] text-slate-500 leading-relaxed">
                           Incredible! You played the role of Computer Vision perfectly, immediately drawing a high-accuracy box around the target item. You gained +100 bonus XP points!
@@ -841,7 +841,7 @@ export default function AiCourses() {
                           onClick={() => resetChallenge('cv_ch')}
                           className="px-6 py-2.5 bg-sky-500 hover:bg-sky-600 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer shadow shadow-sky-250"
                         >
-                          Play Hunt Again! 🎮
+                          Play Hunt Again! 
                         </button>
                       </motion.div>
                     )}
@@ -857,7 +857,7 @@ export default function AiCourses() {
                 <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
                   <div>
                     <span className={`inline-block px-3 py-0.5 ${activeTopic.bgLight} ${activeTopic.textAccent} border border-purple-200 rounded-full text-[9px] font-bold uppercase tracking-wider`}>
-                      Sober Playground 🌟
+                      Sober Playground 
                     </span>
                     <h2 className="text-base font-bold text-slate-900 mt-2">
                       {activeTopic.title}
@@ -886,10 +886,10 @@ export default function AiCourses() {
                           <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">1. Choose AI Tool Type</label>
                           <div className="grid grid-cols-2 gap-1.5">
                             {[
-                              { id: 'Story', label: 'Story 📖' },
-                              { id: 'Cartoon', label: 'Cartoon 🎨' },
-                              { id: 'Comic', label: 'Comic 🎭' },
-                              { id: 'Presentation', label: 'Presentation 📊' }
+                              { id: 'Story', label: 'Story ' },
+                              { id: 'Cartoon', label: 'Cartoon ' },
+                              { id: 'Comic', label: 'Comic ' },
+                              { id: 'Presentation', label: 'Presentation ' }
                             ].map(tool => (
                               <button
                                 key={tool.id}
@@ -909,10 +909,10 @@ export default function AiCourses() {
                           <label className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block">2. Select Project Theme</label>
                           <div className="grid grid-cols-2 gap-1.5">
                             {[
-                              { id: 'Jungle Adventure', label: 'Jungle 🌴' },
-                              { id: 'Robot School', label: 'Robo School 🏫' },
-                              { id: 'Space Journey', label: 'Space 🚀' },
-                              { id: 'Magical Castle', label: 'Castle 🏰' }
+                              { id: 'Jungle Adventure', label: 'Jungle ' },
+                              { id: 'Robot School', label: 'Robo School ' },
+                              { id: 'Space Journey', label: 'Space ' },
+                              { id: 'Magical Castle', label: 'Castle ' }
                             ].map(theme => (
                               <button
                                 key={theme.id}
@@ -931,7 +931,7 @@ export default function AiCourses() {
                           onClick={runMlFruitSorter}
                           className="w-full py-2.5 bg-amber-500 hover:bg-amber-600 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shadow shadow-amber-100 transition-all border-b border-amber-700 active:translate-y-0.5"
                         >
-                          <Play className="w-3.5 h-3.5 fill-white" /> Generate with AI! 🚀
+                          <Play className="w-3.5 h-3.5 fill-white" /> Generate with AI! 
                         </button>
                       </div>
 
@@ -971,7 +971,7 @@ export default function AiCourses() {
                               )}
                             </div>
 
-                            <p className="text-[10px] font-bold text-amber-600 text-center">AI Generation Quality: 100% Verified! ✨</p>
+                            <p className="text-[10px] font-bold text-amber-600 text-center">AI Generation Quality: 100% Verified! </p>
                           </motion.div>
                         ) : (
                           <div className="text-slate-400 space-y-2 text-center">
@@ -984,7 +984,7 @@ export default function AiCourses() {
                     </div>
                   )}
 
-                  {/* DEEP LEARNING (Brain Train 🧠🚂) */}
+                  {/* DEEP LEARNING (Brain Train ) */}
                   {activeTopic.id === 'dl' && (
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                       
@@ -1021,7 +1021,7 @@ export default function AiCourses() {
                           }`}
                         >
                           <Activity className={`w-3.5 h-3.5 ${isTrainingDl ? 'animate-spin' : ''}`} />
-                          {isTrainingDl ? `Training network...` : 'Train Robot Brain! 🚂'}
+                          {isTrainingDl ? `Training network...` : 'Train Robot Brain! '}
                         </button>
                       </div>
 
@@ -1035,7 +1035,7 @@ export default function AiCourses() {
                             <div className="w-4 h-4 rounded-full bg-slate-700 border border-slate-500" />
                           </div>
                           
-                          <div className="text-pink-400/40 text-[8px] font-mono shrink-0">➔</div>
+                          <div className="text-pink-400/40 text-[8px] font-mono shrink-0"></div>
 
                           <div className="flex flex-col gap-3">
                             {[1, 2, 3].map(n => (
@@ -1047,18 +1047,18 @@ export default function AiCourses() {
                                   isTrainingDl ? 'bg-pink-500 border-pink-300 shadow-[0_0_8px_rgba(244,63,94,0.5)]' : 'bg-slate-800 border-slate-650'
                                 }`}
                               >
-                                💡
+                                
                               </motion.div>
                             ))}
                           </div>
 
-                          <div className="text-pink-400/40 text-[8px] font-mono shrink-0">➔</div>
+                          <div className="text-pink-400/40 text-[8px] font-mono shrink-0"></div>
 
                           <div className="flex flex-col gap-2">
                             <div className={`w-6 h-6 rounded-full border flex items-center justify-center text-xs ${
                               dlAcc > 80 ? 'bg-green-500 border-green-300' : 'bg-slate-800 border-slate-600'
                             }`}>
-                              🐱
+                              
                             </div>
                           </div>
                         </div>
@@ -1081,7 +1081,7 @@ export default function AiCourses() {
                     </div>
                   )}
 
-                  {/* NATURAL LANGUAGE (Emoji Mood Matcher 🎭💬) */}
+                  {/* NATURAL LANGUAGE (Emoji Mood Matcher ) */}
                   {activeTopic.id === 'nlp' && (
                     <div className="space-y-4">
                       {/* Message Input */}
@@ -1107,9 +1107,9 @@ export default function AiCourses() {
                       <div className="flex gap-1.5 items-center flex-wrap">
                         <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider">Samples:</span>
                         {[
-                          "Tomorrow is a school holiday! Yay! 🥳🎈",
-                          "I lost my drawing book at the playground. 😢",
-                          "Why does the computer brain think, and how was it made? 🧐"
+                          "Tomorrow is a school holiday! Yay! ",
+                          "I lost my drawing book at the playground. ",
+                          "Why does the computer brain think, and how was it made? "
                         ].map((pst, pIdx) => (
                           <button
                             key={pIdx}
@@ -1142,7 +1142,7 @@ export default function AiCourses() {
                     </div>
                   )}
 
-                  {/* COMPUTER VISION (Robot Eyes 👁️🤖) */}
+                  {/* COMPUTER VISION (Robot Eyes ) */}
                   {activeTopic.id === 'cv' && (
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                       
@@ -1179,7 +1179,7 @@ export default function AiCourses() {
                           }`}
                         >
                           <Eye className="w-3.5 h-3.5" />
-                          {isCvDetecting ? 'Scanning feed...' : 'Activate Robot Eyes! 👁️'}
+                          {isCvDetecting ? 'Scanning feed...' : 'Activate Robot Eyes! '}
                         </button>
                       </div>
 
@@ -1230,7 +1230,7 @@ export default function AiCourses() {
                     </div>
                   )}
 
-                  {/* DATA SCIENCE (Star Chart 📊⭐) */}
+                  {/* DATA SCIENCE (Star Chart ) */}
                   {activeTopic.id === 'ds' && (
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
                       
@@ -1255,7 +1255,7 @@ export default function AiCourses() {
                           <div className="flex justify-between text-[7px] font-bold text-slate-400 uppercase tracking-wider">
                             <span>1 Day</span>
                             <span>3 Days</span>
-                            <span>5 Days 🌟</span>
+                            <span>5 Days </span>
                           </div>
                         </div>
 
@@ -1263,7 +1263,7 @@ export default function AiCourses() {
                           onClick={calculateStarPredictions}
                           className="w-full py-2.5 bg-indigo-500 hover:bg-indigo-600 text-white rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 cursor-pointer shadow shadow-indigo-100 border-b border-indigo-700 active:translate-y-0.5 transition-all"
                         >
-                          <BarChart3 className="w-3.5 h-3.5" /> Plot Magic Line! 📊🌈
+                          <BarChart3 className="w-3.5 h-3.5" /> Plot Magic Line! 
                         </button>
                       </div>
 
@@ -1276,11 +1276,11 @@ export default function AiCourses() {
                             <line x1="20" y1="10" x2="20" y2="90" stroke="#e2e8f0" strokeWidth="1.5" />
                             
                             <g opacity="0.9">
-                              <text x="35" y="83" fontSize="8">⭐</text>
-                              <text x="75" y="68" fontSize="8">⭐</text>
-                              <text x="115" y="53" fontSize="8">⭐</text>
-                              <text x="155" y="38" fontSize="8">⭐</text>
-                              {dsRegressionPlot && dsPracticeDays >= 5 && <text x="178" y="18" fontSize="10" className="animate-bounce">🌟</text>}
+                              <text x="35" y="83" fontSize="8"></text>
+                              <text x="75" y="68" fontSize="8"></text>
+                              <text x="115" y="53" fontSize="8"></text>
+                              <text x="155" y="38" fontSize="8"></text>
+                              {dsRegressionPlot && dsPracticeDays >= 5 && <text x="178" y="18" fontSize="10" className="animate-bounce"></text>}
                             </g>
 
                             {dsRegressionPlot && (

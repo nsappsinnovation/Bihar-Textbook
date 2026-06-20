@@ -7,6 +7,7 @@ import {
   Palette, GraduationCap, FlaskConical, Trophy, X, Play
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { videoItems } from '../data/vrData';
 
 const VrDashboard = () => {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ const VrDashboard = () => {
       progress: 60,
       timeLeft: '35 min left',
       level: 'Beginner',
-      youtubeId: 'y3_v0a74L58',
+      youtubeId: 'PsSvqvK_3Zo',
     },
     'History': {
       title: 'Ancient Civilizations',
@@ -79,13 +80,18 @@ const VrDashboard = () => {
     { label: '360° Worlds', value: 'Explore places', icon: <Globe className="text-purple-600" />, color: 'bg-purple-50', path: '/vr-labs-worlds' },
   ];
 
+  const getSubjectCountText = (subject) => {
+    const count = videoItems.filter(item => item.subject === subject).length;
+    return `${count} ${count === 1 ? 'Experience' : 'Experiences'}`;
+  };
+
   const topics = [
-    { label: 'Science', sub: '4 Experiences', icon: <Microscope size={20} className="text-blue-600" />, bg: 'bg-blue-50' },
-    { label: 'History', sub: '1 Experience', icon: <Landmark size={20} className="text-amber-600" />, bg: 'bg-amber-50' },
-    { label: 'Geography', sub: '2 Experiences', icon: <MapPin size={20} className="text-emerald-600" />, bg: 'bg-emerald-50' },
-    { label: 'Technology', sub: '1 Experience', icon: <Layers size={20} className="text-purple-600" />, bg: 'bg-purple-50' },
-    { label: 'Art & Culture', sub: '1 Experience', icon: <Palette size={20} className="text-rose-500" />, bg: 'bg-rose-50' },
-    { label: 'Math', sub: '1 Experience', icon: <GraduationCap size={20} className="text-sky-600" />, bg: 'bg-sky-50' },
+    { label: 'Science', sub: getSubjectCountText('Science'), icon: <Microscope size={20} className="text-blue-600" />, bg: 'bg-blue-50' },
+    { label: 'History', sub: getSubjectCountText('History'), icon: <Landmark size={20} className="text-amber-600" />, bg: 'bg-amber-50' },
+    { label: 'Geography', sub: getSubjectCountText('Geography'), icon: <MapPin size={20} className="text-emerald-600" />, bg: 'bg-emerald-50' },
+    { label: 'Technology', sub: getSubjectCountText('Technology'), icon: <Layers size={20} className="text-purple-600" />, bg: 'bg-purple-50' },
+    { label: 'Art & Culture', sub: getSubjectCountText('Art & Culture'), icon: <Palette size={20} className="text-rose-500" />, bg: 'bg-rose-50' },
+    { label: 'Math', sub: getSubjectCountText('Math'), icon: <GraduationCap size={20} className="text-sky-600" />, bg: 'bg-sky-50' },
   ];
 
   const handleTopicSelect = (topicLabel) => {

@@ -1,38 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowLeft, ArrowRight, BookOpen, Flame, Star, 
   Clock, Calendar, BookMarked, Library, BookText,
   Rocket, Globe, Microscope, Lightbulb, GraduationCap, MapPin,
   X, CheckCircle2, Trophy, Headphones, Search, Bell, Settings,
-  Heart, LayoutGrid, Download, Play, SkipBack, Bookmark, Search as SearchIcon, Activity,
-  Leaf, Landmark, Atom, User, Briefcase
+  Heart, LayoutGrid, Play, SkipBack, Bookmark, Search as SearchIcon, Activity,
+  Leaf, Landmark, Atom, User, Briefcase, Pause, Film
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import ReactPlayer from 'react-player';
+import { booksData } from './MyAudioLibrary';
 
 const AudioLibraryDashboard = () => {
   const navigate = useNavigate();
+  const audioRef = useRef(null);
 
   const [selectedCategory, setSelectedCategory] = useState('Self Growth');
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isBookmarked, setIsBookmarked] = useState(true); // The Alchemist is bookmarked by default
+  const [isBookmarked, setIsBookmarked] = useState(true); // Default to true
   const [progress, setProgress] = useState(45);
+  const [currentTime, setCurrentTime] = useState(1125); // 18:45 in seconds
+  const [duration, setDuration] = useState(2430); // 40:30 in seconds
+
+  // Get recently played books from localStorage
+  const [recentlyPlayed, setRecentlyPlayed] = useState(() => {
+    try {
+      const ids = JSON.parse(localStorage.getItem('recentlyPlayed') || '[]');
+      return ids.map(id => booksData.find(b => b.id === id)).filter(Boolean);
+    } catch (e) {
+      return [];
+    }
+  });
+
+  const [recentlyPlayedCount, setRecentlyPlayedCount] = useState(recentlyPlayed.length);
+  const [isRecentExpanded, setIsRecentExpanded] = useState(false);
+  const [currentBook, setCurrentBook] = useState(() => {
+    return recentlyPlayed[0] || booksData[0]; // The Alchemist or first book by default
+  });
 
   // Real-time stats state
-  const [completedBooksCount, setCompletedBooksCount] = useState(2); // "jaise abhi hm 2 book pdhe h to 2 hi how krna chiye"
-  const [libraryCount, setLibraryCount] = useState(56);
-  const [favoritesCount, setFavoritesCount] = useState(12);
-  const [downloadsCount, setDownloadsCount] = useState(3);
-  const [recentlyPlayedCount, setRecentlyPlayedCount] = useState(7);
+  const [completedBooksCount, setCompletedBooksCount] = useState(2); 
+  const [libraryCount, setLibraryCount] = useState(booksData.length);
+  const [favoritesCount, setFavoritesCount] = useState(1);
   const [listeningStreak, setListeningStreak] = useState(7);
+
+  const formatTime = (timeInSecs) => {
+    if (isNaN(timeInSecs)) return "00:00";
+    const minutes = Math.floor(timeInSecs / 60);
+    const seconds = Math.floor(timeInSecs % 60);
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  };
 
   const togglePlay = () => {
     setIsPlaying(!isPlaying);
-    if (!isPlaying) {
-      if (progress < 90) {
-        setProgress(prev => prev + 15);
-      } else if (progress < 100) {
-        setProgress(100);
+  };
+
+  const handleProgress = ({ playedSeconds }) => {
+    setCurrentTime(playedSeconds);
+    if (duration > 0) {
+      const pct = Math.round((playedSeconds / duration) * 100);
+      setProgress(pct);
+      if (pct === 100 && progress < 100) {
         setCompletedBooksCount(prev => prev + 1);
       }
     }
@@ -41,12 +70,10 @@ const AudioLibraryDashboard = () => {
   const toggleBookmark = () => {
     if (isBookmarked) {
       setIsBookmarked(false);
-      setFavoritesCount(prev => prev - 1);
-      setLibraryCount(prev => prev - 1);
+      setFavoritesCount(prev => Math.max(0, prev - 1));
     } else {
       setIsBookmarked(true);
       setFavoritesCount(prev => prev + 1);
-      setLibraryCount(prev => prev + 1);
     }
   };
 
@@ -61,14 +88,32 @@ const AudioLibraryDashboard = () => {
 
   const quickStats = [
     { label: 'My Library', value: `${libraryCount} items`, icon: <Library className="text-purple-600" />, color: 'bg-purple-50', path: '/my-audio-library?filter=all' },
+    { label: 'Recently Played', value: `${recentlyPlayedCount} items`, icon: <Clock className="text-blue-500" />, color: 'bg-blue-50', path: '/my-audio-library?filter=recent' },
     { label: 'Favorites', value: `${favoritesCount} saved`, icon: <Heart className={`transition-colors ${isBookmarked ? 'text-rose-500 fill-rose-500' : 'text-rose-500'}`} />, color: 'bg-rose-50', path: '/my-audio-library?filter=favorites' },
-    { label: 'Downloads', value: `${downloadsCount} offline`, icon: <Download className="text-emerald-500" />, color: 'bg-emerald-50', path: '/my-audio-library?filter=completed' },
-    { label: 'Recently Played', value: `${recentlyPlayedCount} today`, icon: <Clock className="text-blue-500" />, color: 'bg-blue-50', path: '/my-audio-library?filter=progress' },
   ];
 
   return (
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden">
-      
+      {/* Off-screen ReactPlayer for dynamic audiobook playback */}
+      <ReactPlayer
+        ref={audioRef}
+        url={currentBook.audioUrl}
+        playing={isPlaying}
+        onProgress={handleProgress}
+        onDuration={(d) => setDuration(d)}
+        style={{ position: 'absolute', left: '-9999px', top: '-9999px' }}
+        width="200px"
+        height="200px"
+        config={{ 
+          youtube: { 
+            playerVars: { 
+              origin: window.location.origin,
+              autoplay: 1,
+              playsinline: 1
+            } 
+          } 
+        }}
+      />
 
       {/* Main Content */}
       <main className="flex-1 min-h-screen pb-0">
@@ -122,8 +167,7 @@ const AudioLibraryDashboard = () => {
               </div>
             </section>
 
-            {/* Quick Stats Row */}
-            <section className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 relative z-20 -mt-8 px-4 md:px-12">
+            <section className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 relative z-20 -mt-8 px-4 md:px-12">
               {quickStats.map((stat, i) => (
                 <div 
                   key={i} 
@@ -146,17 +190,17 @@ const AudioLibraryDashboard = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
             {/* Continue Listening */}
-            <div className="lg:col-span-8">
-               <div className="flex items-center justify-between px-1 mb-4">
+            <div className="lg:col-span-8 space-y-6">
+               <div className="flex items-center justify-between px-1 mb-1">
                  <h3 className="text-[16px] font-bold text-[#1e1b4b]">Continue Listening</h3>
                  <button onClick={() => navigate('/my-audio-library?filter=progress')} className="text-[13px] font-medium text-[#1e1b4b] hover:text-purple-600 flex items-center gap-1 transition-colors">See all <ArrowRight size={14} /></button>
                </div>
                
                <div className="bg-white rounded-[24px] p-4 border border-slate-200 shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex flex-col sm:flex-row items-center sm:items-stretch gap-6">
                   <div className="w-[140px] h-[140px] rounded-[16px] overflow-hidden shrink-0 relative group/cover shadow-sm">
-                     <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=400" alt="The Alchemist" className="w-full h-full object-cover" />
+                     <img src={currentBook.cover} alt={currentBook.title} className="w-full h-full object-cover" />
                      <div 
-                        className="absolute bottom-2 right-2 w-10 h-10 bg-[#8b4513]/80 border-[2px] border-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-white cursor-pointer hover:scale-105 transition-transform shadow-lg" 
+                        className="absolute bottom-2 right-2 w-10 h-10 bg-black/60 border-[2px] border-white/90 backdrop-blur-sm rounded-full flex items-center justify-center text-white cursor-pointer hover:scale-105 transition-transform shadow-lg" 
                         onClick={togglePlay}
                      >
                         {isPlaying ? <div className="flex gap-1"><div className="w-1 h-3.5 bg-white rounded-full" /><div className="w-1 h-3.5 bg-white rounded-full" /></div> : <Play fill="currentColor" size={16} className="ml-0.5" />}
@@ -165,8 +209,8 @@ const AudioLibraryDashboard = () => {
 
                   <div className="flex-1 flex flex-col justify-center py-1">
                      <div className="mb-3">
-                        <h4 className="text-[18px] font-bold text-[#1e1b4b] tracking-tight leading-tight">The Alchemist</h4>
-                        <p className="text-[13px] font-medium text-[#1e1b4b]/70 mt-1">Paulo Coelho</p>
+                        <h4 className="text-[18px] font-bold text-[#1e1b4b] tracking-tight leading-tight">{currentBook.title}</h4>
+                        <p className="text-[13px] font-medium text-[#1e1b4b]/70 mt-1">{currentBook.author}</p>
                      </div>
 
                      <div className="flex items-center gap-4 mb-1">
@@ -179,7 +223,7 @@ const AudioLibraryDashboard = () => {
                         </div>
                         <span className="text-[12px] font-medium text-[#1e1b4b]/80 shrink-0">{progress}%</span>
                      </div>
-                     <p className="text-[12px] font-medium text-[#1e1b4b]/60 mb-4">18:45 / 40:30</p>
+                     <p className="text-[12px] font-medium text-[#1e1b4b]/60 mb-4">{formatTime(currentTime)} / {formatTime(duration)}</p>
 
                      <div className="flex items-center gap-3">
                         <button className="w-[100px] h-[40px] bg-[#7c3aed] hover:bg-[#6d28d9] text-white rounded-full flex items-center justify-center transition-colors shadow-sm" onClick={togglePlay}>

@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Zap, Edit3, Image as ImageIcon, Mic, GraduationCap, Rocket, MessageSquare, Sparkles, Palette, Bot, Volume2, Globe } from 'lucide-react';
 
 const toolsCategories = [
-  { id: 'All', label: 'All Tools', icon: '⚡' },
-  { id: 'Writing', label: 'Writing', icon: '📝' },
-  { id: 'Image', label: 'Image', icon: '🎨' },
-  { id: 'Voice', label: 'Voice', icon: '🔊' },
-  { id: 'Learning', label: 'Learning', icon: '🎓' },
-  { id: 'Productivity', label: 'Productivity', icon: '🚀' }
+  { id: 'All', label: 'All Tools', icon: <Zap size={16} /> },
+  { id: 'Writing', label: 'Writing', icon: <Edit3 size={16} /> },
+  { id: 'Image', label: 'Image', icon: <ImageIcon size={16} /> },
+  { id: 'Voice', label: 'Voice', icon: <Mic size={16} /> },
+  { id: 'Learning', label: 'Learning', icon: <GraduationCap size={16} /> },
+  { id: 'Productivity', label: 'Productivity', icon: <Rocket size={16} /> }
 ];
 
 const toolsDataList = [
-  { name: 'ChatGPT', tag: 'Writing Assistant', desc: 'AI chatbot that helps answer questions, write content, and explain ideas.', icon: '💬', color: 'bg-emerald-50 text-emerald-600', iconBg: 'bg-emerald-100 text-emerald-600', categories: ['Writing', 'Learning'] },
-  { name: 'Google Gemini', tag: 'Learning Assistant', desc: 'AI assistant by Google that helps with writing, learning, and exploring ideas.', icon: '✨', color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Writing', 'Learning', 'Productivity'] },
-  { name: 'Canva AI', tag: 'Image Creator', desc: 'AI design tool that helps create posters, presentations, and images easily.', icon: '🎨', color: 'bg-cyan-50 text-cyan-600', iconBg: 'bg-cyan-100 text-cyan-600', categories: ['Image', 'Productivity'] },
-  { name: 'QuillBot', tag: 'Writing Helper', desc: 'AI writing tool that helps paraphrase, summarize, and improve your writing.', icon: '🤖', color: 'bg-teal-50 text-teal-600', iconBg: 'bg-teal-100 text-teal-600', categories: ['Writing'] },
-  { name: 'ElevenLabs', tag: 'Voice AI', desc: 'AI voice tool that converts text into natural-sounding speech.', icon: '🔊', color: 'bg-pink-50 text-pink-600', iconBg: 'bg-pink-100 text-pink-600', categories: ['Voice'] },
-  { name: 'DeepL', tag: 'Translation', desc: 'AI tool that helps translate text more accurately and naturally.', icon: '🌐', color: 'bg-blue-50 text-blue-600', iconBg: 'bg-blue-100 text-blue-600', categories: ['Writing', 'Productivity'] }
+  { name: 'ChatGPT', tag: 'Writing Assistant', desc: 'AI chatbot that helps answer questions, write content, and explain ideas.', icon: <MessageSquare size={24} />, color: 'bg-emerald-50 text-emerald-600', iconBg: 'bg-emerald-100 text-emerald-600', categories: ['Writing', 'Learning'] },
+  { name: 'Google Gemini', tag: 'Learning Assistant', desc: 'AI assistant by Google that helps with writing, learning, and exploring ideas.', icon: <Sparkles size={24} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Writing', 'Learning', 'Productivity'] },
+  { name: 'Canva AI', tag: 'Image Creator', desc: 'AI design tool that helps create posters, presentations, and images easily.', icon: <Palette size={24} />, color: 'bg-cyan-50 text-cyan-600', iconBg: 'bg-cyan-100 text-cyan-600', categories: ['Image', 'Productivity'] },
+  { name: 'QuillBot', tag: 'Writing Helper', desc: 'AI writing tool that helps paraphrase, summarize, and improve your writing.', icon: <Bot size={24} />, color: 'bg-teal-50 text-teal-600', iconBg: 'bg-teal-100 text-teal-600', categories: ['Writing'] },
+  { name: 'ElevenLabs', tag: 'Voice AI', desc: 'AI voice tool that converts text into natural-sounding speech.', icon: <Volume2 size={24} />, color: 'bg-pink-50 text-pink-600', iconBg: 'bg-pink-100 text-pink-600', categories: ['Voice'] },
+  { name: 'DeepL', tag: 'Translation', desc: 'AI tool that helps translate text more accurately and naturally.', icon: <Globe size={24} />, color: 'bg-blue-50 text-blue-600', iconBg: 'bg-blue-100 text-blue-600', categories: ['Writing', 'Productivity'] }
 ];
 
 const ExploreAiTools = () => {
