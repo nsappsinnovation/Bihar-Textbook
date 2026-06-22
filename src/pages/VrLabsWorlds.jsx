@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowLeft, Play, X, Search, Globe, FlaskConical, 
   Sparkles, Video, Clock, Layers, ChevronRight, ArrowRight, BookOpen
 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
+
+import { videoItems, vrCourseItems } from '../data/vrData';
 
 const VrLabsWorlds = () => {
   const navigate = useNavigate();
@@ -17,200 +19,13 @@ const VrLabsWorlds = () => {
   const [activeSubject, setActiveSubject] = useState(initialSubject);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [isAnimationDone, setIsAnimationDone] = useState(false);
 
-  // Easily customizable array of YouTube videos
-  const videoItems = [
-    // 360 Worlds - Technology Experiences
-    {
-      id: 'world-1',
-      title: 'SheiKra Roller Coaster 360° POV',
-      category: 'worlds',
-      subject: 'Technology',
-      desc: 'Experience the thrilling drops and loops of the SheiKra roller coaster in immersive 360-degree VR.',
-      youtubeId: 'tR8ZtyhSDYw',
-      duration: '4 mins',
-      difficulty: 'Beginner',
-      thumbnail: `https://img.youtube.com/vi/tR8ZtyhSDYw/hqdefault.jpg`,
-    },
-    {
-      id: 'world-2',
-      title: 'Mindfulness & Relaxation 360°',
-      category: 'worlds',
-      subject: 'Technology',
-      desc: 'A calming 360-degree environment designed for mindfulness practice and immersive relaxation.',
-      youtubeId: 'eKumVFvGHFA',
-      duration: '10 mins',
-      difficulty: 'Beginner',
-      thumbnail: `https://img.youtube.com/vi/eKumVFvGHFA/hqdefault.jpg`,
-    },
-    {
-      id: 'world-3',
-      title: 'New York City in 8K 360°',
-      category: 'worlds',
-      subject: 'Technology',
-      desc: 'Take a virtual tour through the bustling streets and iconic landmarks of New York City in stunning 8K VR.',
-      youtubeId: 'kyN623RzFe0',
-      duration: '12 mins',
-      difficulty: 'Beginner',
-      thumbnail: `https://img.youtube.com/vi/kyN623RzFe0/hqdefault.jpg`,
-    },
-    {
-      id: 'world-4',
-      title: 'Fantasy World 360° Experience',
-      category: 'worlds',
-      subject: 'Technology',
-      desc: 'Explore a breathtaking fantasy landscape created with cutting-edge Unreal Engine 5 technology.',
-      youtubeId: '7i79_PxyJo8',
-      duration: '5 mins',
-      difficulty: 'Beginner',
-      thumbnail: `https://img.youtube.com/vi/7i79_PxyJo8/hqdefault.jpg`,
-    },
-    {
-      id: 'world-5',
-      title: 'Launch Into Space 360° Hyperlapse',
-      category: 'worlds',
-      subject: 'Technology',
-      desc: 'Journey from the Earth\'s surface to the edge of space in this spectacular 360-degree hyperlapse.',
-      youtubeId: 'PsSvqvK_3Zo',
-      duration: '6 mins',
-      difficulty: 'Beginner',
-      thumbnail: `https://img.youtube.com/vi/PsSvqvK_3Zo/hqdefault.jpg`,
-    },
-
-    // Virtual Labs - Science
-    {
-      id: 'science-1',
-      title: 'VReaLab - Physics & Chemistry',
-      category: 'labs',
-      subject: 'Science',
-      desc: 'Explore curriculum-based VR/3D simulations for physics, chemistry, and biology in a virtual laboratory.',
-      youtubeId: 'zrQGD_u7cLQ',
-      duration: '5 mins',
-      difficulty: 'Intermediate',
-      thumbnail: `https://img.youtube.com/vi/zrQGD_u7cLQ/hqdefault.jpg`,
-    },
-    {
-      id: 'science-2',
-      title: 'Biological Sciences 3D Simulation',
-      category: 'labs',
-      subject: 'Science',
-      desc: 'Immerse yourself in complex biological systems and interactive cellular simulations.',
-      youtubeId: 'ZKgv0FevJ1A',
-      duration: '8 mins',
-      difficulty: 'Beginner',
-      thumbnail: `https://img.youtube.com/vi/ZKgv0FevJ1A/hqdefault.jpg`,
-    },
-    {
-      id: 'science-3',
-      title: 'EFFE Technology Virtual Lab',
-      category: 'labs',
-      subject: 'Science',
-      desc: 'Conduct K-12 physics simulations and experiments securely in an interactive 3D virtual environment.',
-      youtubeId: 'rixOBcEXs3Q',
-      duration: '7 mins',
-      difficulty: 'Intermediate',
-      thumbnail: `https://img.youtube.com/vi/rixOBcEXs3Q/hqdefault.jpg`,
-    },
-    {
-      id: 'science-4',
-      title: 'Advanced Science Virtual Laboratory',
-      category: 'labs',
-      subject: 'Science',
-      desc: 'Conduct complex scientific experiments safely within a high-fidelity virtual space.',
-      youtubeId: 'PrSFw8SxnQM',
-      duration: '10 mins',
-      difficulty: 'Advanced',
-      thumbnail: `https://img.youtube.com/vi/PrSFw8SxnQM/hqdefault.jpg`,
-    },
-
-    // Virtual Labs - Geography
-    {
-      id: 'geo-1',
-      title: 'Earth Sciences & Terrain Exploration',
-      category: 'labs',
-      subject: 'Geography',
-      desc: 'Investigate geological formations, tectonic plates, and dynamic earth systems in 360 degrees.',
-      youtubeId: 'w-CZdZdbBHM',
-      duration: '6 mins',
-      difficulty: 'Beginner',
-      thumbnail: `https://img.youtube.com/vi/w-CZdZdbBHM/hqdefault.jpg`,
-    },
-    {
-      id: 'geo-2',
-      title: 'Climate & Atmospheric Systems VR',
-      category: 'labs',
-      subject: 'Geography',
-      desc: 'Visualize global weather patterns, ocean currents, and the atmospheric layers in immersive VR.',
-      youtubeId: '-78kDRt7mNo',
-      duration: '9 mins',
-      difficulty: 'Intermediate',
-      thumbnail: `https://img.youtube.com/vi/-78kDRt7mNo/hqdefault.jpg`,
-    },
-
-    // Virtual Labs - Technology
-    {
-      id: 'tech-1',
-      title: 'Robotics & Automation Systems',
-      category: 'labs',
-      subject: 'Technology',
-      desc: 'Design, build, and program industrial robots within an interactive virtual simulator.',
-      youtubeId: 'A79O-gONc7c',
-      duration: '12 mins',
-      difficulty: 'Advanced',
-      thumbnail: `https://img.youtube.com/vi/A79O-gONc7c/hqdefault.jpg`,
-    },
-    {
-      id: 'tech-2',
-      title: 'Computer Architecture & Networking',
-      category: 'labs',
-      subject: 'Technology',
-      desc: 'Learn the fundamentals of computer hardware and network topologies via interactive VR.',
-      youtubeId: 'McB20mZHr-4',
-      duration: '11 mins',
-      difficulty: 'Intermediate',
-      thumbnail: `https://img.youtube.com/vi/McB20mZHr-4/hqdefault.jpg`,
-    },
-
-    // 360 Worlds - Additional
-    {
-      id: 'world-6',
-      title: 'Taj Mahal 360° VR Tour',
-      category: 'worlds',
-      subject: 'History',
-      desc: 'Experience the majestic beauty and intricate architecture of the Taj Mahal in immersive 360-degree virtual reality.',
-      youtubeId: '8HV1JVgqPM0',
-      duration: '5 mins',
-      difficulty: 'Beginner',
-      thumbnail: `https://img.youtube.com/vi/8HV1JVgqPM0/hqdefault.jpg`,
-    },
-    {
-      id: 'world-7',
-      title: 'Immersive VR180 Viewing Experience',
-      category: 'worlds',
-      subject: 'Technology',
-      desc: 'A scenic VR180 video experience often used to showcase and test high-definition immersive environments.',
-      youtubeId: 'hp0EaEDhAog',
-      duration: '4 mins',
-      difficulty: 'Beginner',
-      thumbnail: `https://img.youtube.com/vi/hp0EaEDhAog/hqdefault.jpg`,
-    },
-  ];
-
-  // VR Course sequential lessons (from AR/VR Courses)
-  const vrCourseItems = [
-    { id: 'vrc-1', lesson: 1, title: 'VR Lab - Introduction', desc: 'Get started with VR fundamentals. Learn about headsets, controllers, and the immersive environment setup.', youtubeId: 'pgc3LclGh3A', duration: '15 mins', difficulty: 'Beginner', thumbnail: `https://img.youtube.com/vi/pgc3LclGh3A/hqdefault.jpg` },
-    { id: 'vrc-2', lesson: 2, title: 'VR Lab - Module 1', desc: 'Understanding 3D space and coordinate systems. Build your first virtual object from scratch.', youtubeId: 'hat4luNKWf8', duration: '18 mins', difficulty: 'Beginner', thumbnail: `https://img.youtube.com/vi/hat4luNKWf8/hqdefault.jpg` },
-    { id: 'vrc-3', lesson: 3, title: 'VR Lab - Module 2', desc: 'Textures, materials, and lighting in virtual environments. Make your scenes look realistic.', youtubeId: 'DXxSWh_rXfI', duration: '20 mins', difficulty: 'Beginner', thumbnail: `https://img.youtube.com/vi/DXxSWh_rXfI/hqdefault.jpg` },
-    { id: 'vrc-4', lesson: 4, title: 'VR Lab - Module 3', desc: 'Physics and collisions in VR. Understand gravity, bounce, and real-time object interactions.', youtubeId: 'TjyGrit2mIQ', duration: '22 mins', difficulty: 'Intermediate', thumbnail: `https://img.youtube.com/vi/TjyGrit2mIQ/hqdefault.jpg` },
-    { id: 'vrc-5', lesson: 5, title: 'VR Lab - Module 4', desc: 'User interaction design — hand tracking, gaze input, and controller-based navigation.', youtubeId: 'CZRf-sicJo8', duration: '19 mins', difficulty: 'Intermediate', thumbnail: `https://img.youtube.com/vi/CZRf-sicJo8/hqdefault.jpg` },
-    { id: 'vrc-6', lesson: 6, title: 'VR Lab - Module 5', desc: 'Audio and spatial sound in VR. Create immersive soundscapes that respond to user position.', youtubeId: 'A6zCr_skTh0', duration: '16 mins', difficulty: 'Intermediate', thumbnail: `https://img.youtube.com/vi/A6zCr_skTh0/hqdefault.jpg` },
-    { id: 'vrc-7', lesson: 7, title: 'VR Lab - Module 6', desc: 'Building interactive UI panels inside VR — menus, buttons, and heads-up displays.', youtubeId: 'IOVMgEWY7og', duration: '21 mins', difficulty: 'Intermediate', thumbnail: `https://img.youtube.com/vi/IOVMgEWY7og/hqdefault.jpg` },
-    { id: 'vrc-8', lesson: 8, title: 'VR Lab - Module 7', desc: 'Animation and motion capture basics. Bring your virtual characters to life with realistic movements.', youtubeId: 'Iusr8Xv8zbI', duration: '24 mins', difficulty: 'Advanced', thumbnail: `https://img.youtube.com/vi/Iusr8Xv8zbI/hqdefault.jpg` },
-    { id: 'vrc-9', lesson: 9, title: 'VR Lab - Module 8', desc: 'Multi-user VR environments — networking, synchronization, and collaborative virtual spaces.', youtubeId: '_AXCZUf1bB4', duration: '25 mins', difficulty: 'Advanced', thumbnail: `https://img.youtube.com/vi/_AXCZUf1bB4/hqdefault.jpg` },
-    { id: 'vrc-10', lesson: 10, title: 'VR Lab - Module 9', desc: 'Performance optimization — reducing latency, managing frame rates, and GPU rendering tips.', youtubeId: 'e8_MTsy7_Gg', duration: '20 mins', difficulty: 'Advanced', thumbnail: `https://img.youtube.com/vi/e8_MTsy7_Gg/hqdefault.jpg` },
-    { id: 'vrc-11', lesson: 11, title: 'VR Lab - Module 10', desc: 'Augmented Reality integration — blending real world with virtual overlays using AR frameworks.', youtubeId: 'YHPUtKaTd08', duration: '22 mins', difficulty: 'Advanced', thumbnail: `https://img.youtube.com/vi/YHPUtKaTd08/hqdefault.jpg` },
-    { id: 'vrc-12', lesson: 12, title: 'VR Lab - Module 11', desc: 'Final project — build and deploy a complete VR experience from concept to published app.', youtubeId: 'G0TfT21YmLY', duration: '30 mins', difficulty: 'Advanced', thumbnail: `https://img.youtube.com/vi/G0TfT21YmLY/hqdefault.jpg` },
-  ];
+  useEffect(() => {
+    if (!selectedVideo) {
+      setIsAnimationDone(false);
+    }
+  }, [selectedVideo]);
 
   // Filter items
   const filteredItems = videoItems.filter(item => {
@@ -358,8 +173,8 @@ const VrLabsWorlds = () => {
              
 
               {/* Course Cards Grid */}
-              <AnimatePresence mode="popLayout">
-                <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                <AnimatePresence mode="popLayout">
                   {vrCourseItems.map((item, idx) => (
                     <motion.div
                       layout
@@ -367,12 +182,12 @@ const VrLabsWorlds = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 0.3, delay: idx * 0.04 }}
-                      className="group flex flex-col bg-white border border-slate-100 rounded-[20px] overflow-hidden hover:shadow-xl hover:border-emerald-100 transition-all cursor-pointer"
+                      transition={{ duration: 0.25 }}
+                      className="group flex flex-col bg-white border border-slate-100 rounded-[16px] overflow-hidden hover:shadow-xl hover:border-emerald-100 transition-all cursor-pointer"
                       onClick={() => setSelectedVideo({ ...item, category: 'courses', subject: 'VR/AR' })}
                     >
                       {/* Thumbnail */}
-                      <div className="relative w-full aspect-square overflow-hidden bg-slate-100">
+                      <div className="relative w-full aspect-video overflow-hidden bg-slate-100">
                         <img src={item.thumbnail} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                         
                         {/* Lesson number badge */}
@@ -382,9 +197,9 @@ const VrLabsWorlds = () => {
 
                         {/* Play overlay */}
                         <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 flex items-center justify-center transition-all duration-300">
-                          <motion.div whileHover={{ scale: 1.1 }} className="w-12 h-12 rounded-full bg-white text-emerald-600 flex items-center justify-center shadow-xl group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">
+                          <div className="w-10 h-10 rounded-full bg-white text-emerald-600 flex items-center justify-center shadow-xl group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">
                             <Play size={20} className="ml-1 fill-current" />
-                          </motion.div>
+                          </div>
                         </div>
 
                         {/* Duration */}
@@ -396,7 +211,7 @@ const VrLabsWorlds = () => {
                       </div>
 
                       {/* Card Details */}
-                      <div className="p-4 flex flex-col flex-1">
+                      <div className="p-3 flex flex-col flex-1">
                         <div className="mb-2">
                           <span className="text-[9px] font-bold text-emerald-600 px-2 py-1 rounded-md bg-emerald-50 tracking-wider uppercase">
                             VR/AR Course
@@ -419,14 +234,14 @@ const VrLabsWorlds = () => {
                       </div>
                     </motion.div>
                   ))}
-                </motion.div>
-              </AnimatePresence>
+                </AnimatePresence>
+              </div>
             </>
           ) : (
             <>
               {/* Video Cards Grid View */}
-              <AnimatePresence mode="popLayout">
-                <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                <AnimatePresence mode="popLayout">
                   {filteredItems.map((item, idx) => (
                     <motion.div
                       layout
@@ -434,12 +249,12 @@ const VrLabsWorlds = () => {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 0.3, delay: idx * 0.05 }}
-                      className="group flex flex-col bg-white border border-slate-100 rounded-[20px] overflow-hidden hover:shadow-xl hover:border-blue-100 transition-all cursor-pointer"
+                      transition={{ duration: 0.25 }}
+                      className="group flex flex-col bg-white border border-slate-100 rounded-[16px] overflow-hidden hover:shadow-xl hover:border-blue-100 transition-all cursor-pointer"
                       onClick={() => setSelectedVideo(item)}
                     >
                       {/* Top Side: Thumbnail container */}
-                      <div className="relative w-full aspect-square overflow-hidden bg-slate-100">
+                      <div className="relative w-full aspect-video overflow-hidden bg-slate-100">
                         <img
                           src={item.thumbnail}
                           alt={item.title}
@@ -454,12 +269,9 @@ const VrLabsWorlds = () => {
 
                         {/* Play Button Overlay */}
                         <div className="absolute inset-0 bg-black/10 group-hover:bg-black/30 flex items-center justify-center transition-all duration-300">
-                          <motion.div 
-                            whileHover={{ scale: 1.1 }}
-                            className="w-12 h-12 rounded-full bg-white text-blue-600 flex items-center justify-center shadow-xl group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300"
-                          >
+                          <div className="w-10 h-10 rounded-full bg-white text-blue-600 flex items-center justify-center shadow-xl group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
                             <Play size={20} className="ml-1 fill-current" />
-                          </motion.div>
+                          </div>
                         </div>
 
                         {/* Bottom badges */}
@@ -471,7 +283,7 @@ const VrLabsWorlds = () => {
                       </div>
 
                       {/* Bottom Side: Card Details */}
-                      <div className="p-4 flex flex-col flex-1">
+                      <div className="p-3 flex flex-col flex-1">
                         <div className="mb-2">
                           <span className="text-[9px] font-bold text-blue-600 px-2 py-1 rounded-md bg-blue-50 tracking-wider uppercase">
                             {item.subject}
@@ -498,8 +310,8 @@ const VrLabsWorlds = () => {
                       </div>
                     </motion.div>
                   ))}
-                </motion.div>
-              </AnimatePresence>
+                </AnimatePresence>
+              </div>
 
               {/* Empty state when no search result */}
               {filteredItems.length === 0 && (
@@ -536,6 +348,7 @@ const VrLabsWorlds = () => {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
+              onAnimationComplete={() => setIsAnimationDone(true)}
               className="bg-white rounded-[24px] overflow-hidden shadow-2xl w-full max-w-2xl border border-slate-100 relative max-h-[90vh] flex flex-col"
             >
               {/* Close Button */}
@@ -547,14 +360,32 @@ const VrLabsWorlds = () => {
               </button>
 
               {/* YouTube Video Embed Container */}
-              <div className="aspect-video w-full bg-black shrink-0">
-                <iframe
-                  src={`https://www.youtube.com/embed/${selectedVideo.youtubeId}?autoplay=1`}
-                  title={selectedVideo.title}
-                  className="w-full h-full"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
+              <div className="aspect-video w-full bg-black shrink-0 relative flex items-center justify-center overflow-hidden">
+                {isAnimationDone ? (
+                  <iframe
+                    src={`https://www.youtube.com/embed/${selectedVideo.youtubeId}?autoplay=1`}
+                    title={selectedVideo.title}
+                    className="w-full h-full border-0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                ) : (
+                  <div className="absolute inset-0 flex items-center justify-center bg-slate-950">
+                    {selectedVideo.thumbnail && (
+                      <img 
+                        src={selectedVideo.thumbnail} 
+                        alt="" 
+                        className="absolute inset-0 w-full h-full object-cover opacity-40 blur-[2px]"
+                      />
+                    )}
+                    <div className="relative z-10 flex flex-col items-center gap-3">
+                      <div className="w-12 h-12 rounded-full border-4 border-slate-800 border-t-blue-500 animate-spin" />
+                      <span className="text-white text-xs font-semibold tracking-wider uppercase opacity-80 animate-pulse">
+                        Loading Experience...
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Details in Modal */}
