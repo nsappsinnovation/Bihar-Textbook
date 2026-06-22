@@ -116,18 +116,19 @@ const Footer = () => {
           <p className="text-sm">
             Email Us- <br />
             <a
-              href="mailto:xyz@gmail.com"
+              href="mailto:textbookmd@gmail.com"
               className="text-white hover:underline"
             >
-              xyz@gmail.com
+              textbookmd@gmail.com
             </a>
           </p>
 
           <div className="mt-4 text-sm">
-            <p>Bihar State Text Book Publishing Corporation Logo</p>
-            <p>Registered Office-</p>
-            <p>State- Bihar</p>
-            <p>Country-India</p>
+            <p className="font-semibold">Registered Office:-</p>
+            <p>Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001</p>
+            <p>Bihar</p>
+            <p>India</p>
+            <p className="mt-2">Phone: 06122221975</p>
           </div>
         </div>
       </div>
