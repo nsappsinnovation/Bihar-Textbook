@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  ArrowLeft, ArrowRight, BookOpen,
-  Shield, Trophy, Play, Clock, GraduationCap, FileText, ChevronRight, CheckCircle2, XCircle,
-  Gamepad2, Key
+  ArrowLeft, ArrowRight, BookOpen, Shield, Trophy, Play, Clock, GraduationCap, FileText, ChevronRight, CheckCircle2, XCircle, Gamepad2, Key,
+  Bot, CreditCard, Ban, Zap, Sparkles, User, AlertOctagon, Smartphone, Rocket, Lock, Unlock, Search, Package, Hammer, Skull, Globe, Ghost, UserX, Volume2, Award, Star, RefreshCw, Target, Bell, HelpCircle, MessageSquare
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -166,11 +165,11 @@ const CyberSecurityQuiz = () => {
                   </span>
                   <div className="flex items-center gap-2">
                     <Shield className="w-4 h-4 text-emerald-400 animate-pulse" />
-                    <div className={`px-2 py-0.5 rounded text-[9px] font-black border ${timeLeft > 10
+                    <div className={`px-2 py-0.5 rounded text-[9px] font-black border flex items-center gap-1 ${timeLeft > 10
                         ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
                         : 'bg-rose-500/10 text-rose-400 border-rose-500/30 animate-pulse'
                       }`}>
-                      ⏱ {timeLeft}s
+                      <Clock size={10} /> {timeLeft}s
                     </div>
                   </div>
                 </div>
@@ -236,7 +235,9 @@ const CyberSecurityQuiz = () => {
               className="w-full"
             >
               <div className="bg-[#051c14]/85 backdrop-blur-xl border-2 border-emerald-500/40 rounded-[24px] p-5 shadow-[0_0_35px_rgba(0,0,0,0.6)] text-center text-white">
-                <div className="w-16 h-16 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-3 shadow-xl shadow-emerald-500/35">🏆</div>
+                <div className="w-16 h-16 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-xl shadow-emerald-500/35">
+                  <Trophy size={28} className="text-white" />
+                </div>
                 <h2 className="text-lg font-black text-white mb-1">Challenge Completed!</h2>
                 <p className="text-slate-400 text-[10px] font-bold mb-4">Cyber Security Quiz performance:</p>
 
@@ -280,31 +281,31 @@ const ChatPatrol = ({ onComplete }) => {
   const chatMissions = [
     {
       id: 1,
-      title: "🤖 Robo-Gamer99's Cheat Trap",
+      title: "Robo-Gamer99's Cheat Trap",
       character: "Robo-Gamer99",
-      avatar: "🤖",
+      iconType: "bot",
       avatarBg: "bg-purple-600",
-      initialMessage: "Hey friend! Want free infinite gold and diamond pets in your game? 🎮 Just send me a picture of your parent's credit card (the plastic bank card) and tell me the 3 tiny numbers on the back!",
+      initialMessage: "Hey friend! Want free infinite gold and diamond pets in your game? Just send me a picture of your parent's credit card (the plastic bank card) and tell me the 3 tiny numbers on the back!",
       options: [
         {
-          text: "Wow! Free gold! Let me find the credit card right now! 💳",
+          text: "Wow! Free gold! Let me find the credit card right now!",
           isCorrect: false,
-          feedback: "Oh no! The gaming monster bought 100 digital alien space-bananas with your parents' card! 🍌 Rule: NEVER share credit cards or bank card details with online strangers!"
+          feedback: "Oh no! The gaming monster bought 100 digital alien space-bananas with your parents' card! Rule: NEVER share credit cards or bank card details with online strangers!"
         },
         {
-          text: "Wait! Free stuff shouldn't ask for a credit card. I never share bank cards! 🚫",
+          text: "Wait! Free stuff shouldn't ask for a credit card. I never share bank cards!",
           isCorrect: true,
-          feedback: "Hooray! You blocked the monster! They got frustrated and self-destructed in a cloud of digital sparks! ⚡"
+          feedback: "Hooray! You blocked the monster! They got frustrated and self-destructed in a cloud of digital sparks!"
         }
       ]
     },
     {
       id: 2,
-      title: "🦄 The Rainbow Unicorn Club",
+      title: "The Rainbow Unicorn Club",
       character: "Super-Unicorn-77",
-      avatar: "🦄",
+      iconType: "unicorn",
       avatarBg: "bg-pink-500",
-      initialMessage: "Omg! You won a giant, fluffy rainbow unicorn plushie! 🦄 Tell me your home address and where you go to school so the delivery truck can drop it off right now!",
+      initialMessage: "Omg! You won a giant, fluffy rainbow unicorn plushie! Tell me your home address and where you go to school so the delivery truck can drop it off right now!",
       options: [
         {
           text: "Yay! My address is 123 Rainbow Street and I go to Sunshine School...",
@@ -312,33 +313,42 @@ const ChatPatrol = ({ onComplete }) => {
           feedback: "Oh no! The unicorn was actually a sneaky spyware robot in a costume! Now they know where you live and play. Rule: NEVER share your real name, address, or school online!"
         },
         {
-          text: "Stop! I don't give my home address or school name to people online! 🛑",
+          text: "Stop! I don't give my home address or school name to people online!",
           isCorrect: true,
-          feedback: "Amazing job! You protected your secret base! The robot unicorn malfunctioned and rolled away on a unicycle! 🚲"
+          feedback: "Amazing job! You protected your secret base! The robot unicorn malfunctioned and rolled away on a unicycle!"
         }
       ]
     },
     {
       id: 3,
-      title: "🦝 Uncle Pockets' Vault Key",
+      title: "Uncle Pockets' Vault Key",
       character: "Uncle Pockets",
-      avatar: "🦝",
+      iconType: "raccoon",
       avatarBg: "bg-amber-600",
-      initialMessage: "Alert! Your digital piggy bank has a leak! 🚨 Quick, read me the 4-digit code (OTP) that just popped up on your parent's phone so I can patch it!",
+      initialMessage: "Alert! Your digital piggy bank has a leak! Quick, read me the 4-digit code (OTP) that just popped up on your parent's phone so I can patch it!",
       options: [
         {
-          text: "Oh no! Stop the leak! The code is 9987! 📱",
+          text: "Oh no! Stop the leak! The code is 9987!",
           isCorrect: false,
-          feedback: "Oh no! That code was the key to the vault! Uncle Pockets opened the piggy bank and flew away with all the coins! 🚀 Rule: NEVER share OTP codes with anyone!"
+          feedback: "Oh no! That code was the key to the vault! Uncle Pockets opened the piggy bank and flew away with all the coins! Rule: NEVER share OTP codes with anyone!"
         },
         {
-          text: "Wait! I will ask my parents first. I never share security codes! 🕵️",
+          text: "Wait! I will ask my parents first. I never share security codes!",
           isCorrect: true,
-          feedback: "Perfect! You kept the vault locked! Uncle Pockets cried: 'Curses! Foiled again!' and vanished into a puff of smoke! 🔐"
+          feedback: "Perfect! You kept the vault locked! Uncle Pockets cried: 'Curses! Foiled again!' and vanished into a puff of smoke!"
         }
       ]
     }
   ];
+
+  const renderAvatar = (iconType) => {
+    switch (iconType) {
+      case 'bot': return <Bot size={18} />;
+      case 'unicorn': return <Sparkles size={18} />;
+      case 'raccoon': return <Ghost size={18} />;
+      default: return <UserX size={18} />;
+    }
+  };
 
   const [activeMission, setActiveMission] = useState(null);
   const [selectedChoice, setSelectedChoice] = useState(null);
@@ -362,15 +372,15 @@ const ChatPatrol = ({ onComplete }) => {
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-3">
         <div>
           <h3 className="text-lg font-bold text-emerald-400 flex items-center gap-2">
-            💬 Chat Patrol: Monster or Friend?
+            <MessageSquare size={18} /> Chat Patrol: Monster or Friend?
           </h3>
           <p className="text-[11px] text-slate-300 mt-1">
-            🚨 Tricky monsters are trying to steal your family secrets or piggy bank! Read their messages and pick the safest reply. Don't share cards, passwords, or personal details!
+            Tricky monsters are trying to steal your family secrets or piggy bank! Read their messages and pick the safest reply. Don't share cards, passwords, or personal details!
           </p>
         </div>
         <div className="bg-emerald-950/60 border border-emerald-500/30 px-3.5 py-1.5 rounded-full flex items-center gap-2 w-max">
           <span className="text-[9px] font-black text-slate-300 uppercase tracking-wider">SHIELDS EARNED:</span>
-          <span className="text-xs font-black text-yellow-400">🛡️ {getScore()} / {chatMissions.length}</span>
+          <span className="text-xs font-black text-yellow-400 flex items-center gap-1"><Shield size={12} className="fill-current" /> {getScore()} / {chatMissions.length}</span>
         </div>
       </div>
 
@@ -390,8 +400,8 @@ const ChatPatrol = ({ onComplete }) => {
               >
                 <div>
                   <div className="flex items-center gap-2.5 mb-3">
-                    <span className={`w-8 h-8 rounded-xl flex items-center justify-center text-lg ${m.avatarBg}`}>
-                      {m.avatar}
+                    <span className={`w-8 h-8 rounded-xl flex items-center justify-center text-white ${m.avatarBg}`}>
+                      {renderAvatar(m.iconType)}
                     </span>
                     <div>
                       <h4 className="font-bold text-xs text-slate-100">{m.character}</h4>
@@ -403,7 +413,7 @@ const ChatPatrol = ({ onComplete }) => {
                 
                 <div className="flex items-center justify-between w-full mt-2 border-t border-white/5 pt-2">
                   <span className="text-[10px] font-black text-emerald-400 uppercase tracking-wider">PLAY MISSION</span>
-                  {isDone && <span className="text-[10px] font-black text-yellow-400">🛡️ CLEARED</span>}
+                  {isDone && <span className="text-[10px] font-black text-yellow-400 flex items-center gap-1"><Shield size={10} className="fill-current" /> CLEARED</span>}
                 </div>
               </button>
             );
@@ -421,8 +431,8 @@ const ChatPatrol = ({ onComplete }) => {
           <div className="bg-[#03140f] rounded-2xl border border-emerald-500/10 p-4 max-w-2xl mx-auto space-y-4 shadow-inner">
             {/* Scammer message */}
             <div className="flex items-start gap-3">
-              <span className={`w-10 h-10 rounded-2xl flex items-center justify-center text-xl shrink-0 ${activeMission.avatarBg} animate-bounce`}>
-                {activeMission.avatar}
+              <span className={`w-10 h-10 rounded-2xl flex items-center justify-center text-white shrink-0 ${activeMission.avatarBg} animate-bounce`}>
+                {renderAvatar(activeMission.iconType)}
               </span>
               <div className="bg-[#06241b] text-slate-200 p-3.5 rounded-2xl rounded-tl-none text-xs font-semibold leading-relaxed max-w-[85%] border border-emerald-500/10 shadow-md">
                 <span className="block text-[9px] font-black text-purple-300 uppercase tracking-wider mb-1">{activeMission.character}</span>
@@ -459,8 +469,8 @@ const ChatPatrol = ({ onComplete }) => {
                     <span className="block text-[9px] font-black text-emerald-400 uppercase tracking-wider mb-1">You</span>
                     {selectedChoice.text}
                   </div>
-                  <span className="w-10 h-10 rounded-2xl flex items-center justify-center text-xl shrink-0 bg-emerald-600 text-white font-bold">
-                    👶
+                  <span className="w-10 h-10 rounded-2xl flex items-center justify-center text-white shrink-0 bg-emerald-600">
+                    <User size={18} />
                   </span>
                 </div>
 
@@ -468,10 +478,14 @@ const ChatPatrol = ({ onComplete }) => {
                 <div className={`p-4 rounded-xl border ${
                   selectedChoice.isCorrect 
                     ? 'bg-emerald-950/80 border-emerald-500/40 text-emerald-300' 
-                    : 'bg-rose-950/80 border-rose-500/40 text-rose-300'
+                    : 'bg-rose-955/80 border-rose-500/40 text-rose-300'
                 } text-xs font-medium leading-relaxed`}>
                   <div className="flex items-center gap-2 mb-2 font-black text-sm uppercase tracking-wider">
-                    {selectedChoice.isCorrect ? "🏆 Success! Hacker Blocked!" : "🚨 Alert! You got Tricked!"}
+                    {selectedChoice.isCorrect ? (
+                      <span className="flex items-center gap-1.5"><Shield size={16} className="text-emerald-400" /> Success! Hacker Blocked!</span>
+                    ) : (
+                      <span className="flex items-center gap-1.5"><AlertOctagon size={16} className="text-rose-400" /> Alert! You got Tricked!</span>
+                    )}
                   </div>
                   <p className="font-semibold">{selectedChoice.feedback}</p>
                 </div>
@@ -510,7 +524,7 @@ const ScamDetective = ({ onComplete }) => {
   const detectiveMissions = [
     {
       id: 1,
-      title: "🚨 The Suspicious Text Message",
+      title: "The Suspicious Text Message",
       type: "SMS Text Message",
       sender: "+1 (800) 555-SCAM (Claims: Bank of Safety)",
       messageTextPre: "ALERT: Your account is ",
@@ -522,15 +536,15 @@ const ScamDetective = ({ onComplete }) => {
       messageTextPost: " Do not delay!",
       flags: {
         1: {
-          label: "🚨 Scary Panic Words (SUSPENDED!)",
+          label: "Scary Panic Words (SUSPENDED!)",
           desc: "Scammers use scary words like 'SUSPENDED!' to make you panic and click quickly without thinking. Real banks or companies never talk to you like this! Always stay calm."
         },
         2: {
-          label: "😱 Threat of Losing Money (FOREVER:)",
+          label: "Threat of Losing Money (FOREVER:)",
           desc: "Saying your money is gone 'FOREVER' is a scare tactic. They want to make you scared so you act fast. Real banks will never threat-text you. Show it to a parent!"
         },
         3: {
-          label: "🔗 Weird Web Link",
+          label: "Weird Web Link",
           desc: "Look at that address: it has random words and doesn't end in normal sites like '.com' or '.in'. Never click links in texts, they can steal your details or install bugs!"
         }
       }
@@ -564,15 +578,15 @@ const ScamDetective = ({ onComplete }) => {
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-3">
         <div>
           <h3 className="text-lg font-bold text-emerald-400 flex items-center gap-2">
-            🕵️ Scam Link Detective
+            <Search size={18} /> Scam Link Detective
           </h3>
           <p className="text-[11px] text-slate-300 mt-1">
-            🚨 A sneaky scammer sent a text message to trick you! Tap the yellow words inside the SMS message to discover the 3 warning signs (Red Flags).
+            A sneaky scammer sent a text message to trick you! Tap the yellow words inside the SMS message to discover the 3 warning signs (Red Flags).
           </p>
         </div>
         <div className="bg-emerald-950/60 border border-emerald-500/30 px-3.5 py-1.5 rounded-full flex items-center gap-2 w-max">
           <span className="text-[9px] font-black text-slate-300 uppercase tracking-wider">RED FLAGS FOUND:</span>
-          <span className="text-xs font-black text-yellow-400">🔍 {Object.keys(clickedFlags).length} / 3</span>
+          <span className="text-xs font-black text-yellow-400 flex items-center gap-1"><Search size={12} /> {Object.keys(clickedFlags).length} / 3</span>
         </div>
       </div>
 
@@ -583,7 +597,7 @@ const ScamDetective = ({ onComplete }) => {
           
           <div className="w-full bg-[#0d1e19] border border-emerald-900/40 rounded-2xl p-4 min-h-[200px] flex flex-col">
             <div className="flex items-center gap-2 pb-3 border-b border-emerald-950/60 mb-3">
-              <span className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-sm">💬</span>
+              <span className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-white"><MessageSquare size={16} /></span>
               <div>
                 <div className="text-[10px] font-bold text-slate-300">{mission.sender}</div>
                 <div className="text-[8px] text-slate-500">Text Message • Today</div>
@@ -639,23 +653,23 @@ const ScamDetective = ({ onComplete }) => {
         <div className="bg-[#03140f] border border-emerald-500/15 rounded-2xl p-5 flex flex-col justify-between">
           <div>
             <h4 className="text-[10px] font-black uppercase text-slate-400 mb-3 tracking-wider flex items-center gap-1.5">
-              🕵️ Detective Clue Checklist
+              <Search size={12} /> Detective Clue Checklist
             </h4>
 
             {/* Clue Checklist */}
             <div className="mb-4 bg-emerald-950/20 border border-emerald-500/10 rounded-xl p-3 space-y-2">
-              <span className="block text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1">🔍 Clues to Discover:</span>
+              <span className="block text-[8px] font-black text-slate-400 uppercase tracking-widest mb-1">Clues to Discover:</span>
               <div className="flex items-center justify-between text-xs font-bold">
-                <span className={clickedFlags[1] ? 'text-emerald-400' : 'text-slate-400'}>1. 🚨 Scary Panic Words</span>
-                <span className="text-[10px] font-black">{clickedFlags[1] ? '✅ FOUND' : '❌ HIDDEN'}</span>
+                <span className={clickedFlags[1] ? 'text-emerald-400' : 'text-slate-400'}>1. Scary Panic Words</span>
+                <span className="text-[10px] font-black">{clickedFlags[1] ? '✓ FOUND' : '✗ HIDDEN'}</span>
               </div>
               <div className="flex items-center justify-between text-xs font-bold">
-                <span className={clickedFlags[2] ? 'text-emerald-400' : 'text-slate-400'}>2. 😱 Threat of Losing Money</span>
-                <span className="text-[10px] font-black">{clickedFlags[2] ? '✅ FOUND' : '❌ HIDDEN'}</span>
+                <span className={clickedFlags[2] ? 'text-emerald-400' : 'text-slate-400'}>2. Threat of Losing Money</span>
+                <span className="text-[10px] font-black">{clickedFlags[2] ? '✓ FOUND' : '✗ HIDDEN'}</span>
               </div>
               <div className="flex items-center justify-between text-xs font-bold">
-                <span className={clickedFlags[3] ? 'text-emerald-400' : 'text-slate-400'}>3. 🔗 Weird Scammy Web Link</span>
-                <span className="text-[10px] font-black">{clickedFlags[3] ? '✅ FOUND' : '❌ HIDDEN'}</span>
+                <span className={clickedFlags[3] ? 'text-emerald-400' : 'text-slate-400'}>3. Weird Scammy Web Link</span>
+                <span className="text-[10px] font-black">{clickedFlags[3] ? '✓ FOUND' : '✗ HIDDEN'}</span>
               </div>
             </div>
             
@@ -683,8 +697,8 @@ const ScamDetective = ({ onComplete }) => {
           <div className="pt-4 border-t border-emerald-500/10 mt-4">
             {isCompleted ? (
               <div className="space-y-4">
-                <div className="bg-emerald-900/30 border border-emerald-500/30 p-3.5 rounded-xl text-emerald-350 text-xs font-bold leading-relaxed">
-                  🎉 Fantastic work, Detective! You disarmed the scammer! Always remember: If a text has scary threats or weird links, NEVER click them. Tell a parent!
+                <div className="bg-emerald-900/30 border border-emerald-500/30 p-3.5 rounded-xl text-emerald-300 text-xs font-bold leading-relaxed">
+                  Fantastic work, Detective! You disarmed the scammer! Always remember: If a text has scary threats or weird links, NEVER click them. Tell a parent!
                 </div>
                 <button 
                   onClick={resetGame}
@@ -735,9 +749,9 @@ const PasswordForge = ({ onComplete }) => {
     if (password.length === 0) {
       return {
         name: "No Shield",
-        color: "border-dashed border-slate-700 bg-slate-900 text-slate-650",
+        color: "border-dashed border-slate-700 bg-slate-905 text-slate-500",
         desc: "Type a password to start forging!",
-        emoji: "💨"
+        iconType: "none"
       };
     }
     switch(strength) {
@@ -745,37 +759,37 @@ const PasswordForge = ({ onComplete }) => {
       case 1:
         return {
           name: "Fragile Cardboard Shield",
-          color: "border-amber-850 bg-amber-955/40 text-amber-500 shadow-amber-900/10",
+          color: "border-amber-850 bg-[#352515] text-amber-500 shadow-amber-900/10",
           desc: "Flimsy! Easily broken by the goblin's paper airplane.",
-          emoji: "📦"
+          iconType: "cardboard"
         };
       case 2:
         return {
           name: "Reinforced Wooden Shield",
-          color: "border-yellow-750 bg-yellow-955/30 text-yellow-600 shadow-yellow-800/10",
+          color: "border-yellow-750 bg-[#302510] text-yellow-600 shadow-[#302510]/10",
           desc: "Decent! Can handle small rocks but will break under laser fire.",
-          emoji: "🪵"
+          iconType: "wood"
         };
       case 3:
         return {
           name: "Polished Iron Bulwark",
           color: "border-slate-500 bg-slate-800 text-slate-300 shadow-slate-700/20",
           desc: "Solid! Standard security that repels basic hacker slingshots.",
-          emoji: "🛡️"
+          iconType: "iron"
         };
       case 4:
         return {
           name: "Glowing Emerald Forcefield",
           color: "border-emerald-400 bg-emerald-950/60 text-emerald-300 shadow-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.2)]",
           desc: "Incredible! Reflects the Goblin's plasma cannon right back at them!",
-          emoji: "⚡"
+          iconType: "emerald"
         };
       default:
         return {
           name: "Cardboard Shield",
-          color: "border-amber-800 bg-amber-950/40 text-amber-500",
+          color: "border-amber-800 bg-[#352515] text-amber-500",
           desc: "Type a stronger password!",
-          emoji: "📦"
+          iconType: "cardboard"
         };
     }
   };
@@ -807,7 +821,7 @@ const PasswordForge = ({ onComplete }) => {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h3 className="text-lg font-bold text-emerald-400 flex items-center gap-2">
-            🛡️ Password Shield Forge
+            <Shield size={18} /> Password Shield Forge
           </h3>
           <p className="text-[11px] text-slate-300 mt-1">
             Type a strong password to upgrade your defense shield and protect the castle from the Glitch Goblin!
@@ -876,7 +890,11 @@ const PasswordForge = ({ onComplete }) => {
             disabled={isTesting || password.length === 0}
             className="w-full py-3 bg-[#10b981] hover:bg-[#059669] disabled:opacity-40 text-white rounded-xl text-xs font-black tracking-wide uppercase transition-all cursor-pointer shadow-lg shadow-emerald-600/25 flex items-center justify-center gap-2 active:scale-[0.98]"
           >
-            {isTesting ? "🔥 Testing Shield Defenses..." : "⚔️ Test Shield Against Goblin!"}
+            {isTesting ? (
+              <span className="flex items-center gap-1.5"><RefreshCw size={14} className="animate-spin" /> Testing Shield Defenses...</span>
+            ) : (
+              <span className="flex items-center gap-1.5"><Shield size={14} /> Test Shield Against Goblin!</span>
+            )}
           </button>
         </div>
 
@@ -896,18 +914,22 @@ const PasswordForge = ({ onComplete }) => {
           <div className="flex items-center justify-around w-full py-4 relative z-0">
             {/* The Shield display */}
             <div className="flex flex-col items-center gap-2">
-              <div className={`w-20 h-20 rounded-full border-2 flex items-center justify-center text-3xl shadow-inner transition-all duration-300 ${shield.color}`}>
-                {shield.emoji}
+              <div className={`w-20 h-20 rounded-full border-2 flex items-center justify-center shadow-inner transition-all duration-300 ${shield.color}`}>
+                {shield.iconType === "none" && <Lock size={32} className="text-slate-500" />}
+                {shield.iconType === "cardboard" && <Package size={32} className="text-amber-500" />}
+                {shield.iconType === "wood" && <Hammer size={32} className="text-yellow-600" />}
+                {shield.iconType === "iron" && <Shield size={32} className="text-slate-300" />}
+                {shield.iconType === "emerald" && <Zap size={32} className="text-emerald-400 animate-pulse" />}
               </div>
               <div className="text-xs font-bold text-slate-200 mt-2">{shield.name}</div>
             </div>
 
-            <div className="text-xs font-black text-slate-605 uppercase tracking-widest">VS</div>
+            <div className="text-xs font-black text-slate-600 uppercase tracking-widest">VS</div>
 
             {/* Scammer Goblin display */}
             <div className="flex flex-col items-center gap-2">
-              <div className="w-20 h-20 rounded-full border border-rose-500/20 bg-rose-950/20 flex items-center justify-center text-3xl shadow-lg animate-pulse">
-                🤢
+              <div className="w-20 h-20 rounded-full border border-rose-500/20 bg-rose-950/20 flex items-center justify-center shadow-lg animate-pulse">
+                <Skull size={32} className="text-rose-500" />
               </div>
               <div className="text-xs font-bold text-slate-200 mt-2">Glitch Goblin</div>
             </div>
@@ -921,25 +943,25 @@ const PasswordForge = ({ onComplete }) => {
             
             {testResult === "weak" && (
               <motion.div initial={{ scale: 0.95 }} animate={{ scale: 1 }} className="text-xs font-semibold text-rose-400">
-                💥 The Glitch Goblin threw a wet tomato 🍅 and completely shattered your Cardboard Shield! Access denied to castle! Try building a wooden or iron shield!
+                The Glitch Goblin threw a wet tomato and completely shattered your Cardboard Shield! Access denied to castle! Try building a wooden or iron shield!
               </motion.div>
             )}
 
             {testResult === "medium" && (
               <motion.div initial={{ scale: 0.95 }} animate={{ scale: 1 }} className="text-xs font-semibold text-yellow-400">
-                🪵 The Glitch Goblin threw a heavy rock 🪨. Your Wooden Shield blocked it, but got badly cracked! A hacker would eventually break in. Add symbols or capitals!
+                The Glitch Goblin threw a heavy rock. Your Wooden Shield blocked it, but got badly cracked! A hacker would eventually break in. Add symbols or capitals!
               </motion.div>
             )}
 
             {testResult === "strong" && (
-              <motion.div initial={{ scale: 0.95 }} animate={{ scale: 1 }} className="text-xs font-semibold text-slate-350">
-                🛡️ The Goblin fired a Laser Pistol! Your Iron Shield blocked it, but got burnt. Very good, but can we make it perfect by adding symbols like @,#,$?
+              <motion.div initial={{ scale: 0.95 }} animate={{ scale: 1 }} className="text-xs font-semibold text-slate-300">
+                The Goblin fired a Laser Pistol! Your Iron Shield blocked it, but got burnt. Very good, but can we make it perfect by adding symbols like @,#,$?
               </motion.div>
             )}
 
             {testResult === "perfect" && (
-              <motion.div initial={{ scale: 0.95 }} animate={{ scale: 1 }} className="text-xs font-semibold text-emerald-400">
-                🏆 PERFECT! The Goblin fired a Giant Plasma Cannon! Your Emerald Forcefield reflected the beam back, vaporizing the goblin's weapon! Castle is 100% SECURE!
+              <motion.div initial={{ scale: 0.95 }} animate={{ scale: 1 }} className="text-xs font-semibold text-emerald-400 flex items-center gap-1.5 justify-center">
+                <Trophy size={14} className="text-emerald-400" /> PERFECT! The Goblin fired a Giant Plasma Cannon! Your Emerald Forcefield reflected the beam back, vaporizing the goblin's weapon! Castle is 100% SECURE!
               </motion.div>
             )}
           </div>
@@ -954,23 +976,23 @@ const PopupBlaster = ({ onComplete }) => {
   const [alerts, setAlerts] = useState([
     {
       id: 1,
-      title: "⚠️ CRITICAL COMPUTER DANGER!",
+      title: "CRITICAL COMPUTER DANGER!",
       text: "Warning: 99 virus bugs detected in your system! Click to clean immediately!",
-      actionText: "🔴 CLEAN DEVICE NOW",
+      actionText: "CLEAN DEVICE NOW",
       safeAction: "Close (X)",
     },
     {
       id: 2,
-      title: "🎁 FREE IPHONE 25 WINNER!",
+      title: "FREE IPHONE 25 WINNER!",
       text: "Congratulations! You have been randomly chosen to receive a free phone! Click below to claim!",
-      actionText: "🎉 CLAIM PRIZE",
+      actionText: "CLAIM PRIZE",
       safeAction: "Close (X)",
     },
     {
       id: 3,
-      title: "🚨 SECURITY FIREWALL LEAK!",
+      title: "SECURITY FIREWALL LEAK!",
       text: "Your computer security firewall has crashed! Click to download repairs!",
-      actionText: "⚡ DOWNLOAD FIX",
+      actionText: "DOWNLOAD FIX",
       safeAction: "Close (X)",
     }
   ]);
@@ -987,7 +1009,7 @@ const PopupBlaster = ({ onComplete }) => {
   const handleScamClick = () => {
     setFeedback({
       isCorrect: false,
-      text: "Oh no! Tapping that loaded a sneaky virus bug! 👾 Hackers got access! Remember: Never trust flashy pop-up warnings or free prize claims."
+      text: "Oh no! Tapping that loaded a sneaky virus bug! Hackers got access! Remember: Never trust flashy pop-up warnings or free prize claims."
     });
   };
 
@@ -995,7 +1017,7 @@ const PopupBlaster = ({ onComplete }) => {
     setScore(prev => prev + 1);
     setFeedback({
       isCorrect: true,
-      text: "Excellent choice! You closed the fake warning or clicked 'Ask a Parent'! That is exactly how to disarm a pop-up. 🛡️"
+      text: "Excellent choice! You closed the fake warning or clicked 'Ask a Parent'! That is exactly how to disarm a pop-up."
     });
   };
 
@@ -1013,13 +1035,13 @@ const PopupBlaster = ({ onComplete }) => {
   return (
     <div className="bg-[#051c14]/90 text-white rounded-[24px] border-2 border-emerald-500/30 p-6 shadow-xl max-w-lg mx-auto relative overflow-hidden">
       <div className="flex items-center justify-between mb-4">
-        <h4 className="font-bold text-emerald-400 flex items-center gap-2">💥 Pop-up Blaster</h4>
+        <h4 className="font-bold text-emerald-400 flex items-center gap-2"><Zap size={18} /> Pop-up Blaster</h4>
         <span className="text-xs bg-emerald-950 px-3 py-1 rounded-full text-yellow-400 font-bold">Score: {score}/3</span>
       </div>
 
       {score === 3 ? (
         <div className="text-center py-6 space-y-4">
-          <div className="text-4xl">🏆</div>
+          <div className="flex justify-center"><Trophy size={48} className="text-emerald-400 animate-bounce" /></div>
           <h5 className="font-bold text-emerald-400 text-sm">Perfect Score! All pop-up alerts closed safely!</h5>
           <p className="text-xs text-slate-350 leading-relaxed font-semibold">
             You are officially a Pop-up Blaster Master! You proved that fake alerts cannot trick you.
@@ -1057,19 +1079,19 @@ const PopupBlaster = ({ onComplete }) => {
                   onClick={handleSafeClick}
                   className="text-[9px] font-black text-slate-400 hover:text-white underline cursor-pointer text-center"
                 >
-                  🛡️ Ignore & Ask Parent
+                  Ignore & Ask Parent
                 </button>
               </div>
             </div>
           ) : (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4 py-4 text-center">
-              <span className="text-3xl">{feedback.isCorrect ? "✅" : "❌"}</span>
+              <div className="flex justify-center">{feedback.isCorrect ? <CheckCircle2 size={36} className="text-emerald-400" /> : <XCircle size={36} className="text-rose-500" />}</div>
               <p className={`text-xs font-semibold leading-relaxed ${feedback.isCorrect ? "text-emerald-400" : "text-rose-400"}`}>
                 {feedback.text}
               </p>
               <button 
                 onClick={feedback.isCorrect ? nextAlert : () => setFeedback(null)}
-                className="px-5 py-2 bg-emerald-600 hover:bg-emerald-705 text-white rounded-lg text-xs font-bold transition-all cursor-pointer shadow-md"
+                className="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition-all cursor-pointer shadow-md"
               >
                 {feedback.isCorrect ? "Next Pop-up →" : "Try Again"}
               </button>
@@ -1086,7 +1108,7 @@ const PermissionShield = ({ onComplete }) => {
   const apps = [
     {
       id: 1,
-      name: "Super Flashlight App 🔦",
+      name: "Super Flashlight App",
       description: "A simple flashlight that turns on your camera light.",
       requests: [
         { key: "camera", name: "Access Camera (to toggle light)", safe: true },
@@ -1095,7 +1117,7 @@ const PermissionShield = ({ onComplete }) => {
     },
     {
       id: 2,
-      name: "Calculator Pro 🧮",
+      name: "Calculator Pro",
       description: "Quickly solve math equations and study helper.",
       requests: [
         { key: "mic", name: "Access Microphone", safe: false },
@@ -1104,7 +1126,7 @@ const PermissionShield = ({ onComplete }) => {
     },
     {
       id: 3,
-      name: "Dino Runner Game 🦖",
+      name: "Dino Runner Game",
       description: "Help the dinosaur run and dodge obstacles online.",
       requests: [
         { key: "internet", name: "Access Internet", safe: true },
@@ -1145,7 +1167,7 @@ const PermissionShield = ({ onComplete }) => {
       setCompletedApps(prev => prev + 1);
       setFeedback({
         isCorrect: true,
-        text: `Awesome! You allowed only necessary requests and denied the privacy threats. ${currentApp.name} is installed safely! 🛡️`
+        text: `Awesome! You allowed only necessary requests and denied the privacy threats. ${currentApp.name} is installed safely!`
       });
     } else {
       setFeedback({
@@ -1168,13 +1190,13 @@ const PermissionShield = ({ onComplete }) => {
   return (
     <div className="bg-[#051c14]/90 text-white rounded-[24px] border-2 border-emerald-500/30 p-6 shadow-xl max-w-lg mx-auto relative overflow-hidden">
       <div className="flex items-center justify-between mb-4">
-        <h4 className="font-bold text-emerald-400 flex items-center gap-2">🛡️ Permission Shield</h4>
+        <h4 className="font-bold text-emerald-400 flex items-center gap-2"><Shield size={18} /> Permission Shield</h4>
         <span className="text-xs bg-emerald-950 px-3 py-1 rounded-full text-yellow-400 font-bold">Safeguarded: {completedApps}/3</span>
       </div>
 
       {completedApps === 3 ? (
         <div className="text-center py-6 space-y-4">
-          <div className="text-4xl">👑</div>
+          <div className="flex justify-center"><Award size={48} className="text-emerald-400 animate-bounce" /></div>
           <h5 className="font-bold text-emerald-400 text-sm">Perfect Setup! All apps secured!</h5>
           <p className="text-xs text-slate-355 leading-relaxed font-semibold">
             You successfully guarded your personal data from spying apps! Remember: always deny permissions that an app does not need to work.
@@ -1228,12 +1250,12 @@ const PermissionShield = ({ onComplete }) => {
                 onClick={handleInstall}
                 className="w-full py-2.5 mt-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-md active:scale-98"
               >
-                📥 Complete Installation
+                Complete Installation
               </button>
             </div>
           ) : (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4 py-4 text-center">
-              <span className="text-3xl">{feedback.isCorrect ? "✅" : "❌"}</span>
+              <div className="flex justify-center">{feedback.isCorrect ? <CheckCircle2 size={36} className="text-emerald-400" /> : <XCircle size={36} className="text-rose-500" />}</div>
               <p className={`text-xs font-semibold leading-relaxed ${feedback.isCorrect ? "text-emerald-400" : "text-rose-400"}`}>
                 {feedback.text}
               </p>
@@ -1327,7 +1349,7 @@ const LessonQuiz = ({ questions, onComplete }) => {
           {isAnswered && (
             <div className="flex justify-between items-center pt-2">
               <span className={`text-[11px] font-bold ${isCorrectChoice ? 'text-emerald-400' : 'text-rose-400'}`}>
-                {isCorrectChoice ? "Correct Answer! 🌟" : "Oops! Incorrect choice."}
+                {isCorrectChoice ? "Correct Answer!" : "Oops! Incorrect choice."}
               </span>
               <button 
                 onClick={handleNext}
@@ -1340,7 +1362,7 @@ const LessonQuiz = ({ questions, onComplete }) => {
         </div>
       ) : (
         <div className="text-center py-4 space-y-4">
-          <div className="text-3xl">{isAllCorrect ? "🏆" : "🔁"}</div>
+          <div className="flex justify-center">{isAllCorrect ? <Trophy size={36} className="text-emerald-400" /> : <RotateCcw size={36} className="text-slate-400" />}</div>
           <h5 className="font-bold text-slate-100 text-xs">
             {isAllCorrect ? "Lesson Quiz Cleared!" : "Quiz Failed!"}
           </h5>
@@ -1356,7 +1378,7 @@ const LessonQuiz = ({ questions, onComplete }) => {
                 onClick={onComplete}
                 className="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer"
               >
-                Claim Badge & Unlock Next →
+                Claim Badge & Unlock Next
               </button>
             ) : (
               <button 
@@ -1377,30 +1399,30 @@ const LessonQuiz = ({ questions, onComplete }) => {
 const lessons = [
   {
     id: 1,
-    title: "Lesson 1: Monster or Friend? 💬",
-    badge: "🛡️ Privacy Guard",
+    title: "Lesson 1: Monster or Friend?",
+    badge: "Privacy Guard",
     topic: "Chat safety & Strangers",
     summary: "Learn why talking to strangers on the internet can be tricky, and what secrets you must keep safe!",
     image: "/images/cybersecurity/lesson1.png",
     learnSections: [
       {
-        title: "The Digital Playground 🌐",
+        title: "The Digital Playground",
         desc: "The internet is like a giant, beautiful public playground where millions of kids play games, watch cartoons, and chat. But just like a real park, you must never talk to strangers who approach you without your parents knowing!"
       },
       {
-        title: "Online Pretenders 🎭",
+        title: "Online Pretenders",
         desc: "Did you know that some tricky monsters pretend to be kids online? A character using a cute puppy picture or claiming to be '9-year-old Alex' could actually be a hacker trying to find your secrets. Always be cautious!"
       },
       {
-        title: "The Golden Safe Rules 🔑",
-        desc: "Keep your personal keys safe! Never share these with anyone online:\n\n🔑 Your home address and school name\n🔑 Your phone number\n🔑 Your parent's credit card or bank details\n🔑 The 4-digit code (OTP) sent to your parents' phone."
+        title: "The Golden Safe Rules",
+        desc: "Keep your personal keys safe! Never share these with anyone online:\n\n* Your home address and school name\n* Your phone number\n* Your parent's credit card or bank details\n* The 4-digit code (OTP) sent to your parents' phone."
       },
       {
-        title: "Checklist for Chat Safety ✅",
-        desc: "✅ **DO:** Play games with school friends you know in real life.\n✅ **DO:** Tell a parent immediately if someone online asks where you live.\n❌ **DON'T:** Send pictures of your house, school, or face to game strangers.\n❌ **DON'T:** Share passwords, even if a stranger offers you 'free Robux' or game skins."
+        title: "Checklist for Chat Safety",
+        desc: "DO: Play games with school friends you know in real life.\nDO: Tell a parent immediately if someone online asks where you live.\nDON'T: Send pictures of your house, school, or face to game strangers.\nDON'T: Share passwords, even if a stranger offers you 'free Robux' or game skins."
       }
     ],
-    content: "🚨 The internet is like a giant park! You can play games and chat, but sometimes tricky monsters pretend to be friendly characters.\n\n🔒 **Your Secrets are Keys!**\nNever give away your parent's bank cards, your address, or your 4-digit code (OTP) to anyone online. Keep them hidden inside your secret base!",
+    content: "The internet is like a giant park! You can play games and chat, but sometimes tricky monsters pretend to be friendly characters.\n\nYour Secrets are Keys!\nNever give away your parent's bank cards, your address, or your 4-digit code (OTP) to anyone online. Keep them hidden inside your secret base!",
     game: "Chat Patrol",
     quiz: [
       {
@@ -1417,30 +1439,30 @@ const lessons = [
   },
   {
     id: 2,
-    title: "Lesson 2: Link Detectives 🕵️",
-    badge: "🔍 Link Detective",
+    title: "Lesson 2: Link Detectives",
+    badge: "Link Detective",
     topic: "SMS & Phishing Scams",
     summary: "Learn how to spot suspicious text messages (phishing) that try to scare you into clicking weird links.",
     image: "/images/cybersecurity/lesson2.png",
     learnSections: [
       {
-        title: "Sneaky Fishing Hooks 🎣",
+        title: "Sneaky Fishing Hooks",
         desc: "Phishing (pronounced like 'fishing') is when a scammer drops a virtual hook into the digital water, hoping you will bite! They send fake text messages or emails pretending to be a bank, a game, or a delivery company."
       },
       {
-        title: "Spotting the Panic Trap 🚨",
+        title: "Spotting the Panic Trap",
         desc: "Scammers want to scare you! They use words like 'URGENT', 'BLOCKED', or 'LOST FOREVER'. They want you to panic and tap their sneaky link immediately before you can ask an adult. Stop, breathe, and analyze!"
       },
       {
-        title: "Decoding Web Links 🌐",
+        title: "Decoding Web Links",
         desc: "Always look at the link (URL) before tapping! A safe site uses https and ends with a normal domain (like .com or .org). Scammers use weird links like bank-verify-now.xyz or free-gift-box.net/alert to sneak viruses onto your device."
       },
       {
-        title: "Checklist for Link Safety ✅",
-        desc: "✅ **DO:** Show suspicious text messages to a parent or teacher.\n✅ **DO:** Delete the message immediately if you don't recognize the sender.\n❌ **DON'T:** Click on links in SMS messages claiming you won a lottery or a phone.\n❌ **DON'T:** Enter passwords or usernames on pages that look weird or suspicious."
+        title: "Checklist for Link Safety",
+        desc: "DO: Show suspicious text messages to a parent or teacher.\nDO: Delete the message immediately if you don't recognize the sender.\nDON'T: Click on links in SMS messages claiming you won a lottery or a phone.\nDON'T: Enter passwords or usernames on pages that look weird or suspicious."
       }
     ],
-    content: "📱 Scammers send sneaky text messages that try to make you panic!\n\n⚠️ **Look for the 3 Red Flags:**\n1. **Scary Words:** 'Your account is SUSPENDED!'\n2. **Extreme Threats:** 'Your money is lost FOREVER!'\n3. **Weird Links:** Websites ending in weird letters like '.xyz' instead of '.com'.\n\nIf you see these, don't tap! Call a parent!",
+    content: "Scammers send sneaky text messages that try to make you panic!\n\nLook for the 3 Red Flags:\n1. Scary Words: 'Your account is SUSPENDED!'\n2. Extreme Threats: 'Your money is lost FOREVER!'\n3. Weird Links: Websites ending in weird letters like '.xyz' instead of '.com'.\n\nIf you see these, don't tap! Call a parent!",
     game: "Scam Detective",
     quiz: [
       {
@@ -1457,30 +1479,30 @@ const lessons = [
   },
   {
     id: 3,
-    title: "Lesson 3: Shield Forging 🏰",
-    badge: "⚔️ Password Smith",
+    title: "Lesson 3: Shield Forging",
+    badge: "Password Smith",
     topic: "Strong Password Creation",
     summary: "Learn how to create passwords that act like indestructible forcefields against the Glitch Goblin!",
     image: "/images/cybersecurity/lesson3.png",
     learnSections: [
       {
-        title: "The Fortress Gate 🏰",
+        title: "The Fortress Gate",
         desc: "A password is like the drawbridge of your digital castle. If it's weak (like '123456' or 'superman'), the Glitch Goblin and hacking robots can kick it down in seconds! A strong password keeps your account safe."
       },
       {
-        title: "The Materials of Defense ⚔️",
-        desc: "📦 Cardboard Shield: 'cat' or 'password' — Cracks instantly!\n🪵 Wooden Door: 'cat123' or 'superman10' — Cracks in a few minutes.\n⛓️ Iron Gate: 'CatDog2024' — Good, but robots can still guess it eventually.\n💎 Emerald Forcefield: 'C@t&D0g#2026!' — Indestructible! Mixing letters, numbers, and symbols creates the ultimate defense."
+        title: "The Materials of Defense",
+        desc: "Cardboard Shield: 'cat' or 'password' — Cracks instantly!\nWooden Door: 'cat123' or 'superman10' — Cracks in a few minutes.\nIron Gate: 'CatDog2024' — Good, but robots can still guess it eventually.\nEmerald Forcefield: 'C@t&D0g#2026!' — Indestructible! Mixing letters, numbers, and symbols creates the ultimate defense."
       },
       {
-        title: "How to Remember Your Shield 🧠",
+        title: "How to Remember Your Shield",
         desc: "Create a fun, secret sentence! For example: 'I love eating pizza on Fridays!' becomes 'Il2ep0F!'. It is super easy for you to remember, but impossible for a hacking robot to guess!"
       },
       {
-        title: "Checklist for Password Safety ✅",
-        desc: "✅ **DO:** Use different passwords for different games.\n✅ **DO:** Keep your passwords written down in a secret notebook at home.\n❌ **DON'T:** Use easy-to-guess things like your birthday or pet's name.\n❌ **DON'T:** Share your password with anyone, not even your best friends at school!"
+        title: "Checklist for Password Safety",
+        desc: "DO: Use different passwords for different games.\nDO: Keep your passwords written down in a secret notebook at home.\nDON'T: Use easy-to-guess things like your birthday or pet's name.\nDON'T: Share your password with anyone, not even your best friends at school!"
       }
     ],
-    content: "🏰 Hackers use guessing robots to break into your accounts. If your password is too easy, they will crack it in a second!\n\n🛡️ **The Shield Blueprint:**\n• Simple passwords (like '123456' or 'doggy') are fragile like **Cardboard**.\n• Add capitals (ABC) and numbers (123) to make an **Iron Gate**.\n• Add symbols (@, #, $, %) to forge an **Emerald Forcefield** that blocks everything!",
+    content: "Hackers use guessing robots to break into your accounts. If your password is too easy, they will crack it in a second!\n\nThe Shield Blueprint:\n• Simple passwords (like '123456' or 'doggy') are fragile like Cardboard.\n• Add capitals (ABC) and numbers (123) to make an Iron Gate.\n• Add symbols (@, #, $, %) to forge an Emerald Forcefield that blocks everything!",
     game: "Password Forge",
     quiz: [
       {
@@ -1497,30 +1519,30 @@ const lessons = [
   },
   {
     id: 4,
-    title: "Lesson 4: Pop-up Blaster 💥",
-    badge: "⚡ Pop-up Blaster",
+    title: "Lesson 4: Pop-up Blaster",
+    badge: "Pop-up Blaster",
     topic: "Device Safety & Updates",
     summary: "Learn to ignore fake scary virus alerts and keep your device software updated to keep hackers out.",
     image: "/images/cybersecurity/lesson4.png",
     learnSections: [
       {
-        title: "Beware of Loud Pop-ups 🔊",
+        title: "Beware of Loud Pop-ups",
         desc: "When browsing, some pages display red flashing warning boxes shouting: 'WARNING! 99 VIRUSES DETECTED!' or 'YOUR DEVICE IS INFECTED!'. Don't be scared! These are fake warnings designed to trick you into downloading viruses."
       },
       {
-        title: "Disarming the Trap 💥",
+        title: "Disarming the Trap",
         desc: "Never click the big, bright buttons in a pop-up. Instead, look closely for a tiny, white X button in the top corner. If you can't find it, close the browser tab or ask an adult to close it for you."
       },
       {
-        title: "Software Updates are Shield Refills 🛡️",
+        title: "Software Updates are Shield Refills",
         desc: "Hacking robots constantly search for hidden holes (security bugs) in your games and operating systems. When you update your apps, the creators patch up these holes, keeping the robots locked out!"
       },
       {
-        title: "Checklist for Device Safety ✅",
-        desc: "✅ **DO:** Turn on 'Automatic Updates' for your phone, tablet, or computer.\n✅ **DO:** Close the browser tab if a flashy screen blocks your page.\n❌ **DON'T:** Install 'device cleaner' or 'helper' apps suggested by pop-ups.\n❌ **DON'T:** Postpone important system updates for too long."
+        title: "Checklist for Device Safety",
+        desc: "DO: Turn on 'Automatic Updates' for your phone, tablet, or computer.\nDO: Close the browser tab if a flashy screen blocks your page.\nDON'T: Install 'device cleaner' or 'helper' apps suggested by pop-ups.\nDON'T: Postpone important system updates for too long."
       }
     ],
-    content: "💥 While surfing the web, you might see scary pop-up boxes shouting: 'YOUR DEVICE HAS 50 VIRUSES! CLICK NOW TO REPAIR!'\n\n👾 **It's a Trick!**\nThese are fake pop-ups trying to make you download bad apps. Never click the big green buttons. Always close the window by clicking the small white 'X' or show it to a parent!",
+    content: "While surfing the web, you might see scary pop-up boxes shouting: 'YOUR DEVICE HAS 50 VIRUSES! CLICK NOW TO REPAIR!'\n\nIt's a Trick!\nThese are fake pop-ups trying to make you download bad apps. Never click the big green buttons. Always close the window by clicking the small white 'X' or show it to a parent!",
     game: "Pop-up Blaster",
     quiz: [
       {
@@ -1537,30 +1559,30 @@ const lessons = [
   },
   {
     id: 5,
-    title: "Lesson 5: Permission Safeguard 🛡️",
-    badge: "👑 Safe Downloader",
+    title: "Lesson 5: Permission Safeguard",
+    badge: "Safe Downloader",
     topic: "2FA & App Permissions",
     summary: "Learn about Two-Factor Authentication (2FA) and how to deny sneaky apps from spying on your photos or location.",
     image: "/images/cybersecurity/lesson5.png",
     learnSections: [
       {
-        title: "The Double-Lock Lockbox 🔑🔑",
+        title: "The Double-Lock Lockbox",
         desc: "Two-Factor Authentication (2FA) is like locking your chest with two different keys. When you log in with your password, a secret one-time code is sent to your parent's phone. Even if a hacker steals your password, they can't get in without that second key!"
       },
       {
-        title: "Sneaky App Demands 📱",
+        title: "Sneaky App Demands",
         desc: "When you download a new game, it asks for permission to access your device features. A driving game might need access to your screen controls, but does a calculator app need to see your photo gallery or know your location? Absolutely not!"
       },
       {
-        title: "The Permission Shield Rules 🛡️",
+        title: "The Permission Shield Rules",
         desc: "Always review permission requests! If an app asks for something it doesn't need to work, click DENY. It's better to be safe than let sneaky apps track your coordinates or read your private messages."
       },
       {
-        title: "Checklist for Permission Safety ✅",
-        desc: "✅ **DO:** Enable 2FA on your main gaming and school accounts with parent help.\n✅ **DO:** Deny location access for games that do not require mapping.\n❌ **DON'T:** Download apps from random websites. Only use official app stores.\n❌ **DON'T:** Click 'Allow' to every popup without reading what it is asking for."
+        title: "Checklist for Permission Safety",
+        desc: "DO: Enable 2FA on your main gaming and school accounts with parent help.\nDO: Deny location access for games that do not require mapping.\nDON'T: Download apps from random websites. Only use official app stores.\nDON'T: Click 'Allow' to every popup without reading what it is asking for."
       }
     ],
-    content: "👑 Keep your digital house safe with a double lock!\n\n🔑 **2FA (Two-Factor Authentication):**\nThis requires both a password AND a secret code sent to your parent's phone to log in. Even if a hacker guesses your password, they can't get in!\n\n📱 **App Permission Rules:**\nIf a simple Flashlight app asks to see your photos, contacts, or location, **DENY IT!** Apps should only access what they need to work.",
+    content: "Keep your digital house safe with a double lock!\n\n2FA (Two-Factor Authentication):\nThis requires both a password AND a secret code sent to your parent's phone to log in. Even if a hacker guesses your password, they can't get in!\n\nApp Permission Rules:\nIf a simple Flashlight app asks to see your photos, contacts, or location, DENY IT! Apps should only access what they need to work.",
     game: "Permission Shield",
     quiz: [
       {
@@ -1704,8 +1726,14 @@ const CyberSecurityDashboard = () => {
                             }`}>
                               {less.badge}
                             </span>
-                            <span>
-                              {isCompleted ? '✅' : !isUnlocked ? '🔒' : '⭐'}
+                            <span className="flex items-center">
+                              {isCompleted ? (
+                                <CheckCircle2 size={12} className={isActive ? "text-white" : "text-emerald-500"} />
+                              ) : !isUnlocked ? (
+                                <Lock size={12} className={isActive ? "text-emerald-100/60" : "text-slate-450"} />
+                              ) : (
+                                <Star size={12} className={isActive ? "text-yellow-200" : "text-yellow-550"} />
+                              )}
                             </span>
                           </div>
                           <div className="text-xs font-black truncate">{less.title}</div>
@@ -1731,15 +1759,15 @@ const CyberSecurityDashboard = () => {
                   {/* Sub-tabs */}
                   <div className="flex gap-1.5 bg-slate-100 p-1 rounded-full border border-slate-200/60">
                     {[
-                      { id: 'learn', label: '📖 Learn', disabled: false },
-                      { id: 'play', label: '🎮 Play Game', disabled: false },
-                      { id: 'test', label: '📝 Take Quiz', disabled: !gameCleared && !completedLessons.includes(activeLessonId) }
+                      { id: 'learn', label: 'Learn', icon: <BookOpen size={12} />, disabled: false },
+                      { id: 'play', label: 'Play Game', icon: <Gamepad2 size={12} />, disabled: false },
+                      { id: 'test', label: 'Take Quiz', icon: <HelpCircle size={12} />, disabled: !gameCleared && !completedLessons.includes(activeLessonId) }
                     ].map(tab => (
                       <button
                         key={tab.id}
                         onClick={() => !tab.disabled && setActiveLessonTab(tab.id)}
                         disabled={tab.disabled}
-                        className={`px-4 py-2 rounded-full text-[10px] font-black tracking-wide uppercase transition-all cursor-pointer ${
+                        className={`px-3 py-1.5 rounded-full text-[10px] font-black tracking-wide uppercase transition-all cursor-pointer flex items-center gap-1.5 ${
                           activeLessonTab === tab.id
                             ? 'bg-emerald-600 text-white shadow-sm'
                             : tab.disabled 
@@ -1747,7 +1775,8 @@ const CyberSecurityDashboard = () => {
                               : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
                         }`}
                       >
-                        {tab.label}
+                        {tab.icon}
+                        <span>{tab.label}</span>
                       </button>
                     ))}
                   </div>
@@ -1770,8 +1799,8 @@ const CyberSecurityDashboard = () => {
                           </div>
                         </div>
                         <div className="bg-[#051c14]/95 border border-emerald-500/25 p-4 rounded-2xl text-white shadow-sm">
-                          <span className="text-[9px] font-black text-emerald-400 uppercase tracking-widest block mb-1">
-                            🎯 Key Mission
+                          <span className="text-[9px] font-black text-emerald-400 uppercase tracking-widest flex items-center gap-1.5 mb-1">
+                            <Target size={12} /> Key Mission
                           </span>
                           <p className="text-[11px] font-bold text-slate-200 leading-relaxed">
                             {lessons[activeLessonId - 1].summary}
@@ -1832,7 +1861,7 @@ const CyberSecurityDashboard = () => {
                             onClick={() => setActiveLessonTab('play')}
                             className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full font-bold text-[13px] flex items-center gap-2 cursor-pointer shadow-md transition-all active:scale-95 hover:shadow-emerald-500/20"
                           >
-                            🎮 Play Game & Practice <ArrowRight size={16} />
+                            <Gamepad2 size={16} /> Play Game & Practice <ArrowRight size={16} />
                           </button>
                         </div>
                       </div>
@@ -1883,14 +1912,14 @@ const CyberSecurityDashboard = () => {
                           animate={{ opacity: 1, y: 0 }}
                           className="max-w-md mx-auto bg-emerald-50 border border-emerald-200 p-4 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-3 shadow-sm"
                         >
-                          <span className="text-xs font-bold text-emerald-800 text-center md:text-left">
-                            🎉 Game Cleared! Ready to test your knowledge?
+                          <span className="text-xs font-bold text-emerald-800 text-center md:text-left flex items-center gap-1.5">
+                            <Award size={16} className="text-emerald-600 animate-bounce" /> Game Cleared! Ready to test your knowledge?
                           </span>
                           <button
                             onClick={() => setActiveLessonTab('test')}
-                            className="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-md"
+                            className="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-md flex items-center gap-1.5"
                           >
-                            📝 Go to Quiz
+                            <HelpCircle size={14} /> Go to Quiz
                           </button>
                         </motion.div>
                       )}
@@ -1929,7 +1958,7 @@ const CyberSecurityDashboard = () => {
                       animate={{ scale: 1, opacity: 1 }} 
                       className="max-w-md mx-auto mt-6 bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-6 rounded-3xl text-center space-y-4 shadow-xl"
                     >
-                      <div className="text-4xl">👑</div>
+                      <div className="flex justify-center"><Award size={48} className="text-white animate-bounce" /></div>
                       <h4 className="font-extrabold text-sm uppercase tracking-wide">Cyber Academy Graduate!</h4>
                       <p className="text-xs leading-relaxed font-semibold text-emerald-55">
                         Amazing job! You completed all 5 Lessons and disarmed every hacker and scammer trap. You are a Certified Cyber Defender!
