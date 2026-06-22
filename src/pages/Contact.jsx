@@ -81,9 +81,9 @@ const Contact = () => {
                 </div>
 
                 <div className="space-y-8 flex-grow">
-                  <InfoItem icon={<MapPin className="w-5 h-5" />} title="Address">
-                    Bihar State Text Book Publishing Corporation Ltd.<br />
-                    Budh Marg, Patna, Bihar - 800001
+                  <InfoItem icon={<MapPin className="w-5 h-5" />} title="Registered Office">
+                    Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001<br />
+                    Bihar, India
                   </InfoItem>
 
                   <InfoItem icon={<Mail className="w-5 h-5" />} title="Email Id">
@@ -91,7 +91,7 @@ const Contact = () => {
                   </InfoItem>
 
                   <InfoItem icon={<Phone className="w-5 h-5" />} title="Phone Number">
-                    +91 612 222 1975
+                    06122221975
                   </InfoItem>
 
                   <div className="flex items-start gap-5">

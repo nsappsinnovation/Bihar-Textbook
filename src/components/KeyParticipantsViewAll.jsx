@@ -12,15 +12,15 @@ const industryData = [
     category: "Leadership",
   },
   {
-    name: "Shri Sunil Kumar",
+    name: "Sri Mithilesh Tiwari",
     role: "Hon'ble Education Minister, Bihar",
-    image: "/images/KeyParticipants/Sunil-Kumar.png",
+    image: "/images/KeyParticipants/sri_mithlesh.png",
     category: "Leadership",
   },
   {
-    name: "Shri Dr. B. Rajender, IAS",
-    role: "Additional Chief Secretary, Education Department",
-    image: "/images/KeyParticipants/B.Rajendra.png",
+    name: "Shri Vinod Singh Gunjiyal",
+    role: "Secretary, Education Department",
+    image: "/images/KeyParticipants/sri-vinod.png",
     category: "Leadership",
   },
   {

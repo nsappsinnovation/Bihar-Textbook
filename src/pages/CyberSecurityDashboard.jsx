@@ -165,11 +165,11 @@ const CyberSecurityQuiz = () => {
                   </span>
                   <div className="flex items-center gap-2">
                     <Shield className="w-4 h-4 text-emerald-400 animate-pulse" />
-                    <div className={`px-2 py-0.5 rounded text-[9px] font-black border ${timeLeft > 10
+                    <div className={`px-2 py-0.5 rounded text-[9px] font-black border flex items-center gap-1 ${timeLeft > 10
                         ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30'
                         : 'bg-rose-500/10 text-rose-400 border-rose-500/30 animate-pulse'
                       }`}>
-                      ⏱ {timeLeft}s
+                      <Clock size={10} /> {timeLeft}s
                     </div>
                   </div>
                 </div>
@@ -235,7 +235,9 @@ const CyberSecurityQuiz = () => {
               className="w-full"
             >
               <div className="bg-[#051c14]/85 backdrop-blur-xl border-2 border-emerald-500/40 rounded-[24px] p-5 shadow-[0_0_35px_rgba(0,0,0,0.6)] text-center text-white">
-                <div className="w-16 h-16 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-3 shadow-xl shadow-emerald-500/35">🏆</div>
+                <div className="w-16 h-16 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-xl shadow-emerald-500/35">
+                  <Trophy size={28} className="text-white" />
+                </div>
                 <h2 className="text-lg font-black text-white mb-1">Challenge Completed!</h2>
                 <p className="text-slate-400 text-[10px] font-bold mb-4">Cyber Security Quiz performance:</p>
 

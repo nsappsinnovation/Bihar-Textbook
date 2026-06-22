@@ -21,21 +21,21 @@ export const participants = [
     },
     {
         id: 3,
-        name: "Shri Vijay Kumar Chaudhary",
-        title: "Minister of Education, Bihar",
+        name: "Sri Mithilesh Tiwari",
+        title: "Hon'ble Education Minister of Bihar",
         description: "Overseeing the state's literacy mission.",
         role: "Leadership",
-        image: "/images/KeyParticipants/vijay_kr_choudary.png", // Placeholder or generic if not found, trying a likely twitter one or similar. Actually let's use a placeholder if unsure, but I'll try to use a generic avatar if the link is broken, handled in component.
+        image: "/images/KeyParticipants/sri_mithlesh.png",
         colorTheme: "green",
         accentColor: "bg-green-300"
     },
     {
         id: 4,
-        name: "Dr. B. Rajender",
-        title: "Additional Chief Secretary",
+        name: "Shri Vinod Singh Gunjiyal",
+        title: "Secretary",
         description: "Education Department, Bihar.",
         role: "Leadership",
-        image: "/images/KeyParticipants/B.Rajendra.png",
+        image: "/images/KeyParticipants/sri-vinod.png",
         colorTheme: "purple",
         accentColor: "bg-purple-200"
     },

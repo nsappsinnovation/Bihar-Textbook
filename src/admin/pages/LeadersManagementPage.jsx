@@ -24,17 +24,17 @@ export default function LeadersManagementPage({ addToast }) {
       },
       { 
         id: 2, 
-        name: 'Shri Sunil Kumar', 
+        name: 'Sri Mithilesh Tiwari', 
         role: "Hon'ble Education Minister, Bihar", 
         tag: 'LEADERSHIP', 
-        image: '/images/KeyParticipants/Sunil-Kumar.png' 
+        image: '/images/KeyParticipants/sri_mithlesh.png' 
       },
       { 
         id: 3, 
-        name: 'Shri Dr. B. Rajender, IAS', 
-        role: 'Additional Chief Secretary, Education Department', 
+        name: 'Shri Vinod Singh Gunjiyal', 
+        role: 'Secretary, Education Department', 
         tag: 'LEADERSHIP', 
-        image: '/images/KeyParticipants/B.Rajendra.png' 
+        image: '/images/KeyParticipants/sri-vinod.png' 
       },
       { 
         id: 4, 
