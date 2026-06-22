@@ -1,0 +1,458 @@
+// ===== Dummy Data for BSTBPC Admin Portal =====
+import { tendersData } from '../../data/tendersData';
+import { noticesData } from '../../components/Notice';
+
+export const dashboardStats = [
+  {
+    id: 1,
+    title: 'Total Books',
+    value: 2847,
+    change: '+12.5%',
+    trend: 'up',
+    icon: 'BookOpen',
+    color: 'blue',
+    gradient: 'from-blue-500 to-blue-700',
+    bgColor: 'bg-blue-50',
+    iconColor: 'text-blue-600',
+    sparkline: [30, 40, 35, 50, 49, 60, 70, 91, 85, 95, 100, 110],
+  },
+  {
+    id: 2,
+    title: 'Total Officers',
+    value: 384,
+    change: '+3.2%',
+    trend: 'up',
+    icon: 'Users',
+    color: 'indigo',
+    gradient: 'from-indigo-500 to-indigo-700',
+    bgColor: 'bg-indigo-50',
+    iconColor: 'text-indigo-600',
+    sparkline: [20, 25, 30, 28, 35, 40, 38, 42, 45, 50, 48, 55],
+  },
+  {
+    id: 3,
+    title: 'Total Notices',
+    value: 156,
+    change: '+8.1%',
+    trend: 'up',
+    icon: 'Bell',
+    color: 'cyan',
+    gradient: 'from-cyan-500 to-cyan-700',
+    bgColor: 'bg-cyan-50',
+    iconColor: 'text-cyan-600',
+    sparkline: [10, 15, 12, 18, 20, 25, 22, 30, 28, 35, 32, 40],
+  },
+];
+
+export const recentActivities = [
+  {
+    id: 1,
+    user: 'Rajesh Kumar Singh',
+    action: 'Updated officer profile information',
+    type: 'update',
+    time: '2 minutes ago',
+    avatar: 'RK',
+    status: 'completed',
+  },
+  {
+    id: 2,
+    user: 'Priya Sharma',
+    action: 'Uploaded new notice regarding exam schedule',
+    type: 'upload',
+    time: '15 minutes ago',
+    avatar: 'PS',
+    status: 'completed',
+  },
+  {
+    id: 3,
+    user: 'Amit Verma',
+    action: 'Added new textbook - Mathematics Class 10',
+    type: 'create',
+    time: '1 hour ago',
+    avatar: 'AV',
+    status: 'completed',
+  },
+  {
+    id: 4,
+    user: 'Sunita Devi',
+    action: 'Edited Department of Primary Education info',
+    type: 'edit',
+    time: '2 hours ago',
+    avatar: 'SD',
+    status: 'pending',
+  },
+  {
+    id: 5,
+    user: 'Vikash Pandey',
+    action: 'Logged in from new device',
+    type: 'login',
+    time: '3 hours ago',
+    avatar: 'VP',
+    status: 'warning',
+  },
+  {
+    id: 6,
+    user: 'Meena Kumari',
+    action: 'Deleted outdated notice - Annual Budget 2024',
+    type: 'delete',
+    time: '5 hours ago',
+    avatar: 'MK',
+    status: 'completed',
+  },
+  {
+    id: 7,
+    user: 'System Admin',
+    action: 'Scheduled database backup completed',
+    type: 'system',
+    time: '6 hours ago',
+    avatar: 'SA',
+    status: 'completed',
+  },
+];
+
+export const books = [
+  {
+    id: 1,
+    name: 'गणित (Mathematics)',
+    class: 'Class 10',
+    subject: 'Mathematics',
+    uploadDate: '2026-04-15',
+    status: 'Published',
+    cover: '📐',
+    description: 'Complete mathematics textbook for Class 10 students of Bihar Board.',
+  },
+  {
+    id: 2,
+    name: 'विज्ञान (Science)',
+    class: 'Class 10',
+    subject: 'Science',
+    uploadDate: '2026-04-12',
+    status: 'Published',
+    cover: '🔬',
+    description: 'Comprehensive science textbook covering Physics, Chemistry, and Biology.',
+  },
+  {
+    id: 3,
+    name: 'हिंदी (Hindi)',
+    class: 'Class 8',
+    subject: 'Hindi',
+    uploadDate: '2026-04-10',
+    status: 'Published',
+    cover: '📖',
+    description: 'Hindi language and literature textbook for middle school students.',
+  },
+  {
+    id: 4,
+    name: 'English Reader',
+    class: 'Class 9',
+    subject: 'English',
+    uploadDate: '2026-04-08',
+    status: 'Draft',
+    cover: '📚',
+    description: 'English reader with prose and poetry selections for Class 9.',
+  },
+  {
+    id: 5,
+    name: 'सामाजिक विज्ञान (Social Science)',
+    class: 'Class 7',
+    subject: 'Social Science',
+    uploadDate: '2026-04-05',
+    status: 'Published',
+    cover: '🌍',
+    description: 'Social science textbook covering History, Geography, and Civics.',
+  },
+  {
+    id: 6,
+    name: 'संस्कृत (Sanskrit)',
+    class: 'Class 6',
+    subject: 'Sanskrit',
+    uploadDate: '2026-03-28',
+    status: 'Under Review',
+    cover: '📜',
+    description: 'Introductory Sanskrit textbook with grammar and literature.',
+  },
+  {
+    id: 7,
+    name: 'भौतिक विज्ञान (Physics)',
+    class: 'Class 12',
+    subject: 'Physics',
+    uploadDate: '2026-03-25',
+    status: 'Published',
+    cover: '⚛️',
+    description: 'Advanced physics textbook for senior secondary students.',
+  },
+  {
+    id: 8,
+    name: 'रसायन विज्ञान (Chemistry)',
+    class: 'Class 12',
+    subject: 'Chemistry',
+    uploadDate: '2026-03-20',
+    status: 'Published',
+    cover: '🧪',
+    description: 'Chemistry textbook covering organic, inorganic, and physical chemistry.',
+  },
+  {
+    id: 9,
+    name: 'जीव विज्ञान (Biology)',
+    class: 'Class 11',
+    subject: 'Biology',
+    uploadDate: '2026-03-18',
+    status: 'Draft',
+    cover: '🧬',
+    description: 'Biology textbook with detailed illustrations and diagrams.',
+  },
+  {
+    id: 10,
+    name: 'कंप्यूटर विज्ञान (Computer Science)',
+    class: 'Class 11',
+    subject: 'Computer Science',
+    uploadDate: '2026-03-15',
+    status: 'Published',
+    cover: '💻',
+    description: 'Introduction to programming and computer fundamentals.',
+  },
+];
+
+export const officers = [
+  {
+    id: 1,
+    name: 'Dr. Rajendra Prasad Yadav',
+    designation: 'Director',
+    department: 'Administration',
+    email: 'rajendra.yadav@bstbpc.gov.in',
+    phone: '+91 9876543210',
+    status: 'Active',
+    avatar: 'RP',
+    description: 'Head of BSTBPC administration overseeing all publishing operations.',
+  },
+  {
+    id: 2,
+    name: 'Smt. Anita Kumari',
+    designation: 'Deputy Director',
+    department: 'Publishing',
+    email: 'anita.kumari@bstbpc.gov.in',
+    phone: '+91 9876543211',
+    status: 'Active',
+    avatar: 'AK',
+    description: 'Manages textbook publishing and quality assurance.',
+  },
+  {
+    id: 3,
+    name: 'Shri Manoj Kumar',
+    designation: 'Assistant Director',
+    department: 'IT Department',
+    email: 'manoj.kumar@bstbpc.gov.in',
+    phone: '+91 9876543212',
+    status: 'Active',
+    avatar: 'MK',
+    description: 'Oversees digital infrastructure and e-publishing initiatives.',
+  },
+  {
+    id: 4,
+    name: 'Dr. Sunita Singh',
+    designation: 'Content Head',
+    department: 'Editorial',
+    email: 'sunita.singh@bstbpc.gov.in',
+    phone: '+91 9876543213',
+    status: 'On Leave',
+    avatar: 'SS',
+    description: 'Leads the editorial team for content review and curation.',
+  },
+  {
+    id: 5,
+    name: 'Shri Arvind Mishra',
+    designation: 'Finance Officer',
+    department: 'Finance',
+    email: 'arvind.mishra@bstbpc.gov.in',
+    phone: '+91 9876543214',
+    status: 'Active',
+    avatar: 'AM',
+    description: 'Manages financial operations, budgeting, and procurement.',
+  },
+  {
+    id: 6,
+    name: 'Smt. Kavita Devi',
+    designation: 'Section Officer',
+    department: 'Distribution',
+    email: 'kavita.devi@bstbpc.gov.in',
+    phone: '+91 9876543215',
+    status: 'Active',
+    avatar: 'KD',
+    description: 'Coordinates textbook distribution across Bihar.',
+  },
+];
+
+const formattedNotices = noticesData.map((item) => {
+  let isoDate = new Date().toISOString();
+  if (item.date) {
+    const parts = item.date.split('/');
+    if (parts.length === 3) {
+      isoDate = `${parts[2]}-${parts[1]}-${parts[0]}T00:00:00.000Z`;
+    }
+  }
+  return {
+    id: `notice_${item.id}`,
+    title: item.title,
+    description: item.description,
+    date: isoDate,
+    priority: item.isUrgent ? 'High' : 'Medium',
+    category: item.category || 'Notice',
+    pinned: item.isUrgent || false,
+    hasAttachment: !!item.document,
+    author: 'Admin',
+    document: item.document
+  };
+});
+
+const formattedTenders = tendersData.map((item) => {
+  return {
+    id: `tender_${item.id}`,
+    title: item.title,
+    description: item.title,
+    date: new Date().toISOString(),
+    priority: 'Medium',
+    category: 'Tender',
+    pinned: false,
+    hasAttachment: !!item.link,
+    author: 'Admin',
+    document: item.link
+  };
+});
+
+export const notices = [...formattedNotices, ...formattedTenders];
+
+export const messages = [
+  {
+    id: 1,
+    sender: 'Rajesh Kumar Singh',
+    avatar: 'RK',
+    subject: 'Regarding Textbook Distribution in Patna District',
+    preview: 'Sir, I wanted to inform you about the current status of textbook distribution in Patna district. We have successfully delivered to 85% of schools...',
+    fullMessage: 'Sir, I wanted to inform you about the current status of textbook distribution in Patna district. We have successfully delivered to 85% of schools. The remaining 15% are in remote areas and we expect completion by next week. Please advise if any priority changes are needed.',
+    time: '10:30 AM',
+    date: '2026-05-09',
+    read: false,
+    starred: true,
+  },
+  {
+    id: 2,
+    sender: 'Priya Sharma',
+    avatar: 'PS',
+    subject: 'Content Review - Hindi Class 8',
+    preview: 'The content review for Hindi Class 8 textbook has been completed. Attached are the detailed review notes and suggested corrections...',
+    fullMessage: 'The content review for Hindi Class 8 textbook has been completed. Attached are the detailed review notes and suggested corrections. There are 12 grammatical corrections and 3 factual updates needed in Chapter 5. Please review and approve the changes at your earliest convenience.',
+    time: '9:15 AM',
+    date: '2026-05-09',
+    read: false,
+    starred: false,
+  },
+  {
+    id: 3,
+    sender: 'IT Support Team',
+    avatar: 'IT',
+    subject: 'System Maintenance Scheduled',
+    preview: 'Dear Admin, we have scheduled a system maintenance window for this Saturday from 10 PM to 2 AM. During this time, the portal will be...',
+    fullMessage: 'Dear Admin, we have scheduled a system maintenance window for this Saturday from 10 PM to 2 AM. During this time, the portal will be temporarily unavailable. This maintenance includes security updates and performance optimizations. No data loss is expected.',
+    time: 'Yesterday',
+    date: '2026-05-08',
+    read: true,
+    starred: false,
+  },
+  {
+    id: 4,
+    sender: 'Amit Verma',
+    avatar: 'AV',
+    subject: 'New Textbook Submission - Computer Science 11',
+    preview: 'I have submitted the final manuscript for Computer Science Class 11 textbook. All chapters have been reviewed and approved by...',
+    fullMessage: 'I have submitted the final manuscript for Computer Science Class 11 textbook. All chapters have been reviewed and approved by the editorial board. The textbook includes updated content on AI and Machine Learning as per the new curriculum guidelines.',
+    time: 'Yesterday',
+    date: '2026-05-08',
+    read: true,
+    starred: true,
+  },
+  {
+    id: 5,
+    sender: 'Finance Department',
+    avatar: 'FD',
+    subject: 'Payment Release for Printing Partners',
+    preview: 'The payment for the last batch of textbook printing has been processed. All three printing partners have been paid as per the...',
+    fullMessage: 'The payment for the last batch of textbook printing has been processed. All three printing partners have been paid as per the contract terms. Total disbursement: ₹2.35 Crore. Please find the detailed breakdown attached.',
+    time: 'May 7',
+    date: '2026-05-07',
+    read: true,
+    starred: false,
+  },
+  {
+    id: 6,
+    sender: 'Sunita Devi',
+    avatar: 'SD',
+    subject: 'Editorial Meeting Minutes',
+    preview: 'Please find attached the minutes of the editorial board meeting held on May 5. Key decisions include revision of Science textbooks...',
+    fullMessage: 'Please find attached the minutes of the editorial board meeting held on May 5. Key decisions include revision of Science textbooks for Classes 9-10, introduction of new chapters in Environmental Studies, and timeline for the upcoming academic year curriculum changes.',
+    time: 'May 6',
+    date: '2026-05-06',
+    read: true,
+    starred: false,
+  },
+];
+
+export const chartData = {
+  bookDistribution: [
+    { month: 'Jan', distributed: 4200, target: 5000 },
+    { month: 'Feb', distributed: 3800, target: 5000 },
+    { month: 'Mar', distributed: 5100, target: 5000 },
+    { month: 'Apr', distributed: 4700, target: 5500 },
+    { month: 'May', distributed: 5300, target: 5500 },
+    { month: 'Jun', distributed: 4900, target: 5500 },
+    { month: 'Jul', distributed: 6200, target: 6000 },
+    { month: 'Aug', distributed: 5800, target: 6000 },
+    { month: 'Sep', distributed: 6500, target: 6000 },
+    { month: 'Oct', distributed: 5400, target: 6000 },
+    { month: 'Nov', distributed: 6800, target: 6500 },
+    { month: 'Dec', distributed: 7200, target: 6500 },
+  ],
+  monthlyUploads: [
+    { month: 'Jan', uploads: 12 },
+    { month: 'Feb', uploads: 18 },
+    { month: 'Mar', uploads: 15 },
+    { month: 'Apr', uploads: 22 },
+    { month: 'May', uploads: 28 },
+    { month: 'Jun', uploads: 20 },
+    { month: 'Jul', uploads: 35 },
+    { month: 'Aug', uploads: 30 },
+    { month: 'Sep', uploads: 25 },
+    { month: 'Oct', uploads: 32 },
+    { month: 'Nov', uploads: 38 },
+    { month: 'Dec', uploads: 42 },
+  ],
+  contentTypeDistribution: [
+    { name: 'Textbooks', value: 45 },
+    { name: 'Notices', value: 20 },
+    { name: 'Tenders', value: 15 },
+    { name: 'Gallery', value: 12 },
+    { name: 'Documents', value: 8 },
+  ],
+};
+
+export const yearOptions = [
+  '2026', '2025', '2024', '2023', '2022'
+];
+
+export const classOptions = [
+  'All Classes', 'Class 1', 'Class 2', 'Class 3', 'Class 4', 'Class 5',
+  'Class 6', 'Class 7', 'Class 8', 'Class 9', 'Class 10', 'Class 11', 'Class 12',
+];
+
+export const subjectOptions = [
+  'All Subjects', 'Mathematics', 'Science', 'Hindi', 'English',
+  'Social Science', 'Sanskrit', 'Physics', 'Chemistry', 'Biology', 'Computer Science',
+];
+
+export const departmentOptions = [
+  'Administration', 'Publishing', 'Editorial', 'IT Department',
+  'Finance', 'Distribution', 'Human Resources', 'Legal',
+];
+
+export const noticeCategories = [
+  'All', 'Notice', 'Tender', 'Academic', 'Operations', 'Training', 'Finance', 'General', 'Distribution',
+];

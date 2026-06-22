@@ -1,107 +1,257 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { ReactLenis } from "lenis/react";
 
 import Nav from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
+import Blog from "./components/Blog.jsx";
 
-// Pages
+/* Pages */
 import Home from "./pages/Home";
-import Contact from "./pages/Contact";
-import Notice from "./pages/Notice";
 import Tenders from "./pages/Tenders";
 import CsrPolicy from "./pages/CsrPolicy";
+import KnowUs from "./pages/Know";
+import Books from "./pages/Books.jsx";
+import BookReader from "./pages/BookReader.jsx";
+import Flipbook from "./pages/Flipbook.jsx";
+import Gallery from "./pages/Gallery.jsx";
+import Document from "./pages/Document.jsx";
+import FlagshipDetail from "./pages/FlagshipDetail.jsx";
+import EventDetails from "./pages/EventDetails.jsx";
+import Ling from "./pages/Ling.jsx";
+import LingModule from "./pages/LingModule.jsx";
+import PublishingMission from "./pages/PublishingMission.jsx";
+import VrMission from "./pages/VrMission.jsx";
+import SignLanguageMission from "./pages/SignLanguageMission.jsx";
+import MultilingualMission from "./pages/MultilingualMission.jsx";
+import AudiobooksMission from "./pages/AudiobooksMission.jsx";
+import Sign from "./pages/Signlanguage.jsx";
+import SignLearn from "./pages/SignLearn.jsx";
+import SignModule from "./pages/SignModule.jsx";
+import SkillLearn from "./pages/SkillLearn.jsx";
+import AiIntelligence from "./pages/AiIntelligence.jsx";
+import CyberSecurity from "./pages/CyberSecurity.jsx";
+import HeritageArchive from "./pages/HeritageArchive.jsx";
+import Vr from "./pages/Vrlab.jsx";
+import Linguistics from "./pages/Linguistics.jsx";
+import Digital from "./pages/DigitalPortal.jsx";
+import Audio from "./pages/Audiolib.jsx";
+import Trend1 from "./pages/TrendingSkills.jsx";
+import Quiz2 from "./pages/Skillsquiz.jsx";
+import Ebook from "./pages/Ebook";
+import Basicskill from "./pages/Basicskills.jsx";
 
-// Gallery
-import PhotoGallery from "./pages/Photo_gallery";
-import VideoGallery from "./pages/Video_gallery";
-import PressRelease from "./pages/press_release";
+import LifeSkills from "./pages/LifeSkills.jsx";
+import HeritageDashboard from "./pages/HeritageDashboard.jsx";
+import AudioLibraryDashboard from "./pages/AudioLibraryDashboard.jsx";
+import MyAudioLibrary from "./pages/MyAudioLibrary.jsx";
+import AiIntelligenceDashboard from "./pages/AiIntelligenceDashboard.jsx";
+import AiQuizChallenge from "./pages/AiQuizChallenge.jsx";
+import ExploreAiTools from "./pages/ExploreAiTools.jsx";
+import VrDashboard from "./pages/VrDashboard.jsx";
+import VrLabsWorlds from "./pages/VrLabsWorlds.jsx";
+import CyberSecurityDashboard from "./pages/CyberSecurityDashboard.jsx";
+import CollaborativeLearningViewAll from "./pages/CollaborativeLearningViewAll.jsx";
 
-// Documents
-import RegistrationForm from "./pages/Registeration_form.jsx";
-import Hrt from "./pages/Hrt";
-import Rti from "./pages/Rti";
+import PustakMela from "./pages/PustakMela.jsx";
+import AssessmentPlatform from "./pages/AssessmentPlatform.jsx";
+import RegionalContent from "./pages/RegionalContent.jsx";
+import CurriculumExpo from "./pages/CurriculumExpo.jsx";
 
-// Classes
-import Class1 from "./pages/classes/Class1";
-import Class2 from "./pages/classes/Class2";
-import Class3 from "./pages/classes/Class3";
-import Class4 from "./pages/classes/Class4";
-import Class5 from "./pages/classes/Class5";
-import Class6 from "./pages/classes/Class6";
-import Class7 from "./pages/classes/Class7";
-import Class8 from "./pages/classes/Class8";
-import Class9 from "./pages/classes/Class9";
-import Class10 from "./pages/classes/Class10";
-import Class11 from "./pages/classes/Class11";
-import Class12 from "./pages/classes/Class12";
+/* Components */
+import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
+import Contact from "./pages/Contact";
+import Notice from "./components/Notice.jsx";
+import FlagshipEvents from "./components/FlagshipEvents.jsx";
+import Video from "./components/Signcourses.jsx";
+import AiCourses from "./components/AiCourses.jsx";
+import Audiovideo from "./components/Audiovideo.jsx";
+import Vrcourse from "./components/Arvideo.jsx";
+import Digitalcourse from "./components/Digitalvideo.jsx";
+import MobileCourses from "./components/MobileCourses.jsx";
+import ArchiveCourses from "./components/ArchiveCourses.jsx";
 
-// Management
-import MdMessage from "./pages/md_mess.jsx";
-import BoardOfDirectors from "./pages/board_of_directors.jsx";
-import MdList from "./pages/list_of_md.jsx";
-import OfficersList from "./pages/officers_list.jsx";
-import Employees from "./pages/our_employee.jsx";
-import OrgStructure from "./pages/organisational_struc.jsx";
-import RegisteredPrinters from "./pages/register_printer.jsx";
+/* Auth */
+import Login from "./components/Login.jsx";
+import SignUp from "./components/SignUp.jsx";
+
+import ScrollToTop from "./components/ScrollToTop";
+import AdminPortal from "./admin/AdminPortal.jsx";
 
 function App() {
+  const location = useLocation();
+
+  const isIsolatedPage =
+    location.pathname === "/login" ||
+    location.pathname === "/signup" ||
+    location.pathname.startsWith("/admin") ||
+    location.pathname.includes("/flip");
+
+  const isMissionPage = [
+    "/ling", "/linguistic", "/vr", "/sign", "/sign-learn", "/sign-module",
+    "/ai-intelligence", "/digital", "/audio-books", 
+    "/cyber-security", "/heritage-archive", 
+    "/basic-skills", "/ebook", "/ling/words", "/ling/phrases", "/ling/conversations",
+    "/publishing-mission", "/vr-mission", "/sign-language-mission", "/multilingual-mission", "/audiobooks-mission"
+  ].includes(location.pathname);
+
+  const isNoNavPage =
+    isIsolatedPage ||
+    isMissionPage ||
+    location.pathname.startsWith("/ling") ||
+    [
+      "/sign",
+      "/sign-learn",
+      "/sign-module",
+      "/life-skills",
+      "/heritage-dashboard",
+      "/audio-library-dashboard",
+      "/my-audio-library",
+      "/ai-intelligence-dashboard",
+      "/vr-dashboard",
+      "/vr-labs-worlds",
+      "/cyber-security-dashboard",
+      "/ai-courses",
+      "/ai-quiz-challenge",
+      "/explore-ai-tools",
+    ].includes(location.pathname);
+
+  const isNoFooterPage =
+    isIsolatedPage ||
+    isMissionPage ||
+    [
+      "/life-skills",
+      "/heritage-dashboard",
+      "/audio-library-dashboard",
+      "/my-audio-library",
+      "/ai-intelligence-dashboard",
+      "/vr-dashboard",
+      "/vr-labs-worlds",
+      "/cyber-security-dashboard",
+      "/ai-courses",
+      "/ai-quiz-challenge",
+      "/explore-ai-tools",
+      "/know-us/md-message",
+    ].includes(location.pathname);
+
   return (
-    <BrowserRouter>
+    <ReactLenis root>
+      <ScrollToTop />
+      {!isNoNavPage && <Nav />}
+
       <div className="min-h-screen flex flex-col">
-        <Nav />
-
-        <main className="flex-grow">
+        <main
+          className={`flex-grow ${location.pathname !== "/" && !isNoNavPage ? "pt-24" : ""
+            }`}
+        >
           <Routes>
-            {/* Home */}
             <Route path="/" element={<Home />} />
+            <Route path="/admin/*" element={<AdminPortal />} />
 
-            {/* Gallery */}
-            <Route path="/photo-gallery" element={<PhotoGallery />} />
-            <Route path="/video-gallery" element={<VideoGallery />} />
-            <Route path="/press-release" element={<PressRelease />} />
+            {/* Core */}
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/contact" element={<Contact />} />
 
-            {/* Documents */}
-            <Route path="/registration-form" element={<RegistrationForm />} />
-            <Route path="/hrt" element={<Hrt />} />
-            <Route path="/rti" element={<Rti />} />
+            {/* Auth */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
 
-            {/* Classes */}
-            <Route path="/class-1" element={<Class1 />} />
-            <Route path="/class-2" element={<Class2 />} />
-            <Route path="/class-3" element={<Class3 />} />
-            <Route path="/class-4" element={<Class4 />} />
-            <Route path="/class-5" element={<Class5 />} />
-            <Route path="/class-6" element={<Class6 />} />
-            <Route path="/class-7" element={<Class7 />} />
-            <Route path="/class-8" element={<Class8 />} />
-            <Route path="/class-9" element={<Class9 />} />
-            <Route path="/class-10" element={<Class10 />} />
-            <Route path="/class-11" element={<Class11 />} />
-            <Route path="/class-12" element={<Class12 />} />
+            {/* Learning Modules */}
+            <Route path="/sign" element={<Sign />} />
+            <Route path="/sign-learn" element={<SignLearn />} />
+            <Route path="/sign-module" element={<SignModule />} />
+            <Route path="/skill-learn" element={<SkillLearn />} />
 
-            {/* Management */}
-            <Route path="/md-message" element={<MdMessage />} />
-            <Route path="/board-of-directors" element={<BoardOfDirectors />} />
-            <Route path="/md-list" element={<MdList />} />
-            <Route path="/officers-list" element={<OfficersList />} />
-            <Route path="/employees" element={<Employees />} />
-            <Route path="/organisation-structure" element={<OrgStructure />} />
-            <Route
-              path="/registered-printers"
-              element={<RegisteredPrinters />}
-            />
+            {/* AI */}
+            <Route path="/ai-intelligence" element={<AiIntelligence />} />
+            <Route path="/ai-intelligence-dashboard" element={<AiIntelligenceDashboard />} />
+            <Route path="/ai-courses" element={<AiCourses />} />
+            <Route path="/ai-quiz-challenge" element={<AiQuizChallenge />} />
+            <Route path="/explore-ai-tools" element={<ExploreAiTools />} />
+
+            {/* VR */}
+            <Route path="/vr" element={<Vr />} />
+            <Route path="/vr-dashboard" element={<VrDashboard />} />
+            <Route path="/vr-labs-worlds" element={<VrLabsWorlds />} />
+
+            {/* Cyber */}
+            <Route path="/cyber-security" element={<CyberSecurity />} />
+            <Route path="/cyber-security-dashboard" element={<CyberSecurityDashboard />} />
+
+            {/* Heritage */}
+            <Route path="/heritage-archive" element={<HeritageArchive />} />
+            <Route path="/heritage-dashboard" element={<HeritageDashboard />} />
+
+            {/* Audio */}
+            <Route path="/audio-books" element={<Audio />} />
+            <Route path="/audio-library-dashboard" element={<AudioLibraryDashboard />} />
+            <Route path="/my-audio-library" element={<MyAudioLibrary />} />
+
+            {/* Linguistics */}
+            <Route path="/ling" element={<Ling />} />
+            <Route path="/ling/words" element={<LingModule type="words" />} />
+            <Route path="/ling/phrases" element={<LingModule type="phrases" />} />
+            <Route path="/ling/conversations" element={<LingModule type="conversations" />} />
+            <Route path="/linguistic" element={<Linguistics />} />
+
+            {/* Courses */}
+            <Route path="/courses" element={<Video />} />
+            <Route path="/audio-courses" element={<Audiovideo />} />
+            <Route path="/ar-courses" element={<Vrcourse />} />
+            <Route path="/digital-courses" element={<Digitalcourse />} />
+            <Route path="/mobile-courses" element={<MobileCourses />} />
+            <Route path="/archive-courses" element={<ArchiveCourses />} />
+
+            {/* Skills */}
+            <Route path="/basic-skills" element={<Basicskill />} />
+            <Route path="/life-skills" element={<LifeSkills />} />
+            <Route path="/trending/:slug" element={<Trend1 />} />
+            <Route path="/quiz/:slug" element={<Quiz2 />} />
+
+            {/* Books */}
+            <Route path="/books/:classId" element={<Books />} />
+            <Route path="/class/:classId/read/:bookSubject" element={<BookReader />} />
+            <Route path="/book/:classId/:bookSubject/:chapterId/flip" element={<Flipbook />} />
+
+            {/* Gallery & Docs */}
+            <Route path="/gallery/:sectionId" element={<Gallery />} />
+            <Route path="/documents/:sectionId" element={<Document />} />
+
+            {/* Know Us */}
+            <Route path="/know-us/:sectionId" element={<KnowUs />} />
+
+            {/* Events */}
+            <Route path="/flagship-events" element={<FlagshipEvents />} />
+            <Route path="/flagship-events/:id" element={<FlagshipDetail />} />
+            <Route path="/events/:eventSlug" element={<EventDetails />} />
 
             {/* Other */}
             <Route path="/notice" element={<Notice />} />
             <Route path="/tenders" element={<Tenders />} />
             <Route path="/csr-policy" element={<CsrPolicy />} />
-            <Route path="/contact" element={<Contact />} />
+
+            {/* Missions */}
+            <Route path="/publishing-mission" element={<PublishingMission />} />
+            <Route path="/vr-mission" element={<VrMission />} />
+            <Route path="/sign-language-mission" element={<SignLanguageMission />} />
+            <Route path="/multilingual-mission" element={<MultilingualMission />} />
+            <Route path="/audiobooks-mission" element={<AudiobooksMission />} />
+            <Route path="/pustak-mela" element={<PustakMela />} />
+            <Route path="/assessment-platform" element={<AssessmentPlatform />} />
+            <Route path="/regional-content" element={<RegionalContent />} />
+            <Route path="/curriculum-expo" element={<CurriculumExpo />} />
+
+            {/* Misc */}
+            <Route path="/ebook" element={<Ebook />} />
+            <Route path="/digital" element={<Digital />} />
+            <Route path="/collaborative-learning" element={<CollaborativeLearningViewAll />} />
+            <Route path="/key-participants" element={<KeyParticipantViewAll />} />
           </Routes>
         </main>
 
-        <Footer />
+        {!isNoFooterPage && <Footer />}
       </div>
-    </BrowserRouter>
+    </ReactLenis>
   );
 }
 
