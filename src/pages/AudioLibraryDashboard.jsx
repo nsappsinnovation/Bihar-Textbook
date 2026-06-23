@@ -108,7 +108,6 @@ const AudioLibraryDashboard = () => {
           youtube: { 
             playerVars: { 
               origin: window.location.origin,
-              autoplay: 1,
               playsinline: 1
             } 
           } 
@@ -213,16 +212,6 @@ const AudioLibraryDashboard = () => {
                         <p className="text-[13px] font-medium text-[#1e1b4b]/70 mt-1">{currentBook.author}</p>
                      </div>
 
-                     <div className="flex items-center gap-4 mb-1">
-                        <div className="flex-1 h-[6px] bg-[#f0f0f5] rounded-full overflow-hidden relative">
-                           <motion.div 
-                              initial={{ width: 0 }}
-                              animate={{ width: `${progress}%` }}
-                              className="h-full bg-[#7c3aed] rounded-full" 
-                           />
-                        </div>
-                        <span className="text-[12px] font-medium text-[#1e1b4b]/80 shrink-0">{progress}%</span>
-                     </div>
                      <p className="text-[12px] font-medium text-[#1e1b4b]/60 mb-4">{formatTime(currentTime)} / {formatTime(duration)}</p>
 
                      <div className="flex items-center gap-3">
@@ -316,22 +305,7 @@ const AudioLibraryDashboard = () => {
                ))}
             </div>
 
-            {/* Progress Bar */}
-            <div className="relative mt-6 px-1 pb-1">
-               {/* Background Line */}
-               <div className="absolute top-1/2 left-0 right-0 h-[3px] bg-purple-100 -translate-y-1/2 rounded-full"></div>
-               {/* Filled Line */}
-               <div className="absolute top-1/2 left-0 w-[33%] h-[3px] bg-purple-300 -translate-y-1/2 rounded-full"></div>
-               
-               {/* Dots */}
-               <div className="relative flex justify-between items-center z-10">
-                  <div className="w-2.5 h-2.5 bg-purple-600 rounded-full shadow-[0_0_0_4px_white] z-20"></div>
-                  <div className="w-2.5 h-2.5 bg-purple-400 rounded-full shadow-[0_0_0_4px_white] z-20"></div>
-                  <div className="w-2 h-2 bg-purple-300 rounded-full shadow-[0_0_0_4px_white] z-20"></div>
-                  <div className="w-2 h-2 bg-purple-300 rounded-full shadow-[0_0_0_4px_white] z-20"></div>
-               </div>
-            </div>
-          </section>
+           </section>
           
 
         </div>
