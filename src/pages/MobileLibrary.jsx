@@ -1,18 +1,17 @@
-
-import React from 'react'
+import React from 'react';
 import { Link } from "react-router-dom";
 import { useRef } from "react";
-import { BookOpen, Award, Users, Search, Target, CheckCircle2, FileText, ArrowLeft, ArrowRight, Zap, Monitor, Globe } from 'lucide-react';
+import { BookOpen, Truck, Users, MapPin, CheckCircle2, FileText, ArrowRight, Globe, Laptop, BookHeart, Compass } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const CurriculumExpo = () => {
+const MobileLibrary = () => {
     const sliderRef = useRef(null);
 
     const stats = [
-        { label: "EXHIBITS", value: "150+", sub: "Pedagogical Innovations", icon: <Zap size={20} /> },
-        { label: "ATTENDEES", value: "10K+", sub: "Educators & Leaders", icon: <Users size={20} /> },
-        { label: "WORKSHOPS", value: "40+", sub: "Interactive Sessions", icon: <BookOpen size={20} /> },
-        { label: "LEGACY", value: "3Yrs+", sub: "Modernizing Education", icon: <Award size={20} /> }
+        { label: "VANS ACTIVE", value: "50+", sub: "Across Districts", icon: <Truck size={20} /> },
+        { label: "STUDENTS REACHED", value: "100K+", sub: "Rural Areas", icon: <Users size={20} /> },
+        { label: "RESOURCES", value: "10K+", sub: "Books & Digital Content", icon: <BookOpen size={20} /> },
+        { label: "DISTRICTS", value: "38", sub: "State-wide Coverage", icon: <MapPin size={20} /> }
     ];
 
     const fadeIn = {
@@ -24,45 +23,45 @@ const CurriculumExpo = () => {
         }
     };
 
-    const processSteps = [
+    const features = [
         {
-            title: "NEP Integration",
-            image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=600",
-            description: "Showcasing how the National Education Policy 2020 is being implemented in Bihar's curriculum.",
-            details: [
-                "NEP Framework",
-                "Skill-Based Learning",
-                "Holistic Pedagogy"
-            ],
-        },
-        {
-            title: "Interactive Textbooks",
-            image: "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?auto=format&fit=crop&q=80&w=600",
-            description: "Demos of next-gen textbooks with QR codes, AR features, and embedded digital assets.",
-            details: [
-                "QR Integration",
-                "AR Demos",
-                "Digital Assets"
-            ],
-        },
-        {
-            title: "Teacher Empowerment",
+            title: "Remote Access",
             image: "https://images.unsplash.com/photo-1544928147-79a2dbc1f389?auto=format&fit=crop&q=80&w=600",
-            description: "Workshops focused on equipping teachers with modern tools and classroom management techniques.",
+            description: "Bringing educational resources to the most remote villages, ensuring no student is left behind.",
             details: [
-                "Smart Tools",
-                "Pedagogy Training",
-                "Peer Networking"
+                "Village-to-Village Route",
+                "Scheduled Visits",
+                "Community Stops"
             ],
         },
         {
-            title: "Future of Learning",
-            image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80&w=600",
-            description: "Exhibitions on AI in education, coding for kids, and remote learning solutions.",
+            title: "Digital Kiosks",
+            image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=600",
+            description: "Equipped with tablets and laptops for digital learning and e-book access on the go.",
             details: [
-                "AI in Classroom",
-                "Coding Modules",
-                "Hybrid Models"
+                "Internet Access",
+                "Interactive Learning",
+                "E-Library Access"
+            ],
+        },
+        {
+            title: "Vast Collection",
+            image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=600",
+            description: "A wide variety of textbooks, reference materials, and storybooks for all age groups.",
+            details: [
+                "School Curriculum",
+                "Competitive Exams",
+                "Leisure Reading"
+            ],
+        },
+        {
+            title: "Guided Learning",
+            image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80&w=600",
+            description: "Educators travel with the vans to assist students, conduct reading sessions, and provide guidance.",
+            details: [
+                "Reading Sessions",
+                "Career Counseling",
+                "Doubt Clearing"
             ],
         },
     ];
@@ -74,37 +73,37 @@ const CurriculumExpo = () => {
                     {/* LEFT: Image */}
                     <div className="flex justify-center">
                         <img
-                            src="public/images/curriculam expo/curriculam mobilization.png"
-                            alt="Curriculum Mobilization Expo"
-                            className="w-[620px] h-auto object-cover"
+                            src="https://i.dawn.com/primary/2020/11/5fa1c8942bb12.jpg"
+                            alt="Mobile Library Initiative"
+                            className="w-[620px] h-auto object-cover rounded-[40px] shadow-xl"
                         />
                     </div>
 
                     {/* RIGHT: Content */}
                     <div>
                         <h1 className="text-4xl md:text-5xl font-bold text-slate-900">
-                            Curriculum Mobilization Expo
+                            Mobile Library Initiative
                         </h1>
                         <p className="mt-4 text-lg font-semibold text-blue-500">
-                            Innovating Education for the 21st Century
+                            Reaching the Remotest Corners of Bihar
                         </p>
                         <p className="mt-4 text-slate-600 max-w-md">
-                            The Curriculum Mobilization Expo is a showcase of Bihar's commitment to modernization, alignment with NEP 2020, and the introduction of interactive learning tools.
+                            Equipped with textbooks, reference books, and digital learning kiosks, our mobile library vans travel across districts to bring knowledge directly to unserved and rural communities.
                         </p>
 
                         <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-                                <div className="text-blue-500 text-xl"><Monitor size={20} /></div>
+                                <div className="text-blue-500 text-xl"><Globe size={20} /></div>
                                 <div>
-                                    <h3 className="font-semibold text-slate-800">Tech Integration</h3>
-                                    <p className="text-sm text-slate-600">Demos of digital and AR learning.</p>
+                                    <h3 className="font-semibold text-slate-800">State-wide Reach</h3>
+                                    <p className="text-sm text-slate-600">Covering all remote districts.</p>
                                 </div>
                             </div>
                             <div className="p-5 border rounded-xl shadow-sm flex gap-4">
-                                <div className="text-blue-500 text-xl"><Globe size={20} /></div>
+                                <div className="text-blue-500 text-xl"><Laptop size={20} /></div>
                                 <div>
-                                    <h3 className="font-semibold text-slate-800">NEP Aligned</h3>
-                                    <p className="text-sm text-slate-600">Bringing policy to practice.</p>
+                                    <h3 className="font-semibold text-slate-800">Tech-Enabled</h3>
+                                    <p className="text-sm text-slate-600">Digital kiosks on wheels.</p>
                                 </div>
                             </div>
                         </div>
@@ -138,27 +137,27 @@ const CurriculumExpo = () => {
                         <div className="lg:col-span-5 space-y-10">
                             <div className="space-y-4">
                                 <h2 className="text-xs font-black uppercase tracking-[0.3em] text-blue-600">
-                                    Program Overview
+                                    Initiative Overview
                                 </h2>
                                 <h3 className="text-4xl font-extrabold text-slate-900 leading-tight">
-                                    Modernizing Educational
+                                    Delivering Education
                                     <br />
                                     <span className="text-slate-400">
-                                        Pedagogy
+                                        To Your Doorstep
                                     </span>
                                 </h3>
                             </div>
 
                             <p className="text-lg text-slate-600 leading-relaxed font-light">
-                                The Curriculum Mobilization Expo is more than just an exhibition; it's a movement to bring modern, student-centered learning to every classroom in Bihar. By showcasing the latest pedagogical innovations and aligning them with NEP 2020, we empower educators to create engaging and effective learning experiences.
+                                The Mobile Library is designed to bridge the gap in educational access by bringing a wealth of reading materials and digital resources straight to students who cannot easily reach traditional libraries.
                             </p>
 
                             <div className="space-y-4">
                                 {[
-                                    "Showcase of interactive and AR-powered textbooks",
-                                    "Integration strategies for NEP 2020 guidelines",
-                                    "Collaborative workshops for teacher empowerment",
-                                    "Demonstrations of digital assets and smart classroom tools"
+                                    "Reach unserved areas",
+                                    "Promote literacy in villages",
+                                    "Provide access to technology",
+                                    "Encourage community learning"
                                 ].map((item, i) => (
                                     <div
                                         key={i}
@@ -175,14 +174,14 @@ const CurriculumExpo = () => {
                         <div className="lg:col-span-7 lg:mt-[120px]">
                             <div className="relative group overflow-hidden rounded-[40px] border border-slate-100 shadow-xl">
                                 <img
-                                    src="https://images.unsplash.com/photo-1544928147-79a2dbc1f389?auto=format&fit=crop&q=80&w=800"
-                                    alt="Curriculum Mobilization Expo"
+                                    src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=800"
+                                    alt="Students reading books"
                                     className="w-full aspect-[4/3] object-cover transition-transform duration-1000 group-hover:scale-105"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent" />
                                 <div className="absolute bottom-10 left-10 text-white">
-                                    <p className="text-[10px] font-black uppercase tracking-widest mb-2 opacity-80">Our Facility</p>
-                                    <h4 className="text-2xl font-bold">Innovation Hub</h4>
+                                    <p className="text-[10px] font-black uppercase tracking-widest mb-2 opacity-80">Community Impact</p>
+                                    <h4 className="text-2xl font-bold">Empowering Young Minds</h4>
                                 </div>
                             </div>
                         </div>
@@ -194,13 +193,13 @@ const CurriculumExpo = () => {
                 <div className="max-w-7xl mx-auto">
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
                         <div className="space-y-4">
-                            <h2 className="text-xs font-black uppercase tracking-[0.3em] text-blue-400">Exhibition</h2>
-                            <h3 className="text-4xl md:text-5xl font-black text-white tracking-tight">Modernizing Pedagogy<br /></h3>
+                            <h2 className="text-xs font-black uppercase tracking-[0.3em] text-blue-400">Features</h2>
+                            <h3 className="text-4xl md:text-5xl font-black text-white tracking-tight">Explore The Library Van<br /></h3>
                         </div>
                     </div>
 
                     <div ref={sliderRef} className="flex gap-8 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-6 no-scrollbar">
-                        {processSteps.map((step, i) => (
+                        {features.map((feature, i) => (
                             <motion.div
                                 key={i}
                                 initial="hidden"
@@ -211,12 +210,12 @@ const CurriculumExpo = () => {
                                 className="snap-start flex-shrink-0 w-[85%] sm:w-[60%] lg:w-[32%] bg-white/5 backdrop-blur-md border border-white/10 p-12 rounded-[40px] hover:border-blue-500/50 transition-all duration-500 group"
                             >
                                 <div className="mb-10 rounded-3xl bg-white flex items-center justify-center h-64 overflow-hidden">
-                                    <img src={step.image} alt={step.title} loading="lazy" className="h-full w-full object-cover" />
+                                    <img src={feature.image} alt={feature.title} loading="lazy" className="h-full w-full object-cover" />
                                 </div>
-                                <h4 className="text-xl font-black text-white mb-6 uppercase tracking-tight">{step.title}</h4>
-                                <p className="text-blue-100/60 leading-relaxed font-light mb-8 text-sm">{step.description}</p>
+                                <h4 className="text-xl font-black text-white mb-6 uppercase tracking-tight">{feature.title}</h4>
+                                <p className="text-blue-100/60 leading-relaxed font-light mb-8 text-sm">{feature.description}</p>
                                 <div className="space-y-3 border-t border-white/5 pt-8">
-                                    {step.details.map((detail, j) => (
+                                    {feature.details.map((detail, j) => (
                                         <div key={j} className="flex items-center gap-3 text-[11px] font-bold text-blue-100/40 uppercase tracking-widest">
                                             <div className="w-1 h-1 rounded-full bg-blue-500" />
                                             {detail}
@@ -235,13 +234,13 @@ const CurriculumExpo = () => {
                     <div className="relative z-10 space-y-10">
                         <div className="flex justify-center">
                             <div className="p-4 bg-white rounded-2xl shadow-sm border border-slate-100">
-                                <FileText size={32} className="text-blue-600" />
+                                <Compass size={32} className="text-blue-600" />
                             </div>
                         </div>
                         <div className="space-y-4">
-                            <h3 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight">Explore the Expo</h3>
+                            <h3 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight">Track the Van</h3>
                             <p className="text-lg text-slate-500 font-light max-w-xl mx-auto leading-relaxed">
-                                Join us at the next Expo and see the future of education in Bihar firsthand.
+                                Find out when the Mobile Library is visiting your district and plan your learning session.
                             </p>
                         </div>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -253,7 +252,7 @@ const CurriculumExpo = () => {
                 </div>
             </section>
         </div>
-    )
-}
+    );
+};
 
-export default CurriculumExpo
+export default MobileLibrary;

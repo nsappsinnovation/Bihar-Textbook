@@ -96,9 +96,9 @@ const MissionLandingLayout = ({ themeName = 'blue', hero, overview, modules }) =
       </div>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center pt-32 pb-16 px-6">
+      <section className="relative pt-12 lg:pt-16 pb-16 px-6">
         <div className="max-w-[1300px] mx-auto w-full">
-          <div className="flex flex-col lg:flex-row items-center lg:items-center justify-between gap-12">
+          <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-12 lg:gap-8">
             
             {/* Left: Text Content */}
             <div className="lg:w-[48%] space-y-5 z-10">
