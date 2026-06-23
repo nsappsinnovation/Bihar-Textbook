@@ -6,6 +6,7 @@ import Hero from '../components/Hero';
 import KeyParticipant from "../components/KeyParticipant";
 import NoticeBoard from "./navbar_pages/NoticeBoard";
 import StakeHolder from "../components/StakeHolder";
+import EvolutionMap from '../components/EvolutionMap';
 
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
     <div className="bg-white">
       <Hero />
       <MissionGrid />
+      <EvolutionMap />
       <NoticeBoard />
       <CoreMissions />
       <KeyParticipant />
