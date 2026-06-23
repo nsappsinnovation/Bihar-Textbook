@@ -91,6 +91,7 @@ function App() {
     "/ai-intelligence", "/audio-books", 
     "/cyber-security", "/heritage-archive", 
     "/basic-skills", "/ling/words", "/ling/phrases", "/ling/conversations",
+    "/pustak-mela", "/mobile-library",
     "/publishing-mission", "/vr-mission", "/sign-language-mission", "/multilingual-mission", "/audiobooks-mission"
   ].includes(location.pathname);
 
