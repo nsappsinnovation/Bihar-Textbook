@@ -50,22 +50,22 @@ const PustakMela = () => {
       items: [
         {
           title: "Author Interactions",
-          image: "https://images.unsplash.com/photo-1544928147-79a2dbc1f389?auto=format&fit=crop&q=80&w=600",
+          image: "/images/generated/pustak_author.png",
           description: "Meet your favorite authors, attend book signings, and participate in engaging literary discussions."
         },
         {
           title: "Digital Learning Expo",
-          image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=600",
+          image: "/images/generated/pustak_digital.png",
           description: "Experience the latest in educational technology, including e-books and interactive learning platforms."
         },
         {
           title: "Children's Corner",
-          image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=600",
+          image: "/images/generated/pustak_children.png",
           description: "A dedicated space for young readers with storytelling, competitions, and fun educational games."
         },
         {
           title: "Cultural Showcase",
-          image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80&w=600",
+          image: "/images/generated/pustak_cultural.png",
           description: "Celebrate Bihar's rich heritage through cultural performances and traditional art exhibitions."
         }
       ]
