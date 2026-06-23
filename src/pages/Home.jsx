@@ -1,10 +1,10 @@
 
-import CoreMissions from '../components/CoreMissions'
-import MissionGrid from '../components/MissionGrid';
+import CoreMissions from '../missions/CoreMissions'
+import MissionGrid from '../missions/MissionGrid';
 import React from 'react';
 import Hero from '../components/Hero';
 import KeyParticipant from "../components/KeyParticipant";
-import FlagshipEvents from "../components/FlagshipEvents";
+import NoticeBoard from "../components/NoticeBoard";
 import StakeHolder from "../components/StakeHolder";
 
 
@@ -14,7 +14,7 @@ const Home = () => {
       <Hero />
 
       <MissionGrid />
-      <FlagshipEvents />
+      <NoticeBoard />
       <CoreMissions />
       <KeyParticipant />
 
@@ -24,3 +24,4 @@ const Home = () => {
 }
 
 export default Home;
+

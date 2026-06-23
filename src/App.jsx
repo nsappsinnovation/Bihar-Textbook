@@ -11,68 +11,68 @@ import Home from "./pages/Home";
 import Tenders from "./pages/Tenders";
 import CsrPolicy from "./pages/CsrPolicy";
 import KnowUs from "./pages/Know";
-import Books from "./pages/Books.jsx";
-import BookReader from "./pages/BookReader.jsx";
-import Flipbook from "./pages/Flipbook.jsx";
+import Books from "./books/Books.jsx";
+import BookReader from "./books/BookReader.jsx";
+import Flipbook from "./books/Flipbook.jsx";
 import Gallery from "./pages/Gallery.jsx";
 import Document from "./pages/Document.jsx";
 import FlagshipDetail from "./pages/FlagshipDetail.jsx";
 import EventDetails from "./pages/EventDetails.jsx";
-import Ling from "./pages/Ling.jsx";
-import LingModule from "./pages/LingModule.jsx";
-import PublishingMission from "./pages/PublishingMission.jsx";
-import VrMission from "./pages/VrMission.jsx";
-import SignLanguageMission from "./pages/SignLanguageMission.jsx";
-import MultilingualMission from "./pages/MultilingualMission.jsx";
-import AudiobooksMission from "./pages/AudiobooksMission.jsx";
-import Sign from "./pages/Signlanguage.jsx";
-import SignLearn from "./pages/SignLearn.jsx";
-import SignModule from "./pages/SignModule.jsx";
-import SkillLearn from "./pages/SkillLearn.jsx";
-import AiIntelligence from "./pages/AiIntelligence.jsx";
-import CyberSecurity from "./pages/CyberSecurity.jsx";
-import HeritageArchive from "./pages/HeritageArchive.jsx";
-import Vr from "./pages/Vrlab.jsx";
-import Linguistics from "./pages/Linguistics.jsx";
+import Ling from "./linguistics/Ling.jsx";
+import LingModule from "./linguistics/LingModule.jsx";
+import PublishingMission from "./missions/PublishingMission.jsx";
+import VrMission from "./missions/VrMission.jsx";
+import SignLanguageMission from "./missions/SignLanguageMission.jsx";
+import MultilingualMission from "./missions/MultilingualMission.jsx";
+import AudiobooksMission from "./missions/AudiobooksMission.jsx";
+import Sign from "./signLanguage/Signlanguage.jsx";
+import SignLearn from "./signLanguage/SignLearn.jsx";
+import SignModule from "./signLanguage/SignModule.jsx";
+import SkillLearn from "./skills/SkillLearn.jsx";
+import AiIntelligence from "./ai/AiIntelligence.jsx";
+import CyberSecurity from "./cyberSecurity/CyberSecurity.jsx";
+import HeritageArchive from "./heritage/HeritageArchive.jsx";
+import Vr from "./vr/Vrlab.jsx";
+import Linguistics from "./linguistics/Linguistics.jsx";
 
-import Audio from "./pages/Audiolib.jsx";
-import Trend1 from "./pages/TrendingSkills.jsx";
-import Quiz2 from "./pages/Skillsquiz.jsx";
+import Audio from "./audio/Audiolib.jsx";
+import Trend1 from "./skills/TrendingSkills.jsx";
+import Quiz2 from "./skills/Skillsquiz.jsx";
 
-import Basicskill from "./pages/Basicskills.jsx";
+import Basicskill from "./skills/Basicskills.jsx";
 
-import LifeSkills from "./pages/LifeSkills.jsx";
-import HeritageDashboard from "./pages/HeritageDashboard.jsx";
-import AudioLibraryDashboard from "./pages/AudioLibraryDashboard.jsx";
-import MyAudioLibrary from "./pages/MyAudioLibrary.jsx";
-import AiIntelligenceDashboard from "./pages/AiIntelligenceDashboard.jsx";
-import AiQuizChallenge from "./pages/AiQuizChallenge.jsx";
-import ExploreAiTools from "./pages/ExploreAiTools.jsx";
-import VrDashboard from "./pages/VrDashboard.jsx";
-import VrLabsWorlds from "./pages/VrLabsWorlds.jsx";
-import CyberSecurityDashboard from "./pages/CyberSecurityDashboard.jsx";
+import LifeSkills from "./skills/LifeSkills.jsx";
+import HeritageDashboard from "./heritage/HeritageDashboard.jsx";
+import AudioLibraryDashboard from "./audio/AudioLibraryDashboard.jsx";
+import MyAudioLibrary from "./audio/MyAudioLibrary.jsx";
+import AiIntelligenceDashboard from "./ai/AiIntelligenceDashboard.jsx";
+import AiQuizChallenge from "./ai/AiQuizChallenge.jsx";
+import ExploreAiTools from "./ai/ExploreAiTools.jsx";
+import VrDashboard from "./vr/VrDashboard.jsx";
+import VrLabsWorlds from "./vr/VrLabsWorlds.jsx";
+import CyberSecurityDashboard from "./cyberSecurity/CyberSecurityDashboard.jsx";
 import CollaborativeLearningViewAll from "./pages/CollaborativeLearningViewAll.jsx";
 
-import PustakMela from "./pages/PustakMela.jsx";
+import PustakMela from "./missions/PustakMela.jsx";
 
-import MobileLibrary from "./pages/MobileLibrary.jsx";
+import MobileLibrary from "./missions/MobileLibrary.jsx";
 
 /* Components */
 import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
 import Contact from "./pages/Contact";
 import Notice from "./components/Notice.jsx";
-import FlagshipEvents from "./components/FlagshipEvents.jsx";
-import Video from "./components/Signcourses.jsx";
-import AiCourses from "./components/AiCourses.jsx";
-import Audiovideo from "./components/Audiovideo.jsx";
-import Vrcourse from "./components/Arvideo.jsx";
-import Digitalcourse from "./components/Digitalvideo.jsx";
-import MobileCourses from "./components/MobileCourses.jsx";
-import ArchiveCourses from "./components/ArchiveCourses.jsx";
+import NoticeBoard from "./components/NoticeBoard.jsx";
+import Video from "./signLanguage/Signcourses.jsx";
+import AiCourses from "./ai/AiCourses.jsx";
+import Audiovideo from "./audio/Audiovideo.jsx";
+import Vrcourse from "./vr/Arvideo.jsx";
+import Digitalcourse from "./courses/Digitalvideo.jsx";
+import MobileCourses from "./courses/MobileCourses.jsx";
+import ArchiveCourses from "./courses/ArchiveCourses.jsx";
 
 /* Auth */
-import Login from "./components/Login.jsx";
-import SignUp from "./components/SignUp.jsx";
+import Login from "./auth/Login.jsx";
+import SignUp from "./auth/SignUp.jsx";
 
 import ScrollToTop from "./components/ScrollToTop";
 import AdminPortal from "./admin/AdminPortal.jsx";
@@ -221,7 +221,7 @@ function App() {
             <Route path="/know-us/:sectionId" element={<KnowUs />} />
 
             {/* Events */}
-            <Route path="/flagship-events" element={<FlagshipEvents />} />
+            <Route path="/notice-board" element={<NoticeBoard />} />
             <Route path="/flagship-events/:id" element={<FlagshipDetail />} />
             <Route path="/events/:eventSlug" element={<EventDetails />} />
 
@@ -254,3 +254,4 @@ function App() {
 }
 
 export default App;
+
