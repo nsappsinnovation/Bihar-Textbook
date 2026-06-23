@@ -264,32 +264,7 @@ const AudioLibraryDashboard = () => {
                  </div>
                </section>
 
-               {/* Featured Video Story */}
-               <section className="bg-white rounded-[15px] shadow-[0_2px_10px_rgba(0,0,0,0.02)] p-4 border border-slate-50 overflow-hidden">
-                 <div className="flex items-center justify-between mb-4 px-1">
-                   <h3 className="text-[15px] font-bold text-[#1e1b4b] flex items-center gap-2"><Film size={18} className="text-purple-600"/> Featured Video Story</h3>
-                   <button onClick={() => navigate('/my-audio-library')} className="text-[13px] font-semibold text-purple-600 flex items-center gap-1">View Library <ArrowRight size={12} /></button>
-                 </div>
-                 <div className="aspect-video w-full rounded-xl overflow-hidden bg-slate-900 shadow-inner relative group/video">
-                    <ReactPlayer 
-                        url="https://www.youtube.com/watch?v=kS1w2c7jYg0" 
-                        width="100%" 
-                        height="100%" 
-                        controls={true}
-                        light="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=1200"
-                        playing={false}
-                        playIcon={
-                          <div className="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center shadow-2xl group-hover/video:scale-110 transition-transform cursor-pointer">
-                            <Play className="w-8 h-8 fill-purple-600 text-purple-600 ml-1" />
-                          </div>
-                        }
-                    />
-                 </div>
-                 <div className="mt-3 px-1">
-                    <h4 className="text-[15px] font-bold text-slate-900">The Alchemist - Animated Summary</h4>
-                    <p className="text-[12px] font-medium text-slate-500 mt-0.5">Watch and learn the core concepts of this masterpiece.</p>
-                 </div>
-               </section>
+              
             </div>
 
             {/* Discover Section */}
