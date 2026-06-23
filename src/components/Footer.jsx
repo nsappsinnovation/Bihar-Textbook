@@ -67,31 +67,31 @@ const Footer = () => {
             <div className="flex items-start gap-3">
               <MapPin className="text-blue-400 mt-1 flex-shrink-0" size={18} />
               <span>
-                Bihar State Text Book Publishing Corporation Ltd.<br />
-                Bhawan, Budh Marg, Patna - 800001
+                Registered Office:<br />
+                Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001<br />
+                Bihar, India
               </span>
             </div>
 
             <div className="flex items-center gap-3">
               <Mail className="text-blue-400 flex-shrink-0" size={18} />
-              <a href="mailto:bstbpc.patna@gmail.com" className="hover:text-white transition-colors">
-                bstbpc.patna@gmail.com
+              <a href="mailto:textbookmd@gmail.com" className="hover:text-white transition-colors">
+                textbookmd@gmail.com
               </a>
             </div>
 
             <div className="flex items-center gap-3">
               <Phone className="text-blue-400 flex-shrink-0" size={18} />
-              <span>+91 612 222 1234</span>
+              <span>06122221975</span>
             </div>
           </div>
 
-          <div className="mt-6 pt-4 border-t border-white/10">
-            <p className="text-[10px] text-white/40 uppercase tracking-wider font-semibold mb-2">Partnered With</p>
-            <div className="flex gap-4 items-center opacity-50 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300">
-              <img src="/logo.png" alt="Gov" className="h-8" />
-              <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/95/Digital_India_logo.svg/1200px-Digital_India_logo.svg.png" alt="Digital India" className="h-6" />
-              <img src="https://indiaai.gov.in/assets/images/logo.png" alt="India AI" className="h-6" />
-            </div>
+          <div className="mt-4 text-sm">
+            <p className="font-semibold">Registered Office:-</p>
+            <p>Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001</p>
+            <p>Bihar</p>
+            <p>India</p>
+            <p className="mt-2">Phone: 06122221975</p>
           </div>
         </div>
       </div>
