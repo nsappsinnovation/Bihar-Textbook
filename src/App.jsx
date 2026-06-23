@@ -16,8 +16,6 @@ import BookReader from "./books/BookReader.jsx";
 import Flipbook from "./books/Flipbook.jsx";
 import Gallery from "./pages/Gallery.jsx";
 import Document from "./pages/Document.jsx";
-import FlagshipDetail from "./pages/FlagshipDetail.jsx";
-import EventDetails from "./pages/EventDetails.jsx";
 import Ling from "./linguistics/Ling.jsx";
 import LingModule from "./linguistics/LingModule.jsx";
 import PublishingMission from "./missions/PublishingMission.jsx";
@@ -27,8 +25,7 @@ import MultilingualMission from "./missions/MultilingualMission.jsx";
 import AudiobooksMission from "./missions/AudiobooksMission.jsx";
 import Sign from "./signLanguage/Signlanguage.jsx";
 import SignLearn from "./signLanguage/SignLearn.jsx";
-import SignModule from "./signLanguage/SignModule.jsx";
-import SkillLearn from "./skills/SkillLearn.jsx";
+
 import AiIntelligence from "./ai/AiIntelligence.jsx";
 import CyberSecurity from "./cyberSecurity/CyberSecurity.jsx";
 import HeritageArchive from "./heritage/HeritageArchive.jsx";
@@ -36,8 +33,7 @@ import Vr from "./vr/Vrlab.jsx";
 import Linguistics from "./linguistics/Linguistics.jsx";
 
 import Audio from "./audio/Audiolib.jsx";
-import Trend1 from "./skills/TrendingSkills.jsx";
-import Quiz2 from "./skills/Skillsquiz.jsx";
+
 
 import Basicskill from "./skills/Basicskills.jsx";
 
@@ -46,29 +42,20 @@ import HeritageDashboard from "./heritage/HeritageDashboard.jsx";
 import AudioLibraryDashboard from "./audio/AudioLibraryDashboard.jsx";
 import MyAudioLibrary from "./audio/MyAudioLibrary.jsx";
 import AiIntelligenceDashboard from "./ai/AiIntelligenceDashboard.jsx";
-import AiQuizChallenge from "./ai/AiQuizChallenge.jsx";
-import ExploreAiTools from "./ai/ExploreAiTools.jsx";
+
+
 import VrDashboard from "./vr/VrDashboard.jsx";
 import VrLabsWorlds from "./vr/VrLabsWorlds.jsx";
 import CyberSecurityDashboard from "./cyberSecurity/CyberSecurityDashboard.jsx";
-import CollaborativeLearningViewAll from "./pages/CollaborativeLearningViewAll.jsx";
 
-import PustakMela from "./missions/PustakMela.jsx";
 
-import MobileLibrary from "./missions/MobileLibrary.jsx";
 
 /* Components */
 import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
 import Contact from "./pages/Contact";
 import Notice from "./components/Notice.jsx";
 import NoticeBoard from "./components/NoticeBoard.jsx";
-import Video from "./signLanguage/Signcourses.jsx";
-import AiCourses from "./ai/AiCourses.jsx";
-import Audiovideo from "./audio/Audiovideo.jsx";
-import Vrcourse from "./vr/Arvideo.jsx";
-import Digitalcourse from "./courses/Digitalvideo.jsx";
-import MobileCourses from "./courses/MobileCourses.jsx";
-import ArchiveCourses from "./courses/ArchiveCourses.jsx";
+
 
 /* Auth */
 import Login from "./auth/Login.jsx";
@@ -111,9 +98,8 @@ function App() {
       "/vr-dashboard",
       "/vr-labs-worlds",
       "/cyber-security-dashboard",
-      "/ai-courses",
-      "/ai-quiz-challenge",
-      "/explore-ai-tools",
+      
+      
     ].includes(location.pathname);
 
   const isNoFooterPage =
@@ -128,9 +114,9 @@ function App() {
       "/vr-dashboard",
       "/vr-labs-worlds",
       "/cyber-security-dashboard",
-      "/ai-courses",
-      "/ai-quiz-challenge",
-      "/explore-ai-tools",
+     
+      
+      
       "/know-us/md-message",
     ].includes(location.pathname);
 
@@ -159,16 +145,11 @@ function App() {
             {/* Learning Modules */}
             <Route path="/sign" element={<Sign />} />
             <Route path="/sign-learn" element={<SignLearn />} />
-            <Route path="/sign-module" element={<SignModule />} />
-            <Route path="/skill-learn" element={<SkillLearn />} />
 
             {/* AI */}
             <Route path="/ai-intelligence" element={<AiIntelligence />} />
             <Route path="/ai-intelligence-dashboard" element={<AiIntelligenceDashboard />} />
-            <Route path="/ai-courses" element={<AiCourses />} />
-            <Route path="/ai-quiz-challenge" element={<AiQuizChallenge />} />
-            <Route path="/explore-ai-tools" element={<ExploreAiTools />} />
-
+            
             {/* VR */}
             <Route path="/vr" element={<Vr />} />
             <Route path="/vr-dashboard" element={<VrDashboard />} />
@@ -195,18 +176,14 @@ function App() {
             <Route path="/linguistic" element={<Linguistics />} />
 
             {/* Courses */}
-            <Route path="/courses" element={<Video />} />
-            <Route path="/audio-courses" element={<Audiovideo />} />
-            <Route path="/ar-courses" element={<Vrcourse />} />
-            <Route path="/digital-courses" element={<Digitalcourse />} />
-            <Route path="/mobile-courses" element={<MobileCourses />} />
-            <Route path="/archive-courses" element={<ArchiveCourses />} />
+
+
+
 
             {/* Skills */}
             <Route path="/basic-skills" element={<Basicskill />} />
             <Route path="/life-skills" element={<LifeSkills />} />
-            <Route path="/trending/:slug" element={<Trend1 />} />
-            <Route path="/quiz/:slug" element={<Quiz2 />} />
+
 
             {/* Books */}
             <Route path="/books/:classId" element={<Books />} />
@@ -222,8 +199,6 @@ function App() {
 
             {/* Events */}
             <Route path="/notice-board" element={<NoticeBoard />} />
-            <Route path="/flagship-events/:id" element={<FlagshipDetail />} />
-            <Route path="/events/:eventSlug" element={<EventDetails />} />
 
             {/* Other */}
             <Route path="/notice" element={<Notice />} />
@@ -236,13 +211,8 @@ function App() {
             <Route path="/sign-language-mission" element={<SignLanguageMission />} />
             <Route path="/multilingual-mission" element={<MultilingualMission />} />
             <Route path="/audiobooks-mission" element={<AudiobooksMission />} />
-            <Route path="/pustak-mela" element={<PustakMela />} />
-
-            <Route path="/mobile-library" element={<MobileLibrary />} />
-
+  
             {/* Misc */}
-
-            <Route path="/collaborative-learning" element={<CollaborativeLearningViewAll />} />
             <Route path="/key-participants" element={<KeyParticipantViewAll />} />
           </Routes>
         </main>
