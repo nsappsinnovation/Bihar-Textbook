@@ -9,7 +9,7 @@ const MobileLibrary = () => {
       title: "Mobile Library Initiative",
       highlight: "Reaching the Remotest Corners of Bihar",
       description: "Equipped with textbooks, reference books, and digital learning kiosks, our mobile library vans travel across districts to bring knowledge directly to unserved and rural communities.",
-      image: "https://i.dawn.com/primary/2020/11/5fa1c8942bb12.jpg",
+      image: "/images/generated/mobile_library_van.png",
       action: {
         label: "Track the Van",
         path: "/"
