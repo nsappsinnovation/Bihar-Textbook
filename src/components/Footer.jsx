@@ -86,13 +86,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="mt-4 text-sm">
-            <p className="font-semibold">Registered Office:-</p>
-            <p>Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001</p>
-            <p>Bihar</p>
-            <p>India</p>
-            <p className="mt-2">Phone: 06122221975</p>
-          </div>
+         
         </div>
       </div>
 
