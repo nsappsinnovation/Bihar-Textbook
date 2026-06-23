@@ -36,7 +36,7 @@ const CyberSecurity = () => {
       title: "Program Overview",
       heading: "Protecting Students in the Digital Age",
       description: "Our Cyber Security initiative is dedicated to educating students about the risks of the digital world. By teaching practical safety habits, we empower the next generation to use technology responsibly and safely.",
-      image: "/images/skills/c1.png",
+      image: "/images/generated/cyber_ai_images.png",
       points: [
         "Understand phishing, scam calls, and fake links",
         "Build strong password habits and enable 2FA",
@@ -50,17 +50,17 @@ const CyberSecurity = () => {
       items: [
         {
           title: "AI Deepfakes & Photo Safety",
-          image: "/images/skills/deep.png",
+          image: "/images/generated/cyber_deepfakes.png",
           description: "Learn how AI-generated images and deepfake photos can be misused online and how to protect yourself on social media."
         },
         {
           title: "Phishing & Scams",
-          image: "/images/skills/c2.png",
+          image: "/images/generated/cyber_phishing.png",
           description: "Understand how attackers trick humans using fake emails, calls, messages, and emotional pressure."
         },
         {
           title: "AI-Generated Images",
-          image: "/images/skills/ai.png",
+          image: "/images/generated/cyber_ai_images.png",
           description: "Learn how AI-generated images can be used to spread misinformation and how to recognize them."
         },
         {

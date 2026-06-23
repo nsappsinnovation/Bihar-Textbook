@@ -36,7 +36,7 @@ const Audiolib = () => {
       title: "Program Overview",
       heading: "Empowering Learning Through Auditory Resources",
       description: "Our Audio Learning initiative helps students gain knowledge through listening, making education more flexible and accessible. With engaging narration, students can explore stories, concepts, and skills without being limited to traditional reading methods.",
-      image: "/images/audio/a1.png",
+      image: "/images/generated/audiolib_shared_learning.png",
       points: [
         "Supports learning for all reading preferences and abilities",
         "Improves listening, comprehension, and vocabulary",
@@ -50,22 +50,22 @@ const Audiolib = () => {
       items: [
         {
           title: "Diverse Content and Accessibility",
-          image: "/images/audio/a2.png",
+          image: "/images/generated/audiolib_diverse_content.png",
           description: "Audiobooks offer a vast library of knowledge and stories, making learning accessible to everyone, including learners with different reading preferences."
         },
         {
           title: "Professional Development",
-          image: "/images/audio/a3.png",
+          image: "/images/generated/audiolib_professional_development.png",
           description: "Audiobooks are an excellent resource for professional growth, helping learners build new skills through structured audio learning."
         },
         {
           title: "Active and Hands-Free Learning",
-          image: "/images/audio/a4.png",
+          image: "/images/generated/audiolib_hands_free.png",
           description: "Audiobooks support hands-free learning for active students—perfect during workouts, traveling, or daily routines."
         },
         {
           title: "Shared Learning and Engagement",
-          image: "/images/audio/a5.png",
+          image: "/images/generated/audiolib_shared_learning.png",
           description: "Audiobooks are great for shared learning, especially for families. Parents and children can enjoy stories together."
         }
       ]
