@@ -63,15 +63,28 @@ const Footer = () => {
         <div>
           <h4 className="text-white font-semibold mb-4 tracking-wide text-sm uppercase">Contact Information</h4>
 
-          <p className="text-sm">
-            Email Us- <br />
-            <a
-              href="mailto:textbookmd@gmail.com"
-              className="text-white hover:underline"
-            >
-              textbookmd@gmail.com
-            </a>
-          </p>
+          <div className="space-y-4 text-sm">
+            <div className="flex items-start gap-3">
+              <MapPin className="text-blue-400 mt-1 flex-shrink-0" size={18} />
+              <span>
+                Registered Office:<br />
+                Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001<br />
+                Bihar, India
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <Mail className="text-blue-400 flex-shrink-0" size={18} />
+              <a href="mailto:textbookmd@gmail.com" className="hover:text-white transition-colors">
+                textbookmd@gmail.com
+              </a>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <Phone className="text-blue-400 flex-shrink-0" size={18} />
+              <span>06122221975</span>
+            </div>
+          </div>
 
           <div className="mt-4 text-sm">
             <p className="font-semibold">Registered Office:-</p>
