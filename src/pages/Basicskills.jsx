@@ -10,6 +10,7 @@ const Basicskills = () => {
       highlight: "Learn Essential Daily Skills for Safe & Smart Living",
       description: "Practical lessons teaching students road safety, traffic rules, ATM usage, and responsible everyday behavior in modern society.",
       image: "/images/skills/a.png",
+      imageClassName: "scale-[1.4] lg:-translate-x-48",
       action: {
         label: "Start Learning",
         path: "/life-skills"

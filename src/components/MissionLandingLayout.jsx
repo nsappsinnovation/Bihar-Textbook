@@ -96,9 +96,9 @@ const MissionLandingLayout = ({ themeName = 'blue', hero, overview, modules }) =
       </div>
 
       {/* Hero Section */}
-      <section className="relative pt-12 lg:pt-16 pb-16 px-6">
+      <section className="relative pt-12 lg:pt-16 pb-8 lg:pb-12 px-6">
         <div className="max-w-[1300px] mx-auto w-full">
-          <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-12 lg:gap-8">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
             
             {/* Left: Text Content */}
             <div className="lg:w-[48%] space-y-5 z-10">
@@ -164,7 +164,7 @@ const MissionLandingLayout = ({ themeName = 'blue', hero, overview, modules }) =
                 <img
                   src={hero.image}
                   alt={hero.title}
-                  className="w-full max-w-[460px] object-contain drop-shadow-2xl"
+                  className={`w-full max-w-[460px] max-h-[380px] lg:max-h-[460px] object-contain drop-shadow-2xl ${hero.imageClassName || ''}`}
                 />
               </motion.div>
             </div>
@@ -173,7 +173,7 @@ const MissionLandingLayout = ({ themeName = 'blue', hero, overview, modules }) =
       </section>
 
       {/* Overview Parallax Section */}
-      <section className="py-16 px-6 relative z-20">
+      <section className="py-10 lg:py-12 px-6 relative z-20">
         <div className="max-w-[1200px] mx-auto">
           <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
             

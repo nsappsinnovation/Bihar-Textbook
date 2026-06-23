@@ -10,6 +10,7 @@ const CyberSecurity = () => {
       highlight: "Learn Online Safety, Scam Protection & Secure Digital Habits!",
       description: "Practical cyber security lessons designed to protect students from phishing, malware, OTP fraud, fake links, and online threats.",
       image: "/images/skills/c.png",
+      imageClassName: "scale-[1.4] lg:-translate-x-48",
       action: {
         label: "Start Learning",
         path: "/cyber-security-dashboard"

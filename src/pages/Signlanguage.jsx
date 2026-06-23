@@ -10,6 +10,7 @@ const Signlanguage = () => {
       highlight: "Master ASL with Fun and Engaging Lessons!",
       description: "Interactive and engaging lessons designed for 8th to 12th class students.",
       image: "/images/hello.png",
+      imageClassName: "scale-[1.4] lg:-translate-x-48",
       action: {
         label: "Start Learning",
         path: "/sign-learn"
