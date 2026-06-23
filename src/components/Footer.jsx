@@ -67,21 +67,22 @@ const Footer = () => {
             <div className="flex items-start gap-3">
               <MapPin className="text-blue-400 mt-1 flex-shrink-0" size={18} />
               <span>
-                Bihar State Text Book Publishing Corporation Ltd.<br />
-                Bhawan, Budh Marg, Patna - 800001
+                Registered Office:<br />
+                Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001<br />
+                Bihar, India
               </span>
             </div>
 
             <div className="flex items-center gap-3">
               <Mail className="text-blue-400 flex-shrink-0" size={18} />
-              <a href="mailto:bstbpc.patna@gmail.com" className="hover:text-white transition-colors">
-                bstbpc.patna@gmail.com
+              <a href="mailto:textbookmd@gmail.com" className="hover:text-white transition-colors">
+                textbookmd@gmail.com
               </a>
             </div>
 
             <div className="flex items-center gap-3">
               <Phone className="text-blue-400 flex-shrink-0" size={18} />
-              <span>+91 612 222 1234</span>
+              <span>06122221975</span>
             </div>
           </div>
 

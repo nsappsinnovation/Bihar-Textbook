@@ -14,7 +14,40 @@ export default function LeadersManagementPage({ addToast }) {
   const storageKey = 'website_leaders_v3';
   const [leaders, setLeaders] = useState(() => {
     const saved = localStorage.getItem(storageKey);
-    return saved ? JSON.parse(saved) : [
+    if (saved) {
+      try {
+        let parsed = JSON.parse(saved);
+        let updated = false;
+        parsed = parsed.map(item => {
+          if (item.name === "Shri Sunil Kumar" || item.name === "Sri Sunil Kumar") {
+            updated = true;
+            return {
+              ...item,
+              name: "Sri Mithilesh Tiwari",
+              role: "Hon'ble Education Minister, Bihar",
+              image: "/images/KeyParticipants/sri_mithlesh.png"
+            };
+          }
+          if (item.name === "Shri Dr. B. Rajender, IAS" || item.name === "Dr. B. Rajender") {
+            updated = true;
+            return {
+              ...item,
+              name: "Shri Vinod Singh Gunjiyal",
+              role: "Secretary, Education Department",
+              image: "/images/KeyParticipants/sri-vinod.png"
+            };
+          }
+          return item;
+        });
+        if (updated) {
+          localStorage.setItem(storageKey, JSON.stringify(parsed));
+        }
+        return parsed;
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    return [
       { 
         id: 1, 
         name: 'Shri Samrat Choudhary', 
@@ -24,17 +57,17 @@ export default function LeadersManagementPage({ addToast }) {
       },
       { 
         id: 2, 
-        name: 'Shri Sunil Kumar', 
+        name: 'Sri Mithilesh Tiwari', 
         role: "Hon'ble Education Minister, Bihar", 
         tag: 'LEADERSHIP', 
-        image: '/images/KeyParticipants/Sunil-Kumar.png' 
+        image: '/images/KeyParticipants/sri_mithlesh.png' 
       },
       { 
         id: 3, 
-        name: 'Shri Dr. B. Rajender, IAS', 
-        role: 'Additional Chief Secretary, Education Department', 
+        name: 'Shri Vinod Singh Gunjiyal', 
+        role: 'Secretary, Education Department', 
         tag: 'LEADERSHIP', 
-        image: '/images/KeyParticipants/B.Rajendra.png' 
+        image: '/images/KeyParticipants/sri-vinod.png' 
       },
       { 
         id: 4, 

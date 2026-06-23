@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 const RTI = () => {
   const [rtiData, setRtiData] = React.useState({ 
     officer: 'Shri. Rajesh Kumar', 
-    phone: '+91 612 222 1975', 
+    phone: '06122221975', 
     email: 'rti.bstbpc@bihar.gov.in', 
-    address: 'Budh Marg, Patna - 800001' 
+    address: 'Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001' 
   });
 
   React.useEffect(() => {
