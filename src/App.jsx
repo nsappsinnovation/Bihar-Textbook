@@ -34,11 +34,11 @@ import CyberSecurity from "./pages/CyberSecurity.jsx";
 import HeritageArchive from "./pages/HeritageArchive.jsx";
 import Vr from "./pages/Vrlab.jsx";
 import Linguistics from "./pages/Linguistics.jsx";
-import Digital from "./pages/DigitalPortal.jsx";
+
 import Audio from "./pages/Audiolib.jsx";
 import Trend1 from "./pages/TrendingSkills.jsx";
 import Quiz2 from "./pages/Skillsquiz.jsx";
-import Ebook from "./pages/Ebook";
+
 import Basicskill from "./pages/Basicskills.jsx";
 
 import LifeSkills from "./pages/LifeSkills.jsx";
@@ -54,9 +54,8 @@ import CyberSecurityDashboard from "./pages/CyberSecurityDashboard.jsx";
 import CollaborativeLearningViewAll from "./pages/CollaborativeLearningViewAll.jsx";
 
 import PustakMela from "./pages/PustakMela.jsx";
-import AssessmentPlatform from "./pages/AssessmentPlatform.jsx";
-import RegionalContent from "./pages/RegionalContent.jsx";
-import CurriculumExpo from "./pages/CurriculumExpo.jsx";
+
+import MobileLibrary from "./pages/MobileLibrary.jsx";
 
 /* Components */
 import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
@@ -89,9 +88,10 @@ function App() {
 
   const isMissionPage = [
     "/ling", "/linguistic", "/vr", "/sign", "/sign-learn", "/sign-module",
-    "/ai-intelligence", "/digital", "/audio-books", 
+    "/ai-intelligence", "/audio-books", 
     "/cyber-security", "/heritage-archive", 
-    "/basic-skills", "/ebook", "/ling/words", "/ling/phrases", "/ling/conversations",
+    "/basic-skills", "/ling/words", "/ling/phrases", "/ling/conversations",
+    "/pustak-mela", "/mobile-library",
     "/publishing-mission", "/vr-mission", "/sign-language-mission", "/multilingual-mission", "/audiobooks-mission"
   ].includes(location.pathname);
 
@@ -237,13 +237,11 @@ function App() {
             <Route path="/multilingual-mission" element={<MultilingualMission />} />
             <Route path="/audiobooks-mission" element={<AudiobooksMission />} />
             <Route path="/pustak-mela" element={<PustakMela />} />
-            <Route path="/assessment-platform" element={<AssessmentPlatform />} />
-            <Route path="/regional-content" element={<RegionalContent />} />
-            <Route path="/curriculum-expo" element={<CurriculumExpo />} />
+
+            <Route path="/mobile-library" element={<MobileLibrary />} />
 
             {/* Misc */}
-            <Route path="/ebook" element={<Ebook />} />
-            <Route path="/digital" element={<Digital />} />
+
             <Route path="/collaborative-learning" element={<CollaborativeLearningViewAll />} />
             <Route path="/key-participants" element={<KeyParticipantViewAll />} />
           </Routes>

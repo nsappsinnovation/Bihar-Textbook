@@ -50,22 +50,22 @@ const HeritageArchive = () => {
       items: [
         {
           title: "Document Collection",
-          image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80&w=600",
+          image: "/images/generated/heritage_collection.png",
           description: "Gathering historical textbooks, manuscripts, and educational records from across Bihar."
         },
         {
           title: "Digitization Phase",
-          image: "https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&q=80&w=600",
+          image: "/images/generated/heritage_archive_indian.png",
           description: "High-resolution scanning and OCR processing to convert physical copies into digital formats."
         },
         {
           title: "Digital Cataloging",
-          image: "https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&q=80&w=600",
+          image: "/images/generated/pustak_digital.png",
           description: "Organizing digital assets into a searchable and structured database for global access."
         },
         {
           title: "Public Access Portal",
-          image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&q=80&w=600",
+          image: "/images/generated/mobile_digital_kiosks.png",
           description: "Making the archive available to researchers, students, and historians worldwide online."
         }
       ]

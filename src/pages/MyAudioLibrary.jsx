@@ -19,8 +19,8 @@ const booksData = [
     duration: "4h 15m",
     chaptersCount: 5,
     cover: "https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.youtube.com/watch?v=kS1w2c7jYg0",
-    youtubeId: "kS1w2c7jYg0",
+    audioUrl: "https://www.youtube.com/watch?v=fKXr0wyw1gA",
+    youtubeId: "fKXr0wyw1gA",
     description: "A magical story about Santiago, an Andalusian shepherd boy who yearns to travel in search of a worldly treasure. His quest will lead him to riches far different—and far more satisfying—than he ever imagined.",
     chapters: ["Santiago's Dream & The Fortune Teller", "The Old King of Salem", "Crossing the Desert & The Oasis", "Meeting the Alchemist", "The Pyramids & The Real Treasure"],
     progress: 45,
@@ -37,8 +37,8 @@ const booksData = [
     duration: "5h 30m",
     chaptersCount: 4,
     cover: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.youtube.com/watch?v=PZ7lDrwYdZc",
-    youtubeId: "PZ7lDrwYdZc",
+    audioUrl: "https://www.youtube.com/watch?v=4r6Vdjx9RqA",
+    youtubeId: "4r6Vdjx9RqA",
     description: "No matter your goals, Atomic Habits offers a proven framework for improving every day. James Clear, one of the world's leading experts on habit formation, reveals practical strategies to build good habits and break bad ones.",
     chapters: ["The Surprising Power of Atomic Habits", "How Your Habits Shape Your Identity", "The 1st & 2nd Laws: Make it Obvious & Attractive", "The 3rd & 4th Laws: Make it Easy & Satisfying"],
     progress: 10,
@@ -55,8 +55,8 @@ const booksData = [
     duration: "6h 12m",
     chaptersCount: 6,
     cover: "https://images.unsplash.com/photo-1592492159418-09f31333cca8?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.youtube.com/watch?v=Juzmup72H8I",
-    youtubeId: "Juzmup72H8I",
+    audioUrl: "https://www.youtube.com/watch?v=wF293QPbmvo",
+    youtubeId: "wF293QPbmvo",
     description: "Robert Kiyosaki's legendary book explodes the myth that you need to earn a high income to be rich and explains the difference between working for money and having your money work for you.",
     chapters: ["Lesson 1: The Rich Don't Work for Money", "Lesson 2: Why Teach Financial Literacy?", "Lesson 3: Mind Your Own Business", "Lesson 4: The History of Taxes & Power of Corporations", "Lesson 5: The Rich Invent Money", "Lesson 6: Work to Learn—Don't Work for Money"],
     progress: 85,
@@ -73,8 +73,8 @@ const booksData = [
     duration: "2h 45m",
     chaptersCount: 4,
     cover: "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.youtube.com/watch?v=A5qWuP22D8s",
-    youtubeId: "A5qWuP22D8s",
+    audioUrl: "https://www.youtube.com/watch?v=83qff2e_1io",
+    youtubeId: "83qff2e_1io",
     description: "A beautiful moral tale about a pilot stranded in the desert who meets a young prince fallen to Earth from a tiny asteroid. A story about friendship, love, and what is truly important in life.",
     chapters: ["The Pilot in the Sahara Desert", "Meeting the Asteroid Prince", "The Journey Across Six Planets", "The Fox's Golden Secret & Earth"],
     progress: 100,
@@ -91,8 +91,8 @@ const booksData = [
     duration: "4h 50m",
     chaptersCount: 5,
     cover: "https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.youtube.com/watch?v=V6WcZ3u5wYw",
-    youtubeId: "V6WcZ3u5wYw",
+    audioUrl: "https://www.youtube.com/watch?v=A4TU2h_rDlM",
+    youtubeId: "A4TU2h_rDlM",
     description: "The classic introduction to the world's most famous consulting detective, Sherlock Holmes, and his companion Dr. John Watson, as they solve their first mystery: the Lauriston Gardens murder.",
     chapters: ["Meet Mr. Sherlock Holmes", "The Science of Deduction", "The Murder in Lauriston Gardens", "What John Rance Had to Tell", "Solving the Mystery"],
     progress: 0,
@@ -109,8 +109,8 @@ const booksData = [
     duration: "7h 20m",
     chaptersCount: 6,
     cover: "https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.youtube.com/watch?v=813tQ526_C4",
-    youtubeId: "813tQ526_C4",
+    audioUrl: "https://www.youtube.com/watch?v=grR2wbamM54",
+    youtubeId: "grR2wbamM54",
     description: "The landmark success manual based on Hill's conversations with 500 of the world's most successful individuals. It outlines the 13 principles of personal achievement and wealth generation.",
     chapters: ["Introduction: The Power of Thought", "Step 1: Intense Desire", "Step 2: Absolute Faith", "Step 3: Auto-Suggestion", "Step 4: Specialized Knowledge", "Step 5: Organized Planning"],
     progress: 100,
@@ -127,8 +127,8 @@ const booksData = [
     duration: "8h 45m",
     chaptersCount: 4,
     cover: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.youtube.com/watch?v=B3l43sSg18c",
-    youtubeId: "B3l43sSg18c",
+    audioUrl: "https://www.youtube.com/watch?v=IMVdr0IgXDM",
+    youtubeId: "IMVdr0IgXDM",
     description: "Sapiens integrates history and science to reconsider accepted narratives, connect past developments with contemporary concerns, and examine what the future might hold.",
     chapters: ["Part 1: The Cognitive Revolution", "Part 2: The Agricultural Revolution", "Part 3: The Unification of Humankind", "Part 4: The Scientific Revolution"],
     progress: 30,
@@ -145,8 +145,8 @@ const booksData = [
     duration: "6h 15m",
     chaptersCount: 5,
     cover: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.youtube.com/watch?v=d7y9V-K3_D4",
-    youtubeId: "d7y9V-K3_D4",
+    audioUrl: "https://www.youtube.com/watch?v=JHh1FHQq0k8",
+    youtubeId: "JHh1FHQq0k8",
     description: "The iconic science exploration that details human consciousness, cosmic evolution, and the deep mysteries of the universe, explained by world-renowned astronomer Carl Sagan.",
     chapters: ["The Shores of the Cosmic Ocean", "One Voice in the Cosmic Fugue", "The Harmony of Worlds", "Heaven and Hell", "Blues for a Red Planet"],
     progress: 0,
@@ -163,8 +163,8 @@ const booksData = [
     duration: "9h 30m",
     chaptersCount: 5,
     cover: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.youtube.com/watch?v=eH65s78v1_8",
-    youtubeId: "eH65s78v1_8",
+    audioUrl: "https://www.youtube.com/watch?v=a98R2WPH7lk",
+    youtubeId: "a98R2WPH7lk",
     description: "The exclusive biography of Apple's visionary co-founder Steve Jobs, detailing his creative passion and the revolutionary products that changed the world.",
     chapters: ["Childhood & Silicon Valley", "The Birth of Apple", "The Exile & NeXT", "The Return & Think Different", "The Legacy of a Visionary"],
     progress: 15,
@@ -181,8 +181,8 @@ const booksData = [
     duration: "5h 10m",
     chaptersCount: 6,
     cover: "https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.youtube.com/watch?v=T3J0S0n3kQ8",
-    youtubeId: "T3J0S0n3kQ8",
+    audioUrl: "https://www.youtube.com/watch?v=kLAWEduZ6Yw",
+    youtubeId: "kLAWEduZ6Yw",
     description: "Stephen Hawking's landmark introduction to the origins and nature of our universe, covering gravity, black holes, the Big Bang, and the search for a unified theory.",
     chapters: ["Our Picture of the Universe", "Space and Time", "The Expanding Universe", "The Uncertainty Principle", "Elementary Particles", "Black Holes"],
     progress: 100,
@@ -199,8 +199,8 @@ const booksData = [
     duration: "10h 15m",
     chaptersCount: 5,
     cover: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.youtube.com/watch?v=aF0Q8_1x51U",
-    youtubeId: "aF0Q8_1x51U",
+    audioUrl: "https://www.youtube.com/watch?v=prvucnMsJQE",
+    youtubeId: "prvucnMsJQE",
     description: "The astonishingly intimate biography of the world's most controversial and fascinating innovator, tracing his journey from a difficult childhood to leading Tesla and SpaceX.",
     chapters: ["South Africa & Escape", "Zip2 & PayPal Days", "SpaceX: Reaching the Stars", "Tesla: Electric Revolution", "The Drive for Mars & AI"],
     progress: 0,
@@ -217,8 +217,8 @@ const booksData = [
     duration: "7h 40m",
     chaptersCount: 5,
     cover: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=400",
-    audioUrl: "https://www.youtube.com/watch?v=N1e_Q67h5nE",
-    youtubeId: "N1e_Q67h5nE",
+    audioUrl: "https://www.youtube.com/watch?v=klutCtYVDe8",
+    youtubeId: "klutCtYVDe8",
     description: "The timeless autobiography of Mohandas K. Gandhi, detailing his early childhood, spiritual evolution, and his path of non-violent resistance.",
     chapters: ["Birth and Childhood", "Studies in London", "The Struggle in South Africa", "Birth of Satyagraha", "Return to India & Independence"],
     progress: 50,
@@ -480,7 +480,6 @@ const MyAudioLibrary = () => {
           youtube: { 
             playerVars: { 
               origin: window.location.origin,
-              autoplay: 1,
               playsinline: 1
             } 
           } 
@@ -639,17 +638,6 @@ const MyAudioLibrary = () => {
 
                     {/* Bottom Progress Row */}
                     <div className="mt-3 pt-2.5 border-t border-slate-50 relative z-10 flex-grow flex flex-col justify-end">
-                      {book.progress > 0 && (
-                        <div className="space-y-1 mb-2.5">
-                          <div className="flex justify-between text-[9px] font-bold text-slate-500">
-                            <span>Progress</span>
-                            <span>{book.progress}%</span>
-                          </div>
-                          <div className="h-1 bg-slate-100 rounded-full overflow-hidden">
-                            <div className="h-full bg-purple-500 rounded-full" style={{ width: `${book.progress}%` }} />
-                          </div>
-                        </div>
-                      )}
 
                       {/* Interactive Buttons */}
                       <div className="flex gap-1.5">

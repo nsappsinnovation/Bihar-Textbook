@@ -36,7 +36,7 @@ const Linguistic = () => {
       title: "Program Overview",
       heading: "Preserving Bihar's Linguistic Heritage",
       description: "Our Linguistics initiative is dedicated to the documentation, study, and promotion of Bihar's diverse regional languages and dialects. By creating comprehensive educational resources, we foster an inclusive environment where students can stay rooted in their cultural identity while achieving academic excellence.",
-      image: "/images/linguistic/l6.png",
+      image: "/images/generated/linguistics_overview.png",
       points: [
         "Detailed documentation of endangered and native dialects",
         "Creation of specialized textbooks for multilingual education",
@@ -50,27 +50,27 @@ const Linguistic = () => {
       items: [
         {
           title: "Multilingual Storytelling Sessions",
-          image: "/images/linguistic/l1.png",
+          image: "/images/generated/linguistics_storytelling.png",
           description: "Students explore regional and global languages through guided storytelling and immersive audio-visual lessons."
         },
         {
           title: "Live Conversation Practice",
-          image: "/images/linguistic/l2.png",
+          image: "/images/generated/linguistics_live_conversation.png",
           description: "Real-time speaking sessions with guided pronunciation and peer interaction."
         },
         {
           title: "Regional Language Labs",
-          image: "/images/linguistic/l3.png",
+          image: "/images/generated/linguistics_regional_labs.png",
           description: "Dedicated digital labs for Hindi, Tamil, Telugu, Bengali and more."
         },
         {
           title: "Global Language Immersion",
-          image: "/images/linguistic/l3.png",
+          image: "/images/generated/linguistics_global_immersion.png",
           description: "Explore French, Spanish, Arabic and other global languages through immersive tools."
         },
         {
           title: "Inclusive Language Learning",
-          image: "/images/linguistic/l5.png",
+          image: "/images/generated/linguistics_inclusive_learning.png",
           description: "Accessible language education with subtitles, audio support and inclusive design."
         }
       ]
