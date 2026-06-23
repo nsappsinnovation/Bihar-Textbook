@@ -1,6 +1,6 @@
 import React from 'react';
 import { Shield, Lock, Zap } from 'lucide-react';
-import MissionLandingLayout from '../missions/MissionLandingLayout';
+import MissionLandingLayout from '../components/missions/MissionLandingLayout';
 
 const CyberSecurity = () => {
   const pageData = {

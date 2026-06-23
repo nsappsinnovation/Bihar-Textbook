@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 import Modal, { FormInput, ToggleSwitch } from '../components/Modal';
 import { notices, noticeCategories } from '../data/dummyData';
-import { noticesData } from '../../components/Notice';
+import { noticesData } from '../../pages/navbar_pages/Notice';
 import { useDebounce } from '../hooks/useCustomHooks';
 
 const priorityStyles = {

@@ -39,7 +39,6 @@ const Footer = () => {
           <h4 className="text-white font-semibold mb-4 tracking-wide text-sm uppercase">Quick Navigation</h4>
           <ul className="space-y-3">
             <FooterLink to="/" label="Home" />
-            <FooterLink to="/know-us/board_of_directors" label="About Us" />
             <FooterLink to="/books/Class1" label="Textbooks" />
             <FooterLink to="/notice" label="Notices & Circulars" />
             <FooterLink to="/tenders" label="Tenders" />
@@ -47,15 +46,13 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* KEY INITIATIVES */}
+        {/* DOCUMENTS */}
         <div>
-          <h4 className="text-white font-semibold mb-4 tracking-wide text-sm uppercase">Key Initiatives</h4>
+          <h4 className="text-white font-semibold mb-4 tracking-wide text-sm uppercase">Documents</h4>
           <ul className="space-y-3">
-            <FooterLink to="/flagship-events/digital-books-portal" label="Digital Library Portal" />
-            <FooterLink to="/flagship-events/bihar-state-pustak-mela" label="Bihar Pustak Mela" />
-            <FooterLink to="/flagship-events/audio-books-inclusive" label="Audio Books (Inclusive)" />
-            <FooterLink to="/flagship-events/regional-content-drive" label="Regional Content" />
-            <FooterLink to="/flagship-events" label="View All Programs →" highlight />
+            <FooterLink to="/documents/hrd" label="HRD" />
+            <FooterLink to="/documents/registration-form" label="Registration Forms" />
+            <FooterLink to="/documents/rti" label="RTI" />
           </ul>
         </div>
 
@@ -92,7 +89,11 @@ const Footer = () => {
 
       {/* BOTTOM BAR */}
       <div className="max-w-[1280px] mx-auto mt-6 pt-4 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/50">
-        <p>© 2026 BSTBPC. All rights reserved.</p>
+        <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+          <p>© 2026 BSTBPC. All rights reserved.</p>
+          <span className="hidden md:inline">|</span>
+          <p>Designed by NS Apps Innovations</p>
+        </div>
         <div className="flex gap-6">
           <Link to="/csr-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
           <Link to="/csr-policy" className="hover:text-white transition-colors">Terms of Service</Link>

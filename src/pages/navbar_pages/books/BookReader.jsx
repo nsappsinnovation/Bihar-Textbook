@@ -13,7 +13,7 @@ import {
     FaLightbulb
 } from "react-icons/fa";
 import { Menu } from "lucide-react";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../../components/Sidebar";
 import data from "./Book.json";
 
 const BookReader = () => {

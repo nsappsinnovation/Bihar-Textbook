@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import SearchBar from './SearchBar';
+import SearchBar from '../../components/SearchBar';
 import BlogPost from './BlogPost';
-import Back from './Background';
-import { searchArticles } from '../services/wikipedia';
+import Back from '../../components/Background';
+
+const searchArticles = async (query) => {
+    // Mock data since wikipedia.js was removed
+    return [];
+};
 
 function Blog() {
       const [results, setResults] = useState([]);

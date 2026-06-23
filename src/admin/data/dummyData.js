@@ -1,6 +1,6 @@
 // ===== Dummy Data for BSTBPC Admin Portal =====
 import { tendersData } from '../../data/tendersData';
-import { noticesData } from '../../components/Notice';
+import { noticesData } from '../../pages/navbar_pages/Notice';
 
 export const dashboardStats = [
   {

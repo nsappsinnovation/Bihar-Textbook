@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { getArticleExtract } from '../services/wikipedia';
+const getArticleExtract = async (pageid) => {
+    return { extract: '', thumbnail: null };
+};
 
 const BlogPost = ({ title, pageid, snippet, timestamp }) => {
     const [details, setDetails] = useState({ extract: '', thumbnail: null });

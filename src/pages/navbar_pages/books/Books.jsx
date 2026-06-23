@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import data from "./Book.json";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../../components/Sidebar";
 import { Menu, X, Filter, Download } from "lucide-react";
 
 const Books = () => {

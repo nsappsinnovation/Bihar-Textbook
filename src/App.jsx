@@ -4,57 +4,49 @@ import { ReactLenis } from "lenis/react";
 
 import Nav from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
-import Blog from "./components/Blog.jsx";
+import Blog from "./pages/navbar_pages/Blog.jsx";
 
 /* Pages */
 import Home from "./pages/Home";
 import Tenders from "./pages/Tenders";
 import CsrPolicy from "./pages/CsrPolicy";
 import KnowUs from "./pages/Know";
-import Books from "./books/Books.jsx";
-import BookReader from "./books/BookReader.jsx";
-import Flipbook from "./books/Flipbook.jsx";
+import Books from "./pages/navbar_pages/books/Books.jsx";
+import BookReader from "./pages/navbar_pages/books/BookReader.jsx";
+import Flipbook from "./pages/navbar_pages/books/Flipbook.jsx";
 import Gallery from "./pages/Gallery.jsx";
 import Document from "./pages/Document.jsx";
 import Ling from "./linguistics/Ling.jsx";
 import LingModule from "./linguistics/LingModule.jsx";
-import PublishingMission from "./missions/PublishingMission.jsx";
-import VrMission from "./missions/VrMission.jsx";
-import SignLanguageMission from "./missions/SignLanguageMission.jsx";
-import MultilingualMission from "./missions/MultilingualMission.jsx";
-import AudiobooksMission from "./missions/AudiobooksMission.jsx";
+import PublishingMission from "./pages/missions/PublishingMission.jsx";
+import VrMission from "./pages/missions/VrMission.jsx";
+import SignLanguageMission from "./pages/missions/SignLanguageMission.jsx";
+import MultilingualMission from "./pages/missions/MultilingualMission.jsx";
+import AudiobooksMission from "./pages/missions/AudiobooksMission.jsx";
 import Sign from "./signLanguage/Signlanguage.jsx";
 import SignLearn from "./signLanguage/SignLearn.jsx";
-
 import AiIntelligence from "./ai/AiIntelligence.jsx";
 import CyberSecurity from "./cyberSecurity/CyberSecurity.jsx";
 import HeritageArchive from "./heritage/HeritageArchive.jsx";
 import Vr from "./vr/Vrlab.jsx";
 import Linguistics from "./linguistics/Linguistics.jsx";
-
 import Audio from "./audio/Audiolib.jsx";
-
-
 import Basicskill from "./skills/Basicskills.jsx";
-
 import LifeSkills from "./skills/LifeSkills.jsx";
 import HeritageDashboard from "./heritage/HeritageDashboard.jsx";
 import AudioLibraryDashboard from "./audio/AudioLibraryDashboard.jsx";
 import MyAudioLibrary from "./audio/MyAudioLibrary.jsx";
 import AiIntelligenceDashboard from "./ai/AiIntelligenceDashboard.jsx";
-
-
 import VrDashboard from "./vr/VrDashboard.jsx";
 import VrLabsWorlds from "./vr/VrLabsWorlds.jsx";
 import CyberSecurityDashboard from "./cyberSecurity/CyberSecurityDashboard.jsx";
 
 
-
 /* Components */
 import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
 import Contact from "./pages/Contact";
-import Notice from "./components/Notice.jsx";
-import NoticeBoard from "./components/NoticeBoard.jsx";
+import Notice from "./pages/navbar_pages/Notice.jsx";
+import NoticeBoard from "./pages/navbar_pages/NoticeBoard.jsx";
 
 
 /* Auth */

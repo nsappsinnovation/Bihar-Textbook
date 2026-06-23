@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 import { noticesData as actualNotices } from './Notice';
-import { tendersData } from '../data/tendersData';
+import { tendersData } from '../../data/tendersData';
 
 const combinedData = [];
 const maxLength = Math.max(actualNotices.length, tendersData.length);
