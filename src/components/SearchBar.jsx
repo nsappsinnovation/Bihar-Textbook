@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { getSuggestions } from '../services/wikipedia';
+// Mock getSuggestions since wikipedia.js was removed
+const getSuggestions = async (term) => [];
 
 const typingPhrases = [
     "About Solar System",
