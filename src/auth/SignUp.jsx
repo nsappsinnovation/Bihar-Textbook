@@ -3,7 +3,7 @@ import { FiMail, FiLock, FiEye, FiEyeOff, FiUser } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
-  const [role, setRole] = useState("student");
+  const [role, setRole] = useState("admin");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -26,8 +26,8 @@ const SignUp = () => {
             className="max-w-xs lg:max-w-sm drop-shadow-2xl animate-pulse-slow"
           />
           <div className="mt-8 text-center">
-            <h3 className="text-xl font-bold text-indigo-900">Join the Community</h3>
-            <p className="text-gray-500 text-sm mt-2 max-w-[280px]">Access premium educational content and collaborate with the best educators.</p>
+            <h3 className="text-xl font-bold text-indigo-900">Admin Portal Setup</h3>
+            <p className="text-gray-500 text-sm mt-2 max-w-[280px]">Register a new Administrator account to manage publication databases, textbooks, tenders, and schools.</p>
           </div>
         </div>
 
@@ -37,29 +37,12 @@ const SignUp = () => {
           {/* ===== FIXED HEADER ===== */}
           <div className="p-8 pb-4 text-center">
             <img src="/logo.png" alt="Logo" className="h-10 mx-auto mb-4" />
-            <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Create New Account</h2>
-            <p className="text-gray-400 text-xs font-semibold mt-1 tracking-wider uppercase">Fill in the details below</p>
+            <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Admin Registration</h2>
+            <p className="text-gray-400 text-xs font-semibold mt-1 tracking-wider uppercase">Create a new administrator profile</p>
           </div>
 
           {/* ===== SCROLLABLE CONTENT ===== */}
           <div className="flex-1 overflow-y-auto px-8 lg:px-14 pb-10 custom-scrollbar">
-
-            {/* ===== ROLE SELECTION ===== */}
-            <div className="mb-6">
-              <div className="flex justify-center p-1 bg-gray-100/80 rounded-2xl w-full border border-gray-200">
-                {["Student", "Teacher", "Director"].map((item) => (
-                  <button
-                    key={item}
-                    type="button"
-                    onClick={() => setRole(item.toLowerCase())}
-                    className={`flex-1 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300
-                      ${role === item.toLowerCase() ? "bg-white text-indigo-700 shadow-md scale-[1.02]" : "text-gray-500 hover:text-gray-700"}`}
-                  >
-                    {item}
-                  </button>
-                ))}
-              </div>
-            </div>
 
             {/* ===== FORM ===== */}
             <form className="space-y-4">
@@ -69,7 +52,7 @@ const SignUp = () => {
               <div className="space-y-1.5">
                 <label className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em] ml-1">Password</label>
                 <div className="relative group">
-                  <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-indigo-500 transition-colors" />
+                  <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-indigo-50 transition-colors" />
                   <input
                     type={showPassword ? "text" : "password"}
                     placeholder="Create a strong password"
@@ -83,17 +66,12 @@ const SignUp = () => {
                     {showPassword ? <FiEyeOff size={18} /> : <FiEye size={18} />}
                   </button>
                 </div>
-                <div className="flex flex-wrap gap-1.5 pt-1 mt-1 ml-1">
-                  {["8+ Chars", "Symbol", "Upper"].map((rule) => (
-                    <span key={rule} className="px-2 py-0.5 text-[9px] font-bold rounded-md bg-indigo-50 text-indigo-400 border border-indigo-100 uppercase tracking-tighter">{rule}</span>
-                  ))}
-                </div>
               </div>
 
               <div className="space-y-1.5">
                 <label className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em] ml-1">Confirm Password</label>
                 <div className="relative group">
-                  <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-indigo-500 transition-colors" />
+                  <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-indigo-50 transition-colors" />
                   <input
                     type={showConfirmPassword ? "text" : "password"}
                     placeholder="Repeat your password"
@@ -113,7 +91,7 @@ const SignUp = () => {
                 type="submit"
                 className="w-full py-4 rounded-2xl bg-indigo-900 hover:bg-indigo-800 text-white font-bold text-base shadow-[0_10px_30px_-10px_rgba(49,46,129,0.5)] hover:shadow-[0_20px_40px_-10px_rgba(49,46,129,0.6)] transition-all duration-300 transform hover:-translate-y-1 active:scale-[0.98] mt-4"
               >
-                Create My Account
+                Register as Admin
               </button>
 
               <div className="text-center text-xs text-gray-500 font-bold tracking-wide mt-6">

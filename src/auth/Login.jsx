@@ -47,39 +47,19 @@ const Login = () => {
           </div>
 
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Select Portal Role</h2>
-            <p className="text-gray-500 text-sm mt-1 font-medium">Choose your role and sign in instantly without any password.</p>
-          </div>
-
-          {/* Role Toggle */}
-          <div className="flex justify-center p-1 bg-gray-100/80 rounded-2xl mb-8 w-fit mx-auto border border-gray-200">
-            <button
-              type="button"
-              onClick={() => setRole("user")}
-              className={`px-8 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer
-                ${role === "user" ? "bg-white text-indigo-700 shadow-md scale-[1.02]" : "text-gray-500 hover:text-gray-700"}`}
-            >
-              User
-            </button>
-            <button
-              type="button"
-              onClick={() => setRole("admin")}
-              className={`px-8 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer
-                ${role === "admin" ? "bg-white text-indigo-700 shadow-md scale-[1.02]" : "text-gray-500 hover:text-gray-700"}`}
-            >
-              Admin
-            </button>
+            <h2 className="text-3xl font-bold text-gray-900 tracking-tight">Admin Portal Access</h2>
+            <p className="text-gray-500 text-sm mt-1 font-medium">Sign in instantly to access the Administrator Dashboard.</p>
           </div>
 
           {/* ================= FORM ================= */}
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="bg-indigo-50/50 border border-indigo-100 rounded-2xl p-6 text-center">
-              <span className="text-xs font-bold text-indigo-600 uppercase tracking-widest block mb-1">Selected Access</span>
-              <p className="text-lg font-extrabold text-indigo-900 capitalize">
-                {role === "admin" ? "🛡️ Administrator Dashboard" : "🎓 Regular User Portal"}
+              <span className="text-xs font-bold text-indigo-600 uppercase tracking-widest block mb-1">Authorized Access Only</span>
+              <p className="text-lg font-extrabold text-indigo-900">
+                🛡️ Administrator Dashboard
               </p>
               <p className="text-xs text-gray-500 mt-2">
-                Clicking the button below will immediately log you into the portal.
+                Clicking the button below will immediately log you into the admin panel.
               </p>
             </div>
 
@@ -87,7 +67,7 @@ const Login = () => {
               type="submit"
               className="w-full py-4 rounded-2xl bg-indigo-900 hover:bg-indigo-800 text-white font-bold text-base shadow-[0_10px_30px_-10px_rgba(49,46,129,0.5)] hover:shadow-[0_20px_40px_-10px_rgba(49,46,129,0.6)] transition-all duration-300 transform hover:-translate-y-1 active:scale-[0.98] cursor-pointer mt-2"
             >
-              Sign In as {role === "admin" ? "Admin" : "User"}
+              Sign In as Admin
             </button>
           </form>
 
