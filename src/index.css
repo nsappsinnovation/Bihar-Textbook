@@ -1,5 +1,36 @@
 @import "tailwindcss";
 
+@layer base {
+  /* Make sure html and body are scrollable */
+  html, body {
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  /* Optimize scaling for typical Windows laptops (1366x768 or 1920x1080 at 125% scale) 
+     This reduces all rem-based paddings, margins, and text sizes by ~12.5% on smaller desktop screens */
+  @media screen and (min-width: 1024px) and (max-width: 1440px) {
+    html {
+      font-size: 14px;
+    }
+  }
+  
+  /* Hide scrollbar globally but keep functionality */
+  * {
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* IE and Edge */
+  }
+  
+  *::-webkit-scrollbar {
+    width: 0px !important;
+    height: 0px !important;
+    background: transparent !important;
+  }
+}
+
 /* =========================
    Theme Configuration
    ========================= */
@@ -217,5 +248,53 @@ html.lenis body {
 .lenis-scrolling iframe {
   pointer-events: none;
 }
+
+/* Custom Scrollbar for Modal content container */
+.custom-modal-scrollbar::-webkit-scrollbar {
+  width: 6px !important;
+  display: block !important;
+}
+
+.custom-modal-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9 !important;
+  border-radius: 10px !important;
+}
+
+.custom-modal-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1 !important;
+  border-radius: 10px !important;
+}
+
+.custom-modal-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8 !important;
+}
+
+/* Custom Scrollbar for Prompt Academy Syllabus Directory */
+.prompt-academy-scrollbar {
+  scrollbar-width: thin !important;
+  scrollbar-color: #cbd5e1 #f1f5f9 !important;
+}
+
+.prompt-academy-scrollbar::-webkit-scrollbar {
+  width: 6px !important;
+  height: 6px !important;
+  display: block !important;
+}
+
+.prompt-academy-scrollbar::-webkit-scrollbar-track {
+  background: #f8fafc !important;
+  border-radius: 4px !important;
+}
+
+.prompt-academy-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1 !important;
+  border-radius: 4px !important;
+  border: 1px solid #f8fafc !important;
+}
+
+.prompt-academy-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8 !important;
+}
+
 
 

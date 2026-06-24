@@ -13,6 +13,23 @@ const Sidebar = ({ classes, currentClassId }) => {
         }
     }, [currentClassId]);
 
+    // Auto-scroll active class into view
+    useEffect(() => {
+        if (currentClassId) {
+            const timer = setTimeout(() => {
+                const activeEl = document.querySelector(".sidebar-active-class");
+                const container = document.querySelector(".sidebar-scroll-container");
+                if (activeEl && container) {
+                    const containerRect = container.getBoundingClientRect();
+                    const activeRect = activeEl.getBoundingClientRect();
+                    const scrollOffset = activeRect.top - containerRect.top - (containerRect.height / 2) + (activeRect.height / 2);
+                    container.scrollBy({ top: scrollOffset, behavior: "smooth" });
+                }
+            }, 150);
+            return () => clearTimeout(timer);
+        }
+    }, [currentClassId]);
+
     // Handle toggle
     const toggleClass = (id) => {
         setExpandedClasses(prev =>
@@ -51,7 +68,7 @@ const Sidebar = ({ classes, currentClassId }) => {
             </div>
 
             {/* Navigation List */}
-            <div className="flex-1 py-4 px-4 space-y-1 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-200">
+            <div className="sidebar-scroll-container flex-1 py-4 px-4 space-y-1 overflow-y-auto no-scrollbar scrollbar-hide">
                 <div className="px-3 mb-4 flex items-center justify-between">
                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Navigation</span>
                     <span className="bg-blue-50 text-blue-600 text-[9px] font-bold px-2 py-0.5 rounded-md border border-blue-100">Classrooms</span>
@@ -73,7 +90,7 @@ const Sidebar = ({ classes, currentClassId }) => {
                                     className={`
                                         group flex items-center justify-between px-3 py-2 rounded-xl cursor-pointer transition-all duration-200
                                         ${isActive
-                                            ? "bg-blue-600 text-white shadow-md shadow-blue-200"
+                                            ? "sidebar-active-class bg-blue-600 text-white shadow-md shadow-blue-200"
                                             : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}
                                     `}
                                 >

@@ -8,17 +8,17 @@ const industryData = [
     image: "/images/KeyParticipants/samrat.png",
   },
   {
-    name: "Shri Sunil Kumar",
+    name: "Sri Mithilesh Tiwari",
     role: "Hon'ble Education Minister, Bihar",
-    image: "/images/KeyParticipants/Sunil-Kumar.png",
+    image: "/images/KeyParticipants/sri_mithlesh.png",
   },
   {
-    name: "Shri Dr. B. Rajender, I.A.S.",
-    role: "Additional Chief Secretary, Education Department",
-    image: "/images/KeyParticipants/B.Rajendra.png",
+    name: "Shri Vinod Singh Gunjiyal",
+    role: "Secretary, Education Department",
+    image: "/images/KeyParticipants/sri-vinod.png",
   },
   {
-    name: "Shri Yatendra Kumar Pal, I.A.S.",
+    name: "Shri Yatendra Kumar Pal, IAS",
     role: "Managing Director, Bihar State Text Book Publishing Corporation (BSTBPC)",
     image: "/images/KeyParticipants/shri_yatendra_pal.png",
   },
@@ -49,8 +49,52 @@ const academiaData = [
 
 export default function KeyParticipant() {
   const [tab, setTab] = useState("industry");
-  const data = tab === "industry" ? industryData : academiaData;
   const scrollRef = useRef(null);
+
+  const [allData, setAllData] = useState(() => {
+    const saved = localStorage.getItem('website_leaders_v3');
+    if (saved) {
+      try {
+        let parsed = JSON.parse(saved);
+        let updated = false;
+        parsed = parsed.map(item => {
+          if (item.name === "Shri Sunil Kumar" || item.name === "Sri Sunil Kumar") {
+            updated = true;
+            return {
+              ...item,
+              name: "Sri Mithilesh Tiwari",
+              role: "Hon'ble Education Minister, Bihar",
+              image: "/images/KeyParticipants/sri_mithlesh.png"
+            };
+          }
+          if (item.name === "Shri Dr. B. Rajender, IAS" || item.name === "Dr. B. Rajender") {
+            updated = true;
+            return {
+              ...item,
+              name: "Shri Vinod Singh Gunjiyal",
+              role: "Secretary, Education Department",
+              image: "/images/KeyParticipants/sri-vinod.png"
+            };
+          }
+          return item;
+        });
+        if (updated) {
+          localStorage.setItem('website_leaders_v3', JSON.stringify(parsed));
+        }
+        return parsed;
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    return [
+      ...industryData.map(i => ({...i, tag: 'LEADERSHIP'})),
+      ...academiaData.map(a => ({...a, tag: 'VISIONARIES'}))
+    ];
+  });
+
+  const industryList = allData.filter(d => d.tag === 'LEADERSHIP');
+  const academiaList = allData.filter(d => d.tag === 'VISIONARIES' || d.tag === 'EDUCATORS');
+  const data = tab === "industry" ? industryList : academiaList;
 
   const scroll = (direction) => {
     if (scrollRef.current) {

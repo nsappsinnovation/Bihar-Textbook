@@ -74,10 +74,11 @@ export default function NotificationsPage({ setActivePage }) {
               <motion.div
                 key={notif.id}
                 layout
+                onClick={() => handleView(notif)}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0, x: 20 }}
-                className={`group flex items-start gap-5 p-6 transition-all relative ${notif.read ? 'bg-white' : 'bg-blue-50/30'}`}
+                className={`group flex items-start gap-5 p-6 transition-all relative cursor-pointer hover:bg-gray-50 ${notif.read ? 'bg-white' : 'bg-blue-50/30'}`}
               >
                 {/* Status Indicator */}
                 {!notif.read && (
@@ -116,7 +117,7 @@ export default function NotificationsPage({ setActivePage }) {
 
                     <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all">
                       <button 
-                        onClick={() => handleView(notif)}
+                        onClick={(e) => { e.stopPropagation(); handleView(notif); }}
                         className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-all tooltip"
                         title="View Details"
                       >
@@ -125,7 +126,7 @@ export default function NotificationsPage({ setActivePage }) {
                       
                       {!notif.read && (
                         <button 
-                          onClick={() => markAsRead(notif.id)}
+                          onClick={(e) => { e.stopPropagation(); markAsRead(notif.id); }}
                           className="p-2 text-emerald-600 hover:bg-emerald-50 rounded-lg transition-all"
                           title="Mark as Read"
                         >
@@ -134,7 +135,7 @@ export default function NotificationsPage({ setActivePage }) {
                       )}
 
                       <button 
-                        onClick={() => removeActivity(notif.id)}
+                        onClick={(e) => { e.stopPropagation(); removeActivity(notif.id); }}
                         className="p-2 text-gray-300 hover:text-red-500 hover:bg-red-50 rounded-lg transition-all"
                         title="Delete"
                       >

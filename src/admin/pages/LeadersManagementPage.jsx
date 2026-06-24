@@ -11,36 +11,98 @@ import { useActivityLog } from '../hooks/useCustomHooks';
 export default function LeadersManagementPage({ addToast }) {
   const { logActivity } = useActivityLog();
   
+  const storageKey = 'website_leaders_v3';
   const [leaders, setLeaders] = useState(() => {
-    const saved = localStorage.getItem('website_leaders');
-    return saved ? JSON.parse(saved) : [
+    const saved = localStorage.getItem(storageKey);
+    if (saved) {
+      try {
+        let parsed = JSON.parse(saved);
+        let updated = false;
+        parsed = parsed.map(item => {
+          if (item.name === "Shri Sunil Kumar" || item.name === "Sri Sunil Kumar") {
+            updated = true;
+            return {
+              ...item,
+              name: "Sri Mithilesh Tiwari",
+              role: "Hon'ble Education Minister, Bihar",
+              image: "/images/KeyParticipants/sri_mithlesh.png"
+            };
+          }
+          if (item.name === "Shri Dr. B. Rajender, IAS" || item.name === "Dr. B. Rajender") {
+            updated = true;
+            return {
+              ...item,
+              name: "Shri Vinod Singh Gunjiyal",
+              role: "Secretary, Education Department",
+              image: "/images/KeyParticipants/sri-vinod.png"
+            };
+          }
+          return item;
+        });
+        if (updated) {
+          localStorage.setItem(storageKey, JSON.stringify(parsed));
+        }
+        return parsed;
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    return [
       { 
         id: 1, 
-        name: 'Anand Kumar', 
-        role: 'Founder, Super 30 & Mathematician', 
-        tag: 'VISIONARIES', 
-        image: '/images/leaders/anand.jpg' 
+        name: 'Shri Samrat Choudhary', 
+        role: "Hon'ble Chief Minister, Bihar", 
+        tag: 'LEADERSHIP', 
+        image: '/images/KeyParticipants/samrat.png' 
       },
       { 
         id: 2, 
-        name: 'HC Verma', 
-        role: 'Renowned Physicist & Educator, IIT Kanpur (Born in Bihar)', 
-        tag: 'VISIONARIES', 
-        image: '/images/leaders/hcverma.jpg' 
+        name: 'Sri Mithilesh Tiwari', 
+        role: "Hon'ble Education Minister, Bihar", 
+        tag: 'LEADERSHIP', 
+        image: '/images/KeyParticipants/sri_mithlesh.png' 
       },
       { 
         id: 3, 
-        name: 'Shri Nitish Kumar', 
-        role: "Hon'ble Chief Minister, Bihar", 
+        name: 'Shri Vinod Singh Gunjiyal', 
+        role: 'Secretary, Education Department', 
         tag: 'LEADERSHIP', 
-        image: '/images/leaders/nitish.jpg' 
+        image: '/images/KeyParticipants/sri-vinod.png' 
+      },
+      { 
+        id: 4, 
+        name: 'Shri Yatendra Kumar Pal, IAS', 
+        role: 'Managing Director, Bihar State Text Book Publishing Corporation (BSTBPC)', 
+        tag: 'LEADERSHIP', 
+        image: '/images/KeyParticipants/shri_yatendra_pal.png' 
       },
       { 
         id: 5, 
+        name: 'Anand Kumar', 
+        role: 'Founder, Super 30 & Mathematician', 
+        tag: 'VISIONARIES', 
+        image: '/images/KeyParticipants/Anand kumar pic.png' 
+      },
+      { 
+        id: 6, 
+        name: 'HC Verma', 
+        role: 'Renowned Physicist & Educator, IIT Kanpur (Born in Bihar)', 
+        tag: 'VISIONARIES', 
+        image: '/images/KeyParticipants/hc-verma-pic.png' 
+      },
+      { 
+        id: 7, 
         name: 'Prof. Girish Kumar Choudhary', 
         role: 'Vice Chancellor, Patna University', 
-        tag: 'EDUCATORS', 
-        image: '/images/leaders/girish.jpg' 
+        tag: 'VISIONARIES', 
+        image: '/images/KeyParticipants/girish_kumar_choudhary.png' 
+      },
+      { 
+        id: 8, 
+        name: 'Abhayanand', 
+        role: 'Former DGP Bihar & Co-founder of Super 30', 
+        tag: 'VISIONARIES', 
+        image: '/images/KeyParticipants/abhyanand.png' 
       }
     ];
   });
@@ -56,7 +118,7 @@ export default function LeadersManagementPage({ addToast }) {
 
   const saveToStorage = (updated) => {
     setLeaders(updated);
-    localStorage.setItem('website_leaders', JSON.stringify(updated));
+    localStorage.setItem(storageKey, JSON.stringify(updated));
   };
 
   const handleImageChange = (e) => {
@@ -132,7 +194,7 @@ export default function LeadersManagementPage({ addToast }) {
           className="flex items-center gap-2 px-6 py-3.5 bg-indigo-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-indigo-600/20 hover:bg-indigo-700 transition-all"
         >
           <Plus className="w-4 h-4" />
-          <span>Add New Leader</span>
+          <span>Add</span>
         </button>
       </div>
 

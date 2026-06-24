@@ -105,12 +105,6 @@ export default function EmployeesManagementPage({ addToast }) {
     emp.department.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const stats = [
-    { label: 'TOTAL STAFF', value: `${employees.length}+`, icon: Users, color: 'text-blue-600', bg: 'bg-blue-50' },
-    { label: 'DEPT HEADS', value: '15+', icon: Award, color: 'text-indigo-600', bg: 'bg-indigo-50' },
-    { label: 'AVG TENURE', value: '10yrs', icon: Heart, color: 'text-blue-500', bg: 'bg-blue-50/50' },
-    { label: 'SATISFACTION', value: '98%', icon: TrendingUp, color: 'text-sky-500', bg: 'bg-sky-50' },
-  ];
 
   return (
     <motion.div
@@ -118,30 +112,12 @@ export default function EmployeesManagementPage({ addToast }) {
       animate={{ opacity: 1, y: 0 }}
       className="space-y-8"
     >
-      {/* Stats Section */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat, idx) => (
-          <motion.div
-            key={stat.label}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.1 }}
-            className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm flex flex-col items-center text-center group hover:shadow-xl hover:shadow-gray-200/40 transition-all duration-300"
-          >
-            <div className={`p-4 rounded-2xl ${stat.bg} ${stat.color} mb-6 group-hover:scale-110 transition-transform`}>
-              <stat.icon className="w-6 h-6" />
-            </div>
-            <h4 className="text-3xl font-black text-gray-900 mb-1">{stat.value}</h4>
-            <p className="text-[10px] font-black text-gray-400 tracking-[0.2em] uppercase">{stat.label}</p>
-          </motion.div>
-        ))}
-      </div>
 
       {/* Directory Section */}
       <div className="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden">
         <div className="p-8 border-b border-gray-50 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
           <div>
-            <h3 className="text-xl font-black text-gray-900">Employee Directory</h3>
+            <h3 className="text-xl font-bold text-gray-900">Employee Directory</h3>
             <p className="text-sm text-gray-400 font-medium mt-1">Official registry of BSTBPC staff members</p>
           </div>
           
@@ -161,7 +137,7 @@ export default function EmployeesManagementPage({ addToast }) {
               className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3.5 bg-blue-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-all"
             >
               <Plus className="w-4 h-4" />
-              <span>Add Employee</span>
+              <span>Add</span>
             </button>
           </div>
         </div>
@@ -170,11 +146,11 @@ export default function EmployeesManagementPage({ addToast }) {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-gray-50/50">
-                <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-50">Employee ID</th>
-                <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-50">Name</th>
-                <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-50">Designation</th>
-                <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-50">Department</th>
-                <th className="px-8 py-5 text-[11px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-50 text-right">Actions</th>
+                <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50">Employee ID</th>
+                <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50">Name</th>
+                <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50">Designation</th>
+                <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50">Department</th>
+                <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-50">
@@ -189,21 +165,21 @@ export default function EmployeesManagementPage({ addToast }) {
                     className="group hover:bg-gray-50/30 transition-colors"
                   >
                     <td className="px-8 py-5">
-                      <span className="text-sm font-black text-blue-600 tracking-tight">{emp.employeeId}</span>
+                      <span className="text-sm font-bold text-blue-600 tracking-tight">{emp.employeeId}</span>
                     </td>
                     <td className="px-8 py-5">
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
                           <UserCheck className="w-4 h-4" />
                         </div>
-                        <span className="text-sm font-extrabold text-gray-900">{emp.name}</span>
+                        <span className="text-sm font-bold text-gray-900">{emp.name}</span>
                       </div>
                     </td>
                     <td className="px-8 py-5">
                       <span className="text-sm font-bold text-gray-500">{emp.designation}</span>
                     </td>
                     <td className="px-8 py-5">
-                      <span className="px-3 py-1 bg-gray-100 text-[10px] font-black text-gray-500 rounded-lg uppercase tracking-wider">
+                      <span className="px-3 py-1 bg-gray-100 text-[10px] font-bold text-gray-500 rounded-lg uppercase tracking-wider">
                         {emp.department}
                       </span>
                     </td>
@@ -256,7 +232,7 @@ export default function EmployeesManagementPage({ addToast }) {
               onChange={(val) => setFormData(prev => ({ ...prev, employeeId: val }))}
             />
             <div>
-              <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-2">Department</label>
+              <label className="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-2">Department</label>
               <select 
                 className="w-full px-4 py-3 rounded-2xl bg-gray-50 border-none text-sm font-bold text-gray-700 focus:ring-2 focus:ring-blue-500/20 transition-all"
                 value={formData.department}
@@ -295,7 +271,7 @@ export default function EmployeesManagementPage({ addToast }) {
             </button>
             <button
               onClick={handleSave}
-              className="px-6 py-3 rounded-2xl bg-blue-600 text-white text-sm font-black shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-all"
+              className="px-6 py-3 rounded-2xl bg-blue-600 text-white text-sm font-bold shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-all"
             >
               {editingEmployee ? "Update Record" : "Register Employee"}
             </button>

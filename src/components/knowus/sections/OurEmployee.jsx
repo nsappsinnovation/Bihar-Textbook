@@ -12,23 +12,28 @@ const OurEmployee = () => {
   ]);
 
   useEffect(() => {
-    const saved = localStorage.getItem('module_content_ku-employees');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) {
-          setEmployees(parsed.map(item => ({
-            id: item.id,
-            name: item.title,
-            designation: item.designation,
-            department: item.department,
-            employeeId: item.employeeId
-          })));
+    const loadEmployees = () => {
+      const saved = localStorage.getItem('module_content_ku-employee');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed)) {
+            setEmployees(parsed.map(item => ({
+              id: item.id,
+              name: item.name || item.title,
+              designation: item.designation,
+              department: item.department,
+              employeeId: item.employeeId
+            })));
+          }
+        } catch (e) {
+          console.error("Error loading employee data", e);
         }
-      } catch (e) {
-        console.error("Error loading employee data", e);
       }
-    }
+    };
+    loadEmployees();
+    window.addEventListener('storage', loadEmployees);
+    return () => window.removeEventListener('storage', loadEmployees);
   }, []);
 
   const filteredEmployees = employees.filter(emp => 
@@ -54,16 +59,7 @@ const OurEmployee = () => {
         </p>
       </section>
 
-      {/* ================= STATS SECTION ================= */}
-      <section className="max-w-6xl mx-auto px-6 mb-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          <StatCard icon={<FiUsers />} value={`${employees.length}+`} label="Total Staff" color="blue" />
-          <StatCard icon={<FiAward />} value="15+" label="Dept Heads" color="blue" />
-          <StatCard icon={<FiHeart />} value="10yrs" label="Avg Tenure" color="blue" />
-          <StatCard icon={<FiTrendingUp />} value="98%" label="Satisfaction" color="blue" />
-        </div>
-      </section>
-
+      
       {/* ================= EMPLOYEE LIST SECTION ================= */}
       <section className="max-w-6xl mx-auto px-6 mb-20">
         <div className="bg-transparent border border-slate-300 overflow-hidden font-sans">

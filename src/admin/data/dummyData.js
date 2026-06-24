@@ -1,6 +1,6 @@
 // ===== Dummy Data for BSTBPC Admin Portal =====
 import { tendersData } from '../../data/tendersData';
-import { noticesData } from '../../components/Notice';
+import { noticesData } from '../../pages/navbar_pages/Notice';
 
 export const dashboardStats = [
   {
@@ -296,7 +296,7 @@ const formattedNotices = noticesData.map((item) => {
     description: item.description,
     date: isoDate,
     priority: item.isUrgent ? 'High' : 'Medium',
-    category: 'Notice',
+    category: item.category || 'Notice',
     pinned: item.isUrgent || false,
     hasAttachment: !!item.document,
     author: 'Admin',

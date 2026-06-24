@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 const RTI = () => {
   const [rtiData, setRtiData] = React.useState({ 
     officer: 'Shri. Rajesh Kumar', 
-    phone: '+91 612 222 1975', 
+    phone: '06122221975', 
     email: 'rti.bstbpc@bihar.gov.in', 
-    address: 'Budh Marg, Patna - 800001' 
+    address: 'Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001' 
   });
 
   React.useEffect(() => {
@@ -58,9 +58,7 @@ const RTI = () => {
               <div
                 className="bg-white rounded-3xl p-8 shadow-xl border border-slate-100"
               >
-                <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-6 border border-blue-100">
-                  <FiShield className="text-2xl" />
-                </div>
+                
                 <h3 className="text-lg font-black text-[#0d0e23] mb-8">Nodal Officer</h3>
                 
                 <div className="space-y-6">
@@ -71,9 +69,9 @@ const RTI = () => {
                 </div>
 
                 <div className="mt-8 pt-8 border-t border-slate-100">
-                  <button className="w-full py-4 rounded-xl bg-[#0d0e23] text-white text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-blue-600 transition-all shadow-lg shadow-blue-100">
+                  <a href="https://rtionline.gov.in/" target="_blank" rel="noopener noreferrer" className="w-full py-4 rounded-xl bg-[#0d0e23] text-white text-[10px] font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-blue-600 transition-all shadow-lg shadow-blue-100">
                     File Online RTI <FiExternalLink />
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -84,7 +82,7 @@ const RTI = () => {
                 className="bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-slate-100"
               >
                 <h2 className="text-xl md:text-2xl font-black text-[#0d0e23] mb-6 flex items-center gap-4">
-                  <FiInfo className="text-blue-600" />
+                 
                   Proactive Disclosures
                 </h2>
                 <p className="text-xs text-slate-500 font-medium leading-relaxed mb-10">
@@ -109,20 +107,7 @@ const RTI = () => {
                   ))}
                 </div>
 
-                <div className="mt-12 p-6 bg-blue-50/50 rounded-2xl border border-blue-100 space-y-4">
-                  <div className="flex items-center gap-3 text-blue-700">
-                    <FiFileText className="text-xl" />
-                    <h4 className="text-sm font-black uppercase tracking-widest">Mandatory Documents</h4>
-                  </div>
-                  <div className="grid gap-3">
-                    <a href="#" className="flex items-center justify-between p-3 bg-white rounded-xl border border-blue-100 hover:shadow-md transition-all text-[11px] font-bold text-slate-700">
-                      RTI Handbook 2025-26 <FiDownload className="text-blue-600" />
-                    </a>
-                    <a href="#" className="flex items-center justify-between p-3 bg-white rounded-xl border border-blue-100 hover:shadow-md transition-all text-[11px] font-bold text-slate-700">
-                      Annual Disclosure Report <FiDownload className="text-blue-600" />
-                    </a>
-                  </div>
-                </div>
+                
               </div>
             </div>
 

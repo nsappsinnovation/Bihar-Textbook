@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import Modal, { FormInput, ToggleSwitch } from '../components/Modal';
 import { notices, noticeCategories } from '../data/dummyData';
+import { noticesData } from '../../pages/navbar_pages/Notice';
 import { useDebounce } from '../hooks/useCustomHooks';
 
 const priorityStyles = {
@@ -35,17 +36,37 @@ export default function NoticesPage({ addToast, forcedCategory }) {
   // Local state for notices with persistence
   const [noticeList, setNoticeList] = useState(() => {
     const saved = localStorage.getItem('website_notices_v2');
-    return saved ? JSON.parse(saved) : notices;
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      // Fix old data that was overwritten with 'Notice'
+      const migrated = parsed.map(item => {
+        if (item.category === 'Notice' && typeof item.id === 'string' && item.id.startsWith('notice_')) {
+          const orig = noticesData.find(n => `notice_${n.id}` === item.id);
+          if (orig && orig.category) {
+            return { ...item, category: orig.category };
+          }
+        }
+        return item;
+      });
+      localStorage.setItem('website_notices_v2', JSON.stringify(migrated));
+      return migrated;
+    }
+    return notices;
   });
+
+  const noticeOptions = ["Recruitment", "Financial", "Technical", "Circular", "Corrigendum", "Other"];
+  const tenderOptions = ["Active", "E-Tender", "Procurement", "Services", "Other"];
+  const categoryOptions = forcedCategory === 'Tender' ? tenderOptions : noticeOptions;
 
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    category: forcedCategory || 'Notice',
+    category: categoryOptions[0],
     priority: 'Low',
     pinned: false,
     date: new Date().toISOString(),
-    author: 'Admin'
+    author: 'Admin',
+    document: null
   });
 
   const debouncedSearch = useDebounce(searchQuery);
@@ -53,12 +74,21 @@ export default function NoticesPage({ addToast, forcedCategory }) {
   const filteredNotices = useMemo(() => {
     return noticeList.filter((notice) => {
       const matchesSearch = notice.title.toLowerCase().includes(debouncedSearch.toLowerCase());
-      const matchesCategory = forcedCategory 
-        ? notice.category === forcedCategory 
-        : (selectedCategory === 'All' || notice.category === selectedCategory);
+      
+      let matchesCategory = true;
+      if (forcedCategory) {
+        if (forcedCategory === 'Tender') {
+          matchesCategory = tenderOptions.includes(notice.category) || notice.category.toLowerCase().includes('tender');
+        } else {
+          matchesCategory = !tenderOptions.includes(notice.category) && !notice.category.toLowerCase().includes('tender');
+        }
+      } else {
+        matchesCategory = selectedCategory === 'All' || notice.category === selectedCategory;
+      }
+
       return matchesSearch && matchesCategory;
     });
-  }, [debouncedSearch, selectedCategory, noticeList, forcedCategory]);
+  }, [noticeList, debouncedSearch, selectedCategory, forcedCategory]);
 
   // Sort pinned notices first
   const sortedNotices = useMemo(() => {
@@ -79,6 +109,7 @@ export default function NoticesPage({ addToast, forcedCategory }) {
     }
     setNoticeList(updatedList);
     localStorage.setItem('website_notices_v2', JSON.stringify(updatedList));
+    window.dispatchEvent(new Event('websiteDataUpdated'));
     setShowAddModal(false);
     setEditingNotice(null);
     resetForm();
@@ -89,6 +120,7 @@ export default function NoticesPage({ addToast, forcedCategory }) {
     const updatedList = noticeList.filter(n => n.id !== id);
     setNoticeList(updatedList);
     localStorage.setItem('website_notices_v2', JSON.stringify(updatedList));
+    window.dispatchEvent(new Event('websiteDataUpdated'));
     addToast('Notice deleted', 'error');
     if (itemToDelete) {
       logActivity(`Deleted notice: ${itemToDelete.title}`, 'Admin', 'delete');
@@ -99,11 +131,12 @@ export default function NoticesPage({ addToast, forcedCategory }) {
     setFormData({
       title: '',
       description: '',
-      category: forcedCategory || 'Notice',
+      category: categoryOptions[0],
       priority: 'Low',
       pinned: false,
       date: new Date().toISOString(),
-      author: 'Admin'
+      author: 'Admin',
+      document: null
     });
   };
 
@@ -138,7 +171,7 @@ export default function NoticesPage({ addToast, forcedCategory }) {
           id="add-notice-btn"
         >
           <Plus className="w-4 h-4" />
-          {forcedCategory ? `Add ${forcedCategory}` : 'Add Notice'}
+          {'Add'}
         </motion.button>
       </div>
 
@@ -225,6 +258,12 @@ export default function NoticesPage({ addToast, forcedCategory }) {
                     <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
                       {notice.category}
                     </span>
+                    {notice.document && (
+                      <span className="text-xs text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full flex items-center gap-1 font-medium">
+                        <Paperclip className="w-3 h-3" />
+                        {notice.document}
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -292,7 +331,7 @@ export default function NoticesPage({ addToast, forcedCategory }) {
                 className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-300 transition-all bg-white" 
                 id="notice-category"
               >
-                {noticeCategories.filter(c => c !== 'All').map(cat => <option key={cat} value={cat}>{cat}</option>)}
+                {categoryOptions.map(cat => <option key={cat} value={cat}>{cat}</option>)}
               </select>
             </div>
             <div className="mb-4">
@@ -315,6 +354,21 @@ export default function NoticesPage({ addToast, forcedCategory }) {
             onChange={(val) => setFormData(prev => ({ ...prev, pinned: val }))} 
             id="notice-pin" 
           />
+
+          <div className="mb-4 mt-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Upload Document (PDF)</label>
+            <input 
+              type="file" 
+              accept=".pdf"
+              onChange={(e) => setFormData(prev => ({ ...prev, document: e.target.files[0]?.name }))}
+              className="w-full px-4 py-2 rounded-xl border border-gray-200 text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all bg-white"
+            />
+            {formData.document && (
+              <p className="mt-2 text-xs text-emerald-600 font-medium flex items-center gap-1">
+                <Paperclip className="w-3 h-3" /> {formData.document}
+              </p>
+            )}
+          </div>
           
           <div className="flex items-center justify-end gap-3 mt-6 pt-4 border-t border-gray-100">
             <button

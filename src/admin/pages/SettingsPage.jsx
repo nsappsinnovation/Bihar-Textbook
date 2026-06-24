@@ -3,16 +3,17 @@ import { motion } from 'framer-motion';
 import { Save, User, Bell, Shield, PaintBucket, Globe } from 'lucide-react';
 import { FormInput, ToggleSwitch } from '../components/Modal';
 
+import { useRef } from 'react';
 const tabs = [
   { id: 'profile', label: 'Profile', icon: User },
   { id: 'notifications', label: 'Notifications', icon: Bell },
   { id: 'security', label: 'Security', icon: Shield },
-  { id: 'appearance', label: 'Appearance', icon: PaintBucket },
   { id: 'system', label: 'System', icon: Globe },
 ];
 
 export default function SettingsPage({ addToast }) {
   const [activeTab, setActiveTab] = useState('profile');
+  const fileInputRef = useRef(null);
   
   // Load settings from localStorage or use defaults
   const [settings, setSettings] = useState(() => {
@@ -52,6 +53,17 @@ export default function SettingsPage({ addToast }) {
     window.dispatchEvent(new Event('settingsUpdated'));
     
     addToast('Settings saved successfully and reflected across dashboard', 'success');
+  };
+
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        handleChange('avatar', reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -108,13 +120,37 @@ export default function SettingsPage({ addToast }) {
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
                 <h3 className="text-lg font-bold text-gray-800 mb-6 border-b border-gray-100 pb-4">Profile Settings</h3>
                 <div className="flex items-center gap-6 mb-8">
-                  <div className="w-24 h-24 rounded-2xl bg-blue-600 flex items-center justify-center text-white text-3xl font-bold shadow-lg uppercase">
-                    {settings.firstName[0]}{settings.lastName[0]}
-                  </div>
+                  {settings.avatar ? (
+                    <img src={settings.avatar} alt="Avatar" className="w-24 h-24 rounded-2xl object-cover border border-gray-100" />
+                  ) : (
+                    <div className="w-24 h-24 rounded-2xl bg-blue-600 flex items-center justify-center text-white text-3xl font-bold uppercase">
+                      {settings.firstName[0]}{settings.lastName[0]}
+                    </div>
+                  )}
                   <div>
-                    <button className="px-4 py-2 rounded-xl border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors mb-2">
-                      Change Avatar
-                    </button>
+                    <input 
+                      type="file" 
+                      accept="image/*" 
+                      className="hidden" 
+                      ref={fileInputRef} 
+                      onChange={handleAvatarChange} 
+                    />
+                    <div className="flex items-center gap-2 mb-2">
+                      <button 
+                        onClick={() => fileInputRef.current?.click()}
+                        className="px-4 py-2 rounded-xl border border-gray-200 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+                      >
+                        Change Avatar
+                      </button>
+                      {settings.avatar && (
+                        <button 
+                          onClick={() => handleChange('avatar', null)}
+                          className="px-4 py-2 rounded-xl border border-red-200 text-sm font-medium text-red-600 hover:bg-red-50 transition-colors"
+                        >
+                          Remove Avatar
+                        </button>
+                      )}
+                    </div>
                     <p className="text-xs text-gray-500">JPG, GIF or PNG. Max size of 800K</p>
                   </div>
                 </div>
@@ -157,15 +193,7 @@ export default function SettingsPage({ addToast }) {
               </motion.div>
             )}
 
-            {activeTab === 'appearance' && (
-              <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
-                <h3 className="text-lg font-bold text-gray-800 mb-6 border-b border-gray-100 pb-4">Appearance Settings</h3>
-                <div className="space-y-6 max-w-lg">
-                   <ToggleSwitch label="Dark Mode" checked={settings.darkMode} onChange={(val) => handleChange('darkMode', val)} id="dark-mode" />
-                   <p className="text-sm text-gray-500 -mt-4 mb-4">Toggle dark theme across the application</p>
-                </div>
-              </motion.div>
-            )}
+
 
              {activeTab === 'system' && (
               <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}>
