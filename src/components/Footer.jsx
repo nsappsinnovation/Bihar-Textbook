@@ -14,7 +14,7 @@ const Footer = () => {
         
         
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 lg:gap-8">
           {/* BRAND & LOGOS */}
           <div className="flex flex-col">
             <Link to="/" className="inline-block mb-6 group">
@@ -50,14 +50,31 @@ const Footer = () => {
           <div>
             <h4 className="text-white font-semibold mb-6 tracking-wider text-sm uppercase relative inline-block">
               Quick Navigation
-              
             </h4>
-            <ul className="space-y-4">
+            <ul className="space-y-3">
               <FooterLink to="/" label="Home" />
               <FooterLink to="/books/Class1" label="Textbooks" />
               <FooterLink to="/notice" label="Notices & Circulars" />
               <FooterLink to="/tenders" label="Tenders" />
+              <FooterLink to="/gallery/photo" label="Gallery" />
+              <FooterLink to="/csr-policy" label="CSR Policy" />
               <FooterLink to="/contact" label="Contact Us" />
+            </ul>
+          </div>
+
+          {/* KNOW US */}
+          <div>
+            <h4 className="text-white font-semibold mb-6 tracking-wider text-sm uppercase relative inline-block">
+              Know Us
+            </h4>
+            <ul className="space-y-3">
+              <FooterLink to="/know-us/md-message" label="MD Message" />
+              <FooterLink to="/know-us/board-of-directors" label="Board of Directors" />
+              <FooterLink to="/know-us/organisation-structure" label="Organisation Structure" />
+              <FooterLink to="/know-us/officers" label="Officers List" />
+              <FooterLink to="/know-us/employees" label="Our Employees" />
+              <FooterLink to="/know-us/wholesellers" label="Wholesellers & Depots" />
+              <FooterLink to="/know-us/registered-printers" label="Registered Printers" />
             </ul>
           </div>
 
@@ -65,9 +82,8 @@ const Footer = () => {
           <div>
             <h4 className="text-white font-semibold mb-6 tracking-wider text-sm uppercase relative inline-block">
               Documents
-              
             </h4>
-            <ul className="space-y-4">
+            <ul className="space-y-3">
               <FooterLink to="/documents/hrd" label="HRD" />
               <FooterLink to="/documents/registration-form" label="Registration Forms" />
               <FooterLink to="/documents/rti" label="RTI" />
@@ -78,7 +94,6 @@ const Footer = () => {
           <div>
             <h4 className="text-white font-semibold mb-6 tracking-wider text-sm uppercase relative inline-block">
               Contact Information
-             
             </h4>
 
             <div className="space-y-5 text-sm">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BookOpen, Map, MonitorPlay, Glasses, Sparkles, BookHeadphones, MapPin, Cpu } from 'lucide-react';
+import { BookOpen, Map, MonitorPlay, Glasses, Sparkles, BookHeadphones, MapPin, Cpu, Printer } from 'lucide-react';
 
 const milestones = [
   {
@@ -13,46 +13,71 @@ const milestones = [
     accent: '#f59e0b'
   },
   {
-    year: '2005',
-    title: 'Statewide Reach',
-    description: 'Expanded the distribution network to ensure educational materials reach students in all 38 districts.',
+    year: '1967',
+    title: 'GDR Printing Project',
+    description: 'VEB Polygraph (GDR) printing project selected to modernize and standardize textbook production.',
+    icon: Printer,
+    color: 'from-teal-400 to-emerald-500',
+    glow: 'rgba(16, 185, 129, 0.4)',
+    accent: '#10b981'
+  },
+  {
+    year: '1972',
+    title: 'Production Started',
+    description: 'First textbook printing unit started production in Bihar, boosting local publishing capability.',
+    icon: Cpu,
+    color: 'from-rose-400 to-pink-500',
+    glow: 'rgba(244, 63, 94, 0.4)',
+    accent: '#f43f5e'
+  },
+  {
+    year: '1970s–2000s',
+    title: 'Statewide Expansion',
+    description: 'Textbook printing and distribution network scaled rapidly to cover schools in all 38 districts of Bihar.',
     icon: Map,
     color: 'from-blue-400 to-indigo-500',
     glow: 'rgba(59, 130, 246, 0.4)',
     accent: '#3b82f6'
   },
   {
-    year: '2018',
-    title: 'Digital Transition',
-    description: 'Introduced e-books, digital portals, and online repositories, moving beyond physical printing.',
+    year: '2010s–2020s',
+    title: 'Digital Innovation',
+    description: 'Transitioned to e-tenders, online textbook access, digital portals, and advanced administration.',
     icon: MonitorPlay,
-    color: 'from-emerald-400 to-teal-500',
-    glow: 'rgba(16, 185, 129, 0.4)',
-    accent: '#10b981'
-  },
-  {
-    year: '2024',
-    title: 'Future Ready',
-    description: 'Pioneered modern education with VR Labs, Audiobooks, AI Intelligence, and inclusive learning.',
-    icon: Sparkles,
     color: 'from-purple-400 to-pink-500',
     glow: 'rgba(168, 85, 247, 0.4)',
     accent: '#d946ef'
   }
 ];
 
-// Nodes mapped roughly to the actual shape of Bihar
-const cities = [
-  { id: 'patna', label: 'Patna HQ', x: '46%', y: '52%', main: true },
-  { id: 'muzaffarpur', label: 'Muzaffarpur', x: '52%', y: '38%' },
-  { id: 'gaya', label: 'Gaya', x: '42%', y: '72%' },
-  { id: 'purnia', label: 'Purnia', x: '82%', y: '38%' },
-  { id: 'bhagalpur', label: 'Bhagalpur', x: '72%', y: '60%' },
-  { id: 'darbhanga', label: 'Darbhanga', x: '62%', y: '30%' },
-  { id: 'rohtas', label: 'Rohtas', x: '25%', y: '70%' },
-  { id: 'champaran', label: 'West Champaran', x: '25%', y: '20%' },
-  { id: 'chapra', label: 'Chapra', x: '35%', y: '45%' },
-];
+import mapData from './biharMapData.json';
+
+const citiesMap = {
+  patna: { label: 'Patna HQ', district: 'Patna', main: true },
+  muzaffarpur: { label: 'Muzaffarpur', district: 'Muzaffarpur' },
+  gaya: { label: 'Gaya', district: 'Gaya' },
+  purnia: { label: 'Purnia', district: 'Purnia' },
+  bhagalpur: { label: 'Bhagalpur', district: 'Bhagalpur' },
+  darbhanga: { label: 'Darbhanga', district: 'Darbhanga' },
+  rohtas: { label: 'Rohtas', district: 'Rohtas' },
+  champaran: { label: 'West Champaran', district: 'Pashchim Champaran' },
+  chapra: { label: 'Chapra', district: 'Saran (chhapra)' },
+};
+
+// Nodes mapped to the actual shape of Bihar
+const cities = Object.entries(citiesMap).map(([id, info]) => {
+  const feature = mapData.paths.find(p => p.district === info.district);
+  return {
+    id,
+    label: info.label,
+    district: info.district,
+    main: info.main,
+    cx: feature ? feature.centroid[0] : 0,
+    cy: feature ? feature.centroid[1] : 0,
+    x: feature ? `${(feature.centroid[0]/mapData.width)*100}%` : '0%',
+    y: feature ? `${(feature.centroid[1]/mapData.height)*100}%` : '0%'
+  };
+});
 
 const connections = [
   ['patna', 'muzaffarpur'],
@@ -69,6 +94,7 @@ const connections = [
 
 const EvolutionMap = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [hoveredDistrict, setHoveredDistrict] = useState(null);
 
   // Auto advance timeline
   useEffect(() => {
@@ -194,59 +220,101 @@ const EvolutionMap = () => {
             <div className="w-full relative aspect-[4/3]">
               
               {/* The Actual Bihar Map Image (Light Vector Theme) */}
-              <img 
-                src="./bihar.png" 
-                alt="Vector Map of Bihar"
-                className="absolute inset-0 w-full h-full object-contain p-2 opacity-25 select-none pointer-events-none drop-shadow-xl transition-all duration-1000"
-                style={{ filter: 'grayscale(1) brightness(0.9) contrast(1.2)' }}
-              />
+              <svg 
+                viewBox={`0 0 ${mapData.width} ${mapData.height}`} 
+                className="absolute inset-0 w-full h-full drop-shadow-xl pointer-events-auto"
+                style={{ zIndex: 5 }}
+              >
+                {/* Base Map Paths */}
+                <g className="map-districts">
+                  {mapData.paths.map((p) => {
+                    const isHovered = hoveredDistrict === p.district;
+                    const isPatna = p.district === 'Patna';
+                    const isMilestoneCity = cities.some(c => c.district === p.district);
+                    
+                    // Logic for timeline sync
+                    let baseFill = "#f8fafc"; // default very light
+                    if (activeIndex === 0) {
+                      baseFill = isPatna ? "#e2e8f0" : "#fbfcfd";
+                    } else if (activeIndex === 1) {
+                      baseFill = (isPatna || p.district === 'Muzaffarpur') ? "#e2e8f0" : "#fbfcfd";
+                    } else if (activeIndex === 2) {
+                      baseFill = (isPatna || p.district === 'Muzaffarpur' || p.district === 'Gaya') ? "#e2e8f0" : "#fbfcfd";
+                    } else if (activeIndex >= 3) {
+                      baseFill = isMilestoneCity ? "#e2e8f0" : "#f1f5f9";
+                    }
 
-              {/* Map Overlays & Connections (SVG Layer) */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 10 }}>
-                {connections.map(([sourceId, targetId], i) => {
-                  const source = cities.find(c => c.id === sourceId);
-                  const target = cities.find(c => c.id === targetId);
-                  
-                  const isVisible = activeIndex >= 1; // Show from 2005
-                  const isAnimated = activeIndex >= 2; // Data flow from 2018
-                  
-                  return (
-                    <g key={`conn-${i}`}>
-                      {/* Base Line */}
-                      <motion.line
-                        x1={source.x} y1={source.y}
-                        x2={target.x} y2={target.y}
-                        stroke="rgba(148, 163, 184, 0.4)"
-                        strokeWidth="1.5"
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: isVisible ? 1 : 0 }}
-                        transition={{ duration: 1, ease: "easeInOut" }}
+                    return (
+                      <motion.path
+                        key={p.district}
+                        d={p.d}
+                        fill={isHovered ? "#93c5fd" : baseFill}
+                        stroke={isHovered ? "#3b82f6" : (activeIndex === 0 && !isPatna ? "#f1f5f9" : "#cbd5e1")}
+                        strokeWidth={isHovered ? "2" : "1"}
+                        className="transition-all duration-700 cursor-pointer"
+                        onMouseEnter={() => setHoveredDistrict(p.district)}
+                        onMouseLeave={() => setHoveredDistrict(null)}
                       />
-                      {/* Animated Data Flow Line */}
-                      {isAnimated && (
+                    );
+                  })}
+                </g>
+
+                {/* Map Connections (SVG Layer) */}
+                <g className="map-connections" style={{ zIndex: 10 }}>
+                  {connections.map(([sourceId, targetId], i) => {
+                    const source = cities.find(c => c.id === sourceId);
+                    const target = cities.find(c => c.id === targetId);
+                    
+                    const isVisible = activeIndex >= 3; // Show from 1970s-2000s expansion
+                    const isAnimated = activeIndex >= 4; // Data flow from 2010s-2020s
+                    
+                    return (
+                      <g key={`conn-${i}`}>
+                        {/* Base Line */}
                         <motion.line
-                          x1={source.x} y1={source.y}
-                          x2={target.x} y2={target.y}
-                          stroke={milestones[activeIndex]?.accent || "#10b981"}
-                          strokeWidth="2.5"
-                          strokeDasharray="4 8"
-                          initial={{ strokeDashoffset: 100, opacity: 0 }}
-                          animate={{ strokeDashoffset: 0, opacity: 1 }}
-                          transition={{
-                            strokeDashoffset: { repeat: Infinity, duration: 1.5, ease: "linear" },
-                            opacity: { duration: 0.5 }
-                          }}
+                          x1={source.cx} y1={source.cy}
+                          x2={target.cx} y2={target.cy}
+                          stroke="rgba(148, 163, 184, 0.4)"
+                          strokeWidth="1.5"
+                          initial={{ pathLength: 0 }}
+                          animate={{ pathLength: isVisible ? 1 : 0 }}
+                          transition={{ duration: 1, ease: "easeInOut" }}
                         />
-                      )}
-                    </g>
-                  );
-                })}
+                        {/* Animated Data Flow Line */}
+                        {isAnimated && (
+                          <motion.line
+                            x1={source.cx} y1={source.cy}
+                            x2={target.cx} y2={target.cy}
+                            stroke={milestones[activeIndex]?.accent || "#10b981"}
+                            strokeWidth="2.5"
+                            strokeDasharray="4 8"
+                            initial={{ strokeDashoffset: 100, opacity: 0 }}
+                            animate={{ strokeDashoffset: 0, opacity: 1 }}
+                            transition={{
+                              strokeDashoffset: { repeat: Infinity, duration: 1.5, ease: "linear" },
+                              opacity: { duration: 0.5 }
+                            }}
+                          />
+                        )}
+                      </g>
+                    );
+                  })}
+                </g>
               </svg>
 
               {/* City Nodes & Labels Layer */}
               {cities.map((city, idx) => {
                 const isHQ = city.main;
-                const isVisible = isHQ || activeIndex >= 1; // HQ always visible, others from 2005
+                let isVisible = false;
+                if (activeIndex === 0) {
+                  isVisible = isHQ;
+                } else if (activeIndex === 1) {
+                  isVisible = isHQ || city.id === 'muzaffarpur';
+                } else if (activeIndex === 2) {
+                  isVisible = isHQ || city.id === 'muzaffarpur' || city.id === 'gaya';
+                } else {
+                  isVisible = true; // All show from 1970s-2000s onwards
+                }
                 const activeColor = milestones[activeIndex]?.accent || '#3b82f6';
                 const nodeColor = isHQ ? activeColor : (isVisible ? '#94a3b8' : 'transparent');
 
@@ -293,7 +361,7 @@ const EvolutionMap = () => {
 
               {/* Floating Tech Elements (2024 Phase) - Light Theme */}
               <AnimatePresence>
-                {activeIndex === 3 && (
+                {activeIndex === 4 && (
                   <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 40 }}>
                     <motion.div
                       initial={{ opacity: 0, y: 30, scale: 0.8 }}
@@ -332,15 +400,15 @@ const EvolutionMap = () => {
               </AnimatePresence>
 
               {/* Map Footer Status Pill (Floating) */}
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-xl border border-slate-200 px-6 py-3 rounded-full flex items-center gap-4 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)]">
+              <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-xl border border-slate-200 px-6 py-3 rounded-full flex items-center gap-4 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)]">
                  <div className="flex items-center gap-3">
                    <div className="relative flex h-2.5 w-2.5">
                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ backgroundColor: milestones[activeIndex].accent }}></span>
                      <span className="relative inline-flex rounded-full h-2.5 w-2.5" style={{ backgroundColor: milestones[activeIndex].accent }}></span>
                    </div>
-                   <span className="text-slate-800 text-[10px] font-black uppercase tracking-widest whitespace-nowrap">
-                     {activeIndex === 0 ? 'HQ Initialized' : activeIndex === 1 ? 'Network Expanding' : activeIndex === 2 ? 'Data Transmission' : 'Next-Gen Deployed'}
-                   </span>
+                    <span className="text-slate-800 text-[10px] font-black uppercase tracking-widest whitespace-nowrap">
+                      {activeIndex === 0 ? 'HQ Initialized' : activeIndex === 1 ? 'Printing Selected' : activeIndex === 2 ? 'Production Started' : activeIndex === 3 ? 'Network Expanded' : 'Digital Era Deployed'}
+                    </span>
                  </div>
                  <div className="hidden sm:block w-px h-4 bg-slate-200"></div>
                  <div className="hidden sm:flex items-center gap-1.5 text-slate-400 text-[9px] font-black uppercase tracking-widest whitespace-nowrap">
