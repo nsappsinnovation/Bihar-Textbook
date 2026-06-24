@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { ArrowUpRight, Bell, Eye, Activity, Calendar, Hash } from "lucide-react";
+import { ArrowUpRight, Bell, Eye, Activity, Calendar, Hash, FileText, Award } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 import { noticesData as actualNotices } from './Notice';
 import { tendersData } from '../../data/tendersData';
@@ -108,11 +107,6 @@ export default function NoticeBoard() {
   const totalNotices = 232;
   const totalTenders = 230;
 
-  const chartData = [
-    { name: 'Notices', Count: totalNotices, color: '#3b82f6' },
-    { name: 'Tenders', Count: totalTenders, color: '#f59e0b' }
-  ];
-
   return (
     <section className="w-full bg-[#fcfcfd] py-16 px-6 md:px-12 lg:px-24 font-sans text-slate-900 border-t border-slate-100 overflow-hidden relative">
       <style>
@@ -175,30 +169,49 @@ export default function NoticeBoard() {
                 Stay updated with the latest administrative announcements, active tenders, and educational circulars from the Bihar State Text Book Publishing Corporation.
               </p>
 
-              {/* Stats Graph - Premium Bar Chart */}
-              <div className="h-[270px] w-full mt-4 mb-8 bg-white/80 backdrop-blur-xl p-5 rounded-3xl border border-white shadow-[0_8px_30px_rgb(0,0,0,0.06)] relative overflow-hidden flex flex-col justify-center">
-                 <h3 className="absolute top-5 left-5 text-[10px] font-black uppercase tracking-widest text-slate-400">Total Volume</h3>
-                 <div className="absolute top-5 right-5 flex items-center gap-2 z-10">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.8)]"></span>
-                    <span className="text-[9px] uppercase tracking-widest font-black text-emerald-600">Live Data</span>
-                 </div>
-                 
-                 <ResponsiveContainer width="100%" height={190} className="mt-8">
-                   <BarChart data={chartData} margin={{ top: 20, right: 20, left: -25, bottom: 0 }}>
-                     <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
-                     <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fontSize: 12, fill: '#64748b', fontWeight: 700 }} dy={10} />
-                     <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 11, fill: '#94a3b8', fontWeight: 600 }} />
-                     <Tooltip 
-                       cursor={{ fill: 'rgba(241,245,249,0.5)' }}
-                       contentStyle={{ borderRadius: '12px', border: '1px solid rgba(255,255,255,0.8)', background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(10px)', boxShadow: '0 10px 25px -5px rgb(0 0 0 / 0.1)', fontSize: '13px', fontWeight: 700 }} 
-                     />
-                     <Bar dataKey="Count" radius={[6, 6, 0, 0]} barSize={45}>
-                       {chartData.map((entry, index) => (
-                         <Cell key={`cell-${index}`} fill={entry.color} />
-                       ))}
-                     </Bar>
-                   </BarChart>
-                 </ResponsiveContainer>
+              {/* Premium Stats Overview Widget */}
+              <div className="flex flex-col gap-4 mt-6 mb-8">
+                {/* Active Tenders Card */}
+                <div className="bg-white/80 backdrop-blur-xl p-5 rounded-2xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex items-center justify-between group hover:shadow-md transition-all duration-300">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center border border-amber-500/20 shadow-[0_0_15px_rgba(245,158,11,0.1)] group-hover:scale-110 transition-transform">
+                      <FileText className="text-amber-500" size={22} />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-black text-slate-800 tracking-wider">Active Tenders</h4>
+                      <p className="text-[11px] text-slate-400 mt-0.5 font-medium">E-procurement & contracts</p>
+                    </div>
+                  </div>
+                  <span className="text-2xl font-black text-amber-500 tracking-tight">{totalTenders}+</span>
+                </div>
+
+                {/* Live Notices Card */}
+                <div className="bg-white/80 backdrop-blur-xl p-5 rounded-2xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex items-center justify-between group hover:shadow-md transition-all duration-300">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-rose-500/10 flex items-center justify-center border border-rose-500/20 shadow-[0_0_15px_rgba(244,63,94,0.1)] group-hover:scale-110 transition-transform">
+                      <Bell className="text-rose-500" size={22} />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-black text-slate-800 tracking-wider">Official Notices</h4>
+                      <p className="text-[11px] text-slate-400 mt-0.5 font-medium">Administrative announcements</p>
+                    </div>
+                  </div>
+                  <span className="text-2xl font-black text-rose-500 tracking-tight">{totalNotices}+</span>
+                </div>
+
+                {/* Academic Circulars Card */}
+                <div className="bg-white/80 backdrop-blur-xl p-5 rounded-2xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex items-center justify-between group hover:shadow-md transition-all duration-300">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.1)] group-hover:scale-110 transition-transform">
+                      <Award className="text-blue-500" size={22} />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-black text-slate-800 tracking-wider">Academic Circulars</h4>
+                      <p className="text-[11px] text-slate-400 mt-0.5 font-medium">Curriculum & syllabus updates</p>
+                    </div>
+                  </div>
+                  <span className="text-2xl font-black text-blue-500 tracking-tight">67+</span>
+                </div>
               </div>
             </div>
 
