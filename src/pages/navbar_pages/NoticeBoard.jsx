@@ -112,11 +112,12 @@ export default function NoticeBoard() {
       <style>
         {`
           @keyframes marquee-y {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-50%); }
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(0, -50%, 0); }
           }
           .animate-marquee-y {
             animation: marquee-y 35s linear infinite;
+            will-change: transform;
           }
           .animate-marquee-y:hover {
             animation-play-state: paused;

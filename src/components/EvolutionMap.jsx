@@ -138,7 +138,7 @@ const EvolutionMap = () => {
             </p>
 
             {/* The Milestones Timeline */}
-            <div className="relative pl-6">
+            <div className="relative pl-6 min-h-[450px]">
               {/* Vertical Progress Line */}
               <div className="absolute left-6 top-6 bottom-6 w-0.5 bg-slate-200"></div>
               {/* Animated Active Line Progress */}
