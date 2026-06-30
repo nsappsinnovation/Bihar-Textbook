@@ -40,6 +40,7 @@ import AiIntelligenceDashboard from "./ai/AiIntelligenceDashboard.jsx";
 import VrDashboard from "./vr/VrDashboard.jsx";
 import VrLabsWorlds from "./vr/VrLabsWorlds.jsx";
 import CyberSecurityDashboard from "./cyberSecurity/CyberSecurityDashboard.jsx";
+import VrTechLearning from "./vr/VrTechLearning.jsx";
 
 
 /* Components */
@@ -90,8 +91,7 @@ function App() {
       "/vr-dashboard",
       "/vr-labs-worlds",
       "/cyber-security-dashboard",
-      
-      
+      "/vr-tech-learning",
     ].includes(location.pathname);
 
   const isNoFooterPage =
@@ -106,9 +106,7 @@ function App() {
       "/vr-dashboard",
       "/vr-labs-worlds",
       "/cyber-security-dashboard",
-     
-      
-      
+      "/vr-tech-learning",
       "/know-us/md-message",
     ].includes(location.pathname);
 
@@ -146,6 +144,7 @@ function App() {
             <Route path="/vr" element={<Vr />} />
             <Route path="/vr-dashboard" element={<VrDashboard />} />
             <Route path="/vr-labs-worlds" element={<VrLabsWorlds />} />
+            <Route path="/vr-tech-learning" element={<VrTechLearning />} />
 
             {/* Cyber */}
             <Route path="/cyber-security" element={<CyberSecurity />} />
