@@ -38,7 +38,7 @@ import AudioLibraryDashboard from "./audio/AudioLibraryDashboard.jsx";
 import MyAudioLibrary from "./audio/MyAudioLibrary.jsx";
 import AiIntelligenceDashboard from "./ai/AiIntelligenceDashboard.jsx";
 import VrDashboard from "./vr/VrDashboard.jsx";
-import VrLabsWorlds from "./vr/VrLabsWorlds.jsx";
+
 import CyberSecurityDashboard from "./cyberSecurity/CyberSecurityDashboard.jsx";
 
 
@@ -88,7 +88,7 @@ function App() {
       "/my-audio-library",
       "/ai-intelligence-dashboard",
       "/vr-dashboard",
-      "/vr-labs-worlds",
+      
       "/cyber-security-dashboard",
       
       
@@ -104,7 +104,7 @@ function App() {
       "/my-audio-library",
       "/ai-intelligence-dashboard",
       "/vr-dashboard",
-      "/vr-labs-worlds",
+     
       "/cyber-security-dashboard",
      
       
@@ -145,7 +145,7 @@ function App() {
             {/* VR */}
             <Route path="/vr" element={<Vr />} />
             <Route path="/vr-dashboard" element={<VrDashboard />} />
-            <Route path="/vr-labs-worlds" element={<VrLabsWorlds />} />
+            
 
             {/* Cyber */}
             <Route path="/cyber-security" element={<CyberSecurity />} />
