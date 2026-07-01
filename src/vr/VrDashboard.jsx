@@ -4,7 +4,7 @@ import {
   ArrowLeft, ArrowRight, BookOpen, Flame, Star, 
   Clock, Award, Globe, Landmark, Rocket, Microscope,
   Code, Eye, Compass, Layers, MapPin, Bookmark,
-  Palette, GraduationCap, FlaskConical, Trophy, X, Play
+  Palette, GraduationCap, FlaskConical, Trophy, X, Play, Cpu
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { videoItems } from '../data/vrData';
@@ -76,6 +76,7 @@ const VrDashboard = () => {
 
   const quickStats = [
     { label: 'VR Courses', value: 'Curriculum-based', icon: <Rocket className="text-blue-600" />, color: 'bg-blue-50', path: '/vr-labs-worlds?tab=courses' },
+    { label: 'Learn VR Technology', value: 'How it works', icon: <Cpu className="text-indigo-600" />, color: 'bg-indigo-50', path: '/vr-tech-learning' },
     { label: 'Virtual Labs', value: 'Practice in VR', icon: <FlaskConical className="text-emerald-600" />, color: 'bg-emerald-50', path: '/vr-labs-worlds' },
     { label: '360° Worlds', value: 'Explore places', icon: <Globe className="text-purple-600" />, color: 'bg-purple-50', path: '/vr-labs-worlds' },
   ];
@@ -143,7 +144,7 @@ const VrDashboard = () => {
             </section>
 
             {/* Quick Stats Row */}
-            <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 lg:gap-6 relative z-20 -mt-6 md:-mt-8 px-3 sm:px-4 md:px-12">
+            <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6 relative z-20 -mt-6 md:-mt-8 px-3 sm:px-4 md:px-12">
               {quickStats.map((stat, i) => (
                 <div 
                   key={i}
