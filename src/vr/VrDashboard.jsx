@@ -7,8 +7,8 @@ const VrDashboard = () => {
 
   const quickStats = [
     { 
-      label: 'VR Courses', 
-      value: 'Curriculum-based', 
+      label: 'Learn VR Technology', 
+      value: 'How It Works?', 
       icon: <Rocket className="text-blue-600" />, 
       color: 'bg-blue-50' 
     },
