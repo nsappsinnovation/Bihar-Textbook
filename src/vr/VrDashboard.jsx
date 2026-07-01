@@ -72,7 +72,7 @@ const VrDashboard = () => {
             </section>
 
             {/* Quick Stats Row */}
-            <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 lg:gap-6 relative z-20 -mt-6 md:-mt-8 px-3 sm:px-4 md:px-12">
+            <section id="content-section" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 lg:gap-6 relative z-20 -mt-6 md:-mt-8 px-3 sm:px-4 md:px-12">
               {quickStats.map((stat, i) => (
                 <div 
                   key={i}
