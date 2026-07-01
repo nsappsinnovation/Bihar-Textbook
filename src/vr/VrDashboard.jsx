@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowLeft, ArrowRight, Globe, Rocket, FlaskConical } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import VrSimulators from './VrSimulators';
 
 const VrDashboard = () => {
   const navigate = useNavigate();
@@ -88,6 +89,11 @@ const VrDashboard = () => {
                 </div>
               ))}
             </section>
+          </div>
+
+          {/* 360° Immersive Labs & Worlds Simulation Section */}
+          <div className="pt-4 pb-12">
+            <VrSimulators />
           </div>
 
         </div>
