@@ -127,8 +127,8 @@ const Footer = () => {
         </div>
 
         {/* BOTTOM BAR */}
-        <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-xs md:text-sm text-white/40">
-          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6 text-center md:text-left">
+        <div className="mt-16 pt-8 border-t border-white/5 flex flex-col items-center justify-center gap-4 text-xs md:text-sm text-white/40 text-center">
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6 text-center">
             <p className="font-medium tracking-wide">© 2026 BSTBPC. All rights reserved.</p>
             <span className="hidden md:inline text-white/10">|</span>
             <p>
