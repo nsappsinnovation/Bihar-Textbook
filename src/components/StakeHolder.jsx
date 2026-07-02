@@ -1,117 +1,186 @@
 import React from "react";
-import { GraduationCap, BookOpen, Landmark, Building2, Users, Truck, Lightbulb, HeartHandshake, Briefcase, Quote } from "lucide-react";
+import { motion } from "framer-motion";
 
-const stakeholderData = [
+
+const testimonials = [
   {
-    name: "Students & Learners",
-    role: "Core Beneficiary",
-    icon: GraduationCap,
-    quote: "The ultimate beneficiaries of our ecosystem, whose curiosity and growth drive every educational initiative in Bihar.",
-    color: "text-blue-500",
-    bg: "bg-blue-50",
+    id: 1,
+    quote: "\"Education must build character, discipline, and a spirit of service to the nation.\"",
+    name: "Dr. Rajendra Prasad",
+    role: "FIRST PRESIDENT OF INDIA | FROM BIHAR",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Dr._Rajendra_Prasad.jpg/800px-Dr._Rajendra_Prasad.jpg"
   },
   {
-    name: "Teachers & Educators",
-    role: "Academic Pillar",
-    icon: BookOpen,
-    quote: "The pillars of our society who mold young minds and bring the curriculum to life through dedicated pedagogy.",
-    color: "text-orange-500",
-    bg: "bg-orange-50",
+    id: 2,
+    quote: "\"The purpose of education is not only employment, but the awakening of social responsibility.\"",
+    name: "Jayaprakash Narayan",
+    role: "LOKNAYAK | SOCIAL REFORMER",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Jayaprakash_Narayan_1975_stamp_of_India.jpg/800px-Jayaprakash_Narayan_1975_stamp_of_India.jpg"
   },
   {
-    name: "Educational Institutions",
-    role: "Learning Grounds",
-    icon: Landmark,
-    quote: "The foundational grounds where infrastructure meets innovation to foster holistic development and learning.",
-    color: "text-indigo-500",
-    bg: "bg-indigo-50",
+    id: 3,
+    quote: "\"Education is the strongest foundation on which a modern and progressive Bihar can be built.\"",
+    name: "Satyendra Narayan Sinha",
+    role: "FORMER CHIEF MINISTER | EDUCATION REFORMER",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Satyendra_Narayan_Sinha.jpg/800px-Satyendra_Narayan_Sinha.jpg"
   },
   {
-    name: "Department of Education",
-    role: "Policy Maker",
-    icon: Building2,
-    quote: "The guiding force establishing policies and ensuring equitable access to quality education for all across the state.",
-    color: "text-emerald-500",
-    bg: "bg-emerald-50",
+    id: 4,
+    quote: "\"The progress of Bihar depends on schools, colleges, good governance, and equal opportunity for all.\"",
+    name: "Shri Krishna Sinha",
+    role: "FIRST CHIEF MINISTER OF BIHAR",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Sri_Krishna_Sinha.jpg/800px-Sri_Krishna_Sinha.jpg"
   },
   {
-    name: "Parents & Guardians",
-    role: "Support System",
-    icon: Users,
-    quote: "The essential partners in learning who support, encourage, and nurture students beyond the classroom walls.",
-    color: "text-pink-500",
-    bg: "bg-pink-50",
+    id: 5,
+    quote: "\"Knowledge becomes meaningful when it is used for public service and social development.\"",
+    name: "Anugrah Narayan Sinha",
+    role: "BIHAR VIBHUTI | EDUCATIONIST",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Anugrah_Narayan_Sinha.jpg/800px-Anugrah_Narayan_Sinha.jpg"
   },
   {
-    name: "Logistics Partners",
-    role: "Supply Chain",
-    icon: Truck,
-    quote: "The crucial link ensuring that every student receives the right textbooks and learning materials on time.",
-    color: "text-amber-500",
-    bg: "bg-amber-50",
+    id: 6,
+    quote: "\"Education should not remain a privilege of a few; it must become the strength of every common student.\"",
+    name: "Karpoori Thakur",
+    role: "JAN NAYAK | FORMER CHIEF MINISTER",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Karpoori_Thakur.jpg/800px-Karpoori_Thakur.jpg"
   },
   {
-    name: "Curriculum Experts",
-    role: "Knowledge Architects",
-    icon: Lightbulb,
-    quote: "The visionary minds crafting modern, NEP-aligned syllabi to prepare our youth for the challenges of tomorrow.",
-    color: "text-violet-500",
-    bg: "bg-violet-50",
+    id: 7,
+    quote: "\"The doors of education must remain open for the poor, the backward, and the marginalized.\"",
+    name: "Karpoori Thakur",
+    role: "JAN NAYAK | SOCIAL JUSTICE LEADER",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Karpoori_Thakur.jpg/800px-Karpoori_Thakur.jpg"
   },
   {
-    name: "CSR & NGO Partners",
-    role: "Collaborators",
-    icon: HeartHandshake,
-    quote: "The collaborative forces bringing additional resources, innovation, and support to bridge educational gaps.",
-    color: "text-rose-500",
-    bg: "bg-rose-50",
+    id: 8,
+    quote: "\"Educating children, especially girls, is the most powerful way to change the future of Bihar.\"",
+    name: "Shri Nitish Kumar",
+    role: "HON'BLE CHIEF MINISTER, BIHAR",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Nitish_Kumar_in_2022.jpg/800px-Nitish_Kumar_in_2022.jpg"
   },
   {
-    name: "District Officers",
-    role: "Field Leaders",
-    icon: Briefcase,
-    quote: "The on-ground leaders implementing state policies and ensuring administrative excellence at the grassroots.",
-    color: "text-cyan-500",
-    bg: "bg-cyan-50",
+    id: 9,
+    quote: "\"A society moves forward when every child receives education, dignity, and opportunity.\"",
+    name: "Jagjivan Ram",
+    role: "NATIONAL LEADER | FROM BIHAR",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Jagjivan_Ram_1976_stamp_of_India.jpg/800px-Jagjivan_Ram_1976_stamp_of_India.jpg"
   },
+  {
+    id: 10,
+    quote: "\"Education gives confidence to the weak, dignity to the poor, and strength to democracy.\"",
+    name: "Jagjivan Ram",
+    role: "SOCIAL JUSTICE LEADER",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Jagjivan_Ram_1976_stamp_of_India.jpg/800px-Jagjivan_Ram_1976_stamp_of_India.jpg"
+  },
+  {
+    id: 11,
+    quote: "\"Education creates the intellectual strength required for public life, self-governance, and national progress.\"",
+    name: "Dr. Sachchidananda Sinha",
+    role: "EDUCATIONIST | CONSTITUENT ASSEMBLY PRESIDENT",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Sachchidananda_Sinha.jpg/800px-Sachchidananda_Sinha.jpg"
+  },
+  {
+    id: 12,
+    quote: "\"The real power of learning lies in creating responsible citizens and a just society.\"",
+    name: "Dr. Sachchidananda Sinha",
+    role: "EDUCATIONIST | PUBLIC INTELLECTUAL",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Sachchidananda_Sinha.jpg/800px-Sachchidananda_Sinha.jpg"
+  },
+  {
+    id: 13,
+    quote: "\"Good education must reach the village, the poor household, and the first-generation learner.\"",
+    name: "Ramdhari Singh Dinkar",
+    role: "NATIONAL POET | THINKER FROM BIHAR",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Ramdhari_Singh_Dinkar_1999_stamp_of_India.jpg/800px-Ramdhari_Singh_Dinkar_1999_stamp_of_India.jpg"
+  },
+  {
+    id: 14,
+    quote: "\"Learning is the light that removes fear, inequality, and darkness from society.\"",
+    name: "Ramdhari Singh Dinkar",
+    role: "RASHTRAKAVI | EDUCATIONAL THINKER",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Ramdhari_Singh_Dinkar_1999_stamp_of_India.jpg/800px-Ramdhari_Singh_Dinkar_1999_stamp_of_India.jpg"
+  },
+  {
+    id: 15,
+    quote: "\"A strong education system is the path to a strong Bihar, a strong society, and a strong India.\"",
+    name: "Shri Nitish Kumar",
+    role: "HON'BLE CHIEF MINISTER, BIHAR",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Nitish_Kumar_in_2022.jpg/800px-Nitish_Kumar_in_2022.jpg"
+  }
+];
+
+const colors = [
+  {
+    quote: "text-amber-400/20",
+    role: "text-amber-600/75",
+    border: "hover:border-amber-100",
+  },
+  {
+    quote: "text-blue-400/20",
+    role: "text-blue-600/75",
+    border: "hover:border-blue-100",
+  },
+  {
+    quote: "text-emerald-400/20",
+    role: "text-emerald-600/75",
+    border: "hover:border-emerald-100",
+  },
+  {
+    quote: "text-rose-400/20",
+    role: "text-rose-500/75",
+    border: "hover:border-rose-100",
+  },
+  {
+    quote: "text-purple-400/20",
+    role: "text-purple-600/75",
+    border: "hover:border-purple-100",
+  }
 ];
 
 export default function StakeHolder() {
-  const row1 = [...stakeholderData.slice(0, 5), ...stakeholderData.slice(0, 5), ...stakeholderData.slice(0, 5)];
-  const row2 = [...stakeholderData.slice(4, 9), ...stakeholderData.slice(4, 9), ...stakeholderData.slice(4, 9)];
+  // Partition testimonials into two rows
+  const row1 = testimonials.slice(0, 8);
+  const row2 = testimonials.slice(8);
 
-  const StakeholderCard = ({ item }) => {
-    const Icon = item.icon;
+  const TestimonialCard = ({ item, index }) => {
+    const theme = colors[index % colors.length];
+    
+    // Clean escape quotes from strings for display
+    const cleanQuote = item.quote.startsWith('"') && item.quote.endsWith('"')
+      ? item.quote.slice(1, -1)
+      : item.quote;
+
     return (
-      <div
-        className="
-          w-[290px] md:w-[330px] h-[190px] md:h-[210px] flex-shrink-0 flex flex-col p-5 mx-4
-          rounded-2xl bg-white border border-slate-200/50 shadow-none
-        "
-      >
-        <div className="mb-2.5">
-          <svg className={`w-5.5 h-5.5 ${item.color} opacity-15`} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" />
-          </svg>
-        </div>
+      <div className={`w-[260px] sm:w-[300px] h-[160px] sm:h-[175px] shrink-0 bg-white border border-slate-100 rounded-xl p-4 sm:p-5 shadow-[0_2px_12px_rgba(0,0,0,0.015)] ${theme.border} hover:shadow-[0_8px_24px_rgba(0,0,0,0.035)] transition-all duration-500 ease-out flex flex-col justify-between relative overflow-hidden group`}>
+        
+        {/* Quote symbol */}
+        <span className={`absolute -top-2 left-3 text-5xl font-serif ${theme.quote} select-none pointer-events-none`}>
+          “
+        </span>
 
-        <div className="flex-grow mb-3 overflow-y-auto no-scrollbar">
-          <p className="text-slate-600 text-xs md:text-sm leading-relaxed font-medium">
-            "{item.quote}"
-          </p>
-        </div>
+        {/* Quote Content */}
+        <p className="text-slate-600 font-medium text-[11px] sm:text-[12px] leading-relaxed relative z-10 pt-2 mb-4 italic whitespace-normal">
+          “{cleanQuote}”
+        </p>
 
-        <div className="flex items-center gap-3 mt-auto pt-2.5 border-t border-slate-100">
-          <div className={`w-8 h-8 md:w-9 h-9 rounded-full flex items-center justify-center shrink-0 ${item.bg} ${item.color}`}>
-            <Icon size={18} strokeWidth={2.5} />
-          </div>
+        {/* Profile / Author Section */}
+        <div className="flex items-center gap-2.5 border-t border-slate-50 pt-3 mt-auto">
+          <img
+            src={item.image}
+            alt={item.name}
+            className="w-8 h-8 rounded-full object-cover border border-slate-100 shadow-sm shrink-0"
+            onError={(e) => {
+              e.target.src = `https://api.dicebear.com/7.x/initials/svg?seed=${item.name}`;
+            }}
+          />
           <div>
-            <h3 className="text-xs md:text-sm font-bold text-slate-800 leading-tight">
+            <h4 className="font-extrabold text-[#1E293B] text-[11px] sm:text-[12px] leading-tight group-hover:text-blue-600 transition-colors">
               {item.name}
-            </h3>
-            <p className={`mt-0.5 text-[8px] md:text-[9px] font-bold uppercase tracking-wider leading-snug ${item.color}`}>
+            </h4>
+            <span className={`text-[8px] font-extrabold tracking-wider ${theme.role} block mt-0.5`}>
               {item.role}
-            </p>
+            </span>
           </div>
         </div>
       </div>
@@ -119,64 +188,63 @@ export default function StakeHolder() {
   };
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#fffdf8] py-24 border-t border-slate-100 font-sans">
-      <style>{`
-        @keyframes scroll-left {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(calc(-100% / 3)); }
-        }
-        @keyframes scroll-right {
-          0% { transform: translateX(calc(-100% / 3)); }
-          100% { transform: translateX(0); }
-        }
-        .animate-scroll-left {
-          animation: scroll-left 40s linear infinite;
-        }
-        .animate-scroll-right {
-          animation: scroll-right 40s linear infinite;
-        }
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
-
-      {/* --- Standardized Header --- */}
-      <div className="max-w-[1400px] mx-auto mb-16 px-6">
-        <div className="flex items-center gap-3 mb-3">
-          <span className="w-8 h-[1.5px] bg-[#5ba7f7]" />
-          <span className="text-[10px] font-black uppercase tracking-[0.25em] text-[#5ba7f7]">
-            Our Network
-          </span>
-        </div>
-        <h2 className="text-3xl md:text-4xl lg:text-[44px] font-extrabold tracking-tight text-slate-900 leading-[1.15] mb-4">
-          Collaborating for an <br />
-          <span className="text-slate-400">Educated & Empowered Bihar</span>
-        </h2>
-        <p className="text-slate-500 text-sm md:text-base font-medium leading-relaxed max-w-3xl">
-          Building a unified ecosystem with students, educators, and institutional partners to drive sustainable growth.
-        </p>
+    <section className="relative w-full overflow-hidden bg-[#fcfcfd] py-20 border-t border-slate-100">
+      
+      {/* Header */}
+      <div className="max-w-[1280px] mx-auto mb-12 px-6 md:px-10 lg:px-12">
+        <motion.div 
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl"
+        >
+          <div className="flex items-center gap-2 mb-4">
+             <motion.div 
+               initial={{ width: 0 }}
+               whileInView={{ width: 24 }}
+               viewport={{ once: true }}
+               transition={{ duration: 0.6, delay: 0.3 }}
+               className="h-px bg-blue-600"
+             ></motion.div>
+             <span className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em]">Our Inspiration</span>
+          </div>
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
+            Voices for an <br />
+            <span className="text-slate-400 font-medium">Educated & Empowered Bihar</span>
+          </h2>
+          <p className="text-sm text-slate-500 font-medium leading-relaxed pr-4">
+            Insights and inspiring words from Bihar's visionary leaders, educators, and reformers who continue to shape the state's educational journey.
+          </p>
+        </motion.div>
       </div>
+ 
 
       {/* Marquee Rows Container */}
-      <div className="relative flex flex-col gap-8 w-full max-w-[100vw] overflow-hidden">
-        {/* ROW 1 - Scrolling Left */}
-        <div className="w-full no-scrollbar overflow-hidden">
-          <div className="flex w-max animate-scroll-left px-4">
-            {row1.map((item, i) => (
-              <StakeholderCard key={`row1-${i}`} item={item} />
+      <div className="w-full flex flex-col gap-6">
+
+        {/* ROW 1 - Right to Left */}
+        <div className="flex overflow-hidden">
+          <div className="flex gap-5 animate-marquee whitespace-nowrap">
+            {[...row1, ...row1].map((item, i) => (
+              <TestimonialCard 
+                key={`row1-${item.id}-${i}`} 
+                item={item} 
+                index={i} 
+              />
             ))}
           </div>
         </div>
 
-        {/* ROW 2 - Scrolling Right */}
-        <div className="w-full no-scrollbar overflow-hidden">
-          <div className="flex w-max animate-scroll-right px-4">
-            {row2.map((item, i) => (
-              <StakeholderCard key={`row2-${i}`} item={item} />
+        {/* ROW 2 - Left to Right */}
+        <div className="flex overflow-hidden">
+          <div className="flex gap-5 animate-marquee-reverse whitespace-nowrap">
+            {[...row2, ...row2].map((item, i) => (
+              <TestimonialCard 
+                key={`row2-${item.id}-${i}`} 
+                item={item} 
+                index={i + row1.length} 
+              />
             ))}
           </div>
         </div>

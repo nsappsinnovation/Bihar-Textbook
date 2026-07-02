@@ -119,7 +119,7 @@ const Signlanguage = () => {
         {/* Navigation - Simple Align Back Arrow */}
         <div className="mb-2 mt-4">
           <button 
-            onClick={() => navigate("/#missions-grid")} 
+            onClick={() => navigate("/")} 
             className="group w-10 h-10 bg-white hover:bg-slate-50 border border-slate-200/85 rounded-full shadow-sm flex items-center justify-center text-slate-650 hover:text-slate-950 transition-all duration-350 cursor-pointer"
             aria-label="Back to missions"
           >

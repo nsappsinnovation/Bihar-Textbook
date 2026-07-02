@@ -18,7 +18,7 @@ const MissionGrid = () => {
             desc: "Accessible Digital Content",
             image: "/images/missions/audio-book.png",
             hoverImage: "/images/missions/audio-bookhov.png",
-            link: "/audio-books",
+            link: "/audio-library-dashboard",
             accent: "blue"
         },
         {
@@ -27,7 +27,7 @@ const MissionGrid = () => {
             desc: "Inclusive Educational Tools",
             image: "/images/missions/friend.png",
             hoverImage: "/images/missions/friendhov.png",
-            link: "/sign",
+            link: "/sign-learn",
             accent: "blue"
         },
         {
@@ -36,7 +36,7 @@ const MissionGrid = () => {
             desc: "Universal Digital Access",
             image: "/images/missions/diverse.png",
             hoverImage: "/images/missions/diversehov.png",
-            link: "/linguistic",
+            link: "/ling",
             accent: "blue"
         },
         {
@@ -45,7 +45,7 @@ const MissionGrid = () => {
             desc: "Smart Adaptive Tutoring",
             image: "/images/missions/ai.png",
             hoverImage: "/images/missions/aihov.png",
-            link: "/ai-intelligence",
+            link: "/ai-intelligence-dashboard",
             accent: "blue"
         },
         {
@@ -54,7 +54,7 @@ const MissionGrid = () => {
             desc: "Digital Safety & Ethics",
             image: "/images/missions/cyber-security.png",
             hoverImage: "/images/missions/cyber-securityhov.png",
-            link: "/cyber-security",
+            link: "/cyber-security-dashboard",
             accent: "blue"
         },
         {
@@ -63,7 +63,7 @@ const MissionGrid = () => {
             desc: "Cultural Document Preservation",
             image: "/images/missions/history.png",
             hoverImage: "/images/missions/historyhov.png",
-            link: "/heritage-archive",
+            link: "/heritage-dashboard",
             accent: "blue"
         },
         {
@@ -72,7 +72,7 @@ const MissionGrid = () => {
             desc: "Communication & Life Skills",
             image: "/images/missions/abilities.png",
             hoverImage: "/images/missions/abilitieshov.png",
-            link: "/basic-skills",
+            link: "/life-skills",
             accent: "emerald"
         }
     ];

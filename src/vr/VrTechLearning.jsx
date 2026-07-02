@@ -16,7 +16,7 @@ const lessons = [
     badge: "Space Explorer",
     topic: "What is VR?",
     summary: "Step inside a new world and learn how VR headsets teleport your eyes and ears!",
-    image: "/images/vr/vr_intro.png",
+    image: "/images/vr/vr_technology_hero.png",
     learnSections: [
       {
         title: "Magic Glasses for Your Eyes",
@@ -58,7 +58,7 @@ const lessons = [
     badge: "Sensor Master",
     topic: "How does it track you?",
     summary: "Find out how screens, curved lenses, and tracking sensors follow your movement!",
-    image: "/images/vr/vr_headset_work.png",
+    image: "/images/vr/vr.png",
     learnSections: [
       {
         title: "The Screen & Curvy Glass Lenses",
@@ -100,7 +100,7 @@ const lessons = [
     badge: "Tech Sorcerer",
     topic: "VR Controllers & Hands",
     summary: "Learn how wireless controllers translate your real hand gestures into virtual actions!",
-    image: "/images/vr/vr_controllers.png",
+    image: "/images/vr/i4.png",
     learnSections: [
       {
         title: "Your Hands in the Virtual World",
@@ -142,7 +142,7 @@ const lessons = [
     badge: "Dimension Hopper",
     topic: "VR vs AR vs MR",
     summary: "Explore the differences between fully virtual worlds and holograms in your real room!",
-    image: "/images/vr/vr_ar_mr.png",
+    image: "/images/vr/i2.png",
     learnSections: [
       {
         title: "Virtual Reality (VR) - The Closed Eye",
@@ -184,7 +184,7 @@ const lessons = [
     badge: "Safety Guardian",
     topic: "VR Safety & Health",
     summary: "Establish your safety circle to play without bumping into walls or straining your eyes!",
-    image: "/images/vr/vr_safety_zone.png",
+    image: "/images/vr/heaven.png",
     learnSections: [
       {
         title: "The Guardian Boundary",
@@ -276,7 +276,7 @@ const HeadsetGame = ({ onComplete }) => {
 
           <div className="w-full h-44 md:h-52 rounded-xl overflow-hidden border border-slate-700 bg-slate-950 flex items-center justify-center relative group">
             <img
-              src="/images/vr/vr_headset_table.png"
+              src="/images/vr/rhs.png"
               alt="VR Headset on table"
               className="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-300"
             />
@@ -304,7 +304,7 @@ const HeadsetGame = ({ onComplete }) => {
           {/* Blur Simulator View */}
           <div className="w-full h-56 md:h-64 rounded-xl overflow-hidden border border-slate-700 bg-slate-950 flex items-center justify-center relative">
             <img
-              src="/images/vr/vr_intro.png"
+              src="/images/vr/v3.png"
               alt="Blur Space Portal"
               className="w-full h-full object-cover transition-all duration-75"
               style={{ filter: `blur(${blurAmount}px)` }}
@@ -384,7 +384,7 @@ const HeadsetGame = ({ onComplete }) => {
           {/* Sharp space kid visual */}
           <div className="w-full h-56 md:h-64 rounded-xl overflow-hidden border border-indigo-500/30 bg-slate-950 flex items-center justify-center relative shadow-[0_0_15px_rgba(99,102,241,0.2)]">
             <img
-              src="/images/vr/vr_intro.png"
+              src="/images/vr/v3.png"
               alt="Space Portal Active"
               className="w-full h-full object-cover"
             />
@@ -462,7 +462,7 @@ const GyroGame = ({ onComplete }) => {
 
           <div className="w-full h-56 md:h-64 rounded-xl overflow-hidden border border-slate-700 bg-slate-950 flex items-center justify-center relative group">
             <img
-              src="/images/vr/vr_sensors_chip.png"
+              src="/images/vr/i.png"
               alt="VR Headset Sensors"
               className="w-full h-full object-cover opacity-85 group-hover:scale-105 transition-transform duration-300"
             />
@@ -794,7 +794,7 @@ const ControllersGame = ({ onComplete }) => {
 
           <div className="w-full h-56 md:h-64 rounded-xl overflow-hidden border border-slate-700 bg-slate-950 flex items-center justify-center relative">
             <img
-              src="/images/vr/vr_controllers.png"
+              src="/images/vr/i4.png"
               alt="VR Controllers"
               className="w-full h-full object-cover opacity-80"
             />
@@ -1079,7 +1079,7 @@ const RealityGame = ({ onComplete }) => {
             <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
               {/* AR Real room background */}
               <img
-                src="/images/vr/vr_headset_table.png"
+                src="/images/vr/rhs.png"
                 alt="Real room table"
                 className="absolute inset-0 w-full h-full object-cover opacity-75"
               />
@@ -1112,7 +1112,7 @@ const RealityGame = ({ onComplete }) => {
             <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
               {/* MR Real room background */}
               <img
-                src="/images/vr/vr_headset_table.png"
+                src="/images/vr/rhs.png"
                 alt="Real room table"
                 className="absolute inset-0 w-full h-full object-cover opacity-75"
               />
@@ -1236,7 +1236,7 @@ const SafetyGame = ({ onComplete }) => {
         <div className="w-full h-64 bg-slate-950 border border-slate-800 rounded-xl relative overflow-hidden flex items-center justify-center shadow-inner">
           {/* Room Background image */}
           <img 
-            src="/images/vr/vr_safety_zone.png" 
+            src="/images/vr/heaven.png" 
             alt="Safety Room Play Zone" 
             className="absolute inset-0 w-full h-full object-cover opacity-60 pointer-events-none"
           />
@@ -1445,7 +1445,7 @@ const LessonQuiz = ({ questions, onComplete }) => {
 };
 
 // Main VR Technology Learning Dashboard Component
-const VrTechLearning = () => {
+const VrTechLearning = ({ isEmbedded = false, onBack }) => {
   const navigate = useNavigate();
   const [activeLessonId, setActiveLessonId] = useState(1);
   const [unlockedLessons, setUnlockedLessons] = useState(() => {
@@ -1526,20 +1526,32 @@ const VrTechLearning = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FDFDFF] flex flex-col font-sans text-slate-900 overflow-x-hidden">
+    <div className={`${isEmbedded ? '' : 'min-h-screen bg-[#FDFDFF]'} flex flex-col font-sans text-slate-900 overflow-x-hidden`}>
       {/* Back Button */}
-      <button
-        onClick={() => navigate("/vr-dashboard")}
-        className="fixed top-3 left-3 md:top-5 md:left-5 z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-indigo-600 hover:shadow-lg transition-all border border-slate-100 group"
-      >
-        <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
-      </button>
+      {!isEmbedded && (
+        <button
+          onClick={() => navigate("/vr-dashboard")}
+          className="fixed top-3 left-3 md:top-5 md:left-5 z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-indigo-600 hover:shadow-lg transition-all border border-slate-100 group"
+        >
+          <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
+        </button>
+      )}
 
-      <main className="flex-1 min-h-screen pb-16">
+      <main className="flex-1 pb-16">
         <div className="px-4 sm:px-6 md:px-12 2xl:px-20 space-y-6 md:space-y-8 pt-8 max-w-[1400px] mx-auto">
 
           {/* Hero Section */}
           <section className="bg-gradient-to-r from-indigo-950 via-slate-900 to-indigo-950 rounded-[28px] p-6 md:p-8 text-white relative overflow-hidden border border-indigo-500/20 shadow-lg shadow-indigo-950/20">
+            {/* Close button for embedded view */}
+            {isEmbedded && onBack && (
+              <button
+                onClick={onBack}
+                className="absolute top-4 right-4 z-20 p-2 text-slate-400 hover:text-slate-100 hover:bg-white/10 rounded-full transition-colors cursor-pointer"
+                title="Collapse Technology Lab"
+              >
+                <XCircle size={22} />
+              </button>
+            )}
             {/* Ambient glows and grids */}
             <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle, #4f46e5 1px, transparent 1px)', backgroundSize: '20px 20px' }} />
             <div className="absolute -right-10 -top-10 w-48 h-48 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none" />
@@ -1576,7 +1588,7 @@ const VrTechLearning = () => {
                   className="relative w-48 h-36 md:w-56 md:h-40 rounded-2xl overflow-hidden border border-indigo-500/30 shadow-[0_0_30px_rgba(79,70,229,0.3)] bg-slate-950/40 backdrop-blur-sm"
                 >
                   <img
-                    src="/images/vr/vr_hero.png"
+                    src="/images/vr/vr_technology_hero.png"
                     alt="VR Technology Hero"
                     className="w-full h-full object-cover"
                   />
@@ -1809,7 +1821,13 @@ const VrTechLearning = () => {
                           <div className="space-y-4">
                             <p className="text-[11px] text-yellow-300 font-bold">★ Congratulations! You have fully completed the VR Technology curriculum! ★</p>
                             <button
-                              onClick={() => navigate('/vr-dashboard')}
+                              onClick={() => {
+                                if (isEmbedded && onBack) {
+                                  onBack();
+                                } else {
+                                  navigate('/vr-dashboard');
+                                }
+                              }}
                               className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-black uppercase tracking-wider transition-all"
                             >
                               Return to Dashboard

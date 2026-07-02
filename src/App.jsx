@@ -28,7 +28,6 @@ import SignLearn from "./signLanguage/SignLearn.jsx";
 import AiIntelligence from "./ai/AiIntelligence.jsx";
 import CyberSecurity from "./cyberSecurity/CyberSecurity.jsx";
 import HeritageArchive from "./heritage/HeritageArchive.jsx";
-import Vr from "./vr/Vrlab.jsx";
 import Linguistics from "./linguistics/Linguistics.jsx";
 import Audio from "./audio/Audiolib.jsx";
 import Basicskill from "./skills/Basicskills.jsx";
@@ -38,7 +37,7 @@ import AudioLibraryDashboard from "./audio/AudioLibraryDashboard.jsx";
 import MyAudioLibrary from "./audio/MyAudioLibrary.jsx";
 import AiIntelligenceDashboard from "./ai/AiIntelligenceDashboard.jsx";
 import VrDashboard from "./vr/VrDashboard.jsx";
-import VrLabsWorlds from "./vr/VrLabsWorlds.jsx";
+
 import CyberSecurityDashboard from "./cyberSecurity/CyberSecurityDashboard.jsx";
 import VrTechLearning from "./vr/VrTechLearning.jsx";
 
@@ -89,7 +88,7 @@ function App() {
       "/my-audio-library",
       "/ai-intelligence-dashboard",
       "/vr-dashboard",
-      "/vr-labs-worlds",
+      
       "/cyber-security-dashboard",
       "/vr-tech-learning",
     ].includes(location.pathname);
@@ -104,7 +103,7 @@ function App() {
       "/my-audio-library",
       "/ai-intelligence-dashboard",
       "/vr-dashboard",
-      "/vr-labs-worlds",
+     
       "/cyber-security-dashboard",
       "/vr-tech-learning",
       "/know-us/md-message",
@@ -141,10 +140,9 @@ function App() {
             <Route path="/ai-intelligence-dashboard" element={<AiIntelligenceDashboard />} />
             
             {/* VR */}
-            <Route path="/vr" element={<Vr />} />
+            <Route path="/vr" element={<VrDashboard />} />
             <Route path="/vr-dashboard" element={<VrDashboard />} />
-            <Route path="/vr-labs-worlds" element={<VrLabsWorlds />} />
-            <Route path="/vr-tech-learning" element={<VrTechLearning />} />
+            
 
             {/* Cyber */}
             <Route path="/cyber-security" element={<CyberSecurity />} />
