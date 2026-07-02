@@ -179,47 +179,6 @@ const Hero = () => {
                 </div>
             </div>
 
-            {/* 3. PREVIEW CARD */}
-            <div
-                className="absolute bottom-12 right-6 lg:right-16 z-20 w-[240px] md:w-[320px] aspect-[16/9] cursor-pointer group"
-                onClick={handleNext}
-            >
-                {/* Standard hover effect only, no shared element transition */}
-                <div className="w-full h-full relative rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-white/10 group-hover:border-white/30 transition-all duration-500 transform group-hover:-translate-y-1">
-                    <div className="absolute inset-0 w-full h-full">
-                        <img
-                            src={nextSlide.image}
-                            alt={nextSlide.title}
-                            className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-all duration-700 opacity-98 blur-[0.3px]"
-                            style={{ willChange: 'transform, filter, opacity' }}
-                        />
-                        <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500" />
-                    </div>
-
-                    <div className="absolute inset-0 p-5 flex flex-col justify-end bg-gradient-to-t from-black/80 via-black/20 to-transparent">
-                        <motion.h4
-                            key={nextSlide.id}
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="text-white font-bold uppercase text-base leading-none drop-shadow-md"
-                        >
-                            {nextSlide.title}
-                        </motion.h4>
-                        <p className="text-white/60 text-[10px] mt-1 uppercase tracking-widest font-medium">Coming Next</p>
-                    </div>
-
-                    {/* Progress Bar */}
-                    <div className="absolute bottom-0 left-0 h-1 bg-white/10 w-full">
-                        <motion.div
-                            key={currentIndex}
-                            initial={{ width: "0%" }}
-                            animate={{ width: "100%" }}
-                            transition={{ duration: 12, ease: "linear" }}
-                            className="h-full bg-blue-500 shadow-[0_0_10px_#3b82f6]"
-                        />
-                    </div>
-                </div>
-            </div>
 
             {/* Pagination Indicators */}
             <div className="absolute left-6 lg:left-16 bottom-12 flex items-center gap-4 z-20">

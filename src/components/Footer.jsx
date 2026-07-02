@@ -14,9 +14,9 @@ const Footer = () => {
         
         
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-10 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
           {/* BRAND & LOGOS */}
-          <div className="flex flex-col">
+          <div className="flex flex-col md:col-span-6 lg:col-span-3">
             <Link to="/" className="inline-block mb-6 group">
               <div className="flex items-center gap-4">
                 <div className="relative">
@@ -34,7 +34,7 @@ const Footer = () => {
               </div>
             </Link>
 
-            <p className="text-white/60 text-sm leading-relaxed mb-8 pr-4">
+            <p className="text-white/60 text-sm leading-relaxed mb-6 pr-4">
               Empowering the future of Bihar through accessible, high-quality, and modern educational resources for every student.
             </p>
 
@@ -47,11 +47,11 @@ const Footer = () => {
           </div>
 
           {/* SITE NAVIGATION */}
-          <div>
-            <h4 className="text-white font-semibold mb-6 tracking-wider text-sm uppercase relative inline-block">
+          <div className="md:col-span-3 lg:col-span-2">
+            <h4 className="text-white font-bold mb-6 tracking-wider text-sm uppercase relative inline-block after:content-[''] after:absolute after:bottom-[-6px] after:left-0 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded">
               Quick Navigation
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-3 pt-2">
               <FooterLink to="/" label="Home" />
               <FooterLink to="/books/Class1" label="Textbooks" />
               <FooterLink to="/notice" label="Notices & Circulars" />
@@ -63,11 +63,11 @@ const Footer = () => {
           </div>
 
           {/* KNOW US */}
-          <div>
-            <h4 className="text-white font-semibold mb-6 tracking-wider text-sm uppercase relative inline-block">
+          <div className="md:col-span-3 lg:col-span-2">
+            <h4 className="text-white font-bold mb-6 tracking-wider text-sm uppercase relative inline-block after:content-[''] after:absolute after:bottom-[-6px] after:left-0 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded">
               Know Us
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-3 pt-2">
               <FooterLink to="/know-us/md-message" label="MD Message" />
               <FooterLink to="/know-us/board-of-directors" label="Board of Directors" />
               <FooterLink to="/know-us/organisation-structure" label="Organisation Structure" />
@@ -79,11 +79,11 @@ const Footer = () => {
           </div>
 
           {/* DOCUMENTS */}
-          <div>
-            <h4 className="text-white font-semibold mb-6 tracking-wider text-sm uppercase relative inline-block">
+          <div className="md:col-span-3 lg:col-span-2">
+            <h4 className="text-white font-bold mb-6 tracking-wider text-sm uppercase relative inline-block after:content-[''] after:absolute after:bottom-[-6px] after:left-0 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded">
               Documents
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-3 pt-2">
               <FooterLink to="/documents/hrd" label="HRD" />
               <FooterLink to="/documents/registration-form" label="Registration Forms" />
               <FooterLink to="/documents/rti" label="RTI" />
@@ -91,12 +91,12 @@ const Footer = () => {
           </div>
 
           {/* CONTACT INFO */}
-          <div>
-            <h4 className="text-white font-semibold mb-6 tracking-wider text-sm uppercase relative inline-block">
+          <div className="md:col-span-9 lg:col-span-3">
+            <h4 className="text-white font-bold mb-6 tracking-wider text-sm uppercase relative inline-block after:content-[''] after:absolute after:bottom-[-6px] after:left-0 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded">
               Contact Information
             </h4>
 
-            <div className="space-y-5 text-sm">
+            <div className="space-y-5 text-sm pt-2">
               <div className="flex items-start gap-4 group">
                 <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-500/20 group-hover:scale-110 transition-all border border-blue-500/20">
                   <MapPin className="text-blue-400" size={18} />
@@ -127,16 +127,37 @@ const Footer = () => {
         </div>
 
         {/* BOTTOM BAR */}
-        <div className="mt-16 pt-6 border-t border-white/10 flex flex-col lg:flex-row justify-between items-center gap-6 text-sm text-white/50">
-          
+        <div className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-xs md:text-sm text-white/40">
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6 text-center md:text-left">
             <p className="font-medium tracking-wide">© 2026 BSTBPC. All rights reserved.</p>
-            
-            <p>Designed by <span className="text-white font-medium bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">NS Apps Innovations</span></p>
-         
-          <div className="flex flex-wrap justify-center gap-6 md:gap-8 font-medium">
-            <Link to="/csr-policy" className="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-blue-500 hover:after:w-full after:transition-all after:duration-300">Privacy Policy</Link>
-            <Link to="/csr-policy" className="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-blue-500 hover:after:w-full after:transition-all after:duration-300">Terms of Service</Link>
-            <Link to="/csr-policy" className="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[2px] after:bg-blue-500 hover:after:w-full after:transition-all after:duration-300">Sitemap</Link>
+            <span className="hidden md:inline text-white/10">|</span>
+            <p>
+              Designed by{" "}
+              <span className="text-white font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">
+                NS Apps Innovations
+              </span>
+            </p>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-6 font-medium">
+            <Link
+              to="/csr-policy"
+              className="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-[1.5px] after:bg-blue-500 hover:after:w-full after:transition-all after:duration-300"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              to="/csr-policy"
+              className="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-[1.5px] after:bg-blue-500 hover:after:w-full after:transition-all after:duration-300"
+            >
+              Terms of Service
+            </Link>
+            <Link
+              to="/csr-policy"
+              className="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-[1.5px] after:bg-blue-500 hover:after:w-full after:transition-all after:duration-300"
+            >
+              Sitemap
+            </Link>
           </div>
         </div>
       </div>
