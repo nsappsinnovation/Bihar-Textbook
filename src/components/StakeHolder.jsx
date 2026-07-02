@@ -218,8 +218,7 @@ export default function StakeHolder() {
           </p>
         </motion.div>
       </div>
-    );
-  };
+ 
 
       {/* Marquee Rows Container */}
       <div className="w-full flex flex-col gap-6">
