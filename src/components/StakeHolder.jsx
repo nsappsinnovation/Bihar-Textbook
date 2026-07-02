@@ -218,6 +218,8 @@ export default function StakeHolder() {
           </p>
         </motion.div>
       </div>
+    );
+  };
 
       {/* Marquee Rows Container */}
       <div className="w-full flex flex-col gap-6">
@@ -247,13 +249,7 @@ export default function StakeHolder() {
             ))}
           </div>
         </div>
-
       </div>
-
-      {/* Edge Fades */}
-      <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-[#fcfcfd] to-transparent z-10 pointer-events-none" />
-      <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-[#fcfcfd] to-transparent z-10 pointer-events-none" />
-
     </section>
   );
 }
