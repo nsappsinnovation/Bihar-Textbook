@@ -588,10 +588,10 @@ const Basicskills = () => {
                           <div className="absolute top-0 left-0 right-0 h-4 bg-emerald-950/40" />
                           <div className="absolute bottom-0 left-0 right-0 h-4 bg-emerald-950/40" />
 
-                          {/* Zebra crossing stripes */}
-                          <div className="absolute left-1/2 -translate-x-1/2 w-16 h-full flex justify-between px-1 pointer-events-none">
-                            {[1, 2, 3, 4, 5].map((s) => (
-                              <div key={s} className="w-2 h-full bg-white/85" />
+                          {/* Zebra crossing stripes (Horizontal bars) */}
+                          <div className="absolute left-1/2 -translate-x-1/2 w-16 h-full flex flex-col justify-evenly py-1 pointer-events-none">
+                            {[1, 2, 3, 4, 5, 6, 7].map((s) => (
+                              <div key={s} className="h-1.5 w-full bg-white/85 rounded-sm" />
                             ))}
                           </div>
 

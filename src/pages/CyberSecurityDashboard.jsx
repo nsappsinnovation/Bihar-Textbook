@@ -142,20 +142,37 @@ const CyberSecurityQuiz = () => {
   const progress = ((currentQ + (isAnswered ? 1 : 0)) / quizQuestions.length) * 100;
 
   return (
-    <div className="w-full flex justify-center font-sans select-none py-6">
-      <div className="w-full max-w-[500px] shrink-0 transition-all duration-300">
+    <div className="w-full min-h-[580px] flex items-center justify-center font-sans select-none py-10 px-4 relative rounded-[32px] overflow-hidden shadow-2xl border border-emerald-500/30 my-4">
+      {/* High-Tech Cyber Background Picture with Gradient & Mesh Overlay */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="/images/cybersecurity/3rd.png" 
+          onError={(e) => { e.target.src = '/images/cybersecurity/rhs.png'; }}
+          alt="Cyber Security Background" 
+          className="w-full h-full object-cover object-center scale-105 transition-transform duration-1000"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#02140d]/92 via-[#051c14]/85 to-[#010d08]/95 backdrop-blur-[4px]" />
+        {/* Cyberpunk Grid & Glow Blobs */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#10b981_1px,transparent_1px),linear-gradient(to_bottom,#10b981_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-15" />
+        <div className="absolute top-0 right-1/4 w-80 h-80 bg-emerald-500/20 rounded-full blur-[100px] pointer-events-none animate-pulse" />
+        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-cyan-500/15 rounded-full blur-[100px] pointer-events-none animate-pulse" />
+      </div>
+
+      <div className="w-full max-w-[520px] shrink-0 transition-all duration-300 relative z-10 my-auto">
         <AnimatePresence mode="wait">
           {!showResult && (
             <motion.div
               key="active-quiz"
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -30 }}
-              transition={{ duration: 0.2 }}
+              initial={{ opacity: 0, scale: 0.96, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: -15 }}
+              transition={{ duration: 0.25 }}
               className="w-full"
             >
-              <div className="bg-[#051c14]/85 backdrop-blur-xl border-2 border-emerald-500/40 rounded-[24px] p-5 shadow-[0_0_35px_rgba(0,0,0,0.6)] text-white">
-                
+              <div className="bg-[#051c14]/90 backdrop-blur-2xl border-2 border-emerald-500/50 rounded-[28px] p-6 shadow-[0_0_50px_rgba(16,185,129,0.25)] text-white relative overflow-hidden">
+                {/* Subtle top card shine */}
+                <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-60" />
+
                 {/* Header Row */}
                 <div className="flex items-center justify-between mb-3.5">
                   <span className="text-[9px] font-black text-slate-400 tracking-widest uppercase flex items-center gap-2">
@@ -236,7 +253,8 @@ const CyberSecurityQuiz = () => {
               exit={{ opacity: 0 }}
               className="w-full"
             >
-              <div className="bg-[#051c14]/85 backdrop-blur-xl border-2 border-emerald-500/40 rounded-[24px] p-5 shadow-[0_0_35px_rgba(0,0,0,0.6)] text-center text-white">
+              <div className="bg-[#051c14]/90 backdrop-blur-2xl border-2 border-emerald-500/50 rounded-[28px] p-6 shadow-[0_0_50px_rgba(16,185,129,0.25)] text-center text-white relative overflow-hidden">
+                <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-60" />
                 <div className="w-16 h-16 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-3 shadow-xl shadow-emerald-500/35">🏆</div>
                 <h2 className="text-lg font-black text-white mb-1">Challenge Completed!</h2>
                 <p className="text-slate-400 text-[10px] font-bold mb-4">Cyber Security Quiz performance:</p>
@@ -259,7 +277,7 @@ const CyberSecurityQuiz = () => {
                 </div>
 
                 <div className="bg-[#06241b]/40 rounded-xl p-2.5 mb-4 border border-emerald-500/10">
-                  <p className="text-xs text-slate-355 font-bold leading-relaxed">
+                  <p className="text-xs text-slate-300 font-bold leading-relaxed">
                     {score >= 800 ? " Outstanding! You're a certified Cyber Defender!" : "Great job! Try again for a perfect score!"}
                   </p>
                 </div>

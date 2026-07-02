@@ -8,14 +8,14 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 const toolsDataList = [
-  { name: 'Hello', tag: 'Greeting', desc: 'Wave your hand gently from side to side to say hello.', image: '/images/signlanguage/hand.png', color: 'bg-green-50 text-green-600', icon: <Hand size={28} />, categories: ['Greetings', 'Daily'] },
-  { name: 'Thank You', tag: 'Greeting', desc: 'Touch your chin with fingers, then move hand forward towards the person.', image: '/images/signlanguage/handl.png', color: 'bg-green-50 text-green-600', icon: <HeartHandshake size={28} />, categories: ['Greetings', 'Daily'] },
-  { name: 'Mother', tag: 'Family', desc: 'Tap your thumb on your chin with an open hand facing sideways.', image: '/images/signlanguage/hand.png', color: 'bg-green-50 text-green-600', icon: <Users size={28} />, categories: ['Family'] },
-  { name: 'Happy', tag: 'Emotion', desc: 'Brush both flat hands upward on your chest to show joy.', image: '/images/signlanguage/thumb.png', color: 'bg-green-50 text-green-600', icon: <Smile size={28} />, categories: ['Emotions'] },
-  { name: 'Sorry', tag: 'Greeting', desc: 'Rub a closed fist in a circular motion over your heart.', image: '/images/signlanguage/ghosthand.png', color: 'bg-green-50 text-green-600', icon: <Heart size={28} />, categories: ['Greetings', 'Emotions'] },
-  { name: 'Eat', tag: 'Daily', desc: 'Bring your flattened O-hand to your mouth a few times.', image: '/images/signlanguage/hand.png', color: 'bg-green-50 text-green-600', icon: <Utensils size={28} />, categories: ['Daily'] },
-  { name: 'Father', tag: 'Family', desc: 'Tap your thumb on your forehead with an open hand facing sideways.', image: '/images/signlanguage/handl.png', color: 'bg-green-50 text-green-600', icon: <Users size={28} />, categories: ['Family'] },
-  { name: 'Sad', tag: 'Emotion', desc: 'Place both hands in front of your face and pull them down while making a sad face.', image: '/images/signlanguage/ghosthand.png', color: 'bg-green-50 text-green-600', icon: <Frown size={28} />, categories: ['Emotions'] }
+  { name: 'Hello', tag: 'Greeting', desc: 'Wave your hand gently from side to side to say hello.', image: '/images/signlanguage/hello.png', color: 'bg-green-50 text-green-600', icon: <Hand size={28} />, categories: ['Greetings', 'Daily'] },
+  { name: 'Thank You', tag: 'Greeting', desc: 'Touch your chin with fingers, then move hand forward towards the person.', image: '/images/signlanguage/thankyou.png', color: 'bg-green-50 text-green-600', icon: <HeartHandshake size={28} />, categories: ['Greetings', 'Daily'] },
+  { name: 'Mother', tag: 'Family', desc: 'Tap your thumb on your chin with an open hand facing sideways.', image: '/images/signlanguage/mother.png', color: 'bg-green-50 text-green-600', icon: <Users size={28} />, categories: ['Family'] },
+  { name: 'Happy', tag: 'Emotion', desc: 'Brush both flat hands upward on your chest to show joy.', image: '/images/signlanguage/happy.png', color: 'bg-green-50 text-green-600', icon: <Smile size={28} />, categories: ['Emotions'] },
+  { name: 'Sorry', tag: 'Greeting', desc: 'Rub a closed fist in a circular motion over your heart.', image: '/images/signlanguage/sorry.png', color: 'bg-green-50 text-green-600', icon: <Heart size={28} />, categories: ['Greetings', 'Emotions'] },
+  { name: 'Eat', tag: 'Daily', desc: 'Bring your flattened O-hand to your mouth a few times.', image: '/images/signlanguage/eat.png', color: 'bg-green-50 text-green-600', icon: <Utensils size={28} />, categories: ['Daily'] },
+  { name: 'Father', tag: 'Family', desc: 'Tap your thumb on your forehead with an open hand facing sideways.', image: '/images/signlanguage/father.png', color: 'bg-green-50 text-green-600', icon: <Users size={28} />, categories: ['Family'] },
+  { name: 'Sad', tag: 'Emotion', desc: 'Place both hands in front of your face and pull them down while making a sad face.', image: '/images/signlanguage/sad.png', color: 'bg-green-50 text-green-600', icon: <Frown size={28} />, categories: ['Emotions'] }
 ];
 
 const ExploreSignsComponent = () => {
@@ -36,8 +36,8 @@ const ExploreSignsComponent = () => {
             <div className="w-full h-full relative preserve-3d transition-transform duration-500 group-hover:rotate-y-180">
 
               {/* Front of Card */}
-              <div className="absolute inset-0 backface-hidden bg-white rounded-[20px] border border-slate-100 p-5 flex flex-col items-center text-center shadow-[0_4px_20px_rgba(0,0,0,0.03)] group-hover:border-green-200 transition-colors">
-                <div className={`w-14 h-14 rounded-full flex items-center justify-center text-xl mb-4 bg-green-100 text-green-600`}>
+              <div className="absolute inset-0 backface-hidden bg-white rounded-[20px] border border-slate-100 p-5 flex flex-col items-center justify-center text-center shadow-[0_4px_20px_rgba(0,0,0,0.03)] group-hover:border-green-200 transition-colors">
+                <div className="w-14 h-14 rounded-full flex items-center justify-center text-xl mb-4 bg-green-100 text-green-600 mx-auto shrink-0">
                   {tool.icon ? React.cloneElement(tool.icon, { className: "opacity-80" }) : <span className="font-black opacity-60 text-2xl">{tool.name.charAt(0)}</span>}
                 </div>
                 <h4 className="text-lg font-black text-slate-900 leading-tight">{tool.name}</h4>
@@ -51,15 +51,17 @@ const ExploreSignsComponent = () => {
               </div>
 
               {/* Back of Card */}
-              <div className="absolute inset-0 backface-hidden rounded-[20px] shadow-lg shadow-green-100/50 transition-all overflow-hidden rotate-y-180 border-2 border-green-200">
-                <div
-                  className="w-full h-full bg-no-repeat bg-white"
-                  style={{
-                    backgroundImage: "url('/images/signlanguage/common.png')",
-                    backgroundSize: "400% 200%",
-                    backgroundPosition: `${(index % 4) * 33.3333}% ${Math.floor(index / 4) * 100}%`
-                  }}
-                />
+              <div className="absolute inset-0 backface-hidden rounded-[20px] shadow-lg shadow-green-100/50 transition-all overflow-hidden rotate-y-180 border-2 border-green-200 bg-white flex flex-col items-center justify-center p-4">
+                <div className="w-full h-[65%] flex items-center justify-center relative">
+                  <img
+                    src={tool.image}
+                    alt={`Sign for ${tool.name}`}
+                    className="max-w-full max-h-full object-contain mix-blend-multiply drop-shadow-sm"
+                  />
+                </div>
+                <span className="text-[11px] font-black text-green-700 bg-green-50 px-3 py-1 rounded-full uppercase tracking-wider mt-2">
+                  {tool.name}
+                </span>
               </div>
 
             </div>
@@ -805,10 +807,15 @@ const SignLearn = () => {
 
                 <div className="pt-2">
                   <button
-                    onClick={() => navigate("/sign-module", { state: { type: "conversations" } })}
-                    className="px-5 py-2.5 sm:px-6 sm:py-3 bg-green-600 text-white rounded-full font-bold text-[12px] sm:text-[14px] flex items-center gap-2 hover:bg-green-700 transition-colors w-max shadow-sm shadow-green-200"
+                    onClick={() => {
+                      const target = document.getElementById("content-section");
+                      if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
+                    className="px-5 py-2.5 sm:px-6 sm:py-3 bg-green-600 text-white rounded-full font-bold text-[12px] sm:text-[14px] flex items-center gap-2 hover:bg-green-700 transition-colors w-max shadow-sm shadow-green-200 cursor-pointer"
                   >
-                    Start a Conversation <ArrowRight size={16} />
+                    Start Learning <ArrowRight size={16} />
                   </button>
                 </div>
               </div>

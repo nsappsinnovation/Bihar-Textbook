@@ -21,10 +21,10 @@ const LANGUAGES = [
 
 export default function LinguisticApp() {
   const navigate = useNavigate();
-  const [sourceLang, setSourceLang] = useState(null);
-  const [targetLang, setTargetLang] = useState(null);
+  const [sourceLang, setSourceLang] = useState(() => localStorage.getItem("ling_source_lang") || "hi");
+  const [targetLang, setTargetLang] = useState(() => localStorage.getItem("ling_target_lang") || "en");
   const [activeNav, setActiveNav] = useState("Home");
-  const [lastModule, setLastModule] = useState("words");
+  const [lastModule, setLastModule] = useState(() => localStorage.getItem("ling_last_module") || "words");
   
   // Real-time states
   const [streak, setStreak] = useState(0);
@@ -32,6 +32,14 @@ export default function LinguisticApp() {
   const [wordsProgress, setWordsProgress] = useState(0);
   const [phrasesProgress, setPhrasesProgress] = useState(0);
   const [convProgress, setConvProgress] = useState(0);
+
+  useEffect(() => {
+    if (sourceLang) localStorage.setItem("ling_source_lang", sourceLang);
+  }, [sourceLang]);
+
+  useEffect(() => {
+    if (targetLang) localStorage.setItem("ling_target_lang", targetLang);
+  }, [targetLang]);
 
   useEffect(() => {
     const saved = localStorage.getItem("ling_last_module");
@@ -44,6 +52,15 @@ export default function LinguisticApp() {
     setPhrasesProgress(parseInt(localStorage.getItem("ling_phrases_progress") || "0"));
     setConvProgress(parseInt(localStorage.getItem("ling_conversations_progress") || "0"));
   }, []);
+
+  const handleStartLearning = (moduleType = lastModule) => {
+    const src = sourceLang || "hi";
+    const tgt = targetLang || "en";
+    localStorage.setItem("ling_last_module", moduleType);
+    localStorage.setItem("ling_source_lang", src);
+    localStorage.setItem("ling_target_lang", tgt);
+    navigate(`/ling/${moduleType}`, { state: { source: src, target: tgt } });
+  };
 
   return (
     <div className="min-h-screen bg-[#FDFDFD] font-sans text-[#2D3142] flex flex-col overflow-x-hidden -mt-6">
@@ -106,7 +123,7 @@ export default function LinguisticApp() {
                     selected={sourceLang === lang.id}
                     onClick={() => {
                       setSourceLang(lang.id);
-                      if (targetLang === lang.id) setTargetLang(null);
+                      if (targetLang === lang.id) setTargetLang(sourceLang || "en");
                     }} 
                   />
                 ))}
@@ -152,7 +169,7 @@ export default function LinguisticApp() {
         <div className="flex justify-center mb-8 -mt-6">
           <button 
             disabled={!sourceLang || !targetLang}
-            onClick={() => navigate(`/ling/${lastModule}`, { state: { source: sourceLang, target: targetLang } })}
+            onClick={() => handleStartLearning(lastModule)}
             className={`bg-[#0BB562] hover:bg-[#099A52] text-white font-bold px-12 py-4 rounded-full shadow-[0_8px_20px_rgba(11,181,98,0.2)] flex items-center gap-3 transition-all hover:-translate-y-0.5 group ${(!sourceLang || !targetLang) && 'opacity-50 cursor-not-allowed grayscale'}`}
           >
             {lastModule === 'words' ? 'Start Learning' : `Continue ${lastModule.charAt(0).toUpperCase() + lastModule.slice(1)}`} <ArrowRight size={20} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform" />
@@ -169,7 +186,7 @@ export default function LinguisticApp() {
             titleColor="#065F46"
             linkColor="#10B981"
             imgSrc="/images/linguistic/plant_3d.png"
-            onClick={() => navigate("/ling/words", { state: { source: sourceLang, target: targetLang } })}
+            onClick={() => handleStartLearning("words")}
           />
           <ModuleCard 
             title="Basic Phrases"
@@ -179,7 +196,7 @@ export default function LinguisticApp() {
             titleColor="#92400E"
             linkColor="#F59E0B"
             imgSrc="/images/linguistic/l4.png"
-            onClick={() => navigate("/ling/phrases", { state: { source: sourceLang, target: targetLang } })}
+            onClick={() => handleStartLearning("phrases")}
           />
           <ModuleCard 
             title="Conversations"
@@ -189,7 +206,7 @@ export default function LinguisticApp() {
             titleColor="#5B21B6"
             linkColor="#8B5CF6"
             imgSrc="/images/linguistic/hero_3d.png"
-            onClick={() => navigate("/ling/conversations", { state: { source: sourceLang, target: targetLang } })}
+            onClick={() => handleStartLearning("conversations")}
           />
         </div>
 
@@ -203,9 +220,9 @@ export default function LinguisticApp() {
            </div>
 
            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <ContinueItem icon={<BookOpen size={18} />} color="#0BB562" bg="#E8F5E9" title="Basic Words" progress={(wordsProgress / 20) * 100} text={`${wordsProgress} / 20`} onClick={() => navigate("/ling/words", { state: { source: sourceLang, target: targetLang } })} />
-              <ContinueItem icon={<MessageSquare size={18} />} color="#FF9800" bg="#FFF3E0" title="Basic Phrases" progress={(phrasesProgress / 20) * 100} text={`${phrasesProgress} / 20`} onClick={() => navigate("/ling/phrases", { state: { source: sourceLang, target: targetLang } })} />
-              <ContinueItem icon={<User size={18} />} color="#9C27B0" bg="#F3E5F5" title="Conversations" progress={(convProgress / 10) * 100} text={`${convProgress} / 10`} onClick={() => navigate("/ling/conversations", { state: { source: sourceLang, target: targetLang } })} />
+              <ContinueItem icon={<BookOpen size={18} />} color="#0BB562" bg="#E8F5E9" title="Basic Words" progress={(wordsProgress / 20) * 100} text={`${wordsProgress} / 20`} onClick={() => handleStartLearning("words")} />
+              <ContinueItem icon={<MessageSquare size={18} />} color="#FF9800" bg="#FFF3E0" title="Basic Phrases" progress={(phrasesProgress / 20) * 100} text={`${phrasesProgress} / 20`} onClick={() => handleStartLearning("phrases")} />
+              <ContinueItem icon={<User size={18} />} color="#9C27B0" bg="#F3E5F5" title="Conversations" progress={(convProgress / 10) * 100} text={`${convProgress} / 10`} onClick={() => handleStartLearning("conversations")} />
            </div>
         </div>
 
