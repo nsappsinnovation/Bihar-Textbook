@@ -3,14 +3,18 @@ import { ArrowLeft, ArrowRight, Globe, Rocket, FlaskConical } from 'lucide-react
 import { useNavigate } from 'react-router-dom';
 import VrSimulators from './VrSimulators';
 import VrTechLearning from './VrTechLearning';
+import VrVirtualLab from './VrVirtualLab';
 
 const VrDashboard = () => {
   const navigate = useNavigate();
-  const [activeSection, setActiveSection] = useState('tech-learning'); // 'simulators' | 'tech-learning'
+  const [activeSection, setActiveSection] = useState('tech-learning'); // 'simulators' | 'tech-learning' | 'virtual-lab'
 
   const handleSectionSwitch = (section) => {
     setActiveSection(section);
-    const targetId = section === 'simulators' ? "simulators-section" : "tech-learning-section";
+    const targetId = 
+      section === 'simulators' ? "simulators-section" : 
+      section === 'virtual-lab' ? "virtual-lab-section" : 
+      "tech-learning-section";
     setTimeout(() => {
       const target = document.getElementById(targetId);
       if (target) {
@@ -90,6 +94,8 @@ const VrDashboard = () => {
                   onClick={() => {
                     if (i === 0) {
                       handleSectionSwitch('tech-learning');
+                    } else if (i === 1) {
+                      handleSectionSwitch('virtual-lab');
                     } else {
                       handleSectionSwitch('simulators');
                     }
@@ -108,10 +114,14 @@ const VrDashboard = () => {
             </section>
           </div>
 
-          {/* Bottom Interactive Section (Toggled between Simulators and Tech Learning) */}
+          {/* Bottom Interactive Section (Toggled between Simulators, Tech Learning, and Virtual Lab) */}
           {activeSection === 'simulators' ? (
             <div className="pt-4 pb-12" id="simulators-section">
               <VrSimulators />
+            </div>
+          ) : activeSection === 'virtual-lab' ? (
+            <div className="pt-4 pb-12" id="virtual-lab-section">
+              <VrVirtualLab />
             </div>
           ) : (
             <div id="tech-learning-section" className="pt-4 pb-12">
