@@ -39,6 +39,7 @@ import AiIntelligenceDashboard from "./ai/AiIntelligenceDashboard.jsx";
 import VrDashboard from "./vr/VrDashboard.jsx";
 
 import CyberSecurityDashboard from "./cyberSecurity/CyberSecurityDashboard.jsx";
+import VrTechLearning from "./vr/VrTechLearning.jsx";
 
 
 /* Components */
@@ -89,8 +90,7 @@ function App() {
       "/vr-dashboard",
       
       "/cyber-security-dashboard",
-      
-      
+      "/vr-tech-learning",
     ].includes(location.pathname);
 
   const isNoFooterPage =
@@ -105,9 +105,7 @@ function App() {
       "/vr-dashboard",
      
       "/cyber-security-dashboard",
-     
-      
-      
+      "/vr-tech-learning",
       "/know-us/md-message",
     ].includes(location.pathname);
 
