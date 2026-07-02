@@ -28,7 +28,6 @@ import SignLearn from "./signLanguage/SignLearn.jsx";
 import AiIntelligence from "./ai/AiIntelligence.jsx";
 import CyberSecurity from "./cyberSecurity/CyberSecurity.jsx";
 import HeritageArchive from "./heritage/HeritageArchive.jsx";
-import Vr from "./vr/Vrlab.jsx";
 import Linguistics from "./linguistics/Linguistics.jsx";
 import Audio from "./audio/Audiolib.jsx";
 import Basicskill from "./skills/Basicskills.jsx";
@@ -143,7 +142,7 @@ function App() {
             <Route path="/ai-intelligence-dashboard" element={<AiIntelligenceDashboard />} />
             
             {/* VR */}
-            <Route path="/vr" element={<Vr />} />
+            <Route path="/vr" element={<VrDashboard />} />
             <Route path="/vr-dashboard" element={<VrDashboard />} />
             
 

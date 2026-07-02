@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowLeft, ArrowRight, Globe, Rocket, FlaskConical } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import VrSimulators from './VrSimulators';
+import VrTechLearning from './VrTechLearning';
 
 const VrDashboard = () => {
   const navigate = useNavigate();
+  const [activeSection, setActiveSection] = useState('tech-learning'); // 'simulators' | 'tech-learning'
+
+  const handleSectionSwitch = (section) => {
+    setActiveSection(section);
+    const targetId = section === 'simulators' ? "simulators-section" : "tech-learning-section";
+    setTimeout(() => {
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 120);
+  };
 
   const quickStats = [
     { 
@@ -30,7 +43,7 @@ const VrDashboard = () => {
   return (
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden">
       <button
-        onClick={() => navigate("/vr")}
+        onClick={() => navigate("/")}
         className="fixed top-3 left-3 md:top-5 md:left-5 z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group"
       >
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
@@ -55,10 +68,7 @@ const VrDashboard = () => {
                  
                  <div className="pt-2">
                    <button 
-                     onClick={() => {
-                        const target = document.getElementById("content-section");
-                        if(target) target.scrollIntoView({ behavior: 'smooth' });
-                     }}
+                     onClick={() => handleSectionSwitch('tech-learning')}
                      className="px-5 py-2.5 sm:px-6 sm:py-3 bg-blue-600 text-white rounded-full font-bold text-[12px] sm:text-[14px] flex items-center gap-2 hover:bg-blue-700 transition-colors w-max shadow-sm shadow-blue-200"
                    >
                      Start Learning <ArrowRight size={16} />
@@ -77,7 +87,14 @@ const VrDashboard = () => {
               {quickStats.map((stat, i) => (
                 <div 
                   key={i}
-                  className="bg-white rounded-[16px] p-4 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex items-center gap-4 transition-all duration-300"
+                  onClick={() => {
+                    if (i === 0) {
+                      handleSectionSwitch('tech-learning');
+                    } else {
+                      handleSectionSwitch('simulators');
+                    }
+                  }}
+                  className="bg-white rounded-[16px] p-4 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex items-center gap-4 transition-all duration-300 cursor-pointer hover:shadow-lg hover:-translate-y-0.5 active:scale-95"
                 >
                    <div className={`w-[48px] h-[48px] ${stat.color} rounded-[12px] flex items-center justify-center shrink-0 [&>svg]:w-5 [&>svg]:h-5`}>
                       {stat.icon}
@@ -91,10 +108,22 @@ const VrDashboard = () => {
             </section>
           </div>
 
-          {/* 360° Immersive Labs & Worlds Simulation Section */}
-          <div className="pt-4 pb-12">
-            <VrSimulators />
-          </div>
+          {/* Bottom Interactive Section (Toggled between Simulators and Tech Learning) */}
+          {activeSection === 'simulators' ? (
+            <div className="pt-4 pb-12" id="simulators-section">
+              <VrSimulators />
+            </div>
+          ) : (
+            <div id="tech-learning-section" className="pt-4 pb-12">
+              <VrTechLearning 
+                isEmbedded={true} 
+                onBack={() => {
+                  setActiveSection('simulators');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }} 
+              />
+            </div>
+          )}
 
         </div>
       </main>

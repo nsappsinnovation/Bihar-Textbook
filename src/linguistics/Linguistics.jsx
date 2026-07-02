@@ -438,7 +438,7 @@ const Linguistics = () => {
       <div className="max-w-[1140px] mx-auto px-6 sm:px-8 pt-2 sm:pt-4">
         <div className="mb-4 -mt-24">
           <button 
-            onClick={() =>  navigate("/#missions-grid")} 
+            onClick={() =>  navigate("/")} 
             className="group w-10 h-10 bg-white hover:bg-slate-50 border border-slate-200/80 rounded-full shadow-sm flex items-center justify-center text-slate-600 hover:text-slate-900 transition-all duration-300 cursor-pointer"
             aria-label="Back"
           >
