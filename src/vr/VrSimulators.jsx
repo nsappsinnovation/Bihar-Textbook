@@ -1,15 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  Rocket, Compass, Eye, Shield, Maximize2, Minimize2, 
-  Volume2, VolumeX, Info, CheckCircle2, RotateCcw, Orbit, Globe,
-  ZoomIn, ZoomOut
+  Rocket, Eye, Shield, Maximize2, Minimize2, 
+  Info, CheckCircle2, RotateCcw, Orbit, Globe
 } from 'lucide-react';
 
 const VrSimulators = () => {
-  const [activeSim, setActiveSim] = useState('space'); // 'space' | 'mars' | 'ocean'
+  const [activeSim, setActiveSim] = useState('space'); // 'space' | 'ocean'
   const [isVrMode, setIsVrMode] = useState(false); // Stereoscopic SBS Mode
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [muted, setMuted] = useState(true);
   const containerRef = useRef(null);
 
   const toggleFullscreen = () => {
@@ -32,97 +30,105 @@ const VrSimulators = () => {
   }, []);
 
   return (
-    <div className="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xl relative overflow-hidden" ref={containerRef}>
-      {/* Background soft glows */}
-      <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-purple-500/5 rounded-full blur-[100px] pointer-events-none" />
+    <div 
+      className={`transition-all relative overflow-hidden ${
+        isFullscreen 
+          ? 'fixed inset-0 w-screen h-screen bg-black z-50 p-0 rounded-none border-0 flex flex-col' 
+          : 'bg-white rounded-3xl p-6 border border-slate-200/80 shadow-xl'
+      }`} 
+      ref={containerRef}
+    >
+      {/* Background soft glows - only in window mode */}
+      {!isFullscreen && (
+        <>
+          <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/5 rounded-full blur-[100px] pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-purple-500/5 rounded-full blur-[100px] pointer-events-none" />
+        </>
+      )}
 
-      {/* Header controls */}
-      <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
-        <div>
-          <span className="px-3 py-1 bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold rounded-full tracking-wider uppercase">
-            360° Immersive Labs
-          </span>
-          <h2 className="text-xl md:text-2xl font-extrabold text-slate-800 mt-2 tracking-tight">
-            Interactive VR Simulation Hub
-          </h2>
-          <p className="text-slate-500 text-xs md:text-sm mt-1">
-            Drag to look around in 360°. Toggle VR mode to view through Cardboard/VR headsets.
-          </p>
+      {/* Header controls - Hidden when in Fullscreen so zero text appears */}
+      {!isFullscreen && (
+        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
+          <div>
+            <span className="px-3 py-1 bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold rounded-full tracking-wider uppercase">
+              360° Immersive Labs
+            </span>
+            <h2 className="text-xl md:text-2xl font-extrabold text-slate-800 mt-2 tracking-tight">
+              Interactive VR Simulation Hub
+            </h2>
+            <p className="text-slate-500 text-xs md:text-sm mt-1">
+              Drag to look around in 360°. Toggle VR mode to view through Cardboard/VR headsets.
+            </p>
+          </div>
+
+          {/* Action Controls */}
+          <div className="flex items-center gap-2 flex-wrap">
+            <button 
+              onClick={() => setIsVrMode(!isVrMode)}
+              className={`px-4 py-2 rounded-full font-bold text-xs flex items-center gap-2 transition-all active:scale-95 border ${
+                isVrMode 
+                  ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white border-transparent shadow-[0_0_15px_rgba(168,85,247,0.3)]' 
+                  : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+              }`}
+            >
+              <Eye size={14} /> {isVrMode ? 'VR Mode Active' : 'Enable SBS VR Mode'}
+            </button>
+            
+            <button 
+              onClick={toggleFullscreen}
+              className="p-2 bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-200 rounded-full transition-colors active:scale-95"
+              title="Toggle Fullscreen"
+            >
+              {isFullscreen ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
+            </button>
+          </div>
         </div>
+      )}
 
-        {/* Action Controls */}
-        <div className="flex items-center gap-2 flex-wrap">
+      {/* Simulator Navigation Tabs - Hidden when in Fullscreen */}
+      {!isFullscreen && (
+        <div className="relative z-10 flex gap-2 mb-6 overflow-x-auto pb-1 scrollbar-thin scrollbar-thumb-slate-200">
           <button 
-            onClick={() => setIsVrMode(!isVrMode)}
-            className={`px-4 py-2 rounded-full font-bold text-xs flex items-center gap-2 transition-all active:scale-95 border ${
-              isVrMode 
-                ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white border-transparent shadow-[0_0_15px_rgba(168,85,247,0.3)]' 
-                : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+            onClick={() => setActiveSim('space')}
+            className={`px-5 py-3 rounded-2xl font-bold text-xs flex items-center gap-2.5 transition-all shrink-0 border ${
+              activeSim === 'space'
+                ? 'bg-blue-600 text-white border-blue-500 shadow-lg shadow-blue-500/20'
+                : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100 hover:text-slate-800'
             }`}
           >
-            <Eye size={14} /> {isVrMode ? 'VR Mode Active' : 'Enable SBS VR Mode'}
-          </button>
-          
-          <button 
-            onClick={() => setMuted(!muted)}
-            className="p-2 bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-200 rounded-full transition-colors active:scale-95"
-            title={muted ? "Unmute Ambient Sound" : "Mute Sound"}
-          >
-            {muted ? <VolumeX size={14} /> : <Volume2 size={14} />}
+            <Rocket size={14} /> Space & Milky Way 360°
           </button>
 
           <button 
-            onClick={toggleFullscreen}
-            className="p-2 bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-200 rounded-full transition-colors active:scale-95"
-            title="Toggle Fullscreen"
+            onClick={() => setActiveSim('ocean')}
+            className={`px-5 py-3 rounded-2xl font-bold text-xs flex items-center gap-2.5 transition-all shrink-0 border ${
+              activeSim === 'ocean'
+                ? 'bg-emerald-600 text-white border-emerald-500 shadow-lg shadow-emerald-500/20'
+                : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100 hover:text-slate-800'
+            }`}
           >
-            {isFullscreen ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
+            <Shield size={14} /> Deep Ocean Trench VR
           </button>
         </div>
-      </div>
+      )}
 
-      {/* Simulator Navigation Tabs */}
-      <div className="relative z-10 flex gap-2 mb-6 overflow-x-auto pb-1 scrollbar-thin scrollbar-thumb-slate-200">
+      {/* Minimal icon-only exit fullscreen button without text */}
+      {isFullscreen && (
         <button 
-          onClick={() => setActiveSim('space')}
-          className={`px-5 py-3 rounded-2xl font-bold text-xs flex items-center gap-2.5 transition-all shrink-0 border ${
-            activeSim === 'space'
-              ? 'bg-blue-600 text-white border-blue-500 shadow-lg shadow-blue-500/20'
-              : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100 hover:text-slate-800'
-          }`}
+          onClick={toggleFullscreen}
+          className="absolute top-4 right-4 z-50 p-2.5 bg-black/40 hover:bg-black/80 text-white/70 hover:text-white rounded-full border border-white/20 backdrop-blur transition-all"
+          title="Exit Fullscreen"
         >
-          <Rocket size={14} /> Space & Milky Way 360°
+          <Minimize2 size={16} />
         </button>
-
-        <button 
-          onClick={() => setActiveSim('mars')}
-          className={`px-5 py-3 rounded-2xl font-bold text-xs flex items-center gap-2.5 transition-all shrink-0 border ${
-            activeSim === 'mars'
-              ? 'bg-amber-600 text-white border-amber-500 shadow-lg shadow-amber-500/20'
-              : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100 hover:text-slate-800'
-          }`}
-        >
-          <Compass size={14} /> Mars Jezero Crater 360°
-        </button>
-
-        <button 
-          onClick={() => setActiveSim('ocean')}
-          className={`px-5 py-3 rounded-2xl font-bold text-xs flex items-center gap-2.5 transition-all shrink-0 border ${
-            activeSim === 'ocean'
-              ? 'bg-emerald-600 text-white border-emerald-500 shadow-lg shadow-emerald-500/20'
-              : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100 hover:text-slate-800'
-          }`}
-        >
-          <Shield size={14} /> Deep Ocean Trench VR
-        </button>
-      </div>
+      )}
 
       {/* Simulation Container */}
-      <div className="relative z-10 w-full bg-black rounded-2xl border border-slate-200 overflow-hidden min-h-[380px] sm:min-h-[450px] md:min-h-[520px]">
-        {activeSim === 'space' && <SpaceSimulator isVrMode={isVrMode} muted={muted} />}
-        {activeSim === 'mars' && <MarsSimulator isVrMode={isVrMode} muted={muted} />}
-        {activeSim === 'ocean' && <OceanSimulator isVrMode={isVrMode} muted={muted} />}
+      <div className={`relative z-10 w-full bg-black overflow-hidden flex-1 ${
+        isFullscreen ? 'h-full min-h-screen rounded-none border-0' : 'rounded-2xl border border-slate-200 min-h-[380px] sm:min-h-[450px] md:min-h-[520px]'
+      }`}>
+        {activeSim === 'space' && <SpaceSimulator isVrMode={isVrMode} isFullscreen={isFullscreen} />}
+        {activeSim === 'ocean' && <OceanSimulator isVrMode={isVrMode} isFullscreen={isFullscreen} />}
       </div>
     </div>
   );
@@ -131,73 +137,14 @@ const VrSimulators = () => {
 /* =========================================================================
    1. Space Orbit & Milky Way Simulator Component
    ========================================================================= */
-const SpaceSimulator = ({ isVrMode, muted }) => {
+const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
   const canvasRef = useRef(null);
   const [viewMode, setViewMode] = useState('system'); // 'system' | 'galaxy'
   const [activeObject, setActiveObject] = useState(null);
-  const [zoom, setZoom] = useState(1.0); // Zoom level state
+  const zoom = 1.0; // Fixed zoom level
   const isDragging = useRef(false);
   const prevMousePos = useRef({ x: 0, y: 0 });
   const cameraAngle = useRef({ yaw: 0, pitch: 0 });
-
-  const audioCtxRef = useRef(null);
-  const ambientOscRef = useRef(null);
-
-  // Wheel scroll zooming
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const handleWheel = (e) => {
-      e.preventDefault();
-      setZoom(z => Math.max(0.3, Math.min(4.0, z - e.deltaY * 0.0015)));
-    };
-    canvas.addEventListener('wheel', handleWheel, { passive: false });
-    return () => {
-      canvas.removeEventListener('wheel', handleWheel);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (!muted) {
-      try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        const ctx = new AudioContext();
-        audioCtxRef.current = ctx;
-        const osc = ctx.createOscillator();
-        const gainNode = ctx.createGain();
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(65, ctx.currentTime);
-        gainNode.gain.setValueAtTime(0.06, ctx.currentTime);
-        const filter = ctx.createBiquadFilter();
-        filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(120, ctx.currentTime);
-        osc.connect(filter);
-        filter.connect(gainNode);
-        gainNode.connect(ctx.destination);
-        osc.start();
-        ambientOscRef.current = osc;
-      } catch (err) {
-        console.error(err);
-      }
-    } else {
-      if (ambientOscRef.current) {
-        try { ambientOscRef.current.stop(); } catch(e){}
-        ambientOscRef.current = null;
-      }
-      if (audioCtxRef.current) {
-        try { audioCtxRef.current.close(); } catch(e){}
-        audioCtxRef.current = null;
-      }
-    }
-    return () => {
-      if (ambientOscRef.current) {
-        try { ambientOscRef.current.stop(); } catch(e){}
-      }
-      if (audioCtxRef.current) {
-        try { audioCtxRef.current.close(); } catch(e){}
-      }
-    };
-  }, [muted]);
 
   const planets = [
     { 
@@ -930,125 +877,59 @@ const SpaceSimulator = ({ isVrMode, muted }) => {
         className="w-full flex-1"
       />
 
-      {/* Mode Selector HUD Toggle - Light Styled */}
-      <div className="absolute top-4 left-4 flex gap-1 bg-white/90 backdrop-blur border border-slate-200 p-1 rounded-xl z-20 pointer-events-auto shadow-md">
-        <button 
-          onClick={() => { setViewMode('system'); setActiveObject(null); }}
-          className={`px-3 py-1.5 rounded-lg text-[10px] font-bold transition-colors ${
-            viewMode === 'system' 
-              ? 'bg-blue-600 text-white shadow-sm' 
-              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
-          }`}
-        >
-          Solar System View
-        </button>
-        <button 
-          onClick={() => { setViewMode('galaxy'); setActiveObject(null); }}
-          className={`px-3 py-1.5 rounded-lg text-[10px] font-bold transition-colors ${
-            viewMode === 'galaxy' 
-              ? 'bg-blue-600 text-white shadow-sm' 
-              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
-          }`}
-        >
-          Milky Way Galaxy
-        </button>
-      </div>
-
-      {/* Zoom HUD Controls */}
-      <div className="absolute top-4 left-[280px] sm:left-[300px] flex gap-1 bg-white/90 backdrop-blur border border-slate-200 p-1 rounded-xl z-20 pointer-events-auto shadow-md items-center">
-        <button 
-          onClick={() => setZoom(z => Math.max(0.3, z - 0.25))}
-          className="p-1 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded"
-          title="Zoom Out (Scroll Down)"
-        >
-          <ZoomOut size={14} />
-        </button>
-        <span className="text-[9px] font-bold px-1.5 text-slate-700 min-w-[36px] text-center font-mono">
-          {zoom.toFixed(1)}x
-        </span>
-        <button 
-          onClick={() => setZoom(z => Math.min(4.0, z + 0.25))}
-          className="p-1 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded"
-          title="Zoom In (Scroll Up)"
-        >
-          <ZoomIn size={14} />
-        </button>
-        <button 
-          onClick={() => setZoom(1.0)}
-          className="text-[8px] font-black tracking-wider uppercase px-1.5 py-1 text-blue-600 hover:bg-blue-50 rounded"
-          title="Reset Zoom"
-        >
-          Reset
-        </button>
-      </div>
-
-      {/* VR HUD Info overlay - Light Styled */}
-      {!isVrMode && (
-        <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur border border-slate-200/80 rounded-2xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 pointer-events-auto shadow-xl">
-          <div>
-            <h4 className="text-slate-800 text-xs font-bold flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-blue-500 animate-ping" />
-              {viewMode === 'system' ? 'Solar System Simulator' : 'Milky Way Galaxy Observer'}
-            </h4>
-            <p className="text-[11px] text-slate-500 mt-1 max-w-md">
-              {viewMode === 'system' 
-                ? 'Explore the planets and their detailed moons in the Milky Way backdrop. Use scroll wheel or zoom buttons to zoom in/out.' 
-                : 'Interactive 3D simulation of our spiral galaxy. Explore arms and click objects to scan details.'}
-            </p>
-          </div>
-          <div className="flex gap-1.5 flex-wrap">
-            {viewMode === 'system' ? (
-              planets.map((planet, i) => (
-                <button 
-                  key={i}
-                  onClick={() => setActiveObject(planet)}
-                  className="px-2.5 py-1 bg-slate-50 border border-slate-200 hover:border-blue-500 hover:bg-blue-50/50 text-slate-700 rounded text-[9px] font-semibold transition-all"
-                >
-                  {planet.name}
-                </button>
-              ))
-            ) : (
-              galaxyHotspots.map((spot, i) => (
-                <button 
-                  key={i}
-                  onClick={() => setActiveObject(spot)}
-                  className="px-2.5 py-1 bg-slate-50 border border-slate-200 hover:border-blue-500 hover:bg-blue-50/50 text-slate-700 rounded text-[9px] font-semibold transition-all"
-                >
-                  {spot.name}
-                </button>
-              ))
-            )}
-          </div>
+      {/* Mode Selector HUD Toggle - Light Styled (Hidden in Fullscreen) */}
+      {!isFullscreen && (
+        <div className="absolute top-4 left-4 flex gap-1 bg-white/90 backdrop-blur border border-slate-200 p-1 rounded-xl z-20 pointer-events-auto shadow-md">
+          <button 
+            onClick={() => { setViewMode('system'); setActiveObject(null); }}
+            className={`px-3 py-1.5 rounded-lg text-[10px] font-bold transition-colors ${
+              viewMode === 'system' 
+                ? 'bg-blue-600 text-white shadow-sm' 
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+            }`}
+          >
+            Solar System View
+          </button>
+          <button 
+            onClick={() => { setViewMode('galaxy'); setActiveObject(null); }}
+            className={`px-3 py-1.5 rounded-lg text-[10px] font-bold transition-colors ${
+              viewMode === 'galaxy' 
+                ? 'bg-blue-600 text-white shadow-sm' 
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+            }`}
+          >
+            Milky Way Galaxy
+          </button>
         </div>
       )}
 
-      {/* Object Profile Details Popup - Light Styled */}
-      {activeObject && !isVrMode && (
-        <div className="absolute top-18 right-4 bg-white/95 border border-slate-200 rounded-2xl p-4 w-72 pointer-events-auto shadow-2xl z-20 animate-fadeIn text-slate-800">
-          <div className="flex justify-between items-center mb-2">
-            <h5 className="text-slate-900 text-sm font-bold flex items-center gap-1.5">
-              <span className="w-3 h-3 rounded-full" style={{ backgroundColor: activeObject.color || '#38bdf8' }} />
+      {/* Object Profile Details Popup - Smaller size & hidden in Fullscreen */}
+      {activeObject && !isVrMode && !isFullscreen && (
+        <div className="absolute top-16 right-4 bg-white/95 border border-slate-200 rounded-xl p-3 w-56 pointer-events-auto shadow-2xl z-20 animate-fadeIn text-slate-800">
+          <div className="flex justify-between items-center mb-1.5">
+            <h5 className="text-slate-900 text-xs font-bold flex items-center gap-1.5 truncate">
+              <span className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: activeObject.color || '#38bdf8' }} />
               {activeObject.name}
             </h5>
-            <button onClick={() => setActiveObject(null)} className="text-slate-400 hover:text-slate-600 text-xs font-bold">&times;</button>
+            <button onClick={() => setActiveObject(null)} className="text-slate-400 hover:text-slate-600 text-xs font-bold shrink-0 ml-1">&times;</button>
           </div>
-          <p className="text-[11px] text-slate-600 leading-relaxed">{activeObject.desc}</p>
+          <p className="text-[10px] text-slate-600 leading-relaxed">{activeObject.desc}</p>
           {viewMode === 'system' && activeObject.moons && activeObject.moons.length > 0 && (
-            <div className="mt-2 text-[9px] text-slate-500 bg-slate-50 p-1.5 rounded border border-slate-100">
+            <div className="mt-1.5 text-[8px] text-slate-500 bg-slate-50 p-1.5 rounded border border-slate-100">
               <strong className="text-slate-700">Moons ({activeObject.moons.length}):</strong>{' '}
               {activeObject.moons.map(m => m.name).join(', ')}
             </div>
           )}
           {activeObject.stats && (
-            <div className="mt-2 grid grid-cols-2 gap-1.5 bg-slate-50 p-1.5 rounded border border-slate-100 text-[9px] text-slate-500 font-mono">
+            <div className="mt-1.5 grid grid-cols-2 gap-1 bg-slate-50 p-1.5 rounded border border-slate-100 text-[8px] text-slate-500 font-mono">
               <div><strong className="text-slate-700">Distance:</strong> {activeObject.stats.dist}</div>
               <div><strong className="text-slate-700">Mass:</strong> {activeObject.stats.mass}</div>
               <div className="col-span-2"><strong className="text-slate-700">Type:</strong> {activeObject.stats.type}</div>
             </div>
           )}
-          <div className="mt-3 pt-2 border-t border-slate-100 flex justify-between text-[9px] text-slate-400 font-mono">
-            <span>Type: {viewMode === 'system' ? 'Planetary Body' : 'Galactic Structure'}</span>
-            <span>Status: Active</span>
+          <div className="mt-2 pt-1.5 border-t border-slate-100 flex justify-between text-[8px] text-slate-400 font-mono">
+            <span>Type: {viewMode === 'system' ? 'Planet' : 'Galaxy'}</span>
+            <span>Active</span>
           </div>
         </div>
       )}
@@ -1057,394 +938,15 @@ const SpaceSimulator = ({ isVrMode, muted }) => {
 };
 
 /* =========================================================================
-   2. Mars Jezero Crater Panoramic Tour Simulator
+   2. Deep Ocean Trench VR Explorer
    ========================================================================= */
-const MarsSimulator = ({ isVrMode, muted }) => {
-  const canvasRef = useRef(null);
-  const isDragging = useRef(false);
-  const prevMousePos = useRef({ x: 0, y: 0 });
-  const cameraAngle = useRef({ yaw: 0, pitch: 0 });
-  const [activeInfo, setActiveInfo] = useState(null);
-
-  const audioCtxRef = useRef(null);
-  const windOscRef = useRef(null);
-
-  useEffect(() => {
-    if (!muted) {
-      try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        const ctx = new AudioContext();
-        audioCtxRef.current = ctx;
-
-        const bufferSize = ctx.sampleRate * 2;
-        const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-        const output = noiseBuffer.getChannelData(0);
-        let b0, b1, b2, b3, b4, b5, b6;
-        b0 = b1 = b2 = b3 = b4 = b5 = b6 = 0.0;
-        for (let i = 0; i < bufferSize; i++) {
-          const white = Math.random() * 2 - 1;
-          b0 = 0.99886 * b0 + white * 0.0555179;
-          b1 = 0.99332 * b1 + white * 0.0750759;
-          b2 = 0.96900 * b2 + white * 0.1538520;
-          b3 = 0.86650 * b3 + white * 0.3104856;
-          b4 = 0.55000 * b4 + white * 0.5329522;
-          b5 = -0.7616 * b5 - white * 0.0168980;
-          output[i] = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
-          output[i] *= 0.11;
-          b6 = white * 0.115926;
-        }
-
-        const sourceNode = ctx.createBufferSource();
-        sourceNode.buffer = noiseBuffer;
-        sourceNode.loop = true;
-        const filter = ctx.createBiquadFilter();
-        filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(260, ctx.currentTime);
-        const gainNode = ctx.createGain();
-        gainNode.gain.setValueAtTime(0.08, ctx.currentTime);
-        sourceNode.connect(filter);
-        filter.connect(gainNode);
-        gainNode.connect(ctx.destination);
-        sourceNode.start();
-        windOscRef.current = sourceNode;
-      } catch (err) {
-        console.error(err);
-      }
-    } else {
-      if (windOscRef.current) {
-        try { windOscRef.current.stop(); } catch(e){}
-        windOscRef.current = null;
-      }
-      if (audioCtxRef.current) {
-        try { audioCtxRef.current.close(); } catch(e){}
-        audioCtxRef.current = null;
-      }
-    }
-    return () => {
-      if (windOscRef.current) {
-        try { windOscRef.current.stop(); } catch(e){}
-      }
-      if (audioCtxRef.current) {
-        try { audioCtxRef.current.close(); } catch(e){}
-      }
-    };
-  }, [muted]);
-
-  const hotspots = [
-    { yaw: 0, pitch: -0.05, label: 'Perseverance Rover', title: 'Perseverance Rover', desc: 'NASA’s heavy robotic explorer landed in Jezero Crater in Feb 2021 to search for ancient biosignatures and collect rock cores.' },
-    { yaw: -0.4, pitch: 0.15, label: 'Ingenuity Helicopter', title: 'Ingenuity Helicopter', desc: 'The tiny 1.8 kg rotorcraft that completed 72 historic flights on Mars, proving powered flight is possible in the thin Martian air.' },
-    { yaw: 0.5, pitch: -0.1, label: 'Jezero Delta Minerals', title: 'Crater Clay Delta', desc: 'Rich clay and mineral deposits swept by ancient water channels into the lakebed, representing ideal preservation environments for ancient micro-organisms.' },
-    { yaw: -1.1, pitch: 0.05, label: 'Mount Sharp Horizon', title: 'Crater Rim', desc: 'The distant rim of Jezero Crater rising in the dusty horizon. The crater spans 45 kilometers wide.' }
-  ];
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let animId;
-
-    const render = () => {
-      const width = canvas.width = canvas.parentElement.clientWidth;
-      const height = canvas.height = canvas.parentElement.clientHeight;
-
-      const drawViewport = (viewX, viewWidth, stereoOffset) => {
-        ctx.save();
-        ctx.beginPath();
-        ctx.rect(viewX, 0, viewWidth, height);
-        ctx.clip();
-
-        const yaw = cameraAngle.current.yaw + stereoOffset;
-        const pitch = cameraAngle.current.pitch;
-
-        // Sky
-        const skyGrad = ctx.createLinearGradient(viewX, 0, viewX, height * 0.65);
-        skyGrad.addColorStop(0, '#581c0c');
-        skyGrad.addColorStop(0.4, '#854d0e');
-        skyGrad.addColorStop(0.8, '#b45309');
-        skyGrad.addColorStop(1, '#ea580c');
-        ctx.fillStyle = skyGrad;
-        ctx.fillRect(viewX, 0, viewWidth, height * 0.65);
-
-        // Ground
-        const groundGrad = ctx.createLinearGradient(viewX, height * 0.65, viewX, height);
-        groundGrad.addColorStop(0, '#7c2d12');
-        groundGrad.addColorStop(1, '#451a03');
-        ctx.fillStyle = groundGrad;
-        ctx.fillRect(viewX, height * 0.65, viewWidth, height * 0.35);
-
-        const centerX = viewX + viewWidth / 2;
-        const centerY = height / 2;
-        const wrapYaw = (yaw % (Math.PI * 2));
-
-        const getProjCoords = (angX, angY) => {
-          let diffX = angX - wrapYaw;
-          while (diffX < -Math.PI) diffX += Math.PI * 2;
-          while (diffX > Math.PI) diffX -= Math.PI * 2;
-          let diffY = angY - pitch;
-          const screenX = centerX + diffX * (viewWidth * 0.95);
-          const screenY = centerY + diffY * (height * 0.8) + height * 0.15;
-          return { x: screenX, y: screenY };
-        };
-
-        const drawHills = (offsetAngle, scale, heightOffset, color) => {
-          ctx.fillStyle = color;
-          ctx.beginPath();
-          let started = false;
-          for (let a = -Math.PI; a <= Math.PI; a += 0.25) {
-            const h = Math.sin(a * 4 + offsetAngle) * 35 + Math.cos(a * 7) * 15 + heightOffset;
-            const pt = getProjCoords(a, h / height);
-            if (!started) {
-              ctx.moveTo(pt.x, pt.y);
-              started = true;
-            } else {
-              ctx.lineTo(pt.x, pt.y);
-            }
-          }
-          const ptEnd = getProjCoords(Math.PI, 1);
-          const ptStart = getProjCoords(-Math.PI, 1);
-          ctx.lineTo(ptEnd.x, height);
-          ctx.lineTo(ptStart.x, height);
-          ctx.closePath();
-          ctx.fill();
-        };
-
-        drawHills(1.2, 1, -50, '#9a3412');
-        drawHills(-0.8, 1.2, -100, '#7c2d12');
-
-        // Rover
-        ctx.save();
-        const rovBase = getProjCoords(0, -0.15);
-        ctx.fillStyle = 'rgba(200, 200, 200, 0.95)';
-        ctx.strokeStyle = '#27272a';
-        ctx.lineWidth = 1.5;
-
-        ctx.fillStyle = '#18181b';
-        for (let i = -16; i <= 16; i += 16) {
-          ctx.beginPath();
-          ctx.arc(rovBase.x + i, rovBase.y + 12, 6, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.stroke();
-        }
-
-        ctx.fillStyle = '#d4d4d8';
-        ctx.fillRect(rovBase.x - 20, rovBase.y - 12, 40, 20);
-        ctx.strokeRect(rovBase.x - 20, rovBase.y - 12, 40, 20);
-
-        ctx.strokeStyle = '#52525b';
-        ctx.beginPath();
-        ctx.moveTo(rovBase.x - 10, rovBase.y - 12);
-        ctx.lineTo(rovBase.x - 10, rovBase.y - 34);
-        ctx.stroke();
-        ctx.fillStyle = '#27272a';
-        ctx.fillRect(rovBase.x - 16, rovBase.y - 38, 12, 8);
-        ctx.strokeRect(rovBase.x - 16, rovBase.y - 38, 12, 8);
-
-        ctx.fillStyle = '#60a5fa';
-        ctx.beginPath();
-        ctx.arc(rovBase.x - 10, rovBase.y - 34, 2, 0, Math.PI*2);
-        ctx.fill();
-        ctx.restore();
-
-        // Helicopter
-        ctx.save();
-        const flyHeight = -0.05 + Math.sin(Date.now() * 0.003) * 0.05;
-        const heliBase = getProjCoords(-0.4, flyHeight);
-        ctx.strokeStyle = '#27272a';
-        ctx.lineWidth = 1;
-        
-        ctx.beginPath();
-        ctx.moveTo(heliBase.x, heliBase.y - 6);
-        ctx.lineTo(heliBase.x, heliBase.y + 10);
-        ctx.stroke();
-
-        ctx.save();
-        ctx.translate(heliBase.x, heliBase.y - 4);
-        ctx.scale(Math.abs(Math.sin(Date.now() * 0.02)), 0.15);
-        ctx.fillStyle = '#71717a';
-        ctx.beginPath();
-        ctx.arc(0, 0, 24, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-
-        ctx.fillStyle = '#fbbf24';
-        ctx.fillRect(heliBase.x - 5, heliBase.y + 2, 10, 8);
-        ctx.strokeRect(heliBase.x - 5, heliBase.y + 2, 10, 8);
-
-        ctx.strokeStyle = '#18181b';
-        ctx.beginPath();
-        ctx.moveTo(heliBase.x - 4, heliBase.y + 10);
-        ctx.lineTo(heliBase.x - 12, heliBase.y + 22);
-        ctx.moveTo(heliBase.x + 4, heliBase.y + 10);
-        ctx.lineTo(heliBase.x + 12, heliBase.y + 22);
-        ctx.stroke();
-        ctx.restore();
-
-        // Hotspots
-        hotspots.forEach((spot) => {
-          const pt = getProjCoords(spot.yaw, spot.pitch);
-          ctx.fillStyle = 'rgba(234, 88, 12, 0.4)';
-          ctx.beginPath();
-          ctx.arc(pt.x, pt.y, 14 + Math.sin(Date.now() * 0.005) * 4, 0, Math.PI * 2);
-          ctx.fill();
-
-          ctx.fillStyle = '#ffffff';
-          ctx.strokeStyle = '#ea580c';
-          ctx.lineWidth = 2;
-          ctx.beginPath();
-          ctx.arc(pt.x, pt.y, 8, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.stroke();
-
-          ctx.fillStyle = 'rgba(0, 0, 0, 0.75)';
-          ctx.font = 'bold 9px sans-serif';
-          const labelWidth = ctx.measureText(spot.label).width;
-          ctx.fillRect(pt.x - labelWidth/2 - 4, pt.y - 25, labelWidth + 8, 14);
-          ctx.fillStyle = '#ffffff';
-          ctx.fillText(spot.label, pt.x - labelWidth/2, pt.y - 15);
-        });
-
-        if (isVrMode) {
-          ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(centerX - 8, centerY);
-          ctx.lineTo(centerX + 8, centerY);
-          ctx.moveTo(centerX, centerY - 8);
-          ctx.lineTo(centerX, centerY + 8);
-          ctx.stroke();
-        }
-        ctx.restore();
-      };
-
-      if (isVrMode) {
-        drawViewport(0, width / 2, -0.012);
-        drawViewport(width / 2, width / 2, 0.012);
-        ctx.strokeStyle = '#1e293b';
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(width / 2, 0);
-        ctx.lineTo(width / 2, height);
-        ctx.stroke();
-      } else {
-        drawViewport(0, width, 0);
-      }
-      animId = requestAnimationFrame(render);
-    };
-
-    render();
-    return () => cancelAnimationFrame(animId);
-  }, [isVrMode]);
-
-  const handleCanvasClick = (e) => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const rect = canvas.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const clickY = e.clientY - rect.top;
-
-    const width = canvas.width;
-    const height = canvas.height;
-    const viewWidth = isVrMode ? width / 2 : width;
-    const centerX = viewWidth / 2;
-    const centerY = height / 2;
-    const yaw = cameraAngle.current.yaw;
-    const pitch = cameraAngle.current.pitch;
-
-    let clicked = null;
-    hotspots.forEach((spot) => {
-      let diffX = spot.yaw - yaw;
-      while (diffX < -Math.PI) diffX += Math.PI * 2;
-      while (diffX > Math.PI) diffX -= Math.PI * 2;
-      let diffY = spot.pitch - pitch;
-      const ptX = centerX + diffX * (viewWidth * 0.95);
-      const ptY = centerY + diffY * (height * 0.8) + height * 0.15;
-
-      const dist = Math.hypot(clickX - ptX, clickY - ptY);
-      if (dist < 22) clicked = spot;
-    });
-
-    if (clicked) setActiveInfo(clicked);
-  };
-
-  const handleMouseDown = (e) => {
-    isDragging.current = true;
-    prevMousePos.current = { x: e.clientX, y: e.clientY };
-  };
-
-  const handleMouseMove = (e) => {
-    if (!isDragging.current) return;
-    const deltaX = e.clientX - prevMousePos.current.x;
-    const deltaY = e.clientY - prevMousePos.current.y;
-    cameraAngle.current.yaw += deltaX * 0.005;
-    cameraAngle.current.pitch = Math.max(-Math.PI/4, Math.min(Math.PI/4, cameraAngle.current.pitch - deltaY * 0.005));
-    prevMousePos.current = { x: e.clientX, y: e.clientY };
-  };
-
-  const handleMouseUp = () => {
-    isDragging.current = false;
-  };
-
-  return (
-    <div className="absolute inset-0 flex flex-col overflow-hidden select-none cursor-grab active:cursor-grabbing">
-      <canvas 
-        ref={canvasRef}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-        onClick={handleCanvasClick}
-        className="w-full flex-1"
-      />
-
-      {/* VR HUD Info overlay - Light Styled */}
-      {!isVrMode && (
-        <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur border border-slate-200/80 rounded-2xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 pointer-events-auto shadow-xl">
-          <div>
-            <h4 className="text-slate-800 text-xs font-bold flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
-              Mars Jezero Crater 360° virtual tour
-            </h4>
-            <p className="text-[11px] text-slate-500 mt-1 max-w-md">
-              Drag to explore the Jezero Crater desert in 360°. Click glowing hotspots to inspect the Perseverance Rover, Ingenuity Helicopter, and clay mineral deposits.
-            </p>
-          </div>
-        </div>
-      )}
-
-      {/* Info Popup Overlay - Light Styled */}
-      {activeInfo && !isVrMode && (
-        <div className="absolute top-4 right-4 bg-white/95 border border-slate-200 rounded-2xl p-4 w-72 pointer-events-auto shadow-2xl z-20 animate-fadeIn text-slate-800">
-          <div className="flex justify-between items-center mb-2">
-            <h5 className="text-slate-900 text-sm font-bold flex items-center gap-1.5">
-              <Compass size={14} className="text-amber-500 animate-spin-slow" />
-              {activeInfo.title}
-            </h5>
-            <button onClick={() => setActiveInfo(null)} className="text-slate-400 hover:text-slate-600 text-xs font-bold">&times;</button>
-          </div>
-          <p className="text-[11px] text-slate-600 leading-relaxed">{activeInfo.desc}</p>
-          <div className="mt-3 pt-2 border-t border-slate-100 flex justify-between items-center text-[10px]">
-            <span className="text-slate-400 font-mono">Location: Jezero Crater, Mars</span>
-            <span className="px-2 py-0.5 bg-amber-500/10 border border-amber-500/20 text-amber-600 rounded text-[9px]">Hotspot Active</span>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
-
-/* =========================================================================
-   3. Deep Ocean Trench VR Explorer
-   ========================================================================= */
-const OceanSimulator = ({ isVrMode, muted }) => {
+const OceanSimulator = ({ isVrMode, isFullscreen }) => {
   const canvasRef = useRef(null);
   const isDragging = useRef(false);
   const prevMousePos = useRef({ x: 0, y: 0 });
   const cameraAngle = useRef({ yaw: 0, pitch: 0 });
   const flashlightPos = useRef({ x: 200, y: 200 });
   const [activeCreature, setActiveCreature] = useState(null);
-
-  const audioCtxRef = useRef(null);
-  const sonarIntervalRef = useRef(null);
 
   // Sea Bed Rocks and Swaying Seaweed Plants
   const seabedElementsRef = useRef([]);
@@ -1476,7 +978,7 @@ const OceanSimulator = ({ isVrMode, muted }) => {
     for (let i = 0; i < 18; i++) {
       const type = fishTypes[i % fishTypes.length];
       const size = type === 'shark' ? 55 : type === 'turtle' ? 42 : 18 + Math.random() * 7;
-      const speed = type === 'shark' ? 0.003 : type === 'turtle' ? 0.002 : 0.005 + Math.random() * 0.006;
+      const speed = type === 'shark' ? 0.0008 : type === 'turtle' ? 0.0005 : 0.001 + Math.random() * 0.0015;
       
       fishesRef.current.push({
         yaw: Math.random() * Math.PI * 2,
@@ -1489,53 +991,6 @@ const OceanSimulator = ({ isVrMode, muted }) => {
       });
     }
   }
-
-  useEffect(() => {
-    if (!muted) {
-      try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        const ctx = new AudioContext();
-        audioCtxRef.current = ctx;
-
-        const ping = () => {
-          if (!audioCtxRef.current || audioCtxRef.current.state === 'closed') return;
-          const osc = ctx.createOscillator();
-          const gainNode = ctx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(750, ctx.currentTime);
-          osc.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 1.6);
-          gainNode.gain.setValueAtTime(0.12, ctx.currentTime);
-          gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.9);
-          osc.connect(gainNode);
-          gainNode.connect(ctx.destination);
-          osc.start();
-          osc.stop(ctx.currentTime + 2.1);
-        };
-
-        ping();
-        sonarIntervalRef.current = setInterval(ping, 4800);
-      } catch (err) {
-        console.error(err);
-      }
-    } else {
-      if (sonarIntervalRef.current) {
-        clearInterval(sonarIntervalRef.current);
-        sonarIntervalRef.current = null;
-      }
-      if (audioCtxRef.current) {
-        try { audioCtxRef.current.close(); } catch(e){}
-        audioCtxRef.current = null;
-      }
-    }
-    return () => {
-      if (sonarIntervalRef.current) {
-        clearInterval(sonarIntervalRef.current);
-      }
-      if (audioCtxRef.current) {
-        try { audioCtxRef.current.close(); } catch(e){}
-      }
-    };
-  }, [muted]);
 
   const creatures = [
     { yaw: -0.3, pitch: 0.1, name: 'Bioluminescent Jellyfish', desc: 'Glowing jellyfish that utilize green & blue proteins to light up in pitch black water depths exceeding 3,000 meters.', size: 28 },
@@ -2629,36 +2084,23 @@ const OceanSimulator = ({ isVrMode, muted }) => {
         className="w-full flex-1"
       />
 
-      {/* VR HUD Info overlay - Light Styled */}
-      {!isVrMode && (
-        <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur border border-slate-200/80 rounded-2xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 pointer-events-auto shadow-xl">
-          <div>
-            <h4 className="text-slate-800 text-xs font-bold flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-              Submarine Deep-Sea HUD Console
-            </h4>
-            <p className="text-[11px] text-slate-500 mt-1 max-w-md">
-              Aim the searchlight at creatures or swimming fishes (Clownfish, Blue Tang, Yellow Tang, Sea Turtles, Great White Shark) to illuminate them. Click on any target to trigger the biological database scan.
-            </p>
-          </div>
-        </div>
-      )}
+     
 
-      {/* Creature Database Bio Popup - Light Styled */}
-      {activeCreature && !isVrMode && (
-        <div className="absolute top-4 right-4 bg-white/95 border border-emerald-100 rounded-2xl p-4 w-72 pointer-events-auto shadow-2xl z-20 animate-fadeIn text-slate-800">
-          <div className="flex justify-between items-center mb-2">
-            <h5 className="text-emerald-600 text-xs font-mono font-bold flex items-center gap-1.5">
-              <CheckCircle2 size={12} className="text-emerald-500" />
+      {/* Creature Database Bio Popup - Smaller size & hidden in Fullscreen */}
+      {activeCreature && !isVrMode && !isFullscreen && (
+        <div className="absolute top-16 right-4 bg-white/95 border border-emerald-100 rounded-xl p-3 w-56 pointer-events-auto shadow-2xl z-20 animate-fadeIn text-slate-800">
+          <div className="flex justify-between items-center mb-1.5">
+            <h5 className="text-emerald-600 text-[10px] font-mono font-bold flex items-center gap-1 truncate">
+              <CheckCircle2 size={10} className="text-emerald-500 shrink-0" />
               SCAN COMPLETED
             </h5>
-            <button onClick={() => setActiveCreature(null)} className="text-slate-400 hover:text-slate-600 text-xs font-bold">&times;</button>
+            <button onClick={() => setActiveCreature(null)} className="text-slate-400 hover:text-slate-600 text-xs font-bold shrink-0 ml-1">&times;</button>
           </div>
-          <h4 className="text-slate-900 text-sm font-extrabold mb-1 tracking-wide">{activeCreature.name}</h4>
-          <p className="text-[11px] text-slate-600 leading-relaxed font-sans">{activeCreature.desc}</p>
-          <div className="mt-3 pt-2 border-t border-emerald-50 flex justify-between items-center text-[10px] text-slate-400 font-mono">
+          <h4 className="text-slate-900 text-xs font-extrabold mb-1 tracking-wide truncate">{activeCreature.name}</h4>
+          <p className="text-[10px] text-slate-600 leading-relaxed font-sans">{activeCreature.desc}</p>
+          <div className="mt-2 pt-1.5 border-t border-emerald-50 flex justify-between items-center text-[8px] text-slate-400 font-mono">
             <span>Pressure: ~350 atm</span>
-            <span className="px-2 py-0.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 rounded text-[9px]">Class: Abyssal</span>
+            <span className="px-1.5 py-0.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 rounded text-[8px]">Class: Abyssal</span>
           </div>
         </div>
       )}

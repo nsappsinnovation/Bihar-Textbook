@@ -142,19 +142,36 @@ const CyberSecurityQuiz = () => {
   const progress = ((currentQ + (isAnswered ? 1 : 0)) / quizQuestions.length) * 100;
 
   return (
-    <div className="w-full flex justify-center font-sans select-none py-6">
-      <div className="w-full max-w-[500px] shrink-0 transition-all duration-300">
+    <div className="w-full min-h-[580px] flex items-center justify-center font-sans select-none py-10 px-4 relative rounded-[32px] overflow-hidden shadow-2xl border border-emerald-500/30 my-4">
+      {/* High-Tech Cyber Background Picture with Gradient & Mesh Overlay */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="/images/cybersecurity/3rd.png" 
+          onError={(e) => { e.target.src = '/images/cybersecurity/rhs.png'; }}
+          alt="Cyber Security Background" 
+          className="w-full h-full object-cover object-center scale-105 transition-transform duration-1000"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#02140d]/92 via-[#051c14]/85 to-[#010d08]/95 backdrop-blur-[4px]" />
+        {/* Cyberpunk Grid & Glow Blobs */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#10b981_1px,transparent_1px),linear-gradient(to_bottom,#10b981_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-15" />
+        <div className="absolute top-0 right-1/4 w-80 h-80 bg-emerald-500/20 rounded-full blur-[100px] pointer-events-none animate-pulse" />
+        <div className="absolute bottom-0 left-1/4 w-80 h-80 bg-cyan-500/15 rounded-full blur-[100px] pointer-events-none animate-pulse" />
+      </div>
+
+      <div className="w-full max-w-[520px] shrink-0 transition-all duration-300 relative z-10 my-auto">
         <AnimatePresence mode="wait">
           {!showResult && (
             <motion.div
               key="active-quiz"
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -30 }}
-              transition={{ duration: 0.2 }}
+              initial={{ opacity: 0, scale: 0.96, y: 15 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: -15 }}
+              transition={{ duration: 0.25 }}
               className="w-full"
             >
-              <div className="bg-[#051c14]/85 backdrop-blur-xl border-2 border-emerald-500/40 rounded-[24px] p-5 shadow-[0_0_35px_rgba(0,0,0,0.6)] text-white">
+              <div className="bg-[#051c14]/90 backdrop-blur-2xl border-2 border-emerald-500/50 rounded-[28px] p-6 shadow-[0_0_50px_rgba(16,185,129,0.25)] text-white relative overflow-hidden">
+                {/* Subtle top card shine */}
+                <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-60" />
 
                 {/* Header Row */}
                 <div className="flex items-center justify-between mb-3.5">
@@ -234,7 +251,8 @@ const CyberSecurityQuiz = () => {
               exit={{ opacity: 0 }}
               className="w-full"
             >
-              <div className="bg-[#051c14]/85 backdrop-blur-xl border-2 border-emerald-500/40 rounded-[24px] p-5 shadow-[0_0_35px_rgba(0,0,0,0.6)] text-center text-white">
+              <div className="bg-[#051c14]/90 backdrop-blur-2xl border-2 border-emerald-500/50 rounded-[28px] p-6 shadow-[0_0_50px_rgba(16,185,129,0.25)] text-center text-white relative overflow-hidden">
+                <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-60" />
                 <div className="w-16 h-16 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-xl shadow-emerald-500/35">
                   <Trophy size={28} className="text-white" />
                 </div>
@@ -259,7 +277,7 @@ const CyberSecurityQuiz = () => {
                 </div>
 
                 <div className="bg-[#06241b]/40 rounded-xl p-2.5 mb-4 border border-emerald-500/10">
-                  <p className="text-xs text-slate-355 font-bold leading-relaxed">
+                  <p className="text-xs text-slate-300 font-bold leading-relaxed">
                     {score >= 80 ? " Outstanding! You're a certified Cyber Defender!" : "Great job! Try again for a perfect score!"}
                   </p>
                 </div>
@@ -2080,23 +2098,23 @@ const CyberSecurityDashboard = () => {
             className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-md"
             onClick={() => setSelectedItem(null)}
           >
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              className="bg-white rounded-[32px] max-w-5xl w-[95%] shadow-2xl relative overflow-hidden flex flex-col lg:flex-row max-h-[90vh] lg:min-h-[550px] border border-slate-100"
-              onClick={e => e.stopPropagation()}
-            >
-              {/* Floating Close Button */}
-              <button
-                onClick={() => setSelectedItem(null)}
-                className="absolute top-4 right-4 z-20 w-10 h-10 flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full transition-colors cursor-pointer"
+            {selectedItem.type === 'video' ? (
+              <motion.div
+                initial={{ scale: 0.95, opacity: 0, y: 20 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.95, opacity: 0, y: 20 }}
+                className="bg-white rounded-[32px] max-w-5xl w-[95%] shadow-2xl relative overflow-hidden flex flex-col lg:flex-row max-h-[90vh] lg:min-h-[550px] border border-slate-100"
+                onClick={e => e.stopPropagation()}
               >
-                <XCircle size={22} strokeWidth={2} />
-              </button>
+                {/* Floating Close Button */}
+                <button
+                  onClick={() => setSelectedItem(null)}
+                  className="absolute top-4 right-4 z-20 w-10 h-10 flex items-center justify-center bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full transition-colors cursor-pointer"
+                >
+                  <XCircle size={22} strokeWidth={2} />
+                </button>
 
-              {/* Left Side: Video Section */}
-              {selectedItem.type === 'video' && selectedItem.videoLink ? (
+                {/* Left Side: Video Section */}
                 <div className="w-full lg:w-[60%] bg-black shrink-0 relative flex flex-col">
                   {/* Container that forces aspect ratio on mobile but fills height on desktop */}
                   <div className="w-full aspect-video lg:aspect-auto lg:h-full lg:absolute lg:inset-0">
@@ -2111,44 +2129,117 @@ const CyberSecurityDashboard = () => {
                     ></iframe>
                   </div>
                 </div>
-              ) : (
-                <div className="w-full lg:w-[60%] h-64 lg:h-auto bg-gradient-to-r from-emerald-500 to-teal-500 shrink-0 flex items-center justify-center relative">
-                  <FileText size={64} className="text-white/30" />
-                </div>
-              )}
-              
-              {/* Right Side: Title and Content Section */}
-              <div className="w-full lg:w-[40%] flex-1 bg-white flex flex-col overflow-hidden relative">
-                {/* Offset Scrollable Area to keep scrollbar away from rounded corners */}
-                <div 
-                  data-lenis-prevent
-                  className="flex-grow overflow-y-auto custom-modal-scrollbar my-6 mr-3 ml-6 lg:ml-8"
-                >
-                  <div className="pr-4 pb-2 mt-4 lg:mt-0">
-                    <div className="flex flex-wrap items-center gap-3 mb-5">
-                      <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-700 flex items-center gap-1.5">
-                        {selectedItem.type === 'video' ? <><Play size={12} fill="currentColor" /> VIDEO MODULE</> : <><FileText size={12} fill="currentColor" /> READING MATERIAL</>}
-                      </span>
-                      {selectedItem.duration && <span className="flex items-center gap-1.5 text-[11px] font-bold text-slate-500"><Clock size={14} /> {selectedItem.duration}</span>}
-                    </div>
-                    
-                    <h2 className="text-xl md:text-2xl font-black text-slate-900 mb-6 leading-tight pr-4">
-                      {selectedItem.title}
-                    </h2>
-                    
-                    <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-                      <h3 className="text-sm font-black text-slate-800 mb-4 flex items-center gap-2 uppercase tracking-wide">
-                         <Shield className="text-emerald-500" size={18}/>
-                         Lesson Details
-                      </h3>
-                      <p className="text-sm font-medium text-slate-700 leading-relaxed whitespace-pre-line">
-                        {selectedItem.content}
-                      </p>
+                
+                {/* Right Side: Title and Content Section */}
+                <div className="w-full lg:w-[40%] flex-1 bg-white flex flex-col overflow-hidden relative">
+                  {/* Offset Scrollable Area to keep scrollbar away from rounded corners */}
+                  <div 
+                    data-lenis-prevent
+                    className="flex-grow overflow-y-auto custom-modal-scrollbar my-6 mr-3 ml-6 lg:ml-8"
+                  >
+                    <div className="pr-4 pb-2 mt-4 lg:mt-0">
+                      <div className="flex flex-wrap items-center gap-3 mb-5">
+                        <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-700 flex items-center gap-1.5">
+                          <Play size={12} fill="currentColor" /> VIDEO MODULE
+                        </span>
+                        {selectedItem.duration && <span className="flex items-center gap-1.5 text-[11px] font-bold text-slate-500"><Clock size={14} /> {selectedItem.duration}</span>}
+                      </div>
+                      
+                      <h2 className="text-xl md:text-2xl font-black text-slate-900 mb-6 leading-tight pr-4">
+                        {selectedItem.title}
+                      </h2>
+                      
+                      <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
+                        <h3 className="text-sm font-black text-slate-800 mb-4 flex items-center gap-2 uppercase tracking-wide">
+                           <Shield className="text-emerald-500" size={18}/>
+                           Lesson Details
+                        </h3>
+                        <p className="text-sm font-medium text-slate-700 leading-relaxed whitespace-pre-line">
+                          {selectedItem.content}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            ) : (
+              <motion.div
+                initial={{ scale: 0.95, opacity: 0, y: 15 }}
+                animate={{ scale: 1, opacity: 1, y: 0 }}
+                exit={{ scale: 0.95, opacity: 0, y: 15 }}
+                className="bg-white rounded-[28px] max-w-xl w-[92%] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] relative overflow-hidden flex flex-col border border-emerald-500/20"
+                onClick={e => e.stopPropagation()}
+              >
+                {/* Header Banner */}
+                <div className="relative bg-gradient-to-br from-[#063b2c] via-[#09523d] to-[#0d6e52] p-6 text-white overflow-hidden">
+                  <div className="absolute -right-6 -bottom-6 w-32 h-32 bg-emerald-400/10 rounded-full blur-xl pointer-events-none" />
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 text-white/5 pointer-events-none">
+                    <Shield size={120} />
+                  </div>
+
+                  {/* Close Button */}
+                  <button
+                    onClick={() => setSelectedItem(null)}
+                    className="absolute top-4 right-4 z-20 w-9 h-9 flex items-center justify-center bg-white/10 hover:bg-white/20 text-white rounded-full transition-all cursor-pointer backdrop-blur-md"
+                  >
+                    <XCircle size={20} />
+                  </button>
+
+                  <div className="relative z-10 pr-8">
+                    <div className="flex items-center gap-2 mb-2.5">
+                      <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-400/20 text-emerald-300 border border-emerald-400/30 flex items-center gap-1.5 shadow-sm">
+                        <FileText size={12} className="text-emerald-300" /> READING MATERIAL
+                      </span>
+                      {selectedItem.duration && (
+                        <span className="flex items-center gap-1 text-[11px] font-bold text-emerald-200/80 bg-black/20 px-2.5 py-0.5 rounded-full">
+                          <Clock size={12} /> {selectedItem.duration}
+                        </span>
+                      )}
+                    </div>
+
+                    <h2 className="text-xl md:text-2xl font-black text-white leading-tight">
+                      {selectedItem.title}
+                    </h2>
+                  </div>
+                </div>
+
+                {/* Content Section */}
+                <div 
+                  data-lenis-prevent
+                  className="p-6 md:p-7 max-h-[60vh] overflow-y-auto custom-modal-scrollbar space-y-5"
+                >
+                  <div className="bg-gradient-to-br from-emerald-50/80 to-teal-50/40 border border-emerald-500/15 rounded-2xl p-5 md:p-6 shadow-sm relative">
+                    <div className="flex items-center gap-2 text-emerald-800 font-extrabold text-xs uppercase tracking-wider mb-3.5 pb-2.5 border-b border-emerald-500/10">
+                      <Shield className="text-emerald-600 shrink-0" size={16} />
+                      <span>Lesson Details & Guidelines</span>
+                    </div>
+                    <div className="text-slate-700 font-semibold text-sm md:text-[15px] leading-relaxed whitespace-pre-line space-y-2">
+                      {selectedItem.content}
+                    </div>
+                  </div>
+
+                  {selectedItem.desc && (
+                    <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/60 p-3.5 rounded-xl text-xs font-bold text-slate-500">
+                      <Sparkles size={16} className="text-amber-500 shrink-0" />
+                      <span>{selectedItem.desc}</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Footer */}
+                <div className="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-4">
+                  <span className="text-xs font-bold text-slate-400 hidden sm:flex items-center gap-1.5">
+                    <CheckCircle2 size={16} className="text-emerald-500 shrink-0" /> Stay secure & alert online!
+                  </span>
+                  <button
+                    onClick={() => setSelectedItem(null)}
+                    className="w-full sm:w-auto ml-auto px-6 py-2.5 bg-gradient-to-r from-[#10b981] to-[#0d9488] hover:from-[#059669] hover:to-[#0f766e] text-white rounded-full text-xs font-black tracking-wide uppercase transition-all shadow-md shadow-emerald-500/25 cursor-pointer active:scale-95 flex items-center justify-center gap-1.5"
+                  >
+                    Got It, Stay Safe <ChevronRight size={14} />
+                  </button>
+                </div>
+              </motion.div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

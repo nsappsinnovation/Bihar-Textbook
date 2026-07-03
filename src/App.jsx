@@ -155,7 +155,7 @@ function App() {
             {/* Audio */}
             <Route path="/audio-books" element={<Audio />} />
             <Route path="/audio-library-dashboard" element={<AudioLibraryDashboard />} />
-            <Route path="/my-audio-library" element={<MyAudioLibrary />} />
+            <Route path="/my-audio-library" element={<AudioLibraryDashboard />} />
 
             {/* Linguistics */}
             <Route path="/ling" element={<Ling />} />

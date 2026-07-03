@@ -127,7 +127,7 @@ const QuizComponent = () => {
                     <span className={`text-xs font-bold ${selectedOption === q.correct ? 'text-green-600'
                       : selectedOption === null ? 'text-amber-600' : 'text-rose-600'
                       }`}>
-                      {selectedOption === q.correct ? '🎉 Correct!' : selectedOption === null ? "Time is up!" : '❌ Wrong answer'}
+                      {selectedOption === q.correct ? 'Correct!' : selectedOption === null ? "Time is up!" : '❌ Wrong answer'}
                     </span>
                   ) : <div />}
 
@@ -1856,12 +1856,6 @@ const LifeSkills = () => {
                                 </div>
                               </div>
 
-                              <div className="bg-emerald-50 rounded-2xl p-4 border border-emerald-100 flex items-start gap-3 mt-6">
-                                <Shield className="text-emerald-600 shrink-0 mt-0.5" size={18} />
-                                <p className="text-xs text-emerald-800 leading-relaxed font-medium">
-                                  <strong className="block font-black mb-0.5">Banking Safety Challenge:</strong> Try inserting the debit card, choose English or Hindi, select Cash Withdrawal, pick Savings A/C, type your withdrawal amount (e.g. 500 or 1000) using the keypad and click ENTER, then enter a secret 4-digit PIN to complete the transaction!
-                                </p>
-                              </div>
                             </div>
                           </div>
                         )}
@@ -1920,13 +1914,6 @@ const LifeSkills = () => {
                                     <li>Make eye contact with drivers to ensure they see you.</li>
                                   </ul>
                                 </div>
-
-                                <div className="bg-emerald-50 rounded-xl p-3 border border-emerald-100/70 flex items-start gap-2">
-                                  <Shield className="text-emerald-600 shrink-0 mt-0.5" size={14} />
-                                  <p className="text-[10px] text-emerald-800 leading-relaxed font-semibold">
-                                    <strong>Safety Rule:</strong> Never cross when traffic light is GREEN or YELLOW. Walk only when cars stop completely for a RED light.
-                                  </p>
-                                </div>
                               </div>
 
                               {/* Right Column: Interactive Road Viewport */}
@@ -1951,36 +1938,60 @@ const LifeSkills = () => {
                                   {/* Lanes */}
                                   <div className="flex-1 relative flex items-center">
                                     <div className="absolute inset-x-0 h-0.5 border-t border-dashed border-white/40 top-1/2 -translate-y-1/2" />
-                                    <div className="absolute left-[40%] top-0 bottom-0 w-20 flex justify-between px-1">
-                                      {[0, 1, 2, 3, 4, 5].map(idx => (
-                                        <div key={idx} className="w-1.5 h-full bg-white/90" />
+                                    {/* Zebra Crossing Stripes (Horizontal bars) */}
+                                    <div className="absolute left-[40%] top-0 bottom-0 w-24 flex flex-col justify-evenly py-1 pointer-events-none">
+                                      {[0, 1, 2, 3, 4, 5, 6, 7].map(idx => (
+                                        <div key={idx} className="h-2 w-full bg-white/95 rounded-sm shadow-sm" />
                                       ))}
                                     </div>
 
-                                    {trafficLight !== 'red' && !isCrossing && (
-                                      <motion.div
-                                        animate={{ x: [-80, 550] }}
-                                        transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-                                        className="absolute top-2.5 text-3xl"
-                                      >
-                                        🚓
-                                      </motion.div>
-                                    )}
-                                    {trafficLight !== 'red' && !isCrossing && (
-                                      <motion.div
-                                        animate={{ x: [550, -80] }}
-                                        transition={{ duration: 4, repeat: Infinity, ease: 'linear', delay: 1 }}
-                                        className="absolute bottom-2.5 text-3xl"
-                                      >
-                                        🚙
-                                      </motion.div>
-                                    )}
+                                    {/* Top Car (Upar wala: Left to Right) */}
+                                    <motion.div
+                                      animate={
+                                        trafficLight === 'red' || isCrossing
+                                          ? { left: '18%' }
+                                          : { left: ['-20%', '110%'] }
+                                      }
+                                      transition={
+                                        trafficLight === 'red' || isCrossing
+                                          ? { duration: 0.5 }
+                                          : {
+                                              duration: trafficLight === 'yellow' ? 7 : 2.5,
+                                              repeat: Infinity,
+                                              ease: 'linear'
+                                            }
+                                      }
+                                      className="absolute top-2.5 text-3xl -scale-x-100 z-10"
+                                    >
+                                      🚓
+                                    </motion.div>
+
+                                    {/* Bottom Car (Neeche wala: Right to Left) */}
+                                    <motion.div
+                                      animate={
+                                        trafficLight === 'red' || isCrossing
+                                          ? { left: '70%' }
+                                          : { left: ['110%', '-20%'] }
+                                      }
+                                      transition={
+                                        trafficLight === 'red' || isCrossing
+                                          ? { duration: 0.5 }
+                                          : {
+                                              duration: trafficLight === 'yellow' ? 8 : 3,
+                                              repeat: Infinity,
+                                              ease: 'linear'
+                                            }
+                                      }
+                                      className="absolute bottom-2.5 text-3xl z-10"
+                                    >
+                                      🚙
+                                    </motion.div>
 
                                     <motion.div
-                                      animate={isCrossing ? { y: [145, 20] } : { y: 145 }}
+                                      animate={isCrossing ? { y: [0, -140] } : { y: 0 }}
                                       transition={{ duration: 2 }}
-                                      className="absolute left-[45%] text-3xl z-20"
-                                      style={{ bottom: '5px' }}
+                                      className="absolute left-[46%] text-3xl z-20"
+                                      style={{ bottom: '-12px' }}
                                     >
                                       🚶‍♂️
                                     </motion.div>
