@@ -1615,7 +1615,7 @@ const PromptAcademyComponent = () => {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-8">
         <div className="space-y-1">
           <h2 className="text-3xl md:text-4xl font-black text-slate-900 font-display flex items-center gap-3">
-            <WandSparkles className="text-pink-500 animate-pulse" size={32} /> Prompt Academy
+            <WandSparkles className="text-purple-500 animate-pulse" size={32} /> Prompt Academy
           </h2>
           <p className="text-sm md:text-base text-slate-500 font-medium max-w-lg">
             Master the art of asking AI and unlock magical results through 10 interactive quests!
@@ -1637,9 +1637,9 @@ const PromptAcademyComponent = () => {
             const isActive = activeLessonIdx === idx;
             const isLocked = lesson.id > 1 && !completedLessons.includes(lesson.id - 1) && !isActive;
 
-            let cardStyle = "border-slate-100 bg-white hover:border-pink-200 hover:bg-pink-50/30 text-slate-600";
+            let cardStyle = "border-slate-100 bg-white hover:border-purple-200 hover:bg-purple-50/30 text-slate-600";
             if (isActive) {
-              cardStyle = "border-pink-400 bg-pink-50/50 text-pink-950 shadow-sm ring-1 ring-pink-500/20";
+              cardStyle = "border-purple-400 bg-purple-50/50 text-purple-950 shadow-sm ring-1 ring-purple-500/20";
             } else if (isLocked) {
               cardStyle = "border-slate-50 bg-slate-50/40 text-slate-400 opacity-60 cursor-not-allowed";
             }
@@ -1671,7 +1671,7 @@ const PromptAcademyComponent = () => {
                        Done
                     </span>
                   ) : isActive ? (
-                    <span className="text-[10px] font-black text-pink-600 bg-pink-50 border border-pink-100 px-2 py-1 rounded-md animate-pulse font-display uppercase tracking-wider">
+                    <span className="text-[10px] font-black text-purple-600 bg-purple-50 border border-purple-100 px-2 py-1 rounded-md animate-pulse font-display uppercase tracking-wider">
                        Active
                     </span>
                   ) : isLocked ? (
@@ -1692,9 +1692,9 @@ const PromptAcademyComponent = () => {
         {/* Right column: Active lesson content area */}
         <div className="lg:col-span-8 bg-white rounded-[1.5rem] border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] overflow-hidden">
           {/* Active Lesson Header Banner */}
-          <div className="bg-white border-b border-pink-100/60 p-6 sm:p-8 flex items-center justify-between gap-4">
+          <div className="bg-white border-b border-purple-100/60 p-6 sm:p-8 flex items-center justify-between gap-4">
             <div>
-              <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-pink-500 bg-pink-50 px-3 py-1.5 rounded-lg mb-2 inline-block font-display border border-pink-100/50">
+              <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-purple-500 bg-purple-50 px-3 py-1.5 rounded-lg mb-2 inline-block font-display border border-purple-100/50">
                 Level {activeLesson.id}: {activeLesson.concept}
               </span>
               <h3 className="text-2xl sm:text-3xl font-black font-display text-slate-900 tracking-tight mt-1">
@@ -1717,7 +1717,7 @@ const PromptAcademyComponent = () => {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex-1 py-3.5 text-center transition-all cursor-pointer border-b-2 outline-none flex flex-col items-center justify-center ${
                     isTabActive
-                      ? "border-pink-500 bg-white text-pink-600 font-black"
+                      ? "border-purple-500 bg-white text-purple-600 font-black"
                       : "border-transparent text-slate-500 hover:text-slate-800 hover:bg-slate-50"
                   }`}
                 >
@@ -1747,23 +1747,23 @@ const PromptAcademyComponent = () => {
                       <h3 className="text-lg sm:text-xl font-black text-slate-800 font-display mb-1">
                         {activeLesson.learn.title}
                       </h3>
-                      <p className="text-xs sm:text-sm text-pink-500 font-black font-display">
+                      <p className="text-xs sm:text-sm text-purple-500 font-black font-display">
                         {activeLesson.learn.subtitle}
                       </p>
                     </div>
                   </div>
 
-                  <div className="bg-gradient-to-br from-pink-50/80 to-purple-50/40 border border-pink-100 rounded-2xl p-5 text-sm sm:text-base text-slate-700 font-medium leading-relaxed shadow-sm">
+                  <div className="bg-gradient-to-br from-purple-50/80 to-purple-50/40 border border-purple-100 rounded-2xl p-5 text-sm sm:text-base text-slate-700 font-medium leading-relaxed shadow-sm">
                     {activeLesson.learn.description}
                   </div>
 
                   <div className="bg-white border border-slate-100/80 shadow-sm rounded-2xl p-5">
-                    <span className="text-xs sm:text-sm font-black text-pink-600 uppercase tracking-wider block mb-3 font-display flex items-center gap-1.5">
+                    <span className="text-xs sm:text-sm font-black text-purple-600 uppercase tracking-wider block mb-3 font-display flex items-center gap-1.5">
                       <Lightbulb size={16} className="text-amber-500" /> Prompt Master Tips
                     </span>
                     <ul className="space-y-2.5 text-sm text-slate-700 font-medium list-disc pl-5 leading-normal">
                       {activeLesson.learn.tips.map((tip, tIdx) => (
-                        <li key={tIdx} className="marker:text-pink-400">{tip}</li>
+                        <li key={tIdx} className="marker:text-purple-400">{tip}</li>
                       ))}
                     </ul>
                   </div>
@@ -1771,7 +1771,7 @@ const PromptAcademyComponent = () => {
                   <div className="pt-4 flex justify-end">
                     <button
                       onClick={() => setActiveTab("quest")}
-                      className="px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-xl text-xs sm:text-sm font-black font-display transition-all shadow-md active:scale-95 cursor-pointer flex items-center gap-1"
+                      className="px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white rounded-xl text-xs sm:text-sm font-black font-display transition-all shadow-md active:scale-95 cursor-pointer flex items-center gap-1"
                     >
                       Let's Go to Quest! <ArrowRight size={16} />
                     </button>
@@ -1792,15 +1792,15 @@ const PromptAcademyComponent = () => {
                   {isQuestCasting && (
                     <div className="absolute inset-0 bg-white/95 z-20 flex flex-col items-center justify-center p-8 text-center rounded-2xl">
                       <div className="relative w-24 h-24 mb-4">
-                        <div className="absolute inset-0 rounded-full border-4 border-pink-100 border-t-pink-500 animate-spin" />
-                        <div className="absolute inset-2 bg-pink-50 rounded-full flex items-center justify-center shadow-inner">
-                          <WandSparkles className="text-pink-500 animate-bounce" size={28} />
+                        <div className="absolute inset-0 rounded-full border-4 border-purple-100 border-t-purple-500 animate-spin" />
+                        <div className="absolute inset-2 bg-purple-50 rounded-full flex items-center justify-center shadow-inner">
+                          <WandSparkles className="text-purple-500 animate-bounce" size={28} />
                         </div>
                       </div>
                       <h3 className="text-base font-black text-slate-800 font-display mb-1">
                         Casting Spell...
                       </h3>
-                      <p className="text-sm font-black text-pink-600 animate-pulse font-display">
+                      <p className="text-sm font-black text-purple-600 animate-pulse font-display">
                         {castingTexts[castingStep]}
                       </p>
                     </div>
@@ -1835,19 +1835,19 @@ const PromptAcademyComponent = () => {
                         </div>
 
                         {/* Awesome Super Output */}
-                        <div className="bg-gradient-to-br from-pink-50/40 to-purple-50/20 border border-pink-100 rounded-2xl p-5 flex flex-col justify-between relative shadow-sm">
-                          <span className="absolute top-2.5 right-2.5 bg-pink-500 text-white text-[10px] sm:text-xs font-black px-2 py-0.5 rounded uppercase tracking-wider font-display animate-bounce shadow-sm">
+                        <div className="bg-gradient-to-br from-purple-50/40 to-purple-50/20 border border-purple-100 rounded-2xl p-5 flex flex-col justify-between relative shadow-sm">
+                          <span className="absolute top-2.5 right-2.5 bg-purple-500 text-white text-[10px] sm:text-xs font-black px-2 py-0.5 rounded uppercase tracking-wider font-display animate-bounce shadow-sm">
                             Awesome
                           </span>
                           <div>
-                            <span className="text-xs sm:text-sm font-black text-pink-600 uppercase font-display flex items-center gap-1.5 mb-1">
+                            <span className="text-xs sm:text-sm font-black text-purple-600 uppercase font-display flex items-center gap-1.5 mb-1">
                               <Sparkles size={16} /> Magic Super Prompt Result
                             </span>
                             <span className="text-xs sm:text-sm font-bold text-slate-700 block mb-3 max-h-16 overflow-y-auto leading-relaxed font-mono">
                               "{getLivePromptText()}"
                             </span>
                           </div>
-                          <div className="bg-white rounded-xl overflow-hidden min-h-[180px] flex items-center justify-center p-3 border border-pink-100/50 shadow-[0_2px_10px_rgba(0,0,0,0.03)]">
+                          <div className="bg-white rounded-xl overflow-hidden min-h-[180px] flex items-center justify-center p-3 border border-purple-100/50 shadow-[0_2px_10px_rgba(0,0,0,0.03)]">
                             {activeLesson.quest.superOutputImage ? (
                               <BoringVsSuperPromptImage
                                 imageUrl={activeLesson.quest.superOutputImage}
@@ -1867,13 +1867,13 @@ const PromptAcademyComponent = () => {
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
                       {/* Character bubble */}
                       <div className="md:col-span-5 bg-slate-50 border border-slate-100 p-5 rounded-2xl text-center flex flex-col items-center shadow-sm">
-                        <div className="w-24 h-24 bg-white rounded-xl border border-pink-100 shadow-sm p-1.5 mb-3.5 shrink-0 overflow-hidden">
+                        <div className="w-24 h-24 bg-white rounded-xl border border-purple-100 shadow-sm p-1.5 mb-3.5 shrink-0 overflow-hidden">
                           {getCharacterImage(activeLesson)}
                         </div>
                         <h4 className="text-sm sm:text-base font-black text-slate-800 font-display">
                           {activeLesson.quest.characterName}
                         </h4>
-                        <span className="text-[10px] sm:text-xs font-black text-pink-500 uppercase tracking-widest block mb-3 font-display">
+                        <span className="text-[10px] sm:text-xs font-black text-purple-500 uppercase tracking-widest block mb-3 font-display">
                           Quest Guide
                         </span>
                         <div className="bg-white border border-slate-100/80 p-4 rounded-xl shadow-inner text-xs sm:text-sm font-medium text-slate-600 leading-relaxed text-left relative">
@@ -1886,7 +1886,7 @@ const PromptAcademyComponent = () => {
                       <div className="md:col-span-7 space-y-4">
                         <div>
                           <h4 className="text-sm sm:text-base font-black text-slate-800 font-display flex items-center gap-1.5">
-                            <WandSparkles size={16} className="text-pink-500" /> Assemble Ingredients
+                            <WandSparkles size={16} className="text-purple-500" /> Assemble Ingredients
                           </h4>
                           <p className="text-xs sm:text-sm text-slate-500 font-medium mt-1">
                             Select all 4 power-ups to write the ultimate prompt.
@@ -1943,7 +1943,7 @@ const PromptAcademyComponent = () => {
                           disabled={selectedIngredients.length < activeLesson.quest.ingredients.length}
                           className={`w-full py-3.5 rounded-xl text-sm sm:text-base font-black font-display transition-all ${
                             selectedIngredients.length === activeLesson.quest.ingredients.length
-                              ? "bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white shadow-md cursor-pointer active:scale-[0.99]"
+                              ? "bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white shadow-md cursor-pointer active:scale-[0.99]"
                               : "bg-slate-100 border border-slate-200 text-slate-400 cursor-not-allowed"
                           }`}
                         >
@@ -1982,7 +1982,7 @@ const PromptAcademyComponent = () => {
                   <div className="space-y-3.5">
                     {activeLesson.battle.options.map((option, idx) => {
                       const isSelected = selectedOption === idx;
-                      let optionStyle = "bg-white border-slate-200 text-slate-700 hover:border-pink-200 hover:bg-pink-50/20";
+                      let optionStyle = "bg-white border-slate-200 text-slate-700 hover:border-purple-200 hover:bg-purple-50/20";
                       if (battleAnswered) {
                         if (option.isCorrect) {
                            optionStyle = "bg-emerald-50 border-emerald-400 text-emerald-700 font-bold";
@@ -2005,7 +2005,7 @@ const PromptAcademyComponent = () => {
                               : battleAnswered && isSelected && !option.isCorrect
                               ? "bg-rose-500 text-white"
                               : isSelected
-                              ? "bg-pink-500 text-white"
+                              ? "bg-purple-500 text-white"
                               : "bg-slate-100 text-slate-500"
                           }`}>
                             {battleAnswered && option.isCorrect ? "" : battleAnswered && isSelected && !option.isCorrect ? "" : optionLabels[idx]}
@@ -2029,7 +2029,7 @@ const PromptAcademyComponent = () => {
                     <div className="flex justify-end pt-2">
                       <button
                         onClick={handleCompleteBattle}
-                        className="px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-xl text-xs sm:text-sm font-black font-display transition-all shadow-md active:scale-95 cursor-pointer flex items-center gap-1"
+                        className="px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white rounded-xl text-xs sm:text-sm font-black font-display transition-all shadow-md active:scale-95 cursor-pointer flex items-center gap-1"
                       >
                         {activeLesson.battle.options[selectedOption]?.isCorrect ? (
                           activeLessonIdx < lessonsData.length - 1 ? (
@@ -2069,25 +2069,25 @@ const LearnAndPromptAcademyComponent = () => {
             onClick={() => setActiveSection('concepts')}
             className={`flex-1 sm:flex-initial px-5 sm:px-7 py-3 rounded-xl font-black font-display text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer ${
               activeSection === 'concepts'
-                ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-200 scale-[1.02]'
+                ? 'bg-white text-purple-600 shadow-sm border border-purple-100'
                 : 'text-slate-500 hover:text-slate-900 hover:bg-white/60'
             }`}
           >
-            <Lightbulb size={18} className={activeSection === 'concepts' ? 'text-amber-300 animate-pulse' : ''} />
+            <Lightbulb size={18} className={activeSection === 'concepts' ? 'text-purple-500 animate-pulse' : ''} />
             <span>AI Quick Concepts</span>
-            <span className={`text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-extrabold ml-1 ${activeSection === 'concepts' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-600'}`}>Easy</span>
+            <span className={`text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-extrabold ml-1 ${activeSection === 'concepts' ? 'bg-purple-100 text-purple-700' : 'bg-slate-200 text-slate-600'}`}>Easy</span>
           </button>
           <button
             onClick={() => setActiveSection('academy')}
             className={`flex-1 sm:flex-initial px-5 sm:px-7 py-3 rounded-xl font-black font-display text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer ${
               activeSection === 'academy'
-                ? 'bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 text-white shadow-md shadow-pink-200 scale-[1.02]'
+                ? 'bg-white text-purple-600 shadow-sm border border-purple-100'
                 : 'text-slate-500 hover:text-slate-900 hover:bg-white/60'
             }`}
           >
-            <WandSparkles size={18} className={activeSection === 'academy' ? 'text-pink-300 animate-spin' : ''} />
+            <WandSparkles size={18} className={activeSection === 'academy' ? 'text-purple-500 animate-spin' : ''} />
             <span>Prompt Academy Course</span>
-            <span className={`text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-extrabold ml-1 ${activeSection === 'academy' ? 'bg-white/20 text-white' : 'bg-pink-100 text-pink-700'}`}>10 Lessons</span>
+            <span className={`text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-extrabold ml-1 ${activeSection === 'academy' ? 'bg-purple-100 text-purple-700' : 'bg-slate-200 text-slate-600'}`}>10 Lessons</span>
           </button>
         </div>
 
@@ -2157,7 +2157,7 @@ const LearnAndPromptAcademyComponent = () => {
                         <div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div> Video Recommendations (YouTube)
                       </li>
                       <li className="flex items-center gap-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-pink-500"></div> Self-Driving Cars
+                        <div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div> Self-Driving Cars
                       </li>
                       <li className="flex items-center gap-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div> Math & Homework Tutors
@@ -2187,7 +2187,7 @@ const LearnAndPromptAcademyComponent = () => {
                      <span className="text-[10px] font-black text-slate-600 uppercase tracking-wide">Chat</span>
                    </div>
                    <div className="bg-white p-4 rounded-2xl shadow-sm border border-indigo-50 flex flex-col items-center justify-center gap-2 transform -translate-y-2 -rotate-2 hover:rotate-0 hover:scale-105 transition-all duration-300">
-                     <div className="w-10 h-10 rounded-full bg-pink-50 text-pink-500 flex items-center justify-center"><Palette size={20} /></div>
+                     <div className="w-10 h-10 rounded-full bg-purple-50 text-purple-500 flex items-center justify-center"><Palette size={20} /></div>
                      <span className="text-[10px] font-black text-slate-600 uppercase tracking-wide">Create</span>
                    </div>
                    <div className="bg-white p-4 rounded-2xl shadow-sm border border-indigo-50 flex flex-col items-center justify-center gap-2 transform translate-y-6 rotate-6 hover:rotate-0 hover:scale-105 transition-all duration-300">
@@ -2280,12 +2280,12 @@ const LearnAndPromptAcademyComponent = () => {
                 </div>
 
                 {/* Power 4 */}
-                <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-pink-300 hover:shadow-lg transition-all text-left flex flex-col justify-between group">
+                <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-purple-300 hover:shadow-lg transition-all text-left flex flex-col justify-between group">
                   <div className="space-y-3">
-                    <div className="w-12 h-12 rounded-2xl bg-pink-50 text-pink-600 flex items-center justify-center font-black group-hover:scale-110 transition-transform shadow-inner">
+                    <div className="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center font-black group-hover:scale-110 transition-transform shadow-inner">
                       <Palette size={24} />
                     </div>
-                    <h4 className="text-base font-black text-slate-900 font-display group-hover:text-pink-600 transition-colors">
+                    <h4 className="text-base font-black text-slate-900 font-display group-hover:text-purple-600 transition-colors">
                       Generative Art
                     </h4>
                     <p className="text-xs text-slate-600 font-medium leading-relaxed">
@@ -2293,7 +2293,7 @@ const LearnAndPromptAcademyComponent = () => {
                     </p>
                   </div>
                   <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                    <span className="text-[10px] font-extrabold text-pink-600 bg-pink-50 px-2 py-1 rounded-md uppercase font-mono tracking-wider">
+                    <span className="text-[10px] font-extrabold text-purple-600 bg-purple-50 px-2 py-1 rounded-md uppercase font-mono tracking-wider">
                       AI Image Creators
                     </span>
                   </div>
@@ -2646,7 +2646,7 @@ const AiIntelligenceDashboard = () => {
   ];
 
   const quickStats = [
-    { label: 'Learn & Prompt Academy', value: 'Concepts & Prompts', icon: <WandSparkles className="text-pink-600" />, color: 'bg-pink-50' },
+    { label: 'Learn & Prompt Academy', value: 'Concepts & Prompts', icon: <WandSparkles className="text-purple-600" />, color: 'bg-purple-50' },
     { label: 'Explore Tools', value: 'AI powered', icon: <Cpu className="text-purple-600" />, color: 'bg-purple-50' },
     { label: 'Take Challenges', value: 'Test skills', icon: <Trophy className="text-orange-500" />, color: 'bg-orange-50' }
   ];
