@@ -209,7 +209,7 @@ const AudioLibraryDashboard = () => {
       <main className="flex-1 min-h-screen pb-0">
         {/* Back Button */}
         <button
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/#missions-grid")}
           className="fixed top-5 left-5 z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group cursor-pointer"
         >
           <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
@@ -353,19 +353,13 @@ const AudioLibraryDashboard = () => {
 
             {/* Bookshelf Grid (Responsive 1/2/3/4 Columns across full width) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 items-stretch">
-              <AnimatePresence mode="popLayout">
                 {filteredBooks.map((book) => {
                   const isBookPlaying = selectedBook && selectedBook.id === book.id && isPlaying;
                   const isFav = favorites.includes(book.id);
                   
                   return (
-                    <motion.div
+                    <div
                       key={book.id}
-                      layout
-                      initial={{ opacity: 0, scale: 0.95 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      transition={{ duration: 0.25 }}
                       className={`bg-white rounded-2xl border transition-all p-5 flex flex-col justify-between group relative overflow-hidden ${
                         selectedBook && selectedBook.id === book.id 
                           ? 'border-purple-400 shadow-lg ring-2 ring-purple-500/10' 
@@ -468,7 +462,7 @@ const AudioLibraryDashboard = () => {
                           </button>
                         </div>
                       </div>
-                    </motion.div>
+                    </div>
                   );
                 })}
 
@@ -485,7 +479,6 @@ const AudioLibraryDashboard = () => {
                     </button>
                   </div>
                 )}
-              </AnimatePresence>
             </div>
 
           </div>

@@ -325,7 +325,7 @@ const Basicskills = () => {
         {/* Navigation */}
         <div className="mb-4">
           <button 
-            onClick={() => navigate("/")} 
+            onClick={() => navigate("/#missions-grid")} 
             className="group w-10 h-10 bg-white hover:bg-slate-50 border border-slate-200/80 rounded-full shadow-sm flex items-center justify-center text-slate-600 hover:text-slate-900 transition-all duration-300 cursor-pointer"
             aria-label="Back to missions"
           >

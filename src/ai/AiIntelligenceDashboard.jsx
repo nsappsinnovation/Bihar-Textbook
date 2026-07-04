@@ -2498,7 +2498,7 @@ const AiIntelligenceDashboard = () => {
   return (
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden">
       <button
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/#missions-grid")}
         className="fixed top-3 left-3 md:top-5 md:left-5 z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-green-600 hover:shadow-lg transition-all border border-slate-100 group"
       >
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
@@ -2508,27 +2508,7 @@ const AiIntelligenceDashboard = () => {
       <main className="flex-1 min-h-screen pb-4 overflow-y-auto">
         <div className="px-4 sm:px-6 md:px-12 2xl:px-20 space-y-6 md:space-y-8 pt-4 2xl:max-w-[1600px] 2xl:mx-auto">
 
-          {/* Top Promotional Banner */}
-          <div className="bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 text-white rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-md border border-white/10 relative overflow-hidden group">
-            <div className="absolute -right-10 -top-10 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:scale-120 transition-transform duration-700 pointer-events-none" />
-            <div className="flex items-center gap-3 relative z-10 text-left">
-              <span className="text-2xl animate-bounce shrink-0 select-none text-white"><Cpu size={24} /></span>
-              <div>
-                <h4 className="font-extrabold text-sm sm:text-base font-display">Learn How to Use AI in Efficient Ways!</h4>
-                <p className="text-xs text-pink-100 font-bold">Unlock the secrets of Prompt Academy to get 10x better results from AI sidekicks.</p>
-              </div>
-            </div>
-            <button
-              onClick={() => {
-                setActiveFilter('Prompt Academy');
-                const target = document.getElementById("content-section");
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="px-5 py-2.5 bg-white text-purple-700 hover:bg-purple-50 rounded-xl text-xs sm:text-sm font-black font-display shadow-sm hover:shadow-md transition-all active:scale-95 cursor-pointer shrink-0 relative z-10"
-            >
-              Start Prompt Academy! 
-            </button>
-          </div>
+          
 
           {/* Hero & Stats Section */}
           <div className="relative">

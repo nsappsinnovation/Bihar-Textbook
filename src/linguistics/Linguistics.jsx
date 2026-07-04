@@ -20,6 +20,52 @@ import {
 const Linguistics = () => {
   const navigate = useNavigate();
   const [activeModule, setActiveModule] = useState(0);
+
+  const playSpeech = (text, langCode) => {
+    if (!window.speechSynthesis || !text) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    const langMap = {
+      'de': 'de-DE', 'fr': 'fr-FR', 'es': 'es-ES', 'hi': 'hi-IN', 'en': 'en-US', 
+      'ja': 'ja-JP', 'ko': 'ko-KR', 'it': 'it-IT', 'ru': 'ru-RU', 'zh': 'zh-CN', 'ar': 'ar-SA',
+      'bn': 'bn-IN', 'ta': 'ta-IN', 'te': 'te-IN'
+    };
+    const langNamesMap = {
+      'ar': 'arabic', 'hi': 'hindi', 'de': 'german', 'fr': 'french', 'es': 'spanish',
+      'ja': 'japanese', 'ko': 'korean', 'it': 'italian', 'ru': 'russian', 'zh': 'chinese', 'en': 'english',
+      'bn': 'bengali', 'ta': 'tamil', 'te': 'telugu'
+    };
+    const targetLangTag = langMap[langCode] || langCode || 'en-US';
+    utterance.lang = targetLangTag;
+    utterance.rate = 0.95;
+    
+    const speakWithVoice = () => {
+      const voices = window.speechSynthesis.getVoices();
+      let voiceFound = false;
+      if (voices.length > 0) {
+        const nameKeyword = langNamesMap[langCode] || '';
+        const voice = voices.find(v => v.lang.replace('_', '-').toLowerCase().startsWith(targetLangTag.toLowerCase()))
+                   || voices.find(v => v.lang.replace('_', '-').toLowerCase().startsWith((langCode || '').toLowerCase()))
+                   || (nameKeyword && voices.find(v => v.name.toLowerCase().includes(nameKeyword)))
+                   || voices.find(v => v.lang.toLowerCase().includes((langCode || '').toLowerCase()));
+        if (voice) {
+          utterance.voice = voice;
+          utterance.lang = voice.lang;
+          voiceFound = true;
+        }
+      }
+      window.speechSynthesis.speak(utterance);
+    };
+
+    if (window.speechSynthesis.getVoices().length === 0) {
+      window.speechSynthesis.onvoiceschanged = () => {
+        speakWithVoice();
+      };
+      setTimeout(speakWithVoice, 150);
+    } else {
+      speakWithVoice();
+    }
+  };
   
   // Interactive States
   const [selectedIndianLang, setSelectedIndianLang] = useState(0);
@@ -172,16 +218,15 @@ const Linguistics = () => {
       ]
     },
     {
-      name: "Arabic",
-      greeting: "مرحبا",
-      transliteration: "Mar-ha-ba",
-      meaning: "Hello",
-      family: "Semitic (Afroasiatic)",
-      fact: "Arabic is written from right to left and uses a unique root-and-pattern system.",
+      name: "Italian",
+      greeting: "Ciao",
+      transliteration: "Chow",
+      meaning: "Hello / Goodbye",
+      family: "Romance (Latin-based)",
+      fact: "Italian is known as the language of music and features expressive melodious vowel endings.",
       syllables: [
-        { char: "مر", rom: "mar", desc: "Bilabial nasal closing into a trilled/tapped alveolar r." },
-        { char: "حـ", rom: "ha", desc: "Voiceless pharyngeal fricative, a deep breathy h sound." },
-        { char: "با", rom: "ba", desc: "Voiced bilabial stop ending with a pure open vowel." }
+        { char: "Ci", rom: "ch", desc: "Voiceless palato-alveolar affricate, similar to English 'ch' in cheese." },
+        { char: "ao", rom: "ow", desc: "Pure open diphthong ending with a rounded vowel." }
       ]
     }
   ];
@@ -221,7 +266,16 @@ const Linguistics = () => {
             <div className="my-auto flex flex-col items-center space-y-6">
               <div className="text-center space-y-2">
                 <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Selected Greeting ({currentData.script} Script)</p>
-                <h4 className="text-3xl sm:text-4xl font-extrabold text-emerald-400 tracking-wide">{currentData.greeting}</h4>
+                <h4 className="text-3xl sm:text-4xl font-extrabold text-emerald-400 tracking-wide flex items-center justify-center gap-3">
+                  {currentData.greeting}
+                  <button 
+                    onClick={() => playSpeech(currentData.greeting, currentData.name === "Hindi" ? "hi" : currentData.name === "Bengali" ? "bn" : currentData.name === "Tamil" ? "ta" : currentData.name === "Telugu" ? "te" : "en")}
+                    className="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500 hover:text-slate-950 flex items-center justify-center transition-all cursor-pointer shadow-sm"
+                    title="Listen pronunciation"
+                  >
+                    <Mic size={16} />
+                  </button>
+                </h4>
                 <p className="text-xs sm:text-sm text-slate-300 italic">{currentData.transliteration}</p>
               </div>
 
@@ -368,8 +422,15 @@ const Linguistics = () => {
             <div className="my-auto flex flex-col items-center space-y-6">
               <div className="text-center space-y-2">
                 <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Selected Greeting ({currentLang.family})</p>
-                <h4 className="text-3xl sm:text-4xl font-extrabold text-blue-400 tracking-wide" dir={currentLang.name === "Arabic" ? "rtl" : "ltr"}>
+                <h4 className="text-3xl sm:text-4xl font-extrabold text-blue-400 tracking-wide flex items-center justify-center gap-3">
                   {currentLang.greeting}
+                  <button 
+                    onClick={() => playSpeech(currentLang.greeting, currentLang.name === "French" ? "fr" : currentLang.name === "Spanish" ? "es" : currentLang.name === "German" ? "de" : "it")}
+                    className="w-8 h-8 rounded-full bg-blue-500/20 text-blue-400 hover:bg-blue-500 hover:text-slate-950 flex items-center justify-center transition-all cursor-pointer shadow-sm"
+                    title="Listen pronunciation"
+                  >
+                    <Mic size={16} />
+                  </button>
                 </h4>
                 <p className="text-xs sm:text-sm text-slate-300 italic">{currentLang.transliteration}</p>
                 <p className="text-[10px] text-slate-500">Meaning: "{currentLang.meaning}"</p>
@@ -378,7 +439,7 @@ const Linguistics = () => {
               <div className="flex flex-col items-center space-y-4 w-full">
                 <p className="text-[10px] text-slate-400 font-medium">Hover or click a syllable below to analyze its phonetic origin:</p>
                 
-                <div className="flex justify-center gap-2.5" dir={currentLang.name === "Arabic" ? "rtl" : "ltr"}>
+                <div className="flex justify-center gap-2.5">
                   {currentLang.syllables.map((syl, idx) => (
                     <button
                       key={idx}

@@ -19,118 +19,200 @@ const VrVirtualLab = () => {
   const canvasRef = useRef(null);
   const latencyCanvasRef = useRef(null);
 
-  // Ray tracing canvas renderer for Tab 1
+  // Ray tracing canvas renderer for Tab 1 (Super High-DPI Crisp Rendering)
   useEffect(() => {
     if (activeTab !== 'optics') return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     
-    const width = canvas.width = 540;
-    const height = canvas.height = 240;
+    // 4x supersampling via High-DPI scaling to completely eliminate blur and pixelation
+    const dpr = Math.max(window.devicePixelRatio || 1, 2) * 2;
+    const logicalWidth = 540;
+    const logicalHeight = 240;
 
-    // Dark optical bench background for high contrast glowing light rays
-    ctx.fillStyle = '#0f172a';
-    ctx.fillRect(0, 0, width, height);
-    ctx.strokeStyle = 'rgba(51, 65, 85, 0.4)';
-    ctx.lineWidth = 1;
-    for (let x = 0; x < width; x += 30) {
+    canvas.width = logicalWidth * dpr;
+    canvas.height = logicalHeight * dpr;
+    canvas.style.width = '100%';
+    canvas.style.height = 'auto';
+    canvas.style.aspectRatio = '540 / 240';
+
+    ctx.save();
+    ctx.scale(dpr, dpr);
+
+    // Dark high-contrast background
+    ctx.fillStyle = '#080e1e';
+    ctx.fillRect(0, 0, logicalWidth, logicalHeight);
+
+    // Subtle ambient radial glow behind optical components
+    const bgGlow = ctx.createRadialGradient(270, 120, 10, 270, 120, 220);
+    bgGlow.addColorStop(0, 'rgba(30, 58, 138, 0.3)');
+    bgGlow.addColorStop(0.6, 'rgba(15, 23, 42, 0.15)');
+    bgGlow.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    ctx.fillStyle = bgGlow;
+    ctx.fillRect(0, 0, logicalWidth, logicalHeight);
+
+    // Ultra-crisp grid lines
+    ctx.strokeStyle = 'rgba(51, 65, 85, 0.35)';
+    ctx.lineWidth = 0.75;
+    for (let x = 0; x <= logicalWidth; x += 30) {
       ctx.beginPath();
       ctx.moveTo(x, 0);
-      ctx.lineTo(x, height);
+      ctx.lineTo(x, logicalHeight);
       ctx.stroke();
     }
-    for (let y = 0; y < height; y += 30) {
+    for (let y = 0; y <= logicalHeight; y += 30) {
       ctx.beginPath();
       ctx.moveTo(0, y);
-      ctx.lineTo(width, y);
+      ctx.lineTo(logicalWidth, y);
       ctx.stroke();
     }
 
     // 1. Draw VR Screen (Right Side)
     const screenX = 460;
-    ctx.fillStyle = '#1e293b';
+    
+    ctx.save();
+    ctx.shadowColor = '#38bdf8';
+    ctx.shadowBlur = 12;
+    ctx.fillStyle = '#0f172a';
     ctx.fillRect(screenX, 40, 20, 160);
+    ctx.restore();
+
     ctx.strokeStyle = '#38bdf8';
-    ctx.lineWidth = 4;
+    ctx.lineWidth = 2.5;
     ctx.strokeRect(screenX, 40, 20, 160);
     
-    // Draw rainbow colors on the VR Screen
+    // Vivid RGB subpixel gradient on the screen
     const screenGrad = ctx.createLinearGradient(screenX, 40, screenX, 200);
-    screenGrad.addColorStop(0, '#f43f5e'); 
-    screenGrad.addColorStop(0.5, '#10b981'); 
+    screenGrad.addColorStop(0, '#ff2a5f'); 
+    screenGrad.addColorStop(0.5, '#00e599'); 
     screenGrad.addColorStop(1, '#6366f1'); 
     ctx.fillStyle = screenGrad;
-    ctx.fillRect(screenX + 3, 44, 14, 152);
+    ctx.fillRect(screenX + 3, 43, 14, 154);
+
+    // Crisp label badge for VR Screen
+    ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
+    ctx.fillRect(screenX - 22, 14, 68, 18);
+    ctx.strokeStyle = 'rgba(56, 189, 248, 0.45)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(screenX - 22, 14, 68, 18);
 
     ctx.fillStyle = '#38bdf8';
-    ctx.font = 'bold 10px sans-serif';
-    ctx.fillText("VR SCREEN", screenX - 25, 30);
+    ctx.font = '700 10px "Inter", "Segoe UI", system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText("VR SCREEN", screenX + 12, 27);
+    ctx.textAlign = 'left';
 
-    // 2. Draw Magic Lens
+    // 2. Draw Magic Glass Lens
     const lensX = screenX - 60 - (lensDist - 30) * 1.6;
     
     ctx.save();
+    ctx.shadowColor = '#38bdf8';
+    ctx.shadowBlur = 14;
     ctx.beginPath();
     ctx.moveTo(lensX, 40);
-    ctx.quadraticCurveTo(lensX + 18, 120, lensX, 200);
-    ctx.quadraticCurveTo(lensX - 18, 120, lensX, 40);
+    ctx.quadraticCurveTo(lensX + 20, 120, lensX, 200);
+    ctx.quadraticCurveTo(lensX - 20, 120, lensX, 40);
     ctx.closePath();
-    ctx.fillStyle = 'rgba(56, 189, 248, 0.3)';
+    
+    const lensGrad = ctx.createLinearGradient(lensX - 15, 40, lensX + 15, 200);
+    lensGrad.addColorStop(0, 'rgba(56, 189, 248, 0.55)');
+    lensGrad.addColorStop(0.5, 'rgba(14, 165, 233, 0.18)');
+    lensGrad.addColorStop(1, 'rgba(56, 189, 248, 0.55)');
+    ctx.fillStyle = lensGrad;
     ctx.fill();
+
     ctx.strokeStyle = '#38bdf8';
-    ctx.lineWidth = 3;
+    ctx.lineWidth = 2.5;
     ctx.stroke();
     ctx.restore();
 
+    // Specular glass reflection curve inside lens
+    ctx.beginPath();
+    ctx.moveTo(lensX - 4, 60);
+    ctx.quadraticCurveTo(lensX + 5, 120, lensX - 4, 180);
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.55)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Label for LENS
+    ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
+    ctx.fillRect(lensX - 20, 14, 40, 18);
+    ctx.strokeStyle = 'rgba(56, 189, 248, 0.45)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(lensX - 20, 14, 40, 18);
+
     ctx.fillStyle = '#38bdf8';
-    ctx.fillText("LENS", lensX - 12, 30);
+    ctx.font = '700 10px "Inter", "Segoe UI", system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText("LENS", lensX, 27);
+    ctx.textAlign = 'left';
 
     // 3. Draw Kid's Eye
     const eyeX = 80;
     const eyeY = 120;
     
-    // Draw white sclera
+    // Label badge for YOUR EYE
+    ctx.fillStyle = 'rgba(15, 23, 42, 0.9)';
+    ctx.fillRect(eyeX - 35, eyeY - 56, 70, 18);
+    ctx.strokeStyle = 'rgba(148, 163, 184, 0.45)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(eyeX - 35, eyeY - 56, 70, 18);
+
+    ctx.fillStyle = '#f1f5f9';
+    ctx.font = '700 10px "Inter", "Segoe UI", system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText("YOUR EYE", eyeX, eyeY - 43);
+    ctx.textAlign = 'left';
+
+    // White sclera with shadow shading
+    ctx.save();
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+    ctx.shadowBlur = 8;
     ctx.fillStyle = '#ffffff';
     ctx.beginPath();
     ctx.arc(eyeX, eyeY, 32, -Math.PI / 4, Math.PI / 4, true);
     ctx.arc(eyeX - 44, eyeY, 32, Math.PI / 4, -Math.PI / 4, true);
     ctx.closePath();
     ctx.fill();
-    ctx.strokeStyle = '#94a3b8';
+    ctx.restore();
+
+    ctx.strokeStyle = '#64748b';
     ctx.lineWidth = 2;
     ctx.stroke();
 
-    // Iris
-    ctx.fillStyle = '#0ea5e9';
+    // Iris with realistic radial gradient
+    const irisGrad = ctx.createRadialGradient(eyeX + 6, eyeY, 2, eyeX + 6, eyeY, 16);
+    irisGrad.addColorStop(0, '#38bdf8');
+    irisGrad.addColorStop(1, '#0284c7');
+    ctx.fillStyle = irisGrad;
     ctx.beginPath();
     ctx.arc(eyeX + 6, eyeY, 16, 0, Math.PI * 2);
     ctx.fill();
     
     // Pupil
-    ctx.fillStyle = '#000000';
+    ctx.fillStyle = '#020617';
     ctx.beginPath();
-    ctx.arc(eyeX + 8, eyeY, 8, 0, Math.PI * 2);
+    ctx.arc(eyeX + 8, eyeY, 8.5, 0, Math.PI * 2);
     ctx.fill();
 
-    // Sparkle dot in eye
+    // Corneal reflection sparkle
     ctx.fillStyle = '#ffffff';
     ctx.beginPath();
     ctx.arc(eyeX + 5, eyeY - 5, 3, 0, Math.PI * 2);
     ctx.fill();
 
-    ctx.fillStyle = '#94a3b8';
-    ctx.font = 'bold 9px sans-serif';
-    ctx.fillText("YOUR EYE", eyeX - 20, eyeY - 38);
-
-    // 4. Trace Light Rays
+    // 4. Trace Laser Light Rays
     const isOptimal = Math.abs(lensDist - 70) <= 5;
-    const rayColors = ['#f43f5e', '#10b981', '#6366f1'];
+    const rayColors = ['#ff2a5f', '#00e599', '#6366f1'];
     const sourcesY = [60, 120, 180];
     
     sourcesY.forEach((sy, index) => {
+      ctx.save();
       ctx.strokeStyle = rayColors[index];
       ctx.lineWidth = 2.5;
+      ctx.shadowColor = rayColors[index];
+      ctx.shadowBlur = 10;
       
       // Ray 1: Screen to Lens
       ctx.beginPath();
@@ -152,54 +234,85 @@ const VrVirtualLab = () => {
       ctx.moveTo(lensX, sy);
       ctx.lineTo(eyeX + 8, targetY1);
       ctx.stroke();
+      ctx.restore();
 
-      // Inside eyeball paths
+      // Inside eyeball refraction paths
       let retinaTargetY = eyeY - (sy - eyeY) * 0.4;
       if (!isOptimal) {
         retinaTargetY = eyeY - (targetY1 - eyeY) * 0.55;
       }
-      ctx.strokeStyle = rayColors[index] + '80'; 
+      ctx.strokeStyle = rayColors[index] + '90'; 
+      ctx.lineWidth = 1.8;
       ctx.beginPath();
       ctx.moveTo(eyeX + 8, targetY1);
       ctx.lineTo(eyeX - 12, retinaTargetY);
       ctx.stroke();
 
       // Draw light focus dots on retina
+      ctx.save();
       if (isOptimal) {
-        ctx.fillStyle = '#10b981';
+        ctx.fillStyle = '#00e599';
+        ctx.shadowColor = '#00e599';
+        ctx.shadowBlur = 8;
         ctx.beginPath();
-        ctx.arc(eyeX - 12, retinaTargetY, 3, 0, Math.PI * 2);
+        ctx.arc(eyeX - 12, retinaTargetY, 3.5, 0, Math.PI * 2);
         ctx.fill();
       } else {
-        ctx.fillStyle = '#ef4444';
+        ctx.fillStyle = '#ff2a5f';
+        ctx.shadowColor = '#ff2a5f';
+        ctx.shadowBlur = 10;
         ctx.beginPath();
-        ctx.arc(eyeX - 12, retinaTargetY, 6, 0, Math.PI * 2);
+        ctx.arc(eyeX - 12, retinaTargetY, 6.5, 0, Math.PI * 2);
         ctx.fill();
       }
+      ctx.restore();
     });
 
-    // Focus status banner
+    // Focus status top banner
+    ctx.save();
     if (isOptimal) {
-      ctx.fillStyle = 'rgba(16, 185, 129, 0.95)';
-      ctx.fillRect(170, 10, 200, 26);
+      ctx.shadowColor = 'rgba(16, 185, 129, 0.4)';
+      ctx.shadowBlur = 14;
+      ctx.fillStyle = '#059669';
+      ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(150, 10, 240, 26, 8);
+      else ctx.fillRect(150, 10, 240, 26);
+      ctx.fill();
+      
+      ctx.strokeStyle = '#34d399';
+      ctx.lineWidth = 1.5;
+      if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(150, 10, 240, 26, 8); ctx.stroke(); }
+      else ctx.strokeRect(150, 10, 240, 26);
+
       ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 10px sans-serif';
+      ctx.font = '700 11px "Inter", "Segoe UI", system-ui, sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText("PERFECT FOCUS!", 270, 26);
-      ctx.textAlign = 'left';
+      ctx.fillText("✓ PERFECT FOCUS! (Crisp on Retina)", 270, 27);
     } else {
-      ctx.fillStyle = 'rgba(239, 68, 68, 0.9)';
-      ctx.fillRect(170, 10, 200, 26);
+      ctx.shadowColor = 'rgba(239, 68, 68, 0.4)';
+      ctx.shadowBlur = 14;
+      ctx.fillStyle = '#dc2626';
+      ctx.beginPath();
+      if (ctx.roundRect) ctx.roundRect(150, 10, 240, 26, 8);
+      else ctx.fillRect(150, 10, 240, 26);
+      ctx.fill();
+      
+      ctx.strokeStyle = '#f87171';
+      ctx.lineWidth = 1.5;
+      if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(150, 10, 240, 26, 8); ctx.stroke(); }
+      else ctx.strokeRect(150, 10, 240, 26);
+
       ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 10px sans-serif';
+      ctx.font = '700 11px "Inter", "Segoe UI", system-ui, sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText(lensDist > 70 ? "BLURRY: Too Far" : "BLURRY: Too Close", 270, 26);
-      ctx.textAlign = 'left';
+      ctx.fillText(lensDist > 70 ? "⚠ BLURRY: Lens Too Far Away" : "⚠ BLURRY: Lens Too Close", 270, 27);
     }
+    ctx.restore();
+    ctx.restore();
 
   }, [lensDist, activeTab]);
 
-  // Frametime visual graph
+  // Frametime visual graph (High-DPI Supersampled)
   useEffect(() => {
     if (activeTab !== 'optics') return;
     const canvas = latencyCanvasRef.current;
@@ -209,16 +322,26 @@ const VrVirtualLab = () => {
     let frameTimes = Array(25).fill(11);
 
     const drawLatency = () => {
-      const width = canvas.width = 120;
-      const height = canvas.height = 60;
+      const dpr = Math.max(window.devicePixelRatio || 1, 2) * 2;
+      const logicalWidth = 120;
+      const logicalHeight = 50;
+      
+      canvas.width = logicalWidth * dpr;
+      canvas.height = logicalHeight * dpr;
+      canvas.style.width = '100%';
+      canvas.style.height = '50px';
 
-      ctx.fillStyle = '#0f172a';
-      ctx.fillRect(0, 0, width, height);
+      ctx.save();
+      ctx.scale(dpr, dpr);
+
+      ctx.fillStyle = '#080e1e';
+      ctx.fillRect(0, 0, logicalWidth, logicalHeight);
 
       ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+      ctx.lineWidth = 1;
       ctx.beginPath();
-      ctx.moveTo(0, height / 2);
-      ctx.lineTo(width, height / 2);
+      ctx.moveTo(0, logicalHeight / 2);
+      ctx.lineTo(logicalWidth, logicalHeight / 2);
       ctx.stroke();
 
       const targetMs = refreshRate === 120 ? 8 : refreshRate === 90 ? 11 : 16;
@@ -226,16 +349,20 @@ const VrVirtualLab = () => {
       const nextTime = targetMs + (Math.random() - 0.5) * 0.8;
       frameTimes.push(nextTime);
 
-      ctx.strokeStyle = refreshRate === 120 ? '#10b981' : refreshRate === 90 ? '#38bdf8' : '#e11d48';
+      const lineColor = refreshRate === 120 ? '#00e599' : refreshRate === 90 ? '#38bdf8' : '#ff2a5f';
+      ctx.strokeStyle = lineColor;
+      ctx.shadowColor = lineColor;
+      ctx.shadowBlur = 6;
       ctx.lineWidth = 2.5;
       ctx.beginPath();
       frameTimes.forEach((time, index) => {
-        const x = (index / (frameTimes.length - 1)) * width;
-        const y = height - (time / 22) * height;
+        const x = (index / (frameTimes.length - 1)) * logicalWidth;
+        const y = logicalHeight - (time / 22) * logicalHeight;
         if (index === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
       });
       ctx.stroke();
+      ctx.restore();
 
       animId = requestAnimationFrame(drawLatency);
     };
@@ -342,7 +469,12 @@ const VrVirtualLab = () => {
 
             {/* Screen Speed Toggle */}
             <div className="space-y-2.5 pt-3 border-t border-slate-100">
-              <span className="block text-xs font-bold text-slate-800">Screen Smoothness</span>
+              <div className="flex justify-between items-center">
+                <span className="block text-xs font-bold text-slate-800">Screen Smoothness</span>
+                <span className="text-[10px] font-mono font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+                  {refreshRate} Hz
+                </span>
+              </div>
               <div className="grid grid-cols-3 gap-1.5">
                 {[60, 90, 120].map((hz) => (
                   <button
@@ -354,9 +486,18 @@ const VrVirtualLab = () => {
                         : 'bg-slate-50 border-slate-200 text-slate-700 hover:bg-slate-100'
                     }`}
                   >
-                    {hz === 60 ? 'Slow' : hz === 90 ? 'Fast' : 'Super'}
+                    {hz === 60 ? 'Slow (60)' : hz === 90 ? 'Fast (90)' : 'Super (120)'}
                   </button>
                 ))}
+              </div>
+              <div className="mt-2.5 bg-slate-950 rounded-xl p-2.5 border border-slate-800 flex items-center justify-between shadow-inner">
+                <div className="flex flex-col">
+                  <span className="text-[9.5px] font-extrabold text-slate-400 uppercase tracking-wider">Frame Time</span>
+                  <span className="text-xs font-mono font-bold text-emerald-400">
+                    {refreshRate === 120 ? '8.3 ms' : refreshRate === 90 ? '11.1 ms' : '16.6 ms'}
+                  </span>
+                </div>
+                <canvas ref={latencyCanvasRef} className="w-28 h-9 block rounded border border-slate-800" />
               </div>
             </div>
           </div>
@@ -364,9 +505,9 @@ const VrVirtualLab = () => {
           {/* Canvas optics grid */}
           <div className="lg:col-span-2 space-y-4">
             <div className="bg-white border border-blue-200 rounded-2xl overflow-hidden shadow-sm">
-              <div className="bg-blue-50/80 px-4 py-1.5 border-b border-blue-100 flex justify-between items-center text-[10px] font-extrabold text-blue-800">
+              <div className="bg-blue-50/90 px-4 py-2 border-b border-blue-100 flex justify-between items-center text-[11px] font-extrabold text-blue-900 tracking-wide">
                 <span>OPTICAL BENCH: LIGHT REFRACTION</span>
-                <span className="text-emerald-600 font-bold flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> ONLINE</span>
+                <span className="text-emerald-600 font-bold flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> ONLINE (HD)</span>
               </div>
               <canvas ref={canvasRef} className="w-full block" />
             </div>

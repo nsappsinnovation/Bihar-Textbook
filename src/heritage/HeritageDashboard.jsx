@@ -4,7 +4,8 @@ import {
   Landmark, MapPin, Globe, Box, BookOpen, Flag, Palette
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+// eslint-disable-next-line no-unused-vars
+import { motion } from 'framer-motion';
 
 const HeritageDashboard = () => {
   const navigate = useNavigate();
@@ -25,31 +26,36 @@ const HeritageDashboard = () => {
       category: 'Ancient Civilizations',
       title: 'The Indus Valley',
       desc: 'Discover the advanced urban planning of Harappa and Mohenjo-daro. They featured baked brick houses, elaborate drainage systems, and water supply systems.',
-      image: '/images/heritage/indus.png'
+      image: '/images/heritage/indus.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Indus_Valley_Civilisation'
     },
     {
       category: 'Ancient Civilizations',
       title: 'Mesopotamia',
       desc: 'Known as the cradle of civilization, located between the Tigris and Euphrates rivers, famous for the invention of writing.',
-      image: '/images/heritage/meso.png'
+      image: '/images/heritage/meso.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Mesopotamia'
     },
     {
       category: 'Ancient Civilizations',
       title: 'Ancient Egypt',
       desc: 'Explore the civilization of the Nile Valley, known for its monumental pyramids, pharaohs, and hieroglyphic writing system.',
-      image: '/images/heritage/ancient egypt.png'
+      image: '/images/heritage/ancient egypt.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Ancient_Egypt'
     },
     {
       category: 'Ancient Civilizations',
       title: 'Ancient Rome',
       desc: 'A massive empire that shaped Western civilization, known for its engineering, architecture, and complex legal and political systems.',
-      image: '/images/heritage/ancient rome.png'
+      image: '/images/heritage/ancient rome.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Ancient_Rome'
     },
     {
       category: 'Ancient Civilizations',
       title: 'Mayan Civilization',
       desc: 'A Mesoamerican civilization noted for its fully developed writing system, art, architecture, mathematics, and astronomical system.',
-      image: '/images/heritage/mayan.png'
+      image: '/images/heritage/mayan.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Maya_civilization'
     },
 
     // 2. Indian Heritage
@@ -57,31 +63,36 @@ const HeritageDashboard = () => {
       category: 'Indian Heritage',
       title: 'The Chola Dynasty',
       desc: 'Learn about the powerful Chola empire, their art, and architecture. They were known for building grand temples like the Brihadeeswarar Temple.',
-      image: '/images/heritage/chola.png'
+      image: '/images/heritage/chola.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Chola_dynasty'
     },
     {
       category: 'Indian Heritage',
       title: 'Taj Mahal',
       desc: 'An immense mausoleum of white marble, built in Agra by Mughal emperor Shah Jahan in memory of his favorite wife.',
-      image: '/images/heritage/taj mahal.png'
+      image: '/images/heritage/taj mahal.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Taj_Mahal'
     },
     {
       category: 'Indian Heritage',
       title: 'Ajanta & Ellora',
       desc: 'Ancient rock-cut caves featuring magnificent Buddhist, Hindu, and Jain sculptures and paintings dating back to the 2nd century BCE.',
-      image: '/images/heritage/ajanta ellora.png'
+      image: '/images/heritage/ajanta ellora.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Ajanta_Caves'
     },
     {
       category: 'Indian Heritage',
       title: 'Vijayanagara Empire',
       desc: 'The ruins of Hampi tell the story of a prosperous and wealthy empire known for its intricate temple architecture and grand bazaars.',
-      image: '/images/heritage/vijaynagar.png'
+      image: '/images/heritage/vijaynagar.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Vijayanagara_Empire'
     },
     {
       category: 'Indian Heritage',
       title: 'Khajuraho Temples',
       desc: 'Famous for their nagara-style architectural symbolism and intricate, expressive sculptures built by the Chandela dynasty.',
-      image: '/images/heritage/khajuraho.png'
+      image: '/images/heritage/khajuraho.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Khajuraho_Group_of_Monuments'
     },
 
     // 3. World Heritage
@@ -89,31 +100,36 @@ const HeritageDashboard = () => {
       category: 'World Heritage',
       title: 'The Great Wall',
       desc: 'Explore the history and construction of the majestic Great Wall of China, built to protect against nomadic intrusions.',
-      image: '/images/heritage/greatwall.png'
+      image: '/images/heritage/greatwall.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Great_Wall_of_China'
     },
     {
       category: 'World Heritage',
       title: 'Machu Picchu',
       desc: 'An Incan citadel set high in the Andes Mountains in Peru, renowned for its sophisticated dry-stone walls and panoramic views.',
-      image: '/images/heritage/machu-picchu.png'
+      image: '/images/heritage/machu-picchu.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Machu_Picchu'
     },
     {
       category: 'World Heritage',
       title: 'Petra',
       desc: 'A famous archaeological site in Jordan\'s southwestern desert, known for its rock-cut architecture and water conduit system.',
-      image: '/images/heritage/petra.png'
+      image: '/images/heritage/petra.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Petra'
     },
     {
       category: 'World Heritage',
       title: 'Colosseum',
       desc: 'An oval amphitheater in the centre of the city of Rome, Italy, built of travertine limestone, tuff, and brick-faced concrete.',
-      image: '/images/heritage/colosseum.png'
+      image: '/images/heritage/colosseum.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Colosseum'
     },
     {
       category: 'World Heritage',
       title: 'Chichen Itza',
       desc: 'A complex of Mayan ruins on Mexico\'s Yucatán Peninsula, dominated by the massive El Castillo step pyramid.',
-      image: '/images/heritage/chichen-itza.png'
+      image: '/images/heritage/chichen-itza.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Chichen_Itza'
     },
 
     // 4. Artifacts
@@ -121,31 +137,36 @@ const HeritageDashboard = () => {
       category: 'Artifacts',
       title: 'Terracotta Warriors',
       desc: 'Uncover the secrets of the massive underground army of the first Emperor of China, buried with him to protect him in the afterlife.',
-      image: '/images/heritage/terracotta.png'
+      image: '/images/heritage/terracotta.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Terracotta_Army'
     },
     {
       category: 'Artifacts',
       title: 'Rosetta Stone',
       desc: 'A granodiorite stele inscribed with three versions of a decree that became the key to deciphering Egyptian hieroglyphs.',
-      image: '/images/heritage/rosetta.png'
+      image: '/images/heritage/rosetta.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Rosetta_Stone'
     },
     {
       category: 'Artifacts',
       title: 'Tutankhamun\'s Mask',
       desc: 'The gold death mask of the 18th-dynasty ancient Egyptian Pharaoh Tutankhamun, discovered by Howard Carter in 1925.',
-      image: '/images/heritage/tutankhamun.png'
+      image: '/images/heritage/tutankhamun.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Mask_of_Tutankhamun'
     },
     {
       category: 'Artifacts',
       title: 'Dancing Girl',
       desc: 'A prehistoric bronze sculpture made in lost-wax casting, found in Mohenjo-daro, a symbol of the Indus Valley civilization.',
-      image: '/images/heritage/dancing girl.png'
+      image: '/images/heritage/dancing girl.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Dancing_Girl_(Mohenjo-daro)'
     },
     {
       category: 'Artifacts',
       title: 'Venus de Milo',
       desc: 'An ancient Greek marble sculpture, one of the most famous works of ancient Greek sculpture, depicting Aphrodite.',
-      image: '/images/heritage/venus de milo.png'
+      image: '/images/heritage/venus de milo.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Venus_de_Milo'
     },
 
     // 5. Manuscripts
@@ -153,31 +174,36 @@ const HeritageDashboard = () => {
       category: 'Manuscripts',
       title: 'Vedic Scripts',
       desc: 'Understand the ancient wisdom preserved in the oldest Sanskrit texts, encompassing philosophy, rituals, and hymns.',
-      image: '/images/heritage/vedic.png'
+      image: '/images/heritage/vedic.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Vedas'
     },
     {
       category: 'Manuscripts',
       title: 'Dead Sea Scrolls',
       desc: 'Ancient Jewish religious manuscripts found in the Qumran Caves in the Judaean Desert, of great historical and religious significance.',
-      image: '/images/heritage/dead sea scrolls.png'
+      image: '/images/heritage/dead sea scrolls.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Dead_Sea_Scrolls'
     },
     {
       category: 'Manuscripts',
       title: 'Magna Carta',
       desc: 'A royal charter of rights agreed to by King John of England, laying the foundation for modern democracy and constitutional law.',
-      image: '/images/heritage/magna carta.png'
+      image: '/images/heritage/magna carta.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Magna_Carta'
     },
     {
       category: 'Manuscripts',
       title: 'Book of Kells',
       desc: 'An illuminated manuscript Gospel book in Latin, containing the four Gospels of the New Testament, renowned for its intricate artwork.',
-      image: '/images/heritage/book of kells.png'
+      image: '/images/heritage/book of kells.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Book_of_Kells'
     },
     {
       category: 'Manuscripts',
       title: 'Gutenberg Bible',
       desc: 'The first major book printed using mass-produced movable metal type in Europe, marking the start of the printing revolution.',
-      image: '/images/heritage/gutenberg bible.png'
+      image: '/images/heritage/gutenberg bible.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Gutenberg_Bible'
     },
 
     // 6. Freedom Struggle
@@ -185,31 +211,36 @@ const HeritageDashboard = () => {
       category: 'Freedom Struggle',
       title: 'The Salt March',
       desc: 'Trace the path of non-violent resistance that changed the world, led by Mahatma Gandhi against the British salt monopoly.',
-      image: '/images/heritage/salt march.png'
+      image: '/images/heritage/salt march.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Salt_March'
     },
     {
       category: 'Freedom Struggle',
       title: 'Revolt of 1857',
       desc: 'Also known as the First War of Independence, it was a major uprising in India against the rule of the British East India Company.',
-      image: '/images/heritage/revolt of 1857.png'
+      image: '/images/heritage/revolt of 1857.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857'
     },
     {
       category: 'Freedom Struggle',
       title: 'Quit India Movement',
       desc: 'Launched by Mahatma Gandhi in 1942, demanding an end to British rule in India during World War II.',
-      image: '/images/heritage/quit india movement.png'
+      image: '/images/heritage/quit india movement.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Quit_India_Movement'
     },
     {
       category: 'Freedom Struggle',
       title: 'Jallianwala Bagh',
       desc: 'A turning point in the Indian independence movement where peaceful protestors were fired upon by British colonial troops.',
-      image: '/images/heritage/jallianwala bagh.png'
+      image: '/images/heritage/jallianwala bagh.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Jallianwala_Bagh_massacre'
     },
     {
       category: 'Freedom Struggle',
       title: 'Partition of India',
       desc: 'The division of British India into two independent dominions, India and Pakistan, marking the end of colonial rule.',
-      image: '/images/heritage/partition of india.png'
+      image: '/images/heritage/partition of india.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Partition_of_India'
     },
 
     // 7. Folk Culture
@@ -217,31 +248,36 @@ const HeritageDashboard = () => {
       category: 'Folk Culture',
       title: 'Madhubani Art',
       desc: 'Learn the vibrant storytelling traditions of Bihar through mural paintings, traditionally created by women in the Mithila region.',
-      image: '/images/heritage/madhubani art.png'
+      image: '/images/heritage/madhubani art.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Madhubani_art'
     },
     {
       category: 'Folk Culture',
       title: 'Warli Painting',
       desc: 'A tribal art form from Maharashtra that uses geometric shapes to depict social life, deeply rooted in nature and community.',
-      image: '/images/heritage/warli painting.png'
+      image: '/images/heritage/warli painting.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Warli_painting'
     },
     {
       category: 'Folk Culture',
       title: 'Kalbelia Dance',
       desc: 'A sensuous folk dance performed by the women of the Kalbelia snake-charming community in Rajasthan, India.',
-      image: '/images/heritage/kalbelia dance.png'
+      image: '/images/heritage/kalbelia dance.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Kalbelia'
     },
     {
       category: 'Folk Culture',
       title: 'Kathputli Puppetry',
       desc: 'A string puppet theatre native to Rajasthan, known for its vibrant storytelling, colorful dolls, and traditional music.',
-      image: '/images/heritage/kathputli puppetry.png'
+      image: '/images/heritage/kathputli puppetry.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Kathputli_(puppetry)'
     },
     {
       category: 'Folk Culture',
       title: 'Baul Singers',
       desc: 'Mystic minstrels from Bengal whose music blends various religious influences, emphasizing a search for the inner divine.',
-      image: '/images/heritage/baul singers.png'
+      image: '/images/heritage/baul singers.png',
+      wikiUrl: 'https://en.wikipedia.org/wiki/Baul'
     }
   ];
 
@@ -254,7 +290,7 @@ const HeritageDashboard = () => {
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-hidden scrollbar-hide">
       {/* Back Button */}
       <button
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/#missions-grid")}
         className="fixed top-5 left-5 md:top-5 md:left-5 z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-[#B45309] hover:shadow-lg transition-all border border-slate-100 group"
       >
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
@@ -406,13 +442,13 @@ const HeritageDashboard = () => {
                                  {card.desc}
                                </p>
                                <a
-                                 href={`https://www.google.com/search?q=${encodeURIComponent(card.title + ' ' + (card.category || ''))}`}
+                                 href={card.wikiUrl || `https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(card.title)}`}
                                  target="_blank"
                                  rel="noopener noreferrer"
                                  className="self-start px-4 py-1.5 bg-[#B45309] hover:bg-amber-800 text-white rounded-full text-[10px] font-black uppercase tracking-wider flex items-center gap-1 transition-all duration-200 shadow-sm shadow-orange-200 hover:shadow-md hover:-translate-y-0.5 active:translate-y-0"
                                  onClick={(e) => e.stopPropagation()}
                                >
-                                 Read More
+                                 Read More on Wikipedia
                                  <ArrowRight size={12} strokeWidth={2.5} />
                                </a>
                             </div>
