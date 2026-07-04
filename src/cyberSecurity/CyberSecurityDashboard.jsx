@@ -1331,80 +1331,128 @@ const LessonQuiz = ({ questions, onComplete }) => {
   const isAllCorrect = score === questions.length;
 
   return (
-    <div className="bg-[#051c14]/90 text-white rounded-[24px] border-2 border-emerald-500/30 p-5 shadow-xl max-w-md mx-auto">
+    <div className="bg-white rounded-[32px] border border-slate-200 shadow-sm max-w-2xl mx-auto overflow-hidden relative">
+      {/* Decorative top header line */}
+      <div className="h-2 w-full bg-gradient-to-r from-emerald-400 to-teal-500 absolute top-0 left-0" />
+
       {!showResult ? (
-        <div className="space-y-4">
-          <div className="flex justify-between items-center text-[10px] font-black text-slate-400 uppercase tracking-widest">
-            <span>QUESTION {currentQ + 1} / {questions.length}</span>
-            <span className="text-yellow-400">Score: {score}</span>
+        <div className="p-6 sm:p-10">
+          <div className="flex justify-between items-center mb-8">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-extrabold rounded-full uppercase tracking-wider">
+              <Trophy size={14} /> Question {currentQ + 1} of {questions.length}
+            </span>
+            <span className="text-sm font-bold text-slate-500">
+              Score: <span className="text-emerald-600 font-black">{score}</span>
+            </span>
           </div>
 
-          <h5 className="text-xs font-bold text-slate-100 min-h-[40px] leading-relaxed">
+          <h5 className="text-lg sm:text-xl font-extrabold text-[#1A1C2E] leading-relaxed mb-8">
             {q.question}
           </h5>
 
-          <div className="space-y-2">
+          <div className="space-y-3">
             {q.options.map((opt, idx) => {
-              let btnStyle = "bg-[#06241b]/60 border-emerald-500/30 text-white hover:bg-[#093529]/70 hover:border-emerald-400";
+              let btnStyle = "bg-white border-slate-200 text-slate-700 hover:border-emerald-300 hover:bg-emerald-50/50 hover:shadow-sm";
+              let icon = null;
+              
               if (isAnswered) {
-                if (idx === q.correct) btnStyle = "bg-emerald-950 border-emerald-500 text-emerald-400";
-                else if (idx === selectedOption) btnStyle = "bg-rose-955 border-rose-500 text-rose-400";
-                else btnStyle = "bg-[#06241b]/20 border-white/5 text-slate-500";
+                if (idx === q.correct) {
+                  btnStyle = "bg-emerald-50 border-emerald-500 text-emerald-800 shadow-sm ring-1 ring-emerald-500/20";
+                  icon = <CheckCircle2 size={18} className="text-emerald-500" />;
+                } else if (idx === selectedOption) {
+                  btnStyle = "bg-rose-50 border-rose-500 text-rose-800 shadow-sm ring-1 ring-rose-500/20";
+                  icon = <XCircle size={18} className="text-rose-500" />;
+                } else {
+                  btnStyle = "bg-slate-50 border-slate-100 text-slate-400 opacity-60";
+                }
               }
+
               return (
                 <button
                   key={idx}
                   onClick={() => handleSelect(idx)}
                   disabled={isAnswered}
-                  className={`w-full text-left p-3 border rounded-xl text-xs font-bold transition-all cursor-pointer ${btnStyle}`}
+                  className={`w-full text-left p-4 sm:p-5 border-2 rounded-2xl text-sm sm:text-base font-bold transition-all duration-300 cursor-pointer flex items-center justify-between gap-3 ${btnStyle} ${!isAnswered && 'group'}`}
                 >
-                  {opt}
+                  <span>{opt}</span>
+                  {icon && <span>{icon}</span>}
+                  {!isAnswered && <div className="w-5 h-5 rounded-full border-2 border-slate-200 group-hover:border-emerald-400 transition-colors shrink-0" />}
                 </button>
               );
             })}
           </div>
 
-          {isAnswered && (
-            <div className="flex justify-between items-center pt-2">
-              <span className={`text-[11px] font-bold ${isCorrectChoice ? 'text-emerald-400' : 'text-rose-400'}`}>
-                {isCorrectChoice ? "Correct Answer!" : "Oops! Incorrect choice."}
-              </span>
-              <button 
-                onClick={handleNext}
-                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-[10px] font-black transition-all cursor-pointer"
+          <AnimatePresence>
+            {isAnswered && (
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 mt-4 border-t border-slate-100"
               >
-                {currentQ < questions.length - 1 ? 'NEXT' : 'FINISH'}
-              </button>
-            </div>
-          )}
+                <span className={`text-sm sm:text-base font-bold flex items-center gap-2 ${isCorrectChoice ? 'text-emerald-600' : 'text-rose-600'}`}>
+                  {isCorrectChoice ? (
+                    <><CheckCircle2 size={20} /> Excellent! That is the correct answer.</>
+                  ) : (
+                    <><XCircle size={20} /> Oops! That's not right.</>
+                  )}
+                </span>
+                <motion.button 
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handleNext}
+                  className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-xl text-sm font-extrabold transition-all cursor-pointer shadow-md flex items-center justify-center gap-2"
+                >
+                  {currentQ < questions.length - 1 ? 'Next Question' : 'View Results'}
+                  <ArrowRight size={16} />
+                </motion.button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       ) : (
-        <div className="text-center py-4 space-y-4">
-          <div className="flex justify-center">{isAllCorrect ? <Trophy size={36} className="text-emerald-400" /> : <RotateCcw size={36} className="text-slate-400" />}</div>
-          <h5 className="font-bold text-slate-100 text-xs">
-            {isAllCorrect ? "Lesson Quiz Cleared!" : "Quiz Failed!"}
-          </h5>
-          <p className="text-xs text-slate-400 leading-relaxed font-semibold">
-            {isAllCorrect 
-              ? "Wonderful job! You got all questions correct and earned your badge stamp!" 
-              : `You scored ${score} out of ${questions.length}. Get 100% to pass the lesson!`}
-          </p>
-
-          <div className="flex gap-2">
+        <div className="p-8 sm:p-12 text-center space-y-6">
+          <div className="flex justify-center mb-2">
             {isAllCorrect ? (
-              <button 
-                onClick={onComplete}
-                className="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer"
-              >
-                Claim Badge & Unlock Next
-              </button>
+              <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center shadow-inner">
+                <Trophy size={40} className="text-emerald-500" />
+              </div>
             ) : (
-              <button 
-                onClick={handleRestart}
-                className="w-full py-2 bg-slate-800 hover:bg-slate-750 text-white rounded-xl text-xs font-bold transition-all cursor-pointer"
+              <div className="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center shadow-inner">
+                <RotateCcw size={40} className="text-amber-500" />
+              </div>
+            )}
+          </div>
+          
+          <div>
+            <h5 className="font-extrabold text-[#1A1C2E] text-2xl mb-2">
+              {isAllCorrect ? "Perfect Score!" : "Almost There!"}
+            </h5>
+            <p className="text-base text-slate-500 leading-relaxed font-medium">
+              {isAllCorrect 
+                ? "Wonderful job! You got every question correct and earned your badge!" 
+                : `You scored ${score} out of ${questions.length}. You need a perfect score to pass this lesson.`}
+            </p>
+          </div>
+
+          <div className="pt-6">
+            {isAllCorrect ? (
+              <motion.button 
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={onComplete}
+                className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-2xl text-base font-extrabold transition-all cursor-pointer shadow-md flex items-center justify-center gap-2 mx-auto"
               >
-                Retry Quiz
-              </button>
+                Claim Badge & Unlock Next <Award size={20} />
+              </motion.button>
+            ) : (
+              <motion.button 
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={handleRestart}
+                className="w-full sm:w-auto px-10 py-4 bg-slate-800 hover:bg-slate-900 text-white rounded-2xl text-base font-extrabold transition-all cursor-pointer shadow-md flex items-center justify-center gap-2 mx-auto"
+              >
+                Retry Quiz <RotateCcw size={20} />
+              </motion.button>
             )}
           </div>
         </div>
@@ -1863,8 +1911,7 @@ const CyberSecurityDashboard = () => {
                   <div className="bg-slate-100 p-1.5 rounded-2xl border border-slate-200/80 flex items-center gap-1 w-full sm:w-auto shrink-0 self-stretch sm:self-center flex-wrap">
                     {[
                       { id: 'learn', label: 'Learn Cards', icon: <BookOpen size={15} />, disabled: false, cleared: true },
-                      { id: 'play', label: 'Play Game', icon: <Gamepad2 size={15} />, disabled: false, cleared: gameCleared || completedLessons.includes(activeLessonId) },
-                      { id: 'test', label: 'Take Quiz', icon: <Trophy size={15} />, disabled: !gameCleared && !completedLessons.includes(activeLessonId), cleared: quizCleared || completedLessons.includes(activeLessonId) }
+                      { id: 'test', label: 'Take Quiz', icon: <Trophy size={15} />, disabled: false, cleared: quizCleared || completedLessons.includes(activeLessonId) }
                     ].map(stg => (
                       <button
                         key={stg.id}
@@ -1897,113 +1944,54 @@ const CyberSecurityDashboard = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="max-w-5xl mx-auto space-y-6"
+                        className="w-full space-y-6"
                       >
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                           {lessons[activeLessonId - 1].learnSections.map((sec, idx) => (
                             <div
                               key={idx}
-                              className="group p-5 rounded-3xl border border-slate-200 transition-all duration-300 bg-white hover:bg-gradient-to-b hover:from-white hover:to-emerald-50/30 shadow-sm hover:shadow-md hover:border-emerald-300 flex flex-col justify-between"
+                              className="group p-5 rounded-3xl border border-slate-200 transition-all duration-300 bg-white hover:bg-gradient-to-b hover:from-white hover:to-emerald-50/30 shadow-sm hover:shadow-md hover:border-emerald-300 flex flex-col"
                             >
-                              <div>
-                                <div className="w-full aspect-square max-h-40 mx-auto rounded-2xl bg-gradient-to-br from-slate-50 via-white to-slate-100 border border-slate-200/60 p-3 flex items-center justify-center mb-4 overflow-hidden group-hover:border-emerald-200 transition-colors shadow-inner">
-                                  <img
-                                    src={sec.image || lessons[activeLessonId - 1].image}
-                                    alt={sec.title}
-                                    className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
-                                  />
-                                </div>
+                              <div className="w-full h-36 mx-auto rounded-2xl bg-gradient-to-br from-slate-50 via-white to-slate-100 border border-slate-200/60 p-4 flex items-center justify-center mb-4 overflow-hidden group-hover:border-emerald-200 transition-colors shadow-inner shrink-0">
+                                <img
+                                  src={sec.image || lessons[activeLessonId - 1].image}
+                                  alt={sec.title}
+                                  className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                                />
+                              </div>
 
-                                <div className="space-y-2">
-                                  <span className="inline-block px-2.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-100/80 text-emerald-700 text-[10px] font-extrabold uppercase tracking-wider">
+                              <div className="space-y-2 flex-1 flex flex-col">
+                                <div>
+                                  <span className="inline-block px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100/80 text-emerald-700 text-xs font-extrabold uppercase tracking-wider">
                                     Topic {idx + 1}
                                   </span>
-                                  <h4 className="font-extrabold text-base sm:text-lg text-[#1A1C2E] leading-snug group-hover:text-emerald-600 transition-colors">
-                                    {sec.title}
-                                  </h4>
-                                  <p className="text-xs sm:text-sm font-normal text-slate-600 leading-relaxed pt-1 whitespace-pre-line">
-                                    {sec.desc}
-                                  </p>
                                 </div>
+                                <h4 className="font-extrabold text-lg text-[#1A1C2E] leading-snug group-hover:text-emerald-600 transition-colors">
+                                  {sec.title}
+                                </h4>
+                                <p className="text-sm font-medium text-slate-500 leading-relaxed pt-1 whitespace-pre-line flex-1">
+                                  {sec.desc}
+                                </p>
                               </div>
                             </div>
                           ))}
                         </div>
 
-                        <div className="pt-2">
+                        <div className="pt-2 max-w-2xl mx-auto">
                           <motion.button
                             whileHover={{ scale: 1.01 }}
                             whileTap={{ scale: 0.99 }}
-                            onClick={() => setActiveLessonTab('play')}
+                            onClick={() => setActiveLessonTab('test')}
                             className="w-full py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-2xl text-sm font-extrabold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2.5 shadow-md hover:shadow-lg cursor-pointer group"
                           >
-                            <span>Next Stage</span>
+                            <span>Ready to Test Knowledge?</span>
                             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                           </motion.button>
                         </div>
                       </motion.div>
                     )}
 
-                    {activeLessonTab === 'play' && (
-                      <motion.div
-                        key="stage-play"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="py-2 space-y-6"
-                      >
-                        {activeLessonId === 1 && (
-                          <ChatPatrol 
-                            onComplete={() => {
-                              setGameCleared(true);
-                            }}
-                          />
-                        )}
-                        {activeLessonId === 2 && (
-                          <ScamDetective 
-                            onComplete={() => {
-                              setGameCleared(true);
-                            }}
-                          />
-                        )}
-                        {activeLessonId === 3 && (
-                          <PasswordForge 
-                            onComplete={() => {
-                              setGameCleared(true);
-                            }}
-                          />
-                        )}
-                        {activeLessonId === 4 && (
-                          <PopupBlaster 
-                            onComplete={() => {
-                              setGameCleared(true);
-                            }}
-                          />
-                        )}
-                        {activeLessonId === 5 && (
-                          <PermissionShield 
-                            onComplete={() => {
-                              setGameCleared(true);
-                            }}
-                          />
-                        )}
-
-                        {gameCleared && (
-                          <div className="pt-4 max-w-4xl mx-auto">
-                            <motion.button
-                              whileHover={{ scale: 1.01 }}
-                              whileTap={{ scale: 0.99 }}
-                              onClick={() => setActiveLessonTab('test')}
-                              className="w-full py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-2xl text-sm font-extrabold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2.5 shadow-md hover:shadow-lg cursor-pointer group"
-                            >
-                              <span>Next Stage: Take Quiz</span>
-                              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                            </motion.button>
-                          </div>
-                        )}
-                      </motion.div>
-                    )}
+                    {/* Play Game Stage Removed */}
 
                     {activeLessonTab === 'test' && (
                       <motion.div

@@ -5,7 +5,8 @@ import {
   Brain, Lightbulb, Cpu, Trophy, CheckCircle2, 
   Play, GraduationCap, XCircle,
   MessageSquare, Sparkles, Palette, Bot, Volume2, Globe,
-  WandSparkles, ChevronRight, Copy, Mic, MicOff, HelpCircle, Award, Gamepad2
+  WandSparkles, ChevronRight, Copy, Mic, MicOff, HelpCircle, Award, Gamepad2,
+  Eye, Shield, Star
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -1609,67 +1610,26 @@ const PromptAcademyComponent = () => {
   const progressPercentage = (completedLessons.length / lessonsData.length) * 100;
 
   return (
-    <div className="bg-white rounded-xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-5 md:p-8 font-body">
+    <div className="bg-white rounded-[2rem] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-6 md:p-10 font-body relative overflow-hidden">
       {/* Academy Header */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-slate-100 pb-5 mb-6">
-        <div>
-          <h2 className="text-2xl md:text-3xl font-black text-slate-900 font-display flex items-center gap-2">
-            <WandSparkles className="text-indigo-600 animate-pulse" /> AI Prompt Academy
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-8">
+        <div className="space-y-1">
+          <h2 className="text-3xl md:text-4xl font-black text-slate-900 font-display flex items-center gap-3">
+            <WandSparkles className="text-pink-500 animate-pulse" size={32} /> Prompt Academy
           </h2>
-          <p className="text-sm md:text-base text-slate-500 font-bold mt-0.5">
-            Master the art of asking AI and unlock magical results!
+          <p className="text-sm md:text-base text-slate-500 font-medium max-w-lg">
+            Master the art of asking AI and unlock magical results through 10 interactive quests!
           </p>
-        </div>
-        <div className="flex items-center gap-2.5 bg-indigo-50/40 px-5 py-2.5 rounded-lg border border-indigo-100/80 shadow-sm">
-          <Award className="text-indigo-600" size={24} />
-          <div>
-            <span className="text-[10px] sm:text-xs font-black uppercase text-indigo-600 tracking-wider block leading-none font-display">
-              XP Points
-            </span>
-            <span className="text-lg md:text-xl font-black text-indigo-800 leading-none">
-              {xp} XP
-            </span>
-          </div>
         </div>
       </div>
 
-      {/* Progress Bar Row */}
-      <div className="bg-slate-50 rounded-xl p-4 sm:p-5 mb-6 border border-slate-100/80 flex flex-col sm:flex-row items-start sm:items-center gap-4 justify-between">
-        <div className="flex-1 w-full">
-          <div className="flex justify-between text-xs sm:text-sm font-black uppercase tracking-wider text-slate-500 mb-2 font-display">
-            <span>Course Progress</span>
-            <span className="text-indigo-800">
-              {completedLessons.length} / 10 Lessons Done ({Math.round(progressPercentage)}%)
-            </span>
-          </div>
-          <div className="w-full h-2 bg-slate-200 rounded-md overflow-hidden">
-            <motion.div
-              animate={{ width: `${progressPercentage}%` }}
-              className="h-full bg-gradient-to-r from-indigo-500 to-indigo-700"
-            />
-          </div>
-        </div>
-        <div className="bg-indigo-50 border border-indigo-100 rounded-lg px-4 py-2 text-center shrink-0">
-          <span className="text-[10px] sm:text-xs font-black text-indigo-700 uppercase tracking-widest block mb-0.5 font-display">
-            Title Rank
-          </span>
-          <span className="text-sm sm:text-base font-black text-indigo-950 font-display">
-            {completedLessons.length === 10
-              ? "Prompt Grandmaster"
-              : completedLessons.length >= 6
-              ? "Prompt Knight"
-              : completedLessons.length >= 3
-              ? "Prompt Adept"
-              : "Prompt Apprentice"}
-          </span>
-        </div>
-      </div>
+
 
       {/* Main double column layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left column: Syllabus Navigator */}
         <div className="lg:col-span-4 space-y-3 max-h-[620px] overflow-y-auto pr-1 prompt-academy-scrollbar" data-lenis-prevent>
-          <h3 className="text-xs sm:text-sm font-black text-slate-500 uppercase tracking-wider mb-2 px-1 font-display">
+          <h3 className="text-[11px] sm:text-xs font-black text-slate-400 uppercase tracking-widest mb-3 px-1 font-display">
             Syllabus Directory
           </h3>
           {lessonsData.map((lesson, idx) => {
@@ -1677,9 +1637,9 @@ const PromptAcademyComponent = () => {
             const isActive = activeLessonIdx === idx;
             const isLocked = lesson.id > 1 && !completedLessons.includes(lesson.id - 1) && !isActive;
 
-            let cardStyle = "border-slate-100 bg-white hover:border-indigo-200 hover:bg-slate-50/50 text-slate-600";
+            let cardStyle = "border-slate-100 bg-white hover:border-pink-200 hover:bg-pink-50/30 text-slate-600";
             if (isActive) {
-              cardStyle = "border-indigo-500 bg-indigo-50/30 text-indigo-950 shadow-sm ring-1 ring-indigo-500/20";
+              cardStyle = "border-pink-400 bg-pink-50/50 text-pink-950 shadow-sm ring-1 ring-pink-500/20";
             } else if (isLocked) {
               cardStyle = "border-slate-50 bg-slate-50/40 text-slate-400 opacity-60 cursor-not-allowed";
             }
@@ -1689,37 +1649,37 @@ const PromptAcademyComponent = () => {
                 key={lesson.id}
                 disabled={isLocked}
                 onClick={() => selectLesson(idx)}
-                className={`w-full flex items-center justify-between gap-3 p-4 rounded-xl border text-left transition-all cursor-pointer ${cardStyle}`}
+                className={`w-full flex items-center justify-between gap-3 p-4 rounded-2xl border text-left transition-all cursor-pointer ${cardStyle}`}
               >
                 <div className="flex items-center gap-3.5 min-w-0">
                   <span className="text-3xl shrink-0">{lesson.icon}</span>
                   <div className="min-w-0">
-                    <span className="text-[10px] sm:text-xs font-black text-slate-400 uppercase tracking-wide block leading-none mb-1.5 font-display">
+                    <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider block leading-none mb-1.5 font-display">
                       Lesson {lesson.id}
                     </span>
-                    <h4 className="text-sm sm:text-base font-black font-display truncate leading-tight">
+                    <h4 className="text-sm font-black font-display truncate leading-tight mb-0.5">
                       {lesson.title}
                     </h4>
-                    <span className="text-xs font-semibold text-slate-500 opacity-80 block truncate">
+                    <span className="text-[11px] font-bold text-slate-400 truncate block">
                       {lesson.concept}
                     </span>
                   </div>
                 </div>
                 <div className="shrink-0">
                   {isCompleted ? (
-                    <span className="text-[10px] sm:text-xs font-black text-emerald-600 bg-emerald-50 border border-emerald-100 px-2 py-0.5 rounded font-display">
-                       Completed
+                    <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 border border-emerald-100 px-2 py-1 rounded-md font-display uppercase tracking-wider">
+                       Done
                     </span>
                   ) : isActive ? (
-                    <span className="text-[10px] sm:text-xs font-black text-indigo-600 bg-indigo-50 border border-indigo-100 px-2 py-0.5 rounded animate-pulse font-display">
+                    <span className="text-[10px] font-black text-pink-600 bg-pink-50 border border-pink-100 px-2 py-1 rounded-md animate-pulse font-display uppercase tracking-wider">
                        Active
                     </span>
                   ) : isLocked ? (
-                    <span className="text-[10px] sm:text-xs font-black text-slate-400 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded font-display">
+                    <span className="text-[10px] font-black text-slate-400 bg-slate-100 border border-slate-200 px-2 py-1 rounded-md font-display uppercase tracking-wider">
                       Locked
                     </span>
                   ) : (
-                    <span className="text-[10px] sm:text-xs font-black text-indigo-600 bg-indigo-50 border border-indigo-100 px-2 py-0.5 rounded font-display">
+                    <span className="text-[10px] font-black text-indigo-600 bg-indigo-50 border border-indigo-100 px-2 py-1 rounded-md font-display uppercase tracking-wider">
                       Open
                     </span>
                   )}
@@ -1730,18 +1690,17 @@ const PromptAcademyComponent = () => {
         </div>
 
         {/* Right column: Active lesson content area */}
-        <div className="lg:col-span-8 bg-white rounded-xl border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] overflow-hidden">
+        <div className="lg:col-span-8 bg-white rounded-[1.5rem] border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] overflow-hidden">
           {/* Active Lesson Header Banner */}
-          <div className="bg-gradient-to-r from-indigo-600 to-indigo-800 p-5 text-white flex items-center justify-between gap-4">
+          <div className="bg-white border-b border-pink-100/60 p-6 sm:p-8 flex items-center justify-between gap-4">
             <div>
-              <span className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-indigo-100 bg-white/10 px-3 py-1 rounded mb-1.5 inline-block font-display">
+              <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-pink-500 bg-pink-50 px-3 py-1.5 rounded-lg mb-2 inline-block font-display border border-pink-100/50">
                 Level {activeLesson.id}: {activeLesson.concept}
               </span>
-              <h3 className="text-xl sm:text-2xl font-black font-display">
+              <h3 className="text-2xl sm:text-3xl font-black font-display text-slate-900 tracking-tight mt-1">
                 {activeLesson.title}
               </h3>
             </div>
-            <span className="text-4xl sm:text-5xl">{activeLesson.icon}</span>
           </div>
 
           {/* Sub-tab Navigation */}
@@ -1749,7 +1708,6 @@ const PromptAcademyComponent = () => {
             {[
               { id: "learn", label: "Learn", subtitle: "Concept", icon: <BookOpen size={16} /> },
               { id: "quest", label: "Quest", subtitle: "Help Hero", icon: <Trophy size={16} /> },
-              { id: "sandbox", label: "Sandbox", subtitle: "Playground", icon: <Lightbulb size={16} /> },
               { id: "battle", label: "Battle", subtitle: "Final Test", icon: <Gamepad2 size={16} /> }
             ].map(tab => {
               const isTabActive = activeTab === tab.id;
@@ -1759,8 +1717,8 @@ const PromptAcademyComponent = () => {
                   onClick={() => setActiveTab(tab.id)}
                   className={`flex-1 py-3.5 text-center transition-all cursor-pointer border-b-2 outline-none flex flex-col items-center justify-center ${
                     isTabActive
-                      ? "border-indigo-600 bg-white text-indigo-700 font-black"
-                      : "border-transparent text-slate-500 hover:text-slate-800"
+                      ? "border-pink-500 bg-white text-pink-600 font-black"
+                      : "border-transparent text-slate-500 hover:text-slate-800 hover:bg-slate-50"
                   }`}
                 >
                   <span className="text-sm sm:text-base font-black font-display flex items-center gap-1.5">{tab.icon} {tab.label}</span>
@@ -1789,44 +1747,23 @@ const PromptAcademyComponent = () => {
                       <h3 className="text-lg sm:text-xl font-black text-slate-800 font-display mb-1">
                         {activeLesson.learn.title}
                       </h3>
-                      <p className="text-xs sm:text-sm text-indigo-600 font-black font-display">
+                      <p className="text-xs sm:text-sm text-pink-500 font-black font-display">
                         {activeLesson.learn.subtitle}
                       </p>
                     </div>
-                    <button
-                      onClick={handleSpeak}
-                      className={`p-2.5 rounded-lg border transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-sm active:scale-95 shrink-0 ${
-                        isSpeaking
-                          ? "bg-indigo-600 border-indigo-600 text-white animate-pulse"
-                          : "bg-white border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-indigo-100"
-                      }`}
-                      title={isSpeaking ? "Mute Speech" : "Listen with Voice"}
-                    >
-                      {isSpeaking ? (
-                        <>
-                          <MicOff size={16} />
-                          <span className="text-xs font-black font-display hidden sm:inline">Stop</span>
-                        </>
-                      ) : (
-                        <>
-                          <Mic size={16} />
-                          <span className="text-xs font-black font-display hidden sm:inline">Listen</span>
-                        </>
-                      )}
-                    </button>
                   </div>
 
-                  <p className="text-sm sm:text-base text-slate-600 font-semibold leading-relaxed">
+                  <div className="bg-gradient-to-br from-pink-50/80 to-purple-50/40 border border-pink-100 rounded-2xl p-5 text-sm sm:text-base text-slate-700 font-medium leading-relaxed shadow-sm">
                     {activeLesson.learn.description}
-                  </p>
+                  </div>
 
-                  <div className="bg-indigo-50/40 border border-indigo-100/70 rounded-xl p-5">
-                    <span className="text-xs sm:text-sm font-black text-indigo-600 uppercase tracking-wider block mb-2.5 font-display flex items-center gap-1.5">
-                      <Lightbulb size={16} /> Prompt Master Tips
+                  <div className="bg-white border border-slate-100/80 shadow-sm rounded-2xl p-5">
+                    <span className="text-xs sm:text-sm font-black text-pink-600 uppercase tracking-wider block mb-3 font-display flex items-center gap-1.5">
+                      <Lightbulb size={16} className="text-amber-500" /> Prompt Master Tips
                     </span>
-                    <ul className="space-y-2 text-sm text-slate-700 font-bold list-disc pl-5 leading-normal">
+                    <ul className="space-y-2.5 text-sm text-slate-700 font-medium list-disc pl-5 leading-normal">
                       {activeLesson.learn.tips.map((tip, tIdx) => (
-                        <li key={tIdx}>{tip}</li>
+                        <li key={tIdx} className="marker:text-pink-400">{tip}</li>
                       ))}
                     </ul>
                   </div>
@@ -1834,7 +1771,7 @@ const PromptAcademyComponent = () => {
                   <div className="pt-4 flex justify-end">
                     <button
                       onClick={() => setActiveTab("quest")}
-                      className="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white rounded-lg text-xs sm:text-sm font-black font-display transition-all shadow-md active:scale-95 cursor-pointer flex items-center gap-1"
+                      className="px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-xl text-xs sm:text-sm font-black font-display transition-all shadow-md active:scale-95 cursor-pointer flex items-center gap-1"
                     >
                       Let's Go to Quest! <ArrowRight size={16} />
                     </button>
@@ -1853,17 +1790,17 @@ const PromptAcademyComponent = () => {
                 >
                   {/* Casting Loader overlay */}
                   {isQuestCasting && (
-                    <div className="absolute inset-0 bg-white/95 z-20 flex flex-col items-center justify-center p-8 text-center rounded-xl">
+                    <div className="absolute inset-0 bg-white/95 z-20 flex flex-col items-center justify-center p-8 text-center rounded-2xl">
                       <div className="relative w-24 h-24 mb-4">
-                        <div className="absolute inset-0 rounded-full border-4 border-indigo-100 border-t-indigo-600 animate-spin" />
-                        <div className="absolute inset-2 bg-indigo-50 rounded-full flex items-center justify-center">
-                          <WandSparkles className="text-indigo-600 animate-bounce" size={28} />
+                        <div className="absolute inset-0 rounded-full border-4 border-pink-100 border-t-pink-500 animate-spin" />
+                        <div className="absolute inset-2 bg-pink-50 rounded-full flex items-center justify-center shadow-inner">
+                          <WandSparkles className="text-pink-500 animate-bounce" size={28} />
                         </div>
                       </div>
                       <h3 className="text-base font-black text-slate-800 font-display mb-1">
                         Casting Spell...
                       </h3>
-                      <p className="text-sm font-black text-indigo-600 animate-pulse font-display">
+                      <p className="text-sm font-black text-pink-600 animate-pulse font-display">
                         {castingTexts[castingStep]}
                       </p>
                     </div>
@@ -1873,7 +1810,7 @@ const PromptAcademyComponent = () => {
                     <div className="space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                         {/* Boring Output */}
-                        <div className="bg-slate-50 border border-slate-100 rounded-xl p-5 flex flex-col justify-between">
+                        <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 flex flex-col justify-between shadow-sm">
                           <div>
                             <span className="text-xs sm:text-sm font-black text-slate-500 uppercase font-display block mb-1">
                               Boring Prompt Result
@@ -1882,7 +1819,7 @@ const PromptAcademyComponent = () => {
                               "{activeLesson.quest.boringPrompt}"
                             </span>
                           </div>
-                          <div className="bg-white rounded-lg overflow-hidden min-h-[180px] flex items-center justify-center p-3 border border-slate-100">
+                          <div className="bg-white rounded-xl overflow-hidden min-h-[180px] flex items-center justify-center p-3 border border-slate-100 shadow-[0_2px_10px_rgba(0,0,0,0.02)]">
                             {activeLesson.quest.boringOutputImage ? (
                               <BoringVsSuperPromptImage
                                 imageUrl={activeLesson.quest.boringOutputImage}
@@ -1898,19 +1835,19 @@ const PromptAcademyComponent = () => {
                         </div>
 
                         {/* Awesome Super Output */}
-                        <div className="bg-indigo-50/10 border border-indigo-100/80 rounded-xl p-5 flex flex-col justify-between relative shadow-sm">
-                          <span className="absolute top-2.5 right-2.5 bg-indigo-600 text-white text-[10px] sm:text-xs font-black px-2 py-0.5 rounded uppercase tracking-wider font-display animate-bounce">
+                        <div className="bg-gradient-to-br from-pink-50/40 to-purple-50/20 border border-pink-100 rounded-2xl p-5 flex flex-col justify-between relative shadow-sm">
+                          <span className="absolute top-2.5 right-2.5 bg-pink-500 text-white text-[10px] sm:text-xs font-black px-2 py-0.5 rounded uppercase tracking-wider font-display animate-bounce shadow-sm">
                             Awesome
                           </span>
                           <div>
-                            <span className="text-xs sm:text-sm font-black text-indigo-600 uppercase font-display block mb-1 flex items-center gap-1.5">
+                            <span className="text-xs sm:text-sm font-black text-pink-600 uppercase font-display flex items-center gap-1.5 mb-1">
                               <Sparkles size={16} /> Magic Super Prompt Result
                             </span>
                             <span className="text-xs sm:text-sm font-bold text-slate-700 block mb-3 max-h-16 overflow-y-auto leading-relaxed font-mono">
                               "{getLivePromptText()}"
                             </span>
                           </div>
-                          <div className="bg-gradient-to-br from-indigo-50/20 to-slate-50/20 rounded-lg overflow-hidden min-h-[180px] flex items-center justify-center p-3 border border-indigo-100/50">
+                          <div className="bg-white rounded-xl overflow-hidden min-h-[180px] flex items-center justify-center p-3 border border-pink-100/50 shadow-[0_2px_10px_rgba(0,0,0,0.03)]">
                             {activeLesson.quest.superOutputImage ? (
                               <BoringVsSuperPromptImage
                                 imageUrl={activeLesson.quest.superOutputImage}
@@ -1918,54 +1855,28 @@ const PromptAcademyComponent = () => {
                                 isAwesome={true}
                               />
                             ) : (
-                              <div className="w-full bg-white p-4 rounded-lg border border-indigo-100 shadow-sm max-h-[160px] overflow-y-auto" data-lenis-prevent>
+                              <div className="w-full bg-white p-4 rounded-lg max-h-[160px] overflow-y-auto" data-lenis-prevent>
                                 {renderProfessionalTextOutput(activeLesson.quest.superOutputText, activeLesson.id)}
                               </div>
                             )}
                           </div>
                         </div>
                       </div>
-
-                      {/* Quest cleared card */}
-                      <div className="bg-gradient-to-r from-indigo-600 to-indigo-800 rounded-xl p-5 text-white text-center flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <div className="text-left">
-                          <h4 className="text-base sm:text-lg font-black font-display flex items-center gap-1.5 justify-center sm:justify-start">
-                            <Trophy size={18} className="text-indigo-200" /> Quest Cleared!
-                          </h4>
-                          <p className="text-xs sm:text-sm text-indigo-100 font-bold">
-                            Badge Unlocked:{" "}
-                            <span className="bg-white/10 px-2 py-0.5 rounded font-black text-white font-display">
-                              {activeLesson.quest.badge}
-                            </span>
-                          </p>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <span className="text-xs sm:text-sm font-black bg-white/10 px-3 py-1.5 rounded-lg border border-white/20 font-display">
-                            +50 XP awarded
-                          </span>
-                          <button
-                            onClick={() => setActiveTab("sandbox")}
-                            className="bg-white text-indigo-700 hover:bg-slate-50 px-5 py-2 rounded-lg text-xs sm:text-sm font-black font-display shadow-md transition-all active:scale-95 cursor-pointer flex items-center gap-0.5"
-                          >
-                            Go to Sandbox <ChevronRight size={16} />
-                          </button>
-                        </div>
-                      </div>
                     </div>
                   ) : (
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
                       {/* Character bubble */}
-                      <div className="md:col-span-5 bg-slate-50 border border-slate-100 p-5 rounded-xl text-center flex flex-col items-center">
-                        <div className="w-24 h-24 bg-white rounded-xl border border-indigo-100 shadow-sm p-1.5 mb-3.5 shrink-0 overflow-hidden">
+                      <div className="md:col-span-5 bg-slate-50 border border-slate-100 p-5 rounded-2xl text-center flex flex-col items-center shadow-sm">
+                        <div className="w-24 h-24 bg-white rounded-xl border border-pink-100 shadow-sm p-1.5 mb-3.5 shrink-0 overflow-hidden">
                           {getCharacterImage(activeLesson)}
                         </div>
                         <h4 className="text-sm sm:text-base font-black text-slate-800 font-display">
                           {activeLesson.quest.characterName}
                         </h4>
-                        <span className="text-[10px] sm:text-xs font-black text-indigo-600 uppercase tracking-widest block mb-3 font-display">
+                        <span className="text-[10px] sm:text-xs font-black text-pink-500 uppercase tracking-widest block mb-3 font-display">
                           Quest Guide
                         </span>
-                        <div className="bg-white border border-slate-100/80 p-3.5 rounded-lg shadow-inner text-xs sm:text-sm font-semibold text-slate-600 leading-relaxed text-left relative">
+                        <div className="bg-white border border-slate-100/80 p-4 rounded-xl shadow-inner text-xs sm:text-sm font-medium text-slate-600 leading-relaxed text-left relative">
                           <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-t border-l border-slate-100/80 rotate-45" />
                           "{activeLesson.quest.characterMsg}"
                         </div>
@@ -1975,9 +1886,9 @@ const PromptAcademyComponent = () => {
                       <div className="md:col-span-7 space-y-4">
                         <div>
                           <h4 className="text-sm sm:text-base font-black text-slate-800 font-display flex items-center gap-1.5">
-                            <WandSparkles size={16} className="text-indigo-600" /> Assemble Ingredients
+                            <WandSparkles size={16} className="text-pink-500" /> Assemble Ingredients
                           </h4>
-                          <p className="text-xs sm:text-sm text-slate-500 font-semibold">
+                          <p className="text-xs sm:text-sm text-slate-500 font-medium mt-1">
                             Select all 4 power-ups to write the ultimate prompt.
                           </p>
                         </div>
@@ -1988,7 +1899,7 @@ const PromptAcademyComponent = () => {
                               <button
                                 key={ing.id}
                                 onClick={() => toggleIngredient(ing)}
-                                className={`p-3.5 rounded-lg border text-left cursor-pointer transition-all ${getIngredientColorClass(
+                                className={`p-3.5 rounded-xl border text-left cursor-pointer transition-all ${getIngredientColorClass(
                                   ing.type,
                                   isSelected
                                 )}`}
@@ -2008,7 +1919,7 @@ const PromptAcademyComponent = () => {
                                 <p className="text-xs sm:text-sm font-bold opacity-95 leading-normal mb-1.5 font-mono">
                                   "{ing.text}"
                                 </p>
-                                <span className="text-[10px] sm:text-xs font-semibold block opacity-85 leading-normal">
+                                <span className="text-[10px] sm:text-xs font-medium block opacity-80 leading-normal">
                                   {ing.desc}
                                 </span>
                               </button>
@@ -2019,20 +1930,20 @@ const PromptAcademyComponent = () => {
 
                       {/* Bottom live prompt preview and cast button */}
                       <div className="md:col-span-12 space-y-3 pt-3 border-t border-slate-100">
-                        <div className="bg-slate-50 border border-slate-100 rounded-lg p-4">
+                        <div className="bg-slate-50 border border-slate-100 rounded-xl p-4 shadow-sm">
                           <span className="text-[10px] sm:text-xs font-black text-slate-500 uppercase tracking-wider block mb-1.5 font-display">
                             Live Prompt spell composition
                           </span>
-                          <div className="bg-white border border-slate-100 p-4 rounded-lg min-h-[60px] flex items-center leading-relaxed text-xs sm:text-sm font-mono text-indigo-700 font-extrabold shadow-inner">
+                          <div className="bg-white border border-slate-100 p-4 rounded-lg min-h-[60px] flex items-center leading-relaxed text-xs sm:text-sm font-mono text-slate-700 font-bold shadow-inner">
                             {renderLivePromptBadges()}
                           </div>
                         </div>
                         <button
                           onClick={handleCastSpell}
                           disabled={selectedIngredients.length < activeLesson.quest.ingredients.length}
-                          className={`w-full py-3.5 rounded-lg text-sm sm:text-base font-black font-display transition-all ${
+                          className={`w-full py-3.5 rounded-xl text-sm sm:text-base font-black font-display transition-all ${
                             selectedIngredients.length === activeLesson.quest.ingredients.length
-                              ? "bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white shadow-md cursor-pointer"
+                              ? "bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white shadow-md cursor-pointer active:scale-[0.99]"
                               : "bg-slate-100 border border-slate-200 text-slate-400 cursor-not-allowed"
                           }`}
                         >
@@ -2041,101 +1952,6 @@ const PromptAcademyComponent = () => {
                       </div>
                     </div>
                   )}
-                </motion.div>
-              )}
-
-              {/* SANDBOX STEP */}
-              {activeTab === 'sandbox' && (
-                <motion.div
-                  key={`sandbox-${activeLesson.id}`}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="space-y-6"
-                >
-                  <div>
-                    <h3 className="text-lg sm:text-xl font-black text-slate-800 font-display mb-1">
-                      {activeLesson.sandbox.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-500 font-semibold">
-                      Customize the dynamic fields to construct a custom prompt spell.
-                    </p>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-                    {/* Input customizers */}
-                    <div className="md:col-span-5 bg-slate-50 border border-slate-100 p-5 rounded-xl space-y-4">
-                      {activeLesson.sandbox.inputs.map(inp => {
-                        const val = sandboxInputs[activeLesson.id]?.[inp.key] || "";
-                        return (
-                          <div key={inp.key}>
-                            <label className="text-xs sm:text-sm font-black text-slate-600 uppercase font-display tracking-wider block mb-1.5">
-                              {inp.label}
-                            </label>
-                            {inp.type === "select" ? (
-                              <select
-                                value={val}
-                                onChange={(e) => handleSandboxInputChange(inp.key, e.target.value)}
-                                className="w-full px-4 py-2.5 border border-slate-200 rounded-lg text-xs sm:text-sm font-semibold bg-white text-slate-700 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-100 transition-all cursor-pointer"
-                              >
-                                {inp.options.map(opt => (
-                                  <option key={opt} value={opt}>
-                                    {opt}
-                                  </option>
-                                ))}
-                              </select>
-                            ) : (
-                              <input
-                                type="text"
-                                placeholder={inp.placeholder}
-                                value={val}
-                                onChange={(e) => handleSandboxInputChange(inp.key, e.target.value)}
-                                className="w-full px-4 py-2.5 border border-slate-200 rounded-lg text-xs sm:text-sm font-semibold bg-white text-slate-700 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-100 transition-all"
-                              />
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
-
-                    {/* Result composition */}
-                    <div className="md:col-span-7 flex flex-col justify-between h-full space-y-4">
-                      <div className="bg-slate-50 border border-slate-100 rounded-xl p-5 flex-1">
-                        <span className="text-[10px] sm:text-xs font-black text-slate-500 uppercase font-display tracking-wider block mb-2">
-                          Live Generated Prompt Formula
-                        </span>
-                        <div className="bg-white border border-slate-100 p-4 rounded-lg text-xs sm:text-sm text-slate-700 font-mono leading-relaxed min-h-[100px] max-h-[160px] overflow-y-auto break-words select-all" data-lenis-prevent>
-                          {getSandboxPromptText()}
-                        </div>
-                      </div>
-                      <div className="flex gap-3">
-                        <button
-                          onClick={handleCopySandboxSpell}
-                          className="flex-1 py-3 bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white rounded-lg text-xs sm:text-sm font-black font-display transition-all shadow-md active:scale-95 cursor-pointer flex items-center justify-center gap-1.5"
-                        >
-                          {isCopied ? <CheckCircle2 size={16} /> : <Copy size={16} />}
-                          {isCopied ? "Copied Spell!" : "Copy to Clipboard"}
-                        </button>
-                        <a
-                          href="https://chat.openai.com"
-                          target="_blank"
-                          rel="noreferrer"
-                          className="py-3 px-5 bg-slate-50 border border-slate-200 hover:bg-slate-100 text-slate-600 rounded-lg text-xs sm:text-sm font-black font-display transition-all flex items-center justify-center gap-1 cursor-pointer"
-                        >
-                          Try in ChatGPT
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="pt-2 flex justify-end">
-                    <button
-                      onClick={() => setActiveTab("battle")}
-                      className="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white rounded-lg text-xs sm:text-sm font-black font-display transition-all shadow-md active:scale-95 cursor-pointer flex items-center gap-1"
-                    >
-                      Go to Battle Test! <ArrowRight size={16} />
-                    </button>
-                  </div>
                 </motion.div>
               )}
 
@@ -2152,12 +1968,12 @@ const PromptAcademyComponent = () => {
                     <h3 className="text-lg sm:text-xl font-black text-slate-800 font-display mb-1">
                        Prompt Battle Trivia
                     </h3>
-                    <p className="text-xs sm:text-sm text-slate-500 font-semibold">
+                    <p className="text-xs sm:text-sm text-slate-500 font-medium">
                       Pick the prompt that uses all guidelines to defeat the Boring Text Monster!
                     </p>
                   </div>
 
-                  <div className="bg-slate-50 border border-slate-100 rounded-xl p-5 shadow-inner">
+                  <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 shadow-sm">
                     <h4 className="text-sm sm:text-base font-bold text-slate-800 leading-relaxed">
                       {activeLesson.battle.scenario}
                     </h4>
@@ -2166,7 +1982,7 @@ const PromptAcademyComponent = () => {
                   <div className="space-y-3.5">
                     {activeLesson.battle.options.map((option, idx) => {
                       const isSelected = selectedOption === idx;
-                      let optionStyle = "bg-white border-slate-200 text-slate-700 hover:border-indigo-200 hover:bg-indigo-50/15";
+                      let optionStyle = "bg-white border-slate-200 text-slate-700 hover:border-pink-200 hover:bg-pink-50/20";
                       if (battleAnswered) {
                         if (option.isCorrect) {
                            optionStyle = "bg-emerald-50 border-emerald-400 text-emerald-700 font-bold";
@@ -2181,7 +1997,7 @@ const PromptAcademyComponent = () => {
                           key={idx}
                           disabled={battleAnswered}
                           onClick={() => handleSelectBattleOption(idx)}
-                          className={`w-full flex items-start gap-4 p-4 rounded-xl border text-left transition-all duration-250 cursor-pointer font-semibold ${optionStyle}`}
+                          className={`w-full flex items-start gap-4 p-4 rounded-xl border text-left transition-all duration-250 cursor-pointer font-medium ${optionStyle}`}
                         >
                           <span className={`w-7 h-7 rounded-md flex items-center justify-center text-xs sm:text-sm font-black shrink-0 transition-all shadow-sm ${
                             battleAnswered && option.isCorrect
@@ -2189,7 +2005,7 @@ const PromptAcademyComponent = () => {
                               : battleAnswered && isSelected && !option.isCorrect
                               ? "bg-rose-500 text-white"
                               : isSelected
-                              ? "bg-indigo-600 text-white"
+                              ? "bg-pink-500 text-white"
                               : "bg-slate-100 text-slate-500"
                           }`}>
                             {battleAnswered && option.isCorrect ? "" : battleAnswered && isSelected && !option.isCorrect ? "" : optionLabels[idx]}
@@ -2210,25 +2026,10 @@ const PromptAcademyComponent = () => {
                   </div>
 
                   {battleAnswered && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className="bg-indigo-50/40 border border-indigo-100 rounded-xl p-5 mt-3"
-                    >
-                      <span className="text-xs sm:text-sm font-black text-indigo-700 uppercase tracking-wider flex items-center gap-1 mb-1.5 font-display">
-                        <HelpCircle size={14} /> Prompt Master Logic Explanation
-                      </span>
-                      <p className="text-xs sm:text-sm text-slate-600 font-bold leading-relaxed">
-                        {activeLesson.battle.explanation}
-                      </p>
-                    </motion.div>
-                  )}
-
-                  {battleAnswered && (
                     <div className="flex justify-end pt-2">
                       <button
                         onClick={handleCompleteBattle}
-                        className="px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-700 hover:to-indigo-900 text-white rounded-lg text-xs sm:text-sm font-black font-display transition-all shadow-md active:scale-95 cursor-pointer flex items-center gap-1"
+                        className="px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-xl text-xs sm:text-sm font-black font-display transition-all shadow-md active:scale-95 cursor-pointer flex items-center gap-1"
                       >
                         {activeLesson.battle.options[selectedOption]?.isCorrect ? (
                           activeLessonIdx < lessonsData.length - 1 ? (
@@ -2250,6 +2051,362 @@ const PromptAcademyComponent = () => {
           </div>
         </div>
       </div>
+    </div>
+  );
+};
+
+
+const LearnAndPromptAcademyComponent = () => {
+  const [activeSection, setActiveSection] = useState('concepts'); // 'concepts' or 'academy'
+  const [activeConceptTab, setActiveConceptTab] = useState('basics'); // 'basics', 'superpowers', 'learning'
+
+  return (
+    <div className="space-y-8 font-body max-w-6xl mx-auto">
+      {/* Sleek Top Mode Selector / Header */}
+      <div className="bg-white rounded-3xl p-3 sm:p-4 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-2 w-full sm:w-auto p-1 bg-slate-50 rounded-2xl border border-slate-100/80">
+          <button
+            onClick={() => setActiveSection('concepts')}
+            className={`flex-1 sm:flex-initial px-5 sm:px-7 py-3 rounded-xl font-black font-display text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer ${
+              activeSection === 'concepts'
+                ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-200 scale-[1.02]'
+                : 'text-slate-500 hover:text-slate-900 hover:bg-white/60'
+            }`}
+          >
+            <Lightbulb size={18} className={activeSection === 'concepts' ? 'text-amber-300 animate-pulse' : ''} />
+            <span>AI Quick Concepts</span>
+            <span className={`text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-extrabold ml-1 ${activeSection === 'concepts' ? 'bg-white/20 text-white' : 'bg-slate-200 text-slate-600'}`}>Easy</span>
+          </button>
+          <button
+            onClick={() => setActiveSection('academy')}
+            className={`flex-1 sm:flex-initial px-5 sm:px-7 py-3 rounded-xl font-black font-display text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer ${
+              activeSection === 'academy'
+                ? 'bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 text-white shadow-md shadow-pink-200 scale-[1.02]'
+                : 'text-slate-500 hover:text-slate-900 hover:bg-white/60'
+            }`}
+          >
+            <WandSparkles size={18} className={activeSection === 'academy' ? 'text-pink-300 animate-spin' : ''} />
+            <span>Prompt Academy Course</span>
+            <span className={`text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-extrabold ml-1 ${activeSection === 'academy' ? 'bg-white/20 text-white' : 'bg-pink-100 text-pink-700'}`}>10 Lessons</span>
+          </button>
+        </div>
+
+      </div>
+
+      {/* Dynamic Content View */}
+      <AnimatePresence mode="wait">
+        {activeSection === 'concepts' && (
+          <motion.div
+            key="quick-concepts"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.3 }}
+            className="space-y-8 pb-16"
+          >
+            {/* Sub-navigation for AI Concepts */}
+            <div className="flex flex-wrap items-center gap-2 pb-4">
+              {[
+                { id: 'basics', label: '1. What is AI?', icon: Sparkles },
+                { id: 'superpowers', label: '2. Superpowers', icon: Eye },
+                { id: 'learning', label: '3. How AI Learns & Safety', icon: Brain },
+              ].map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveConceptTab(tab.id)}
+                  className={`px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider font-display flex items-center gap-2 transition-all cursor-pointer ${
+                    activeConceptTab === tab.id
+                      ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md shadow-indigo-200 scale-[1.02] border border-transparent'
+                      : 'bg-white text-slate-500 border border-slate-200 hover:border-indigo-300 hover:text-indigo-600 hover:bg-indigo-50/30'
+                  }`}
+                >
+                  <tab.icon size={16} className={activeConceptTab === tab.id ? 'text-indigo-200' : 'opacity-70'} />
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+
+            <AnimatePresence mode="wait">
+              {activeConceptTab === 'basics' && (
+                <motion.div key="basics" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.2 }}>
+                  {/* Top Hero Banner: What is AI? (Engaging 2-Column Layout) */}
+                  <div className="bg-gradient-to-br from-indigo-50/50 via-white to-purple-50/50 rounded-3xl p-6 sm:p-8 md:p-10 relative overflow-hidden shadow-sm border border-indigo-100/60 flex flex-col md:flex-row items-center justify-between gap-10">
+              
+              {/* Left Content */}
+              <div className="relative z-10 w-full md:w-3/5 space-y-5 text-left">
+                {/* Badges */}
+                
+
+                {/* Title & Text */}
+                <div className="space-y-4">
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
+                    What is Artificial Intelligence?
+                  </h2>
+                  <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed max-w-xl">
+                    Think of AI as a <strong className="text-indigo-600 font-bold">super-smart digital brain</strong>. Instead of just following rules, AI learns from real-world examples (like photos or text) to solve problems, recognize patterns, and create new things!
+                  </p>
+
+                  {/* Extra Content: Real World Examples & Fun Fact */}
+                  <div className="pt-2 space-y-3">
+                    <h4 className="text-xs font-black uppercase text-slate-500 tracking-wider font-display">Where do we use it?</h4>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm font-medium text-slate-700">
+                      <li className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-indigo-500"></div> Smart Assistants (Siri, Alexa)
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div> Video Recommendations (YouTube)
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-pink-500"></div> Self-Driving Cars
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div> Math & Homework Tutors
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="mt-6 bg-indigo-50/50 border border-indigo-100/80 rounded-xl p-3.5 flex items-start gap-3 max-w-xl shadow-sm">
+                     <Lightbulb size={18} className="text-amber-500 shrink-0 mt-0.5" />
+                     <p className="text-[13px] text-indigo-900 font-medium leading-relaxed">
+                       <strong>Fun Fact:</strong> The term "Artificial Intelligence" was actually invented way back in <strong>1956</strong> by a scientist named John McCarthy during a summer conference!
+                     </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Visual (Abstract Representation of AI) */}
+              <div className="relative w-full md:w-2/5 flex justify-center items-center py-4 md:py-0">
+                <div className="absolute inset-0 bg-indigo-300/20 blur-[50px] rounded-full w-48 h-48 mx-auto" />
+                <div className="relative grid grid-cols-2 gap-4">
+                   <div className="bg-white p-4 rounded-2xl shadow-sm border border-indigo-50 flex flex-col items-center justify-center gap-2 transform -rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-300">
+                     <div className="w-10 h-10 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center"><Eye size={20} /></div>
+                     <span className="text-[10px] font-black text-slate-600 uppercase tracking-wide">Vision</span>
+                   </div>
+                   <div className="bg-white p-4 rounded-2xl shadow-sm border border-indigo-50 flex flex-col items-center justify-center gap-2 transform translate-y-4 rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-300">
+                     <div className="w-10 h-10 rounded-full bg-purple-50 text-purple-500 flex items-center justify-center"><MessageSquare size={20} /></div>
+                     <span className="text-[10px] font-black text-slate-600 uppercase tracking-wide">Chat</span>
+                   </div>
+                   <div className="bg-white p-4 rounded-2xl shadow-sm border border-indigo-50 flex flex-col items-center justify-center gap-2 transform -translate-y-2 -rotate-2 hover:rotate-0 hover:scale-105 transition-all duration-300">
+                     <div className="w-10 h-10 rounded-full bg-pink-50 text-pink-500 flex items-center justify-center"><Palette size={20} /></div>
+                     <span className="text-[10px] font-black text-slate-600 uppercase tracking-wide">Create</span>
+                   </div>
+                   <div className="bg-white p-4 rounded-2xl shadow-sm border border-indigo-50 flex flex-col items-center justify-center gap-2 transform translate-y-6 rotate-6 hover:rotate-0 hover:scale-105 transition-all duration-300">
+                     <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center"><Brain size={20} /></div>
+                     <span className="text-[10px] font-black text-slate-600 uppercase tracking-wide">Learn</span>
+                   </div>
+                </div>
+              </div>
+            </div>
+                </motion.div>
+              )}
+
+              {activeConceptTab === 'superpowers' && (
+                <motion.div key="superpowers" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.2 }} className="space-y-4">
+                  {/* 4 Superpowers Visual Grid (No long text!) */}
+                  <div className="space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 text-left px-2">
+                <div>
+                  <span className="text-xs font-black text-purple-600 uppercase tracking-wider font-display">
+                    Core Skills
+                  </span>
+                  <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display">
+                    4 Amazing AI Superpowers
+                  </h3>
+                </div>
+                <p className="text-xs text-slate-500 font-semibold">
+                  How AI helps us every single day
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {/* Power 1 */}
+                <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-blue-300 hover:shadow-lg transition-all text-left flex flex-col justify-between group">
+                  <div className="space-y-3">
+                    <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-black group-hover:scale-110 transition-transform shadow-inner">
+                      <Eye size={24} />
+                    </div>
+                    <h4 className="text-base font-black text-slate-900 font-display group-hover:text-blue-600 transition-colors">
+                      Computer Vision
+                    </h4>
+                    <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                      AI looks at pixels to recognize shapes, colors, faces, and traffic signs instantly.
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <span className="text-[10px] font-extrabold text-blue-600 bg-blue-50 px-2 py-1 rounded-md uppercase font-mono tracking-wider">
+                      FaceID &amp; Cars
+                    </span>
+                  </div>
+                </div>
+
+                {/* Power 2 */}
+                <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-purple-300 hover:shadow-lg transition-all text-left flex flex-col justify-between group">
+                  <div className="space-y-3">
+                    <div className="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center font-black group-hover:scale-110 transition-transform shadow-inner">
+                      <MessageSquare size={24} />
+                    </div>
+                    <h4 className="text-base font-black text-slate-900 font-display group-hover:text-purple-600 transition-colors">
+                      Talking Chatbots
+                    </h4>
+                    <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                      AI reads sentences, translates languages, and chats like a real human tutor.
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <span className="text-[10px] font-extrabold text-purple-600 bg-purple-50 px-2 py-1 rounded-md uppercase font-mono tracking-wider">
+                      Siri &amp; ChatGPT
+                    </span>
+                  </div>
+                </div>
+
+                {/* Power 3 */}
+                <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-emerald-300 hover:shadow-lg transition-all text-left flex flex-col justify-between group">
+                  <div className="space-y-3">
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-black group-hover:scale-110 transition-transform shadow-inner">
+                      <Brain size={24} />
+                    </div>
+                    <h4 className="text-base font-black text-slate-900 font-display group-hover:text-emerald-600 transition-colors">
+                      Pattern Finder
+                    </h4>
+                    <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                      AI scans millions of data rows to find hidden secrets and predict future trends.
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <span className="text-[10px] font-extrabold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md uppercase font-mono tracking-wider">
+                      YouTube Recommendations
+                    </span>
+                  </div>
+                </div>
+
+                {/* Power 4 */}
+                <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-pink-300 hover:shadow-lg transition-all text-left flex flex-col justify-between group">
+                  <div className="space-y-3">
+                    <div className="w-12 h-12 rounded-2xl bg-pink-50 text-pink-600 flex items-center justify-center font-black group-hover:scale-110 transition-transform shadow-inner">
+                      <Palette size={24} />
+                    </div>
+                    <h4 className="text-base font-black text-slate-900 font-display group-hover:text-pink-600 transition-colors">
+                      Generative Art
+                    </h4>
+                    <p className="text-xs text-slate-600 font-medium leading-relaxed">
+                      AI learns artistic styles to build stunning new pictures and stories from your prompts.
+                    </p>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                    <span className="text-[10px] font-extrabold text-pink-600 bg-pink-50 px-2 py-1 rounded-md uppercase font-mono tracking-wider">
+                      AI Image Creators
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+                </motion.div>
+              )}
+
+              {activeConceptTab === 'learning' && (
+                <motion.div key="learning" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} transition={{ duration: 0.2 }}>
+                  {/* How AI Learns & Golden Rules in a clean 2-column layout */}
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+              {/* Left Box: How AI Learns (3 Easy Steps) */}
+              <div className="lg:col-span-6 bg-gradient-to-br from-slate-50 to-indigo-50/40 rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-sm flex flex-col justify-between text-left">
+                <div>
+                  <span className="text-xs font-black text-indigo-600 uppercase tracking-wider font-display block mb-1">
+                    Simple Timeline
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-black text-slate-900 font-display mb-4">
+                    How Does AI Get Smart?
+                  </h3>
+
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-3.5 bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm">
+                      <div className="w-8 h-8 rounded-xl bg-indigo-600 text-white font-black font-display text-sm flex items-center justify-center shrink-0 shadow-md shadow-indigo-200">
+                        1
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-black text-slate-900 font-display">Feed the Data</h4>
+                        <p className="text-xs text-slate-600 font-medium mt-0.5">We show AI millions of examples (photos, books, numbers) so it learns shapes and facts.</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3.5 bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm">
+                      <div className="w-8 h-8 rounded-xl bg-indigo-600 text-white font-black font-display text-sm flex items-center justify-center shrink-0 shadow-md shadow-indigo-200">
+                        2
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-black text-slate-900 font-display">Practice &amp; Guess</h4>
+                        <p className="text-xs text-slate-600 font-medium mt-0.5">AI practices guessing. When it makes a mistake, we correct it until its score reaches 100%!</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3.5 bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm">
+                      <div className="w-8 h-8 rounded-xl bg-indigo-600 text-white font-black font-display text-sm flex items-center justify-center shrink-0 shadow-md shadow-indigo-200">
+                        3
+                      </div>
+                      <div>
+                        <h4 className="text-sm font-black text-slate-900 font-display">Spot Secrets</h4>
+                        <p className="text-xs text-slate-600 font-medium mt-0.5">AI works like a detective, automatically spotting patterns without human help!</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Box: 4 Golden Rules of Safe AI */}
+              <div className="lg:col-span-6 bg-gradient-to-br from-amber-50/70 to-orange-50/40 rounded-3xl p-6 sm:p-7 border border-amber-200/80 shadow-sm flex flex-col justify-between text-left">
+                <div>
+                  <span className="text-xs font-black text-amber-700 uppercase tracking-wider font-display block mb-1">
+                    Safety First
+                  </span>
+                  <h3 className="text-lg sm:text-xl font-black text-slate-900 font-display mb-4">
+                    4 Smart Rules of Using AI
+                  </h3>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="bg-white/80 backdrop-blur-sm p-3.5 rounded-2xl border border-amber-100 shadow-sm">
+                      <div className="mb-1 text-amber-500"><Shield size={20} /></div>
+                      <h4 className="text-xs sm:text-sm font-black text-slate-900 font-display">Keep Secrets Secret</h4>
+                      <p className="text-[11px] text-slate-600 font-medium mt-0.5">Never share passwords, real addresses, or phone numbers with AI.</p>
+                    </div>
+
+                    <div className="bg-white/80 backdrop-blur-sm p-3.5 rounded-2xl border border-amber-100 shadow-sm">
+                      <div className="mb-1 text-amber-500"><CheckCircle2 size={20} /></div>
+                      <h4 className="text-xs sm:text-sm font-black text-slate-900 font-display">Double-Check Facts</h4>
+                      <p className="text-[11px] text-slate-600 font-medium mt-0.5">AI can make silly mistakes. Verify important facts with a textbook or teacher.</p>
+                    </div>
+
+                    <div className="bg-white/80 backdrop-blur-sm p-3.5 rounded-2xl border border-amber-100 shadow-sm">
+                      <div className="mb-1 text-amber-500"><Brain size={20} /></div>
+                      <h4 className="text-xs sm:text-sm font-black text-slate-900 font-display">Learn, Don't Copy</h4>
+                      <p className="text-[11px] text-slate-600 font-medium mt-0.5">Let AI explain *how* to solve homework instead of just copying the answer.</p>
+                    </div>
+
+                    <div className="bg-white/80 backdrop-blur-sm p-3.5 rounded-2xl border border-amber-100 shadow-sm">
+                      <div className="mb-1 text-amber-500"><Star size={20} /></div>
+                      <h4 className="text-xs sm:text-sm font-black text-slate-900 font-display">Be Creative &amp; Kind</h4>
+                      <p className="text-[11px] text-slate-600 font-medium mt-0.5">Use AI to brainstorm stories, practice coding, and build positive art!</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+        )}
+
+        {activeSection === 'academy' && (
+          <motion.div
+            key="prompt-academy"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.3 }}
+          >
+            <PromptAcademyComponent />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -2466,7 +2623,7 @@ const QuizComponent = () => {
 
 const AiIntelligenceDashboard = () => {
   const navigate = useNavigate();
-  const [activeFilter, setActiveFilter] = useState('Learn Concepts');
+  const [activeFilter, setActiveFilter] = useState('Learn & Prompt Academy');
   const [selectedItem, setSelectedItem] = useState(null);
   const [learnSubTab, setLearnSubTab] = useState('meet');
 
@@ -2489,8 +2646,7 @@ const AiIntelligenceDashboard = () => {
   ];
 
   const quickStats = [
-    { label: 'Learn Concepts', value: 'Step by step', icon: <Lightbulb className="text-blue-600" />, color: 'bg-blue-50' },
-    { label: 'Prompt Academy', value: 'Prompt Hero!', icon: <WandSparkles className="text-pink-600" />, color: 'bg-pink-50' },
+    { label: 'Learn & Prompt Academy', value: 'Concepts & Prompts', icon: <WandSparkles className="text-pink-600" />, color: 'bg-pink-50' },
     { label: 'Explore Tools', value: 'AI powered', icon: <Cpu className="text-purple-600" />, color: 'bg-purple-50' },
     { label: 'Take Challenges', value: 'Test skills', icon: <Trophy className="text-orange-500" />, color: 'bg-orange-50' }
   ];
@@ -2543,7 +2699,7 @@ const AiIntelligenceDashboard = () => {
             </section>
 
             {/* Quick Stats Row — overlapping hero with negative margin */}
-            <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 relative z-20 -mt-8 px-4 md:px-12">
+            <section className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 relative z-20 -mt-8 px-4 md:px-12">
               {quickStats.map((stat, i) => {
                 const isActive = activeFilter === stat.label;
                 return (
@@ -2581,392 +2737,7 @@ const AiIntelligenceDashboard = () => {
               >
                 {activeFilter === 'Explore Tools' && <ExploreToolsComponent />}
                 {activeFilter === 'Take Challenges' && <QuizComponent />}
-                {activeFilter === 'Prompt Academy' && <PromptAcademyComponent />}
-                {activeFilter === 'Learn Concepts' && (
-                  <div className="space-y-8 max-w-5xl mx-auto font-body">
-                    {/* Top Hero Card: What is AI? */}
-                    <div className="bg-gradient-to-r from-blue-500 to-indigo-600 rounded-[24px] p-6 sm:p-8 text-white relative overflow-hidden shadow-lg border border-indigo-400/20">
-                      <div className="absolute right-4 bottom-4 text-8xl opacity-15 select-none pointer-events-none">
-                        
-                      </div>
-                      <div className="relative z-10 space-y-3">
-                        <span className="bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider font-display border border-white/10">
-                           AI for Kids
-                        </span>
-                        <h2 className="text-xl sm:text-2xl md:text-3xl font-black font-display leading-tight">
-                          What is Artificial Intelligence (AI)? 
-                        </h2>
-                        <p className="text-sm sm:text-base text-blue-50 font-medium leading-relaxed max-w-2xl">
-                          Imagine your computer got a brain! Normally, computers are like super obedient dogs—they only do exactly what you tell them. But an <strong>AI</strong> is like a <strong>cute baby dragon</strong>! It can learn by looking at pictures, listening to your voice, and guessing what to do next!
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Top Prominent CTA button inside Learn Concepts */}
-                    <div className="bg-gradient-to-r from-pink-50 via-purple-50 to-indigo-50 border border-pink-100 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm hover:shadow-md transition-shadow">
-                      <div className="flex items-center gap-3 text-left">
-                        <span className="text-3xl shrink-0"></span>
-                        <div>
-                          <h4 className="text-sm sm:text-base font-black text-slate-800 font-display">
-                            Want to become an AI prompt magician?
-                          </h4>
-                          <p className="text-xs text-slate-500 font-semibold leading-normal">
-                            Learn how to command AI to draw pictures and write stories in efficient ways!
-                          </p>
-                        </div>
-                      </div>
-                      <button
-                        onClick={() => {
-                          setActiveFilter('Prompt Academy');
-                          const target = document.getElementById("content-section");
-                          if (target) target.scrollIntoView({ behavior: 'smooth' });
-                        }}
-                        className="px-5 py-2.5 bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-600 hover:from-pink-600 hover:via-purple-700 hover:to-indigo-700 text-white rounded-xl font-bold font-display text-xs sm:text-sm shadow-sm hover:shadow-md transition-all active:scale-95 cursor-pointer shrink-0"
-                      >
-                         Click to learn how to use AI in efficient ways!
-                      </button>
-                    </div>
-
-                    {/* Sub-tab Navigation for Learn Concepts */}
-                    <div className="flex flex-wrap bg-slate-100/60 border border-slate-200/50 rounded-2xl p-1.5 gap-1 shadow-inner">
-                      {[
-                        { id: 'meet', label: ' Meet Robo' },
-                        { id: 'superpowers', label: ' AI Superpowers' },
-                        { id: 'works', label: ' How AI Learns' },
-                        { id: 'rules', label: ' Smart Rules' }
-                      ].map(tab => (
-                        <button
-                          key={tab.id}
-                          onClick={() => setLearnSubTab(tab.id)}
-                          className={`flex-1 min-w-[120px] py-3 text-center rounded-xl font-bold font-display transition-all cursor-pointer text-xs sm:text-sm ${
-                            learnSubTab === tab.id
-                              ? 'bg-white text-indigo-700 shadow-md ring-1 ring-slate-200'
-                              : 'text-slate-500 hover:bg-white/50 hover:text-slate-800'
-                          }`}
-                        >
-                          {tab.label}
-                        </button>
-                      ))}
-                    </div>
-
-                    {/* Sub-tab Content Area */}
-                    <div className="bg-white rounded-3xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.02)] p-6 sm:p-8 min-h-[300px]">
-                      <AnimatePresence mode="wait">
-                        {learnSubTab === 'meet' && (
-                          <motion.div
-                            key="meet"
-                            initial={{ opacity: 0, scale: 0.98 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center"
-                          >
-                            <div className="lg:col-span-7 space-y-4 text-left">
-                              <span className="bg-indigo-50 border border-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider font-display inline-block">
-                                 Welcome Friend
-                              </span>
-                              <h3 className="text-xl sm:text-2xl font-black text-[#1e1b4b] font-display">
-                                Meet Your AI Sidekick! 
-                              </h3>
-                              <p className="text-sm sm:text-base text-slate-600 font-semibold leading-relaxed">
-                                Imagine your computer got a brain! Normally, computer programs are like super obedient recipe books—they only do exactly what the programmer wrote, step-by-step.
-                              </p>
-                              <p className="text-sm sm:text-base text-slate-600 font-semibold leading-relaxed">
-                                But an <strong>Artificial Intelligence (AI)</strong> is like a <strong>cute baby dragon</strong>! It doesn't just copy. It can learn by looking at pictures, listening to your voice, and guessing what to do next!
-                              </p>
-                              <div className="bg-indigo-50/50 border border-indigo-100 rounded-xl p-4 flex items-start gap-3 mt-4">
-                                <span className="text-xl shrink-0"></span>
-                                <p className="text-xs sm:text-sm text-slate-500 font-bold leading-normal">
-                                  <strong>Did you know?</strong> AI isn't a physical robot in a factory. It is a set of smart rules and math running inside computer chips all over the world!
-                                </p>
-                              </div>
-                            </div>
-                            <div className="lg:col-span-5 flex justify-center">
-                              <div className="w-64 h-64 sm:w-80 sm:h-80 bg-gradient-to-br from-indigo-100 to-purple-100 rounded-3xl p-4 shadow-md flex items-center justify-center relative overflow-hidden group">
-                                <motion.img
-                                  src="/images/ai/cute_ai_robot.png"
-                                  alt="Cute AI Robot"
-                                  className="w-full h-full object-contain relative z-10"
-                                  animate={{ y: [0, -10, 0] }}
-                                  transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-                                />
-                                <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-                              </div>
-                            </div>
-                          </motion.div>
-                        )}
-
-                        {learnSubTab === 'superpowers' && (
-                          <motion.div
-                            key="superpowers"
-                            initial={{ opacity: 0, scale: 0.98 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="space-y-6"
-                          >
-                            <div className="text-center max-w-2xl mx-auto space-y-2">
-                              <span className="bg-purple-50 border border-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider font-display inline-block">
-                                 Magical Abilities
-                              </span>
-                              <h3 className="text-xl sm:text-2xl font-black text-[#1e1b4b] font-display">
-                                What can AI do? (Its Superpowers!)
-                              </h3>
-                              <p className="text-xs sm:text-sm text-slate-500 font-medium">
-                                Just like superheroes have special gear, AI has 4 amazing skills that let it understand the world around us.
-                              </p>
-                            </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                              {/* Card 1 */}
-                              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:border-blue-200 transition-all hover:shadow-md flex items-start gap-4">
-                                <span className="text-3xl p-2.5 rounded-xl bg-blue-50 text-blue-600 shrink-0"></span>
-                                <div className="text-left space-y-1">
-                                  <h4 className="text-base font-black text-slate-900 font-display">
-                                    Computer Vision (AI Eyes)
-                                  </h4>
-                                  <p className="text-xs text-slate-500 font-bold leading-normal">
-                                    AI looks at the pixels in photos or video feeds to recognize shapes, colors, and faces.
-                                  </p>
-                                  <p className="text-[11px] text-blue-600 font-extrabold font-mono pt-1">
-                                    Example: FaceID on phones & Self-driving cars.
-                                  </p>
-                                </div>
-                              </div>
-
-                              {/* Card 2 */}
-                              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:border-purple-200 transition-all hover:shadow-md flex items-start gap-4">
-                                <span className="text-3xl p-2.5 rounded-xl bg-purple-50 text-purple-600 shrink-0"></span>
-                                <div className="text-left space-y-1">
-                                  <h4 className="text-base font-black text-slate-900 font-display">
-                                    Talking Chatbots (AI Speech)
-                                  </h4>
-                                  <p className="text-xs text-slate-500 font-bold leading-normal">
-                                    AI uses Natural Language Processing to read sentences, translate languages, and talk to you.
-                                  </p>
-                                  <p className="text-[11px] text-purple-600 font-extrabold font-mono pt-1">
-                                    Example: Siri, Alexa, Google Gemini & ChatGPT.
-                                  </p>
-                                </div>
-                              </div>
-
-                              {/* Card 3 */}
-                              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:border-emerald-200 transition-all hover:shadow-md flex items-start gap-4">
-                                <span className="text-3xl p-2.5 rounded-xl bg-emerald-50 text-emerald-600 shrink-0"></span>
-                                <div className="text-left space-y-1">
-                                  <h4 className="text-base font-black text-slate-900 font-display">
-                                    Pattern Finder (AI Brain)
-                                  </h4>
-                                  <p className="text-xs text-slate-500 font-bold leading-normal">
-                                    AI reads huge tables of data to search for trends and predict what happens next.
-                                  </p>
-                                  <p className="text-[11px] text-emerald-600 font-extrabold font-mono pt-1">
-                                    Example: YouTube recommending videos & Weather predictions.
-                                  </p>
-                                </div>
-                              </div>
-
-                              {/* Card 4 */}
-                              <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] hover:border-pink-200 transition-all hover:shadow-md flex items-start gap-4">
-                                <span className="text-3xl p-2.5 rounded-xl bg-pink-50 text-pink-600 shrink-0"></span>
-                                <div className="text-left space-y-1">
-                                  <h4 className="text-base font-black text-slate-900 font-display">
-                                    Generative AI (AI Artist)
-                                  </h4>
-                                  <p className="text-xs text-slate-500 font-bold leading-normal">
-                                    AI learns styles from millions of drawings to build completely new images and stories from prompts.
-                                  </p>
-                                  <p className="text-[11px] text-pink-600 font-extrabold font-mono pt-1">
-                                    Example: Creating funny cartoon avatars & generating stories.
-                                  </p>
-                                </div>
-                              </div>
-                            </div>
-
-                            <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-3xl p-5 flex flex-col md:flex-row items-center gap-6 border border-purple-100">
-                              <div className="md:w-1/3 flex justify-center">
-                                <img
-                                  src="/images/ai/ai_superpowers.png"
-                                  alt="AI Superpowers Illustration"
-                                  className="max-h-48 object-contain rounded-xl"
-                                />
-                              </div>
-                              <div className="md:w-2/3 text-left space-y-2">
-                                <h4 className="text-sm sm:text-base font-black text-purple-900 font-display">
-                                  AI is Your Creative Sidekick! 
-                                </h4>
-                                <p className="text-xs sm:text-sm text-slate-600 font-semibold leading-relaxed">
-                                  You don't need to be a coding genius to use AI's superpowers. By learning how to give it clean descriptions, you can use these powers to co-create beautiful illustrations, solve tough math riddles, or design customized learning plans!
-                                </p>
-                              </div>
-                            </div>
-                          </motion.div>
-                        )}
-
-                        {learnSubTab === 'works' && (
-                          <motion.div
-                            key="works"
-                            initial={{ opacity: 0, scale: 0.98 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="space-y-6"
-                          >
-                            <div className="text-center max-w-2xl mx-auto space-y-2">
-                              <span className="bg-emerald-50 border border-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider font-display inline-block">
-                                 Training Timeline
-                              </span>
-                              <h3 className="text-xl sm:text-2xl font-black text-[#1e1b4b] font-display">
-                                How Does AI Get So Smart?
-                              </h3>
-                              <p className="text-xs sm:text-sm text-slate-500 font-medium">
-                                Just like a human student, AI goes to a digital school! Here are the 3 magical steps:
-                              </p>
-                            </div>
-
-                            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
-                              <div className="lg:col-span-5 flex justify-center order-last lg:order-first">
-                                <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl p-4 border border-emerald-100 flex items-center justify-center">
-                                  <img
-                                    src="/images/ai/ai_learning_dragon.png"
-                                    alt="AI learning like a dragon"
-                                    className="max-h-64 sm:max-h-80 object-contain rounded-2xl"
-                                  />
-                                </div>
-                              </div>
-                              <div className="lg:col-span-7 space-y-5">
-                                {/* Step 1 */}
-                                <div className="flex items-start gap-4">
-                                  <div className="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center text-sm font-black font-display shrink-0 shadow-sm">
-                                    1
-                                  </div>
-                                  <div className="text-left">
-                                    <h4 className="text-base font-black text-slate-900 font-display">
-                                      The Giant Picture Book (Data)
-                                    </h4>
-                                    <p className="text-xs sm:text-sm text-slate-500 font-semibold leading-normal">
-                                      We show the AI computer program thousands or millions of examples—like photos of cats, trees, and numbers—until it recognizes what they are.
-                                    </p>
-                                  </div>
-                                </div>
-
-                                {/* Step 2 */}
-                                <div className="flex items-start gap-4">
-                                  <div className="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center text-sm font-black font-display shrink-0 shadow-sm">
-                                    2
-                                  </div>
-                                  <div className="text-left">
-                                    <h4 className="text-base font-black text-slate-900 font-display">
-                                      The Guessing Game (Training)
-                                    </h4>
-                                    <p className="text-xs sm:text-sm text-slate-500 font-semibold leading-normal">
-                                      AI learns by guessing. If it guesses a cat is a dog, we say "Nope, try again!" It adjusts its virtual brain connections and tries again. Soon, it gets a perfect score!
-                                    </p>
-                                  </div>
-                                </div>
-
-                                {/* Step 3 */}
-                                <div className="flex items-start gap-4">
-                                  <div className="w-8 h-8 rounded-full bg-emerald-500 text-white flex items-center justify-center text-sm font-black font-display shrink-0 shadow-sm">
-                                    3
-                                  </div>
-                                  <div className="text-left">
-                                    <h4 className="text-base font-black text-slate-900 font-display">
-                                      Spotting Secret Clues (Prediction)
-                                    </h4>
-                                    <p className="text-xs sm:text-sm text-slate-500 font-semibold leading-normal">
-                                      AI works like a detective. It notes clues—like cat pointy ears vs red apples—to tell them apart automatically without help!
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </motion.div>
-                        )}
-
-                        {learnSubTab === 'rules' && (
-                          <motion.div
-                            key="rules"
-                            initial={{ opacity: 0, scale: 0.98 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="space-y-6"
-                          >
-                            <div className="text-center max-w-2xl mx-auto space-y-2">
-                              <span className="bg-amber-50 border border-amber-100 text-amber-700 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider font-display inline-block">
-                                 Be Safe & Smart
-                              </span>
-                              <h3 className="text-xl sm:text-2xl font-black text-[#1e1b4b] font-display">
-                                The Smart Rules of using AI!
-                              </h3>
-                              <p className="text-xs sm:text-sm text-slate-500 font-medium">
-                                AI is a super helpful friend, but we must use it safely and responsibly!
-                              </p>
-                            </div>
-
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
-                              {/* Rule 1 */}
-                              <div className="bg-amber-50/40 border border-amber-100 rounded-2xl p-5 space-y-2 shadow-sm">
-                                <span className="text-2xl"></span>
-                                <h4 className="text-base font-black text-slate-900 font-display">
-                                  Keep Secrets Secret
-                                </h4>
-                                <p className="text-xs text-slate-600 font-semibold leading-relaxed">
-                                  Never share your real name, address, phone number, or passwords with an AI chatbot. Treat it like a friendly stranger in public!
-                                </p>
-                              </div>
-
-                              {/* Rule 2 */}
-                              <div className="bg-amber-50/40 border border-amber-100 rounded-2xl p-5 space-y-2 shadow-sm">
-                                <span className="text-2xl"></span>
-                                <h4 className="text-base font-black text-slate-900 font-display">
-                                  Double Check the Facts
-                                </h4>
-                                <p className="text-xs text-slate-600 font-semibold leading-relaxed">
-                                  AI can sometimes make up silly answers (this is called a "hallucination"). Always double-check important details with a textbook, teacher, or parent!
-                                </p>
-                              </div>
-
-                              {/* Rule 3 */}
-                              <div className="bg-amber-50/40 border border-amber-100 rounded-2xl p-5 space-y-2 shadow-sm">
-                                <span className="text-2xl"></span>
-                                <h4 className="text-base font-black text-slate-900 font-display">
-                                  Use Your Own Brain
-                                </h4>
-                                <p className="text-xs text-slate-600 font-semibold leading-relaxed">
-                                  AI can explain hard homework concepts, but let it explain *how* to get the answer instead of copying it blindly. That's how you get smart!
-                                </p>
-                              </div>
-
-                              {/* Rule 4 */}
-                              <div className="bg-amber-50/40 border border-amber-100 rounded-2xl p-5 space-y-2 shadow-sm">
-                                <span className="text-2xl"></span>
-                                <h4 className="text-base font-black text-slate-900 font-display">
-                                  Be Creative & Kind
-                                </h4>
-                                <p className="text-xs text-slate-600 font-semibold leading-relaxed">
-                                  Use AI for positive ideas—like brainstorming fairytale stories, learning coding blocks, or creating beautiful art projects!
-                                </p>
-                              </div>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-
-                    {/* Metaphor of Games Card */}
-                    <div className="bg-slate-50 border border-slate-100 rounded-[20px] p-5 sm:p-6 flex flex-col md:flex-row items-center gap-5">
-                      <div className="text-4xl sm:text-5xl select-none shrink-0">
-                        
-                      </div>
-                      <div className="space-y-1 text-left">
-                        <h4 className="text-sm sm:text-base font-black text-slate-800 font-display">
-                          Have you played with AI Games before?
-                        </h4>
-                        <p className="text-xs sm:text-sm text-slate-500 font-semibold leading-relaxed">
-                          You might have already played with AI! Have you ever tried <strong>Quick, Draw!</strong> (where AI guesses your doodles in real-time) or <strong>Akinator</strong> (the virtual genie who guesses who you're thinking of)? Those are powered by AI brains!
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                )}
+                {(activeFilter === 'Learn & Prompt Academy' || activeFilter === 'Learn Concepts' || activeFilter === 'Prompt Academy') && <LearnAndPromptAcademyComponent />}
               </motion.div>
             </AnimatePresence>
           </div>

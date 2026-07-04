@@ -1448,123 +1448,132 @@ const LessonQuiz = ({ questions, onComplete, lessonBadge }) => {
   const isAllCorrect = score === questions.length;
 
   return (
-    <div className="bg-white border border-slate-200 text-[#1A1C2E] rounded-3xl p-6 sm:p-8 max-w-2xl mx-auto shadow-sm relative overflow-hidden">
+    <div className="bg-white rounded-[32px] border border-slate-200 shadow-sm max-w-2xl mx-auto overflow-hidden relative">
+      {/* Decorative top header line */}
+      <div className="h-2 w-full bg-gradient-to-r from-indigo-400 to-blue-500 absolute top-0 left-0" />
       {showResult && isAllCorrect && <ConfettiExplosion />}
 
       {!showResult ? (
-        <div className="space-y-6">
-          <div className="flex justify-between items-center bg-slate-50 px-4 py-2.5 rounded-xl border border-slate-200">
-            <span className="text-xs font-bold text-indigo-700 uppercase tracking-wider flex items-center gap-1.5">
-              <HelpCircle size={16} className="text-indigo-600" /> Question {currentQ + 1} of {questions.length}
+        <div className="p-6 sm:p-10">
+          <div className="flex justify-between items-center mb-8">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-extrabold rounded-full uppercase tracking-wider">
+              <Trophy size={14} /> Question {currentQ + 1} of {questions.length}
             </span>
-            <span className="text-xs font-bold text-slate-700 bg-white px-3 py-1 rounded-full border border-slate-200">
-              Score: {score}
+            <span className="text-sm font-bold text-slate-500">
+              Score: <span className="text-indigo-600 font-black">{score}</span>
             </span>
           </div>
 
-          <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
-            <h5 className="text-base sm:text-lg font-bold text-[#1A1C2E] leading-relaxed">
-              {q.question}
-            </h5>
-          </div>
+          <h5 className="text-lg sm:text-xl font-extrabold text-[#1A1C2E] leading-relaxed mb-8">
+            {q.question}
+          </h5>
 
           <div className="space-y-3">
             {q.options.map((opt, idx) => {
-              let btnStyle = "bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:border-indigo-400 shadow-sm";
+              let btnStyle = "bg-white border-slate-200 text-slate-700 hover:border-indigo-300 hover:bg-indigo-50/50 hover:shadow-sm";
+              let icon = null;
+              
               if (isAnswered) {
-                if (idx === q.correct) btnStyle = "bg-emerald-50 border-[#0BB562] text-emerald-900 font-bold shadow-sm";
-                else if (idx === selectedOption) btnStyle = "bg-rose-50 border-rose-500 text-rose-900";
-                else btnStyle = "bg-slate-50 border-slate-200 text-slate-400 opacity-60";
+                if (idx === q.correct) {
+                  btnStyle = "bg-emerald-50 border-[#0BB562] text-emerald-900 shadow-sm ring-1 ring-emerald-500/20";
+                  icon = <CheckCircle2 size={18} className="text-[#0BB562]" />;
+                } else if (idx === selectedOption) {
+                  btnStyle = "bg-rose-50 border-rose-500 text-rose-800 shadow-sm ring-1 ring-rose-500/20";
+                  icon = <XCircle size={18} className="text-rose-500" />;
+                } else {
+                  btnStyle = "bg-slate-50 border-slate-100 text-slate-400 opacity-60";
+                }
               }
+
               return (
-                <motion.button
-                  whileHover={!isAnswered ? { scale: 1.01, x: 3 } : {}}
-                  whileTap={!isAnswered ? { scale: 0.99 } : {}}
+                <button
                   key={idx}
                   onClick={() => handleSelect(idx)}
                   disabled={isAnswered}
-                  className={`w-full text-left p-4 sm:p-5 border rounded-xl text-sm sm:text-base font-semibold transition-all cursor-pointer flex items-center justify-between gap-3 ${btnStyle}`}
+                  className={`w-full text-left p-4 sm:p-5 border-2 rounded-2xl text-sm sm:text-base font-bold transition-all duration-300 cursor-pointer flex items-center justify-between gap-3 ${btnStyle} ${!isAnswered && 'group'}`}
                 >
                   <span>{opt}</span>
-                  {isAnswered && idx === q.correct && <CheckCircle2 size={20} className="text-[#0BB562] shrink-0" />}
-                  {isAnswered && idx === selectedOption && idx !== q.correct && <XCircle size={20} className="text-rose-500 shrink-0" />}
-                </motion.button>
+                  {icon && <span>{icon}</span>}
+                  {!isAnswered && <div className="w-5 h-5 rounded-full border-2 border-slate-200 group-hover:border-indigo-400 transition-colors shrink-0" />}
+                </button>
               );
             })}
           </div>
 
-          {isAnswered && (
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="flex justify-between items-center pt-4 border-t border-slate-100"
-            >
-              <span className={`text-sm font-bold flex items-center gap-1.5 ${isCorrectChoice ? 'text-[#0BB562]' : 'text-rose-600'}`}>
-                {isCorrectChoice ? "Correct answer." : "Incorrect answer."}
-              </span>
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={handleNext}
-                className="px-6 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-sm font-bold transition-all cursor-pointer shadow-sm flex items-center gap-2"
+          <AnimatePresence>
+            {isAnswered && (
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 mt-4 border-t border-slate-100"
               >
-                <span>{currentQ < questions.length - 1 ? 'Next Question' : 'View Results'}</span>
-                <ArrowRight size={16} />
-              </motion.button>
-            </motion.div>
-          )}
+                <span className={`text-sm sm:text-base font-bold flex items-center gap-2 ${isCorrectChoice ? 'text-[#0BB562]' : 'text-rose-600'}`}>
+                  {isCorrectChoice ? (
+                    <><CheckCircle2 size={20} /> Excellent! That is the correct answer.</>
+                  ) : (
+                    <><XCircle size={20} /> Oops! That's not right.</>
+                  )}
+                </span>
+                <motion.button 
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handleNext}
+                  className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white rounded-xl text-sm font-extrabold transition-all cursor-pointer shadow-md flex items-center justify-center gap-2"
+                >
+                  {currentQ < questions.length - 1 ? 'Next Question' : 'View Results'}
+                  <ArrowRight size={16} />
+                </motion.button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       ) : (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="text-center py-8 space-y-6"
-        >
-          <div className="flex justify-center">
+        <div className="p-8 sm:p-12 text-center space-y-6">
+          <div className="flex justify-center mb-2">
             {isAllCorrect ? (
-              <div className="w-20 h-20 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center mx-auto shadow-sm">
-                <Trophy size={40} className="text-amber-500" />
+              <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center shadow-inner">
+                <Trophy size={40} className="text-emerald-500" />
               </div>
             ) : (
-              <div className="w-20 h-20 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center mx-auto shadow-sm">
-                <RefreshCw size={40} className="text-slate-500 animate-spin" />
+              <div className="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center shadow-inner">
+                <RotateCcw size={40} className="text-amber-500" />
               </div>
             )}
           </div>
-
+          
           <div>
-            <h5 className="font-extrabold text-[#1A1C2E] text-xl sm:text-2xl">
-              {isAllCorrect ? "Quiz Completed Successfully" : "Quiz Requires Review"}
+            <h5 className="font-extrabold text-[#1A1C2E] text-2xl mb-2">
+              {isAllCorrect ? "Quiz Completed Successfully!" : "Almost There!"}
             </h5>
-            <p className="text-sm text-slate-600 leading-relaxed font-medium mt-2 max-w-md mx-auto">
-              {isAllCorrect
-                ? `You achieved 100% accuracy and earned the ${lessonBadge} stamp for your curriculum profile.`
+            <p className="text-base text-slate-500 leading-relaxed font-medium">
+              {isAllCorrect 
+                ? `You achieved 100% accuracy and earned the ${lessonBadge} stamp for your curriculum profile.` 
                 : `You scored ${score} out of ${questions.length}. A score of 100% is required to earn the lesson badge stamp.`}
             </p>
           </div>
 
-          <div className="pt-2">
+          <div className="pt-6">
             {isAllCorrect ? (
-              <motion.button
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.99 }}
+              <motion.button 
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={onComplete}
-                className="w-full py-3.5 bg-[#0BB562] hover:bg-[#099b53] text-white rounded-xl text-sm font-bold uppercase tracking-wider transition-all cursor-pointer shadow-sm flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-[#0BB562] to-[#099b53] hover:from-[#099b53] hover:to-emerald-700 text-white rounded-2xl text-base font-extrabold transition-all cursor-pointer shadow-md flex items-center justify-center gap-2 mx-auto"
               >
-                <Award size={18} className="text-white" /> Claim {lessonBadge} Stamp <ArrowRight size={18} />
+                Claim {lessonBadge} Stamp <Award size={20} />
               </motion.button>
             ) : (
-              <motion.button
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.99 }}
+              <motion.button 
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 onClick={handleRestart}
-                className="w-full py-3.5 bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-800 rounded-xl text-sm font-bold transition-all cursor-pointer flex items-center justify-center gap-2 shadow-sm"
+                className="w-full sm:w-auto px-10 py-4 bg-slate-800 hover:bg-slate-900 text-white rounded-2xl text-base font-extrabold transition-all cursor-pointer shadow-md flex items-center justify-center gap-2 mx-auto"
               >
-                <RefreshCw size={16} /> Retry Quiz
+                Retry Quiz <RotateCcw size={20} />
               </motion.button>
             )}
           </div>
-        </motion.div>
+        </div>
       )}
     </div>
   );
@@ -1801,34 +1810,34 @@ const VrTechLearning = ({ isEmbedded = false, onBack }) => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="max-w-4xl mx-auto space-y-6"
+                    className="w-full space-y-6"
                   >
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
                       {currentLesson.learnSections.map((sec, idx) => (
                         <div
                           key={idx}
-                          className="group p-5 rounded-3xl border border-slate-200 transition-all duration-300 bg-white hover:bg-gradient-to-b hover:from-white hover:to-slate-50/80 shadow-sm hover:shadow-md hover:border-indigo-300 flex flex-col justify-between"
+                          className="group p-5 rounded-3xl border border-slate-200 transition-all duration-300 bg-white hover:bg-gradient-to-b hover:from-white hover:to-indigo-50/30 shadow-sm hover:shadow-md hover:border-indigo-300 flex flex-col"
                         >
-                          <div>
-                            <div className="w-full aspect-square max-h-40 mx-auto rounded-2xl bg-gradient-to-br from-slate-50 via-white to-slate-100 border border-slate-200/60 p-3 flex items-center justify-center mb-4 overflow-hidden group-hover:border-indigo-200 transition-colors shadow-inner">
-                              <img
-                                src={sec.image}
-                                alt={sec.title}
-                                className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
-                              />
-                            </div>
+                          <div className="w-full h-44 mx-auto rounded-2xl bg-gradient-to-br from-slate-50 via-white to-slate-100 border border-slate-200/60 p-4 flex items-center justify-center mb-4 overflow-hidden group-hover:border-indigo-200 transition-colors shadow-inner shrink-0">
+                            <img
+                              src={sec.image}
+                              alt={sec.title}
+                              className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                            />
+                          </div>
 
-                            <div className="space-y-2">
-                              <span className="inline-block px-2.5 py-0.5 rounded-full bg-indigo-50 border border-indigo-100/80 text-indigo-700 text-[10px] font-extrabold uppercase tracking-wider">
+                          <div className="space-y-2 flex-1 flex flex-col">
+                            <div>
+                              <span className="inline-block px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100/80 text-indigo-700 text-xs font-extrabold uppercase tracking-wider">
                                 Topic {idx + 1}
                               </span>
-                              <h4 className="font-extrabold text-base sm:text-lg text-[#1A1C2E] leading-snug group-hover:text-indigo-600 transition-colors">
-                                {sec.title}
-                              </h4>
-                              <p className="text-xs sm:text-sm font-normal text-slate-600 leading-relaxed pt-1">
-                                {sec.desc}
-                              </p>
                             </div>
+                            <h4 className="font-extrabold text-lg text-[#1A1C2E] leading-snug group-hover:text-indigo-600 transition-colors">
+                              {sec.title}
+                            </h4>
+                            <p className="text-sm font-medium text-slate-500 leading-relaxed pt-1 flex-1">
+                              {sec.desc}
+                            </p>
                           </div>
                         </div>
                       ))}
