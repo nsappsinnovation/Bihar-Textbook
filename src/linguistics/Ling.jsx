@@ -14,7 +14,7 @@ const LANGUAGES = [
   { id: "es", name: "Spanish", flag: "https://flagcdn.com/w40/es.png" },
   { id: "ja", name: "Japanese", flag: "https://flagcdn.com/w40/jp.png" },
   { id: "zh", name: "Chinese", flag: "https://flagcdn.com/w40/cn.png" },
-  { id: "ar", name: "Arabic", flag: "https://flagcdn.com/w40/sa.png" },
+  { id: "it", name: "Italian", flag: "https://flagcdn.com/w40/it.png" },
   { id: "ru", name: "Russian", flag: "https://flagcdn.com/w40/ru.png" },
   { id: "ko", name: "Korean", flag: "https://flagcdn.com/w40/kr.png" }
 ];
@@ -45,12 +45,23 @@ export default function LinguisticApp() {
     const saved = localStorage.getItem("ling_last_module");
     if (saved) setLastModule(saved);
 
-    // Load dynamic data
-    setStreak(parseInt(localStorage.getItem("ling_streak") || "0"));
-    setDailyProgress(parseInt(localStorage.getItem("ling_daily_progress") || "0"));
-    setWordsProgress(parseInt(localStorage.getItem("ling_words_progress") || "0"));
-    setPhrasesProgress(parseInt(localStorage.getItem("ling_phrases_progress") || "0"));
-    setConvProgress(parseInt(localStorage.getItem("ling_conversations_progress") || "0"));
+    // Load dynamic data and permanently fix/cap any overflowing counts
+    const s = parseInt(localStorage.getItem("ling_streak") || "0");
+    const d = Math.min(parseInt(localStorage.getItem("ling_daily_progress") || "0"), 10);
+    const w = Math.min(parseInt(localStorage.getItem("ling_words_progress") || "0"), 20);
+    const p = Math.min(parseInt(localStorage.getItem("ling_phrases_progress") || "0"), 20);
+    const c = Math.min(parseInt(localStorage.getItem("ling_conversations_progress") || "0"), 10);
+
+    localStorage.setItem("ling_words_progress", w);
+    localStorage.setItem("ling_phrases_progress", p);
+    localStorage.setItem("ling_conversations_progress", c);
+    localStorage.setItem("ling_daily_progress", d);
+
+    setStreak(s);
+    setDailyProgress(d);
+    setWordsProgress(w);
+    setPhrasesProgress(p);
+    setConvProgress(c);
   }, []);
 
   const handleStartLearning = (moduleType = lastModule) => {
@@ -68,7 +79,7 @@ export default function LinguisticApp() {
       <main className="flex-1 px-2 md:px-4 lg:px-8 pb-8 max-w-[1400px] mx-auto w-full overflow-hidden relative">
        {/* Back Button */}
              <button
-               onClick={() => navigate("/")}
+               onClick={() => navigate("/#missions-grid")}
                className="fixed top-5 left-5 z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group"
              >
                <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
@@ -220,9 +231,9 @@ export default function LinguisticApp() {
            </div>
 
            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <ContinueItem icon={<BookOpen size={18} />} color="#0BB562" bg="#E8F5E9" title="Basic Words" progress={(wordsProgress / 20) * 100} text={`${wordsProgress} / 20`} onClick={() => handleStartLearning("words")} />
-              <ContinueItem icon={<MessageSquare size={18} />} color="#FF9800" bg="#FFF3E0" title="Basic Phrases" progress={(phrasesProgress / 20) * 100} text={`${phrasesProgress} / 20`} onClick={() => handleStartLearning("phrases")} />
-              <ContinueItem icon={<User size={18} />} color="#9C27B0" bg="#F3E5F5" title="Conversations" progress={(convProgress / 10) * 100} text={`${convProgress} / 10`} onClick={() => handleStartLearning("conversations")} />
+              <ContinueItem icon={<BookOpen size={18} />} color="#0BB562" bg="#E8F5E9" title="Basic Words" progress={(Math.min(wordsProgress, 20) / 20) * 100} text={`${Math.min(wordsProgress, 20)} / 20`} onClick={() => handleStartLearning("words")} />
+              <ContinueItem icon={<MessageSquare size={18} />} color="#FF9800" bg="#FFF3E0" title="Basic Phrases" progress={(Math.min(phrasesProgress, 20) / 20) * 100} text={`${Math.min(phrasesProgress, 20)} / 20`} onClick={() => handleStartLearning("phrases")} />
+              <ContinueItem icon={<User size={18} />} color="#9C27B0" bg="#F3E5F5" title="Conversations" progress={(Math.min(convProgress, 10) / 10) * 100} text={`${Math.min(convProgress, 10)} / 10`} onClick={() => handleStartLearning("conversations")} />
            </div>
         </div>
 
@@ -334,6 +345,7 @@ function ModuleCard({ title, desc, icon, bg, titleColor, linkColor, imgSrc, onCl
 }
 
 function ContinueItem({ icon, color, bg, title, sub, progress, text, onClick }) {
+  const safeProgress = Math.min(Math.max(progress || 0, 0), 100);
   return (
     <div onClick={onClick} className="bg-white border border-[#F0F0F0] rounded-3xl p-6 flex items-center justify-between shadow-sm hover:shadow-md transition-all cursor-pointer group">
        <div className="flex items-center gap-4">
@@ -341,9 +353,9 @@ function ContinueItem({ icon, color, bg, title, sub, progress, text, onClick }) 
             {icon}
           </div>
           <div className="space-y-1">
-            <h4 className="text-[15px] font-bold text-[#1A1C2E]">{title} <span className="text-slate-300 font-medium">- {sub}</span></h4>
+            <h4 className="text-[15px] font-bold text-[#1A1C2E]">{title} {sub && <span className="text-slate-300 font-medium">- {sub}</span>}</h4>
             <div className="w-32 h-1.5 bg-[#F5F5F5] rounded-full overflow-hidden">
-               <div style={{ width: `${progress}%`, backgroundColor: color }} className="h-full rounded-full" />
+               <div style={{ width: `${safeProgress}%`, backgroundColor: color }} className="h-full rounded-full transition-all duration-500" />
             </div>
           </div>
        </div>

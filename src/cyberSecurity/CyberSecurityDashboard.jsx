@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft, ArrowRight, BookOpen, Shield, Trophy, Play, Clock, GraduationCap, FileText, ChevronRight, CheckCircle2, XCircle, Gamepad2, Key,
-  Bot, CreditCard, Ban, Zap, Sparkles, User, AlertOctagon, Smartphone, Rocket, Lock, Unlock, Search, Package, Hammer, Skull, Globe, Ghost, UserX, Volume2, Award, Star, RefreshCw, Target, Bell, HelpCircle, MessageSquare
+  Bot, CreditCard, Ban, Zap, Sparkles, User, AlertOctagon, Smartphone, Rocket, Lock, Unlock, Search, Package, Hammer, Skull, Globe, Ghost, UserX, Volume2, Award, Star, RefreshCw, Target, Bell, HelpCircle, MessageSquare, LayoutGrid, RotateCcw
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -1331,84 +1331,176 @@ const LessonQuiz = ({ questions, onComplete }) => {
   const isAllCorrect = score === questions.length;
 
   return (
-    <div className="bg-[#051c14]/90 text-white rounded-[24px] border-2 border-emerald-500/30 p-5 shadow-xl max-w-md mx-auto">
+    <div className="bg-white rounded-[32px] border border-slate-200 shadow-sm max-w-2xl mx-auto overflow-hidden relative">
+      {/* Decorative top header line */}
+      <div className="h-2 w-full bg-gradient-to-r from-emerald-400 to-teal-500 absolute top-0 left-0" />
+
       {!showResult ? (
-        <div className="space-y-4">
-          <div className="flex justify-between items-center text-[10px] font-black text-slate-400 uppercase tracking-widest">
-            <span>QUESTION {currentQ + 1} / {questions.length}</span>
-            <span className="text-yellow-400">Score: {score}</span>
+        <div className="p-6 sm:p-10">
+          <div className="flex justify-between items-center mb-8">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-extrabold rounded-full uppercase tracking-wider">
+              <Trophy size={14} /> Question {currentQ + 1} of {questions.length}
+            </span>
+            <span className="text-sm font-bold text-slate-500">
+              Score: <span className="text-emerald-600 font-black">{score}</span>
+            </span>
           </div>
 
-          <h5 className="text-xs font-bold text-slate-100 min-h-[40px] leading-relaxed">
+          <h5 className="text-lg sm:text-xl font-extrabold text-[#1A1C2E] leading-relaxed mb-8">
             {q.question}
           </h5>
 
-          <div className="space-y-2">
+          <div className="space-y-3">
             {q.options.map((opt, idx) => {
-              let btnStyle = "bg-[#06241b]/60 border-emerald-500/30 text-white hover:bg-[#093529]/70 hover:border-emerald-400";
+              let btnStyle = "bg-white border-slate-200 text-slate-700 hover:border-emerald-300 hover:bg-emerald-50/50 hover:shadow-sm";
+              let icon = null;
+              
               if (isAnswered) {
-                if (idx === q.correct) btnStyle = "bg-emerald-950 border-emerald-500 text-emerald-400";
-                else if (idx === selectedOption) btnStyle = "bg-rose-955 border-rose-500 text-rose-400";
-                else btnStyle = "bg-[#06241b]/20 border-white/5 text-slate-500";
+                if (idx === q.correct) {
+                  btnStyle = "bg-emerald-50 border-emerald-500 text-emerald-800 shadow-sm ring-1 ring-emerald-500/20";
+                  icon = <CheckCircle2 size={18} className="text-emerald-500" />;
+                } else if (idx === selectedOption) {
+                  btnStyle = "bg-rose-50 border-rose-500 text-rose-800 shadow-sm ring-1 ring-rose-500/20";
+                  icon = <XCircle size={18} className="text-rose-500" />;
+                } else {
+                  btnStyle = "bg-slate-50 border-slate-100 text-slate-400 opacity-60";
+                }
               }
+
               return (
                 <button
                   key={idx}
                   onClick={() => handleSelect(idx)}
                   disabled={isAnswered}
-                  className={`w-full text-left p-3 border rounded-xl text-xs font-bold transition-all cursor-pointer ${btnStyle}`}
+                  className={`w-full text-left p-4 sm:p-5 border-2 rounded-2xl text-sm sm:text-base font-bold transition-all duration-300 cursor-pointer flex items-center justify-between gap-3 ${btnStyle} ${!isAnswered && 'group'}`}
                 >
-                  {opt}
+                  <span>{opt}</span>
+                  {icon && <span>{icon}</span>}
+                  {!isAnswered && <div className="w-5 h-5 rounded-full border-2 border-slate-200 group-hover:border-emerald-400 transition-colors shrink-0" />}
                 </button>
               );
             })}
           </div>
 
-          {isAnswered && (
-            <div className="flex justify-between items-center pt-2">
-              <span className={`text-[11px] font-bold ${isCorrectChoice ? 'text-emerald-400' : 'text-rose-400'}`}>
-                {isCorrectChoice ? "Correct Answer!" : "Oops! Incorrect choice."}
-              </span>
-              <button 
-                onClick={handleNext}
-                className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-[10px] font-black transition-all cursor-pointer"
+          <AnimatePresence>
+            {isAnswered && (
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-8 mt-4 border-t border-slate-100"
               >
-                {currentQ < questions.length - 1 ? 'NEXT' : 'FINISH'}
-              </button>
-            </div>
-          )}
+                <span className={`text-sm sm:text-base font-bold flex items-center gap-2 ${isCorrectChoice ? 'text-emerald-600' : 'text-rose-600'}`}>
+                  {isCorrectChoice ? (
+                    <><CheckCircle2 size={20} /> Excellent! That is the correct answer.</>
+                  ) : (
+                    <><XCircle size={20} /> Oops! That's not right.</>
+                  )}
+                </span>
+                <motion.button 
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handleNext}
+                  className="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-xl text-sm font-extrabold transition-all cursor-pointer shadow-md flex items-center justify-center gap-2"
+                >
+                  {currentQ < questions.length - 1 ? 'Next Question' : 'View Results'}
+                  <ArrowRight size={16} />
+                </motion.button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       ) : (
-        <div className="text-center py-4 space-y-4">
-          <div className="flex justify-center">{isAllCorrect ? <Trophy size={36} className="text-emerald-400" /> : <RotateCcw size={36} className="text-slate-400" />}</div>
-          <h5 className="font-bold text-slate-100 text-xs">
-            {isAllCorrect ? "Lesson Quiz Cleared!" : "Quiz Failed!"}
-          </h5>
-          <p className="text-xs text-slate-400 leading-relaxed font-semibold">
-            {isAllCorrect 
-              ? "Wonderful job! You got all questions correct and earned your badge stamp!" 
-              : `You scored ${score} out of ${questions.length}. Get 100% to pass the lesson!`}
-          </p>
-
-          <div className="flex gap-2">
+        <div className="p-8 sm:p-12 text-center space-y-6">
+          <div className="flex justify-center mb-2">
             {isAllCorrect ? (
-              <button 
-                onClick={onComplete}
-                className="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer"
-              >
-                Claim Badge & Unlock Next
-              </button>
+              <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center shadow-inner">
+                <Trophy size={40} className="text-emerald-500" />
+              </div>
             ) : (
-              <button 
-                onClick={handleRestart}
-                className="w-full py-2 bg-slate-800 hover:bg-slate-750 text-white rounded-xl text-xs font-bold transition-all cursor-pointer"
+              <div className="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center shadow-inner">
+                <RotateCcw size={40} className="text-amber-500" />
+              </div>
+            )}
+          </div>
+          
+          <div>
+            <h5 className="font-extrabold text-[#1A1C2E] text-2xl mb-2">
+              {isAllCorrect ? "Perfect Score!" : "Almost There!"}
+            </h5>
+            <p className="text-base text-slate-500 leading-relaxed font-medium">
+              {isAllCorrect 
+                ? "Wonderful job! You got every question correct and earned your badge!" 
+                : `You scored ${score} out of ${questions.length}. You need a perfect score to pass this lesson.`}
+            </p>
+          </div>
+
+          <div className="pt-6">
+            {isAllCorrect ? (
+              <motion.button 
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={onComplete}
+                className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-2xl text-base font-extrabold transition-all cursor-pointer shadow-md flex items-center justify-center gap-2 mx-auto"
               >
-                Retry Quiz
-              </button>
+                Claim Badge & Unlock Next <Award size={20} />
+              </motion.button>
+            ) : (
+              <motion.button 
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={handleRestart}
+                className="w-full sm:w-auto px-10 py-4 bg-slate-800 hover:bg-slate-900 text-white rounded-2xl text-base font-extrabold transition-all cursor-pointer shadow-md flex items-center justify-center gap-2 mx-auto"
+              >
+                Retry Quiz <RotateCcw size={20} />
+              </motion.button>
             )}
           </div>
         </div>
       )}
+    </div>
+  );
+};
+
+const ConfettiExplosion = () => {
+  const [particles] = useState(() => {
+    const colors = ['#0BB562', '#4F46E5', '#0284C7', '#F59E0B', '#9333EA', '#10B981'];
+    return Array.from({ length: 45 }).map(() => {
+      const angle = Math.random() * 360;
+      const distance = 80 + Math.random() * 220;
+      const size = 6 + Math.random() * 8;
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      const x = Math.cos(angle * (Math.PI / 180)) * distance;
+      const y = Math.sin(angle * (Math.PI / 180)) * distance + 40;
+      const rotate = Math.random() * 360;
+      const duration = 1.2 + Math.random() * 0.5;
+      const isCircle = Math.random() > 0.5;
+      return { x, y, rotate, duration, isCircle, size, color };
+    });
+  });
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-50 flex items-center justify-center">
+      {particles.map((p, i) => (
+        <motion.div
+          key={i}
+          initial={{ x: 0, y: 0, scale: 0, opacity: 1 }}
+          animate={{
+            x: p.x,
+            y: p.y,
+            scale: [0, 1.3, 0.4],
+            opacity: [1, 1, 0],
+            rotate: p.rotate
+          }}
+          transition={{ duration: p.duration, ease: "easeOut" }}
+          style={{
+            position: 'absolute',
+            width: p.size,
+            height: p.size,
+            backgroundColor: p.color,
+            borderRadius: p.isCircle ? '50%' : '3px'
+          }}
+        />
+      ))}
     </div>
   );
 };
@@ -1425,19 +1517,23 @@ const lessons = [
     learnSections: [
       {
         title: "The Digital Playground",
-        desc: "The internet is like a giant, beautiful public playground where millions of kids play games, watch cartoons, and chat. But just like a real park, you must never talk to strangers who approach you without your parents knowing!"
+        desc: "The internet is like a giant, beautiful public playground where millions of kids play games, watch cartoons, and chat. But just like a real park, you must never talk to strangers who approach you without your parents knowing!",
+        image: "/images/cybersecurity/lesson1.png"
       },
       {
         title: "Online Pretenders",
-        desc: "Did you know that some tricky monsters pretend to be kids online? A character using a cute puppy picture or claiming to be '9-year-old Alex' could actually be a hacker trying to find your secrets. Always be cautious!"
+        desc: "Did you know that some tricky monsters pretend to be kids online? A character using a cute puppy picture or claiming to be '9-year-old Alex' could actually be a hacker trying to find your secrets. Always be cautious!",
+        image: "/images/cybersecurity/3rd.png"
       },
       {
         title: "The Golden Safe Rules",
-        desc: "Keep your personal keys safe! Never share these with anyone online:\n\n* Your home address and school name\n* Your phone number\n* Your parent's credit card or bank details\n* The 4-digit code (OTP) sent to your parents' phone."
+        desc: "Keep your personal keys safe! Never share these with anyone online:\n\n* Your home address and school name\n* Your phone number\n* Your parent's credit card or bank details\n* The 4-digit code (OTP) sent to your parents' phone.",
+        image: "/images/cybersecurity/rhs.png"
       },
       {
         title: "Checklist for Chat Safety",
-        desc: "DO: Play games with school friends you know in real life.\nDO: Tell a parent immediately if someone online asks where you live.\nDON'T: Send pictures of your house, school, or face to game strangers.\nDON'T: Share passwords, even if a stranger offers you 'free Robux' or game skins."
+        desc: "DO: Play games with school friends you know in real life.\nDO: Tell a parent immediately if someone online asks where you live.\nDON'T: Send pictures of your house, school, or face to game strangers.\nDON'T: Share passwords, even if a stranger offers you 'free Robux' or game skins.",
+        image: "/images/cybersecurity/lesson1.png"
       }
     ],
     content: "The internet is like a giant park! You can play games and chat, but sometimes tricky monsters pretend to be friendly characters.\n\nYour Secrets are Keys!\nNever give away your parent's bank cards, your address, or your 4-digit code (OTP) to anyone online. Keep them hidden inside your secret base!",
@@ -1465,19 +1561,23 @@ const lessons = [
     learnSections: [
       {
         title: "Sneaky Fishing Hooks",
-        desc: "Phishing (pronounced like 'fishing') is when a scammer drops a virtual hook into the digital water, hoping you will bite! They send fake text messages or emails pretending to be a bank, a game, or a delivery company."
+        desc: "Phishing (pronounced like 'fishing') is when a scammer drops a virtual hook into the digital water, hoping you will bite! They send fake text messages or emails pretending to be a bank, a game, or a delivery company.",
+        image: "/images/cybersecurity/lesson2.png"
       },
       {
         title: "Spotting the Panic Trap",
-        desc: "Scammers want to scare you! They use words like 'URGENT', 'BLOCKED', or 'LOST FOREVER'. They want you to panic and tap their sneaky link immediately before you can ask an adult. Stop, breathe, and analyze!"
+        desc: "Scammers want to scare you! They use words like 'URGENT', 'BLOCKED', or 'LOST FOREVER'. They want you to panic and tap their sneaky link immediately before you can ask an adult. Stop, breathe, and analyze!",
+        image: "/images/cybersecurity/3rd.png"
       },
       {
         title: "Decoding Web Links",
-        desc: "Always look at the link (URL) before tapping! A safe site uses https and ends with a normal domain (like .com or .org). Scammers use weird links like bank-verify-now.xyz or free-gift-box.net/alert to sneak viruses onto your device."
+        desc: "Always look at the link (URL) before tapping! A safe site uses https and ends with a normal domain (like .com or .org). Scammers use weird links like bank-verify-now.xyz or free-gift-box.net/alert to sneak viruses onto your device.",
+        image: "/images/cybersecurity/rhs.png"
       },
       {
         title: "Checklist for Link Safety",
-        desc: "DO: Show suspicious text messages to a parent or teacher.\nDO: Delete the message immediately if you don't recognize the sender.\nDON'T: Click on links in SMS messages claiming you won a lottery or a phone.\nDON'T: Enter passwords or usernames on pages that look weird or suspicious."
+        desc: "DO: Show suspicious text messages to a parent or teacher.\nDO: Delete the message immediately if you don't recognize the sender.\nDON'T: Click on links in SMS messages claiming you won a lottery or a phone.\nDON'T: Enter passwords or usernames on pages that look weird or suspicious.",
+        image: "/images/cybersecurity/lesson2.png"
       }
     ],
     content: "Scammers send sneaky text messages that try to make you panic!\n\nLook for the 3 Red Flags:\n1. Scary Words: 'Your account is SUSPENDED!'\n2. Extreme Threats: 'Your money is lost FOREVER!'\n3. Weird Links: Websites ending in weird letters like '.xyz' instead of '.com'.\n\nIf you see these, don't tap! Call a parent!",
@@ -1505,19 +1605,23 @@ const lessons = [
     learnSections: [
       {
         title: "The Fortress Gate",
-        desc: "A password is like the drawbridge of your digital castle. If it's weak (like '123456' or 'superman'), the Glitch Goblin and hacking robots can kick it down in seconds! A strong password keeps your account safe."
+        desc: "A password is like the drawbridge of your digital castle. If it's weak (like '123456' or 'superman'), the Glitch Goblin and hacking robots can kick it down in seconds! A strong password keeps your account safe.",
+        image: "/images/cybersecurity/lesson3.png"
       },
       {
         title: "The Materials of Defense",
-        desc: "Cardboard Shield: 'cat' or 'password' — Cracks instantly!\nWooden Door: 'cat123' or 'superman10' — Cracks in a few minutes.\nIron Gate: 'CatDog2024' — Good, but robots can still guess it eventually.\nEmerald Forcefield: 'C@t&D0g#2026!' — Indestructible! Mixing letters, numbers, and symbols creates the ultimate defense."
+        desc: "Cardboard Shield: 'cat' or 'password' — Cracks instantly!\nWooden Door: 'cat123' or 'superman10' — Cracks in a few minutes.\nIron Gate: 'CatDog2024' — Good, but robots can still guess it eventually.\nEmerald Forcefield: 'C@t&D0g#2026!' — Indestructible! Mixing letters, numbers, and symbols creates the ultimate defense.",
+        image: "/images/cybersecurity/3rd.png"
       },
       {
         title: "How to Remember Your Shield",
-        desc: "Create a fun, secret sentence! For example: 'I love eating pizza on Fridays!' becomes 'Il2ep0F!'. It is super easy for you to remember, but impossible for a hacking robot to guess!"
+        desc: "Create a fun, secret sentence! For example: 'I love eating pizza on Fridays!' becomes 'Il2ep0F!'. It is super easy for you to remember, but impossible for a hacking robot to guess!",
+        image: "/images/cybersecurity/rhs.png"
       },
       {
         title: "Checklist for Password Safety",
-        desc: "DO: Use different passwords for different games.\nDO: Keep your passwords written down in a secret notebook at home.\nDON'T: Use easy-to-guess things like your birthday or pet's name.\nDON'T: Share your password with anyone, not even your best friends at school!"
+        desc: "DO: Use different passwords for different games.\nDO: Keep your passwords written down in a secret notebook at home.\nDON'T: Use easy-to-guess things like your birthday or pet's name.\nDON'T: Share your password with anyone, not even your best friends at school!",
+        image: "/images/cybersecurity/lesson3.png"
       }
     ],
     content: "Hackers use guessing robots to break into your accounts. If your password is too easy, they will crack it in a second!\n\nThe Shield Blueprint:\n• Simple passwords (like '123456' or 'doggy') are fragile like Cardboard.\n• Add capitals (ABC) and numbers (123) to make an Iron Gate.\n• Add symbols (@, #, $, %) to forge an Emerald Forcefield that blocks everything!",
@@ -1545,19 +1649,23 @@ const lessons = [
     learnSections: [
       {
         title: "Beware of Loud Pop-ups",
-        desc: "When browsing, some pages display red flashing warning boxes shouting: 'WARNING! 99 VIRUSES DETECTED!' or 'YOUR DEVICE IS INFECTED!'. Don't be scared! These are fake warnings designed to trick you into downloading viruses."
+        desc: "When browsing, some pages display red flashing warning boxes shouting: 'WARNING! 99 VIRUSES DETECTED!' or 'YOUR DEVICE IS INFECTED!'. Don't be scared! These are fake warnings designed to trick you into downloading viruses.",
+        image: "/images/cybersecurity/lesson4.png"
       },
       {
         title: "Disarming the Trap",
-        desc: "Never click the big, bright buttons in a pop-up. Instead, look closely for a tiny, white X button in the top corner. If you can't find it, close the browser tab or ask an adult to close it for you."
+        desc: "Never click the big, bright buttons in a pop-up. Instead, look closely for a tiny, white X button in the top corner. If you can't find it, close the browser tab or ask an adult to close it for you.",
+        image: "/images/cybersecurity/3rd.png"
       },
       {
         title: "Software Updates are Shield Refills",
-        desc: "Hacking robots constantly search for hidden holes (security bugs) in your games and operating systems. When you update your apps, the creators patch up these holes, keeping the robots locked out!"
+        desc: "Hacking robots constantly search for hidden holes (security bugs) in your games and operating systems. When you update your apps, the creators patch up these holes, keeping the robots locked out!",
+        image: "/images/cybersecurity/rhs.png"
       },
       {
         title: "Checklist for Device Safety",
-        desc: "DO: Turn on 'Automatic Updates' for your phone, tablet, or computer.\nDO: Close the browser tab if a flashy screen blocks your page.\nDON'T: Install 'device cleaner' or 'helper' apps suggested by pop-ups.\nDON'T: Postpone important system updates for too long."
+        desc: "DO: Turn on 'Automatic Updates' for your phone, tablet, or computer.\nDO: Close the browser tab if a flashy screen blocks your page.\nDON'T: Install 'device cleaner' or 'helper' apps suggested by pop-ups.\nDON'T: Postpone important system updates for too long.",
+        image: "/images/cybersecurity/lesson4.png"
       }
     ],
     content: "While surfing the web, you might see scary pop-up boxes shouting: 'YOUR DEVICE HAS 50 VIRUSES! CLICK NOW TO REPAIR!'\n\nIt's a Trick!\nThese are fake pop-ups trying to make you download bad apps. Never click the big green buttons. Always close the window by clicking the small white 'X' or show it to a parent!",
@@ -1585,19 +1693,23 @@ const lessons = [
     learnSections: [
       {
         title: "The Double-Lock Lockbox",
-        desc: "Two-Factor Authentication (2FA) is like locking your chest with two different keys. When you log in with your password, a secret one-time code is sent to your parent's phone. Even if a hacker steals your password, they can't get in without that second key!"
+        desc: "Two-Factor Authentication (2FA) is like locking your chest with two different keys. When you log in with your password, a secret one-time code is sent to your parent's phone. Even if a hacker steals your password, they can't get in without that second key!",
+        image: "/images/cybersecurity/lesson5.png"
       },
       {
         title: "Sneaky App Demands",
-        desc: "When you download a new game, it asks for permission to access your device features. A driving game might need access to your screen controls, but does a calculator app need to see your photo gallery or know your location? Absolutely not!"
+        desc: "When you download a new game, it asks for permission to access your device features. A driving game might need access to your screen controls, but does a calculator app need to see your photo gallery or know your location? Absolutely not!",
+        image: "/images/cybersecurity/3rd.png"
       },
       {
         title: "The Permission Shield Rules",
-        desc: "Always review permission requests! If an app asks for something it doesn't need to work, click DENY. It's better to be safe than let sneaky apps track your coordinates or read your private messages."
+        desc: "Always review permission requests! If an app asks for something it doesn't need to work, click DENY. It's better to be safe than let sneaky apps track your coordinates or read your private messages.",
+        image: "/images/cybersecurity/rhs.png"
       },
       {
         title: "Checklist for Permission Safety",
-        desc: "DO: Enable 2FA on your main gaming and school accounts with parent help.\nDO: Deny location access for games that do not require mapping.\nDON'T: Download apps from random websites. Only use official app stores.\nDON'T: Click 'Allow' to every popup without reading what it is asking for."
+        desc: "DO: Enable 2FA on your main gaming and school accounts with parent help.\nDO: Deny location access for games that do not require mapping.\nDON'T: Download apps from random websites. Only use official app stores.\nDON'T: Click 'Allow' to every popup without reading what it is asking for.",
+        image: "/images/cybersecurity/lesson5.png"
       }
     ],
     content: "Keep your digital house safe with a double lock!\n\n2FA (Two-Factor Authentication):\nThis requires both a password AND a secret code sent to your parent's phone to log in. Even if a hacker guesses your password, they can't get in!\n\nApp Permission Rules:\nIf a simple Flashlight app asks to see your photos, contacts, or location, DENY IT! Apps should only access what they need to work.",
@@ -1703,288 +1815,273 @@ const CyberSecurityDashboard = () => {
           className="mt-10 px-4 md:px-12 pb-12"
         >
           {activeFilter === 'Safety Playzone' && (
-            <div className="space-y-6">
-              {/* Timeline Header */}
-              <div className="bg-slate-50 border border-slate-200/60 rounded-2xl p-4 shadow-sm">
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-[10px] font-black text-slate-500 uppercase tracking-wider">Your Learning Journey</span>
-                  <span className="text-xs font-black text-emerald-600">
-                    {completedLessons.length} / 5 Lessons Cleared
-                  </span>
+            <div className="space-y-4 pt-2 sm:pt-4">
+              {/* Sleek Lesson Selection Bar */}
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 px-1">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-sm">
+                    <Shield size={16} />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-extrabold text-[#1A1C2E]">Cyber Security Course</h3>
+                    <p className="text-[11px] text-slate-500 font-medium">Select an unlocked lesson module to begin training</p>
+                  </div>
                 </div>
-                
-                {/* Timeline Path */}
-                <div className="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
-                  {lessons.map((less, idx) => {
-                    const isUnlocked = unlockedLessons.includes(less.id);
-                    const isCompleted = completedLessons.includes(less.id);
-                    const isActive = activeLessonId === less.id;
-                    
-                    return (
-                      <React.Fragment key={less.id}>
-                        {idx > 0 && (
-                          <div className={`hidden md:block flex-grow h-[3px] transition-colors ${
-                            isUnlocked ? 'bg-emerald-500' : 'bg-slate-200'
-                          }`} />
-                        )}
-                        <button
-                          onClick={() => isUnlocked && setActiveLessonId(less.id)}
-                          disabled={!isUnlocked}
-                          className={`flex-1 text-left p-3 rounded-2xl border transition-all cursor-pointer ${
-                            isActive 
-                              ? 'bg-emerald-600 text-white border-emerald-600 shadow-md shadow-emerald-500/20'
-                              : isUnlocked 
-                                ? 'bg-white text-slate-800 border-slate-200 hover:border-emerald-400'
-                                : 'bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed opacity-60'
-                          }`}
-                        >
-                          <div className="flex items-center justify-between mb-1">
-                            <span className={`text-[8px] font-black uppercase tracking-wider ${
-                              isActive ? 'text-emerald-100' : 'text-slate-400'
-                            }`}>
-                              {less.badge}
-                            </span>
-                            <span className="flex items-center">
-                              {isCompleted ? (
-                                <CheckCircle2 size={12} className={isActive ? "text-white" : "text-emerald-500"} />
-                              ) : !isUnlocked ? (
-                                <Lock size={12} className={isActive ? "text-emerald-100/60" : "text-slate-450"} />
-                              ) : (
-                                <Star size={12} className={isActive ? "text-yellow-200" : "text-yellow-550"} />
-                              )}
-                            </span>
-                          </div>
-                          <div className="text-xs font-black truncate">{less.title}</div>
-                        </button>
-                      </React.Fragment>
-                    );
-                  })}
-                </div>
+                {completedLessons.length > 0 && (
+                  <button
+                    onClick={() => {
+                      if (window.confirm("Do you want to reset your training progress and start from Lesson 1?")) {
+                        setUnlockedLessons([1]);
+                        setCompletedLessons([]);
+                        setActiveLessonId(1);
+                        setActiveLessonTab('learn');
+                        setGameCleared(false);
+                        setQuizCleared(false);
+                      }
+                    }}
+                    className="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 border border-slate-200 px-3.5 py-1.5 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 shadow-sm hover:border-rose-200"
+                  >
+                    <RefreshCw size={13} /> Reset Progress
+                  </button>
+                )}
               </div>
 
-              {/* Active Lesson Details Card */}
-              <div className="bg-white rounded-[24px] border border-slate-100 shadow-sm p-6 space-y-6">
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-100 pb-5">
+              {/* Lesson Pills Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 mb-2">
+                {lessons.map((less) => {
+                  const isUnlocked = unlockedLessons.includes(less.id);
+                  const isCompleted = completedLessons.includes(less.id);
+                  const isActive = activeLessonId === less.id;
+
+                  return (
+                    <button
+                      key={less.id}
+                      onClick={() => {
+                        if (isUnlocked) {
+                          setActiveLessonId(less.id);
+                        }
+                      }}
+                      disabled={!isUnlocked}
+                      className={`text-left px-3.5 py-2.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-2 min-h-[50px] ${
+                        isActive
+                          ? 'bg-emerald-600 text-white border-emerald-600 shadow-md font-bold scale-[1.02]'
+                          : isUnlocked
+                          ? 'bg-white text-[#1A1C2E] border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/30 shadow-sm font-medium'
+                          : 'bg-slate-100/80 text-slate-400 border-slate-200 cursor-not-allowed opacity-60 font-medium'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2.5 min-w-0">
+                        {isActive ? (
+                          <span className="w-2.5 h-2.5 rounded-full bg-white shrink-0 animate-pulse" title="Active Lesson" />
+                        ) : isCompleted ? (
+                          <CheckCircle2 size={16} className="text-emerald-500 shrink-0" title="Completed" />
+                        ) : isUnlocked ? (
+                          <span className="w-2 h-2 rounded-full bg-emerald-300 shrink-0" />
+                        ) : (
+                          <Lock size={14} className="text-slate-400 shrink-0" title="Locked" />
+                        )}
+                        <span className="text-xs sm:text-sm font-bold truncate">
+                          {less.id}. {less.title.split(': ')[1] || less.title}
+                        </span>
+                      </div>
+                      {isUnlocked && !isActive && !isCompleted && (
+                        <ChevronRight size={14} className="text-slate-400 shrink-0" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Active Lesson Main Container */}
+              <section className="bg-white rounded-3xl border border-slate-200 shadow-sm p-5 sm:p-8 space-y-6">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-5">
                   <div>
-                    <h3 className="text-xl font-extrabold text-slate-900 flex items-center gap-2">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-bold rounded-full uppercase tracking-wider mb-2">
+                      <Award size={14} className="text-emerald-600" /> Lesson {activeLessonId} Badge: <span className="font-extrabold text-[#1A1C2E]">{lessons[activeLessonId - 1].badge}</span>
+                    </div>
+                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1A1C2E] tracking-tight">
                       {lessons[activeLessonId - 1].title}
-                    </h3>
-                    <p className="text-xs text-slate-500 mt-1 font-semibold">
-                      Topic: {lessons[activeLessonId - 1].topic}
+                    </h2>
+                    <p className="text-sm text-slate-600 mt-1 font-medium">
+                      Topic Focus: <span className="text-emerald-600 font-bold">{lessons[activeLessonId - 1].topic}</span>
                     </p>
                   </div>
-                  
-                  {/* Sub-tabs */}
-                  <div className="flex gap-1.5 bg-slate-100 p-1 rounded-full border border-slate-200/60">
+
+                  {/* Sleek Inline Stage Switcher Pill */}
+                  <div className="bg-slate-100 p-1.5 rounded-2xl border border-slate-200/80 flex items-center gap-1 w-full sm:w-auto shrink-0 self-stretch sm:self-center flex-wrap">
                     {[
-                      { id: 'learn', label: 'Learn', icon: <BookOpen size={12} />, disabled: false },
-                      { id: 'play', label: 'Play Game', icon: <Gamepad2 size={12} />, disabled: false },
-                      { id: 'test', label: 'Take Quiz', icon: <HelpCircle size={12} />, disabled: !gameCleared && !completedLessons.includes(activeLessonId) }
-                    ].map(tab => (
+                      { id: 'learn', label: 'Learn Cards', icon: <BookOpen size={15} />, disabled: false, cleared: true },
+                      { id: 'test', label: 'Take Quiz', icon: <Trophy size={15} />, disabled: false, cleared: quizCleared || completedLessons.includes(activeLessonId) }
+                    ].map(stg => (
                       <button
-                        key={tab.id}
-                        onClick={() => !tab.disabled && setActiveLessonTab(tab.id)}
-                        disabled={tab.disabled}
-                        className={`px-3 py-1.5 rounded-full text-[10px] font-black tracking-wide uppercase transition-all cursor-pointer flex items-center gap-1.5 ${
-                          activeLessonTab === tab.id
-                            ? 'bg-emerald-600 text-white shadow-sm'
-                            : tab.disabled 
-                              ? 'text-slate-300 cursor-not-allowed opacity-60'
-                              : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                        key={stg.id}
+                        onClick={() => !stg.disabled && setActiveLessonTab(stg.id)}
+                        disabled={stg.disabled}
+                        className={`flex-1 sm:flex-initial py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition-all cursor-pointer flex items-center justify-center gap-2 min-h-[40px] ${
+                          activeLessonTab === stg.id
+                            ? 'bg-white text-[#1A1C2E] shadow-sm text-emerald-600 ring-1 ring-slate-200/50'
+                            : stg.disabled
+                            ? 'text-slate-300 cursor-not-allowed opacity-60 font-medium'
+                            : stg.cleared
+                            ? 'text-emerald-600 hover:bg-white/50 font-medium'
+                            : 'text-slate-500 hover:text-slate-800 hover:bg-white/50 font-medium'
                         }`}
                       >
-                        {tab.icon}
-                        <span>{tab.label}</span>
+                        {stg.cleared && activeLessonTab !== stg.id ? <CheckCircle2 size={15} className="text-emerald-500" /> : stg.icon}
+                        <span>{stg.label}</span>
                       </button>
                     ))}
                   </div>
                 </div>
 
-                {/* Sub-tab Content Area */}
-                <div className="min-h-[300px]">
-                  {activeLessonTab === 'learn' && (
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-                      {/* Left Side: Cartoon Illustration Card */}
-                      <div className="lg:col-span-5 flex flex-col justify-between bg-slate-50 border border-slate-200/60 rounded-[28px] p-5 shadow-sm space-y-4">
-                        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-slate-200 bg-white flex items-center justify-center shadow-inner group">
-                          <img
-                            src={lessons[activeLessonId - 1].image}
-                            alt={lessons[activeLessonId - 1].title}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                          />
-                          <div className="absolute top-3 left-3 bg-emerald-600/90 backdrop-blur-sm px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-wider text-white shadow-sm">
-                            Visual Guide
-                          </div>
-                        </div>
-                        <div className="bg-[#051c14]/95 border border-emerald-500/25 p-4 rounded-2xl text-white shadow-sm">
-                          <span className="text-[9px] font-black text-emerald-400 uppercase tracking-widest flex items-center gap-1.5 mb-1">
-                            <Target size={12} /> Key Mission
-                          </span>
-                          <p className="text-[11px] font-bold text-slate-200 leading-relaxed">
-                            {lessons[activeLessonId - 1].summary}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Right Side: Detailed Expandable Reading Guide */}
-                      <div className="lg:col-span-7 flex flex-col justify-between space-y-5">
-                        <div className="space-y-3">
-                          <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-wider mb-2">
-                            Interactive Knowledge Guide - Tap to Explore
-                          </h4>
-                          {lessons[activeLessonId - 1].learnSections.map((sec, idx) => {
-                            const isExpanded = expandedSectionIndex === idx;
-                            return (
-                              <div
-                                key={idx}
-                                className={`border rounded-2xl transition-all ${
-                                  isExpanded
-                                    ? 'bg-emerald-50/50 border-emerald-300 shadow-sm'
-                                    : 'bg-white border-slate-200/80 hover:border-slate-300'
-                                }`}
-                              >
-                                <button
-                                  onClick={() => setExpandedSectionIndex(idx)}
-                                  className="w-full text-left px-5 py-4 flex items-center justify-between font-bold text-slate-800 text-xs cursor-pointer select-none"
-                                >
-                                  <span>{sec.title}</span>
-                                  <span className={`text-xs transition-transform duration-200 ${
-                                    isExpanded ? 'rotate-90 text-emerald-600' : 'text-slate-400'
-                                  }`}>
-                                    ▶
-                                  </span>
-                                </button>
-                                <AnimatePresence initial={false}>
-                                  {isExpanded && (
-                                    <motion.div
-                                      initial={{ height: 0, opacity: 0 }}
-                                      animate={{ height: 'auto', opacity: 1 }}
-                                      exit={{ height: 0, opacity: 0 }}
-                                      transition={{ duration: 0.25 }}
-                                      className="overflow-hidden"
-                                    >
-                                      <p className="px-5 pb-5 pt-1 text-[11px] font-semibold text-slate-600 leading-relaxed whitespace-pre-line border-t border-slate-100">
-                                        {sec.desc}
-                                      </p>
-                                    </motion.div>
-                                  )}
-                                </AnimatePresence>
+                {/* Stage Content Area */}
+                <div className="min-h-[350px]">
+                  <AnimatePresence mode="wait">
+                    {activeLessonTab === 'learn' && (
+                      <motion.div
+                        key="stage-learn"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="w-full space-y-6"
+                      >
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                          {lessons[activeLessonId - 1].learnSections.map((sec, idx) => (
+                            <div
+                              key={idx}
+                              className="group p-5 rounded-3xl border border-slate-200 transition-all duration-300 bg-white hover:bg-gradient-to-b hover:from-white hover:to-emerald-50/30 shadow-sm hover:shadow-md hover:border-emerald-300 flex flex-col"
+                            >
+                              <div className="w-full h-36 mx-auto rounded-2xl bg-gradient-to-br from-slate-50 via-white to-slate-100 border border-slate-200/60 p-4 flex items-center justify-center mb-4 overflow-hidden group-hover:border-emerald-200 transition-colors shadow-inner shrink-0">
+                                <img
+                                  src={sec.image || lessons[activeLessonId - 1].image}
+                                  alt={sec.title}
+                                  className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                                />
                               </div>
-                            );
-                          })}
+
+                              <div className="space-y-2 flex-1 flex flex-col">
+                                <div>
+                                  <span className="inline-block px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100/80 text-emerald-700 text-xs font-extrabold uppercase tracking-wider">
+                                    Topic {idx + 1}
+                                  </span>
+                                </div>
+                                <h4 className="font-extrabold text-lg text-[#1A1C2E] leading-snug group-hover:text-emerald-600 transition-colors">
+                                  {sec.title}
+                                </h4>
+                                <p className="text-sm font-medium text-slate-500 leading-relaxed pt-1 whitespace-pre-line flex-1">
+                                  {sec.desc}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
                         </div>
 
-                        <div className="flex justify-end pt-2">
-                          <button
-                            onClick={() => setActiveLessonTab('play')}
-                            className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-full font-bold text-[13px] flex items-center gap-2 cursor-pointer shadow-md transition-all active:scale-95 hover:shadow-emerald-500/20"
-                          >
-                            <Gamepad2 size={16} /> Play Game & Practice <ArrowRight size={16} />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {activeLessonTab === 'play' && (
-                    <div className="space-y-6">
-                      {activeLessonId === 1 && (
-                        <ChatPatrol 
-                          onComplete={() => {
-                            setGameCleared(true);
-                          }}
-                        />
-                      )}
-                      {activeLessonId === 2 && (
-                        <ScamDetective 
-                          onComplete={() => {
-                            setGameCleared(true);
-                          }}
-                        />
-                      )}
-                      {activeLessonId === 3 && (
-                        <PasswordForge 
-                          onComplete={() => {
-                            setGameCleared(true);
-                          }}
-                        />
-                      )}
-                      {activeLessonId === 4 && (
-                        <PopupBlaster 
-                          onComplete={() => {
-                            setGameCleared(true);
-                          }}
-                        />
-                      )}
-                      {activeLessonId === 5 && (
-                        <PermissionShield 
-                          onComplete={() => {
-                            setGameCleared(true);
-                          }}
-                        />
-                      )}
-
-                      {gameCleared && (
-                        <motion.div 
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          className="max-w-md mx-auto bg-emerald-50 border border-emerald-200 p-4 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-3 shadow-sm"
-                        >
-                          <span className="text-xs font-bold text-emerald-800 text-center md:text-left flex items-center gap-1.5">
-                            <Award size={16} className="text-emerald-600 animate-bounce" /> Game Cleared! Ready to test your knowledge?
-                          </span>
-                          <button
+                        <div className="pt-2 max-w-2xl mx-auto">
+                          <motion.button
+                            whileHover={{ scale: 1.01 }}
+                            whileTap={{ scale: 0.99 }}
                             onClick={() => setActiveLessonTab('test')}
-                            className="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer shadow-md flex items-center gap-1.5"
+                            className="w-full py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-2xl text-sm font-extrabold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2.5 shadow-md hover:shadow-lg cursor-pointer group"
                           >
-                            <HelpCircle size={14} /> Go to Quiz
-                          </button>
-                        </motion.div>
-                      )}
-                    </div>
-                  )}
+                            <span>Ready to Test Knowledge?</span>
+                            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                          </motion.button>
+                        </div>
+                      </motion.div>
+                    )}
 
-                  {activeLessonTab === 'test' && (
-                    <div className="py-4">
-                      <LessonQuiz 
-                        questions={lessons[activeLessonId - 1].quiz}
-                        onComplete={() => {
-                          if (!completedLessons.includes(activeLessonId)) {
-                            setCompletedLessons(prev => [...prev, activeLessonId]);
-                          }
-                          if (activeLessonId < 5) {
-                            const nextId = activeLessonId + 1;
-                            if (!unlockedLessons.includes(nextId)) {
-                              setUnlockedLessons(prev => [...prev, nextId]);
-                            }
-                            setActiveLessonId(nextId);
-                            setActiveLessonTab('learn');
-                          } else {
-                            setQuizCleared(true);
-                            if (!completedLessons.includes(5)) {
-                              setCompletedLessons(prev => [...prev, 5]);
-                            }
-                          }
-                        }}
-                      />
-                    </div>
-                  )}
+                    {/* Play Game Stage Removed */}
 
-                  {activeLessonId === 5 && quizCleared && (
-                    <motion.div 
-                      initial={{ scale: 0.95, opacity: 0 }} 
-                      animate={{ scale: 1, opacity: 1 }} 
-                      className="max-w-md mx-auto mt-6 bg-gradient-to-br from-emerald-500 to-teal-600 text-white p-6 rounded-3xl text-center space-y-4 shadow-xl"
-                    >
-                      <div className="flex justify-center"><Award size={48} className="text-white animate-bounce" /></div>
-                      <h4 className="font-extrabold text-sm uppercase tracking-wide">Cyber Academy Graduate!</h4>
-                      <p className="text-xs leading-relaxed font-semibold text-emerald-55">
-                        Amazing job! You completed all 5 Lessons and disarmed every hacker and scammer trap. You are a Certified Cyber Defender!
-                      </p>
-                    </motion.div>
-                  )}
+                    {activeLessonTab === 'test' && (
+                      <motion.div
+                        key="stage-test"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="py-2"
+                      >
+                        {quizCleared ? (
+                          <div className="bg-white border border-slate-200 text-[#1A1C2E] rounded-3xl p-6 sm:p-8 text-center max-w-xl mx-auto space-y-5 shadow-sm relative overflow-hidden">
+                            <ConfettiExplosion />
+
+                            <div className="w-16 h-16 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center mx-auto shadow-sm">
+                              <Trophy size={32} className="text-amber-500" />
+                            </div>
+
+                            <div>
+                              <span className="text-xs font-bold text-emerald-600 uppercase tracking-wider bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
+                                Assessment Verified
+                              </span>
+                              <h4 className="font-extrabold text-xl sm:text-2xl text-[#1A1C2E] mt-3">
+                                Module Completed: {lessons[activeLessonId - 1].badge}
+                              </h4>
+                              <p className="text-sm text-slate-600 leading-relaxed font-medium mt-2">
+                                You have successfully demonstrated comprehension of this lesson module. Your recognition badge has been recorded.
+                              </p>
+                            </div>
+
+                            {activeLessonId < lessons.length ? (
+                              <motion.button
+                                whileHover={{ scale: 1.01 }}
+                                whileTap={{ scale: 0.99 }}
+                                onClick={() => {
+                                  const nextId = activeLessonId + 1;
+                                  if (!unlockedLessons.includes(nextId)) {
+                                    setUnlockedLessons(prev => [...prev, nextId]);
+                                  }
+                                  setActiveLessonId(nextId);
+                                  setActiveLessonTab('learn');
+                                }}
+                                className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-sm font-bold uppercase tracking-wider transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+                              >
+                                <span>Proceed to Lesson {activeLessonId + 1}: {lessons[activeLessonId].badge}</span> <ArrowRight size={18} />
+                              </motion.button>
+                            ) : (
+                              <div className="space-y-4 pt-2">
+                                <div className="bg-amber-50 border border-amber-200 p-3.5 rounded-xl text-center shadow-sm">
+                                  <p className="text-sm text-amber-900 font-bold">
+                                    Amazing job! You completed all 5 Lessons and disarmed every hacker and scammer trap. You are a Certified Cyber Defender!
+                                  </p>
+                                </div>
+                                <motion.button
+                                  whileHover={{ scale: 1.01 }}
+                                  whileTap={{ scale: 0.99 }}
+                                  onClick={() => setActiveFilter('Knowledge Base')}
+                                  className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-sm font-bold uppercase tracking-wider transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+                                >
+                                  <Award size={18} /> Explore Knowledge Base
+                                </motion.button>
+                              </div>
+                            )}
+                          </div>
+                        ) : (
+                          <LessonQuiz 
+                            questions={lessons[activeLessonId - 1].quiz}
+                            onComplete={() => {
+                              if (!completedLessons.includes(activeLessonId)) {
+                                setCompletedLessons(prev => [...prev, activeLessonId]);
+                              }
+                              setQuizCleared(true);
+                              if (activeLessonId < 5) {
+                                const nextId = activeLessonId + 1;
+                                if (!unlockedLessons.includes(nextId)) {
+                                  setUnlockedLessons(prev => [...prev, nextId]);
+                                }
+                              } else {
+                                if (!completedLessons.includes(5)) {
+                                  setCompletedLessons(prev => [...prev, 5]);
+                                }
+                              }
+                            }}
+                          />
+                        )}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
-              </div>
+              </section>
             </div>
           )}
 
@@ -2020,7 +2117,7 @@ const CyberSecurityDashboard = () => {
   return (
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden">
       <button
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/#missions-grid")}
         className="fixed top-5 left-5 z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:shadow-lg transition-all border border-slate-100 group"
       >
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
