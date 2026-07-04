@@ -25,17 +25,17 @@ const lessons = [
       {
         title: "Magic Glasses for Your Eyes",
         desc: "Virtual Reality (VR) is like putting on a pair of magic goggles. Instead of looking at a flat screen like a TV, these goggles completely cover your eyes. When you turn your head, you see a brand new 3D world all around you!",
-        image: "/images/vr/v1.png"
+        image: "/images/vr/magic_goggles.png"
       },
       {
         title: "Tricking Your Brain",
         desc: "How does it feel so real? The headset shows slightly different pictures to each of your eyes (just like how we see in real life). It also plays 3D sounds that change depending on where you look. Your brain gets tricked into thinking you are actually there!",
-        image: "/images/vr/v2.png"
+        image: "/images/vr/brain_trick.png"
       },
       {
         title: "Where Can You Go?",
         desc: "With VR, you don't just watch a video. You can walk on Mars, swim next to a giant blue whale, explore an ancient castle, or sit inside a spaceship. The possibilities are endless!",
-        image: "/images/vr/v3.png"
+        image: "/images/vr/mars_whale.png"
       }
     ],
     quiz: [
@@ -70,17 +70,17 @@ const lessons = [
       {
         title: "The Screen & Curvy Glass Lenses",
         desc: "Inside the headset, there is a small, bright high-definition screen. But since the screen is super close to your face, it would look blurry. That's why there are two curved glass lenses in between! They bend the light so your eyes can focus comfortably on the virtual world.",
-        image: "/images/vr/vr.png"
+        image: "/images/vr/lenses.png"
       },
       {
         title: "Follow-Me Sensors",
         desc: "How does the headset know you turned your head? It has built-in sensors called gyroscopes and accelerometers (the same sensors that track steps on a phone). They measure your movements hundreds of times a second so the virtual camera moves instantly!",
-        image: "/images/vr/i.png"
+        image: "/images/vr/gyro_sensor.png"
       },
       {
         title: "Low Latency (Fast Response)",
         desc: "If the screen camera moves too slowly when you turn your head, it feels weird. Good VR headsets update the image instantly (in less than 20 milliseconds) so everything feels natural and comfortable.",
-        image: "/images/vr/i3.png"
+        image: "/images/vr/low_latency.png"
       }
     ],
     quiz: [
@@ -115,17 +115,17 @@ const lessons = [
       {
         title: "Your Hands in the Virtual World",
         desc: "To interact with the VR world, you hold wireless controllers in your hands. The headset tracks their position using sensors or cameras. When you move your hand in real life, a virtual hand or magic wand moves exactly the same way in the headset!",
-        image: "/images/vr/i4.png"
+        image: "/images/vr/virtual_hands.png"
       },
       {
         title: "Pressing Buttons & Grabbing",
         desc: "VR controllers have buttons, joysticks, and trigger buttons under your fingers. You can squeeze the trigger to pick up a virtual sword, pull a lever, throw a basketball, or draw in the air!",
-        image: "/images/vr/vr_controllers.png"
+        image: "/images/vr/controllers_buttons.png"
       },
       {
         title: "Feeling the Action (Haptics)",
         desc: "When you touch or grab something in VR, the controllers rumble or vibrate. This is called haptic feedback. It lets you 'feel' the virtual environment, like the tension of drawing a bow string or the bounce of a ball.",
-        image: "/images/vr/audio.png"
+        image: "/images/vr/haptics.png"
       }
     ],
     quiz: [
@@ -160,17 +160,17 @@ const lessons = [
       {
         title: "Virtual Reality (VR) - The Closed Eye",
         desc: "VR completely blocks out the real world. You see only digital computer graphics. If you turn around, you see the digital sky, not your room wall. You are 100% inside the computer's world.",
-        image: "/images/vr/vr_hero.png"
+        image: "/images/vr/closed_eye.png"
       },
       {
         title: "Augmented Reality (AR) - The Digital Overlay",
         desc: "AR does NOT hide your real room. It overlays digital stickers or holograms on top of it. Think of Pokémon GO or camera filters that add puppy ears to your face. You see the real world with virtual extras!",
-        image: "/images/vr/rhs.png"
+        image: "/images/vr/augmented_overlay.png"
       },
       {
         title: "Mixed Reality (MR) - The Interactive Merge",
         desc: "MR is a super-advanced blend. Digital objects don't just float; they interact with real physical items! For example, a digital puppy can hide behind your real chair, or a virtual ball can bounce off your real kitchen table.",
-        image: "/images/vr/vr_ar_mr.png"
+        image: "/images/vr/mixed_reality.png"
       }
     ],
     quiz: [
@@ -205,17 +205,17 @@ const lessons = [
       {
         title: "The Guardian Boundary",
         desc: "Since you cannot see your actual room while in VR, you must draw a safe play circle on the floor first. If you get too close to the edge, a glowing virtual grid appears in your view to warn you. This is the Guardian System!",
-        image: "/images/vr/vr_safety_zone.png"
+        image: "/images/vr/guardian_boundary.png"
       },
       {
         title: "Clear the Floor!",
         desc: "Before putting on the headset, always make sure the floor is empty. Clear away toys, skateboards, cups of water, and move chairs. Keep pets out of the room so you don't accidentally step on your dog or cat!",
-        image: "/images/vr/heaven.png"
+        image: "/images/vr/clear_floor.png"
       },
       {
         title: "The 20-20-20 Rule for Eyes",
         desc: "VR screens are close to your eyes. To avoid headaches or eye strain, take a break every 20 minutes. Look at something 20 feet away for 20 seconds. If you ever feel dizzy, take off the headset immediately and rest.",
-        image: "/images/vr/vr_headset_work.png"
+        image: "/images/vr/eye_break.png"
       }
     ],
     quiz: [
@@ -1816,17 +1816,17 @@ const VrTechLearning = ({ isEmbedded = false, onBack }) => {
                       {currentLesson.learnSections.map((sec, idx) => (
                         <div
                           key={idx}
-                          className="group p-5 rounded-3xl border border-slate-200 transition-all duration-300 bg-white hover:bg-gradient-to-b hover:from-white hover:to-indigo-50/30 shadow-sm hover:shadow-md hover:border-indigo-300 flex flex-col"
+                          className="group rounded-3xl border border-slate-200 transition-all duration-300 bg-white hover:bg-gradient-to-b hover:from-white hover:to-indigo-50/30 shadow-sm hover:shadow-md hover:border-indigo-300 flex flex-col overflow-hidden"
                         >
-                          <div className="w-full h-44 mx-auto rounded-2xl bg-gradient-to-br from-slate-50 via-white to-slate-100 border border-slate-200/60 p-4 flex items-center justify-center mb-4 overflow-hidden group-hover:border-indigo-200 transition-colors shadow-inner shrink-0">
+                          <div className="w-full h-48 sm:h-52 overflow-hidden shrink-0 bg-slate-100">
                             <img
                               src={sec.image}
                               alt={sec.title}
-                              className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                             />
                           </div>
 
-                          <div className="space-y-2 flex-1 flex flex-col">
+                          <div className="p-5 space-y-2 flex-1 flex flex-col">
                             <div>
                               <span className="inline-block px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100/80 text-indigo-700 text-xs font-extrabold uppercase tracking-wider">
                                 Topic {idx + 1}
