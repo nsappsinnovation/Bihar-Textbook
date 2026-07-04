@@ -1518,22 +1518,22 @@ const lessons = [
       {
         title: "The Digital Playground",
         desc: "The internet is like a giant, beautiful public playground where millions of kids play games, watch cartoons, and chat. But just like a real park, you must never talk to strangers who approach you without your parents knowing!",
-        image: "/images/cybersecurity/lesson1.png"
+        image: "/images/cybersecurity/cs_digital_playground.png"
       },
       {
         title: "Online Pretenders",
         desc: "Did you know that some tricky monsters pretend to be kids online? A character using a cute puppy picture or claiming to be '9-year-old Alex' could actually be a hacker trying to find your secrets. Always be cautious!",
-        image: "/images/cybersecurity/3rd.png"
+        image: "/images/cybersecurity/cs_online_pretenders.png"
       },
       {
         title: "The Golden Safe Rules",
         desc: "Keep your personal keys safe! Never share these with anyone online:\n\n* Your home address and school name\n* Your phone number\n* Your parent's credit card or bank details\n* The 4-digit code (OTP) sent to your parents' phone.",
-        image: "/images/cybersecurity/rhs.png"
+        image: "/images/cybersecurity/cs_golden_rules.png"
       },
       {
         title: "Checklist for Chat Safety",
         desc: "DO: Play games with school friends you know in real life.\nDO: Tell a parent immediately if someone online asks where you live.\nDON'T: Send pictures of your house, school, or face to game strangers.\nDON'T: Share passwords, even if a stranger offers you 'free Robux' or game skins.",
-        image: "/images/cybersecurity/lesson1.png"
+        image: "/images/cybersecurity/cs_chat_checklist.png"
       }
     ],
     content: "The internet is like a giant park! You can play games and chat, but sometimes tricky monsters pretend to be friendly characters.\n\nYour Secrets are Keys!\nNever give away your parent's bank cards, your address, or your 4-digit code (OTP) to anyone online. Keep them hidden inside your secret base!",
@@ -1562,22 +1562,22 @@ const lessons = [
       {
         title: "Sneaky Fishing Hooks",
         desc: "Phishing (pronounced like 'fishing') is when a scammer drops a virtual hook into the digital water, hoping you will bite! They send fake text messages or emails pretending to be a bank, a game, or a delivery company.",
-        image: "/images/cybersecurity/lesson2.png"
+        image: "/images/cybersecurity/cs_fishing_hooks.png"
       },
       {
         title: "Spotting the Panic Trap",
         desc: "Scammers want to scare you! They use words like 'URGENT', 'BLOCKED', or 'LOST FOREVER'. They want you to panic and tap their sneaky link immediately before you can ask an adult. Stop, breathe, and analyze!",
-        image: "/images/cybersecurity/3rd.png"
+        image: "/images/cybersecurity/cs_panic_trap.png"
       },
       {
         title: "Decoding Web Links",
         desc: "Always look at the link (URL) before tapping! A safe site uses https and ends with a normal domain (like .com or .org). Scammers use weird links like bank-verify-now.xyz or free-gift-box.net/alert to sneak viruses onto your device.",
-        image: "/images/cybersecurity/rhs.png"
+        image: "/images/cybersecurity/cs_decoding_links.png"
       },
       {
         title: "Checklist for Link Safety",
         desc: "DO: Show suspicious text messages to a parent or teacher.\nDO: Delete the message immediately if you don't recognize the sender.\nDON'T: Click on links in SMS messages claiming you won a lottery or a phone.\nDON'T: Enter passwords or usernames on pages that look weird or suspicious.",
-        image: "/images/cybersecurity/lesson2.png"
+        image: "/images/cybersecurity/cs_link_checklist.png"
       }
     ],
     content: "Scammers send sneaky text messages that try to make you panic!\n\nLook for the 3 Red Flags:\n1. Scary Words: 'Your account is SUSPENDED!'\n2. Extreme Threats: 'Your money is lost FOREVER!'\n3. Weird Links: Websites ending in weird letters like '.xyz' instead of '.com'.\n\nIf you see these, don't tap! Call a parent!",
@@ -1606,7 +1606,7 @@ const lessons = [
       {
         title: "The Fortress Gate",
         desc: "A password is like the drawbridge of your digital castle. If it's weak (like '123456' or 'superman'), the Glitch Goblin and hacking robots can kick it down in seconds! A strong password keeps your account safe.",
-        image: "/images/cybersecurity/lesson3.png"
+        image: "/images/cybersecurity/cs_fortress_gate.png"
       },
       {
         title: "The Materials of Defense",
@@ -1950,17 +1950,17 @@ const CyberSecurityDashboard = () => {
                           {lessons[activeLessonId - 1].learnSections.map((sec, idx) => (
                             <div
                               key={idx}
-                              className="group p-5 rounded-3xl border border-slate-200 transition-all duration-300 bg-white hover:bg-gradient-to-b hover:from-white hover:to-emerald-50/30 shadow-sm hover:shadow-md hover:border-emerald-300 flex flex-col"
+                              className="group rounded-3xl border border-slate-200 transition-all duration-300 bg-white hover:bg-gradient-to-b hover:from-white hover:to-emerald-50/30 shadow-sm hover:shadow-md hover:border-emerald-300 flex flex-col overflow-hidden"
                             >
-                              <div className="w-full h-36 mx-auto rounded-2xl bg-gradient-to-br from-slate-50 via-white to-slate-100 border border-slate-200/60 p-4 flex items-center justify-center mb-4 overflow-hidden group-hover:border-emerald-200 transition-colors shadow-inner shrink-0">
+                              <div className="w-full h-48 sm:h-52 overflow-hidden shrink-0 bg-slate-100">
                                 <img
                                   src={sec.image || lessons[activeLessonId - 1].image}
                                   alt={sec.title}
-                                  className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                 />
                               </div>
 
-                              <div className="space-y-2 flex-1 flex flex-col">
+                              <div className="p-5 space-y-2 flex-1 flex flex-col">
                                 <div>
                                   <span className="inline-block px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100/80 text-emerald-700 text-xs font-extrabold uppercase tracking-wider">
                                     Topic {idx + 1}
