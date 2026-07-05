@@ -37,10 +37,10 @@ const Signlanguage = () => {
       badge: "Dictionary"
     },
     {
-      title: "Everyday Greetings",
-      description: "Explore core conversational gestures used for polite greetings and daily communications in the deaf community.",
+      title: "Essential Vocabulary",
+      description: "Explore core conversational gestures used for daily greetings, family members, emotions, and common communications in the deaf community.",
       icon: <BookOpen size={16} />,
-      badge: "Conversational"
+      badge: "Vocabulary"
     }
   ];
 
@@ -56,6 +56,36 @@ const Signlanguage = () => {
       options: ['Thank You', 'Sorry', 'Welcome'],
       correct: 'Thank You',
       explanation: 'Touch your chin with fingers, then move hand forward.'
+    },
+    {
+      image: '/images/signlanguage/mother.png',
+      options: ['Father', 'Mother', 'Friend'],
+      correct: 'Mother',
+      explanation: 'Tap your thumb on your chin with an open hand facing sideways.'
+    },
+    {
+      image: '/images/signlanguage/father.png',
+      options: ['Mother', 'Teacher', 'Father'],
+      correct: 'Father',
+      explanation: 'Tap your thumb on your forehead with an open hand facing sideways.'
+    },
+    {
+      image: '/images/signlanguage/happy.png',
+      options: ['Sad', 'Angry', 'Happy'],
+      correct: 'Happy',
+      explanation: 'Brush both flat hands upward on your chest to show joy.'
+    },
+    {
+      image: '/images/signlanguage/sad.png',
+      options: ['Happy', 'Sad', 'Cry'],
+      correct: 'Sad',
+      explanation: 'Place both hands in front of your face and pull them down while making a sad face.'
+    },
+    {
+      image: '/images/signlanguage/eat.png',
+      options: ['Drink', 'Eat', 'Sleep'],
+      correct: 'Eat',
+      explanation: 'Bring your flattened O-hand to your mouth repeatedly.'
     },
     {
       image: '/images/signlanguage/sorry.png',
@@ -74,7 +104,12 @@ const Signlanguage = () => {
   const greetingList = [
     { name: 'HELLO', image: '/images/signlanguage/hello.png', desc: 'Wave your hand gently from side to side to say hello.' },
     { name: 'THANK YOU', image: '/images/signlanguage/thankyou.png', desc: 'Touch your chin with fingers, then move hand forward towards the person.' },
+    { name: 'MOTHER', image: '/images/signlanguage/mother.png', desc: 'Tap your thumb on your chin with an open hand facing sideways.' },
+    { name: 'FATHER', image: '/images/signlanguage/father.png', desc: 'Tap your thumb on your forehead with an open hand facing sideways.' },
+    { name: 'HAPPY', image: '/images/signlanguage/happy.png', desc: 'Brush both flat hands upward on your chest to show joy.' },
+    { name: 'SAD', image: '/images/signlanguage/sad.png', desc: 'Place both hands in front of your face and pull them down while making a sad face.' },
     { name: 'SORRY', image: '/images/signlanguage/sorry.png', desc: 'Rub a closed fist in a circular motion over your heart.' },
+    { name: 'EAT', image: '/images/signlanguage/eat.png', desc: 'Bring your flattened O-hand to your mouth a few times.' },
     { name: 'WELCOME', image: '/images/signlanguage/welcome.png', desc: 'Bring both hands towards your chest in a welcoming motion.' },
     { name: 'PLEASE', image: '/images/signlanguage/please.png', desc: 'Place your flat palm on your chest and move it in a circular motion.' }
   ];
