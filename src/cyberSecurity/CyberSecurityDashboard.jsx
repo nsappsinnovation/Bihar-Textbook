@@ -146,7 +146,7 @@ const CyberSecurityQuiz = () => {
       {/* High-Tech Cyber Background Picture with Gradient & Mesh Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="/images/cybersecurity/3rd.png" 
+          src="/images/cybersecurity/cs_quiz_background.png" 
           onError={(e) => { e.target.src = '/images/cybersecurity/rhs.png'; }}
           alt="Cyber Security Background" 
           className="w-full h-full object-cover object-center scale-105 transition-transform duration-1000"
@@ -1518,22 +1518,22 @@ const lessons = [
       {
         title: "The Digital Playground",
         desc: "The internet is like a giant, beautiful public playground where millions of kids play games, watch cartoons, and chat. But just like a real park, you must never talk to strangers who approach you without your parents knowing!",
-        image: "/images/cybersecurity/lesson1.png"
+        image: "/images/cybersecurity/cs_digital_playground.png"
       },
       {
         title: "Online Pretenders",
         desc: "Did you know that some tricky monsters pretend to be kids online? A character using a cute puppy picture or claiming to be '9-year-old Alex' could actually be a hacker trying to find your secrets. Always be cautious!",
-        image: "/images/cybersecurity/3rd.png"
+        image: "/images/cybersecurity/cs_online_pretenders.png"
       },
       {
         title: "The Golden Safe Rules",
         desc: "Keep your personal keys safe! Never share these with anyone online:\n\n* Your home address and school name\n* Your phone number\n* Your parent's credit card or bank details\n* The 4-digit code (OTP) sent to your parents' phone.",
-        image: "/images/cybersecurity/rhs.png"
+        image: "/images/cybersecurity/cs_golden_rules.png"
       },
       {
         title: "Checklist for Chat Safety",
         desc: "DO: Play games with school friends you know in real life.\nDO: Tell a parent immediately if someone online asks where you live.\nDON'T: Send pictures of your house, school, or face to game strangers.\nDON'T: Share passwords, even if a stranger offers you 'free Robux' or game skins.",
-        image: "/images/cybersecurity/lesson1.png"
+        image: "/images/cybersecurity/cs_chat_checklist.png"
       }
     ],
     content: "The internet is like a giant park! You can play games and chat, but sometimes tricky monsters pretend to be friendly characters.\n\nYour Secrets are Keys!\nNever give away your parent's bank cards, your address, or your 4-digit code (OTP) to anyone online. Keep them hidden inside your secret base!",
@@ -1562,22 +1562,22 @@ const lessons = [
       {
         title: "Sneaky Fishing Hooks",
         desc: "Phishing (pronounced like 'fishing') is when a scammer drops a virtual hook into the digital water, hoping you will bite! They send fake text messages or emails pretending to be a bank, a game, or a delivery company.",
-        image: "/images/cybersecurity/lesson2.png"
+        image: "/images/cybersecurity/cs_fishing_hooks.png"
       },
       {
         title: "Spotting the Panic Trap",
         desc: "Scammers want to scare you! They use words like 'URGENT', 'BLOCKED', or 'LOST FOREVER'. They want you to panic and tap their sneaky link immediately before you can ask an adult. Stop, breathe, and analyze!",
-        image: "/images/cybersecurity/3rd.png"
+        image: "/images/cybersecurity/cs_panic_trap.png"
       },
       {
         title: "Decoding Web Links",
         desc: "Always look at the link (URL) before tapping! A safe site uses https and ends with a normal domain (like .com or .org). Scammers use weird links like bank-verify-now.xyz or free-gift-box.net/alert to sneak viruses onto your device.",
-        image: "/images/cybersecurity/rhs.png"
+        image: "/images/cybersecurity/cs_decoding_links.png"
       },
       {
         title: "Checklist for Link Safety",
         desc: "DO: Show suspicious text messages to a parent or teacher.\nDO: Delete the message immediately if you don't recognize the sender.\nDON'T: Click on links in SMS messages claiming you won a lottery or a phone.\nDON'T: Enter passwords or usernames on pages that look weird or suspicious.",
-        image: "/images/cybersecurity/lesson2.png"
+        image: "/images/cybersecurity/cs_link_checklist.png"
       }
     ],
     content: "Scammers send sneaky text messages that try to make you panic!\n\nLook for the 3 Red Flags:\n1. Scary Words: 'Your account is SUSPENDED!'\n2. Extreme Threats: 'Your money is lost FOREVER!'\n3. Weird Links: Websites ending in weird letters like '.xyz' instead of '.com'.\n\nIf you see these, don't tap! Call a parent!",
@@ -1606,22 +1606,22 @@ const lessons = [
       {
         title: "The Fortress Gate",
         desc: "A password is like the drawbridge of your digital castle. If it's weak (like '123456' or 'superman'), the Glitch Goblin and hacking robots can kick it down in seconds! A strong password keeps your account safe.",
-        image: "/images/cybersecurity/lesson3.png"
+        image: "/images/cybersecurity/cs_fortress_gate.png"
       },
       {
         title: "The Materials of Defense",
         desc: "Cardboard Shield: 'cat' or 'password' — Cracks instantly!\nWooden Door: 'cat123' or 'superman10' — Cracks in a few minutes.\nIron Gate: 'CatDog2024' — Good, but robots can still guess it eventually.\nEmerald Forcefield: 'C@t&D0g#2026!' — Indestructible! Mixing letters, numbers, and symbols creates the ultimate defense.",
-        image: "/images/cybersecurity/3rd.png"
+        image: "/images/cybersecurity/cs_materials_defense.png"
       },
       {
         title: "How to Remember Your Shield",
         desc: "Create a fun, secret sentence! For example: 'I love eating pizza on Fridays!' becomes 'Il2ep0F!'. It is super easy for you to remember, but impossible for a hacking robot to guess!",
-        image: "/images/cybersecurity/rhs.png"
+        image: "/images/cybersecurity/cs_secret_sentence.png"
       },
       {
         title: "Checklist for Password Safety",
         desc: "DO: Use different passwords for different games.\nDO: Keep your passwords written down in a secret notebook at home.\nDON'T: Use easy-to-guess things like your birthday or pet's name.\nDON'T: Share your password with anyone, not even your best friends at school!",
-        image: "/images/cybersecurity/lesson3.png"
+        image: "/images/cybersecurity/cs_password_checklist.png"
       }
     ],
     content: "Hackers use guessing robots to break into your accounts. If your password is too easy, they will crack it in a second!\n\nThe Shield Blueprint:\n• Simple passwords (like '123456' or 'doggy') are fragile like Cardboard.\n• Add capitals (ABC) and numbers (123) to make an Iron Gate.\n• Add symbols (@, #, $, %) to forge an Emerald Forcefield that blocks everything!",
@@ -1650,22 +1650,22 @@ const lessons = [
       {
         title: "Beware of Loud Pop-ups",
         desc: "When browsing, some pages display red flashing warning boxes shouting: 'WARNING! 99 VIRUSES DETECTED!' or 'YOUR DEVICE IS INFECTED!'. Don't be scared! These are fake warnings designed to trick you into downloading viruses.",
-        image: "/images/cybersecurity/lesson4.png"
+        image: "/images/cybersecurity/cs_loud_popups.png"
       },
       {
         title: "Disarming the Trap",
         desc: "Never click the big, bright buttons in a pop-up. Instead, look closely for a tiny, white X button in the top corner. If you can't find it, close the browser tab or ask an adult to close it for you.",
-        image: "/images/cybersecurity/3rd.png"
+        image: "/images/cybersecurity/cs_disarm_trap.png"
       },
       {
         title: "Software Updates are Shield Refills",
         desc: "Hacking robots constantly search for hidden holes (security bugs) in your games and operating systems. When you update your apps, the creators patch up these holes, keeping the robots locked out!",
-        image: "/images/cybersecurity/rhs.png"
+        image: "/images/cybersecurity/cs_shield_refills.png"
       },
       {
         title: "Checklist for Device Safety",
         desc: "DO: Turn on 'Automatic Updates' for your phone, tablet, or computer.\nDO: Close the browser tab if a flashy screen blocks your page.\nDON'T: Install 'device cleaner' or 'helper' apps suggested by pop-ups.\nDON'T: Postpone important system updates for too long.",
-        image: "/images/cybersecurity/lesson4.png"
+        image: "/images/cybersecurity/cs_device_checklist.png"
       }
     ],
     content: "While surfing the web, you might see scary pop-up boxes shouting: 'YOUR DEVICE HAS 50 VIRUSES! CLICK NOW TO REPAIR!'\n\nIt's a Trick!\nThese are fake pop-ups trying to make you download bad apps. Never click the big green buttons. Always close the window by clicking the small white 'X' or show it to a parent!",
@@ -1694,22 +1694,22 @@ const lessons = [
       {
         title: "The Double-Lock Lockbox",
         desc: "Two-Factor Authentication (2FA) is like locking your chest with two different keys. When you log in with your password, a secret one-time code is sent to your parent's phone. Even if a hacker steals your password, they can't get in without that second key!",
-        image: "/images/cybersecurity/lesson5.png"
+        image: "/images/cybersecurity/cs_double_lock.png"
       },
       {
         title: "Sneaky App Demands",
         desc: "When you download a new game, it asks for permission to access your device features. A driving game might need access to your screen controls, but does a calculator app need to see your photo gallery or know your location? Absolutely not!",
-        image: "/images/cybersecurity/3rd.png"
+        image: "/images/cybersecurity/cs_sneaky_apps.png"
       },
       {
         title: "The Permission Shield Rules",
         desc: "Always review permission requests! If an app asks for something it doesn't need to work, click DENY. It's better to be safe than let sneaky apps track your coordinates or read your private messages.",
-        image: "/images/cybersecurity/rhs.png"
+        image: "/images/cybersecurity/cs_permission_shield.png"
       },
       {
         title: "Checklist for Permission Safety",
         desc: "DO: Enable 2FA on your main gaming and school accounts with parent help.\nDO: Deny location access for games that do not require mapping.\nDON'T: Download apps from random websites. Only use official app stores.\nDON'T: Click 'Allow' to every popup without reading what it is asking for.",
-        image: "/images/cybersecurity/lesson5.png"
+        image: "/images/cybersecurity/cs_permission_checklist.png"
       }
     ],
     content: "Keep your digital house safe with a double lock!\n\n2FA (Two-Factor Authentication):\nThis requires both a password AND a secret code sent to your parent's phone to log in. Even if a hacker guesses your password, they can't get in!\n\nApp Permission Rules:\nIf a simple Flashlight app asks to see your photos, contacts, or location, DENY IT! Apps should only access what they need to work.",
@@ -1950,17 +1950,17 @@ const CyberSecurityDashboard = () => {
                           {lessons[activeLessonId - 1].learnSections.map((sec, idx) => (
                             <div
                               key={idx}
-                              className="group p-5 rounded-3xl border border-slate-200 transition-all duration-300 bg-white hover:bg-gradient-to-b hover:from-white hover:to-emerald-50/30 shadow-sm hover:shadow-md hover:border-emerald-300 flex flex-col"
+                              className="group rounded-3xl border border-slate-200 transition-all duration-300 bg-white hover:bg-gradient-to-b hover:from-white hover:to-emerald-50/30 shadow-sm hover:shadow-md hover:border-emerald-300 flex flex-col overflow-hidden"
                             >
-                              <div className="w-full h-36 mx-auto rounded-2xl bg-gradient-to-br from-slate-50 via-white to-slate-100 border border-slate-200/60 p-4 flex items-center justify-center mb-4 overflow-hidden group-hover:border-emerald-200 transition-colors shadow-inner shrink-0">
+                              <div className="w-full h-48 sm:h-52 overflow-hidden shrink-0 bg-slate-100">
                                 <img
                                   src={sec.image || lessons[activeLessonId - 1].image}
                                   alt={sec.title}
-                                  className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                 />
                               </div>
 
-                              <div className="space-y-2 flex-1 flex flex-col">
+                              <div className="p-5 space-y-2 flex-1 flex flex-col">
                                 <div>
                                   <span className="inline-block px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100/80 text-emerald-700 text-xs font-extrabold uppercase tracking-wider">
                                     Topic {idx + 1}
