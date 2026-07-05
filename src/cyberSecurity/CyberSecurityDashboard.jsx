@@ -146,7 +146,7 @@ const CyberSecurityQuiz = () => {
       {/* High-Tech Cyber Background Picture with Gradient & Mesh Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="/images/cybersecurity/3rd.png" 
+          src="/images/cybersecurity/cs_quiz_background.png" 
           onError={(e) => { e.target.src = '/images/cybersecurity/rhs.png'; }}
           alt="Cyber Security Background" 
           className="w-full h-full object-cover object-center scale-105 transition-transform duration-1000"
@@ -1611,17 +1611,17 @@ const lessons = [
       {
         title: "The Materials of Defense",
         desc: "Cardboard Shield: 'cat' or 'password' — Cracks instantly!\nWooden Door: 'cat123' or 'superman10' — Cracks in a few minutes.\nIron Gate: 'CatDog2024' — Good, but robots can still guess it eventually.\nEmerald Forcefield: 'C@t&D0g#2026!' — Indestructible! Mixing letters, numbers, and symbols creates the ultimate defense.",
-        image: "/images/cybersecurity/3rd.png"
+        image: "/images/cybersecurity/cs_materials_defense.png"
       },
       {
         title: "How to Remember Your Shield",
         desc: "Create a fun, secret sentence! For example: 'I love eating pizza on Fridays!' becomes 'Il2ep0F!'. It is super easy for you to remember, but impossible for a hacking robot to guess!",
-        image: "/images/cybersecurity/rhs.png"
+        image: "/images/cybersecurity/cs_secret_sentence.png"
       },
       {
         title: "Checklist for Password Safety",
         desc: "DO: Use different passwords for different games.\nDO: Keep your passwords written down in a secret notebook at home.\nDON'T: Use easy-to-guess things like your birthday or pet's name.\nDON'T: Share your password with anyone, not even your best friends at school!",
-        image: "/images/cybersecurity/lesson3.png"
+        image: "/images/cybersecurity/cs_password_checklist.png"
       }
     ],
     content: "Hackers use guessing robots to break into your accounts. If your password is too easy, they will crack it in a second!\n\nThe Shield Blueprint:\n• Simple passwords (like '123456' or 'doggy') are fragile like Cardboard.\n• Add capitals (ABC) and numbers (123) to make an Iron Gate.\n• Add symbols (@, #, $, %) to forge an Emerald Forcefield that blocks everything!",
@@ -1650,22 +1650,22 @@ const lessons = [
       {
         title: "Beware of Loud Pop-ups",
         desc: "When browsing, some pages display red flashing warning boxes shouting: 'WARNING! 99 VIRUSES DETECTED!' or 'YOUR DEVICE IS INFECTED!'. Don't be scared! These are fake warnings designed to trick you into downloading viruses.",
-        image: "/images/cybersecurity/lesson4.png"
+        image: "/images/cybersecurity/cs_loud_popups.png"
       },
       {
         title: "Disarming the Trap",
         desc: "Never click the big, bright buttons in a pop-up. Instead, look closely for a tiny, white X button in the top corner. If you can't find it, close the browser tab or ask an adult to close it for you.",
-        image: "/images/cybersecurity/3rd.png"
+        image: "/images/cybersecurity/cs_disarm_trap.png"
       },
       {
         title: "Software Updates are Shield Refills",
         desc: "Hacking robots constantly search for hidden holes (security bugs) in your games and operating systems. When you update your apps, the creators patch up these holes, keeping the robots locked out!",
-        image: "/images/cybersecurity/rhs.png"
+        image: "/images/cybersecurity/cs_shield_refills.png"
       },
       {
         title: "Checklist for Device Safety",
         desc: "DO: Turn on 'Automatic Updates' for your phone, tablet, or computer.\nDO: Close the browser tab if a flashy screen blocks your page.\nDON'T: Install 'device cleaner' or 'helper' apps suggested by pop-ups.\nDON'T: Postpone important system updates for too long.",
-        image: "/images/cybersecurity/lesson4.png"
+        image: "/images/cybersecurity/cs_device_checklist.png"
       }
     ],
     content: "While surfing the web, you might see scary pop-up boxes shouting: 'YOUR DEVICE HAS 50 VIRUSES! CLICK NOW TO REPAIR!'\n\nIt's a Trick!\nThese are fake pop-ups trying to make you download bad apps. Never click the big green buttons. Always close the window by clicking the small white 'X' or show it to a parent!",
@@ -1694,22 +1694,22 @@ const lessons = [
       {
         title: "The Double-Lock Lockbox",
         desc: "Two-Factor Authentication (2FA) is like locking your chest with two different keys. When you log in with your password, a secret one-time code is sent to your parent's phone. Even if a hacker steals your password, they can't get in without that second key!",
-        image: "/images/cybersecurity/lesson5.png"
+        image: "/images/cybersecurity/cs_double_lock.png"
       },
       {
         title: "Sneaky App Demands",
         desc: "When you download a new game, it asks for permission to access your device features. A driving game might need access to your screen controls, but does a calculator app need to see your photo gallery or know your location? Absolutely not!",
-        image: "/images/cybersecurity/3rd.png"
+        image: "/images/cybersecurity/cs_sneaky_apps.png"
       },
       {
         title: "The Permission Shield Rules",
         desc: "Always review permission requests! If an app asks for something it doesn't need to work, click DENY. It's better to be safe than let sneaky apps track your coordinates or read your private messages.",
-        image: "/images/cybersecurity/rhs.png"
+        image: "/images/cybersecurity/cs_permission_shield.png"
       },
       {
         title: "Checklist for Permission Safety",
         desc: "DO: Enable 2FA on your main gaming and school accounts with parent help.\nDO: Deny location access for games that do not require mapping.\nDON'T: Download apps from random websites. Only use official app stores.\nDON'T: Click 'Allow' to every popup without reading what it is asking for.",
-        image: "/images/cybersecurity/lesson5.png"
+        image: "/images/cybersecurity/cs_permission_checklist.png"
       }
     ],
     content: "Keep your digital house safe with a double lock!\n\n2FA (Two-Factor Authentication):\nThis requires both a password AND a secret code sent to your parent's phone to log in. Even if a hacker guesses your password, they can't get in!\n\nApp Permission Rules:\nIf a simple Flashlight app asks to see your photos, contacts, or location, DENY IT! Apps should only access what they need to work.",
