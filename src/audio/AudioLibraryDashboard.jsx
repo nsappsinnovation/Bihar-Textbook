@@ -222,7 +222,7 @@ const AudioLibraryDashboard = () => {
             {/* Hero Section */}
             <section className="bg-white rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[300px] pb-6">
               <div className="relative z-10 p-8 md:p-10 lg:w-1/2 space-y-4">
-                 <h1 className="text-[32px] md:text-[42px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
+                 <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
                     Listen, learn & <br /> grow with <br />
                     <span className="text-purple-600">Audio Library</span>
                  </h1>

@@ -519,7 +519,7 @@ const Linguistics = () => {
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse" />
                 Linguistic Mission
               </span>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-[1.1] tracking-tight text-left">
+              <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
                 Diverse <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Linguistic Learning</span> Programs
               </h1>
               <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed max-w-2xl text-left">
