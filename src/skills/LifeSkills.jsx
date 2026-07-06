@@ -1134,7 +1134,7 @@ const LifeSkills = () => {
             {/* Hero Section */}
             <section className="bg-white rounded-[16px] md:rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[180px] sm:min-h-[220px] md:min-h-[260px] 2xl:min-h-[320px] pb-4 md:pb-6 text-left">
               <div className="relative z-10 p-5 sm:p-0 md:p-2 lg:w-1/2 space-y-3 md:space-y-4">
-                <h1 className="text-[22px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
+                <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
                   Learn, Grow & <br /> Live Better with <br />
                   <span className="text-emerald-600">Life Skills</span>
                 </h1>
@@ -2076,16 +2076,16 @@ const LifeSkills = () => {
                             <div className="max-w-[800px] mx-auto text-left space-y-6">
                               <div className="flex justify-between items-start">
                                 <div>
-                                  <span className="text-[10px] font-black uppercase text-emerald-600 tracking-wider bg-emerald-50 px-3 py-1.5 rounded-full">
+                                  <span className="text-[11px] font-black uppercase text-emerald-600 tracking-wider bg-emerald-50 px-3.5 py-1.5 rounded-full">
                                     Practical Lab 03
                                   </span>
-                                  <h2 className="text-2xl md:text-3xl font-black text-slate-900 mt-2">Smart Cashier Lab</h2>
-                                  <p className="text-sm text-slate-500 font-bold mt-1">Calculate and build correct change using Indian Rupee notes & coins.</p>
+                                  <h2 className="text-[26px] md:text-[34px] font-black text-slate-900 mt-2">Smart Cashier Lab</h2>
+                                  <p className="text-[15px] text-slate-500 font-bold mt-1">Calculate and build correct change using Indian Rupee notes & coins.</p>
                                 </div>
                                 <div className="flex items-center gap-2">
                                   <div className="bg-amber-50 px-4 py-2 rounded-2xl border border-amber-100 text-center shrink-0">
-                                    <span className="text-[9px] font-bold text-amber-600 uppercase tracking-widest block">Score</span>
-                                    <span className="text-lg font-black text-amber-700">{cashierScore} pts</span>
+                                    <span className="text-[10px] font-bold text-amber-600 uppercase tracking-widest block">Score</span>
+                                    <span className="text-xl font-black text-amber-700">{cashierScore} pts</span>
                                   </div>
                                   <button
                                     onClick={resetCashierLab}
@@ -2101,32 +2101,32 @@ const LifeSkills = () => {
                                 {/* CUSTOMER PANEL */}
                                 <div className="md:col-span-5 bg-slate-50 border border-slate-100 rounded-[24px] p-5 flex flex-col justify-between min-h-[300px]">
                                   <div className="space-y-4">
-                                    <div className="flex items-center gap-2">
-                                      <span className="text-3xl">👤</span>
+                                    <div className="flex items-center gap-2.5">
+                                      <span className="text-[35px]">👤</span>
                                       <div>
-                                        <h4 className="text-sm font-black text-slate-800">Customer Checkout</h4>
-                                        <p className="text-[10px] text-slate-400 font-bold">A customer is buying one item.</p>
+                                        <h4 className="text-[15px] font-black text-slate-800">Customer Checkout</h4>
+                                        <p className="text-[11.5px] text-slate-400 font-bold">A customer is buying one item.</p>
                                       </div>
                                     </div>
 
-                                    <div className="bg-white border border-slate-200/60 rounded-2xl p-4 space-y-3">
+                                    <div className="bg-white border border-slate-200/60 rounded-2xl p-4.5 space-y-3.5">
                                       <div className="flex justify-between items-center">
-                                        <span className="text-xs font-bold text-slate-500">Item Selected:</span>
-                                        <span className="text-xs font-black text-slate-800 flex items-center gap-1">
+                                        <span className="text-[13px] font-bold text-slate-500">Item Selected:</span>
+                                        <span className="text-[13px] font-black text-slate-800 flex items-center gap-1.5">
                                           {cashierCurrentItem.icon} {cashierCurrentItem.name}
                                         </span>
                                       </div>
                                       <div className="flex justify-between items-center">
-                                        <span className="text-xs font-bold text-slate-500">Item Cost:</span>
-                                        <span className="text-sm font-black text-slate-800">₹ {cashierCurrentItem.price}</span>
+                                        <span className="text-[13px] font-bold text-slate-500">Item Cost:</span>
+                                        <span className="text-[15px] font-black text-slate-800">₹ {cashierCurrentItem.price}</span>
                                       </div>
                                       <div className="flex justify-between items-center pt-2.5 border-t border-dashed border-slate-100">
-                                        <span className="text-xs font-bold text-slate-500">Cash Received:</span>
-                                        <span className="text-sm font-black text-emerald-600">₹ {cashierPaidAmount}</span>
+                                        <span className="text-[13px] font-bold text-slate-500">Cash Received:</span>
+                                        <span className="text-[15px] font-black text-emerald-600">₹ {cashierPaidAmount}</span>
                                       </div>
-                                      <div className="flex justify-between items-center pt-2.5 border-t border-dashed border-slate-100 bg-emerald-50/40 p-2 rounded-lg">
-                                        <span className="text-xs font-black text-emerald-700">Change Due:</span>
-                                        <span className="text-base font-black text-emerald-700">₹ {cashierPaidAmount - cashierCurrentItem.price}</span>
+                                      <div className="flex justify-between items-center pt-2.5 border-t border-dashed border-slate-100 bg-emerald-50/40 p-2.5 rounded-lg">
+                                        <span className="text-[13.5px] font-black text-emerald-700">Change Due:</span>
+                                        <span className="text-lg font-black text-emerald-700">₹ {cashierPaidAmount - cashierCurrentItem.price}</span>
                                       </div>
                                     </div>
                                   </div>
@@ -2134,7 +2134,7 @@ const LifeSkills = () => {
                                   <div className="pt-4">
                                     <button
                                       onClick={generateNewCashierCustomer}
-                                      className="w-full py-2.5 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold transition-all text-center cursor-pointer"
+                                      className="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-[13.5px] font-bold transition-all text-center cursor-pointer"
                                     >
                                       Next Customer
                                     </button>
@@ -2143,8 +2143,8 @@ const LifeSkills = () => {
 
                                 {/* REGISTER TRAY */}
                                 <div className="md:col-span-7 space-y-4">
-                                  <h4 className="text-xs font-black text-slate-400 uppercase tracking-wider">Indian Currency Drawer</h4>
-                                  <div className="grid grid-cols-2 gap-2">
+                                  <h4 className="text-[13.5px] font-black text-slate-400 uppercase tracking-wider">Indian Currency Drawer</h4>
+                                  <div className="grid grid-cols-2 gap-2.5">
                                     {[
                                       { val: 100, label: '₹100 Note', color: 'bg-indigo-50 border-indigo-200 text-indigo-700' },
                                       { val: 50, label: '₹50 Note', color: 'bg-sky-50 border-sky-200 text-sky-700' },
@@ -2156,22 +2156,22 @@ const LifeSkills = () => {
                                     ].map(curr => (
                                       <div
                                         key={curr.val}
-                                        className={`p-2.5 border rounded-xl flex items-center justify-between shadow-sm ${curr.color}`}
+                                        className={`p-3.5 border rounded-xl flex items-center justify-between shadow-sm ${curr.color}`}
                                       >
-                                        <div className="font-mono font-black text-xs">{curr.label}</div>
-                                        <div className="flex items-center gap-1.5 shrink-0">
+                                        <div className="font-mono font-black text-[13.5px]">{curr.label}</div>
+                                        <div className="flex items-center gap-2 shrink-0">
                                           <button
                                             onClick={() => removeNoteFromTray(curr.val)}
-                                            className="w-5.5 h-5.5 bg-white hover:bg-slate-100 rounded-md border border-slate-200 flex items-center justify-center font-bold text-xs text-slate-600 transition-colors cursor-pointer"
+                                            className="w-7 h-7 bg-white hover:bg-slate-100 rounded-md border border-slate-200 flex items-center justify-center font-bold text-sm text-slate-600 transition-colors cursor-pointer"
                                           >
                                             -
                                           </button>
-                                          <span className="font-mono text-xs font-black w-4 text-center">
+                                          <span className="font-mono text-sm font-black w-5 text-center">
                                             {cashierChangeTray[curr.val]}
                                           </span>
                                           <button
                                             onClick={() => addNoteToTray(curr.val)}
-                                            className="w-5.5 h-5.5 bg-white hover:bg-slate-100 rounded-md border border-slate-200 flex items-center justify-center font-bold text-xs text-slate-600 transition-colors cursor-pointer"
+                                            className="w-7 h-7 bg-white hover:bg-slate-100 rounded-md border border-slate-200 flex items-center justify-center font-bold text-sm text-slate-600 transition-colors cursor-pointer"
                                           >
                                             +
                                           </button>
@@ -2182,24 +2182,24 @@ const LifeSkills = () => {
 
                                   {/* PAY TRAY DISPLAY */}
                                   <div className="bg-[#121620] rounded-[24px] p-4 text-white border border-slate-800 min-h-[100px] flex flex-col justify-between">
-                                    <div className="flex justify-between items-center text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">
+                                    <div className="flex justify-between items-center text-[11px] text-slate-400 font-bold uppercase tracking-wider mb-2">
                                       <span>Current Cash Tray</span>
                                       <button
                                         onClick={() => setCashierChangeTray({ 100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 2: 0, 1: 0 })}
-                                        className="text-rose-400 hover:text-rose-300 font-black cursor-pointer text-[10px]"
+                                        className="text-rose-400 hover:text-rose-300 font-black cursor-pointer text-[11px]"
                                       >
                                         Clear Tray
                                       </button>
                                     </div>
 
-                                    <div className="flex flex-wrap gap-1.5 items-center py-2 min-h-[40px]">
+                                    <div className="flex flex-wrap gap-2 items-center py-2 min-h-[40px]">
                                       {Object.keys(cashierChangeTray).map(val => {
                                         const qty = cashierChangeTray[val];
                                         if (qty === 0) return null;
                                         return Array.from({ length: qty }).map((_, i) => (
                                           <div
                                             key={`${val}-${i}`}
-                                            className={`px-2 py-1 rounded font-mono font-black text-[9px] shadow-sm select-none border ${val === '100' ? 'bg-indigo-600 border-indigo-400 text-white'
+                                            className={`px-2.5 py-1.5 rounded font-mono font-black text-[10.5px] shadow-sm select-none border ${val === '100' ? 'bg-indigo-600 border-indigo-400 text-white'
                                               : val === '50' ? 'bg-sky-500 border-sky-400 text-white'
                                                 : val === '20' ? 'bg-orange-500 border-orange-400 text-white'
                                                   : val === '10' ? 'bg-amber-600 border-amber-400 text-white'
@@ -2211,19 +2211,19 @@ const LifeSkills = () => {
                                         ));
                                       })}
                                       {Object.values(cashierChangeTray).every(v => v === 0) && (
-                                        <span className="text-[10px] text-slate-500 font-semibold italic">Tray is empty. Add notes or coins above.</span>
+                                        <span className="text-[11px] text-slate-500 font-semibold italic">Tray is empty. Add notes or coins above.</span>
                                       )}
                                     </div>
 
                                     <div className="flex justify-between items-center border-t border-slate-800 pt-2 mt-2">
-                                      <div className="text-xs font-bold">
+                                      <div className="text-[13px] font-bold">
                                         Total Tray: <span className="font-mono text-yellow-400 font-black">₹ {
                                           Object.keys(cashierChangeTray).reduce((sum, val) => sum + parseInt(val, 10) * cashierChangeTray[val], 0)
                                         }</span>
                                       </div>
                                       <button
                                         onClick={checkCashierChange}
-                                        className="px-5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold transition-all cursor-pointer"
+                                        className="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-[13px] font-bold transition-all cursor-pointer"
                                       >
                                         Hand Over Change
                                       </button>
@@ -2236,7 +2236,7 @@ const LifeSkills = () => {
                                         initial={{ opacity: 0, y: 5 }}
                                         animate={{ opacity: 1, y: 0 }}
                                         exit={{ opacity: 0 }}
-                                        className={`p-3 rounded-xl text-xs font-medium border ${cashierFeedback.type === 'success'
+                                        className={`p-3 rounded-xl text-[13px] font-medium border ${cashierFeedback.type === 'success'
                                           ? 'bg-green-50 border-green-200 text-green-800'
                                           : 'bg-rose-50 border-rose-200 text-rose-800'
                                           }`}
@@ -2256,16 +2256,16 @@ const LifeSkills = () => {
                             <div className="max-w-[800px] mx-auto text-left space-y-6">
                               <div className="flex justify-between items-start">
                                 <div>
-                                  <span className="text-[10px] font-black uppercase text-emerald-600 tracking-wider bg-emerald-50 px-3 py-1.5 rounded-full">
+                                  <span className="text-[11px] font-black uppercase text-emerald-600 tracking-wider bg-emerald-50 px-3.5 py-1.5 rounded-full">
                                     Practical Lab 04
                                   </span>
-                                  <h2 className="text-2xl md:text-3xl font-black text-slate-900 mt-2">Emergency First Aid Clinic</h2>
-                                  <p className="text-sm text-slate-500 font-bold mt-1">Diagnose patient injuries and execute medical procedures in correct sequence.</p>
+                                  <h2 className="text-[26px] md:text-[34px] font-black text-slate-900 mt-2">Emergency First Aid Clinic</h2>
+                                  <p className="text-[15px] text-slate-500 font-bold mt-1">Diagnose patient injuries and execute medical procedures in correct sequence.</p>
                                 </div>
                                 <div className="flex items-center gap-2">
                                   <div className="bg-rose-50 px-4 py-2 rounded-2xl border border-rose-100 text-center shrink-0">
-                                    <span className="text-[9px] font-bold text-rose-600 uppercase tracking-widest block">Score</span>
-                                    <span className="text-lg font-black text-rose-700">{firstAidScore} pts</span>
+                                    <span className="text-[10px] font-bold text-rose-600 uppercase tracking-widest block">Score</span>
+                                    <span className="text-xl font-black text-rose-700">{firstAidScore} pts</span>
                                   </div>
                                   <button
                                     onClick={resetFirstAidGame}
@@ -2282,48 +2282,48 @@ const LifeSkills = () => {
                                 <div className="md:col-span-5 bg-slate-50 border border-slate-100 rounded-[24px] p-5 flex flex-col justify-between min-h-[320px]">
                                   <div className="space-y-4">
                                     <div className="flex justify-between items-center">
-                                      <span className="text-[9px] font-black uppercase bg-rose-50 text-rose-700 px-2.5 py-1 rounded-md border border-rose-100">
+                                      <span className="text-[10px] font-black uppercase bg-rose-50 text-rose-700 px-2.5 py-1 rounded-md border border-rose-100">
                                         Wound Station
                                       </span>
                                       <button
                                         onClick={nextFirstAidScenario}
-                                        className="text-[10px] font-bold text-slate-500 hover:text-slate-700 cursor-pointer"
+                                        className="text-[11.5px] font-bold text-slate-500 hover:text-slate-700 cursor-pointer"
                                       >
                                         Skip Patient ➔
                                       </button>
                                     </div>
 
                                     <div className="space-y-2 text-center py-3">
-                                      <div className="text-4xl">
+                                      <div className="text-[44px]">
                                         {firstAidScenarios[currentScenarioIdx].icon}
                                       </div>
-                                      <h4 className="font-black text-base text-slate-800">
+                                      <h4 className="font-black text-[17px] text-slate-800">
                                         {firstAidScenarios[currentScenarioIdx].title}
                                       </h4>
-                                      <p className="text-xs text-slate-500 leading-relaxed font-semibold px-2">
+                                      <p className="text-[13.5px] text-slate-500 leading-relaxed font-semibold px-2">
                                         "{firstAidScenarios[currentScenarioIdx].description}"
                                       </p>
                                     </div>
 
-                                    <div className="bg-white border border-slate-200/60 rounded-xl p-3 space-y-2">
-                                      <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest block mb-1">Clinic Treatment Steps:</span>
+                                    <div className="bg-white border border-slate-200/60 rounded-xl p-3.5 space-y-2.5">
+                                      <span className="text-[10.5px] font-black text-slate-400 uppercase tracking-widest block mb-1">Clinic Treatment Steps:</span>
                                       {firstAidScenarios[currentScenarioIdx].correctOrder.map((step, idx) => {
                                         const isDone = firstAidSequence.length > idx;
                                         const isCurrent = firstAidSequence.length === idx;
                                         return (
                                           <div
                                             key={step}
-                                            className={`flex items-center gap-2.5 p-1.5 rounded-lg border text-[11px] font-bold ${isDone ? 'bg-green-50 border-green-200 text-green-700'
+                                            className={`flex items-center gap-2.5 p-1.5 rounded-lg border text-[12.5px] font-bold ${isDone ? 'bg-green-50 border-green-200 text-green-700'
                                               : isCurrent ? 'bg-emerald-50 border-emerald-300 text-emerald-700'
                                                 : 'bg-slate-50/50 border-slate-100 text-slate-400'
                                               }`}
                                           >
-                                            <span className={`w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-black ${isDone ? 'bg-green-500 text-white' : 'bg-slate-200 text-slate-500'
+                                            <span className={`w-[18px] h-[18px] rounded-full flex items-center justify-center text-[10px] font-black ${isDone ? 'bg-green-500 text-white' : 'bg-slate-200 text-slate-500'
                                               }`}>
                                               {idx + 1}
                                             </span>
                                             <span className="capitalize">{step.replace('-', ' ')}</span>
-                                            {isDone && <span className="ml-auto text-[10px]">✓ Done</span>}
+                                            {isDone && <span className="ml-auto text-[10.5px]">✓ Done</span>}
                                           </div>
                                         );
                                       })}
@@ -2333,7 +2333,7 @@ const LifeSkills = () => {
                                   <div className="pt-4">
                                     <button
                                       onClick={resetFirstAidLab}
-                                      className="w-full py-2 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-xl text-[10px] font-black text-slate-600 tracking-wider uppercase transition-all cursor-pointer"
+                                      className="w-full py-2.5 bg-slate-100 hover:bg-slate-200 border border-slate-200 rounded-xl text-[11px] font-black text-slate-600 tracking-wider uppercase transition-all cursor-pointer"
                                     >
                                       Reset Clinic
                                     </button>
@@ -2342,7 +2342,7 @@ const LifeSkills = () => {
 
                                 {/* TOOL CABINET */}
                                 <div className="md:col-span-7 space-y-4">
-                                  <h4 className="text-xs font-black text-slate-400 uppercase tracking-wider">Clinic Tool Cabinet</h4>
+                                  <h4 className="text-[13px] font-black text-slate-400 uppercase tracking-wider">Clinic Tool Cabinet</h4>
                                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                                     {[
                                       { id: 'wash', name: 'Sterile Water', desc: 'Wash off loose dirt', icon: '💧' },
@@ -2361,15 +2361,15 @@ const LifeSkills = () => {
                                           key={tool.id}
                                           onClick={() => selectFirstAidTool(tool.id)}
                                           disabled={firstAidFinished}
-                                          className={`p-3 border rounded-2xl text-center space-y-1.5 transition-all shadow-sm flex flex-col items-center group cursor-pointer ${isUsed
+                                          className={`p-3.5 border rounded-2xl text-center space-y-2 transition-all shadow-sm flex flex-col items-center group cursor-pointer ${isUsed
                                             ? 'bg-slate-50 border-slate-200 opacity-60'
                                             : 'bg-white border-slate-100 hover:border-emerald-300 hover:shadow-md'
                                             }`}
                                         >
-                                          <span className="text-3xl group-hover:scale-110 transition-transform">{tool.icon}</span>
+                                          <span className="text-[35px] group-hover:scale-110 transition-transform">{tool.icon}</span>
                                           <div className="space-y-0.5">
-                                            <div className="text-[10px] font-black text-slate-800 leading-none">{tool.name}</div>
-                                            <div className="text-[8px] text-slate-400 font-bold leading-tight">{tool.desc}</div>
+                                            <div className="text-[11.5px] font-black text-slate-800 leading-none">{tool.name}</div>
+                                            <div className="text-[9.5px] text-slate-400 font-bold leading-tight">{tool.desc}</div>
                                           </div>
                                         </button>
                                       );

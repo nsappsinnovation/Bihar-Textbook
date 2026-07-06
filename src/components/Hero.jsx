@@ -8,7 +8,7 @@ const slides = [
     {
         id: "slide-0",
         title: "BIHAR STATE",
-        subtitle: "TEXT BOOK\nPUBLISHING",
+        subtitle: "TEXT BOOK\nPUBLISHING CORPORATION",
         description: "Delivering reliable, well-designed textbooks so every Bihar Board student learns from clear and standardized academic resources.",
         image: "/images/hero/classroom.png",
         link: "/publishing-mission"
@@ -140,7 +140,7 @@ const Hero = () => {
                             exit="exit"
                         >
                             <div className="overflow-hidden">
-                                <motion.h1 className={`uppercase font-black tracking-tighter leading-[0.95] mb-4 ${currentSlide.id === 'slide-2' ? 'text-4xl md:text-5xl lg:text-[60px]' : 'text-5xl md:text-6xl lg:text-[80px]'}`}>
+                                <motion.h1 className={`uppercase font-black tracking-tighter leading-[0.95] mb-4 ${currentSlide.id === 'slide-2' ? 'text-5xl md:text-6xl lg:text-[72px]' : 'text-5xl md:text-6xl lg:text-[80px]'}`}>
                                     <span className="block text-white drop-shadow-2xl">
                                         {currentSlide.title}
                                     </span>
@@ -154,7 +154,7 @@ const Hero = () => {
                                 initial={{ opacity: 0, y: 10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3, duration: 0.6 }}
-                                className="text-blue-100/70 text-base md:text-lg max-w-xl font-light leading-relaxed mb-6"
+                                className="text-blue-100/70 text-[17px] md:text-[20px] max-w-xl font-light leading-relaxed mb-6"
                             >
                                 {currentSlide.description}
                             </motion.p>
@@ -166,7 +166,7 @@ const Hero = () => {
                                 className="flex items-center gap-5"
                             >
                                 <Link to={currentSlide.link} className="cursor-pointer">
-                                    <button className="cursor-pointer group relative bg-white text-black px-6 py-2.5 text-sm rounded-full font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-blue-50 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_40px_rgba(59,130,246,0.3)] hover:-translate-y-1">
+                                    <button className="cursor-pointer group relative bg-white text-black px-7 py-3 text-[15px] rounded-full font-bold uppercase tracking-widest flex items-center gap-2.5 hover:bg-blue-50 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_40px_rgba(59,130,246,0.3)] hover:-translate-y-1">
                                         Explore Now
                                         <span className="bg-black text-white w-6 h-6 rounded-full flex items-center justify-center group-hover:rotate-45 transition-transform duration-500">
                                             <FaPlay size={8} className="ml-0.5" />
