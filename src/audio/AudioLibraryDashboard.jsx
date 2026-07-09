@@ -4,7 +4,7 @@ import {
   ArrowLeft, ArrowRight, BookOpen, Star, 
   Clock, Library, CheckCircle2, Headphones, Search, 
   Heart, Play, Pause, SkipBack, SkipForward, Volume2, VolumeX,
-  X, CheckCircle, Sparkles, FileText, Layers, ChevronUp, ChevronDown, BookMarked
+  X, CheckCircle, Sparkles, FileText, Layers, ChevronUp, ChevronDown, BookMarked, ExternalLink
 } from 'lucide-react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
@@ -17,19 +17,20 @@ const AudioLibraryDashboard = () => {
 
   // State Management
   const [books, setBooks] = useState(booksData);
-  const [selectedBook, setSelectedBook] = useState(booksData[0]); // The Alchemist by default
+  const [selectedBook, setSelectedBook] = useState(booksData[0]); // Default to Mridang Class 1 English
   const [isPlayerExpanded, setIsPlayerExpanded] = useState(false);
   const [activeTab, setActiveTab] = useState(filterParam); // 'all' | 'recent' | 'favorites' | 'progress' | 'completed'
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState('Class 1');
   const [searchQuery, setSearchQuery] = useState('');
+  const [viewTimestampsBook, setViewTimestampsBook] = useState(null);
   
   // Audio Player State
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [volume, setVolume] = useState(0.8);
+  const [volume, setVolume] = useState(1.0);
   const [isMuted, setIsMuted] = useState(false);
-  const [favorites, setFavorites] = useState([1]); // Book IDs favorited
+  const [favorites, setFavorites] = useState([101]); // Book IDs favorited
   
   // Refs
   const audioRef = useRef(null);
@@ -51,10 +52,28 @@ const AudioLibraryDashboard = () => {
     }
   });
 
-  // Calculate Quick Stats for Dashboard Header
-  const libraryCount = books.length;
-  const recentlyPlayedCount = recentlyPlayedIds.length;
-  const favoritesCount = favorites.length;
+  // Calculate Quick Stats dynamically based on current selected class
+  const currentClassBooks = books.filter(b => selectedCategory === 'All' || b.class === selectedCategory || b.category === selectedCategory);
+  const libraryCount = currentClassBooks.length;
+  const recentlyPlayedCount = recentlyPlayedIds.filter(id => currentClassBooks.some(b => b.id === id)).length;
+  const favoritesCount = favorites.filter(id => currentClassBooks.some(b => b.id === id)).length;
+
+  // Helper to compute active chapter and timestamp interval
+  const getCurrentChapterInfo = (book, currentSecs, totalSecs) => {
+    if (!book || !book.chapters || book.chapters.length === 0) return null;
+    const dur = totalSecs && totalSecs > 0 ? totalSecs : 1200;
+    const chapterDur = dur / book.chapters.length;
+    const activeIdx = Math.min(book.chapters.length - 1, Math.floor((currentSecs || 0) / chapterDur));
+    const startSecs = activeIdx * chapterDur;
+    const endSecs = (activeIdx + 1) * chapterDur;
+    return {
+      chapterNumber: activeIdx + 1,
+      totalChapters: book.chapters.length,
+      chapterTitle: book.chapters[activeIdx],
+      startTime: formatTime(startSecs),
+      endTime: formatTime(endSecs)
+    };
+  };
 
   const handlePlayPause = () => {
     setIsPlaying(!isPlaying);
@@ -141,13 +160,18 @@ const AudioLibraryDashboard = () => {
     }
   };
 
-  const categoriesList = ['All', 'Self Growth', 'History', 'Science', 'Biographies', 'Business', 'Stories'];
+  const categoriesList = [
+    'Class 1', 'Class 2', 'Class 3', 'Class 4',
+    'Class 5', 'Class 6', 'Class 7', 'Class 8',
+    'Class 9', 'Class 10', 'Class 11', 'Class 12'
+  ];
 
   const filteredBooks = (() => {
     let list = books.filter(book => {
       const matchesSearch = book.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                            book.author.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesCategory = selectedCategory === 'All' || book.category === selectedCategory;
+                            book.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                            (book.subject && book.subject.toLowerCase().includes(searchQuery.toLowerCase()));
+      const matchesCategory = selectedCategory === 'All' || book.class === selectedCategory || book.category === selectedCategory;
 
       let matchesTab = true;
       if (activeTab === 'favorites') {
@@ -175,35 +199,57 @@ const AudioLibraryDashboard = () => {
   })();
 
   const quickStats = [
-    { label: 'My Library', value: `${libraryCount} items`, icon: <Library className="text-purple-600" />, color: 'bg-purple-50', tab: 'all' },
-    { label: 'Recently Played', value: `${recentlyPlayedCount} items`, icon: <Clock className="text-blue-500" />, color: 'bg-blue-50', tab: 'recent' },
+    { label: `${selectedCategory === 'All' ? 'Total Library' : selectedCategory + ' Library'}`, value: `${libraryCount} audiobooks`, icon: <Library className="text-purple-600" />, color: 'bg-purple-50', tab: 'all' },
+    { label: 'Recently Played', value: `${recentlyPlayedCount} in ${selectedCategory}`, icon: <Clock className="text-blue-500" />, color: 'bg-blue-50', tab: 'recent' },
     { label: 'Favorites', value: `${favoritesCount} saved`, icon: <Heart className={`transition-colors ${favoritesCount > 0 ? 'text-rose-500 fill-rose-500' : 'text-rose-500'}`} />, color: 'bg-rose-50', tab: 'favorites' },
   ];
 
   return (
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden pb-32">
-      {/* Background Audio Player */}
-      <ReactPlayer
-        ref={audioRef}
-        url={selectedBook ? selectedBook.audioUrl : ''}
-        playing={isPlaying}
-        volume={volume}
-        muted={isMuted}
-        onProgress={({ playedSeconds }) => setCurrentTime(playedSeconds)}
-        onDuration={(d) => setDuration(d)}
-        onEnded={handleNextTrack}
-        style={{ position: 'absolute', left: '-9999px', top: '-9999px' }}
-        width="200px"
-        height="200px"
-        config={{ 
-          youtube: { 
-            playerVars: { 
-              origin: window.location.origin,
-              playsinline: 1
+      {/* Background Audio Player (Supports both MP3 & YouTube) */}
+      {selectedBook && selectedBook.audioUrl && selectedBook.audioUrl.endsWith('.mp3') ? (
+        <audio
+          ref={(el) => {
+            if (el) {
+              el.volume = volume;
+              el.muted = isMuted;
+              if (isPlaying) {
+                el.play().catch(() => {});
+              } else {
+                el.pause();
+              }
+            }
+          }}
+          src={selectedBook.audioUrl}
+          onTimeUpdate={(e) => setCurrentTime(e.target.currentTime)}
+          onDurationChange={(e) => setDuration(e.target.duration || 1200)}
+          onEnded={handleNextTrack}
+          style={{ display: 'none' }}
+        />
+      ) : (
+        <ReactPlayer
+          ref={audioRef}
+          url={selectedBook ? selectedBook.audioUrl : ''}
+          playing={isPlaying}
+          volume={volume}
+          muted={isMuted}
+          onProgress={({ playedSeconds }) => setCurrentTime(playedSeconds)}
+          onDuration={(d) => setDuration(d)}
+          onEnded={handleNextTrack}
+          style={{ position: 'absolute', left: '-9999px', top: '-9999px' }}
+          width="200px"
+          height="200px"
+          config={{ 
+            youtube: { 
+              playerVars: { 
+                origin: window.location.origin,
+                playsinline: 1,
+                autoplay: 1
+              } 
             } 
-          } 
-        }}
-      />
+          }}
+        />
+      )}
 
       {/* Main Content */}
       <main className="flex-1 min-h-screen pb-0">
@@ -356,6 +402,7 @@ const AudioLibraryDashboard = () => {
                 {filteredBooks.map((book) => {
                   const isBookPlaying = selectedBook && selectedBook.id === book.id && isPlaying;
                   const isFav = favorites.includes(book.id);
+                  const cardChapterInfo = isBookPlaying ? getCurrentChapterInfo(book, currentTime, duration) : null;
                   
                   return (
                     <div
@@ -371,37 +418,38 @@ const AudioLibraryDashboard = () => {
                       {/* Top Section: Cover & Book Info */}
                       <div>
                         <div className="flex gap-4 items-start relative z-10">
-                          <div 
-                            onClick={() => selectBook(book)}
-                            className="relative w-24 h-32 rounded-xl overflow-hidden shadow-md shrink-0 border border-slate-100 group-hover:scale-105 transition-transform duration-300 cursor-pointer"
+                          <a
+                            href={book.cietUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="relative w-24 h-32 rounded-xl overflow-hidden shadow-md shrink-0 border border-slate-100 group-hover:scale-105 transition-transform duration-300 block"
+                            title="Open official NCERT audio book page"
                           >
                             <img src={book.cover} alt={book.title} className="w-full h-full object-cover" />
-                            
-                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                              <button
-                                className="w-10 h-10 rounded-full bg-white text-purple-600 flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
-                              >
-                                {isBookPlaying ? <Pause className="w-4 h-4 fill-purple-600" /> : <Play className="w-4 h-4 fill-purple-600 ml-0.5" />}
-                              </button>
-                            </div>
 
                             {book.progress === 100 && (
                               <div className="absolute top-1.5 left-1.5 bg-green-500 text-white rounded-full p-0.5 shadow-sm">
                                 <CheckCircle2 className="w-3.5 h-3.5" />
                               </div>
                             )}
-                          </div>
+                          </a>
 
                           <div className="flex-1 space-y-1 min-w-0">
-                            <span className="text-[10px] uppercase tracking-wider font-extrabold text-purple-600 bg-purple-50 px-2 py-0.5 rounded-full inline-block">
-                              {book.category}
-                            </span>
-                            <h3 
-                              onClick={() => selectBook(book)}
-                              className="font-extrabold text-slate-900 text-base group-hover:text-purple-600 transition-colors leading-tight line-clamp-2 cursor-pointer pt-0.5"
+                            <div className="flex items-center justify-between gap-1">
+                              <span className="text-[10px] uppercase tracking-wider font-extrabold text-purple-600 bg-purple-50 px-2.5 py-0.5 rounded-full inline-block">
+                                {book.subject || book.category}
+                              </span>
+                            </div>
+                            <a 
+                              href={book.cietUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                              className="font-extrabold text-slate-900 text-base group-hover:text-purple-600 transition-colors leading-tight line-clamp-2 block pt-0.5"
                             >
                               {book.title}
-                            </h3>
+                            </a>
                             <p className="text-xs text-slate-500 font-medium truncate">By {book.author}</p>
                             
                             <div className="flex items-center gap-1.5 pt-1">
@@ -416,9 +464,10 @@ const AudioLibraryDashboard = () => {
                         <p className="text-xs text-slate-500 line-clamp-2 mt-3.5 relative z-10 leading-relaxed font-medium">
                           {book.description}
                         </p>
+
                       </div>
 
-                      {/* Bottom Section: Meta & Play Buttons */}
+                      {/* Bottom Section: Meta & Listen Button */}
                       <div className="mt-4 pt-3.5 border-t border-slate-100/80 relative z-10 space-y-3">
                         <div className="flex items-center justify-between text-slate-400 text-[11px]">
                           <span className="flex items-center gap-1 font-semibold">
@@ -429,29 +478,26 @@ const AudioLibraryDashboard = () => {
                           </span>
                         </div>
 
-                        <div className="flex gap-2">
-                          <button
-                            onClick={() => selectBook(book)}
-                            className={`flex-1 h-10 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition-all cursor-pointer ${
-                              isBookPlaying 
-                                ? 'bg-purple-100 text-purple-700 hover:bg-purple-200 ring-2 ring-purple-500/20 font-extrabold' 
-                                : 'bg-purple-600 text-white hover:bg-purple-700 shadow-md shadow-purple-500/15 hover:-translate-y-0.5'
-                            }`}
+                        <div className="flex gap-2.5">
+                          <a
+                            href={book.cietUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="flex-1 h-10 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold flex items-center justify-center gap-2 transition-all shadow-md shadow-purple-500/15 hover:-translate-y-0.5"
+                            title="Open official NCERT audio book page"
                           >
-                            {isBookPlaying ? (
-                              <>
-                                <Pause className="w-4 h-4 fill-purple-700" /> Playing Now
-                              </>
-                            ) : (
-                              <>
-                                <Headphones className="w-4 h-4" /> Play Audio
-                              </>
-                            )}
-                          </button>
+                            <Headphones className="w-4 h-4" />
+                            <span>Listen Audiobook</span>
+                            <ExternalLink className="w-3.5 h-3.5 opacity-80 ml-0.5" />
+                          </a>
 
                           <button
-                            onClick={() => toggleFavorite(book.id)}
-                            className={`h-10 w-10 rounded-xl flex items-center justify-center transition-all cursor-pointer border ${
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleFavorite(book.id);
+                            }}
+                            className={`h-10 w-10 rounded-xl flex items-center justify-center transition-all cursor-pointer border shrink-0 ${
                               isFav 
                                 ? 'bg-rose-50 text-rose-500 border-rose-200 shadow-sm' 
                                 : 'bg-white text-slate-400 border-slate-200 hover:bg-slate-50 hover:text-rose-500'
@@ -484,121 +530,6 @@ const AudioLibraryDashboard = () => {
           </div>
         </div>
       </main>
-
-      {/* FLOATING BOTTOM AUDIO PLAYER  */}
-      {selectedBook && (
-        <div className={`fixed bottom-0 left-0 right-0 bg-white border-t border-purple-100 shadow-[0_-10px_30px_rgba(0,0,0,0.08)] z-40 transition-all duration-300 ${isPlayerExpanded ? 'py-4 px-6 h-auto' : 'py-2.5 px-6 h-16'}`}>
-          <div className="max-w-7xl mx-auto flex items-center justify-between h-full gap-4">
-            
-            {/* Track Info */}
-            <div className="flex items-center gap-3 min-w-0">
-              <div className="w-10 h-12 rounded-lg overflow-hidden shadow-sm shrink-0 border border-slate-100">
-                <img src={selectedBook.cover} alt={selectedBook.title} className="w-full h-full object-cover" />
-              </div>
-              <div className="min-w-0">
-                <h4 className="text-xs sm:text-sm font-extrabold text-slate-900 truncate leading-snug">{selectedBook.title}</h4>
-                <p className="text-[10px] sm:text-xs text-slate-500 font-medium truncate mt-0.5">{selectedBook.author}</p>
-              </div>
-            </div>
-
-            {/* Collapsed vs Expanded Player Controls */}
-            {!isPlayerExpanded ? (
-              <div className="flex items-center gap-3">
-                <span className="text-[10px] font-bold text-slate-400 hidden sm:inline font-mono">
-                  {formatTime(currentTime)} / {formatTime(duration)}
-                </span>
-                
-                <button 
-                  onClick={handlePlayPause}
-                  className="w-10 h-10 bg-purple-600 hover:bg-purple-700 text-white rounded-full flex items-center justify-center shadow-md transition-all hover:scale-105 cursor-pointer shrink-0"
-                  title={isPlaying ? "Pause" : "Play"}
-                >
-                  {isPlaying ? <Pause className="w-4 h-4 fill-white" /> : <Play className="w-4 h-4 fill-white ml-0.5" />}
-                </button>
-
-                <button 
-                  onClick={() => setIsPlayerExpanded(true)}
-                  className="p-1.5 text-slate-400 hover:text-slate-800 transition-colors cursor-pointer"
-                  title="Expand Player"
-                >
-                  <ChevronUp className="w-5 h-5" />
-                </button>
-              </div>
-            ) : (
-              <>
-                <div className="flex-1 w-full flex flex-col items-center gap-2">
-                  <div className="flex items-center gap-6">
-                    <button 
-                      onClick={handlePrevTrack}
-                      className="text-slate-400 hover:text-slate-800 transition-colors cursor-pointer"
-                    >
-                      <SkipBack className="w-5 h-5" />
-                    </button>
-                    
-                    <button
-                      onClick={handlePlayPause}
-                      className="w-11 h-11 bg-purple-600 hover:bg-purple-700 text-white rounded-full flex items-center justify-center shadow-lg shadow-purple-200 transition-all hover:scale-105 cursor-pointer"
-                    >
-                      {isPlaying ? <Pause className="w-5 h-5 fill-white" /> : <Play className="w-5 h-5 fill-white ml-0.5" />}
-                    </button>
-                    
-                    <button 
-                      onClick={handleNextTrack}
-                      className="text-slate-400 hover:text-slate-800 transition-colors cursor-pointer"
-                    >
-                      <SkipForward className="w-5 h-5" />
-                    </button>
-                  </div>
-
-                  <div className="w-full flex items-center gap-3">
-                    <span className="text-[10px] font-bold text-slate-500 w-10 text-right font-mono">{formatTime(currentTime)}</span>
-                    <input
-                      type="range"
-                      min={0}
-                      max={duration || 100}
-                      value={currentTime}
-                      onChange={handleScrubberChange}
-                      className="flex-1 h-1.5 bg-slate-100 rounded-full appearance-none cursor-pointer accent-purple-600 focus:outline-none"
-                    />
-                    <span className="text-[10px] font-bold text-slate-500 w-10 font-mono">{formatTime(duration)}</span>
-                  </div>
-                </div>
-
-                <div className="hidden md:flex items-center justify-end gap-5 w-full md:w-1/4 shrink-0">
-                  <button 
-                    onClick={() => toggleFavorite(selectedBook.id)} 
-                    className="text-slate-400 hover:text-rose-500 transition-colors cursor-pointer"
-                  >
-                    <Heart className={`w-5 h-5 ${favorites.includes(selectedBook.id) ? 'fill-rose-500 text-rose-500' : ''}`} />
-                  </button>
-
-                  <div className="flex items-center gap-2">
-                    <button onClick={toggleMute} className="text-slate-400 hover:text-slate-800 transition-colors cursor-pointer">
-                      {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                    </button>
-                    <input
-                      type="range"
-                      min={0}
-                      max={1}
-                      step={0.05}
-                      value={isMuted ? 0 : volume}
-                      onChange={handleVolumeChange}
-                      className="w-16 h-1.5 bg-slate-100 rounded-full appearance-none cursor-pointer accent-purple-600 focus:outline-none"
-                    />
-                  </div>
-                </div>
-
-                <button 
-                  onClick={() => setIsPlayerExpanded(false)}
-                  className="p-1.5 text-slate-400 hover:text-slate-800 transition-colors shrink-0 cursor-pointer"
-                >
-                  <ChevronDown className="w-5 h-5" />
-                </button>
-              </>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   );
 };
