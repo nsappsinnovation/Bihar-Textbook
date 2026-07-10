@@ -146,9 +146,11 @@ const AudioLibraryDashboard = () => {
     setIsMuted(!isMuted);
   };
 
-  const selectBook = (book) => {
+  const selectBook = (book, chapterIdx = 0) => {
     let willPlay = false;
-    if (selectedBook && selectedBook.id === book.id) {
+    const targetUrl = (book.chapterAudioUrls && book.chapterAudioUrls[chapterIdx]) || book.audioUrl;
+
+    if (selectedBook && selectedBook.id === book.id && chapterIdx === 0) {
       const nextPlay = !isPlaying;
       setIsPlaying(nextPlay);
       willPlay = nextPlay;
@@ -157,6 +159,17 @@ const AudioLibraryDashboard = () => {
       setCurrentTime(0);
       setIsPlaying(true);
       willPlay = true;
+    }
+
+    if (willPlay && htmlAudioRef.current && targetUrl) {
+      htmlAudioRef.current.src = targetUrl;
+      htmlAudioRef.current.load();
+      const playPromise = htmlAudioRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((e) => console.warn("Audio play prevented or waiting:", e));
+      }
+    } else if (!willPlay && htmlAudioRef.current) {
+      htmlAudioRef.current.pause();
     }
 
     if (willPlay) {
@@ -835,14 +848,17 @@ const AudioLibraryDashboard = () => {
                     <div
                       key={idx}
                       onClick={() => {
-                        selectBook(viewTimestampsBook);
-                        setCurrentTime(range.startSecs);
-                        if (htmlAudioRef.current) {
-                          htmlAudioRef.current.currentTime = range.startSecs;
-                          htmlAudioRef.current.play().catch(() => {});
-                        }
-                        if (audioRef.current && audioRef.current.seekTo) {
-                          audioRef.current.seekTo(range.startSecs, 'seconds');
+                        selectBook(viewTimestampsBook, idx);
+                        if (!viewTimestampsBook.chapterAudioUrls || !viewTimestampsBook.chapterAudioUrls[idx]) {
+                          setCurrentTime(range.startSecs);
+                          if (htmlAudioRef.current) {
+                            htmlAudioRef.current.currentTime = range.startSecs;
+                          }
+                          if (audioRef.current && audioRef.current.seekTo) {
+                            audioRef.current.seekTo(range.startSecs, 'seconds');
+                          }
+                        } else {
+                          setCurrentTime(0);
                         }
                         setIsPlaying(true);
                         setViewTimestampsBook(null);

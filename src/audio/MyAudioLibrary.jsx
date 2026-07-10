@@ -21,7 +21,18 @@ const booksData = [
     "duration": "1h 12m",
     "chaptersCount": 9,
     "cover": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=600",
-    "audioUrl": "https://ia800300.us.archive.org/30/items/aesop_fables_volume_one_librivox/fables_01_01_aesop.mp3",
+    "audioUrl": "https://ciet.ncert.gov.in/storage/app/public/files/17/Mridang/Unit%201%20My%20Family%20and%20Me%20-%20Chapter%201%20Two%20Little%20Hands.mp3",
+    "chapterAudioUrls": [
+      "https://ciet.ncert.gov.in/storage/app/public/files/17/Mridang/Unit%201%20My%20Family%20and%20Me%20-%20Chapter%201%20Two%20Little%20Hands.mp3",
+      "https://ciet.ncert.gov.in/storage/app/public/files/17/Mridang/Unit%201%20My%20Family%20and%20Me%20-%20Chapter%202%20Greetings.mp3",
+      "https://ciet.ncert.gov.in/storage/app/public/files/17/Mridang/Unit%202%20Life%20Around%20Us%20-%20Chapter%201%20Picture%20Time.mp3",
+      "https://ciet.ncert.gov.in/storage/app/public/files/17/Mridang/Unit%202%20Life%20Around%20Us%20-%20Chapter%202%20The%20Cap%20Seller%20and%20the%20Monkeys.mp3",
+      "https://ciet.ncert.gov.in/storage/app/public/files/17/Mridang/Unit%202%20Life%20Around%20Us%20-%20Chapter%203%20A%20Farm.mp3",
+      "https://ciet.ncert.gov.in/storage/app/public/files/17/Mridang/Unit%203%20Food%20-%20Chapter%201%20Fun%20with%20Pictures.mp3",
+      "https://ciet.ncert.gov.in/storage/app/public/files/17/Mridang/Unit%203%20Food%20-%20Chapter%202%20The%20Food%20We%20Eat.mp3",
+      "https://ciet.ncert.gov.in/storage/app/public/files/17/Mridang/Unit%204%20Seasons%20-%20Chapter%201%20The%20Four%20Seasons.mp3",
+      "https://ciet.ncert.gov.in/storage/app/public/files/17/Mridang/Unit%204%20Seasons%20-%20Chapter%202%20Anandi_s%20Rainbow.mp3"
+    ],
     "cietUrl": "https://ciet.ncert.gov.in/audio-book/115",
     "description": "Official NCERT CIET Audio Book for Class 1 English textbook 'Mridang'. 9 chapters across 4 Units designed for early learners.",
     "chapters": [
@@ -51,7 +62,7 @@ const booksData = [
     "duration": "1h 35m",
     "chaptersCount": 12,
     "cover": "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&q=80&w=600",
-    "audioUrl": "https://ia802708.us.archive.org/21/items/alice_in_wonderland_librivox/wonderland_ch01_carroll.mp3",
+    "audioUrl": "https://ciet.ncert.gov.in/storage/app/public/files/17/Audios/Sarangi/Ikai%201%20Meena%20Ka%20Parivar%20-%20Chapter%201%20Meena%20Ka%20Parivar.mp3",
     "cietUrl": "https://ciet.ncert.gov.in/audio-book/117",
     "description": "Official NCERT CIET Audio Book for Class 1 Hindi textbook 'Sarangi'. 12 authentic NCERT chapters with poems and folk tales.",
     "chapters": [
@@ -84,7 +95,7 @@ const booksData = [
     "duration": "1h 20m",
     "chaptersCount": 10,
     "cover": "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&q=80&w=600",
-    "audioUrl": "https://ia801404.us.archive.org/12/items/junglebook_librivox/junglebook_01_kipling_64kb.mp3",
+    "audioUrl": "https://ciet.ncert.gov.in/storage/app/public/files/17/Audios/Joyful-mathematics/Chapter%201%20-%20Finding%20the%20Furry%20Cat!.mp3",
     "cietUrl": "https://ciet.ncert.gov.in/audio-book/116",
     "description": "Official NCERT CIET Audio Book for Class 1 Mathematics textbook 'Joyful Mathematics'. 10 complete chapters covering shapes, numbers, patterns and time.",
     "chapters": [
@@ -146,7 +157,7 @@ const booksData = [
     "duration": "1h 24m",
     "chaptersCount": 10,
     "cover": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&q=80&w=600",
-    "audioUrl": "https://ia801503.us.archive.org/15/items/origin_species_librivox/origin_of_species_01_darwin_64kb.mp3",
+    "audioUrl": "https://ciet.ncert.gov.in/storage/app/public/files/17/Mridang/mridang%202/Unit%201%20Fun%20with%20Friends%20-%20Chapter%201%20My%20Bicycle.mp3",
     "cietUrl": "https://ciet.ncert.gov.in/audio-book/120",
     "description": "Official NCERT CIET Audio Book for Class 2 English textbook 'Mridang'. 10 complete chapters across 5 Units.",
     "chapters": [
