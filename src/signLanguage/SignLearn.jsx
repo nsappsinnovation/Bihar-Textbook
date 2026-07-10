@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft, ArrowRight, BookOpen, Clock,
   Hand, Play, GraduationCap, XCircle, Keyboard,
-  HeartHandshake, Heart, Smile, Frown, Utensils, Users, ChevronRight
+  HeartHandshake, Heart, Smile, Frown, Utensils, Users, ChevronRight,
+  ExternalLink, Search, Landmark, Video
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -357,6 +358,9 @@ const SignLearn = () => {
   const [activeFilter, setActiveFilter] = useState('Learn ISL');
   const [activeVideo, setActiveVideo] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [videoCategoryFilter, setVideoCategoryFilter] = useState('All');
+  const [videoLevelFilter, setVideoLevelFilter] = useState('All');
+  const [videoSearchQuery, setVideoSearchQuery] = useState('');
 
   const signVideos = [
     {
@@ -771,8 +775,274 @@ const SignLearn = () => {
     }
   ];
 
+  const externalSignVideos = [
+    {
+      id: 101,
+      title: 'ISL 101: Alphabet',
+      desc: 'Learn the Indian Sign Language alphabet from A to Z.',
+      image: 'https://img.youtube.com/vi/qcdivQfA41Y/hqdefault.jpg',
+      duration: '9:06',
+      level: 'Beginner',
+      channelName: 'ISL 101 Course',
+      sourceType: 'external',
+      sourceBadge: 'Private & Community',
+      directUrl: 'https://www.youtube.com/watch?v=qcdivQfA41Y',
+      youtubeUrl: 'https://www.youtube.com/embed/qcdivQfA41Y?autoplay=1',
+      redirectOnly: true
+    },
+    {
+      id: 102,
+      title: 'ISL 101: Numbers',
+      desc: 'Learn how to sign numbers and count in ISL.',
+      image: 'https://img.youtube.com/vi/vnH2BmcSRMA/hqdefault.jpg',
+      duration: '3:52',
+      level: 'Beginner',
+      channelName: 'ISL 101 Course',
+      sourceType: 'external',
+      sourceBadge: 'Private & Community',
+      directUrl: 'https://www.youtube.com/watch?v=vnH2BmcSRMA',
+      youtubeUrl: 'https://www.youtube.com/embed/vnH2BmcSRMA?autoplay=1',
+      redirectOnly: true
+    },
+    {
+      id: 103,
+      title: 'ISL 101: Basic Words 1',
+      desc: 'Introduction to foundational everyday words in ISL.',
+      image: 'https://img.youtube.com/vi/VtbYvVDItvg/hqdefault.jpg',
+      duration: '10:15',
+      level: 'Beginner',
+      channelName: 'ISL 101 Course',
+      sourceType: 'external',
+      sourceBadge: 'Private & Community',
+      directUrl: 'https://www.youtube.com/watch?v=VtbYvVDItvg',
+      youtubeUrl: 'https://www.youtube.com/embed/VtbYvVDItvg?autoplay=1',
+      redirectOnly: true
+    },
+    {
+      id: 104,
+      title: 'ISL 101: Basic Words 2',
+      desc: 'Expand your vocabulary with more everyday signs.',
+      image: 'https://img.youtube.com/vi/lffGJ29IhZQ/hqdefault.jpg',
+      duration: '6:59',
+      level: 'Beginner',
+      channelName: 'ISL 101 Course',
+      sourceType: 'external',
+      sourceBadge: 'Private & Community',
+      directUrl: 'https://www.youtube.com/watch?v=lffGJ29IhZQ',
+      youtubeUrl: 'https://www.youtube.com/embed/lffGJ29IhZQ?autoplay=1',
+      redirectOnly: true
+    },
+    {
+      id: 105,
+      title: 'ISL 101: Question Words',
+      desc: 'Learn how to ask Who, What, Where, When, and Why.',
+      image: 'https://img.youtube.com/vi/DOFPRw6Epl0/hqdefault.jpg',
+      duration: '4:00',
+      level: 'Beginner',
+      channelName: 'ISL 101 Course',
+      sourceType: 'external',
+      sourceBadge: 'Private & Community',
+      directUrl: 'https://www.youtube.com/watch?v=DOFPRw6Epl0',
+      youtubeUrl: 'https://www.youtube.com/embed/DOFPRw6Epl0?autoplay=1',
+      redirectOnly: true
+    },
+    {
+      id: 106,
+      title: 'ISL 101: Colours',
+      desc: 'Learn the signs for different colors.',
+      image: 'https://img.youtube.com/vi/qtrBGmioR2Q/hqdefault.jpg',
+      duration: '4:19',
+      level: 'Beginner',
+      channelName: 'ISL 101 Course',
+      sourceType: 'external',
+      sourceBadge: 'Private & Community',
+      directUrl: 'https://www.youtube.com/watch?v=qtrBGmioR2Q',
+      youtubeUrl: 'https://www.youtube.com/embed/qtrBGmioR2Q?autoplay=1',
+      redirectOnly: true
+    },
+    {
+      id: 107,
+      title: 'ISL 101: Relations',
+      desc: 'Signs for family members and relationships.',
+      image: 'https://img.youtube.com/vi/drs0_jcKr5w/hqdefault.jpg',
+      duration: '4:03',
+      level: 'Intermediate',
+      channelName: 'ISL 101 Course',
+      sourceType: 'external',
+      sourceBadge: 'Private & Community',
+      directUrl: 'https://www.youtube.com/watch?v=drs0_jcKr5w',
+      youtubeUrl: 'https://www.youtube.com/embed/drs0_jcKr5w?autoplay=1',
+      redirectOnly: true
+    },
+    {
+      id: 108,
+      title: 'ISL 101: Days of the Week',
+      desc: 'Learn how to sign Monday through Sunday.',
+      image: 'https://img.youtube.com/vi/XPRtZQSKL-4/hqdefault.jpg',
+      duration: '4:56',
+      level: 'Beginner',
+      channelName: 'ISL 101 Course',
+      sourceType: 'external',
+      sourceBadge: 'Private & Community',
+      directUrl: 'https://www.youtube.com/watch?v=XPRtZQSKL-4',
+      youtubeUrl: 'https://www.youtube.com/embed/XPRtZQSKL-4?autoplay=1',
+      redirectOnly: true
+    },
+    {
+      id: 109,
+      title: 'ISL 101: Months',
+      desc: 'Learn the signs for all 12 months of the year.',
+      image: 'https://img.youtube.com/vi/x58C6-ZtW_8/hqdefault.jpg',
+      duration: '5:15',
+      level: 'Intermediate',
+      channelName: 'ISL 101 Course',
+      sourceType: 'external',
+      sourceBadge: 'Private & Community',
+      directUrl: 'https://www.youtube.com/watch?v=x58C6-ZtW_8',
+      youtubeUrl: 'https://www.youtube.com/embed/x58C6-ZtW_8?autoplay=1',
+      redirectOnly: true
+    },
+    {
+      id: 110,
+      title: 'ISL 101: Basic Words 3',
+      desc: 'Advanced basic vocabulary for everyday use.',
+      image: 'https://img.youtube.com/vi/bIkHfFlu4VU/hqdefault.jpg',
+      duration: '6:59',
+      level: 'Intermediate',
+      channelName: 'ISL 101 Course',
+      sourceType: 'external',
+      sourceBadge: 'Private & Community',
+      directUrl: 'https://www.youtube.com/watch?v=bIkHfFlu4VU',
+      youtubeUrl: 'https://www.youtube.com/embed/bIkHfFlu4VU?autoplay=1',
+      redirectOnly: true
+    },
+    {
+      id: 111,
+      title: 'ISL 101: Standard Signs',
+      desc: 'Learn standard, universally understood signs.',
+      image: 'https://img.youtube.com/vi/-Eh3ktA52jw/hqdefault.jpg',
+      duration: '7:04',
+      level: 'Advanced',
+      channelName: 'ISL 101 Course',
+      sourceType: 'external',
+      sourceBadge: 'Private & Community',
+      directUrl: 'https://www.youtube.com/watch?v=-Eh3ktA52jw',
+      youtubeUrl: 'https://www.youtube.com/embed/-Eh3ktA52jw?autoplay=1',
+      redirectOnly: true
+    },
+    {
+      id: 112,
+      title: 'ISL Vocab: Fruits',
+      desc: 'Learn the names of common fruits in ISL.',
+      image: 'https://img.youtube.com/vi/G6UY0amZ93s/hqdefault.jpg',
+      duration: '1:32',
+      level: 'Beginner',
+      channelName: 'ISL Vocab Series',
+      sourceType: 'external',
+      sourceBadge: 'Private & Community',
+      directUrl: 'https://www.youtube.com/watch?v=G6UY0amZ93s',
+      youtubeUrl: 'https://www.youtube.com/embed/G6UY0amZ93s?autoplay=1',
+      redirectOnly: true
+    },
+    {
+      id: 113,
+      title: 'ISL Vocab: Vegetables',
+      desc: 'Learn the names of common vegetables.',
+      image: 'https://img.youtube.com/vi/0tJ34RKNwC0/hqdefault.jpg',
+      duration: '1:24',
+      level: 'Beginner',
+      channelName: 'ISL Vocab Series',
+      sourceType: 'external',
+      sourceBadge: 'Private & Community',
+      directUrl: 'https://www.youtube.com/watch?v=0tJ34RKNwC0',
+      youtubeUrl: 'https://www.youtube.com/embed/0tJ34RKNwC0?autoplay=1',
+      redirectOnly: true
+    },
+    {
+      id: 114,
+      title: 'ISL Vocab: Animals',
+      desc: 'Discover how to sign different animals.',
+      image: 'https://img.youtube.com/vi/dnH8mo0s7go/hqdefault.jpg',
+      duration: '1:28',
+      level: 'Beginner',
+      channelName: 'ISL Vocab Series',
+      sourceType: 'external',
+      sourceBadge: 'Private & Community',
+      directUrl: 'https://www.youtube.com/watch?v=dnH8mo0s7go',
+      youtubeUrl: 'https://www.youtube.com/embed/dnH8mo0s7go?autoplay=1',
+      redirectOnly: true
+    },
+    {
+      id: 115,
+      title: 'ISL Learning: Good Manners & Habits',
+      desc: 'Learn polite phrases and good habits in ISL.',
+      image: 'https://img.youtube.com/vi/rKwokwZQ6FU/hqdefault.jpg',
+      duration: '1:18',
+      level: 'Intermediate',
+      channelName: 'ISL Learning Series',
+      sourceType: 'external',
+      sourceBadge: 'Private & Community',
+      directUrl: 'https://www.youtube.com/watch?v=rKwokwZQ6FU',
+      youtubeUrl: 'https://www.youtube.com/embed/rKwokwZQ6FU?autoplay=1',
+      redirectOnly: true
+    },
+    {
+      id: 116,
+      title: 'ISL Learning: Road & Traffic Signs',
+      desc: 'Important road and traffic safety signs.',
+      image: 'https://img.youtube.com/vi/Y6CSy7dbzik/hqdefault.jpg',
+      duration: '1:02',
+      level: 'Intermediate',
+      channelName: 'ISL Learning Series',
+      sourceType: 'external',
+      sourceBadge: 'Private & Community',
+      directUrl: 'https://www.youtube.com/watch?v=Y6CSy7dbzik',
+      youtubeUrl: 'https://www.youtube.com/embed/Y6CSy7dbzik?autoplay=1',
+      redirectOnly: true
+    },
+    {
+      id: 117,
+      title: 'ISL Learning: Facts About Indian Cities',
+      desc: 'Learn signs for major cities and interesting facts.',
+      image: 'https://img.youtube.com/vi/_yC1ZZXNcWI/hqdefault.jpg',
+      duration: '1:16',
+      level: 'Advanced',
+      channelName: 'ISL Learning Series',
+      sourceType: 'external',
+      sourceBadge: 'Private & Community',
+      directUrl: 'https://www.youtube.com/watch?v=_yC1ZZXNcWI',
+      youtubeUrl: 'https://www.youtube.com/embed/_yC1ZZXNcWI?autoplay=1',
+      redirectOnly: true
+    }
+  ];
+
+  const allSignVideos = [
+    ...signVideos.map(item => ({
+      ...item,
+      sourceType: 'official',
+      sourceBadge: 'Govt. Official (ISLRTC)',
+      channelName: 'ISLRTC Official Course',
+      directUrl: item.youtubeUrl.replace('https://www.youtube.com/embed/', 'https://www.youtube.com/watch?v=').replace('?autoplay=1', '')
+    })),
+    ...externalSignVideos
+  ];
+
+  const filteredVideos = allSignVideos.filter(video => {
+    if (videoCategoryFilter === 'Govt. Official (ISLRTC)' && video.sourceType !== 'official') return false;
+    if (videoCategoryFilter === 'Private & Community' && video.sourceType !== 'external') return false;
+    if (videoLevelFilter !== 'All' && video.level !== videoLevelFilter) return false;
+    if (videoSearchQuery.trim()) {
+      const q = videoSearchQuery.toLowerCase();
+      const matchTitle = (video.title || '').toLowerCase().includes(q);
+      const matchDesc = (video.desc || '').toLowerCase().includes(q);
+      const matchChannel = (video.channelName || '').toLowerCase().includes(q);
+      if (!matchTitle && !matchDesc && !matchChannel) return false;
+    }
+    return true;
+  });
+
   const quickStats = [
-    { label: 'Learn ISL', value: 'Video Lectures', icon: <BookOpen className="text-emerald-600" />, color: 'bg-emerald-50' },
+    { label: 'Learn ISL', value: `${allSignVideos.length} Video Lectures`, icon: <BookOpen className="text-emerald-600" />, color: 'bg-emerald-50' },
     { label: 'Explore Signs', value: 'Visual library', icon: <Hand className="text-blue-600" />, color: 'bg-blue-50' },
     { label: 'Type to Sign', value: 'Fingerspell Translator', icon: <Keyboard className="text-purple-600" />, color: 'bg-purple-50' },
   ];
@@ -866,34 +1136,144 @@ const SignLearn = () => {
                 {activeFilter === 'Explore Signs' && <ExploreSignsComponent />}
                 {activeFilter === 'Type to Sign' && <FingerspellComponent />}
                 {activeFilter === 'Learn ISL' && (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                    {signVideos.map(video => (
-                      <div key={video.id} onClick={() => { setActiveVideo(video); setIsModalOpen(true); }} className="bg-white rounded-[20px] overflow-hidden border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg hover:-translate-y-1 transition-all cursor-pointer group">
-                        <div className="relative aspect-video bg-slate-100 overflow-hidden">
-                          <img src={video.image} alt={video.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                          <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 flex items-center justify-center transition-colors">
-                            <div className="w-12 h-12 rounded-full bg-white/90 text-green-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                              <Play className="ml-1 w-6 h-6 fill-current" />
-                            </div>
-                          </div>
-                          <div className="absolute bottom-2 left-2 px-2 py-1 bg-black/70 backdrop-blur-sm rounded-md text-white text-[10px] font-bold flex items-center gap-1">
-                            <Clock size={12} /> {video.duration}
-                          </div>
+                  <div className="space-y-6">
+                    {/* Filter & Search Toolbar */}
+                    <div className="bg-white rounded-[24px] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-5 sm:p-6 space-y-4">
+                      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+                        {/* Source Category Pills */}
+                        <div className="flex flex-wrap items-center gap-2">
+                          {[
+                            { id: 'All', label: 'All Videos', badge: `${allSignVideos.length}` },
+                            { id: 'Govt. Official (ISLRTC)', label: 'Govt. & Official (ISLRTC)', badge: `${allSignVideos.filter(v => v.sourceType === 'official').length}` },
+                            { id: 'Private & Community', label: 'Private & Community Creators', badge: `${allSignVideos.filter(v => v.sourceType === 'external').length}` }
+                          ].map(tab => {
+                            const isActive = videoCategoryFilter === tab.id;
+                            return (
+                              <button
+                                key={tab.id}
+                                onClick={() => setVideoCategoryFilter(tab.id)}
+                                className={`px-4 py-2.5 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer ${
+                                  isActive
+                                    ? 'bg-green-600 text-white shadow-md shadow-green-500/20'
+                                    : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
+                                }`}
+                              >
+                                <span>{tab.label}</span>
+                                <span className={`px-2 py-0.5 rounded-full text-[10px] font-extrabold ${
+                                  isActive ? 'bg-white/20 text-white' : 'bg-white text-slate-600'
+                                }`}>
+                                  {tab.badge}
+                                </span>
+                              </button>
+                            );
+                          })}
                         </div>
-                        <div className="p-4">
-                          <div className="flex items-center gap-2 mb-2">
-                            <span className="text-[10px] font-bold text-green-600 bg-green-50 px-2 py-1 rounded-md uppercase tracking-wider">Lesson</span>
-                          </div>
-                          <h3 className="text-[15px] font-bold text-slate-900 leading-tight mb-1.5 group-hover:text-green-600 transition-colors">{video.title}</h3>
-                          <p className="text-xs text-slate-500 font-medium line-clamp-2 mb-4">{video.desc}</p>
-                          <div className="flex items-center justify-between pt-3 border-t border-slate-50">
-                            <span className="flex items-center gap-1.5 text-[11px] font-bold text-slate-400">
-                              <GraduationCap size={14} className="text-green-500" /> {video.level}
-                            </span>
-                          </div>
+
+                        {/* Search Input */}
+                        <div className="relative w-full lg:w-72">
+                          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                          <input
+                            type="text"
+                            placeholder="Search ISL videos..."
+                            value={videoSearchQuery}
+                            onChange={(e) => setVideoSearchQuery(e.target.value)}
+                            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-full text-xs sm:text-sm font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:border-green-500 focus:ring-2 ring-green-500/20 transition-all"
+                          />
                         </div>
                       </div>
-                    ))}
+
+                      {/* Level Pills */}
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-slate-100">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <span className="text-xs font-bold text-slate-400 mr-1">Level:</span>
+                          {['All', 'Beginner', 'Intermediate', 'Advanced'].map(lvl => (
+                            <button
+                              key={lvl}
+                              onClick={() => setVideoLevelFilter(lvl)}
+                              className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                                videoLevelFilter === lvl
+                                  ? 'bg-green-600 text-white shadow-sm'
+                                  : 'bg-slate-100 hover:bg-slate-200 text-slate-600'
+                              }`}
+                            >
+                              {lvl}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Video Grid */}
+                    {filteredVideos.length === 0 ? (
+                      <div className="bg-white rounded-[24px] border border-slate-100 p-12 text-center space-y-3">
+                        <Video size={40} className="text-slate-300 mx-auto" />
+                        <h4 className="text-lg font-bold text-slate-800">No matching videos found</h4>
+                        <p className="text-sm text-slate-500 max-w-sm mx-auto">Try selecting a different source category, level filter, or search term.</p>
+                        <button
+                          onClick={() => {
+                            setVideoCategoryFilter('All');
+                            setVideoLevelFilter('All');
+                            setVideoSearchQuery('');
+                          }}
+                          className="mt-2 px-5 py-2 rounded-full bg-green-600 text-white text-xs font-bold hover:bg-green-700 transition-colors cursor-pointer shadow-sm"
+                        >
+                          Reset All Filters
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                        {filteredVideos.map(video => (
+                          <div
+                            key={video.id}
+                            onClick={() => {
+                              if (video.sourceType === 'external' || video.redirectOnly) {
+                                window.open(video.directUrl || video.youtubeUrl, '_blank', 'noopener,noreferrer');
+                              } else {
+                                setActiveVideo(video);
+                                setIsModalOpen(true);
+                              }
+                            }}
+                            className="bg-white rounded-[20px] overflow-hidden border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg hover:-translate-y-1 transition-all cursor-pointer group flex flex-col"
+                          >
+                            <div className="relative aspect-video bg-slate-100 overflow-hidden shrink-0">
+                              <img src={video.image} alt={video.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 flex items-center justify-center transition-colors">
+                                <div className="w-12 h-12 rounded-full bg-white/90 text-slate-800 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                  {video.sourceType === 'external' ? (
+                                    <ExternalLink className="w-5 h-5 text-slate-800" />
+                                  ) : (
+                                    <Play className="ml-0.5 w-6 h-6 fill-current text-slate-800" />
+                                  )}
+                                </div>
+                              </div>
+                              <div className="absolute bottom-2 left-2 px-2 py-1 bg-black/70 backdrop-blur-sm rounded-md text-white text-[10px] font-bold flex items-center gap-1">
+                                <Clock size={12} /> {video.duration}
+                              </div>
+                            </div>
+
+                            <div className="p-4 flex-1 flex flex-col justify-between">
+                              <div>
+                                <div className="flex items-center justify-between gap-2 mb-2">
+                                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider bg-slate-100 text-slate-700">
+                                    {video.channelName || 'Lesson'}
+                                  </span>
+                                  <span className="flex items-center gap-1 text-[11px] font-bold text-slate-400">
+                                    <GraduationCap size={13} className="text-slate-400" /> {video.level}
+                                  </span>
+                                </div>
+
+                                <h3 className="text-[15px] font-bold text-slate-900 leading-tight mb-1.5 group-hover:text-slate-700 transition-colors line-clamp-2">
+                                  {video.title}
+                                </h3>
+                                <p className="text-xs text-slate-500 font-medium line-clamp-2 mb-3">
+                                  {video.desc}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 )}
               </motion.div>
@@ -932,12 +1312,24 @@ const SignLearn = () => {
                     </div>
                   </div>
                 </div>
-                <button
-                  onClick={() => setIsModalOpen(false)}
-                  className="absolute top-3 sm:top-4 right-3 sm:right-4 w-7 h-7 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-900 flex items-center justify-center transition-colors"
-                >
-                  <XCircle size={18} />
-                </button>
+                <div className="absolute top-3 sm:top-4 right-3 sm:right-4 flex items-center gap-2">
+                  <button
+                    onClick={() => {
+                      window.open(activeVideo.directUrl || activeVideo.youtubeUrl, '_blank', 'noopener,noreferrer');
+                    }}
+                    className="px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-900 text-slate-700 hover:text-white border border-slate-200 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
+                    title="Watch directly on YouTube"
+                  >
+                    <span>Watch on YouTube</span>
+                    <ExternalLink size={13} />
+                  </button>
+                  <button
+                    onClick={() => setIsModalOpen(false)}
+                    className="w-7 h-7 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-900 flex items-center justify-center transition-colors cursor-pointer"
+                  >
+                    <XCircle size={18} />
+                  </button>
+                </div>
               </div>
 
               <div className="flex-1 flex flex-col">

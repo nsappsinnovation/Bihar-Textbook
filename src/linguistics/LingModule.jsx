@@ -375,9 +375,7 @@ export default function LingModule({ type }) {
   }, [currentItem, type]);
 
   const handleSpeak = (text, langCode) => {
-    if (!window.speechSynthesis || !text) return;
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
+    if (!text) return;
     const langMap = {
       'de': 'de-DE', 'fr': 'fr-FR', 'es': 'es-ES', 'hi': 'hi-IN', 'en': 'en-US', 
       'ja': 'ja-JP', 'ko': 'ko-KR', 'it': 'it-IT', 'ru': 'ru-RU', 'zh': 'zh-CN'
@@ -387,34 +385,37 @@ export default function LingModule({ type }) {
       'ja': 'japanese', 'ko': 'korean', 'it': 'italian', 'ru': 'russian', 'zh': 'chinese', 'en': 'english'
     };
     const targetLangTag = langMap[langCode] || langCode || 'en-US';
-    utterance.lang = targetLangTag;
-    utterance.rate = 0.95;
-    utterance.pitch = 1.0; 
-    
-    const speakWithVoice = () => {
-      const voices = window.speechSynthesis.getVoices();
-      if (voices.length > 0) {
-        const nameKeyword = langNamesMap[langCode] || '';
-        const voice = voices.find(v => v.lang.replace('_', '-').toLowerCase().startsWith(targetLangTag.toLowerCase()))
-                   || voices.find(v => v.lang.replace('_', '-').toLowerCase().startsWith((langCode || '').toLowerCase()))
-                   || (nameKeyword && voices.find(v => v.name.toLowerCase().includes(nameKeyword)))
-                   || voices.find(v => v.lang.toLowerCase().includes((langCode || '').toLowerCase()));
-        if (voice) {
-          utterance.voice = voice;
-          utterance.lang = voice.lang;
-        }
-      }
-      window.speechSynthesis.speak(utterance);
-    };
+    const shortLang = (langCode || 'en').split('-')[0].toLowerCase();
 
-    if (window.speechSynthesis.getVoices().length === 0) {
-      window.speechSynthesis.onvoiceschanged = () => {
-        speakWithVoice();
-      };
-      setTimeout(speakWithVoice, 150);
-    } else {
-      speakWithVoice();
-    }
+    // Prioritize natural human-sounding pronunciation audio
+    const audioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=${encodeURIComponent(shortLang)}&client=tw-ob&q=${encodeURIComponent(text)}`;
+    const audio = new Audio(audioUrl);
+    
+    audio.play().catch(() => {
+      // Fallback to browser speechSynthesis if offline or audio blocked
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = targetLangTag;
+        utterance.rate = 0.95;
+        utterance.pitch = 1.0;
+
+        const voices = window.speechSynthesis.getVoices();
+        if (voices.length > 0) {
+          const nameKeyword = langNamesMap[shortLang] || shortLang;
+          const naturalVoice = voices.find(v => (v.name.includes('Natural') || v.name.includes('Neural') || v.name.includes('Google')) && v.lang.replace('_', '-').toLowerCase().startsWith(targetLangTag.toLowerCase()))
+                            || voices.find(v => v.lang.replace('_', '-').toLowerCase().startsWith(targetLangTag.toLowerCase()))
+                            || voices.find(v => v.lang.replace('_', '-').toLowerCase().startsWith(shortLang))
+                            || voices.find(v => v.name.toLowerCase().includes(nameKeyword))
+                            || (shortLang === 'hi' && voices.find(v => v.name.includes('हिन्दी') || v.name.toLowerCase().includes('hemant') || v.name.toLowerCase().includes('kalpana') || v.name.toLowerCase().includes('swara') || v.name.toLowerCase().includes('madhur')));
+          if (naturalVoice) {
+            utterance.voice = naturalVoice;
+            utterance.lang = naturalVoice.lang;
+          }
+        }
+        window.speechSynthesis.speak(utterance);
+      }
+    });
   };
 
   const handleNext = () => {
@@ -581,7 +582,7 @@ export default function LingModule({ type }) {
                         ? 'bg-[#F1FAF6] border-emerald-50 rounded-bl-none' 
                         : 'bg-[#FFFDF9] border-orange-50 rounded-br-none mr-48'}`}>
                       
-                      <div className="flex items-start gap-3">
+                      <div className="flex items-center gap-3 py-1">
                          <div 
                            onClick={() => handleSpeak(currentItem.text, targetLang)} 
                            className={`w-9 h-9 rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform shadow-sm flex-shrink-0
@@ -590,10 +591,7 @@ export default function LingModule({ type }) {
                             <Volume2 size={18} fill="currentColor" />
                          </div>
                          <div className="flex-1">
-                            <h2 className="text-[16px] font-black text-slate-800 leading-tight mb-0.5">{currentItem.text}</h2>
-                            <p className="text-[13px] text-slate-400 font-bold mb-1.5">{currentItem.en || currentItem.text}</p>
-                            <div className={`h-[1.2px] w-6 mb-1.5 ${currentItem.speaker === 'boy' ? 'bg-emerald-100' : 'bg-orange-100'}`} />
-                            <p className="text-[14px] text-slate-500 font-bold italic leading-snug">{currentItem.native}</p>
+                            <h2 className="text-[17px] font-black text-slate-800 leading-snug">{currentItem.text}</h2>
                          </div>
                       </div>
 

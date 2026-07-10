@@ -22,9 +22,7 @@ const Linguistics = () => {
   const [activeModule, setActiveModule] = useState(0);
 
   const playSpeech = (text, langCode) => {
-    if (!window.speechSynthesis || !text) return;
-    window.speechSynthesis.cancel();
-    const utterance = new SpeechSynthesisUtterance(text);
+    if (!text) return;
     const langMap = {
       'de': 'de-DE', 'fr': 'fr-FR', 'es': 'es-ES', 'hi': 'hi-IN', 'en': 'en-US', 
       'ja': 'ja-JP', 'ko': 'ko-KR', 'it': 'it-IT', 'ru': 'ru-RU', 'zh': 'zh-CN', 'ar': 'ar-SA',
@@ -36,35 +34,36 @@ const Linguistics = () => {
       'bn': 'bengali', 'ta': 'tamil', 'te': 'telugu'
     };
     const targetLangTag = langMap[langCode] || langCode || 'en-US';
-    utterance.lang = targetLangTag;
-    utterance.rate = 0.95;
-    
-    const speakWithVoice = () => {
-      const voices = window.speechSynthesis.getVoices();
-      let voiceFound = false;
-      if (voices.length > 0) {
-        const nameKeyword = langNamesMap[langCode] || '';
-        const voice = voices.find(v => v.lang.replace('_', '-').toLowerCase().startsWith(targetLangTag.toLowerCase()))
-                   || voices.find(v => v.lang.replace('_', '-').toLowerCase().startsWith((langCode || '').toLowerCase()))
-                   || (nameKeyword && voices.find(v => v.name.toLowerCase().includes(nameKeyword)))
-                   || voices.find(v => v.lang.toLowerCase().includes((langCode || '').toLowerCase()));
-        if (voice) {
-          utterance.voice = voice;
-          utterance.lang = voice.lang;
-          voiceFound = true;
-        }
-      }
-      window.speechSynthesis.speak(utterance);
-    };
+    const shortLang = (langCode || 'en').split('-')[0].toLowerCase();
 
-    if (window.speechSynthesis.getVoices().length === 0) {
-      window.speechSynthesis.onvoiceschanged = () => {
-        speakWithVoice();
-      };
-      setTimeout(speakWithVoice, 150);
-    } else {
-      speakWithVoice();
-    }
+    // Prioritize natural human-sounding pronunciation audio
+    const audioUrl = `https://translate.google.com/translate_tts?ie=UTF-8&tl=${encodeURIComponent(shortLang)}&client=tw-ob&q=${encodeURIComponent(text)}`;
+    const audio = new Audio(audioUrl);
+    
+    audio.play().catch(() => {
+      // Fallback to browser speechSynthesis if offline or audio blocked
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = targetLangTag;
+        utterance.rate = 0.95;
+
+        const voices = window.speechSynthesis.getVoices();
+        if (voices.length > 0) {
+          const nameKeyword = langNamesMap[shortLang] || shortLang;
+          const naturalVoice = voices.find(v => (v.name.includes('Natural') || v.name.includes('Neural') || v.name.includes('Google')) && v.lang.replace('_', '-').toLowerCase().startsWith(targetLangTag.toLowerCase()))
+                            || voices.find(v => v.lang.replace('_', '-').toLowerCase().startsWith(targetLangTag.toLowerCase()))
+                            || voices.find(v => v.lang.replace('_', '-').toLowerCase().startsWith(shortLang))
+                            || voices.find(v => v.name.toLowerCase().includes(nameKeyword))
+                            || (shortLang === 'hi' && voices.find(v => v.name.includes('हिन्दी') || v.name.toLowerCase().includes('hemant') || v.name.toLowerCase().includes('kalpana') || v.name.toLowerCase().includes('swara') || v.name.toLowerCase().includes('madhur')));
+          if (naturalVoice) {
+            utterance.voice = naturalVoice;
+            utterance.lang = naturalVoice.lang;
+          }
+        }
+        window.speechSynthesis.speak(utterance);
+      }
+    });
   };
   
   // Interactive States
