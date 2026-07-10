@@ -2654,7 +2654,7 @@ const AiIntelligenceDashboard = () => {
 
   const quickStats = [
     { label: 'Learn & Prompt Academy', value: 'Concepts & Prompts', icon: <WandSparkles className="text-purple-600" />, color: 'bg-purple-50' },
-    { label: 'Explore Tools', value: 'AI powered', icon: <Cpu className="text-purple-600" />, color: 'bg-purple-50' },
+    { label: 'Explore Tools', value: 'AI tools', icon: <Cpu className="text-purple-600" />, color: 'bg-purple-50' },
     { label: 'Take Challenges', value: 'Test skills', icon: <Trophy className="text-orange-500" />, color: 'bg-orange-50' }
   ];
 
