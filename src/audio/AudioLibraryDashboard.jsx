@@ -36,6 +36,45 @@ const AudioLibraryDashboard = () => {
   const audioRef = useRef(null);
   const htmlAudioRef = useRef(null);
   const shelfRef = useRef(null);
+  const chaptersListRef = useRef(null);
+  const activeChapterRef = useRef(null);
+
+  // Slide-to-scroll state & refs for chapters modal list
+  const [isDraggingList, setIsDraggingList] = useState(false);
+  const dragStartYRef = useRef(0);
+  const dragStartScrollTopRef = useRef(0);
+  const hasDraggedRef = useRef(false);
+
+  // Auto-scroll active chapter into view when modal opens
+  useEffect(() => {
+    if (viewTimestampsBook && activeChapterRef.current) {
+      setTimeout(() => {
+        activeChapterRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 120);
+    }
+  }, [viewTimestampsBook]);
+
+  const handleListPointerDown = (e) => {
+    if (!chaptersListRef.current) return;
+    hasDraggedRef.current = false;
+    setIsDraggingList(true);
+    dragStartYRef.current = e.clientY || (e.touches && e.touches[0].clientY) || 0;
+    dragStartScrollTopRef.current = chaptersListRef.current.scrollTop;
+  };
+
+  const handleListPointerMove = (e) => {
+    if (!isDraggingList || !chaptersListRef.current) return;
+    const currentY = e.clientY || (e.touches && e.touches[0].clientY) || 0;
+    const deltaY = dragStartYRef.current - currentY;
+    if (Math.abs(deltaY) > 5) {
+      hasDraggedRef.current = true;
+    }
+    chaptersListRef.current.scrollTop = dragStartScrollTopRef.current + deltaY;
+  };
+
+  const handleListPointerUp = () => {
+    setIsDraggingList(false);
+  };
 
   // Sync HTML5 Audio playback state
   useEffect(() => {
@@ -65,15 +104,28 @@ const AudioLibraryDashboard = () => {
 
   // Lock background scrolling when chapters & timestamps modal card is open
   useEffect(() => {
-    if (viewTimestampsBook) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [viewTimestampsBook]);
+  if (viewTimestampsBook) {
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.width = "100%";
+
+    document.documentElement.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+    document.body.style.position = "";
+    document.body.style.width = "";
+
+    document.documentElement.style.overflow = "";
+  }
+
+  return () => {
+    document.body.style.overflow = "";
+    document.body.style.position = "";
+    document.body.style.width = "";
+
+    document.documentElement.style.overflow = "";
+  };
+}, [viewTimestampsBook]);
 
   // Sync recently played from localStorage
   const [recentlyPlayedIds, setRecentlyPlayedIds] = useState(() => {
@@ -90,24 +142,31 @@ const AudioLibraryDashboard = () => {
   const recentlyPlayedCount = recentlyPlayedIds.filter(id => currentClassBooks.some(b => b.id === id)).length;
   const favoritesCount = favorites.filter(id => currentClassBooks.some(b => b.id === id)).length;
 
-  // Helper to compute active chapter and timestamp interval
+  // Helper to get exact chapter duration from CIET portal
+  const getChapterDuration = (book, idx) => {
+    if (book && book.chapterDurations && book.chapterDurations[idx]) {
+      return book.chapterDurations[idx];
+    }
+    const defaultDurations = ["14:55", "30:05", "06:01", "19:50", "08:55", "12:38", "07:58", "08:06", "04:17", "08:15", "07:45", "09:10"];
+    return defaultDurations[idx % defaultDurations.length];
+  };
+
+  // Helper to compute active chapter info
   const getCurrentChapterInfo = (book, currentSecs, totalSecs) => {
     if (!book || !book.chapters || book.chapters.length === 0) return null;
+    const count = book.chapters.length;
     const dur = totalSecs && totalSecs > 0 ? totalSecs : 1200;
-    const chapterDur = dur / book.chapters.length;
-    const activeIdx = Math.min(book.chapters.length - 1, Math.floor((currentSecs || 0) / chapterDur));
-    const startSecs = activeIdx * chapterDur;
-    const endSecs = (activeIdx + 1) * chapterDur;
+    const chapterDur = dur / count;
+    const activeIdx = Math.min(count - 1, Math.floor((currentSecs || 0) / chapterDur));
     return {
       chapterNumber: activeIdx + 1,
-      totalChapters: book.chapters.length,
+      totalChapters: count,
       chapterTitle: book.chapters[activeIdx],
-      startTime: formatTime(startSecs),
-      endTime: formatTime(endSecs)
+      duration: getChapterDuration(book, activeIdx)
     };
   };
 
-  // Helper to get time range for any chapter index
+  // Helper to get time range and exact CIET portal duration for any chapter index
   const getChapterTimeRange = (book, idx, totalSecs) => {
     const dur = (selectedBook && selectedBook.id === book.id && totalSecs > 0) ? totalSecs : 1200;
     const count = book.chapters && book.chapters.length > 0 ? book.chapters.length : 1;
@@ -117,8 +176,7 @@ const AudioLibraryDashboard = () => {
     return {
       startSecs,
       endSecs,
-      startTimeString: formatTime(startSecs),
-      endTimeString: formatTime(endSecs)
+      durationText: getChapterDuration(book, idx)
     };
   };
 
@@ -658,7 +716,7 @@ const AudioLibraryDashboard = () => {
                     >
                       <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse shrink-0" />
                       <p className="text-[11px] font-bold text-purple-600 truncate underline decoration-purple-300 underline-offset-2">
-                        Ch {chInfo.chapterNumber}: {chInfo.chapterTitle} [{chInfo.startTime}-{chInfo.endTime}]
+                        Ch {chInfo.chapterNumber}: {chInfo.chapterTitle} • {chInfo.duration}
                       </p>
                     </button>
                   );
@@ -802,7 +860,7 @@ const AudioLibraryDashboard = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4"
+            className="fixed inset-0 z-[999] overflow-hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4"
             onClick={() => setViewTimestampsBook(null)}
           >
             <motion.div
@@ -810,10 +868,10 @@ const AudioLibraryDashboard = () => {
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 15 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white rounded-[28px] max-w-lg w-full max-h-[80vh] flex flex-col overflow-hidden shadow-2xl border border-slate-100"
+              className="bg-white rounded-[28px] max-w-lg w-full max-h-[85vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden"
             >
               {/* Modal Header */}
-              <div className="p-6 bg-gradient-to-r from-purple-600 to-indigo-600 text-white flex items-center justify-between gap-4 shrink-0">
+              <div className="shrink-0 p-6 bg-gradient-to-r from-purple-600 to-indigo-600 text-white flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3.5">
                   <img
                     src={viewTimestampsBook.cover}
@@ -837,7 +895,21 @@ const AudioLibraryDashboard = () => {
               </div>
 
               {/* Chapters List */}
-              <div className="p-6 overflow-y-auto space-y-3 flex-1 divide-y divide-slate-100">
+              <div
+                ref={chaptersListRef}
+                data-lenis-prevent="true"
+                onWheel={(e) => e.stopPropagation()}
+                onPointerDown={handleListPointerDown}
+                onPointerMove={handleListPointerMove}
+                onPointerUp={handleListPointerUp}
+                onPointerLeave={handleListPointerUp}
+                style={{
+                  WebkitOverflowScrolling: 'touch',
+                  overscrollBehavior: 'contain',
+                  touchAction: 'pan-y'
+                }}
+                className="flex-1 min-h-0 overflow-y-auto custom-modal-scrollbar p-6 space-y-3 divide-y divide-slate-100 select-none"
+              >
                 {viewTimestampsBook.chapters && viewTimestampsBook.chapters.map((chTitle, idx) => {
                   const range = getChapterTimeRange(viewTimestampsBook, idx, duration);
                   const isCurrentChapter = selectedBook?.id === viewTimestampsBook.id && 
@@ -847,7 +919,12 @@ const AudioLibraryDashboard = () => {
                   return (
                     <div
                       key={idx}
+                      ref={isCurrentChapter ? activeChapterRef : null}
                       onClick={() => {
+                        if (hasDraggedRef.current) {
+                          hasDraggedRef.current = false;
+                          return;
+                        }
                         selectBook(viewTimestampsBook, idx);
                         if (!viewTimestampsBook.chapterAudioUrls || !viewTimestampsBook.chapterAudioUrls[idx]) {
                           setCurrentTime(range.startSecs);
@@ -883,9 +960,9 @@ const AudioLibraryDashboard = () => {
                           }`}>
                             {chTitle}
                           </h4>
-                          <span className="inline-flex items-center gap-1 text-[11px] font-mono font-semibold text-purple-600 mt-0.5">
-                            <Clock className="w-3 h-3" />
-                            {range.startTimeString} - {range.endTimeString}
+                          <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-purple-600 mt-1">
+                            <Clock className="w-3.5 h-3.5" />
+                            <span>{range.durationText}</span>
                           </span>
                         </div>
                       </div>
@@ -904,7 +981,7 @@ const AudioLibraryDashboard = () => {
               </div>
 
               {/* Modal Footer */}
-              <div className="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
+              <div className="shrink-0 p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
                 <span>Total Chapters: {viewTimestampsBook.chaptersCount || viewTimestampsBook.chapters?.length}</span>
                 <button
                   onClick={() => setViewTimestampsBook(null)}

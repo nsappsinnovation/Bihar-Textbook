@@ -18,16 +18,16 @@
     }
   }
   
-  /* Hide scrollbar globally but keep functionality */
-  * {
-    scrollbar-width: none !important; /* Firefox */
-    -ms-overflow-style: none !important; /* IE and Edge */
+  /* Hide scrollbar globally but keep functionality except on custom scrollbar containers */
+  *:not(.custom-modal-scrollbar) {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
   }
   
-  *::-webkit-scrollbar {
-    width: 0px !important;
-    height: 0px !important;
-    background: transparent !important;
+  *:not(.custom-modal-scrollbar)::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+    background: transparent;
   }
 }
 
@@ -250,23 +250,29 @@ html.lenis body {
 }
 
 /* Custom Scrollbar for Modal content container */
+.custom-modal-scrollbar {
+  scrollbar-width: thin !important;
+  scrollbar-color: #a855f7 #f1f5f9 !important;
+}
+
 .custom-modal-scrollbar::-webkit-scrollbar {
-  width: 6px !important;
+  width: 8px !important;
   display: block !important;
 }
 
 .custom-modal-scrollbar::-webkit-scrollbar-track {
-  background: #f1f5f9 !important;
+  background: #f8fafc !important;
   border-radius: 10px !important;
 }
 
 .custom-modal-scrollbar::-webkit-scrollbar-thumb {
-  background: #cbd5e1 !important;
+  background: #c084fc !important;
   border-radius: 10px !important;
+  border: 2px solid #f8fafc !important;
 }
 
 .custom-modal-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8 !important;
+  background: #9333ea !important;
 }
 
 /* Custom Scrollbar for Prompt Academy Syllabus Directory */
