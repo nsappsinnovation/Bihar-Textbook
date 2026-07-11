@@ -1143,15 +1143,6 @@ const LifeSkills = () => {
                 </p>
 
                 <div className="pt-2">
-                  <button
-                    onClick={() => {
-                      const target = document.getElementById("content-section");
-                      if (target) target.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className="px-5 py-2.5 sm:px-6 sm:py-3 bg-emerald-600 text-white rounded-full font-bold text-[12px] sm:text-[14px] flex items-center gap-2 hover:bg-emerald-700 transition-colors w-max shadow-sm shadow-emerald-200 cursor-pointer"
-                  >
-                    Start Learning <ArrowRight size={16} />
-                  </button>
                 </div>
               </div>
 
@@ -1166,28 +1157,30 @@ const LifeSkills = () => {
               {quickStats.map((stat, i) => {
                 const isActive = activeFilter === stat.label;
 
-                // Themed borders and icons, keeping white background
-                let themeBg = 'bg-white';
                 let themeBorder = '';
                 let iconBg = '';
                 let iconColor = '';
                 let textColor = '';
+                let valueColor = '';
 
                 if (stat.label === 'Learn Skills') {
-                  themeBorder = isActive ? 'border-emerald-500 ring-2 ring-emerald-500/10 shadow-md' : 'border-slate-100/70 hover:border-emerald-200';
+                  themeBorder = isActive ? 'border-emerald-500 ring-2 ring-emerald-500/10 shadow-md' : 'border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)]';
                   iconBg = isActive ? 'bg-emerald-600 text-white' : 'bg-emerald-50';
                   iconColor = isActive ? 'text-white' : 'text-emerald-600';
-                  textColor = isActive ? 'text-emerald-700' : 'text-slate-800 group-hover:text-emerald-600';
+                  textColor = isActive ? 'text-emerald-700' : 'text-[#1e1b4b] group-hover:text-emerald-600';
+                  valueColor = isActive ? 'text-emerald-600/80' : 'text-slate-500';
                 } else if (stat.label === 'Practical Labs') {
-                  themeBorder = isActive ? 'border-blue-500 ring-2 ring-blue-500/10 shadow-md' : 'border-slate-100/70 hover:border-blue-200';
-                  iconBg = isActive ? 'bg-blue-650 text-white' : 'bg-blue-50';
+                  themeBorder = isActive ? 'border-blue-500 ring-2 ring-blue-500/10 shadow-md' : 'border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)]';
+                  iconBg = isActive ? 'bg-blue-600 text-white' : 'bg-blue-50';
                   iconColor = isActive ? 'text-white' : 'text-blue-600';
-                  textColor = isActive ? 'text-blue-750 text-blue-700' : 'text-slate-800 group-hover:text-blue-600';
+                  textColor = isActive ? 'text-blue-700' : 'text-[#1e1b4b] group-hover:text-blue-600';
+                  valueColor = isActive ? 'text-blue-600/80' : 'text-slate-500';
                 } else { // Take Challenges
-                  themeBorder = isActive ? 'border-amber-500 ring-2 ring-amber-500/10 shadow-md' : 'border-slate-100/70 hover:border-amber-200';
+                  themeBorder = isActive ? 'border-amber-500 ring-2 ring-amber-500/10 shadow-md' : 'border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)]';
                   iconBg = isActive ? 'bg-amber-500 text-white' : 'bg-amber-50';
                   iconColor = isActive ? 'text-white' : 'text-amber-500';
-                  textColor = isActive ? 'text-amber-700' : 'text-slate-800 group-hover:text-amber-600';
+                  textColor = isActive ? 'text-amber-700' : 'text-[#1e1b4b] group-hover:text-amber-600';
+                  valueColor = isActive ? 'text-amber-600/80' : 'text-slate-500';
                 }
 
                 return (
@@ -1198,14 +1191,14 @@ const LifeSkills = () => {
                       const target = document.getElementById("content-section");
                       if (target) target.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className={`${themeBg} ${themeBorder} rounded-2xl p-3.5 md:p-4 border flex items-center gap-3 md:gap-4 hover:shadow-md transition-all cursor-pointer group`}
+                    className={`bg-white ${themeBorder} rounded-[16px] p-3 md:p-4 border flex items-center gap-3 md:gap-4 hover:shadow-md transition-shadow cursor-pointer group`}
                   >
-                    <div className={`w-[44px] h-[44px] ${iconBg} rounded-xl flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5`}>
+                    <div className={`w-[44px] h-[44px] ${iconBg} rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5`}>
                       {React.cloneElement(stat.icon, { className: iconColor })}
                     </div>
                     <div>
-                      <h4 className={`text-[13px] font-black leading-tight transition-colors ${textColor}`}>{stat.label}</h4>
-                      <p className="text-[11px] font-bold mt-0.5 opacity-80">{stat.value}</p>
+                      <h4 className={`text-[13px] font-bold leading-tight transition-colors ${textColor}`}>{stat.label}</h4>
+                      <p className={`text-[11px] font-medium mt-0.5 ${valueColor}`}>{stat.value}</p>
                     </div>
                   </div>
                 );

@@ -71,12 +71,6 @@ const VrDashboard = () => {
                  </p>
                  
                  <div className="pt-2">
-                   <button 
-                     onClick={() => handleSectionSwitch('tech-learning')}
-                     className="px-5 py-2.5 sm:px-6 sm:py-3 bg-blue-600 text-white rounded-full font-bold text-[12px] sm:text-[14px] flex items-center gap-2 hover:bg-blue-700 transition-colors w-max shadow-sm shadow-blue-200"
-                   >
-                     Start Learning <ArrowRight size={16} />
-                   </button>
                  </div>
               </div>
 
@@ -88,29 +82,32 @@ const VrDashboard = () => {
 
             {/* Quick Stats Row */}
             <section id="content-section" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 lg:gap-6 relative z-20 -mt-6 md:-mt-8 px-3 sm:px-4 md:px-12">
-              {quickStats.map((stat, i) => (
-                <div 
-                  key={i}
-                  onClick={() => {
-                    if (i === 0) {
-                      handleSectionSwitch('tech-learning');
-                    } else if (i === 1) {
-                      handleSectionSwitch('virtual-lab');
-                    } else {
-                      handleSectionSwitch('simulators');
-                    }
-                  }}
-                  className="bg-white rounded-[16px] p-4 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex items-center gap-4 transition-all duration-300 cursor-pointer hover:shadow-lg hover:-translate-y-0.5 active:scale-95"
-                >
-                   <div className={`w-[48px] h-[48px] ${stat.color} rounded-[12px] flex items-center justify-center shrink-0 [&>svg]:w-5 [&>svg]:h-5`}>
-                      {stat.icon}
-                   </div>
-                   <div>
-                      <h4 className="text-[14px] font-extrabold text-[#1E293B] leading-tight">{stat.label}</h4>
-                      <p className="text-[11px] font-medium text-slate-400 mt-0.5">{stat.value}</p>
-                   </div>
-                </div>
-              ))}
+              {quickStats.map((stat, i) => {
+                const isActive = i === 0 ? activeSection === 'tech-learning' : i === 1 ? activeSection === 'virtual-lab' : activeSection === 'simulators';
+                return (
+                  <div 
+                    key={i}
+                    onClick={() => {
+                      if (i === 0) {
+                        handleSectionSwitch('tech-learning');
+                      } else if (i === 1) {
+                        handleSectionSwitch('virtual-lab');
+                      } else {
+                        handleSectionSwitch('simulators');
+                      }
+                    }}
+                    className={`bg-white rounded-[16px] p-3 md:p-4 border ${isActive ? 'border-blue-500 ring-2 ring-blue-500/10 shadow-md' : 'border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)]'} flex items-center gap-3 md:gap-4 hover:shadow-md transition-shadow cursor-pointer group`}
+                  >
+                     <div className={`w-[44px] h-[44px] ${isActive ? 'bg-blue-600 text-white' : stat.color} rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5`}>
+                        {React.cloneElement(stat.icon, { className: isActive ? 'text-white' : stat.icon.props.className })}
+                     </div>
+                     <div>
+                        <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? 'text-blue-700' : 'text-[#1e1b4b] group-hover:text-blue-600'}`}>{stat.label}</h4>
+                        <p className={`text-[11px] font-medium mt-0.5 ${isActive ? 'text-blue-600/80' : 'text-slate-550 text-slate-500'}`}>{stat.value}</p>
+                     </div>
+                  </div>
+                );
+              })}
             </section>
           </div>
 

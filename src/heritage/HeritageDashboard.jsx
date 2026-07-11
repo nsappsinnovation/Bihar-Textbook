@@ -394,12 +394,6 @@ const HeritageDashboard = () => {
                 Discover, learn and preserve our rich history and cultural heritage in a new interactive way.
               </p>
               <div className="pt-2">
-                <button 
-                  onClick={() => navigate('/heritage-archive')}
-                  className="px-5 py-2.5 sm:px-6 sm:py-3 bg-[#B45309] text-white rounded-full font-bold text-[12px] sm:text-[14px] flex items-center gap-2 hover:bg-amber-800 transition-colors w-max shadow-sm shadow-orange-200 cursor-pointer"
-                >
-                  Explore Archive Sandbox <ArrowRight size={16} />
-                </button>
               </div>
             </div>
 
@@ -416,27 +410,29 @@ const HeritageDashboard = () => {
 
           {/* Category Selection */}
           <section className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5 md:gap-3 relative z-20 -mt-12 md:-mt-12 px-3 sm:px-4 md:px-12">
-            {categories.map((cat, i) => (
-              <div 
-                key={i} 
-                onClick={() => {
-                  setSelectedCategory(cat.label);
-                  setCurrentIndex(0);
-                }}
-                className={`bg-white rounded-[16px] p-2.5 md:p-3 border shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex items-center gap-2.5 transition-all duration-300 cursor-pointer group hover:-translate-y-1 hover:shadow-lg ${
-                  selectedCategory === cat.label ? 'border-amber-400 bg-amber-50/20 shadow-md ring-2 ring-amber-100' : 'border-slate-100 hover:border-amber-200'
-                }`}
-              >
-                <div className={`w-8 h-8 md:w-10 md:h-10 rounded-[10px] md:rounded-[12px] flex items-center justify-center shrink-0 transition-transform group-hover:scale-110 ${cat.color}`}>
-                   {cat.icon}
+            {categories.map((cat, i) => {
+              const isActive = selectedCategory === cat.label;
+              const count = flashcards.filter(card => card.category === cat.label).length;
+              const valueText = count === 1 ? '1 card' : `${count} cards`;
+              return (
+                <div 
+                  key={i} 
+                  onClick={() => {
+                    setSelectedCategory(cat.label);
+                    setCurrentIndex(0);
+                  }}
+                  className={`bg-white rounded-[16px] p-2.5 md:p-3 border ${isActive ? 'border-amber-500 ring-2 ring-amber-500/10 shadow-md' : 'border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)]'} flex items-center gap-2.5 md:gap-3 hover:shadow-md transition-shadow cursor-pointer group`}
+                >
+                   <div className={`w-[36px] h-[36px] md:w-[44px] md:h-[44px] ${isActive ? 'bg-amber-600 text-white' : cat.color} rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-4 [&>svg]:h-4 md:[&>svg]:w-5 md:[&>svg]:h-5`}>
+                      {React.cloneElement(cat.icon, { className: isActive ? 'text-white' : cat.icon.props.className })}
+                   </div>
+                   <div>
+                      <h4 className={`text-[11px] md:text-[13px] font-bold leading-tight transition-colors ${isActive ? 'text-amber-700' : 'text-[#1e1b4b] group-hover:text-amber-600'}`}>{cat.label}</h4>
+                      <p className={`text-[9px] md:text-[11px] font-medium mt-0.5 ${isActive ? 'text-amber-600/80' : 'text-slate-500'}`}>{valueText}</p>
+                   </div>
                 </div>
-                <h4 className={`text-[11px] md:text-[12px] font-extrabold leading-tight transition-colors pr-1 ${
-                  selectedCategory === cat.label ? 'text-[#B45309]' : 'text-slate-700 group-hover:text-[#B45309]'
-                }`}>
-                  {cat.label}
-                </h4>
-              </div>
-            ))}
+              );
+            })}
           </section>
 
           {/* Carousel Section */}

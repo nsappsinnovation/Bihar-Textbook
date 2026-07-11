@@ -2138,15 +2138,6 @@ const CyberSecurityDashboard = () => {
                 </p>
 
                 <div className="pt-2">
-                  <button
-                    onClick={() => {
-                      const target = document.getElementById("content-section");
-                      if (target) target.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className="px-6 py-3 bg-emerald-600 text-white rounded-full font-bold text-[14px] flex items-center gap-2 hover:bg-emerald-700 transition-colors w-max shadow-sm shadow-emerald-200"
-                  >
-                    Start Learning <ArrowRight size={16} />
-                  </button>
                 </div>
               </div>
 
@@ -2162,14 +2153,18 @@ const CyberSecurityDashboard = () => {
                 return (
                   <div
                     key={i}
-                    onClick={() => setActiveFilter(stat.label)}
-                    className={`bg-white rounded-[16px] p-3 md:p-4 border ${isActive ? 'border-emerald-500 ring-2 ring-emerald-500/10 shadow-md' : 'border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)]'} flex items-center gap-3 md:gap-4 hover:shadow-md transition-all cursor-pointer group`}
+                    onClick={() => {
+                      setActiveFilter(stat.label);
+                      const target = document.getElementById("content-section");
+                      if (target) target.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className={`bg-white rounded-[16px] p-3 md:p-4 border ${isActive ? 'border-emerald-500 ring-2 ring-emerald-500/10 shadow-md' : 'border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)]'} flex items-center gap-3 md:gap-4 hover:shadow-md transition-shadow cursor-pointer group`}
                   >
                     <div className={`w-[44px] h-[44px] ${isActive ? 'bg-emerald-600 text-white' : stat.color} rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5`}>
                       {React.cloneElement(stat.icon, { className: isActive ? 'text-white' : stat.icon.props.className })}
                     </div>
                     <div>
-                      <h4 className={`text-[13px] font-bold leading-tight ${isActive ? 'text-emerald-700' : 'text-[#1e1b4b]'}`}>{stat.label}</h4>
+                      <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? 'text-emerald-700' : 'text-[#1e1b4b] group-hover:text-emerald-600'}`}>{stat.label}</h4>
                       <p className={`text-[11px] font-medium mt-0.5 ${isActive ? 'text-emerald-600/80' : 'text-slate-500'}`}>{stat.value}</p>
                     </div>
                   </div>

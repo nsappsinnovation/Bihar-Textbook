@@ -342,17 +342,8 @@ const LifeSkills = () => {
                    Practical lessons and daily habits for an independent life.
                  </p>
                  
-                 <div className="pt-2">
-                   <button 
-                     onClick={() => {
-                        const target = document.getElementById("content-section");
-                        if(target) target.scrollIntoView({ behavior: 'smooth' });
-                     }}
-                      className="px-5 py-2.5 sm:px-6 sm:py-3 bg-emerald-600 text-white rounded-full font-bold text-[12px] sm:text-[14px] flex items-center gap-2 hover:bg-emerald-700 transition-colors w-max shadow-sm shadow-emerald-200"
-                   >
-                     Start Learning <ArrowRight size={16} />
-                   </button>
-                 </div>
+                  <div className="pt-2">
+                  </div>
               </div>
 
               <div className="hidden lg:block absolute top-0 right-0 w-[55%] h-full">

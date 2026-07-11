@@ -388,17 +388,7 @@ const AudioLibraryDashboard = () => {
                  </p>
                  
                  <div className="pt-2">
-                   <button 
-                     onClick={() => {
-                       setActiveTab('all');
-                       setSelectedCategory('All');
-                       scrollToShelf();
-                     }}
-                     className="px-6 py-3 bg-purple-600 text-white rounded-full font-bold text-[14px] flex items-center gap-2 hover:bg-purple-700 transition-colors w-max shadow-sm shadow-purple-200 cursor-pointer"
-                   >
-                     Start Listening <ArrowRight size={16} />
-                   </button>
-                 </div>
+                  </div>
               </div>
 
               <div className="hidden lg:block absolute top-0 right-0 w-[55%] h-full">
@@ -418,25 +408,28 @@ const AudioLibraryDashboard = () => {
             </section>
 
             <section className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 relative z-20 -mt-8 px-4 md:px-12">
-              {quickStats.map((stat, i) => (
-                <div 
-                  key={i} 
-                  onClick={() => {
-                    setActiveTab(stat.tab);
-                    setSelectedCategory('All');
-                    scrollToShelf();
-                  }}
-                  className="bg-white rounded-[16px] p-3 md:p-4 border border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex items-center gap-3 md:gap-4 hover:shadow-md transition-shadow cursor-pointer group"
-                >
-                   <div className={`w-[44px] h-[44px] ${stat.color} rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5`}>
-                      {stat.icon}
-                   </div>
-                   <div>
-                      <h4 className="text-[13px] font-bold text-[#1e1b4b] leading-tight group-hover:text-purple-600 transition-colors">{stat.label}</h4>
-                      <p className="text-[11px] font-medium text-slate-500 mt-0.5">{stat.value}</p>
-                   </div>
-                </div>
-              ))}
+              {quickStats.map((stat, i) => {
+                const isActive = activeTab === stat.tab;
+                return (
+                  <div 
+                    key={i} 
+                    onClick={() => {
+                      setActiveTab(stat.tab);
+                      setSelectedCategory('All');
+                      scrollToShelf();
+                    }}
+                    className={`bg-white rounded-[16px] p-3 md:p-4 border ${isActive ? 'border-purple-500 ring-2 ring-purple-500/10 shadow-md' : 'border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)]'} flex items-center gap-3 md:gap-4 hover:shadow-md transition-shadow cursor-pointer group`}
+                  >
+                     <div className={`w-[44px] h-[44px] ${isActive ? 'bg-purple-600 text-white' : stat.color} rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5`}>
+                        {React.cloneElement(stat.icon, { className: isActive ? 'text-white' : stat.icon.props.className })}
+                     </div>
+                     <div>
+                        <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? 'text-purple-700' : 'text-[#1e1b4b] group-hover:text-purple-600'}`}>{stat.label}</h4>
+                        <p className={`text-[11px] font-medium mt-0.5 ${isActive ? 'text-purple-600/80' : 'text-slate-500'}`}>{stat.value}</p>
+                     </div>
+                  </div>
+                );
+              })}
             </section>
           </div>
 

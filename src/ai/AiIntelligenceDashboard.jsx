@@ -2687,15 +2687,6 @@ const AiIntelligenceDashboard = () => {
                  </p>
                  
                  <div className="pt-2">
-                   <button 
-                     onClick={() => {
-                        const target = document.getElementById("content-section");
-                        if(target) target.scrollIntoView({ behavior: 'smooth' });
-                     }}
-                      className="px-5 py-2.5 sm:px-6 sm:py-3 bg-purple-600 text-white rounded-full font-bold text-[12px] sm:text-[14px] flex items-center gap-2 hover:bg-purple-700 transition-colors w-max shadow-sm shadow-purple-200"
-                   >
-                     Start Learning <ArrowRight size={16} />
-                   </button>
                  </div>
               </div>
 

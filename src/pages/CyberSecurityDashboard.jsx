@@ -422,15 +422,6 @@ const CyberSecurityDashboard = () => {
                  </p>
                  
                  <div className="pt-2">
-                   <button 
-                     onClick={() => {
-                        const target = document.getElementById("content-section");
-                        if(target) target.scrollIntoView({ behavior: 'smooth' });
-                     }}
-                     className="px-6 py-3 bg-emerald-600 text-white rounded-full font-bold text-[14px] flex items-center gap-2 hover:bg-emerald-700 transition-colors w-max shadow-sm shadow-emerald-200"
-                   >
-                     Start Learning <ArrowRight size={16} />
-                   </button>
                  </div>
               </div>
 
