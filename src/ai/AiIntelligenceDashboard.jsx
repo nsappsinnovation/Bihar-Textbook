@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
+import {   
   ArrowLeft, ArrowRight, BookOpen, Clock,
   Brain, Lightbulb, Cpu, Trophy, CheckCircle2,
   Play, GraduationCap, XCircle,
   MessageSquare, Sparkles, Palette, Bot, Volume2, Globe,
   WandSparkles, ChevronRight, Copy, Mic, MicOff, HelpCircle, Award, Gamepad2,
   Eye, Shield, Star, Check, Plus, RotateCcw
-} from 'lucide-react';
+, Feather, Music, Scale, Image, Calculator, Shapes , PanelLeftClose , PanelLeftOpen } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const toolsCategories = [
@@ -69,18 +69,229 @@ const optionLabels = ['A', 'B', 'C', 'D'];
 const lessonsData = [
   {
     id: 1,
-    title: "Image Creator",
-    icon: "",
-    concept: "Image Generation",
+    title: "How to Give Best Prompts",
+    concept: "Prompting Basics",
     learn: {
-      title: "Image Creator (Be an Art Director)",
-      subtitle: "Describe colors, style, and lighting for amazing pictures!",
-      description: "When using AI image generators, a simple prompt like 'a turtle' will give you a plain, boring photograph. To make a masterpiece, you must act like an Art Director! Tell the AI the style (like 3D Pixar cartoon, watercolor, or neon chalk), the colors, the lighting (like sunset glow), and the details.",
-      tips: [
-        "Specify the Art Style: 'Pixar 3D animation', '8-bit pixel art', or 'watercolor'.",
-        "Describe the Lighting: 'Warm sunset golden hour' or 'bright glowing neon'.",
-        "Add fine details: Describe the character's clothing, expressions, and surroundings."
+      title: "The Magic Prompt Formula",
+      subtitle: "Learn the secret 3-step formula to talk to AI!",
+      description: "Talking to AI is like giving instructions to a super-smart robot. If you just say 'help me', it gets confused! Use this systematic magic formula:\n\n**1. Role**: Who should the AI pretend to be? (Example: 'Act as a funny science teacher')\n**2. Task**: What do you want it to do? (Example: 'Explain gravity')\n**3. Details**: What are the rules? (Example: 'Use a maximum of 3 sentences')\n\n**Important Rules:**\n- Be the Boss: Give clear and direct orders.\n- Add Rules: Tell it exactly how long or short the answer should be.\n- Give Examples: Show the AI exactly what you want the output to look like.",
+      tips: []
+    },
+    quest: {
+      characterName: "Timetable Helper",
+      characterImage: "",
+      characterMsg: "I want to ask the AI to help me plan a study timetable for my class 7 exams. If I just say 'make a study plan', it gives a generic, useless schedule. Help me make a clear prompt!",
+      targetType: "Script Generator",
+      boringPrompt: "make a study plan",
+      boringOutputText: "Here is a study plan:\nMorning: Study.\nAfternoon: Study.\nEvening: Study.\nNight: Sleep.",
+      superOutputText: "### Class 7 Study Timetable\n- **Role**: Friendly school counselor study guide.\n- **Subject Focus**: Mathematics and Science preparation.\n- **Daily Schedule**:\n  - **4:00 PM - 5:00 PM**: Mathematics practice (formulas & exercises).\n  - **5:00 PM - 5:30 PM**: Fun activity / tea break.\n  - **5:30 PM - 6:30 PM**: Science revision (diagrams & definitions).\n- **Secret Tip**: Take a 5-minute stretch break every 25 minutes!",
+      badge: "Master Planner",
+      ingredients: [
+        { id: "l1_role", label: "Role Power-up", text: "Act as a friendly class 7 tutor,", type: "role", desc: "Tells the AI to be a class 7 tutor." },
+        { id: "l1_subject", label: "Subject Power-up", text: "create a daily after-school study timetable for preparing science and math,", type: "detail", desc: "Specifies the subject and time." },
+        { id: "l1_details", label: "Detail Power-up", text: "assuming I have 2 hours of study time from 4 PM to 6 PM,", type: "background", desc: "Adds constraints." },
+        { id: "l1_finish", label: "Style Power-up", text: "formatted as a clear bulleted list with fun study tips.", type: "style", desc: "Specifies the layout style." }
       ]
+    }
+  },
+  {
+    id: 2,
+    title: "Solve Math Equations",
+    concept: "Mathematics",
+    learn: {
+      title: "Step-by-Step Math Tutor",
+      subtitle: "Ask the AI to explain the logic instead of just giving the answer!",
+      description: "If you ask an AI 'what is 2x + 5 = 15?', it will just say 'x = 5'. This doesn't help you learn! Instead, ask it to become a tutor.\n\n**Systematic Example:**\n**[Bad Prompt]**: 'Solve 2x + 5 = 15'\n**[Super Prompt]**: 'Act as a patient math teacher. Solve 2x + 5 = 15 step-by-step. Explain the rule for each step, and verify the final answer at the end.'\n\n**Important Rules:**\n- Ask for Steps: Always include 'Solve this step-by-step'.\n- Ask for the Rules: Tell it to explain the 'why' behind the math.\n- Verify: Ask it to verify the answer by plugging it back into the equation.",
+      tips: []
+    },
+    quest: {
+      characterName: "Algebra Wizard",
+      characterImage: "",
+      characterMsg: "I am stuck on this algebra equation: '3x - 7 = 14'. I want the AI to explain how to solve it step-by-step so I can do it myself next time.",
+      targetType: "Script Generator",
+      boringPrompt: "solve 3x-7=14",
+      boringOutputText: "x = 7",
+      superOutputText: "### Solving 3x - 7 = 14 Step-by-Step\n- **Goal**: Find the value of variable 'x'.\n- **Step 1 (Add 7 to both sides)**: To isolate the term with x, add 7 to both sides of the equation.\n  - 3x - 7 + 7 = 14 + 7\n  - 3x = 21\n- **Step 2 (Divide both sides by 3)**: To find x, divide both sides by 3.\n  - 3x / 3 = 21 / 3\n  - x = 7\n- **Verification**: Substitute x = 7 back into the original equation:\n  - 3(7) - 7 = 21 - 7 = 14. This is correct!",
+      badge: "Math Genius",
+      ingredients: [
+        { id: "l2_role", label: "Role Power-up", text: "Act as a patient math teacher,", type: "role", desc: "Tells the AI to be a math teacher." },
+        { id: "l2_subject", label: "Subject Power-up", text: "solve the linear equation 3x - 7 = 14 step-by-step,", type: "detail", desc: "Defines the equation to solve." },
+        { id: "l2_details", label: "Detail Power-up", text: "explaining the balance rule (doing the same operation on both sides),", type: "background", desc: "Asks for mathematical rules." },
+        { id: "l2_finish", label: "Style Power-up", text: "showing the calculation steps clearly and verifying the final answer.", type: "style", desc: "Specifies the output format." }
+      ]
+    }
+  },
+  {
+    id: 3,
+    title: "Notice Writing (Formal)",
+    concept: "Formal School Notice",
+    learn: {
+      title: "The Formal Notice Master",
+      subtitle: "Learn the exact layout for writing a professional school notice!",
+      description: "Notices are highly **FORMAL**. You must never use casual words like 'Hey' or 'Cool'. A school notice must follow a strict box format.\n\n**Systematic Layout Rules:**\n1. **School Name**: Top center.\n2. **The Word 'NOTICE'**: Right below it, in capital letters.\n3. **Date & Heading**: When and What.\n4. **Body**: Very short (under 50 words).\n5. **Sign-off**: Your name and designation (e.g., 'Head Boy').\n\n**Example Prompt**: 'Act as a Head Girl. Write a formal 50-word school notice about a lost watch following the standard CBSE box format.'\n\n**Important Rules:**\n- Specify the Tone: Always ask for a 'highly formal and respectful tone'.\n- Enforce the Layout: Command the AI to include the 'Date, Heading, and Signature'.\n- Keep it Strict: Set a hard limit of 'maximum 50 words'.",
+      tips: []
+    },
+    quest: {
+      characterName: "Notice Editor",
+      characterImage: "",
+      characterMsg: "As the School Head Boy, I need to write a formal notice for the school notice board about a Lost Water Bottle found in the playground. Help me format it correctly!",
+      targetType: "Script Generator",
+      boringPrompt: "write lost bottle notice",
+      boringOutputText: "I found a bottle on the playground. It is blue. If it is yours, come and take it from me. Thanks.",
+      superOutputText: "### NOTICE\n**BIHAR PUBLIC SCHOOL, PATNA**\n\n**Date**: 13th July, 2026\n\n**Subject**: Found: Blue Sports Water Bottle\n\nThis is to inform all students that a blue metal sports water bottle was found in the school playground during the lunch break yesterday. The owner can claim it from the school office after providing proof of ownership.\n\n**Ankit Kumar**\nHead Boy",
+      badge: "Star Editor",
+      ingredients: [
+        { id: "l3_role", label: "Role Power-up", text: "Act as the School Head Boy,", type: "role", desc: "Tells the AI your formal school role." },
+        { id: "l3_subject", label: "Subject Power-up", text: "write a formal school notice about a lost blue sports water bottle found in the playground,", type: "detail", desc: "Specifies the official topic." },
+        { id: "l3_details", label: "Detail Power-up", text: "using the standard formal school format with Date, Subject, and Designation,", type: "background", desc: "Defines strict formatting guidelines." },
+        { id: "l3_finish", label: "Style Power-up", text: "keeping the word count strictly under 50 words in a respectful tone.", type: "style", desc: "Specifies word limits and tone." }
+      ]
+    }
+  },
+  {
+    id: 4,
+    title: "Email & Letters (Informal)",
+    concept: "Informal Communication",
+    learn: {
+      title: "Fun Emails to Friends!",
+      subtitle: "How to tell AI to write casual, friendly, and exciting letters!",
+      description: "Unlike notices, **INFORMAL** letters and emails (to friends or family) are fun, relaxed, and full of emotion! You don't need a strict box format, but you do need the right vibe.\n\n**Systematic Rules for Informal Prompts:**\n1. **Greeting**: Use words like 'Dear Rohan' or 'Hi Uncle!'.\n2. **Tone**: Tell the AI to use a 'warm, enthusiastic, and friendly tone'.\n3. **Content**: It can be longer, chatty, and include personal feelings or jokes!\n\n**Example Prompt**: 'Act as my funny best friend. Write an informal email inviting me to a weekend movie marathon. Use a very excited tone!'\n\n**Important Rules:**\n- Set the Emotion: Use words like 'excited', 'nostalgic', or 'funny' in your prompt.\n- Casual Sign-off: Ask it to end with 'Lots of love' or 'Catch you later!'.",
+      tips: []
+    },
+    quest: {
+      characterName: "Party Planner",
+      characterImage: "",
+      characterMsg: "I want to send an informal, exciting email to invite my best friend Rahul to my space-themed birthday party! I want it to sound super fun and friendly.",
+      targetType: "Script Generator",
+      boringPrompt: "write birthday invite to rahul",
+      boringOutputText: "Subject: Birthday.\nHi Rahul, come to my birthday on Sunday. We will cut cake. Bye.",
+      superOutputText: "### Subject: You're invited to the ultimate SPACE PARTY!\n\nHey Rahul! \n\nHope you're having an awesome week! Guess what? I am throwing a massive Space-Themed Birthday Party this Sunday and you are the VIP guest!\n\nWe are going to have zero-gravity games, a rocket-shaped cake, and tons of pizza! Bring your best astronaut energy.\n\nLet me know if you can make it, I really want you there!\n\nLots of love and rocket fuel,\n**Your Best Friend**",
+      badge: "Email Pro",
+      ingredients: [
+        { id: "l4_role", label: "Role Power-up", text: "Act as an excited best friend,", type: "role", desc: "Sets a fun and friendly role." },
+        { id: "l4_subject", label: "Subject Power-up", text: "write an informal email inviting my friend Rahul to a space-themed birthday party,", type: "detail", desc: "Explains the fun event." },
+        { id: "l4_details", label: "Detail Power-up", text: "using a warm, enthusiastic, and chatty tone,", type: "background", desc: "Ensures casual politeness." },
+        { id: "l4_finish", label: "Style Power-up", text: "including fun space terms and ending with 'Lots of love'.", type: "style", desc: "Adds specific style elements." }
+      ]
+    }
+  },
+  {
+    id: 5,
+    title: "Essay Writing",
+    concept: "Structured Essays",
+    learn: {
+      title: "Story & Essay Builder",
+      subtitle: "Tell the AI exactly how to organize your paragraphs!",
+      description: "A bad prompt like 'write an essay about lions' gives you a giant, boring wall of text that puts everyone to sleep.\n\nTo write an amazing essay, be an architect! Tell the AI exactly how to build it:\n\n**Systematic Blueprint:**\n1. **Title**: 'Start with a catchy headline.'\n2. **Structure**: 'Write exactly 3 paragraphs.'\n3. **Content Map**: 'Paragraph 1 is the Introduction. Paragraph 2 is about Family Life. Paragraph 3 is the Conclusion.'\n\nThis guarantees a beautifully structured essay every single time!\n\n**Important Rules:**\n- Tell the AI the layout: Demand subheadings for each section.\n- Set a length limit: Give a strict limit like '100 words per paragraph'.\n- Define the audience: 'Write this so a 10-year-old can understand it.'",
+      tips: []
+    },
+    quest: {
+      characterName: "Creative Author",
+      characterImage: "",
+      characterMsg: "I want to write a short essay about lions for my class. My boring prompt 'write an essay about lions' is just too long and messy. Can you help me prompt the AI to write a structured, 3-paragraph essay with a catchy title?",
+      targetType: "Script Generator",
+      boringPrompt: "write an essay about lions",
+      boringOutputText: "Lions are big cats. They live in Africa. They are called the king of the jungle. They hunt in groups called prides. They eat meat. They sleep a lot.",
+      superOutputText: "### The Majestic Kings of the Savannah\n\n**Introduction**: Lions are powerful big cats that live in the grassy savannahs of Africa. They are famous for their golden fur, loud roars, and strong bodies, earning them the title 'King of the Jungle'.\n\n**Family Life**: Unlike other cats, lions live in large family groups called prides. The female lionesses do most of the hunting and work together to protect their cute cubs.\n\n**Conclusion**: Lions are essential protectors of their environment. By keeping the animal population in balance, they help keep the savannah healthy and beautiful for everyone.",
+      badge: "Master Essayist",
+      ingredients: [
+        { id: "l5_role", label: "Role Power-up", text: "Act as a creative children's encyclopedia writer,", type: "role", desc: "Sets a creative writer role." },
+        { id: "l5_subject", label: "Subject Power-up", text: "write an informative article about the life of African lions,", type: "detail", desc: "Sets the animal topic." },
+        { id: "l5_details", label: "Detail Power-up", text: "structured with a title and exactly three paragraphs (Introduction, Body, Conclusion),", type: "background", desc: "Specifies paragraph structure." },
+        { id: "l5_finish", label: "Style Power-up", text: "using an engaging and educational tone suitable for a school project.", type: "style", desc: "Selects tone." }
+      ]
+    }
+  },
+  {
+    id: 6,
+    title: "Comprehension Helper",
+    concept: "Reading Comprehension",
+    learn: {
+      title: "Understand Any Difficult Text",
+      subtitle: "Ask the AI to break down difficult text and create practice quizzes!",
+      description: "Ever read a paragraph in English class and thought, 'What does this even mean?!' AI can be your personal translator!\n\nInstead of just asking 'explain this', use a **Systematic Learning Prompt**:\n\n1. **Summarize**: 'Extract the 3 most important facts from this story.'\n2. **Vocabulary**: 'Find 2 difficult words in the text and explain their meaning using simple examples.'\n3. **Test Me**: 'Generate a multiple-choice question to test if I understood it.'\n\n**Important Rules:**\n- Ask for Bullet Points: It makes summaries much easier to read.\n- Demand Simplicity: Tell the AI to 'explain it like I am 12 years old'.\n- Self-Test: The best way to learn is by taking a mini-quiz at the end!",
+      tips: []
+    },
+    quest: {
+      characterName: "Literary Guide",
+      characterImage: "",
+      characterMsg: "I have this short passage about the Invention of the Printing Press. I want the AI to help me summarize it and quiz me so I can study for my comprehension exam.",
+      targetType: "Script Generator",
+      boringPrompt: "explain this printing press paragraph",
+      boringOutputText: "The printing press was invented by Johannes Gutenberg in the 15th century. It made books cheaper and allowed people to read more.",
+      superOutputText: "### Printing Press Comprehension Guide\n- **Key Summary Points**:\n  1. Johannes Gutenberg invented the printing press in Germany around 1440.\n  2. It allowed books to be mass-produced, making them affordable for common people.\n  3. It started a reading revolution, spreading knowledge and education quickly.\n- **Vocabulary Builder**:\n  - Mass-produced: Made in large quantities using machines (like making 1000 books instead of copying 1 by hand).\n  - Revolution: A huge change in the way people live or work.\n- **Quick Quiz**:\n  - Q: Who invented the printing press?\n  - A: Johannes Gutenberg",
+      badge: "Text Explorer",
+      ingredients: [
+        { id: "l6_role", label: "Role Power-up", text: "Act as an English comprehension tutor,", type: "role", desc: "Tells the AI to act as a tutor." },
+        { id: "l6_subject", label: "Subject Power-up", text: "analyze the passage about the printing press and extract 3 main facts,", type: "detail", desc: "Defines the text to analyze." },
+        { id: "l6_details", label: "Detail Power-up", text: "list and define any 2 difficult words in simple student-friendly terms,", type: "background", desc: "Asks for vocabulary help." },
+        { id: "l6_finish", label: "Style Power-up", text: "generate a 1-question check quiz with answer key at the bottom.", type: "style", desc: "Requests a quick self-test." }
+      ]
+    }
+  },
+  {
+    id: 7,
+    title: "Science: Photosynthesis",
+    concept: "Science Concepts",
+    learn: {
+      title: "Explain Science with Metaphors",
+      subtitle: "Learn complex science by comparing it to everyday fun things!",
+      description: "Science can have hard, scary words like 'chlorophyll' or 'stomata'. A boring prompt gives a boring textbook definition.\n\nTo make science fun, use **Metaphors** (comparisons)! Ask the AI to compare a confusing science topic to something you already understand.\n\n**Systematic Example:**\n**[Bad]**: 'Explain photosynthesis.'\n**[Super]**: 'Explain photosynthesis by comparing the plant to a Chef cooking in a kitchen. Explain what the ingredients (sun, water, CO2) are, and what the final dish is!'\n\n**Important Rules:**\n- Use Metaphors: Compare atoms to LEGOs, or blood cells to delivery trucks.\n- Simple Words: Ask the AI to explain terms in language a 6th grader can understand.\n- Visuals: Ask it to describe what a diagram of the process would look like.",
+      tips: []
+    },
+    quest: {
+      characterName: "Science Tutor",
+      characterImage: "",
+      characterMsg: "I need to learn Photosynthesis for my science test tomorrow, but the textbook definition is too confusing. Help me prompt the AI to explain it like a cooking recipe!",
+      targetType: "Script Generator",
+      boringPrompt: "what is photosynthesis",
+      boringOutputText: "Photosynthesis is the process by which green plants use sunlight, carbon dioxide, and water to synthesize nutrients.",
+      superOutputText: "### Plant Kitchen: The Photosynthesis Recipe\n- **The Metaphor**: The Leaf is a mini kitchen, and the Plant is a Chef!\n- **The Ingredients**:\n  1. **Sunlight**: The stove or heat source (captured by chlorophyll, the chef's solar panels).\n  2. **Water**: Drawn from the roots (like water from the tap).\n  3. **Carbon Dioxide**: Sucked in from the air through tiny leaf pores (like fresh air from the kitchen window).\n- **The Dish**: Glucose (sugar food) and fresh Oxygen (released into the air for us!).",
+      badge: "Junior Scientist",
+      ingredients: [
+        { id: "l7_role", label: "Role Power-up", text: "Act as a friendly middle school science teacher,", type: "role", desc: "Sets a teaching role." },
+        { id: "l7_subject", label: "Subject Power-up", text: "explain the process of photosynthesis using a cooking metaphor,", type: "detail", desc: "Defines the metaphor type." },
+        { id: "l7_details", label: "Detail Power-up", text: "explaining the roles of chlorophyll, water, carbon dioxide, and oxygen,", type: "background", desc: "Includes terms." },
+        { id: "l7_finish", label: "Style Power-up", text: "using a simple, exciting tone with bullet points.", type: "style", desc: "Formats as list." }
+      ]
+    }
+  },
+  {
+    id: 8,
+    title: "Science: Water Cycle",
+    concept: "Science Concepts",
+    learn: {
+      title: "Learn Through Storytelling",
+      subtitle: "Turn boring science stages into an epic adventure story!",
+      description: "The water cycle has four major parts: Evaporation, Condensation, Precipitation, and Collection. Memorizing them is boring!\n\nInstead, ask the AI to write an **Adventure Story**.\n\n**Systematic Trick:**\nWhen you read a story about a little water droplet named 'Dewey' going on a wild skydive, your brain remembers the facts 10x better! Combine facts with fiction to create the perfect study notes.\n\n**Important Rules:**\n- Story Method: Ask the AI to explain a cycle by telling a story about a fun character.\n- Force Vocabulary: Command the AI: 'You MUST include these exact scientific words...'\n- Summary: Ask for a quick 1-sentence recap at the very end.",
+      tips: []
+    },
+    quest: {
+      characterName: "Nature Explorer",
+      characterImage: "",
+      characterMsg: "I need to remember the 4 stages of the water cycle for my science exam. Let's make a prompt that tells the adventure of a water droplet!",
+      targetType: "Script Generator",
+      boringPrompt: "what are the stages of the water cycle",
+      boringOutputText: "The stages of the water cycle are evaporation, condensation, precipitation, and run-off.",
+      superOutputText: "### Dewey's Grand Water Cycle Adventure\n- **Stage 1: Evaporation (The Lift)**: Dewey the water droplet lies in a warm lake. The hot sun shines down, heating him up until he turns into invisible water vapor and floats high into the sky!\n- **Stage 2: Condensation (The Cloud)**: High up, the air is cold. Dewey cools down, turns back into a water droplet, and clings to his friends to form a soft, white cloud.\n- **Stage 3: Precipitation (The Dive)**: The cloud gets heavy. Dewey and his friends drop down as cool, refreshing rain!\n- **Stage 4: Collection (Home)**: Dewey lands on the soil and flows into a river, ready to start the journey again.",
+      badge: "Eco Warrior",
+      ingredients: [
+        { id: "l8_role", label: "Role Power-up", text: "Act as a creative science storyteller,", type: "role", desc: "Tells the AI to be a storyteller." },
+        { id: "l8_subject", label: "Subject Power-up", text: "explain the water cycle through a short story about a water droplet,", type: "detail", desc: "Sets story subject." },
+        { id: "l8_details", label: "Detail Power-up", text: "clearly highlighting evaporation, condensation, and precipitation,", type: "background", desc: "Demands cycle terminology." },
+        { id: "l8_finish", label: "Style Power-up", text: "written in a fun, educational narrative style for kids.", type: "style", desc: "Selects storytelling tone." }
+      ]
+    }
+  },
+  {
+    id: 9,
+    title: "Image Generation",
+    concept: "AI Art Creation",
+    learn: {
+      title: "Be an AI Art Director",
+      subtitle: "Describe colors, style, and lighting to generate masterpieces!",
+      description: "When using AI image generators, a simple prompt like 'a turtle' will give you a plain, boring photograph.\n\nTo make a masterpiece, you must act like a Hollywood Art Director! Build your prompt systematically:\n\n1. **The Subject**: What is the main thing? (A turtle flying in space)\n2. **The Medium/Style**: How is it drawn? (3D Pixar animation, or glowing neon chalk?)\n3. **The Lighting**: Where is the light coming from? (Cinematic lighting, warm sunset, glowing edges)\n\n**Important Rules:**\n- Specify the Art Style: Use terms like '8-bit pixel art', 'watercolor', or 'cyberpunk'.\n- Describe the Lighting: Lighting changes everything! Try 'golden hour' or 'neon glow'.\n- Add fine details: Describe the character's clothing, expressions, and surroundings.",
+      tips: []
     },
     quest: {
       characterName: "AI Art Assistant",
@@ -92,765 +303,203 @@ const lessonsData = [
       superOutputImage: "/images/ai/neon_turtle.png",
       badge: "Master Artist",
       ingredients: [
-        {
-          id: "l1_style",
-          label: "Medium Power-up",
-          text: "A glowing neon chalk illustration drawn on a dark slate blackboard,",
-          type: "role",
-          desc: "Sets the specific art medium."
-        },
-        {
-          id: "l1_subject",
-          label: "Subject Power-up",
-          text: "showing a magical sea turtle swimming through the cosmos,",
-          type: "detail",
-          desc: "Describes the turtle subject."
-        },
-        {
-          id: "l1_details",
-          label: "Detail Power-up",
-          text: "with its shell made of shimmering violet star constellations,",
-          type: "background",
-          desc: "Adds galactic details to the shell."
-        },
-        {
-          id: "l1_finish",
-          label: "Texture Power-up",
-          text: "creating bright glowing edges and dusty chalk textures.",
-          type: "style",
-          desc: "Adds glowing borders and textures."
-        }
+        { id: "l9_role", label: "Medium Power-up", text: "A glowing neon chalk illustration drawn on a dark slate blackboard,", type: "role", desc: "Sets the specific art medium." },
+        { id: "l9_subject", label: "Subject Power-up", text: "showing a magical sea turtle swimming through the cosmos,", type: "detail", desc: "Describes the turtle subject." },
+        { id: "l9_details", label: "Detail Power-up", text: "with its shell made of shimmering violet star constellations,", type: "background", desc: "Adds galactic details to the shell." },
+        { id: "l9_finish", label: "Texture Power-up", text: "creating bright glowing edges and dusty chalk textures.", type: "style", desc: "Adds glowing borders and textures." }
       ]
-    },
-    sandbox: {
-      category: "image",
-      title: "Art Director Sandbox",
-      inputs: [
-        {
-          key: "subject",
-          label: "Subject Description",
-          type: "text",
-          placeholder: "e.g., a happy flying cat"
-        },
-        {
-          key: "style",
-          label: "Art Style",
-          type: "select",
-          options: [
-            "Pixar 3D Animation",
-            "8-Bit Retro Pixel Art",
-            "Delicate Watercolor Painting",
-            "Glow-in-the-dark Neon Cyberpunk"
-          ]
-        }
-      ],
-      template: t => `Create a high-quality drawing of ${t.subject || "a friendly baby dragon"} in a ${t.style || "Pixar 3D Animation"} style.`
-    },
-    battle: {
-      scenario: "You want an image of a puppy playing in the rain, but styled like an old-school video game. Which prompt should you use?",
-      options: [
-        {
-          text: "draw a puppy in a rain game",
-          isCorrect: false,
-          feedback: "Too simple! The AI might make a flat cartoon drawing instead of actual retro pixel grids."
-        },
-        {
-          text: "A cute golden retriever puppy splashing in a puddle under the rain. Retro 8-bit pixel art style, blocky pixel grids, and game boy color palette.",
-          isCorrect: true,
-          feedback: "Spot on! You specified the pixel style, blocky grids, and color palette."
-        },
-        {
-          text: "cute puppy rain video game graphics",
-          isCorrect: false,
-          feedback: "A bit short. The AI generator won't know if you want 3D, pixel art, or realistic drawing."
-        },
-        {
-          text: "puppy in rain vector illustration logo",
-          isCorrect: false,
-          feedback: "Vector illustration logo is a clean flat graphic, not an old-school video game pixel art style!"
-        }
-      ],
-      explanation: "Specific style keywords (like '8-bit pixel art' and 'blocky grids') guide the AI image generator to produce the exact artistic style you want."
     }
   },
   {
-    id: 2,
-    title: "Story & Essay Builder",
-    icon: "",
-    concept: "Essay Writing",
+    id: 10,
+    title: "Story Writing (Narrative)",
+    concept: "Creative Writing",
     learn: {
-      title: "Story & Essay Builder (Structure your Writing)",
-      subtitle: "Tell the AI exactly how to organize your paragraphs!",
-      description: "A bad essay prompt like 'write an essay about lions' will give you a giant, boring block of text that is hard to read. A good prompt tells the AI who to act as (like a creative writer), who the reader is (like school kids), how many paragraphs to write, and to include a title and subheadings!",
-      tips: [
-        "Tell the AI the layout: 'Include a title, introduction, body, and conclusion.'",
-        "Set a length limit: 'Write exactly 3 short paragraphs.'",
-        "Define the tone: 'Write in an exciting and informative style.'"
-      ]
+      title: "The Master Storyteller",
+      subtitle: "Prompt AI to write a thrilling story with characters and plot twists!",
+      description: "Writing a story is like directing a movie. If you just say 'write a story about a dog', the AI will write something very boring.\n\n**Systematic Blueprint:**\n1. **Setting**: Where does it happen? (e.g., A haunted forest in 2050).\n2. **Characters**: Who is the hero? (e.g., Max, a robot dog).\n3. **Conflict**: What is the problem? (e.g., He lost his battery).\n4. **Resolution**: How does it end? (e.g., He uses solar power to save the day).\n\n**Important Rules:**\n- Set the Tone: Tell the AI if it should be scary, funny, or mysterious.\n- Add Dialogue: Command the AI to include conversations between characters.",
+      tips: []
     },
     quest: {
-      characterName: "AI Writing Assistant",
+      characterName: "Story Weaver",
       characterImage: "",
-      characterMsg: "I want to write a short essay about lions for my class. My boring prompt 'write an essay about lions' is just too long and messy. Can you help me prompt the AI to write a structured, 3-paragraph essay with a catchy title?",
+      characterMsg: "I need to write a suspenseful short story for my English assignment about a lost treasure in a jungle. Help me prompt the AI to make it exciting!",
       targetType: "Script Generator",
-      boringPrompt: "write an essay about lions",
-      boringOutputText: "Lions are big cats. They live in Africa. They are called the king of the jungle. They hunt in groups called prides. They eat meat. They sleep a lot.",
-      superOutputText: "The Majestic Kings of the Savannah\n\nIntroduction: Lions are powerful big cats that live in the grassy savannahs of Africa. They are famous for their golden fur, loud roars, and strong bodies, earning them the title 'King of the Jungle'.\n\nFamily Life: Unlike other cats, lions live in large family groups called prides. The female lionesses do most of the hunting and work together to protect their cute cubs.\n\nConclusion: Lions are essential protectors of their environment. By keeping the animal population in balance, they help keep the savannah healthy and beautiful for everyone.",
-      badge: "Master Essayist",
+      boringPrompt: "write a story about jungle treasure",
+      boringOutputText: "Once upon a time, there was a jungle. A boy went inside. He found a treasure box. He was very happy and went home.",
+      superOutputText: "### The Secret of the Emerald Vine\n\nThe Amazon jungle was thick with fog as Leo hacked through the vines. He was exhausted, but the map in his hands glowed faintly in the dark. \n\nSuddenly, he heard a low growl from the bushes. 'Who goes there?' Leo shouted, his heart pounding. \n\nFrom the shadows emerged a giant golden jaguar, guarding the entrance to the ancient Emerald Temple. Using his quick wits, Leo offered the jaguar his shiny compass. The beast sniffed it, purred, and let him pass, revealing a room filled with glowing green gems!",
+      badge: "Master Novelist",
       ingredients: [
-        {
-          id: "l2_role",
-          label: "Role Power-up",
-          text: "Act as a creative children's encyclopedia writer,",
-          type: "role",
-          desc: "Tells the AI what mask to wear."
-        },
-        {
-          id: "l2_subject",
-          label: "Subject Power-up",
-          text: "write an informative article about the life of African lions,",
-          type: "detail",
-          desc: "Describes the main topic."
-        },
-        {
-          id: "l2_structure",
-          label: "Structure Power-up",
-          text: "structured with a title and exactly three paragraphs (Introduction, Body, Conclusion),",
-          type: "background",
-          desc: "Sets the format rules."
-        },
-        {
-          id: "l2_tone",
-          label: "Tone Power-up",
-          text: "using an engaging and educational tone suitable for a school project.",
-          type: "style",
-          desc: "Specifies the writing tone."
-        }
+        { id: "l10_role", label: "Role Power-up", text: "Act as a suspenseful mystery author,", type: "role", desc: "Sets the author persona." },
+        { id: "l10_subject", label: "Subject Power-up", text: "write a short story about an explorer named Leo finding treasure in the jungle,", type: "detail", desc: "Sets the plot and character." },
+        { id: "l10_details", label: "Detail Power-up", text: "including a conflict with a wild animal and a clever resolution,", type: "background", desc: "Adds the problem and solution." },
+        { id: "l10_finish", label: "Style Power-up", text: "using descriptive words and at least one line of dialogue.", type: "style", desc: "Forces dialogue and adjectives." }
       ]
-    },
-    sandbox: {
-      category: "text",
-      title: "Essay Organizer Sandbox",
-      inputs: [
-        {
-          key: "subject",
-          label: "Subject Description",
-          type: "text",
-          placeholder: "e.g., why honeybees are important"
-        },
-        {
-          key: "paragraphs",
-          label: "Paragraph Count",
-          type: "select",
-          options: [
-            "exactly 2 short paragraphs",
-            "exactly 3 short paragraphs",
-            "exactly 4 short paragraphs"
-          ]
-        },
-        {
-          key: "tone",
-          label: "Writing Tone",
-          type: "select",
-          options: [
-            "exciting and energetic",
-            "factual and serious",
-            "simple and easy for kids"
-          ]
-        }
-      ],
-      template: t => `Act as a creative educational writer. Write a short article about ${t.subject || "saving trees"}. Structure: Include a title and write ${t.paragraphs || "exactly 3 short paragraphs"}. Tone: Use a ${t.tone || "simple and easy for kids"} style.`
-    },
-    battle: {
-      scenario: "You need to write a descriptive essay about your school. Which prompt gets you a well-structured essay?",
-      options: [
-        {
-          text: "write a story about school",
-          isCorrect: false,
-          feedback: "Too vague! The AI will write a random story rather than a structured essay about your specific school."
-        },
-        {
-          text: "Act as a school guide. Write a 3-paragraph descriptive essay about my school. Paragraph 1: The beautiful building. Paragraph 2: The friendly teachers and students. Paragraph 3: Why I love it. Include a title.",
-          isCorrect: true,
-          feedback: "Perfect! You specified the role, the number of paragraphs, and what each paragraph should cover."
-        },
-        {
-          text: "make an essay about school with 5000 words",
-          isCorrect: false,
-          feedback: "Too long! That will generate a huge wall of text that is hard to read."
-        },
-        {
-          text: "school essay format",
-          isCorrect: false,
-          feedback: "This just asks for a format template, not a completed structured essay."
-        }
-      ],
-      explanation: "Defining what goes into each paragraph ensures the AI doesn't ramble and gives you exactly what you need."
     }
   },
   {
-    id: 3,
-    title: "Poem & Story Explainer",
-    icon: "📖",
-    concept: "Literature Simplifier",
+    id: 11,
+    title: "Poem Writing",
+    concept: "Creative Writing",
     learn: {
-      title: "Poem & Story Explainer (Bilingual)",
-      subtitle: "Simplify and translate poems or stories in English & Hindi!",
-      description: "Reading old or classic poems and stories can be difficult due to complex words, metaphors, and cultural contexts. A lazy prompt like 'what does this poem mean?' might reply with even more confusing explanations. A great prompt tells the AI to act as a bilingual literature teacher, break down the core message, and explain it in simple, child-friendly terms in BOTH English and Hindi!",
-      tips: [
-        "Set a clear role: 'Act as a friendly bilingual literature teacher.'",
-        "Specify the source: 'Explain the central theme and hidden meaning of the poem [Name].'",
-        "Request bilingual output: 'Provide the summary in both English and Hindi sections using simple words.'"
-      ]
+      title: "The Poetry Generator",
+      subtitle: "Command AI to rhyme and use rhythm perfectly!",
+      description: "Poems need rhythm, rhyming words, and deep meanings. A plain prompt gives a plain poem.\n\n**Systematic Blueprint:**\n1. **Topic & Theme**: What is the poem about? (e.g., A rainy day and feeling cozy).\n2. **Structure**: How many stanzas (paragraphs)? (e.g., 3 stanzas).\n3. **Rhyme Scheme**: AABB (every two lines rhyme) or ABAB (alternate lines rhyme).\n\n**Important Rules:**\n- Specify the Rhyme: Always tell the AI the exact rhyme scheme you want.\n- Metaphors: Ask the AI to compare things (e.g., 'compare the rain to a dancer').",
+      tips: []
     },
     quest: {
-      characterName: "AI Literature Assistant",
+      characterName: "Poetry Bard",
       characterImage: "",
-      characterMsg: "I am trying to understand the famous poem 'Where the Mind is Without Fear' by Rabindranath Tagore. But the language is too deep for me! Can you help me build a Super Prompt that explains it in simple terms in both English and Hindi?",
+      characterMsg: "I want to write a beautiful 2-stanza poem about the Moon for my school magazine. Let's make it rhyme perfectly!",
       targetType: "Script Generator",
-      boringPrompt: "explain Where the mind is without fear",
-      boringOutputText: "Where the Mind is Without Fear is a patriotic poem written by Rabindranath Tagore expressing his vision of a free and awakened India.",
-      superOutputText: "Where the Mind is Without Fear Meaning / कविता का अर्थ\n- Central Theme / मुख्य विषय: The poem expresses Rabindranath Tagore's dream of a free nation where people live with dignity, self-respect, and truth without any fear.\n- English Explanation: Tagore prays for a country where knowledge is free for all children, where society is not divided by caste or religion, and everyone speaks the truth.\n- Hindi Explanation: कवि रबींद्रनाथ टैगोर एक ऐसे देश की कामना करते हैं जहाँ सब बिना किसी डर के गर्व से जिएं, ज्ञान सबके लिए मुफ्त हो, और लोग आपस में न लड़ें।\n- Core Lesson / सीख: True freedom means having a fearless mind, holding your head high with self-respect, and always walking on the path of truth.",
-      badge: "Literature Scholar",
+      boringPrompt: "write a poem about the moon",
+      boringOutputText: "The moon is very bright.\nIt comes out in the night.\nIt is up in the sky.\nWay up high.",
+      superOutputText: "### The Silver Watcher\n\nA silver coin tossed in the night,\nIt bathes the world in gentle light.\nIt watches while the children sleep,\nAnd guards the secrets in the deep.\n\nThough clouds may try to hide its face,\nIt glides along with silent grace.\nA lonely traveler in the dark,\nLeaving a glowing, peaceful mark.",
+      badge: "Master Poet",
       ingredients: [
-        {
-          id: "l3_role",
-          label: "Role Power-up",
-          text: "Act as a friendly bilingual literature teacher,",
-          type: "role",
-          desc: "Tells the AI to play a bilingual teacher."
-        },
-        {
-          id: "l3_subject",
-          label: "Subject Power-up",
-          text: "explain the meaning of the poem 'Where the mind is without fear',",
-          type: "detail",
-          desc: "Defines the poem to explain."
-        },
-        {
-          id: "l3_constraint",
-          label: "Bilingual Power-up",
-          text: "breaking it down into simple terms in both English and Hindi,",
-          type: "background",
-          desc: "Asks for a simple bilingual breakdown."
-        },
-        {
-          id: "l3_format",
-          label: "Format Power-up",
-          text: "formatting the output with bullet points for Theme, English meaning, and Hindi meaning.",
-          type: "style",
-          desc: "Specifies a clean bulleted layout."
-        }
+        { id: "l11_role", label: "Role Power-up", text: "Act as an award-winning poet,", type: "role", desc: "Sets the poetic role." },
+        { id: "l11_subject", label: "Subject Power-up", text: "write a poem about the moon watching over the sleeping world,", type: "detail", desc: "Sets the theme." },
+        { id: "l11_details", label: "Detail Power-up", text: "structured in exactly 2 stanzas using an AABB rhyme scheme,", type: "background", desc: "Forces exact poem structure." },
+        { id: "l11_finish", label: "Style Power-up", text: "using gentle and peaceful vocabulary.", type: "style", desc: "Sets the mood." }
       ]
-    },
-    sandbox: {
-      category: "text",
-      title: "Poem & Story Simplifier Sandbox",
-      inputs: [
-        {
-          key: "subject",
-          label: "Poem/Story Title",
-          type: "text",
-          placeholder: "e.g., Where the Mind is Without Fear"
-        },
-        {
-          key: "language",
-          label: "Languages",
-          type: "select",
-          options: [
-            "both English and Hindi",
-            "only English (simplified)",
-            "only Hindi (सरल हिंदी)"
-          ]
-        },
-        {
-          key: "format",
-          label: "Output Format",
-          type: "select",
-          options: [
-            "bulleted summary",
-            "line-by-line breakdown",
-            "short story summary"
-          ]
-        }
-      ],
-      template: t => `Act as a friendly bilingual literature teacher. Explain the meaning and theme of the poem/story "${t.subject || "Where the Mind is Without Fear"}" in ${t.language || "both English and Hindi"}. Format the output as a ${t.format || "bulleted summary"} in simple, child-friendly words.`
-    },
-    battle: {
-      scenario: "You want to understand the moral of the classic story 'The Boy Who Cried Wolf' in simple terms. Which prompt will get you a clear explanation in both English and Hindi?",
-      options: [
-        {
-          text: "what is the boy who cried wolf story about",
-          isCorrect: false,
-          feedback: "Too simple! The AI will write a long summary of the story in English, but it won't give a bilingual explanation of the moral."
-        },
-        {
-          text: "Act as a friendly bilingual literature teacher. Explain the core moral of 'The Boy Who Cried Wolf' in simple, easy-to-understand terms. Provide the response in two clear bullet points: first in English, and second in Hindi (हिंदी).",
-          isCorrect: true,
-          feedback: "Fantastic! This prompt specifies the role, the story, simple language, and the bilingual bulleted output."
-        },
-        {
-          text: "translate the story of the wolf boy into hindi",
-          isCorrect: false,
-          feedback: "This just translates the whole story into Hindi. It does not explain the moral in simple terms in both languages."
-        },
-        {
-          text: "moral of the boy who cried wolf",
-          isCorrect: false,
-          feedback: "This asks for the moral, but does not specify simple language or the bilingual (English and Hindi) requirement."
-        }
-      ],
-      explanation: "Using a role like 'bilingual literature teacher' and asking for a structured output ensures you get the moral explained simply in both languages!"
     }
   },
   {
-    id: 4,
-    title: "Math Solver",
-    icon: "📐",
-    concept: "Math Questioning",
+    id: 12,
+    title: "Argumentative Composition",
+    concept: "Debate & Essays",
     learn: {
-      title: "Math Solver (Solve Word Problems)",
-      subtitle: "Make AI think step-by-step to solve math correctly!",
-      description: "A bad math prompt just asks for the answer, which can make the AI guess or skip steps. A good math prompt tells the AI to act as a math teacher, write down each step of the calculation, and explain the rules like PEMDAS. PEMDAS stands for: P (Parentheses), E (Exponents), M (Multiplication), D (Division), A (Addition), and S (Subtraction) — the magic order of operations in math!",
-      tips: [
-        "Tell the AI: 'Explain each step of the calculation.'",
-        "Use the magic words: 'Let's think step-by-step.'",
-        "Specify the rules: 'Use PEMDAS (Parentheses, Exponents, Multiplication, Division, Addition, Subtraction) order of operations.'"
-      ]
+      title: "The Great Debater",
+      subtitle: "Learn to build strong arguments and counter-arguments!",
+      description: "In an argumentative essay, you must pick a side and defend it with logic. If you just ask AI to 'write about homework', it will just ramble.\n\n**Systematic Blueprint:**\n1. **Stance**: Tell the AI exactly which side to take (e.g., 'Homework should be banned').\n2. **Arguments**: Ask for 3 strong logical points.\n3. **Counter-Argument**: Acknowledge the other side (e.g., 'Some say homework helps practice, BUT...').\n4. **Conclusion**: End with a powerful closing statement.\n\n**Important Rules:**\n- Use Transition Words: Tell AI to use words like 'Firstly', 'However', and 'In conclusion'.\n- Stay Formal: Arguments should sound logical, not emotional.",
+      tips: []
     },
     quest: {
-      characterName: "AI Mathematics Assistant",
+      characterName: "Debate Captain",
       characterImage: "",
-      characterMsg: "I need to solve a tricky math puzzle: 'What is 4 + 3 x 5?' If I write a simple prompt like 'solve 4+3x5', the AI might calculate it left-to-right (4+3=7, 7x5=35) instead of using PEMDAS (3x5=15, 4+15=19). Help me craft a Super Prompt with the math rules!",
+      characterMsg: "I have a debate tomorrow. My topic is 'Junk Food should be banned in school canteens'. Help me prompt the AI to write a solid argumentative essay!",
       targetType: "Script Generator",
-      boringPrompt: "solve 4+3x5",
-      boringOutputText: "The answer is 35.",
-      superOutputText: "Let's solve the math problem 4 + 3 x 5 step-by-step:\n1. Rule (PEMDAS): Multiplication must be performed before addition.\n2. Step 1: Multiply 3 by 5. (3 x 5 = 15).\n3. Step 2: Add 4 to the result of Step 1. (4 + 15 = 19).\nConclusion: The final correct answer is 19.",
-      badge: "Math Champion",
+      boringPrompt: "write an essay on banning junk food",
+      boringOutputText: "Junk food is bad. It makes you sick. Schools should not sell it. Students should eat apples instead. That is why it should be banned.",
+      superOutputText: "### The Case Against Junk Food in Schools\n\n**Introduction**: School is a place for holistic development, which includes both mental and physical health. Therefore, junk food must be strictly banned in school canteens.\n\n**Key Arguments**: \nFirstly, junk food is highly processed and causes lethargy, reducing a student's ability to focus in class. Secondly, daily consumption leads to severe long-term health issues like obesity. \n\n**Counter-Argument**: Some argue that students should have the freedom to choose their food. However, children are often too young to make healthy choices when tempted by sugar.\n\n**Conclusion**: By replacing junk food with nutritious options, schools can actively protect the health and focus of their students.",
+      badge: "Master Debater",
       ingredients: [
-        {
-          id: "l4_role",
-          label: "Role Power-up",
-          text: "Act as a patient math tutor,",
-          type: "role",
-          desc: "Tells AI to play a patient math tutor."
-        },
-        {
-          id: "l4_subject",
-          label: "Question Power-up",
-          text: "solve the expression 4 + 3 x 5,",
-          type: "detail",
-          desc: "Provides the expression to solve."
-        },
-        {
-          id: "l4_logic",
-          label: "Logic Power-up",
-          text: "thinking step-by-step using PEMDAS order of operations,",
-          type: "background",
-          desc: "Instructs AI to think step-by-step using PEMDAS (Parentheses, Exponents, Mult/Div, Add/Sub)."
-        },
-        {
-          id: "l4_conclusion",
-          label: "Answer Power-up",
-          text: "and highlighting the final answer in a clear conclusion line.",
-          type: "style",
-          desc: "Specifies formatting of the final answer."
-        }
+        { id: "l12_role", label: "Role Power-up", text: "Act as an expert debate captain,", type: "role", desc: "Sets a strong debating tone." },
+        { id: "l12_subject", label: "Subject Power-up", text: "write an argumentative essay arguing that junk food should be banned in schools,", type: "detail", desc: "Sets the exact stance." },
+        { id: "l12_details", label: "Detail Power-up", text: "including an introduction, 2 strong arguments, and 1 counter-argument,", type: "background", desc: "Defines the debate layout." },
+        { id: "l12_finish", label: "Style Power-up", text: "using formal transition words like 'Firstly' and 'However'.", type: "style", desc: "Forces professional language." }
       ]
-    },
-    sandbox: {
-      category: "text",
-      title: "Math Prompt Builder",
-      inputs: [
-        {
-          key: "subject",
-          label: "Subject Description",
-          type: "text",
-          placeholder: "e.g., 10 - 2 x 4 + 1"
-        },
-        {
-          key: "rule",
-          label: "Select Rule",
-          type: "select",
-          options: [
-            "PEMDAS rules",
-            "Step-by-step steps",
-            "Explain the logic"
-          ]
-        }
-      ],
-      template: t => `Act as a patient math tutor, solve the problem ${t.subject || "5 + 2 x 3"}. Let's think step-by-step and explain each calculation using ${t.rule || "PEMDAS rules"}.`
-    },
-    battle: {
-      scenario: "You want the AI to help you solve a word problem: 'Sam has 12 apples. He gives half to Roy, and gets 3 back.' Which prompt ensures a correct explanation?",
-      options: [
-        {
-          text: "what is 12 divided by 2 plus 3",
-          isCorrect: false,
-          feedback: "Too simple! The AI might give you just a number without explaining how it solved it."
-        },
-        {
-          text: "Act as a friendly math teacher. Solve the word problem about Sam's apples. Think step-by-step, showing the subtraction and addition steps separately, and explain the final answer.",
-          isCorrect: true,
-          feedback: "Excellent! The AI will show each step clearly, helping you understand the math behind it."
-        },
-        {
-          text: "explain this math question: Sam had 12 apples, gave half away, and got 3",
-          isCorrect: false,
-          feedback: "A bit too vague. The AI might write a long story instead of showing the step-by-step math."
-        },
-        {
-          text: "write a python code to calculate 12/2 + 3",
-          isCorrect: false,
-          feedback: "This just writes computer code, it doesn't explain the math problem step-by-step in plain English!"
-        }
-      ],
-      explanation: "Asking the AI to show its steps helps it keep track of numbers and gives you a clear explanation to learn from."
     }
   },
   {
-    id: 5,
-    title: "Science Explorer",
-    icon: "🔬",
-    concept: "Science Related",
+    id: 13,
+    title: "Descriptive Writing",
+    concept: "Creative Writing",
     learn: {
-      title: "Science Explorer (Use Metaphors)",
-      subtitle: "Ask the AI for simple metaphors to understand hard topics!",
-      description: "Science has many big words and tricky ideas, like photosynthesis or gravity. A bad prompt like 'what is photosynthesis' gives you a hard, college-level textbook page. A good prompt tells the AI to use a simple metaphor (like comparing a leaf to a solar-powered food factory) so it is super easy and fun to learn!",
-      tips: [
-        "Ask for metaphors: 'Explain this using a simple metaphor (like a factory or a train).'",
-        "Target the age: 'Explain it to a 10-year-old child.'",
-        "Keep it brief: 'Keep the explanation under 100 words.'"
-      ]
+      title: "Paint with Words",
+      subtitle: "Use the 5 senses to describe a scene vividly!",
+      description: "Descriptive writing is all about making the reader feel like they are inside the story. \n\n**Systematic Blueprint:**\nInstead of saying 'The market was crowded', you must use **Sensory Details**:\n1. **Sight**: What do you see? (Bright red apples, flashing neon signs).\n2. **Sound**: What do you hear? (Honking horns, shouting vendors).\n3. **Smell**: What do you smell? (Freshly baked bread, exhaust fumes).\n\n**Important Rules:**\n- Force Sensory Details: Explicitly command the AI: 'Describe what I can hear, see, and smell.'\n- Use Adjectives: Ask it to use strong, descriptive adjectives.",
+      tips: []
     },
     quest: {
-      characterName: "AI Science Assistant",
+      characterName: "Word Painter",
       characterImage: "",
-      characterMsg: "I want to explain photosynthesis to my little sister. But the textbook answer is too complicated! Can we prompt the AI to explain it using a fun metaphor, like a kitchen or a solar panel, in simple words?",
+      characterMsg: "I need to describe a 'Busy Train Station' for my English composition. Make sure the prompt tells the AI to use lots of sensory details!",
       targetType: "Script Generator",
-      boringPrompt: "explain photosynthesis",
-      boringOutputText: "Photosynthesis is the chemical process by which green plants use sunlight to synthesize nutrients from carbon dioxide and water.",
-      superOutputText: "The Solar-Powered Leaf Kitchen!\n\nImagine every green leaf on a plant is a tiny, solar-powered kitchen!\n1. The Ingredients: The plant breathes in Carbon Dioxide from the air and sips Water from the soil.\n2. The Chef: Sunlight acts as the magical chef, cooking the water and air together.\n3. The Food: The chef makes delicious Sugar (plant food) to help the plant grow strong.\n4. The Gift: As a thank you, the kitchen releases fresh Oxygen into the air for us to breathe!",
-      badge: "Junior Scientist",
+      boringPrompt: "describe a busy train station",
+      boringOutputText: "The train station was very busy. Many people were walking around. Trains were coming and going. It was loud.",
+      superOutputText: "### The Bustling Station\n\nStepping into the central train station felt like entering a massive, swirling tornado of life. \n\n**Sight**: A sea of passengers rushed past, dragging heavy, scuffed suitcases over the polished marble floors. Bright yellow departure boards flashed rapidly above the crowds.\n**Sound**: The air vibrated with the screeching of metal brakes as trains pulled in, mixing with the muffled voice of the announcer echoing through the speakers.\n**Smell**: A distinct scent filled the air—a mix of metallic train oil and the sweet aroma of hot coffee from the corner bakery.",
+      badge: "Sensory Writer",
       ingredients: [
-        {
-          id: "l5_role",
-          label: "Role Power-up",
-          text: "Act as a friendly science teacher,",
-          type: "role",
-          desc: "Tells the AI what role to play."
-        },
-        {
-          id: "l5_subject",
-          label: "Subject Power-up",
-          text: "explain the scientific process of photosynthesis,",
-          type: "detail",
-          desc: "Defines the science topic."
-        },
-        {
-          id: "l5_metaphor",
-          label: "Metaphor Power-up",
-          text: "using the metaphor of a 'solar-powered kitchen' cooking food,",
-          type: "background",
-          desc: "Adds the comparison metaphor."
-        },
-        {
-          id: "l5_limit",
-          label: "Limit Power-up",
-          text: "and organizing it in 4 simple bullet points under 120 words.",
-          type: "style",
-          desc: "Specifies formatting and length constraints."
-        }
+        { id: "l13_role", label: "Role Power-up", text: "Act as a descriptive novelist,", type: "role", desc: "Sets the writer persona." },
+        { id: "l13_subject", label: "Subject Power-up", text: "describe a busy central train station during rush hour,", type: "detail", desc: "Sets the exact scene." },
+        { id: "l13_details", label: "Detail Power-up", text: "focusing specifically on sensory details of sight, sound, and smell,", type: "background", desc: "Forces sensory usage." },
+        { id: "l13_finish", label: "Style Power-up", text: "using rich adjectives and categorizing the senses clearly.", type: "style", desc: "Organizes the output." }
       ]
-    },
-    sandbox: {
-      category: "text",
-      title: "Science Explainer Sandbox",
-      inputs: [
-        {
-          key: "subject",
-          label: "Science Subject",
-          type: "text",
-          placeholder: "e.g., how gravity works"
-        },
-        {
-          key: "metaphor",
-          label: "Metaphor Idea",
-          type: "text",
-          placeholder: "e.g., an invisible rubber band"
-        },
-        {
-          key: "length",
-          label: "Output Length",
-          type: "select",
-          options: [
-            "under 50 words",
-            "under 100 words",
-            "under 150 words"
-          ]
-        }
-      ],
-      template: t => `Act as a science tutor. Explain ${t.subject || "how clouds make rain"} using the metaphor of "${t.metaphor || "a wet sponge being squeezed"}". Rule: Keep it ${t.length || "under 100 words"} and simple for children.`
-    },
-    battle: {
-      scenario: "You want to understand what black holes are. Which prompt will give you the easiest explanation to understand?",
-      options: [
-        {
-          text: "what is a black hole in space",
-          isCorrect: false,
-          feedback: "The AI will give you complex astrophysics formulas and terms like 'singularity' and 'event horizon'."
-        },
-        {
-          text: "Act as a space guide. Explain what a black hole is to a 5th grader. Use a simple metaphor (like a cosmic vacuum cleaner) and keep it under 80 words.",
-          isCorrect: true,
-          feedback: "Fantastic! This uses a simple metaphor, targets the right age, and limits the word count for a clear explanation."
-        },
-        {
-          text: "give me the Event Horizon research paper",
-          isCorrect: false,
-          feedback: "This will give you a dense, university-level scientific paper, not an easy explanation."
-        },
-        {
-          text: "draw a picture of a black hole",
-          isCorrect: false,
-          feedback: "A text-based AI chatbot cannot draw actual pictures directly; it can only write text explanations."
-        }
-      ],
-      explanation: "Metaphors connect new, difficult scientific ideas to simple things you already know, making them easy to understand."
     }
   },
   {
-    id: 6,
-    title: "GK Tutor",
-    icon: "🧠",
-    concept: "General Knowledge",
+    id: 14,
+    title: "Picture Composition",
+    concept: "Creative Writing",
     learn: {
-      title: "GK Tutor (Concept Breakdown)",
-      subtitle: "Turn the AI into an interactive quizmaster!",
-      description: "Learning general knowledge (like geography, history, or music) can feel dry if you just read a long Wikipedia article. A good prompt turns the AI into an interactive tutor that breaks down history or geography into easy bullet points, highlights important words in bold, and finishes with a fun quiz question!",
-      tips: [
-        "Ask for interactive questions: 'End your answer with a multiple-choice question to test me!'",
-        "Highlight key terms: 'Use bold text for important dates, names, and places.'",
-        "Simplify: 'Explain the history of [topic] as a story for kids.'"
-      ]
+      title: "The Scene Detective",
+      subtitle: "Learn to describe an image and build a story around it!",
+      description: "In picture composition, you are given an image and asked to write a story about it. Since AI can't always 'see' your exam paper, you must become its eyes!\n\n**Systematic Blueprint:**\n1. **Describe the Image**: Tell the AI exactly what is in the picture. (e.g., 'A boy holding a broken kite under a tree').\n2. **Background**: Ask the AI to guess what happened before the picture.\n3. **Future**: Ask the AI to guess what happens after the picture.\n\n**Important Rules:**\n- Be highly detailed when describing the picture to the AI.\n- Ask for a 'beginning, middle, and end' to make it a complete story.",
+      tips: []
     },
     quest: {
-      characterName: "AI Knowledge Assistant",
+      characterName: "Visual Detective",
       characterImage: "",
-      characterMsg: "I want to learn about the history of the Taj Mahal for a school quiz. But the online articles are too long and boring! Can we prompt the AI to act as a history tutor, give me 3 cool facts with bold words, and test me with a question at the end?",
+      characterMsg: "I have a picture of a little girl offering an umbrella to a stray dog in the rain. Let's describe it to the AI and have it write a touching composition!",
       targetType: "Script Generator",
-      boringPrompt: "when was the taj mahal built and why",
-      boringOutputText: "The Taj Mahal is an ivory-white marble mausoleum on the south bank of the Yamuna river in Agra. It was commissioned in 1632 by Shah Jahan to house the tomb of Mumtaz Mahal.",
-      superOutputText: "History Lesson: The Taj Mahal 🕌\nWelcome! Let's explore this world wonder together:\n- The Emperor's Promise: The Taj Mahal was built in Agra, India, starting in the year **1632** by the Mughal Emperor **Shah Jahan**.\n- A Monument of Love: He built it to honor his beloved wife, **Mumtaz Mahal**, as a beautiful resting place.\n- The White Marble: Over **20,000 workers** and artists spent **22 years** carving the white marble blocks, which glow pink in the morning and golden under the moon!",
-      badge: "GK Champion",
+      boringPrompt: "write a story about a girl giving umbrella to dog",
+      boringOutputText: "A girl saw a dog in the rain. She gave it her umbrella. The dog was happy. They became friends.",
+      superOutputText: "### A Friend in the Storm\n\n**The Scene**: Heavy rain poured down, turning the street into a muddy river. A small girl in a bright yellow raincoat held her umbrella over a shivering stray puppy.\n\n**Before**: The puppy had been wandering for hours, frightened by the loud thunder, trying to find a dry spot under a bench.\n\n**After**: The girl gently scooped up the cold puppy and wrapped him in her scarf. She carried him all the way home, knowing she had just found her new best friend.",
+      badge: "Master Observer",
       ingredients: [
-        {
-          id: "l6_role",
-          label: "Role Power-up",
-          text: "Act as an interactive history tutor for kids,",
-          type: "role",
-          desc: "Tells the AI to act as a tutor."
-        },
-        {
-          id: "l6_subject",
-          label: "Subject Power-up",
-          text: "explain the creation and purpose of the Taj Mahal in Agra,",
-          type: "detail",
-          desc: "Defines the GK subject."
-        },
-        {
-          id: "l6_style",
-          label: "Style Power-up",
-          text: "highlighting key names and dates in **bold text**,",
-          type: "background",
-          desc: "Specifies typographic highlights."
-        },
-        {
-          id: "l6_format",
-          label: "Format Power-up",
-          text: "and ending with a fun, 3-option multiple choice question to test my knowledge.",
-          type: "style",
-          desc: "Adds the interactive quiz challenge."
-        }
+        { id: "l14_role", label: "Role Power-up", text: "Act as an observant creative writer,", type: "role", desc: "Sets the writer persona." },
+        { id: "l14_subject", label: "Subject Power-up", text: "write a picture composition about an image of a girl offering her umbrella to a stray dog in heavy rain,", type: "detail", desc: "Explains the picture to the AI." },
+        { id: "l14_details", label: "Detail Power-up", text: "describing the scene, what happened before, and what happens next,", type: "background", desc: "Forces the timeline." },
+        { id: "l14_finish", label: "Style Power-up", text: "using emotional language and bold headers for sections.", type: "style", desc: "Organizes the output." }
       ]
-    },
-    sandbox: {
-      category: "text",
-      title: "GK Tutor Sandbox",
-      inputs: [
-        {
-          key: "subject",
-          label: "GK Topic",
-          type: "text",
-          placeholder: "e.g., how Mount Everest was formed"
-        },
-        {
-          key: "style",
-          label: "Explanation Style",
-          type: "select",
-          options: [
-            "highlighting key terms in bold",
-            "writing it as a fun story",
-            "using bullet points and emojis"
-          ]
-        },
-        {
-          key: "quiz",
-          label: "Quiz Option",
-          type: "select",
-          options: [
-            "include a multiple choice question",
-            "include a true or false question",
-            "no quiz, just the facts"
-          ]
-        }
-      ],
-      template: t => `Act as an interactive tutor for kids. Explain ${t.subject || "the history of the wheel"} by ${t.style || "using bullet points and emojis"}. Rule: Please ${t.quiz || "include a multiple choice question"} at the end.`
-    },
-    battle: {
-      scenario: "You want to learn about the solar system and test yourself. Which prompt works best?",
-      options: [
-        {
-          text: "explain the solar system",
-          isCorrect: false,
-          feedback: "This will output a large wall of text without any interactive test questions."
-        },
-        {
-          text: "Act as a space tutor. Break down the solar system's planets into 4 bullet points with bold names. End with a 3-option multiple choice quiz question about the planets.",
-          isCorrect: true,
-          feedback: "Splendid! This prompt gives structure, visual highlights, and an interactive quiz to test what you learned."
-        },
-        {
-          text: "write a story about space planets",
-          isCorrect: false,
-          feedback: "A story is nice, but it doesn't give you structured facts or quiz questions to test your knowledge."
-        },
-        {
-          text: "give me the exact distance to Jupiter",
-          isCorrect: false,
-          feedback: "This just asks for a single fact, not an interactive general knowledge lesson with a quiz."
-        }
-      ],
-      explanation: "Adding a quiz question at the end of a tutor prompt makes learning active, helping you remember the facts much better!"
     }
   },
   {
-    id: 7,
-    title: "Science Experiments",
-    icon: "🧪",
-    concept: "Science Experiments",
+    id: 15,
+    title: "Math: Word Problems",
+    concept: "Mathematics",
     learn: {
-      title: "Science Lab Assistant (Experiment Planner)",
-      subtitle: "Prompt the AI to design safe, step-by-step science experiments!",
-      description: "When you want to perform a science experiment in physics, chemistry, or biology, a simple prompt like 'how does celery experiment work' or 'vinegar and baking soda' only gives a short explanation. To get a professional, repeatable result, you must ask like a Scientist! Specify the materials available, request detailed step-by-step steps, ask for safety precautions, and include an observation chart to record the results.",
-      tips: [
-        "Specify the resources: Tell the AI if you are using 'household kitchen ingredients' or 'school laboratory tools'.",
-        "Request safety tips: Always prompt for safety precautions (like adult help or protective eyewear).",
-        "Add observation guides: Request a time-based chart or observation questions to record your findings."
-      ]
+      title: "The Problem Cracker",
+      subtitle: "Break down confusing word problems into simple facts!",
+      description: "Word problems in math can be tricky because there is too much text. AI can help you decode them!\n\n**Systematic Blueprint:**\nInstead of just asking for the answer, command the AI to dissect the problem:\n1. **Given Facts**: What numbers do we already know?\n2. **The Goal**: What exactly do we need to find?\n3. **The Formula**: Which formula should we use?\n4. **Step-by-Step Solution**: Show the working.\n\n**Important Rules:**\n- Never just ask for the answer. Ask for the 'Given Facts' and 'Formula' first!",
+      tips: []
     },
     quest: {
-      characterName: "AI Science Assistant",
+      characterName: "Math Detective",
       characterImage: "",
-      characterMsg: "I want to perform a biology experiment to show plant transpiration using celery, food coloring, and water. But my boring prompt 'how celery experiment works' gives a vague explanation. Let's build a Super Prompt that guides me step-by-step with materials, safety, and an observation table!",
+      characterMsg: "I have a tough word problem: 'A train travels 300km in 4 hours. What is its speed in km/h?'. Let's ask the AI to break it down perfectly.",
       targetType: "Script Generator",
-      boringPrompt: "celery transpiration experiment",
-      boringOutputText: "Celery transpiration is shown by placing a celery stalk in water colored with food dye. Over time, the capillary action draws the colored water up into the leaves, illustrating water movement in plants.",
-      superOutputText: "Celery Transpiration Science Lab Guide 🌿\n- Objective: To visually demonstrate how plants transport water from roots to leaves using capillary action and transpiration.\n- Materials Needed:\n  1. Fresh celery stalks with leaves intact\n  2. Glass jar or cup filled with water\n  3. Blue or red food coloring (10-15 drops)\n  4. Knife/scissors (for cutting stem base)\n- Safety Precautions: Use caution when cutting the celery stalk. Ask an adult for help if using sharp blades.\n- Step-by-Step Procedure:\n  1. Cut about 1 inch off the bottom of the celery stalk at a 45-degree angle under water.\n  2. Add 10-15 drops of food coloring to your water jar and stir.\n  3. Place the celery stalk cut-side down into the colored water.\n  4. Leave it undisturbed and check it at 2 hours, 6 hours, and 24 hours.\n- Observation Guide:\n  - 2 Hours: Look for small colored dots on the celery bottom showing xylem tubes filled with dye.\n  - 24 Hours: Watch the leaves change color as transpiration pulls water out of the leaves.\n- Scientific Explanation: The water molecules stick to the walls of the tiny tubes inside the celery (adhesion) and stick to each other (cohesion), pulling the colored water upwards. When water evaporates from the leaves (transpiration), it acts like a straw pulling more water up from the jar!",
-      badge: "Lab Specialist",
+      boringPrompt: "solve: train travels 300km in 4 hours what is speed",
+      boringOutputText: "Speed = 75 km/h",
+      superOutputText: "### Word Problem Breakdown\n\n- **Given Facts**:\n  - Distance traveled = 300 km\n  - Time taken = 4 hours\n- **The Goal**:\n  - Find the Speed in km/h.\n- **The Formula**:\n  - Speed = Distance / Time\n- **Step-by-Step Solution**:\n  1. Substitute the values: Speed = 300 / 4\n  2. Perform the division: 300 / 4 = 75\n- **Final Answer**: The speed of the train is 75 km/h.",
+      badge: "Word Problem Ace",
       ingredients: [
-        {
-          id: "l7_role",
-          label: "Role Power-up",
-          text: "Act as a professional science lab instructor,",
-          type: "role",
-          desc: "Tells the AI to act as a lab teacher."
-        },
-        {
-          id: "l7_subject",
-          label: "Subject Power-up",
-          text: "design a step-by-step biology experiment to show celery transpiration,",
-          type: "detail",
-          desc: "Defines the experiment subject."
-        },
-        {
-          id: "l7_materials",
-          label: "Equipment Power-up",
-          text: "using home-friendly materials and listing safety precautions,",
-          type: "background",
-          desc: "Defines materials & safety guidelines."
-        },
-        {
-          id: "l7_format",
-          label: "Format Power-up",
-          text: "including an observation timetable and the underlying scientific explanation.",
-          type: "style",
-          desc: "Requests structured observation and theory."
-        }
+        { id: "l15_role", label: "Role Power-up", text: "Act as a logical math tutor,", type: "role", desc: "Sets a teaching role." },
+        { id: "l15_subject", label: "Subject Power-up", text: "solve the word problem: A train travels 300km in 4 hours, what is its speed?", type: "detail", desc: "Provides the exact math problem." },
+        { id: "l15_details", label: "Detail Power-up", text: "breaking it down into Given Facts, The Goal, and The Formula,", type: "background", desc: "Forces the breakdown structure." },
+        { id: "l15_finish", label: "Style Power-up", text: "showing the step-by-step working before giving the final answer.", type: "style", desc: "Demands the full working." }
       ]
+    }
+  },
+  {
+    id: 16,
+    title: "Math: Geometry Proofs",
+    concept: "Mathematics",
+    learn: {
+      title: "The Geometry Guide",
+      subtitle: "Use AI to understand confusing theorems and shapes!",
+      description: "Geometry proofs can be very confusing. AI can explain them using simple logic and real-world examples.\n\n**Systematic Blueprint:**\nWhen struggling with a theorem (like Pythagoras or Properties of Triangles):\n1. **Simple Definition**: Ask the AI to explain the theorem in one simple sentence.\n2. **Real World Example**: Ask how this is used in real life (like building a house).\n3. **Step-by-Step Proof**: Ask it to prove a simple example.\n\n**Important Rules:**\n- Always ask for a real-world application so your brain remembers it better!",
+      tips: []
     },
-    sandbox: {
-      category: "text",
-      title: "Lab Planner Sandbox",
-      inputs: [
-        {
-          key: "subject",
-          label: "Experiment Subject (Physics/Chemistry/Biology)",
-          type: "text",
-          placeholder: "e.g., chemical reaction of vinegar and baking soda"
-        },
-        {
-          key: "materials",
-          label: "Equipment Level",
-          type: "select",
-          options: [
-            "household kitchen materials",
-            "school science lab apparatus",
-            "professional high-tech lab equipment"
-          ]
-        },
-        {
-          key: "structure",
-          label: "Output Content",
-          type: "select",
-          options: [
-            "step-by-step steps and safety instructions",
-            "materials list, steps, and observation questions",
-            "full lab report outline with scientific formula"
-          ]
-        }
-      ],
-      template: t => `Act as a professional science lab instructor. Design an experiment regarding ${t.subject || "water boiling point changes"}. Assume we are using ${t.materials || "household kitchen materials"}. Output a detailed guide including: ${t.structure || "materials list, steps, and observation questions"}.`
-    },
-    battle: {
-      scenario: "You want to perform a physics experiment at home to study magnetic force fields using simple bar magnets and paperclips. Which prompt gives the most structured and educational result?",
-      options: [
-        {
-          text: "how do magnets attract paperclips",
-          isCorrect: false,
-          feedback: "This just gives a short textual description of magnetism, not a structured experiment you can perform."
-        },
-        {
-          text: "Act as a science lab instructor. Design a step-by-step physics experiment on magnetic force fields using home-friendly magnets and paperclips. Include a list of materials, safety guidelines, experimental steps, and observation questions.",
-          isCorrect: true,
-          feedback: "Perfect! This prompt structures the experiment so it has clear, actionable instructions, materials, safety, and active observations."
-        },
-        {
-          text: "tell me about magnetism",
-          isCorrect: false,
-          feedback: "This is a generic query that results in a long article, not an interactive lab experiment planner."
-        },
-        {
-          text: "can you solve a magnetism physics problem",
-          isCorrect: false,
-          feedback: "This is for solving math equations, not planning a physical experiment."
-        }
-      ],
-      explanation: "Specifying 'materials', 'safety guidelines', and 'observation questions' ensures the AI generates a complete, safe, and structured laboratory protocol that you can easily follow."
+    quest: {
+      characterName: "Shape Master",
+      characterImage: "",
+      characterMsg: "I don't understand the Pythagorean Theorem. Let's prompt the AI to explain it simply with a real-world example!",
+      targetType: "Script Generator",
+      boringPrompt: "explain pythagoras theorem",
+      boringOutputText: "In a right-angled triangle, the square of the hypotenuse side is equal to the sum of squares of the other two sides. a2 + b2 = c2.",
+      superOutputText: "### The Pythagorean Theorem\n\n- **Simple Definition**: If you have a triangle with one 90-degree angle, multiplying the two shorter sides by themselves and adding them together will always equal the longest side multiplied by itself (a2 + b2 = c2).\n- **Real-World Example**: Imagine a ladder leaning against a wall. The wall and the ground make a 90-degree angle. If you know the height of the wall and distance on the ground, Pythagoras tells you exactly how long the ladder is!\n- **Proof Example**:\n  - Side a = 3, Side b = 4\n  - 3 squared + 4 squared = 9 + 16 = 25\n  - Since c squared = 25, Side c (the longest side) must be 5!",
+      badge: "Geometry Genius",
+      ingredients: [
+        { id: "l16_role", label: "Role Power-up", text: "Act as a fun geometry teacher,", type: "role", desc: "Sets a fun teaching role." },
+        { id: "l16_subject", label: "Subject Power-up", text: "explain the Pythagorean Theorem in one simple sentence,", type: "detail", desc: "Asks for simple definition." },
+        { id: "l16_details", label: "Detail Power-up", text: "providing a real-world example of how it is used (like a ladder),", type: "background", desc: "Adds real-world context." },
+        { id: "l16_finish", label: "Style Power-up", text: "and showing a basic number proof with clear bullet points.", type: "style", desc: "Demands formatted proof." }
+      ]
     }
   }
 ];
-
 
 const BoringVsSuperPromptImage = ({ imageUrl, altText, isAwesome }) => {
   if (imageUrl) {
@@ -869,7 +518,7 @@ const BoringVsSuperPromptImage = ({ imageUrl, altText, isAwesome }) => {
       }`}>
       <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl mb-2 shadow-md ${isAwesome ? 'bg-white/20 animate-pulse' : 'bg-slate-100/60'
         }`}>
-        {isAwesome ? "" : ""}
+        {isAwesome ? "✨" : "😴"}
       </div>
       <h4 className="text-xs font-black uppercase tracking-wider mb-1">
         {isAwesome ? "Super AI Render" : "Boring Draft"}
@@ -916,403 +565,53 @@ const getCharacterImage = (lesson) => {
 };
 
 const renderProfessionalTextOutput = (text, lessonId) => {
-  // Lesson 4: Math Step-by-Step PEMDAS
-  if (lessonId === 4) {
-    const lines = text.split('\n').filter(line => line.trim());
-    const steps = [];
-    let intro = "";
-    let conclusion = "";
-
-    lines.forEach(line => {
-      if (line.toLowerCase().startsWith("let's") || line.toLowerCase().startsWith('solve')) {
-        intro = line;
-      } else if (line.toLowerCase().startsWith('conclusion:')) {
-        conclusion = line.replace(/conclusion:/i, '').trim();
-      } else {
-        const match = line.match(/^(\d+)\.\s*(.*)/);
-        if (match) {
-          steps.push({ num: match[1], text: match[2] });
-        } else {
-          steps.push({ num: steps.length + 1, text: line });
-        }
-      }
-    });
-
-    return (
-      <div className="space-y-4 w-full text-left font-body">
-        {intro && (
-          <p className="text-xs sm:text-sm font-bold text-slate-500 italic px-1">
-            {intro}
-          </p>
-        )}
-        <div className="relative pl-6 border-l-2 border-indigo-100 ml-4 space-y-4">
-          {steps.map((step, idx) => (
-            <div key={idx} className="relative">
-              <div className="absolute -left-[35px] top-0.5 w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-black shadow-sm font-display">
-                {step.num}
-              </div>
-              <div className="bg-slate-50 border border-slate-100 rounded-lg px-3.5 py-2">
-                <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block mb-0.5 font-display">
-                  Step {step.num}
-                </span>
-                <p className="text-xs sm:text-sm font-bold text-slate-700 leading-normal">
-                  {step.text}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-        {conclusion && (
-          <div className="bg-emerald-50 border border-emerald-100 rounded-lg p-3 flex items-center gap-3 shadow-sm">
-            <span className="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs shrink-0 font-bold">
-              ✓
-            </span>
-            <div>
-              <span className="text-[10px] font-black uppercase tracking-wider text-emerald-700 block font-display leading-none mb-1">
-                Conclusion
-              </span>
-              <p className="text-xs sm:text-sm font-extrabold text-emerald-950 leading-tight">
-                {conclusion}
-              </p>
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  // Lesson 2: Essay / Writing
-  if (lessonId === 2) {
-    const blocks = text.split('\n\n').filter(block => block.trim());
-    const title = blocks[0] || "Story/Essay Output";
-    const paragraphs = blocks.slice(1);
-
-    return (
-      <div className="w-full text-left space-y-4 font-body">
-        <h4 className="text-sm sm:text-base font-black text-purple-900 border-b border-purple-100 pb-1.5 font-display">
-          📝 {title}
-        </h4>
-        <div className="space-y-3">
-          {paragraphs.map((p, idx) => {
-            const parts = p.split(':');
-            if (parts.length > 1) {
-              const label = parts[0];
-              const rest = parts.slice(1).join(':');
-              return (
-                <div key={idx} className="bg-slate-50 border border-slate-100/80 rounded-xl p-3.5 space-y-1 shadow-sm">
-                  <span className="text-[10px] font-black uppercase tracking-wider text-purple-600 block font-display">
-                    {label}
-                  </span>
-                  <p className="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed">
-                    {rest.trim()}
-                  </p>
-                </div>
-              );
-            }
-            return (
-              <p key={idx} className="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed bg-slate-50 border border-slate-100 rounded-xl p-3.5">
-                {p}
-              </p>
-            );
-          })}
-        </div>
-      </div>
-    );
-  }
-
-  // Lesson 5: Science explanation using Metaphor
-  if (lessonId === 5) {
-    const lines = text.split('\n').filter(line => line.trim());
-    const title = lines[0] || "ScienceMetaphor";
-    const intro = lines[1];
-    const items = lines.slice(2);
-
-    return (
-      <div className="w-full text-left space-y-4 font-body">
-        <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-3 shadow-sm">
-          <h4 className="text-xs sm:text-sm font-black text-emerald-900 font-display flex items-center gap-1.5">
-            🌿 {title}
-          </h4>
-          {intro && (
-            <p className="text-xs text-emerald-800 font-bold mt-1 leading-normal">
-              {intro}
-            </p>
-          )}
-        </div>
-        <div className="grid grid-cols-1 gap-2.5">
-          {items.map((item, idx) => {
-            const cleaned = item.replace(/^\d+\.\s*/, '');
-            const parts = cleaned.split(':');
-            const label = parts.length > 1 ? parts[0] : `Concept ${idx + 1}`;
-            const desc = parts.length > 1 ? parts.slice(1).join(':') : cleaned;
-
-            return (
-              <div key={idx} className="bg-white border border-slate-100 rounded-xl p-3 flex gap-3 shadow-sm hover:border-emerald-200 transition-colors">
-                <div className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-black shrink-0">
-                  {idx + 1}
-                </div>
-                <div>
-                  <span className="text-[10px] font-black uppercase tracking-wider text-emerald-600 block font-display leading-none mb-1">
-                    {label}
-                  </span>
-                  <p className="text-xs sm:text-sm font-medium text-slate-700 leading-normal">
-                    {desc.trim()}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    );
-  }
-
-  // Lesson 3: Poem & Story Explainer bullet summary
-  if (lessonId === 3) {
-    const lines = text.split('\n').filter(line => line.trim());
-    const header = lines[0] || "Poem/Story Meaning";
-    const bullets = lines.slice(1);
-
-    return (
-      <div className="w-full text-left space-y-4 font-body">
-        <div className="border-l-4 border-violet-500 pl-3 py-1">
-          <span className="text-[10px] font-black uppercase tracking-wider text-violet-600 block font-display">
-            Literature breakdown
-          </span>
-          <h4 className="text-xs sm:text-sm font-black text-slate-800 font-display">
-            📖 {header}
-          </h4>
-        </div>
-        <div className="space-y-3">
-          {bullets.map((bullet, idx) => {
-            const cleaned = bullet.replace(/^-\s*/, '');
-            const parts = cleaned.split(':');
-            const label = parts.length > 1 ? parts[0] : "Explanation";
-            const desc = parts.length > 1 ? parts.slice(1).join(':') : cleaned;
-
-            return (
-              <div key={idx} className="bg-slate-50 border border-slate-100 rounded-xl p-3.5 shadow-sm space-y-1">
-                <span className="text-[10px] font-black text-violet-600 uppercase tracking-widest block font-display">
-                  {label}
-                </span>
-                <p className="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed">
-                  {desc.trim()}
-                </p>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    );
-  }
-
-  // Lesson 6: GK Tutor concept breakdown + quiz
-  if (lessonId === 6) {
-    const sections = text.split('\n\n').filter(s => s.trim());
-    const factLines = sections[0] ? sections[0].split('\n').filter(l => l.trim()) : [];
-    const title = factLines[0] || "General Knowledge breakdown";
-    const welcome = factLines[1];
-    const facts = factLines.slice(2);
-
-    // Quiz lines parsing
-    let quizTitle = "Quick Quiz";
-    let quizOptions = [];
-    if (sections.length > 1) {
-      const quizLines = sections[1].split('\n').filter(l => l.trim());
-      quizTitle = quizLines[0];
-      quizOptions = quizLines.slice(1);
-    }
-
-    const renderBoldText = (textStr) => {
-      const parts = textStr.split('**');
-      return parts.map((part, i) => i % 2 === 1 ? <strong key={i} className="font-extrabold text-slate-900 bg-amber-50 px-1 rounded">{part}</strong> : part);
-    };
-
-    return (
-      <div className="w-full text-left space-y-5 font-body">
-        <div className="bg-purple-50 border border-purple-100 rounded-xl p-3 shadow-sm">
-          <h4 className="text-xs sm:text-sm font-black text-purple-900 font-display">
-            🕌 {title}
-          </h4>
-          {welcome && (
-            <p className="text-xs text-purple-800 font-bold mt-0.5">
-              {welcome}
-            </p>
-          )}
-        </div>
-
-        <div className="space-y-2.5">
-          {facts.map((fact, idx) => {
-            const cleaned = fact.replace(/^-\s*/, '');
-            const parts = cleaned.split(':');
-            const label = parts.length > 1 ? parts[0] : "Fact";
-            const desc = parts.length > 1 ? parts.slice(1).join(':') : cleaned;
-
-            return (
-              <div key={idx} className="bg-white border border-slate-100 rounded-xl p-3 flex gap-3 shadow-sm">
-                <div className="w-2 h-2 rounded-full bg-purple-500 mt-2 shrink-0" />
-                <div>
-                  <span className="text-[10px] font-black uppercase tracking-wider text-purple-600 block font-display leading-none mb-1">
-                    {label}
-                  </span>
-                  <p className="text-xs sm:text-sm font-medium text-slate-600 leading-normal">
-                    {renderBoldText(desc.trim())}
-                  </p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {quizOptions.length > 0 && (
-          <div className="bg-slate-50 border border-slate-100 rounded-xl p-4 space-y-3">
-            <span className="text-[9px] font-black uppercase tracking-wider text-slate-400 block font-display">
-              {quizTitle}
-            </span>
-            <div className="grid grid-cols-1 gap-2">
-              {quizOptions.map((opt, idx) => (
-                <div key={idx} className="bg-white border border-slate-100 rounded-lg px-3 py-2 text-xs font-bold text-slate-700 shadow-sm flex items-center gap-2">
-                  <span className="w-5 h-5 rounded bg-slate-100 flex items-center justify-center text-[10px] font-black text-slate-500">
-                    {opt.trim().substring(0, 1)}
-                  </span>
-                  <span>
-                    {opt.trim().substring(2)}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  // Lesson 7: Science Experiments Lab Guide
-  if (lessonId === 7) {
-    const sections = text.split('\n- ').filter(sec => sec.trim());
-
-    let objective = "";
-    let materials = [];
-    let safety = "";
-    let procedure = [];
-    let observation = [];
-    let explanation = "";
-
-    sections.forEach(sec => {
-      const trimmed = sec.trim();
-      if (trimmed.startsWith("Objective:")) {
-        objective = trimmed.replace("Objective:", "").trim();
-      } else if (trimmed.startsWith("Materials Needed:")) {
-        materials = trimmed.split("\n").slice(1).map(l => l.replace(/^\s*\d+\.\s*/, "").trim()).filter(l => l);
-      } else if (trimmed.startsWith("Safety Precautions:")) {
-        safety = trimmed.replace("Safety Precautions:", "").trim();
-      } else if (trimmed.startsWith("Step-by-Step Procedure:")) {
-        procedure = trimmed.split("\n").slice(1).map(l => l.replace(/^\s*\d+\.\s*/, "").trim()).filter(l => l);
-      } else if (trimmed.startsWith("Observation Guide:")) {
-        observation = trimmed.split("\n").slice(1).map(l => l.replace(/^\s*-\s*/, "").trim()).filter(l => l);
-      } else if (trimmed.startsWith("Scientific Explanation:")) {
-        explanation = trimmed.replace("Scientific Explanation:", "").trim();
-      }
-    });
-
-    return (
-      <div className="w-full text-left space-y-4 font-body text-slate-700">
-        <div className="bg-blue-50 border border-blue-100 rounded-xl p-3.5 shadow-sm">
-          <h4 className="text-xs sm:text-sm font-black text-blue-900 font-display flex items-center gap-1.5">
-            🧪 Celery Transpiration Science Lab Guide 🌿
-          </h4>
-          {objective && (
-            <p className="text-xs text-blue-800 font-bold mt-1 leading-normal">
-              <strong>Objective:</strong> {objective}
-            </p>
-          )}
-        </div>
-
-        {safety && (
-          <div className="bg-amber-50 border border-amber-200/60 rounded-xl p-3 flex gap-2.5 text-xs text-amber-800 font-bold items-center shadow-sm">
-            <span className="text-lg">⚠️</span>
-            <div>
-              <span className="text-[9px] font-black uppercase tracking-wider text-amber-700 block font-display">Safety Precaution</span>
-              <p className="leading-snug">{safety}</p>
-            </div>
-          </div>
-        )}
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-          {materials.length > 0 && (
-            <div className="bg-white border border-slate-100 rounded-xl p-3.5 shadow-sm">
-              <span className="text-[10px] font-black uppercase tracking-wider text-blue-600 block mb-2 font-display">
-                📋 Required Materials
-              </span>
-              <ul className="space-y-1.5 text-xs font-semibold text-slate-600">
-                {materials.map((m, i) => (
-                  <li key={i} className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-blue-400 shrink-0" />
-                    <span>{m}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {observation.length > 0 && (
-            <div className="bg-white border border-slate-100 rounded-xl p-3.5 shadow-sm">
-              <span className="text-[10px] font-black uppercase tracking-wider text-indigo-600 block mb-2 font-display">
-                ⏳ Observation Timetable
-              </span>
-              <ul className="space-y-1.5 text-xs font-semibold text-slate-600">
-                {observation.map((o, i) => (
-                  <li key={i} className="flex items-start gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5 shrink-0" />
-                    <span>{o}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
-
-        {procedure.length > 0 && (
-          <div className="bg-slate-50 border border-slate-100 rounded-xl p-3.5 shadow-sm space-y-2">
-            <span className="text-[10px] font-black uppercase tracking-wider text-slate-500 block font-display">
-              🚶‍♂️ Step-by-Step Procedure
-            </span>
-            <div className="space-y-2">
-              {procedure.map((p, i) => (
-                <div key={i} className="flex gap-2.5 items-start">
-                  <span className="w-5 h-5 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-[10px] font-black font-display shrink-0 mt-0.5">
-                    {i + 1}
-                  </span>
-                  <p className="text-xs sm:text-sm font-medium text-slate-600 leading-relaxed">
-                    {p}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {explanation && (
-          <div className="bg-purple-50/70 border border-purple-100 rounded-xl p-3.5 shadow-sm">
-            <span className="text-[10px] font-black uppercase tracking-wider text-purple-600 block mb-1 font-display">
-              🔬 Scientific Explanation (Capillary Action)
-            </span>
-            <p className="text-xs sm:text-sm font-semibold text-purple-950 leading-relaxed">
-              {explanation}
-            </p>
-          </div>
-        )}
-      </div>
-    );
-  }
-
+  if (!text) return null;
+  const lines = text.split('\n');
   return (
-    <pre className="whitespace-pre-wrap font-mono text-xs sm:text-sm text-indigo-700 font-extrabold leading-relaxed">
-      {text}
-    </pre>
+    <div className="space-y-3 text-left font-body">
+      {lines.map((line, idx) => {
+        const trimmed = line.trim();
+        if (!trimmed) return <div key={idx} className="h-2" />;
+
+        // Header: ### Title
+        if (trimmed.startsWith('###')) {
+          return (
+            <h4 key={idx} className="text-base sm:text-lg font-black text-purple-900 border-b border-purple-100 pb-1.5 font-display mt-2">
+              {trimmed.replace('###', '').trim()}
+            </h4>
+          );
+        }
+
+        // List item starting with - or 
+        if (trimmed.startsWith('-') || trimmed.startsWith(' ')) {
+          const content = trimmed.replace(/^[-]\s/, '');
+          return (
+            <div key={idx} className="flex gap-2.5 items-start pl-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-purple-500 mt-2 shrink-0" />
+              <p className="text-xs sm:text-sm font-semibold text-slate-700 leading-relaxed">
+                {renderFormattedSpan(content)}
+              </p>
+            </div>
+          );
+        }
+
+        // Normal paragraph or title block
+        return (
+          <p key={idx} className="text-xs sm:text-sm font-medium text-slate-700 leading-relaxed">
+            {renderFormattedSpan(trimmed)}
+          </p>
+        );
+      })}
+    </div>
   );
 };
 
+const renderFormattedSpan = (textStr) => {
+  if (!textStr) return "";
+  // Simple bold parser for **text**
+  const parts = textStr.split('**');
+  return parts.map((part, i) => i % 2 === 1 ? <strong key={i} className="font-extrabold text-slate-900 bg-purple-50 px-1 rounded">{part}</strong> : part);
+};
 
 
 const PromptAcademyComponent = () => {
@@ -1326,6 +625,7 @@ const PromptAcademyComponent = () => {
   });
   const [activeLessonIdx, setActiveLessonIdx] = useState(0);
   const [activeTab, setActiveTab] = useState("learn");
+  const [isSyllabusOpen, setIsSyllabusOpen] = useState(true);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [isQuestCasting, setIsQuestCasting] = useState(false);
   const [castingStep, setCastingStep] = useState(0);
@@ -1345,6 +645,103 @@ const PromptAcademyComponent = () => {
   const [isSpeaking, setIsSpeaking] = useState(false);
 
   const activeLesson = lessonsData[activeLessonIdx];
+
+  const renderDynamicProgressiveOutput = () => {
+    if (selectedIngredients.length === 0 || selectedIngredients.length === 4) return null;
+
+    const allIngredients = activeLesson.quest.ingredients;
+    const hasRole = selectedIngredients.find(i => i.id === allIngredients[0].id);
+    const hasSubject = selectedIngredients.find(i => i.id === allIngredients[1].id);
+    const hasDetail = selectedIngredients.find(i => i.id === allIngredients[2].id);
+    const hasStyle = selectedIngredients.find(i => i.id === allIngredients[3].id);
+
+    let outputText = "";
+    let missingFeedback = [];
+
+    if (!hasRole) missingFeedback.push("Robotic Tone (Missing Role)");
+    if (!hasSubject) missingFeedback.push("No Topic (Missing Subject)");
+    if (!hasDetail) missingFeedback.push("Very Brief (Missing Details)");
+    if (!hasStyle) missingFeedback.push("Hard to Read (Missing Style)");
+
+    if (activeLesson.quest.targetType === "Image Creator") {
+      if (!hasSubject) {
+        outputText = "Error: Cannot generate image. Please provide a Subject to draw!";
+      } else {
+        outputText = "Generating Image... [Result is very plain and lacks artistic direction. Add more rules!]";
+      }
+      
+      return (
+        <div className="flex gap-3 animate-in fade-in slide-in-from-bottom-2 duration-500 mt-2 w-full">
+           <div className="w-6 h-6 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center shrink-0 mt-1 shadow-sm">
+              <Lightbulb size={14} />
+           </div>
+           <div className="bg-white border border-amber-200 text-slate-700 text-sm p-3.5 rounded-2xl rounded-tl-sm shadow-sm w-full">
+              <span className="font-bold block mb-1 text-amber-500">
+                 {selectedIngredients.length === 1 ? 'Incomplete Prompt ⚠️' : selectedIngredients.length === 2 ? 'Getting Closer 💡' : 'Almost Perfect ✨'}
+              </span>
+              <p className="mb-3 text-xs sm:text-sm text-slate-500">
+                 I analyzed your prompt. Here is the generated result and why it is failing:
+              </p>
+              <div className="mt-2 bg-slate-50 p-3 rounded-xl border border-slate-100 shadow-inner">
+                 <div className="flex gap-2 flex-wrap mb-3">
+                    {missingFeedback.map((fb, i) => (
+                      <span key={i} className="text-[10px] font-black uppercase bg-rose-50 text-rose-600 px-2 py-1 rounded-md border border-rose-100">{fb}</span>
+                    ))}
+                 </div>
+                 {hasSubject ? (
+                    <img src={activeLesson.quest.boringOutputImage || "/images/ai/flat_turtle.png"} className="rounded-lg w-full border border-slate-200 opacity-90 shadow-sm" alt="Boring Result" />
+                 ) : (
+                    <div className="text-xs text-rose-500 italic font-mono bg-rose-50 p-2 rounded-md border border-rose-100">{outputText}</div>
+                 )}
+              </div>
+           </div>
+        </div>
+      );
+    }
+
+    // Text output logic
+    if (!hasSubject) {
+       outputText = "I am ready to write... but I don't know what the topic is yet! Please give me a subject.";
+    } else {
+       outputText = activeLesson.quest.boringOutputText || "This is a very generic and boring response because the prompt lacks specific details.";
+       if (hasRole) {
+          outputText = "Hello! " + outputText;
+       }
+       if (hasDetail) {
+          outputText += " [I tried to add some details but I am struggling without all the rules...]";
+       }
+       if (hasStyle) {
+          outputText = "• " + outputText.replace(/\n/g, "\n• ");
+       }
+    }
+
+    return (
+        <div className="flex gap-3 animate-in fade-in slide-in-from-bottom-2 duration-500 mt-2 w-full">
+           <div className="w-6 h-6 bg-amber-100 text-amber-500 rounded-full flex items-center justify-center shrink-0 mt-1 shadow-sm">
+              <Lightbulb size={14} />
+           </div>
+           <div className="bg-white border border-amber-200 text-slate-700 text-sm p-3.5 rounded-2xl rounded-tl-sm shadow-sm w-full">
+              <span className="font-bold block mb-1 text-amber-500">
+                 {selectedIngredients.length === 1 ? 'Incomplete Prompt ⚠️' : selectedIngredients.length === 2 ? 'Getting Closer 💡' : 'Almost Perfect ✨'}
+              </span>
+              <p className="mb-3 text-xs sm:text-sm text-slate-500">
+                 I analyzed your prompt. Here is the generated result and why it is failing:
+              </p>
+              <div className="mt-2 bg-slate-50 p-3 rounded-xl border border-slate-100 shadow-inner">
+                 <div className="flex gap-2 flex-wrap mb-3">
+                    {missingFeedback.map((fb, i) => (
+                      <span key={i} className="text-[10px] font-black uppercase bg-rose-50 text-rose-600 px-2 py-1 rounded-md border border-rose-100">{fb}</span>
+                    ))}
+                 </div>
+                 <div className="text-xs sm:text-sm text-slate-600 font-medium italic border-l-2 border-slate-300 pl-3 py-1 whitespace-pre-line">
+                    "{outputText}"
+                 </div>
+              </div>
+           </div>
+        </div>
+    );
+  };
+
 
   const optionLabels = ["A", "B", "C", "D"];
 
@@ -1561,7 +958,7 @@ const PromptAcademyComponent = () => {
             <WandSparkles className="text-purple-500 animate-pulse" size={32} /> Prompt Academy
           </h2>
           <p className="text-sm md:text-base text-slate-500 font-medium max-w-lg">
-            Master the art of asking AI and unlock magical results through {lessonsData.length} interactive quests!
+            Master the art of asking AI and unlock magical results through {lessonsData.length} Learn Prompting!
           </p>
         </div>
       </div>
@@ -1571,14 +968,20 @@ const PromptAcademyComponent = () => {
       {/* Main double column layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Left column: Syllabus Navigator */}
+        {isSyllabusOpen && (
         <div className="lg:col-span-3 space-y-3 max-h-[620px] overflow-y-auto pr-1 prompt-academy-scrollbar" data-lenis-prevent>
-          <h3 className="text-[11px] sm:text-xs font-black text-slate-400 uppercase tracking-widest mb-3 px-1 font-display">
-            Syllabus 
-          </h3>
+          <div className="flex items-center justify-between mb-3 px-1">
+            <h3 className="text-[11px] sm:text-xs font-black text-slate-400 uppercase tracking-widest font-display">
+              Syllabus 
+            </h3>
+            <button onClick={() => setIsSyllabusOpen(false)} className="text-slate-400 hover:text-slate-600 bg-slate-100 hover:bg-slate-200 p-1.5 rounded-lg transition-colors shadow-sm" title="Close Syllabus">
+              <PanelLeftClose size={14} />
+            </button>
+          </div>
           {lessonsData.map((lesson, idx) => {
             const isCompleted = completedLessons.includes(lesson.id);
             const isActive = activeLessonIdx === idx;
-            const isLocked = lesson.id > 1 && !completedLessons.includes(lesson.id - 1) && !isActive;
+            const isLocked = false;
 
             let cardStyle = "border-slate-100 bg-white hover:border-purple-200 hover:bg-purple-50/30 text-slate-600";
             if (isActive) {
@@ -1595,7 +998,30 @@ const PromptAcademyComponent = () => {
                 className={`w-full flex items-center justify-between gap-3 p-4 rounded-2xl border text-left transition-all cursor-pointer ${cardStyle}`}
               >
                 <div className="flex items-center gap-3.5 min-w-0">
-                  <span className="text-3xl shrink-0">{lesson.icon}</span>
+                  <div className="w-10 h-10 rounded-xl bg-purple-50/50 flex items-center justify-center shrink-0 shadow-sm border border-purple-100 text-purple-600">
+                    {(() => {
+                      const size = 20;
+                      switch (lesson.id) {
+                        case 1: return <Lightbulb size={size} />;
+                        case 2: return <Brain size={size} />;
+                        case 3: return <BookOpen size={size} />;
+                        case 4: return <MessageSquare size={size} />;
+                        case 5: return <BookOpen size={size} />;
+                        case 6: return <BookOpen size={size} />;
+                        case 7: return <Cpu size={size} />;
+                        case 8: return <Globe size={size} />;
+                        case 9: return <Palette size={size} />;
+                        case 10: return <Feather size={size} />;
+                        case 11: return <Music size={size} />;
+                        case 12: return <Scale size={size} />;
+                        case 13: return <Eye size={size} />;
+                        case 14: return <Image size={size} />;
+                        case 15: return <Calculator size={size} />;
+                        case 16: return <Shapes size={size} />;
+                        default: return <WandSparkles size={size} />;
+                      }
+                    })()}
+                  </div>
                   <div className="min-w-0">
                     <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider block leading-none mb-1.5 font-display">
                       Lesson {lesson.id}
@@ -1608,65 +1034,40 @@ const PromptAcademyComponent = () => {
                     </span>
                   </div>
                 </div>
-                <div className="shrink-0">
-                  {isCompleted ? (
-                    <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 border border-emerald-100 px-2 py-1 rounded-md font-display uppercase tracking-wider">
-                      Done
-                    </span>
-                  ) : isActive ? (
-                    <span className="text-[10px] font-black text-purple-600 bg-purple-50 border border-purple-100 px-2 py-1 rounded-md animate-pulse font-display uppercase tracking-wider">
-                      Active
-                    </span>
-                  ) : isLocked ? (
-                    <span className="text-[10px] font-black text-slate-400 bg-slate-100 border border-slate-200 px-2 py-1 rounded-md font-display uppercase tracking-wider">
-                      Locked
-                    </span>
-                  ) : (
-                    <span className="text-[10px] font-black text-indigo-600 bg-indigo-50 border border-indigo-100 px-2 py-1 rounded-md font-display uppercase tracking-wider">
-                      Open
-                    </span>
-                  )}
-                </div>
+                
               </button>
             );
           })}
         </div>
+        )}
 
         {/* Right column: Active lesson content area */}
-        <div className="lg:col-span-9 bg-white rounded-[1.5rem] border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] overflow-hidden">
-          {/* Active Lesson Header Banner */}
-          <div className="bg-white border-b border-purple-100/60 p-6 sm:p-8 flex items-center justify-between gap-4">
-            <div>
-              <span className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-purple-500 bg-purple-50 px-3 py-1.5 rounded-lg mb-2 inline-block font-display border border-purple-100/50">
-                Level {activeLesson.id}: {activeLesson.concept}
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-black font-display text-slate-900 tracking-tight mt-1">
-                {activeLesson.title}
-              </h3>
-            </div>
-          </div>
-
+        <div className={`${isSyllabusOpen ? 'lg:col-span-9' : 'lg:col-span-12'} bg-white rounded-[1.5rem] border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.02)] overflow-hidden transition-all duration-500 ease-in-out flex flex-col min-h-[500px]`}>
           {/* Sub-tab Navigation */}
-          <div className="flex border-b border-slate-100 bg-slate-50/50">
+          <div className="flex border-b border-slate-100 bg-slate-50/50 items-center">
+            {!isSyllabusOpen && (
+              <div className="px-3 sm:px-4 py-1.5 border-r border-slate-200/60">
+                 <button onClick={() => setIsSyllabusOpen(true)} className="shrink-0 text-slate-400 hover:text-purple-600 bg-white hover:bg-purple-50 p-2 rounded-lg transition-all border border-slate-200 hover:border-purple-200 shadow-sm flex items-center justify-center" title="Open Syllabus">
+                    <PanelLeftOpen size={18} />
+                 </button>
+              </div>
+            )}
             {[
-              { id: "learn", label: "Learn", subtitle: "Concept", icon: <BookOpen size={16} /> },
-              { id: "quest", label: "Quest", subtitle: "Help Hero", icon: <Trophy size={16} /> },
-              { id: "battle", label: "Battle", subtitle: "Final Test", icon: <Gamepad2 size={16} /> }
+              { id: "learn", label: "Learn", icon: <BookOpen size={16} /> },
+              { id: "quest", label: "Practice", icon: <Trophy size={16} /> }
             ].map(tab => {
               const isTabActive = activeTab === tab.id;
               return (
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id)}
-                  className={`flex-1 py-3.5 text-center transition-all cursor-pointer border-b-2 outline-none flex flex-col items-center justify-center ${isTabActive
+                  className={`flex-1 py-3.5 text-center transition-all cursor-pointer border-b-2 outline-none flex items-center justify-center gap-2 ${isTabActive
                     ? "border-purple-500 bg-white text-purple-600 font-black"
                     : "border-transparent text-slate-500 hover:text-slate-800 hover:bg-slate-50"
                     }`}
                 >
-                  <span className="text-sm sm:text-base font-black font-display flex items-center gap-1.5">{tab.icon} {tab.label}</span>
-                  <span className="text-[10px] sm:text-xs font-semibold opacity-70 leading-none mt-1 hidden sm:block">
-                    {tab.subtitle}
-                  </span>
+                  {tab.icon}
+                  <span className="text-sm sm:text-base font-black font-display">{tab.label}</span>
                 </button>
               );
             })}
@@ -1695,19 +1096,8 @@ const PromptAcademyComponent = () => {
                     </div>
                   </div>
 
-                  <div className="bg-gradient-to-br from-purple-50/80 to-purple-50/40 border border-purple-100 rounded-2xl p-5 text-sm sm:text-base text-slate-700 font-medium leading-relaxed shadow-sm">
-                    {activeLesson.learn.description}
-                  </div>
-
-                  <div className="bg-white border border-slate-100/80 shadow-sm rounded-2xl p-5">
-                    <span className="text-xs sm:text-sm font-black text-purple-600 uppercase tracking-wider block mb-3 font-display flex items-center gap-1.5">
-                      <Lightbulb size={16} className="text-amber-500" /> Prompt Master Tips
-                    </span>
-                    <ul className="space-y-2.5 text-sm text-slate-700 font-medium list-disc pl-5 leading-normal">
-                      {activeLesson.learn.tips.map((tip, tIdx) => (
-                        <li key={tIdx} className="marker:text-purple-400">{tip}</li>
-                      ))}
-                    </ul>
+                  <div className="bg-gradient-to-br from-purple-50/80 to-purple-50/40 border border-purple-100 rounded-2xl p-6 shadow-sm min-h-[200px]">
+                    {renderProfessionalTextOutput(activeLesson.learn.description, activeLesson.id)}
                   </div>
 
                   <div className="pt-4 flex justify-end">
@@ -1715,13 +1105,13 @@ const PromptAcademyComponent = () => {
                       onClick={() => setActiveTab("quest")}
                       className="px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white rounded-xl text-xs sm:text-sm font-black font-display transition-all shadow-md active:scale-95 cursor-pointer flex items-center gap-1"
                     >
-                      Let's Go to Quest! <ArrowRight size={16} />
+                      Let's Practice! <ArrowRight size={16} />
                     </button>
                   </div>
                 </motion.div>
               )}
 
-              {/* QUEST STEP */}
+              {/* PRACTICE STEP */}
               {activeTab === 'quest' && (
                 <motion.div
                   key={`quest-${activeLesson.id}`}
@@ -1730,405 +1120,119 @@ const PromptAcademyComponent = () => {
                   exit={{ opacity: 0, y: -10 }}
                   className="space-y-6"
                 >
-                  {/* Casting Loader overlay */}
-                  {isQuestCasting && (
-                    <div className="absolute inset-0 bg-white/95 z-20 flex flex-col items-center justify-center p-8 text-center rounded-2xl">
-                      <div className="relative w-24 h-24 mb-4">
-                        <div className="absolute inset-0 rounded-full border-4 border-purple-100 border-t-purple-500 animate-spin" />
-                        <div className="absolute inset-2 bg-purple-50 rounded-full flex items-center justify-center shadow-inner">
-                          <WandSparkles className="text-purple-500 animate-bounce" size={28} />
-                        </div>
+                  <div className="flex flex-col lg:flex-row gap-6 items-stretch">
+                    {/* LEFT: Combination Builder */}
+                    <div className="flex-1 flex flex-col w-full bg-slate-50/50 rounded-2xl p-4 sm:p-5 border border-slate-100 shadow-sm">
+                      <div className="shrink-0 mb-4">
+                        <h3 className="text-xl sm:text-2xl font-black text-slate-800 font-display mb-1">Prompt Builder</h3>
+                        <p className="text-sm font-semibold text-slate-500">Click the power-ups to combine rules. Watch the AI respond instantly!</p>
                       </div>
-                      <h3 className="text-base font-black text-slate-800 font-display mb-1">
-                        Casting Spell...
-                      </h3>
-                      <p className="text-sm font-black text-purple-600 animate-pulse font-display">
-                        {castingTexts[castingStep]}
-                      </p>
-                    </div>
-                  )}
-
-                  {questCleared[activeLesson.id] ? (
-                    <div className="space-y-6">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {/* Boring Output */}
-                        <div className="bg-slate-50/40 border border-slate-200 rounded-3xl p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-300">
-                          <div className="space-y-3">
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-2">
-                                <div className="w-8 h-8 rounded-lg bg-slate-100 flex items-center justify-center text-sm font-semibold text-slate-500">
-                                  😴
+                      
+                      <div className="flex flex-col gap-3 overflow-y-auto pr-2 prompt-academy-scrollbar max-h-[380px] sm:max-h-[420px]" data-lenis-prevent>
+                        {activeLesson.quest.ingredients.map((ing) => {
+                          const isSelected = isIngredientSelected(ing.id);
+                          return (
+                            <button
+                              key={ing.id}
+                              onClick={() => toggleIngredient(ing)}
+                              className={`w-full text-left p-3.5 rounded-xl border-2 transition-all cursor-pointer shrink-0 ${isSelected
+                                ? 'border-purple-500 bg-purple-50 shadow-sm'
+                                : 'border-slate-200 bg-white hover:border-purple-300 hover:bg-purple-50/30 shadow-sm'
+                                }`}
+                            >
+                              <div className="flex items-start gap-3">
+                                <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-colors mt-0.5 ${isSelected ? 'bg-purple-500 text-white shadow-md' : 'bg-slate-100 text-slate-400'}`}>
+                                  <Trophy size={16} />
                                 </div>
-                                <div>
-                                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block font-display leading-none">Before</span>
-                                  <span className="text-xs sm:text-sm font-bold text-slate-700 font-display">Boring Prompt Result</span>
-                                </div>
-                              </div>
-                              <span className="px-2.5 py-0.5 rounded-full bg-red-50 text-[9px] font-black text-red-500 uppercase tracking-wider border border-red-100 flex items-center gap-1">
-                                <XCircle size={10} /> Dull
-                              </span>
-                            </div>
-
-                            <div className="bg-slate-100/50 border border-slate-200/60 rounded-2xl p-4">
-                              <span className="text-[9px] font-black uppercase tracking-wider text-slate-400 block mb-1 font-display">
-                                Lazy Input Prompt
-                              </span>
-                              <p className="text-sm font-mono italic text-slate-650 leading-relaxed">
-                                "{activeLesson.quest.boringPrompt}"
-                              </p>
-                            </div>
-                          </div>
-
-                          {activeLesson.quest.boringOutputImage ? (
-                            <div className="mt-5 bg-slate-100/40 rounded-2xl overflow-hidden h-[280px] sm:h-[320px] w-full border border-slate-200/50 shadow-inner relative">
-                              <img
-                                src={activeLesson.quest.boringOutputImage}
-                                alt="Boring output"
-                                className="w-full h-full object-cover filter grayscale-[30%]"
-                              />
-                              <span className="absolute top-3 right-3 bg-slate-900/70 backdrop-blur-sm text-white text-[9px] font-bold px-2.5 py-1 rounded-md font-display uppercase tracking-wider border border-white/10 z-10">
-                                Draft Output
-                              </span>
-                              <div className="absolute bottom-3 left-3 right-3 bg-red-950/80 backdrop-blur-sm px-3.5 py-2 rounded-xl border border-red-900/20 text-[11px] text-red-200 font-bold font-display flex items-center gap-1.5 z-10 shadow-md">
-                                <span>⚠️ Low resolution, flat colors, no depth</span>
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="mt-5 bg-slate-100/40 rounded-2xl overflow-hidden min-h-[280px] flex flex-col items-center justify-center p-5 border border-slate-200/50 shadow-inner relative">
-                              <span className="absolute top-3 right-3 bg-slate-200 text-slate-500 text-[9px] font-bold px-2.5 py-1 rounded-md font-display uppercase tracking-wider border border-slate-300/30">
-                                Draft Output
-                              </span>
-                              <div className="w-full text-left bg-white p-4.5 rounded-xl border border-slate-200 shadow-sm leading-relaxed">
-                                <p className="text-xs font-mono text-slate-400 italic">"{activeLesson.quest.boringOutputText}"</p>
-                                <div className="text-[10px] text-slate-400 font-bold font-display mt-4 border-t border-slate-100 pt-3 flex items-center gap-1.5">
-                                  <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-ping" />
-                                  <span>No formatting, missing style guide or specific details</span>
-                                </div>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Awesome Super Output */}
-                        <div className="bg-purple-50/20 border border-purple-200 rounded-3xl p-6 flex flex-col justify-between relative shadow-sm hover:shadow-md transition-all duration-300">
-
-                          <div className="space-y-3">
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-2">
-                                <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-purple-500 to-indigo-500 flex items-center justify-center text-sm font-semibold text-white shadow-sm shadow-purple-500/20">
-                                  ✨
-                                </div>
-                                <div>
-                                  <span className="text-[10px] font-black text-purple-600 uppercase tracking-widest block font-display leading-none">After</span>
-                                  <span className="text-xs sm:text-sm font-bold text-slate-800 font-display">Supercharged Prompt Result</span>
-                                </div>
-                              </div>
-                              <span className="px-2.5 py-0.5 rounded-full bg-gradient-to-r from-purple-500 to-indigo-500 text-[9px] font-black text-white uppercase tracking-wider shadow-sm flex items-center gap-1">
-                                <Sparkles size={10} /> Active
-                              </span>
-                            </div>
-
-                            <div className="bg-white/80 border border-purple-100 rounded-2xl p-4 shadow-sm">
-                              <span className="text-[10px] font-black uppercase tracking-wider text-purple-600 block mb-1 font-display">
-                                Assembled Super Prompt
-                              </span>
-                              <p className="text-sm sm:text-base font-mono font-bold text-slate-850 leading-relaxed">
-                                "{getLivePromptText()}"
-                              </p>
-                            </div>
-                          </div>
-
-                          {activeLesson.quest.superOutputImage ? (
-                            <div className="mt-5 bg-white rounded-2xl overflow-hidden h-[280px] sm:h-[320px] w-full border border-purple-150 shadow-sm hover:shadow-md transition-all duration-300 relative">
-                              <img
-                                src={activeLesson.quest.superOutputImage}
-                                alt="Awesome output"
-                                className="w-full h-full object-cover"
-                              />
-                            </div>
-                          ) : (
-                            <div className="mt-5 bg-white rounded-2xl overflow-hidden min-h-[280px] flex items-center justify-center p-5 border border-purple-150 shadow-md relative">
-                              <div className="w-full bg-white max-h-[240px] overflow-y-auto prompt-academy-scrollbar pr-1" data-lenis-prevent>
-                                {renderProfessionalTextOutput(activeLesson.quest.superOutputText, activeLesson.id)}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="pt-4 flex justify-end">
-                        <button
-                          onClick={() => setActiveTab("battle")}
-                          className="px-5 py-3.5 bg-gradient-to-r from-purple-500 via-indigo-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-750 text-white rounded-xl text-xs sm:text-sm font-black font-display transition-all shadow-md active:scale-95 cursor-pointer flex items-center gap-2 group"
-                        >
-                          <span>Next Challenge ⚔️</span>
-                          <ChevronRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="space-y-6">
-                      {/* Character bubble banner (Top) */}
-                      <div className="bg-gradient-to-r from-purple-50/60 to-indigo-50/40 border border-purple-100 rounded-3xl p-5 flex flex-col sm:flex-row items-center gap-5 shadow-sm relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500/5 to-indigo-500/5 rounded-full blur-2xl pointer-events-none" />
-
-                        <div className="relative w-16 h-16 rounded-full p-0.5 bg-gradient-to-tr from-purple-400 to-indigo-500 shadow-md flex items-center justify-center shrink-0">
-                          <div className="w-full h-full rounded-full bg-white overflow-hidden border border-white flex items-center justify-center">
-                            {getCharacterImage(activeLesson)}
-                          </div>
-                        </div>
-
-                        <div className="flex-grow space-y-1.5 text-center sm:text-left">
-                          <div className="flex flex-col sm:flex-row sm:items-center gap-2 justify-center sm:justify-start">
-                            <h4 className="text-base font-black text-slate-800 tracking-tight font-display">
-                              {activeLesson.quest.characterName}
-                            </h4>
-                            <span className="inline-flex self-center sm:self-start items-center px-2.5 py-0.5 rounded-full bg-purple-100/70 text-[9px] font-black text-purple-600 uppercase tracking-wider font-display">
-                              Quest Guide
-                            </span>
-                          </div>
-                          <p className="italic text-sm sm:text-base font-semibold text-slate-700 leading-relaxed">
-                            "{activeLesson.quest.characterMsg}"
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* Ingredients selection below */}
-                      <div className="space-y-4">
-                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
-                          <div className="space-y-1">
-                            <h4 className="text-sm sm:text-base font-black text-slate-800 font-display flex items-center gap-2">
-                              <WandSparkles size={18} className="text-purple-500 animate-pulse" />
-                              Assemble Ingredients
-                            </h4>
-                            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-purple-50 border border-purple-100 text-purple-700 text-xs font-bold animate-pulse">
-                              <span className="w-1.5 h-1.5 rounded-full bg-purple-500" />
-                              Select all 4 power-ups below to construct your prompt spell!
-                            </div>
-                          </div>
-                          <div className="px-3.5 py-1.5 rounded-full bg-purple-100 text-purple-700 text-[11px] sm:text-xs font-black font-mono tracking-wider self-start sm:self-center">
-                            Progress: {selectedIngredients.length} / {activeLesson.quest.ingredients.length}
-                          </div>
-                        </div>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                          {activeLesson.quest.ingredients.map(ing => {
-                            const isSelected = isIngredientSelected(ing.id);
-
-                            let colorTheme = {
-                              bg: "bg-white border-slate-150 text-slate-700 hover:border-slate-355 hover:bg-slate-50/50",
-                              activeBg: "bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-white border-transparent shadow-lg shadow-purple-500/20",
-                              pillBg: "bg-slate-100 text-slate-500",
-                              activePillBg: "bg-white/20 text-white"
-                            };
-
-                            if (ing.type === 'role') {
-                              colorTheme = {
-                                bg: "bg-white border-slate-205 text-slate-700 hover:border-sky-300 hover:bg-sky-50/10",
-                                activeBg: "bg-gradient-to-br from-sky-500 to-blue-600 text-white border-transparent shadow-lg shadow-blue-500/20",
-                                pillBg: "bg-sky-50 text-sky-600",
-                                activePillBg: "bg-white/20 text-white"
-                              };
-                            } else if (ing.type === 'detail') {
-                              colorTheme = {
-                                bg: "bg-white border-slate-205 text-slate-700 hover:border-emerald-300 hover:bg-emerald-50/10",
-                                activeBg: "bg-gradient-to-br from-emerald-500 to-teal-600 text-white border-transparent shadow-lg shadow-emerald-500/20",
-                                pillBg: "bg-emerald-50 text-emerald-600",
-                                activePillBg: "bg-white/20 text-white"
-                              };
-                            } else if (ing.type === 'background') {
-                              colorTheme = {
-                                bg: "bg-white border-slate-205 text-slate-700 hover:border-indigo-300 hover:bg-indigo-50/10",
-                                activeBg: "bg-gradient-to-br from-indigo-500 to-purple-600 text-white border-transparent shadow-lg shadow-indigo-500/20",
-                                pillBg: "bg-indigo-50 text-indigo-600",
-                                activePillBg: "bg-white/20 text-white"
-                              };
-                            } else if (ing.type === 'style') {
-                              colorTheme = {
-                                bg: "bg-white border-slate-205 text-slate-700 hover:border-amber-300 hover:bg-amber-50/10",
-                                activeBg: "bg-gradient-to-br from-amber-500 to-orange-600 text-white border-transparent shadow-lg shadow-amber-500/20",
-                                pillBg: "bg-amber-50 text-amber-700",
-                                activePillBg: "bg-white/20 text-white"
-                              };
-                            }
-
-                            return (
-                              <button
-                                key={ing.id}
-                                onClick={() => toggleIngredient(ing)}
-                                className={`group p-4.5 rounded-2xl border text-left cursor-pointer transition-all duration-300 flex flex-col justify-between min-h-[155px] relative overflow-hidden ${isSelected
-                                  ? colorTheme.activeBg + " -translate-y-1"
-                                  : colorTheme.bg
-                                  }`}
-                              >
-                                <div className="flex items-center justify-between w-full mb-3">
-                                  <span className={`text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-md font-display ${isSelected ? colorTheme.activePillBg : colorTheme.pillBg}`}>
+                                <div className="min-w-0">
+                                  <span className={`text-xs font-black uppercase tracking-wider block mb-0.5 font-display ${isSelected ? 'text-purple-600' : 'text-slate-600'}`}>
                                     {ing.label}
                                   </span>
-                                  <div className={`w-5 h-5 rounded-full flex items-center justify-center transition-all ${isSelected
-                                    ? "bg-white text-purple-600 scale-110 shadow-sm"
-                                    : "border border-slate-200 text-slate-400 group-hover:border-slate-400 group-hover:scale-105"
-                                    }`}>
-                                    {isSelected ? <Check size={11} strokeWidth={4} /> : <Plus size={11} strokeWidth={3} />}
-                                  </div>
+                                  <span className="text-xs font-semibold text-slate-500 leading-snug block">
+                                    {ing.desc}
+                                  </span>
                                 </div>
-
-                                <div className="flex-grow flex items-center py-1">
-                                  <p className={`text-sm font-bold font-mono leading-snug tracking-tight ${isSelected ? 'text-white' : 'text-slate-700'}`}>
-                                    "{ing.text}"
-                                  </p>
-                                </div>
-
-                                <p className={`text-[11px] sm:text-xs mt-2 leading-snug ${isSelected ? 'text-white/80 font-medium' : 'text-slate-500 font-normal'}`}>
-                                  {ing.desc}
-                                </p>
-
-                                {isSelected && (
-                                  <div className="absolute -bottom-6 -right-6 w-16 h-16 bg-white/10 rounded-full blur-xl pointer-events-none" />
-                                )}
-                              </button>
-                            );
-                          })}
-                        </div>
-                      </div>
-
-                      {/* Bottom live prompt preview and cast button */}
-                      <div className="space-y-4 pt-4 border-t border-slate-100">
-                        <div className="bg-gradient-to-br from-purple-50/40 via-white to-indigo-50/30 border border-purple-100 rounded-2xl p-5 shadow-sm relative overflow-hidden">
-                          <div className="absolute top-4 left-4 flex gap-1.5 z-10 opacity-60">
-                            <span className="w-2.5 h-2.5 rounded-full bg-rose-500" style={{ backgroundColor: '#ff5f56' }} />
-                            <span className="w-2.5 h-2.5 rounded-full bg-amber-500" style={{ backgroundColor: '#ffbd2e' }} />
-                            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" style={{ backgroundColor: '#27c93f' }} />
-                          </div>
-
-                          <div className="text-center mb-3">
-                            <span className="text-[9px] font-black uppercase tracking-widest text-purple-500 font-display">
-                              AI Prompt Spell Compiler
-                            </span>
-                          </div>
-
-                          <div className="bg-white/70 border border-purple-100/50 p-4.5 rounded-xl min-h-[72px] flex items-center leading-relaxed text-xs sm:text-sm font-mono text-slate-700 shadow-inner relative mt-1">
-                            {selectedIngredients.length === 0 ? (
-                              <span className="text-slate-400 font-medium italic select-none">
-                                // Select power-up ingredients above to compile your prompt spell...
-                              </span>
-                            ) : (
-                              renderLivePromptBadges()
-                            )}
-                          </div>
-                        </div>
-
-                        <button
-                          onClick={handleCastSpell}
-                          disabled={selectedIngredients.length < activeLesson.quest.ingredients.length}
-                          className={`w-full py-4 rounded-2xl text-sm sm:text-base font-black font-display transition-all duration-300 relative overflow-hidden ${selectedIngredients.length === activeLesson.quest.ingredients.length
-                            ? "bg-gradient-to-r from-purple-600 via-indigo-600 to-indigo-700 hover:from-purple-700 hover:to-indigo-800 text-white shadow-lg shadow-indigo-600/20 active:scale-[0.98] cursor-pointer"
-                            : "bg-slate-100 border border-slate-200 text-slate-400 cursor-not-allowed"
-                            }`}
-                        >
-                          <span className="flex items-center justify-center gap-2">
-                            <Sparkles size={18} className={selectedIngredients.length === activeLesson.quest.ingredients.length ? "animate-pulse" : ""} />
-                            <span>Cast Prompt Spell!</span>
-                          </span>
-                        </button>
+                              </div>
+                            </button>
+                          );
+                        })}
                       </div>
                     </div>
-                  )}
+
+                    {/* RIGHT: Live AI Chat Preview */}
+                    <div className="w-full lg:w-[400px] xl:w-[500px] 2xl:w-[550px] flex flex-col h-[500px] bg-white border border-slate-200 shadow-xl rounded-2xl overflow-hidden shrink-0">
+                      <div className="bg-slate-50 border-b border-slate-200 p-4 flex items-center gap-3">
+                         <div className="w-8 h-8 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center">
+                            <Bot size={18} />
+                         </div>
+                         <div>
+                            <span className="text-xs font-black uppercase text-slate-700 font-display block leading-tight">AI Assistant</span>
+                            <span className="text-[10px] font-bold text-emerald-500 flex items-center gap-1 mt-0.5"><span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Online</span>
+                         </div>
+                      </div>
+                      
+                      <div className="p-5 grow flex flex-col gap-4 overflow-y-auto bg-slate-50/50 ai-chat-scrollbar" data-lenis-prevent>
+                         {/* Default AI Greeting */}
+                         <div className="flex gap-3">
+                            <div className="w-6 h-6 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center shrink-0 mt-1"><Bot size={14} /></div>
+                            <div className="bg-white border border-slate-200 text-slate-700 text-sm p-3 rounded-2xl rounded-tl-sm shadow-sm">
+                               Hello! I am ready to generate something awesome. Build your prompt on the left to begin!
+                            </div>
+                         </div>
+                         
+                         {/* User Message (Shows selected ingredients) */}
+                         {selectedIngredients.length > 0 && (
+                           <div className="flex gap-3 justify-end mt-2 animate-in slide-in-from-right-4 duration-300">
+                              <div className="bg-purple-600 text-white text-sm p-3 rounded-2xl rounded-tr-sm shadow-sm font-mono max-w-[85%] text-right">
+                                 {getLivePromptText()}
+                              </div>
+                           </div>
+                         )}
+
+                         {/* AI Dynamic Response */}
+                         {renderDynamicProgressiveOutput()}
+                         {selectedIngredients.length === 4 && (
+                           <div className="flex gap-3 animate-in fade-in slide-in-from-bottom-2 duration-500 mt-2">
+                              <div className="w-6 h-6 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center shrink-0 mt-1"><Check size={14} /></div>
+                              <div className="bg-white border border-emerald-200 text-slate-700 text-sm p-4 rounded-2xl rounded-tl-sm shadow-sm w-full relative">
+                                 <span className="font-black text-emerald-500 uppercase tracking-wider text-[10px] block mb-2 font-display">Perfect Prompt Output</span>
+                                 <div className="bg-emerald-50/50 p-3 rounded-xl border border-emerald-100">
+                                    {activeLesson.quest.targetType === "Image Creator" ? (
+                                      <div className="rounded-xl overflow-hidden shadow-sm border border-emerald-200/50">
+                                        <img src={activeLesson.quest.superOutputImage} alt="Generated AI Masterpiece" className="w-full h-auto object-cover" />
+                                        <div className="p-2 bg-slate-900 text-center">
+                                          <span className="text-[10px] text-emerald-400 font-mono tracking-wider font-black">AI Image Successfully Generated</span>
+                                        </div>
+                                      </div>
+                                    ) : (
+                                      renderProfessionalTextOutput(activeLesson.quest.superOutputText, activeLesson.id)
+                                    )}
+                                 </div>
+                              </div>
+                           </div>
+                         )}
+                      </div>
+
+                      {selectedIngredients.length === 4 && (
+                         <div className="p-4 bg-white border-t border-slate-100 animate-in slide-in-from-bottom-4">
+                            <button onClick={() => {
+                               completeLesson(activeLesson.id);
+                               if (activeLessonIdx < lessonsData.length - 1) {
+                                  selectLesson(activeLessonIdx + 1);
+                               } else {
+                                  alert("Congratulations! You completed all lessons!");
+                               }
+                            }} className="w-full py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-xl font-black font-display text-sm shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer flex items-center justify-center gap-2">
+                               Complete Lesson & Next <ArrowRight size={16} />
+                            </button>
+                         </div>
+                      )}
+                    </div>
+                  </div>
                 </motion.div>
               )}
 
-              {/* BATTLE STEP */}
-              {activeTab === 'battle' && (
-                <motion.div
-                  key={`battle-${activeLesson.id}`}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="space-y-6"
-                >
-                  <div>
-                    <h3 className="text-lg sm:text-xl font-black text-slate-800 font-display mb-1">
-                      Prompt Battle Trivia
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-500 font-medium">
-                      Pick the prompt that uses all guidelines to defeat the Boring Text Monster!
-                    </p>
-                  </div>
-
-                  <div className="bg-slate-50 border border-slate-100 rounded-2xl p-5 shadow-sm">
-                    <h4 className="text-sm sm:text-base font-bold text-slate-800 leading-relaxed">
-                      {activeLesson.battle.scenario}
-                    </h4>
-                  </div>
-
-                  <div className="space-y-3.5">
-                    {activeLesson.battle.options.map((option, idx) => {
-                      const isSelected = selectedOption === idx;
-                      let optionStyle = "bg-white border-slate-200 text-slate-700 hover:border-purple-200 hover:bg-purple-50/20";
-                      if (battleAnswered) {
-                        if (option.isCorrect) {
-                          optionStyle = "bg-emerald-50 border-emerald-400 text-emerald-700 font-bold";
-                        } else if (isSelected) {
-                          optionStyle = "bg-rose-50 border-rose-400 text-rose-700 font-bold";
-                        } else {
-                          optionStyle = "bg-slate-50 border-slate-100 text-slate-400 opacity-60";
-                        }
-                      }
-                      return (
-                        <button
-                          key={idx}
-                          disabled={battleAnswered}
-                          onClick={() => handleSelectBattleOption(idx)}
-                          className={`w-full flex items-start gap-4 p-4 rounded-xl border text-left transition-all duration-250 cursor-pointer font-medium ${optionStyle}`}
-                        >
-                          <span className={`w-7 h-7 rounded-md flex items-center justify-center text-xs sm:text-sm font-black shrink-0 transition-all shadow-sm ${battleAnswered && option.isCorrect
-                            ? "bg-emerald-500 text-white"
-                            : battleAnswered && isSelected && !option.isCorrect
-                              ? "bg-rose-500 text-white"
-                              : isSelected
-                                ? "bg-purple-500 text-white"
-                                : "bg-slate-100 text-slate-500"
-                            }`}>
-                            {battleAnswered && option.isCorrect ? "✓" : battleAnswered && isSelected && !option.isCorrect ? "✗" : optionLabels[idx]}
-                          </span>
-                          <div className="flex-1">
-                            <p className="text-xs sm:text-sm leading-relaxed font-mono">
-                              "{option.text}"
-                            </p>
-                            {battleAnswered && isSelected && (
-                              <p className="text-xs sm:text-sm font-bold mt-2 text-current opacity-90 leading-normal">
-                                {option.feedback}
-                              </p>
-                            )}
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  {battleAnswered && (
-                    <div className="flex justify-end pt-2">
-                      <button
-                        onClick={handleCompleteBattle}
-                        className="px-6 py-3 bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white rounded-xl text-xs sm:text-sm font-black font-display transition-all shadow-md active:scale-95 cursor-pointer flex items-center gap-1"
-                      >
-                        {activeLesson.battle.options[selectedOption]?.isCorrect ? (
-                          activeLessonIdx < lessonsData.length - 1 ? (
-                            <>
-                              Complete & Unlock Next <ChevronRight size={16} />
-                            </>
-                          ) : (
-                            "Complete Prompt Academy!"
-                          )
-                        ) : (
-                          "Try Battle Again"
-                        )}
-                      </button>
-                    </div>
-                  )}
-                </motion.div>
-              )}
-            </AnimatePresence>
+              </AnimatePresence>
           </div>
         </div>
       </div>
@@ -2404,7 +1508,7 @@ const LearnConceptsComponent = () => {
                           <div className="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm">
                             <div className="mb-1 text-indigo-600"><Brain size={20} /></div>
                             <h4 className="text-xs sm:text-sm font-black text-slate-900 font-display">Learn, Don't Copy</h4>
-                            <p className="text-[11px] text-slate-600 font-medium mt-0.5">Let AI explain *how* to solve homework instead of just copying the answer.</p>
+                            <p className="text-[11px] text-slate-600 font-medium mt-0.5">Let AI explain how to solve homework instead of just copying the answer.</p>
                           </div>
 
                           <div className="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm">
@@ -2662,7 +1766,7 @@ const AiIntelligenceDashboard = () => {
 
   const quickStats = [
     { label: 'Learn Concepts', value: 'Quick Lessons', icon: <BookOpen className="text-purple-600" />, color: 'bg-purple-50' },
-    { label: 'Prompt Academy', value: 'Interactive Quests', icon: <WandSparkles className="text-purple-600" />, color: 'bg-purple-50' },
+    { label: 'Prompt Academy', value: 'Learn Prompting', icon: <WandSparkles className="text-purple-600" />, color: 'bg-purple-50' },
     { label: 'Explore Tools', value: 'AI Tools', icon: <Cpu className="text-purple-600" />, color: 'bg-purple-50' }
   ];
 
