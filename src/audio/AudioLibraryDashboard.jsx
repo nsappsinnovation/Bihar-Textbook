@@ -373,10 +373,10 @@ const AudioLibraryDashboard = () => {
           <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
         </button>
 
-        <div className="px-6 md:px-12 space-y-8 pt-4">
+        <div className="space-y-8 pt-4">
           
           {/* HERO & QUICK STATS SECTION */}
-          <div className="relative">
+          <div className="relative px-6 md:px-12">
             <section className="bg-white rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[300px] pb-6">
               <div className="relative z-10 p-8 md:p-10 lg:w-1/2 space-y-4">
                  <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
@@ -434,7 +434,7 @@ const AudioLibraryDashboard = () => {
           </div>
 
           {/* AUDIOBOOK SHELF */}
-          <div ref={shelfRef} className="pt-4 space-y-6">
+          <div ref={shelfRef} className="px-4 sm:px-8 md:px-14 lg:px-16 xl:px-24 max-w-[1380px] mx-auto pt-4 space-y-6">
             
             {/* Filter Tabs & Search Bar Row */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-4 rounded-[20px] border border-slate-100 shadow-sm">
