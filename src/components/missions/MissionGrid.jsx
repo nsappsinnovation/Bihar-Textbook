@@ -9,7 +9,7 @@ const MissionGrid = () => {
             desc: "Immersive Learning Experiences",
             image: "/images/missions/headset.png",
             hoverImage: "/images/missions/headsethov.png",
-            link: "/vr",
+            link: "/vr-dashboard",
             accent: "blue"
         },
         {
