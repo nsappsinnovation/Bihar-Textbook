@@ -9,14 +9,14 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 const toolsDataList = [
-  { name: 'Hello', tag: 'Greeting', desc: 'Wave your hand gently from side to side to say hello.', image: '/images/signlanguage/hello.png', color: 'bg-green-50 text-green-600', icon: <Hand size={28} />, categories: ['Greetings', 'Daily'] },
-  { name: 'Thank You', tag: 'Greeting', desc: 'Touch your chin with fingers, then move hand forward towards the person.', image: '/images/signlanguage/thankyou.png', color: 'bg-green-50 text-green-600', icon: <HeartHandshake size={28} />, categories: ['Greetings', 'Daily'] },
-  { name: 'Mother', tag: 'Family', desc: 'Tap your thumb on your chin with an open hand facing sideways.', image: '/images/signlanguage/mother.png', color: 'bg-green-50 text-green-600', icon: <Users size={28} />, categories: ['Family'] },
-  { name: 'Happy', tag: 'Emotion', desc: 'Brush both flat hands upward on your chest to show joy.', image: '/images/signlanguage/happy.png', color: 'bg-green-50 text-green-600', icon: <Smile size={28} />, categories: ['Emotions'] },
-  { name: 'Sorry', tag: 'Greeting', desc: 'Rub a closed fist in a circular motion over your heart.', image: '/images/signlanguage/sorry.png', color: 'bg-green-50 text-green-600', icon: <Heart size={28} />, categories: ['Greetings', 'Emotions'] },
-  { name: 'Eat', tag: 'Daily', desc: 'Bring your flattened O-hand to your mouth a few times.', image: '/images/signlanguage/eat.png', color: 'bg-green-50 text-green-600', icon: <Utensils size={28} />, categories: ['Daily'] },
-  { name: 'Father', tag: 'Family', desc: 'Tap your thumb on your forehead with an open hand facing sideways.', image: '/images/signlanguage/father.png', color: 'bg-green-50 text-green-600', icon: <Users size={28} />, categories: ['Family'] },
-  { name: 'Sad', tag: 'Emotion', desc: 'Place both hands in front of your face and pull them down while making a sad face.', image: '/images/signlanguage/sad.png', color: 'bg-green-50 text-green-600', icon: <Frown size={28} />, categories: ['Emotions'] }
+  { name: 'Hello', tag: 'Greeting', desc: 'Wave your hand gently from side to side to say hello.', image: '/images/signlanguage/hello.png', color: 'bg-emerald-50 text-emerald-600', icon: <Hand size={28} />, categories: ['Greetings', 'Daily'] },
+  { name: 'Thank You', tag: 'Greeting', desc: 'Touch your chin with fingers, then move hand forward towards the person.', image: '/images/signlanguage/thankyou.png', color: 'bg-emerald-50 text-emerald-600', icon: <HeartHandshake size={28} />, categories: ['Greetings', 'Daily'] },
+  { name: 'Mother', tag: 'Family', desc: 'Tap your thumb on your chin with an open hand facing sideways.', image: '/images/signlanguage/mother.png', color: 'bg-emerald-50 text-emerald-600', icon: <Users size={28} />, categories: ['Family'] },
+  { name: 'Happy', tag: 'Emotion', desc: 'Brush both flat hands upward on your chest to show joy.', image: '/images/signlanguage/happy.png', color: 'bg-emerald-50 text-emerald-600', icon: <Smile size={28} />, categories: ['Emotions'] },
+  { name: 'Sorry', tag: 'Greeting', desc: 'Rub a closed fist in a circular motion over your heart.', image: '/images/signlanguage/sorry.png', color: 'bg-emerald-50 text-emerald-600', icon: <Heart size={28} />, categories: ['Greetings', 'Emotions'] },
+  { name: 'Eat', tag: 'Daily', desc: 'Bring your flattened O-hand to your mouth a few times.', image: '/images/signlanguage/eat.png', color: 'bg-emerald-50 text-emerald-600', icon: <Utensils size={28} />, categories: ['Daily'] },
+  { name: 'Father', tag: 'Family', desc: 'Tap your thumb on your forehead with an open hand facing sideways.', image: '/images/signlanguage/father.png', color: 'bg-emerald-50 text-emerald-600', icon: <Users size={28} />, categories: ['Family'] },
+  { name: 'Sad', tag: 'Emotion', desc: 'Place both hands in front of your face and pull them down while making a sad face.', image: '/images/signlanguage/sad.png', color: 'bg-emerald-50 text-emerald-600', icon: <Frown size={28} />, categories: ['Emotions'] }
 ];
 
 const ExploreSignsComponent = () => {
@@ -37,8 +37,8 @@ const ExploreSignsComponent = () => {
             <div className="w-full h-full relative preserve-3d transition-transform duration-500 group-hover:rotate-y-180">
 
               {/* Front of Card */}
-              <div className="absolute inset-0 backface-hidden bg-white rounded-[20px] border border-slate-100 p-5 flex flex-col items-center justify-center text-center shadow-[0_4px_20px_rgba(0,0,0,0.03)] group-hover:border-green-200 transition-colors">
-                <div className="w-14 h-14 rounded-full flex items-center justify-center text-xl mb-4 bg-green-100 text-green-600 mx-auto shrink-0">
+              <div className="absolute inset-0 backface-hidden bg-white rounded-[20px] border border-slate-100 p-5 flex flex-col items-center justify-center text-center shadow-[0_4px_20px_rgba(0,0,0,0.03)] group-hover:border-emerald-200 transition-colors">
+                <div className="w-14 h-14 rounded-full flex items-center justify-center text-xl mb-4 bg-emerald-100 text-emerald-600 mx-auto shrink-0">
                   {tool.icon ? React.cloneElement(tool.icon, { className: "opacity-80" }) : <span className="font-black opacity-60 text-2xl">{tool.name.charAt(0)}</span>}
                 </div>
                 <h4 className="text-lg font-black text-slate-900 leading-tight">{tool.name}</h4>
@@ -46,13 +46,13 @@ const ExploreSignsComponent = () => {
                   {tool.tag}
                 </span>
                 <p className="text-[11px] text-slate-500 mt-3 line-clamp-2 font-medium">{tool.desc}</p>
-                <div className="mt-auto text-[9px] text-green-600 font-bold uppercase tracking-widest bg-green-50 px-3 py-1.5 rounded-full w-full">
+                <div className="mt-auto text-[9px] text-emerald-600 font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1.5 rounded-full w-full">
                   Hover to flip & see sign
                 </div>
               </div>
 
               {/* Back of Card */}
-              <div className="absolute inset-0 backface-hidden rounded-[20px] shadow-lg shadow-green-100/50 transition-all overflow-hidden rotate-y-180 border-2 border-green-200 bg-white flex flex-col items-center justify-center p-4">
+              <div className="absolute inset-0 backface-hidden rounded-[20px] shadow-lg shadow-emerald-100/50 transition-all overflow-hidden rotate-y-180 border-2 border-emerald-200 bg-white flex flex-col items-center justify-center p-4">
                 <div className="w-full h-[65%] flex items-center justify-center relative">
                   <img
                     src={tool.image}
@@ -60,7 +60,7 @@ const ExploreSignsComponent = () => {
                     className="max-w-full max-h-full object-contain mix-blend-multiply drop-shadow-sm"
                   />
                 </div>
-                <span className="text-[11px] font-black text-green-700 bg-green-50 px-3 py-1 rounded-full uppercase tracking-wider mt-2">
+                <span className="text-[11px] font-black text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-wider mt-2">
                   {tool.name}
                 </span>
               </div>
@@ -168,7 +168,7 @@ const FingerspellComponent = () => {
       <div className="absolute inset-0 z-0 opacity-20 pointer-events-none" style={{ backgroundImage: "url('/images/signlanguage/rhs.png')", backgroundSize: 'cover', backgroundPosition: 'center' }} />
 
       <div className="relative z-10 w-full max-w-2xl mx-auto flex flex-col items-center">
-        <div className="w-16 h-16 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center mb-6 shadow-inner">
+        <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mb-6 shadow-inner">
           <Keyboard size={32} />
         </div>
 
@@ -186,7 +186,7 @@ const FingerspellComponent = () => {
             onBlur={() => setTimeout(() => setIsFocused(false), 200)}
             maxLength={15}
             placeholder="TYPE A WORD..."
-            className="w-full px-8 py-5 rounded-full bg-white border-2 border-slate-200 text-center text-2xl font-black text-slate-800 placeholder-slate-300 focus:outline-none focus:border-purple-400 focus:ring-4 ring-purple-100 transition-all tracking-[0.2em] shadow-sm"
+            className="w-full px-8 py-5 rounded-full bg-white border-2 border-slate-200 text-center text-2xl font-black text-slate-800 placeholder-slate-300 focus:outline-none focus:border-emerald-500 focus:ring-4 ring-emerald-100 transition-all tracking-[0.2em] shadow-sm"
           />
           <div className="absolute -bottom-6 left-0 right-0 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center">
             Max 15 characters
@@ -202,16 +202,16 @@ const FingerspellComponent = () => {
                     e.preventDefault();
                     selectWord(item);
                   }}
-                  className="flex items-center gap-3 px-4 py-3 hover:bg-green-50 rounded-[14px] cursor-pointer text-left transition-colors group"
+                  className="flex items-center gap-3 px-4 py-3 hover:bg-emerald-50 rounded-[14px] cursor-pointer text-left transition-colors group"
                 >
-                  <div className="w-8 h-8 rounded-full bg-green-100 text-green-600 flex items-center justify-center shrink-0 font-bold text-[10px]">
+                  <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0 font-bold text-[10px]">
                     ISL
                   </div>
                   <div className="flex-1 min-w-0">
-                    <span className="text-sm font-bold text-slate-800 group-hover:text-green-600 transition-colors">{item.word}</span>
+                    <span className="text-sm font-bold text-slate-800 group-hover:text-emerald-600 transition-colors">{item.word}</span>
                     <p className="text-[10px] text-slate-400 truncate">{item.desc}</p>
                   </div>
-                  <ChevronRight size={14} className="text-slate-300 group-hover:text-green-500 group-hover:translate-x-0.5 transition-all" />
+                  <ChevronRight size={14} className="text-slate-300 group-hover:text-emerald-500 group-hover:translate-x-0.5 transition-all" />
                 </div>
               ))}
             </div>
@@ -223,13 +223,13 @@ const FingerspellComponent = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.95 }}
-            className="w-full max-w-md bg-white rounded-[24px] border-2 border-green-500/20 p-6 flex flex-col items-center text-center shadow-lg relative overflow-hidden"
+            className="w-full max-w-md bg-white rounded-[24px] border-2 border-emerald-500/20 p-6 flex flex-col items-center text-center shadow-lg relative overflow-hidden"
           >
             {/* Decorative background circle */}
-            <div className="absolute -right-10 -top-10 w-32 h-32 rounded-full bg-green-50/50 -z-10" />
+            <div className="absolute -right-10 -top-10 w-32 h-32 rounded-full bg-emerald-50/50 -z-10" />
             <div className="absolute -left-10 -bottom-10 w-32 h-32 rounded-full bg-purple-50/50 -z-10" />
 
-            <span className="text-[10px] font-black text-green-600 bg-green-50 px-3 py-1 rounded-full uppercase tracking-wider mb-4">
+            <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-wider mb-4">
               Whole Word Sign
             </span>
 
@@ -279,7 +279,7 @@ const FingerspellComponent = () => {
                     exit={{ opacity: 0, scale: 0.5, y: -20 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20, delay: index * 0.03 }}
                     onClick={() => setZoomedChar(char)}
-                    className="w-16 h-20 md:w-20 md:h-24 bg-white rounded-[16px] border-2 border-green-100 flex flex-col items-center justify-center relative shadow-[0_4px_15px_rgb(34,197,94,0.1)] overflow-hidden group hover:border-green-400 hover:shadow-[0_8px_20px_rgb(34,197,94,0.2)] hover:-translate-y-1 transition-all cursor-pointer"
+                    className="w-16 h-20 md:w-20 md:h-24 bg-white rounded-[16px] border-2 border-emerald-100 flex flex-col items-center justify-center relative shadow-[0_4px_15px_rgb(16,185,129,0.1)] overflow-hidden group hover:border-emerald-400 hover:shadow-[0_8px_20px_rgb(16,185,129,0.2)] hover:-translate-y-1 transition-all cursor-pointer"
                   >
                     <img
                       src={`/images/signlanguage/alphabets/${char}.png`}
@@ -287,7 +287,7 @@ const FingerspellComponent = () => {
                       alt={`Sign for ${char}`}
                       className="w-10 h-10 md:w-12 md:h-12 object-contain mix-blend-multiply opacity-80 mb-3 group-hover:scale-110 group-hover:opacity-100 transition-all"
                     />
-                    <span className="absolute bottom-2 md:bottom-3 text-lg md:text-xl font-black text-green-700 bg-green-50/90 w-full text-center py-0.5 border-t border-green-100 group-hover:bg-green-100">{char}</span>
+                    <span className="absolute bottom-2 md:bottom-3 text-lg md:text-xl font-black text-emerald-700 bg-emerald-50/90 w-full text-center py-0.5 border-t border-emerald-100 group-hover:bg-emerald-100">{char}</span>
                   </motion.div>
                 );
               })}
@@ -333,7 +333,7 @@ const FingerspellComponent = () => {
               <h4 className="text-4xl font-black text-slate-900 mb-6">Letter {zoomedChar}</h4>
 
               <div className="w-56 h-56 bg-slate-50 rounded-[24px] border-2 border-slate-100 flex items-center justify-center p-6 mb-8 shadow-inner relative overflow-hidden">
-                <div className="absolute inset-0 bg-green-500/5 mix-blend-multiply pointer-events-none" />
+                <div className="absolute inset-0 bg-emerald-500/5 mix-blend-multiply pointer-events-none" />
                 <img
                   src={`/images/signlanguage/alphabets/${zoomedChar}.png`}
                   onError={(e) => { e.target.onerror = null; e.target.src = '/images/signlanguage/hand.png'; }}
@@ -1043,8 +1043,8 @@ const SignLearn = () => {
 
   const quickStats = [
     { label: 'Learn ISL', value: `${allSignVideos.length} Video Lectures`, icon: <BookOpen className="text-emerald-600" />, color: 'bg-emerald-50' },
-    { label: 'Explore Signs', value: 'Visual library', icon: <Hand className="text-blue-600" />, color: 'bg-blue-50' },
-    { label: 'Type to Sign', value: 'Fingerspell Translator', icon: <Keyboard className="text-purple-600" />, color: 'bg-purple-50' },
+    { label: 'Explore Signs', value: 'Visual library', icon: <Hand className="text-emerald-600" />, color: 'bg-emerald-50' },
+    { label: 'Type to Sign', value: 'Fingerspell Translator', icon: <Keyboard className="text-emerald-600" />, color: 'bg-emerald-50' },
   ];
 
   return (
@@ -1053,7 +1053,7 @@ const SignLearn = () => {
       <link rel="preconnect" href="https://img.youtube.com" />
       <button
         onClick={() => navigate("/#missions-grid")}
-        className="fixed top-3 left-3 md:top-5 md:left-5 z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-green-600 hover:shadow-lg transition-all border border-slate-100 group"
+        className="fixed top-3 left-3 md:top-5 md:left-5 z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:shadow-lg transition-all border border-slate-100 group"
       >
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
       </button>
@@ -1069,7 +1069,7 @@ const SignLearn = () => {
               <div className="relative z-10 p-5 sm:p-8 md:p-10 lg:w-1/2 space-y-3 md:space-y-4">
                 <h1 className="text-[22px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
                   Build. Learn. &amp; <br /> Talk with <br />
-                  <span className="text-green-600">Sign Language</span>
+                  <span className="text-emerald-600">Sign Language</span>
                 </h1>
                 <p className="text-slate-500 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed max-w-sm">
                   Your visual learning hub for signs and expressions.
@@ -1097,14 +1097,14 @@ const SignLearn = () => {
                       const target = document.getElementById("content-section");
                       if (target) target.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className={`bg-white rounded-[16px] p-3 md:p-4 border ${isActive ? 'border-green-500 ring-2 ring-green-500/10 shadow-md' : 'border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)]'} flex items-center gap-3 md:gap-4 hover:shadow-md transition-shadow cursor-pointer group`}
+                    className={`bg-white rounded-[16px] p-3 md:p-4 border ${isActive ? 'border-emerald-600 ring-2 ring-emerald-600/10 shadow-md' : 'border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)]'} flex items-center gap-3 md:gap-4 hover:shadow-md hover:border-emerald-300 transition-all cursor-pointer group`}
                   >
-                    <div className={`w-[44px] h-[44px] ${isActive ? 'bg-green-600 text-white' : stat.color} rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5`}>
+                    <div className={`w-[44px] h-[44px] ${isActive ? 'bg-emerald-600 text-white' : stat.color} rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5`}>
                       {React.cloneElement(stat.icon, { className: isActive ? 'text-white' : stat.icon.props.className })}
                     </div>
                     <div>
-                      <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? 'text-green-700' : 'text-[#1e1b4b] group-hover:text-green-600'}`}>{stat.label}</h4>
-                      <p className={`text-[11px] font-medium mt-0.5 ${isActive ? 'text-green-600/80' : 'text-slate-500'}`}>{stat.value}</p>
+                      <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? 'text-emerald-800' : 'text-slate-800 group-hover:text-emerald-600'}`}>{stat.label}</h4>
+                      <p className={`text-[11px] font-medium mt-0.5 ${isActive ? 'text-emerald-600' : 'text-slate-500'}`}>{stat.value}</p>
                     </div>
                   </div>
                 );
@@ -1112,8 +1112,8 @@ const SignLearn = () => {
             </section>
           </div>
 
-          {/* Content Section */}
-          <div id="content-section" className="pt-6">
+          {/* Content Section with standardized responsive layout margins */}
+          <div id="content-section" className="px-2 sm:px-6 md:px-12 lg:px-10 xl:px-10 max-w-[1380px] mx-auto mt-8 sm:mt-10">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeFilter}
@@ -1143,7 +1143,7 @@ const SignLearn = () => {
                                 onClick={() => setVideoCategoryFilter(tab.id)}
                                 className={`px-4 py-2.5 rounded-full text-xs sm:text-sm font-bold flex items-center gap-2 transition-all cursor-pointer ${
                                   isActive
-                                    ? 'bg-green-600 text-white shadow-md shadow-green-500/20'
+                                    ? 'bg-emerald-600 text-white shadow-md shadow-emerald-500/20'
                                     : 'bg-slate-100 hover:bg-slate-200 text-slate-700'
                                 }`}
                               >
@@ -1166,28 +1166,8 @@ const SignLearn = () => {
                             placeholder="Search ISL videos..."
                             value={videoSearchQuery}
                             onChange={(e) => setVideoSearchQuery(e.target.value)}
-                            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-full text-xs sm:text-sm font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:border-green-500 focus:ring-2 ring-green-500/20 transition-all"
+                            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-full text-xs sm:text-sm font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-2 ring-emerald-500/20 transition-all"
                           />
-                        </div>
-                      </div>
-
-                      {/* Level Pills */}
-                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-slate-100">
-                        <div className="flex items-center gap-1.5 flex-wrap">
-                          <span className="text-xs font-bold text-slate-400 mr-1">Level:</span>
-                          {['All', 'Beginner', 'Intermediate', 'Advanced'].map(lvl => (
-                            <button
-                              key={lvl}
-                              onClick={() => setVideoLevelFilter(lvl)}
-                              className={`px-3 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                                videoLevelFilter === lvl
-                                  ? 'bg-green-600 text-white shadow-sm'
-                                  : 'bg-slate-100 hover:bg-slate-200 text-slate-600'
-                              }`}
-                            >
-                              {lvl}
-                            </button>
-                          ))}
                         </div>
                       </div>
                     </div>
@@ -1204,7 +1184,7 @@ const SignLearn = () => {
                             setVideoLevelFilter('All');
                             setVideoSearchQuery('');
                           }}
-                          className="mt-2 px-5 py-2 rounded-full bg-green-600 text-white text-xs font-bold hover:bg-green-700 transition-colors cursor-pointer shadow-sm"
+                          className="mt-2 px-5 py-2 rounded-full bg-emerald-600 text-white text-xs font-bold hover:bg-emerald-700 transition-colors cursor-pointer shadow-sm"
                         >
                           Reset All Filters
                         </button>
@@ -1289,7 +1269,7 @@ const SignLearn = () => {
             <>
               <div className="p-3 sm:p-4 border-b border-slate-100 flex items-center justify-between bg-white shrink-0">
                 <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-green-50 text-green-600 flex items-center justify-center shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
                     <Play size={16} className="fill-current" />
                   </div>
                   <div>
@@ -1297,7 +1277,7 @@ const SignLearn = () => {
                     <div className="flex items-center gap-3 text-[11px] font-bold text-slate-500 mt-0.5">
                       <span className="flex items-center gap-1"><Clock size={12} /> {activeVideo.duration}</span>
                       <span className="w-1 h-1 rounded-full bg-slate-300" />
-                      <span className="text-green-600">{activeVideo.level}</span>
+                      <span className="text-emerald-600">{activeVideo.level}</span>
                     </div>
                   </div>
                 </div>
@@ -1334,7 +1314,7 @@ const SignLearn = () => {
 
                 <div className="p-5 sm:p-6 max-h-[200px] overflow-y-auto">
                   <h3 className="text-[15px] sm:text-[16px] font-bold text-slate-900 mb-2 flex items-center gap-2">
-                    <BookOpen size={18} className="text-green-500" /> Lesson Summary
+                    <BookOpen size={18} className="text-emerald-500" /> Lesson Summary
                   </h3>
                   <div className="prose prose-slate max-w-none text-slate-600 text-[13px] sm:text-[15px] leading-relaxed">
                     <p>{activeVideo.content}</p>
