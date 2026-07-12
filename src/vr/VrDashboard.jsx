@@ -27,20 +27,20 @@ const VrDashboard = () => {
     { 
       label: 'Learn VR Technology', 
       value: 'How It Works?', 
-      icon: <Rocket className="text-blue-600" />, 
-      color: 'bg-blue-50' 
+      icon: <Rocket className="text-indigo-600" />, 
+      color: 'bg-indigo-50' 
     },
     { 
       label: 'Virtual Labs', 
       value: 'Practice in VR', 
-      icon: <FlaskConical className="text-emerald-600" />, 
-      color: 'bg-emerald-50' 
+      icon: <FlaskConical className="text-indigo-600" />, 
+      color: 'bg-indigo-50' 
     },
     { 
       label: '360° Worlds', 
       value: 'Explore places', 
-      icon: <Globe className="text-purple-600" />, 
-      color: 'bg-purple-50' 
+      icon: <Globe className="text-indigo-600" />, 
+      color: 'bg-indigo-50' 
     },
   ];
 
@@ -113,11 +113,11 @@ const VrDashboard = () => {
 
           {/* Bottom Interactive Section (Toggled between Simulators, Tech Learning, and Virtual Lab) */}
           {activeSection === 'simulators' ? (
-            <div className="pt-4 pb-12" id="simulators-section">
+            <div className="px-4 sm:px-10 md:px-12 lg:px-14 xl:px-14 max-w-[1380px] mx-auto pt-4 pb-12" id="simulators-section">
               <VrSimulators />
             </div>
           ) : activeSection === 'virtual-lab' ? (
-            <div className="pt-4 pb-12" id="virtual-lab-section">
+            <div className="px-4 sm:px-10 md:px-12 lg:px-14 xl:px-14 max-w-[1380px] mx-auto pt-4 pb-12" id="simulators-section">
               <VrVirtualLab />
             </div>
           ) : (

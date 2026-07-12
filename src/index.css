@@ -18,13 +18,12 @@
     }
   }
   
-  /* Hide scrollbar globally but keep functionality except on custom scrollbar containers */
-  *:not(.custom-modal-scrollbar) {
+  *:not(.custom-modal-scrollbar):not(.cyber-scrollbar) {
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* IE and Edge */
   }
   
-  *:not(.custom-modal-scrollbar)::-webkit-scrollbar {
+  *:not(.custom-modal-scrollbar):not(.cyber-scrollbar)::-webkit-scrollbar {
     width: 0px;
     height: 0px;
     background: transparent;
@@ -300,6 +299,32 @@ html.lenis body {
 
 .prompt-academy-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #94a3b8 !important;
+}
+
+/* Custom Scrollbar for Cyber Security Dashboard */
+.cyber-scrollbar {
+  scrollbar-width: thin !important;
+  scrollbar-color: #10b981 #f1f5f9 !important;
+}
+
+.cyber-scrollbar::-webkit-scrollbar {
+  width: 8px !important;
+  display: block !important;
+}
+
+.cyber-scrollbar::-webkit-scrollbar-track {
+  background: #f8fafc !important;
+  border-radius: 10px !important;
+}
+
+.cyber-scrollbar::-webkit-scrollbar-thumb {
+  background: #10b981 !important;
+  border-radius: 10px !important;
+  border: 2px solid #f8fafc !important;
+}
+
+.cyber-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #059669 !important;
 }
 
 

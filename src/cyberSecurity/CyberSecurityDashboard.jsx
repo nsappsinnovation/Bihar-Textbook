@@ -142,7 +142,7 @@ const CyberSecurityQuiz = () => {
   const progress = ((currentQ + (isAnswered ? 1 : 0)) / quizQuestions.length) * 100;
 
   return (
-    <div className="w-full min-h-[580px] flex items-center justify-center font-sans select-none py-10 px-4 relative rounded-[32px] overflow-hidden shadow-2xl border border-emerald-500/30 my-4">
+    <div className="w-full min-h-[580px] flex items-center justify-center font-sans select-none py-10 px-4 relative rounded-[24px] overflow-hidden shadow-2xl border border-emerald-500/30">
       {/* High-Tech Cyber Background Picture with Gradient & Mesh Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
@@ -1505,225 +1505,285 @@ const ConfettiExplosion = () => {
   );
 };
 
-// Curriculum Lessons Database
+// Curriculum Lessons Database (Class 6-8 Step-by-Step Progressive Cybersecurity Learning)
 const lessons = [
   {
     id: 1,
-    title: "Lesson 1: Monster or Friend?",
-    badge: "Privacy Guard",
-    topic: "Chat safety & Strangers",
-    summary: "Learn why talking to strangers on the internet can be tricky, and what secrets you must keep safe!",
+    title: "Lesson 1: What is Cybersecurity?",
+    badge: "Cyber Explorer",
+    topic: "Basics of Online Safety",
+    summary: "Start from the basics: learn what cybersecurity means and why computers and phones need protection.",
     image: "/images/cybersecurity/lesson1.png",
     learnSections: [
       {
-        title: "The Digital Playground",
-        desc: "The internet is like a giant, beautiful public playground where millions of kids play games, watch cartoons, and chat. But just like a real park, you must never talk to strangers who approach you without your parents knowing!",
-        image: "/images/cybersecurity/cs_digital_playground.png"
+        title: "What Does 'Cybersecurity' Mean?",
+        desc: "Just like we lock our house doors at night to keep our family and belongings safe, Cybersecurity means locking and protecting our digital world—our computers, mobile phones, internet accounts, and private information.",
+        image: "/images/cybersecurity/cs_digital_playground.png",
+        funFact: "The word 'Cyber' comes from 'Cybernetics', meaning anything related to computers, networks, and virtual reality!"
       },
       {
-        title: "Online Pretenders",
-        desc: "Did you know that some tricky monsters pretend to be kids online? A character using a cute puppy picture or claiming to be '9-year-old Alex' could actually be a hacker trying to find your secrets. Always be cautious!",
-        image: "/images/cybersecurity/cs_online_pretenders.png"
+        title: "What Are We Protecting?",
+        desc: "When you use the internet, your device holds valuable digital treasures: your school projects, family photos, email messages, game progress, and your parents' online banking details. Cybersecurity keeps these treasures safe from being stolen or damaged.",
+        image: "/images/cybersecurity/cs_online_pretenders.png",
+        funFact: "Every day, over 300 billion emails are sent across the internet containing personal and professional data!"
       },
       {
-        title: "The Golden Safe Rules",
-        desc: "Keep your personal keys safe! Never share these with anyone online:\n\n* Your home address and school name\n* Your phone number\n* Your parent's credit card or bank details\n* The 4-digit code (OTP) sent to your parents' phone.",
-        image: "/images/cybersecurity/cs_golden_rules.png"
+        title: "Who Are Online Hackers?",
+        desc: "Hackers or cybercriminals are people who search the internet looking for unlocked digital doors or weak security systems. They try to sneak into accounts to steal information or cause trouble.",
+        image: "/images/cybersecurity/cs_golden_rules.png",
+        funFact: "Not all hackers are bad! 'Ethical Hackers' (White Hat Hackers) are cybersecurity professionals hired by companies to test and strengthen their security locks!"
       },
       {
-        title: "Checklist for Chat Safety",
-        desc: "DO: Play games with school friends you know in real life.\nDO: Tell a parent immediately if someone online asks where you live.\nDON'T: Send pictures of your house, school, or face to game strangers.\nDON'T: Share passwords, even if a stranger offers you 'free Robux' or game skins.",
-        image: "/images/cybersecurity/cs_chat_checklist.png"
+        title: "The 3 Golden Pillars (C-I-A)",
+        desc: "Cybersecurity relies on 3 main rules:\n1. Confidentiality: Keeping private secrets private.\n2. Integrity: Making sure data is not altered or damaged.\n3. Availability: Ensuring your computer and internet work when you need them.",
+        image: "/images/cybersecurity/cs_chat_checklist.png",
+        funFact: "The C-I-A Triad is the foundational rule taught to every cybersecurity engineer around the world!"
       }
     ],
-    content: "The internet is like a giant park! You can play games and chat, but sometimes tricky monsters pretend to be friendly characters.\n\nYour Secrets are Keys!\nNever give away your parent's bank cards, your address, or your 4-digit code (OTP) to anyone online. Keep them hidden inside your secret base!",
+    content: "Welcome to Cybersecurity!\n\nWhat is Cybersecurity?\nIt is the practice of protecting computers, smartphones, and online accounts from unauthorized access or damage.\n\nWhy does it matter?\nBecause our digital lives hold valuable personal information that must be protected just like our physical homes.",
     game: "Chat Patrol",
     quiz: [
       {
-        question: "A stranger online offers you free game items but asks for your parents' credit card details. What should you do?",
-        options: ["Share it immediately", "Never share financial info and say NO", "Send a picture of the card"],
+        question: "What is the main goal of Cybersecurity?",
+        options: [
+          "To make computers run internet games faster",
+          "To protect computers, mobile phones, and online information from unauthorized access and harm",
+          "To turn off the internet at night"
+        ],
         correct: 1
       },
       {
-        question: "Which of these is a secret you should NEVER share with strangers online?",
-        options: ["Your favorite color", "Your home address and school name", "Your favorite animal"],
-        correct: 1
+        question: "What is an 'Ethical Hacker' (White Hat Hacker)?",
+        options: [
+          "A professional hired to test and improve computer security systems legally",
+          "Someone who breaks into computers to steal money",
+          "A robot that repairs computer screens"
+        ],
+        correct: 0
       }
     ]
   },
   {
     id: 2,
-    title: "Lesson 2: Link Detectives",
-    badge: "Link Detective",
-    topic: "SMS & Phishing Scams",
-    summary: "Learn how to spot suspicious text messages (phishing) that try to scare you into clicking weird links.",
+    title: "Lesson 2: Your Digital Footprint & Privacy",
+    badge: "Privacy Defender",
+    topic: "Personal Data & Footprints",
+    summary: "Understand what personal data is and how everything you do online leaves a lasting digital footprint.",
     image: "/images/cybersecurity/lesson2.png",
     learnSections: [
       {
-        title: "Sneaky Fishing Hooks",
-        desc: "Phishing (pronounced like 'fishing') is when a scammer drops a virtual hook into the digital water, hoping you will bite! They send fake text messages or emails pretending to be a bank, a game, or a delivery company.",
-        image: "/images/cybersecurity/cs_fishing_hooks.png"
+        title: "What is a Digital Footprint?",
+        desc: "Every time you visit a website, post a comment, or play an online game, you leave behind a trail of information called your Digital Footprint. Once something is shared online, it can stay there for a very long time.",
+        image: "/images/cybersecurity/cs_fishing_hooks.png",
+        funFact: "Did you know? Search engines can index web pages in seconds, meaning an online post can be saved even if deleted later!"
       },
       {
-        title: "Spotting the Panic Trap",
-        desc: "Scammers want to scare you! They use words like 'URGENT', 'BLOCKED', or 'LOST FOREVER'. They want you to panic and tap their sneaky link immediately before you can ask an adult. Stop, breathe, and analyze!",
-        image: "/images/cybersecurity/cs_panic_trap.png"
+        title: "Personal Information (PII)",
+        desc: "Personally Identifiable Information (PII) is any detail that can identify who you are or where you live. Never share your full legal name, home address, school name, phone number, or parents' bank details with strangers online.",
+        image: "/images/cybersecurity/cs_panic_trap.png",
+        funFact: "Professional esports gamers use anonymous gamer tags and never share their real birthdate or hometown publicly!"
       },
       {
-        title: "Decoding Web Links",
-        desc: "Always look at the link (URL) before tapping! A safe site uses https and ends with a normal domain (like .com or .org). Scammers use weird links like bank-verify-now.xyz or free-gift-box.net/alert to sneak viruses onto your device.",
-        image: "/images/cybersecurity/cs_decoding_links.png"
+        title: "Social Engineering Tricks",
+        desc: "Sometimes cybercriminals don't hack computers—they trick people! This is called Social Engineering. A stranger in a game might pretend to be a game moderator offering 'free diamonds' if you tell them your email or password.",
+        image: "/images/cybersecurity/cs_decoding_links.png",
+        funFact: "Cybersecurity studies show that over 80% of cyber attacks start by tricking a person rather than hacking a machine!"
       },
       {
-        title: "Checklist for Link Safety",
-        desc: "DO: Show suspicious text messages to a parent or teacher.\nDO: Delete the message immediately if you don't recognize the sender.\nDON'T: Click on links in SMS messages claiming you won a lottery or a phone.\nDON'T: Enter passwords or usernames on pages that look weird or suspicious.",
-        image: "/images/cybersecurity/cs_link_checklist.png"
+        title: "Smart Privacy Checklist",
+        desc: "DO: Keep your gaming profiles and social media accounts set to Private.\nDO: Ask a parent or teacher before entering personal details on any website.\nDON'T: Send personal photos or your home address to online chat strangers.\nDON'T: Share OTP verification codes sent to your phone.",
+        image: "/images/cybersecurity/cs_link_checklist.png",
+        funFact: "Banks and official platforms never ask for OTP verification codes over chat messages!"
       }
     ],
-    content: "Scammers send sneaky text messages that try to make you panic!\n\nLook for the 3 Red Flags:\n1. Scary Words: 'Your account is SUSPENDED!'\n2. Extreme Threats: 'Your money is lost FOREVER!'\n3. Weird Links: Websites ending in weird letters like '.xyz' instead of '.com'.\n\nIf you see these, don't tap! Call a parent!",
+    content: "Everything you share online creates your Digital Footprint.\n\nProtecting Your Identity:\n• Keep PII Private: Never share your home address, school name, phone number, or OTP codes.\n• Watch Out for Social Engineering: Never trust strangers asking for passwords or private details.",
     game: "Scam Detective",
     quiz: [
       {
-        question: "Why do scammers use scary words like 'SUSPENDED!' or 'FOREVER' in text messages?",
-        options: ["To make you panic and click without thinking", "Because they want to help you", "To make you laugh"],
-        correct: 0
+        question: "What is a 'Digital Footprint'?",
+        options: [
+          "Shoe prints left on the floor near a computer desk",
+          "The trail of information and activity you leave behind whenever you use the internet",
+          "A fingerprint scanner on a smartphone"
+        ],
+        correct: 1
       },
       {
-        question: "Which web link looks safe and normal?",
-        options: ["http://secure-login-bank-alert.xyz/rob-money", "https://www.google.com", "http://free-candy-click-here.net/virus"],
+        question: "A stranger in an online game offers you free game coins if you tell them your school name and home address. What should you do?",
+        options: [
+          "Give them the information to get the coins",
+          "Never share personal information with online strangers and tell a parent",
+          "Give them a friend's address instead"
+        ],
         correct: 1
       }
     ]
   },
   {
     id: 3,
-    title: "Lesson 3: Shield Forging",
-    badge: "Password Smith",
-    topic: "Strong Password Creation",
-    summary: "Learn how to create passwords that act like indestructible forcefields against the Glitch Goblin!",
+    title: "Lesson 3: Strong Passwords & 2FA",
+    badge: "Lock Master",
+    topic: "Passwords & Two-Factor Auth",
+    summary: "Learn how to build strong passphrases and use Two-Factor Authentication to lock your accounts.",
     image: "/images/cybersecurity/lesson3.png",
     learnSections: [
       {
-        title: "The Fortress Gate",
-        desc: "A password is like the drawbridge of your digital castle. If it's weak (like '123456' or 'superman'), the Glitch Goblin and hacking robots can kick it down in seconds! A strong password keeps your account safe.",
-        image: "/images/cybersecurity/cs_fortress_gate.png"
+        title: "Why Simple Passwords Are Unsafe",
+        desc: "If your password is short or common—like '123456', 'password', or your pet's name—automated computer programs can guess it in less than a second. Your password is the key to your digital lock!",
+        image: "/images/cybersecurity/cs_fortress_gate.png",
+        funFact: "An 8-character simple lowercase password can be cracked in less than 1 second by modern computers!"
       },
       {
-        title: "The Materials of Defense",
-        desc: "Cardboard Shield: 'cat' or 'password' — Cracks instantly!\nWooden Door: 'cat123' or 'superman10' — Cracks in a few minutes.\nIron Gate: 'CatDog2024' — Good, but robots can still guess it eventually.\nEmerald Forcefield: 'C@t&D0g#2026!' — Indestructible! Mixing letters, numbers, and symbols creates the ultimate defense.",
-        image: "/images/cybersecurity/cs_materials_defense.png"
+        title: "Building a Strong Passphrase",
+        desc: "Instead of a short word, create a memorable Passphrase combining 4 unrelated words plus numbers and symbols! For example: 'BlueRocketCoffeeJump#99' is easy for you to remember but takes millions of years for a computer to guess.",
+        image: "/images/cybersecurity/cs_materials_defense.png",
+        funFact: "A 14-character passphrase with uppercase, lowercase, numbers, and symbols takes over 200 million years to crack!"
       },
       {
-        title: "How to Remember Your Shield",
-        desc: "Create a fun, secret sentence! For example: 'I love eating pizza on Fridays!' becomes 'Il2ep0F!'. It is super easy for you to remember, but impossible for a hacking robot to guess!",
-        image: "/images/cybersecurity/cs_secret_sentence.png"
+        title: "Never Reuse Passwords",
+        desc: "If you use the exact same password for your email, school account, and games, a hacker who discovers it on one site can unlock all your accounts. Always use a unique password for each important service.",
+        image: "/images/cybersecurity/cs_secret_sentence.png",
+        funFact: "Password managers use military-grade AES-256 encryption to safely store unique passwords for every site!"
       },
       {
-        title: "Checklist for Password Safety",
-        desc: "DO: Use different passwords for different games.\nDO: Keep your passwords written down in a secret notebook at home.\nDON'T: Use easy-to-guess things like your birthday or pet's name.\nDON'T: Share your password with anyone, not even your best friends at school!",
-        image: "/images/cybersecurity/cs_password_checklist.png"
+        title: "Two-Factor Authentication (2FA)",
+        desc: "Two-Factor Authentication (2FA) adds a second lock! To log in, you need your password PLUS a temporary code sent to your phone. Even if someone discovers your password, they cannot get in without that second code.",
+        image: "/images/cybersecurity/cs_password_checklist.png",
+        funFact: "Enabling Two-Factor Authentication (2FA) blocks over 99.9% of automated hacking attempts instantly!"
       }
     ],
-    content: "Hackers use guessing robots to break into your accounts. If your password is too easy, they will crack it in a second!\n\nThe Shield Blueprint:\n• Simple passwords (like '123456' or 'doggy') are fragile like Cardboard.\n• Add capitals (ABC) and numbers (123) to make an Iron Gate.\n• Add symbols (@, #, $, %) to forge an Emerald Forcefield that blocks everything!",
+    content: "Lock your accounts with high-strength keys!\n\nPassword Rules:\n• Create Passphrases: Use 4 unrelated words + numbers & symbols.\n• Enable 2FA: Require a password PLUS a verification code to log in safely.",
     game: "Password Forge",
     quiz: [
       {
-        question: "Which of these makes a password incredibly strong against hackers?",
-        options: ["Using '12345678'", "Using your pet's name", "Using a mix of letters, numbers, and symbols"],
+        question: "Which of these is the strongest and safest password choice?",
+        options: [
+          "12345678",
+          "Your birthdate or pet's name",
+          "A 14-character passphrase combining words, numbers, and symbols like 'BlueRocketCoffeeJump#99'"
+        ],
         correct: 2
       },
       {
-        question: "If your password is 'cat', what kind of defense shield will you forge?",
-        options: ["A fragile cardboard shield that breaks easily", "A glowing emerald forcefield", "A strong iron gate"],
+        question: "What is Two-Factor Authentication (2FA)?",
+        options: [
+          "An extra security lock that requires both your password AND a verification code sent to your phone",
+          "Sharing your password with two friends",
+          "Typing your password twice as fast"
+        ],
         correct: 0
       }
     ]
   },
   {
     id: 4,
-    title: "Lesson 4: Pop-up Blaster",
-    badge: "Pop-up Blaster",
-    topic: "Device Safety & Updates",
-    summary: "Learn to ignore fake scary virus alerts and keep your device software updated to keep hackers out.",
+    title: "Lesson 4: Spotting Scams & Phishing",
+    badge: "Link Detective",
+    topic: "Phishing & Fake Messages",
+    summary: "Master how to recognize fake messages, urgency traps, and suspicious web links before clicking.",
     image: "/images/cybersecurity/lesson4.png",
     learnSections: [
       {
-        title: "Beware of Loud Pop-ups",
-        desc: "When browsing, some pages display red flashing warning boxes shouting: 'WARNING! 99 VIRUSES DETECTED!' or 'YOUR DEVICE IS INFECTED!'. Don't be scared! These are fake warnings designed to trick you into downloading viruses.",
-        image: "/images/cybersecurity/cs_loud_popups.png"
+        title: "What is Phishing?",
+        desc: "Phishing is an online scam where attackers send fake SMS messages or emails pretending to be a trusted company (like a bank, delivery company, or game platform) to trick you into clicking harmful links.",
+        image: "/images/cybersecurity/cs_loud_popups.png",
+        funFact: "The word 'phishing' was coined in 1996 as a metaphor for using digital bait to hook unsuspecting users!"
       },
       {
-        title: "Disarming the Trap",
-        desc: "Never click the big, bright buttons in a pop-up. Instead, look closely for a tiny, white X button in the top corner. If you can't find it, close the browser tab or ask an adult to close it for you.",
-        image: "/images/cybersecurity/cs_disarm_trap.png"
+        title: "The Panic & Urgency Trap",
+        desc: "Scams almost always try to make you panic! They use alarming words like 'URGENT!', 'YOUR ACCOUNT IS BLOCKED!', or 'YOU WON A FREE GIFT!'. They want you to rush and click without thinking. Stop, breathe, and verify!",
+        image: "/images/cybersecurity/cs_disarm_trap.png",
+        funFact: "Scam messages deliberately create artificial panic because stress makes human brains skip logical safety checks!"
       },
       {
-        title: "Software Updates are Shield Refills",
-        desc: "Hacking robots constantly search for hidden holes (security bugs) in your games and operating systems. When you update your apps, the creators patch up these holes, keeping the robots locked out!",
-        image: "/images/cybersecurity/cs_shield_refills.png"
+        title: "Checking Web Links (URLs)",
+        desc: "Always inspect the web link before clicking! Safe official websites use HTTPS and correct spelling (like google.com). Phishing links often have subtle spelling mistakes or strange extensions like bank-security-verify.xyz.",
+        image: "/images/cybersecurity/cs_shield_refills.png",
+        funFact: "A padlock icon (HTTPS) means data connection is encrypted, but always double-check the domain spelling!"
       },
       {
-        title: "Checklist for Device Safety",
-        desc: "DO: Turn on 'Automatic Updates' for your phone, tablet, or computer.\nDO: Close the browser tab if a flashy screen blocks your page.\nDON'T: Install 'device cleaner' or 'helper' apps suggested by pop-ups.\nDON'T: Postpone important system updates for too long.",
-        image: "/images/cybersecurity/cs_device_checklist.png"
+        title: "Link Safety Checklist",
+        desc: "DO: Check unexpected messages with a parent or teacher.\nDO: Look closely at the website domain spelling.\nDON'T: Click links in SMS messages claiming you won a lottery or reward.\nDON'T: Enter login details on unfamiliar pages.",
+        image: "/images/cybersecurity/cs_device_checklist.png",
+        funFact: "Modern web browsers check links against real-time security databases to block millions of phishing sites daily!"
       }
     ],
-    content: "While surfing the web, you might see scary pop-up boxes shouting: 'YOUR DEVICE HAS 50 VIRUSES! CLICK NOW TO REPAIR!'\n\nIt's a Trick!\nThese are fake pop-ups trying to make you download bad apps. Never click the big green buttons. Always close the window by clicking the small white 'X' or show it to a parent!",
+    content: "Phishing attacks use deceptive messages to trick you into clicking harmful links.\n\nSpotting Phishing:\n• Beware of Panic Words: Messages demanding urgent action.\n• Inspect URLs: Check for strange domain names or misspelled websites before clicking.",
     game: "Pop-up Blaster",
     quiz: [
       {
-        question: "A web page pops up shouting that your device has a virus and asks you to click 'Install Antivirus'. What do you do?",
-        options: ["Click Install immediately", "Ignore it, close the window, and tell an adult", "Buy the suggested app"],
-        correct: 1
+        question: "Why do phishing scam messages often use alarming words like 'URGENT!' or 'ACCOUNT BLOCKED!'?",
+        options: [
+          "To create panic so you click the link without checking carefully",
+          "Because they want to give you free rewards",
+          "To make the message look decorative"
+        ],
+        correct: 0
       },
       {
-        question: "Why should we update our games and apps?",
-        options: ["To slow down the device", "To change the background colors", "To fix security holes and block hacking robots"],
-        correct: 2
+        question: "Which web link looks like a legitimate and secure website address?",
+        options: [
+          "http://secure-login-bank-alert.xyz/verify",
+          "https://www.google.com",
+          "http://free-gift-box.net/alert"
+        ],
+        correct: 1
       }
     ]
   },
   {
     id: 5,
-    title: "Lesson 5: Permission Safeguard",
-    badge: "Safe Downloader",
-    topic: "2FA & App Permissions",
-    summary: "Learn about Two-Factor Authentication (2FA) and how to deny sneaky apps from spying on your photos or location.",
+    title: "Lesson 5: Device Safety & Apps",
+    badge: "System Protector",
+    topic: "Updates & App Permissions",
+    summary: "Learn how to handle fake virus alerts, update your device software, and manage app permissions.",
     image: "/images/cybersecurity/lesson5.png",
     learnSections: [
       {
-        title: "The Double-Lock Lockbox",
-        desc: "Two-Factor Authentication (2FA) is like locking your chest with two different keys. When you log in with your password, a secret one-time code is sent to your parent's phone. Even if a hacker steals your password, they can't get in without that second key!",
-        image: "/images/cybersecurity/cs_double_lock.png"
+        title: "Ignoring Fake Virus Pop-ups",
+        desc: "While browsing, you might see flashing pop-up ads claiming 'YOUR DEVICE IS INFECTED WITH 50 VIRUSES! CLICK TO CLEAN!'. Don't panic—these are scareware ads trying to trick you into downloading harmful software.",
+        image: "/images/cybersecurity/cs_double_lock.png",
+        funFact: "Real operating systems and web browsers never display alarming countdown timers in pop-up security alerts!"
       },
       {
-        title: "Sneaky App Demands",
-        desc: "When you download a new game, it asks for permission to access your device features. A driving game might need access to your screen controls, but does a calculator app need to see your photo gallery or know your location? Absolutely not!",
-        image: "/images/cybersecurity/cs_sneaky_apps.png"
+        title: "Safe Browsing Habits",
+        desc: "Never click buttons inside suspicious pop-up banners. Safely close the browser tab by clicking the small 'X' or pressing Alt+F4 on your keyboard without downloading anything.",
+        image: "/images/cybersecurity/cs_sneaky_apps.png",
+        funFact: "Closing the browser tab instantly stops any unwanted pop-up script from running!"
       },
       {
-        title: "The Permission Shield Rules",
-        desc: "Always review permission requests! If an app asks for something it doesn't need to work, click DENY. It's better to be safe than let sneaky apps track your coordinates or read your private messages.",
-        image: "/images/cybersecurity/cs_permission_shield.png"
+        title: "Why Software Updates Matter",
+        desc: "Software updates don't just add new features—they include essential 'security patches'. Developers release updates to fix newly discovered security bugs so hackers cannot exploit your device.",
+        image: "/images/cybersecurity/cs_permission_shield.png",
+        funFact: "Automatic updates protect your devices while you sleep so your operating system stays secure 24/7!"
       },
       {
-        title: "Checklist for Permission Safety",
-        desc: "DO: Enable 2FA on your main gaming and school accounts with parent help.\nDO: Deny location access for games that do not require mapping.\nDON'T: Download apps from random websites. Only use official app stores.\nDON'T: Click 'Allow' to every popup without reading what it is asking for.",
-        image: "/images/cybersecurity/cs_permission_checklist.png"
+        title: "Smart App Permissions",
+        desc: "When installing an app, check what permissions it asks for. While a navigation map app needs location access, a simple calculator app should never ask to see your photos, microphone, or contacts!",
+        image: "/images/cybersecurity/cs_permission_checklist.png",
+        funFact: "Denying unnecessary app permissions prevents apps from secretly tracking your daily habits!"
       }
     ],
-    content: "Keep your digital house safe with a double lock!\n\n2FA (Two-Factor Authentication):\nThis requires both a password AND a secret code sent to your parent's phone to log in. Even if a hacker guesses your password, they can't get in!\n\nApp Permission Rules:\nIf a simple Flashlight app asks to see your photos, contacts, or location, DENY IT! Apps should only access what they need to work.",
+    content: "Keep your devices running safely!\n\nDevice Protection Rules:\n• Avoid Scareware: Never click buttons on pop-ups claiming your device has viruses.\n• Enable Automatic Updates: Regular software patches seal security holes.\n• Check App Permissions: Deny access if an app asks for permissions it doesn't need.",
     game: "Permission Shield",
     quiz: [
       {
-        question: "What is Two-Factor Authentication (2FA)?",
-        options: ["Sharing your password with two friends", "An extra safety lock that needs a secret code to log in", "Making your internet twice as fast"],
+        question: "A website pop-up claims your computer has viruses and asks you to click 'Install Cleaner Now'. What should you do?",
+        options: [
+          "Click Install immediately",
+          "Safely close the browser tab without clicking the banner",
+          "Call the phone number shown on the screen"
+        ],
         correct: 1
       },
       {
-        question: "A simple calculator app asks for permission to access your photo gallery and location. What should you do?",
-        options: ["Click ALLOW to use the calculator", "Click DENY because a calculator does not need your photos", "Delete your photos first"],
-        correct: 1
+        question: "Why should you deny a simple calculator app if it requests permission to access your GPS location and photos?",
+        options: [
+          "Because a calculator app does not need your location or photos to function",
+          "Because calculators only work offline",
+          "Because photos take too much memory"
+        ],
+        correct: 0
       }
     ]
   }
@@ -1736,18 +1796,31 @@ const CyberSecurityDashboard = () => {
 
   // Curriculum State
   const [activeLessonId, setActiveLessonId] = useState(1);
-  const [unlockedLessons, setUnlockedLessons] = useState(() => {
-    const saved = localStorage.getItem('unlockedCyberLessons');
-    return saved ? JSON.parse(saved) : [1];
-  });
+  const [unlockedLessons, setUnlockedLessons] = useState([1, 2, 3, 4, 5]);
   const [completedLessons, setCompletedLessons] = useState(() => {
     const saved = localStorage.getItem('completedCyberLessons');
     return saved ? JSON.parse(saved) : [];
   });
-  const [activeLessonTab, setActiveLessonTab] = useState('learn'); // 'learn' | 'play' | 'test'
-  const [gameCleared, setGameCleared] = useState(false);
-  const [quizCleared, setQuizCleared] = useState(false);
-  const [expandedSectionIndex, setExpandedSectionIndex] = useState(0);
+  const [activeTopicIndex, setActiveTopicIndex] = useState(0);
+
+  const handleSelectLesson = (id) => {
+    setActiveLessonId(id);
+    setActiveTopicIndex(0);
+  };
+
+  const handleProceedNext = () => {
+    if (!completedLessons.includes(activeLessonId)) {
+      setCompletedLessons(prev => [...prev, activeLessonId]);
+    }
+    if (activeLessonId < lessons.length) {
+      handleSelectLesson(activeLessonId + 1);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  const currentLesson = lessons.find(less => less.id === activeLessonId) || lessons[0];
+  const selectedSec = currentLesson.learnSections[activeTopicIndex] || currentLesson.learnSections[0];
 
   useEffect(() => {
     localStorage.setItem('unlockedCyberLessons', JSON.stringify(unlockedLessons));
@@ -1758,11 +1831,7 @@ const CyberSecurityDashboard = () => {
   }, [completedLessons]);
 
   useEffect(() => {
-    setActiveLessonTab('learn');
-    setExpandedSectionIndex(0);
-    const isCompleted = completedLessons.includes(activeLessonId);
-    setGameCleared(isCompleted);
-    setQuizCleared(isCompleted);
+    setActiveTopicIndex(0);
   }, [activeLessonId]);
 
   // Prevent background scrolling when a cyber module modal is open
@@ -1792,15 +1861,48 @@ const CyberSecurityDashboard = () => {
   }, [selectedItem]);
 
   const quickStats = [
-    { label: 'Safety Playzone', value: 'Interactive Games', icon: <Shield className="text-emerald-600" />, color: 'bg-emerald-50' },
-    { label: 'Knowledge Base', value: 'Glossary & Tips', icon: <BookOpen className="text-purple-600" />, color: 'bg-purple-50' },
-    { label: 'Skill Assessment', value: 'Quizzes & Badges', icon: <Trophy className="text-orange-500" />, color: 'bg-orange-50' },
+    { label: 'Safety Playzone', value: 'Cyber Security Modules', icon: <Shield className="text-emerald-600" />, color: 'bg-emerald-50' },
+    { label: 'Knowledge Base', value: 'Glossary & Reading Materials', icon: <BookOpen className="text-emerald-600" />, color: 'bg-emerald-50' },
+    { label: 'Skill Assessment', value: 'Quizzes & Verification', icon: <Trophy className="text-emerald-600" />, color: 'bg-emerald-50' },
   ];
 
   const articles = [
-    { id: 1, title: 'Cyber Security Glossary', desc: 'Definitions for all the common cyber security terms.', content: "Let's learn the secret language of the internet!\n\n• Hacker: Someone who tries to break into computers.\n• Malware: A sick bug for your computer.\n• Firewall: A magical shield that blocks bad internet traffic." },
-    { id: 2, title: 'Top 5 Tips for Online Safety', desc: 'A quick checklist to keep yourself safe on the web.', content: "1. Never share your real name or address.\n2. Keep your passwords a secret.\n3. Ask an adult before downloading apps.\n4. Don't talk to strangers online.\n5. Log out when you're done playing." },
-    { id: 3, title: 'What to do if you are hacked?', desc: 'Steps to recover your accounts and secure your data.', content: "Oh no! If you think someone is in your account:\n\n1. Don't panic!\n2. Tell a trusted adult (like mom, dad, or a teacher) immediately.\n3. Let them help you change your passwords and scan your device for bugs." },
+    {
+      id: 1,
+      title: 'Core Cyber Security Glossary & Definitions',
+      desc: 'Essential definitions for core cyber security terminology and concepts.',
+      content: "MASTERING CYBER SECURITY TERMINOLOGY\n\n• Phishing: Deceptive communications disguised as legitimate entities designed to trick users into disclosing sensitive credentials.\n• Ransomware: Malicious software that encrypts user files and demands financial ransom for the decryption key.\n• Multi-Factor Authentication (MFA): A security mechanism requiring two or more independent credentials to verify user identity.\n• Zero-Day Exploit: A cyber attack targeting a newly discovered software vulnerability before a patch is available.\n• End-to-End Encryption: Cryptographic protocols that secure data in transit so only authorized recipients can decipher it.\n• Social Engineering: Psychological manipulation techniques used by threat actors to breach human security barriers."
+    },
+    {
+      id: 2,
+      title: 'Top 10 Rules for Digital Footprint & Online Privacy',
+      desc: 'Professional checklist for maintaining personal privacy and securing your digital footprint.',
+      content: "PROTECTING YOUR ONLINE IDENTIFIER & FOOTPRINT\n\n1. Practice Data Minimization: Never enter unnecessary personal details on public web forms.\n2. Enable Multi-Factor Authentication (MFA) on all financial and primary email accounts.\n3. Audit Application Permissions: Regularly revoke microphone, location, and background data access from unused apps.\n4. Use Unique Passwords: Avoid credential reuse across multiple web platforms.\n5. Inspect URLs Carefully: Verify HTTPS protocol and exact domain spelling before entering authentication credentials.\n6. Keep Software Updated: System updates contain critical patches for known exploits."
+    },
+    {
+      id: 3,
+      title: 'Emergency Incident Response: What to Do If Compromised',
+      desc: 'Actionable step-by-step protocol to contain security breaches and recover compromised accounts.',
+      content: "IMMEDIATE RESPONSE PROTOCOL FOR COMPROMISED ACCOUNTS\n\nStep 1: Isolate the Affected Device — Disconnect from Wi-Fi or cellular networks to prevent lateral malware spread.\nStep 2: Reset Primary Credentials — Use a clean, uncompromised device to reset passwords for your primary email and bank accounts.\nStep 3: Terminate Active Sessions — Use account security settings to force 'Log Out of All Devices'.\nStep 4: Run Full Diagnostic Scans — Execute a comprehensive anti-malware scan to remove persistent trojans or keyloggers.\nStep 5: Monitor Financial Statements — Notify banking institutions immediately if unauthorized transactions appear."
+    },
+    {
+      id: 4,
+      title: 'Anatomy of Modern Phishing, Smishing & Vishing Attacks',
+      desc: 'In-depth analysis of email spoofing, SMS phishing (smishing), QR code scams (quishing), and AI voice calls.',
+      content: "UNDERSTANDING MODERN SOCIAL ENGINEERING VECTORS\n\n• Email Phishing: Look for spoofed sender headers, urgent emotional triggers ('Immediate Account Suspension'), and hidden destination URLs.\n• Smishing (SMS Scams): Unsolicited text messages claiming package delivery failures or bank KYC verification links.\n• Quishing (QR Code Scams): Malicious QR codes placed over legitimate parking or payment displays that redirect to credential harvesting forms.\n• Vishing & Deepfake Audio: Scammers using voice cloning technology over phone calls to impersonate colleagues or family members."
+    },
+    {
+      id: 5,
+      title: 'NIST Password Guidelines & Credential Management',
+      desc: 'Modern standards for passphrase length, entropy, passkeys, and secure password managers.',
+      content: "MODERN PASSWORD HYGIENE (NIST SPECIAL PUBLICATION 800-63B)\n\n• Prioritize Length Over Complexity: A 16-character passphrase composed of memorable words is far stronger than an 8-character complex string.\n• Adopt Password Managers: Zero-knowledge encrypted vaults eliminate human memory limitations and generate unique high-entropy secrets.\n• Transition to Passkeys: Public-key cryptography (FIDO2/WebAuthn) replaces vulnerable passwords with hardware-backed biometric verification."
+    },
+    {
+      id: 6,
+      title: 'Securing Public Wi-Fi, Mobile Devices & Smart Home IoT',
+      desc: 'Best practices for safe browsing on open networks and isolating connected smart devices.',
+      content: "NETWORK & DEVICE HARDENING GUIDELINES\n\n• Public Wi-Fi Precautions: Never perform sensitive banking or corporate logins over unencrypted open Wi-Fi without a verified Virtual Private Network (VPN).\n• Bluetooth & AirDrop Hardening: Disable discoverability when in public terminals or crowded transport hubs.\n• IoT Network Isolation: Place smart TVs, cameras, and IoT home appliances on a dedicated Guest Wi-Fi network separated from primary work computers."
+    }
   ];
 
   const renderContent = () => {
@@ -1812,300 +1914,234 @@ const CyberSecurityDashboard = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.3 }}
-          className="mt-10 px-4 md:px-12 pb-12"
+          className="pb-12"
         >
           {activeFilter === 'Safety Playzone' && (
             <div className="space-y-4 pt-2 sm:pt-4">
-              {/* Sleek Lesson Selection Bar */}
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 px-1">
-                <div className="flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-sm">
-                    <Shield size={16} />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-extrabold text-[#1A1C2E]">Cyber Security Course</h3>
-                    <p className="text-[11px] text-slate-500 font-medium">Select an unlocked lesson module to begin training</p>
-                  </div>
-                </div>
-                {completedLessons.length > 0 && (
-                  <button
-                    onClick={() => {
-                      if (window.confirm("Do you want to reset your training progress and start from Lesson 1?")) {
-                        setUnlockedLessons([1]);
-                        setCompletedLessons([]);
-                        setActiveLessonId(1);
-                        setActiveLessonTab('learn');
-                        setGameCleared(false);
-                        setQuizCleared(false);
-                      }
-                    }}
-                    className="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 border border-slate-200 px-3.5 py-1.5 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 shadow-sm hover:border-rose-200"
-                  >
-                    <RefreshCw size={13} /> Reset Progress
-                  </button>
-                )}
-              </div>
-
-              {/* Lesson Pills Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 mb-2">
+              {/* Top lesson selection bar matching VR module exactly */}
+              <div className="bg-white border border-slate-100 rounded-[20px] p-2 shadow-[0_4px_20px_rgb(0,0,0,0.03)] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 mb-3">
                 {lessons.map((less) => {
-                  const isUnlocked = unlockedLessons.includes(less.id);
                   const isCompleted = completedLessons.includes(less.id);
                   const isActive = activeLessonId === less.id;
 
                   return (
                     <button
                       key={less.id}
-                      onClick={() => {
-                        if (isUnlocked) {
-                          setActiveLessonId(less.id);
-                        }
-                      }}
-                      disabled={!isUnlocked}
-                      className={`text-left px-3.5 py-2.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-2 min-h-[50px] ${
+                      onClick={() => handleSelectLesson(less.id)}
+                      className={`text-left px-3.5 py-2.5 rounded-xl border transition-all cursor-pointer flex items-center gap-2.5 min-h-[46px] font-display ${
                         isActive
-                          ? 'bg-emerald-600 text-white border-emerald-600 shadow-md font-bold scale-[1.02]'
-                          : isUnlocked
-                          ? 'bg-white text-[#1A1C2E] border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/30 shadow-sm font-medium'
-                          : 'bg-slate-100/80 text-slate-400 border-slate-200 cursor-not-allowed opacity-60 font-medium'
+                          ? 'bg-emerald-50/80 border-emerald-200 text-emerald-950 font-bold shadow-sm'
+                          : 'bg-white border-slate-100 hover:bg-slate-50 text-slate-700 font-medium'
                       }`}
                     >
                       <div className="flex items-center gap-2.5 min-w-0">
-                        {isActive ? (
-                          <span className="w-2.5 h-2.5 rounded-full bg-white shrink-0 animate-pulse" title="Active Lesson" />
-                        ) : isCompleted ? (
-                          <CheckCircle2 size={16} className="text-emerald-500 shrink-0" title="Completed" />
-                        ) : isUnlocked ? (
-                          <span className="w-2 h-2 rounded-full bg-emerald-300 shrink-0" />
-                        ) : (
-                          <Lock size={14} className="text-slate-400 shrink-0" title="Locked" />
-                        )}
-                        <span className="text-xs sm:text-sm font-bold truncate">
-                          {less.id}. {less.title.split(': ')[1] || less.title}
+                        <span className={`w-6 h-6 rounded-md flex items-center justify-center text-xs font-bold shrink-0 ${
+                          isCompleted ? 'bg-emerald-600 text-white' : isActive ? 'bg-emerald-600 text-white' : 'bg-slate-100 text-slate-600'
+                        }`}>
+                          {less.id}
+                        </span>
+                        <span className="text-xs sm:text-sm truncate">
+                          {less.title.replace(/^Lesson \d+:\s*/, '')}
                         </span>
                       </div>
-                      {isUnlocked && !isActive && !isCompleted && (
-                        <ChevronRight size={14} className="text-slate-400 shrink-0" />
-                      )}
                     </button>
                   );
                 })}
               </div>
 
-              {/* Active Lesson Main Container */}
-              <section className="bg-white rounded-3xl border border-slate-200 shadow-sm p-5 sm:p-8 space-y-6">
+              {/* Active Lesson Main Container exactly matching VR module */}
+              <section className="bg-white rounded-[24px] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-5 sm:p-7 md:p-8 space-y-6">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-5">
                   <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-bold rounded-full uppercase tracking-wider mb-2">
-                      <Award size={14} className="text-emerald-600" /> Lesson {activeLessonId} Badge: <span className="font-extrabold text-[#1A1C2E]">{lessons[activeLessonId - 1].badge}</span>
-                    </div>
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1A1C2E] tracking-tight">
-                      {lessons[activeLessonId - 1].title}
+                    <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight">
+                      {currentLesson.title}
                     </h2>
-                    <p className="text-sm text-slate-600 mt-1 font-medium">
-                      Topic Focus: <span className="text-emerald-600 font-bold">{lessons[activeLessonId - 1].topic}</span>
+                    <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
+                      Topic Focus: <span className="text-emerald-600 font-bold">{currentLesson.topic}</span>
                     </p>
-                  </div>
-
-                  {/* Sleek Inline Stage Switcher Pill */}
-                  <div className="bg-slate-100 p-1.5 rounded-2xl border border-slate-200/80 flex items-center gap-1 w-full sm:w-auto shrink-0 self-stretch sm:self-center flex-wrap">
-                    {[
-                      { id: 'learn', label: 'Learn Cards', icon: <BookOpen size={15} />, disabled: false, cleared: true },
-                      { id: 'test', label: 'Take Quiz', icon: <Trophy size={15} />, disabled: false, cleared: quizCleared || completedLessons.includes(activeLessonId) }
-                    ].map(stg => (
-                      <button
-                        key={stg.id}
-                        onClick={() => !stg.disabled && setActiveLessonTab(stg.id)}
-                        disabled={stg.disabled}
-                        className={`flex-1 sm:flex-initial py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition-all cursor-pointer flex items-center justify-center gap-2 min-h-[40px] ${
-                          activeLessonTab === stg.id
-                            ? 'bg-white text-[#1A1C2E] shadow-sm text-emerald-600 ring-1 ring-slate-200/50'
-                            : stg.disabled
-                            ? 'text-slate-300 cursor-not-allowed opacity-60 font-medium'
-                            : stg.cleared
-                            ? 'text-emerald-600 hover:bg-white/50 font-medium'
-                            : 'text-slate-500 hover:text-slate-800 hover:bg-white/50 font-medium'
-                        }`}
-                      >
-                        {stg.cleared && activeLessonTab !== stg.id ? <CheckCircle2 size={15} className="text-emerald-500" /> : stg.icon}
-                        <span>{stg.label}</span>
-                      </button>
-                    ))}
                   </div>
                 </div>
 
-                {/* Stage Content Area */}
-                <div className="min-h-[350px]">
-                  <AnimatePresence mode="wait">
-                    {activeLessonTab === 'learn' && (
-                      <motion.div
-                        key="stage-learn"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="w-full space-y-6"
-                      >
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                          {lessons[activeLessonId - 1].learnSections.map((sec, idx) => (
-                            <div
-                              key={idx}
-                              className="group rounded-3xl border border-slate-200 transition-all duration-300 bg-white hover:bg-gradient-to-b hover:from-white hover:to-emerald-50/30 shadow-sm hover:shadow-md hover:border-emerald-300 flex flex-col overflow-hidden"
-                            >
-                              <div className="w-full h-48 sm:h-52 overflow-hidden shrink-0 bg-slate-100">
-                                <img
-                                  src={sec.image || lessons[activeLessonId - 1].image}
-                                  alt={sec.title}
-                                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                                />
-                              </div>
+                {/* Main 12-column Grid matching VR module */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+                  {/* Left Sidebar with sections */}
+                  <div className="lg:col-span-4 flex flex-col gap-2.5">
+                    <div className="px-1 pb-1">
+                      <span className="text-xs font-extrabold text-slate-500 uppercase tracking-wider font-display">
+                        Lesson Topics ({currentLesson.learnSections.length})
+                      </span>
+                    </div>
 
-                              <div className="p-5 space-y-2 flex-1 flex flex-col">
-                                <div>
-                                  <span className="inline-block px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100/80 text-emerald-700 text-xs font-extrabold uppercase tracking-wider">
-                                    Topic {idx + 1}
-                                  </span>
-                                </div>
-                                <h4 className="font-extrabold text-lg text-[#1A1C2E] leading-snug group-hover:text-emerald-600 transition-colors">
-                                  {sec.title}
-                                </h4>
-                                <p className="text-sm font-medium text-slate-500 leading-relaxed pt-1 whitespace-pre-line flex-1">
-                                  {sec.desc}
-                                </p>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-
-                        <div className="pt-2 max-w-2xl mx-auto">
-                          <motion.button
-                            whileHover={{ scale: 1.01 }}
-                            whileTap={{ scale: 0.99 }}
-                            onClick={() => setActiveLessonTab('test')}
-                            className="w-full py-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white rounded-2xl text-sm font-extrabold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2.5 shadow-md hover:shadow-lg cursor-pointer group"
-                          >
-                            <span>Ready to Test Knowledge?</span>
-                            <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                          </motion.button>
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {/* Play Game Stage Removed */}
-
-                    {activeLessonTab === 'test' && (
-                      <motion.div
-                        key="stage-test"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="py-2"
-                      >
-                        {quizCleared ? (
-                          <div className="bg-white border border-slate-200 text-[#1A1C2E] rounded-3xl p-6 sm:p-8 text-center max-w-xl mx-auto space-y-5 shadow-sm relative overflow-hidden">
-                            <ConfettiExplosion />
-
-                            <div className="w-16 h-16 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center mx-auto shadow-sm">
-                              <Trophy size={32} className="text-amber-500" />
-                            </div>
-
-                            <div>
-                              <span className="text-xs font-bold text-emerald-600 uppercase tracking-wider bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
-                                Assessment Verified
-                              </span>
-                              <h4 className="font-extrabold text-xl sm:text-2xl text-[#1A1C2E] mt-3">
-                                Module Completed: {lessons[activeLessonId - 1].badge}
-                              </h4>
-                              <p className="text-sm text-slate-600 leading-relaxed font-medium mt-2">
-                                You have successfully demonstrated comprehension of this lesson module. Your recognition badge has been recorded.
-                              </p>
-                            </div>
-
-                            {activeLessonId < lessons.length ? (
-                              <motion.button
-                                whileHover={{ scale: 1.01 }}
-                                whileTap={{ scale: 0.99 }}
-                                onClick={() => {
-                                  const nextId = activeLessonId + 1;
-                                  if (!unlockedLessons.includes(nextId)) {
-                                    setUnlockedLessons(prev => [...prev, nextId]);
-                                  }
-                                  setActiveLessonId(nextId);
-                                  setActiveLessonTab('learn');
-                                }}
-                                className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-sm font-bold uppercase tracking-wider transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
-                              >
-                                <span>Proceed to Lesson {activeLessonId + 1}: {lessons[activeLessonId].badge}</span> <ArrowRight size={18} />
-                              </motion.button>
-                            ) : (
-                              <div className="space-y-4 pt-2">
-                                <div className="bg-amber-50 border border-amber-200 p-3.5 rounded-xl text-center shadow-sm">
-                                  <p className="text-sm text-amber-900 font-bold">
-                                    Amazing job! You completed all 5 Lessons and disarmed every hacker and scammer trap. You are a Certified Cyber Defender!
-                                  </p>
-                                </div>
-                                <motion.button
-                                  whileHover={{ scale: 1.01 }}
-                                  whileTap={{ scale: 0.99 }}
-                                  onClick={() => setActiveFilter('Knowledge Base')}
-                                  className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-sm font-bold uppercase tracking-wider transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
-                                >
-                                  <Award size={18} /> Explore Knowledge Base
-                                </motion.button>
-                              </div>
-                            )}
+                    {currentLesson.learnSections.map((sec, idx) => {
+                      const isTopicActive = activeTopicIndex === idx;
+                      return (
+                        <button
+                          key={idx}
+                          onClick={() => setActiveTopicIndex(idx)}
+                          className={`w-full text-left p-4 rounded-[18px] border transition-all cursor-pointer flex items-center justify-between gap-3 ${
+                            isTopicActive
+                              ? 'bg-emerald-50/80 border-emerald-300 text-emerald-950 font-bold shadow-sm'
+                              : 'bg-white border-slate-200/80 hover:bg-slate-50 text-slate-700 font-medium shadow-[0_4px_16px_rgb(0,0,0,0.02)]'
+                          }`}
+                        >
+                          <div className="min-w-0 space-y-1">
+                            <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider font-display ${
+                              isTopicActive ? 'bg-emerald-200 text-emerald-900' : 'bg-slate-100 text-slate-600'
+                            }`}>
+                              Section {idx + 1}
+                            </span>
+                            <h4 className="text-sm sm:text-base font-bold truncate font-display">
+                              {sec.title}
+                            </h4>
                           </div>
-                        ) : (
-                          <LessonQuiz 
-                            questions={lessons[activeLessonId - 1].quiz}
-                            onComplete={() => {
-                              if (!completedLessons.includes(activeLessonId)) {
-                                setCompletedLessons(prev => [...prev, activeLessonId]);
-                              }
-                              setQuizCleared(true);
-                              if (activeLessonId < 5) {
-                                const nextId = activeLessonId + 1;
-                                if (!unlockedLessons.includes(nextId)) {
-                                  setUnlockedLessons(prev => [...prev, nextId]);
-                                }
-                              } else {
-                                if (!completedLessons.includes(5)) {
-                                  setCompletedLessons(prev => [...prev, 5]);
-                                }
-                              }
-                            }}
-                          />
-                        )}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                          <ChevronRight size={16} className={`shrink-0 transition-transform ${isTopicActive ? 'text-emerald-600 translate-x-0.5' : 'text-slate-400'}`} />
+                        </button>
+                      );
+                    })}
+
+                    <div className="pt-2 mt-auto">
+                      {activeLessonId < lessons.length ? (
+                        <button
+                          onClick={handleProceedNext}
+                          className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider font-display transition-all duration-200 flex items-center justify-center gap-2 shadow-sm cursor-pointer group"
+                        >
+                          <span>Proceed to Next Lesson</span>
+                          <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                        </button>
+                      ) : (
+                        <button
+                          onClick={handleProceedNext}
+                          className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider font-display transition-all duration-200 flex items-center justify-center gap-2 shadow-sm cursor-pointer group"
+                        >
+                          <span>Return to Dashboard</span>
+                          <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Right Content Area matching VR module */}
+                  <div className="lg:col-span-8 bg-white border border-slate-200/80 rounded-[24px] p-6 sm:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.03)] flex flex-col justify-between space-y-6">
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between gap-3 flex-wrap border-b border-slate-100 pb-4">
+                        <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider font-display">
+                          Section {activeTopicIndex + 1} of {currentLesson.learnSections.length}
+                        </span>
+                      </div>
+
+                      <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight">
+                        {selectedSec.title}
+                      </h3>
+
+                      <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-normal whitespace-pre-line">
+                        {selectedSec.desc}
+                      </p>
+
+                      {selectedSec.funFact && (
+                        <div className="mt-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-50/90 to-slate-50/80 border border-emerald-100 flex items-start gap-3.5 shadow-sm">
+                          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+                            <Sparkles size={16} />
+                          </div>
+                          <div className="space-y-1">
+                            <span className="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700 font-display block">
+                              Did You Know? • Cyber Security Fun Fact
+                            </span>
+                            <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+                              {selectedSec.funFact}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Previous & Next Section Controls */}
+                    <div className="flex items-center justify-between gap-3 pt-4 border-t border-slate-100">
+                      <button
+                        onClick={() => setActiveTopicIndex(prev => Math.max(0, prev - 1))}
+                        disabled={activeTopicIndex === 0}
+                        className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all font-display ${
+                          activeTopicIndex === 0
+                            ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
+                            : 'bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer'
+                        }`}
+                      >
+                        Previous Section
+                      </button>
+
+                      {activeTopicIndex < currentLesson.learnSections.length - 1 ? (
+                        <button
+                          onClick={() => setActiveTopicIndex(prev => Math.min(currentLesson.learnSections.length - 1, prev + 1))}
+                          className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer font-display"
+                        >
+                          Next Section <ChevronRight size={16} />
+                        </button>
+                      ) : activeLessonId < lessons.length ? (
+                        <button
+                          onClick={handleProceedNext}
+                          className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer font-display"
+                        >
+                          Next Lesson <ArrowRight size={16} />
+                        </button>
+                      ) : (
+                        <button
+                          onClick={handleProceedNext}
+                          className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer font-display"
+                        >
+                          Return to Dashboard <ArrowRight size={16} />
+                        </button>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </section>
             </div>
           )}
 
           {activeFilter === 'Knowledge Base' && (
-            <div>
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-extrabold text-slate-900">Reading Materials</h2>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                {articles.map(article => (
-                  <div key={article.id} onClick={() => setSelectedItem({ ...article, type: 'article' })} className="bg-white p-5 rounded-[20px] border border-slate-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer group">
-                    <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                      <FileText size={20} />
-                    </div>
-                    <h3 className="text-[15px] font-bold text-slate-900 mb-2 group-hover:text-emerald-600 transition-colors">{article.title}</h3>
-                    <p className="text-xs text-slate-500 font-medium">{article.desc}</p>
+            <div className="space-y-4 pt-2 sm:pt-4">
+              <section className="bg-white rounded-[24px] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-5 sm:p-7 md:p-8 space-y-6">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-5">
+                  <div>
+                    <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight">
+                      Cyber Security Reading Materials & Glossary
+                    </h2>
+                    <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
+                      Select an article or glossary card below to view detailed guidelines and definitions
+                    </p>
                   </div>
-                ))}
-              </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {articles.map(article => (
+                    <div
+                      key={article.id}
+                      onClick={() => setSelectedItem({ ...article, type: 'article' })}
+                      className="bg-white p-6 rounded-[20px] border border-slate-200/80 shadow-sm hover:shadow-md hover:border-emerald-300 transition-all cursor-pointer group flex flex-col justify-between space-y-4"
+                    >
+                      <div>
+                        <div className="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center mb-4 group-hover:scale-110 transition-transform shadow-sm">
+                          <FileText size={18} />
+                        </div>
+                        <h3 className="text-base font-bold text-slate-900 mb-2 font-display group-hover:text-emerald-600 transition-colors">
+                          {article.title}
+                        </h3>
+                        <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
+                          {article.desc}
+                        </p>
+                      </div>
+                      <div className="pt-3 border-t border-slate-100 flex items-center text-emerald-600 text-xs font-bold gap-1 font-display">
+                        <span>Read Full Guide</span>
+                        <ChevronRight size={14} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </section>
             </div>
           )}
 
           {activeFilter === 'Skill Assessment' && (
-            <div className="mt-4">
+            <div className="space-y-4 pt-2 sm:pt-4">
               <CyberSecurityQuiz />
             </div>
           )}
@@ -2123,8 +2159,8 @@ const CyberSecurityDashboard = () => {
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
       </button>
 
-      <main className={`flex-1 min-h-screen pb-4 ${selectedItem ? 'overflow-hidden' : 'overflow-y-auto'}`}>
-        <div className="px-6 md:px-12 space-y-8 pt-4">
+      <main className={`flex-1 min-h-screen pb-16 cyber-scrollbar ${selectedItem ? 'overflow-hidden' : 'overflow-y-auto'}`}>
+        <div className="px-4 sm:px-6 md:px-12 2xl:px-20 space-y-6 md:space-y-8 pt-4 2xl:max-w-[1600px] 2xl:mx-auto">
 
           <div className="relative">
             <section className="bg-white rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[300px] pb-6">
@@ -2147,7 +2183,7 @@ const CyberSecurityDashboard = () => {
               </div>
             </section>
 
-            <section className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 relative z-20 -mt-8 px-4 md:px-12">
+            <section className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 relative z-20 -mt-8 px-4 md:px-8">
               {quickStats.map((stat, i) => {
                 const isActive = activeFilter === stat.label;
                 return (
@@ -2174,7 +2210,7 @@ const CyberSecurityDashboard = () => {
           </div>
         </div>
 
-        <div id="content-section">
+        <div id="content-section" className="px-4 sm:px-8 md:px-14 lg:px-16 xl:px-24 max-w-[1380px] mx-auto mt-8 sm:mt-10">
           {renderContent()}
         </div>
       </main>
@@ -2227,7 +2263,7 @@ const CyberSecurityDashboard = () => {
                   {/* Offset Scrollable Area to keep scrollbar away from rounded corners */}
                   <div 
                     data-lenis-prevent
-                    className="flex-grow overflow-y-auto custom-modal-scrollbar my-6 mr-3 ml-6 lg:ml-8"
+                    className="flex-grow overflow-y-auto cyber-scrollbar my-6 mr-3 ml-6 lg:ml-8"
                   >
                     <div className="pr-4 pb-2 mt-4 lg:mt-0">
                       <div className="flex flex-wrap items-center gap-3 mb-5">
@@ -2298,7 +2334,7 @@ const CyberSecurityDashboard = () => {
                 {/* Content Section */}
                 <div 
                   data-lenis-prevent
-                  className="p-6 md:p-7 max-h-[60vh] overflow-y-auto custom-modal-scrollbar space-y-5"
+                  className="p-6 md:p-7 max-h-[60vh] overflow-y-auto cyber-scrollbar space-y-5"
                 >
                   <div className="bg-gradient-to-br from-emerald-50/80 to-teal-50/40 border border-emerald-500/15 rounded-2xl p-5 md:p-6 shadow-sm relative">
                     <div className="flex items-center gap-2 text-emerald-800 font-extrabold text-xs uppercase tracking-wider mb-3.5 pb-2.5 border-b border-emerald-500/10">

@@ -12,48 +12,51 @@ import {
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-// 5 Curriculum Lessons Database (Texts kept exactly intact, unique images assigned to every lesson & section)
+// 5 Curriculum Lessons Database (Class 6-8 Age-Appropriate Science & Tech Concepts)
 const lessons = [
   {
     id: 1,
-    title: "Lesson 1: The Magic Portal",
-    badge: "Space Explorer",
-    topic: "What is VR?",
-    summary: "Step inside a new world and learn how VR headsets teleport your eyes and ears!",
+    title: "Lesson 1: How VR Headsets Work",
+    badge: "VR Explorer",
+    topic: "3D Worlds & Headsets",
+    summary: "Discover how VR headsets surround your eyes with 360-degree digital worlds!",
     image: "/images/vr/vr_intro.png",
     learnSections: [
       {
-        title: "Magic Glasses for Your Eyes",
-        desc: "Virtual Reality (VR) is like putting on a pair of magic goggles. Instead of looking at a flat screen like a TV, these goggles completely cover your eyes. When you turn your head, you see a brand new 3D world all around you!",
-        image: "/images/vr/magic_goggles.png"
+        title: "From Flat Screens to 360 Headsets",
+        desc: "When you watch TV or play on a computer, you look at a flat screen in front of you. A VR headset is worn over your eyes so the screen surrounds your entire view. Wherever you turn your head—up, down, left, or right—you see a full 360-degree digital world!",
+        image: "/images/vr/magic_goggles.png",
+        funFact: "The very first virtual reality machine was built in 1962! Called the 'Sensorama', it let viewers ride a virtual motorcycle with 3D visuals, stereo sound, wind, and even flower scents!"
       },
       {
-        title: "Tricking Your Brain",
-        desc: "How does it feel so real? The headset shows slightly different pictures to each of your eyes (just like how we see in real life). It also plays 3D sounds that change depending on where you look. Your brain gets tricked into thinking you are actually there!",
-        image: "/images/vr/brain_trick.png"
+        title: "How Two Eyes See 3D Depth",
+        desc: "Try closing one eye, then the other—notice how your left and right eyes see from slightly different angles? VR headsets use this same natural trick! Inside the headset, two separate images are shown (one for each eye). Your brain combines them to see realistic 3D depth and distance.",
+        image: "/images/vr/brain_trick.png",
+        funFact: "Because our two eyes are slightly apart, each sees a slightly different angle. VR headsets use this principle—called stereoscopy—to create true 3D depth inside flat displays!"
       },
       {
-        title: "Where Can You Go?",
-        desc: "With VR, you don't just watch a video. You can walk on Mars, swim next to a giant blue whale, explore an ancient castle, or sit inside a spaceship. The possibilities are endless!",
-        image: "/images/vr/mars_whale.png"
+        title: "3D Sound That Moves With You",
+        desc: "VR doesn't just trick your eyes; it uses 3D Spatial Audio for your ears! If a virtual rocket takes off to your right, the sound comes from the right earphone. When you turn your head toward the rocket, the sound moves right in front of you.",
+        image: "/images/vr/mars_whale.png",
+        funFact: "NASA astronauts train for real spacewalks inside VR headsets before ever leaving Earth, practicing how to use tools in zero gravity!"
       }
     ],
     quiz: [
       {
-        question: "What does VR stand for, and what does it do?",
+        question: "How is a VR headset different from a regular TV or computer screen?",
         options: [
-          "Very Remote: It lets you call friends from far away",
-          "Virtual Reality: It covers your eyes to put you inside a computer-made 3D world",
-          "Visual Radio: It plays music with screensavers"
+          "It shows a flat picture only when you sit still",
+          "It surrounds your eyes so you see a 360-degree world wherever you turn your head",
+          "It only works in bright sunlight"
         ],
         correct: 1
       },
       {
-        question: "How does VR make you feel like you are inside a different place?",
+        question: "How does a VR headset create realistic 3D depth?",
         options: [
-          "By showing a 3D world around you and playing sounds that match your head movement",
-          "By vibrating the headset very hard",
-          "By making the room colder"
+          "By showing slightly different angles to your left eye and right eye",
+          "By shining a red laser on the wall",
+          "By making the screen flash rapidly"
         ],
         correct: 0
       }
@@ -61,44 +64,47 @@ const lessons = [
   },
   {
     id: 2,
-    title: "Lesson 2: The Brains of the Headset",
-    badge: "Sensor Master",
-    topic: "How does it track you?",
-    summary: "Find out how screens, curved lenses, and tracking sensors follow your movement!",
+    title: "Lesson 2: Lenses & Motion Sensors",
+    badge: "Sensor Detective",
+    topic: "Lenses & Gyro Sensors",
+    summary: "Learn how curved glass lenses keep screens clear and how smart sensors track your head.",
     image: "/images/vr/vr_sensors_chip.png",
     learnSections: [
       {
-        title: "The Screen & Curvy Glass Lenses",
-        desc: "Inside the headset, there is a small, bright high-definition screen. But since the screen is super close to your face, it would look blurry. That's why there are two curved glass lenses in between! They bend the light so your eyes can focus comfortably on the virtual world.",
-        image: "/images/vr/lenses.png"
+        title: "Why VR Headsets Need Lenses",
+        desc: "If you hold a phone screen two inches from your nose, it looks blurry and hurts your eyes. VR headsets place special curved glass lenses between your eyes and the screen. These lenses bend light rays so your eyes can focus clearly without straining.",
+        image: "/images/vr/lenses.png",
+        funFact: "VR headset lenses use concentric Fresnel grooves to stay extremely thin and light while bending display light precisely to your eyes!"
       },
       {
-        title: "Follow-Me Sensors",
-        desc: "How does the headset know you turned your head? It has built-in sensors called gyroscopes and accelerometers (the same sensors that track steps on a phone). They measure your movements hundreds of times a second so the virtual camera moves instantly!",
-        image: "/images/vr/gyro_sensor.png"
+        title: "Gyroscope Motion Sensors",
+        desc: "How does the virtual world move instantly when you turn your head? Inside the headset is a tiny sensor called a Gyroscope. It measures your head turns more than 1,000 times every second so the camera moves exactly when you move!",
+        image: "/images/vr/gyro_sensor.png",
+        funFact: "A modern VR gyroscope measures head turns over 1,000 times per second—more than 10 times faster than the blink of a human eye!"
       },
       {
-        title: "Low Latency (Fast Response)",
-        desc: "If the screen camera moves too slowly when you turn your head, it feels weird. Good VR headsets update the image instantly (in less than 20 milliseconds) so everything feels natural and comfortable.",
-        image: "/images/vr/low_latency.png"
+        title: "Fast Screen Refresh Rate",
+        desc: "If a screen updates too slowly when you look around, it can make you feel dizzy. Good VR headsets refresh the picture 90 to 120 times every single second! This super-fast speed keeps motion smooth and natural.",
+        image: "/images/vr/low_latency.png",
+        funFact: "Human eyes notice motion lag if it takes more than 20 milliseconds—modern VR screens refresh up to 120 times every second!"
       }
     ],
     quiz: [
       {
-        question: "What do the curved glass lenses inside a VR headset do?",
+        question: "Why do VR headsets have curved glass lenses between your eyes and the screen?",
         options: [
-          "They protect the screen from dust and dirt",
-          "They bend the light from the screen so your eyes can focus close-up without blur",
-          "They change the color of the screen to green"
+          "To change screen colors to black and white",
+          "To bend light rays so your eyes can focus clearly on the close-up screen without blur",
+          "To make the headset heavier"
         ],
         correct: 1
       },
       {
-        question: "Which sensor helps the VR headset detect when you turn your head?",
+        question: "Which sensor inside the headset detects when you turn your head left or right?",
         options: [
-          "A gyroscope sensor",
+          "A Gyroscope sensor",
           "A temperature thermometer",
-          "A light brightness sensor"
+          "A microphone sensor"
         ],
         correct: 0
       }
@@ -106,44 +112,47 @@ const lessons = [
   },
   {
     id: 3,
-    title: "Lesson 3: Magic Wand Hands",
-    badge: "Tech Sorcerer",
-    topic: "VR Controllers & Hands",
-    summary: "Learn how wireless controllers translate your real hand gestures into virtual actions!",
+    title: "Lesson 3: Controllers & Touch Feedback",
+    badge: "Tech Master",
+    topic: "Hand Tracking & Vibration",
+    summary: "Find out how wireless controllers track your hands and vibrate when you touch virtual objects!",
     image: "/images/vr/vr_controllers.png",
     learnSections: [
       {
-        title: "Your Hands in the Virtual World",
-        desc: "To interact with the VR world, you hold wireless controllers in your hands. The headset tracks their position using sensors or cameras. When you move your hand in real life, a virtual hand or magic wand moves exactly the same way in the headset!",
-        image: "/images/vr/virtual_hands.png"
+        title: "Tracking Your Hands in 3D Space",
+        desc: "To grab objects in VR, you hold wireless hand controllers. Cameras on the headset track hidden infrared lights on the controllers. When you raise your real hand or wave, your virtual hand inside the headset moves the exact same way!",
+        image: "/images/vr/virtual_hands.png",
+        funFact: "VR controllers have tiny hidden infrared LEDs that cameras track with sub-millimeter precision in 3D space!"
       },
       {
-        title: "Pressing Buttons & Grabbing",
-        desc: "VR controllers have buttons, joysticks, and trigger buttons under your fingers. You can squeeze the trigger to pick up a virtual sword, pull a lever, throw a basketball, or draw in the air!",
-        image: "/images/vr/controllers_buttons.png"
+        title: "Buttons, Joysticks & Grab Triggers",
+        desc: "VR controllers have joysticks for walking and trigger buttons under your fingers. When you squeeze the trigger button, your virtual hand closes to pick up lab beakers, throw a basketball, or use scientific tools.",
+        image: "/images/vr/controllers_buttons.png",
+        funFact: "Advanced VR gloves can simulate physical resistance so grabbing a virtual baseball or bow feels solid and real in your hand!"
       },
       {
-        title: "Feeling the Action (Haptics)",
-        desc: "When you touch or grab something in VR, the controllers rumble or vibrate. This is called haptic feedback. It lets you 'feel' the virtual environment, like the tension of drawing a bow string or the bounce of a ball.",
-        image: "/images/vr/haptics.png"
+        title: "Feeling Virtual Contact (Haptic Vibration)",
+        desc: "Have you noticed how a phone vibrates when you get a notification? VR controllers use tiny vibration motors inside. When your virtual hand touches a table or catches a ball, the controller rumbles so you actually feel the contact!",
+        image: "/images/vr/haptics.png",
+        funFact: "Haptic feedback uses linear resonant actuators—the exact same ultra-precise vibration motors used in high-end smartphones!"
       }
     ],
     quiz: [
       {
-        question: "How does the VR system know where your hands are moving?",
+        question: "How does the VR headset know where your hands are moving?",
         options: [
-          "It guesses based on your age",
-          "It tracks the position of the wireless controllers using cameras or sensors",
-          "You have to speak into a microphone to move your hands"
+          "By guessing based on sound",
+          "By tracking infrared lights or sensors on your wireless controllers",
+          "Using a wired computer mouse"
         ],
         correct: 1
       },
       {
-        question: "What is 'haptic feedback' in VR controllers?",
+        question: "Why do VR controllers vibrate when you touch an object in the virtual world?",
         options: [
-          "A system that plays music",
-          "A vibration or rumble that lets you feel physical contact in the virtual world",
-          "A light that turns red when you are low on battery"
+          "To play music through your hands",
+          "To give tactile haptic feedback so you feel physical contact with virtual objects",
+          "Because the battery is empty"
         ],
         correct: 1
       }
@@ -151,44 +160,47 @@ const lessons = [
   },
   {
     id: 4,
-    title: "Lesson 4: The Reality Spectrum",
-    badge: "Dimension Hopper",
-    topic: "VR vs AR vs MR",
-    summary: "Explore the differences between fully virtual worlds and holograms in your real room!",
+    title: "Lesson 4: VR vs. AR vs. Mixed Reality",
+    badge: "Reality Explorer",
+    topic: "VR, AR & MR",
+    summary: "Understand the difference between full virtual worlds and digital holograms in your room!",
     image: "/images/vr/vr_ar_mr.png",
     learnSections: [
       {
-        title: "Virtual Reality (VR) - The Closed Eye",
-        desc: "VR completely blocks out the real world. You see only digital computer graphics. If you turn around, you see the digital sky, not your room wall. You are 100% inside the computer's world.",
-        image: "/images/vr/closed_eye.png"
+        title: "Virtual Reality (VR) - Full Digital World",
+        desc: "In Virtual Reality (VR), your view of the real room is completely replaced by a computer-generated 3D world. You can visit outer space, dive deep into the ocean, or walk inside an atom simulation.",
+        image: "/images/vr/closed_eye.png",
+        funFact: "Surgeons practice complex brain and heart operations inside VR medical simulators before ever operating on a real patient!"
       },
       {
-        title: "Augmented Reality (AR) - The Digital Overlay",
-        desc: "AR does NOT hide your real room. It overlays digital stickers or holograms on top of it. Think of Pokémon GO or camera filters that add puppy ears to your face. You see the real world with virtual extras!",
-        image: "/images/vr/augmented_overlay.png"
+        title: "Augmented Reality (AR) - Digital Overlays",
+        desc: "Augmented Reality (AR) lets you see your real physical room while adding digital information or pictures on top. For example, pointing a tablet camera at a plant to see floating labels of its leaves and roots.",
+        image: "/images/vr/augmented_overlay.png",
+        funFact: "Pilots have used head-up augmented reality displays projected onto jet cockpits since the late 1970s!"
       },
       {
-        title: "Mixed Reality (MR) - The Interactive Merge",
-        desc: "MR is a super-advanced blend. Digital objects don't just float; they interact with real physical items! For example, a digital puppy can hide behind your real chair, or a virtual ball can bounce off your real kitchen table.",
-        image: "/images/vr/mixed_reality.png"
+        title: "Mixed Reality (MR) - Smart Holograms",
+        desc: "Mixed Reality (MR) uses headset cameras to scan your actual furniture. Digital 3D objects can recognize your real table or walls—like a virtual science ball that bounces off your real study desk!",
+        image: "/images/vr/mixed_reality.png",
+        funFact: "Mixed Reality headsets use depth sensors to scan your room and build an exact 3D wireframe mesh of your furniture in real time!"
       }
     ],
     quiz: [
       {
-        question: "Which technology overlays virtual objects on top of the real world without hiding it?",
+        question: "What is the main difference between Virtual Reality (VR) and Augmented Reality (AR)?",
         options: [
-          "Virtual Reality (VR)",
-          "Augmented Reality (AR)",
-          "Old TV Screens"
+          "VR replaces your whole view with a 3D world, while AR adds digital info on top of your real room",
+          "VR only works on TV screens",
+          "AR completely blocks your eyes"
         ],
-        correct: 1
+        correct: 0
       },
       {
-        question: "What makes Mixed Reality (MR) different from Augmented Reality (AR)?",
+        question: "What makes Mixed Reality (MR) special when used in your study room?",
         options: [
-          "In MR, virtual objects can interact with real things, like bouncing off your real desk",
-          "MR is only in black and white",
-          "MR requires you to wear heavy gloves"
+          "Digital 3D objects can recognize and interact with real physical furniture like desks and walls",
+          "It turns off your room lights automatically",
+          "It requires heavy wired backpacks"
         ],
         correct: 0
       }
@@ -196,44 +208,47 @@ const lessons = [
   },
   {
     id: 5,
-    title: "Lesson 5: Safety First in VR",
-    badge: "Safety Guardian",
-    topic: "VR Safety & Health",
-    summary: "Establish your safety circle to play without bumping into walls or straining your eyes!",
+    title: "Lesson 5: Safety & Eye Care in VR",
+    badge: "Safety Champion",
+    topic: "Guardian & Eye Rules",
+    summary: "Learn how to set up a safe play boundary and care for your eyes during VR learning.",
     image: "/images/vr/vr_safety_zone.png",
     learnSections: [
       {
-        title: "The Guardian Boundary",
-        desc: "Since you cannot see your actual room while in VR, you must draw a safe play circle on the floor first. If you get too close to the edge, a glowing virtual grid appears in your view to warn you. This is the Guardian System!",
-        image: "/images/vr/guardian_boundary.png"
+        title: "The Guardian Safety Boundary",
+        desc: "Because you can't see your real room inside VR, you draw a digital safety circle on your floor before starting. If you walk too close to your real wall or desk, a glowing grid lights up to warn you so you don't bump into anything!",
+        image: "/images/vr/guardian_boundary.png",
+        funFact: "The Guardian boundary system uses real-time computer vision to draw a safety grid in mid-air the moment you step within 6 inches of a wall!"
       },
       {
-        title: "Clear the Floor!",
-        desc: "Before putting on the headset, always make sure the floor is empty. Clear away toys, skateboards, cups of water, and move chairs. Keep pets out of the room so you don't accidentally step on your dog or cat!",
-        image: "/images/vr/clear_floor.png"
+        title: "Matching Lens Width to Your Eyes (IPD)",
+        desc: "Everyone's eyes are spaced slightly differently. Headsets have a slider wheel to adjust the distance between the two lenses. Aligning the lenses with the center of your pupils keeps the picture sharp and comfortable.",
+        image: "/images/vr/clear_floor.png",
+        funFact: "Professional VR labs measure every student's IPD in millimeters to customize optical lens spacing before simulations!"
       },
       {
-        title: "The 20-20-20 Rule for Eyes",
-        desc: "VR screens are close to your eyes. To avoid headaches or eye strain, take a break every 20 minutes. Look at something 20 feet away for 20 seconds. If you ever feel dizzy, take off the headset immediately and rest.",
-        image: "/images/vr/eye_break.png"
+        title: "The 20-20 Rest Rule for Healthy Eyes",
+        desc: "Looking at any screen for too long can tire your eyes. Follow the 20-20 rule: every 20 minutes, take off your headset and look at something 20 feet away for 20 seconds to relax your eye muscles!",
+        image: "/images/vr/eye_break.png",
+        funFact: "Looking at an object 20 feet away completely relaxes the internal ciliary muscle inside your eye, instantly easing eye fatigue!"
       }
     ],
     quiz: [
       {
-        question: "What is a 'Guardian System' in VR?",
+        question: "Why do VR headsets show a glowing Guardian grid when you walk near the edge of your play area?",
         options: [
-          "A password lock that protects your account",
-          "A glowing virtual boundary grid that warns you if you are about to hit real furniture",
-          "A voice that tells you how to play the game"
+          "To warn you before you bump into real walls or furniture",
+          "To change the level of the game",
+          "To turn off the headset"
         ],
-        correct: 1
+        correct: 0
       },
       {
-        question: "What should you do to protect your eyes and body during long VR sessions?",
+        question: "What is the 20-20 rule for keeping your eyes healthy during screen or VR time?",
         options: [
-          "Take a break every 20 minutes, look far away, and clear all hazards from the floor before playing",
-          "Play in a dark closet so the light doesn't leak",
-          "Keep the headset on even if you feel dizzy"
+          "Every 20 minutes, look at something 20 feet away for 20 seconds to rest your eyes",
+          "Blink 20 times every second",
+          "Play for 20 hours straight"
         ],
         correct: 0
       }
@@ -1583,33 +1598,13 @@ const LessonQuiz = ({ questions, onComplete, lessonBadge }) => {
 const VrTechLearning = ({ isEmbedded = false, onBack }) => {
   const navigate = useNavigate();
   const [activeLessonId, setActiveLessonId] = useState(1);
-  const [unlockedLessons, setUnlockedLessons] = useState(() => {
-    const saved = localStorage.getItem('unlockedVrTechLessons');
-    return saved ? JSON.parse(saved) : [1];
-  });
+  const unlockedLessons = [1, 2, 3, 4, 5];
   const [completedLessons, setCompletedLessons] = useState(() => {
     const saved = localStorage.getItem('completedVrTechLessons');
     return saved ? JSON.parse(saved) : [];
   });
   
-  // Clean, simple step tracker: 1: Story Cards, 2: Gamer Simulator, 3: Stamp Quiz
-  const [activeStage, setActiveStage] = useState(1);
-  const [gameCleared, setGameCleared] = useState(() => {
-    const saved = localStorage.getItem('completedVrTechLessons');
-    const comp = saved ? JSON.parse(saved) : [];
-    return comp.includes(1);
-  });
-  const [quizCleared, setQuizCleared] = useState(() => {
-    const saved = localStorage.getItem('completedVrTechLessons');
-    const comp = saved ? JSON.parse(saved) : [];
-    return comp.includes(1);
-  });
-
-  const { speakingId, speak, stop } = useSpeechSynthesis();
-
-  useEffect(() => {
-    localStorage.setItem('unlockedVrTechLessons', JSON.stringify(unlockedLessons));
-  }, [unlockedLessons]);
+  const [activeTopicIndex, setActiveTopicIndex] = useState(0);
 
   useEffect(() => {
     localStorage.setItem('completedVrTechLessons', JSON.stringify(completedLessons));
@@ -1619,70 +1614,28 @@ const VrTechLearning = ({ isEmbedded = false, onBack }) => {
 
   const handleSelectLesson = (id) => {
     setActiveLessonId(id);
-    setActiveStage(1);
-    stop();
-    const isCompleted = completedLessons.includes(id);
-    setGameCleared(isCompleted);
-    setQuizCleared(isCompleted);
+    setActiveTopicIndex(0);
     window.scrollTo({ top: 380, behavior: 'smooth' });
   };
 
-  const handleGameComplete = () => {
-    setGameCleared(true);
-    setActiveStage(3);
-  };
-
-  const handleQuizComplete = () => {
-    setQuizCleared(true);
+  const handleProceedNext = () => {
     if (!completedLessons.includes(activeLessonId)) {
       setCompletedLessons(prev => [...prev, activeLessonId]);
     }
     if (activeLessonId < lessons.length) {
-      const nextId = activeLessonId + 1;
-      if (!unlockedLessons.includes(nextId)) {
-        setUnlockedLessons(prev => [...prev, nextId]);
+      handleSelectLesson(activeLessonId + 1);
+    } else {
+      if (isEmbedded && onBack) {
+        onBack();
+      } else {
+        navigate('/vr-dashboard');
       }
-    }
-  };
-
-  const handleNextLesson = () => {
-    if (activeLessonId < lessons.length) {
-      const nextId = activeLessonId + 1;
-      setActiveLessonId(nextId);
-      setActiveStage(1);
-      stop();
-      const isCompleted = completedLessons.includes(nextId);
-      setGameCleared(isCompleted);
-      setQuizCleared(isCompleted);
-      window.scrollTo({ top: 350, behavior: 'smooth' });
-    }
-  };
-
-  const handleRestartJourney = () => {
-    if (window.confirm("Do you want to reset your training progress and start from Lesson 1?")) {
-      setUnlockedLessons([1]);
-      setCompletedLessons([]);
-      setActiveLessonId(1);
-      setActiveStage(1);
-      setGameCleared(false);
-      setQuizCleared(false);
-    }
-  };
-
-  const renderGame = () => {
-    switch (activeLessonId) {
-      case 1: return <HeadsetGame onComplete={handleGameComplete} />;
-      case 2: return <GyroGame onComplete={handleGameComplete} />;
-      case 3: return <ControllersGame onComplete={handleGameComplete} />;
-      case 4: return <RealityGame onComplete={handleGameComplete} />;
-      case 5: return <SafetyGame onComplete={handleGameComplete} />;
-      default: return <div>Game module unavailable</div>;
     }
   };
 
 
   return (
-    <div className={`${isEmbedded ? '' : 'min-h-screen bg-[#F8FAFC]'} flex flex-col font-sans text-[#1A1C2E] overflow-x-hidden selection:bg-indigo-500 selection:text-white transition-all duration-300`}>
+    <div className={`${isEmbedded ? '' : 'min-h-screen bg-[#F8FAFC]'} flex flex-col font-sans text-slate-900 overflow-x-hidden selection:bg-indigo-500 selection:text-white transition-all duration-300`}>
       {!isEmbedded && (
         <button
           onClick={() => navigate("/vr-dashboard")}
@@ -1695,28 +1648,7 @@ const VrTechLearning = ({ isEmbedded = false, onBack }) => {
       <main className="flex-1 pb-16">
         <div className="px-4 sm:px-6 md:px-12 max-w-[1400px] mx-auto space-y-4 pt-4 sm:pt-6">
 
-          {/* Sleek Lesson Selection Bar */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 px-1">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center shadow-sm">
-                <LayoutGrid size={16} />
-              </div>
-              <div>
-                <h3 className="text-sm font-extrabold text-[#1A1C2E]">VR Course</h3>
-                <p className="text-[11px] text-slate-500 font-medium">Select an unlocked lesson module to begin training</p>
-              </div>
-            </div>
-            {completedLessons.length > 0 && (
-              <button
-                onClick={handleRestartJourney}
-                className="text-xs font-bold text-slate-600 hover:text-rose-600 bg-white hover:bg-rose-50 border border-slate-200 px-3.5 py-1.5 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 shadow-sm hover:border-rose-200"
-              >
-                <RotateCcw size={13} /> Reset Progress
-              </button>
-            )}
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5 mb-2">
+          <div className="bg-white border border-slate-100 rounded-[20px] p-2 shadow-[0_4px_20px_rgb(0,0,0,0.03)] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 mb-3">
             {lessons.map((less) => {
               const isUnlocked = unlockedLessons.includes(less.id);
               const isCompleted = completedLessons.includes(less.id);
@@ -1725,209 +1657,187 @@ const VrTechLearning = ({ isEmbedded = false, onBack }) => {
               return (
                 <button
                   key={less.id}
-                  onClick={() => {
-                    if (isUnlocked) {
-                      handleSelectLesson(less.id);
-                    }
-                  }}
-                  disabled={!isUnlocked}
-                  className={`text-left px-3.5 py-2.5 rounded-xl border transition-all cursor-pointer flex items-center justify-between gap-2 min-h-[50px] ${
+                  onClick={() => handleSelectLesson(less.id)}
+                  className={`text-left px-3.5 py-2.5 rounded-xl border transition-all cursor-pointer flex items-center gap-2.5 min-h-[46px] font-display ${
                     isActive
-                      ? 'bg-indigo-600 text-white border-indigo-600 shadow-md font-bold scale-[1.02]'
-                      : isUnlocked
-                      ? 'bg-white text-[#1A1C2E] border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/30 shadow-sm font-medium'
-                      : 'bg-slate-100/80 text-slate-400 border-slate-200 cursor-not-allowed opacity-60 font-medium'
+                      ? 'bg-indigo-50/80 border-indigo-200 text-indigo-950 font-bold shadow-sm'
+                      : 'bg-white border-slate-100 hover:bg-slate-50 text-slate-700 font-medium'
                   }`}
                 >
                   <div className="flex items-center gap-2.5 min-w-0">
-                    {isActive ? (
-                      <span className="w-2.5 h-2.5 rounded-full bg-white shrink-0 animate-pulse" title="Active Lesson" />
-                    ) : isCompleted ? (
-                      <CheckCircle2 size={16} className="text-[#0BB562] shrink-0" title="Completed" />
-                    ) : isUnlocked ? (
-                      <span className="w-2 h-2 rounded-full bg-indigo-300 shrink-0" />
-                    ) : (
-                      <Lock size={14} className="text-slate-400 shrink-0" title="Locked" />
-                    )}
-                    <span className="text-xs sm:text-sm font-bold truncate">
-                      {less.id}. {less.title.split(': ')[1]}
+                    <span className={`w-6 h-6 rounded-md flex items-center justify-center text-xs font-bold shrink-0 ${
+                      isCompleted ? 'bg-emerald-600 text-white' : isActive ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-600'
+                    }`}>
+                      {less.id}
+                    </span>
+                    <span className="text-xs sm:text-sm truncate">
+                      {less.title.split(': ')[1]}
                     </span>
                   </div>
-                  {isUnlocked && !isActive && !isCompleted && (
-                    <ChevronRight size={14} className="text-slate-400 shrink-0" />
-                  )}
                 </button>
               );
             })}
           </div>
 
           {/* Active Lesson Main Container */}
-          <section className="bg-white rounded-3xl border border-slate-200 shadow-sm p-5 sm:p-8 space-y-6">
+          <section className="bg-white rounded-[24px] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-5 sm:p-7 md:p-8 space-y-6">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-5">
               <div>
-                <div className="inline-flex items-center gap-2 px-3 py-1 bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold rounded-full uppercase tracking-wider mb-2">
-                  <Award size={14} className="text-indigo-600" /> Lesson {activeLessonId} Badge: <span className="font-extrabold text-[#1A1C2E]">{currentLesson.badge}</span>
-                </div>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1A1C2E] tracking-tight">
+                <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight">
                   {currentLesson.title}
                 </h2>
-                <p className="text-sm text-slate-600 mt-1 font-medium">
+                <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
                   Topic Focus: <span className="text-indigo-600 font-bold">{currentLesson.topic}</span>
                 </p>
-              </div>
-
-              {/* Sleek Inline Stage Switcher Pill */}
-              <div className="bg-slate-100 p-1.5 rounded-2xl border border-slate-200/80 flex items-center gap-1 w-full sm:w-auto shrink-0 self-stretch sm:self-center">
-                {[
-                  { id: 1, step: "Step 1", label: "Learn Cards", icon: <BookOpen size={15} />, cleared: true },
-                  { id: 2, step: "Step 2", label: "Take Quiz", icon: <Trophy size={15} />, cleared: quizCleared }
-                ].map(stg => (
-                  <button
-                    key={stg.id}
-                    onClick={() => setActiveStage(stg.id)}
-                    className={`flex-1 sm:flex-initial py-2.5 px-4 rounded-xl font-bold text-xs sm:text-sm transition-all cursor-pointer flex items-center justify-center gap-2 min-h-[40px] ${
-                      activeStage === stg.id
-                        ? 'bg-white text-[#1A1C2E] shadow-sm text-indigo-600 ring-1 ring-slate-200/50'
-                        : stg.cleared
-                        ? 'text-[#0BB562] hover:bg-white/50 font-medium'
-                        : 'text-slate-500 hover:text-slate-800 hover:bg-white/50 font-medium'
-                    }`}
-                  >
-                    {stg.cleared && activeStage !== stg.id ? <CheckCircle2 size={15} className="text-[#0BB562]" /> : stg.icon}
-                    <span>{stg.label}</span>
-                  </button>
-                ))}
               </div>
             </div>
 
             {/* Stage Content Area */}
             <div className="min-h-[350px]">
               <AnimatePresence mode="wait">
-                {activeStage === 1 && (
-                  <motion.div
-                    key="stage-1"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="w-full space-y-6"
-                  >
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                      {currentLesson.learnSections.map((sec, idx) => (
-                        <div
-                          key={idx}
-                          className="group rounded-3xl border border-slate-200 transition-all duration-300 bg-white hover:bg-gradient-to-b hover:from-white hover:to-indigo-50/30 shadow-sm hover:shadow-md hover:border-indigo-300 flex flex-col overflow-hidden"
-                        >
-                          <div className="w-full h-48 sm:h-52 overflow-hidden shrink-0 bg-slate-100">
-                            <img
-                              src={sec.image}
-                              alt={sec.title}
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                            />
+                <motion.div
+                  key={`lesson-${activeLessonId}`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="w-full"
+                >
+                  {(() => {
+                    const selectedSec = currentLesson.learnSections[activeTopicIndex] || currentLesson.learnSections[0];
+                    return (
+                      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+                        {/* Sidebar with 3 sections */}
+                        <div className="lg:col-span-4 flex flex-col gap-2.5">
+                          <div className="px-1 pb-1">
+                            <span className="text-xs font-extrabold text-slate-500 uppercase tracking-wider font-display">
+                              Lesson Topics ({currentLesson.learnSections.length})
+                            </span>
                           </div>
+                          {currentLesson.learnSections.map((sec, idx) => {
+                            const isTopicActive = activeTopicIndex === idx;
+                            return (
+                              <button
+                                key={idx}
+                                onClick={() => setActiveTopicIndex(idx)}
+                                className={`w-full text-left p-4 rounded-[18px] border transition-all cursor-pointer flex items-center justify-between gap-3 ${
+                                  isTopicActive
+                                    ? 'bg-indigo-50/80 border-indigo-300 text-indigo-950 font-bold shadow-sm'
+                                    : 'bg-white border-slate-200/80 hover:bg-slate-50 text-slate-700 font-medium shadow-[0_4px_16px_rgb(0,0,0,0.02)]'
+                                }`}
+                              >
+                                <div className="min-w-0 space-y-1">
+                                  <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider font-display ${
+                                    isTopicActive ? 'bg-indigo-200 text-indigo-900' : 'bg-slate-100 text-slate-600'
+                                  }`}>
+                                    Section {idx + 1}
+                                  </span>
+                                  <h4 className="text-sm sm:text-base font-bold truncate font-display">
+                                    {sec.title}
+                                  </h4>
+                                </div>
+                                <ChevronRight size={16} className={`shrink-0 transition-transform ${isTopicActive ? 'text-indigo-600 translate-x-0.5' : 'text-slate-400'}`} />
+                              </button>
+                            );
+                          })}
 
-                          <div className="p-5 space-y-2 flex-1 flex flex-col">
-                            <div>
-                              <span className="inline-block px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100/80 text-indigo-700 text-xs font-extrabold uppercase tracking-wider">
-                                Topic {idx + 1}
+                          <div className="pt-2 mt-auto">
+                            {activeLessonId < lessons.length ? (
+                              <button
+                                onClick={handleProceedNext}
+                                className="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider font-display transition-all duration-200 flex items-center justify-center gap-2 shadow-sm cursor-pointer group"
+                              >
+                                <span>Proceed to Next Lesson</span>
+                                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                              </button>
+                            ) : (
+                              <button
+                                onClick={handleProceedNext}
+                                className="w-full py-3.5 bg-[#0BB562] hover:bg-[#099b53] text-white rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider font-display transition-all duration-200 flex items-center justify-center gap-2 shadow-sm cursor-pointer group"
+                              >
+                                <span>Return to VR Dashboard</span>
+                                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                              </button>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Description Details Card (No Images) */}
+                        <div className="lg:col-span-8 bg-white border border-slate-200/80 rounded-[24px] p-6 sm:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.03)] flex flex-col justify-between space-y-6">
+                          <div className="space-y-4">
+                            <div className="flex items-center justify-between gap-3 flex-wrap border-b border-slate-100 pb-4">
+                              <span className="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 text-xs font-bold uppercase tracking-wider font-display">
+                                Section {activeTopicIndex + 1} of {currentLesson.learnSections.length}
                               </span>
                             </div>
-                            <h4 className="font-extrabold text-lg text-[#1A1C2E] leading-snug group-hover:text-indigo-600 transition-colors">
-                              {sec.title}
-                            </h4>
-                            <p className="text-sm font-medium text-slate-500 leading-relaxed pt-1 flex-1">
-                              {sec.desc}
+
+                            <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight">
+                              {selectedSec.title}
+                            </h3>
+
+                            <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-normal whitespace-pre-line">
+                              {selectedSec.desc}
                             </p>
+
+                            {selectedSec.funFact && (
+                              <div className="mt-6 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-indigo-50/90 to-slate-50/80 border border-indigo-100 flex items-start gap-3.5 shadow-sm">
+                                <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+                                  <Sparkles size={16} />
+                                </div>
+                                <div className="space-y-1">
+                                  <span className="text-[11px] font-extrabold uppercase tracking-wider text-indigo-700 font-display block">
+                                    Did You Know? • VR Fun Fact
+                                  </span>
+                                  <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
+                                    {selectedSec.funFact}
+                                  </p>
+                                </div>
+                              </div>
+                            )}
                           </div>
-                        </div>
-                      ))}
-                    </div>
 
-                    <div className="pt-2">
-                      <motion.button
-                        whileHover={{ scale: 1.01 }}
-                        whileTap={{ scale: 0.99 }}
-                        onClick={() => setActiveStage(2)}
-                        className="w-full py-4 bg-gradient-to-r from-[#0BB562] to-[#099b53] hover:from-[#099b53] hover:to-[#088748] text-white rounded-2xl text-sm font-extrabold uppercase tracking-wider transition-all duration-300 flex items-center justify-center gap-2.5 shadow-md hover:shadow-lg cursor-pointer group"
-                      >
-                        <span>Next Stage</span>
-                        <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                      </motion.button>
-                    </div>
-                  </motion.div>
-                )}
-
-                {activeStage === 2 && (
-                  <motion.div
-                    key="stage-2"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.2 }}
-                    className="py-2"
-                  >
-                    {quizCleared ? (
-                      <div className="bg-white border border-slate-200 text-[#1A1C2E] rounded-3xl p-6 sm:p-8 text-center max-w-xl mx-auto space-y-5 shadow-sm relative overflow-hidden">
-                        <ConfettiExplosion />
-
-                        <div className="w-16 h-16 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center mx-auto shadow-sm">
-                          <Trophy size={32} className="text-amber-500" />
-                        </div>
-
-                        <div>
-                          <span className="text-xs font-bold text-[#0BB562] uppercase tracking-wider bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full">
-                            Assessment Verified
-                          </span>
-                          <h4 className="font-extrabold text-xl sm:text-2xl text-[#1A1C2E] mt-3">
-                            Module Completed: {currentLesson.badge}
-                          </h4>
-                          <p className="text-sm text-slate-600 leading-relaxed font-medium mt-2">
-                            You have successfully demonstrated comprehension of this lesson module. Your recognition badge has been recorded.
-                          </p>
-                        </div>
-
-                        {activeLessonId < lessons.length ? (
-                          <motion.button
-                            whileHover={{ scale: 1.01 }}
-                            whileTap={{ scale: 0.99 }}
-                            onClick={handleNextLesson}
-                            className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-sm font-bold uppercase tracking-wider transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
-                          >
-                            <span>Proceed to Lesson {activeLessonId + 1}: {lessons[activeLessonId].badge}</span> <ArrowRight size={18} />
-                          </motion.button>
-                        ) : (
-                          <div className="space-y-4 pt-2">
-                            <div className="bg-amber-50 border border-amber-200 p-3.5 rounded-xl text-center shadow-sm">
-                              <p className="text-sm text-amber-900 font-bold">
-                                You have successfully completed all 5 VR Technology modules.
-                              </p>
-                            </div>
-                            <motion.button
-                              whileHover={{ scale: 1.01 }}
-                              whileTap={{ scale: 0.99 }}
-                              onClick={() => {
-                                if (isEmbedded && onBack) {
-                                  onBack();
-                                } else {
-                                  navigate('/vr-dashboard');
-                                }
-                              }}
-                              className="w-full py-3 bg-[#0BB562] hover:bg-[#099b53] text-white rounded-xl text-sm font-bold uppercase tracking-wider transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
+                          {/* Previous & Next Section Controls */}
+                          <div className="flex items-center justify-between gap-3 pt-4 border-t border-slate-100">
+                            <button
+                              onClick={() => setActiveTopicIndex(prev => Math.max(0, prev - 1))}
+                              disabled={activeTopicIndex === 0}
+                              className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all font-display ${
+                                activeTopicIndex === 0
+                                  ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
+                                  : 'bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer'
+                              }`}
                             >
-                              <Award size={18} /> Return to VR Dashboard
-                            </motion.button>
+                              Previous Section
+                            </button>
+
+                            {activeTopicIndex < currentLesson.learnSections.length - 1 ? (
+                              <button
+                                onClick={() => setActiveTopicIndex(prev => Math.min(currentLesson.learnSections.length - 1, prev + 1))}
+                                className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer font-display"
+                              >
+                                Next Section <ChevronRight size={16} />
+                              </button>
+                            ) : activeLessonId < lessons.length ? (
+                              <button
+                                onClick={handleProceedNext}
+                                className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer font-display"
+                              >
+                                Next Lesson <ArrowRight size={16} />
+                              </button>
+                            ) : (
+                              <button
+                                onClick={handleProceedNext}
+                                className="px-5 py-2.5 rounded-xl bg-[#0BB562] hover:bg-[#099b53] text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer font-display"
+                              >
+                                Return to Dashboard <ArrowRight size={16} />
+                              </button>
+                            )}
                           </div>
-                        )}
+                        </div>
                       </div>
-                    ) : (
-                      <LessonQuiz
-                        questions={currentLesson.quiz}
-                        onComplete={handleQuizComplete}
-                        lessonBadge={currentLesson.badge}
-                      />
-                    )}
-                  </motion.div>
-                )}
+                    );
+                  })()}
+                </motion.div>
               </AnimatePresence>
             </div>
           </section>
