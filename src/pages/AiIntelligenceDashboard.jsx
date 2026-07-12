@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 const toolsCategories = [
   { id: 'All', label: 'All Tools'},
-  { id: 'Indian AI', label: 'Indian AI' },
+  { id: 'Indian AI', label: 'Indian Tools' },
   { id: 'Writing', label: 'Writing' },
   { id: 'Image', label: 'Image' },
   { id: 'Voice', label: 'Voice' },
@@ -18,17 +18,22 @@ const toolsCategories = [
 ];
 
 const toolsDataList = [
-  { name: 'Sarvam AI', tag: 'Indic Voice & AI', desc: 'India’s foundational AI platform specialized in Indian languages, voice AI, and localized generative models.', icon: '🪄', color: 'bg-orange-50 text-orange-600', iconBg: 'bg-orange-100 text-orange-600', categories: ['Indian AI', 'Voice', 'Writing', 'Learning'] },
-  { name: 'BharatGPT', tag: 'Multilingual AI', desc: 'India’s indigenous conversational AI assistant supporting 14+ Indian languages with voice and text capabilities.', icon: '🇮🇳', color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI', 'Writing', 'Learning', 'Productivity'] },
-  { name: 'ChatGPT', tag: 'Writing Assistant', desc: 'AI chatbot that helps answer questions, write content, and explain ideas.', icon: '💬', color: 'bg-emerald-50 text-emerald-600', iconBg: 'bg-emerald-100 text-emerald-600', categories: ['Writing', 'Learning'] },
+  { name: 'Sarvam AI', tag: 'Indic Voice & AI', desc: 'India’s foundational AI platform specialized in Indian languages, voice AI, and localized generative models.', icon: '🪄', color: 'bg-orange-50 text-orange-600', iconBg: 'bg-orange-100 text-orange-600', categories: ['Indian AI', 'Voice'] },
+  { name: 'BharatGPT', tag: 'Multilingual AI', desc: 'India’s indigenous conversational AI assistant supporting 14+ Indian languages with voice and text capabilities.', icon: '🇮🇳', color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI', 'Writing', 'Learning'] },
+  { name: 'ChatGPT', tag: 'Writing Assistant', desc: 'AI chatbot that helps answer questions, write content, and explain ideas.', icon: '💬', color: 'bg-emerald-50 text-emerald-600', iconBg: 'bg-emerald-100 text-emerald-600', categories: ['Writing', 'Learning', 'Productivity'] },
   { name: 'Google Gemini', tag: 'Learning Assistant', desc: 'AI assistant by Google that helps with writing, learning, and exploring ideas.', icon: '✨', color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Writing', 'Learning', 'Productivity'] },
-  { name: 'Krutrim AI', tag: 'Indic LLM Platform', desc: 'India’s AI platform building multilingual foundational models and generative AI for Indian contexts.', icon: '⚡', color: 'bg-emerald-50 text-emerald-600', iconBg: 'bg-emerald-100 text-emerald-600', categories: ['Indian AI', 'Writing', 'Learning', 'Productivity'] },
-  { name: 'Bhashini AI', tag: 'Indic Translation', desc: 'National AI platform breaking language barriers with speech-to-speech and text translation across Indian languages.', icon: '🗣️', color: 'bg-blue-50 text-blue-600', iconBg: 'bg-blue-100 text-blue-600', categories: ['Indian AI', 'Voice', 'Learning', 'Productivity'] },
+  { name: 'Krutrim AI', tag: 'Indic LLM Platform', desc: 'India’s AI platform building multilingual foundational models and generative AI for Indian contexts.', icon: '⚡', color: 'bg-emerald-50 text-emerald-600', iconBg: 'bg-emerald-100 text-emerald-600', categories: ['Indian AI', 'Writing', 'Learning'] },
+  { name: 'Bhashini AI', tag: 'Indic Translation', desc: 'National AI platform breaking language barriers with speech-to-speech and text translation across Indian languages.', icon: '🗣️', color: 'bg-blue-50 text-blue-600', iconBg: 'bg-blue-100 text-blue-600', categories: ['Indian AI', 'Voice', 'Productivity'] },
   { name: 'Canva AI', tag: 'Image Creator', desc: 'AI design tool that helps create posters, presentations, and images easily.', icon: '🎨', color: 'bg-cyan-50 text-cyan-600', iconBg: 'bg-cyan-100 text-cyan-600', categories: ['Image', 'Productivity'] },
-  { name: 'Project Indus', tag: 'Hindi & Dialect LLM', desc: 'A foundational Indian language model built specifically for Hindi and Indian regional dialects to democratize AI.', icon: '🧠', color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI', 'Learning', 'Writing'] },
-  { name: 'QuillBot', tag: 'Writing Helper', desc: 'AI writing tool that helps paraphrase, summarize, and improve your writing.', icon: '🤖', color: 'bg-teal-50 text-teal-600', iconBg: 'bg-teal-100 text-teal-600', categories: ['Writing'] },
-  { name: 'KissanAI', tag: 'Agri AI Assistant', desc: 'Multilingual AI voice and text assistant providing real-time agricultural advice and farming guidance in regional languages.', icon: '🌾', color: 'bg-teal-50 text-teal-600', iconBg: 'bg-teal-100 text-teal-600', categories: ['Indian AI', 'Voice', 'Productivity'] },
-  { name: 'ElevenLabs', tag: 'Voice AI', desc: 'AI voice tool that converts text into natural-sounding speech.', icon: '🔊', color: 'bg-pink-50 text-pink-600', iconBg: 'bg-pink-100 text-pink-600', categories: ['Voice'] },
+  { name: 'Midjourney', tag: 'AI Image Generator', desc: 'Leading AI art generator that creates stunning, realistic images from descriptive prompts.', icon: '🎨', color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Image'] },
+  { name: 'Stable Diffusion', tag: 'Open Image Model', desc: 'Powerful open-source image generation model that allows precise control over style, composition, and details.', icon: '🎨', color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Image', 'Productivity'] },
+  { name: 'Hanooman AI', tag: 'Indic Multilingual LLM', desc: 'India’s multilingual AI platform built for regional languages, supporting translation, text generation, and speech in 22+ languages.', icon: '💬', color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI', 'Writing', 'Learning'] },
+  { name: 'Project Indus', tag: 'Hindi & Dialect LLM', desc: 'A foundational Indian language model built specifically for Hindi and Indian regional dialects to democratize AI.', icon: '🧠', color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI', 'Learning'] },
+  { name: 'QuillBot', tag: 'Writing Helper', desc: 'AI writing tool that helps paraphrase, summarize, and improve your writing.', icon: '🤖', color: 'bg-teal-50 text-teal-600', iconBg: 'bg-teal-100 text-teal-600', categories: ['Writing', 'Productivity'] },
+  { name: 'CoRover.ai', tag: 'Conversational AI', desc: 'India’s conversational AI platform powering major public systems like IRCTC’s AskDISHA and AskSarkar chatbots.', icon: '🤖', color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI', 'Productivity'] },
+  { name: 'KissanAI', tag: 'Agri AI Assistant', desc: 'Multilingual AI voice and text assistant providing real-time agricultural advice and farming guidance in regional languages.', icon: '🌾', color: 'bg-teal-50 text-teal-600', iconBg: 'bg-teal-100 text-teal-600', categories: ['Indian AI', 'Learning'] },
+  { name: 'ElevenLabs', tag: 'Voice AI', desc: 'AI voice tool that converts text into natural-sounding speech.', icon: '🔊', color: 'bg-pink-50 text-pink-600', iconBg: 'bg-pink-100 text-pink-600', categories: ['Voice', 'Productivity'] },
+  { name: 'Airavat AI', tag: 'AI Infrastructure', desc: 'India’s cloud-based AI supercomputing infrastructure designed to train foundation models and process Indic language datasets.', icon: '💻', color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI'] },
   { name: 'DeepL', tag: 'Translation', desc: 'AI tool that helps translate text more accurately and naturally.', icon: '🌐', color: 'bg-blue-50 text-blue-600', iconBg: 'bg-blue-100 text-blue-600', categories: ['Writing', 'Productivity'] }
 ];
 

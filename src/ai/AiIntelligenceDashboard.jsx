@@ -6,12 +6,13 @@ import {
   Play, GraduationCap, XCircle,
   MessageSquare, Sparkles, Palette, Bot, Volume2, Globe,
   WandSparkles, ChevronRight, Copy, Mic, MicOff, HelpCircle, Award, Gamepad2,
-  Eye, Shield, Star, Check, Plus
+  Eye, Shield, Star, Check, Plus, RotateCcw
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const toolsCategories = [
   { id: 'All', label: 'All Tools' },
+  { id: 'Indian AI', label: 'Indian Tools' },
   { id: 'Writing', label: 'Writing' },
   { id: 'Image', label: 'Image' },
   { id: 'Voice', label: 'Voice' },
@@ -20,17 +21,22 @@ const toolsCategories = [
 ];
 
 const toolsDataList = [
-  { name: 'Sarvam AI', tag: 'Indic Voice & AI', desc: 'India’s foundational AI platform specialized in Indian languages, voice AI, and localized generative models.', icon: <WandSparkles size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI', 'Voice', 'Writing', 'Learning'] },
-  { name: 'BharatGPT', tag: 'Multilingual AI', desc: 'India’s indigenous conversational AI assistant supporting 14+ Indian languages with voice and text capabilities.', icon: <MessageSquare size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI', 'Writing', 'Learning', 'Productivity'] },
-  { name: 'ChatGPT', tag: 'Writing Assistant', desc: 'AI chatbot that helps answer questions, write content, and explain ideas.', icon: <MessageSquare size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Writing', 'Learning'] },
+  { name: 'Sarvam AI', tag: 'Indic Voice & AI', desc: 'India’s foundational AI platform specialized in Indian languages, voice AI, and localized generative models.', icon: <WandSparkles size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI', 'Voice'] },
+  { name: 'BharatGPT', tag: 'Multilingual AI', desc: 'India’s indigenous conversational AI assistant supporting 14+ Indian languages with voice and text capabilities.', icon: <MessageSquare size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI', 'Writing', 'Learning'] },
+  { name: 'ChatGPT', tag: 'Writing Assistant', desc: 'AI chatbot that helps answer questions, write content, and explain ideas.', icon: <MessageSquare size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Writing', 'Learning', 'Productivity'] },
   { name: 'Google Gemini', tag: 'Learning Assistant', desc: 'AI assistant by Google that helps with writing, learning, and exploring ideas.', icon: <Sparkles size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Writing', 'Learning', 'Productivity'] },
-  { name: 'Krutrim AI', tag: 'Indic LLM Platform', desc: 'India’s AI platform building multilingual foundational models and generative AI for Indian contexts.', icon: <Sparkles size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI', 'Writing', 'Learning', 'Productivity'] },
-  { name: 'Bhashini AI', tag: 'Indic Translation', desc: 'National AI platform breaking language barriers with speech-to-speech and text translation across Indian languages.', icon: <Globe size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI', 'Voice', 'Learning', 'Productivity'] },
+  { name: 'Krutrim AI', tag: 'Indic LLM Platform', desc: 'India’s AI platform building multilingual foundational models and generative AI for Indian contexts.', icon: <Sparkles size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI', 'Writing', 'Learning'] },
+  { name: 'Bhashini AI', tag: 'Indic Translation', desc: 'National AI platform breaking language barriers with speech-to-speech and text translation across Indian languages.', icon: <Globe size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI', 'Voice', 'Productivity'] },
   { name: 'Canva AI', tag: 'Image Creator', desc: 'AI design tool that helps create posters, presentations, and images easily.', icon: <Palette size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Image', 'Productivity'] },
-  { name: 'Project Indus', tag: 'Hindi & Dialect LLM', desc: 'A foundational Indian language model built specifically for Hindi and Indian regional dialects to democratize AI.', icon: <Brain size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI', 'Learning', 'Writing'] },
-  { name: 'QuillBot', tag: 'Writing Helper', desc: 'AI writing tool that helps paraphrase, summarize, and improve your writing.', icon: <Bot size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Writing'] },
-  { name: 'KissanAI', tag: 'Agri AI Assistant', desc: 'Multilingual AI voice and text assistant providing real-time agricultural advice and farming guidance in regional languages.', icon: <Bot size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI', 'Voice', 'Productivity'] },
-  { name: 'ElevenLabs', tag: 'Voice AI', desc: 'AI voice tool that converts text into natural-sounding speech.', icon: <Volume2 size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Voice'] },
+  { name: 'Midjourney', tag: 'AI Image Generator', desc: 'Leading AI art generator that creates stunning, realistic images from descriptive prompts.', icon: <Palette size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Image'] },
+  { name: 'Stable Diffusion', tag: 'Open Image Model', desc: 'Powerful open-source image generation model that allows precise control over style, composition, and details.', icon: <Palette size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Image', 'Productivity'] },
+  { name: 'Hanooman AI', tag: 'Indic Multilingual LLM', desc: 'India’s multilingual AI platform built for regional languages, supporting translation, text generation, and speech in 22+ languages.', icon: <MessageSquare size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI', 'Writing', 'Learning'] },
+  { name: 'Project Indus', tag: 'Hindi & Dialect LLM', desc: 'A foundational Indian language model built specifically for Hindi and Indian regional dialects to democratize AI.', icon: <Brain size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI', 'Learning'] },
+  { name: 'QuillBot', tag: 'Writing Helper', desc: 'AI writing tool that helps paraphrase, summarize, and improve your writing.', icon: <Bot size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Writing', 'Productivity'] },
+  { name: 'CoRover.ai', tag: 'Conversational AI', desc: 'India’s conversational AI platform powering major public systems like IRCTC’s AskDISHA and AskSarkar chatbots.', icon: <Bot size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI', 'Productivity'] },
+  { name: 'KissanAI', tag: 'Agri AI Assistant', desc: 'Multilingual AI voice and text assistant providing real-time agricultural advice and farming guidance in regional languages.', icon: <Bot size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI', 'Learning'] },
+  { name: 'ElevenLabs', tag: 'Voice AI', desc: 'AI voice tool that converts text into natural-sounding speech.', icon: <Volume2 size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Voice', 'Productivity'] },
+  { name: 'Airavat AI', tag: 'AI Infrastructure', desc: 'India’s cloud-based AI supercomputing infrastructure designed to train foundation models and process Indic language datasets.', icon: <Cpu size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Indian AI'] },
   { name: 'DeepL', tag: 'Translation', desc: 'AI tool that helps translate text more accurately and naturally.', icon: <Globe size={22} />, color: 'bg-purple-50 text-purple-600', iconBg: 'bg-purple-100 text-purple-600', categories: ['Writing', 'Productivity'] }
 ];
 
@@ -64,7 +70,7 @@ const lessonsData = [
   {
     id: 1,
     title: "Image Creator",
-    icon: "🎨",
+    icon: "",
     concept: "Image Generation",
     learn: {
       title: "Image Creator (Be an Art Director)",
@@ -170,7 +176,7 @@ const lessonsData = [
   {
     id: 2,
     title: "Story & Essay Builder",
-    icon: "✍️",
+    icon: "",
     concept: "Essay Writing",
     learn: {
       title: "Story & Essay Builder (Structure your Writing)",
@@ -1567,7 +1573,7 @@ const PromptAcademyComponent = () => {
         {/* Left column: Syllabus Navigator */}
         <div className="lg:col-span-3 space-y-3 max-h-[620px] overflow-y-auto pr-1 prompt-academy-scrollbar" data-lenis-prevent>
           <h3 className="text-[11px] sm:text-xs font-black text-slate-400 uppercase tracking-widest mb-3 px-1 font-display">
-            Syllabus Directory
+            Syllabus 
           </h3>
           {lessonsData.map((lesson, idx) => {
             const isCompleted = completedLessons.includes(lesson.id);
@@ -2131,67 +2137,27 @@ const PromptAcademyComponent = () => {
 };
 
 
-const LearnAndPromptAcademyComponent = () => {
-  const [activeSection, setActiveSection] = useState('concepts'); // 'concepts' or 'academy'
+const LearnConceptsComponent = () => {
   const [activeConceptTab, setActiveConceptTab] = useState('basics'); // 'basics', 'superpowers', 'learning'
 
   return (
-    <div className="space-y-8 font-body max-w-7xl mx-auto">
-      {/* Sleek Top Mode Selector / Header */}
-      <div className="bg-white rounded-3xl p-3 sm:p-4 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="flex items-center gap-2 w-full sm:w-auto p-1 bg-slate-50 rounded-2xl border border-slate-100/80">
-          <button
-            onClick={() => setActiveSection('concepts')}
-            className={`flex-1 sm:flex-initial px-5 sm:px-7 py-3 rounded-xl font-black font-display text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer ${activeSection === 'concepts'
-              ? 'bg-white text-purple-600 shadow-sm border border-purple-100'
-              : 'text-slate-500 hover:text-slate-900 hover:bg-white/60'
-              }`}
-          >
-            <Lightbulb size={18} className={activeSection === 'concepts' ? 'text-purple-500 animate-pulse' : ''} />
-            <span>AI Quick Concepts</span>
-            <span className={`text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-extrabold ml-1 ${activeSection === 'concepts' ? 'bg-purple-100 text-purple-700' : 'bg-slate-200 text-slate-600'}`}>Easy</span>
-          </button>
-          <button
-            onClick={() => setActiveSection('academy')}
-            className={`flex-1 sm:flex-initial px-5 sm:px-7 py-3 rounded-xl font-black font-display text-xs sm:text-sm transition-all flex items-center justify-center gap-2 cursor-pointer ${activeSection === 'academy'
-              ? 'bg-white text-purple-600 shadow-sm border border-purple-100'
-              : 'text-slate-500 hover:text-slate-900 hover:bg-white/60'
-              }`}
-          >
-            <span>Prompt Academy Course</span>
-            <span className={`text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider font-extrabold ml-1 ${activeSection === 'academy' ? 'bg-purple-100 text-purple-700' : 'bg-slate-200 text-slate-600'}`}>{lessonsData.length} Lessons</span>
-          </button>
-        </div>
-
-      </div>
-
-      {/* Dynamic Content View */}
-      <AnimatePresence mode="wait">
-        {activeSection === 'concepts' && (
-          <motion.div
-            key="quick-concepts"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.3 }}
-            className="space-y-8 pb-16"
-          >
-            {/* Sub-navigation for AI Concepts */}
-            <div className="flex flex-wrap items-center gap-2 pb-4">
+    <div className="space-y-8 font-body max-w-7xl mx-auto pb-16">
+      {/* Sub-navigation for AI Concepts */}
+      <div className="flex flex-wrap items-center gap-2 pb-4">
               {[
                 { id: 'basics', label: '1. What is AI?', icon: Sparkles },
-                { id: 'superpowers', label: '2. Superpowers', icon: Eye },
+                { id: 'superpowers', label: '2. What AI Can Do', icon: Eye },
                 { id: 'learning', label: '3. How AI Learns & Safety', icon: Brain },
               ].map(tab => (
                 <button
                   key={tab.id}
                   onClick={() => setActiveConceptTab(tab.id)}
                   className={`px-4 py-2.5 rounded-xl text-xs font-black uppercase tracking-wider font-display flex items-center gap-2 transition-all cursor-pointer ${activeConceptTab === tab.id
-                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md shadow-indigo-200 scale-[1.02] border border-transparent'
+                    ? 'bg-white text-purple-400 shadow-sm border border-purple-100 scale-[1.02]'
                     : 'bg-white text-slate-500 border border-slate-200 hover:border-indigo-300 hover:text-indigo-600 hover:bg-indigo-50/30'
                     }`}
                 >
-                  <tab.icon size={16} className={activeConceptTab === tab.id ? 'text-indigo-200' : 'opacity-70'} />
+                  <tab.icon size={16} className={activeConceptTab === tab.id ? 'text-purple-600 animate-pulse' : 'opacity-70'} />
                   {tab.label}
                 </button>
               ))}
@@ -2213,28 +2179,18 @@ const LearnAndPromptAcademyComponent = () => {
                         <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
                           What is Artificial Intelligence?
                         </h2>
-                        <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed max-w-xl">
-                          Think of AI as a <strong className="text-indigo-600 font-bold">super-smart digital brain</strong>. Instead of just following rules, AI learns from real-world examples (like photos or text) to solve problems, recognize patterns, and create new things!
-                        </p>
-
-                        {/* Extra Content: Real World Examples & Fun Fact */}
-                        <div className="pt-2 space-y-3">
-                          <h4 className="text-xs font-black uppercase text-slate-500 tracking-wider font-display">Where do we use it?</h4>
-                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-sm font-medium text-slate-700">
-                            <li className="flex items-center gap-2">
-                              <div className="w-1.5 h-1.5 rounded-full bg-indigo-500"></div> Smart Assistants
-                            </li>
-                            <li className="flex items-center gap-2">
-                              <div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div> Video Recommendations
-                            </li>
-                            <li className="flex items-center gap-2">
-                              <div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div> Self-Driving Cars
-                            </li>
-                            <li className="flex items-center gap-2">
-                              <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div> Math & Homework Tutors
-                            </li>
-                          </ul>
+                        <div className="space-y-3.5 text-sm sm:text-base text-slate-650 font-medium leading-relaxed max-w-xl text-left">
+                          <p>
+                            Imagine a computer that can learn to play chess, recognize your pet’s face, or even write a funny poem, without a human coding the rules step-by-step. That is <strong className="text-indigo-600 font-bold">Artificial Intelligence (AI)</strong>!
+                          </p>
+                          <p>
+                            Normally, computers act like calculators—they only do exactly what we tell them to do using pre-written instructions. But AI acts more like a <strong className="text-purple-650 font-bold">curious student</strong>. It learns by studying thousands of examples (called <strong>Data</strong>), finding patterns on its own, and getting smarter over time!
+                          </p>
+                          <p>
+                            Just like how you learn to identify a mango by seeing it, smelling it, and tasting it a few times, an AI learns to identify a cat, a song, or a word by training on millions of pictures, audio clips, or sentences.
+                          </p>
                         </div>
+
 
                         <div className="mt-6 bg-indigo-50/50 border border-indigo-100/80 rounded-xl p-3.5 flex items-start gap-3 max-w-xl shadow-sm">
                           <Lightbulb size={18} className="text-amber-500 shrink-0 mt-0.5" />
@@ -2249,21 +2205,21 @@ const LearnAndPromptAcademyComponent = () => {
                     <div className="relative w-full md:w-2/5 flex justify-center items-center py-4 md:py-0">
                       <div className="absolute inset-0 bg-indigo-300/20 blur-[50px] rounded-full w-48 h-48 mx-auto" />
                       <div className="relative grid grid-cols-2 gap-4">
-                        <div className="bg-white p-4 rounded-2xl shadow-sm border border-indigo-50 flex flex-col items-center justify-center gap-2 transform -rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-300">
-                          <div className="w-10 h-10 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center"><Eye size={20} /></div>
-                          <span className="text-[10px] font-black text-slate-600 uppercase tracking-wide">Vision</span>
+                        <div className="bg-white w-28 h-28 sm:w-32 sm:h-32 p-5 rounded-3xl shadow-md border border-indigo-50 flex flex-col items-center justify-center gap-2.5 transform -rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-300">
+                          <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center"><Eye size={24} /></div>
+                          <span className="text-[11px] font-black text-slate-700 uppercase tracking-wider">Vision</span>
                         </div>
-                        <div className="bg-white p-4 rounded-2xl shadow-sm border border-indigo-50 flex flex-col items-center justify-center gap-2 transform translate-y-4 rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-300">
-                          <div className="w-10 h-10 rounded-full bg-purple-50 text-purple-500 flex items-center justify-center"><MessageSquare size={20} /></div>
-                          <span className="text-[10px] font-black text-slate-600 uppercase tracking-wide">Chat</span>
+                        <div className="bg-white w-28 h-28 sm:w-32 sm:h-32 p-5 rounded-3xl shadow-md border border-indigo-50 flex flex-col items-center justify-center gap-2.5 transform translate-y-4 rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-300">
+                          <div className="w-12 h-12 rounded-full bg-purple-50 text-purple-500 flex items-center justify-center"><MessageSquare size={24} /></div>
+                          <span className="text-[11px] font-black text-slate-700 uppercase tracking-wider">Chat</span>
                         </div>
-                        <div className="bg-white p-4 rounded-2xl shadow-sm border border-indigo-50 flex flex-col items-center justify-center gap-2 transform -translate-y-2 -rotate-2 hover:rotate-0 hover:scale-105 transition-all duration-300">
-                          <div className="w-10 h-10 rounded-full bg-purple-50 text-purple-500 flex items-center justify-center"><Palette size={20} /></div>
-                          <span className="text-[10px] font-black text-slate-600 uppercase tracking-wide">Create</span>
+                        <div className="bg-white w-28 h-28 sm:w-32 sm:h-32 p-5 rounded-3xl shadow-md border border-indigo-50 flex flex-col items-center justify-center gap-2.5 transform -translate-y-2 -rotate-2 hover:rotate-0 hover:scale-105 transition-all duration-300">
+                          <div className="w-12 h-12 rounded-full bg-purple-50 text-purple-500 flex items-center justify-center"><Palette size={24} /></div>
+                          <span className="text-[11px] font-black text-slate-700 uppercase tracking-wider">Create</span>
                         </div>
-                        <div className="bg-white p-4 rounded-2xl shadow-sm border border-indigo-50 flex flex-col items-center justify-center gap-2 transform translate-y-6 rotate-6 hover:rotate-0 hover:scale-105 transition-all duration-300">
-                          <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center"><Brain size={20} /></div>
-                          <span className="text-[10px] font-black text-slate-600 uppercase tracking-wide">Learn</span>
+                        <div className="bg-white w-28 h-28 sm:w-32 sm:h-32 p-5 rounded-3xl shadow-md border border-indigo-50 flex flex-col items-center justify-center gap-2.5 transform translate-y-6 rotate-6 hover:rotate-0 hover:scale-105 transition-all duration-300">
+                          <div className="w-12 h-12 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center"><Brain size={24} /></div>
+                          <span className="text-[11px] font-black text-slate-700 uppercase tracking-wider">Learn</span>
                         </div>
                       </div>
                     </div>
@@ -2278,34 +2234,34 @@ const LearnAndPromptAcademyComponent = () => {
                     <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 text-left px-2">
                       <div>
                         <span className="text-xs font-black text-purple-600 uppercase tracking-wider font-display">
-                          Core Skills
+                          Capabilities
                         </span>
                         <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display">
-                          4 Amazing AI Superpowers
+                          4 Core Capabilities of AI
                         </h3>
                       </div>
                       <p className="text-xs text-slate-500 font-semibold">
-                        How AI helps us every single day
+                        How AI understands, sees, predicts, and creates
                       </p>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                       {/* Power 1 */}
-                      <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-blue-300 hover:shadow-lg transition-all text-left flex flex-col justify-between group">
+                      <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-purple-300 hover:shadow-lg transition-all text-left flex flex-col justify-between group">
                         <div className="space-y-3">
-                          <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-black group-hover:scale-110 transition-transform shadow-inner">
+                          <div className="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center font-black group-hover:scale-110 transition-transform shadow-inner">
                             <Eye size={24} />
                           </div>
-                          <h4 className="text-base font-black text-slate-900 font-display group-hover:text-blue-600 transition-colors">
+                          <h4 className="text-base font-black text-slate-900 font-display group-hover:text-purple-600 transition-colors">
                             Computer Vision
                           </h4>
                           <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                            AI looks at pixels to recognize shapes, colors, faces, and traffic signs instantly.
+                            AI analyzes pixels in images and videos to recognize objects, read handwriting, and identify face patterns.
                           </p>
                         </div>
                         <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                          <span className="text-[10px] font-extrabold text-blue-600 bg-blue-50 px-2 py-1 rounded-md uppercase font-mono tracking-wider">
-                            FaceID &amp; Cars
+                          <span className="text-[10px] font-extrabold text-purple-600 bg-purple-50 px-2 py-1 rounded-md uppercase font-mono tracking-wider">
+                            Google Lens &amp; FaceID
                           </span>
                         </div>
                       </div>
@@ -2317,35 +2273,35 @@ const LearnAndPromptAcademyComponent = () => {
                             <MessageSquare size={24} />
                           </div>
                           <h4 className="text-base font-black text-slate-900 font-display group-hover:text-purple-600 transition-colors">
-                            Talking Chatbots
+                            Natural Language (NLP)
                           </h4>
                           <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                            AI reads sentences, translates languages, and chats like a real human tutor.
+                            AI understands spoken words, translates sentences between languages, and answers questions like an assistant.
                           </p>
                         </div>
                         <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
                           <span className="text-[10px] font-extrabold text-purple-600 bg-purple-50 px-2 py-1 rounded-md uppercase font-mono tracking-wider">
-                            Siri &amp; ChatGPT
+                            Translate &amp; Siri
                           </span>
                         </div>
                       </div>
 
                       {/* Power 3 */}
-                      <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-emerald-300 hover:shadow-lg transition-all text-left flex flex-col justify-between group">
+                      <div className="bg-white rounded-2xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:border-purple-300 hover:shadow-lg transition-all text-left flex flex-col justify-between group">
                         <div className="space-y-3">
-                          <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-black group-hover:scale-110 transition-transform shadow-inner">
+                          <div className="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center font-black group-hover:scale-110 transition-transform shadow-inner">
                             <Brain size={24} />
                           </div>
-                          <h4 className="text-base font-black text-slate-900 font-display group-hover:text-emerald-600 transition-colors">
-                            Pattern Finder
+                          <h4 className="text-base font-black text-slate-900 font-display group-hover:text-purple-600 transition-colors">
+                            Smart Predictions
                           </h4>
                           <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                            AI scans millions of data rows to find hidden secrets and predict future trends.
+                            AI studies trends and large datasets to recommend your next video, estimate traffic, or predict weather changes.
                           </p>
                         </div>
                         <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                          <span className="text-[10px] font-extrabold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md uppercase font-mono tracking-wider">
-                            YouTube Recommendations
+                          <span className="text-[10px] font-extrabold text-purple-600 bg-purple-50 px-2 py-1 rounded-md uppercase font-mono tracking-wider">
+                            Maps &amp; Recommendations
                           </span>
                         </div>
                       </div>
@@ -2357,15 +2313,15 @@ const LearnAndPromptAcademyComponent = () => {
                             <Palette size={24} />
                           </div>
                           <h4 className="text-base font-black text-slate-900 font-display group-hover:text-purple-600 transition-colors">
-                            Generative Art
+                            Creative Generation
                           </h4>
                           <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                            AI learns artistic styles to build stunning new pictures and stories from your prompts.
+                            AI writes letters, creates digital artwork, or builds slide presentations based on your text instructions.
                           </p>
                         </div>
                         <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
                           <span className="text-[10px] font-extrabold text-purple-600 bg-purple-50 px-2 py-1 rounded-md uppercase font-mono tracking-wider">
-                            AI Image Creators
+                            ChatGPT &amp; Midjourney
                           </span>
                         </div>
                       </div>
@@ -2423,9 +2379,9 @@ const LearnAndPromptAcademyComponent = () => {
                     </div>
 
                     {/* Right Box: 4 Golden Rules of Safe AI */}
-                    <div className="lg:col-span-6 bg-gradient-to-br from-amber-50/70 to-orange-50/40 rounded-3xl p-6 sm:p-7 border border-amber-200/80 shadow-sm flex flex-col justify-between text-left">
+                    <div className="lg:col-span-6 bg-gradient-to-br from-slate-50 to-indigo-50/40 rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-sm flex flex-col justify-between text-left">
                       <div>
-                        <span className="text-xs font-black text-amber-700 uppercase tracking-wider font-display block mb-1">
+                        <span className="text-xs font-black text-indigo-600 uppercase tracking-wider font-display block mb-1">
                           Safety First
                         </span>
                         <h3 className="text-lg sm:text-xl font-black text-slate-900 font-display mb-4">
@@ -2433,26 +2389,26 @@ const LearnAndPromptAcademyComponent = () => {
                         </h3>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                          <div className="bg-white/80 backdrop-blur-sm p-3.5 rounded-2xl border border-amber-100 shadow-sm">
-                            <div className="mb-1 text-amber-500"><Shield size={20} /></div>
+                          <div className="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm">
+                            <div className="mb-1 text-indigo-600"><Shield size={20} /></div>
                             <h4 className="text-xs sm:text-sm font-black text-slate-900 font-display">Keep Secrets Secret</h4>
                             <p className="text-[11px] text-slate-600 font-medium mt-0.5">Never share passwords, real addresses, or phone numbers with AI.</p>
                           </div>
 
-                          <div className="bg-white/80 backdrop-blur-sm p-3.5 rounded-2xl border border-amber-100 shadow-sm">
-                            <div className="mb-1 text-amber-500"><CheckCircle2 size={20} /></div>
+                          <div className="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm">
+                            <div className="mb-1 text-indigo-600"><CheckCircle2 size={20} /></div>
                             <h4 className="text-xs sm:text-sm font-black text-slate-900 font-display">Double-Check Facts</h4>
                             <p className="text-[11px] text-slate-600 font-medium mt-0.5">AI can make silly mistakes. Verify important facts with a textbook or teacher.</p>
                           </div>
 
-                          <div className="bg-white/80 backdrop-blur-sm p-3.5 rounded-2xl border border-amber-100 shadow-sm">
-                            <div className="mb-1 text-amber-500"><Brain size={20} /></div>
+                          <div className="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm">
+                            <div className="mb-1 text-indigo-600"><Brain size={20} /></div>
                             <h4 className="text-xs sm:text-sm font-black text-slate-900 font-display">Learn, Don't Copy</h4>
                             <p className="text-[11px] text-slate-600 font-medium mt-0.5">Let AI explain *how* to solve homework instead of just copying the answer.</p>
                           </div>
 
-                          <div className="bg-white/80 backdrop-blur-sm p-3.5 rounded-2xl border border-amber-100 shadow-sm">
-                            <div className="mb-1 text-amber-500"><Star size={20} /></div>
+                          <div className="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm">
+                            <div className="mb-1 text-indigo-600"><Star size={20} /></div>
                             <h4 className="text-xs sm:text-sm font-black text-slate-900 font-display">Be Creative &amp; Kind</h4>
                             <p className="text-[11px] text-slate-600 font-medium mt-0.5">Use AI to brainstorm stories, practice coding, and build positive art!</p>
                           </div>
@@ -2463,21 +2419,6 @@ const LearnAndPromptAcademyComponent = () => {
                 </motion.div>
               )}
             </AnimatePresence>
-          </motion.div>
-        )}
-
-        {activeSection === 'academy' && (
-          <motion.div
-            key="prompt-academy"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.3 }}
-          >
-            <PromptAcademyComponent />
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };
@@ -2537,269 +2478,23 @@ const ExploreToolsComponent = () => {
 };
 
 const QuizComponent = () => {
-  const challengeModes = {
-    superpowers: {
-      title: "AI Superpowers Arena",
-      desc: "Test your knowledge of the 4 core AI skills: Vision, NLP, Pattern Finder, and Generative Art.",
-      badge: "Beginner",
-      badgeColor: "bg-blue-100 text-blue-700 border-blue-200",
-      color: "from-blue-500 to-cyan-500",
-      questions: [
-        {
-          question: "Unlike regular programs that just follow rules, what makes AI special?",
-          options: [
-            "It can run without electricity",
-            "It learns from pictures and experiences, just like a human",
-            "It only works on smart refrigerators",
-            "It is always a metallic robot with red eyes"
-          ],
-          correct: 1,
-          funnySuccess: "Bingo! AI learns from data instead of static code.",
-          funnyFailure: "Incorrect. AI requires data training, not just power."
-        },
-        {
-          question: "Siri and Google Assistant understand your voice using which AI superpower?",
-          options: [
-            "Natural Language Processing (NLP)",
-            "X-ray Vision",
-            "Telepathy",
-            "Sub-atomic coding"
-          ],
-          correct: 0,
-          funnySuccess: "NLP magic! The AI listens, converts speech to text, and replies.",
-          funnyFailure: "Incorrect. Siri and Google Assistant use NLP to process spoken language."
-        },
-        {
-          question: "When a self-driving car spots a red light, what superpower is it using?",
-          options: [
-            "Hypnotic persuasion",
-            "Computer Vision (AI Eyes)",
-            "Super speed",
-            "Baking skills"
-          ],
-          correct: 1,
-          funnySuccess: "Correct! Computer Vision allows the car to process visual pixels and identify traffic signals.",
-          funnyFailure: "Incorrect. Computer Vision is the key technology for self-driving cars to see surroundings."
-        },
-        {
-          question: "What is the absolute first step to training a new AI helper?",
-          options: [
-            "Giving it a fancy metal suit",
-            "Showing it millions of photos or examples (Data Training)",
-            "Shouting at the monitor until it works",
-            "Buying it a cup of coffee"
-          ],
-          correct: 1,
-          funnySuccess: "Awesome! Data is food for the AI brain.",
-          funnyFailure: "Incorrect. You must supply data to train an AI model."
-        },
-        {
-          question: "What is a 'neural network' in deep learning?",
-          options: [
-            "A spiderweb made of fiber cables",
-            "Layers of tiny digital thinking units that mimic human brain cells",
-            "A social network for robots to share memes",
-            "The power grid of a small town"
-          ],
-          correct: 1,
-          funnySuccess: "Genius! Neural networks simulate biological brains to learn complex patterns.",
-          funnyFailure: "Incorrect. Neural networks are layers of processing units that mimic brain cells."
-        }
-      ]
-    },
-    prompting: {
-      title: "Prompt Spellbook Academy",
-      desc: "Master the art of prompt engineering: Magic Masks, Detail Detectives, and Output Controls.",
-
-      badge: "Intermediate",
-      badgeColor: "bg-purple-100 text-purple-700 border-purple-200",
-      color: "from-purple-500 to-indigo-500",
-      questions: [
-        {
-          question: "What happens when you give an AI a 'Magic Mask' (System Role)?",
-          options: [
-            "It hides its webcam so you can't see it",
-            "It acts as a specific character or expert helper (like a Math Tutor or Art Director)",
-            "It changes the website background color to black",
-            "It prints out a superhero costume"
-          ],
-          correct: 1,
-          funnySuccess: "Perfect! System roles frame the AI's persona, making its replies targeted and useful.",
-          funnyFailure: "Incorrect. A system role defines the AI persona or character."
-        },
-        {
-          question: "You want an AI artist to generate a cozy cabin. How do you act as a 'Detail Detective'?",
-          options: [
-            "Just type 'cabin' and cross your fingers",
-            "Describe materials, colors, surrounding weather, and the lighting style",
-            "Send the AI a photo of your own bedroom",
-            "Write 'draw a cabin or else'"
-          ],
-          correct: 1,
-          funnySuccess: "Yes! High-detail descriptions lead to breathtaking AI images.",
-          funnyFailure: "Incorrect. Providing rich details helps the AI create the exact image you want."
-        },
-        {
-          question: "Why should we use 'Ingredients' (Constraint Prompting) in our prompts?",
-          options: [
-            "To make the AI output taste better",
-            "To guide the AI to follow specific rules (like word count, format, or language)",
-            "To speed up the internet connection",
-            "To change the computer's CPU temperature"
-          ],
-          correct: 1,
-          funnySuccess: "Brilliant! Constraints prevent the AI from generating random or irrelevant content.",
-          funnyFailure: "Incorrect. Constraints help guide the formatting and style of the AI response."
-        },
-        {
-          question: "Which of these is a 'Supercharged Prompt' for writing a story?",
-          options: [
-            "'write a story'",
-            "'make a forest story'",
-            "'Act as a wizard storyteller. Write an enchanting story about a hidden fairy fountain, using magical metaphors.'",
-            "'story please'"
-          ],
-          correct: 2,
-          funnySuccess: "Spell Cast! That prompt specifies role, topic, style, and tone for a rich, beautiful story.",
-          funnyFailure: "Incorrect. The most descriptive prompt with role and tone definitions works best."
-        },
-        {
-          question: "If you want an AI to summarize a long poem, what format instruction works best?",
-          options: [
-            "'summarize it'",
-            "'provide 3 bullet points with bold key terms and highlights'",
-            "'write a story about a poem'",
-            "'explain the meaning in a single 1000-word paragraph'"
-          ],
-          correct: 1,
-          funnySuccess: "Perfect! Bullet points and bold keywords make the summary readable and engaging.",
-          funnyFailure: "Incorrect. Requesting specific bullet points with highlights yields the most readable summary."
-        }
-      ]
-    },
-    science: {
-      title: "Lab Instructor's Challenge",
-      desc: "Put on your safety goggles! Learn to design science experiments in Physics, Chemistry, and Biology.",
-      badge: "Expert",
-      badgeColor: "bg-emerald-100 text-emerald-700 border-emerald-200",
-      color: "from-emerald-500 to-teal-500",
-      questions: [
-        {
-          question: "Why must you prompt the AI for safety precautions when designing an experiment?",
-          options: [
-            "To make the experiment take longer",
-            "To avoid dangerous accidents (like mixing wrong chemicals or using sharp blades unsafely)",
-            "To get a higher score on the dashboard",
-            "To make the output look more colorful"
-          ],
-          correct: 1,
-          funnySuccess: "Safety First! Prompting for safety guidelines prevents laboratory mishaps.",
-          funnyFailure: "Incorrect. Safety precautions are essential to prevent physical accidents during experiments."
-        },
-        {
-          question: "You want to study plant transpiration. What is the best way to prompt the AI for the experiment guide?",
-          options: [
-            "'tell me about plant leaves'",
-            "'Act as a lab instructor. Design a step-by-step experiment showing plant transpiration using celery, food coloring, and jars. Include safety tips and an observation log.'",
-            "'how does water get to celery'",
-            "'draw a diagram of celery'"
-          ],
-          correct: 1,
-          funnySuccess: "Scientist level! The prompt specifies the instructor role, materials, safety, steps, and observation charts.",
-          funnyFailure: "Incorrect. The most educational prompt specifies the experiment details and structure."
-        },
-        {
-          question: "If you are performing a science experiment at home, why should you tell the AI to use 'home-friendly materials'?",
-          options: [
-            "So you don't have to buy expensive school lab apparatus like Bunsen burners or toxic acids",
-            "To make the experiment look like a cooking show",
-            "Because the AI doesn't know what a test tube is",
-            "To save electricity in the house"
-          ],
-          correct: 0,
-          funnySuccess: "Correct! Tailoring materials to what is available at home makes the experiment feasible.",
-          funnyFailure: "Incorrect. Requesting home-friendly materials ensures you can safely perform it in a kitchen."
-        },
-        {
-          question: "What is the purpose of requesting an 'observation timetable' in a science experiment prompt?",
-          options: [
-            "To practice drawing tables in math",
-            "To record physical changes at set times and track results systematically",
-            "To show the AI how fast you can write",
-            "To make the text output look like a calendar"
-          ],
-          correct: 1,
-          funnySuccess: "Systematic! Observation timetables guide you on when and what to look for during the reaction.",
-          funnyFailure: "Incorrect. Timetables help you collect data at precise intervals."
-        },
-        {
-          question: "To study magnetic force fields at home, which prompt is most educational?",
-          options: [
-            "'magnets science project'",
-            "'Act as a physics lab tutor. Design a step-by-step experiment on magnetic force fields using simple magnets and paperclips. List safety warnings.'",
-            "'show me a magnet video'",
-            "'what is a magnetic field'"
-          ],
-          correct: 1,
-          funnySuccess: "Superb! It covers role, topics, home apparatus, safety warnings, and experimental steps.",
-          funnyFailure: "Incorrect. A specific prompt requesting lab tutorial instructions is much better."
-        }
-      ]
-    }
-  };
-
-  const [selectedMode, setSelectedMode] = useState(null);
-  const [showRules, setShowRules] = useState(false);
   const [currentQ, setCurrentQ] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [score, setScore] = useState(0);
-  const [lives, setLives] = useState(3);
-  const [streak, setStreak] = useState(1);
   const [showResult, setShowResult] = useState(false);
-  const [isGameOver, setIsGameOver] = useState(false);
-
-  const startMode = (modeKey) => {
-    setSelectedMode(modeKey);
-    setShowRules(true);
-    setCurrentQ(0);
-    setSelectedOption(null);
-    setIsAnswered(false);
-    setScore(0);
-    setLives(3);
-    setStreak(1);
-    setShowResult(false);
-    setIsGameOver(false);
-  };
 
   const handleSelect = (idx) => {
-    if (isAnswered || isGameOver) return;
+    if (isAnswered) return;
     setSelectedOption(idx);
     setIsAnswered(true);
-
-    const modeData = challengeModes[selectedMode];
-    const qData = modeData.questions[currentQ];
-    const isCorrect = idx === qData.correct;
-
-    if (isCorrect) {
-      const addedScore = 10 * streak;
-      setScore(prev => prev + addedScore);
-      setStreak(prev => prev + 1);
-    } else {
-      setLives(prev => {
-        const nextLives = prev - 1;
-        if (nextLives <= 0) {
-          setIsGameOver(true);
-        }
-        return nextLives;
-      });
-      setStreak(1);
+    if (idx === quizQuestions[currentQ].correct) {
+      setScore(prev => prev + 100);
     }
   };
 
   const handleNext = () => {
-    const modeData = challengeModes[selectedMode];
-    if (currentQ < modeData.questions.length - 1) {
+    if (currentQ < quizQuestions.length - 1) {
       setCurrentQ(prev => prev + 1);
       setSelectedOption(null);
       setIsAnswered(false);
@@ -2808,390 +2503,134 @@ const QuizComponent = () => {
     }
   };
 
-  const resetGame = () => {
-    setSelectedMode(null);
-    setShowRules(false);
+  const handleRestart = () => {
     setCurrentQ(0);
     setSelectedOption(null);
     setIsAnswered(false);
     setScore(0);
-    setLives(3);
-    setStreak(1);
     setShowResult(false);
-    setIsGameOver(false);
   };
 
+  const getOptionStyle = (idx) => {
+    if (!isAnswered) return selectedOption === idx
+      ? 'bg-purple-50 border-purple-500 text-purple-750'
+      : 'bg-white border-slate-200 text-slate-700 hover:border-purple-300 hover:bg-purple-50/50';
+    if (idx === quizQuestions[currentQ].correct) return 'bg-emerald-50 border-emerald-500 text-emerald-800';
+    if (idx === selectedOption) return 'bg-rose-50 border-rose-500 text-rose-800';
+    return 'bg-slate-50 border-slate-100 text-slate-450';
+  };
+
+  const getLabelBg = (idx) => {
+    if (!isAnswered) return selectedOption === idx ? 'bg-purple-650 text-white' : 'bg-slate-100 text-slate-500';
+    if (idx === quizQuestions[currentQ].correct) return 'bg-emerald-500 text-white';
+    if (idx === selectedOption) return 'bg-rose-500 text-white';
+    return 'bg-slate-200 text-slate-400';
+  };
+
+  const q = quizQuestions[currentQ];
+  const progress = ((currentQ + (isAnswered ? 1 : 0)) / quizQuestions.length) * 100;
   const optionLabels = ["A", "B", "C", "D"];
 
-  // Render Selection Screen
-  if (!selectedMode) {
-    return (
-      <div className="space-y-6 font-body text-slate-800 max-w-5xl mx-auto">
-        <div className="text-center space-y-2 py-4">
-          <span className="text-xs font-black text-purple-600 uppercase tracking-widest font-display block">
-            Arena Challenges
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 font-display">
-            AI Quiz Quest Arena
-          </h2>
-          <p className="text-sm text-slate-500 max-w-lg mx-auto font-medium">
-            Test your knowledge in a retro gaming style. Lose 3 lives and the AI breaks! Build a streak for higher XP scores!
-          </p>
-        </div>
+  return (
+    <div className="w-full flex justify-center py-8 mb-16 relative rounded-2xl overflow-hidden border border-slate-100">
+      {/* Background Image with translucent overlay */}
+      <div className="absolute inset-0 z-0">
+        <img src="/images/ai/challenge.png" alt="Quiz Background" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-purple-950/15 backdrop-blur-[2px]" />
+      </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {Object.keys(challengeModes).map(key => {
-            const mode = challengeModes[key];
-            return (
-              <div
-                key={key}
-                className="bg-white rounded-3xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.03)] p-6 hover:shadow-lg hover:border-purple-200 transition-all duration-300 flex flex-col justify-between group relative overflow-hidden"
-              >
-                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-purple-500/5 to-transparent rounded-bl-full pointer-events-none" />
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="text-4xl">{mode.icon}</span>
-                    <span className={`text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded border ${mode.badgeColor}`}>
-                      {mode.badge}
-                    </span>
+      <div className="w-full max-w-[450px] shrink-0 transition-all duration-300 relative z-10 px-4">
+        <AnimatePresence mode="wait">
+          {!showResult ? (
+            <motion.div key="active-quiz" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} className="w-full">
+              <div className="bg-blue-50/70 backdrop-blur-xl rounded-[20px] p-5 sm:p-6 border border-blue-200/40 shadow-[0_8px_30px_rgba(30,41,59,0.06)]">
+                
+                <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center gap-2 flex-row text-left">
+                    <div className="w-8 h-8 rounded-full bg-purple-100 text-purple-650 flex items-center justify-center shadow-inner">
+                      <Brain size={16} className="text-purple-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-xs font-bold text-slate-900">Question {currentQ + 1}/{quizQuestions.length}</h3>
+                      <p className="text-[10px] font-bold text-slate-400">AI Knowledge Test</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-lg font-black text-slate-900 font-display mb-1 group-hover:text-purple-600 transition-colors">
-                      {mode.title}
-                    </h3>
-                    <p className="text-xs text-slate-500 leading-relaxed font-semibold">
-                      {mode.desc}
-                    </p>
+                  <div className="bg-slate-50/80 px-3 py-1.5 rounded-lg border border-slate-200/60 text-center">
+                    <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider block mb-0.5">Score</span>
+                    <span className="text-sm font-black text-purple-600 leading-none">{score}</span>
                   </div>
                 </div>
 
-                <div className="pt-6">
-                  <button
-                    onClick={() => startMode(key)}
-                    className="w-full py-2.5 bg-slate-50 hover:bg-gradient-to-r hover:from-purple-500 hover:to-indigo-500 hover:text-white border border-slate-200 hover:border-transparent text-slate-700 rounded-xl text-xs font-black font-display transition-all active:scale-[0.98] cursor-pointer"
-                  >
-                    Start Quest
+                <div className="w-full h-1 bg-slate-100 rounded-full mb-5 overflow-hidden">
+                  <motion.div animate={{ width: `${progress}%` }} className="h-full bg-purple-600 rounded-full" />
+                </div>
+
+                <h2 className="text-[15px] font-bold text-slate-900 leading-snug mb-5 text-left">
+                  {q.question}
+                </h2>
+
+                <div className="space-y-2.5">
+                  {q.options.map((opt, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => handleSelect(idx)}
+                      disabled={isAnswered}
+                      className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl border text-left transition-all duration-200 cursor-pointer font-bold ${getOptionStyle(idx)}`}
+                    >
+                      <span className={`w-7 h-7 rounded-lg flex items-center justify-center text-[11px] font-black shrink-0 transition-all shadow-sm ${getLabelBg(idx)}`}>
+                        {isAnswered && idx === q.correct ? <CheckCircle2 size={14} /> 
+                          : isAnswered && idx === selectedOption && idx !== q.correct ? <XCircle size={14} />
+                          : optionLabels[idx]}
+                      </span>
+                      <span className="text-[13px] font-semibold flex-1 leading-snug">{opt}</span>
+                    </button>
+                  ))}
+                </div>
+
+                <div className="mt-5 flex items-center justify-between min-h-[38px]">
+                  {isAnswered ? (
+                    <span className={`text-xs font-bold ${
+                      selectedOption === q.correct ? 'text-emerald-600' 
+                      : selectedOption === null ? 'text-amber-600' : 'text-rose-600'
+                    }`}>
+                      {selectedOption === q.correct ? '🎉 Correct!' : selectedOption === null ? "Time is up!" : '❌ Wrong answer'}
+                    </span>
+                  ) : <div />}
+
+                  {isAnswered && (
+                    <button onClick={handleNext}
+                      className="flex items-center gap-1.5 px-5 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white rounded-full text-xs font-bold transition-all shadow-md shadow-purple-200 active:scale-95 cursor-pointer"
+                    >
+                      {currentQ < quizQuestions.length - 1 ? 'Next' : 'Results'} <ArrowRight size={14} />
+                    </button>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div key="quiz-results" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="w-full">
+              <div className="bg-blue-50/70 backdrop-blur-xl rounded-[20px] p-6 sm:p-8 border border-blue-200/40 shadow-[0_8px_30px_rgba(30,41,59,0.06)] text-center">
+                <div className="w-16 h-16 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-3 shadow-inner">
+                  <Trophy size={32} />
+                </div>
+                <h2 className="text-xl font-bold text-slate-900 mb-1">Challenge Completed!</h2>
+                <p className="text-xs text-slate-500 mb-6 font-medium">You've successfully finished the AI Knowledge Challenge.</p>
+
+                <div className="bg-slate-50/80 rounded-[16px] p-5 mb-6 border border-slate-200/60 inline-block min-w-[180px]">
+                  <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Total Score</span>
+                  <span className="text-3xl font-black text-purple-600">{score}</span>
+                  <span className="text-[10px] font-bold text-slate-400 block mt-1">out of {quizQuestions.length * 100}</span>
+                </div>
+
+                <div className="flex justify-center">
+                  <button onClick={handleRestart} className="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white rounded-full text-xs font-bold transition-all shadow-md shadow-purple-200 active:scale-95 cursor-pointer">
+                    Play Again
                   </button>
                 </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-    );
-  }
-
-  const modeData = challengeModes[selectedMode];
-  const q = modeData.questions[currentQ];
-  const progress = ((currentQ + (isAnswered ? 1 : 0)) / modeData.questions.length) * 100;
-
-  // Render Rules Screen
-  if (selectedMode && showRules) {
-    return (
-      <div className="w-full max-w-lg mx-auto bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-8 text-white font-body shadow-2xl relative overflow-hidden text-left">
-        <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-purple-500/5 to-transparent rounded-bl-full pointer-events-none" />
-
-        {/* Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
-          <button
-            onClick={resetGame}
-            className="text-xs font-bold text-slate-400 hover:text-white flex items-center gap-1 transition-colors cursor-pointer"
-          >
-            ← Back
-          </button>
-          <span className="text-[10px] font-black text-purple-400 bg-purple-950/40 border border-purple-800/30 px-3 py-1 rounded-md font-display uppercase tracking-wider">
-            {modeData.badge} Arena
-          </span>
-        </div>
-
-        {/* Quest Info */}
-        <div className="space-y-4 mb-6">
-          <div className="flex items-center gap-3">
-            <span className="text-4xl">{modeData.icon}</span>
-            <div>
-              <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest block font-display leading-none mb-1">Active Quest</span>
-              <h3 className="text-xl sm:text-2xl font-black text-slate-100 font-display">
-                {modeData.title}
-              </h3>
-            </div>
-          </div>
-          <p className="text-xs sm:text-sm text-slate-400 font-semibold leading-relaxed">
-            {modeData.desc}
-          </p>
-        </div>
-
-        {/* Game Rules Card */}
-        <div className="bg-slate-850 border border-slate-800 rounded-2xl p-5 space-y-4 mb-6">
-          <h4 className="text-xs font-black uppercase text-purple-400 tracking-wider font-display flex items-center gap-2">
-            <Shield size={16} className="text-purple-500" /> Quest Rules & Guidelines
-          </h4>
-          <ul className="space-y-3 text-xs text-slate-355 font-medium">
-            <li className="flex items-start gap-2.5">
-              <span className="text-base shrink-0">❤️</span>
-              <div>
-                <strong className="text-white">3 Lives (Hearts):</strong> You start with 3 lives. Every incorrect answer costs you 1 life. Don't let your lives reach 0!
-              </div>
-            </li>
-            <li className="flex items-start gap-2.5">
-              <span className="text-base shrink-0 text-amber-500 font-bold">»</span>
-              <div>
-                <strong className="text-white">Combo Streak:</strong> Answer consecutive questions correctly to increase your combo streak. A higher streak multiplies your XP reward!
-              </div>
-            </li>
-            <li className="flex items-start gap-2.5">
-              <span className="text-base shrink-0 text-amber-500 font-bold">»</span>
-              <div>
-                <strong className="text-white">{modeData.questions.length} Quest Questions:</strong> Complete all questions to log your score and unlock your Prompt Master Rank.
-              </div>
-            </li>
-          </ul>
-        </div>
-
-        {/* Actions */}
-        <button
-          onClick={() => setShowRules(false)}
-          className="w-full py-4 bg-gradient-to-r from-purple-500 via-indigo-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white rounded-xl text-xs sm:text-sm font-black font-display transition-all shadow-md active:scale-95 cursor-pointer flex items-center justify-center gap-2"
-        >
-          <span>Begin Quest</span>
-        </button>
-      </div>
-    );
-  }
-
-  // Render Game Over Screen
-  if (isGameOver) {
-    return (
-      <div className="w-full max-w-md mx-auto bg-slate-900 border border-slate-800 rounded-3xl p-8 text-center text-white font-body shadow-2xl relative overflow-hidden">
-        <div className="absolute -top-10 -left-10 w-32 h-32 bg-rose-500/10 rounded-full blur-2xl pointer-events-none" />
-        <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-rose-500/10 rounded-full blur-2xl pointer-events-none" />
-
-        <h2 className="text-xl font-black font-display text-rose-500 uppercase tracking-widest mb-1">
-          System Glitch
-        </h2>
-        <h3 className="text-2xl font-black font-display mb-3">
-          Game Over
-        </h3>
-        <p className="text-xs text-slate-400 leading-relaxed max-w-xs mx-auto font-semibold mb-6">
-          All 3 lives lost! The AI got confused and forgot your prompts. Let's rebuild the digital brain!
-        </p>
-
-        <div className="flex flex-col gap-2.5">
-          <button
-            onClick={() => startMode(selectedMode)}
-            className="w-full py-3 bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white rounded-xl text-xs font-black font-display transition-all shadow-md active:scale-95 cursor-pointer"
-          >
-            Retry Quest
-          </button>
-          <button
-            onClick={resetGame}
-            className="w-full py-3 bg-slate-800 hover:bg-slate-750 text-slate-300 rounded-xl text-xs font-black font-display transition-all active:scale-95 cursor-pointer"
-          >
-            Back to Arenas
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  // Render Results Screen
-  if (showResult) {
-    const getRank = () => {
-      if (score >= 40) return { title: "AI Whisperer", color: "text-purple-400 bg-purple-950/40 border-purple-800/30" };
-      if (score >= 25) return { title: "Prompt Apprentice", color: "text-indigo-400 bg-indigo-950/40 border-indigo-800/30" };
-      return { title: "AI Novice", color: "text-slate-400 bg-slate-900 border-slate-800" };
-    };
-    const rank = getRank();
-
-    return (
-      <div className="w-full max-w-md mx-auto bg-slate-900 border border-slate-800 rounded-3xl p-8 text-center text-white font-body shadow-2xl relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-500/5 to-transparent pointer-events-none" />
-
-        <div className="w-16 h-16 bg-amber-500/10 border border-amber-500/30 text-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-amber-500/5">
-          <Trophy size={32} />
-        </div>
-        <h2 className="text-xl font-black font-display text-amber-400 uppercase tracking-widest mb-1">
-          Quest Complete!
-        </h2>
-        <h3 className="text-2xl font-black font-display mb-4">
-          Results Logged
-        </h3>
-
-        <div className="space-y-4 mb-6">
-          {/* Star Rating based on remaining lives */}
-          <div className="flex flex-col items-center gap-2 mb-2">
-            <div className="flex items-center justify-center gap-2">
-              {[1, 2, 3].map((starNum) => {
-                const isFilled = starNum <= lives;
-                return (
-                  <Star
-                    key={starNum}
-                    size={32}
-                    className={`transition-all duration-500 ${isFilled
-                      ? "text-amber-400 fill-amber-400 drop-shadow-[0_0_8px_rgba(251,191,36,0.6)] scale-110"
-                      : "text-slate-700 fill-slate-850 opacity-40"
-                      }`}
-                  />
-                );
-              })}
-            </div>
-            <p className="text-xs text-slate-400 font-bold">
-              {lives === 3 ? "Perfect Run! 3/3 Hearts Saved" : lives === 2 ? "Great Job! 2/3 Hearts Saved" : "Completed! 1/3 Hearts Saved"}
-            </p>
-          </div>
-
-          <div className="bg-slate-800/50 border border-slate-800 rounded-2xl p-4 inline-block min-w-[200px]">
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider block mb-1">Total Score XP</span>
-            <span className="text-3xl font-black text-purple-400 font-display">{score} XP</span>
-          </div>
-
-          <div className="block">
-            <div className={`px-4 py-2 rounded-xl border text-xs font-black font-display inline-block ${rank.color}`}>
-              Unlocked Rank: {rank.title}
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-2.5">
-          <button
-            onClick={() => startMode(selectedMode)}
-            className="w-full py-3 bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white rounded-xl text-xs font-black font-display transition-all active:scale-95 cursor-pointer"
-          >
-            Play Again
-          </button>
-          <button
-            onClick={resetGame}
-            className="w-full py-3 bg-slate-800 hover:bg-slate-750 text-slate-300 rounded-xl text-xs font-black font-display transition-all active:scale-95 cursor-pointer"
-          >
-            Choose Other Arena
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="w-full max-w-lg mx-auto bg-slate-900 border border-slate-800 rounded-3xl p-6 sm:p-7 text-white font-body shadow-2xl relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-bl from-purple-500/5 to-transparent rounded-bl-full pointer-events-none" />
-
-      {/* Quest Header Status Bar */}
-      <div className="flex items-center justify-between gap-3 mb-5 pb-3.5 border-b border-slate-800">
-        <button
-          onClick={resetGame}
-          className="text-xs font-bold text-slate-400 hover:text-white flex items-center gap-1 transition-colors cursor-pointer"
-        >
-          ← Quit
-        </button>
-        <div className="flex items-center gap-2">
-          {Array.from({ length: 3 }).map((_, i) => (
-            <span key={i} className="text-[15px] filter drop-shadow">
-              {i < lives ? "❤️" : "🖤"}
-            </span>
-          ))}
-        </div>
-        <div className="flex items-center gap-2">
-          {streak > 1 && (
-            <span className="bg-gradient-to-r from-orange-500 to-red-500 text-[10px] font-black text-white px-2 py-0.5 rounded-md font-display uppercase tracking-wider animate-bounce shadow-sm">
-              x{streak} Streak
-            </span>
-          )}
-          <span className="bg-slate-800 border border-slate-700/60 px-2.5 py-1 rounded-lg text-[11px] font-black font-display text-purple-400">
-            {score} XP
-          </span>
-        </div>
-      </div>
-
-      <div className="space-y-4">
-        {/* Progress Log */}
-        <div className="flex justify-between items-center text-[10px] font-black text-slate-400 uppercase tracking-widest font-display">
-          <span>{modeData.title}</span>
-          <span>Question {currentQ + 1}/{modeData.questions.length}</span>
-        </div>
-
-        <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
-          <motion.div animate={{ width: `${progress}%` }} className="h-full bg-gradient-to-r from-purple-500 to-indigo-500 rounded-full" />
-        </div>
-
-        {/* Question Text */}
-        <h2 className="text-sm sm:text-base font-black leading-snug mb-2 font-display text-slate-100">
-          {q.question}
-        </h2>
-
-        {/* Options */}
-        <div className="space-y-2.5">
-          {q.options.map((opt, idx) => {
-            let btnStyle = "bg-slate-800/40 border-slate-800 text-slate-300 hover:bg-slate-800/80 hover:border-slate-700";
-            let pillStyle = "bg-slate-800 text-slate-400";
-
-            if (isAnswered) {
-              if (idx === q.correct) {
-                btnStyle = "bg-emerald-950/60 border-emerald-500/50 text-emerald-100 shadow-md shadow-emerald-500/5";
-                pillStyle = "bg-emerald-500 text-white";
-              } else if (idx === selectedOption) {
-                btnStyle = "bg-rose-950/60 border-rose-500/50 text-rose-100 shadow-md shadow-rose-500/5";
-                pillStyle = "bg-rose-500 text-white";
-              } else {
-                btnStyle = "bg-slate-900 border-slate-850 text-slate-500 opacity-40";
-                pillStyle = "bg-slate-850 text-slate-600";
-              }
-            }
-
-            return (
-              <button
-                key={idx}
-                onClick={() => handleSelect(idx)}
-                disabled={isAnswered}
-                className={`w-full flex items-center gap-3 px-3.5 py-3 rounded-xl border text-left transition-all duration-200 cursor-pointer font-semibold ${btnStyle}`}
-              >
-                <span className={`w-6 h-6 rounded-lg flex items-center justify-center text-[10px] font-black shrink-0 transition-all font-display ${pillStyle}`}>
-                  {isAnswered && idx === q.correct ? "✓"
-                    : isAnswered && idx === selectedOption && idx !== q.correct ? "✗"
-                      : optionLabels[idx]}
-                </span>
-                <span className="text-xs sm:text-sm font-semibold flex-1 leading-snug">{opt}</span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Witty Feedback panel */}
-        <AnimatePresence>
-          {isAnswered && (
-            <motion.div
-              initial={{ opacity: 0, y: 5 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -5 }}
-              className={`p-3.5 rounded-xl border text-xs font-bold leading-relaxed flex gap-2 ${selectedOption === q.correct
-                ? "bg-emerald-950/40 border-emerald-900/30 text-emerald-300"
-                : "bg-rose-950/40 border-rose-900/30 text-rose-300"
-                }`}
-            >
-              {selectedOption === q.correct ? (
-                <CheckCircle2 size={16} className="text-emerald-400 shrink-0 mt-0.5" />
-              ) : (
-                <XCircle size={16} className="text-rose-400 shrink-0 mt-0.5" />
-              )}
-              <div>
-                <span className="text-[9px] font-black uppercase tracking-wider block font-display mb-0.5">
-                  {selectedOption === q.correct ? "Correct" : "Incorrect"}
-                </span>
-                <p>{selectedOption === q.correct ? q.funnySuccess : q.funnyFailure}</p>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
-
-        {/* Action Button */}
-        {isAnswered && (
-          <div className="pt-2 flex justify-end">
-            <button
-              onClick={handleNext}
-              className="px-5 py-2.5 bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 text-white rounded-xl text-xs font-black font-display transition-all shadow-md active:scale-95 cursor-pointer flex items-center gap-1.5"
-            >
-              <span>{currentQ < modeData.questions.length - 1 ? "Next Question" : "Check Score"}</span>
-              <ChevronRight size={14} />
-            </button>
-          </div>
-        )}
       </div>
     </div>
   );
@@ -3199,7 +2638,7 @@ const QuizComponent = () => {
 
 const AiIntelligenceDashboard = () => {
   const navigate = useNavigate();
-  const [activeFilter, setActiveFilter] = useState('Learn & Prompt Academy');
+  const [activeFilter, setActiveFilter] = useState('Learn Concepts');
   const [selectedItem, setSelectedItem] = useState(null);
   const [learnSubTab, setLearnSubTab] = useState('meet');
 
@@ -3222,9 +2661,9 @@ const AiIntelligenceDashboard = () => {
   ];
 
   const quickStats = [
-    { label: 'Learn & Prompt Academy', value: 'Concepts & Prompts', icon: <WandSparkles className="text-purple-600" />, color: 'bg-purple-50' },
-    { label: 'Explore Tools', value: 'AI tools', icon: <Cpu className="text-purple-600" />, color: 'bg-purple-50' },
-    { label: 'Take Challenges', value: 'Test skills', icon: <Trophy className="text-orange-500" />, color: 'bg-orange-50' }
+    { label: 'Learn Concepts', value: 'Quick Lessons', icon: <BookOpen className="text-purple-600" />, color: 'bg-purple-50' },
+    { label: 'Prompt Academy', value: 'Interactive Quests', icon: <WandSparkles className="text-purple-600" />, color: 'bg-purple-50' },
+    { label: 'Explore Tools', value: 'AI Tools', icon: <Cpu className="text-purple-600" />, color: 'bg-purple-50' }
   ];
 
   return (
@@ -3254,18 +2693,6 @@ const AiIntelligenceDashboard = () => {
                 <p className="text-slate-500 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed max-w-sm">
                   Your AI-powered learning hub for skills and knowledge.
                 </p>
-
-                <div className="pt-2">
-                  <button
-                    onClick={() => {
-                      const target = document.getElementById("content-section");
-                      if (target) target.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    className="px-5 py-2.5 sm:px-6 sm:py-3 bg-purple-600 text-white rounded-full font-bold text-[12px] sm:text-[14px] flex items-center gap-2 hover:bg-purple-700 transition-colors w-max shadow-sm shadow-purple-200"
-                  >
-                    Start Learning <ArrowRight size={16} />
-                  </button>
-                </div>
               </div>
 
               <div className="hidden lg:block absolute top-0 right-0 w-[55%] h-full">
@@ -3311,9 +2738,19 @@ const AiIntelligenceDashboard = () => {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
               >
-                {activeFilter === 'Explore Tools' && <ExploreToolsComponent />}
-                {activeFilter === 'Take Challenges' && <QuizComponent />}
-                {(activeFilter === 'Learn & Prompt Academy' || activeFilter === 'Learn Concepts' || activeFilter === 'Prompt Academy') && <LearnAndPromptAcademyComponent />}
+                {activeFilter === 'Learn Concepts' && (
+                  <LearnConceptsComponent />
+                )}
+                {activeFilter === 'Prompt Academy' && (
+                  <div className="max-w-7xl mx-auto px-4 md:px-0">
+                    <PromptAcademyComponent />
+                  </div>
+                )}
+                {activeFilter === 'Explore Tools' && (
+                  <div className="max-w-7xl mx-auto">
+                    <ExploreToolsComponent />
+                  </div>
+                )}
               </motion.div>
             </AnimatePresence>
           </div>
