@@ -25,9 +25,6 @@ import MultilingualMission from "./pages/missions/MultilingualMission.jsx";
 import AudiobooksMission from "./pages/missions/AudiobooksMission.jsx";
 import Sign from "./signLanguage/Signlanguage.jsx";
 import SignLearn from "./signLanguage/SignLearn.jsx";
-import AiIntelligence from "./ai/AiIntelligence.jsx";
-import CyberSecurity from "./cyberSecurity/CyberSecurity.jsx";
-import HeritageArchive from "./heritage/HeritageArchive.jsx";
 import Linguistics from "./linguistics/Linguistics.jsx";
 import Audio from "./audio/Audiolib.jsx";
 import Basicskill from "./skills/Basicskills.jsx";
@@ -67,7 +64,7 @@ function App() {
 
   const isMissionPage = [
     "/ling", "/linguistic", "/vr", "/sign", "/sign-learn", "/sign-module",
-    "/ai-intelligence", "/audio-books", 
+     "/audio-books", 
     "/cyber-security", "/heritage-archive", 
     "/basic-skills", "/ling/words", "/ling/phrases", "/ling/conversations",
     "/pustak-mela", "/mobile-library",
@@ -136,20 +133,19 @@ function App() {
             <Route path="/sign-learn" element={<SignLearn />} />
 
             {/* AI */}
-            <Route path="/ai-intelligence" element={<AiIntelligence />} />
+            
             <Route path="/ai-intelligence-dashboard" element={<AiIntelligenceDashboard />} />
             
             {/* VR */}
-            <Route path="/vr" element={<VrDashboard />} />
             <Route path="/vr-dashboard" element={<VrDashboard />} />
             
 
             {/* Cyber */}
-            <Route path="/cyber-security" element={<CyberSecurity />} />
+           
             <Route path="/cyber-security-dashboard" element={<CyberSecurityDashboard />} />
 
             {/* Heritage */}
-            <Route path="/heritage-archive" element={<HeritageArchive />} />
+           
             <Route path="/heritage-dashboard" element={<HeritageDashboard />} />
 
             {/* Audio */}
