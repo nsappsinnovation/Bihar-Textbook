@@ -254,16 +254,16 @@ const PHRASE_CONCEPTS = [
 ];
 
 const CONVERSATION_FLOW = [
-  { speaker: 'boy', hi: "नमस्ते", en: "Hello", de: "Hallo", fr: "Bonjour", es: "Hola", ja: "こんにちは", zh: "你好", it: "Ciao", ru: "Привет", ko: "안녕하세요" },
-  { speaker: 'girl', hi: "नमस्ते राहुल, आप कैसे हैं?", en: "Hello Rahul, how are you?", de: "Hallo Rahul, wie geht es dir?", fr: "Bonjour Rahul, comment ça va ?", es: "Hola Rahul, ¿cómo estás?", ja: "こんにちは、ラフルさん。お元気ですか？", zh: "你好，Rahul。你好吗？", it: "Ciao Rahul, come stai?", ru: "Привет, Рахул. Как дела?", ko: "안녕하세요 라훌 씨. 어떻게 지내세요?" },
-  { speaker: 'boy', hi: "मैं ठीक हूँ, धन्यवाद। और आप?", en: "I'm fine, thank you. And you?", de: "Mir geht es gut, danke. Und dir?", fr: "Ça va bien, merci. Et toi ?", es: "Estoy bien, gracias. ¿Y tú?", ja: "元気です、ありがとう。あなたは？", zh: "我很好，谢谢。你呢？", it: "Sto bene, grazie. E tu?", ru: "Я в порядке, спасибо. А у тебя?", ko: "잘 지내요, 감사합니다. 당신은요?" },
-  { speaker: 'girl', hi: "मैं भी ठीक हूँ। आज आप क्या कर रहे हैं?", en: "I'm fine too. What are you doing today?", de: "Mir geht es auch gut. Was machst du heute?", fr: "Ça va bien aussi. Que fais-tu aujourd'hui ?", es: "Yo también estoy bien. ¿Qué haces hoy?", ja: "私も元気です。今日は何をしていますか？", zh: "我也很好。你今天在做什么？", it: "Anche io sto bene. Cosa fai oggi?", ru: "Я тоже в порядке. Что ты делаешь сегодня?", ko: "저도 잘 지내요. 오늘 뭐 하세요?" },
-  { speaker: 'boy', hi: "मैं नई भाषा सीख रहा हूँ।", en: "I am learning a new language.", de: "Ich lerne eine neue Sprache.", fr: "J'apprends une nouvelle langue.", es: "Estoy aprendiendo un nuevo idioma.", ja: "新しい言語を勉強しています。", zh: "我正在学习一门新语言。", it: "Sto imparando una nuova lingua.", ru: "Я изучаю новый язык.", ko: "저는 새로운 언어를 배우고 있어요." },
-  { speaker: 'girl', hi: "यह बहुत अच्छा है! कौन सी भाषा?", en: "That's great! Which language?", de: "Das ist toll! Welche Sprache?", fr: "C'est super ! Quelle langue ?", es: "¡Eso es genial! ¿Qué idioma?", ja: "それは素晴らしいですね！どの言語ですか？", zh: "那太好了！哪种语言？", it: "È fantastico! Quale lingua?", ru: "Это здорово! Какой язык?", ko: "대단하네요! 어떤 언어인가요?" },
-  { speaker: 'boy', hi: "मैं अभी जर्मन सीख रहा हूँ।", en: "I am learning German right now.", de: "Ich lerne gerade Deutsch.", fr: "J'apprends l'allemand en ce moment.", es: "Estoy aprendiendo alemán ahora mismo.", ja: "今、ドイツ語 को勉強しています。", zh: "我正在学习德语。", it: "Adesso sto imparando il tedesco.", ru: "Я сейчас изучаю немецкий.", ko: "지금 독일어를 배우고 있어요." },
-  { speaker: 'girl', hi: "जर्मन एक सुंदर भाषा है।", en: "German is a beautiful language.", de: "Deutsch ist eine schöne Sprache.", fr: "L'allemand est une belle langue.", es: "El alemán es un idioma hermoso.", ja: "ドイツ語は美しい言語です。", zh: "德语是一门美丽的语言。", it: "Il tedesco è una lingua bellissima.", ru: "Немецкий — красивый язык.", ko: "독일어는 아름다운 언어예요." },
-  { speaker: 'boy', hi: "हाँ, मुझे यह बहुत पसंद है।", en: "Yes, I like it very much.", de: "Ja, ich mag es sehr.", fr: "Oui, j'aime beaucoup ça.", es: "Sí, me gusta mucho.", ja: "はい、とても気に入っています。", zh: "是的，我很喜欢它。", it: "Sì, mi piace molto.", ru: "Да, мне это очень нравится.", ko: "네, 정말 좋아해요." },
-  { speaker: 'girl', hi: "शुभकामनाएं! बाद में मिलते हैं।", en: "Good luck! See you later.", de: "Viel Glück! Bis später.", fr: "Bonne chance ! À plus tard.", es: "¡Buena suerte! Hasta luego.", ja: "頑張ってください！また後で。", zh: "祝你好运！回头见。", it: "Buona fortuna! A dopo.", ru: "Удачи! До встречи.", ko: "행운을 빌어요! 나중에 봐요." }
+  { speaker: 'boy', audioFile: '1_Boy_Hello', hi: "नमस्ते", en: "Hello", de: "Hallo", fr: "Bonjour", es: "Hola", ja: "こんにちは", zh: "你好", it: "Ciao", ru: "Привет", ko: "안녕하세요" },
+  { speaker: 'girl', audioFile: '2_Girl_Hello_Rahul_how_are_you', hi: "नमस्ते राहुल, आप कैसे हैं?", en: "Hello Rahul, how are you?", de: "Hallo Rahul, wie geht es dir?", fr: "Bonjour Rahul, comment ça va ?", es: "Hola Rahul, ¿cómo estás?", ja: "こんにちは、ラフルさん。お元気ですか？", zh: "你好，Rahul。你好吗？", it: "Ciao Rahul, come stai?", ru: "Привет, Рахул. Как дела?", ko: "안녕하세요 라훌 씨. 어떻게 지내세요?" },
+  { speaker: 'boy', audioFile: '3_Boy_Im_fine_thank_you_And_you', hi: "मैं ठीक हूँ, धन्यवाद। और आप?", en: "I'm fine, thank you. And you?", de: "Mir geht es gut, danke. Und dir?", fr: "Ça va bien, merci. Et toi ?", es: "Estoy bien, gracias. ¿Y tú?", ja: "元気です、ありがとう。あなたは？", zh: "我很好，谢谢。你呢？", it: "Sto bene, grazie. E tu?", ru: "Я в порядке, спасибо. А у тебя?", ko: "잘 지내요, 감사합니다. 당신은요?" },
+  { speaker: 'girl', audioFile: '4_Girl_Im_fine_too_What_are_you_doing', hi: "मैं भी ठीक हूँ। आज आप क्या कर रहे हैं?", en: "I'm fine too. What are you doing today?", de: "Mir geht es auch gut. Was machst du heute?", fr: "Ça va bien aussi. Que fais-tu aujourd'hui ?", es: "Yo también estoy bien. ¿Qué haces hoy?", ja: "私も元気です。今日は何をしていますか？", zh: "我也很好。你今天在做什么？", it: "Anche io sto bene. Cosa fai oggi?", ru: "Я тоже в порядке. Что ты делаешь сегодня?", ko: "저도 잘 지내요. 오늘 뭐 하세요?" },
+  { speaker: 'boy', audioFile: '5_Boy_I_am_learning_a_new_language', hi: "मैं नई भाषा सीख रहा हूँ।", en: "I am learning a new language.", de: "Ich lerne eine neue Sprache.", fr: "J'apprends une nouvelle langue.", es: "Estoy aprendiendo un nuevo idioma.", ja: "新しい言語を勉強しています。", zh: "我正在学习一门新语言。", it: "Sto imparando una nuova lingua.", ru: "Я изучаю новый язык.", ko: "저는 새로운 언어를 배우고 있어요." },
+  { speaker: 'girl', audioFile: '6_Girl_Thats_great_Which_language', hi: "यह बहुत अच्छा है! कौन सी भाषा?", en: "That's great! Which language?", de: "Das ist toll! Welche Sprache?", fr: "C'est super ! Quelle langue ?", es: "¡Eso es genial! ¿Qué idioma?", ja: "それは素晴らしいですね！どの言語ですか？", zh: "那太好了！哪种语言？", it: "È fantastico! Quale lingua?", ru: "Это здорово! Какой язык?", ko: "대단하네요! 어떤 언어인가요?" },
+  { speaker: 'boy', audioFile: '7_Boy_I_am_learning_German_right_now', hi: "मैं अभी जर्मन सीख रहा हूँ।", en: "I am learning German right now.", de: "Ich lerne gerade Deutsch.", fr: "J'apprends l'allemand en ce moment.", es: "Estoy aprendiendo alemán ahora mismo.", ja: "今、ドイツ語 को勉強しています。", zh: "我正在学习德语。", it: "Adesso sto imparando il tedesco.", ru: "Я сейчас изучаю немецкий.", ko: "지금 독일어를 배우고 있어요." },
+  { speaker: 'girl', audioFile: '8_Girl_German_is_a_beautiful_language', hi: "जर्मन एक सुंदर भाषा है।", en: "German is a beautiful language.", de: "Deutsch ist eine schöne Sprache.", fr: "L'allemand est une belle langue.", es: "El alemán es un idioma hermoso.", ja: "ドイツ語は美しい言語です。", zh: "德语是一门美丽的语言。", it: "Il tedesco è una lingua bellissima.", ru: "Немецкий — красивый язык.", ko: "독일어는 아름다운 언어예요." },
+  { speaker: 'boy', audioFile: '9_Boy_Yes_I_like_it_very_much', hi: "हाँ, मुझे यह बहुत पसंद है।", en: "Yes, I like it very much.", de: "Ja, ich mag es sehr.", fr: "Oui, j'aime beaucoup ça.", es: "Sí, me gusta mucho.", ja: "はい、とても気に入っています。", zh: "是的，我很喜欢它。", it: "Sì, mi piace molto.", ru: "Да, мне это очень нравится.", ko: "네, 정말 좋아해요." },
+  { speaker: 'girl', audioFile: '10_Girl_Good_luck_See_you_later', hi: "शुभकामनाएं! बाद में मिलते हैं।", en: "Good luck! See you later.", de: "Viel Glück! Bis später.", fr: "Bonne chance ! À plus tard.", es: "¡Buena suerte! Hasta luego.", ja: "頑張ってください！また後で。", zh: "祝你好运！回头见。", it: "Buona fortuna! A dopo.", ru: "Удачи! До встречи.", ko: "행운을 빌어요! 나중에 봐요." }
 ];
 
 const LANG_NAMES = {
@@ -341,7 +341,8 @@ export default function LingModule({ type }) {
         native: concept[sourceLang] || concept.hi,
         distractors: [],
         target: concept[targetLang] || concept.en,
-        isConversation: true
+        isConversation: true,
+        audioFile: concept.audioFile
       };
     }
     const native = concept.translations[sourceLang] || concept.translations.en;
@@ -353,7 +354,8 @@ export default function LingModule({ type }) {
       target,
       distractors,
       image: concept.image,
-      translation: concept.translations.en 
+      translation: concept.translations.en,
+      audioFile: concept.translations.en.replace(/['?,!.]/g, '').replace(/ /g, '_')
     };
   });
   
@@ -374,8 +376,27 @@ export default function LingModule({ type }) {
     return [currentItem.target, ...currentItem.distractors];
   }, [currentItem, type]);
 
-  const handleSpeak = (text, langCode) => {
+  const handleSpeak = (text, langCode, audioFileName) => {
     if (!text) return;
+    
+    // Attempt to play pre-recorded local audio first
+    if (audioFileName) {
+      // Use the actual module type for the folder path. Ensure phrase folder matches what was checked
+      const folderName = type === 'conversations' ? 'conversation' : type;
+      const audioUrl = `/audio_output/${folderName}/${langCode}/${audioFileName}.mp3`;
+      const audio = new Audio(audioUrl);
+      
+      audio.play().catch((err) => {
+        console.warn("Failed to play local audio, falling back to TTS:", err);
+        fallbackTTS(text, langCode);
+      });
+      return;
+    }
+    
+    fallbackTTS(text, langCode);
+  };
+
+  const fallbackTTS = (text, langCode) => {
     const langMap = {
       'de': 'de-DE', 'fr': 'fr-FR', 'es': 'es-ES', 'hi': 'hi-IN', 'en': 'en-US', 
       'ja': 'ja-JP', 'ko': 'ko-KR', 'it': 'it-IT', 'ru': 'ru-RU', 'zh': 'zh-CN'
@@ -435,10 +456,9 @@ export default function LingModule({ type }) {
         if (currentModVal < maxLimit) {
           localStorage.setItem(moduleKey, currentModVal + 1);
         }
-        setTimeout(() => handleSpeak(items[nextStep].text, targetLang), 500);
+        setTimeout(() => handleSpeak(items[nextStep].text, targetLang, items[nextStep].audioFile), 500);
       } else {
-        handleSpeak(t.question_main(targetLangName), sourceLang);
-        setTimeout(() => handleSpeak(items[nextStep].target, targetLang), 1800);
+        setTimeout(() => handleSpeak(items[nextStep].target, targetLang, items[nextStep].audioFile), 500);
       }
     } else setIsCompleted(true);
   };
@@ -471,18 +491,19 @@ export default function LingModule({ type }) {
     const timer = setTimeout(() => {
       if (currentItem) {
         if (type !== 'conversations') {
-          handleSpeak(t.question_main(targetLangName), sourceLang);
-          setTimeout(() => handleSpeak(currentItem.target, targetLang), 1800);
-        } else handleSpeak(currentItem.text, targetLang);
+          handleSpeak(currentItem.target, targetLang, currentItem.audioFile);
+        } else {
+          handleSpeak(currentItem.text, targetLang, currentItem.audioFile);
+        }
       }
-    }, 1000);
+    }, 500);
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
     let timer;
     if (isCorrect === true && type !== 'conversations') {
-      handleSpeak(currentItem.target, targetLang);
+      handleSpeak(currentItem.target, targetLang, currentItem.audioFile);
       const newDailyProgress = Math.min(dailyProgress + 1, dailyTotal);
       setDailyProgress(newDailyProgress);
       localStorage.setItem("ling_daily_progress", newDailyProgress);
@@ -584,7 +605,7 @@ export default function LingModule({ type }) {
                       
                       <div className="flex items-center gap-3 py-1">
                          <div 
-                           onClick={() => handleSpeak(currentItem.text, targetLang)} 
+                           onClick={() => handleSpeak(currentItem.text, targetLang, currentItem.audioFile)} 
                            className={`w-9 h-9 rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform shadow-sm flex-shrink-0
                               ${currentItem.speaker === 'boy' ? 'bg-white text-[#0BB562]' : 'bg-white text-orange-400'}`}
                          >
@@ -644,7 +665,7 @@ export default function LingModule({ type }) {
             <div className="flex flex-col items-center gap-3 py-2 -ml-16">
               <h1 className="text-lg font-black text-center mb-0">{t.question_main(targetLangName)}</h1>
               <div className="w-full max-w-[280px] aspect-[1/1.1] bg-white rounded-[32px] shadow-xl shadow-slate-300/40 flex flex-col items-center justify-center p-6 relative border border-slate-50">
-                  <div onClick={() => handleSpeak(currentItem.target, targetLang)} className="absolute top-4 right-4 w-9 h-9 bg-[#F1FAF6] rounded-full flex items-center justify-center text-[#0BB562] cursor-pointer hover:scale-110 transition-transform active:scale-90"><Volume2 size={18} /></div>
+                  <div onClick={() => handleSpeak(currentItem.target, targetLang, currentItem.audioFile)} className="absolute top-4 right-4 w-9 h-9 bg-[#F1FAF6] rounded-full flex items-center justify-center text-[#0BB562] cursor-pointer hover:scale-110 transition-transform active:scale-90"><Volume2 size={18} /></div>
                   <img src={currentItem.image} className="w-[100px] h-[100px] object-contain mb-4 animate-bounce-subtle" alt="Word" />
                   <div className="text-center"><div className="text-4xl font-black mb-1">{currentItem.native}</div><div className="h-0.5 w-20 bg-[#F1FAF6] mx-auto mb-2" /><div className="text-[14px] text-slate-400 font-bold tracking-widest uppercase opacity-60">{currentItem.translation}</div></div>
               </div>

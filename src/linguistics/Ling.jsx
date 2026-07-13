@@ -117,7 +117,7 @@ export default function LinguisticApp() {
         </div>
 
         {/* Selection Cards Grid */}
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-12 relative z-30 -mt-40">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-12 relative z-30 -mt-40 mx-6 lg:mx-16">
           
           {/* Know Language Card */}
           <div className="bg-white border border-[slate-500] rounded-[40px] px-10 py-7 shadow-xl shadow-slate-100/50">
@@ -177,7 +177,7 @@ export default function LinguisticApp() {
         </div>
 
         {/* Primary CTA */}
-        <div className="flex justify-center mb-8 -mt-6">
+        <div className="flex justify-center mb-8 -mt-6 mx-6 lg:mx-16">
           <button 
             disabled={!sourceLang || !targetLang}
             onClick={() => handleStartLearning(lastModule)}
@@ -188,7 +188,7 @@ export default function LinguisticApp() {
         </div>
 
         {/* Modules Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 mx-6 lg:mx-16">
           <ModuleCard 
             title="Basic Words"
             desc="Learn everyday words with interactive practice"
@@ -222,7 +222,7 @@ export default function LinguisticApp() {
         </div>
 
         {/* Footer Section */}
-        <div className="pb-7">
+        <div className="pb-7 mx-6 lg:mx-16">
            <div className="flex justify-between items-center mb-5">
               <h3 className="text-2xl font-black text-[#1A1C2E]">Continue learning</h3>
               <button className="text-[15px] font-bold text-[#0BB562] flex items-center gap-1.5 hover:opacity-80 transition-opacity">
