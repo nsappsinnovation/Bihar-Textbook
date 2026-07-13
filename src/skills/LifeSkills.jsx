@@ -998,10 +998,10 @@ const LifeSkills = () => {
                               {lab.icon}
                             </div>
                             <div className="overflow-hidden">
-                              <h3 className="text-[13px] md:text-sm font-black leading-tight mb-0.5 truncate">
+                              <h3 className="text-[12px] md:text-[13px] font-display font-bold leading-tight mb-0.5 truncate">
                                 {lab.title}
                               </h3>
-                              <p className="text-[11px] md:text-xs opacity-80 leading-snug font-semibold truncate">
+                              <p className="text-[10px] md:text-[11px] opacity-80 leading-snug font-medium font-display truncate">
                                 {lab.desc}
                               </p>
                             </div>
@@ -1178,7 +1178,7 @@ const LifeSkills = () => {
                         }}
                         className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold rounded-xl text-xs active:scale-95 transition-all shadow-lg shadow-emerald-200 cursor-pointer"
                       >
-                        Finish Guide 🎉
+                        Finish Guide 
                       </button>
                     )}
                   </div>

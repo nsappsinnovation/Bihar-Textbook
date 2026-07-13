@@ -489,7 +489,7 @@ const TrafficLab = () => {
     <div className="bg-white rounded-[32px] border border-slate-100 shadow-[0_12px_40px_rgba(0,0,0,0.03)] p-6 md:p-8">
       <div className="w-full text-left space-y-8">
         <div>
-          <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">Road Safety Simulators</h2>
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-slate-900 tracking-tight">Road Safety Simulators</h2>
           <p className="text-slate-500 text-sm md:text-base font-semibold leading-relaxed mt-2 max-w-xl">Experience realistic road hazards and learn why traffic rules save lives.</p>
         </div>
 

@@ -643,7 +643,7 @@ const FirstAidLab = () => {
               <span className="text-[11px] font-black uppercase text-teal-600 tracking-widest bg-teal-50 px-3.5 py-1.5 rounded-full border border-teal-100/50 animate-pulse">
                 🔴 Clinic Waiting Room & ER Dashboard
               </span>
-              <h2 className="text-2xl md:text-3xl font-black text-slate-800 mt-2 tracking-tight">First Aid Clinic Simulator</h2>
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-slate-800 mt-2 tracking-tight">First Aid Clinic Simulator</h2>
               <p className="text-[13px] text-slate-500 font-semibold mt-1">Diagnose patients, select cabinet supplies, and execute critical medical procedures.</p>
             </div>
             <div className="flex items-center gap-3 self-stretch sm:self-auto justify-end">
@@ -1118,7 +1118,7 @@ const FirstAidLab = () => {
 
               {Object.keys(curedPatients).length === 7 ? (
                 <>
-                  <h2 className="text-xl md:text-2xl font-black text-slate-800 tracking-tight">
+                  <h2 className="text-xl md:text-2xl font-display font-bold text-slate-800 tracking-tight">
                     🏆 First Aid Master Graduate Certificate
                   </h2>
                   <h3 className="text-sm font-bold text-emerald-600 mt-0.5 tracking-wider uppercase">
@@ -1127,7 +1127,7 @@ const FirstAidLab = () => {
                 </>
               ) : (
                 <>
-                  <h2 className="text-xl md:text-2xl font-black text-slate-800 tracking-tight">
+                  <h2 className="text-xl md:text-2xl font-display font-bold text-slate-800 tracking-tight">
                     Junior Doctor Bravery Certificate
                   </h2>
                   <h3 className="text-sm font-bold text-emerald-600 mt-0.5 tracking-wider uppercase">

@@ -2,65 +2,15 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RefreshCw, HelpCircle, Coins } from 'lucide-react';
 
-const BoyAvatarSVG = ({ expression = "smile", className = "w-14 h-14 mx-auto" }) => (
-  <svg viewBox="0 0 100 100" className={className}>
-    <circle cx="50" cy="50" r="45" fill="#ECFDF5" stroke="#A7F3D0" strokeWidth="2" />
-    <path d="M 25,40 C 25,20 75,20 75,40 C 80,45 75,50 75,40 C 70,30 30,30 25,40" fill="#1E293B" />
-    <circle cx="50" cy="52" r="28" fill="#FDE047" opacity="0.8" />
-    <circle cx="50" cy="52" r="28" fill="#FDBA74" opacity="0.5" />
-    <path d="M 22,42 Q 35,32 50,42 Q 65,32 78,42 Q 80,30 50,22 Q 20,30 22,42" fill="#1E293B" />
-    {expression === "closed" ? (
-      <>
-        <path d="M 36,52 Q 41,56 46,52" stroke="#1E293B" strokeWidth="3" fill="none" strokeLinecap="round" />
-        <path d="M 54,52 Q 59,56 64,52" stroke="#1E293B" strokeWidth="3" fill="none" strokeLinecap="round" />
-      </>
-    ) : (
-      <>
-        <circle cx="42" cy="52" r="3.5" fill="#1E293B" />
-        <circle cx="58" cy="52" r="3.5" fill="#1E293B" />
-      </>
-    )}
-    {expression === "neutral" ? (
-      <line x1="44" y1="65" x2="56" y2="65" stroke="#1E293B" strokeWidth="3" strokeLinecap="round" />
-    ) : expression === "surprise" ? (
-      <circle cx="50" cy="65" r="4" fill="#1E293B" />
-    ) : (
-      <path d="M 44,62 Q 50,70 56,62" stroke="#1E293B" strokeWidth="3" fill="none" strokeLinecap="round" />
-    )}
-  </svg>
-);
 
-const GirlAvatarSVG = ({ className = "w-14 h-14 mx-auto", expression = "smile" }) => (
-  <svg viewBox="0 0 100 100" className={className}>
-    <circle cx="50" cy="50" r="45" fill="#EFF6FF" stroke="#BFDBFE" strokeWidth="2" />
-    <circle cx="20" cy="40" r="12" fill="#475569" />
-    <circle cx="80" cy="40" r="12" fill="#475569" />
-    <circle cx="50" cy="52" r="28" fill="#FDE047" opacity="0.8" />
-    <circle cx="50" cy="52" r="28" fill="#FDBA74" opacity="0.5" />
-    <path d="M 22,44 C 30,36 70,36 78,44 C 70,38 30,38 22,44" fill="#475569" />
-    <path d="M 22,44 Q 50,22 78,44" fill="#475569" />
-    {expression === "closed" ? (
-      <>
-        <path d="M 36,52 Q 41,56 46,52" stroke="#1E293B" strokeWidth="3" fill="none" strokeLinecap="round" />
-        <path d="M 54,52 Q 59,56 64,52" stroke="#1E293B" strokeWidth="3" fill="none" strokeLinecap="round" />
-      </>
-    ) : (
-      <>
-        <circle cx="42" cy="52" r="3.5" fill="#1E293B" />
-        <circle cx="58" cy="52" r="3.5" fill="#1E293B" />
-      </>
-    )}
-    <path d="M 44,62 Q 50,70 56,62" stroke="#1E293B" strokeWidth="3" fill="none" strokeLinecap="round" />
-  </svg>
-);
 
 // Indian Currency Visual Components for Smart Cashier Lab
 const IndianRupeeNote = ({ val, onClick, disabled = false, size = "md" }) => {
   const colorMap = {
-    100: "from-[#818cf8] via-[#6366f1] to-[#4f46e5] border-[#a5b4fc] text-indigo-100",
-    50: "from-[#22d3ee] via-[#06b6d4] to-[#0891b2] border-[#67e8f9] text-cyan-100",
-    20: "from-[#fbbf24] via-[#f59e0b] to-[#d97706] border-[#fde047] text-amber-100",
-    10: "from-[#ca8a04] via-[#a16207] to-[#854d0e] border-[#fef08a] text-yellow-100"
+    100: "from-[#a78bfa] via-[#8b5cf6] to-[#7c3aed] border-[#ddd6fe] text-purple-100", // Lavender
+    50: "from-[#67e8f9] via-[#06b6d4] to-[#0891b2] border-[#cffafe] text-cyan-950", // Fluorescent Blue
+    20: "from-[#86efac] via-[#22c55e] to-[#15803d] border-[#bbf7d0] text-green-950", // Greenish Yellow
+    10: "from-[#d6d3d1] via-[#78716c] to-[#44403c] border-[#e7e5e4] text-stone-900" // Chocolate Brown
   };
 
   const bgStyle = colorMap[val] || "from-slate-500 to-slate-600 border-slate-400";
@@ -101,7 +51,7 @@ const IndianRupeeCoin = ({ val, onClick, disabled = false, size = "md" }) => {
   const colorMap = {
     5: "from-[#facc15] via-[#eab308] to-[#ca8a04] border-[#fef08a] text-yellow-950 shadow-yellow-600/30",
     2: "from-[#e2e8f0] via-[#cbd5e1] to-[#94a3b8] border-[#f1f5f9] text-slate-800 shadow-slate-400/30",
-    1: "from-[#b45309] via-[#92400e] to-[#78350f] border-[#d97706] text-amber-100 shadow-amber-900/30"
+    1: "from-[#d4d4d8] via-[#a1a1aa] to-[#71717a] border-[#e4e4e7] text-slate-900 shadow-slate-500/30"
   };
 
   const bgStyle = colorMap[val] || "from-slate-400 to-slate-500 border-slate-300";
@@ -236,7 +186,7 @@ const CashierLab = () => {
   const [cashierScore, setCashierScore] = useState(0);
   const [cashierCustomerType, setCashierCustomerType] = useState('boy');
   const [cashierExpression, setCashierExpression] = useState('smile');
-  const [cashierMessage, setCashierMessage] = useState('नमस्ते! Can you help me buy this item? Here is my cash.');
+  const [cashierMessage, setCashierMessage] = useState('Hello! Can you help me buy this item? Here is my cash.');
   const [cashierStreak, setCashierStreak] = useState(0);
   const [showCashierHelp, setShowCashierHelp] = useState(false);
 
@@ -259,7 +209,7 @@ const CashierLab = () => {
     setCashierCustomerType(customerTypes[Math.floor(Math.random() * customerTypes.length)]);
 
     const greetings = [
-      `नमस्ते! I would like to buy the ${randomItem.name}. Here is ₹${paid}.`,
+      `Hi! I would like to buy the ${randomItem.name}. Here is ₹${paid}.`,
       `Hello! Can you ring up this ${randomItem.name} for me? Handing you ₹${paid}.`,
       `Hi cashier! I am purchasing this ${randomItem.name}. I only have a ₹${paid} note.`,
       `Good day! I'll take this ${randomItem.name}, please. Here is ₹${paid}.`
@@ -376,23 +326,12 @@ const CashierLab = () => {
         <div className="flex flex-col gap-6 border-b border-slate-100 pb-5">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div>
-              <span className="text-[11px] font-black uppercase text-emerald-600 tracking-wider bg-emerald-50 px-3.5 py-1.5 rounded-full">
-                Practical Lab 03
-              </span>
-              <h2 className="text-[26px] md:text-[34px] font-black text-slate-900 mt-2">Smart Cashier Lab</h2>
+              {/* Badge Removed */}
+              <h2 className="text-[26px] md:text-[34px] font-display font-bold text-slate-900 mt-2">Smart Cashier Lab</h2>
               <p className="text-[14px] text-slate-500 font-bold mt-1">Calculate and build correct change using Indian Rupee notes & coins.</p>
             </div>
             <div className="flex flex-wrap items-center gap-2.5 self-stretch sm:self-auto justify-end">
-              {/* Streak Badge */}
-              <div className="bg-amber-50 px-4 py-2 rounded-2xl border border-amber-100 text-center shrink-0 flex flex-col justify-center min-w-[70px]">
-                <span className="text-[9px] font-bold text-amber-600 uppercase tracking-widest block">Streak</span>
-                <span className="text-base font-black text-amber-700">{cashierStreak} 🔥</span>
-              </div>
-              {/* Score Badge */}
-              <div className="bg-emerald-50 px-4 py-2 rounded-2xl border border-emerald-100 text-center shrink-0 flex flex-col justify-center min-w-[75px]">
-                <span className="text-[9px] font-bold text-emerald-600 uppercase tracking-widest block">Score</span>
-                <span className="text-base font-black text-emerald-700">{cashierScore} pts</span>
-              </div>
+              {/* Removed Badges */}
               {/* Reset */}
               <button
                 onClick={resetCashierLab}
@@ -404,73 +343,16 @@ const CashierLab = () => {
             </div>
           </div>
 
-          {/* LEVEL PROGRESS TIMELINE */}
-          <div className="w-full relative mt-3 pt-2">
-            <div className="relative flex justify-between items-start w-full">
-              {/* Background Line (connects all circles) */}
-              <div className="absolute left-[8%] right-[8%] top-[14px] h-[3px] bg-slate-200 z-0 rounded-full">
-                {/* Active Progress Line */}
-                <motion.div
-                  className="h-full bg-emerald-500 rounded-full"
-                  initial={{ width: "0%" }}
-                  animate={{ width: `${((cashierLevel - 1) / 4) * 100}%` }}
-                  transition={{ type: "spring", stiffness: 80, damping: 15 }}
-                />
-              </div>
-
-              {/* Steps */}
-              {[1, 2, 3, 4, 5].map((lvl) => {
-                const isCompleted = cashierLevel > lvl;
-                const isActive = cashierLevel === lvl;
-                const isLocked = cashierLevel < lvl;
-
-                return (
-                  <div key={lvl} className="flex flex-col items-center z-10 flex-1 relative">
-                    {/* Circle Node */}
-                    <motion.div
-                      whileHover={isLocked ? {} : { scale: 1.08 }}
-                      className={`w-7 h-7 rounded-full flex items-center justify-center border transition-all duration-300 font-sans font-bold text-xs shadow-sm
-                        ${isCompleted ? 'bg-emerald-500 border-emerald-600 text-white' : ''}
-                        ${isActive ? 'bg-indigo-600 border-indigo-700 text-white shadow-[0_0_8px_rgba(79,70,229,0.35)] ring-4 ring-indigo-50' : ''}
-                        ${isLocked ? 'bg-slate-100 border-slate-200 text-slate-400' : ''}
-                      `}
-                    >
-                      {isCompleted ? "✓" : lvl}
-                    </motion.div>
-
-                    {/* Level label */}
-                    <span className={`text-[10px] sm:text-[11.5px] font-black text-center mt-2 ${isActive ? 'text-indigo-600' : 'text-slate-400'}`}>
-                      Level {lvl}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+          {/* Removed Progress Timeline */}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
 
-          {/* LEFT COLUMN: CUSTOMER AVATAR, POS RECEIPT, MATH ASSISTANT */}
-          <div className="lg:col-span-5 space-y-5">
-
-            {/* Customer Avatar & Speech Bubble */}
-            <div className="flex flex-col items-center bg-slate-50 border border-slate-200/60 rounded-3xl p-5 relative shadow-sm">
-              <div className="relative w-20 h-20 bg-emerald-50 rounded-full border-2 border-emerald-250 flex items-center justify-center shadow-md">
-                {cashierCustomerType === 'boy' ? (
-                  <BoyAvatarSVG expression={cashierExpression} className="w-16 h-16" />
-                ) : (
-                  <GirlAvatarSVG expression={cashierExpression} className="w-16 h-16" />
-                )}
-              </div>
-              <div className="mt-4 relative bg-white border border-slate-200 p-3.5 rounded-2xl text-[12px] font-bold text-slate-700 leading-relaxed text-center shadow-sm w-full">
-                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-t border-l border-slate-200 rotate-45" />
-                <p className="font-sans">{cashierMessage}</p>
-              </div>
-            </div>
+          {/* LEFT COLUMN: POS RECEIPT */}
+          <div className="lg:col-span-4 flex flex-col h-full">
 
             {/* POS INVOICE / THERMAL RECEIPT */}
-            <div className="relative bg-white border border-slate-200 shadow-[0_8px_20px_rgba(0,0,0,0.04)] rounded-t-2xl rounded-b-none p-5 pt-6 font-mono text-[11.5px] text-slate-700 overflow-hidden border-b-0">
+            <div className="relative bg-white border border-slate-200 shadow-[0_8px_20px_rgba(0,0,0,0.04)] rounded-t-2xl rounded-b-none p-5 pt-6 font-mono text-[11.5px] text-slate-700 overflow-hidden border-b-0 flex-1 flex flex-col">
               <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-slate-100 via-white to-slate-100" />
 
               {/* Store Name Header */}
@@ -527,14 +409,6 @@ const CashierLab = () => {
                   <span>CHANGE DUE:</span>
                   <span className="text-emerald-700">₹{cashierPaidAmount - cashierCurrentItem.price}</span>
                 </div>
-
-                <button
-                  onClick={() => setShowCashierHelp(prev => !prev)}
-                  className="w-full mt-1.5 py-1.5 px-3 bg-white hover:bg-emerald-100/50 text-emerald-800 text-[10px] font-black uppercase tracking-wider rounded-lg border border-emerald-200 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                >
-                  <HelpCircle size={11} className="text-emerald-600" />
-                  {showCashierHelp ? "Hide Math Guide" : "Help Me Count! (गणित गाइड)"}
-                </button>
               </div>
 
               {/* Barcode representation */}
@@ -555,89 +429,61 @@ const CashierLab = () => {
               </div>
             </div>
 
-            {/* "HELP ME COUNT" STEP-BY-STEP MATH ASSISTANT */}
-            <AnimatePresence>
-              {showCashierHelp && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="bg-amber-50/70 border border-amber-250/50 rounded-2xl p-4 text-left space-y-3 overflow-hidden shadow-sm"
-                >
-                  <h4 className="text-[11px] font-black text-amber-800 uppercase tracking-wider flex items-center gap-1.5 border-b border-amber-200/60 pb-1.5">
-                    <HelpCircle size={13} className="text-amber-700" /> counting assistant (गणित गाइड)
-                  </h4>
-                  <div className="space-y-2.5">
-                    {getChangeGuideSteps(cashierCurrentItem.price, cashierPaidAmount).map((step, idx) => (
-                      <div key={idx} className="text-[11px] leading-relaxed text-amber-900 font-semibold">
-                        <div className="font-bold flex items-center gap-1">
-                          <span className="w-1.5 h-1.5 rounded-full bg-amber-600 shrink-0" />
-                          {step.title}
-                        </div>
-                        <p className="text-[10px] text-amber-800/80 font-medium pl-2.5 mt-0.5">{step.desc}</p>
-                        <div className="inline-block bg-white/80 border border-amber-200/50 rounded px-1.5 py-0.5 font-mono text-[9.5px] font-bold text-amber-900 mt-1 ml-2.5">
-                          {step.math}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {/* Removed Math Assistant */}
 
           </div>
 
-          {/* RIGHT COLUMN: CASH DRAWER & HANDOVER TRAY */}
-          <div className="lg:col-span-7 space-y-5">
+          {/* RIGHT COLUMN: CASH DRAWER */}
+          <div className="lg:col-span-8 space-y-5">
 
             {/* CASH REGISTER DRAWER */}
-            <div className="bg-slate-800 border-4 border-slate-700 rounded-[28px] p-5 shadow-2xl space-y-5">
-              <div className="flex items-center justify-between border-b border-slate-700 pb-2.5">
+            <div className="bg-white border-2 border-slate-100 rounded-[28px] p-5 shadow-lg space-y-5 relative">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
                 <div className="flex items-center gap-2">
                   <div>
-                    <h4 className="text-[12.5px] font-black text-white uppercase tracking-wider flex items-center gap-1">
-                      Cash Register Drawer (कैश ड्रावर)
+                    <h4 className="text-[12.5px] font-black text-slate-800 uppercase tracking-wider flex items-center gap-1">
+                      Cash Register Drawer
                     </h4>
-                    <p className="text-[10px] text-slate-400 font-medium">Click on notes or coins to move them to the Handover Tray</p>
+                    <p className="text-[10px] text-slate-500 font-medium">Click on notes or coins to move them to the Handover Tray</p>
                   </div>
                 </div>
-                <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest bg-slate-900/60 px-2 py-1 border border-slate-700 rounded-lg shadow-inner">Drawer Box</span>
+                <span className="text-[8px] font-black text-slate-500 uppercase tracking-widest bg-slate-50 px-2 py-1 border border-slate-200 rounded-lg shadow-sm">Drawer Box</span>
               </div>
 
               {/* Paper Bills Section */}
               <div className="space-y-2.5">
-                <div className="text-[9.5px] font-black text-slate-400 uppercase tracking-wider pl-1">Paper Bills (बैंक नोट)</div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="text-[9.5px] font-black text-slate-500 uppercase tracking-wider pl-1">Paper Bills</div>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                   {[100, 50, 20, 10].map(val => (
                     <div
                       key={val}
-                      className="bg-slate-900/40 border border-slate-700 p-3 rounded-2xl flex flex-col items-center justify-center gap-2 shadow-inner relative group animate-fade-in"
+                      className="bg-slate-50 border border-slate-200 p-2 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm relative group animate-fade-in hover:bg-white transition-colors"
                     >
                       {/* Compartment Label */}
-                      <div className="absolute top-1 right-2 text-[8px] font-mono text-slate-505 font-bold">₹{val} Slot</div>
+                      <div className="absolute top-1 right-1.5 text-[7px] font-mono text-slate-400 font-bold">₹{val} Slot</div>
 
                       {/* Stack of 3D notes */}
-                      <div className="relative w-36 h-20 flex items-center justify-center mt-1">
+                      <div className="relative w-24 h-12 flex items-center justify-center mt-2.5 mb-1">
                         {/* Back note */}
                         <div className="absolute top-1 left-1 transform rotate-[-2deg] scale-[0.98] opacity-30">
-                          <IndianRupeeNote val={val} disabled={true} />
+                          <IndianRupeeNote val={val} size="sm" disabled={true} />
                         </div>
                         {/* Middle note */}
                         <div className="absolute top-0.5 left-0.5 transform rotate-[1deg] scale-[0.99] opacity-60">
-                          <IndianRupeeNote val={val} disabled={true} />
+                          <IndianRupeeNote val={val} size="sm" disabled={true} />
                         </div>
                         {/* Front note (clickable) */}
                         <div className="absolute top-0 left-0">
-                          <IndianRupeeNote val={val} onClick={() => addNoteToTray(val)} />
+                          <IndianRupeeNote val={val} size="sm" onClick={() => addNoteToTray(val)} />
                         </div>
                       </div>
 
                       {/* Helper indicator */}
                       <button
                         onClick={() => addNoteToTray(val)}
-                        className="w-full py-1 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg font-bold text-[10px] text-slate-300 transition-colors uppercase tracking-wider cursor-pointer"
+                        className="w-full py-0.5 mt-1 bg-white hover:bg-slate-100 border border-slate-200 rounded text-[9px] font-bold text-slate-500 transition-colors uppercase tracking-wider cursor-pointer shadow-sm"
                       >
-                        Take ₹{val} Note
+                        Take ₹{val}
                       </button>
                     </div>
                   ))}
@@ -645,37 +491,37 @@ const CashierLab = () => {
               </div>
 
               {/* Coins Section */}
-              <div className="space-y-2.5 pt-3.5 border-t border-slate-700">
-                <div className="text-[9.5px] font-black text-slate-400 uppercase tracking-wider pl-1">Metallic Coins (सिक्के)</div>
-                <div className="grid grid-cols-3 gap-3">
+              <div className="space-y-2.5 pt-3.5 border-t border-slate-100">
+                <div className="text-[9.5px] font-black text-slate-500 uppercase tracking-wider pl-1">Metallic Coins</div>
+                <div className="grid grid-cols-3 gap-2.5">
                   {[5, 2, 1].map(val => (
                     <div
                       key={val}
-                      className="bg-slate-900/40 border border-slate-700 p-3 rounded-2xl flex flex-col items-center justify-center gap-3 shadow-inner relative"
+                      className="bg-slate-50 border border-slate-200 p-2 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm relative hover:bg-white transition-colors"
                     >
-                      <div className="absolute top-1 right-1.5 text-[8px] font-mono text-slate-500 font-bold">₹{val} Slot</div>
+                      <div className="absolute top-1 right-1.5 text-[7px] font-mono text-slate-400 font-bold">₹{val} Slot</div>
 
                       {/* Stack of Coins */}
-                      <div className="relative w-14 h-14 flex items-center justify-center mt-1">
+                      <div className="relative w-8 h-8 flex items-center justify-center mt-2 mb-1">
                         {/* Back coin */}
-                        <div className="absolute top-1 left-1 transform scale-95 opacity-30">
-                          <IndianRupeeCoin val={val} disabled={true} />
+                        <div className="absolute top-0.5 left-0.5 transform scale-95 opacity-30">
+                          <IndianRupeeCoin val={val} size="sm" disabled={true} />
                         </div>
                         {/* Middle coin */}
-                        <div className="absolute top-0.5 left-0.5 transform scale-98 opacity-60">
-                          <IndianRupeeCoin val={val} disabled={true} />
+                        <div className="absolute top-px left-px transform scale-98 opacity-60">
+                          <IndianRupeeCoin val={val} size="sm" disabled={true} />
                         </div>
                         {/* Front coin */}
                         <div className="absolute top-0 left-0">
-                          <IndianRupeeCoin val={val} onClick={() => addNoteToTray(val)} />
+                          <IndianRupeeCoin val={val} size="sm" onClick={() => addNoteToTray(val)} />
                         </div>
                       </div>
 
                       <button
                         onClick={() => addNoteToTray(val)}
-                        className="w-full py-1 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg font-bold text-[9px] text-slate-300 transition-colors uppercase tracking-wider cursor-pointer"
+                        className="w-full py-0.5 mt-1 bg-white hover:bg-slate-100 border border-slate-200 rounded text-[9px] font-bold text-slate-500 transition-colors uppercase tracking-wider cursor-pointer shadow-sm"
                       >
-                        Take ₹{val} Coin
+                        Take ₹{val}
                       </button>
                     </div>
                   ))}
@@ -683,21 +529,21 @@ const CashierLab = () => {
               </div>
             </div>
 
-            {/* HANDOVER TRAY (हस्तांतरण ट्रे) */}
-            <div className="bg-slate-900 rounded-[28px] p-5 text-white border-2 border-slate-800 min-h-[140px] flex flex-col justify-between shadow-xl relative overflow-hidden">
-              <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px] opacity-20 pointer-events-none" />
+            {/* HANDOVER TRAY */}
+            <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-[28px] p-5 text-slate-800 border-2 border-slate-200 min-h-[140px] flex flex-col justify-between shadow-lg relative overflow-hidden">
+              <div className="absolute inset-0 bg-[radial-gradient(#94a3b8_1px,transparent_1px)] [background-size:16px_16px] opacity-10 pointer-events-none" />
 
-              <div className="flex justify-between items-center text-[10px] text-slate-400 font-black uppercase tracking-wider mb-3 z-10">
+              <div className="flex justify-between items-center text-[10px] text-slate-500 font-black uppercase tracking-wider mb-3 z-10">
                 <span className="flex items-center gap-1.5">
-                  <Coins size={12} className="text-yellow-400 animate-pulse" />
-                  Handover Tray (हस्तांतरण ट्रे)
+                  <Coins size={12} className="text-emerald-500 animate-pulse" />
+                  Handover Tray
                 </span>
                 <div className="flex items-center gap-2">
-                  <span className="text-[8px] bg-slate-800 text-slate-500 px-2 py-0.5 rounded font-bold normal-case">Click items to return to drawer</span>
+                  <span className="text-[8px] bg-white text-slate-500 px-2 py-0.5 rounded font-bold normal-case border border-slate-200 shadow-sm">Click items to return to drawer</span>
                   <button
                     onClick={() => setCashierChangeTray({ 100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 2: 0, 1: 0 })}
                     disabled={Object.values(cashierChangeTray).every(v => v === 0)}
-                    className="text-rose-400 hover:text-rose-350 disabled:opacity-30 disabled:pointer-events-none font-black cursor-pointer text-[10px] uppercase tracking-wider transition-colors"
+                    className="text-rose-500 hover:text-rose-600 disabled:opacity-30 disabled:pointer-events-none font-black cursor-pointer text-[10px] uppercase tracking-wider transition-colors"
                   >
                     Clear Tray
                   </button>
@@ -705,7 +551,7 @@ const CashierLab = () => {
               </div>
 
               {/* Visual notes and coins in the tray */}
-              <div className="flex flex-wrap gap-3 items-center py-4 min-h-[70px] bg-slate-950/40 rounded-2xl border border-slate-800 px-4 z-10 shadow-inner">
+              <div className="flex flex-wrap gap-3 items-center py-4 min-h-[70px] bg-white/60 rounded-2xl border border-slate-200 px-4 z-10 shadow-inner">
                 {Object.keys(cashierChangeTray).map(valStr => {
                   const val = parseInt(valStr, 10);
                   const qty = cashierChangeTray[val];
@@ -738,9 +584,9 @@ const CashierLab = () => {
               </div>
 
               {/* Footer details */}
-              <div className="flex justify-between items-center border-t border-slate-800 pt-3 mt-3 z-10">
-                <div className="text-[13px] font-bold">
-                  Total Tray: <span className="font-mono text-yellow-400 font-black text-base">₹{
+              <div className="flex justify-between items-center border-t border-slate-200 pt-3 mt-3 z-10">
+                <div className="text-[13px] font-bold text-slate-600">
+                  Total Tray: <span className="font-mono text-emerald-600 font-black text-base">₹{
                     Object.keys(cashierChangeTray).reduce((sum, val) => sum + parseInt(val, 10) * cashierChangeTray[val], 0)
                   }</span>
                 </div>
@@ -750,18 +596,17 @@ const CashierLab = () => {
                     disabled={Object.values(cashierChangeTray).every(v => v === 0)}
                     className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-40 disabled:pointer-events-none text-white rounded-xl text-[12px] font-black uppercase tracking-wider transition-all cursor-pointer shadow-md hover:shadow-emerald-950/50"
                   >
-                    Hand Over Change 🤝
+                    Hand Over Change
                   </button>
                   <button
                     onClick={generateNewCashierCustomer}
-                    className="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-[12px] font-black uppercase tracking-wider transition-all cursor-pointer shadow-sm"
+                    className="px-4 py-2.5 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 rounded-xl text-[12px] font-black uppercase tracking-wider transition-all cursor-pointer shadow-sm"
                   >
-                    Skip / Next 👤
+                    Skip / Next
                   </button>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -791,11 +636,8 @@ const CashierLab = () => {
               <div className="flex flex-col items-center text-center space-y-4">
                 {/* Character speaking section */}
                 <div className="flex items-center gap-4 w-full">
-                  <div className="shrink-0 w-20 h-20 bg-slate-50 border-2 border-slate-200 rounded-full flex items-center justify-center shadow-md relative">
-                    <BoyAvatarSVG
-                      expression={cashierFeedback.type === 'success' ? 'smile' : 'surprise'}
-                      className="w-16 h-16"
-                    />
+                  <div className={`shrink-0 w-20 h-20 ${cashierFeedback.type === 'success' ? 'bg-emerald-50 border-emerald-200 text-emerald-600' : 'bg-rose-50 border-rose-200 text-rose-600'} border-2 rounded-full flex items-center justify-center shadow-md relative text-5xl font-black`}>
+                    ₹
                     {/* Badge */}
                     <div className={`absolute -bottom-1 -right-1 text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full text-white ${cashierFeedback.type === 'success' ? 'bg-emerald-500' : 'bg-rose-500'
                       }`}>
@@ -830,7 +672,7 @@ const CashierLab = () => {
                 {/* Always-visible step-by-step Counting assistant in the modal */}
                 <div className="w-full bg-amber-50/70 border border-amber-250/50 rounded-2xl p-4 text-left space-y-2.5 shadow-inner">
                   <h4 className="text-[10.5px] font-black text-amber-800 uppercase tracking-wider flex items-center gap-1.5 border-b border-amber-200/40 pb-1.5">
-                    <HelpCircle size={13} className="text-amber-700" /> Counting Guide (काउंटिंग गाइड)
+                    <HelpCircle size={13} className="text-amber-700" /> Counting Guide
                   </h4>
                   <div className="space-y-2">
                     {getChangeGuideSteps(cashierCurrentItem.price, cashierPaidAmount).map((step, idx) => (

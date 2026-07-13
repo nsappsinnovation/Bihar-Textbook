@@ -75,7 +75,7 @@ const AtmLab = () => {
       <div className="w-full text-left space-y-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-5">
           <div>
-            <h2 className="text-2xl md:text-3xl font-black text-slate-800 tracking-tight">ATM Simulator</h2>
+            <h2 className="text-2xl md:text-3xl font-display font-bold text-slate-800 tracking-tight">ATM Simulator</h2>
             <p className="text-[13px] text-slate-500 font-semibold mt-1">Practice withdrawing cash safely.</p>
           </div>
           <button
