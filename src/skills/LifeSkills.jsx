@@ -472,14 +472,14 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
               </div>
               <div className="grid grid-cols-2 gap-3 text-left">
                 <div className="bg-emerald-50/50 p-2.5 rounded-xl border border-emerald-100/50">
-                  <span className="text-[9px] font-black text-emerald-800 uppercase tracking-wider block mb-1">Needs (ज़रूरत)</span>
+                  <span className="text-[9px] font-black text-emerald-800 uppercase tracking-wider block mb-1">Needs</span>
                   <div className="space-y-1">
                     <div className="text-[10px] font-bold text-slate-700">📚 Text Books</div>
                     <div className="text-[10px] font-bold text-slate-700">🍎 Healthy Food</div>
                   </div>
                 </div>
                 <div className="bg-amber-50/50 p-2.5 rounded-xl border border-amber-100/50">
-                  <span className="text-[9px] font-black text-amber-800 uppercase tracking-wider block mb-1">Wants (इच्छा)</span>
+                  <span className="text-[9px] font-black text-amber-800 uppercase tracking-wider block mb-1">Wants</span>
                   <div className="space-y-1">
                     <div className="text-[10px] font-bold text-slate-650">🎮 Video Games</div>
                     <div className="text-[10px] font-bold text-slate-650">🍬 Sweets</div>
@@ -629,8 +629,8 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
               </div>
               <div className="text-xs font-black text-slate-805">Use Polite Words</div>
               <div className="flex flex-wrap gap-1.5 justify-center">
-                <span className="bg-emerald-50 border border-emerald-100 text-emerald-800 text-[9px] font-black px-2.5 py-1 rounded-full">Please / कृपया</span>
-                <span className="bg-blue-50 border border-blue-100 text-blue-800 text-[9px] font-black px-2.5 py-1 rounded-full">Thank you / धन्यवाद</span>
+                <span className="bg-emerald-50 border border-emerald-100 text-emerald-800 text-[9px] font-black px-2.5 py-1 rounded-full">Please</span>
+                <span className="bg-blue-50 border border-blue-100 text-blue-800 text-[9px] font-black px-2.5 py-1 rounded-full">Thank you</span>
               </div>
             </div>
           )}
@@ -832,7 +832,7 @@ const LifeSkills = () => {
               }}
               className="w-full py-1.5 bg-white hover:bg-emerald-50 text-emerald-600 font-extrabold rounded-lg text-[10px] tracking-wide shadow transition-all flex items-center justify-center gap-1 cursor-pointer select-none"
             >
-              Start Guide / विस्तृत गाइड देखें ➔
+              Start Guide ➔
             </button>
             <div className="text-[8px] font-bold text-emerald-250 uppercase tracking-widest text-center mt-2 opacity-80">
               Tap anywhere else to flip back
@@ -844,9 +844,9 @@ const LifeSkills = () => {
   };
 
   const quickStats = [
-    { label: 'Learn Skills', value: 'Step by step', icon: <Lightbulb className="text-emerald-600" />, color: 'bg-emerald-50' },
-    { label: 'Practical Labs', value: 'Interactive labs', icon: <Target className="text-blue-600" />, color: 'bg-blue-50' },
-    { label: 'Take Challenges', value: 'Test skills', icon: <Trophy className="text-amber-500" />, color: 'bg-amber-50' },
+    { label: 'Learn Skills', value: 'Step by step', icon: <Lightbulb />, color: 'bg-emerald-50' },
+    { label: 'Practical Labs', value: 'Interactive labs', icon: <Target />, color: 'bg-emerald-50' },
+    { label: 'Take Challenges', value: 'Test skills', icon: <Trophy />, color: 'bg-emerald-50' },
   ];
 
   return (
@@ -866,7 +866,7 @@ const LifeSkills = () => {
           <div className="relative">
             {/* Hero Section */}
             <section className="bg-white rounded-[16px] md:rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[180px] sm:min-h-[220px] md:min-h-[260px] 2xl:min-h-[320px] pb-4 md:pb-6 text-left">
-              <div className="relative z-10 p-5 sm:p-0 md:p-2 lg:w-1/2 space-y-3 md:space-y-4">
+              <div className="relative z-10 p-6 sm:p-8 md:p-10 lg:p-12 lg:w-1/2 space-y-3 md:space-y-4">
                 <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
                   Learn, Grow & <br /> Live Better with <br />
                   <span className="text-emerald-600">Life Skills</span>
@@ -886,35 +886,15 @@ const LifeSkills = () => {
             </section>
 
             {/* Quick Stats Row — overlapping hero with negative margin */}
-            <section className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 relative z-20 -mt-4 px-4 md:px-12 text-left">
+            <section className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 relative z-20 -mt-10 px-2 sm:px-6 md:px-8 text-left">
               {quickStats.map((stat, i) => {
                 const isActive = activeFilter === stat.label;
 
-                let themeBorder = '';
-                let iconBg = '';
-                let iconColor = '';
-                let textColor = '';
-                let valueColor = '';
-
-                if (stat.label === 'Learn Skills') {
-                  themeBorder = isActive ? 'border-emerald-500 ring-2 ring-emerald-500/10 shadow-md' : 'border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)]';
-                  iconBg = isActive ? 'bg-emerald-600 text-white' : 'bg-emerald-50';
-                  iconColor = isActive ? 'text-white' : 'text-emerald-600';
-                  textColor = isActive ? 'text-emerald-700' : 'text-[#1e1b4b] group-hover:text-emerald-600';
-                  valueColor = isActive ? 'text-emerald-600/80' : 'text-slate-500';
-                } else if (stat.label === 'Practical Labs') {
-                  themeBorder = isActive ? 'border-blue-500 ring-2 ring-blue-500/10 shadow-md' : 'border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)]';
-                  iconBg = isActive ? 'bg-blue-600 text-white' : 'bg-blue-50';
-                  iconColor = isActive ? 'text-white' : 'text-blue-600';
-                  textColor = isActive ? 'text-blue-700' : 'text-[#1e1b4b] group-hover:text-blue-600';
-                  valueColor = isActive ? 'text-blue-600/80' : 'text-slate-500';
-                } else { // Take Challenges
-                  themeBorder = isActive ? 'border-amber-500 ring-2 ring-amber-500/10 shadow-md' : 'border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)]';
-                  iconBg = isActive ? 'bg-amber-500 text-white' : 'bg-amber-50';
-                  iconColor = isActive ? 'text-white' : 'text-amber-500';
-                  textColor = isActive ? 'text-amber-700' : 'text-[#1e1b4b] group-hover:text-amber-600';
-                  valueColor = isActive ? 'text-amber-600/80' : 'text-slate-500';
-                }
+                const themeBorder = isActive ? 'border-emerald-500 ring-2 ring-emerald-500/10 shadow-md' : 'border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)]';
+                const iconBg = isActive ? 'bg-emerald-600 text-white' : 'bg-emerald-50';
+                const iconColor = isActive ? 'text-white' : 'text-emerald-600';
+                const textColor = isActive ? 'text-emerald-700' : 'text-[#1e1b4b] group-hover:text-emerald-600';
+                const valueColor = isActive ? 'text-emerald-600/80' : 'text-slate-500';
 
                 return (
                   <div
@@ -940,7 +920,7 @@ const LifeSkills = () => {
           </div>
 
           {/* Content Section */}
-          <div id="content-section" className="pt-6">
+          <div id="content-section" className="pt-6 px-2 sm:px-6 md:px-12">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeFilter}
@@ -956,47 +936,47 @@ const LifeSkills = () => {
                       {[
                         {
                           id: 'atm',
-                          title: 'Bihar Gramin Bank ATM',
-                          desc: 'Secure cash withdrawal simulation.',
+                          title: 'ATM Simulator',
+                          desc: 'Practice withdrawing cash safely.',
                           difficulty: 'Medium',
-                          icon: '🏦',
-                          activeStyle: 'bg-[#f1f5f9] border-emerald-500 ring-2 ring-emerald-500/10 shadow-md text-slate-900',
-                          inactiveStyle: 'bg-[#f8fafc]/95 border-slate-200/60 hover:bg-[#f1f5f9]/70 hover:border-slate-300 text-slate-700 hover:text-slate-900',
-                          iconBgActive: 'bg-blue-600 text-white',
-                          iconBgInactive: 'bg-blue-50 text-blue-600'
+                          icon: <CreditCard />,
+                          activeStyle: 'bg-white border-emerald-500 ring-1 ring-emerald-500 shadow-md text-slate-900 scale-[1.02]',
+                          inactiveStyle: 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-sm text-slate-700 hover:text-slate-900',
+                          iconBgActive: 'bg-emerald-50 text-emerald-600',
+                          iconBgInactive: 'bg-slate-50 text-slate-400 group-hover:text-emerald-500'
                         },
                         {
                           id: 'traffic',
-                          title: 'Traffic Safety Lab',
-                          desc: 'Signals & road crossing practice.',
+                          title: 'Road Crossing',
+                          desc: 'Learn how to read traffic signals.',
                           difficulty: 'Easy',
-                          icon: '🚦',
-                          activeStyle: 'bg-[#f1f5f9] border-emerald-500 ring-2 ring-emerald-500/10 shadow-md text-slate-900',
-                          inactiveStyle: 'bg-[#f8fafc]/95 border-slate-200/60 hover:bg-[#f1f5f9]/70 hover:border-slate-300 text-slate-700 hover:text-slate-900',
-                          iconBgActive: 'bg-emerald-600 text-white',
-                          iconBgInactive: 'bg-green-50 text-emerald-600'
+                          icon: <AlertCircle />,
+                          activeStyle: 'bg-white border-emerald-500 ring-1 ring-emerald-500 shadow-md text-slate-900 scale-[1.02]',
+                          inactiveStyle: 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-sm text-slate-700 hover:text-slate-900',
+                          iconBgActive: 'bg-emerald-50 text-emerald-600',
+                          iconBgInactive: 'bg-slate-50 text-slate-400 group-hover:text-emerald-500'
                         },
                         {
                           id: 'cashier',
-                          title: 'Smart Cashier Lab',
-                          desc: 'Indian currency change calculator.',
+                          title: 'Cashier Math',
+                          desc: 'Calculate the correct change to give back.',
                           difficulty: 'Medium',
-                          icon: '🪙',
-                          activeStyle: 'bg-[#f1f5f9] border-emerald-500 ring-2 ring-emerald-500/10 shadow-md text-slate-900',
-                          inactiveStyle: 'bg-[#f8fafc]/95 border-slate-200/60 hover:bg-[#f1f5f9]/70 hover:border-slate-300 text-slate-700 hover:text-slate-900',
-                          iconBgActive: 'bg-amber-600 text-white',
-                          iconBgInactive: 'bg-amber-50 text-amber-600'
+                          icon: <Coins />,
+                          activeStyle: 'bg-white border-emerald-500 ring-1 ring-emerald-500 shadow-md text-slate-900 scale-[1.02]',
+                          inactiveStyle: 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-sm text-slate-700 hover:text-slate-900',
+                          iconBgActive: 'bg-emerald-50 text-emerald-600',
+                          iconBgInactive: 'bg-slate-50 text-slate-400 group-hover:text-emerald-500'
                         },
                         {
                           id: 'firstaid',
-                          title: 'First Aid Clinic',
-                          desc: 'Emergency wound treatment steps.',
+                          title: 'First Aid Basics',
+                          desc: 'Learn how to treat minor wounds.',
                           difficulty: 'Hard',
-                          icon: '🩹',
-                          activeStyle: 'bg-[#f1f5f9] border-emerald-500 ring-2 ring-emerald-500/10 shadow-md text-slate-900',
-                          inactiveStyle: 'bg-[#f8fafc]/95 border-slate-200/60 hover:bg-[#f1f5f9]/70 hover:border-slate-300 text-slate-700 hover:text-slate-900',
-                          iconBgActive: 'bg-rose-600 text-white',
-                          iconBgInactive: 'bg-rose-50 text-rose-600'
+                          icon: <HeartPulse />,
+                          activeStyle: 'bg-white border-emerald-500 ring-1 ring-emerald-500 shadow-md text-slate-900 scale-[1.02]',
+                          inactiveStyle: 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-sm text-slate-700 hover:text-slate-900',
+                          iconBgActive: 'bg-emerald-50 text-emerald-600',
+                          iconBgInactive: 'bg-slate-50 text-slate-400 group-hover:text-emerald-500'
                         }
                       ].map(lab => {
                         const isActive = selectedLab === lab.id;
@@ -1012,27 +992,19 @@ const LifeSkills = () => {
                                 }
                               }, 100);
                             }}
-                            className={`p-5 rounded-lg border transition-all duration-300 cursor-pointer text-left relative overflow-hidden group ${isActive ? lab.activeStyle : lab.inactiveStyle
-                              }`}
+                            className={`p-3 md:p-4 rounded-[12px] border transition-all duration-300 cursor-pointer text-left flex items-center gap-3 relative group ${isActive ? lab.activeStyle : lab.inactiveStyle}`}
                           >
-                            <div className="flex justify-between items-start mb-3">
-                              <div className={`w-12 h-12 rounded-md flex items-center justify-center text-2xl shadow-inner ${isActive ? lab.iconBgActive : lab.iconBgInactive
-                                }`}>
-                                {lab.icon}
-                              </div>
-                              <span className={`text-[10px] font-black uppercase px-2.5 py-1 rounded-full ${lab.difficulty === 'Easy' ? 'bg-green-100/80 text-green-800 border border-green-200/30'
-                                : lab.difficulty === 'Medium' ? 'bg-blue-100/80 text-blue-800 border border-blue-200/30'
-                                  : 'bg-rose-100/80 text-rose-800 border border-rose-200/30'
-                                }`}>
-                                {lab.difficulty}
-                              </span>
+                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center shadow-inner shrink-0 transition-colors ${isActive ? lab.iconBgActive : lab.iconBgInactive} [&>svg]:w-5 [&>svg]:h-5`}>
+                              {lab.icon}
                             </div>
-                            <h3 className="text-base font-black leading-tight mb-1">
-                              {lab.title}
-                            </h3>
-                            <p className="text-[13px] opacity-90 leading-normal font-semibold">
-                              {lab.desc}
-                            </p>
+                            <div className="overflow-hidden">
+                              <h3 className="text-[13px] md:text-sm font-black leading-tight mb-0.5 truncate">
+                                {lab.title}
+                              </h3>
+                              <p className="text-[11px] md:text-xs opacity-80 leading-snug font-semibold truncate">
+                                {lab.desc}
+                              </p>
+                            </div>
                           </div>
                         );
                       })}
@@ -1097,7 +1069,7 @@ const LifeSkills = () => {
                   </div>
                   <div className="text-left">
                     <h3 className="text-sm md:text-base font-black text-slate-800 leading-tight">{selectedGuideSkill.title}</h3>
-                    <p className="text-[9px] md:text-[10px] font-bold text-emerald-600 uppercase tracking-widest mt-0.5">Step-by-Step Guide / विस्तृत गाइड</p>
+                    <p className="text-[9px] md:text-[10px] font-bold text-emerald-600 uppercase tracking-widest mt-0.5">Step-by-Step Guide</p>
                   </div>
                 </div>
                 <button
@@ -1169,21 +1141,14 @@ const LifeSkills = () => {
                     </div>
 
                     {/* Step Title */}
-                    <h4 className="text-lg md:text-xl font-black text-slate-900 leading-snug mb-1">
+                    <h4 className="text-lg md:text-xl font-black text-slate-900 leading-snug mb-5">
                       {skillStepsData[selectedGuideSkill.id]?.[currentGuideStep]?.title.split(" / ")[0]}
                     </h4>
-                    <p className="text-sm md:text-base font-bold text-emerald-600 mb-5 leading-snug">
-                      {skillStepsData[selectedGuideSkill.id]?.[currentGuideStep]?.title.split(" / ")[1]}
-                    </p>
 
                     {/* Description Box */}
                     <div className="p-4 md:p-5 bg-slate-50 border border-slate-100 rounded-2xl space-y-3 flex-1">
                       <p className="text-[13px] md:text-sm font-semibold text-slate-700 leading-relaxed">
                         {skillStepsData[selectedGuideSkill.id]?.[currentGuideStep]?.desc.split(" / ")[0]}
-                      </p>
-                      <div className="h-px bg-slate-200/60 w-full" />
-                      <p className="text-[12px] md:text-[13px] font-semibold text-slate-500 leading-relaxed italic">
-                        {skillStepsData[selectedGuideSkill.id]?.[currentGuideStep]?.desc.split(" / ")[1]}
                       </p>
                     </div>
                   </div>

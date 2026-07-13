@@ -75,11 +75,8 @@ const AtmLab = () => {
       <div className="w-full text-left space-y-8">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-5">
           <div>
-            <span className="text-[11px] font-black uppercase text-emerald-600 tracking-widest bg-emerald-50 px-3.5 py-1.5 rounded-full border border-emerald-100/50">
-              🏦 Practical Lab 01
-            </span>
-            <h2 className="text-2xl md:text-3xl font-black text-slate-800 mt-2 tracking-tight">Bihar Gramin Bank ATM Simulator</h2>
-            <p className="text-[13px] text-slate-500 font-semibold mt-1">Simulate safe cash withdrawals under realistic Bihar state banking conditions.</p>
+            <h2 className="text-2xl md:text-3xl font-black text-slate-800 tracking-tight">ATM Simulator</h2>
+            <p className="text-[13px] text-slate-500 font-semibold mt-1">Practice withdrawing cash safely.</p>
           </div>
           <button
             onClick={resetAtm}
@@ -145,7 +142,7 @@ const AtmLab = () => {
 
             <div className="bg-amber-50/70 rounded-2xl py-5 pl-7 pr-5 border border-amber-200/50 space-y-3">
               <h4 className="text-[12px] font-black uppercase text-amber-700 tracking-wider flex items-center gap-1.5 -ml-2">
-                <Shield size={14} className="text-amber-600 animate-pulse" /> Security Guidelines / सुरक्षा नियम
+                <Shield size={14} className="text-amber-600 animate-pulse" /> Security Guidelines
               </h4>
               <ul className="text-[11.5px] text-amber-900/90 space-y-2.5 list-disc list-outside pl-4 font-bold leading-relaxed">
                 <li>Always cover the keypad with your free hand while typing your secret PIN.</li>
@@ -164,7 +161,7 @@ const AtmLab = () => {
               {/* Top Banner/Engraving */}
               <div className="bg-[#003b80] text-white py-2 px-3 rounded-xl text-center shadow-inner border border-[#002a60] flex flex-col items-center select-none">
                 <span className="text-[13px] font-black tracking-widest">BIHAR GRAMIN BANK</span>
-                <span className="text-[9px] text-sky-200 font-bold uppercase tracking-wider">Automated Teller Machine • एटीएम</span>
+                <span className="text-[9px] text-sky-200 font-bold uppercase tracking-wider">Automated Teller Machine</span>
               </div>
 
               {/* ATM Screen and Side Buttons Group */}
@@ -196,7 +193,7 @@ const AtmLab = () => {
 
                   {/* Screen Header */}
                   <div className="border-b border-white/20 pb-1 flex justify-between items-center text-[9px] font-bold tracking-wide">
-                    <span className="flex items-center gap-1">🏦 बिहार ग्रामीण बैंक</span>
+                    <span className="flex items-center gap-1">🏦 BIHAR GRAMIN BANK</span>
                     <span className="text-[8px] text-sky-200">BIHAR GRAMIN BANK</span>
                   </div>
 
@@ -206,13 +203,13 @@ const AtmLab = () => {
                       <CreditCard className="w-12 h-12 text-sky-200 animate-bounce" />
                       <div className="space-y-0.5">
                         <h4 className="text-xs font-black tracking-wide text-white">WELCOME TO BIHAR GRAMIN BANK</h4>
-                        <p className="text-[9px] text-sky-100 font-bold">कृपया अपना कार्ड डालें / Please insert your card</p>
+                        <p className="text-[9px] text-sky-100 font-bold">Please insert your card</p>
                       </div>
                       <button
                         onClick={() => setAtmStep('language')}
                         className="px-5 py-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-450 text-slate-950 rounded-xl text-[10px] font-black uppercase transition-all shadow-md cursor-pointer active:scale-95"
                       >
-                        Insert Card / कार्ड डालें
+                        Insert Card
                       </button>
                     </div>
                   )}
@@ -221,7 +218,7 @@ const AtmLab = () => {
                     <div className="flex-1 flex flex-col justify-between py-2 text-right z-20">
                       <div className="text-center">
                         <h4 className="text-xs font-black text-white">PLEASE SELECT LANGUAGE</h4>
-                        <p className="text-[9px] text-sky-100">भाषा का चयन करें</p>
+                        <p className="text-[9px] text-sky-100">Select an option below</p>
                       </div>
                       <div className="space-y-3.5 pr-0.5 text-right flex flex-col items-end">
                         <button
@@ -240,7 +237,7 @@ const AtmLab = () => {
                           }}
                           className="w-[120px] py-1.5 bg-sky-950/70 hover:bg-sky-600 border border-sky-400/35 hover:border-sky-300 text-white rounded-lg text-[10px] font-black text-center cursor-pointer shadow-sm"
                         >
-                          हिंदी / HINDI ➔
+                          HINDI ➔
                         </button>
                       </div>
                     </div>
@@ -286,7 +283,7 @@ const AtmLab = () => {
                     <div className="flex-1 flex flex-col justify-between py-2 z-20">
                       <div className="text-center">
                         <h4 className="text-xs font-black text-white">SELECT ACCOUNT TYPE</h4>
-                        <p className="text-[9px] text-sky-100">खाता प्रकार चुनें</p>
+                        <p className="text-[9px] text-sky-100">Choose an account type</p>
                       </div>
                       <div className="grid grid-cols-2 gap-2 mt-2">
                         <div className="text-left">
@@ -359,7 +356,7 @@ const AtmLab = () => {
                     <div className="flex-1 flex flex-col justify-between py-1.5 z-20">
                       <div className="text-center space-y-0.5">
                         <h4 className="text-xs font-black text-white">ENTER YOUR SECRET PIN</h4>
-                        <p className="text-[8px] text-sky-200 font-bold">सुरक्षा के लिए अपना पिन गोपनीय रखें</p>
+                        <p className="text-[8px] text-sky-200 font-bold">Keep your PIN secret for security</p>
                       </div>
 
                       <div className="flex flex-col items-center py-1.5">
@@ -385,7 +382,7 @@ const AtmLab = () => {
                           onClick={handlePinSubmit}
                           className="w-[110px] py-1.5 bg-amber-400 text-slate-900 text-[9px] font-black rounded-lg text-center shadow-md hover:bg-amber-350 cursor-pointer"
                         >
-                          ENTER / हाँ ➔
+                          ENTER ➔
                         </button>
                       </div>
                     </div>
@@ -396,7 +393,7 @@ const AtmLab = () => {
                       <div className="w-10 h-10 rounded-full border-4 border-t-yellow-400 border-r-transparent border-b-transparent border-l-transparent animate-spin" />
                       <div className="space-y-0.5">
                         <h4 className="text-xs font-bold text-sky-100">TRANSACTION PROCESSING</h4>
-                        <p className="text-[9px] text-sky-250 font-bold">कृपया प्रतीक्षा करें / Please wait...</p>
+                        <p className="text-[9px] text-sky-250 font-bold">Please wait...</p>
                       </div>
                     </div>
                   )}
@@ -527,7 +524,7 @@ const AtmLab = () => {
                       className="text-[11px] font-black text-emerald-450 animate-bounce flex items-center gap-1.5 cursor-pointer select-none"
                       onClick={() => setAtmStep('success')}
                     >
-                      💵 Take ₹{selectedAmount} Cash (Click here / पैसे निकालें)
+                      💵 Take ₹{selectedAmount} Cash (Click here)
                     </motion.div>
                   ) : (
                     <div className="w-[85%] h-0.5 bg-slate-800 rounded animate-pulse" />
