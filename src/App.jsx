@@ -1,57 +1,55 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { ReactLenis } from "lenis/react";
 
 import Nav from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
-import Blog from "./pages/navbar_pages/Blog.jsx";
-
-/* Pages */
-import Home from "./pages/Home";
-import Tenders from "./pages/Tenders";
-import CsrPolicy from "./pages/CsrPolicy";
-import KnowUs from "./pages/Know";
-import Books from "./pages/navbar_pages/books/Books.jsx";
-import BookReader from "./pages/navbar_pages/books/BookReader.jsx";
-import Flipbook from "./pages/navbar_pages/books/Flipbook.jsx";
-import Gallery from "./pages/Gallery.jsx";
-import Document from "./pages/Document.jsx";
-import Ling from "./linguistics/Ling.jsx";
-import LingModule from "./linguistics/LingModule.jsx";
-import PublishingMission from "./pages/missions/PublishingMission.jsx";
-import VrMission from "./pages/missions/VrMission.jsx";
-import SignLanguageMission from "./pages/missions/SignLanguageMission.jsx";
-import MultilingualMission from "./pages/missions/MultilingualMission.jsx";
-import AudiobooksMission from "./pages/missions/AudiobooksMission.jsx";
-import Sign from "./signLanguage/Signlanguage.jsx";
-import SignLearn from "./signLanguage/SignLearn.jsx";
-import Linguistics from "./linguistics/Linguistics.jsx";
-import Audio from "./audio/Audiolib.jsx";
-import Basicskill from "./skills/Basicskills.jsx";
-import LifeSkills from "./skills/LifeSkills.jsx";
-import HeritageDashboard from "./heritage/HeritageDashboard.jsx";
-import AudioLibraryDashboard from "./audio/AudioLibraryDashboard.jsx";
-import MyAudioLibrary from "./audio/MyAudioLibrary.jsx";
-import AiIntelligenceDashboard from "./ai/AiIntelligenceDashboard.jsx";
-import VrDashboard from "./vr/VrDashboard.jsx";
-
-import CyberSecurityDashboard from "./cyberSecurity/CyberSecurityDashboard.jsx";
-import VrTechLearning from "./vr/VrTechLearning.jsx";
-
-
-/* Components */
-import KeyParticipantViewAll from "./components/KeyParticipantsViewAll";
-import Contact from "./pages/Contact";
-import Notice from "./pages/navbar_pages/Notice.jsx";
-import NoticeBoard from "./pages/navbar_pages/NoticeBoard.jsx";
-
-
-/* Auth */
-import Login from "./auth/Login.jsx";
-import SignUp from "./auth/SignUp.jsx";
-
 import ScrollToTop from "./components/ScrollToTop";
-import AdminPortal from "./admin/AdminPortal.jsx";
+
+/* Lazily loaded Pages & Components */
+const Blog = lazy(() => import("./pages/navbar_pages/Blog.jsx"));
+const Home = lazy(() => import("./pages/Home"));
+const Tenders = lazy(() => import("./pages/Tenders"));
+const CsrPolicy = lazy(() => import("./pages/CsrPolicy"));
+const KnowUs = lazy(() => import("./pages/Know"));
+const Books = lazy(() => import("./pages/navbar_pages/books/Books.jsx"));
+const BookReader = lazy(() => import("./pages/navbar_pages/books/BookReader.jsx"));
+const Flipbook = lazy(() => import("./pages/navbar_pages/books/Flipbook.jsx"));
+const Gallery = lazy(() => import("./pages/Gallery.jsx"));
+const Document = lazy(() => import("./pages/Document.jsx"));
+const Ling = lazy(() => import("./linguistics/Ling.jsx"));
+const LingModule = lazy(() => import("./linguistics/LingModule.jsx"));
+const PublishingMission = lazy(() => import("./pages/missions/PublishingMission.jsx"));
+const VrMission = lazy(() => import("./pages/missions/VrMission.jsx"));
+const SignLanguageMission = lazy(() => import("./pages/missions/SignLanguageMission.jsx"));
+const MultilingualMission = lazy(() => import("./pages/missions/MultilingualMission.jsx"));
+const AudiobooksMission = lazy(() => import("./pages/missions/AudiobooksMission.jsx"));
+const Sign = lazy(() => import("./signLanguage/Signlanguage.jsx"));
+const SignLearn = lazy(() => import("./signLanguage/SignLearn.jsx"));
+const Linguistics = lazy(() => import("./linguistics/Linguistics.jsx"));
+const Audio = lazy(() => import("./audio/Audiolib.jsx"));
+const Basicskill = lazy(() => import("./skills/Basicskills.jsx"));
+const LifeSkills = lazy(() => import("./skills/LifeSkills.jsx"));
+const HeritageDashboard = lazy(() => import("./heritage/HeritageDashboard.jsx"));
+const AudioLibraryDashboard = lazy(() => import("./audio/AudioLibraryDashboard.jsx"));
+const MyAudioLibrary = lazy(() => import("./audio/MyAudioLibrary.jsx"));
+const AiIntelligenceDashboard = lazy(() => import("./ai/AiIntelligenceDashboard.jsx"));
+const VrDashboard = lazy(() => import("./vr/VrDashboard.jsx"));
+const CyberSecurityDashboard = lazy(() => import("./cyberSecurity/CyberSecurityDashboard.jsx"));
+const VrTechLearning = lazy(() => import("./vr/VrTechLearning.jsx"));
+const KeyParticipantViewAll = lazy(() => import("./components/KeyParticipantsViewAll"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Notice = lazy(() => import("./pages/navbar_pages/Notice.jsx"));
+const NoticeBoard = lazy(() => import("./pages/navbar_pages/NoticeBoard.jsx"));
+const Login = lazy(() => import("./auth/Login.jsx"));
+const SignUp = lazy(() => import("./auth/SignUp.jsx"));
+const AdminPortal = lazy(() => import("./admin/AdminPortal.jsx"));
+
+const LoadingFallback = () => (
+  <div className="min-h-screen flex items-center justify-center bg-[#FDFDFD]">
+    <div className="w-12 h-12 border-4 border-slate-200 border-t-emerald-500 rounded-full animate-spin"></div>
+  </div>
+);
 
 function App() {
   const location = useLocation();
@@ -116,90 +114,92 @@ function App() {
           className={`flex-grow ${location.pathname !== "/" && !isNoNavPage ? "pt-24" : ""
             }`}
         >
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/admin/*" element={<AdminPortal />} />
+          <Suspense fallback={<LoadingFallback />}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/admin/*" element={<AdminPortal />} />
 
-            {/* Core */}
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/contact" element={<Contact />} />
+              {/* Core */}
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/contact" element={<Contact />} />
 
-            {/* Auth */}
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<SignUp />} />
+              {/* Auth */}
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<SignUp />} />
 
-            {/* Learning Modules */}
-            <Route path="/sign" element={<Sign />} />
-            <Route path="/sign-learn" element={<SignLearn />} />
+              {/* Learning Modules */}
+              <Route path="/sign" element={<Sign />} />
+              <Route path="/sign-learn" element={<SignLearn />} />
 
-            {/* AI */}
-            
-            <Route path="/ai-intelligence-dashboard" element={<AiIntelligenceDashboard />} />
-            
-            {/* VR */}
-            <Route path="/vr-dashboard" element={<VrDashboard />} />
-            
+              {/* AI */}
+              
+              <Route path="/ai-intelligence-dashboard" element={<AiIntelligenceDashboard />} />
+              
+              {/* VR */}
+              <Route path="/vr-dashboard" element={<VrDashboard />} />
+              
 
-            {/* Cyber */}
-           
-            <Route path="/cyber-security-dashboard" element={<CyberSecurityDashboard />} />
+              {/* Cyber */}
+             
+              <Route path="/cyber-security-dashboard" element={<CyberSecurityDashboard />} />
 
-            {/* Heritage */}
-           
-            <Route path="/heritage-dashboard" element={<HeritageDashboard />} />
+              {/* Heritage */}
+             
+              <Route path="/heritage-dashboard" element={<HeritageDashboard />} />
 
-            {/* Audio */}
-            <Route path="/audio-books" element={<Audio />} />
-            <Route path="/audio-library-dashboard" element={<AudioLibraryDashboard />} />
-            <Route path="/my-audio-library" element={<AudioLibraryDashboard />} />
+              {/* Audio */}
+              <Route path="/audio-books" element={<Audio />} />
+              <Route path="/audio-library-dashboard" element={<AudioLibraryDashboard />} />
+              <Route path="/my-audio-library" element={<AudioLibraryDashboard />} />
 
-            {/* Linguistics */}
-            <Route path="/ling" element={<Ling />} />
-            <Route path="/ling/words" element={<LingModule type="words" />} />
-            <Route path="/ling/phrases" element={<LingModule type="phrases" />} />
-            <Route path="/ling/conversations" element={<LingModule type="conversations" />} />
-            <Route path="/linguistic" element={<Linguistics />} />
+              {/* Linguistics */}
+              <Route path="/ling" element={<Ling />} />
+              <Route path="/ling/words" element={<LingModule type="words" />} />
+              <Route path="/ling/phrases" element={<LingModule type="phrases" />} />
+              <Route path="/ling/conversations" element={<LingModule type="conversations" />} />
+              <Route path="/linguistic" element={<Linguistics />} />
 
-            {/* Courses */}
-
-
-
-
-            {/* Skills */}
-            <Route path="/basic-skills" element={<Basicskill />} />
-            <Route path="/life-skills" element={<LifeSkills />} />
+              {/* Courses */}
 
 
-            {/* Books */}
-            <Route path="/books/:classId" element={<Books />} />
-            <Route path="/class/:classId/read/:bookSubject" element={<BookReader />} />
-            <Route path="/book/:classId/:bookSubject/:chapterId/flip" element={<Flipbook />} />
 
-            {/* Gallery & Docs */}
-            <Route path="/gallery/:sectionId" element={<Gallery />} />
-            <Route path="/documents/:sectionId" element={<Document />} />
 
-            {/* Know Us */}
-            <Route path="/know-us/:sectionId" element={<KnowUs />} />
+              {/* Skills */}
+              <Route path="/basic-skills" element={<Basicskill />} />
+              <Route path="/life-skills" element={<LifeSkills />} />
 
-            {/* Events */}
-            <Route path="/notice-board" element={<NoticeBoard />} />
 
-            {/* Other */}
-            <Route path="/notice" element={<Notice />} />
-            <Route path="/tenders" element={<Tenders />} />
-            <Route path="/csr-policy" element={<CsrPolicy />} />
+              {/* Books */}
+              <Route path="/books/:classId" element={<Books />} />
+              <Route path="/class/:classId/read/:bookSubject" element={<BookReader />} />
+              <Route path="/book/:classId/:bookSubject/:chapterId/flip" element={<Flipbook />} />
 
-            {/* Missions */}
-            <Route path="/publishing-mission" element={<PublishingMission />} />
-            <Route path="/vr-mission" element={<VrMission />} />
-            <Route path="/sign-language-mission" element={<SignLanguageMission />} />
-            <Route path="/multilingual-mission" element={<MultilingualMission />} />
-            <Route path="/audiobooks-mission" element={<AudiobooksMission />} />
-  
-            {/* Misc */}
-            <Route path="/key-participants" element={<KeyParticipantViewAll />} />
-          </Routes>
+              {/* Gallery & Docs */}
+              <Route path="/gallery/:sectionId" element={<Gallery />} />
+              <Route path="/documents/:sectionId" element={<Document />} />
+
+              {/* Know Us */}
+              <Route path="/know-us/:sectionId" element={<KnowUs />} />
+
+              {/* Events */}
+              <Route path="/notice-board" element={<NoticeBoard />} />
+
+              {/* Other */}
+              <Route path="/notice" element={<Notice />} />
+              <Route path="/tenders" element={<Tenders />} />
+              <Route path="/csr-policy" element={<CsrPolicy />} />
+
+              {/* Missions */}
+              <Route path="/publishing-mission" element={<PublishingMission />} />
+              <Route path="/vr-mission" element={<VrMission />} />
+              <Route path="/sign-language-mission" element={<SignLanguageMission />} />
+              <Route path="/multilingual-mission" element={<MultilingualMission />} />
+              <Route path="/audiobooks-mission" element={<AudiobooksMission />} />
+    
+              {/* Misc */}
+              <Route path="/key-participants" element={<KeyParticipantViewAll />} />
+            </Routes>
+          </Suspense>
         </main>
 
         {!isNoFooterPage && <Footer />}
