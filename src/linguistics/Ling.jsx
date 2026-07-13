@@ -295,7 +295,7 @@ function LanguagePill({ lang, selected, disabled, onClick }) {
           : "border-[#F0F0F0] bg-white hover:border-slate-300"}`}
     >
       <div className="w-8 h-8 rounded-full overflow-hidden border border-slate-100">
-        <img src={lang.flag} alt={lang.name} className="w-full h-full object-cover scale-150" />
+        <img src={lang.flag} alt={lang.name} loading="lazy" className="w-full h-full object-cover scale-150" />
       </div>
       <span className={`text-[12px] font-bold ${selected ? "text-[#2E7D32]" : "text-slate-600"}`}>{lang.name}</span>
       
@@ -338,7 +338,7 @@ function ModuleCard({ title, desc, icon, bg, titleColor, linkColor, imgSrc, onCl
 
       {/* 3D Graphic at Bottom Right */}
       <div className="absolute -right-4 -bottom-6 w-32 h-40 transition-transform duration-700 pointer-events-none flex items-end justify-end p-2">
-        {imgSrc && <img src={imgSrc} alt="" className="w-full h-full object-contain" onError={(e) => e.target.style.display='none'} />}
+        {imgSrc && <img src={imgSrc} alt="" loading="lazy" className="w-full h-full object-contain" onError={(e) => e.target.style.display='none'} />}
       </div>
     </div>
   );
