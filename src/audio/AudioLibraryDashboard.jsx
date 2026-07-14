@@ -144,11 +144,13 @@ const AudioLibraryDashboard = () => {
 
   // Helper to get exact chapter duration from CIET portal
   const getChapterDuration = (book, idx) => {
-    if (book && book.chapterDurations && book.chapterDurations[idx]) {
+    if (!book || !book.chapterAudioUrls || !book.chapterAudioUrls[idx]) {
+      return "00:00";
+    }
+    if (book.chapterDurations && book.chapterDurations[idx]) {
       return book.chapterDurations[idx];
     }
-    const defaultDurations = ["14:55", "30:05", "06:01", "19:50", "08:55", "12:38", "07:58", "08:06", "04:17", "08:15", "07:45", "09:10"];
-    return defaultDurations[idx % defaultDurations.length];
+    return "00:00";
   };
 
   // Helper to compute active chapter info
@@ -582,7 +584,7 @@ const AudioLibraryDashboard = () => {
                       <div className="mt-4 pt-3.5 border-t border-slate-100/80 relative z-10 space-y-3">
                         <div className="flex items-center justify-between text-slate-400 text-[11px]">
                           <span className="flex items-center gap-1 font-semibold">
-                            <Clock className="w-3.5 h-3.5 text-purple-800" /> {book.duration}
+                            <Clock className="w-3.5 h-3.5 text-purple-800" /> {(!book.chapterAudioUrls || book.chapterAudioUrls.length === 0) ? "00:00" : book.duration}
                           </span>
                           <button
                             onClick={(e) => {
