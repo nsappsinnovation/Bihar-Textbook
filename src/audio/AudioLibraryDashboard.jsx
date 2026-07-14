@@ -30,7 +30,7 @@ const AudioLibraryDashboard = () => {
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1.0);
   const [isMuted, setIsMuted] = useState(false);
-  const [favorites, setFavorites] = useState([101]); // Book IDs favorited
+  const [favorites, setFavorites] = useState([]); // Book IDs favorited
   
   // Refs
   const audioRef = useRef(null);
