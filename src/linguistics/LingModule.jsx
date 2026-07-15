@@ -52,7 +52,7 @@ const WORD_CONCEPTS = [
   },
   { 
     id: 8, 
-    translations: { hi: "चांद", en: "Moon", de: "Mond", fr: "Lune", es: "Luna", ja: "月", zh: "月亮", it: "Luna", ru: "Луна", ko: "달" }, 
+    translations: { hi: "चन्द्रमा", en: "Moon", de: "Mond", fr: "Lune", es: "Luna", ja: "月", zh: "月亮", it: "Luna", ru: "Луна", ko: "달" }, 
     distractors: { hi: ["रात", "तारा", "ग्रह"], en: ["Night", "Star", "Planet"], de: ["Nacht", "Stern", "Planet"], fr: ["Nuit", "Étoile", "Planète"], es: ["Noche", "Estrella", "Planeta"], ja: ["夜", "星", "惑星"], zh: ["夜晚", "星星", "行星"], it: ["Notte", "Stella", "Pianeta"], ru: ["Ночь", "Звезда", "Планета"], ko: ["밤", "별", "행성"] },
     image: "https://cdn-icons-png.flaticon.com/512/180/180700.png" 
   },
@@ -76,7 +76,7 @@ const WORD_CONCEPTS = [
   },
   { 
     id: 12, 
-    translations: { hi: "पक्षी", en: "Bird", de: "Vogel", fr: "Oiseau", es: "Pájaro", ja: "鳥", zh: "鸟", it: "Uccello", ru: "Птица", ko: "새" }, 
+    translations: { hi: "चिड़िया", en: "Bird", de: "Vogel", fr: "Oiseau", es: "Pájaro", ja: "鳥", zh: "鸟", it: "Uccello", ru: "Птица", ko: "새" }, 
     distractors: { hi: ["उड़ान", "हवा", "पंख"], en: ["Flight", "Wind", "Feather"], de: ["Flug", "Wind", "Feder"], fr: ["Vol", "Vent", "Plume"], es: ["Vuelo", "Viento", "Pluma"], ja: ["飛行", "風", "羽"], zh: ["飞行", "风", "羽毛"], it: ["Volo", "Vento", "Piuma"], ru: ["Полет", "Ветер", "Перо"], ko: ["비행", "바람", "깃털"] },
     image: "https://cdn-icons-png.flaticon.com/512/1864/1864554.png" 
   },
@@ -112,7 +112,7 @@ const WORD_CONCEPTS = [
   },
   { 
     id: 18, 
-    translations: { hi: "स्कूल", en: "School", de: "Schule", fr: "École", es: "Escuela", ja: "学校", zh: "学校", it: "Scuola", ru: "Школа", ko: "학교" }, 
+    translations: { hi: "विद्यालय", en: "School", de: "Schule", fr: "École", es: "Escuela", ja: "学校", zh: "学校", it: "Scuola", ru: "Школа", ko: "학교" }, 
     distractors: { hi: ["घर", "दुकान", "अस्पताल"], en: ["House", "Shop", "Hospital"], de: ["Haus", "Geschäft", "Krankenhaus"], fr: ["Maison", "Magasin", "Hôpital"], es: ["Casa", "Tienda", "Hospital"], ja: ["家", "店", "病院"], zh: ["房子", "商店", "医院"], it: ["Casa", "Negozio", "Ospedale"], ru: ["Дом", "Магазин", "Больница"], ko: ["집", "가게", "병원"] },
     image: "https://cdn-icons-png.flaticon.com/512/167/167707.png" 
   },
@@ -133,7 +133,7 @@ const WORD_CONCEPTS = [
 const PHRASE_CONCEPTS = [
   { 
     id: 1, 
-    translations: { hi: "आपका नाम क्या है?", en: "What is your name?", de: "Wie heißt du?", fr: "Comment t'appelles-tu ?", es: "¿Cómo te llamas?", ja: "名前は何ですか？", zh: "你叫什么名字？", it: "Come ti chiami?", ru: "Как тебя зовут?", ko: "이름이 뭐예요?" }, 
+    translations: { hi: "आपका क्या नाम है?", en: "What is your name?", de: "Wie heißt du?", fr: "Comment t'appelles-tu ?", es: "¿Cómo te llamas?", ja: "名前は何ですか？", zh: "你叫什么名字？", it: "Come ti chiami?", ru: "Как тебя зовут?", ko: "이름이 뭐예요?" }, 
     distractors: { hi: ["आप कैसे हैं?", "कहाँ हैं?", "कौन हैं?"], en: ["How are you?", "Where are you?", "Who are you?"], de: ["Wie geht es dir?", "Wo bist du?", "Wer bist du?"], fr: ["Comment ça va ?", "Où es-tu ?", "Qui es-tu ?"], es: ["¿Cómo estás?", "¿Dónde estás?", "¿Quién eres?"], ja: ["お元気ですか？", "どこですか？", "誰ですか？"], zh: ["你好吗？", "你在哪里？", "你是谁？"], it: ["Come stai?", "Dove sei?", "Chi sei?"], ru: ["Как дела?", "Где ты?", "Кто ты?"], ko: ["어떻게 지내세요?", "어디예요?", "누구세요?"] },
     image: "https://cdn-icons-png.flaticon.com/512/236/236831.png" 
   },
@@ -193,14 +193,14 @@ const PHRASE_CONCEPTS = [
   },
   { 
     id: 11, 
-    translations: { hi: "मुझे समझ नहीं आया", en: "I don't understand", de: "Ich verstehe nicht", fr: "Je ne comprends pas", es: "No entiendo", ja: "わかりません", zh: "我不明白", it: "Non capisco", ru: "Я не понимаю", ko: "이해를 못하겠어요" }, 
+    translations: { hi: "मैं नहीं समझता", en: "I don't understand", de: "Ich verstehe nicht", fr: "Je ne comprends pas", es: "No entiendo", ja: "わかりません", zh: "我不明白", it: "Non capisco", ru: "Я не понимаю", ko: "이해를 못하겠어요" }, 
     distractors: { hi: ["मुझे पता है", "मैंने देखा", "मैंने सुना"], en: ["I know", "I saw", "I heard"], de: ["Ich weiß", "Ich sah", "Ich hörte"], fr: ["Je sais", "J'ai vu", "J'ai entendu"], es: ["Lo sé", "Vi", "Escuché"], ja: ["知っています", "見ました", "聞きました"], zh: ["我知道", "我看到了", "我听到了"], it: ["Lo so", "Ho visto", "Ho sentito"], ru: ["Я знаю", "Я видел", "Я слышал"], ko: ["알아요", "봤어요", "들었어요"] },
     image: "https://cdn-icons-png.flaticon.com/512/6559/6559981.png" 
   },
   { 
     id: 12, 
     translations: { hi: "क्या आप अंग्रेज़ी बोलते हैं?", en: "Do you speak English?", de: "Sprechen Sie Englisch?", fr: "Parlez-vous anglais ?", es: "¿Habla inglés?", ja: "英語を話しますか？", zh: "你会说英语吗？", it: "Parli inglese?", ru: "Вы говорите по-английски?", ko: "영어 할 줄 아세요?" }, 
-    distractors: { hi: ["आप कैसे हैं?", "आपका नाम क्या है?", "आप कहाँ हैं?"], en: ["How are you?", "What is your name?", "Where are you?"], de: ["Wie geht es dir?", "Wie heißt du?", "Wo bist du?"], fr: ["Comment ça va ?", "Comment t'appelles-tu ?", "Où es-tu ?"], es: ["¿Cómo estás?", "¿Cómo te llamas?", "¿Dónde estás?"], ja: ["お元気ですか？", "名前は何ですか？", "どこですか？"], zh: ["你好吗？", "你叫什么名字？", "你在哪里？"], it: ["Come stai?", "Come ti chiami?", "Dove sei?"], ru: ["Как дела?", "Как тебя зовут?", "Где ты?"], ko: ["어떻게 지내세요?", "이름이 뭐예요?", "어디예요?"] },
+    distractors: { hi: ["आप कैसे हैं?", "आपका क्या नाम है?", "आप कहाँ हैं?"], en: ["How are you?", "What is your name?", "Where are you?"], de: ["Wie geht es dir?", "Wie heißt du?", "Wo bist du?"], fr: ["Comment ça va ?", "Comment t'appelles-tu ?", "Où es-tu ?"], es: ["¿Cómo estás?", "¿Cómo te llamas?", "¿Dónde estás?"], ja: ["お元気ですか？", "名前は何ですか？", "どこですか？"], zh: ["你好吗？", "你叫什么名字？", "你在哪里？"], it: ["Come stai?", "Come ti chiami?", "Dove sei?"], ru: ["Как дела?", "Как тебя зовут?", "Где ты?"], ko: ["어떻게 지내세요?", "이름이 뭐예요?", "어디예요?"] },
     image: "https://cdn-icons-png.flaticon.com/512/2991/2991114.png" 
   },
   { 
@@ -217,14 +217,14 @@ const PHRASE_CONCEPTS = [
   },
   { 
     id: 15, 
-    translations: { hi: "मैं तुमसे प्यार करता हूँ", en: "I love you", de: "Ich liebe dich", fr: "Je t'aime", es: "Te amo", ja: "愛しています", zh: "我爱你", it: "Ti amo", ru: "Я тебя люблю", ko: "사랑해요" }, 
+    translations: { hi: "मुझे तुमसे प्यार है", en: "I love you", de: "Ich liebe dich", fr: "Je t'aime", es: "Te amo", ja: "愛しています", zh: "我爱你", it: "Ti amo", ru: "Я тебя люблю", ko: "사랑해요" }, 
     distractors: { hi: ["मुझे यह पसंद है", "मैं खुश हूँ", "मैं दुखी हूँ"], en: ["I like this", "I am happy", "I am sad"], de: ["Ich mag das", "Ich bin glücklich", "Ich bin traurig"], fr: ["J'aime ça", "Je suis heureux", "Je suis triste"], es: ["Me gusta esto", "Estoy feliz", "Estoy triste"], ja: ["これが好きです", "私は幸せです", "私は悲しいです"], zh: ["我喜欢这个", "我很高兴", "我很伤心"], it: ["Mi piace", "Sono felice", "Sono triste"], ru: ["Мне это нравится", "Я счастлив", "Мне грустно"], ko: ["이거 좋아해요", "저는 행복해요", "저는 슬퍼요"] },
     image: "https://cdn-icons-png.flaticon.com/512/833/833472.png" 
   },
   { 
     id: 16, 
     translations: { hi: "आप कहाँ से हैं?", en: "Where are you from?", de: "Woher kommst du?", fr: "D'où viens-tu ?", es: "¿De dónde eres?", ja: "どこから来ましたか？", zh: "你来自哪里？", it: "Di dove sei?", ru: "Откуда ты?", ko: "어디서 오셨나요?" }, 
-    distractors: { hi: ["आप कहाँ जा रहे हैं?", "आप क्या कर रहे हैं?", "आप कौन हैं?"], en: ["Where are you going?", "What are you doing?", "Who are you?"], de: ["Wohin gehst du?", "Was machst du?", "Wer bist du?"], fr: ["Où vas-tu ?", "Que fais-tu ?", "Qui es-tu ?"], es: ["¿A dónde vas?", "¿Qué haces?", "¿Quién eres?"], ja: ["どこに行きますか？", "何をしていますか？", "誰ですか？"], zh: ["要去哪里？", "你在做什么？", "你是谁？"], it: ["Dove vai?", "Cosa fai?", "Chi sei?"], ru: ["Куда ты идешь?", "Что ты делаешь?", "Кто ты?"], ko: ["어디 가세요?", "뭐 하세요?", "누구세요?"] },
+    distractors: { hi: ["आप कहाँ जा रहे हैं?", "आप क्या कर रहे हो?", "आप कौन हैं?"], en: ["Where are you going?", "What are you doing?", "Who are you?"], de: ["Wohin gehst du?", "Was machst du?", "Wer bist du?"], fr: ["Où vas-tu ?", "Que fais-tu ?", "Qui es-tu ?"], es: ["¿A dónde vas?", "¿Qué haces?", "¿Quién eres?"], ja: ["どこに行きますか？", "何をしていますか？", "誰ですか？"], zh: ["要去哪里？", "你在做什么？", "你是谁？"], it: ["Dove vai?", "Cosa fai?", "Chi sei?"], ru: ["Куда ты идешь?", "Что ты делаешь?", "Кто ты?"], ko: ["어디 가세요?", "뭐 하세요?", "누구세요?"] },
     image: "https://cdn-icons-png.flaticon.com/512/854/854878.png" 
   },
   { 
@@ -235,7 +235,7 @@ const PHRASE_CONCEPTS = [
   },
   { 
     id: 18, 
-    translations: { hi: "आप क्या कर रहे हैं?", en: "What are you doing?", de: "Was machst du?", fr: "Que fais-tu ?", es: "¿Qué haces?", ja: "何をしていますか？", zh: "你在做什么？", it: "Cosa stai facendo?", ru: "Что ты делаешь?", ko: "뭐 하고 계세요?" }, 
+    translations: { hi: "आप क्या कर रहे हो?", en: "What are you doing?", de: "Was machst du?", fr: "Que fais-tu ?", es: "¿Qué haces?", ja: "何をしていますか？", zh: "你在做什么？", it: "Cosa stai facendo?", ru: "Что ты делаешь?", ko: "뭐 하고 계세요?" }, 
     distractors: { hi: ["आप कहाँ हैं?", "आप कब आएंगे?", "यह क्या है?"], en: ["Where are you?", "When will you come?", "What is this?"], de: ["Wo bist du?", "Wann kommst du?", "Was ist das?"], fr: ["Où es-tu ?", "Quand viens-tu ?", "Qu'est-ce que c'est ?"], es: ["¿Dónde estás?", "¿Cuándo vendrás?", "¿Qué es esto?"], ja: ["どこにいますか？", "いつ来ますか？", "これは何ですか？"], zh: ["你在哪里？", "你什么时候来？", "这是什么？"], it: ["Dove sei?", "Quando vieni?", "Cos'è questo?"], ru: ["Где ты?", "Когда ты придешь?", "Что это?"], ko: ["어디 계세요?", "언제 오세요?", "이게 뭐예요?"] },
     image: "https://cdn-icons-png.flaticon.com/512/3050/3050525.png" 
   },
@@ -258,7 +258,7 @@ const CONVERSATION_FLOW = [
   { speaker: 'girl', audioFile: '2_Girl_Hello_Rahul_how_are_you', hi: "नमस्ते राहुल, आप कैसे हैं?", en: "Hello Rahul, how are you?", de: "Hallo Rahul, wie geht es dir?", fr: "Bonjour Rahul, comment ça va ?", es: "Hola Rahul, ¿cómo estás?", ja: "こんにちは、ラフルさん。お元気ですか？", zh: "你好，Rahul。你好吗？", it: "Ciao Rahul, come stai?", ru: "Привет, Рахул. Как дела?", ko: "안녕하세요 라훌 씨. 어떻게 지내세요?" },
   { speaker: 'boy', audioFile: '3_Boy_Im_fine_thank_you_And_you', hi: "मैं ठीक हूँ, धन्यवाद। और आप?", en: "I'm fine, thank you. And you?", de: "Mir geht es gut, danke. Und dir?", fr: "Ça va bien, merci. Et toi ?", es: "Estoy bien, gracias. ¿Y tú?", ja: "元気です、ありがとう。あなたは？", zh: "我很好，谢谢。你呢？", it: "Sto bene, grazie. E tu?", ru: "Я в порядке, спасибо. А у тебя?", ko: "잘 지내요, 감사합니다. 당신은요?" },
   { speaker: 'girl', audioFile: '4_Girl_Im_fine_too_What_are_you_doing', hi: "मैं भी ठीक हूँ। आज आप क्या कर रहे हैं?", en: "I'm fine too. What are you doing today?", de: "Mir geht es auch gut. Was machst du heute?", fr: "Ça va bien aussi. Que fais-tu aujourd'hui ?", es: "Yo también estoy bien. ¿Qué haces hoy?", ja: "私も元気です。今日は何をしていますか？", zh: "我也很好。你今天在做什么？", it: "Anche io sto bene. Cosa fai oggi?", ru: "Я тоже в порядке. Что ты делаешь сегодня?", ko: "저도 잘 지내요. 오늘 뭐 하세요?" },
-  { speaker: 'boy', audioFile: '5_Boy_I_am_learning_a_new_language', hi: "मैं नई भाषा सीख रहा हूँ।", en: "I am learning a new language.", de: "Ich lerne eine neue Sprache.", fr: "J'apprends une nouvelle langue.", es: "Estoy aprendiendo un nuevo idioma.", ja: "新しい言語を勉強しています。", zh: "我正在学习一门新语言。", it: "Sto imparando una nuova lingua.", ru: "Я изучаю новый язык.", ko: "저는 새로운 언어를 배우고 있어요." },
+  { speaker: 'boy', audioFile: '5_Boy_I_am_learning_a_new_language', hi: "मैं एक नई भाषा सीख रहा हूँ।", en: "I am learning a new language.", de: "Ich lerne eine neue Sprache.", fr: "J'apprends une nouvelle langue.", es: "Estoy aprendiendo un nuevo idioma.", ja: "新しい言語を勉強しています。", zh: "我正在学习一门新语言。", it: "Sto imparando una nuova lingua.", ru: "Я изучаю новый язык.", ko: "저는 새로운 언어를 배우고 있어요." },
   { speaker: 'girl', audioFile: '6_Girl_Thats_great_Which_language', hi: "यह बहुत अच्छा है! कौन सी भाषा?", en: "That's great! Which language?", de: "Das ist toll! Welche Sprache?", fr: "C'est super ! Quelle langue ?", es: "¡Eso es genial! ¿Qué idioma?", ja: "それは素晴らしいですね！どの言語ですか？", zh: "那太好了！哪种语言？", it: "È fantastico! Quale lingua?", ru: "Это здорово! Какой язык?", ko: "대단하네요! 어떤 언어인가요?" },
   { speaker: 'boy', audioFile: '7_Boy_I_am_learning_German_right_now', hi: "मैं अभी जर्मन सीख रहा हूँ।", en: "I am learning German right now.", de: "Ich lerne gerade Deutsch.", fr: "J'apprends l'allemand en ce moment.", es: "Estoy aprendiendo alemán ahora mismo.", ja: "今、ドイツ語 को勉強しています。", zh: "我正在学习德语。", it: "Adesso sto imparando il tedesco.", ru: "Я сейчас изучаю немецкий.", ko: "지금 독일어를 배우고 있어요." },
   { speaker: 'girl', audioFile: '8_Girl_German_is_a_beautiful_language', hi: "जर्मन एक सुंदर भाषा है।", en: "German is a beautiful language.", de: "Deutsch ist eine schöne Sprache.", fr: "L'allemand est une belle langue.", es: "El alemán es un idioma hermoso.", ja: "ドイツ語は美しい言語です。", zh: "德语是一门美丽的语言。", it: "Il tedesco è una lingua bellissima.", ru: "Немецкий — красивый язык.", ko: "독일어는 아름다운 언어예요." },
