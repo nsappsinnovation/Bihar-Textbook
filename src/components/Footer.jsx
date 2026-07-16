@@ -39,10 +39,8 @@ const Footer = () => {
             </p>
 
             <div className="flex gap-4">
-              <SocialLink icon={<Facebook size={18} />} hoverColor="hover:bg-blue-600 hover:border-blue-500" />
-              <SocialLink icon={<Twitter size={18} />} hoverColor="hover:bg-sky-500 hover:border-sky-400" />
-              <SocialLink icon={<Instagram size={18} />} hoverColor="hover:bg-pink-600 hover:border-pink-500" />
-              <SocialLink icon={<Linkedin size={18} />} hoverColor="hover:bg-blue-700 hover:border-blue-600" />
+              <SocialLink href="https://www.facebook.com/people/Bihar-State-Textbook-Publishing-Corporation-Ltd/61569938164362/" icon={<Facebook size={18} />} hoverColor="hover:bg-blue-600 hover:border-blue-500" />
+              <SocialLink href="https://x.com/bihartextbooks" icon={<Twitter size={18} />} hoverColor="hover:bg-sky-500 hover:border-sky-400" />
             </div>
           </div>
 
@@ -140,24 +138,21 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-wrap justify-center gap-6 font-medium">
-            <Link
-              to="/csr-policy"
-              className="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-[1.5px] after:bg-blue-500 hover:after:w-full after:transition-all after:duration-300"
+            <button
+              className="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-[1.5px] after:bg-blue-500 hover:after:w-full after:transition-all after:duration-300 cursor-pointer"
             >
               Privacy Policy
-            </Link>
-            <Link
-              to="/csr-policy"
-              className="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-[1.5px] after:bg-blue-500 hover:after:w-full after:transition-all after:duration-300"
+            </button>
+            <button
+              className="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-[1.5px] after:bg-blue-500 hover:after:w-full after:transition-all after:duration-300 cursor-pointer"
             >
               Terms of Service
-            </Link>
-            <Link
-              to="/csr-policy"
-              className="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-[1.5px] after:bg-blue-500 hover:after:w-full after:transition-all after:duration-300"
+            </button>
+            <button
+              className="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-[1.5px] after:bg-blue-500 hover:after:w-full after:transition-all after:duration-300 cursor-pointer"
             >
               Sitemap
-            </Link>
+            </button>
           </div>
         </div>
       </div>
@@ -181,8 +176,8 @@ const FooterLink = ({ to, label, highlight }) => (
   </li>
 );
 
-const SocialLink = ({ icon, hoverColor }) => (
-  <a href="#" className={`w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-white/70 border border-white/10 hover:text-white ${hoverColor} transition-all duration-300 group hover:-translate-y-1.5 hover:shadow-lg backdrop-blur-sm`}>
+const SocialLink = ({ icon, hoverColor, href }) => (
+  <a href={href || "#"} target="_blank" rel="noopener noreferrer" className={`w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-white/70 border border-white/10 hover:text-white ${hoverColor} transition-all duration-300 group hover:-translate-y-1.5 hover:shadow-lg backdrop-blur-sm`}>
     <span className="group-hover:scale-110 transition-transform duration-300">
       {icon}
     </span>

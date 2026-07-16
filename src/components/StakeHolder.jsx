@@ -190,7 +190,7 @@ export default function StakeHolder() {
              <span className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em]">Our Inspiration</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
-            Voices for an <br />
+            Voices For An <br />
             <span className="text-slate-400 font-medium">Educated & Empowered Bihar</span>
           </h2>
           <p className="text-sm text-slate-500 font-medium leading-relaxed pr-4">

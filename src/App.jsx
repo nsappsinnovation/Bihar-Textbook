@@ -69,38 +69,11 @@ function App() {
     "/publishing-mission", "/vr-mission", "/sign-language-mission", "/multilingual-mission", "/audiobooks-mission"
   ].includes(location.pathname);
 
-  const isNoNavPage =
-    isIsolatedPage ||
-    isMissionPage ||
-    location.pathname.startsWith("/ling") ||
-    [
-      "/sign",
-      "/sign-learn",
-      "/sign-module",
-      "/life-skills",
-      "/heritage-dashboard",
-      "/audio-library-dashboard",
-      "/my-audio-library",
-      "/ai-intelligence-dashboard",
-      "/vr-dashboard",
-      
-      "/cyber-security-dashboard",
-      "/vr-tech-learning",
-    ].includes(location.pathname);
+  const isNoNavPage = isIsolatedPage;
 
   const isNoFooterPage =
     isIsolatedPage ||
-    isMissionPage ||
     [
-      "/life-skills",
-      "/heritage-dashboard",
-      "/audio-library-dashboard",
-      "/my-audio-library",
-      "/ai-intelligence-dashboard",
-      "/vr-dashboard",
-     
-      "/cyber-security-dashboard",
-      "/vr-tech-learning",
       "/know-us/md-message",
     ].includes(location.pathname);
 
