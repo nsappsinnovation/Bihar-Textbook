@@ -118,8 +118,8 @@ export default function KeyParticipantViewAll() {
           <div className="absolute left-[-150px] bottom-1/4 w-[400px] h-[400px] border border-slate-200/40 rounded-full pointer-events-none" />
         
           <div className="max-w-7xl mx-auto relative z-10 text-center flex flex-col items-center">
-                <Link to="/" className="inline-flex items-center gap-2 text-slate-500 hover:text-indigo-600 transition-colors mb-8 font-medium text-sm self-start md:absolute md:left-0 md:top-0">
-                    <ArrowLeft size={16} /> Back to Home
+                <Link to="/#key-participants" title="Back to Home" className="inline-flex items-center justify-center w-10 h-10 bg-white border border-slate-200 text-slate-700 hover:text-indigo-600 hover:border-indigo-200 hover:shadow-md transition-all mb-8 self-start md:absolute md:left-0 md:top-0 rounded-full group">
+                    <ArrowLeft size={18} className="transition-transform group-hover:-translate-x-0.5" />
                 </Link>
 
                 <motion.div

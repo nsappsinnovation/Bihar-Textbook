@@ -124,11 +124,6 @@ const CoreMissions = () => {
       <div className="container mx-auto px-6 relative z-10 w-full">
         {/* Header */}
         <div className="text-center mb-16">
-          <div className="inline-block px-3 py-1 bg-gray-50/80 rounded-full mb-4 border border-gray-100">
-            <span className="text-gray-500 font-bold tracking-[0.25em] uppercase text-[9px]">
-              Strategic Intent
-            </span>
-          </div>
           <h2 className="text-5xl md:text-7xl font-bold text-[#0d0e23] mb-6 tracking-tight">
             The Eight <span className="text-blue-600/90">Core Pillars</span>
           </h2>

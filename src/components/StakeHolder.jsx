@@ -49,28 +49,28 @@ const testimonials = [
     id: 7,
     quote: "\"The doors of education must remain open for the poor, the backward, and the marginalized.\"",
     name: "Karpoori Thakur",
-    role: "JAN NAYAK | SOCIAL JUSTICE LEADER",
+    role: "JAN NAYAK | FORMER CHIEF MINISTER",
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Karpoori_Thakur.jpg/800px-Karpoori_Thakur.jpg"
   },
   {
     id: 8,
     quote: "\"Educating children, especially girls, is the most powerful way to change the future of Bihar.\"",
     name: "Shri Nitish Kumar",
-    role: "HON'BLE CHIEF MINISTER, BIHAR",
+    role: "Ex-CHIEF MINISTER, BIHAR",
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Nitish_Kumar_in_2022.jpg/800px-Nitish_Kumar_in_2022.jpg"
   },
   {
     id: 9,
     quote: "\"A society moves forward when every child receives education, dignity, and opportunity.\"",
     name: "Jagjivan Ram",
-    role: "NATIONAL LEADER | FROM BIHAR",
+    role: "NATIONAL LEADER | SOCIAL JUSTICE LEADER",
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Jagjivan_Ram_1976_stamp_of_India.jpg/800px-Jagjivan_Ram_1976_stamp_of_India.jpg"
   },
   {
     id: 10,
     quote: "\"Education gives confidence to the weak, dignity to the poor, and strength to democracy.\"",
     name: "Jagjivan Ram",
-    role: "SOCIAL JUSTICE LEADER",
+    role: "NATIONAL LEADER | SOCIAL JUSTICE LEADER",
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Jagjivan_Ram_1976_stamp_of_India.jpg/800px-Jagjivan_Ram_1976_stamp_of_India.jpg"
   },
   {
@@ -84,14 +84,14 @@ const testimonials = [
     id: 12,
     quote: "\"The real power of learning lies in creating responsible citizens and a just society.\"",
     name: "Dr. Sachchidananda Sinha",
-    role: "EDUCATIONIST | PUBLIC INTELLECTUAL",
+    role: "EDUCATIONIST | CONSTITUENT ASSEMBLY PRESIDENT",
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Sachchidananda_Sinha.jpg/800px-Sachchidananda_Sinha.jpg"
   },
   {
     id: 13,
     quote: "\"Good education must reach the village, the poor household, and the first-generation learner.\"",
     name: "Ramdhari Singh Dinkar",
-    role: "NATIONAL POET | THINKER FROM BIHAR",
+    role: "RASHTRAKAVI | EDUCATIONAL THINKER",
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Ramdhari_Singh_Dinkar_1999_stamp_of_India.jpg/800px-Ramdhari_Singh_Dinkar_1999_stamp_of_India.jpg"
   },
   {
@@ -105,36 +105,16 @@ const testimonials = [
     id: 15,
     quote: "\"A strong education system is the path to a strong Bihar, a strong society, and a strong India.\"",
     name: "Shri Nitish Kumar",
-    role: "HON'BLE CHIEF MINISTER, BIHAR",
+    role: "Ex-CHIEF MINISTER, BIHAR",
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Nitish_Kumar_in_2022.jpg/800px-Nitish_Kumar_in_2022.jpg"
   }
 ];
 
 const colors = [
   {
-    quote: "text-amber-400/20",
-    role: "text-amber-600/75",
-    border: "hover:border-amber-100",
-  },
-  {
     quote: "text-blue-400/20",
     role: "text-blue-600/75",
     border: "hover:border-blue-100",
-  },
-  {
-    quote: "text-emerald-400/20",
-    role: "text-emerald-600/75",
-    border: "hover:border-emerald-100",
-  },
-  {
-    quote: "text-rose-400/20",
-    role: "text-rose-500/75",
-    border: "hover:border-rose-100",
-  },
-  {
-    quote: "text-purple-400/20",
-    role: "text-purple-600/75",
-    border: "hover:border-purple-100",
   }
 ];
 
@@ -160,7 +140,7 @@ export default function StakeHolder() {
         </span>
 
         {/* Quote Content */}
-        <p className="text-slate-600 font-medium text-[11px] sm:text-[12px] leading-relaxed relative z-10 pt-2 mb-4 italic whitespace-normal">
+        <p className="text-slate-800 font-semibold text-[13px] sm:text-sm leading-snug relative z-10 pt-2 mb-4 whitespace-normal">
           “{cleanQuote}”
         </p>
 
@@ -188,7 +168,7 @@ export default function StakeHolder() {
   };
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#fcfcfd] py-20 border-t border-slate-100">
+    <section className="relative w-full overflow-hidden bg-[#fcfcfd] py-20 border-t border-slate-100 font-sans text-slate-900">
       
       {/* Header */}
       <div className="max-w-[1280px] mx-auto mb-12 px-6 md:px-10 lg:px-12">
@@ -221,7 +201,13 @@ export default function StakeHolder() {
  
 
       {/* Marquee Rows Container */}
-      <div className="w-full flex flex-col gap-6">
+      <div 
+        className="w-full flex flex-col gap-6"
+        style={{
+          maskImage: 'linear-gradient(to right, transparent, black 25%, black 75%, transparent)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent, black 25%, black 75%, transparent)'
+        }}
+      >
 
         {/* ROW 1 - Right to Left */}
         <div className="flex overflow-hidden">

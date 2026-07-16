@@ -242,23 +242,15 @@ export default function NoticeBoard() {
             </div>
 
             {/* Marquee List Container */}
-            <div className={`marquee-container ${activeTab !== "All" ? "overflow-y-auto" : ""}`}>
-              <div className={`flex flex-col gap-4 py-2 ${activeTab === "All" ? "animate-marquee-y" : ""}`}>
-                 {activeTab === "All" ? (
-                   <>
-                     {/* Duplicate list for infinite scroll effect */}
-                     {filteredNotices.map((notice, idx) => (
-                       <NoticeCard key={`${notice.id}-1`} notice={notice} />
-                     ))}
-                     {filteredNotices.map((notice, idx) => (
-                       <NoticeCard key={`${notice.id}-2`} notice={notice} />
-                     ))}
-                   </>
-                 ) : (
-                   filteredNotices.map((notice, idx) => (
-                     <NoticeCard key={notice.id} notice={notice} />
-                   ))
-                 )}
+            <div className="marquee-container">
+              <div className="flex flex-col gap-4 py-2 animate-marquee-y">
+                {/* Duplicate list for infinite scroll effect */}
+                {filteredNotices.map((notice, idx) => (
+                  <NoticeCard key={`${notice.id}-1`} notice={notice} />
+                ))}
+                {filteredNotices.map((notice, idx) => (
+                  <NoticeCard key={`${notice.id}-2`} notice={notice} />
+                ))}
               </div>
             </div>
 

@@ -109,7 +109,7 @@ export default function KeyParticipant() {
   };
 
   return (
-    <section className="bg-[#f8f9fa] py-14 px-6 font-sans">
+    <section id="key-participants" className="bg-[#f8f9fa] py-14 px-6 font-sans">
       <div className="max-w-[1400px] mx-auto">
         {/* --- Minimalist Header (Matching FlagshipEvents) --- */}
         <div className="max-w-[1280px] mx-auto mb-12">
