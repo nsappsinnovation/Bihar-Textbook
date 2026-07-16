@@ -2,76 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const defaultGalleryItems = [
-  {
-    type: "image",
-    src: "/images/hero_classroom.png",
-    alt: "Primary Classroom Learning Environment"
-  },
-  {
-    type: "image",
-    src: "/images/hero_digital.png",
-    alt: "E-Learning & Digital Books Portal"
-  },
-  {
-    type: "image",
-    src: "/images/hero_ai_new.png",
-    alt: "AI-Assisted Smart Revision Module"
-  },
-  {
-    type: "image",
-    src: "/images/hero_audio_new.png",
-    alt: "Accessible Audio Books Demonstration"
-  },
-  {
-    type: "image",
-    src: "/images/hero_archive.png",
-    alt: "Cultural Document & Textbook Heritage Archive"
-  },
-  {
-    type: "image",
-    src: "/images/s1.png",
-    alt: "Collaborative Student Session in Patna Model School"
-  },
-  {
-    type: "image",
-    src: "/images/hero_linguistic.png",
-    alt: "Diverse Regional Dialects Learning Program"
-  },
-  {
-    type: "image",
-    src: "/images/s2.png",
-    alt: "Interactive Smartboard Classroom Session"
-  },
-  {
-    type: "image",
-    src: "/images/s3.png",
-    alt: "Students Participating in Science Exhibition"
-  },
-  {
-    type: "image",
-    src: "/images/hero_sign.png",
-    alt: "Inclusive Sign Language Training Class"
-  },
-  {
-    type: "image",
-    src: "/images/s4.png",
-    alt: "Foundational Literacy Materials Showcase"
-  },
-  {
-    type: "image",
-    src: "/images/hero_vr_new.png",
-    alt: "Mobile VR Lab Tour Experience"
-  },
-  {
-    type: "image",
-    src: "/images/sign.png",
-    alt: "Teacher Training and Curriculum Reforms Workshop"
-  },
-  {
-    type: "image",
-    src: "/images/hello.png",
-    alt: "Textbook Distribution Camp in Gaya"
-  }
+  { type: "image", src: "/images/hero/classroom.png", alt: "Primary Classroom Learning Environment" },
+  { type: "image", src: "/images/hero/audio.png", alt: "E-Learning & Digital Books Portal" },
+  { type: "image", src: "/images/hero/vr.png", alt: "Mobile VR Lab Tour Experience" },
+  { type: "image", src: "/images/hero/sign.png", alt: "Inclusive Sign Language Training Class" },
+  { type: "image", src: "/images/hero/linguistic.png", alt: "Diverse Regional Dialects Learning Program" },
+  { type: "image", src: "/images/csr.png", alt: "Corporate Social Responsibility Initiatives" },
+  { type: "image", src: "/images/goodnight.png", alt: "Educational Campaigns" },
+  { type: "image", src: "/images/KeyParticipants/sri_mithlesh.png", alt: "Key Participant Session" },
+  { type: "image", src: "/images/KeyParticipants/girish_kumar_choudhary.png", alt: "Conference Highlights" },
+  { type: "image", src: "/images/KeyParticipants/abhyanand.png", alt: "Academic Discussions" },
+  { type: "image", src: "/images/KeyParticipants/sri-vinod.png", alt: "Leadership Meeting" },
+  { type: "image", src: "/images/KeyParticipants/shri_yatendra_pal.png", alt: "Executive Briefing" },
+  { type: "image", src: "/images/KeyParticipants/samrat.png", alt: "Community Outreach" },
+  { type: "image", src: "/images/KeyParticipants/anand.png", alt: "Student Engagement" }
 ];
 
 const Photogallery = () => {
@@ -84,11 +28,12 @@ const Photogallery = () => {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        setItems(parsed.map(item => ({
-          type: "image",
-          src: item.document,
-          alt: item.title || "Gallery Image"
-        })));
+        // Commented out to prevent broken localStorage data from overriding default images
+        // setItems(parsed.map(item => ({
+        //   type: "image",
+        //   src: item.document,
+        //   alt: item.title || "Gallery Image"
+        // })));
       } catch (e) {
         console.error("Error parsing gallery images", e);
       }

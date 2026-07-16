@@ -5,37 +5,37 @@ import { FaPlay } from 'react-icons/fa';
 const defaultVideoItems = [
   {
     type: "video",
-    src: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f",
+    src: "/images/hero/classroom.png",
     videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     alt: "Bihar Digital Classrooms Launch Highlights"
   },
   {
     type: "video",
-    src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b",
+    src: "/images/hero/audio.png",
     videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     alt: "Rural Literacy Outreach & Community Distribution Drives"
   },
   {
     type: "video",
-    src: "https://images.unsplash.com/photo-1531482615713-2afd69097998",
+    src: "/images/hero/vr.png",
     videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     alt: "Teacher Training Workshop on Interactive Smart Textbooks"
   },
   {
     type: "video",
-    src: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6",
+    src: "/images/KeyParticipants/shri_yatendra_pal.png",
     videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     alt: "Academic Session 2026-27 High-Level Inauguration Ceremony"
   },
   {
     type: "video",
-    src: "https://images.unsplash.com/photo-1516979187457-637abb4f9353",
+    src: "/images/hero/sign.png",
     videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     alt: "Accessible Audio Books and Inclusive Pedagogy Program"
   },
   {
     type: "video",
-    src: "https://images.unsplash.com/photo-1677442136019-21780ecad995",
+    src: "/images/hero/linguistic.png",
     videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     alt: "Smart AI Revision Modules Student Pilot Feedback"
   }
@@ -51,12 +51,13 @@ const Videogallery = () => {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        setItems(parsed.map(item => ({
-          type: "video",
-          src: item.document, // Thumbnail
-          videoUrl: item.videoUrl || "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-          alt: item.title || "Video Highlight"
-        })));
+        // Commented out to prevent broken localStorage data from overriding default videos
+        // setItems(parsed.map(item => ({
+        //   type: "video",
+        //   src: item.document, // Thumbnail
+        //   videoUrl: item.videoUrl || "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        //   alt: item.title || "Video Highlight"
+        // })));
       } catch (e) {
         console.error("Error parsing video gallery items", e);
       }

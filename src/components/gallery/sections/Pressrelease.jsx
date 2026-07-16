@@ -20,7 +20,7 @@ const pressReleases = [
     category: "Curriculum",
     fileSize: "4.5 MB",
     cardStyle: "image", // Library image background
-    image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f"
+    image: "/images/hero/classroom.png"
   },
   {
     id: 3,
@@ -57,7 +57,7 @@ const pressReleases = [
     category: "Heritage",
     fileSize: "1.8 MB",
     cardStyle: "image", // Classroom image background
-    image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b"
+    image: "/images/hero/audio.png"
   }
 ];
 
@@ -91,10 +91,10 @@ const Pressrelease = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-indigo-50/80 backdrop-blur-sm border border-indigo-100 mb-6 shadow-sm"
+            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-blue-50/80 backdrop-blur-sm border border-blue-100 mb-6 shadow-sm"
           >
-            <span className="w-2.5 h-2.5 rounded-full bg-indigo-600 animate-pulse"></span>
-            <span className="text-indigo-800 text-xs font-bold tracking-wider uppercase">
+            <span className="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse"></span>
+            <span className="text-blue-800 text-xs font-bold tracking-wider uppercase">
               Official Communications
             </span>
           </motion.div>
@@ -105,7 +105,7 @@ const Pressrelease = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-800 tracking-tight leading-tight mb-6"
           >
-            Press <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">Releases</span>
+            Press <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Releases</span>
           </motion.h2>
 
           <motion.p
@@ -126,7 +126,7 @@ const Pressrelease = () => {
             {pressReleases[0] && (
               <div
                 onClick={() => setSelectedRelease(pressReleases[0])}
-                className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer bg-gradient-to-br from-indigo-600 to-blue-700 text-white p-6 flex flex-col justify-between aspect-[4/3] w-full border border-indigo-500/20"
+                className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer bg-gradient-to-br from-blue-600 to-indigo-700 text-white p-6 flex flex-col justify-between aspect-[4/3] w-full border border-blue-500/20"
               >
                 <div>
                   <span className="px-2.5 py-0.5 bg-white/20 rounded-full text-[9px] font-bold uppercase tracking-wider block w-fit mb-3">
@@ -164,7 +164,7 @@ const Pressrelease = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent flex flex-col justify-end p-6" />
                 <div className="absolute inset-0 flex flex-col justify-between p-6 z-10 text-white">
-                  <span className="px-2.5 py-0.5 bg-indigo-500 rounded-full text-[9px] font-bold uppercase tracking-wider block w-fit">
+                  <span className="px-2.5 py-0.5 bg-blue-500 rounded-full text-[9px] font-bold uppercase tracking-wider block w-fit">
                     {pressReleases[1].category}
                   </span>
                   <div>
@@ -192,10 +192,10 @@ const Pressrelease = () => {
                 className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer bg-slate-900 text-white p-6 flex flex-col justify-between aspect-square w-full border border-slate-800"
               >
                 <div>
-                  <span className="px-2.5 py-0.5 bg-slate-800 text-indigo-400 rounded-full text-[9px] font-bold uppercase tracking-wider block w-fit mb-3">
+                  <span className="px-2.5 py-0.5 bg-slate-800 text-blue-400 rounded-full text-[9px] font-bold uppercase tracking-wider block w-fit mb-3">
                     {pressReleases[3].category}
                   </span>
-                  <h3 className="text-sm font-bold tracking-tight leading-snug line-clamp-3 group-hover:text-indigo-400 transition-colors">
+                  <h3 className="text-sm font-bold tracking-tight leading-snug line-clamp-3 group-hover:text-blue-400 transition-colors">
                     {pressReleases[3].title}
                   </h3>
                 </div>
@@ -221,10 +221,10 @@ const Pressrelease = () => {
                 className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer bg-white/90 backdrop-blur-md p-6 flex flex-col justify-between aspect-[4/3] w-full border border-slate-200"
               >
                 <div>
-                  <span className="px-2.5 py-0.5 bg-indigo-50 text-indigo-600 rounded-full text-[9px] font-bold uppercase tracking-wider block w-fit mb-3">
+                  <span className="px-2.5 py-0.5 bg-blue-50 text-blue-600 rounded-full text-[9px] font-bold uppercase tracking-wider block w-fit mb-3">
                     {pressReleases[2].category}
                   </span>
-                  <h3 className="text-sm font-bold text-slate-800 tracking-tight leading-snug line-clamp-3 group-hover:text-indigo-600 transition-colors">
+                  <h3 className="text-sm font-bold text-slate-800 tracking-tight leading-snug line-clamp-3 group-hover:text-blue-600 transition-colors">
                     {pressReleases[2].title}
                   </h3>
                 </div>
@@ -232,7 +232,7 @@ const Pressrelease = () => {
                   <span className="text-[10px] text-slate-400 font-semibold uppercase">{pressReleases[2].date}</span>
                   <button
                     onClick={(e) => handleDownload(e, pressReleases[2])}
-                    className="p-2 rounded-full bg-slate-50 hover:bg-indigo-50 text-slate-600 hover:text-indigo-600 transition-all border border-slate-200"
+                    className="p-2 rounded-full bg-slate-50 hover:bg-blue-50 text-slate-600 hover:text-blue-600 transition-all border border-slate-200"
                   >
                     <FileDown size={14} />
                   </button>
@@ -247,10 +247,10 @@ const Pressrelease = () => {
                 className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer bg-white/90 backdrop-blur-md p-6 flex flex-col justify-between aspect-[4/3] w-full border border-slate-200"
               >
                 <div>
-                  <span className="px-2.5 py-0.5 bg-indigo-50 text-indigo-600 rounded-full text-[9px] font-bold uppercase tracking-wider block w-fit mb-3">
+                  <span className="px-2.5 py-0.5 bg-blue-50 text-blue-600 rounded-full text-[9px] font-bold uppercase tracking-wider block w-fit mb-3">
                     {pressReleases[4].category}
                   </span>
-                  <h3 className="text-sm font-bold text-slate-800 tracking-tight leading-snug line-clamp-3 group-hover:text-indigo-600 transition-colors">
+                  <h3 className="text-sm font-bold text-slate-800 tracking-tight leading-snug line-clamp-3 group-hover:text-blue-600 transition-colors">
                     {pressReleases[4].title}
                   </h3>
                 </div>
@@ -258,7 +258,7 @@ const Pressrelease = () => {
                   <span className="text-[10px] text-slate-400 font-semibold uppercase">{pressReleases[4].date}</span>
                   <button
                     onClick={(e) => handleDownload(e, pressReleases[4])}
-                    className="p-2 rounded-full bg-slate-50 hover:bg-indigo-50 text-slate-600 hover:text-indigo-600 transition-all border border-slate-200"
+                    className="p-2 rounded-full bg-slate-50 hover:bg-blue-50 text-slate-600 hover:text-blue-600 transition-all border border-slate-200"
                   >
                     <FileDown size={14} />
                   </button>
@@ -283,7 +283,7 @@ const Pressrelease = () => {
 
                 {/* Centered Read expand icon matching reference layout */}
                 <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/35 transition-colors duration-300">
-                  <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center text-white scale-90 group-hover:scale-100 group-hover:bg-indigo-600 group-hover:border-indigo-500 transition-all duration-300 shadow-xl">
+                  <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-md border border-white/40 flex items-center justify-center text-white scale-90 group-hover:scale-100 group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 shadow-xl">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4M4 20l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
                     </svg>
@@ -291,7 +291,7 @@ const Pressrelease = () => {
                 </div>
 
                 <div className="absolute bottom-4 left-4 right-4 text-white z-10 pointer-events-none">
-                  <span className="px-2.5 py-0.5 bg-indigo-500 rounded-full text-[9px] font-bold uppercase tracking-wider block w-fit mb-1.5">
+                  <span className="px-2.5 py-0.5 bg-blue-500 rounded-full text-[9px] font-bold uppercase tracking-wider block w-fit mb-1.5">
                     {pressReleases[5].category}
                   </span>
                   <span className="text-xs font-bold line-clamp-1 opacity-90">{pressReleases[5].title}</span>
@@ -333,14 +333,14 @@ const Pressrelease = () => {
 
               {/* Banner/Header */}
               <div className="p-8 md:p-10 bg-slate-50 border-b border-slate-100">
-                <span className="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-[10px] font-extrabold uppercase tracking-widest block w-fit mb-4">
+                <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-[10px] font-extrabold uppercase tracking-widest block w-fit mb-4">
                   {selectedRelease.category}
                 </span>
                 <h2 className="text-2xl md:text-3xl font-black text-slate-800 leading-snug">
                   {selectedRelease.title}
                 </h2>
                 <div className="flex items-center gap-2 mt-4 text-xs font-bold text-slate-400">
-                  <Calendar size={14} className="text-indigo-500" />
+                  <Calendar size={14} className="text-blue-500" />
                   <span className="uppercase">{selectedRelease.date}</span>
                 </div>
               </div>
@@ -353,8 +353,8 @@ const Pressrelease = () => {
                     {selectedRelease.excerpt}
                   </p>
                 </div>
-                <div className="p-5 bg-indigo-50/50 rounded-2xl border border-indigo-100/50">
-                  <p className="text-xs text-indigo-700 font-medium leading-relaxed">
+                <div className="p-5 bg-blue-50/50 rounded-2xl border border-blue-100/50">
+                  <p className="text-xs text-blue-700 font-medium leading-relaxed">
                     This is an official media briefing published by the Bihar State Text Book Publishing Corporation (BSTPC). You can download the complete press kit including images and statements below.
                   </p>
                 </div>
@@ -363,12 +363,12 @@ const Pressrelease = () => {
               {/* Action Footer */}
               <div className="p-6 md:p-8 border-t border-slate-100 flex items-center justify-between bg-slate-50">
                 <div className="flex items-center gap-1.5 text-xs text-slate-400 font-semibold">
-                  <FileText size={14} className="text-indigo-500" />
+                  <FileText size={14} className="text-blue-500" />
                   <span>Size: {selectedRelease.fileSize}</span>
                 </div>
                 <button
                   onClick={(e) => handleDownload(e, selectedRelease)}
-                  className="px-6 py-3 bg-indigo-600 text-white rounded-full text-xs font-extrabold uppercase tracking-widest hover:bg-indigo-700 transition-all shadow-md shadow-indigo-500/10 flex items-center gap-2"
+                  className="px-6 py-3 bg-blue-600 text-white rounded-full text-xs font-extrabold uppercase tracking-widest hover:bg-blue-700 transition-all shadow-md shadow-blue-500/10 flex items-center gap-2"
                 >
                   <FileDown size={14} /> Download Press Release
                 </button>
