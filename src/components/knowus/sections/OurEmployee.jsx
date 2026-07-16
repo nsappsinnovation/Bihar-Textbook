@@ -51,7 +51,7 @@ const OurEmployee = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-3xl md:text-4xl font-extrabold text-[#0d0e23] tracking-tight mb-4"
         >
-          Our <span className="text-blue-600">Employee</span> Pride
+          Our <span className="text-blue-600">Employees</span>
         </motion.h1>
         
         <p className="text-slate-500 text-sm max-w-2xl mx-auto leading-relaxed font-medium">
@@ -84,17 +84,17 @@ const OurEmployee = () => {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-slate-200 border-b border-slate-300 text-[#0d0e23]">
-                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Employee ID</th>
+                  <th className="w-20 px-4 py-4 text-sm font-bold border-r border-slate-300 text-center">S.No.</th>
                   <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Name</th>
                   <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Designation</th>
                   <th className="px-6 py-4 text-sm font-bold">Department</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-300">
-                {filteredEmployees.map((emp) => (
+                {filteredEmployees.map((emp, index) => (
                   <tr key={emp.id} className="text-[#0d0e23]">
-                    <td className="px-6 py-4 text-sm border-r border-slate-300 font-mono text-blue-600 font-bold">
-                      {emp.employeeId}
+                    <td className="px-6 py-4 text-sm border-r border-slate-300 font-mono text-slate-600 font-bold text-center">
+                      {index + 1}
                     </td>
                     <td className="px-6 py-4 text-sm border-r border-slate-300 font-semibold">
                       {emp.name}
