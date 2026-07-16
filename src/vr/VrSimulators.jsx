@@ -96,7 +96,7 @@ const VrSimulators = () => {
                 : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100 hover:text-slate-800'
             }`}
           >
-            <Rocket size={14} /> Space & Milky Way 360°
+            <Rocket size={14} /> Space 360°
           </button>
 
           <button 
@@ -145,6 +145,7 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
   const isDragging = useRef(false);
   const prevMousePos = useRef({ x: 0, y: 0 });
   const cameraAngle = useRef({ yaw: 0, pitch: 0 });
+  const timeRef = useRef(0);
 
   const planets = [
     { 
@@ -332,12 +333,12 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let animId;
-    let time = 0;
 
     const render = () => {
       const width = canvas.width = canvas.parentElement.clientWidth;
       const height = canvas.height = canvas.parentElement.clientHeight;
-      time += 0.45;
+      timeRef.current += 0.45;
+      const time = timeRef.current;
 
       const drawViewport = (viewX, viewWidth, stereoOffset) => {
         ctx.save();
@@ -487,12 +488,13 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
 
         if (viewMode === 'system') {
           // Draw Sun with Realistic Corona & Rays
-          let sunX = 0, sunY = 0, sunZ = 280;
+          let sunX = 0, sunY = 0, sunZ = 0;
           let sx1 = sunX * Math.cos(yaw) - sunZ * Math.sin(yaw);
           let sz1 = sunX * Math.sin(yaw) + sunZ * Math.cos(yaw);
           let sy1 = sunY;
           let sy2 = sy1 * Math.cos(pitch) - sz1 * Math.sin(pitch);
           let sz2 = sy1 * Math.sin(pitch) + sz1 * Math.cos(pitch);
+          sz2 += 280;
 
           if (sz2 > 0) {
             const sunProjX = centerX + (sx1 / sz2) * (viewWidth * 0.85 * zoom);
@@ -530,9 +532,32 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
 
           // Draw Planets & Moons
           planets.forEach((planet) => {
+            // Draw Orbit ring
+            ctx.beginPath();
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 64; i++) {
+              const oAngle = (i / 64) * Math.PI * 2;
+              const ox = Math.cos(oAngle) * planet.dist;
+              const oz = Math.sin(oAngle) * planet.dist;
+              
+              let ox1 = ox * Math.cos(yaw) - oz * Math.sin(yaw);
+              let oz1 = ox * Math.sin(yaw) + oz * Math.cos(yaw);
+              let oy2 = -oz1 * Math.sin(pitch);
+              let oz2 = oz1 * Math.cos(pitch) + 280;
+              
+              if (oz2 > 0) {
+                 const optX = centerX + (ox1 / oz2) * (viewWidth * 0.85 * zoom);
+                 const optY = centerY + (oy2 / oz2) * (viewWidth * 0.85 * zoom);
+                 if (i === 0) ctx.moveTo(optX, optY);
+                 else ctx.lineTo(optX, optY);
+              }
+            }
+            ctx.stroke();
+
             const angle = time * planet.speed;
             const px = Math.cos(angle) * planet.dist;
-            const pz = Math.sin(angle) * planet.dist + 280;
+            const pz = Math.sin(angle) * planet.dist;
             const py = 0;
 
             let rx1 = px * Math.cos(yaw) - pz * Math.sin(yaw);
@@ -540,6 +565,7 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
             let ry1 = py;
             let ry2 = ry1 * Math.cos(pitch) - rz1 * Math.sin(pitch);
             let rz2 = ry1 * Math.sin(pitch) + rz1 * Math.cos(pitch);
+            rz2 += 280;
 
             if (rz2 > 0) {
               const planetProjX = centerX + (rx1 / rz2) * (viewWidth * 0.85 * zoom);
@@ -608,6 +634,7 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
                   let my1 = my;
                   let my2 = my1 * Math.cos(pitch) - mz1 * Math.sin(pitch);
                   let mz2 = my1 * Math.sin(pitch) + mz1 * Math.cos(pitch);
+                  mz2 += 280;
 
                   if (mz2 > 0) {
                     const moonProjX = centerX + (mx1 / mz2) * (viewWidth * 0.85 * zoom);
@@ -797,19 +824,20 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
     const centerY = height / 2;
     const yaw = cameraAngle.current.yaw;
     const pitch = cameraAngle.current.pitch;
-    const time = 0; // Simple fallback; in production use a state-based frame timer
+    const time = timeRef.current;
 
     if (viewMode === 'system') {
       let clickedPlanet = null;
       planets.forEach((planet) => {
         const angle = time * planet.speed;
         const px = Math.cos(angle) * planet.dist;
-        const pz = Math.sin(angle) * planet.dist + 280;
+        const pz = Math.sin(angle) * planet.dist;
 
         let rx1 = px * Math.cos(yaw) - pz * Math.sin(yaw);
         let rz1 = px * Math.sin(yaw) + pz * Math.cos(yaw);
         let ry2 = -rz1 * Math.sin(pitch);
         let rz2 = rz1 * Math.cos(pitch);
+        rz2 += 280;
 
         if (rz2 > 0) {
           const ptX = centerX + (rx1 / rz2) * (viewWidth * 0.85 * zoom);
@@ -857,7 +885,7 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
     const deltaX = e.clientX - prevMousePos.current.x;
     const deltaY = e.clientY - prevMousePos.current.y;
     cameraAngle.current.yaw += deltaX * 0.005;
-    cameraAngle.current.pitch = Math.max(-Math.PI/4, Math.min(Math.PI/4, cameraAngle.current.pitch - deltaY * 0.005));
+    cameraAngle.current.pitch = Math.max(-Math.PI/2, Math.min(Math.PI/2, cameraAngle.current.pitch - deltaY * 0.005));
     prevMousePos.current = { x: e.clientX, y: e.clientY };
   };
 
@@ -877,34 +905,10 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
         className="w-full flex-1"
       />
 
-      {/* Mode Selector HUD Toggle - Light Styled (Hidden in Fullscreen) */}
-      {!isFullscreen && (
-        <div className="absolute top-4 left-4 flex gap-1 bg-white/90 backdrop-blur border border-slate-200 p-1 rounded-xl z-20 pointer-events-auto shadow-md">
-          <button 
-            onClick={() => { setViewMode('system'); setActiveObject(null); }}
-            className={`px-3 py-1.5 rounded-lg text-[10px] font-bold transition-colors ${
-              viewMode === 'system' 
-                ? 'bg-blue-600 text-white shadow-sm' 
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
-            }`}
-          >
-            Solar System View
-          </button>
-          <button 
-            onClick={() => { setViewMode('galaxy'); setActiveObject(null); }}
-            className={`px-3 py-1.5 rounded-lg text-[10px] font-bold transition-colors ${
-              viewMode === 'galaxy' 
-                ? 'bg-blue-600 text-white shadow-sm' 
-                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
-            }`}
-          >
-            Milky Way Galaxy
-          </button>
-        </div>
-      )}
 
-      {/* Object Profile Details Popup - Smaller size & hidden in Fullscreen */}
-      {activeObject && !isVrMode && !isFullscreen && (
+
+      {/* Object Profile Details Popup - Smaller size */}
+      {activeObject && !isVrMode && (
         <div className="absolute top-16 right-4 bg-white/95 border border-slate-200 rounded-xl p-3 w-56 pointer-events-auto shadow-2xl z-20 animate-fadeIn text-slate-800">
           <div className="flex justify-between items-center mb-1.5">
             <h5 className="text-slate-900 text-xs font-bold flex items-center gap-1.5 truncate">
@@ -1929,29 +1933,6 @@ const OceanSimulator = ({ isVrMode, isFullscreen }) => {
         ctx.closePath();
         ctx.fill();
 
-        // 10. Depth and Pressure telemetry indicators
-        const gaugeX = viewX + 40;
-        const gaugeY = height - 120;
-        ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
-        ctx.fillRect(gaugeX, gaugeY, 115, 80);
-        ctx.strokeStyle = 'rgba(14, 165, 233, 0.4)';
-        ctx.strokeRect(gaugeX, gaugeY, 115, 80);
-        
-        ctx.fillStyle = '#38bdf8';
-        ctx.font = 'bold 9px monospace';
-        ctx.textAlign = 'left';
-        ctx.fillText('SUB TELEMETRY', gaugeX + 8, gaugeY + 16);
-        
-        const currentDepth = 3524 + Math.floor(Math.sin(time * 0.05) * 4);
-        const currentPres = (currentDepth * 0.1).toFixed(1);
-        ctx.fillStyle = '#ffffff';
-        ctx.font = '13px monospace';
-        ctx.fillText(`${currentDepth} m`, gaugeX + 8, gaugeY + 38);
-        ctx.font = '9px monospace';
-        ctx.fillStyle = '#94a3b8';
-        ctx.fillText(`PRESSURE: ${currentPres} atm`, gaugeX + 8, gaugeY + 54);
-        ctx.fillText(`TEMP: 2.4 °C`, gaugeX + 8, gaugeY + 68);
-
         // Scan line grids
         ctx.strokeStyle = 'rgba(14, 165, 233, 0.1)';
         ctx.lineWidth = 4;
@@ -2086,8 +2067,8 @@ const OceanSimulator = ({ isVrMode, isFullscreen }) => {
 
      
 
-      {/* Creature Database Bio Popup - Smaller size & hidden in Fullscreen */}
-      {activeCreature && !isVrMode && !isFullscreen && (
+      {/* Creature Database Bio Popup - Smaller size */}
+      {activeCreature && !isVrMode && (
         <div className="absolute top-16 right-4 bg-white/95 border border-emerald-100 rounded-xl p-3 w-56 pointer-events-auto shadow-2xl z-20 animate-fadeIn text-slate-800">
           <div className="flex justify-between items-center mb-1.5">
             <h5 className="text-emerald-600 text-[10px] font-mono font-bold flex items-center gap-1 truncate">

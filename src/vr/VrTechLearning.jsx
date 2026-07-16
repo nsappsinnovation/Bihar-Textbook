@@ -1742,23 +1742,15 @@ const VrTechLearning = ({ isEmbedded = false, onBack }) => {
                           })}
 
                           <div className="pt-2 mt-auto">
-                            {activeLessonId < lessons.length ? (
-                              <button
-                                onClick={handleProceedNext}
-                                className="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider font-display transition-all duration-200 flex items-center justify-center gap-2 shadow-sm cursor-pointer group"
-                              >
-                                <span>Proceed to Next Lesson</span>
-                                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                              </button>
-                            ) : (
-                              <button
-                                onClick={handleProceedNext}
-                                className="w-full py-3.5 bg-[#0BB562] hover:bg-[#099b53] text-white rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider font-display transition-all duration-200 flex items-center justify-center gap-2 shadow-sm cursor-pointer group"
-                              >
-                                <span>Return to VR Dashboard</span>
-                                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                              </button>
-                            )}
+                            {activeLessonId < lessons.length && (
+                                <button
+                                  onClick={handleProceedNext}
+                                  className="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider font-display transition-all duration-200 flex items-center justify-center gap-2 shadow-sm cursor-pointer group"
+                                >
+                                  <span>Proceed to Next Lesson</span>
+                                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                                </button>
+                              )}
                           </div>
                         </div>
 
