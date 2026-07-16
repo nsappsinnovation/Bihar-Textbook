@@ -75,26 +75,25 @@ export default function LinguisticApp() {
 
   return (
     <div className="min-h-screen bg-[#FDFDFD] font-sans text-[#2D3142] flex flex-col overflow-x-hidden -mt-6">
+      <button
+        onClick={() => navigate("/#missions-grid")}
+        className="fixed top-[80px] md:top-[90px] left-[24px] md:left-[48px] z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group"
+      >
+        <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
+      </button>
       {/* Main Content Area */}
       <main className="flex-1 px-2 md:px-4 lg:px-8 pb-8 max-w-[1400px] mx-auto w-full overflow-hidden relative">
-       {/* Back Button */}
-             <button
-               onClick={() => navigate("/#missions-grid")}
-               className="fixed top-5 left-5 z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group"
-             >
-               <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
-             </button>
 
         {/* Hero Section */}
         <div className="flex flex-col lg:flex-row justify-between items-center mb-24 relative mt-0">
           <div className="space-y-1 z-10 w-[45%] mx-10">
-           <h1 className="text-4xl md:text-5xl font-black leading-tight">
-              Let's learn <br />
-              <span className="text-[#22C55E]">a new language</span>
-            </h1>
-           <p className="text-slate-500 text-base leading-relaxed max-w-xs">
-              Have a conversation in different languages
-            </p>
+             <h1 className="text-4xl md:text-5xl font-black leading-tight">
+                Let's learn <br />
+                <span className="text-[#22C55E]">a new language</span>
+              </h1>
+             <p className="text-slate-500 text-base leading-relaxed max-w-xs mt-2">
+                Have a conversation in different languages
+              </p>
           </div>
           <div className="relative flex items-end justify-center w-full lg:w-[55%] min-h-[340px] mt-12 lg:mt-0">
              {/* Background soft blob */}

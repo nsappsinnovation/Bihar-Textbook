@@ -5,6 +5,14 @@ import VrSimulators from './VrSimulators';
 import VrTechLearning from './VrTechLearning';
 import VrVirtualLab from './VrVirtualLab';
 
+const VrHeadsetIcon = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <rect x="2" y="7" width="20" height="10" rx="2" ry="2"></rect>
+    <path d="M9 17v2a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-2"></path>
+    <path d="M2 12h20"></path>
+  </svg>
+);
+
 const VrDashboard = () => {
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('tech-learning'); // 'simulators' | 'tech-learning' | 'virtual-lab'
@@ -31,10 +39,10 @@ const VrDashboard = () => {
       color: 'bg-indigo-50' 
     },
     { 
-      label: 'Virtual Labs', 
-      value: 'Practice in VR', 
-      icon: <FlaskConical className="text-indigo-600" />, 
-      color: 'bg-indigo-50' 
+      label: 'VR Science Labs', 
+      value: 'Immersive Practice', 
+      icon: <VrHeadsetIcon className="text-purple-600" />, 
+      color: 'bg-purple-100' 
     },
     { 
       label: '360° Worlds', 
@@ -48,10 +56,11 @@ const VrDashboard = () => {
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden">
       <button
         onClick={() => navigate("/#missions-grid")}
-        className="fixed top-3 left-3 md:top-5 md:left-5 z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group"
+        className="fixed top-[80px] md:top-[90px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group"
       >
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
       </button>
+
       
       {/* Main Content */}
       <main className="flex-1 min-h-screen pb-12 overflow-y-auto">
@@ -69,9 +78,6 @@ const VrDashboard = () => {
                  <p className="text-slate-500 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed max-w-sm">
                    Explore, interact and understand difficult concepts through immersive VR experiences.
                  </p>
-                 
-                 <div className="pt-2">
-                 </div>
               </div>
 
               <div className="hidden lg:block absolute top-0 right-0 w-[55%] h-full">

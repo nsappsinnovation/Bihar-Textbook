@@ -319,22 +319,18 @@ const Basicskills = () => {
       <div className="absolute top-0 right-0 -z-10 w-[700px] h-[700px] rounded-full bg-gradient-to-br from-emerald-500/5 to-teal-500/5 blur-[120px]" />
       <div className="absolute bottom-0 left-0 -z-10 w-[600px] h-[600px] rounded-full bg-gradient-to-tr from-teal-500/5 to-emerald-500/5 blur-[120px]" />
 
+      <button
+        onClick={() => navigate("/#missions-grid")}
+        className="fixed top-[80px] md:top-[90px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:shadow-lg transition-all border border-slate-100 group cursor-pointer"
+      >
+        <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
+      </button>
+
       {/* Container */}
       <div className="max-w-[1140px] mx-auto px-6 sm:px-8 pt-4">
 
-        {/* Navigation */}
-        <div className="mb-4">
-          <button 
-            onClick={() => navigate("/#missions-grid")} 
-            className="group w-10 h-10 bg-white hover:bg-slate-50 border border-slate-200/80 rounded-full shadow-sm flex items-center justify-center text-slate-600 hover:text-slate-900 transition-all duration-300 cursor-pointer"
-            aria-label="Back to missions"
-          >
-            <ArrowLeft size={18} className="group-hover:-translate-x-0.5 transition-transform" />
-          </button>
-        </div>
-
         {/* Hero Section */}
-        <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-16 -mt-24">
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center mb-16 mt-4 md:mt-8">
           <div className="lg:col-span-7 space-y-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}

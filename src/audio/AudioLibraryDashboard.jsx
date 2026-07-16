@@ -367,10 +367,9 @@ const AudioLibraryDashboard = () => {
 
       {/* Main Content */}
       <main className="flex-1 min-h-screen pb-0">
-        {/* Back Button */}
         <button
           onClick={() => navigate("/#missions-grid")}
-          className="fixed top-5 left-5 z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group cursor-pointer"
+          className="fixed top-[80px] md:top-[90px] left-[24px] md:left-[48px] z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group cursor-pointer"
         >
           <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
         </button>
@@ -388,9 +387,6 @@ const AudioLibraryDashboard = () => {
                  <p className="text-slate-500 text-[15px] md:text-[16px] font-medium leading-relaxed max-w-sm">
                    Your pocket hub for audiobooks and knowledge.
                  </p>
-                 
-                 <div className="pt-2">
-                  </div>
               </div>
 
               <div className="hidden lg:block absolute top-0 right-0 w-[55%] h-full">
