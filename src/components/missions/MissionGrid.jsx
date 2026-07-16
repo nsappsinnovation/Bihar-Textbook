@@ -24,7 +24,7 @@ const MissionGrid = () => {
         {
             id: 3,
             title: "Sign Language",
-            desc: "Inclusive Educational Tools",
+            desc: "Learn Indian Sign Language",
             image: "/images/missions/friend.png",
             hoverImage: "/images/missions/friendhov.png",
             link: "/sign-learn",
@@ -33,7 +33,7 @@ const MissionGrid = () => {
         {
             id: 4,
             title: "Diverse Language",
-            desc: "Universal Digital Access",
+            desc: "Explore New Languages",
             image: "/images/missions/diverse.png",
             hoverImage: "/images/missions/diversehov.png",
             link: "/ling",
@@ -42,7 +42,7 @@ const MissionGrid = () => {
         {
             id: 5,
             title: "AI Intelligence",
-            desc: "Smart Adaptive Tutoring",
+            desc: "Learn AI Basics",
             image: "/images/missions/ai.png",
             hoverImage: "/images/missions/aihov.png",
             link: "/ai-intelligence-dashboard",
@@ -51,7 +51,7 @@ const MissionGrid = () => {
         {
             id: 7,
             title: "Cyber Security",
-            desc: "Digital Safety & Ethics",
+            desc: "Digital Safety Guidelines",
             image: "/images/missions/cyber-security.png",
             hoverImage: "/images/missions/cyber-securityhov.png",
             link: "/cyber-security-dashboard",
@@ -60,7 +60,7 @@ const MissionGrid = () => {
         {
             id: 8,
             title: "Heritage Archive",
-            desc: "Cultural Document Preservation",
+            desc: "Learn about Heritage",
             image: "/images/missions/history.png",
             hoverImage: "/images/missions/historyhov.png",
             link: "/heritage-dashboard",
@@ -69,7 +69,7 @@ const MissionGrid = () => {
         {
             id: 10,
             title: "Basic Learning Skills",
-            desc: "Communication & Life Skills",
+            desc: "Foundational Learning Tools",
             image: "/images/missions/abilities.png",
             hoverImage: "/images/missions/abilitieshov.png",
             link: "/life-skills",
