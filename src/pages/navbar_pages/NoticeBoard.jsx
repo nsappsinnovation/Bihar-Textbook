@@ -104,8 +104,9 @@ export default function NoticeBoard() {
   ).slice(0, 8); // Showing 8 for a better mix view
 
   // Hardcoded values as per exact user requirements
-  const totalNotices = 232;
-  const totalTenders = 230;
+  const totalNotices = actualNotices.filter(n => n.category !== 'Circular').length;
+  const totalCirculars = actualNotices.filter(n => n.category === 'Circular').length;
+  const totalTenders = tendersData.length;
 
   return (
     <section className="w-full bg-[#fcfcfd] py-16 px-6 md:px-12 lg:px-24 font-sans text-slate-900 border-t border-slate-100 overflow-hidden relative">
@@ -204,7 +205,7 @@ export default function NoticeBoard() {
                       <p className="text-[11px] text-slate-400 mt-0.5 font-medium">Curriculum & syllabus updates</p>
                     </div>
                   </div>
-                  <span className="text-2xl font-black text-blue-500 tracking-tight">67+</span>
+                  <span className="text-2xl font-black text-blue-500 tracking-tight">{totalCirculars}+</span>
                 </div>
               </div>
             </div>

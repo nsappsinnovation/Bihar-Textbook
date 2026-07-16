@@ -6,18 +6,21 @@ import { useEffect } from "react";
 
 const Tenders = () => {
   const [liveTenders, setLiveTenders] = useState(() => {
-    const saved = localStorage.getItem('website_notices_v2');
+    const saved = localStorage.getItem('website_notices_v6');
     if (saved) {
-      return JSON.parse(saved).filter(t => t.category.toLowerCase().includes('tender') || t.title.toLowerCase().includes('tender'));
+      return JSON.parse(saved).filter(t => t.category && t.category.toLowerCase() === 'tender');
     }
     return tendersData;
   });
 
   useEffect(() => {
     const handleUpdate = () => {
-      const saved = localStorage.getItem('website_notices_v2');
+      const saved = localStorage.getItem('website_notices_v6');
       if (saved) {
-        setLiveTenders(JSON.parse(saved).filter(t => t.category.toLowerCase().includes('tender') || t.title.toLowerCase().includes('tender')));
+        const adminTenders = JSON.parse(saved).filter(t => t.category && t.category.toLowerCase() === 'tender');
+        setLiveTenders(adminTenders);
+      } else {
+        setLiveTenders(tendersData);
       }
     };
     window.addEventListener('websiteDataUpdated', handleUpdate);
@@ -47,6 +50,22 @@ const Tenders = () => {
     } catch { return false; }
   };
 
+  const isWithinOneMonth = (dateStr) => {
+    try {
+      if (!dateStr) return false;
+      let d;
+      if (dateStr.includes('/')) {
+        const parts = dateStr.split('/');
+        d = new Date(parts[2], parts[1] - 1, parts[0]);
+      } else {
+        d = new Date(dateStr);
+      }
+      const now = new Date();
+      const diffTime = Math.abs(now - d);
+      return Math.ceil(diffTime / (1000 * 60 * 60 * 24)) <= 30;
+    } catch { return false; }
+  };
+
   const formatDate = (dateStr) => {
     try {
       if (!dateStr) return '';
@@ -57,14 +76,27 @@ const Tenders = () => {
   };
 
   const filteredTenders = useMemo(() => {
-    return liveTenders.filter((t) => {
+    const filtered = liveTenders.filter((t) => {
       const matchesSearch = t.title.toLowerCase().includes(search.toLowerCase());
       const matchesFilter = activeFilter === "All" || 
                            (activeFilter === "E-Tender" && t.title.toLowerCase().includes("e-tender")) ||
                            (activeFilter === "Services" && t.title.toLowerCase().includes("service"));
       return matchesSearch && matchesFilter;
     });
-  }, [search, activeFilter]);
+
+    const pinned = [];
+    const unpinned = [];
+
+    filtered.forEach((item) => {
+      if ((item.isPinned || item.pinned) && isWithinOneMonth(item.date)) {
+        pinned.push(item);
+      } else {
+        unpinned.push(item);
+      }
+    });
+
+    return [...pinned, ...unpinned];
+  }, [search, activeFilter, liveTenders]);
 
   const totalPages = Math.ceil(filteredTenders.length / tendersPerPage);
   const currentTenders = filteredTenders.slice((currentPage - 1) * tendersPerPage, currentPage * tendersPerPage);
@@ -238,6 +270,9 @@ const Tenders = () => {
                             <td className="px-8 py-10">
                               <div className="space-y-3">
                                 <div className="flex flex-wrap items-center gap-2">
+                                  {(tender.isPinned || tender.pinned) && isWithinOneMonth(tender.date) && (
+                                    <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-600 text-[10px] font-black border border-amber-200">PINNED</span>
+                                  )}
                                   {isNew(tender.date) && (
                                     <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
                                       <span className="w-1 h-1 bg-blue-500 rounded-full" /> NEW
@@ -290,6 +325,9 @@ const Tenders = () => {
                       >
                         <div className="flex justify-between items-start">
                           <div className="flex gap-2">
+                             {(tender.isPinned || tender.pinned) && isWithinOneMonth(tender.date) && (
+                                <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-600 text-[10px] font-black border border-amber-200">PINNED</span>
+                             )}
                              {isNew(tender.date) && (
                                 <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-600 text-[10px] font-black">NEW</span>
                              )}

@@ -7,6 +7,7 @@ import {
 import Modal, { FormInput, ToggleSwitch } from '../components/Modal';
 import { notices, noticeCategories } from '../data/dummyData';
 import { noticesData } from '../../pages/navbar_pages/Notice';
+import { tendersData } from '../../data/tendersData';
 import { useDebounce } from '../hooks/useCustomHooks';
 
 const priorityStyles = {
@@ -35,23 +36,14 @@ export default function NoticesPage({ addToast, forcedCategory }) {
   
   // Local state for notices with persistence
   const [noticeList, setNoticeList] = useState(() => {
-    const saved = localStorage.getItem('website_notices_v2');
+    const saved = localStorage.getItem('website_notices_v6');
     if (saved) {
-      const parsed = JSON.parse(saved);
-      // Fix old data that was overwritten with 'Notice'
-      const migrated = parsed.map(item => {
-        if (item.category === 'Notice' && typeof item.id === 'string' && item.id.startsWith('notice_')) {
-          const orig = noticesData.find(n => `notice_${n.id}` === item.id);
-          if (orig && orig.category) {
-            return { ...item, category: orig.category };
-          }
-        }
-        return item;
-      });
-      localStorage.setItem('website_notices_v2', JSON.stringify(migrated));
-      return migrated;
+      return JSON.parse(saved);
     }
-    return notices;
+    return [
+      ...noticesData.map(n => ({ ...n, id: `notice-${n.id}` })),
+      ...tendersData.map(t => ({ ...t, id: `tender-${t.id}` }))
+    ];
   });
 
   const noticeOptions = ["Recruitment", "Financial", "Technical", "Circular", "Corrigendum", "Other"];
@@ -70,6 +62,27 @@ export default function NoticesPage({ addToast, forcedCategory }) {
   });
 
   const debouncedSearch = useDebounce(searchQuery);
+
+  const parseDate = (dateStr) => {
+    try {
+      if (!dateStr) return new Date();
+      if (typeof dateStr === 'string' && dateStr.includes('/')) {
+        const parts = dateStr.split('/');
+        return new Date(parts[2], parts[1] - 1, parts[0]);
+      }
+      const d = new Date(dateStr);
+      return isNaN(d.getTime()) ? new Date() : d;
+    } catch {
+      return new Date();
+    }
+  };
+
+  const formatDate = (dateStr) => {
+    try {
+      const d = parseDate(dateStr);
+      return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+    } catch { return dateStr || ''; }
+  };
 
   const filteredNotices = useMemo(() => {
     return noticeList.filter((notice) => {
@@ -108,7 +121,7 @@ export default function NoticesPage({ addToast, forcedCategory }) {
       logActivity(`Published new notice: ${formData.title}`, 'Admin', 'upload');
     }
     setNoticeList(updatedList);
-    localStorage.setItem('website_notices_v2', JSON.stringify(updatedList));
+    localStorage.setItem('website_notices_v6', JSON.stringify(updatedList));
     window.dispatchEvent(new Event('websiteDataUpdated'));
     setShowAddModal(false);
     setEditingNotice(null);
@@ -119,7 +132,7 @@ export default function NoticesPage({ addToast, forcedCategory }) {
     const itemToDelete = noticeList.find(n => n.id === id);
     const updatedList = noticeList.filter(n => n.id !== id);
     setNoticeList(updatedList);
-    localStorage.setItem('website_notices_v2', JSON.stringify(updatedList));
+    localStorage.setItem('website_notices_v6', JSON.stringify(updatedList));
     window.dispatchEvent(new Event('websiteDataUpdated'));
     addToast('Notice deleted', 'error');
     if (itemToDelete) {
@@ -248,12 +261,14 @@ export default function NoticesPage({ addToast, forcedCategory }) {
 
                   {/* Meta */}
                   <div className="flex items-center flex-wrap gap-3">
-                    <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${priorityStyles[notice.priority]}`}>
-                      {notice.priority}
-                    </span>
+                    {notice.priority && (
+                      <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${priorityStyles[notice.priority]}`}>
+                        {notice.priority}
+                      </span>
+                    )}
                     <span className="text-xs text-gray-400 flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
-                      {new Date(notice.date).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                      {formatDate(notice.date)}
                     </span>
                     <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
                       {notice.category}
@@ -322,7 +337,17 @@ export default function NoticesPage({ addToast, forcedCategory }) {
             onChange={(val) => setFormData(prev => ({ ...prev, description: val }))}
             id="notice-description" 
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-4">
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">Date</label>
+              <input 
+                type="date"
+                value={parseDate(formData.date).toISOString().split('T')[0]}
+                onChange={(e) => setFormData(prev => ({ ...prev, date: new Date(e.target.value).toISOString() }))}
+                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-300 transition-all bg-white" 
+                id="notice-date"
+              />
+            </div>
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-1.5">Category</label>
               <select 

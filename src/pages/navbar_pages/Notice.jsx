@@ -1,183 +1,30 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { FiSearch, FiFileText, FiBell, FiArrowRight, FiCalendar, FiClock, FiFilter } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
-
-// All 33 notices extracted from https://bstbpc.bihar.gov.in/Notice_Circulars.aspx
-export const noticesData = [
-  {
-    id: 1,
-    title: "Selection under application for walk-in interview ADVT No BSTBPC/851/2025",
-    description: "Selection under application for walk-in interview ADVT No BSTBPC/851/2025",
-    date: "17/01/2026",
-    category: "Recruitment",
-    isUrgent: true,
-    document: "https://bstbpc.bihar.gov.in/Admin/documents/168Notice.pdf",
-  },
-  {
-    id: 2,
-    title: "Financial Proceeding of BSTBPC / E-Tender/ Bilingual Text books for Class IX to XII",
-    description: "Financial Proceeding of BSTBPC / E-Tender/ Bilingual Text books for Class IX to XII for School Library /742 dt 04/07/2025",
-    date: "15/09/2025",
-    category: "Financial",
-    document: "https://bstbpc.bihar.gov.in/Admin/documents/167Notice.pdf",
-  },
-  {
-    id: 3,
-    title: "Financial Bid Opening Notice of BSTBPC / E-Tender/ Bilingual Text books",
-    description: "Financial Bid Opening Notice of BSTBPC / E-Tender/ Bilingual Text books for Class IX to XII for School Library /742 dt 04/07/2025",
-    date: "06/09/2025",
-    category: "Financial",
-    document: "https://bstbpc.bihar.gov.in/Admin/documents/166Notice.pdf",
-  },
-  {
-    id: 4,
-    title: "Notice for Financial Bid Opening of BSTBPC / E-Tender Printing Supply",
-    description: "Notice for Financial Bid Opening of BSTBPC / E-Tender Printing Supply",
-    date: "01/10/2025",
-    category: "Financial",
-    document: "https://bstbpc.bihar.gov.in/Admin/documents/165Notice.pdf",
-  },
-  {
-    id: 5,
-    title: "Technical Evaluation of BSTBPC / E-Tender/ Bilingual Text books",
-    description: "Technical Evaluation of BSTBPC / E-Tender/ Bilingual Text books for Class IX to XII for School Library /742 dt 04/07/2025",
-    date: "28/08/2025",
-    category: "Technical",
-    document: "https://bstbpc.bihar.gov.in/Admin/documents/164Notice.pdf",
-  },
-  {
-    id: 6,
-    title: "Corrigendum of BSTBPC / E-Tender/ Bilingual Text books for Class IX to XII",
-    description: "Corrigendum of BSTBPC / E-Tender/ Bilingual Text books for Class IX to XII for School Library /742 dt 04/07/2025",
-    date: "29/07/2025",
-    category: "Corrigendum",
-    document: "https://bstbpc.bihar.gov.in/Admin/documents/163Notice.pdf",
-  },
-  {
-    id: 7,
-    title: "BSTBPC / E-Tender/ Bilingual Text books for Class IX to XII for School Library",
-    description: "BSTBPC / E-Tender/ Bilingual Text books for Class IX to XII for School Library /742 dt 04/07/2025",
-    date: "04/07/2025",
-    category: "Circular",
-    document: "https://bstbpc.bihar.gov.in/Admin/documents/162Notice.pdf",
-  },
-  {
-    id: 8,
-    title: "Corrigendum of BSTBPC / E-Tender/ Printing, Supply of Text Books",
-    description: "Corrigendum of BSTBPC / E-Tender/ Printing, Supply of Text Books for the session 2025-26 for class 1st to 5th /737 dt 03/07/2025",
-    date: "31/07/2025",
-    category: "Corrigendum",
-    document: "https://bstbpc.bihar.gov.in/Admin/documents/161Notice.pdf",
-  },
-  {
-    id: 9,
-    title: "Notice for Technical Bid Opening of BSTBPC / E-Tender Printing Supply",
-    description: "Notice for Technical Bid Opening of BSTBPC / E-Tender Printing Supply /737 dt 03/07/2025",
-    date: "25/07/2025",
-    category: "Technical",
-    document: "https://bstbpc.bihar.gov.in/Admin/documents/160Notice.pdf",
-  },
-  {
-    id: 10,
-    title: "BSTBPC / E-Tender/ Printing, Supply of Text Books for session 2025-26",
-    description: "BSTBPC / E-Tender/ Printing, Supply of Text Books for the session 2025-26 for class 1st to 5th /737 dt 03/07/2025",
-    date: "03/07/2025",
-    category: "Circular",
-    document: "https://bstbpc.bihar.gov.in/Admin/documents/159Notice.pdf",
-  },
-  {
-    id: 11,
-    title: "Extension of Date for BSTBPC / E-Tender/ Printing, Supply of Text Books",
-    description: "Extension of Date for BSTBPC / E-Tender/ Printing, Supply of Text Books for the session 2024-25 /735 dt 02/07/2025",
-    date: "02/07/2025",
-    category: "Extension",
-    document: "https://bstbpc.bihar.gov.in/Admin/documents/158Notice.pdf",
-  },
-  {
-    id: 12,
-    title: "Corrigendum of BSTBPC / E-Tender/ Printing, Supply of Text Books 2024-25",
-    description: "Corrigendum of BSTBPC / E-Tender/ Printing, Supply of Text Books for the session 2024-25 /734 dt 01/07/2025",
-    date: "01/07/2025",
-    category: "Corrigendum",
-    document: "https://bstbpc.bihar.gov.in/Admin/documents/157Notice.pdf",
-  },
-  {
-    id: 13,
-    title: "Notice for Technical Bid Opening BSTBPC / E-Tender 2024-25",
-    description: "Notice for Technical Bid Opening of BSTBPC / E-Tender/ Printing, Supply of Text Books 2024-25",
-    date: "28/06/2025",
-    category: "Technical",
-    document: "https://bstbpc.bihar.gov.in/Admin/documents/156Notice.pdf",
-  },
-  {
-    id: 14,
-    title: "BSTBPC / E-Tender/ Printing, Supply of Text Books for session 2024-25",
-    description: "BSTBPC / E-Tender/ Printing, Supply of Text Books for the session 2024-25 for class 6th to 12th",
-    date: "18/06/2025",
-    category: "Circular",
-    document: "https://bstbpc.bihar.gov.in/Admin/documents/155Notice.pdf",
-  },
-  {
-    id: 15,
-    title: "Advertisement Regarding Walk-in-interview ADVT No BSTBPC/654/2025",
-    description: "Advertisement Regarding Walk-in-interview ADVT No BSTBPC/654/2025",
-    date: "04/06/2025",
-    category: "Recruitment",
-    document: "https://bstbpc.bihar.gov.in/Admin/documents/154Notice.pdf",
-  },
-  {
-    id: 16,
-    title: "Tender for Housekeeping Services at BSTBPC Patna",
-    description: "Tender for Housekeeping Services at Bihar State Text Book Publishing Corporation Ltd. Patna",
-    date: "22/05/2025",
-    category: "Tender",
-    document: "https://bstbpc.bihar.gov.in/Admin/documents/153Notice.pdf",
-  },
-  {
-    id: 17,
-    title: "Notice for BSTBPC / E-Tender/ Printing, Supply of Text Books 2024-25",
-    description: "Notice for BSTBPC / E-Tender/ Printing, Supply of Text Books for the session 2024-25",
-    date: "30/04/2025",
-    category: "Circular",
-    document: "https://bstbpc.bihar.gov.in/Admin/documents/152Notice.pdf",
-  },
-  {
-    id: 18,
-    title: "Financial Bid Opening Notice BSTBPC / E-Tender /632 dt 27/04/2025",
-    description: "Financial Bid Opening Notice of BSTBPC / E-Tender /632 dt 27/04/2025",
-    date: "08/05/2025",
-    category: "Financial",
-    document: "https://bstbpc.bihar.gov.in/Admin/documents/151Notice.pdf",
-  },
-  {
-    id: 19,
-    title: "Technical Bid Opening Notice BSTBPC / E-Tender /632 dt 27/04/2025",
-    description: "Technical Bid Opening Notice of BSTBPC / E-Tender /632 dt 27/04/2025",
-    date: "29/04/2025",
-    category: "Technical",
-    document: "https://bstbpc.bihar.gov.in/Admin/documents/150Notice.pdf",
-  },
-  {
-    id: 20,
-    title: "E-Tender for Printing & Supply of Text Books Session 2024-25",
-    description: "E-Tender for Printing & Supply of Text Books for the Session 2024-25",
-    date: "27/04/2025",
-    category: "Tender",
-    document: "https://bstbpc.bihar.gov.in/Admin/documents/149Notice.pdf",
-  },
-];
+import { noticesData } from "../../data/noticesData";
+export { noticesData };
 
 const Notice = () => {
   const [liveNotices, setLiveNotices] = useState(() => {
-    const saved = localStorage.getItem('website_notices_v2');
-    return saved ? JSON.parse(saved) : noticesData;
+    const saved = localStorage.getItem('website_notices_v6');
+    if (saved) {
+      return JSON.parse(saved).filter(t => 
+        !t.category || t.category.toLowerCase() !== 'tender'
+      );
+    }
+    return noticesData;
   });
 
   useEffect(() => {
     const handleUpdate = () => {
-      const saved = localStorage.getItem('website_notices_v2');
+      const saved = localStorage.getItem('website_notices_v6');
       if (saved) {
-        setLiveNotices(JSON.parse(saved));
+        const adminNotices = JSON.parse(saved).filter(t => 
+          !t.category || t.category.toLowerCase() !== 'tender'
+        );
+        setLiveNotices(adminNotices);
+      } else {
+        setLiveNotices(noticesData);
       }
     };
     window.addEventListener('websiteDataUpdated', handleUpdate);
@@ -191,7 +38,7 @@ const Notice = () => {
 
   const filters = ["All", "Recruitment", "Financial", "Technical", "Circular", "Tender", "Corrigendum"];
 
-  const isNew = (dateStr) => {
+  const isWithinOneMonth = (dateStr) => {
     try {
       if (!dateStr) return false;
       let d;
@@ -204,7 +51,7 @@ const Notice = () => {
       const now = new Date();
       const diffTime = Math.abs(now - d);
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      return diffDays <= 30; // Using 30 days for demo since dates are older
+      return diffDays <= 30;
     } catch { return false; }
   };
 
@@ -218,13 +65,26 @@ const Notice = () => {
   };
 
   const filteredNotices = useMemo(() => {
-    return liveNotices.filter((n) => {
+    const filtered = liveNotices.filter((n) => {
       const matchesSearch = n.title.toLowerCase().includes(search.toLowerCase()) ||
                           n.description.toLowerCase().includes(search.toLowerCase());
       const matchesFilter = activeFilter === "All" || n.category === activeFilter;
       return matchesSearch && matchesFilter;
     });
-  }, [search, activeFilter]);
+
+    const pinned = [];
+    const unpinned = [];
+
+    filtered.forEach((item) => {
+      if ((item.isPinned || item.pinned) && isWithinOneMonth(item.date)) {
+        pinned.push(item);
+      } else {
+        unpinned.push(item);
+      }
+    });
+
+    return [...pinned, ...unpinned];
+  }, [search, activeFilter, liveNotices]);
 
   const totalPages = Math.ceil(filteredNotices.length / noticesPerPage);
   const currentNotices = filteredNotices.slice((currentPage - 1) * noticesPerPage, currentPage * noticesPerPage);
@@ -246,7 +106,6 @@ const Notice = () => {
 
   return (
     <div className="min-h-screen bg-[#f8fafc]">
-      {/* ================= HERO SECTION ================= */}
       <section className="relative bg-[#0d0e23] pt-16 pb-20 text-center text-white overflow-hidden border-b border-white/5">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -302,14 +161,11 @@ const Notice = () => {
         </div>
       </section>
 
-      {/* ================= MAIN CONTENT ================= */}
       <section className="relative -mt-12 pb-24 px-6 z-20">
         <div className="max-w-5xl mx-auto">
-          {/* ELEVATED CONTAINER */}
           <div 
             className="bg-white rounded-3xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-slate-200/50 p-4 md:p-8"
           >
-            {/* FILTER & SEARCH SECTION (Static) */}
             <div className="space-y-6 bg-slate-50/50 rounded-2xl p-4 border border-slate-100 mb-8">
               <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
                 <div className="flex items-center gap-4">
@@ -334,7 +190,6 @@ const Notice = () => {
                 </div>
               </div>
 
-              {/* QUICK FILTERS */}
               <div className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-none">
                 <FiFilter className="text-slate-400 mr-2 flex-shrink-0" />
                 {filters.map((filter) => (
@@ -353,7 +208,6 @@ const Notice = () => {
               </div>
             </div>
 
-            {/* ERROR / EMPTY STATE */}
             <AnimatePresence mode="wait">
               {currentNotices.length === 0 ? (
                 <motion.div 
@@ -372,7 +226,6 @@ const Notice = () => {
                   initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                   className="space-y-8"
                 >
-                  {/* DESKTOP TABLE */}
                   <div className="hidden lg:block overflow-hidden rounded-3xl border border-slate-100 bg-slate-50/50">
                     <table className="w-full text-left">
                       <thead>
@@ -399,7 +252,10 @@ const Notice = () => {
                               <div className="flex items-start gap-4 max-w-2xl">
                                 <div className="space-y-2">
                                   <div className="flex flex-wrap items-center gap-2">
-                                    {isNew(notice.date) && (
+                                    {(notice.isPinned || notice.pinned) && isWithinOneMonth(notice.date) && (
+                                      <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-600 text-[10px] font-black border border-amber-200">PINNED</span>
+                                    )}
+                                    {isWithinOneMonth(notice.date) && (
                                       <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
                                         <span className="w-1 h-1 bg-blue-500 rounded-full" /> NEW
                                       </span>
@@ -446,7 +302,6 @@ const Notice = () => {
                     </table>
                   </div>
 
-                  {/* MOBILE CARD VIEW */}
                   <div className="lg:hidden grid gap-6">
                     {currentNotices.map((notice, index) => (
                       <motion.div 
@@ -458,7 +313,10 @@ const Notice = () => {
                       >
                         <div className="flex justify-between items-start">
                           <div className="flex gap-2">
-                             {isNew(notice.date) && (
+                             {(notice.isPinned || notice.pinned) && isWithinOneMonth(notice.date) && (
+                                <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-600 text-[10px] font-black border border-amber-200">PINNED</span>
+                             )}
+                             {isWithinOneMonth(notice.date) && (
                                 <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-600 text-[10px] font-black">NEW</span>
                              )}
                              <span className="px-2 py-0.5 rounded-md bg-blue-100 text-blue-700 text-[10px] font-black uppercase">{notice.category}</span>
