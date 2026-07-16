@@ -52,26 +52,71 @@ const milestones = [
 
 import mapData from './biharMapData.json';
 
-const citiesMap = {
-  patna: { label: 'Patna HQ', district: 'Patna', main: true },
-  muzaffarpur: { label: 'Muzaffarpur', district: 'Muzaffarpur' },
-  gaya: { label: 'Gaya', district: 'Gaya' },
-  purnia: { label: 'Purnia', district: 'Purnia' },
-  bhagalpur: { label: 'Bhagalpur', district: 'Bhagalpur' },
-  darbhanga: { label: 'Darbhanga', district: 'Darbhanga' },
-  rohtas: { label: 'Rohtas', district: 'Rohtas' },
-  champaran: { label: 'West Champaran', district: 'Pashchim Champaran' },
-  chapra: { label: 'Chapra', district: 'Saran (chhapra)' },
+const GEOJSON_TO_DISTRICT = {
+  "Araria": "Araria",
+  "Arwal": "Arwal",
+  "Aurangabad": "Aurangabad",
+  "Banka": "Banka",
+  "Begusarai": "Begusarai",
+  "Kaimur (Bhabua)": "Kaimur (Bhabhua)",
+  "Bhagalpur": "Bhagalpur",
+  "Bhojpur": "Bhojpur (Aarah)",
+  "Buxar": "Buxar",
+  "Gaya": "Gaya",
+  "Gopalganj": "Gopalganj",
+  "Jamui": "Jamui",
+  "Jehanabad": "Jehanabad",
+  "Katihar": "Katihar",
+  "Khagaria": "Khagaria",
+  "Kishanganj": "Kishanganj",
+  "Madhepura": "Madhepura",
+  "Muzaffarpur": "Muzaffarpur",
+  "Nalanda": "Nalanda (Biharsharif)",
+  "Nawada": "Nawada",
+  "Pashchim Champaran": "West Champaran (Bettiah)",
+  "Patna": "Patna HQ",
+  "Purba Champaran": "East Champaran (Motihari)",
+  "Purnia": "Purnia",
+  "Rohtas": "Rohtas (Sasaram)",
+  "Saharsa": "Saharsa",
+  "Samastipur": "Samastipur",
+  "Saran": "Saran (Chappra)",
+  "Sheikhpura": "Sheikhpura",
+  "Sheohar": "Sheohar",
+  "Sitamarhi": "Sitamarhi",
+  "Supaul": "Supaul",
+  "Vaishali": "Vaishali (Hajipur)",
+  "Darbhanga": "Darbhanga",
+  "Madhubani": "Madhubani",
+  "Munger": "Munger",
+  "Siwan": "Siwan",
+  "Lakhisarai": "Lakhisarai"
 };
 
-// Nodes mapped to the actual shape of Bihar
-const cities = Object.entries(citiesMap).map(([id, info]) => {
-  const feature = mapData.paths.find(p => p.district === info.district);
+const KEY_DISTRICTS = [
+  "Patna",
+  "Muzaffarpur",
+  "Gaya",
+  "Purnia",
+  "Bhagalpur",
+  "Darbhanga",
+  "Rohtas",
+  "Pashchim Champaran",
+  "Saran"
+];
+
+// Nodes mapped to the actual shape of Bihar ONLY for the key connected districts
+const cities = KEY_DISTRICTS.map((geoKey) => {
+  const distName = GEOJSON_TO_DISTRICT[geoKey] || geoKey;
+  const feature = mapData.paths.find(p => 
+    p.district.toLowerCase() === geoKey.toLowerCase() || 
+    p.district.toLowerCase().includes(geoKey.toLowerCase())
+  );
   return {
-    id,
-    label: info.label,
-    district: info.district,
-    main: info.main,
+    id: geoKey.toLowerCase().replace(/\s+/g, '-'),
+    label: distName,
+    district: geoKey,
+    main: geoKey === 'Patna',
     cx: feature ? feature.centroid[0] : 0,
     cy: feature ? feature.centroid[1] : 0,
     x: feature ? `${(feature.centroid[0]/mapData.width)*100}%` : '0%',
@@ -85,8 +130,8 @@ const connections = [
   ['patna', 'bhagalpur'],
   ['patna', 'rohtas'],
   ['patna', 'darbhanga'],
-  ['patna', 'chapra'],
-  ['muzaffarpur', 'champaran'],
+  ['patna', 'saran'],
+  ['muzaffarpur', 'pashchim-champaran'],
   ['darbhanga', 'purnia'],
   ['bhagalpur', 'purnia'],
   ['rohtas', 'gaya']
@@ -139,16 +184,6 @@ const EvolutionMap = () => {
 
             {/* The Milestones Timeline */}
             <div className="relative pl-6 min-h-[450px]">
-              {/* Vertical Progress Line */}
-              <div className="absolute left-6 top-6 bottom-6 w-0.5 bg-slate-200"></div>
-              {/* Animated Active Line Progress */}
-              <motion.div 
-                className="absolute left-6 top-6 w-0.5 bg-blue-500 origin-top"
-                initial={{ height: 0 }}
-                animate={{ height: `${(activeIndex / (milestones.length - 1)) * 100}%` }}
-                transition={{ duration: 0.5, ease: "easeInOut" }}
-              />
-
               <div className="space-y-8 relative z-10">
                 {milestones.map((milestone, index) => {
                   const isActive = index === activeIndex;
@@ -161,6 +196,21 @@ const EvolutionMap = () => {
                       className={`relative flex items-start gap-5 cursor-pointer group transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-60 hover:opacity-100'}`}
                       onClick={() => setActiveIndex(index)}
                     >
+                      {/* Line to next item */}
+                      {index < milestones.length - 1 && (
+                        <div 
+                          className="absolute left-[19px] top-[24px] w-0.5 bg-slate-200 z-0" 
+                          style={{ bottom: '-56px' }}
+                        >
+                          <motion.div 
+                            className="w-full bg-blue-500 origin-top"
+                            initial={{ height: 0 }}
+                            animate={{ height: isPast ? '100%' : '0%' }}
+                            transition={{ duration: 0.5, ease: "easeInOut" }}
+                          />
+                        </div>
+                      )}
+
                       {/* Node Icon */}
                       <div className="relative z-10 flex-shrink-0 mt-1">
                         <motion.div 
@@ -224,8 +274,8 @@ const EvolutionMap = () => {
                 <g className="map-districts">
                   {mapData.paths.map((p) => {
                     const isHovered = hoveredDistrict === p.district;
-                    const isPatna = p.district === 'Patna';
-                    const isMilestoneCity = cities.some(c => c.district === p.district);
+                    const isPatna = p.district.toLowerCase() === 'patna';
+                    const isMilestoneCity = cities.some(c => p.district.toLowerCase().includes(c.district.toLowerCase()));
                     
                     // Logic for timeline sync
                     let baseFill = "#f8fafc"; // default very light

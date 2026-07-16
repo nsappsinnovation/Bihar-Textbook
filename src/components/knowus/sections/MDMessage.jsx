@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
   BookOpen, CalendarCheck, ShieldCheck, UserCheck, 
-  Monitor, Target, TrendingUp, ChevronsRight, Star, Award, Quote
+  Monitor, Target, TrendingUp, ChevronsRight, Star, Award, Quote, GraduationCap
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -134,10 +134,10 @@ const MdMessage = () => {
             {/* Commitment 4 */}
             <div className="flex flex-col items-center text-center px-2">
               <div className="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-5 border border-blue-100">
-                <Monitor className="text-blue-600 w-7 h-7" />
+                <GraduationCap className="text-blue-600 w-7 h-7" />
               </div>
               <p className="text-[13px] font-bold text-slate-700 leading-relaxed">
-                Adopting digital systems for efficient supply chain management
+                Ensuring textbooks reach every student across the state
               </p>
             </div>
           </div>
@@ -199,8 +199,7 @@ const MdMessage = () => {
           
           <div className="md:pl-10 md:border-l-2 border-slate-100 flex items-center">
             <p 
-              className="text-[18px] md:text-[20px] text-blue-700 font-semibold leading-relaxed text-center md:text-left"
-              style={{ fontFamily: '"Brush Script MT", "Lucida Handwriting", cursive' }}
+              className="text-[18px] md:text-[20px] text-blue-700 font-serif italic font-semibold leading-relaxed text-center md:text-left"
             >
               Bihar State Text Book Publishing Corporation
             </p>
