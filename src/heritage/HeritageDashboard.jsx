@@ -373,7 +373,7 @@ const HeritageDashboard = () => {
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-hidden scrollbar-hide">
       <button
         onClick={() => navigate("/#missions-grid")}
-        className="fixed top-[80px] md:top-[90px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-[#B45309] hover:shadow-lg transition-all border border-slate-100 group"
+        className="absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-[#B45309] hover:shadow-lg transition-all border border-slate-100 group"
       >
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
       </button>
@@ -386,7 +386,7 @@ const HeritageDashboard = () => {
           <section className="bg-white rounded-[16px] md:rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[200px] sm:min-h-[260px] md:min-h-[300px] 2xl:min-h-[380px] shadow-[0_4px_20px_rgba(0,0,0,0.04)] pb-4 md:pb-6">
             <div className="relative z-10 p-5 sm:p-8 md:p-10 lg:w-1/2 space-y-3 md:space-y-4">
               <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
-                Let's explore <br />
+                Let's explore <br /> our rich <br />
                 <span className="text-[#B45309]">Heritage Archive</span>
               </h1>
               <p className="text-slate-500 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed max-w-sm">
@@ -406,7 +406,7 @@ const HeritageDashboard = () => {
           </section>
 
           {/* Category Selection */}
-          <section className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5 md:gap-3 relative z-20 -mt-12 md:-mt-12 px-3 sm:px-4 md:px-12">
+          <section className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5 md:gap-3 relative z-20 -mt-14 md:-mt-16 px-3 sm:px-4 md:px-12">
             {categories.map((cat, i) => {
               const isActive = selectedCategory === cat.label;
               const count = flashcards.filter(card => card.category === cat.label).length;

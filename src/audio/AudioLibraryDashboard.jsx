@@ -369,17 +369,17 @@ const AudioLibraryDashboard = () => {
       <main className="flex-1 min-h-screen pb-0">
         <button
           onClick={() => navigate("/#missions-grid")}
-          className="fixed top-[80px] md:top-[90px] left-[24px] md:left-[48px] z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group cursor-pointer"
+          className="absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group cursor-pointer"
         >
           <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
         </button>
 
-        <div className="space-y-8 pt-4">
+        <div className="px-4 sm:px-6 md:px-12 2xl:px-20 space-y-8 pt-4 2xl:max-w-[1600px] 2xl:mx-auto">
           
           {/* HERO & QUICK STATS SECTION */}
-          <div className="relative px-6 md:px-12">
-            <section className="bg-white rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[300px] pb-6">
-              <div className="relative z-10 p-8 md:p-10 lg:w-1/2 space-y-4">
+          <div className="relative">
+            <section className="bg-white rounded-[16px] md:rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[200px] sm:min-h-[260px] md:min-h-[300px] 2xl:min-h-[380px] pb-4 md:pb-6">
+              <div className="relative z-10 p-5 sm:p-8 md:p-10 lg:w-1/2 space-y-3 md:space-y-4">
                  <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
                     Listen, learn & <br /> grow with <br />
                     <span className="text-purple-800">Audio Library</span>

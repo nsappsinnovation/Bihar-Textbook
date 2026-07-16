@@ -1774,7 +1774,7 @@ const AiIntelligenceDashboard = () => {
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden">
       <button
         onClick={() => navigate("/#missions-grid")}
-        className="fixed top-[80px] md:top-[90px] left-[24px] md:left-[48px] z-50 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-green-600 hover:shadow-lg transition-all border border-slate-100 group"
+        className="absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-green-600 hover:shadow-lg transition-all border border-slate-100 group"
       >
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
       </button>
@@ -1795,7 +1795,7 @@ const AiIntelligenceDashboard = () => {
                   <span className="text-purple-600">AI Intelligence</span>
                 </h1>
                 <p className="text-slate-500 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed max-w-sm">
-                  Your AI-powered learning hub for skills and knowledge.
+                  Your hub to master AI concepts, learn prompt engineering, and explore smart tools.
                 </p>
               </div>
 

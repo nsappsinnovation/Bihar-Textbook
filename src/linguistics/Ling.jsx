@@ -77,7 +77,7 @@ export default function LinguisticApp() {
     <div className="min-h-screen bg-[#FDFDFD] font-sans text-[#2D3142] flex flex-col overflow-x-hidden -mt-6">
       <button
         onClick={() => navigate("/#missions-grid")}
-        className="fixed top-[80px] md:top-[90px] left-[24px] md:left-[48px] z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group"
+        className="absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group"
       >
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
       </button>
