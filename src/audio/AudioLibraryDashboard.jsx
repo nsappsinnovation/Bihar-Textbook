@@ -10,6 +10,26 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import { booksData } from './MyAudioLibrary';
 
+const audioTheme = {
+  backButtonHover: 'hover:text-purple-800',
+  heroHighlightText: 'text-purple-800',
+  
+  card1Icon: 'text-purple-800',
+  card1Bg: 'bg-purple-100',
+  card2Icon: 'text-purple-800',
+  card2Bg: 'bg-purple-100',
+  card3Icon: 'text-purple-800',
+  card3Bg: 'bg-purple-100',
+  
+  activeBorder: 'border-purple-800 ring-2 ring-purple-800/10',
+  inactiveBorder: 'border-slate-100',
+  activeIconBg: 'bg-purple-800 text-white',
+  activeTitleText: 'text-purple-900',
+  inactiveTitleHover: 'text-slate-800 group-hover:text-purple-800',
+  activeSubtitleText: 'text-purple-800',
+  inactiveSubtitleText: 'text-slate-500'
+};
+
 const AudioLibraryDashboard = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -322,9 +342,9 @@ const AudioLibraryDashboard = () => {
   })();
 
   const quickStats = [
-    { label: `${selectedCategory === 'All' ? 'Total Library' : selectedCategory + ' Library'}`, value: `${libraryCount} audiobooks`, icon: <Library className="text-purple-800" />, color: 'bg-purple-100', tab: 'all' },
-    { label: 'Recently Played', value: `${recentlyPlayedCount} in ${selectedCategory}`, icon: <Clock className="text-purple-800" />, color: 'bg-purple-100', tab: 'recent' },
-    { label: 'Favorites', value: `${favoritesCount} saved`, icon: <Heart className={`transition-colors ${favoritesCount > 0 ? 'text-purple-800 fill-purple-800' : 'text-purple-800'}`} />, color: 'bg-purple-100', tab: 'favorites' },
+    { label: `${selectedCategory === 'All' ? 'Total Library' : selectedCategory + ' Library'}`, value: `${libraryCount} audiobooks`, icon: <Library className={audioTheme.card1Icon} />, color: audioTheme.card1Bg, tab: 'all' },
+    { label: 'Recently Played', value: `${recentlyPlayedCount} in ${selectedCategory}`, icon: <Clock className={audioTheme.card2Icon} />, color: audioTheme.card2Bg, tab: 'recent' },
+    { label: 'Favorites', value: `${favoritesCount} saved`, icon: <Heart className={`transition-colors ${audioTheme.card3Icon} ${favoritesCount > 0 ? 'fill-purple-800' : ''}`} />, color: audioTheme.card3Bg, tab: 'favorites' },
   ];
 
   return (
@@ -369,7 +389,7 @@ const AudioLibraryDashboard = () => {
       <main className="flex-1 min-h-screen pb-0">
         <button
           onClick={() => navigate("/#missions-grid")}
-          className="absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group cursor-pointer"
+          className={`absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 ${audioTheme.backButtonHover} hover:shadow-lg transition-all border border-slate-100 group cursor-pointer`}
         >
           <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
         </button>
@@ -382,7 +402,7 @@ const AudioLibraryDashboard = () => {
               <div className="relative z-10 p-5 sm:p-8 md:p-10 lg:w-1/2 space-y-3 md:space-y-4">
                  <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
                     Listen, learn & <br /> grow with <br />
-                    <span className="text-purple-800">Audio Library</span>
+                    <span className={audioTheme.heroHighlightText}>Audio Library</span>
                  </h1>
                  <p className="text-slate-500 text-[15px] md:text-[16px] font-medium leading-relaxed max-w-sm">
                    Your pocket hub for audiobooks and knowledge.
@@ -416,14 +436,14 @@ const AudioLibraryDashboard = () => {
                       setSelectedCategory('All');
                       scrollToShelf();
                     }}
-                    className={`bg-white rounded-[16px] p-3 md:p-4 border ${isActive ? 'border-purple-800 ring-2 ring-purple-800/10 shadow-md' : 'border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)]'} flex items-center gap-3 md:gap-4 hover:shadow-md hover:border-purple-300 transition-all cursor-pointer group`}
+                    className={`bg-white rounded-[16px] p-3 md:p-4 border flex items-center gap-3 md:gap-4 hover:shadow-md hover:border-purple-300 transition-all cursor-pointer group ${isActive ? audioTheme.activeBorder + ' shadow-md' : audioTheme.inactiveBorder + ' shadow-[0_4px_20px_rgba(0,0,0,0.06)]'}`}
                   >
-                     <div className={`w-[44px] h-[44px] ${isActive ? 'bg-purple-800 text-white' : stat.color} rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5`}>
+                     <div className={`w-[44px] h-[44px] rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5 ${isActive ? audioTheme.activeIconBg : stat.color}`}>
                         {React.cloneElement(stat.icon, { className: isActive ? 'text-white' : stat.icon.props.className })}
                      </div>
                      <div>
-                        <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? 'text-purple-900' : 'text-slate-800 group-hover:text-purple-800'}`}>{stat.label}</h4>
-                        <p className={`text-[11px] font-medium mt-0.5 ${isActive ? 'text-purple-800' : 'text-slate-500'}`}>{stat.value}</p>
+                        <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? audioTheme.activeTitleText : audioTheme.inactiveTitleHover}`}>{stat.label}</h4>
+                        <p className={`text-[11px] font-medium mt-0.5 ${isActive ? audioTheme.activeSubtitleText : audioTheme.inactiveSubtitleText}`}>{stat.value}</p>
                      </div>
                   </div>
                 );

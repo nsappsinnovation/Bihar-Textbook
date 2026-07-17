@@ -757,6 +757,26 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
   );
 };
 
+const lifeTheme = {
+  backButtonHover: 'hover:text-emerald-600',
+  heroHighlightText: 'text-emerald-600',
+  
+  card1Icon: 'text-emerald-600',
+  card1Bg: 'bg-emerald-50',
+  card2Icon: 'text-emerald-600',
+  card2Bg: 'bg-emerald-50',
+  card3Icon: 'text-emerald-600',
+  card3Bg: 'bg-emerald-50',
+  
+  activeBorder: 'border-emerald-500 ring-2 ring-emerald-500/10 shadow-md',
+  inactiveBorder: 'border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)]',
+  activeIconBg: 'bg-emerald-600 text-white',
+  activeTitleText: 'text-emerald-700',
+  inactiveTitleHover: 'text-[#1e1b4b] group-hover:text-emerald-600',
+  activeSubtitleText: 'text-emerald-600/80',
+  inactiveSubtitleText: 'text-slate-500'
+};
+
 const LifeSkills = () => {
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState('Learn Skills');
@@ -844,16 +864,16 @@ const LifeSkills = () => {
   };
 
   const quickStats = [
-    { label: 'Learn Skills', value: 'Step by step', icon: <Lightbulb />, color: 'bg-emerald-50' },
-    { label: 'Practical Labs', value: 'Interactive labs', icon: <Target />, color: 'bg-emerald-50' },
-    { label: 'Take Challenges', value: 'Test skills', icon: <Trophy />, color: 'bg-emerald-50' },
+    { label: 'Learn Skills', value: 'Step by step', icon: <Lightbulb className={lifeTheme.card1Icon} />, color: lifeTheme.card1Bg },
+    { label: 'Practical Labs', value: 'Interactive labs', icon: <Target className={lifeTheme.card2Icon} />, color: lifeTheme.card2Bg },
+    { label: 'Take Challenges', value: 'Test skills', icon: <Trophy className={lifeTheme.card3Icon} />, color: lifeTheme.card3Bg },
   ];
 
   return (
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden">
       <button
         onClick={() => navigate("/#missions-grid")}
-        className="absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:shadow-lg transition-all border border-slate-100 group cursor-pointer"
+        className={`absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 ${lifeTheme.backButtonHover} hover:shadow-lg transition-all border border-slate-100 group cursor-pointer`}
       >
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
       </button>
@@ -869,7 +889,7 @@ const LifeSkills = () => {
               <div className="relative z-10 p-6 sm:p-8 md:p-10 lg:p-12 lg:w-1/2 space-y-3 md:space-y-4">
                 <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
                   Learn, Grow & <br /> Live Better with <br />
-                  <span className="text-emerald-600">Life Skills</span>
+                  <span className={lifeTheme.heroHighlightText}>Life Skills</span>
                 </h1>
                 <p className="text-slate-500 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed max-w-sm">
                   Practical lessons and daily habits for an independent life.
@@ -890,12 +910,6 @@ const LifeSkills = () => {
               {quickStats.map((stat, i) => {
                 const isActive = activeFilter === stat.label;
 
-                const themeBorder = isActive ? 'border-emerald-500 ring-2 ring-emerald-500/10 shadow-md' : 'border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)]';
-                const iconBg = isActive ? 'bg-emerald-600 text-white' : 'bg-emerald-50';
-                const iconColor = isActive ? 'text-white' : 'text-emerald-600';
-                const textColor = isActive ? 'text-emerald-700' : 'text-[#1e1b4b] group-hover:text-emerald-600';
-                const valueColor = isActive ? 'text-emerald-600/80' : 'text-slate-500';
-
                 return (
                   <div
                     key={i}
@@ -904,14 +918,14 @@ const LifeSkills = () => {
                       const target = document.getElementById("content-section");
                       if (target) target.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className={`bg-white ${themeBorder} rounded-[16px] p-3 md:p-4 border flex items-center gap-3 md:gap-4 hover:shadow-md transition-shadow cursor-pointer group`}
+                    className={`bg-white rounded-[16px] p-3 md:p-4 border flex items-center gap-3 md:gap-4 hover:shadow-md transition-shadow cursor-pointer group ${isActive ? lifeTheme.activeBorder : lifeTheme.inactiveBorder}`}
                   >
-                    <div className={`w-[44px] h-[44px] ${iconBg} rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5`}>
-                      {React.cloneElement(stat.icon, { className: iconColor })}
+                    <div className={`w-[44px] h-[44px] rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5 ${isActive ? lifeTheme.activeIconBg : stat.color}`}>
+                      {React.cloneElement(stat.icon, { className: isActive ? 'text-white' : stat.icon.props.className })}
                     </div>
                     <div>
-                      <h4 className={`text-[13px] font-bold leading-tight transition-colors ${textColor}`}>{stat.label}</h4>
-                      <p className={`text-[11px] font-medium mt-0.5 ${valueColor}`}>{stat.value}</p>
+                      <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? lifeTheme.activeTitleText : lifeTheme.inactiveTitleHover}`}>{stat.label}</h4>
+                      <p className={`text-[11px] font-medium mt-0.5 ${isActive ? lifeTheme.activeSubtitleText : lifeTheme.inactiveSubtitleText}`}>{stat.value}</p>
                     </div>
                   </div>
                 );

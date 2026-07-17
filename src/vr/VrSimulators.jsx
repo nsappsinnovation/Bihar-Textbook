@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
   Rocket, Eye, Shield, Maximize2, Minimize2, 
-  Info, CheckCircle2, RotateCcw, Orbit, Globe
+  Info, CheckCircle2, RotateCcw, Orbit, Globe,
+  ZoomIn, ZoomOut
 } from 'lucide-react';
 
 const VrSimulators = () => {
@@ -141,7 +142,7 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
   const canvasRef = useRef(null);
   const [viewMode, setViewMode] = useState('system'); // 'system' | 'galaxy'
   const [activeObject, setActiveObject] = useState(null);
-  const zoom = 1.0; // Fixed zoom level
+  const [zoom, setZoom] = useState(1.0); // Interactive zoom level
   const isDragging = useRef(false);
   const prevMousePos = useRef({ x: 0, y: 0 });
   const cameraAngle = useRef({ yaw: 0, pitch: 0 });
@@ -496,38 +497,16 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
           let sz2 = sy1 * Math.sin(pitch) + sz1 * Math.cos(pitch);
           sz2 += 280;
 
+          const renderQueue = [];
+
           if (sz2 > 0) {
-            const sunProjX = centerX + (sx1 / sz2) * (viewWidth * 0.85 * zoom);
-            const sunProjY = centerY + (sy2 / sz2) * (viewWidth * 0.85 * zoom);
-            const sunSize = (40 / sz2) * (viewWidth * 0.85 * zoom);
-
-            // Sun Corona Rays
-            ctx.save();
-            ctx.globalCompositeOperation = 'screen';
-            const raysCount = 12;
-            for (let r = 0; r < raysCount; r++) {
-              const rayAngle = (time * 0.005) + (r * (Math.PI * 2 / raysCount));
-              const len = sunSize * (1.8 + Math.sin(time * 0.05 + r) * 0.25);
-              ctx.strokeStyle = 'rgba(245, 158, 11, 0.12)';
-              ctx.lineWidth = sunSize * 0.2;
-              ctx.beginPath();
-              ctx.moveTo(sunProjX, sunProjY);
-              ctx.lineTo(sunProjX + Math.cos(rayAngle) * len, sunProjY + Math.sin(rayAngle) * len);
-              ctx.stroke();
-            }
-            ctx.restore();
-
-            // Sun Glow
-            const glow = ctx.createRadialGradient(sunProjX, sunProjY, 0, sunProjX, sunProjY, sunSize * 2.3);
-            glow.addColorStop(0, '#ffffff');
-            glow.addColorStop(0.15, '#fef08a');
-            glow.addColorStop(0.35, '#f59e0b');
-            glow.addColorStop(0.65, 'rgba(239, 68, 68, 0.22)');
-            glow.addColorStop(1, 'rgba(0,0,0,0)');
-            ctx.fillStyle = glow;
-            ctx.beginPath();
-            ctx.arc(sunProjX, sunProjY, sunSize * 2.3, 0, Math.PI * 2);
-            ctx.fill();
+            renderQueue.push({
+              type: 'sun',
+              z: sz2,
+              projX: centerX + (sx1 / sz2) * (viewWidth * 0.85 * zoom),
+              projY: centerY + (sy2 / sz2) * (viewWidth * 0.85 * zoom),
+              size: (40 / sz2) * (viewWidth * 0.85 * zoom)
+            });
           }
 
           // Draw Planets & Moons
@@ -568,10 +547,81 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
             rz2 += 280;
 
             if (rz2 > 0) {
-              const planetProjX = centerX + (rx1 / rz2) * (viewWidth * 0.85 * zoom);
-              const planetProjY = centerY + (ry2 / rz2) * (viewWidth * 0.85 * zoom);
-              const pSize = (planet.size / rz2) * (viewWidth * 0.85 * zoom);
+              renderQueue.push({
+                type: 'planet',
+                planet: planet,
+                z: rz2,
+                projX: centerX + (rx1 / rz2) * (viewWidth * 0.85 * zoom),
+                projY: centerY + (ry2 / rz2) * (viewWidth * 0.85 * zoom),
+                size: (planet.size / rz2) * (viewWidth * 0.85 * zoom)
+              });
+            }
 
+            // Draw Moons orbiting this planet
+            if (planet.moons) {
+              planet.moons.forEach((moon) => {
+                const mAngle = (time * moon.speed) + (planet.name.charCodeAt(0) * 10);
+                const mx = px + Math.cos(mAngle) * moon.dist;
+                const mz = pz + Math.sin(mAngle) * moon.dist;
+                const my = Math.sin(mAngle) * (moon.dist * 0.15); // Add a 3D tilt
+
+                let mx1 = mx * Math.cos(yaw) - mz * Math.sin(yaw);
+                let mz1 = mx * Math.sin(yaw) + mz * Math.cos(yaw);
+                let my1 = my;
+                let my2 = my1 * Math.cos(pitch) - mz1 * Math.sin(pitch);
+                let mz2 = my1 * Math.sin(pitch) + mz1 * Math.cos(pitch);
+                mz2 += 280;
+
+                if (mz2 > 0) {
+                  renderQueue.push({
+                    type: 'moon',
+                    moon: moon,
+                    z: mz2,
+                    projX: centerX + (mx1 / mz2) * (viewWidth * 0.85 * zoom),
+                    projY: centerY + (my2 / mz2) * (viewWidth * 0.85 * zoom),
+                    size: (moon.size / mz2) * (viewWidth * 0.85 * zoom)
+                  });
+                }
+              });
+            }
+          });
+
+          // Sort descending by depth (Z)
+          renderQueue.sort((a, b) => b.z - a.z);
+
+          renderQueue.forEach((item) => {
+            if (item.type === 'sun') {
+              const { projX: sunProjX, projY: sunProjY, size: sunSize } = item;
+              // Sun Corona Rays
+              ctx.save();
+              ctx.globalCompositeOperation = 'screen';
+              const raysCount = 12;
+              for (let r = 0; r < raysCount; r++) {
+                const rayAngle = (time * 0.005) + (r * (Math.PI * 2 / raysCount));
+                const len = sunSize * (1.8 + Math.sin(time * 0.05 + r) * 0.25);
+                ctx.strokeStyle = 'rgba(245, 158, 11, 0.12)';
+                ctx.lineWidth = sunSize * 0.2;
+                ctx.beginPath();
+                ctx.moveTo(sunProjX, sunProjY);
+                ctx.lineTo(sunProjX + Math.cos(rayAngle) * len, sunProjY + Math.sin(rayAngle) * len);
+                ctx.stroke();
+              }
+              ctx.restore();
+
+              // Sun Glow
+              const glow = ctx.createRadialGradient(sunProjX, sunProjY, 0, sunProjX, sunProjY, sunSize * 2.3);
+              glow.addColorStop(0, '#ffffff');
+              glow.addColorStop(0.15, '#fef08a');
+              glow.addColorStop(0.35, '#f59e0b');
+              glow.addColorStop(0.65, 'rgba(239, 68, 68, 0.22)');
+              glow.addColorStop(1, 'rgba(0,0,0,0)');
+              ctx.fillStyle = glow;
+              ctx.beginPath();
+              ctx.arc(sunProjX, sunProjY, sunSize * 2.3, 0, Math.PI * 2);
+              ctx.fill();
+            } else if (item.type === 'planet') {
+              const { projX: planetProjX, projY: planetProjY, size: pSize, planet } = item;
+              
               // Draw Rings (Saturn)
               if (planet.rings) {
                 ctx.strokeStyle = 'rgba(251, 191, 36, 0.45)';
@@ -621,45 +671,23 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
                 ctx.stroke();
               }
 
-              // Draw Moons orbiting this planet
-              if (planet.moons) {
-                planet.moons.forEach((moon) => {
-                  const mAngle = (time * moon.speed) + (planet.name.charCodeAt(0) * 10);
-                  const mx = px + Math.cos(mAngle) * moon.dist;
-                  const mz = pz + Math.sin(mAngle) * moon.dist;
-                  const my = Math.sin(mAngle) * (moon.dist * 0.15); // Add a 3D tilt
-
-                  let mx1 = mx * Math.cos(yaw) - mz * Math.sin(yaw);
-                  let mz1 = mx * Math.sin(yaw) + mz * Math.cos(yaw);
-                  let my1 = my;
-                  let my2 = my1 * Math.cos(pitch) - mz1 * Math.sin(pitch);
-                  let mz2 = my1 * Math.sin(pitch) + mz1 * Math.cos(pitch);
-                  mz2 += 280;
-
-                  if (mz2 > 0) {
-                    const moonProjX = centerX + (mx1 / mz2) * (viewWidth * 0.85 * zoom);
-                    const moonProjY = centerY + (my2 / mz2) * (viewWidth * 0.85 * zoom);
-                    const mSize = (moon.size / mz2) * (viewWidth * 0.85 * zoom);
-
-                    // Draw Moon Body
-                    ctx.fillStyle = moon.color;
-                    ctx.beginPath();
-                    ctx.arc(moonProjX, moonProjY, Math.max(0.7, mSize), 0, Math.PI * 2);
-                    ctx.fill();
-
-                    // Moon shadow overlay
-                    ctx.fillStyle = 'rgba(0,0,0,0.45)';
-                    ctx.beginPath();
-                    ctx.arc(moonProjX + mSize * 0.2, moonProjY + mSize * 0.2, mSize, -Math.PI/2, Math.PI/2);
-                    ctx.fill();
-                  }
-                });
-              }
-
               // Label
               ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
               ctx.font = 'bold 9px monospace';
               ctx.fillText(planet.name, planetProjX + pSize + 4, planetProjY + 3);
+            } else if (item.type === 'moon') {
+              const { projX: moonProjX, projY: moonProjY, size: mSize, moon } = item;
+              // Draw Moon Body
+              ctx.fillStyle = moon.color;
+              ctx.beginPath();
+              ctx.arc(moonProjX, moonProjY, Math.max(0.7, mSize), 0, Math.PI * 2);
+              ctx.fill();
+
+              // Moon shadow overlay
+              ctx.fillStyle = 'rgba(0,0,0,0.45)';
+              ctx.beginPath();
+              ctx.arc(moonProjX + mSize * 0.2, moonProjY + mSize * 0.2, mSize, -Math.PI/2, Math.PI/2);
+              ctx.fill();
             }
           });
         } else {
@@ -905,7 +933,28 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
         className="w-full flex-1"
       />
 
-
+      {/* Simulation Controls */}
+      {!isVrMode && (
+        <div className="absolute bottom-4 left-4 z-20 flex flex-col gap-2 pointer-events-auto">
+          <div className="flex gap-2">
+            <button 
+              onClick={() => setZoom(z => Math.min(z * 1.5, 5.0))} 
+              className="p-2 bg-slate-800/80 hover:bg-slate-700 text-white rounded-full border border-white/20 backdrop-blur transition-all shadow-lg active:scale-95"
+              title="Zoom In"
+            >
+              <ZoomIn size={16} />
+            </button>
+            <button 
+              onClick={() => setZoom(z => Math.max(z / 1.5, 0.1))} 
+              className="p-2 bg-slate-800/80 hover:bg-slate-700 text-white rounded-full border border-white/20 backdrop-blur transition-all shadow-lg active:scale-95"
+              title="Zoom Out"
+            >
+              <ZoomOut size={16} />
+            </button>
+          </div>
+          
+        </div>
+      )}
 
       {/* Object Profile Details Popup - Smaller size */}
       {activeObject && !isVrMode && (

@@ -13,6 +13,29 @@ const VrHeadsetIcon = ({ className }) => (
   </svg>
 );
 
+const vrTheme = {
+  // Global highlights
+  backButtonHover: 'hover:text-blue-600',
+  heroHighlightText: 'text-blue-600',
+  
+  // Cards inactive colors (defaults)
+  card1Icon: 'text-indigo-600',
+  card1Bg: 'bg-indigo-50',
+  card2Icon: 'text-blue-600',
+  card2Bg: 'bg-blue-50',
+  card3Icon: 'text-indigo-600',
+  card3Bg: 'bg-indigo-50',
+
+  // Active state styling for cards
+  activeBorder: 'border-blue-500 ring-2 ring-blue-500/10',
+  inactiveBorder: 'border-slate-50',
+  activeIconBg: 'bg-blue-600 text-white',
+  activeTitleText: 'text-blue-700',
+  inactiveTitleHover: 'text-[#1e1b4b] group-hover:text-blue-600',
+  activeSubtitleText: 'text-blue-600/80',
+  inactiveSubtitleText: 'text-slate-500'
+};
+
 const VrDashboard = () => {
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('tech-learning'); // 'simulators' | 'tech-learning' | 'virtual-lab'
@@ -35,20 +58,20 @@ const VrDashboard = () => {
     { 
       label: 'Learn VR Technology', 
       value: 'How It Works?', 
-      icon: <Rocket className="text-indigo-600" />, 
-      color: 'bg-indigo-50' 
+      icon: <Rocket className={vrTheme.card1Icon} />, 
+      color: vrTheme.card1Bg 
     },
     { 
       label: 'VR Science Labs', 
       value: 'Immersive Practice', 
-      icon: <VrHeadsetIcon className="text-purple-600" />, 
-      color: 'bg-purple-100' 
+      icon: <VrHeadsetIcon className={vrTheme.card2Icon} />, 
+      color: vrTheme.card2Bg 
     },
     { 
       label: '360° Worlds', 
       value: 'Explore places', 
-      icon: <Globe className="text-indigo-600" />, 
-      color: 'bg-indigo-50' 
+      icon: <Globe className={vrTheme.card3Icon} />, 
+      color: vrTheme.card3Bg 
     },
   ];
 
@@ -56,7 +79,7 @@ const VrDashboard = () => {
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden">
       <button
         onClick={() => navigate("/#missions-grid")}
-        className="absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-blue-600 hover:shadow-lg transition-all border border-slate-100 group"
+        className={`absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 ${vrTheme.backButtonHover} hover:shadow-lg transition-all border border-slate-100 group`}
       >
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
       </button>
@@ -73,7 +96,7 @@ const VrDashboard = () => {
               <div className="relative z-10 p-5 sm:p-8 md:p-10 lg:w-1/2 space-y-3 md:space-y-4">
                  <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
                     Step into <br /> Imagination. <br />
-                    <span className="text-blue-600">Learn in VR.</span>
+                    <span className={vrTheme.heroHighlightText}>Learn in VR.</span>
                  </h1>
                  <p className="text-slate-500 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed max-w-sm">
                    Explore, interact and understand difficult concepts through immersive VR experiences.
@@ -102,14 +125,14 @@ const VrDashboard = () => {
                         handleSectionSwitch('simulators');
                       }
                     }}
-                    className={`bg-white rounded-[16px] p-3 md:p-4 border ${isActive ? 'border-blue-500 ring-2 ring-blue-500/10 shadow-md' : 'border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)]'} flex items-center gap-3 md:gap-4 hover:shadow-md transition-shadow cursor-pointer group`}
+                    className={`bg-white rounded-[16px] p-3 md:p-4 border flex items-center gap-3 md:gap-4 hover:shadow-md transition-shadow cursor-pointer group ${isActive ? vrTheme.activeBorder + ' shadow-md' : vrTheme.inactiveBorder + ' shadow-[0_4px_20px_rgba(0,0,0,0.06)]'}`}
                   >
-                     <div className={`w-[44px] h-[44px] ${isActive ? 'bg-blue-600 text-white' : stat.color} rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5`}>
+                     <div className={`w-[44px] h-[44px] rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5 ${isActive ? vrTheme.activeIconBg : stat.color}`}>
                         {React.cloneElement(stat.icon, { className: isActive ? 'text-white' : stat.icon.props.className })}
                      </div>
                      <div>
-                        <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? 'text-blue-700' : 'text-[#1e1b4b] group-hover:text-blue-600'}`}>{stat.label}</h4>
-                        <p className={`text-[11px] font-medium mt-0.5 ${isActive ? 'text-blue-600/80' : 'text-slate-550 text-slate-500'}`}>{stat.value}</p>
+                        <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? vrTheme.activeTitleText : vrTheme.inactiveTitleHover}`}>{stat.label}</h4>
+                        <p className={`text-[11px] font-medium mt-0.5 ${isActive ? vrTheme.activeSubtitleText : vrTheme.inactiveSubtitleText}`}>{stat.value}</p>
                      </div>
                   </div>
                 );

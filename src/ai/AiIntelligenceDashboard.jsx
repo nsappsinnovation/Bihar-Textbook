@@ -1740,6 +1740,26 @@ const QuizComponent = () => {
   );
 };
 
+const aiTheme = {
+  backButtonHover: 'hover:text-purple-600',
+  heroHighlightText: 'text-purple-600',
+  
+  card1Icon: 'text-purple-600',
+  card1Bg: 'bg-purple-50',
+  card2Icon: 'text-purple-600',
+  card2Bg: 'bg-purple-50',
+  card3Icon: 'text-purple-600',
+  card3Bg: 'bg-purple-50',
+  
+  activeBorder: 'border-purple-500 ring-2 ring-purple-500/10',
+  inactiveBorder: 'border-slate-50',
+  activeIconBg: 'bg-purple-600 text-white',
+  activeTitleText: 'text-purple-700',
+  inactiveTitleHover: 'text-[#1e1b4b] group-hover:text-purple-600',
+  activeSubtitleText: 'text-purple-600/80',
+  inactiveSubtitleText: 'text-slate-500'
+};
+
 const AiIntelligenceDashboard = () => {
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState('Learn Concepts');
@@ -1765,16 +1785,16 @@ const AiIntelligenceDashboard = () => {
   ];
 
   const quickStats = [
-    { label: 'Learn Concepts', value: 'Quick Lessons', icon: <BookOpen className="text-purple-600" />, color: 'bg-purple-50' },
-    { label: 'Prompt Academy', value: 'Learn Prompting', icon: <WandSparkles className="text-purple-600" />, color: 'bg-purple-50' },
-    { label: 'Explore Tools', value: 'AI Tools', icon: <Cpu className="text-purple-600" />, color: 'bg-purple-50' }
+    { label: 'Learn Concepts', value: 'Quick Lessons', icon: <BookOpen className={aiTheme.card1Icon} />, color: aiTheme.card1Bg },
+    { label: 'Prompt Academy', value: 'Learn Prompting', icon: <WandSparkles className={aiTheme.card2Icon} />, color: aiTheme.card2Bg },
+    { label: 'Explore Tools', value: 'AI Tools', icon: <Cpu className={aiTheme.card3Icon} />, color: aiTheme.card3Bg }
   ];
 
   return (
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden">
       <button
         onClick={() => navigate("/#missions-grid")}
-        className="absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-green-600 hover:shadow-lg transition-all border border-slate-100 group"
+        className={`absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 ${aiTheme.backButtonHover} hover:shadow-lg transition-all border border-slate-100 group`}
       >
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
       </button>
@@ -1792,7 +1812,7 @@ const AiIntelligenceDashboard = () => {
               <div className="relative z-10 p-5 sm:p-8 md:p-10 lg:w-1/2 space-y-3 md:space-y-4">
                 <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
                   Build. Learn. &amp; <br /> Think Smarter with <br />
-                  <span className="text-purple-600">AI Intelligence</span>
+                  <span className={aiTheme.heroHighlightText}>AI Intelligence</span>
                 </h1>
                 <p className="text-slate-500 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed max-w-sm">
                   Your hub to master AI concepts, learn prompt engineering, and explore smart tools.
@@ -1817,14 +1837,14 @@ const AiIntelligenceDashboard = () => {
                       const target = document.getElementById("content-section");
                       if (target) target.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className={`bg-white rounded-[16px] p-3 md:p-4 border ${isActive ? 'border-purple-500 ring-2 ring-purple-500/10 shadow-md' : 'border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)]'} flex items-center gap-3 md:gap-4 hover:shadow-md transition-shadow cursor-pointer group`}
+                    className={`bg-white rounded-[16px] p-3 md:p-4 border flex items-center gap-3 md:gap-4 hover:shadow-md transition-shadow cursor-pointer group ${isActive ? aiTheme.activeBorder + ' shadow-md' : aiTheme.inactiveBorder + ' shadow-[0_4px_20px_rgba(0,0,0,0.06)]'}`}
                   >
-                    <div className={`w-[44px] h-[44px] ${isActive ? 'bg-purple-600 text-white' : stat.color} rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5`}>
+                    <div className={`w-[44px] h-[44px] rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5 ${isActive ? aiTheme.activeIconBg : stat.color}`}>
                       {React.cloneElement(stat.icon, { className: isActive ? 'text-white' : stat.icon.props.className })}
                     </div>
                     <div>
-                      <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? 'text-purple-700' : 'text-[#1e1b4b] group-hover:text-purple-600'}`}>{stat.label}</h4>
-                      <p className={`text-[11px] font-medium mt-0.5 ${isActive ? 'text-purple-600/80' : 'text-slate-500'}`}>{stat.value}</p>
+                      <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? aiTheme.activeTitleText : aiTheme.inactiveTitleHover}`}>{stat.label}</h4>
+                      <p className={`text-[11px] font-medium mt-0.5 ${isActive ? aiTheme.activeSubtitleText : aiTheme.inactiveSubtitleText}`}>{stat.value}</p>
                     </div>
                   </div>
                 );

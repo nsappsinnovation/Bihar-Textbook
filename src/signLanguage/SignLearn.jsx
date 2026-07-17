@@ -353,6 +353,26 @@ const FingerspellComponent = () => {
   );
 };
 
+const signTheme = {
+  backButtonHover: 'hover:text-emerald-600',
+  heroHighlightText: 'text-emerald-600',
+  
+  card1Icon: 'text-emerald-600',
+  card1Bg: 'bg-emerald-50',
+  card2Icon: 'text-emerald-600',
+  card2Bg: 'bg-emerald-50',
+  card3Icon: 'text-emerald-600',
+  card3Bg: 'bg-emerald-50',
+  
+  activeBorder: 'border-emerald-600 ring-2 ring-emerald-600/10 shadow-md',
+  inactiveBorder: 'border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:border-emerald-300',
+  activeIconBg: 'bg-emerald-600 text-white',
+  activeTitleText: 'text-emerald-800',
+  inactiveTitleHover: 'text-slate-800 group-hover:text-emerald-600',
+  activeSubtitleText: 'text-emerald-600',
+  inactiveSubtitleText: 'text-slate-500'
+};
+
 const SignLearn = () => {
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState('Learn ISL');
@@ -1042,9 +1062,9 @@ const SignLearn = () => {
   });
 
   const quickStats = [
-    { label: 'Learn ISL', value: `${allSignVideos.length} Video Lectures`, icon: <BookOpen className="text-emerald-600" />, color: 'bg-emerald-50' },
-    { label: 'Explore Signs', value: 'Visual library', icon: <Hand className="text-emerald-600" />, color: 'bg-emerald-50' },
-    { label: 'Type to Sign', value: 'Fingerspell Translator', icon: <Keyboard className="text-emerald-600" />, color: 'bg-emerald-50' },
+    { label: 'Learn ISL', value: `${allSignVideos.length} Video Lectures`, icon: <BookOpen className={signTheme.card1Icon} />, color: signTheme.card1Bg },
+    { label: 'Explore Signs', value: 'Visual library', icon: <Hand className={signTheme.card2Icon} />, color: signTheme.card2Bg },
+    { label: 'Type to Sign', value: 'Fingerspell Translator', icon: <Keyboard className={signTheme.card3Icon} />, color: signTheme.card3Bg },
   ];
 
   return (
@@ -1057,7 +1077,7 @@ const SignLearn = () => {
       <main className="flex-1 min-h-screen pb-4 overflow-y-auto">
         <button
           onClick={() => navigate("/#missions-grid")}
-          className="absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:shadow-lg transition-all border border-slate-100 group"
+          className={`absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 ${signTheme.backButtonHover} hover:shadow-lg transition-all border border-slate-100 group`}
         >
           <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
         </button>
@@ -1070,7 +1090,7 @@ const SignLearn = () => {
               <div className="relative z-10 p-5 sm:p-8 md:p-10 lg:w-1/2 space-y-3 md:space-y-4">
                 <h1 className="text-[22px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
                   Build. Learn. &amp; <br /> Talk with <br />
-                  <span className="text-emerald-600">Sign Language</span>
+                  <span className={signTheme.heroHighlightText}>Sign Language</span>
                 </h1>
                 <p className="text-slate-500 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed max-w-sm">
                   Your visual learning hub for signs and expressions.
@@ -1095,14 +1115,14 @@ const SignLearn = () => {
                       const target = document.getElementById("content-section");
                       if (target) target.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className={`bg-white rounded-[16px] p-3 md:p-4 border ${isActive ? 'border-emerald-600 ring-2 ring-emerald-600/10 shadow-md' : 'border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)]'} flex items-center gap-3 md:gap-4 hover:shadow-md hover:border-emerald-300 transition-all cursor-pointer group`}
+                    className={`bg-white rounded-[16px] p-3 md:p-4 border flex items-center gap-3 md:gap-4 hover:shadow-md transition-all cursor-pointer group ${isActive ? signTheme.activeBorder : signTheme.inactiveBorder}`}
                   >
-                    <div className={`w-[44px] h-[44px] ${isActive ? 'bg-emerald-600 text-white' : stat.color} rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5`}>
+                    <div className={`w-[44px] h-[44px] rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5 ${isActive ? signTheme.activeIconBg : stat.color}`}>
                       {React.cloneElement(stat.icon, { className: isActive ? 'text-white' : stat.icon.props.className })}
                     </div>
                     <div>
-                      <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? 'text-emerald-800' : 'text-slate-800 group-hover:text-emerald-600'}`}>{stat.label}</h4>
-                      <p className={`text-[11px] font-medium mt-0.5 ${isActive ? 'text-emerald-600' : 'text-slate-500'}`}>{stat.value}</p>
+                      <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? signTheme.activeTitleText : signTheme.inactiveTitleHover}`}>{stat.label}</h4>
+                      <p className={`text-[11px] font-medium mt-0.5 ${isActive ? signTheme.activeSubtitleText : signTheme.inactiveSubtitleText}`}>{stat.value}</p>
                     </div>
                   </div>
                 );

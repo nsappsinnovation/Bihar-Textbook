@@ -9,122 +9,122 @@ import {
 const WORD_CONCEPTS = [
   { 
     id: 1, 
-    translations: { hi: "पानी", en: "Water", de: "Wasser", fr: "Eau", es: "Agua", ja: "水", zh: "水", it: "Acqua", ru: "Вода", ko: "물" }, 
-    distractors: { hi: ["नदी", "समुद्र", "झरना"], en: ["River", "Ocean", "Waterfall"], de: ["Fluss", "Ozean", "Wasserfall"], fr: ["Rivière", "Océan", "Cascade"], es: ["Río", "Océano", "Cascada"], ja: ["川", "海", "滝"], zh: ["河流", "海洋", "瀑布"], it: ["Fiume", "Oceano", "Cascata"], ru: ["Река", "Океан", "Водопад"], ko: ["강", "바다", "폭포"] },
+    translations: { hi: "पानी", en: "Water", de: "Wasser", fr: "Eau", es: "Agua", ja: "水 (Mizu)", it: "Acqua" }, 
+    distractors: { hi: ["नदी", "समुद्र", "झरना"], en: ["River", "Ocean", "Waterfall"], de: ["Fluss", "Ozean", "Wasserfall"], fr: ["Rivière", "Océan", "Cascade"], es: ["Río", "Océano", "Cascada"], ja: ["川 (Kawa)", "海 (Umi)", "滝 (Taki)"], it: ["Fiume", "Oceano", "Cascata"] },
     icon: "💧" 
   },
   { 
     id: 2, 
-    translations: { hi: "घर", en: "House", de: "Haus", fr: "Maison", es: "Casa", ja: "家", zh: "房子", it: "Casa", ru: "Дом", ko: "집" }, 
-    distractors: { hi: ["कमरा", "छत", "महल"], en: ["Room", "Roof", "Palace"], de: ["Zimmer", "Dach", "Palast"], fr: ["Chambre", "Toit", "Palais"], es: ["Habitación", "Techo", "Palacio"], ja: ["部屋", "屋根", "宮殿"], zh: ["房间", "屋顶", "宫殿"], it: ["Stanza", "Tetto", "Palazzo"], ru: ["Комната", "Крыша", "Дворец"], ko: ["방", "지붕", "궁전"] },
+    translations: { hi: "घर", en: "House", de: "Haus", fr: "Maison", es: "Casa", ja: "家 (Ie)", it: "Casa" }, 
+    distractors: { hi: ["कमरा", "छत", "महल"], en: ["Room", "Roof", "Palace"], de: ["Zimmer", "Dach", "Palast"], fr: ["Chambre", "Toit", "Palais"], es: ["Habitación", "Techo", "Palacio"], ja: ["部屋 (Heya)", "屋根 (Yane)", "宮殿 (Kyūden)"], it: ["Stanza", "Tetto", "Palazzo"] },
     icon: "🏠" 
   },
   { 
     id: 3, 
-    translations: { hi: "सेब", en: "Apple", de: "Apfel", fr: "Pomme", es: "Manzana", ja: "リンゴ", zh: "苹果", it: "Mela", ru: "Яблоко", ko: "사과" }, 
-    distractors: { hi: ["केला", "अंगूर", "फल"], en: ["Banana", "Grape", "Fruit"], de: ["Banane", "Traube", "Frucht"], fr: ["Banane", "Raisin", "Fruit"], es: ["Plátano", "Uva", "Fruta"], ja: ["バナナ", "ブドウ", "果物"], zh: ["香蕉", "葡萄", "水果"], it: ["Banana", "Uva", "Frutta"], ru: ["Банан", "Виноград", "Фрукт"], ko: ["바나나", "포도", "과일"] },
+    translations: { hi: "सेब", en: "Apple", de: "Apfel", fr: "Pomme", es: "Manzana", ja: "リンゴ (Ringo)", it: "Mela" }, 
+    distractors: { hi: ["केला", "अंगूर", "फल"], en: ["Banana", "Grape", "Fruit"], de: ["Banane", "Traube", "Frucht"], fr: ["Banane", "Raisin", "Fruit"], es: ["Plátano", "Uva", "Fruta"], ja: ["バナナ (Banana)", "ブドウ (Budō)", "果物 (Kudamono)"], it: ["Banana", "Uva", "Frutta"] },
     icon: "🍎" 
   },
   { 
     id: 4, 
-    translations: { hi: "किताब", en: "Book", de: "Buch", fr: "Livre", es: "Libro", ja: "本", zh: "书", it: "Libro", ru: "Книга", ko: "책" }, 
-    distractors: { hi: ["कलम", "कागज", "लाइब्रेरी"], en: ["Pen", "Paper", "Library"], de: ["Stift", "Papier", "Bibliothek"], fr: ["Stylo", "Papier", "Bibliothèque"], es: ["Pluma", "Papel", "Biblioteca"], ja: ["ペン", "紙", "図書館"], zh: ["笔", "纸", "图书馆"], it: ["Penna", "Carta", "Biblioteca"], ru: ["Ручка", "Бумага", "Библиотека"], ko: ["펜", "종이", "도서관"] },
+    translations: { hi: "किताब", en: "Book", de: "Buch", fr: "Livre", es: "Libro", ja: "本 (Hon)", it: "Libro" }, 
+    distractors: { hi: ["कलम", "कागज", "लाइब्रेरी"], en: ["Pen", "Paper", "Library"], de: ["Stift", "Papier", "Bibliothek"], fr: ["Stylo", "Papier", "Bibliothèque"], es: ["Pluma", "Papel", "Biblioteca"], ja: ["ペン (Pen)", "紙 (Kami)", "図書館 (Toshokan)"], it: ["Penna", "Carta", "Biblioteca"] },
     icon: "📖" 
   },
   { 
     id: 5, 
-    translations: { hi: "दोस्त", en: "Friend", de: "Freund", fr: "Ami", es: "Amigo", ja: "友達", zh: "朋友", it: "Amico", ru: "Друг", ko: "친구" }, 
-    distractors: { hi: ["दुश्मन", "परिवार", "भाई"], en: ["Enemy", "Family", "Brother"], de: ["Feind", "Familie", "Bruder"], fr: ["Ennemi", "Familie", "Frère"], es: ["Enemigo", "Familia", "Hermano"], ja: ["敵", "家族", "兄弟"], zh: ["敌人", "家人", "兄弟"], it: ["Nemico", "Famiglia", "Fratello"], ru: ["Враг", "Семья", "Брат"], ko: ["적", "가족", "형제"] },
+    translations: { hi: "दोस्त", en: "Friend", de: "Freund", fr: "Ami", es: "Amigo", ja: "友達 (Tomodachi)", it: "Amico" }, 
+    distractors: { hi: ["दुश्मन", "परिवार", "भाई"], en: ["Enemy", "Family", "Brother"], de: ["Feind", "Familie", "Bruder"], fr: ["Ennemi", "Familie", "Frère"], es: ["Enemigo", "Familia", "Hermano"], ja: ["敵 (Teki)", "家族 (Kazoku)", "兄弟 (Kyōdai)"], it: ["Nemico", "Famiglia", "Fratello"] },
     icon: "🤝" 
   },
   { 
     id: 6, 
-    translations: { hi: "पेड़", en: "Tree", de: "Baum", fr: "Arbre", es: "Árbol", ja: "木", zh: "树", it: "Albero", ru: "Дерево", ko: "나무" }, 
-    distractors: { hi: ["पौधा", "पत्ती", "जंगल"], en: ["Plant", "Leaf", "Forest"], de: ["Pflanze", "Blatt", "Wald"], fr: ["Plante", "Feuille", "Forêt"], es: ["Planta", "Hoja", "Bosque"], ja: ["植物", "葉", "森"], zh: ["植物", "叶子", "森林"], it: ["Pianta", "Foglia", "Foresta"], ru: ["Растение", "Лист", "Лес"], ko: ["식물", "잎", "숲"] },
+    translations: { hi: "पेड़", en: "Tree", de: "Baum", fr: "Arbre", es: "Árbol", ja: "木 (Ki)", it: "Albero" }, 
+    distractors: { hi: ["पौधा", "पत्ती", "जंगल"], en: ["Plant", "Leaf", "Forest"], de: ["Pflanze", "Blatt", "Wald"], fr: ["Plante", "Feuille", "Forêt"], es: ["Planta", "Hoja", "Bosque"], ja: ["植物 (Shokubutsu)", "葉 (Ha)", "森 (Mori)"], it: ["Pianta", "Foglia", "Foresta"] },
     icon: "🌳" 
   },
   { 
     id: 7, 
-    translations: { hi: "सूरज", en: "Sun", de: "Sonne", fr: "Soleil", es: "Sol", ja: "太陽", zh: "太阳", it: "Sole", ru: "Солнце", ko: "태양" }, 
-    distractors: { hi: ["तारा", "बादल", "आसमान"], en: ["Star", "Cloud", "Sky"], de: ["Stern", "Wolke", "Himmel"], fr: ["Étoile", "Nuage", "Ciel"], es: ["Estrella", "Nube", "Cielo"], ja: ["星", "雲", "空"], zh: ["星星", "云", "天空"], it: ["Stella", "Nuvola", "Cielo"], ru: ["Звезда", "Облако", "Небо"], ko: ["별", "구름", "하늘"] },
+    translations: { hi: "सूरज", en: "Sun", de: "Sonne", fr: "Soleil", es: "Sol", ja: "太陽 (Taiyō)", it: "Sole" }, 
+    distractors: { hi: ["तारा", "बादल", "आसमान"], en: ["Star", "Cloud", "Sky"], de: ["Stern", "Wolke", "Himmel"], fr: ["Étoile", "Nuage", "Ciel"], es: ["Estrella", "Nube", "Cielo"], ja: ["星 (Hoshi)", "雲 (Kumo)", "空 (Sora)"], it: ["Stella", "Nuvola", "Cielo"] },
     icon: "☀️" 
   },
   { 
     id: 8, 
-    translations: { hi: "चन्द्रमा", en: "Moon", de: "Mond", fr: "Lune", es: "Luna", ja: "月", zh: "月亮", it: "Luna", ru: "Луна", ko: "달" }, 
-    distractors: { hi: ["रात", "तारा", "ग्रह"], en: ["Night", "Star", "Planet"], de: ["Nacht", "Stern", "Planet"], fr: ["Nuit", "Étoile", "Planète"], es: ["Noche", "Estrella", "Planeta"], ja: ["夜", "星", "惑星"], zh: ["夜晚", "星星", "行星"], it: ["Notte", "Stella", "Pianeta"], ru: ["Ночь", "Звезда", "Планета"], ko: ["밤", "별", "행성"] },
+    translations: { hi: "चन्द्रमा", en: "Moon", de: "Mond", fr: "Lune", es: "Luna", ja: "月 (Tsuki)", it: "Luna" }, 
+    distractors: { hi: ["रात", "तारा", "ग्रह"], en: ["Night", "Star", "Planet"], de: ["Nacht", "Stern", "Planet"], fr: ["Nuit", "Étoile", "Planète"], es: ["Noche", "Estrella", "Planeta"], ja: ["夜 (Yoru)", "星 (Hoshi)", "惑星 (Wakusei)"], it: ["Notte", "Stella", "Pianeta"] },
     icon: "🌙" 
   },
   { 
     id: 9, 
-    translations: { hi: "गाड़ी", en: "Car", de: "Auto", fr: "Voiture", es: "Coche", ja: "車", zh: "汽车", it: "Auto", ru: "Машина", ko: "자동차" }, 
-    distractors: { hi: ["बस", "ट्रेन", "साइकिल"], en: ["Bus", "Train", "Bicycle"], de: ["Bus", "Zug", "Fahrrad"], fr: ["Bus", "Train", "Vélo"], es: ["Autobús", "Tren", "Bicicleta"], ja: ["バス", "電車", "自転車"], zh: ["公交车", "火车", "自行车"], it: ["Autobus", "Treno", "Bicicletta"], ru: ["Автобус", "Поезд", "Велосипед"], ko: ["버스", "기차", "자전거"] },
+    translations: { hi: "गाड़ी", en: "Car", de: "Auto", fr: "Voiture", es: "Coche", ja: "車 (Kuruma)", it: "Auto" }, 
+    distractors: { hi: ["बस", "ट्रेन", "साइकिल"], en: ["Bus", "Train", "Bicycle"], de: ["Bus", "Zug", "Fahrrad"], fr: ["Bus", "Train", "Vélo"], es: ["Autobús", "Tren", "Bicicleta"], ja: ["バス (Basu)", "電車 (Densha)", "自転車 (Jitensha)"], it: ["Autobus", "Treno", "Bicicletta"] },
     icon: "🚗" 
   },
   { 
     id: 10, 
-    translations: { hi: "बिल्ली", en: "Cat", de: "Katze", fr: "Chat", es: "Gato", ja: "猫", zh: "猫", it: "Gatto", ru: "Кот", ko: "고양이" }, 
-    distractors: { hi: ["कुत्ता", "चूहा", "शेर"], en: ["Dog", "Mouse", "Lion"], de: ["Hund", "Maus", "Löwe"], fr: ["Chien", "Souris", "Lion"], es: ["Perro", "Ratón", "León"], ja: ["犬", "ネズミ", "ライオン"], zh: ["狗", "老鼠", "狮子"], it: ["Cane", "Topo", "Leone"], ru: ["Собака", "Мышь", "Лев"], ko: ["개", "쥐", "사자"] },
+    translations: { hi: "बिल्ली", en: "Cat", de: "Katze", fr: "Chat", es: "Gato", ja: "猫 (Neko)", it: "Gatto" }, 
+    distractors: { hi: ["कुत्ता", "चूहा", "शेर"], en: ["Dog", "Mouse", "Lion"], de: ["Hund", "Maus", "Löwe"], fr: ["Chien", "Souris", "Lion"], es: ["Perro", "Ratón", "León"], ja: ["犬 (Inu)", "ネズミ (Nezumi)", "ライオン (Raion)"], it: ["Cane", "Topo", "Leone"] },
     icon: "🐱" 
   },
   { 
     id: 11, 
-    translations: { hi: "कुत्ता", en: "Dog", de: "Hund", fr: "Chien", es: "Perro", ja: "犬", zh: "狗", it: "Cane", ru: "Собака", ko: "개" }, 
-    distractors: { hi: ["बिल्ली", "भेड़िया", "लोमड़ी"], en: ["Cat", "Wolf", "Fox"], de: ["Katze", "Wolf", "Fuchs"], fr: ["Chat", "Loup", "Renard"], es: ["Gato", "Lobo", "Zorro"], ja: ["猫", "オオカミ", "キツネ"], zh: ["猫", "狼", "狐狸"], it: ["Gatto", "Lupo", "Volpe"], ru: ["Кот", "Волк", "Лиса"], ko: ["고양이", "늑대", "여우"] },
+    translations: { hi: "कुत्ता", en: "Dog", de: "Hund", fr: "Chien", es: "Perro", ja: "犬 (Inu)", it: "Cane" }, 
+    distractors: { hi: ["बिल्ली", "भेड़िया", "लोमड़ी"], en: ["Cat", "Wolf", "Fox"], de: ["Katze", "Wolf", "Fuchs"], fr: ["Chat", "Loup", "Renard"], es: ["Gato", "Lobo", "Zorro"], ja: ["猫 (Neko)", "オオカミ (Ōkami)", "キツネ (Kitsune)"], it: ["Gatto", "Lupo", "Volpe"] },
     icon: "🐶" 
   },
   { 
     id: 12, 
-    translations: { hi: "चिड़िया", en: "Bird", de: "Vogel", fr: "Oiseau", es: "Pájaro", ja: "鳥", zh: "鸟", it: "Uccello", ru: "Птица", ko: "새" }, 
-    distractors: { hi: ["उड़ान", "हवा", "पंख"], en: ["Flight", "Wind", "Feather"], de: ["Flug", "Wind", "Feder"], fr: ["Vol", "Vent", "Plume"], es: ["Vuelo", "Viento", "Pluma"], ja: ["飛行", "風", "羽"], zh: ["飞行", "风", "羽毛"], it: ["Volo", "Vento", "Piuma"], ru: ["Полет", "Ветер", "Перо"], ko: ["비행", "바람", "깃털"] },
+    translations: { hi: "चिड़िया", en: "Bird", de: "Vogel", fr: "Oiseau", es: "Pájaro", ja: "鳥 (Tori)", it: "Uccello" }, 
+    distractors: { hi: ["उड़ान", "हवा", "पंख"], en: ["Flight", "Wind", "Feather"], de: ["Flug", "Wind", "Feder"], fr: ["Vol", "Vent", "Plume"], es: ["Vuelo", "Viento", "Pluma"], ja: ["飛行 (Hikō)", "風 (Kaze)", "羽 (Hane)"], it: ["Volo", "Vento", "Piuma"] },
     icon: "🐦" 
   },
   { 
     id: 13, 
-    translations: { hi: "फूल", en: "Flower", de: "Blume", fr: "Fleur", es: "Flor", ja: "花", zh: "花", it: "Fiore", ru: "Цветок", ko: "꽃" }, 
-    distractors: { hi: ["पत्ती", "पेड़", "घास"], en: ["Leaf", "Tree", "Grass"], de: ["Blatt", "Baum", "Gras"], fr: ["Feuille", "Arbre", "Herbe"], es: ["Hoja", "Árbol", "Hierba"], ja: ["葉", "木", "草"], zh: ["叶子", "树", "草"], it: ["Foglia", "Albero", "Erba"], ru: ["Лист", "Дерево", "Трава"], ko: ["잎", "나무", "풀"] },
+    translations: { hi: "फूल", en: "Flower", de: "Blume", fr: "Fleur", es: "Flor", ja: "花 (Hana)", it: "Fiore" }, 
+    distractors: { hi: ["पत्ती", "पेड़", "घास"], en: ["Leaf", "Tree", "Grass"], de: ["Blatt", "Baum", "Gras"], fr: ["Feuille", "Arbre", "Herbe"], es: ["Hoja", "Árbol", "Hierba"], ja: ["葉 (Ha)", "木 (Ki)", "草 (Kusa)"], it: ["Foglia", "Albero", "Erba"] },
     icon: "🌸" 
   },
   { 
     id: 14, 
-    translations: { hi: "आग", en: "Fire", de: "Feuer", fr: "Feu", es: "Fuego", ja: "火", zh: "火", it: "Fuoco", ru: "Огонь", ko: "불" }, 
-    distractors: { hi: ["धुआं", "गर्मी", "राख"], en: ["Smoke", "Heat", "Ash"], de: ["Rauch", "Hitze", "Asche"], fr: ["Fumée", "Chaleur", "Cendre"], es: ["Humo", "Calor", "Ceniza"], ja: ["煙", "熱", "灰"], zh: ["烟雾", "热量", "灰烬"], it: ["Fumo", "Calore", "Cenere"], ru: ["Дым", "Тепло", "Пепел"], ko: ["연기", "열기", "재"] },
+    translations: { hi: "आग", en: "Fire", de: "Feuer", fr: "Feu", es: "Fuego", ja: "火 (Hi)", it: "Fuoco" }, 
+    distractors: { hi: ["धुआं", "गर्मी", "राख"], en: ["Smoke", "Heat", "Ash"], de: ["Rauch", "Hitze", "Asche"], fr: ["Fumée", "Chaleur", "Cendre"], es: ["Humo", "Calor", "Ceniza"], ja: ["煙 (Kemuri)", "熱 (Netsu)", "灰 (Hai)"], it: ["Fumo", "Calore", "Cenere"] },
     icon: "🔥" 
   },
   { 
     id: 15, 
-    translations: { hi: "पृथ्वी", en: "Earth", de: "Erde", fr: "Terre", es: "Tierra", ja: "地球", zh: "地球", it: "Terra", ru: "Земля", ko: "지구" }, 
-    distractors: { hi: ["आसमान", "ग्रह", "तारा"], en: ["Sky", "Planet", "Star"], de: ["Himmel", "Planet", "Stern"], fr: ["Ciel", "Planète", "Étoile"], es: ["Cielo", "Planeta", "Estrella"], ja: ["空", "惑星", "星"], zh: ["天空", "行星", "星星"], it: ["Cielo", "Pianeta", "Stella"], ru: ["Небо", "Планета", "Звезда"], ko: ["하늘", "행성", "별"] },
+    translations: { hi: "पृथ्वी", en: "Earth", de: "Erde", fr: "Terre", es: "Tierra", ja: "地球 (Chikyū)", it: "Terra" }, 
+    distractors: { hi: ["आसमान", "ग्रह", "तारा"], en: ["Sky", "Planet", "Star"], de: ["Himmel", "Planet", "Stern"], fr: ["Ciel", "Planète", "Étoile"], es: ["Cielo", "Planeta", "Estrella"], ja: ["空 (Sora)", "惑星 (Wakusei)", "星 (Hoshi)"], it: ["Cielo", "Pianeta", "Stella"] },
     icon: "🌍" 
   },
   { 
     id: 16, 
-    translations: { hi: "दूध", en: "Milk", de: "Milch", fr: "Lait", es: "Leche", ja: "牛乳", zh: "牛奶", it: "Latte", ru: "Молоко", ko: "우유" }, 
-    distractors: { hi: ["पानी", "चाय", "कॉफ़ी"], en: ["Water", "Tea", "Coffee"], de: ["Wasser", "Tee", "Kaffee"], fr: ["Eau", "Thé", "Café"], es: ["Agua", "Té", "Café"], ja: ["水", "お茶", "コーヒー"], zh: ["水", "茶", "咖啡"], it: ["Acqua", "Tè", "Caffè"], ru: ["Вода", "Чай", "Кофе"], ko: ["물", "차", "커피"] },
+    translations: { hi: "दूध", en: "Milk", de: "Milch", fr: "Lait", es: "Leche", ja: "牛乳 (Gyūnyū)", it: "Latte" }, 
+    distractors: { hi: ["पानी", "चाय", "कॉफ़ी"], en: ["Water", "Tea", "Coffee"], de: ["Wasser", "Tee", "Kaffee"], fr: ["Eau", "Thé", "Café"], es: ["Agua", "Té", "Café"], ja: ["水 (Mizu)", "お茶 (Ocha)", "コーヒー (Kōhī)"], it: ["Acqua", "Tè", "Caffè"] },
     icon: "🥛" 
   },
   { 
     id: 17, 
-    translations: { hi: "रोटी", en: "Bread", de: "Brot", fr: "Pain", es: "Pan", ja: "パン", zh: "面包", it: "Pane", ru: "Хлеб", ko: "빵" }, 
-    distractors: { hi: ["चावल", "फल", "सब्जी"], en: ["Rice", "Fruit", "Vegetable"], de: ["Reis", "Frucht", "Gemüse"], fr: ["Riz", "Fruit", "Légume"], es: ["Arroz", "Fruta", "Verdura"], ja: ["ご飯", "果物", "野菜"], zh: ["米饭", "水果", "蔬菜"], it: ["Riso", "Frutta", "Verdura"], ru: ["Рис", "Фрукт", "Овощ"], ko: ["밥", "과일", "야채"] },
+    translations: { hi: "रोटी", en: "Bread", de: "Brot", fr: "Pain", es: "Pan", ja: "パン (Pan)", it: "Pane" }, 
+    distractors: { hi: ["चावल", "फल", "सब्जी"], en: ["Rice", "Fruit", "Vegetable"], de: ["Reis", "Frucht", "Gemüse"], fr: ["Riz", "Fruit", "Légume"], es: ["Arroz", "Fruta", "Verdura"], ja: ["ご飯 (Gohan)", "果物 (Kudamono)", "野菜 (Yasai)"], it: ["Riso", "Frutta", "Verdura"] },
     icon: "🍞" 
   },
   { 
     id: 18, 
-    translations: { hi: "विद्यालय", en: "School", de: "Schule", fr: "École", es: "Escuela", ja: "学校", zh: "学校", it: "Scuola", ru: "Школа", ko: "학교" }, 
-    distractors: { hi: ["घर", "दुकान", "अस्पताल"], en: ["House", "Shop", "Hospital"], de: ["Haus", "Geschäft", "Krankenhaus"], fr: ["Maison", "Magasin", "Hôpital"], es: ["Casa", "Tienda", "Hospital"], ja: ["家", "店", "病院"], zh: ["房子", "商店", "医院"], it: ["Casa", "Negozio", "Ospedale"], ru: ["Дом", "Магазин", "Больница"], ko: ["집", "가게", "병원"] },
+    translations: { hi: "विद्यालय", en: "School", de: "Schule", fr: "École", es: "Escuela", ja: "学校 (Gakkō)", it: "Scuola" }, 
+    distractors: { hi: ["घर", "दुकान", "अस्पताल"], en: ["House", "Shop", "Hospital"], de: ["Haus", "Geschäft", "Krankenhaus"], fr: ["Maison", "Magasin", "Hôpital"], es: ["Casa", "Tienda", "Hospital"], ja: ["家 (Ie)", "店 (Mise)", "病院 (Byōin)"], it: ["Casa", "Negozio", "Ospedale"] },
     icon: "🏫" 
   },
   { 
     id: 19, 
-    translations: { hi: "सड़क", en: "Road", de: "Straße", fr: "Route", es: "Camino", ja: "道路", zh: "道路", it: "Strada", ru: "Дорога", ko: "도로" }, 
-    distractors: { hi: ["नदी", "पुल", "पार्क"], en: ["River", "Bridge", "Park"], de: ["Fluss", "Brücke", "Park"], fr: ["Rivière", "Pont", "Parc"], es: ["Río", "Puente", "Parque"], ja: ["川", "橋", "公園"], zh: ["河流", "桥梁", "公园"], it: ["Fiume", "Ponte", "Parco"], ru: ["Река", "Мост", "Парк"], ko: ["강", "다리", "공원"] },
+    translations: { hi: "सड़क", en: "Road", de: "Straße", fr: "Route", es: "Camino", ja: "道路 (Dōro)", it: "Strada" }, 
+    distractors: { hi: ["नदी", "पुल", "पार्क"], en: ["River", "Bridge", "Park"], de: ["Fluss", "Brücke", "Park"], fr: ["Rivière", "Pont", "Parc"], es: ["Río", "Puente", "Parque"], ja: ["川 (Kawa)", "橋 (Hashi)", "公園 (Kōen)"], it: ["Fiume", "Ponte", "Parco"] },
     icon: "🛣️" 
   },
   { 
     id: 20, 
-    translations: { hi: "समय", en: "Time", de: "Zeit", fr: "Temps", es: "Tiempo", ja: "時間", zh: "时间", it: "Tempo", ru: "Время", ko: "시간" }, 
-    distractors: { hi: ["दिन", "रात", "घड़ी"], en: ["Day", "Night", "Clock"], de: ["Tag", "Nacht", "Uhr"], fr: ["Jour", "Nuit", "Horloge"], es: ["Día", "Noche", "Reloj"], ja: ["日", "夜", "時計"], zh: ["白天", "夜晚", "时钟"], it: ["Giorno", "Notte", "Orologio"], ru: ["День", "Ночь", "Часы"], ko: ["낮", "밤", "시계"] },
+    translations: { hi: "समय", en: "Time", de: "Zeit", fr: "Temps", es: "Tiempo", ja: "時間 (Jikan)", it: "Tempo" }, 
+    distractors: { hi: ["दिन", "रात", "घड़ी"], en: ["Day", "Night", "Clock"], de: ["Tag", "Nacht", "Uhr"], fr: ["Jour", "Nuit", "Horloge"], es: ["Día", "Noche", "Reloj"], ja: ["日 (Hi)", "夜 (Yoru)", "時計 (Tokei)"], it: ["Giorno", "Notte", "Orologio"] },
     icon: "⏱️" 
   }
 ];
@@ -132,150 +132,150 @@ const WORD_CONCEPTS = [
 const PHRASE_CONCEPTS = [
   { 
     id: 1, 
-    translations: { hi: "आपका क्या नाम है?", en: "What is your name?", de: "Wie heißt du?", fr: "Comment t'appelles-tu ?", es: "¿Cómo te llamas?", ja: "名前は何ですか？", zh: "你叫什么名字？", it: "Come ti chiami?", ru: "Как тебя зовут?", ko: "이름이 뭐예요?" }, 
-    distractors: { hi: ["आप कैसे हैं?", "कहाँ हैं?", "कौन हैं?"], en: ["How are you?", "Where are you?", "Who are you?"], de: ["Wie geht es dir?", "Wo bist du?", "Wer bist du?"], fr: ["Comment ça va ?", "Où es-tu ?", "Qui es-tu ?"], es: ["¿Cómo estás?", "¿Dónde estás?", "¿Quién eres?"], ja: ["お元気ですか？", "どこですか？", "誰ですか？"], zh: ["你好吗？", "你在哪里？", "你是谁？"], it: ["Come stai?", "Dove sei?", "Chi sei?"], ru: ["Как дела?", "Где ты?", "Кто ты?"], ko: ["어떻게 지내세요?", "어디예요?", "누구세요?"] },
+    translations: { hi: "आपका क्या नाम है?", en: "What is your name?", de: "Wie heißt du?", fr: "Comment t'appelles-tu ?", es: "¿Cómo te llamas?", ja: "名前は何ですか？ (Namae wa nan desu ka?)", it: "Come ti chiami?" }, 
+    distractors: { hi: ["आप कैसे हैं?", "कहाँ हैं?", "कौन हैं?"], en: ["How are you?", "Where are you?", "Who are you?"], de: ["Wie geht es dir?", "Wo bist du?", "Wer bist du?"], fr: ["Comment ça va ?", "Où es-tu ?", "Qui es-tu ?"], es: ["¿Cómo estás?", "¿Dónde estás?", "¿Quién eres?"], ja: ["お元気ですか？ (Ogenki desu ka?)", "どこですか？ (Doko desu ka?)", "誰ですか？ (Dare desu ka?)"], it: ["Come stai?", "Dove sei?", "Chi sei?"] },
     icon: "👋" 
   },
   { 
     id: 2, 
-    translations: { hi: "शुभ प्रभात", en: "Good morning", de: "Guten Morgen", fr: "Bonjour", es: "Buenos días", ja: "おはようございます", zh: "早上好", it: "Buongiorno", ru: "Доброе утро", ko: "좋은 아침" }, 
-    distractors: { hi: ["शुभ रात्रि", "नमस्ते", "अलविदा"], en: ["Good night", "Hello", "Goodbye"], de: ["Gute Nacht", "Hallo", "Auf Wiedersehen"], fr: ["Bonne nuit", "Bonjour", "Au revoir"], es: ["Buenas noches", "Hola", "Adiós"], ja: ["おやすみなさい", "こんにちは", "さようなら"], zh: ["晚安", "你好", "再见"], it: ["Buonanotte", "Ciao", "Arrivederci"], ru: ["Спокойной ночи", "Привет", "До свидания"], ko: ["안녕히 주무세요", "안녕하세요", "안녕히 가세요"] },
+    translations: { hi: "शुभ प्रभात", en: "Good morning", de: "Guten Morgen", fr: "Bonjour", es: "Buenos días", ja: "おはようございます (Ohayō gozaimasu)", it: "Buongiorno" }, 
+    distractors: { hi: ["शुभ रात्रि", "नमस्ते", "अलविदा"], en: ["Good night", "Hello", "Goodbye"], de: ["Gute Nacht", "Hallo", "Auf Wiedersehen"], fr: ["Bonne nuit", "Bonjour", "Au revoir"], es: ["Buenas noches", "Hola", "Adiós"], ja: ["おやすみなさい (Oyasuminasai)", "こんにちは (Konnichiwa)", "さようなら (Sayōnara)"], it: ["Buonanotte", "Ciao", "Arrivederci"] },
     icon: "🌅" 
   },
   { 
     id: 3, 
-    translations: { hi: "धन्यवाद", en: "Thank you", de: "Danke", fr: "Merci", es: "Gracias", ja: "ありがとう", zh: "谢谢", it: "Grazie", ru: "Спасибо", ko: "감사합니다" }, 
-    distractors: { hi: ["maaf kre", "हाँ", "नहीं"], en: ["Sorry", "Yes", "No"], de: ["Entschuldigung", "Ja", "Nein"], fr: ["Pardon", "Oui", "Non"], es: ["Perdón", "Sí", "No"], ja: ["ごめんなさい", "はい", "いいえ"], zh: ["对不起", "是", "不是"], it: ["Scusa", "Sì", "No"], ru: ["Извините", "Да", "Нет"], ko: ["미안해요", "네", "아니요"] },
+    translations: { hi: "धन्यवाद", en: "Thank you", de: "Danke", fr: "Merci", es: "Gracias", ja: "ありがとう (Arigatō)", it: "Grazie" }, 
+    distractors: { hi: ["maaf kre", "हाँ", "नहीं"], en: ["Sorry", "Yes", "No"], de: ["Entschuldigung", "Ja", "Nein"], fr: ["Pardon", "Oui", "Non"], es: ["Perdón", "Sí", "No"], ja: ["ごめんなさい (Gomen nasai)", "はい (Hai)", "いいえ (Iie)"], it: ["Scusa", "Sì", "No"] },
     icon: "🙏" 
   },
   { 
     id: 4, 
-    translations: { hi: "हाँ", en: "Yes", de: "Ja", fr: "Oui", es: "Sí", ja: "はい", zh: "是", it: "Sì", ru: "Да", ko: "네" }, 
-    distractors: { hi: ["नहीं", "शायद", "कभी नहीं"], en: ["No", "Maybe", "Never"], de: ["Nein", "Vielleicht", "Niemals"], fr: ["Non", "Peut-être", "Jamais"], es: ["No", "Tal vez", "Nunca"], ja: ["いいえ", "多分", "決して"], zh: ["不是", "也许", "从不"], it: ["No", "Forse", "Mai"], ru: ["Нет", "Может быть", "Никогда"], ko: ["아니요", "아마도", "절대"] },
+    translations: { hi: "हाँ", en: "Yes", de: "Ja", fr: "Oui", es: "Sí", ja: "はい (Hai)", it: "Sì" }, 
+    distractors: { hi: ["नहीं", "शायद", "कभी नहीं"], en: ["No", "Maybe", "Never"], de: ["Nein", "Vielleicht", "Niemals"], fr: ["Non", "Peut-être", "Jamais"], es: ["No", "Tal vez", "Nunca"], ja: ["いいえ (Iie)", "多分 (Tabun)", "決して (Kesshite)"], it: ["No", "Forse", "Mai"] },
     icon: "✅" 
   },
   { 
     id: 5, 
-    translations: { hi: "नहीं", en: "No", de: "Nein", fr: "Non", es: "No", ja: "いいえ", zh: "不是", it: "No", ru: "Нет", ko: "아니요" }, 
-    distractors: { hi: ["हाँ", "ठीक है", "अच्छा"], en: ["Yes", "Okay", "Good"], de: ["Ja", "Okay", "Gut"], fr: ["Oui", "D'accord", "Bien"], es: ["Sí", "Vale", "Bien"], ja: ["はい", "オーケー", "良い"], zh: ["是", "好的", "好"], it: ["Sì", "Va bene", "Bene"], ru: ["Да", "Хорошо", "Хороший"], ko: ["네", "좋아요", "좋은"] },
+    translations: { hi: "नहीं", en: "No", de: "Nein", fr: "Non", es: "No", ja: "いいえ (Iie)", it: "No" }, 
+    distractors: { hi: ["हाँ", "ठीक है", "अच्छा"], en: ["Yes", "Okay", "Good"], de: ["Ja", "Okay", "Gut"], fr: ["Oui", "D'accord", "Bien"], es: ["Sí", "Vale", "Bien"], ja: ["はい (Hai)", "オーケー (Ōkē)", "良い (Yoi)"], it: ["Sì", "Va bene", "Bene"] },
     icon: "❌" 
   },
   { 
     id: 6, 
-    translations: { hi: "maaf kre", en: "Excuse me", de: "Entschuldigen Sie", fr: "Excusez-moi", es: "Perdone", ja: "すみません", zh: "打扰一下", it: "Scusami", ru: "Извините", ko: "실례합니다" }, 
-    distractors: { hi: ["धन्यवाद", "अलविदा", "नमस्ते"], en: ["Thank you", "Goodbye", "Hello"], de: ["Danke", "Auf Wiedersehen", "Hallo"], fr: ["Merci", "Au revoir", "Bonjour"], es: ["Gracias", "Adiós", "Hola"], ja: ["ありがとう", "さようなら", "こんにちは"], zh: ["谢谢", "再见", "你好"], it: ["Grazie", "Arrivederci", "Ciao"], ru: ["Спасибо", "До свидания", "Привет"], ko: ["감사합니다", "안녕히 가세요", "안녕하세요"] },
+    translations: { hi: "maaf kre", en: "Excuse me", de: "Entschuldigen Sie", fr: "Excusez-moi", es: "Perdone", ja: "すみません (Sumimasen)", it: "Scusami" }, 
+    distractors: { hi: ["धन्यवाद", "अलविदा", "नमस्ते"], en: ["Thank you", "Goodbye", "Hello"], de: ["Danke", "Auf Wiedersehen", "Hallo"], fr: ["Merci", "Au revoir", "Bonjour"], es: ["Gracias", "Adiós", "Hola"], ja: ["ありがとう (Arigatō)", "さようなら (Sayōnara)", "こんにちは (Konnichiwa)"], it: ["Grazie", "Arrivederci", "Ciao"] },
     icon: "🙋" 
   },
   { 
     id: 7, 
-    translations: { hi: "मुझे खेद है", en: "I am sorry", de: "Es tut mir leid", fr: "Je suis désolé", es: "Lo siento", ja: "ごめんなさい", zh: "对不起", it: "Mi dispiace", ru: "Мне жаль", ko: "미안합니다" }, 
-    distractors: { hi: ["कोई बात नहीं", "धन्यवाद", "कृपया"], en: ["No problem", "Thank you", "Please"], de: ["Kein Problem", "Danke", "Bitte"], fr: ["Pas de problème", "Merci", "S'il vous plaît"], es: ["No hay problema", "Gracias", "Por favor"], ja: ["問題ない", "ありがとう", "お願いします"], zh: ["没关系", "谢谢", "请"], it: ["Nessun problema", "Grazie", "Per favore"], ru: ["Нет проблем", "Спасибо", "Пожалуйста"], ko: ["문제 없어요", "감사합니다", "제발"] },
+    translations: { hi: "मुझे खेद है", en: "I am sorry", de: "Es tut mir leid", fr: "Je suis désolé", es: "Lo siento", ja: "ごめんなさい (Gomen nasai)", it: "Mi dispiace" }, 
+    distractors: { hi: ["कोई बात नहीं", "धन्यवाद", "कृपया"], en: ["No problem", "Thank you", "Please"], de: ["Kein Problem", "Danke", "Bitte"], fr: ["Pas de problème", "Merci", "S'il vous plaît"], es: ["No hay problema", "Gracias", "Por favor"], ja: ["問題ない (Mondai nai)", "ありがとう (Arigatō)", "お願いします (Onegai shimasu)"], it: ["Nessun problema", "Grazie", "Per favore"] },
     icon: "😔" 
   },
   { 
     id: 8, 
-    translations: { hi: "अलविदा", en: "Goodbye", de: "Auf Wiedersehen", fr: "Au revoir", es: "Adiós", ja: "さようなら", zh: "再见", it: "Arrivederci", ru: "До свидания", ko: "안녕히 가세요" }, 
-    distractors: { hi: ["नमस्ते", "स्वागत है", "धन्यवाद"], en: ["Hello", "Welcome", "Thank you"], de: ["Hallo", "Willkommen", "Danke"], fr: ["Bonjour", "Bienvenue", "Merci"], es: ["Hola", "Bienvenido", "Gracias"], ja: ["こんにちは", "ようこそ", "ありがとう"], zh: ["你好", "欢迎", "谢谢"], it: ["Ciao", "Benvenuto", "Grazie"], ru: ["Привет", "Добро пожаловать", "Спасибо"], ko: ["안녕하세요", "환영합니다", "감사합니다"] },
+    translations: { hi: "अलविदा", en: "Goodbye", de: "Auf Wiedersehen", fr: "Au revoir", es: "Adiós", ja: "さようなら (Sayōnara)", it: "Arrivederci" }, 
+    distractors: { hi: ["नमस्ते", "स्वागत है", "धन्यवाद"], en: ["Hello", "Welcome", "Thank you"], de: ["Hallo", "Willkommen", "Danke"], fr: ["Bonjour", "Bienvenue", "Merci"], es: ["Hola", "Bienvenido", "Gracias"], ja: ["こんにちは (Konnichiwa)", "ようこそ (Yōkoso)", "ありがとう (Arigatō)"], it: ["Ciao", "Benvenuto", "Grazie"] },
     icon: "👋" 
   },
   { 
     id: 9, 
-    translations: { hi: "कृपया", en: "Please", de: "Bitte", fr: "S'il vous plaît", es: "Por favor", ja: "お願いします", zh: "请", it: "Per favore", ru: "Пожалуйста", ko: "제발" }, 
-    distractors: { hi: ["धन्यवाद", "हाँ", "नहीं"], en: ["Thank you", "Yes", "No"], de: ["Danke", "Ja", "Nein"], fr: ["Merci", "Oui", "Non"], es: ["Gracias", "Sí", "No"], ja: ["ありがとう", "はい", "いいえ"], zh: ["谢谢", "是", "不是"], it: ["Grazie", "Sì", "No"], ru: ["Спасибо", "Да", "Нет"], ko: ["감사합니다", "네", "아니요"] },
+    translations: { hi: "कृपया", en: "Please", de: "Bitte", fr: "S'il vous plaît", es: "Por favor", ja: "お願いします (Onegai shimasu)", it: "Per favore" }, 
+    distractors: { hi: ["धन्यवाद", "हाँ", "नहीं"], en: ["Thank you", "Yes", "No"], de: ["Danke", "Ja", "Nein"], fr: ["Merci", "Oui", "Non"], es: ["Gracias", "Sí", "No"], ja: ["ありがとう (Arigatō)", "はい (Hai)", "いいえ (Iie)"], it: ["Grazie", "Sì", "No"] },
     icon: "🥺" 
   },
   { 
     id: 10, 
-    translations: { hi: "मदद", en: "Help", de: "Hilfe", fr: "Aide", es: "Ayuda", ja: "助けて", zh: "帮助", it: "Aiuto", ru: "Помощь", ko: "도와주세요" }, 
-    distractors: { hi: ["रुको", "जाओ", "आओ"], en: ["Stop", "Go", "Come"], de: ["Halt", "Geh", "Komm"], fr: ["Arrêt", "Aller", "Venir"], es: ["Parar", "Ir", "Venir"], ja: ["止まれ", "行く", "来る"], zh: ["停止", "去", "来"], it: ["Fermati", "Vai", "Vieni"], ru: ["Стоп", "Идти", "Прийти"], ko: ["멈춰", "가", "와"] },
+    translations: { hi: "मदद", en: "Help", de: "Hilfe", fr: "Aide", es: "Ayuda", ja: "助けて (Tasukete)", it: "Aiuto" }, 
+    distractors: { hi: ["रुको", "जाओ", "आओ"], en: ["Stop", "Go", "Come"], de: ["Halt", "Geh", "Komm"], fr: ["Arrêt", "Aller", "Venir"], es: ["Parar", "Ir", "Venir"], ja: ["止まれ (Tomare)", "行く (Iku)", "来る (Kuru)"], it: ["Fermati", "Vai", "Vieni"] },
     icon: "🆘" 
   },
   { 
     id: 11, 
-    translations: { hi: "mai ni smjhta", en: "I don't understand", de: "Ich verstehe nicht", fr: "Je ne comprends pas", es: "No entiendo", ja: "わかりません", zh: "我不明白", it: "Non capisco", ru: "Я не понимаю", ko: "이해를 못하겠어요" }, 
-    distractors: { hi: ["मुझे पता है", "मैंने देखा", "मैंने सुना"], en: ["I know", "I saw", "I heard"], de: ["Ich weiß", "Ich sah", "Ich hörte"], fr: ["Je sais", "J'ai vu", "J'ai entendu"], es: ["Lo sé", "Vi", "Escuché"], ja: ["知っています", "見ました", "聞きました"], zh: ["我知道", "我看到了", "我听到了"], it: ["Lo so", "Ho visto", "Ho sentito"], ru: ["Я знаю", "Я видел", "Я слышал"], ko: ["알아요", "봤어요", "들었어요"] },
+    translations: { hi: "mai ni smjhta", en: "I don't understand", de: "Ich verstehe nicht", fr: "Je ne comprends pas", es: "No entiendo", ja: "わかりません (Wakarimasen)", it: "Non capisco" }, 
+    distractors: { hi: ["मुझे पता है", "मैंने देखा", "मैंने सुना"], en: ["I know", "I saw", "I heard"], de: ["Ich weiß", "Ich sah", "Ich hörte"], fr: ["Je sais", "J'ai vu", "J'ai entendu"], es: ["Lo sé", "Vi", "Escuché"], ja: ["知っています (Shitte imasu)", "見ました (Mimashita)", "聞きました (Kikimashita)"], it: ["Lo so", "Ho visto", "Ho sentito"] },
     icon: "🤷" 
   },
   { 
     id: 12, 
-    translations: { hi: "क्या आप अंग्रेज़ी बोलते हैं?", en: "Do you speak English?", de: "Sprechen Sie Englisch?", fr: "Parlez-vous anglais ?", es: "¿Habla inglés?", ja: "英語を話しますか？", zh: "你会说英语吗？", it: "Parli inglese?", ru: "Вы говорите по-английски?", ko: "영어 할 줄 아세요?" }, 
-    distractors: { hi: ["आप कैसे हैं?", "आपका क्या नाम है?", "आप कहाँ हैं?"], en: ["How are you?", "What is your name?", "Where are you?"], de: ["Wie geht es dir?", "Wie heißt du?", "Wo bist du?"], fr: ["Comment ça va ?", "Comment t'appelles-tu ?", "Où es-tu ?"], es: ["¿Cómo estás?", "¿Cómo te llamas?", "¿Dónde estás?"], ja: ["お元気ですか？", "名前は何ですか？", "どこですか？"], zh: ["你好吗？", "你叫什么名字？", "你在哪里？"], it: ["Come stai?", "Come ti chiami?", "Dove sei?"], ru: ["Как дела?", "Как тебя зовут?", "Где ты?"], ko: ["어떻게 지내세요?", "이름이 뭐예요?", "어디예요?"] },
+    translations: { hi: "क्या आप अंग्रेज़ी बोलते हैं?", en: "Do you speak English?", de: "Sprechen Sie Englisch?", fr: "Parlez-vous anglais ?", es: "¿Habla inglés?", ja: "英語を話しますか？ (Eigo o hanashimasu ka?)", it: "Parli inglese?" }, 
+    distractors: { hi: ["आप कैसे हैं?", "आपका क्या नाम है?", "आप कहाँ हैं?"], en: ["How are you?", "What is your name?", "Where are you?"], de: ["Wie geht es dir?", "Wie heißt du?", "Wo bist du?"], fr: ["Comment ça va ?", "Comment t'appelles-tu ?", "Où es-tu ?"], es: ["¿Cómo estás?", "¿Cómo te llamas?", "¿Dónde estás?"], ja: ["お元気ですか？ (Ogenki desu ka?)", "名前は何ですか？ (Namae wa nan desu ka?)", "どこですか？ (Doko desu ka?)"], it: ["Come stai?", "Come ti chiami?", "Dove sei?"] },
     icon: "🗣️" 
   },
   { 
     id: 13, 
-    translations: { hi: "शौचालय कहाँ है?", en: "Where is the bathroom?", de: "Wo ist die Toilette?", fr: "Où sont les toilettes ?", es: "¿Dónde está el baño?", ja: "トイレはどこですか？", zh: "洗手间在哪里？", it: "Dov'è il bagno?", ru: "Где туалет?", ko: "화장실이 어디예요?" }, 
-    distractors: { hi: ["स्टेशन कहाँ है?", "होटल कहाँ है?", "अस्पताल कहाँ है?"], en: ["Where is the station?", "Where is the hotel?", "Where is the hospital?"], de: ["Wo ist der Bahnhof?", "Wo ist das Hotel?", "Wo ist das Krankenhaus?"], fr: ["Où est la gare ?", "Où est l'hôtel ?", "Où est l'hôpital ?"], es: ["¿Dónde está la estación?", "¿Dónde está el hotel?", "¿Dónde está el hospital?"], ja: ["駅はどこですか？", "ホテルはどこですか？", "病院はどこですか？"], zh: ["车站在哪里？", "酒店在哪里？", "医院在哪里？"], it: ["Dov'è la stazione?", "Dov'è l'hotel?", "Dov'è l'ospedale?"], ru: ["Где вокзал?", "Где отель?", "Где больница?"], ko: ["역이 어디예요?", "호텔이 어디예요?", "병원이 어디예요?"] },
+    translations: { hi: "शौचालय कहाँ है?", en: "Where is the bathroom?", de: "Wo ist die Toilette?", fr: "Où sont les toilettes ?", es: "¿Dónde está el baño?", ja: "トイレはどこですか？ (Toire wa doko desu ka?)", it: "Dov'è il bagno?" }, 
+    distractors: { hi: ["स्टेशन कहाँ है?", "होटल कहाँ है?", "अस्पताल कहाँ है?"], en: ["Where is the station?", "Where is the hotel?", "Where is the hospital?"], de: ["Wo ist der Bahnhof?", "Wo ist das Hotel?", "Wo ist das Krankenhaus?"], fr: ["Où est la gare ?", "Où est l'hôtel ?", "Où est l'hôpital ?"], es: ["¿Dónde está la estación?", "¿Dónde está el hotel?", "¿Dónde está el hospital?"], ja: ["駅はどこですか？ (Eki wa doko desu ka?)", "ホテルはどこですか？ (Hoteru wa doko desu ka?)", "病院はどこですか？ (Byōin wa doko desu ka?)"], it: ["Dov'è la stazione?", "Dov'è l'hotel?", "Dov'è l'ospedale?"] },
     icon: "🚻" 
   },
   { 
     id: 14, 
-    translations: { hi: "यह कितने का है?", en: "How much is this?", de: "Wie viel kostet das?", fr: "Combien ça coûte ?", es: "¿Cuánto cuesta esto?", ja: "これはいくらですか？", zh: "这个多少钱？", it: "Quanto costa?", ru: "Сколько это стоит?", ko: "이거 얼마예요?" }, 
-    distractors: { hi: ["यह क्या है?", "यह कब है?", "यह कहाँ है?"], en: ["What is this?", "When is this?", "Where is this?"], de: ["Was ist das?", "Wann ist das?", "Wo ist das?"], fr: ["Qu'est-ce que c'est ?", "C'est quand ?", "C'est où ?"], es: ["¿Qué es esto?", "¿Cuándo es esto?", "¿Dónde está esto?"], ja: ["これは何ですか？", "これはいつですか？", "これはどこですか？"], zh: ["这是什么？", "这是什么时候？", "这是哪里？"], it: ["Cos'è questo?", "Quand'è?", "Dov'è?"], ru: ["Что это?", "Когда это?", "Где это?"], ko: ["이게 뭐예요?", "이게 언제예요?", "이게 어디예요?"] },
+    translations: { hi: "यह कितने का है?", en: "How much is this?", de: "Wie viel kostet das?", fr: "Combien ça coûte ?", es: "¿Cuánto cuesta esto?", ja: "これはいくらですか？ (Kore wa ikura desu ka?)", it: "Quanto costa?" }, 
+    distractors: { hi: ["यह क्या है?", "यह कब है?", "यह कहाँ है?"], en: ["What is this?", "When is this?", "Where is this?"], de: ["Was ist das?", "Wann ist das?", "Wo ist das?"], fr: ["Qu'est-ce que c'est ?", "C'est quand ?", "C'est où ?"], es: ["¿Qué es esto?", "¿Cuándo es esto?", "¿Dónde está esto?"], ja: ["これは何ですか？ (Kore wa nan desu ka?)", "これはいつですか？ (Kore wa itsu desu ka?)", "これはどこですか？ (Kore wa doko desu ka?)"], it: ["Cos'è questo?", "Quand'è?", "Dov'è?"] },
     icon: "💰" 
   },
   { 
     id: 15, 
-    translations: { hi: "मुझे तुमसे प्यार है", en: "I love you", de: "Ich liebe dich", fr: "Je t'aime", es: "Te amo", ja: "愛しています", zh: "我爱你", it: "Ti amo", ru: "Я тебя люблю", ko: "사랑해요" }, 
-    distractors: { hi: ["मुझे यह पसंद है", "मैं खुश हूँ", "मैं दुखी हूँ"], en: ["I like this", "I am happy", "I am sad"], de: ["Ich mag das", "Ich bin glücklich", "Ich bin traurig"], fr: ["J'aime ça", "Je suis heureux", "Je suis triste"], es: ["Me gusta esto", "Estoy feliz", "Estoy triste"], ja: ["これが好きです", "私は幸せです", "私は悲しいです"], zh: ["我喜欢这个", "我很高兴", "我很伤心"], it: ["Mi piace", "Sono felice", "Sono triste"], ru: ["Мне это нравится", "Я счастлив", "Мне грустно"], ko: ["이거 좋아해요", "저는 행복해요", "저는 슬퍼요"] },
+    translations: { hi: "मुझे तुमसे प्यार है", en: "I love you", de: "Ich liebe dich", fr: "Je t'aime", es: "Te amo", ja: "愛しています (Aishiteimasu)", it: "Ti amo" }, 
+    distractors: { hi: ["मुझे यह पसंद है", "मैं खुश हूँ", "मैं दुखी हूँ"], en: ["I like this", "I am happy", "I am sad"], de: ["Ich mag das", "Ich bin glücklich", "Ich bin traurig"], fr: ["J'aime ça", "Je suis heureux", "Je suis triste"], es: ["Me gusta esto", "Estoy feliz", "Estoy triste"], ja: ["これが好きです (Kore ga suki desu)", "私は幸せです (Watashi wa shiawase desu)", "私は悲しいです (Watashi wa kanashii desu)"], it: ["Mi piace", "Sono felice", "Sono triste"] },
     icon: "❤️" 
   },
   { 
     id: 16, 
-    translations: { hi: "आप कहाँ से हैं?", en: "Where are you from?", de: "Woher kommst du?", fr: "D'où viens-tu ?", es: "¿De dónde eres?", ja: "どこから来ましたか？", zh: "你来自哪里？", it: "Di dove sei?", ru: "Откуда ты?", ko: "어디서 오셨나요?" }, 
-    distractors: { hi: ["आप कहाँ जा रहे हैं?", "आप क्या कर रहे हो?", "आप कौन हैं?"], en: ["Where are you going?", "What are you doing?", "Who are you?"], de: ["Wohin gehst du?", "Was machst du?", "Wer bist du?"], fr: ["Où vas-tu ?", "Que fais-tu ?", "Qui es-tu ?"], es: ["¿A dónde vas?", "¿Qué haces?", "¿Quién eres?"], ja: ["どこに行きますか？", "何をしていますか？", "誰ですか？"], zh: ["要去哪里？", "你在做什么？", "你是谁？"], it: ["Dove vai?", "Cosa fai?", "Chi sei?"], ru: ["Куда ты идешь?", "Что ты делаешь?", "Кто ты?"], ko: ["어디 가세요?", "뭐 하세요?", "누구세요?"] },
+    translations: { hi: "आप कहाँ से हैं?", en: "Where are you from?", de: "Woher kommst du?", fr: "D'où viens-tu ?", es: "¿De dónde eres?", ja: "どこから来ましたか？ (Doko kara kimashita ka?)", it: "Di dove sei?" }, 
+    distractors: { hi: ["आप कहाँ जा रहे हैं?", "आप क्या कर रहे हो?", "आप कौन हैं?"], en: ["Where are you going?", "What are you doing?", "Who are you?"], de: ["Wohin gehst du?", "Was machst du?", "Wer bist du?"], fr: ["Où vas-tu ?", "Que fais-tu ?", "Qui es-tu ?"], es: ["¿A dónde vas?", "¿Qué haces?", "¿Quién eres?"], ja: ["どこに行きますか？ (Doko ni ikimasu ka?)", "何をしていますか？ (Nani o shiteimasu ka?)", "誰ですか？ (Dare desu ka?)"], it: ["Dove vai?", "Cosa fai?", "Chi sei?"] },
     icon: "🗺️" 
   },
   { 
     id: 17, 
-    translations: { hi: "मैं ठीक हूँ", en: "I am fine", de: "Mir geht es gut", fr: "Ça va bien", es: "Estoy bien", ja: "元気です", zh: "我很好", it: "Sto bene", ru: "Я в порядке", ko: "저는 잘 지내요" }, 
-    distractors: { hi: ["मैं बीमार हूँ", "मैं दुखी हूँ", "मैं व्यस्त हूँ"], en: ["I am sick", "I am sad", "I am busy"], de: ["Ich bin krank", "Ich bin traurig", "Ich bin beschäftigt"], fr: ["Je suis malade", "Je suis triste", "Je suis occupé"], es: ["Estoy enfermo", "Estoy triste", "Estoy ocupado"], ja: ["病気です", "悲しいです", "忙しいです"], zh: ["我生病了", "我很伤心", "我很忙"], it: ["Sono malato", "Sono triste", "Sono occupato"], ru: ["Я болен", "Мне грустно", "Я занят"], ko: ["아파요", "슬퍼요", "바빠요"] },
+    translations: { hi: "मैं ठीक हूँ", en: "I am fine", de: "Mir geht es gut", fr: "Ça va bien", es: "Estoy bien", ja: "元気です (Genki desu)", it: "Sto bene" }, 
+    distractors: { hi: ["मैं बीमार हूँ", "मैं दुखी हूँ", "मैं व्यस्त हूँ"], en: ["I am sick", "I am sad", "I am busy"], de: ["Ich bin krank", "Ich bin traurig", "Ich bin beschäftigt"], fr: ["Je suis malade", "Je suis triste", "Je suis occupé"], es: ["Estoy enfermo", "Estoy triste", "Estoy ocupado"], ja: ["病気です (Byōki desu)", "悲しいです (Kanashii desu)", "忙しいです (Isogashii desu)"], it: ["Sono malato", "Sono triste", "Sono occupato"] },
     icon: "👍" 
   },
   { 
     id: 18, 
-    translations: { hi: "aap kya kr rhe hai?", en: "What are you doing?", de: "Was machst du?", fr: "Que fais-tu ?", es: "¿Qué haces?", ja: "何をしていますか？", zh: "你在做什么？", it: "Cosa stai facendo?", ru: "Что ты делаешь?", ko: "뭐 하고 계세요?" }, 
-    distractors: { hi: ["आप कहाँ हैं?", "आप कब आएंगे?", "यह क्या है?"], en: ["Where are you?", "When will you come?", "What is this?"], de: ["Wo bist du?", "Wann kommst du?", "Was ist das?"], fr: ["Où es-tu ?", "Quand viens-tu ?", "Qu'est-ce que c'est ?"], es: ["¿Dónde estás?", "¿Cuándo vendrás?", "¿Qué es esto?"], ja: ["どこにいますか？", "いつ来ますか？", "これは何ですか？"], zh: ["你在哪里？", "你什么时候来？", "这是什么？"], it: ["Dove sei?", "Quando vieni?", "Cos'è questo?"], ru: ["Где ты?", "Когда ты придешь?", "Что это?"], ko: ["어디 계세요?", "언제 오세요?", "이게 뭐예요?"] },
+    translations: { hi: "aap kya kr rhe hai?", en: "What are you doing?", de: "Was machst du?", fr: "Que fais-tu ?", es: "¿Qué haces?", ja: "何をしていますか？ (Nani o shiteimasu ka?)", it: "Cosa stai facendo?" }, 
+    distractors: { hi: ["आप कहाँ हैं?", "आप कब आएंगे?", "यह क्या है?"], en: ["Where are you?", "When will you come?", "What is this?"], de: ["Wo bist du?", "Wann kommst du?", "Was ist das?"], fr: ["Où es-tu ?", "Quand viens-tu ?", "Qu'est-ce que c'est ?"], es: ["¿Dónde estás?", "¿Cuándo vendrás?", "¿Qué es esto?"], ja: ["どこにいますか？ (Doko ni imasu ka?)", "いつ来ますか？ (Itsu kimasu ka?)", "これは何ですか？ (Kore wa nan desu ka?)"], it: ["Dove sei?", "Quando vieni?", "Cos'è questo?"] },
     icon: "🤔" 
   },
   { 
     id: 19, 
-    translations: { hi: "कल मिलते हैं", en: "See you tomorrow", de: "Bis morgen", fr: "À demain", es: "Hasta mañana", ja: "また明日", zh: "明天见", it: "A domani", ru: "До завтра", ko: "내일 봐요" }, 
-    distractors: { hi: ["बाद में मिलते हैं", "शुभ रात्रि", "अलविदा"], en: ["See you later", "Good night", "Goodbye"], de: ["Bis später", "Gute Nacht", "Auf Wiedersehen"], fr: ["À plus tard", "Bonne nuit", "Au revoir"], es: ["Hasta luego", "Buenas noches", "Adiós"], ja: ["また後で", "おやすみなさい", "さようなら"], zh: ["回头见", "晚安", "再见"], it: ["A dopo", "Buonanotte", "Arrivederci"], ru: ["До встречи", "Спокойной ночи", "До свидания"], ko: ["나중에 봐요", "안녕히 주무세요", "안녕히 가세요"] },
+    translations: { hi: "कल मिलते हैं", en: "See you tomorrow", de: "Bis morgen", fr: "À demain", es: "Hasta mañana", ja: "また明日 (Mata ashita)", it: "A domani" }, 
+    distractors: { hi: ["बाद में मिलते हैं", "शुभ रात्रि", "अलविदा"], en: ["See you later", "Good night", "Goodbye"], de: ["Bis später", "Gute Nacht", "Auf Wiedersehen"], fr: ["À plus tard", "Bonne nuit", "Au revoir"], es: ["Hasta luego", "Buenas noches", "Adiós"], ja: ["また後で", "おやすみなさい (Oyasuminasai)", "さようなら (Sayōnara)"], it: ["A dopo", "Buonanotte", "Arrivederci"] },
     icon: "📅" 
   },
   { 
     id: 20, 
-    translations: { hi: "आपका दिन शुभ हो", en: "Have a good day", de: "Einen schönen Tag noch", fr: "Bonne journée", es: "Que tengas un buen día", ja: "良い一日を", zh: "祝你度过美好的一天", it: "Buona giornata", ru: "Хорошего дня", ko: "좋은 하루 보내세요" }, 
-    distractors: { hi: ["शुभ प्रभात", "शुभ संध्या", "शुभ रात्रि"], en: ["Good morning", "Good evening", "Good night"], de: ["Guten Morgen", "Guten Abend", "Gute Nacht"], fr: ["Bonjour", "Bonsoir", "Bonne nuit"], es: ["Buenos días", "Buenas tardes", "Buenas noches"], ja: ["おはよう", "こんばんは", "おやすみ"], zh: ["早上好", "晚上好", "晚安"], it: ["Buongiorno", "Buonasera", "Buonanotte"], ru: ["Доброе утро", "Добрый вечер", "Спокойной ночи"], ko: ["좋은 아침", "좋은 저녁", "안녕히 주무세요"] },
+    translations: { hi: "आपका दिन शुभ हो", en: "Have a good day", de: "Einen schönen Tag noch", fr: "Bonne journée", es: "Que tengas un buen día", ja: "良い一日を (Yoi ichinichi o)", it: "Buona giornata" }, 
+    distractors: { hi: ["शुभ प्रभात", "शुभ संध्या", "शुभ रात्रि"], en: ["Good morning", "Good evening", "Good night"], de: ["Guten Morgen", "Guten Abend", "Gute Nacht"], fr: ["Bonjour", "Bonsoir", "Bonne nuit"], es: ["Buenos días", "Buenas tardes", "Buenas noches"], ja: ["おはよう (Ohayō)", "こんばんは (Konbanwa)", "おやすみ (Oyasumi)"], it: ["Buongiorno", "Buonasera", "Buonanotte"] },
     icon: "✨" 
   }
 ];
 
 const CONVERSATION_FLOW = [
-  { speaker: 'boy', audioFile: '1_Boy_Hello', hi: "नमस्ते", en: "Hello", de: "Hallo", fr: "Bonjour", es: "Hola", ja: "こんにちは", zh: "你好", it: "Ciao", ru: "Привет", ko: "안녕하세요" },
-  { speaker: 'girl', audioFile: '2_Girl_Hello_Rahul_how_are_you', hi: "नमस्ते राहुल, आप कैसे हैं?", en: "Hello Rahul, how are you?", de: "Hallo Rahul, wie geht es dir?", fr: "Bonjour Rahul, comment ça va ?", es: "Hola Rahul, ¿cómo estás?", ja: "こんにちは、ラフルさん。お元気ですか？", zh: "你好，Rahul。你好吗？", it: "Ciao Rahul, come stai?", ru: "Привет, Рахул. Как дела?", ko: "안녕하세요 라훌 씨. 어떻게 지내세요?" },
-  { speaker: 'boy', audioFile: '3_Boy_Im_fine_thank_you_And_you', hi: "मैं ठीक हूँ, धन्यवाद। और आप?", en: "I'm fine, thank you. And you?", de: "Mir geht es gut, danke. Und dir?", fr: "Ça va bien, merci. Et toi ?", es: "Estoy bien, gracias. ¿Y tú?", ja: "元気です、ありがとう。あなたは？", zh: "我很好，谢谢。你呢？", it: "Sto bene, grazie. E tu?", ru: "Я в порядке, спасибо. А у тебя?", ko: "잘 지내요, 감사합니다. 당신은요?" },
-  { speaker: 'girl', audioFile: '4_Girl_Im_fine_too_What_are_you_doing', hi: "मैं भी ठीक हूँ। आज आप क्या कर रहे हैं?", en: "I'm fine too. What are you doing today?", de: "Mir geht es auch gut. Was machst du heute?", fr: "Ça va bien aussi. Que fais-tu aujourd'hui ?", es: "Yo también estoy bien. ¿Qué haces hoy?", ja: "私も元気です。今日は何をしていますか？", zh: "我也很好。你今天在做什么？", it: "Anche io sto bene. Cosa fai oggi?", ru: "Я тоже в порядке. Что ты делаешь сегодня?", ko: "저도 잘 지내요. 오늘 뭐 하세요?" },
-  { speaker: 'boy', audioFile: '5_Boy_I_am_learning_a_new_language', hi: "mai ek nayi bhasha seekh rha hu", en: "I am learning a new language.", de: "Ich lerne eine neue Sprache.", fr: "J'apprends une nouvelle langue.", es: "Estoy aprendiendo un nuevo idioma.", ja: "新しい言語を勉強しています。", zh: "我正在学习一门新语言。", it: "Sto imparando una nuova lingua.", ru: "Я изучаю новый язык.", ko: "저는 새로운 언어를 배우고 있어요." },
-  { speaker: 'girl', audioFile: '6_Girl_Thats_great_Which_language', hi: "यह बहुत अच्छा है! कौन सी भाषा?", en: "That's great! Which language?", de: "Das ist toll! Welche Sprache?", fr: "C'est super ! Quelle langue ?", es: "¡Eso es genial! ¿Qué idioma?", ja: "それは素晴らしいですね！どの言語ですか？", zh: "那太好了！哪种语言？", it: "È fantastico! Quale lingua?", ru: "Это здорово! Какой язык?", ko: "대단하네요! 어떤 언어인가요?" },
-  { speaker: 'boy', audioFile: '7_Boy_I_am_learning_German_right_now', hi: "मैं अभी जर्मन सीख रहा हूँ।", en: "I am learning German right now.", de: "Ich lerne gerade Deutsch.", fr: "J'apprends l'allemand en ce moment.", es: "Estoy aprendiendo alemán ahora mismo.", ja: "今、ドイツ語 を勉強しています。", zh: "我正在学习德语。", it: "Adesso sto imparando il tedesco.", ru: "Я сейчас изучаю немецкий.", ko: "지금 독일어를 배우고 있어요." },
-  { speaker: 'girl', audioFile: '8_Girl_German_is_a_beautiful_language', hi: "जर्मन एक सुंदर भाषा है।", en: "German is a beautiful language.", de: "Deutsch ist eine schöne Sprache.", fr: "L'allemand est une belle langue.", es: "El alemán es un idioma hermoso.", ja: "ドイツ語は美しい言語です。", zh: "德语是一门美丽的语言。", it: "Il tedesco è una lingua bellissima.", ru: "Немецкий — красивый язык.", ko: "독일어는 아름다운 언어예요." },
-  { speaker: 'boy', audioFile: '9_Boy_Yes_I_like_it_very_much', hi: "हाँ, मुझे यह बहुत पसंद है।", en: "Yes, I like it very much.", de: "Ja, ich mag es sehr.", fr: "Oui, j'aime beaucoup ça.", es: "Sí, me gusta mucho.", ja: "はい、とても気に入っています。", zh: "是的，我很喜欢它。", it: "Sì, mi piace molto.", ru: "Да, мне это очень нравится.", ko: "네, 정말 좋아해요." },
-  { speaker: 'girl', audioFile: '10_Girl_Good_luck_See_you_later', hi: "शुभकामनाएं! बाद में मिलते हैं।", en: "Good luck! See you later.", de: "Viel Glück! Bis später.", fr: "Bonne chance ! À plus tard.", es: "¡Buena suerte! Hasta luego.", ja: "頑張ってください！また後で。", zh: "祝你好运！回头见。", it: "Buona fortuna! A dopo.", ru: "Удачи! До встречи.", ko: "행운을 빌어요! 나중에 봐요." }
+  { speaker: 'boy', audioFile: '1_Boy_Hello', hi: "नमस्ते", en: "Hello", de: "Hallo", fr: "Bonjour", es: "Hola", ja: "こんにちは (Konnichiwa)", it: "Ciao" },
+  { speaker: 'girl', audioFile: '2_Girl_Hello_Rahul_how_are_you', hi: "नमस्ते राहुल, आप कैसे हैं?", en: "Hello Rahul, how are you?", de: "Hallo Rahul, wie geht es dir?", fr: "Bonjour Rahul, comment ça va ?", es: "Hola Rahul, ¿cómo estás?", ja: "こんにちは、ラフルさん。お元気ですか？ (Konnichiwa, Rafuru-san. Ogenki desu ka?)", it: "Ciao Rahul, come stai?" },
+  { speaker: 'boy', audioFile: '3_Boy_Im_fine_thank_you_And_you', hi: "मैं ठीक हूँ, धन्यवाद। और आप?", en: "I'm fine, thank you. And you?", de: "Mir geht es gut, danke. Und dir?", fr: "Ça va bien, merci. Et toi ?", es: "Estoy bien, gracias. ¿Y tú?", ja: "元気です、ありがとう。あなたは？ (Genki desu, arigatō. Anata wa?)", it: "Sto bene, grazie. E tu?" },
+  { speaker: 'girl', audioFile: '4_Girl_Im_fine_too_What_are_you_doing', hi: "मैं भी ठीक हूँ। आज आप क्या कर रहे हैं?", en: "I'm fine too. What are you doing today?", de: "Mir geht es auch gut. Was machst du heute?", fr: "Ça va bien aussi. Que fais-tu aujourd'hui ?", es: "Yo también estoy bien. ¿Qué haces hoy?", ja: "私も元気です。今日は何をしていますか？ (Watashi mo genki desu. Kyō wa nani o shiteimasu ka?)", it: "Anche io sto bene. Cosa fai oggi?" },
+  { speaker: 'boy', audioFile: '5_Boy_I_am_learning_a_new_language', hi: "mai ek nayi bhasha seekh rha hu", en: "I am learning a new language.", de: "Ich lerne eine neue Sprache.", fr: "J'apprends une nouvelle langue.", es: "Estoy aprendiendo un nuevo idioma.", ja: "新しい言語を勉強しています。 (Atarashii gengo o benkyō shiteimasu.)", it: "Sto imparando una nuova lingua." },
+  { speaker: 'girl', audioFile: '6_Girl_Thats_great_Which_language', hi: "यह बहुत अच्छा है! कौन सी भाषा?", en: "That's great! Which language?", de: "Das ist toll! Welche Sprache?", fr: "C'est super ! Quelle langue ?", es: "¡Eso es genial! ¿Qué idioma?", ja: "それは素晴らしいですね！どの言語ですか？ (Sore wa subarashii desu ne! Dono gengo desu ka?)", it: "È fantastico! Quale lingua?" },
+  { speaker: 'boy', audioFile: '7_Boy_I_am_learning_German_right_now', hi: "मैं अभी जर्मन सीख रहा हूँ।", en: "I am learning German right now.", de: "Ich lerne gerade Deutsch.", fr: "J'apprends l'allemand en ce moment.", es: "Estoy aprendiendo alemán ahora mismo.", ja: "今、ドイツ語 を勉強しています。 (Ima, Doitsugo o benkyō shiteimasu.)", it: "Adesso sto imparando il tedesco." },
+  { speaker: 'girl', audioFile: '8_Girl_German_is_a_beautiful_language', hi: "जर्मन एक सुंदर भाषा है।", en: "German is a beautiful language.", de: "Deutsch ist eine schöne Sprache.", fr: "L'allemand est une belle langue.", es: "El alemán es un idioma hermoso.", ja: "ドイツ語は美しい言語です。 (Doitsugo wa utsukushii gengo desu.)", it: "Il tedesco è una lingua bellissima." },
+  { speaker: 'boy', audioFile: '9_Boy_Yes_I_like_it_very_much', hi: "हाँ, मुझे यह बहुत पसंद है।", en: "Yes, I like it very much.", de: "Ja, ich mag es sehr.", fr: "Oui, j'aime beaucoup ça.", es: "Sí, me gusta mucho.", ja: "はい、とても気に入っています。 (Hai, totemo ki ni itteimasu.)", it: "Sì, mi piace molto." },
+  { speaker: 'girl', audioFile: '10_Girl_Good_luck_See_you_later', hi: "शुभकामनाएं! बाद में मिलते हैं।", en: "Good luck! See you later.", de: "Viel Glück! Bis später.", fr: "Bonne chance ! À plus tard.", es: "¡Buena suerte! Hasta luego.", ja: "頑張ってください！また後で。 (Ganbatte kudasai! Mata ato de.)", it: "Buona fortuna! A dopo." }
 ];
 
 const LANG_NAMES = {
-  hi: { hi: "हिंदी", en: "अंग्रेजी", de: "जर्मन", fr: "फ्रेंच", es: "स्पैनिश", ja: "जापानी", ko: "कोरियाई", ru: "रूसी", it: "इतालवी", zh: "चीनी" },
-  en: { hi: "Hindi", en: "English", de: "German", fr: "French", es: "Spanish", ja: "Japanese", ko: "Korean", ru: "Russian", it: "Italian", zh: "Chinese" },
-  de: { hi: "Hindi", en: "Englisch", de: "Deutsch", fr: "Französisch", es: "Spanisch", ja: "Japanisch", ko: "Koreanisch", ru: "Russisch", it: "Italienisch", zh: "Chinesisch" },
-  fr: { hi: "Hindi", en: "Anglais", de: "Allemand", fr: "Français", es: "Espagnol", ja: "Japonais", ko: "Coréen", ru: "Russe", it: "Italien", zh: "Chinois" },
-  es: { hi: "Hindi", en: "Inglés", de: "Alemán", fr: "Francés", es: "Español", ja: "Japonés", ko: "Coreano", ru: "Ruso", it: "Italiano", zh: "Chino" },
-  ja: { hi: "ヒンディー語", en: "英語", de: "ドイツ語", fr: "フランス語", es: "スペイン語", ja: "日本語", ko: "韓国語", ru: "ロシア語", it: "イタリア語", zh: "中国語" },
-  zh: { hi: "印地语", en: "英语", de: "德语", fr: "法语", es: "西班牙语", ja: "日语", ko: "韩语", ru: "俄语", it: "意大利语", zh: "中文" },
-  it: { hi: "Hindi", en: "Inglese", de: "Tedesco", fr: "Francese", es: "Spagnolo", ja: "Giapponese", ko: "Coreano", ru: "Russo", it: "Italiano", zh: "Cinese" },
-  ru: { hi: "Хинди", en: "Английский", de: "Немецкий", fr: "Французский", es: "Испанский", ja: "Японский", ko: "Корейский", ru: "Русский", it: "Итальянский", zh: "Китайский" },
-  ko: { hi: "힌디어", en: "영어", de: "독일어", fr: "프랑스어", es: "스페인어", ja: "일본어", ko: "한국어", ru: "러시아어", it: "이탈리아어", zh: "중국어" }
+  hi: { hi: "हिंदी", en: "अंग्रेजी", de: "जर्मन", fr: "फ्रेंच", es: "स्पैनिश", ja: "जापानी", it: "इतालवी" },
+  en: { hi: "Hindi", en: "English", de: "German", fr: "French", es: "Spanish", ja: "Japanese", it: "Italian" },
+  de: { hi: "Hindi", en: "Englisch", de: "Deutsch", fr: "Französisch", es: "Spanisch", ja: "Japanisch", it: "Italienisch" },
+  fr: { hi: "Hindi", en: "Anglais", de: "Allemand", fr: "Français", es: "Espagnol", ja: "Japonais", it: "Italien" },
+  es: { hi: "Hindi", en: "Inglés", de: "Alemán", fr: "Francés", es: "Español", ja: "Japonés", it: "Italiano" },
+  ja: { hi: "ヒンディー語", en: "英語", de: "ドイツ語", fr: "フランス語", es: "スペイン語", ja: "日本語 (Nihongo)", it: "イタリア語" },
+  zh: { hi: "印地语", en: "英语", de: "德语", fr: "法语", es: "西班牙语", ja: "日语", it: "意大利语" },
+  it: { hi: "Hindi", en: "Inglese", de: "Tedesco", fr: "Francese", es: "Spagnolo", ja: "Giapponese", it: "Italiano" },
+  ru: { hi: "Хинди", en: "Английский", de: "Немецкий", fr: "Французский", es: "Испанский", ja: "Японский", it: "Итальянский" },
+  ko: { hi: "힌디어", en: "영어", de: "독일어", fr: "프랑스어", es: "스페인어", ja: "일본어", it: "이탈리아어" }
 };
 
 const UI_STRINGS = {

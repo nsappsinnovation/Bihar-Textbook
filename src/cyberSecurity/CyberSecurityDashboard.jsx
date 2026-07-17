@@ -1789,6 +1789,26 @@ const lessons = [
   }
 ];
 
+const cyberTheme = {
+  backButtonHover: 'hover:text-emerald-600',
+  heroHighlightText: 'text-emerald-600',
+  
+  card1Icon: 'text-emerald-600',
+  card1Bg: 'bg-emerald-50',
+  card2Icon: 'text-emerald-600',
+  card2Bg: 'bg-emerald-50',
+  card3Icon: 'text-emerald-600',
+  card3Bg: 'bg-emerald-50',
+  
+  activeBorder: 'border-emerald-500 ring-2 ring-emerald-500/10',
+  inactiveBorder: 'border-slate-50',
+  activeIconBg: 'bg-emerald-600 text-white',
+  activeTitleText: 'text-emerald-700',
+  inactiveTitleHover: 'text-[#1e1b4b] group-hover:text-emerald-600',
+  activeSubtitleText: 'text-emerald-600/80',
+  inactiveSubtitleText: 'text-slate-500'
+};
+
 const CyberSecurityDashboard = () => {
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState('Safety Playzone');
@@ -1861,9 +1881,9 @@ const CyberSecurityDashboard = () => {
   }, [selectedItem]);
 
   const quickStats = [
-    { label: 'Safety Playzone', value: 'Cyber Security Modules', icon: <Shield className="text-emerald-600" />, color: 'bg-emerald-50' },
-    { label: 'Knowledge Base', value: 'Glossary & Reading Materials', icon: <BookOpen className="text-emerald-600" />, color: 'bg-emerald-50' },
-    { label: 'Skill Assessment', value: 'Quizzes & Verification', icon: <Trophy className="text-emerald-600" />, color: 'bg-emerald-50' },
+    { label: 'Safety Playzone', value: 'Cyber Security Modules', icon: <Shield className={cyberTheme.card1Icon} />, color: cyberTheme.card1Bg },
+    { label: 'Knowledge Base', value: 'Glossary & Reading Materials', icon: <BookOpen className={cyberTheme.card2Icon} />, color: cyberTheme.card2Bg },
+    { label: 'Skill Assessment', value: 'Quizzes & Verification', icon: <Trophy className={cyberTheme.card3Icon} />, color: cyberTheme.card3Bg },
   ];
 
   const articles = [
@@ -2154,7 +2174,7 @@ const CyberSecurityDashboard = () => {
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden">
       <button
         onClick={() => navigate("/#missions-grid")}
-        className="absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:shadow-lg transition-all border border-slate-100 group"
+        className={`absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 ${cyberTheme.backButtonHover} hover:shadow-lg transition-all border border-slate-100 group`}
       >
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
       </button>
@@ -2166,7 +2186,7 @@ const CyberSecurityDashboard = () => {
               <div className="relative z-10 p-8 md:p-10 lg:w-1/2 space-y-4">
                 <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
                   Stay Safe <br /> In The Digital <br />
-                  <span className="text-emerald-600">World.</span>
+                  <span className={cyberTheme.heroHighlightText}>World.</span>
                 </h1>
                 <p className="text-slate-500 text-[15px] md:text-[16px] font-medium leading-relaxed max-w-sm">
                   Learn to protect yourself from phishing, malware, and online scams.
@@ -2190,14 +2210,14 @@ const CyberSecurityDashboard = () => {
                       const target = document.getElementById("content-section");
                       if (target) target.scrollIntoView({ behavior: 'smooth' });
                     }}
-                    className={`bg-white rounded-[16px] p-3 md:p-4 border ${isActive ? 'border-emerald-500 ring-2 ring-emerald-500/10 shadow-md' : 'border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)]'} flex items-center gap-3 md:gap-4 hover:shadow-md transition-shadow cursor-pointer group`}
+                    className={`bg-white rounded-[16px] p-3 md:p-4 border flex items-center gap-3 md:gap-4 hover:shadow-md transition-shadow cursor-pointer group ${isActive ? cyberTheme.activeBorder + ' shadow-md' : cyberTheme.inactiveBorder + ' shadow-[0_4px_20px_rgba(0,0,0,0.06)]'}`}
                   >
-                    <div className={`w-[44px] h-[44px] ${isActive ? 'bg-emerald-600 text-white' : stat.color} rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5`}>
+                    <div className={`w-[44px] h-[44px] rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5 ${isActive ? cyberTheme.activeIconBg : stat.color}`}>
                       {React.cloneElement(stat.icon, { className: isActive ? 'text-white' : stat.icon.props.className })}
                     </div>
                     <div>
-                      <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? 'text-emerald-700' : 'text-[#1e1b4b] group-hover:text-emerald-600'}`}>{stat.label}</h4>
-                      <p className={`text-[11px] font-medium mt-0.5 ${isActive ? 'text-emerald-600/80' : 'text-slate-500'}`}>{stat.value}</p>
+                      <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? cyberTheme.activeTitleText : cyberTheme.inactiveTitleHover}`}>{stat.label}</h4>
+                      <p className={`text-[11px] font-medium mt-0.5 ${isActive ? cyberTheme.activeSubtitleText : cyberTheme.inactiveSubtitleText}`}>{stat.value}</p>
                     </div>
                   </div>
                 );
@@ -2206,7 +2226,7 @@ const CyberSecurityDashboard = () => {
           </div>
         </div>
 
-        <div id="content-section" className="px-4 sm:px-8 md:px-14 lg:px-16 xl:px-24 max-w-[1380px] mx-auto mt-8 sm:mt-10">
+        <div id="content-section" className="px-4 sm:px-6 md:px-12 2xl:px-18 2xl:max-w-[1480px] mx-auto mt-8 sm:mt-10">
           {renderContent()}
         </div>
       </main>

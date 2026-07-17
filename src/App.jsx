@@ -58,7 +58,8 @@ function App() {
     location.pathname === "/login" ||
     location.pathname === "/signup" ||
     location.pathname.startsWith("/admin") ||
-    location.pathname.includes("/flip");
+    location.pathname.includes("/flip") ||
+    location.pathname === "/ling/conversations";
 
   const isMissionPage = [
     "/ling", "/linguistic", "/vr", "/sign", "/sign-learn", "/sign-module",

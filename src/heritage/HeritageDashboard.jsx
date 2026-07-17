@@ -7,6 +7,20 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const heritageTheme = {
+  backButtonHover: 'hover:text-[#B45309]',
+  heroHighlightText: 'text-[#B45309]',
+  cardIcon: 'text-amber-600',
+  cardBg: 'bg-amber-50',
+  activeBorder: 'border-amber-500 ring-2 ring-amber-500/10',
+  inactiveBorder: 'border-slate-50',
+  activeIconBg: 'bg-amber-600 text-white',
+  activeTitleText: 'text-amber-700',
+  inactiveTitleHover: 'text-[#1e1b4b] group-hover:text-amber-600',
+  activeSubtitleText: 'text-amber-600/80',
+  inactiveSubtitleText: 'text-slate-500'
+};
+
 const HeritageDashboard = () => {
   const navigate = useNavigate();
   const [selectedFactCard, setSelectedFactCard] = useState(null);
@@ -24,13 +38,13 @@ const HeritageDashboard = () => {
   }, [selectedFactCard]);
 
   const categories = [
-    { label: 'Ancient Civilizations', color: 'bg-amber-50', icon: <Landmark className="text-amber-600 w-4 h-4 md:w-5 md:h-5" /> },
-    { label: 'Indian Heritage', color: 'bg-amber-50', icon: <MapPin className="text-amber-600 w-4 h-4 md:w-5 md:h-5" /> },
-    { label: 'World Heritage', color: 'bg-amber-50', icon: <Globe className="text-amber-600 w-4 h-4 md:w-5 md:h-5" /> },
-    { label: 'Artifacts', color: 'bg-amber-50', icon: <Box className="text-amber-600 w-4 h-4 md:w-5 md:h-5" /> },
-    { label: 'Manuscripts', color: 'bg-amber-50', icon: <BookOpen className="text-amber-600 w-4 h-4 md:w-5 md:h-5" /> },
-    { label: 'Freedom Struggle', color: 'bg-amber-50', icon: <Flag className="text-amber-600 w-4 h-4 md:w-5 md:h-5" /> },
-    { label: 'Folk Culture', color: 'bg-amber-50', icon: <Palette className="text-amber-600 w-4 h-4 md:w-5 md:h-5" /> },
+    { label: 'Ancient Civilizations', color: heritageTheme.cardBg, icon: <Landmark className={`${heritageTheme.cardIcon} w-4 h-4 md:w-5 md:h-5`} /> },
+    { label: 'Indian Heritage', color: heritageTheme.cardBg, icon: <MapPin className={`${heritageTheme.cardIcon} w-4 h-4 md:w-5 md:h-5`} /> },
+    { label: 'World Heritage', color: heritageTheme.cardBg, icon: <Globe className={`${heritageTheme.cardIcon} w-4 h-4 md:w-5 md:h-5`} /> },
+    { label: 'Artifacts', color: heritageTheme.cardBg, icon: <Box className={`${heritageTheme.cardIcon} w-4 h-4 md:w-5 md:h-5`} /> },
+    { label: 'Manuscripts', color: heritageTheme.cardBg, icon: <BookOpen className={`${heritageTheme.cardIcon} w-4 h-4 md:w-5 md:h-5`} /> },
+    { label: 'Freedom Struggle', color: heritageTheme.cardBg, icon: <Flag className={`${heritageTheme.cardIcon} w-4 h-4 md:w-5 md:h-5`} /> },
+    { label: 'Folk Culture', color: heritageTheme.cardBg, icon: <Palette className={`${heritageTheme.cardIcon} w-4 h-4 md:w-5 md:h-5`} /> },
   ];
 
   const flashcards = [
@@ -373,7 +387,7 @@ const HeritageDashboard = () => {
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-hidden scrollbar-hide">
       <button
         onClick={() => navigate("/#missions-grid")}
-        className="absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-[#B45309] hover:shadow-lg transition-all border border-slate-100 group"
+        className={`absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 ${heritageTheme.backButtonHover} hover:shadow-lg transition-all border border-slate-100 group`}
       >
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
       </button>
@@ -387,7 +401,7 @@ const HeritageDashboard = () => {
             <div className="relative z-10 p-5 sm:p-8 md:p-10 lg:w-1/2 space-y-3 md:space-y-4">
               <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
                 Let's explore <br /> our rich <br />
-                <span className="text-[#B45309]">Heritage Archive</span>
+                <span className={heritageTheme.heroHighlightText}>Heritage Archive</span>
               </h1>
               <p className="text-slate-500 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed max-w-sm">
                 Discover, learn and preserve our rich history and cultural heritage in a new interactive way.
@@ -418,14 +432,14 @@ const HeritageDashboard = () => {
                     setSelectedCategory(cat.label);
                     setCurrentIndex(0);
                   }}
-                  className={`bg-white rounded-[16px] p-2.5 md:p-3 border ${isActive ? 'border-amber-500 ring-2 ring-amber-500/10 shadow-md' : 'border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)]'} flex items-center gap-2.5 md:gap-3 hover:shadow-md transition-shadow cursor-pointer group`}
+                  className={`bg-white rounded-[16px] p-2.5 md:p-3 border flex items-center gap-2.5 md:gap-3 hover:shadow-md transition-shadow cursor-pointer group ${isActive ? heritageTheme.activeBorder + ' shadow-md' : heritageTheme.inactiveBorder + ' shadow-[0_4px_20px_rgba(0,0,0,0.06)]'}`}
                 >
-                   <div className={`w-[36px] h-[36px] md:w-[44px] md:h-[44px] ${isActive ? 'bg-amber-600 text-white' : cat.color} rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-4 [&>svg]:h-4 md:[&>svg]:w-5 md:[&>svg]:h-5`}>
+                   <div className={`w-[36px] h-[36px] md:w-[44px] md:h-[44px] rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-4 [&>svg]:h-4 md:[&>svg]:w-5 md:[&>svg]:h-5 ${isActive ? heritageTheme.activeIconBg : cat.color}`}>
                       {React.cloneElement(cat.icon, { className: isActive ? 'text-white' : cat.icon.props.className })}
                    </div>
                    <div>
-                      <h4 className={`text-[11px] md:text-[13px] font-bold leading-tight transition-colors ${isActive ? 'text-amber-700' : 'text-[#1e1b4b] group-hover:text-amber-600'}`}>{cat.label}</h4>
-                      <p className={`text-[9px] md:text-[11px] font-medium mt-0.5 ${isActive ? 'text-amber-600/80' : 'text-slate-500'}`}>{valueText}</p>
+                      <h4 className={`text-[11px] md:text-[13px] font-bold leading-tight transition-colors ${isActive ? heritageTheme.activeTitleText : heritageTheme.inactiveTitleHover}`}>{cat.label}</h4>
+                      <p className={`text-[9px] md:text-[11px] font-medium mt-0.5 ${isActive ? heritageTheme.activeSubtitleText : heritageTheme.inactiveSubtitleText}`}>{valueText}</p>
                    </div>
                 </div>
               );

@@ -27,17 +27,7 @@ const Navbar = () => {
       <div className="flex h-16 w-full items-center justify-between px-2 md:px-6">
         {/* LEFT: Logo */}
         <div className="flex items-center shrink-0">
-          {!isHomePage && (
-            <Link 
-              to="/" 
-              className="mr-3 md:mr-5 flex items-center justify-center w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-all text-slate-700 group" 
-              title="Back to Home"
-            >
-              <svg className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
-              </svg>
-            </Link>
-          )}
+
           <Link to="/">
             <img
               src="/logo.png"
