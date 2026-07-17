@@ -132,7 +132,7 @@ const Footer = () => {
             <p>
               Designed by{" "}
               <span className="text-white font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">
-                NS Apps Innovations
+                 A Startup Product of Bihar
               </span>
             </p>
           </div>
@@ -147,11 +147,6 @@ const Footer = () => {
               className="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-[1.5px] after:bg-blue-500 hover:after:w-full after:transition-all after:duration-300 cursor-pointer"
             >
               Terms of Service
-            </button>
-            <button
-              className="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-[1.5px] after:bg-blue-500 hover:after:w-full after:transition-all after:duration-300 cursor-pointer"
-            >
-              Sitemap
             </button>
           </div>
         </div>

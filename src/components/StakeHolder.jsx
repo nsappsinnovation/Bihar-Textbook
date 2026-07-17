@@ -113,7 +113,7 @@ const testimonials = [
 const colors = [
   {
     quote: "text-blue-400/20",
-    role: "text-blue-600/75",
+    role: "text-slate-500",
     border: "hover:border-blue-100",
   }
 ];
