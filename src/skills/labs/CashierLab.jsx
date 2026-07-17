@@ -270,7 +270,7 @@ const CashierLab = () => {
       if (gameFinishedOccurred) {
         setCashierFeedback({
           type: 'success',
-          text: `🎉 Perfect change! You served all customers correctly!`,
+          text: `Perfect change! You served all customers correctly!`,
           isGameFinish: true
         });
         setCashierLevelProgress(nextProgress);
@@ -279,7 +279,7 @@ const CashierLab = () => {
       } else if (levelUpOccurred) {
         setCashierFeedback({
           type: 'success',
-          text: `🎉 Level Up! You served the customer correctly and passed Level ${cashierLevel} with Grade: A+!`,
+          text: `Level Up! You served the customer correctly and passed Level ${cashierLevel} with Grade: A+.`,
           isLevelUp: true,
           oldLevel: cashierLevel,
           newLevel: cashierLevel + 1
@@ -291,30 +291,30 @@ const CashierLab = () => {
       } else {
         setCashierFeedback({
           type: 'success',
-          text: `🎉 Perfect change! You handed back ₹${changeDue} correctly.`
+          text: `Perfect change! You handed back ₹${changeDue} correctly.`
         });
         setCashierLevelProgress(nextProgress);
         setCashierScore(prev => prev + 100);
         setCashierStreak(prev => prev + 1);
       }
       setCashierExpression('smile');
-      setCashierMessage(`Great job! That is exactly ₹${changeDue}. Thank you! 😊`);
+      setCashierMessage(`Great job! That is exactly ₹${changeDue}. Thank you!`);
     } else if (trayTotal > changeDue) {
       setCashierFeedback({
         type: 'error',
-        text: `❌ Wrong change! You handed back ₹${trayTotal}, but the change due is ₹${changeDue}.`
+        text: `Wrong change! You handed back ₹${trayTotal}, but the change due is ₹${changeDue}.`
       });
       setCashierStreak(0);
       setCashierExpression('surprise');
-      setCashierMessage(`Wait... you gave me ₹${trayTotal}. That is too much change! I am only owed ₹${changeDue}. 🤔`);
+      setCashierMessage(`Wait... you gave me ₹${trayTotal}. That is too much change! I am only owed ₹${changeDue}.`);
     } else {
       setCashierFeedback({
         type: 'error',
-        text: `❌ Not enough change! You handed back ₹${trayTotal}, but the change due is ₹${changeDue}.`
+        text: `Not enough change! You handed back ₹${trayTotal}, but the change due is ₹${changeDue}.`
       });
       setCashierStreak(0);
       setCashierExpression('surprise');
-      setCashierMessage(`Wait a minute... you only gave me ₹${trayTotal}. That is not enough! You still owe me ₹${changeDue - trayTotal}. 🤨`);
+      setCashierMessage(`Wait a minute... you only gave me ₹${trayTotal}. That is not enough! You still owe me ₹${changeDue - trayTotal}.`);
     }
   };
 
@@ -360,7 +360,7 @@ const CashierLab = () => {
                 <img
                   src="/images/life skill/mithila_bazar_banner.png"
                   alt="Mithila Smart Bazar Banner"
-                  className="w-full h-16 object-cover rounded-lg shadow-sm border border-slate-100"
+                  className="w-full h-32 object-cover rounded-lg shadow-sm border border-slate-100"
                 />
                 <div>
                   <h5 className="font-black text-slate-900 tracking-wider text-[13px] uppercase mt-1">MITHILA SMART BAZAR</h5>
@@ -641,21 +641,21 @@ const CashierLab = () => {
                     {/* Badge */}
                     <div className={`absolute -bottom-1 -right-1 text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full text-white ${cashierFeedback.type === 'success' ? 'bg-emerald-500' : 'bg-rose-500'
                       }`}>
-                      {cashierFeedback.isGameFinish ? '🏆 GRADUATE' : cashierFeedback.isLevelUp ? '🚀 LEVEL UP' : cashierFeedback.type === 'success' ? 'SUCCESS' : 'CHECK'}
+                      {cashierFeedback.isGameFinish ? 'GRADUATE' : cashierFeedback.isLevelUp ? 'LEVEL UP' : cashierFeedback.type === 'success' ? 'SUCCESS' : 'CHECK'}
                     </div>
                   </div>
 
                   {/* Speech Bubble pointer tail and card */}
-                  <div className="relative flex-1 bg-slate-50 border-2 border-slate-200 p-3.5 rounded-2xl text-[12px] font-bold text-slate-705 text-slate-700 leading-relaxed text-left shadow-sm">
+                  <div className="relative flex-1 bg-slate-50 border-2 border-slate-200 p-3.5 rounded-2xl text-[12px] font-bold text-slate-700 leading-relaxed text-left shadow-sm">
                     <div className="absolute top-1/2 -translate-y-1/2 -left-2 w-3.5 h-3.5 bg-slate-50 border-b-2 border-l-2 border-slate-200 rotate-45" />
-                    <p className="font-sans font-bold text-slate-805 text-slate-800">
+                    <p className="font-sans font-bold text-slate-800">
                       {cashierFeedback.isGameFinish
-                        ? `🎉 INCREDIBLE! You served all customers correctly and graduated to General Manager!`
+                        ? `Excellent! You served all customers correctly and graduated to General Manager.`
                         : cashierFeedback.isLevelUp
-                          ? `🎉 AWESOME! You leveled up to Level ${cashierFeedback.newLevel}: ${cashierLevelConfig[cashierFeedback.newLevel]?.title}!`
+                          ? `Great job! You reached Level ${cashierFeedback.newLevel}: ${cashierLevelConfig[cashierFeedback.newLevel]?.title}.`
                           : cashierFeedback.type === 'success'
-                            ? `Aha! You got it right! Let's check the change guide below.`
-                            : `Wait... let's count together to see why this is different!`}
+                            ? `Correct! Let's review the counting guide below.`
+                            : `Let's count together to see why the change is incorrect.`}
                     </p>
                   </div>
                 </div>
@@ -664,29 +664,30 @@ const CashierLab = () => {
                 <div className="w-full text-left border-b border-slate-100 pb-3">
                   <div className={`text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-md inline-block ${cashierFeedback.type === 'success' ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700'
                     }`}>
-                    {cashierFeedback.isGameFinish ? '🏆 Course Completed' : cashierFeedback.isLevelUp ? '🚀 Level Up Cleared' : cashierFeedback.type === 'success' ? '🏆 Correct Change Served' : '⚠️ Counting Guide Alert'}
+                    {cashierFeedback.isGameFinish ? 'Course Completed' : cashierFeedback.isLevelUp ? 'Level Up Cleared' : cashierFeedback.type === 'success' ? 'Correct Change Served' : 'Counting Guide Alert'}
                   </div>
                   <h3 className="text-base font-black text-slate-800 mt-2">{cashierFeedback.text}</h3>
                 </div>
 
-                {/* Always-visible step-by-step Counting assistant in the modal */}
-                <div className="w-full bg-amber-50/70 border border-amber-250/50 rounded-2xl p-4 text-left space-y-2.5 shadow-inner">
-                  <h4 className="text-[10.5px] font-black text-amber-800 uppercase tracking-wider flex items-center gap-1.5 border-b border-amber-200/40 pb-1.5">
-                    <HelpCircle size={13} className="text-amber-700" /> Counting Guide
-                  </h4>
-                  <div className="space-y-2">
-                    {getChangeGuideSteps(cashierCurrentItem.price, cashierPaidAmount).map((step, idx) => (
-                      <div key={idx} className="text-[11px] leading-relaxed text-amber-900 font-sans">
-                        <div className="font-bold flex items-center gap-1">
-                          <span className="w-1.5 h-1.5 rounded-full bg-amber-600 shrink-0" />
-                          {step.title}
-                        </div>
-                        <p className="text-[10px] text-amber-800/80 font-medium pl-2.5 mt-0.5">{step.desc}</p>
-                        <div className="inline-block bg-white/90 border border-amber-200/50 rounded px-1.5 py-0.5 font-mono text-[9px] font-bold text-amber-900 mt-1 ml-2.5 shadow-sm">
-                          {step.math}
-                        </div>
-                      </div>
-                    ))}
+                {/* Simplified Summary instead of complex counting guide */}
+                <div className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-left space-y-2.5 shadow-inner font-mono">
+                  <div className="flex justify-between items-center text-[13px]">
+                    <span className="font-medium text-slate-500">Customer Paid:</span>
+                    <span className="font-black text-slate-800">₹{cashierPaidAmount}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-[13px]">
+                    <span className="font-medium text-slate-500">Item Cost:</span>
+                    <span className="font-black text-rose-600">- ₹{cashierCurrentItem.price}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-[14px] border-t border-slate-200 pt-2">
+                    <span className="font-bold text-slate-700">Change Due:</span>
+                    <span className="font-black text-slate-800">₹{cashierPaidAmount - cashierCurrentItem.price}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-[14px] bg-white border border-slate-100 p-2 rounded-lg mt-2 shadow-sm">
+                    <span className="font-bold text-slate-700">Change You Gave:</span>
+                    <span className={`font-black ${Object.keys(cashierChangeTray).reduce((sum, val) => sum + parseInt(val, 10) * cashierChangeTray[val], 0) === cashierPaidAmount - cashierCurrentItem.price ? 'text-emerald-600' : 'text-rose-600'}`}>
+                      ₹{Object.keys(cashierChangeTray).reduce((sum, val) => sum + parseInt(val, 10) * cashierChangeTray[val], 0)}
+                    </span>
                   </div>
                 </div>
 
@@ -701,21 +702,21 @@ const CashierLab = () => {
                         }}
                         className="flex-1 py-3 bg-amber-500 hover:bg-amber-600 text-white rounded-2xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer shadow-lg hover:shadow-amber-500/20 text-center"
                       >
-                        Claim Graduation Badge! 🎓
+                        Claim Graduation Badge
                       </button>
                     ) : cashierFeedback.isLevelUp ? (
                       <button
                         onClick={() => generateNewCashierCustomer(cashierLevel)}
                         className="flex-1 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer shadow-lg hover:shadow-indigo-600/20 text-center"
                       >
-                        Next Level 🚀
+                        Next Level
                       </button>
                     ) : (
                       <button
                         onClick={() => generateNewCashierCustomer(cashierLevel)}
                         className="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer shadow-lg hover:shadow-emerald-600/20 text-center"
                       >
-                        Next Customer ➡️
+                        Next Customer
                       </button>
                     )
                   ) : (
@@ -724,7 +725,7 @@ const CashierLab = () => {
                         onClick={() => setCashierFeedback(null)}
                         className="flex-1 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-2xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer shadow-md text-center"
                       >
-                        Try Again 🔄
+                        Try Again
                       </button>
                     </>
                   )}
