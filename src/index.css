@@ -338,3 +338,9 @@ html.lenis body {
 .ai-chat-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #a855f7 !important;
 }
+
+/* Hide Google Translate UI */
+.skiptranslate iframe { display: none !important; }
+body { top: 0px !important; }
+.goog-te-balloon-frame { display: none !important; }
+.goog-text-highlight { background-color: transparent !important; border: none !important; box-shadow: none !important; }
