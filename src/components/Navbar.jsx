@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, Languages } from "lucide-react";
 import { Knowconfig } from './knowus/Knowconfig';
 import { Galleryconfig } from './gallery/Galleryconfig';
 import { Docuconfig } from './documents/Docuconfig';
@@ -121,8 +121,22 @@ const Navbar = () => {
           <Link to="/contact" className={`transition-colors ${isHomePage ? "hover:text-blue-300" : "hover:text-[#211fa9f8]"}`}>Contact</Link>
         </nav>
 
-        {/* RIGHT: Login & Hamburger (Desktop/Mobile) */}
-        <div className="flex items-center gap-4">
+        {/* RIGHT: Translate, Login & Hamburger (Desktop/Mobile) */}
+        <div className="flex items-center gap-2 md:gap-4">
+          
+          {/* Translate Button */}
+          <button 
+            className={`flex items-center gap-1 px-2 py-1.5 rounded-full border transition-all cursor-pointer group shadow-sm ${
+              isHomePage 
+                ? "text-white border-white/20 bg-white/5 hover:bg-white/20 backdrop-blur-sm" 
+                : "text-slate-700 border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300"
+            }`}
+            title="Translate to Hindi/English"
+          >
+            <Languages size={15} className={`transition-transform group-hover:scale-110 ${isHomePage ? "text-white" : "text-blue-600"}`} />
+            <span className="text-[10px] font-extrabold tracking-wider hidden sm:block pt-0.5"></span>
+          </button>
+
           <div className="hidden lg:block">
             <Link to="/login">
               <button className={`relative px-8 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 overflow-hidden group shadow-md ${
