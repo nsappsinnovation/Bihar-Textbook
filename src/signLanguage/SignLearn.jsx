@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft, ArrowRight, BookOpen, Clock,
@@ -143,6 +143,54 @@ const FingerspellComponent = () => {
   const [zoomedChar, setZoomedChar] = useState(null);
   const [selectedWordSign, setSelectedWordSign] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
+  const [showDictionary, setShowDictionary] = useState(false);
+
+  useEffect(() => {
+    if (showDictionary) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.classList.add('lenis-stopped');
+    } else {
+      document.body.style.overflow = '';
+      document.documentElement.classList.remove('lenis-stopped');
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.classList.remove('lenis-stopped');
+    };
+  }, [showDictionary]);
+
+  // Manual scroll state for dictionary list
+  const listRef = useRef(null);
+  const [isDraggingList, setIsDraggingList] = useState(false);
+  const dragStartYRef = useRef(0);
+  const dragStartScrollTopRef = useRef(0);
+  const hasDraggedRef = useRef(false);
+
+  const handleListPointerDown = (e) => {
+    if (!listRef.current) return;
+    hasDraggedRef.current = false;
+    setIsDraggingList(true);
+    dragStartYRef.current = e.clientY || (e.touches && e.touches[0]?.clientY) || 0;
+    dragStartScrollTopRef.current = listRef.current.scrollTop;
+    if (e.pointerId) listRef.current.setPointerCapture(e.pointerId);
+  };
+
+  const handleListPointerMove = (e) => {
+    if (!isDraggingList || !listRef.current) return;
+    const currentY = e.clientY || (e.touches && e.touches[0]?.clientY) || 0;
+    const deltaY = dragStartYRef.current - currentY;
+    if (Math.abs(deltaY) > 5) {
+      hasDraggedRef.current = true;
+    }
+    listRef.current.scrollTop = dragStartScrollTopRef.current + deltaY;
+  };
+
+  const handleListPointerUp = (e) => {
+    if (isDraggingList && listRef.current && e.pointerId) {
+      try { listRef.current.releasePointerCapture(e.pointerId); } catch(err) {}
+    }
+    setIsDraggingList(false);
+  };
 
   const handleInputChange = (val) => {
     const uppercaseVal = val.toUpperCase().replace(/[^A-Z ]/g, '');
@@ -188,8 +236,16 @@ const FingerspellComponent = () => {
             placeholder="TYPE A WORD..."
             className="w-full px-8 py-5 rounded-full bg-white border-2 border-slate-200 text-center text-2xl font-black text-slate-800 placeholder-slate-300 focus:outline-none focus:border-emerald-500 focus:ring-4 ring-emerald-100 transition-all tracking-[0.2em] shadow-sm"
           />
-          <div className="absolute -bottom-6 left-0 right-0 text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center">
-            Max 15 characters
+          <div className="absolute -bottom-7 left-0 right-0 flex justify-between items-center px-4">
+            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+              Max 15 characters
+            </div>
+            <button 
+              onClick={() => setShowDictionary(true)}
+              className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest flex items-center gap-1 hover:text-emerald-700 cursor-pointer transition-colors bg-emerald-50 px-3 py-1 rounded-full"
+            >
+              <BookOpen size={12} /> Dictionary List
+            </button>
           </div>
 
           {/* Autocomplete Suggestions Dropdown */}
@@ -345,6 +401,82 @@ const FingerspellComponent = () => {
               <p className="text-slate-500 text-center font-medium leading-relaxed">
                 Practice the ISL sign for the alphabet <strong className="text-slate-800 text-lg">{zoomedChar}</strong>.
               </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Dictionary Modal */}
+      <AnimatePresence>
+        {showDictionary && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm"
+            onClick={() => setShowDictionary(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-[24px] border border-slate-100 shadow-2xl p-6 w-full max-w-2xl max-h-[85vh] flex flex-col relative"
+            >
+              <div className="flex justify-between items-center mb-6">
+                <div>
+                  <h3 className="text-xl font-black text-slate-900">Sign Language Dictionary</h3>
+                  <p className="text-sm text-slate-500 font-medium mt-1">Words available with whole-word signs</p>
+                </div>
+                <button onClick={() => setShowDictionary(false)} className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors cursor-pointer">
+                  <XCircle size={20} />
+                </button>
+              </div>
+
+              <div 
+                ref={listRef}
+                onPointerDown={handleListPointerDown}
+                onPointerMove={handleListPointerMove}
+                onPointerUp={handleListPointerUp}
+                onPointerLeave={handleListPointerUp}
+                onPointerCancel={handleListPointerUp}
+                data-lenis-prevent="true"
+                style={{
+                  WebkitOverflowScrolling: 'touch',
+                  overscrollBehavior: 'contain',
+                  touchAction: 'pan-y'
+                }}
+                className="flex-1 overflow-y-auto pr-2 space-y-2 cyber-scrollbar select-none cursor-grab active:cursor-grabbing"
+              >
+                {dictionary.map(item => (
+                  <div
+                    key={item.word}
+                    onClick={() => {
+                      if (hasDraggedRef.current) {
+                        hasDraggedRef.current = false;
+                        return;
+                      }
+                      selectWord(item);
+                      setShowDictionary(false);
+                    }}
+                    className="flex items-center gap-4 p-3 rounded-xl hover:bg-emerald-50 border border-transparent hover:border-emerald-100 cursor-pointer transition-all group"
+                  >
+                    <div className="w-12 h-12 rounded-lg bg-emerald-100 flex items-center justify-center shrink-0">
+                      <img 
+                        src={item.image} 
+                        onError={(e) => { e.target.onerror = null; e.target.src = '/images/signlanguage/hand.png'; }}
+                        alt={item.word} 
+                        className="w-8 h-8 object-contain mix-blend-multiply" 
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0 text-left">
+                      <h4 className="text-sm font-black text-slate-900 group-hover:text-emerald-700 transition-colors">{item.word}</h4>
+                      <p className="text-xs text-slate-500 truncate">{item.desc}</p>
+                    </div>
+                    <ChevronRight size={16} className="text-slate-300 group-hover:text-emerald-500" />
+                  </div>
+                ))}
+              </div>
             </motion.div>
           </motion.div>
         )}
