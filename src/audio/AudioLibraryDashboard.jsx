@@ -51,6 +51,7 @@ const AudioLibraryDashboard = () => {
   const [volume, setVolume] = useState(1.0);
   const [isMuted, setIsMuted] = useState(false);
   const [favorites, setFavorites] = useState([]); // Book IDs favorited
+  const [activeChapterIdx, setActiveChapterIdx] = useState(null);
   
   // Refs
   const audioRef = useRef(null);
@@ -58,6 +59,7 @@ const AudioLibraryDashboard = () => {
   const shelfRef = useRef(null);
   const chaptersListRef = useRef(null);
   const activeChapterRef = useRef(null);
+  const pendingSeekRef = useRef(null);
 
   // Slide-to-scroll state & refs for chapters modal list
   const [isDraggingList, setIsDraggingList] = useState(false);
@@ -177,9 +179,16 @@ const AudioLibraryDashboard = () => {
   const getCurrentChapterInfo = (book, currentSecs, totalSecs) => {
     if (!book || !book.chapters || book.chapters.length === 0) return null;
     const count = book.chapters.length;
-    const dur = totalSecs && totalSecs > 0 ? totalSecs : 1200;
-    const chapterDur = dur / count;
-    const activeIdx = Math.min(count - 1, Math.floor((currentSecs || 0) / chapterDur));
+    
+    let activeIdx = 0;
+    if (activeChapterIdx !== null) {
+      activeIdx = activeChapterIdx;
+    } else {
+      const dur = totalSecs && totalSecs > 0 ? totalSecs : 1200;
+      const chapterDur = dur / count;
+      activeIdx = Math.min(count - 1, Math.floor((currentSecs || 0) / chapterDur));
+    }
+
     return {
       chapterNumber: activeIdx + 1,
       totalChapters: count,
@@ -226,30 +235,52 @@ const AudioLibraryDashboard = () => {
     setIsMuted(!isMuted);
   };
 
-  const selectBook = (book, chapterIdx = 0) => {
+  const selectBook = (book, chapterIdx = null, startSecs = null) => {
+    const effChapterIdx = chapterIdx === null ? 0 : chapterIdx;
+    setActiveChapterIdx(effChapterIdx);
+    
     let willPlay = false;
-    const targetUrl = (book.chapterAudioUrls && book.chapterAudioUrls[chapterIdx]) || book.audioUrl;
+    const targetUrl = (book.chapterAudioUrls && book.chapterAudioUrls[effChapterIdx]) || book.audioUrl;
 
-    if (selectedBook && selectedBook.id === book.id && chapterIdx === 0) {
+    if (selectedBook && selectedBook.id === book.id && effChapterIdx === 0 && startSecs === null) {
       const nextPlay = !isPlaying;
       setIsPlaying(nextPlay);
       willPlay = nextPlay;
     } else {
       setSelectedBook(book);
-      setCurrentTime(0);
       setIsPlaying(true);
       willPlay = true;
     }
 
     if (willPlay && htmlAudioRef.current && targetUrl) {
-      htmlAudioRef.current.src = targetUrl;
-      htmlAudioRef.current.load();
+      const currentSrc = htmlAudioRef.current.src || "";
+      const decodedTarget = encodeURI(targetUrl);
+      
+      if (!currentSrc.endsWith(targetUrl) && !currentSrc.endsWith(decodedTarget)) {
+        if (startSecs === null) setCurrentTime(0);
+        if (startSecs !== null) pendingSeekRef.current = startSecs;
+        htmlAudioRef.current.src = targetUrl;
+        htmlAudioRef.current.load();
+      } else {
+        if (startSecs !== null) {
+          htmlAudioRef.current.currentTime = startSecs;
+          setCurrentTime(startSecs);
+        } else if (effChapterIdx !== 0 || selectedBook?.id !== book.id) {
+          htmlAudioRef.current.currentTime = 0;
+          setCurrentTime(0);
+        }
+      }
+      
       const playPromise = htmlAudioRef.current.play();
       if (playPromise !== undefined) {
         playPromise.catch((e) => console.warn("Audio play prevented or waiting:", e));
       }
     } else if (!willPlay && htmlAudioRef.current) {
       htmlAudioRef.current.pause();
+    }
+
+    if (willPlay && audioRef.current && audioRef.current.seekTo && startSecs !== null) {
+      audioRef.current.seekTo(startSecs, 'seconds');
     }
 
     if (willPlay) {
@@ -355,7 +386,14 @@ const AudioLibraryDashboard = () => {
           ref={htmlAudioRef}
           src={selectedBook.audioUrl}
           onTimeUpdate={(e) => setCurrentTime(e.target.currentTime)}
-          onLoadedMetadata={(e) => setDuration(e.target.duration || 1200)}
+          onLoadedMetadata={(e) => {
+            setDuration(e.target.duration || 1200);
+            if (pendingSeekRef.current !== null) {
+              e.target.currentTime = pendingSeekRef.current;
+              setCurrentTime(pendingSeekRef.current);
+              pendingSeekRef.current = null;
+            }
+          }}
           onDurationChange={(e) => setDuration(e.target.duration || 1200)}
           onEnded={handleNextTrack}
           style={{ display: 'none' }}
@@ -738,7 +776,7 @@ const AudioLibraryDashboard = () => {
             {/* Collapsed vs Expanded Player Controls */}
             {!isPlayerExpanded ? (
               <div className="flex items-center gap-4 shrink-0">
-                <span className="text-xs font-bold text-slate-500 hidden sm:inline font-mono">
+                <span className="text-xs font-bold text-slate-500 hidden sm:inline-block font-mono w-[85px] text-center tabular-nums shrink-0">
                   {formatTime(currentTime)} / {formatTime(duration)}
                 </span>
 
@@ -813,16 +851,19 @@ const AudioLibraryDashboard = () => {
                   </div>
 
                   <div className="w-full flex items-center gap-3">
-                    <span className="text-[10px] font-bold text-slate-500 w-10 text-right font-mono">{formatTime(currentTime)}</span>
+                    <span className="text-[10px] font-bold text-slate-500 w-11 shrink-0 inline-block text-right font-mono tabular-nums">{formatTime(currentTime)}</span>
                     <input
                       type="range"
                       min={0}
                       max={duration || 100}
                       value={currentTime}
                       onChange={handleScrubberChange}
-                      className="flex-1 h-1.5 bg-slate-100 rounded-full appearance-none cursor-pointer accent-purple-600 focus:outline-none"
+                      className="flex-1 h-1.5 rounded-full appearance-none cursor-pointer accent-purple-600 focus:outline-none"
+                      style={{
+                        background: `linear-gradient(to right, #9333ea ${duration > 0 ? (currentTime / duration) * 100 : 0}%, #f1f5f9 ${duration > 0 ? (currentTime / duration) * 100 : 0}%)`
+                      }}
                     />
-                    <span className="text-[10px] font-bold text-slate-500 w-10 font-mono">{formatTime(duration)}</span>
+                    <span className="text-[10px] font-bold text-slate-500 w-11 shrink-0 inline-block font-mono tabular-nums">{formatTime(duration)}</span>
                   </div>
                 </div>
 
@@ -846,7 +887,10 @@ const AudioLibraryDashboard = () => {
                       step={0.05}
                       value={isMuted ? 0 : volume}
                       onChange={handleVolumeChange}
-                      className="w-16 h-1.5 bg-slate-100 rounded-full appearance-none cursor-pointer accent-purple-600 focus:outline-none"
+                      className="w-16 h-1.5 rounded-full appearance-none cursor-pointer accent-purple-600 focus:outline-none"
+                      style={{
+                        background: `linear-gradient(to right, #9333ea ${(isMuted ? 0 : volume) * 100}%, #f1f5f9 ${(isMuted ? 0 : volume) * 100}%)`
+                      }}
                     />
                   </div>
                 </div>
@@ -923,9 +967,7 @@ const AudioLibraryDashboard = () => {
               >
                 {viewTimestampsBook.chapters && viewTimestampsBook.chapters.map((chTitle, idx) => {
                   const range = getChapterTimeRange(viewTimestampsBook, idx, duration);
-                  const isCurrentChapter = selectedBook?.id === viewTimestampsBook.id && 
-                                           currentTime >= range.startSecs && 
-                                           currentTime < range.endSecs;
+                  const isCurrentChapter = selectedBook?.id === viewTimestampsBook.id && activeChapterIdx === idx;
 
                   return (
                     <div
@@ -936,19 +978,12 @@ const AudioLibraryDashboard = () => {
                           hasDraggedRef.current = false;
                           return;
                         }
-                        selectBook(viewTimestampsBook, idx);
-                        if (!viewTimestampsBook.chapterAudioUrls || !viewTimestampsBook.chapterAudioUrls[idx]) {
-                          setCurrentTime(range.startSecs);
-                          if (htmlAudioRef.current) {
-                            htmlAudioRef.current.currentTime = range.startSecs;
-                          }
-                          if (audioRef.current && audioRef.current.seekTo) {
-                            audioRef.current.seekTo(range.startSecs, 'seconds');
-                          }
+                        const hasChapterAudio = viewTimestampsBook.chapterAudioUrls && viewTimestampsBook.chapterAudioUrls[idx];
+                        if (hasChapterAudio) {
+                           selectBook(viewTimestampsBook, idx);
                         } else {
-                          setCurrentTime(0);
+                           selectBook(viewTimestampsBook, idx, range.startSecs);
                         }
-                        setIsPlaying(true);
                         setViewTimestampsBook(null);
                       }}
                       className={`pt-3 first:pt-0 flex items-center justify-between gap-4 p-3 rounded-xl transition-all cursor-pointer group ${
@@ -983,8 +1018,17 @@ const AudioLibraryDashboard = () => {
                           ? 'bg-purple-600 text-white'
                           : 'bg-slate-100 text-slate-700 group-hover:bg-purple-600 group-hover:text-white'
                       }`}>
-                        <Play className="w-3 h-3 fill-current" />
-                        <span>Play Chapter</span>
+                        {isCurrentChapter && isPlaying ? (
+                          <>
+                            <Pause className="w-3 h-3 fill-current" />
+                            <span>Playing</span>
+                          </>
+                        ) : (
+                          <>
+                            <Play className="w-3 h-3 fill-current" />
+                            <span>Play Chapter</span>
+                          </>
+                        )}
                       </button>
                     </div>
                   );
