@@ -106,18 +106,17 @@ const Notice = () => {
 
   return (
     <div className="min-h-screen bg-[#f8fafc]">
-      <section className="relative bg-[#0d0e23] pt-16 pb-20 text-center text-white overflow-hidden border-b border-white/5">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="absolute inset-0 bg-[linear-gradient(135deg,#0F172A_0%,#1e3a8a_60%,#f1f5f9_100%)]" 
-        />
+      <section className="relative pt-24 pb-56 text-center text-white overflow-hidden bg-gradient-to-br from-[#0b2b4f] to-[#124d9c]">
+        {/* Subtle Background Pattern */}
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
         
-        <div className="absolute inset-0 opacity-5 pointer-events-none" style={{
-          backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(255,255,255,0.1) 1px, transparent 0)',
-          backgroundSize: '0px 40px'
-        }} />
+        {/* Decorative elements */}
+        <div className="absolute top-20 left-10 md:left-32 grid grid-cols-3 gap-2 opacity-20">
+            {[...Array(9)].map((_, i) => <div key={i} className="w-1.5 h-1.5 rounded-full bg-white"></div>)}
+        </div>
+        <div className="absolute bottom-40 right-10 md:right-32 grid grid-cols-3 gap-2 opacity-20">
+            {[...Array(9)].map((_, i) => <div key={i} className="w-1.5 h-1.5 rounded-full bg-white"></div>)}
+        </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-6">
           <motion.h1 
@@ -159,9 +158,16 @@ const Notice = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* CSS Wave Bottom */}
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-0">
+          <svg className="relative block w-full h-[60px] md:h-[120px]" preserveAspectRatio="none" viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+             <path d="M0 0C480 130 960 130 1440 0V100H0V0Z" fill="#f8fafc" />
+          </svg>
+        </div>
       </section>
 
-      <section className="relative -mt-12 pb-24 px-6 z-20">
+      <section className="relative -mt-44 pb-24 px-6 z-20">
         <div className="max-w-5xl mx-auto">
           <div 
             className="bg-white rounded-3xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-slate-200/50 p-4 md:p-8"
