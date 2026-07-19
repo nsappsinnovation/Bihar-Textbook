@@ -19,17 +19,6 @@ const Navbar = () => {
     }
   };
 
-  const toggleLanguage = () => {
-    const isHindi = document.cookie.includes('googtrans=/en/hi');
-    if (isHindi) {
-      document.cookie = 'googtrans=/en/en; path=/';
-      document.cookie = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    } else {
-      document.cookie = 'googtrans=/en/hi; path=/';
-    }
-    window.location.reload();
-  };
-
   return (
     <header className={`absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-6 py-4 w-full transition-all duration-300 ${
       isHomePage ? "bg-transparent border-b border-white/10" : "bg-white shadow-sm border-b border-gray-100"
@@ -137,13 +126,12 @@ const Navbar = () => {
           
           {/* Translate Button */}
           <button 
-            onClick={toggleLanguage}
             className={`flex items-center gap-1 px-2 py-1.5 rounded-full border transition-all cursor-pointer group shadow-sm ${
               isHomePage 
                 ? "text-white border-white/20 bg-white/5 hover:bg-white/20 backdrop-blur-sm" 
                 : "text-slate-700 border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300"
             }`}
-            title="Translate to Hindi/English"
+            title="Language"
           >
             <Languages size={15} className={`transition-transform group-hover:scale-110 ${isHomePage ? "text-white" : "text-blue-600"}`} />
             <span className="text-[10px] font-extrabold tracking-wider hidden sm:block pt-0.5"></span>
