@@ -15,10 +15,18 @@ import {
     Settings,
     X,
     Download,
-    ChevronsLeft, // For First Page
-    ChevronsRight as ChevronsRightIcon // For Last Page
+    ChevronsLeft,
+    ChevronsRight as ChevronsRightIcon,
+    Menu,
+    BookOpen,
+    Lightbulb,
+    FileText,
+    ChevronDown,
+    ChevronUp
 } from "lucide-react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
+import { getStoredTextbooksData } from "../../../utils/textbookStorage";
+import { useResolvedUrl } from "../../../utils/fileStorage";
 
 // Use CDN worker
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
@@ -37,6 +45,7 @@ function Flipbook({ pdfFile: propPdfFile }) {
     const { classId, bookSubject, chapterId } = useParams();
     const navigate = useNavigate();
     const bookRef = useRef();
+    const scrollContainerRef = useRef(null);
 
     const [numPages, setNumPages] = useState(null);
     const [pageNumber, setPageNumber] = useState(1);
@@ -47,6 +56,68 @@ function Flipbook({ pdfFile: propPdfFile }) {
     const [pdfPath, setPdfPath] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    // Right Sidebar States
+    const [chapters, setChapters] = useState([]);
+    const [bookInfo, setBookInfo] = useState(null);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [showRightPanel, setShowRightPanel] = useState(window.innerWidth >= 1024);
+
+    useEffect(() => {
+        const handleResize = () => {
+            const width = window.innerWidth;
+            setWindowWidth(width);
+        };
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    // Fetch chapters list and active book data
+    useEffect(() => {
+        const fetchBookDetailsAndChapters = async () => {
+            try {
+                const textbooksData = getStoredTextbooksData();
+                const classData = textbooksData.classes?.find((cls) => cls.id === Number(classId));
+                const allBooks = classData?.books || [];
+                const currentBook = allBooks.find(b => (b.subject || "General") === bookSubject || b.title === bookSubject);
+                setBookInfo(currentBook);
+
+                // Fetch chapters list
+                if (currentBook && currentBook.chapters && currentBook.chapters.length > 0) {
+                    setChapters(currentBook.chapters);
+                } else {
+                    const subjectSlug = (bookSubject || "Hindi").toLowerCase().replace(/[^a-z0-9]/g, '_');
+                    const manifestUrl = `/PDFs/Class_${classId}/${subjectSlug}_manifest.json`;
+                    const response = await fetch(manifestUrl);
+                    if (response.ok) {
+                        const manifestData = await response.json();
+                        const mappedChapters = manifestData.chapters.map(c => ({
+                            id: c.id,
+                            title: c.title,
+                            hindiTitle: c.hindiTitle || c.title,
+                            type: "chapter"
+                        }));
+                        setChapters(mappedChapters);
+                    } else {
+                        // Fallback chapters
+                        setChapters([
+                            { id: 1, title: "Chapter 1", hindiTitle: "हँसते-खेलते", type: "chapter" },
+                            { id: 2, title: "Chapter 2", hindiTitle: "हमारा गाँव (चित्रपठन)", type: "chapter" },
+                        ]);
+                    }
+                }
+            } catch (err) {
+                console.error("Error fetching book chapters:", err);
+                setChapters([
+                    { id: 1, title: "Chapter 1", hindiTitle: "हँसते-खेलते", type: "chapter" },
+                    { id: 2, title: "Chapter 2", hindiTitle: "हमारा गाँव (चित्रपठन)", type: "chapter" },
+                ]);
+            }
+        };
+
+        fetchBookDetailsAndChapters();
+    }, [classId, bookSubject]);
+
+    // Fetch active PDF file path
     useEffect(() => {
         const fetchManifestAndPath = async () => {
             if (propPdfFile) {
@@ -57,6 +128,22 @@ function Flipbook({ pdfFile: propPdfFile }) {
 
             try {
                 setLoading(true);
+
+                // First check if the book has chapters in local storage with a custom PDF URL
+                const textbooksData = getStoredTextbooksData();
+                const classData = textbooksData.classes?.find((cls) => cls.id === Number(classId));
+                const allBooks = classData?.books || [];
+                const book = allBooks.find(b => (b.subject || "General") === bookSubject || b.title === bookSubject);
+                
+                if (book && book.chapters) {
+                    const chapterData = book.chapters.find(c => String(c.id) === String(chapterId));
+                    if (chapterData && chapterData.pdfUrl) {
+                        setPdfPath(chapterData.pdfUrl);
+                        setLoading(false);
+                        return;
+                    }
+                }
+
                 // Sanitize slug to match scraper logic: replace non-alphanumeric with '_'
                 const subjectSlug = (bookSubject || "Hindi").toLowerCase().replace(/[^a-z0-9]/g, '_');
                 const manifestUrl = `/PDFs/Class_${classId}/${subjectSlug}_manifest.json`;
@@ -76,7 +163,6 @@ function Flipbook({ pdfFile: propPdfFile }) {
                     setPdfPath(`/PDFs/Class_${classId}/${chapterData.fileName}`);
                 } else {
                     console.error("Chapter not found in manifest");
-                    // If it's a known non-existent chapter like preface or contents, don't guess
                     if (chapterId === "preface" || chapterId === "contents") {
                         setPdfPath(null); // Will trigger error state
                     } else {
@@ -96,14 +182,28 @@ function Flipbook({ pdfFile: propPdfFile }) {
         fetchManifestAndPath();
     }, [classId, bookSubject, chapterId, propPdfFile]);
 
-    // Construct dynamic path if not provided (DEPRECATED by above logic, but keeping variable name for simple refactor)
-    const pdfFile = pdfPath;
-
     useEffect(() => {
-        const handleResize = () => setWindowWidth(window.innerWidth);
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
+        const timer = setTimeout(() => {
+            if (scrollContainerRef.current) {
+                const container = scrollContainerRef.current;
+                const activeElement = container.querySelector('[data-active="true"]');
+                if (activeElement) {
+                    const containerHeight = container.clientHeight;
+                    const elementTop = activeElement.offsetTop;
+                    const elementHeight = activeElement.clientHeight;
+                    container.scrollTo({
+                        top: elementTop - (containerHeight / 2) + (elementHeight / 2),
+                        behavior: "smooth"
+                    });
+                }
+            }
+        }, 300);
+        return () => clearTimeout(timer);
+    }, [chapterId, chapters]);
+
+    const resolvedPdf = useResolvedUrl(pdfPath);
+    const resolvedCoverImage = useResolvedUrl(bookInfo?.image);
+    const pdfFile = resolvedPdf;
 
     function onDocumentLoadSuccess({ numPages }) {
         setNumPages(numPages);
@@ -135,179 +235,376 @@ function Flipbook({ pdfFile: propPdfFile }) {
     // Build pages array
     const pagesArray = numPages ? Array.from({ length: numPages }, (_, i) => i + 1) : [];
 
-    // Precise sizing to match reference: 
-    // Reference shows a boxy look, likely A4 ratio.
     const isMobile = windowWidth < 768;
-    const bookWidth = isMobile ? windowWidth * 0.9 : 450;
-    const bookHeight = bookWidth * 1.4;
+    const isTablet = windowWidth >= 768 && windowWidth < 1024;
+    
+    // Adjust flipbook page size dynamically depending on whether sidebar is shown
+    const sidebarWidth = showRightPanel ? (isMobile ? windowWidth : 360) : 0;
+    const availableWidth = windowWidth - sidebarWidth;
+    
+    // Calculate page size to fit A4 ratio inside available space
+    const bookWidth = isMobile 
+        ? availableWidth * 0.9 
+        : isTablet 
+            ? Math.min(400, availableWidth * 0.42)
+            : Math.min(460, availableWidth * 0.44);
+            
+    const bookHeight = bookWidth * 1.414;
+
+    const filteredChapters = chapters.filter(c => 
+        (c.title && c.title.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (c.hindiTitle && c.hindiTitle.toLowerCase().includes(searchQuery.toLowerCase()))
+    );
+
+    const bookTitle = bookInfo?.title || bookSubject || "Hindi";
+    const currentChapter = chapters.find(c => String(c.id) === String(chapterId));
+    const currentChapterTitle = currentChapter ? (currentChapter.hindiTitle || currentChapter.title) : `Chapter ${chapterId}`;
+    
+    let cleanedDescription = bookInfo?.description || `Official Bihar Board Class ${classId} textbook for '${bookTitle}'.`;
+    cleanedDescription = cleanedDescription.replace(/[\s\.]*Complete digital reading material\s*&\s*chapters\.?/gi, "");
 
     return (
-        <div className="h-screen w-full flex flex-col bg-[#e6e6e6] overflow-hidden relative font-sans select-none">
+        <div className="h-screen w-full flex flex-col bg-[#f8fafc] overflow-hidden relative font-sans select-none">
 
-            {/* Top Header - Reference Style */}
-            <div className="absolute top-0 left-0 w-full p-4 z-50 flex items-center justify-between pointer-events-none">
-                <div className="pointer-events-auto flex items-center gap-4">
-                    {/* Close Button (Hidden in reference but good UX) */}
+            {/* Top Header Bar */}
+            <header className="w-full bg-white border-b border-slate-200 px-4 py-3 flex items-center justify-between z-30 shrink-0 shadow-sm">
+                <div className="flex items-center gap-3">
                     <button
                         onClick={() => navigate(-1)}
-                        className="bg-white p-2 rounded-full hover:bg-slate-100 shadow-sm text-slate-700 transition-colors"
+                        className="w-9 h-9 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-700 transition-colors shadow-sm cursor-pointer"
+                        title="Go Back"
                     >
-                        <X size={20} />
+                        <X size={16} />
                     </button>
-
-                    <h1 className="text-lg font-bold text-black tracking-wide">
-                        Class : Class {classId} ( {bookSubject || "Hindi"} )
-                    </h1>
+                    <div>
+                        <h1 className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
+                            <span>Class {classId} &bull; {bookTitle}</span>
+                        </h1>
+                        <p className="text-[11px] text-slate-500 font-semibold tracking-wide uppercase mt-0.5">
+                            Reading: {currentChapterTitle}
+                        </p>
+                    </div>
                 </div>
-            </div>
 
-            {/* Main Content Area */}
-            <div className="flex-1 flex items-center justify-center relative p-8">
+                <div className="flex items-center gap-2">
+                    {/* Sidebar Toggle Button */}
+                    <button
+                        onClick={() => setShowRightPanel(!showRightPanel)}
+                        className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
+                            showRightPanel 
+                                ? "bg-blue-600 border-blue-600 text-white shadow-sm shadow-blue-500/20" 
+                                : "bg-white border-slate-200 text-slate-700 hover:bg-slate-50"
+                        }`}
+                    >
+                        <Menu size={14} />
+                        <span className="hidden sm:inline">{showRightPanel ? "Hide TOC" : "Show TOC"}</span>
+                    </button>
+                </div>
+            </header>
 
-                {/* Large Left Arrow */}
-                <button
-                    onClick={() => bookRef.current?.pageFlip?.().flipPrev()}
-                    className="absolute left-4 md:left-12 z-40 p-2 text-slate-600 hover:text-black hover:scale-110 transition-all"
-                >
-                    <ChevronLeft size={64} strokeWidth={1.5} />
-                </button>
+            {/* Middle Container split into Viewer and Sidebar */}
+            <div className="flex-1 flex overflow-hidden relative w-full">
+                
+                {/* Left Area: Flipbook Viewer */}
+                <div className="flex-1 flex flex-col bg-[#f1f5f9] relative overflow-hidden">
+                    <div className="flex-1 flex items-center justify-center relative p-6 sm:p-8 md:p-12 overflow-auto" data-lenis-prevent>
+                        
+                        {/* Large Left Arrow */}
+                        {!isMobile && (
+                            <button
+                                onClick={() => bookRef.current?.pageFlip?.().flipPrev()}
+                                className="absolute left-6 z-20 p-3 rounded-full bg-white/80 border border-slate-200 hover:bg-white text-slate-700 hover:text-black hover:scale-105 shadow-md transition-all cursor-pointer"
+                            >
+                                <ChevronLeft size={24} strokeWidth={2} />
+                            </button>
+                        )}
 
-                {/* Book Container */}
-                <div
-                    className="transition-transform duration-300 ease-out origin-center z-10"
-                    style={{ transform: `scale(${zoom})` }}
-                >
-                    <Document
-                        file={pdfFile}
-                        onLoadSuccess={onDocumentLoadSuccess}
-                        className="flex items-center justify-center"
-                        loading={<div className="text-slate-500 font-medium">Loading Document...</div>}
-                        error={
-                            <div className="flex flex-col items-center gap-4 text-center">
-                                <div className="text-6xl">⚠️</div>
-                                <div className="text-red-500 font-bold text-lg">Document Not Available</div>
-                                <p className="text-slate-500 text-sm max-w-xs">The requested chapter could not be found or is still being uploaded.</p>
-                                <button
-                                    onClick={() => navigate(-1)}
-                                    className="mt-2 text-blue-600 font-bold text-sm hover:underline"
+                        {/* Book Container with zoom */}
+                        <div
+                            className="transition-transform duration-300 ease-out origin-center z-10 my-auto"
+                            style={{ transform: `scale(${zoom})` }}
+                        >
+                            <Document
+                                file={pdfFile}
+                                onLoadSuccess={onDocumentLoadSuccess}
+                                className="flex items-center justify-center"
+                                loading={
+                                    <div className="flex flex-col items-center gap-3 bg-white p-8 rounded-2xl shadow-lg border border-slate-100">
+                                        <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                                        <div className="text-slate-600 font-bold text-sm">Loading Chapter Document...</div>
+                                    </div>
+                                }
+                                error={
+                                    <div className="flex flex-col items-center gap-4 text-center bg-white p-8 rounded-2xl shadow-xl border border-slate-100 max-w-sm">
+                                        
+                                        <div className="text-red-500 font-extrabold text-lg">Document Not Available</div>
+                                        <p className="text-slate-500 text-xs leading-relaxed">
+                                            The PDF for <strong>{currentChapterTitle}</strong> is not loaded or is currently unavailable.
+                                        </p>
+                                        <button
+                                            onClick={() => navigate(-1)}
+                                            className="w-full mt-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-xl text-xs transition-colors shadow-sm"
+                                        >
+                                            Back to Chapters
+                                        </button>
+                                    </div>
+                                }
+                            >
+                                {/* White border container as seen in reference */}
+                                <div className="bg-white p-1.5 shadow-2xl rounded-sm border border-slate-200">
+                                    <HTMLFlipBook
+                                        width={bookWidth}
+                                        height={bookHeight}
+                                        size="fixed"
+                                        minWidth={200}
+                                        maxWidth={800}
+                                        minHeight={300}
+                                        maxHeight={1200}
+                                        maxShadowOpacity={0.4}
+                                        showCover={false}
+                                        mobileScrollSupport={true}
+                                        onFlip={onFlip}
+                                        ref={bookRef}
+                                        className="flip-book"
+                                        style={{ backgroundColor: "#fff" }}
+                                        drawShadow={true}
+                                        flippingTime={800}
+                                        useMouseEvents={true}
+                                        usePortrait={isMobile}
+                                        startPage={0}
+                                    >
+                                        {pagesArray.map((pageNum) => (
+                                            <Pages key={pageNum}>
+                                                <div className="w-full h-full relative">
+                                                    <Page
+                                                        pageNumber={pageNum}
+                                                        width={bookWidth}
+                                                        renderAnnotationLayer={false}
+                                                        renderTextLayer={false}
+                                                        className="pdf-page"
+                                                    />
+                                                </div>
+                                            </Pages>
+                                        ))}
+                                    </HTMLFlipBook>
+                                </div>
+                            </Document>
+                        </div>
+
+                        {/* Large Right Arrow */}
+                        {!isMobile && (
+                            <button
+                                onClick={() => bookRef.current?.pageFlip?.().flipNext()}
+                                className="absolute right-6 z-20 p-3 rounded-full bg-white/80 border border-slate-200 hover:bg-white text-slate-700 hover:text-black hover:scale-105 shadow-md transition-all cursor-pointer"
+                            >
+                                <ChevronRight size={24} strokeWidth={2} />
+                            </button>
+                        )}
+                    </div>
+
+                    {/* Bottom Toolbar centered at the bottom of the viewer */}
+                    <div className="w-full bg-white/85 backdrop-blur-sm border-t border-slate-200 p-2.5 flex justify-center z-25 shrink-0 shadow-[0_-2px_10px_rgba(0,0,0,0.02)]">
+                        <div className="flex items-center gap-3 bg-slate-900 text-white px-4 py-2 rounded-full shadow-lg">
+
+                            {/* Zoom Controls */}
+                            <div className="flex items-center gap-1">
+                                <button 
+                                    onClick={() => setZoom(Math.max(0.6, zoom - 0.1))} 
+                                    className="p-1 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
+                                    title="Zoom Out"
                                 >
-                                    Go Back
+                                    <ZoomOut size={16} />
+                                </button>
+                                <button 
+                                    onClick={() => setZoom(Math.min(1.8, zoom + 0.1))} 
+                                    className="p-1 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
+                                    title="Zoom In"
+                                >
+                                    <ZoomIn size={16} />
                                 </button>
                             </div>
-                        }
-                    >
-                        {/* White border container as seen in reference */}
-                        <div className="bg-white p-1 shadow-2xl">
-                            <HTMLFlipBook
-                                width={bookWidth}
-                                height={bookHeight}
-                                size="fixed"
-                                minWidth={300}
-                                maxWidth={1000}
-                                minHeight={400}
-                                maxHeight={1500}
-                                maxShadowOpacity={0.5}
-                                showCover={false}
-                                mobileScrollSupport={true}
-                                onFlip={onFlip}
-                                ref={bookRef}
-                                className="flip-book"
-                                style={{ backgroundColor: "#fff" }}
-                                drawShadow={true}
-                                flippingTime={1000}
-                                useMouseEvents={true}
-                                usePortrait={isMobile}
-                                startPage={0}
-                            >
-                                {pagesArray.map((pageNum) => (
-                                    <Pages key={pageNum}>
-                                        {/* Outline Red Border on Page Content as usually seen in Bihar books to define safe area */}
-                                        <div className="w-full h-full relative">
-                                            <Page
-                                                pageNumber={pageNum}
-                                                width={bookWidth}
-                                                renderAnnotationLayer={false}
-                                                renderTextLayer={false}
-                                                className="pdf-page"
-                                            />
-                                        </div>
-                                    </Pages>
-                                ))}
-                            </HTMLFlipBook>
+
+                            <div className="w-px h-4 bg-slate-700"></div>
+
+                            {/* Pagination Controls */}
+                            <div className="flex items-center gap-2">
+                                {/* First Page */}
+                                <button 
+                                    onClick={() => bookRef.current?.pageFlip?.().flip(0)} 
+                                    className="p-1 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
+                                    title="First Page"
+                                >
+                                    <ChevronsLeft size={16} />
+                                </button>
+
+                                {/* Prev Page */}
+                                <button 
+                                    onClick={() => bookRef.current?.pageFlip?.().flipPrev()} 
+                                    className="p-1 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
+                                    title="Previous Page"
+                                >
+                                    <ChevronLeft size={16} />
+                                </button>
+
+                                {/* Page Counter Pill */}
+                                <div className="bg-white/10 border border-white/10 rounded-full px-3 py-0.5 text-center flex items-center justify-center gap-1.5">
+                                    <span className="font-bold text-white text-xs">{pageNumber}</span>
+                                    <span className="text-[9px] font-bold text-slate-400">OF</span>
+                                    <span className="font-bold text-white text-xs">{numPages || '--'}</span>
+                                </div>
+
+                                {/* Next Page */}
+                                <button 
+                                    onClick={() => bookRef.current?.pageFlip?.().flipNext()} 
+                                    className="p-1 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
+                                    title="Next Page"
+                                >
+                                    <ChevronRight size={16} />
+                                </button>
+
+                                {/* Last Page */}
+                                <button 
+                                    onClick={() => bookRef.current?.pageFlip?.().flip(numPages - 1)} 
+                                    className="p-1 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
+                                    title="Last Page"
+                                >
+                                    <ChevronsRightIcon size={16} />
+                                </button>
+                            </div>
+
+                            <div className="w-px h-4 bg-slate-700"></div>
+
+                            {/* Utilities */}
+                            <div className="flex items-center gap-1.5">
+                                <button 
+                                    onClick={toggleFullScreen} 
+                                    className="p-1 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
+                                    title="Toggle Fullscreen"
+                                >
+                                    <Maximize size={16} />
+                                </button>
+                                <button 
+                                    onClick={handleDownload} 
+                                    className="bg-blue-600 text-white rounded-full p-1.5 hover:bg-blue-500 transition-colors shadow-sm cursor-pointer"
+                                    title="Download PDF"
+                                >
+                                    <Download size={12} />
+                                </button>
+                            </div>
+
                         </div>
-                    </Document>
+                    </div>
                 </div>
 
-                {/* Large Right Arrow */}
-                <button
-                    onClick={() => bookRef.current?.pageFlip?.().flipNext()}
-                    className="absolute right-4 md:right-12 z-40 p-2 text-slate-600 hover:text-black hover:scale-110 transition-all"
-                >
-                    <ChevronRight size={64} strokeWidth={1.5} />
-                </button>
-            </div>
-
-            {/* Bottom Toolbar - Matching Reference */}
-            <div className="w-full bg-[#dcdcdc] border-t border-slate-300 p-2.5 flex justify-center z-50">
-                <div className="flex items-center gap-4 bg-[#f0f0f0] px-4 py-2 rounded-full shadow-sm">
-
-                    {/* Zoom Controls */}
-                    <div className="flex items-center gap-2">
-                        <button onClick={() => setZoom(Math.max(0.5, zoom - 0.1))} className="text-slate-500 hover:text-black">
-                            <ZoomOut size={18} />
-                        </button>
-                        <button onClick={() => setZoom(Math.min(2, zoom + 0.1))} className="text-slate-500 hover:text-black">
-                            <ZoomIn size={18} />
-                        </button>
-                    </div>
-
-                    <div className="w-px h-4 bg-slate-300"></div>
-
-                    {/* Pagination Controls */}
-                    <div className="flex items-center gap-3">
-                        <button className="text-slate-500 hover:text-black"><Bookmark size={18} /></button>
-
-                        {/* First Page */}
-                        <button onClick={() => bookRef.current?.pageFlip?.().flip(0)} className="text-slate-500 hover:text-black">
-                            <ChevronsLeft size={18} />
-                        </button>
-
-                        {/* Prev Page */}
-                        <button onClick={() => bookRef.current?.pageFlip?.().flipPrev()} className="text-slate-500 hover:text-black">
-                            <ChevronLeft size={18} />
-                        </button>
-
-                        {/* Page Counter Pill */}
-                        <div className="bg-white border border-slate-200 rounded-full px-3 py-0.5 min-w-[80px] text-center flex items-center justify-center gap-1">
-                            <span className="font-bold text-slate-800 text-sm">{pageNumber}</span>
-                            <span className="text-[10px] font-bold text-slate-400 uppercase">OF</span>
-                            <span className="font-bold text-slate-800 text-sm">{numPages || '--'}</span>
+                {/* Right Side: Chapter List & Text Panel */}
+                {showRightPanel && (
+                    <aside className="w-full md:w-[360px] border-l border-slate-200 bg-white flex flex-col shrink-0 z-20 shadow-[-4px_0_12px_rgba(0,0,0,0.015)] relative h-full">
+                        
+                        {/* Book Metadata Cover Card */}
+                        <div className="p-4 border-b border-slate-100 bg-slate-50/50">
+                            <div className="flex gap-3">
+                                <div className="w-14 h-18 rounded-lg overflow-hidden border border-slate-200 shadow-sm shrink-0 bg-white flex items-center justify-center">
+                                    <img 
+                                        src={resolvedCoverImage || "/bookcover.png"} 
+                                        alt={bookTitle}
+                                        onError={(e) => { e.target.src = "/bookcover.png"; }}
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                                <div className="min-w-0 flex-1 flex flex-col justify-center">
+                                    <span className="text-[10px] font-bold text-blue-600 tracking-wider uppercase">Class {classId} textbook</span>
+                                    <h2 className="text-sm font-extrabold text-slate-900 truncate leading-snug">{bookTitle}</h2>
+                                    <p className="text-[11px] text-slate-400 font-semibold truncate mt-0.5">By {bookInfo?.author || "Bihar Board"}</p>
+                                </div>
+                            </div>
+                            {cleanedDescription && (
+                                <p className="text-xs text-slate-500 leading-relaxed mt-3 bg-white p-2.5 rounded-xl border border-slate-200/60 line-clamp-3">
+                                    {cleanedDescription}
+                                </p>
+                            )}
                         </div>
 
-                        {/* Next Page */}
-                        <button onClick={() => bookRef.current?.pageFlip?.().flipNext()} className="text-slate-500 hover:text-black">
-                            <ChevronRight size={18} />
-                        </button>
+                        {/* Search and Table of Contents Title */}
+                        <div className="p-4 border-b border-slate-100 shrink-0">
+                            <div className="flex items-center justify-between mb-3">
+                                <h3 className="text-xs font-bold text-slate-800 tracking-wider uppercase flex items-center gap-1.5">
+                                    <BookOpen size={14} className="text-blue-600" />
+                                    <span>Table of Contents</span>
+                                </h3>
+                                <span className="text-[10px] font-extrabold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">
+                                    {filteredChapters.length} Chapters
+                                </span>
+                            </div>
 
-                        {/* Last Page */}
-                        <button onClick={() => bookRef.current?.pageFlip?.().flip(numPages - 1)} className="text-slate-500 hover:text-black">
-                            <ChevronsRightIcon size={18} />
-                        </button>
-                    </div>
+                            <div className="relative">
+                                <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                                <input
+                                    type="text"
+                                    placeholder="Search chapters..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-400 text-slate-700"
+                                />
+                            </div>
+                        </div>
 
-                    <div className="w-px h-4 bg-slate-300"></div>
+                        {/* Scrollable Chapters List */}
+                        <div ref={scrollContainerRef} className="flex-1 overflow-y-auto p-3 space-y-1.5 custom-scrollbar" data-lenis-prevent>
+                            {filteredChapters.length > 0 ? (
+                                filteredChapters.map((chap, idx) => {
+                                    const isActive = String(chap.id) === String(chapterId);
+                                    return (
+                                        <Link
+                                            data-active={isActive ? "true" : "false"}
+                                            key={chap.id || idx}
+                                            to={`/book/${classId}/${bookSubject}/${chap.id}/flip`}
+                                            className={`w-full flex items-center gap-3 p-3 rounded-xl border transition-all text-left group ${
+                                                isActive
+                                                    ? "bg-gradient-to-r from-blue-50 to-indigo-50/50 border-blue-200 shadow-sm"
+                                                    : "bg-white border-slate-100 hover:bg-slate-50/80 hover:border-slate-200"
+                                            }`}
+                                        >
+                                            {/* Chapter Index number */}
+                                            <div className={`w-7 h-7 rounded-lg flex items-center justify-center text-xs font-bold shrink-0 transition-colors ${
+                                                isActive 
+                                                    ? "bg-blue-600 text-white" 
+                                                    : "bg-slate-100 text-slate-500 group-hover:bg-slate-200"
+                                            }`}>
+                                                {String(idx + 1).padStart(2, '0')}
+                                            </div>
 
-                    {/* Utilities */}
-                    <div className="flex items-center gap-3">
-                        <button className="text-slate-500 hover:text-black"><Printer size={18} /></button>
-                        <button onClick={toggleFullScreen} className="text-slate-500 hover:text-black"><Maximize size={18} /></button>
-                        <button className="text-slate-500 hover:text-black"><Settings size={18} /></button>
-                        <button onClick={handleDownload} className="bg-slate-800 text-white rounded-full p-1.5 hover:bg-black transition-colors">
-                            <Download size={14} />
-                        </button>
-                    </div>
+                                            {/* Chapter titles */}
+                                            <div className="min-w-0 flex-1">
+                                                <h4 className={`text-xs font-bold leading-snug truncate transition-colors ${
+                                                    isActive ? "text-blue-700" : "text-slate-800 group-hover:text-blue-600"
+                                                }`}>
+                                                    {chap.hindiTitle || chap.title}
+                                                </h4>
+                                                {chap.title && chap.title !== chap.hindiTitle && (
+                                                    <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider truncate mt-0.5">
+                                                        {chap.title}
+                                                    </p>
+                                                )}
+                                            </div>
 
-                </div>
+                                            <div className="shrink-0 text-slate-300 group-hover:text-blue-600 transition-colors">
+                                                <ChevronRight size={14} />
+                                            </div>
+                                        </Link>
+                                    );
+                                })
+                            ) : (
+                                <div className="text-center py-12 text-slate-400 text-xs font-medium">
+                                    No chapters found matching "{searchQuery}"
+                                </div>
+                            )}
+                        </div>
+
+                       
+
+                    </aside>
+                )}
+
             </div>
 
         </div>

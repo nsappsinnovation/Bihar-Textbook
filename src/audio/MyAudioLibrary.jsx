@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowLeft, Headphones, Play, Pause, SkipBack, SkipForward, Volume2, VolumeX, 
-  Heart, Bookmark, Clock, BookOpen, Star, Sparkles, Film, X, Search, CheckCircle, 
+  Heart, Bookmark, Clock, BookOpen, Sparkles, Film, X, Search, CheckCircle, 
   Library, RotateCcw, Award, CheckCircle2, ChevronRight, Layers, FileText, ChevronUp, ChevronDown
 } from 'lucide-react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -5972,13 +5972,6 @@ const MyAudioLibrary = () => {
                           {book.title}
                         </h3>
                         <p className="text-[11px] text-slate-500 font-medium truncate">By {book.author}</p>
-                        
-                        {/* Rating row */}
-                        <div className="flex items-center gap-1 mt-1">
-                          <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                          <span className="text-[11px] font-bold text-slate-800">{book.rating}</span>
-                          <span className="text-[9px] text-slate-400">({book.reviews})</span>
-                        </div>
 
                         {/* Extra icons */}
                         <div className="flex items-center gap-2 text-slate-400 text-[9px] pt-0.5">

@@ -12,24 +12,40 @@ import {
     FaFilePdf,
     FaLightbulb
 } from "react-icons/fa";
-import { Menu } from "lucide-react";
+import { Menu, Search } from "lucide-react";
 import Sidebar from "../../../components/Sidebar";
-import data from "./Book.json";
+import { getStoredTextbooksData } from "../../../utils/textbookStorage";
 
 const BookReader = () => {
     const { classId, bookSubject } = useParams();
     const [openSection, setOpenSection] = useState(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+    const [chapters, setChapters] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [searchQuery, setSearchQuery] = useState("");
+
+    const [textbookData, setTextbookData] = useState(() => getStoredTextbooksData());
+
+    useEffect(() => {
+        const handleStorageUpdate = () => {
+            setTextbookData(getStoredTextbooksData());
+        };
+        window.addEventListener("textbooks_updated", handleStorageUpdate);
+        return () => window.removeEventListener("textbooks_updated", handleStorageUpdate);
+    }, []);
+
     const toggleSection = (index) => {
         setOpenSection(openSection === index ? null : index);
     };
 
-    const [chapters, setChapters] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const filteredChapters = chapters.filter(c => 
+        (c.title && c.title.toLowerCase().includes(searchQuery.toLowerCase())) ||
+        (c.hindiTitle && c.hindiTitle.toLowerCase().includes(searchQuery.toLowerCase()))
+    );
 
     // Get book data for image
-    const classData = data.classes?.find((cls) => cls.id === Number(classId));
+    const classData = textbookData.classes?.find((cls) => cls.id === Number(classId));
     const allBooks = classData?.books || [];
     const book = allBooks.find(b => (b.subject || "General") === bookSubject || b.title === bookSubject);
     const bookImage = book?.image || "/images/placeholders/no-cover.png";
@@ -39,10 +55,21 @@ const BookReader = () => {
         setIsSidebarOpen(false);
     }, [classId, bookSubject]);
 
-    // Fetch chapters from manifest
+    // Fetch chapters from manifest or local storage
     useEffect(() => {
         const fetchChapters = async () => {
             try {
+                // First check if the book has chapters in local storage
+                const classDataLocal = textbookData.classes?.find((cls) => cls.id === Number(classId));
+                const allBooksLocal = classDataLocal?.books || [];
+                const bookLocal = allBooksLocal.find(b => (b.subject || "General") === bookSubject || b.title === bookSubject);
+
+                if (bookLocal && bookLocal.chapters && bookLocal.chapters.length > 0) {
+                    setChapters(bookLocal.chapters);
+                    setLoading(false);
+                    return;
+                }
+
                 // Sanitize slug to match scraper logic: replace non-alphanumeric with '_'
                 const subjectSlug = (bookSubject || "Hindi").toLowerCase().replace(/[^a-z0-9]/g, '_');
                 const manifestUrl = `/PDFs/Class_${classId}/${subjectSlug}_manifest.json`;
@@ -53,8 +80,8 @@ const BookReader = () => {
                     // Transform manifest chapters to BookReader format
                     const mappedChapters = manifestData.chapters.map(c => ({
                         id: c.id,
-                        title: c.title, // Use title from scraper
-                        hindiTitle: c.title, // Fallback if no hindi title available yet
+                        title: c.title,
+                        hindiTitle: c.hindiTitle || c.title,
                         type: "chapter"
                     }));
                     setChapters(mappedChapters);
@@ -99,7 +126,7 @@ const BookReader = () => {
                     ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
                 `}
             >
-                <Sidebar classes={data.classes || []} currentClassId={classId} />
+                <Sidebar classes={textbookData.classes || []} currentClassId={classId} />
             </aside>
 
             {/* Main Content */}
@@ -114,166 +141,92 @@ const BookReader = () => {
                     </div>
                 </div>
 
-                <div className="py-12 px-4 sm:px-6 lg:px-8">
-                    <div className="max-w-6xl mx-auto">
+                <div className="py-8 px-4 sm:px-8 lg:px-10">
+                    <div className="max-w-5xl mx-auto">
 
-                        {/* --- Minimal Breadcrumbs --- */}
-                        <nav className="flex items-center space-x-2 text-[11px] uppercase tracking-wider text-slate-400 mb-10">
-                            <Link to="/" className="hover:text-blue-600 transition-colors">Home</Link>
-                            <span>/</span>
-                            <Link to={`/books/${classId}`} className="hover:text-blue-600 transition-colors">Class {classId}</Link>
-                            <span>/</span>
-                            <span className="text-slate-600 font-semibold">{bookTitle}</span>
-                        </nav>
-
-                        {/* --- Simplified Header --- */}
-                        <div className="mb-14 flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8">
-                            <div>
-                                <p className="text-blue-600 font-bold text-[10px] uppercase tracking-[0.2em] mb-3">
-                                    Bihar Textbook Digital
-                                </p>
-                                <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
-                                    Class {classId} <span className="font-light text-slate-400">/</span> {bookTitle}
-                                </h1>
-                            </div>
+                        {/* --- Back Arrow + Book Title on Left --- */}
+                        <div className="mb-8 flex items-center gap-3">
                             <Link
                                 to={`/books/${classId}`}
-                                className="text-xs font-bold text-slate-500 hover:text-blue-600 flex items-center gap-2 transition-colors"
+                                className="w-10 h-10 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-600 flex items-center justify-center transition-all border border-blue-100/60 shadow-sm shrink-0"
+                                title={`Back to Class ${classId} Books`}
                             >
-                                <FaChevronLeft size={10} />
-                                BACK TO LIST
+                                <FaChevronLeft size={14} />
                             </Link>
+                            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                                {bookTitle}
+                            </h1>
                         </div>
 
-                        <div className="flex flex-col lg:flex-row gap-16 border-t border-slate-100 pt-12">
-
-                            {/* --- Left Column: ~65% Table of Contents --- */}
-                            <div className="lg:w-[65%] space-y-8">
-                                <div className="flex items-center gap-3 mb-6">
-                                    <span className="w-[5px] h-[22px] bg-[#2563eb] rounded-[2px]"></span>
-                                    <h2 className="text-[20px] font-bold text-[#1e293b] tracking-tight">Table of Contents</h2>
-                                    <span className="text-[12px] font-medium text-[#94a3b8] px-2">{chapters.length} Units</span>
+                        {/* --- Full-Width Table of Contents --- */}
+                        <div className="w-full space-y-6">
+                            <div className="border-b border-slate-200 pb-4 mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                                <div className="flex items-center gap-3">
+                                    <span className="w-1.5 h-6 bg-[#2563eb] rounded-full"></span>
+                                    <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Table of Contents</h2>
                                 </div>
-
-                                <div className="border-t border-slate-100">
-                                    {chapters.map((chapter, index) => (
-                                        <div key={index} className="border-b border-slate-100 last:border-0 relative">
-                                            <button
-                                                onClick={() => toggleSection(index)}
-                                                className="w-full flex items-center py-6 text-left group transition-all hover:bg-slate-50/50"
-                                            >
-                                                <div className="w-16 text-[#cbd5e1] text-[15px] font-bold font-mono transition-colors">
-                                                    {String(index + 1).padStart(2, '0')}
-                                                </div>
-                                                <div className="flex-1">
-                                                    <h3 className="text-[16px] font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
-                                                        {chapter.hindiTitle}
-                                                    </h3>
-                                                    <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mt-1">
-                                                        {chapter.title}
-                                                    </p>
-                                                </div>
-                                                <div className={`w-8 h-8 flex items-center justify-end transition-colors ${openSection === index ? "text-[#94a3b8]" : "text-[#cbd5e1] group-hover:text-[#94a3b8]"}`}>
-                                                    {openSection === index ? <FaMinus size={12} strokeWidth={1} /> : <FaPlus size={12} strokeWidth={1} />}
-                                                </div>
-                                            </button>
-
-                                            <AnimatePresence>
-                                                {openSection === index && (
-                                                    <motion.div
-                                                        initial={{ height: 0, opacity: 0 }}
-                                                        animate={{ height: "auto", opacity: 1 }}
-                                                        exit={{ height: 0, opacity: 0 }}
-                                                        transition={{ duration: 0.2 }}
-                                                        className="overflow-hidden bg-[#f8fafc] border-t border-slate-100"
-                                                    >
-                                                        <div className="px-16 py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                                                            <p className="text-[13px] text-slate-500 max-w-lg">
-                                                                Access interactive lessons, practice questions, and chapter summaries.
-                                                            </p>
-                                                            <Link
-                                                                to={`/book/${classId}/${bookSubject || "Hindi"}/${chapter.id}/flip`}
-                                                                className="inline-flex items-center justify-center gap-2 bg-[#2563eb] hover:bg-blue-700 text-white text-[11px] font-bold px-6 py-2.5 rounded-lg shadow-sm transition-all active:scale-95 whitespace-nowrap"
-                                                            >
-                                                                READ NOW
-                                                                <FaChevronRight size={10} />
-                                                            </Link>
-                                                        </div>
-                                                    </motion.div>
-                                                )}
-                                            </AnimatePresence>
-                                        </div>
-                                    ))}
+                                <div className="relative w-full sm:w-64">
+                                    <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                                        <Search size={16} className="text-slate-400" />
+                                    </div>
+                                    <input
+                                        type="text"
+                                        placeholder="Search chapters..."
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        className="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                    />
                                 </div>
                             </div>
 
-                            {/* --- Right Column: ~35% Side Stack --- */}
-                            <div className="lg:w-[35%] lg:pl-8">
-                                <div className="sticky top-[100px] h-[calc(100vh-120px)] overflow-y-auto pb-10 space-y-10 pr-4" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
-
-                                    {/* EXPERIENCE */}
-                                    <div>
-                                        <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-3 mb-5">Experience</h4>
-                                        <div className="group cursor-pointer">
-                                            <div className="flex items-start gap-4 mb-3">
-                                                <div className="w-10 h-10 rounded-xl bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center shrink-0 transition-colors">
-                                                    <FaDownload size={16} />
+                            <div className="border border-slate-200/80 rounded-2xl overflow-hidden bg-white shadow-sm">
+                                <style>{`
+                                    .custom-scrollbar::-webkit-scrollbar {
+                                        width: 6px;
+                                    }
+                                    .custom-scrollbar::-webkit-scrollbar-track {
+                                        background: transparent;
+                                    }
+                                    .custom-scrollbar::-webkit-scrollbar-thumb {
+                                        background-color: #cbd5e1;
+                                        border-radius: 3px;
+                                    }
+                                    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+                                        background-color: #94a3b8;
+                                    }
+                                `}</style>
+                                <div className="max-h-[450px] overflow-y-auto custom-scrollbar-hidden" data-lenis-prevent>
+                                    {filteredChapters.length > 0 ? (
+                                        filteredChapters.map((chapter, index) => (
+                                            <Link
+                                                key={index}
+                                                to={`/book/${classId}/${bookSubject || "Hindi"}/${chapter.id}/flip`}
+                                                className="w-full flex items-center justify-between py-5 px-4 sm:px-6 border-b border-slate-100 last:border-0 group transition-all hover:bg-blue-50/40"
+                                            >
+                                                <div className="flex items-center gap-4 sm:gap-6 min-w-0 pr-4">
+                                                    <div className="w-8 sm:w-12 text-slate-300 group-hover:text-blue-600 text-sm sm:text-base font-bold font-mono shrink-0 transition-colors">
+                                                        {String(index + 1).padStart(2, '0')}
+                                                    </div>
+                                                    <div className="min-w-0">
+                                                        <h3 className="text-base sm:text-lg font-bold text-slate-800 group-hover:text-blue-600 transition-colors truncate">
+                                                            {chapter.hindiTitle}
+                                                        </h3>
+                                                        <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mt-0.5 truncate">
+                                                            {chapter.title}
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <h5 className="text-[15px] font-bold text-slate-800 group-hover:text-[#16a34a] transition-colors mb-1.5">Scan & Go App</h5>
-                                                    <p className="text-[12px] text-slate-500 leading-relaxed mb-3">
-                                                        Read offline with ease. Available for all mobile devices.
-                                                    </p>
-                                                    <button className="text-[10px] font-bold text-[#16a34a] tracking-[0.05em] flex items-center gap-1.5 uppercase transition-transform group-hover:translate-x-1">
-                                                        DOWNLOAD APP <FaChevronRight size={8} strokeWidth={3} className="ml-0.5" />
-                                                    </button>
+                                                <div className="inline-flex items-center gap-2 bg-blue-50 group-hover:bg-[#2563eb] text-blue-600 group-hover:text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all shrink-0">
+                                                    <span>READ NOW</span>
+                                                    <FaChevronRight size={10} />
                                                 </div>
-                                            </div>
+                                            </Link>
+                                        ))
+                                    ) : (
+                                        <div className="text-center py-12 text-slate-500 font-medium">
+                                            No chapters found matching "{searchQuery}"
                                         </div>
-                                    </div>
-
-                                    {/* RESOURCES */}
-                                    <div>
-                                        <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-3 mb-5">Resources</h4>
-                                        <div className="group cursor-pointer">
-                                            <div className="flex items-start gap-4 mb-3">
-                                                <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 transition-colors">
-                                                    <FaFilePdf size={16} />
-                                                </div>
-                                                <div>
-                                                    <h5 className="text-[15px] font-bold text-slate-800 group-hover:text-blue-600 transition-colors mb-1.5">Full Book PDF</h5>
-                                                    <p className="text-[12px] text-slate-500 leading-relaxed mb-3">
-                                                        Download the complete book in high quality format.
-                                                    </p>
-                                                    <button className="text-[10px] font-bold text-blue-600 tracking-[0.05em] flex items-center gap-1.5 uppercase transition-transform group-hover:translate-x-1">
-                                                        DOWNLOAD PDF <FaChevronRight size={8} strokeWidth={3} className="ml-0.5" />
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    {/* EXTERNAL */}
-                                    <div>
-                                        <h4 className="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-3 mb-5">External</h4>
-                                        <div className="group cursor-pointer">
-                                            <div className="flex items-start gap-4 mb-3">
-                                                <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 transition-colors">
-                                                    <FaBook size={16} />
-                                                </div>
-                                                <div>
-                                                    <h5 className="text-[15px] font-bold text-slate-800 group-hover:text-blue-600 transition-colors mb-1.5">NCERT Library</h5>
-                                                    <p className="text-[12px] text-slate-500 leading-relaxed mb-3">
-                                                        Access official NCERT digital textbooks.
-                                                    </p>
-                                                    <button className="text-[10px] font-bold text-blue-600 tracking-[0.05em] flex items-center gap-1.5 uppercase transition-transform group-hover:translate-x-1">
-                                                        BROWSE NCERT <FaChevronRight size={8} strokeWidth={3} className="ml-0.5" />
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                    )}
                                 </div>
                             </div>
                         </div>

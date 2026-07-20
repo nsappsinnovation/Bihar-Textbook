@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  ArrowLeft, ArrowRight, BookOpen, Star, 
+  ArrowLeft, ArrowRight, BookOpen, 
   Clock, Library, CheckCircle2, Headphones, Search, 
   Heart, Play, Pause, SkipBack, SkipForward, Volume2, VolumeX,
   X, CheckCircle, Sparkles, FileText, Layers, ChevronUp, ChevronDown, BookMarked, ExternalLink
@@ -37,7 +37,7 @@ const AudioLibraryDashboard = () => {
 
   // State Management
   const [books, setBooks] = useState(booksData);
-  const [selectedBook, setSelectedBook] = useState(booksData[0]); // Default to Mridang Class 1 English
+  const [selectedBook, setSelectedBook] = useState(null); // No card selected initially until clicked
   const [isPlayerExpanded, setIsPlayerExpanded] = useState(true);
   const [activeTab, setActiveTab] = useState(filterParam); // 'all' | 'recent' | 'favorites' | 'progress' | 'completed'
   const [selectedCategory, setSelectedCategory] = useState('Class 1');
@@ -180,14 +180,10 @@ const AudioLibraryDashboard = () => {
     if (!book || !book.chapters || book.chapters.length === 0) return null;
     const count = book.chapters.length;
     
-    let activeIdx = 0;
-    if (activeChapterIdx !== null) {
-      activeIdx = activeChapterIdx;
-    } else {
-      const dur = totalSecs && totalSecs > 0 ? totalSecs : 1200;
-      const chapterDur = dur / count;
-      activeIdx = Math.min(count - 1, Math.floor((currentSecs || 0) / chapterDur));
-    }
+    // Lock chapter index to current active chapter (default to 0) so it remains fixed during full audio playback
+    const activeIdx = (activeChapterIdx !== null && activeChapterIdx >= 0 && activeChapterIdx < count)
+      ? activeChapterIdx
+      : 0;
 
     return {
       chapterNumber: activeIdx + 1,
@@ -563,7 +559,10 @@ const AudioLibraryDashboard = () => {
                   return (
                     <div
                       key={book.id}
-                      onClick={() => setViewTimestampsBook(book)}
+                      onClick={() => {
+                        setSelectedBook(book);
+                        setViewTimestampsBook(book);
+                      }}
                       className={`bg-white rounded-2xl border transition-all p-5 flex flex-col justify-between group relative overflow-hidden cursor-pointer ${
                         selectedBook && selectedBook.id === book.id 
                           ? 'border-purple-600 shadow-lg ring-2 ring-purple-600/10' 
@@ -619,12 +618,6 @@ const AudioLibraryDashboard = () => {
                               {book.title}
                             </button>
                             <p className="text-xs text-slate-500 font-medium truncate">By {book.author}</p>
-                            
-                            <div className="flex items-center gap-1.5 pt-1">
-                              <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                              <span className="text-xs font-bold text-slate-800">{book.rating}</span>
-                              <span className="text-[11px] text-slate-400">({book.reviews})</span>
-                            </div>
                           </div>
                         </div>
 

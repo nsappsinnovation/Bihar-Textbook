@@ -201,6 +201,8 @@ export default function KeyParticipant() {
   );
 }
 function ParticipantCard({ item }) {
+  const isMithilesh = item.name === "Sri Mithilesh Tiwari";
+
   return (
     <div
       className="
@@ -244,18 +246,18 @@ function ParticipantCard({ item }) {
       </div>
 
       {/* IMAGE FIXED TO CARD BOTTOM */}
-      <div className="absolute bottom-0 left-0 right-0 z-20 flex h-[285px] items-end justify-center px-0">
+      <div className={`absolute bottom-0 left-0 right-0 z-20 flex ${isMithilesh ? 'h-[320px]' : 'h-[385px]'} items-end justify-center px-0`}>
         <img
           src={item.image}
           alt={item.name}
-          className="
-            block h-[270px] max-w-full object-contain object-bottom drop-shadow-2xl
+          className={`
+            block ${isMithilesh ? 'h-[265px]' : 'h-[300px]'} max-w-full object-contain object-bottom drop-shadow-2xl
             transition-transform duration-700
             ease-[cubic-bezier(0.22,1,0.36,1)]
             group-hover:scale-105
             group-hover:translate-y-0
             origin-bottom
-          "
+          `}
         />
       </div>
     </div>

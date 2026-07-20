@@ -1,27 +1,36 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import data from "./Book.json";
+import { useParams, Link } from "react-router-dom";
+import { getStoredTextbooksData } from "../../../utils/textbookStorage";
 import Sidebar from "../../../components/Sidebar";
-import { Menu, X, Filter, Download } from "lucide-react";
+import { Menu, X, Filter, Download, Search, BookOpen } from "lucide-react";
+import { useResolvedUrl } from "../../../utils/fileStorage";
 
 const Books = () => {
   const { classId } = useParams();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Mobile state
-  const [activeSubject, setActiveSubject] = useState("All"); // Subject filter state
-
-  // Find the class data
-  const classData = data.classes.find((cls) => cls.id === Number(classId));
-
-  // Placeholder image URL
-  const PLACEHOLDER_IMG = "/images/placeholders/no-cover.png";
+  const [searchQuery, setSearchQuery] = useState(""); // Search state
+  const [textbookData, setTextbookData] = useState(() => getStoredTextbooksData());
 
   useEffect(() => {
     // Close sidebar on route change (mobile)
     setIsSidebarOpen(false);
-    // Reset filter on class change
-    setActiveSubject("All");
+    // Reset search on class change
+    setSearchQuery("");
   }, [classId]);
+
+  useEffect(() => {
+    const handleStorageUpdate = () => {
+      setTextbookData(getStoredTextbooksData());
+    };
+    window.addEventListener("textbooks_updated", handleStorageUpdate);
+    return () => window.removeEventListener("textbooks_updated", handleStorageUpdate);
+  }, []);
+
+  // Find the class data
+  const classData = textbookData?.classes?.find((cls) => cls.id === Number(classId));
+
+  // Placeholder image URL
+  const PLACEHOLDER_IMG = "/images/placeholders/no-cover.png";
 
   if (!classData) {
     return (
@@ -32,16 +41,17 @@ const Books = () => {
     );
   }
 
-  // Get unique subjects for filter
-  const allBooks = classData.books.filter(b => !b.localOnly);
-  const subjects = ["All", ...new Set(allBooks.map(b => b.title))];
+  // Get unique subjects for filter (exclude Drafts / localOnly unless published)
+  const allBooks = classData.books.filter(b => b.status ? b.status === "Published" : !b.localOnly);
 
-  const filteredBooks = activeSubject === "All"
-    ? allBooks
-    : allBooks.filter(book => book.title === activeSubject);
+  const filteredBooks = allBooks.filter(book => {
+    const matchesSearch = book.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                          (book.subject && book.subject.toLowerCase().includes(searchQuery.toLowerCase()));
+    return matchesSearch;
+  });
 
   return (
-    <div className="flex min-h-screen bg-white font-sans">
+    <div className="flex h-screen overflow-hidden bg-white font-sans">
 
       {/* Mobile Sidebar Toggle Overlay */}
       {isSidebarOpen && (
@@ -54,15 +64,15 @@ const Books = () => {
       {/* Sidebar Container */}
       <aside
         className={`
-          fixed top-0 bottom-0 left-0 w-64 bg-white z-20 transform transition-transform duration-300 ease-in-out md:translate-x-0 md:static md:block
+          fixed top-0 bottom-0 left-0 w-64 z-20 bg-white border-r border-slate-200 transform transition-transform duration-300 ease-in-out md:translate-x-0 md:sticky md:top-0 md:h-screen md:flex md:flex-col
           ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
         `}
       >
-        <Sidebar classes={data.classes} currentClassId={classId} />
+        <Sidebar classes={textbookData.classes} currentClassId={classId} />
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 w-full min-w-0 bg-slate-50/50">
+      <main className="flex-1 w-full min-w-0 bg-slate-50/50 h-screen overflow-y-auto scrollbar-hide" data-lenis-prevent="true">
 
         {/* Mobile Header */}
         <div className="md:hidden sticky top-0 z-30 bg-white border-b border-slate-200 px-4 py-3 flex items-center justify-between">
@@ -74,68 +84,51 @@ const Books = () => {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 py-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-4 pb-8">
 
-          {/* --- Header Section (Refined for new layout) --- */}
-          <div className="mb-12">
-            <div className="flex items-center gap-3 mb-2">
-              <span className="h-px w-8 bg-blue-600"></span>
-              <span className="text-blue-600 font-bold tracking-wider uppercase text-xs">
-                Digital Library
-              </span>
+          {/* --- Hero Section --- */}
+          <div className="mb-6 mt-2 flex flex-col lg:flex-row items-center justify-between gap-10">
+            
+            {/* Left Content (Text) */}
+            <div className="flex-1 flex flex-col gap-2 text-center lg:text-left mt-0">
+              <h2 className="text-5xl md:text-6xl font-extrabold text-[#0B1A40] tracking-tight mb-1 leading-tight whitespace-nowrap">
+                {classData.name} Textbooks
+              </h2>
+              <p className="text-slate-500 text-sm md:text-base leading-relaxed max-w-xl">
+                Access the complete collection of Bihar Board textbooks for {classData.name}. 
+                <br className="hidden md:block" /> Select a book to read online.
+              </p>
             </div>
 
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
-              {classData.name} Textbooks
-            </h2>
-            <p className="max-w-3xl text-slate-500 text-lg leading-relaxed">
-              Access the complete collection of Bihar Board textbooks for {classData.name}. Select a book to read online or download.
-            </p>
-          </div>
-
-          {/* --- Subject Filter Chips --- */}
-          <div className="mb-10 flex items-center gap-3 overflow-x-auto pb-4 scrollbar-hide">
-            <div className="flex items-center gap-2 text-slate-400 mr-2">
-              <Filter size={16} />
-              <span className="text-xs font-bold uppercase tracking-wide">Filter:</span>
+            {/* Middle Content (Search Bar) */}
+            <div className="w-full lg:w-64 shrink-0 flex justify-center lg:justify-start -mt-15">
+              <div className="relative w-full">
+                <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+                  <Search size={16} className="text-slate-400" />
+                </div>
+                <input
+                  type="text"
+                  placeholder="Search books..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-sm"
+                />
+              </div>
             </div>
-            <button
-              onClick={() => setActiveSubject("All")}
-              className={`
-                    whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-bold transition-all
-                    ${activeSubject === "All"
-                  ? "bg-slate-900 text-white shadow-md"
-                  : "bg-white text-slate-600 border border-slate-200 hover:border-slate-400"}
-                  `}
-            >
-              All Subjects
-            </button>
-            {subjects.filter(s => s !== "All").map(subj => (
-              <button
-                key={subj}
-                onClick={() => setActiveSubject(subj)}
-                className={`
-                     whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-bold transition-all
-                     ${activeSubject === subj
-                    ? "bg-slate-900 text-white shadow-md"
-                    : "bg-white text-slate-600 border border-slate-200 hover:border-slate-400"}
-                   `}
-              >
-                {subj}
-              </button>
-            ))}
+
+            
           </div>
 
           {/* --- Books Grid --- */}
           {filteredBooks.length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
               {filteredBooks.map((book) => (
                 <BookCard key={book.id} book={book} placeholder={PLACEHOLDER_IMG} classId={classId} />
               ))}
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-20 bg-white rounded-2xl border border-dashed border-slate-300">
-              <div className="text-5xl mb-4 grayscale opacity-50">📚</div>
+              <BookOpen className="w-12 h-12 text-slate-300 mb-4" />
               <h3 className="text-lg font-bold text-slate-700">No books found</h3>
               <p className="text-slate-400 text-sm">Content for this class is coming soon.</p>
             </div>
@@ -146,52 +139,63 @@ const Books = () => {
   );
 };
 
-// --- Sub-Component: Book Card (Preserved & Tweaked) ---
+// --- Sub-Component: Book Card (Compact Textbook Style) ---
 const BookCard = ({ book, placeholder, classId }) => {
-  const [imgSrc, setImgSrc] = useState(book.image);
+  const resolvedImage = useResolvedUrl(book.image);
+
+  const authorName = book.author || "Bihar Board";
+  const rawDescription =
+    book.description ||
+    `Official Bihar Board Class ${classId} textbook for '${book.title}'.`;
+  const descriptionText = rawDescription.replace(/[\s\.]*Complete digital reading material\s*&\s*chapters\.?/gi, "");
 
   return (
-    <div className="group relative flex flex-col bg-white rounded-xl shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 ease-out border border-slate-100 overflow-hidden hover:-translate-y-1 aspect-[3/4.2]">
-
-      {/* Subject Badge */}
-      {book.subject && (
-        <div className="absolute top-2 left-2 z-10">
-          <span className="px-2 py-0.5 text-[9px] font-bold tracking-wide text-blue-700 bg-white/95 backdrop-blur-sm rounded border border-blue-100 shadow-sm">
-            {book.subject.toUpperCase()}
-          </span>
-        </div>
-      )}
-
-      {/* Image Container (75%) */}
-      <div className="relative h-[75%] w-full overflow-hidden bg-slate-50">
+    <div className="bg-white rounded-2xl border border-blue-200 p-3 sm:p-4 shadow-[0_2px_14px_rgba(37,99,235,0.06)] hover:shadow-[0_8px_24px_rgba(37,99,235,0.15)] hover:border-blue-300 transition-all duration-300 grid grid-cols-2 gap-3.5 sm:gap-4 group">
+      {/* Book Cover Image (Left 50%) */}
+      <div className="relative w-full h-full rounded-xl overflow-hidden shadow-sm border border-blue-100 bg-blue-50/40 min-h-[160px] sm:min-h-[200px]">
         <img
-          src={imgSrc}
+          src={resolvedImage || placeholder}
           alt={book.title}
-          onError={() => setImgSrc(placeholder)}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          onError={(e) => { e.target.src = placeholder; }}
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           loading="lazy"
         />
-
-        {/* Overlay Action */}
-        <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-out flex items-center justify-center backdrop-blur-[1px]">
-          <Link
-            to={`/class/${classId}/read/${book.subject || "General"}`}
-            className="bg-white text-slate-900 text-[13px] font-bold py-2.5 px-7 rounded-full shadow-2xl transform translate-y-12 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 ease-soft-spring hover:bg-blue-600 hover:text-white"
-          >
-            Read Book
-          </Link>
-        </div>
       </div>
 
-      {/* Title & Info (25%) */}
-      <div className="h-[25%] p-4 bg-white flex flex-col justify-center">
-        <h3 className="text-sm font-bold text-slate-800 leading-tight line-clamp-1 mb-1 group-hover:text-blue-600 transition-colors">
-          {book.title}
-        </h3>
-        <p className="text-[10px] text-slate-400 font-medium">Bihar Board • Class {classId}</p>
+      {/* Book Metadata, Description & Button (Right 50%) */}
+      <div className="flex flex-col justify-between min-w-0 py-0.5">
+        <div className="flex flex-col flex-1">
+          {/* Book Title */}
+          <h3 className="text-sm sm:text-xl font-bold text-slate-800 leading-snug line-clamp-2 mb-1 group-hover:text-blue-600 transition-colors font-display">
+            {book.title}
+          </h3>
+
+          {/* Author / Publisher */}
+          <p className="text-xs sm:text-sm font-semibold text-slate-400 mb-1.5">
+            {authorName}
+          </p>
+
+          {/* Description / Summary */}
+          <p className="text-[11px] sm:text-xs text-slate-500 leading-relaxed line-clamp-4 sm:line-clamp-5">
+            {descriptionText}
+          </p>
+        </div>
+
+        {/* Read Now Button (Full width of the right 50% column) */}
+        <div className="mt-3">
+          <Link
+            to={`/class/${classId}/read/${book.subject || "General"}`}
+            className="w-full flex items-center justify-center gap-1.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold py-2 px-4 rounded-xl shadow-sm shadow-blue-500/20 transition-all text-xs sm:text-sm"
+          >
+            <BookOpen className="w-4 h-4 text-white shrink-0" />
+            <span>Read Now</span>
+          </Link>
+        </div>
       </div>
     </div>
   );
 };
 
 export default Books;
+
+
