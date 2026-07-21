@@ -248,7 +248,7 @@ const FirstAidLab = () => {
           
           {/* TOP: Scenario Selection */}
           <div className="flex flex-col space-y-3">
-            <h3 className="text-[10px] font-black uppercase text-slate-400 tracking-widest pl-1">Select Emergency Case</h3>
+            <h3 className="text-[12px] font-black uppercase text-slate-400 tracking-widest pl-1">Select Emergency Case</h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
               {scenarios.map((sc) => {
                 const isActive = activeScenarioId === sc.id;
@@ -266,7 +266,7 @@ const FirstAidLab = () => {
                       ${isActive ? 'bg-blue-500 text-white shadow-md' : 'bg-white text-slate-500 border border-slate-200 shadow-sm'}`}>
                       {sc.icon}
                     </div>
-                    <div className="font-display font-bold text-[13px] text-slate-800 leading-tight">
+                    <div className="font-display font-bold text-[15px] text-slate-800 leading-tight">
                       {sc.title}
                     </div>
                   </button>
@@ -282,14 +282,14 @@ const FirstAidLab = () => {
               {/* Problem Description */}
               <div className="relative z-10">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-[10px] font-black uppercase text-rose-500 bg-rose-50 px-2.5 py-0.5 rounded border border-rose-200 tracking-widest">
+                  <span className="text-[12px] font-black uppercase text-rose-500 bg-rose-50 px-2.5 py-0.5 rounded border border-rose-200 tracking-widest">
                     Emergency Case
                   </span>
                 </div>
                 <h3 className="text-xl md:text-2xl font-display font-bold text-slate-900 flex items-center gap-2">
                   <span className="text-rose-500">{activeScenario.icon}</span> {activeScenario.title}
                 </h3>
-                <p className="text-[13.5px] text-slate-600 font-medium leading-relaxed mt-2 max-w-2xl">
+                <p className="text-[15.5px] text-slate-600 font-medium leading-relaxed mt-2 max-w-2xl">
                   {activeScenario.desc}
                 </p>
               </div>
@@ -298,7 +298,7 @@ const FirstAidLab = () => {
                 
                 {/* Protocol Steps Checklist */}
                 <div className="space-y-4">
-                  <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-widest border-b border-slate-200 pb-2">
+                  <h4 className="text-[12px] font-black uppercase text-slate-400 tracking-widest border-b border-slate-200 pb-2">
                     Treatment Protocol
                   </h4>
                   <div className="space-y-3">
@@ -314,17 +314,15 @@ const FirstAidLab = () => {
                             ${isCompletedStep ? 'bg-emerald-50 border-emerald-200' : 
                               isCurrentStep ? 'bg-white border-blue-200 shadow-sm ring-2 ring-blue-500/10' : 'bg-slate-100/50 border-slate-200 opacity-60'}`}
                         >
-                          <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 text-[11px] font-black
-                            ${isCompletedStep ? 'bg-emerald-500 text-white' : 
-                              isCurrentStep ? 'bg-blue-500 text-white' : 'bg-slate-200 text-slate-500'}`}>
-                            {isCompletedStep ? <CheckCircle size={14} /> : index + 1}
+                          <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-[13px] font-black ${isCompletedStep ? 'bg-emerald-500 text-white' : isCurrentStep ? 'bg-blue-500 text-white' : 'bg-slate-200 text-slate-500'}`}>
+                            {isCompletedStep ? <CheckCircle size={15} /> : index + 1}
                           </div>
                           <div className="flex-1 min-w-0 pt-0.5">
-                            <div className={`text-[13px] font-bold ${isCompletedStep ? 'text-emerald-800' : isCurrentStep ? 'text-blue-900' : 'text-slate-500'}`}>
+                            <div className={`text-[15px] font-bold ${isCompletedStep ? 'text-emerald-800' : isCurrentStep ? 'text-blue-900' : 'text-slate-500'}`}>
                               {isCompletedStep ? optionData.label : isCurrentStep ? 'Awaiting Action...' : 'Pending'}
                             </div>
                             {isCompletedStep && (
-                              <p className="text-[10px] text-emerald-650 mt-1 font-medium leading-snug">
+                              <p className="text-[12px] text-emerald-650 mt-1 font-medium leading-snug">
                                 {activeScenario.hints[stepId]}
                               </p>
                             )}
@@ -346,7 +344,7 @@ const FirstAidLab = () => {
 
                 {/* Supplies / Actions */}
                 <div className="space-y-4">
-                  <h4 className="text-[10px] font-black uppercase text-slate-400 tracking-widest border-b border-slate-200 pb-2">
+                  <h4 className="text-[12px] font-black uppercase text-slate-400 tracking-widest border-b border-slate-200 pb-2">
                     Select Medical Action
                   </h4>
                   <div className="grid grid-cols-2 gap-3">
@@ -367,7 +365,7 @@ const FirstAidLab = () => {
                           <div className={`${isUsed ? 'text-slate-400' : 'text-slate-700'}`}>
                             {opt.icon}
                           </div>
-                          <span className="text-[11px] font-bold text-center leading-tight">
+                          <span className="text-[13px] font-bold text-center leading-tight">
                             {opt.label}
                           </span>
                         </button>
@@ -395,7 +393,7 @@ const FirstAidLab = () => {
                              feedback.type === 'warning' ? <AlertTriangle size={16} /> : 
                              <CheckCircle size={16} />}
                           </div>
-                          <div className="text-[11.5px] font-semibold leading-snug">
+                          <div className="text-[13px] font-semibold leading-snug">
                             {feedback.message}
                           </div>
                         </div>

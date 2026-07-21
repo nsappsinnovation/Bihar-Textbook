@@ -363,9 +363,9 @@ const CashierLab = () => {
                   className="w-full h-32 object-cover rounded-lg shadow-sm border border-slate-100"
                 />
                 <div>
-                  <h5 className="font-black text-slate-900 tracking-wider text-[13px] uppercase mt-1">MITHILA SMART BAZAR</h5>
-                  <p className="text-[9.5px] text-slate-400 font-bold uppercase tracking-widest">Patna, Bihar</p>
-                  <div className="text-[8.5px] text-slate-400">Date: {new Date().toLocaleDateString()}</div>
+                  <h5 className="font-black text-slate-900 tracking-wider text-[15px] uppercase mt-1">MITHILA SMART BAZAR</h5>
+                  <p className="text-[11px] text-slate-400 font-bold uppercase tracking-widest">Patna, Bihar</p>
+                  <div className="text-[10.5px] text-slate-400">Date: {new Date().toLocaleDateString()}</div>
                 </div>
               </div>
 
@@ -418,7 +418,7 @@ const CashierLab = () => {
                     <div key={i} className={`h-full bg-slate-800 ${i % 3 === 0 ? 'w-1.5' : i % 2 === 0 ? 'w-0.5' : 'w-1'}`} />
                   ))}
                 </div>
-                <span className="text-[8px] text-slate-400 select-none">MITHILA-POS-99812</span>
+                <span className="text-[10px] text-slate-400 select-none">MITHILA-POS-99812</span>
               </div>
 
               {/* Zig-zag bottom paper effect */}
@@ -441,18 +441,18 @@ const CashierLab = () => {
               <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
                 <div className="flex items-center gap-2">
                   <div>
-                    <h4 className="text-[12.5px] font-black text-slate-800 uppercase tracking-wider flex items-center gap-1">
+                    <h4 className="text-[14px] font-black text-slate-800 uppercase tracking-wider flex items-center gap-1">
                       Cash Register Drawer
                     </h4>
-                    <p className="text-[10px] text-slate-500 font-medium">Click on notes or coins to move them to the Handover Tray</p>
+                    <p className="text-[12px] text-slate-500 font-medium">Click on notes or coins to move them to the Handover Tray</p>
                   </div>
                 </div>
-                <span className="text-[8px] font-black text-slate-500 uppercase tracking-widest bg-slate-50 px-2 py-1 border border-slate-200 rounded-lg shadow-sm">Drawer Box</span>
+                <span className="text-[11px] font-black text-slate-500 uppercase tracking-widest bg-slate-50 px-2.5 py-1 border border-slate-200 rounded-lg shadow-sm">Drawer Box</span>
               </div>
 
               {/* Paper Bills Section */}
               <div className="space-y-2.5">
-                <div className="text-[9.5px] font-black text-slate-500 uppercase tracking-wider pl-1">Paper Bills</div>
+                <div className="text-[12px] font-black text-slate-500 uppercase tracking-wider pl-1">Paper Bills</div>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                   {[100, 50, 20, 10].map(val => (
                     <div
@@ -460,7 +460,7 @@ const CashierLab = () => {
                       className="bg-slate-50 border border-slate-200 p-2 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm relative group animate-fade-in hover:bg-white transition-colors"
                     >
                       {/* Compartment Label */}
-                      <div className="absolute top-1 right-1.5 text-[7px] font-mono text-slate-400 font-bold">₹{val} Slot</div>
+                      <div className="absolute top-1 right-1.5 text-[10px] font-mono text-slate-400 font-bold">₹{val} Slot</div>
 
                       {/* Stack of 3D notes */}
                       <div className="relative w-24 h-12 flex items-center justify-center mt-2.5 mb-1">
@@ -481,7 +481,7 @@ const CashierLab = () => {
                       {/* Helper indicator */}
                       <button
                         onClick={() => addNoteToTray(val)}
-                        className="w-full py-0.5 mt-1 bg-white hover:bg-slate-100 border border-slate-200 rounded text-[9px] font-bold text-slate-500 transition-colors uppercase tracking-wider cursor-pointer shadow-sm"
+                        className="w-full py-1 mt-1 bg-white hover:bg-slate-100 border border-slate-200 rounded text-[12px] font-bold text-slate-500 transition-colors uppercase tracking-wider cursor-pointer shadow-sm"
                       >
                         Take ₹{val}
                       </button>
@@ -492,14 +492,14 @@ const CashierLab = () => {
 
               {/* Coins Section */}
               <div className="space-y-2.5 pt-3.5 border-t border-slate-100">
-                <div className="text-[9.5px] font-black text-slate-500 uppercase tracking-wider pl-1">Metallic Coins</div>
+                <div className="text-[12px] font-black text-slate-500 uppercase tracking-wider pl-1">Metallic Coins</div>
                 <div className="grid grid-cols-3 gap-2.5">
                   {[5, 2, 1].map(val => (
                     <div
                       key={val}
                       className="bg-slate-50 border border-slate-200 p-2 rounded-xl flex flex-col items-center justify-center gap-1.5 shadow-sm relative hover:bg-white transition-colors"
                     >
-                      <div className="absolute top-1 right-1.5 text-[7px] font-mono text-slate-400 font-bold">₹{val} Slot</div>
+                      <div className="absolute top-1 right-1.5 text-[10px] font-mono text-slate-400 font-bold">₹{val} Slot</div>
 
                       {/* Stack of Coins */}
                       <div className="relative w-8 h-8 flex items-center justify-center mt-2 mb-1">
@@ -519,7 +519,7 @@ const CashierLab = () => {
 
                       <button
                         onClick={() => addNoteToTray(val)}
-                        className="w-full py-0.5 mt-1 bg-white hover:bg-slate-100 border border-slate-200 rounded text-[9px] font-bold text-slate-500 transition-colors uppercase tracking-wider cursor-pointer shadow-sm"
+                        className="w-full py-1 mt-1 bg-white hover:bg-slate-100 border border-slate-200 rounded text-[11px] font-bold text-slate-500 transition-colors uppercase tracking-wider cursor-pointer shadow-sm"
                       >
                         Take ₹{val}
                       </button>
@@ -533,17 +533,17 @@ const CashierLab = () => {
             <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-[28px] p-5 text-slate-800 border-2 border-slate-200 min-h-[140px] flex flex-col justify-between shadow-lg relative overflow-hidden">
               <div className="absolute inset-0 bg-[radial-gradient(#94a3b8_1px,transparent_1px)] [background-size:16px_16px] opacity-10 pointer-events-none" />
 
-              <div className="flex justify-between items-center text-[10px] text-slate-500 font-black uppercase tracking-wider mb-3 z-10">
+              <div className="flex justify-between items-center text-[12px] text-slate-500 font-black uppercase tracking-wider mb-3 z-10">
                 <span className="flex items-center gap-1.5">
                   <Coins size={12} className="text-emerald-500 animate-pulse" />
                   Handover Tray
                 </span>
                 <div className="flex items-center gap-2">
-                  <span className="text-[8px] bg-white text-slate-500 px-2 py-0.5 rounded font-bold normal-case border border-slate-200 shadow-sm">Click items to return to drawer</span>
+                  <span className="text-[10px] bg-white text-slate-500 px-2 py-0.5 rounded font-bold normal-case border border-slate-200 shadow-sm">Click items to return to drawer</span>
                   <button
                     onClick={() => setCashierChangeTray({ 100: 0, 50: 0, 20: 0, 10: 0, 5: 0, 2: 0, 1: 0 })}
                     disabled={Object.values(cashierChangeTray).every(v => v === 0)}
-                    className="text-rose-500 hover:text-rose-600 disabled:opacity-30 disabled:pointer-events-none font-black cursor-pointer text-[10px] uppercase tracking-wider transition-colors"
+                    className="text-rose-500 hover:text-rose-600 disabled:opacity-30 disabled:pointer-events-none font-black cursor-pointer text-[12px] uppercase tracking-wider transition-colors"
                   >
                     Clear Tray
                   </button>
@@ -577,7 +577,7 @@ const CashierLab = () => {
                   });
                 })}
                 {Object.values(cashierChangeTray).every(v => v === 0) && (
-                  <span className="text-[11px] text-slate-500 font-semibold italic mx-auto">
+                  <span className="text-[13px] text-slate-500 font-semibold italic mx-auto">
                     Tray is empty. Click notes or coins in the drawer above to add them here.
                   </span>
                 )}
@@ -585,7 +585,7 @@ const CashierLab = () => {
 
               {/* Footer details */}
               <div className="flex justify-between items-center border-t border-slate-200 pt-3 mt-3 z-10">
-                <div className="text-[13px] font-bold text-slate-600">
+                <div className="text-[15px] font-bold text-slate-600">
                   Total Tray: <span className="font-mono text-emerald-600 font-black text-base">₹{
                     Object.keys(cashierChangeTray).reduce((sum, val) => sum + parseInt(val, 10) * cashierChangeTray[val], 0)
                   }</span>
@@ -594,13 +594,13 @@ const CashierLab = () => {
                   <button
                     onClick={checkCashierChange}
                     disabled={Object.values(cashierChangeTray).every(v => v === 0)}
-                    className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-40 disabled:pointer-events-none text-white rounded-xl text-[12px] font-black uppercase tracking-wider transition-all cursor-pointer shadow-md hover:shadow-emerald-950/50"
+                    className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-40 disabled:pointer-events-none text-white rounded-xl text-[13px] font-black uppercase tracking-wider transition-all cursor-pointer shadow-md hover:shadow-emerald-950/50"
                   >
                     Hand Over Change
                   </button>
                   <button
                     onClick={generateNewCashierCustomer}
-                    className="px-4 py-2.5 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 rounded-xl text-[12px] font-black uppercase tracking-wider transition-all cursor-pointer shadow-sm"
+                    className="px-4 py-2.5 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 rounded-xl text-[13px] font-black uppercase tracking-wider transition-all cursor-pointer shadow-sm"
                   >
                     Skip / Next
                   </button>
