@@ -20,8 +20,24 @@ const toolsDataList = [
 ];
 
 const ExploreSignsComponent = () => {
+  const [selectedGif, setSelectedGif] = useState(null);
+
+  useEffect(() => {
+    if (selectedGif) {
+      document.body.style.overflow = 'hidden';
+      document.documentElement.classList.add('lenis-stopped');
+    } else {
+      document.body.style.overflow = '';
+      document.documentElement.classList.remove('lenis-stopped');
+    }
+    return () => {
+      document.body.style.overflow = '';
+      document.documentElement.classList.remove('lenis-stopped');
+    };
+  }, [selectedGif]);
+
   return (
-    <div className="bg-white rounded-[24px] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-6 md:p-8">
+    <div className="bg-white rounded-[24px] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-6 md:p-8 relative">
       <style>{`
         .perspective-1000 { perspective: 1000px; }
         .preserve-3d { transform-style: preserve-3d; }
@@ -33,7 +49,11 @@ const ExploreSignsComponent = () => {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {toolsDataList.map((tool, index) => (
-          <div key={tool.name} className="relative w-full aspect-[1.1] group perspective-1000 cursor-pointer">
+          <div
+            key={tool.name}
+            onClick={() => setSelectedGif(tool)}
+            className="relative w-full aspect-[1.1] group perspective-1000 cursor-pointer"
+          >
             <div className="w-full h-full relative preserve-3d transition-transform duration-500 group-hover:rotate-y-180">
 
               {/* Front of Card */}
@@ -47,13 +67,13 @@ const ExploreSignsComponent = () => {
                 </span>
                 <p className="text-[11px] text-slate-500 mt-3 line-clamp-2 font-medium">{tool.desc}</p>
                 <div className="mt-auto text-[9px] text-emerald-600 font-bold uppercase tracking-widest bg-emerald-50 px-3 py-1.5 rounded-full w-full">
-                  Hover to flip & see sign
+                  Hover to flip / Click for GIF
                 </div>
               </div>
 
               {/* Back of Card */}
               <div className="absolute inset-0 backface-hidden rounded-[20px] shadow-lg shadow-emerald-100/50 transition-all overflow-hidden rotate-y-180 border-2 border-emerald-200 bg-white flex flex-col items-center justify-center p-4">
-                <div className="w-full h-[65%] flex items-center justify-center relative">
+                <div className="w-full h-[60%] flex items-center justify-center relative">
                   <img
                     src={tool.image}
                     alt={`Sign for ${tool.name}`}
@@ -63,12 +83,68 @@ const ExploreSignsComponent = () => {
                 <span className="text-[11px] font-black text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-wider mt-2">
                   {tool.name}
                 </span>
+                <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-1.5">
+                  Click to play GIF
+                </span>
               </div>
 
             </div>
           </div>
         ))}
       </div>
+
+      {/* GIF Animation Modal */}
+      <AnimatePresence>
+        {selectedGif && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm"
+            onClick={() => setSelectedGif(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="bg-white rounded-[32px] p-8 max-w-sm w-full relative flex flex-col items-center shadow-2xl border border-slate-100"
+              onClick={e => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setSelectedGif(null)}
+                className="absolute top-4 right-4 text-slate-400 hover:text-rose-500 bg-slate-100 hover:bg-rose-50 rounded-full p-2 transition-colors cursor-pointer"
+              >
+                <XCircle size={24} />
+              </button>
+
+              <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-wider mb-2 mt-2">
+                Sign Animation
+              </span>
+              <h4 className="text-3xl font-black text-slate-900 mb-6">{selectedGif.name}</h4>
+
+              <div className="w-56 h-56 bg-slate-50 rounded-[24px] border-2 border-slate-100 flex items-center justify-center p-4 mb-6 shadow-inner relative overflow-hidden">
+                <img
+                  src={`/explore sign/${selectedGif.name.toLowerCase()}.gif`}
+                  onError={(e) => { e.target.onerror = null; e.target.src = selectedGif.image; }}
+                  alt={`Sign animation for ${selectedGif.name}`}
+                  className="w-full h-full object-contain mix-blend-multiply"
+                />
+              </div>
+
+              <p className="text-slate-500 text-center font-medium leading-relaxed mb-6 px-4">
+                {selectedGif.desc}
+              </p>
+
+              <button
+                onClick={() => setSelectedGif(null)}
+                className="w-full py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm transition-colors shadow-md shadow-emerald-500/20 cursor-pointer"
+              >
+                Got it!
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -144,9 +220,10 @@ const FingerspellComponent = () => {
   const [selectedWordSign, setSelectedWordSign] = useState(null);
   const [isFocused, setIsFocused] = useState(false);
   const [showDictionary, setShowDictionary] = useState(false);
+  const [previewGif, setPreviewGif] = useState(null);
 
   useEffect(() => {
-    if (showDictionary) {
+    if (showDictionary || previewGif) {
       document.body.style.overflow = 'hidden';
       document.documentElement.classList.add('lenis-stopped');
     } else {
@@ -157,7 +234,7 @@ const FingerspellComponent = () => {
       document.body.style.overflow = '';
       document.documentElement.classList.remove('lenis-stopped');
     };
-  }, [showDictionary]);
+  }, [showDictionary, previewGif]);
 
   // Manual scroll state for dictionary list
   const listRef = useRef(null);
@@ -291,13 +368,25 @@ const FingerspellComponent = () => {
 
             <h4 className="text-xl font-black text-slate-900 mb-4">{selectedWordSign.word}</h4>
 
-            <div className="w-56 h-56 bg-slate-50 rounded-[20px] border border-slate-100 flex items-center justify-center p-4 mb-5 shadow-inner relative overflow-hidden">
+            <div
+              onClick={() => setPreviewGif(selectedWordSign)}
+              className="w-56 h-56 bg-slate-50 rounded-[20px] border border-slate-100 flex items-center justify-center p-4 mb-5 shadow-inner relative overflow-hidden cursor-pointer group/img hover:border-emerald-350 transition-all duration-300"
+              title="Click to play GIF animation"
+            >
               <img
                 src={selectedWordSign.image}
                 onError={(e) => { e.target.onerror = null; e.target.src = '/images/signlanguage/hand.png'; }}
                 alt={`ISL Sign for ${selectedWordSign.word}`}
-                className="w-full h-full object-contain mix-blend-multiply drop-shadow-sm"
+                className="w-full h-full object-contain mix-blend-multiply drop-shadow-sm group-hover/img:scale-105 transition-transform duration-300"
               />
+              <div className="absolute inset-0 bg-black/0 group-hover/img:bg-slate-900/5 flex flex-col items-center justify-center transition-all duration-300">
+                <div className="w-10 h-10 rounded-full bg-white/90 text-slate-800 flex items-center justify-center shadow-md scale-0 group-hover/img:scale-100 transition-all duration-300">
+                  <Play size={18} className="fill-current ml-0.5 text-emerald-600" />
+                </div>
+                <span className="text-[9px] font-bold text-slate-550 uppercase tracking-wider bg-white/95 px-2 py-0.5 rounded-full mt-2 shadow-sm scale-0 group-hover/img:scale-100 transition-all duration-300">
+                  Play GIF
+                </span>
+              </div>
             </div>
 
             <p className="text-slate-500 text-xs font-semibold leading-relaxed mb-6 px-4">
@@ -401,6 +490,59 @@ const FingerspellComponent = () => {
               <p className="text-slate-500 text-center font-medium leading-relaxed">
                 Practice the ISL sign for the alphabet <strong className="text-slate-800 text-lg">{zoomedChar}</strong>.
               </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* GIF Animation Modal */}
+      <AnimatePresence>
+        {previewGif && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm"
+            onClick={() => setPreviewGif(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="bg-white rounded-[32px] p-8 max-w-sm w-full relative flex flex-col items-center shadow-2xl border border-slate-100"
+              onClick={e => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setPreviewGif(null)}
+                className="absolute top-4 right-4 text-slate-400 hover:text-rose-500 bg-slate-100 hover:bg-rose-50 rounded-full p-2 transition-colors cursor-pointer"
+              >
+                <XCircle size={24} />
+              </button>
+
+              <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-wider mb-2 mt-2">
+                Sign Animation
+              </span>
+              <h4 className="text-3xl font-black text-slate-900 mb-6">{previewGif.word}</h4>
+
+              <div className="w-56 h-56 bg-slate-50 rounded-[24px] border-2 border-slate-100 flex items-center justify-center p-4 mb-6 shadow-inner relative overflow-hidden">
+                <img
+                  src={`/explore sign/${previewGif.word.toLowerCase()}.gif`}
+                  onError={(e) => { e.target.onerror = null; e.target.src = previewGif.image; }}
+                  alt={`Sign animation for ${previewGif.word}`}
+                  className="w-full h-full object-contain mix-blend-multiply"
+                />
+              </div>
+
+              <p className="text-slate-500 text-center font-medium leading-relaxed mb-6 px-4">
+                {previewGif.desc}
+              </p>
+
+              <button
+                onClick={() => setPreviewGif(null)}
+                className="w-full py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm transition-colors shadow-md shadow-emerald-500/20 cursor-pointer"
+              >
+                Got it!
+              </button>
             </motion.div>
           </motion.div>
         )}
