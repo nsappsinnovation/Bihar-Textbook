@@ -210,8 +210,7 @@ const dictionary = [
   { word: 'WALK', image: '/images/signlanguage/walk.png', desc: 'Mimic two legs walking by moving your flat hands back and forth.' },
   { word: 'WRITE', image: '/images/signlanguage/write.png', desc: 'Mimic writing with a pen on the open palm of your other hand.' },
   { word: 'READ', image: '/images/signlanguage/read.png', desc: 'Move your index and middle fingers down your open palm like scanning a page.' },
-  { word: 'HAPPY NEW YEAR', image: '/images/signlanguage/happynewyear.png', desc: 'Brush hands upward on your chest, then raise flat hands forward.' },
-  { word: 'CONGRATULATIONS', image: '/images/signlanguage/congratulations.png', desc: 'Clap hands and shake them forward in a celebratory gesture.' },
+  { word: 'HAPPY NEW YEAR', image: '/images/signlanguage/happynewyear.png', desc: 'Brush hands upward on your chest, then raise flat hands forward.' }
 ];
 
 const FingerspellComponent = () => {
