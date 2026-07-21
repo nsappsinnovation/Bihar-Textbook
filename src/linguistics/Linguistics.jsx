@@ -150,30 +150,30 @@ const Linguistics = () => {
       english: "How are you?",
       hindi: "आप कैसे हैं?",
       dialects: [
-        { name: "Maithili", text: "अहाँ केहन छी?", region: "Mithila (North Bihar)" },
-        { name: "Bhojpuri", text: "का हाल बा?", region: "Bhojpur (West Bihar)" },
-        { name: "Magahi", text: "का हाल हौ?", region: "Magadh (South Bihar)" },
-        { name: "Angika", text: "केहेन छौ?", region: "Anga (Southeast Bihar)" }
+        { name: "Maithili", text: "अहाँ केहन छी?", region: "Mithila (North Bihar)", syllables: "अ-हाँ के-हन छी? (A-hã ke-han chhi)" },
+        { name: "Bhojpuri", text: "का हाल बा?", region: "Bhojpur (West Bihar)", syllables: "का हाल बा? (Kaa haal baa)" },
+        { name: "Magahi", text: "का हाल हौ?", region: "Magadh (South Bihar)", syllables: "का हाल हौ? (Kaa haal hau)" },
+        { name: "Angika", text: "केहेन छौ?", region: "Anga (Southeast Bihar)", syllables: "के-हेन छौ? (Ke-hen chau)" }
       ]
     },
     {
       english: "What is your name?",
       hindi: "आपका नाम क्या है?",
       dialects: [
-        { name: "Maithili", text: "अहाँक नाम की अछि?", region: "Mithila (North Bihar)" },
-        { name: "Bhojpuri", text: "राउर नाम का ह?", region: "Bhojpur (West Bihar)" },
-        { name: "Magahi", text: "तोहर नाम की हौ?", region: "Magadh (South Bihar)" },
-        { name: "Angika", text: "तोहार नाम की छौ?", region: "Anga (Southeast Bihar)" }
+        { name: "Maithili", text: "अहाँक नाम की अछि?", region: "Mithila (North Bihar)", syllables: "अ-हाँक नाम की अ-छि? (A-hãk naam kee a-chhi)" },
+        { name: "Bhojpuri", text: "राउर नाम का ह?", region: "Bhojpur (West Bihar)", syllables: "रा-उर नाम का ह? (Raa-ur naam kaa ha)" },
+        { name: "Magahi", text: "तोहर नाम की हौ?", region: "Magadh (South Bihar)", syllables: "तो-हर नाम की हौ? (To-har naam kee hau)" },
+        { name: "Angika", text: "तोहार नाम की छौ?", region: "Anga (Southeast Bihar)", syllables: "तो-हार नाम की छौ? (To-haar naam kee chau)" }
       ]
     },
     {
       english: "Where are you going?",
       hindi: "आप कहाँ जा रहे हैं?",
       dialects: [
-        { name: "Maithili", text: "अहाँ कतय जा रहल छी?", region: "Mithila (North Bihar)" },
-        { name: "Bhojpuri", text: "रउआ कहाँ जात बानी?", region: "Bhojpur (West Bihar)" },
-        { name: "Magahi", text: "तू कहाँ जा रहल ह?", region: "Magadh (South Bihar)" },
-        { name: "Angika", text: "तूं कहाँ जाय रहलो छौ?", region: "Anga (Southeast Bihar)" }
+        { name: "Maithili", text: "अहाँ कतय जा रहल छी?", region: "Mithila (North Bihar)", syllables: "अ-हाँ क-तय जा र-हल छी? (A-hã ka-tay jaa ra-hal chhi)" },
+        { name: "Bhojpuri", text: "रउआ कहाँ जात बानी?", region: "Bhojpur (West Bihar)", syllables: "र-उ-आ क-हाँ जात बा-नी? (Ra-u-aa ka-hã jaat baa-nee)" },
+        { name: "Magahi", text: "तू कहाँ जा रहल ह?", region: "Magadh (South Bihar)", syllables: "तू क-हाँ जा र-हल ह? (Too ka-hã jaa ra-hal ha)" },
+        { name: "Angika", text: "तूं कहाँ जाय रहलो छौ?", region: "Anga (Southeast Bihar)", syllables: "तूं क-हाँ जाय र-ह-लो छौ? (Tũ ka-hã jaay ra-ha-lo chau)" }
       ]
     }
   ];
@@ -376,6 +376,9 @@ const Linguistics = () => {
                       </span>
                     </div>
                     <p className="text-xs sm:text-sm font-bold text-slate-100 group-hover:text-white transition-colors">{d.text}</p>
+                    {d.syllables && (
+                      <p className="text-[10px] text-purple-300/80 font-medium tracking-wide italic mt-0.5">{d.syllables}</p>
+                    )}
                   </div>
                 ))}
               </div>
