@@ -17,7 +17,7 @@ const AnimatedRoad = ({ speed = 2, isMoving = false, showCrosswalk = false, show
         <div className="absolute inset-x-0 h-1 top-1/2 -translate-y-1/2 flex overflow-hidden opacity-80">
           <motion.div 
             animate={isMoving ? { x: [0, -100] } : { x: 0 }} 
-            transition={{ repeat: Infinity, duration: speed, ease: "linear" }}
+            transition={{ repeat: isMoving ? Infinity : 0, duration: speed, ease: "linear" }}
             className="flex w-[200%]"
           >
             {[...Array(30)].map((_, i) => (
@@ -425,8 +425,8 @@ const DistractedSimulator = () => {
            animate={
              status === 'idle' ? { left: '20%', top: '50px', rotate: 0 }
              : focus === 'road' ? { left: '20%', top: ['50px', '40px', '60px', '50px'], rotate: 0 } // Safe: slight bumps
-             : status === 'crash' ? { left: '50%', top: '-20px', rotate: -45 } // Crash: drifts to top barrier
-             : { left: ['20%', '50%'], top: ['50px', '-20px'], rotate: [0, -45] } // Drifting motion
+             : status === 'crash' ? { left: '45%', top: '15px', rotate: -15 } // Crash: hits the barrier
+             : { left: ['20%', '45%'], top: ['50px', '15px'], rotate: [0, -15] } // Drifting motion
            }
            transition={{ 
              duration: status === 'idle' ? 0.5 : (status === 'crash' ? 0.2 : 2.5), 
@@ -435,7 +435,7 @@ const DistractedSimulator = () => {
            }}
            className="absolute z-30 drop-shadow-xl text-7xl scale-x-[-1]"
          >
-           🚙
+           {status === 'crash' ? '💥' : '🚙'}
            
            {/* The Phone Popup if distracted */}
            <AnimatePresence>
