@@ -104,7 +104,7 @@ const ListOfMD = () => {
         </motion.h1>
         
         <p className="text-slate-500 text-sm max-w-2xl mx-auto leading-relaxed font-medium">
-          Honoring the Managing Directors who have shaped the journey and success of Bihar State Text Book Publishing Corporation.
+          Honoring the Managing Directors who have shaped the journey and success of Bihar State Text Book Publishing Corporation Ltd.
         </p>
       </section>
 

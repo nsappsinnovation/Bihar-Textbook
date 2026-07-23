@@ -19,6 +19,9 @@ const MdMessage = () => {
       try {
         const parsed = JSON.parse(saved);
         if (parsed) {
+          if (parsed.name) {
+            parsed.name = parsed.name.replace(/^Shri\b/gi, 'Sri');
+          }
           setMdData(prev => ({ ...prev, ...parsed }));
         }
       } catch (e) {}

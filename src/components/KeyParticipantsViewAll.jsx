@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 // Data from KeyParticipant.jsx
 const industryData = [
   {
-    name: "Shri Samrat Choudhary",
+    name: "Sri Samrat Choudhary",
     role: "Hon'ble Chief Minister, Bihar",
     image: "/images/KeyParticipants/samrat.png",
     category: "Leadership",
@@ -18,13 +18,13 @@ const industryData = [
     category: "Leadership",
   },
   {
-    name: "Shri Vinod Singh Gunjiyal",
+    name: "Sri Vinod Singh Gunjiyal",
     role: "Secretary, Education Department",
     image: "/images/KeyParticipants/sri-vinod.png",
     category: "Leadership",
   },
   {
-    name: "Shri Yatendra Kumar Pal, IAS",
+    name: "Sri Yatendra Kumar Pal, IAS",
     role: "Managing Director, Bihar State Text Book Publishing Corporation (BSTBPC)",
     image: "/images/KeyParticipants/shri_yatendra_pal.png",
     category: "Leadership",
@@ -84,7 +84,7 @@ export default function KeyParticipantViewAll() {
             updated = true;
             return {
               ...item,
-              name: "Shri Vinod Singh Gunjiyal",
+              name: "Sri Vinod Singh Gunjiyal",
               role: "Secretary, Education Department",
               image: "/images/KeyParticipants/sri-vinod.png"
             };

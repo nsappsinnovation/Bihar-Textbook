@@ -50,7 +50,7 @@ export default function LeadersManagementPage({ addToast }) {
     return [
       { 
         id: 1, 
-        name: 'Shri Samrat Choudhary', 
+        name: 'Sri Samrat Choudhary', 
         role: "Hon'ble Chief Minister, Bihar", 
         tag: 'LEADERSHIP', 
         image: '/images/KeyParticipants/samrat.png' 
@@ -71,7 +71,7 @@ export default function LeadersManagementPage({ addToast }) {
       },
       { 
         id: 4, 
-        name: 'Shri Yatendra Kumar Pal, IAS', 
+        name: 'Sri Yatendra Kumar Pal, IAS', 
         role: 'Managing Director, Bihar State Text Book Publishing Corporation (BSTBPC)', 
         tag: 'LEADERSHIP', 
         image: '/images/KeyParticipants/shri_yatendra_pal.png' 

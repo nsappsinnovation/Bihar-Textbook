@@ -17,7 +17,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
     address: 'Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001' 
   });
   const [mdData, setMdData] = useState({
-    name: 'Shri Yatendra Kumar Pal',
+    name: 'Sri Yatendra Kumar Pal',
     designation: 'Managing Director',
     photo: '/images/KeyParticipants/shri_yatendra_pal.png',
     quote: 'Ensuring that textiles of knowledge reach every student in Bihar, timely and with uncompromised quality.',
