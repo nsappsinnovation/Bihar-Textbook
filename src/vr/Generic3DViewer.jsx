@@ -229,8 +229,8 @@ const AtomicModel = () => {
       />
       <InteractiveLabel 
         position={[7, 3, 0]} 
-        title="Electron Orbit" 
-        description="Negatively charged electrons travel around the nucleus at incredible speeds in specific energy levels or orbitals, bound by electromagnetic forces."
+        title="Electron Orbit (Bohr Model)" 
+        description="3 negatively charged electrons revolve around the nucleus in fixed orbits (Rutherford-Bohr Model of a Lithium atom)."
         colorClass="text-green-400"
       />
     </group>
@@ -247,8 +247,8 @@ const Generic3DViewer = ({ activeModel = 'dna' }) => {
       };
       case 'atom': return { 
         title: 'Physics: Atomic Structure', 
-        sub: 'Quantum Mechanics • Electron Orbits',
-        vrText: 'Atoms build everything in the world, but they are invisible! With VR, we can step inside an atom, watch electrons zoom around, and see science in action.'
+        sub: 'Rutherford-Bohr Model • Lithium (Li) Atom',
+        vrText: 'Atoms build everything in the world, but they are invisible! This 3D model depicts the Rutherford-Bohr Model of a Lithium atom (Li), showing 3 electrons orbiting the dense central nucleus (protons & neutrons).'
       };
       default: return { 
         title: 'Genetics: 3D DNA Strand', 

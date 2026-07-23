@@ -7,7 +7,8 @@ import {
   Sliders, 
   Glasses, Hand, Box, MousePointerClick, 
   Paintbrush, Layers, Maximize, Minimize, Globe, 
-  Gamepad2, Search, Zap, Hexagon, XCircle, Heart
+  Gamepad2, Search, Zap, Hexagon, XCircle, Heart,
+  ChevronDown, Check
 } from 'lucide-react';
 import Real3DHeart from './Real3DHeart';
 import Real3DBrain from './Real3DBrain';
@@ -46,6 +47,71 @@ const TexturedEarth = () => {
       <sphereGeometry args={[2.5, 64, 64]} />
       <meshBasicMaterial map={texture} />
     </mesh>
+  );
+};
+
+const CustomDropdown = ({ icon: Icon, placeholder, value, options, activeTab, tabKey, onSelect }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const isActive = activeTab === tabKey;
+  const selectedOption = options.find(o => o.value === value);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <button
+        type="button"
+        onClick={() => setIsOpen(!isOpen)}
+        className={`flex items-center gap-2 px-3.5 py-2 rounded-xl font-extrabold text-[13px] transition-all cursor-pointer ${
+          isActive 
+            ? 'bg-blue-600 text-white shadow-md' 
+            : 'text-slate-500 hover:text-blue-600 hover:bg-white'
+        }`}
+      >
+        <Icon size={16} />
+        <span>{isActive && selectedOption ? selectedOption.label : placeholder}</span>
+        <ChevronDown size={14} className={`transition-transform duration-200 opacity-70 ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+
+      {isOpen && (
+        <div className="absolute top-full left-0 mt-2 w-52 bg-white/95 backdrop-blur-xl border border-slate-200/90 rounded-2xl shadow-2xl z-50 p-1.5 animate-in fade-in zoom-in-95 duration-150">
+          <div className="text-[10px] font-black uppercase tracking-wider text-slate-400 px-3 py-1.5 border-b border-slate-100 mb-1">
+            {placeholder}
+          </div>
+          {options.map((opt) => {
+            const isSelected = isActive && value === opt.value;
+            return (
+              <button
+                key={opt.value}
+                type="button"
+                onClick={() => {
+                  onSelect(opt.value);
+                  setIsOpen(false);
+                }}
+                className={`w-full text-left px-3 py-2 rounded-xl text-xs font-extrabold transition-all flex items-center justify-between cursor-pointer ${
+                  isSelected 
+                    ? 'bg-blue-50 text-blue-600' 
+                    : 'text-slate-700 hover:bg-slate-100/80 hover:text-blue-600'
+                }`}
+              >
+                <span>{opt.label}</span>
+                {isSelected && <Check size={14} className="text-blue-600" />}
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
   );
 };
 
@@ -174,7 +240,7 @@ const VrVirtualLab = () => {
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-emerald-400/5 rounded-full blur-[100px] pointer-events-none" />
 
       {/* Header controls */}
-      <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-4 border-b border-indigo-100/50 pb-5 mb-6 relative z-10">
+      <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-4 border-b border-indigo-100/50 pb-5 mb-6 relative z-40">
         <div>
           <h2 className="text-xl md:text-2xl font-black text-black tracking-tight">
             Interactive Digital Laboratory
@@ -184,7 +250,7 @@ const VrVirtualLab = () => {
 
         <div className="flex flex-wrap items-center gap-3">
           {/* Tab Buttons */}
-          <div className="flex gap-2 bg-white/60 backdrop-blur-md p-1.5 rounded-2xl border border-white shadow-sm shrink-0">
+          <div className="flex gap-2 bg-white/60 backdrop-blur-md p-1.5 rounded-2xl border border-white shadow-sm shrink-0 relative z-50">
             <button 
               onClick={() => setActiveTab('vr-headset')}
               className={`px-4 py-2 rounded-xl font-extrabold text-[13px] transition-all flex items-center gap-2 ${
@@ -194,39 +260,39 @@ const VrVirtualLab = () => {
               <Glasses size={16} /> VR Headset Demo
             </button>
             
-            <div className={`flex items-center gap-2 px-1 rounded-xl transition-all ${activeTab === '3d-viewer' ? 'bg-blue-600 text-white shadow-md' : 'hover:bg-white text-slate-500'}`}>
-               <Box size={16} className="ml-3" />
-               <select 
-                 value={activeTab === '3d-viewer' ? activeViewerModel : ''} 
-                 onChange={(e) => {
-                   setActiveTab('3d-viewer');
-                   setActiveViewerModel(e.target.value);
-                 }}
-                 className={`py-2 pr-4 bg-transparent font-extrabold text-[13px] outline-none cursor-pointer ${activeTab === '3d-viewer' ? 'text-white' : 'text-slate-500 hover:text-blue-600'}`}
-               >
-                 <option value="" disabled hidden>3D Object Viewer</option>
-                 <option value="dna" className="text-slate-700">DNA Strand</option>
-                 <option value="virus" className="text-slate-700">Bacteriophage Virus</option>
-                 <option value="atom" className="text-slate-700">Atomic Structure</option>
-               </select>
-            </div>
+            <CustomDropdown 
+              icon={Box}
+              placeholder="3D Object Viewer"
+              value={activeViewerModel}
+              activeTab={activeTab}
+              tabKey="3d-viewer"
+              options={[
+                { label: 'DNA Strand', value: 'dna' },
+                { label: 'Bacteriophage Virus', value: 'virus' },
+                { label: 'Atomic Structure', value: 'atom' }
+              ]}
+              onSelect={(val) => {
+                setActiveTab('3d-viewer');
+                setActiveViewerModel(val);
+              }}
+            />
             
-            <div className={`flex items-center gap-2 px-1 rounded-xl transition-all ${activeTab === '3d-anatomy' ? 'bg-blue-600 text-white shadow-md' : 'hover:bg-white text-slate-500'}`}>
-               <Layers size={16} className="ml-3" />
-               <select 
-                 value={activeTab === '3d-anatomy' ? activeModel : ''} 
-                 onChange={(e) => {
-                   setActiveTab('3d-anatomy');
-                   setActiveModel(e.target.value);
-                 }}
-                 className={`py-2 pr-4 bg-transparent font-extrabold text-[13px] outline-none cursor-pointer ${activeTab === '3d-anatomy' ? 'text-white' : 'text-slate-500 hover:text-blue-600'}`}
-               >
-                 <option value="" disabled hidden>3D Anatomy Explorer</option>
-                 <option value="heart" className="text-slate-700">Human Heart</option>
-                 <option value="brain" className="text-slate-700">Human Brain</option>
-                 <option value="skeleton" className="text-slate-700">Skeleton Structure</option>
-               </select>
-            </div>
+            <CustomDropdown 
+              icon={Layers}
+              placeholder="3D Anatomy Explorer"
+              value={activeModel}
+              activeTab={activeTab}
+              tabKey="3d-anatomy"
+              options={[
+                { label: 'Human Heart', value: 'heart' },
+                { label: 'Human Brain', value: 'brain' },
+                { label: 'Skeleton Structure', value: 'skeleton' }
+              ]}
+              onSelect={(val) => {
+                setActiveTab('3d-anatomy');
+                setActiveModel(val);
+              }}
+            />
 
             <button 
               onClick={() => setActiveTab('color')}
