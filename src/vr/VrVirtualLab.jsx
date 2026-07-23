@@ -141,14 +141,6 @@ const VrVirtualLab = () => {
             </details>
           </div>
 
-          <div className="flex gap-8 items-center justify-center pointer-events-none w-full relative z-10">
-            <div className="w-48 h-48 md:w-80 md:h-80 border-[8px] border-slate-900 rounded-full shadow-[0_0_50px_rgba(0,0,0,0.9)_inset] backdrop-blur-[1px] flex items-center justify-center bg-transparent">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-sky-500/10 to-transparent" />
-            </div>
-            <div className="w-48 h-48 md:w-80 md:h-80 border-[8px] border-slate-900 rounded-full shadow-[0_0_50px_rgba(0,0,0,0.9)_inset] backdrop-blur-[1px] flex items-center justify-center bg-transparent">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-sky-500/10 to-transparent" />
-            </div>
-          </div>
           <div className="absolute bottom-8 text-white bg-black/70 px-6 py-3 rounded-full text-sm font-bold border border-white/10 tracking-widest uppercase pointer-events-none z-20">
             Drag Earth to rotate 360°
           </div>
