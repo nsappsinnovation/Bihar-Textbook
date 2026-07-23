@@ -139,7 +139,7 @@ const Notice = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-white/60 text-xs md:text-sm max-w-xl mx-auto leading-relaxed font-light"
           >
-            Stay updated with official notices, circulars, tenders & important announcements from the Bihar State Text Book Publishing Corporation.
+            Stay updated with official notices, circulars, tenders & important announcements from the Bihar State Text Book Publishing Corporation Ltd.
           </motion.p>
           
           <motion.div 

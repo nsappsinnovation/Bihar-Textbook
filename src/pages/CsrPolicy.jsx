@@ -82,7 +82,7 @@ const CsrPolicy = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="text-[40px] md:text-[56px] font-black text-slate-900 leading-[1.1] tracking-tight mb-8"
+              className="text-[40px] md:text-[64px] font-display font-black text-slate-900 leading-[1.1] tracking-tight mb-8"
             >
               Empowering <span className="text-blue-700">Communities</span>,<br />
               Transforming <span className="text-blue-700">Futures</span>

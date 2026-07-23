@@ -37,13 +37,9 @@ function Blog() {
                 <header className="pt-16 pb-14 px-4 text-center">
 
 
-                    <h3 className="text-4xl md:text-6xl font-semibold tracking-tight mb-6">
-
-                        <span className="bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent
-        transition-all duration-300">
-                          Gyan Kendra
-                        </span>
-                    </h3>
+                    <h1 className="text-3xl md:text-5xl lg:text-6xl font-display font-black text-slate-900 leading-[1.1] mb-2 tracking-tight">
+                      Gyan <span className="text-blue-600">Kendra</span>
+                    </h1>
 
                     <p
                         className="

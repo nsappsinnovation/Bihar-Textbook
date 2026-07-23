@@ -35,16 +35,7 @@ const Sidebar = ({ classes, currentClassId }) => {
 
     return (
         <div className="w-full md:w-64 flex-shrink-0 flex flex-col pt-6 px-4 h-full z-30 select-none overflow-hidden">
-            {/* Fixed Brand Header */}
             <div className="shrink-0">
-                <div className="px-3 mb-6 flex items-center gap-3">
-                    <img src="/bstbpc_logo.png" alt="BSTBPC Logo" className="h-10 w-auto object-contain" />
-                    <div className="flex flex-col">
-                        <span className="text-2xl font-black text-blue-700 leading-none tracking-tighter">BSTBPC</span>
-                        <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest mt-1">Textbooks</span>
-                    </div>
-                </div>
-
                 <div className="px-3 mb-2 flex items-center justify-between">
                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Classes</span>
                 </div>

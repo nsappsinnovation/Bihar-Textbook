@@ -51,7 +51,7 @@ const Books = () => {
   });
 
   return (
-    <div className="flex h-screen overflow-hidden bg-white font-sans">
+    <div className="flex h-[calc(100vh-6rem)] overflow-hidden bg-white font-sans">
 
       {/* Mobile Sidebar Toggle Overlay */}
       {isSidebarOpen && (
@@ -64,7 +64,7 @@ const Books = () => {
       {/* Sidebar Container */}
       <aside
         className={`
-          fixed top-0 bottom-0 left-0 w-64 z-20 bg-white border-r border-slate-200 transform transition-transform duration-300 ease-in-out md:translate-x-0 md:sticky md:top-0 md:h-screen md:flex md:flex-col
+          fixed top-0 bottom-0 left-0 w-64 z-20 bg-white border-r border-slate-200 transform transition-transform duration-300 ease-in-out md:translate-x-0 md:sticky md:top-0 md:h-[calc(100vh-6rem)] md:flex md:flex-col
           ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
         `}
       >
@@ -72,7 +72,7 @@ const Books = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 w-full min-w-0 bg-slate-50/50 h-screen overflow-y-auto scrollbar-hide" data-lenis-prevent="true">
+      <main className="flex-1 w-full min-w-0 bg-slate-50/50 h-[calc(100vh-6rem)] overflow-y-auto scrollbar-hide" data-lenis-prevent="true">
 
         {/* Mobile Header */}
         <div className="md:hidden sticky top-0 z-30 bg-white border-b border-slate-200 px-4 py-3 flex items-center justify-between">
@@ -84,39 +84,37 @@ const Books = () => {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-4 pb-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-4 pb-16">
 
           {/* --- Hero Section --- */}
-          <div className="mb-6 mt-2 flex flex-col lg:flex-row items-center justify-between gap-10">
+          <div className="mb-5 flex flex-col lg:flex-row items-center justify-between gap-4">
             
             {/* Left Content (Text) */}
-            <div className="flex-1 flex flex-col gap-2 text-center lg:text-left mt-0">
-              <h2 className="text-5xl md:text-6xl font-extrabold text-[#0B1A40] tracking-tight mb-1 leading-tight whitespace-nowrap">
-                {classData.name} Textbooks
-              </h2>
-              <p className="text-slate-500 text-sm md:text-base leading-relaxed max-w-xl">
-                Access the complete collection of Bihar Board textbooks for {classData.name}. 
-                <br className="hidden md:block" /> Select a book to read online.
+            <div className="flex-1 flex flex-col gap-1 text-center lg:text-left mt-0">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-display font-black text-slate-900 leading-[1.1] mb-1 tracking-tight">
+                {classData.name} <span className="text-blue-600">Textbooks</span>
+              </h1>
+              <p className="text-slate-500 text-xs md:text-sm leading-relaxed max-w-xl">
+                Access the complete collection of Bihar Board textbooks for {classData.name}. Select a book to read online.
               </p>
             </div>
 
-            {/* Middle Content (Search Bar) */}
-            <div className="w-full lg:w-64 shrink-0 flex justify-center lg:justify-start -mt-15">
+            {/* Right Content (Search Bar) */}
+            <div className="w-full lg:w-64 shrink-0 flex justify-center lg:justify-end">
               <div className="relative w-full">
-                <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                  <Search size={16} className="text-slate-400" />
+                <div className="absolute inset-y-0 left-3.5 flex items-center pointer-events-none">
+                  <Search size={15} className="text-slate-400" />
                 </div>
                 <input
                   type="text"
                   placeholder="Search books..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-sm"
+                  className="w-full pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-full text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-sm"
                 />
               </div>
             </div>
 
-            
           </div>
 
           {/* --- Books Grid --- */}

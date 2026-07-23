@@ -28,7 +28,7 @@ const Contact = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-[56px] font-black tracking-tight mb-4 text-white"
+            className="text-4xl md:text-[58px] font-display font-black tracking-tight mb-4 text-white"
           >
             Contact <span className="text-blue-300">Us</span>
           </motion.h1>
