@@ -19,11 +19,6 @@ const Gallery = lazy(() => import("./pages/Gallery.jsx"));
 const Document = lazy(() => import("./pages/Document.jsx"));
 const Ling = lazy(() => import("./linguistics/Ling.jsx"));
 const LingModule = lazy(() => import("./linguistics/LingModule.jsx"));
-const PublishingMission = lazy(() => import("./pages/missions/PublishingMission.jsx"));
-const VrMission = lazy(() => import("./pages/missions/VrMission.jsx"));
-const SignLanguageMission = lazy(() => import("./pages/missions/SignLanguageMission.jsx"));
-const MultilingualMission = lazy(() => import("./pages/missions/MultilingualMission.jsx"));
-const AudiobooksMission = lazy(() => import("./pages/missions/AudiobooksMission.jsx"));
 const Sign = lazy(() => import("./signLanguage/Signlanguage.jsx"));
 const SignLearn = lazy(() => import("./signLanguage/SignLearn.jsx"));
 const Linguistics = lazy(() => import("./linguistics/Linguistics.jsx"));
@@ -66,8 +61,7 @@ function App() {
      "/audio-books", 
     "/cyber-security", "/heritage-archive", 
     "/basic-skills", "/ling/words", "/ling/phrases", "/ling/conversations",
-    "/pustak-mela", "/mobile-library",
-    "/publishing-mission", "/vr-mission", "/sign-language-mission", "/multilingual-mission", "/audiobooks-mission"
+    "/pustak-mela", "/mobile-library"
   ].includes(location.pathname);
 
   const isNoNavPage = isIsolatedPage;
@@ -162,13 +156,6 @@ function App() {
               <Route path="/notice" element={<Notice />} />
               <Route path="/tenders" element={<Tenders />} />
               <Route path="/csr-policy" element={<CsrPolicy />} />
-
-              {/* Missions */}
-              <Route path="/publishing-mission" element={<PublishingMission />} />
-              <Route path="/vr-mission" element={<VrMission />} />
-              <Route path="/sign-language-mission" element={<SignLanguageMission />} />
-              <Route path="/multilingual-mission" element={<MultilingualMission />} />
-              <Route path="/audiobooks-mission" element={<AudiobooksMission />} />
     
               {/* Misc */}
               <Route path="/key-participants" element={<KeyParticipantViewAll />} />

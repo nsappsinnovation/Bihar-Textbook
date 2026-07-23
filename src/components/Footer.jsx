@@ -51,7 +51,7 @@ const Footer = () => {
             </h4>
             <ul className="space-y-3 pt-2">
               <FooterLink to="/" label="Home" />
-              <FooterLink to="/books/Class1" label="Textbooks" />
+              <FooterLink to="/books/1" label="Textbooks" />
               <FooterLink to="/notice" label="Notices & Circulars" />
               <FooterLink to="/tenders" label="Tenders" />
               <FooterLink to="/gallery/photo" label="Gallery" />
