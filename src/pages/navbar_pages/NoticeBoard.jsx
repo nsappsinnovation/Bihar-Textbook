@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ArrowUpRight, Bell, Eye, Activity, Calendar, Hash, FileText, Award } from "lucide-react";
+import { ArrowUpRight, Bell, Eye, Activity, Calendar, FileText, Award } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -75,7 +75,7 @@ const NoticeCard = ({ notice }) => (
 
       <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-500 mt-2">
         <span className="flex items-center gap-1.5 bg-slate-50 px-2 py-1 rounded-md border border-slate-100">
-          <Hash size={12} className="text-slate-400" /> Ref: {notice.ref}
+          Ref: {notice.ref}
         </span>
         {notice.deadline && (
           <span className="flex items-center gap-1.5 text-amber-600 bg-amber-50 px-2 py-1 rounded-md border border-amber-100">
@@ -161,7 +161,7 @@ export default function NoticeBoard() {
                 Official Notices <br /> <span className="text-slate-400 font-medium">& Circulars</span>
               </h2>
               <p className="text-sm text-slate-500 font-medium leading-relaxed mb-4">
-                Stay updated with the latest administrative announcements, active tenders, and educational circulars from the Bihar State Text Book Publishing Corporation.
+                Stay updated with the latest administrative announcements, active tenders, and educational circulars from the Bihar State Text Book Publishing Corporation Ltd.
               </p>
 
               {/* Premium Stats Overview Widget */}
