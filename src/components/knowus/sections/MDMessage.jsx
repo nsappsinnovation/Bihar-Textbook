@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const MdMessage = () => {
   const [mdData, setMdData] = useState({
-    name: 'Shri Yatendra Kumar Pal',
+    name: 'Sri Yatendra Kumar Pal',
     photo: '/images/KeyParticipants/shri_yatendra_pal.png',
     welcomeNote: 'It gives me immense pleasure to connect with all stakeholders through this platform. The Bihar State Text Book Publishing Corporation Ltd. plays a pivotal role in strengthening the foundation of education by ensuring the timely production and distribution of quality textbooks across the state.'
   });
@@ -142,9 +142,7 @@ const MdMessage = () => {
             </div>
           </div>
 
-          <p className="text-center text-[15px] font-medium text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            Through strategic planning and continuous monitoring, we ensure that textbooks reach students before the commencement of the academic session.
-          </p>
+         
         </div>
 
         {/* Focus on Quality & Innovation */}
@@ -201,7 +199,7 @@ const MdMessage = () => {
             <p 
               className="text-[18px] md:text-[20px] text-blue-700 font-serif italic font-semibold leading-relaxed text-center md:text-left"
             >
-              Bihar State Text Book Publishing Corporation
+              Bihar State Text Book Publishing Corporation Ltd.
             </p>
           </div>
         </div>
