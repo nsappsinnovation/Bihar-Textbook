@@ -128,7 +128,7 @@ const CoreMissions = () => {
             The Eight <span className="text-blue-600/90">Core Pillars</span>
           </h2>
           <p className="max-w-3xl mx-auto text-gray-500 text-lg font-light leading-relaxed">
-            A structured framework guiding BSTPC’s mission to strengthen learning outcomes across Bihar.
+            A structured framework guiding BSTBPC’s mission to strengthen learning outcomes across Bihar.
           </p>
         </div>
 

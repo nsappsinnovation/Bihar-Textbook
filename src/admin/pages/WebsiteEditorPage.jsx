@@ -17,13 +17,13 @@ export default function WebsiteEditorPage({ module, addToast }) {
     address: 'Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001' 
   });
   const [mdData, setMdData] = useState({
-    name: 'Sri Yatendra Kumar Pal',
+    name: 'Shri Yatendra Kumar Pal',
     designation: 'Managing Director',
     photo: '/images/KeyParticipants/shri_yatendra_pal.png',
     quote: 'Ensuring that textiles of knowledge reach every student in Bihar, timely and with uncompromised quality.',
     welcomeNote: 'It gives me immense pleasure to connect with all stakeholders through this platform. The Bihar State Text Book Publishing Corporation Ltd. plays a pivotal role in strengthening the foundation of education by ensuring the timely production and distribution of quality textbooks across the state.',
     qualityNote: 'Quality remains at the core of our operations. From manuscript approval to final printing, every stage undergoes strict supervision and inspection.',
-    collaboration: 'The successful execution of our responsibilities is possible through the collective efforts of our officers, employees, registered printers, wholesalers, depot staff, and education departments across districts.',
+    collaboration: 'The successful execution of our responsibilities is possible through the collective efforts of our officers, employees, empanalled printers, and education departments across districts.',
     movingForward: 'As we move ahead, our vision remains clear — to ensure that every student in Bihar receives quality textbooks on time, without compromise.'
   });
   const categoryOptions = ["Stakeholder", "Educational", "Corporate", "HR", "General"];
@@ -79,7 +79,51 @@ export default function WebsiteEditorPage({ module, addToast }) {
           if (parsedArray.length === 0 && (module === 'ku-board' || module === 'gl-photo' || module === 'gl-video' || module === 'gl-press' || module === 'ku-list-md' || module === 'ku-officers' || module === 'ku-employees')) {
             dataLoaded = false; 
           } else if (parsedArray.length > 0) {
-            setContent(parsedArray);
+            let processedArray = parsedArray;
+            let hasFixes = false;
+            
+            if (module.startsWith('gl-')) {
+              const defaults = module === 'gl-photo' ? [
+                "/images/hero/classroom.png", "/images/hero/audio.png", "/images/hero/vr.png", "/images/hero/sign.png", "/images/hero/linguistic.png", "/images/csr.png"
+              ] : module === 'gl-video' ? [
+                "/images/hero/classroom.png", "/images/hero/audio.png", "/images/hero/vr.png", "/images/KeyParticipants/shri_yatendra_pal.png", "/images/hero/sign.png", "/images/hero/linguistic.png"
+              ] : [
+                "/images/hero/classroom.png", "/images/hero/audio.png", "/images/hero/vr.png", "/images/hero/sign.png", "/images/hero/linguistic.png"
+              ];
+              
+              const getYouTubeIdLocal = (url) => {
+                if (!url) return null;
+                const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+                const match = url.match(regExp);
+                return (match && match[2].length === 11) ? match[2] : null;
+              };
+
+              processedArray = parsedArray.map((item) => {
+                const doc = item.document;
+                if (!doc || typeof doc !== 'string' || doc.trim() === "" || doc === "undefined" || doc === "null") {
+                  hasFixes = true;
+                  let autoThumbnail = "";
+                  if (module === 'gl-video' && item.videoUrl) {
+                    const ytId = getYouTubeIdLocal(item.videoUrl);
+                    if (ytId) autoThumbnail = `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg`;
+                  }
+                  
+                  let finalFallback = autoThumbnail;
+                  if (!finalFallback) {
+                    finalFallback = module === 'gl-video' ? "/images/hero/audio.png" : "/images/hero/classroom.png";
+                  }
+                  
+                  return { ...item, document: finalFallback };
+                }
+                return item;
+              });
+            }
+
+            setContent(processedArray);
+            if (hasFixes) {
+               localStorage.setItem(`module_content_${module}`, JSON.stringify(processedArray));
+               window.dispatchEvent(new Event('storage'));
+            }
             dataLoaded = true;
           }
         }
@@ -124,28 +168,42 @@ export default function WebsiteEditorPage({ module, addToast }) {
         ];
       } else if (module === 'gl-photo') {
         dummy = [
-          { id: 1, title: "Bihar Text Book Corporation", document: "/images/hero_classroom.png", span: "col-span-1 md:col-span-2 row-span-2", category: "General" },
-          { id: 2, title: "Digital Initiative", document: "/images/hero_digital.png", span: "col-span-1 md:col-span-1 row-span-1", category: "Digital" },
-          { id: 3, title: "AI Learning", document: "/images/hero_ai_new.png", span: "col-span-1 md:col-span-1 row-span-1", category: "AI" },
-          { id: 4, title: "Audio Books", document: "/images/hero_audio_new.png", span: "col-span-1 md:col-span-1 row-span-2", category: "Audio" },
-          { id: 5, title: "Archive Section", document: "/images/hero_archive.png", span: "col-span-1 md:col-span-2 row-span-1", category: "Archive" },
+          { id: 1, title: "Primary Classroom Learning Environment", document: "/images/hero/classroom.png" },
+          { id: 2, title: "E-Learning & Digital Books Portal", document: "/images/hero/audio.png" },
+          { id: 3, title: "Mobile VR Lab Tour Experience", document: "/images/hero/vr.png" },
+          { id: 4, title: "Inclusive Sign Language Training Class", document: "/images/hero/sign.png" },
+          { id: 5, title: "Diverse Regional Dialects Learning Program", document: "/images/hero/linguistic.png" },
+          { id: 6, title: "Corporate Social Responsibility Initiatives", document: "/images/csr.png" },
+          { id: 7, title: "Educational Campaigns", document: "/images/goodnight.png" },
+          { id: 8, title: "Key Participant Session", document: "/images/KeyParticipants/sri_mithlesh.png" },
+          { id: 9, title: "Conference Highlights", document: "/images/KeyParticipants/girish_kumar_choudhary.png" },
+          { id: 10, title: "Academic Discussions", document: "/images/KeyParticipants/abhyanand.png" },
+          { id: 11, title: "Leadership Meeting", document: "/images/KeyParticipants/sri-vinod.png" },
+          { id: 12, title: "Executive Briefing", document: "/images/KeyParticipants/shri_yatendra_pal.png" },
+          { id: 13, title: "Community Outreach", document: "/images/KeyParticipants/samrat.png" },
+          { id: 14, title: "Student Engagement", document: "/images/KeyParticipants/anand.png" }
         ];
       } else if (module === 'gl-video') {
         dummy = [
-          { id: 1, title: "Bihar Film City Meeting", document: "/gallery/biharFilmCityMeeting.jpeg", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Meeting" },
-          { id: 2, title: "MD Speech Highlights", document: "/gallery/rubymam.jpeg", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Speech" },
-          { id: 3, title: "Event Recording", document: "/gallery/rubymam2.jpeg", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Event" },
+          { id: 1, title: "Bihar Digital Classrooms Launch Highlights", document: "/images/hero/classroom.png", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Launch" },
+          { id: 2, title: "Rural Literacy Outreach & Community Distribution Drives", document: "/images/hero/audio.png", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Community" },
+          { id: 3, title: "Teacher Training Workshop on Interactive Smart Textbooks", document: "/images/hero/vr.png", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Training" },
+          { id: 4, title: "Academic Session 2026-27 High-Level Inauguration Ceremony", document: "/images/KeyParticipants/shri_yatendra_pal.png", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Ceremony" },
+          { id: 5, title: "Accessible Audio Books and Inclusive Pedagogy Program", document: "/images/hero/sign.png", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Program" },
+          { id: 6, title: "Smart AI Revision Modules Student Pilot Feedback", document: "/images/hero/linguistic.png", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Feedback" }
         ];
       } else if (module === 'gl-press') {
         dummy = [
-          { id: 1, title: "State Education Summit 2026", document: "/images/hero_classroom.png", category: "News" },
-          { id: 2, title: "Annual Report Release", document: "/images/hero_archive.png", category: "Press" },
-          { id: 3, title: "New Digital Library Launch", document: "/images/hero_digital.png", category: "Update" },
+          { id: 1, title: "Launch of Digital Learning Initiatives Across 500 Schools", document: "/images/hero/classroom.png", category: "Initiatives", desc: "The State Text Book Publishing Corporation today announced a major rollout of VR and AR educational tools, aiming to modernize learning infrastructure in rural districts.", date: "2025-10-15" },
+          { id: 2, title: "New Curriculum Guidelines Released for Upcoming Academic Year", document: "/images/hero/audio.png", category: "Curriculum", desc: "Updated guidelines emphasize regional history, environmental awareness, and foundational literacy skills. All textbooks have been revised accordingly.", date: "2025-09-28" },
+          { id: 3, title: "Partnership Announced with National Digital Library", document: "/images/hero/vr.png", category: "Partnerships", desc: "To expand access to supplementary reading materials across remote districts, a strategic partnership has been formalized.", date: "2025-08-10" },
+          { id: 4, title: "Annual Board Meeting Summary and Future Outlook", document: "/images/hero/sign.png", category: "Corporate", desc: "Key stakeholders convened to discuss the previous quarter's achievements and outline strategic directions for upcoming distributions.", date: "2025-07-22" },
+          { id: 5, title: "NEP 2020 Textbook Alignment Milestone Completed", document: "/images/hero/linguistic.png", category: "Reform", desc: "The corporation has successfully completed the alignment of all primary and secondary level textbooks with the New Education Policy 2020 standards.", date: "2025-05-10" },
         ];
       } else if (module === 'ku-list-md') {
         dummy = [
-          { id: 1, title: "Sri Sunny Sinha", from: "29/11/2023", to: "29/04/2024" },
-          { id: 2, title: "Sri Baidya Nath Yadav, IAS", from: "09/04/2023", to: "29/11/2023" },
+          { id: 1, title: "Shri Sunny Sinha", from: "29/11/2023", to: "29/04/2024" },
+          { id: 2, title: "Shri Baidya Nath Yadav, IAS", from: "09/04/2023", to: "29/11/2023" },
           { id: 3, title: "Shri Manoj Kumar IAS", from: "05/08/2021", to: "31/12/2022" },
           { id: 4, title: "Dr. Ranjit Kumar Singh IAS", from: "18/09/2019", to: "30/07/2021" },
           { id: 5, title: "Shri Arvind Kumar Verma IAS", from: "14/05/2018", to: "31/08/2019" },
@@ -212,18 +270,64 @@ export default function WebsiteEditorPage({ module, addToast }) {
     setIsModalOpen(true);
   };
 
-  const handleFileUpload = (e) => {
+  const handleFileUpload = (e, field = 'document') => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData(prev => ({ 
-          ...prev, 
-          document: reader.result 
-        }));
-        addToast?.('File Ready', 'success');
-      };
-      reader.readAsDataURL(file);
+      const maxSize = field === 'uploadedVideo' ? 5 * 1024 * 1024 : 2 * 1024 * 1024; // 5MB for video, 2MB for images/docs
+      if (file.size > maxSize) {
+        addToast?.(`File too large! Max allowed is ${field === 'uploadedVideo' ? '5MB' : '2MB'}.`, 'error');
+        alert(`Error: File exceeds the maximum limit of ${field === 'uploadedVideo' ? '5' : '2'}MB.`);
+        return;
+      }
+
+      if (file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const MAX_WIDTH = 800;
+            const MAX_HEIGHT = 800;
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+              if (width > MAX_WIDTH) {
+                height *= MAX_WIDTH / width;
+                width = MAX_WIDTH;
+              }
+            } else {
+              if (height > MAX_HEIGHT) {
+                width *= MAX_HEIGHT / height;
+                height = MAX_HEIGHT;
+              }
+            }
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.6); // Compress to 60% quality JPEG
+            
+            setFormData(prev => ({ 
+              ...prev, 
+              [field]: dataUrl 
+            }));
+            addToast?.('Image Optimized & Ready', 'success');
+          };
+          img.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setFormData(prev => ({ 
+            ...prev, 
+            [field]: reader.result 
+          }));
+          addToast?.('File Ready', 'success');
+        };
+        reader.readAsDataURL(file);
+      }
     }
   };
 
@@ -235,6 +339,8 @@ export default function WebsiteEditorPage({ module, addToast }) {
       type: item.type || 'PDF', 
       category: item.category || 'Stakeholder', 
       document: item.document || '',
+      uploadedVideo: item.uploadedVideo || '',
+      date: item.date || '',
       designation: item.designation || '',
       since: item.since || '',
       status: item.status || 'Active',
@@ -250,18 +356,47 @@ export default function WebsiteEditorPage({ module, addToast }) {
 
   const saveItem = () => {
     let updated;
-    if (editingItem) {
-      updated = content.map(i => i.id === editingItem.id ? { ...editingItem, ...formData } : i);
-      addToast?.('Item Updated', 'success');
-      logActivity(`Updated ${formData.title || 'Item'} in ${getModuleName(module)}`, 'Admin', 'edit');
-    } else {
-      updated = [...content, { id: Date.now(), ...formData }];
-      addToast?.('Item Added', 'success');
-      logActivity(`Added ${formData.title || 'Item'} to ${getModuleName(module)}`, 'Admin', 'create');
+    const finalFormData = { ...formData };
+    
+    // Auto-assign default image if none is provided
+    if (module.startsWith('gl-') && (!finalFormData.document || finalFormData.document.trim() === "")) {
+      if (module === 'gl-video') {
+        const getYouTubeId = (url) => {
+          if (!url) return null;
+          const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+          const match = url.match(regExp);
+          return (match && match[2].length === 11) ? match[2] : null;
+        };
+        const ytId = getYouTubeId(finalFormData.videoUrl);
+        if (ytId) {
+          finalFormData.document = `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg`;
+        } else {
+          finalFormData.document = "/images/hero/audio.png";
+        }
+      } else {
+        finalFormData.document = "/images/hero/classroom.png";
+      }
     }
-    setContent(updated);
-    localStorage.setItem(`module_content_${module}`, JSON.stringify(updated));
-    setIsModalOpen(false);
+
+    if (editingItem) {
+      updated = content.map(i => i.id === editingItem.id ? { ...editingItem, ...finalFormData } : i);
+      addToast?.('Item Updated', 'success');
+      logActivity(`Updated ${finalFormData.title || 'Item'} in ${getModuleName(module)}`, 'Admin', 'edit');
+    } else {
+      updated = [...content, { id: Date.now(), ...finalFormData }];
+      addToast?.('Item Added', 'success');
+      logActivity(`Added ${finalFormData.title || 'Item'} to ${getModuleName(module)}`, 'Admin', 'create');
+    }
+    
+    try {
+      localStorage.setItem(`module_content_${module}`, JSON.stringify(updated));
+      setContent(updated);
+      setIsModalOpen(false);
+    } catch (e) {
+      console.error("Storage Error:", e);
+      addToast?.('Storage limit exceeded! File too large.', 'error');
+      alert("Failed to save. The uploaded image is too large for the browser's local storage limit.");
+    }
   };
 
   const removeItem = (id) => {
@@ -407,7 +542,30 @@ export default function WebsiteEditorPage({ module, addToast }) {
               }>
                 {module.startsWith('gl-') ? (
                   <>
-                    <img src={item.document} alt="Gallery" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                    {item.document ? (
+                      <img 
+                        src={item.document} 
+                        alt="Gallery" 
+                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" 
+                        onError={(e) => {
+                          e.target.onerror = null; 
+                          e.target.src = module === 'gl-video' ? "/images/hero/audio.png" : "/images/hero/classroom.png";
+                          
+                          // Also try to heal localStorage silently
+                          try {
+                            const saved = JSON.parse(localStorage.getItem(`module_content_${module}`) || "[]");
+                            const updated = saved.map(i => i.id === item.id ? { ...i, document: e.target.src } : i);
+                            localStorage.setItem(`module_content_${module}`, JSON.stringify(updated));
+                            window.dispatchEvent(new Event('storage'));
+                          } catch (err) {}
+                        }}
+                      />
+                    ) : (
+                      <div className="w-full h-full flex flex-col items-center justify-center bg-gray-50 text-gray-400">
+                        <ImageIcon className="w-8 h-8 mb-2 opacity-50" />
+                        <span className="text-[10px] uppercase font-bold tracking-wider">No Image</span>
+                      </div>
+                    )}
                     {module === 'gl-video' && (
                       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30">
                         <div className="w-0 h-0 border-t-[8px] border-t-transparent border-l-[12px] border-l-white border-b-[8px] border-b-transparent ml-1" />
@@ -501,14 +659,12 @@ export default function WebsiteEditorPage({ module, addToast }) {
         title={editingItem ? "Edit Item" : "Add Item"} 
       >
         <div className="space-y-4">
-          {module !== 'gl-photo' && (
-            <FormInput 
-              label={module === 'ku-board' || module === 'ku-list-md' || module === 'ku-officers' || module === 'ku-employees' ? "Full Name" : "Title / Name"} 
-              placeholder="Enter name" 
-              value={formData.title}
-              onChange={(val) => setFormData(prev => ({ ...prev, title: val }))}
-            />
-          )}
+          <FormInput 
+            label={module === 'gl-photo' ? "Photo Description" : module === 'ku-board' || module === 'ku-list-md' || module === 'ku-officers' || module === 'ku-employees' ? "Full Name" : "Title / Name"} 
+            placeholder={module === 'gl-photo' ? "Enter description for this photo" : "Enter name"} 
+            value={formData.title}
+            onChange={(val) => setFormData(prev => ({ ...prev, title: val }))}
+          />
           {module === 'ku-employees' && (
             <>
               <FormInput 
@@ -597,12 +753,32 @@ export default function WebsiteEditorPage({ module, addToast }) {
               { (module === 'ku-board' || module === 'ku-list-md' || module === 'ku-officers' || module === 'ku-employees') ? null : (
                 <>
                   {(module === 'gl-video' || module === 'gl-press') ? (
-                    <FormInput 
-                      label="Category / Tag" 
-                      placeholder="e.g. Event, News, Meeting" 
-                      value={formData.category}
-                      onChange={(val) => setFormData(prev => ({ ...prev, category: val }))}
-                    />
+                    <>
+                      <FormInput 
+                        label="Category / Tag" 
+                        placeholder="e.g. Event, News, Meeting" 
+                        value={formData.category}
+                        onChange={(val) => setFormData(prev => ({ ...prev, category: val }))}
+                      />
+                      {module === 'gl-press' && (
+                        <>
+                          <FormInput 
+                            label="Date" 
+                            type="date"
+                            placeholder="Select Date"
+                            value={formData.date}
+                            onChange={(val) => setFormData(prev => ({ ...prev, date: val }))}
+                          />
+                          <FormInput 
+                            label="Description / Excerpt" 
+                            type="textarea" 
+                            placeholder="Enter a brief description for this press release" 
+                            value={formData.desc}
+                            onChange={(val) => setFormData(prev => ({ ...prev, desc: val }))}
+                          />
+                        </>
+                      )}
+                    </>
                   ) : module === 'dc-reg-forms' ? (
                     <FormInput 
                       label="Category" 
@@ -614,7 +790,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
                   ) : null}
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      {module === 'gl-photo' ? "Select Photo" : module === 'gl-video' ? "Upload Thumbnail" : module === 'gl-press' ? "Upload Cover Image" : "Upload PDF Document"}
+                      {module === 'gl-photo' ? "Select Photo (Max 2MB)" : module === 'gl-video' ? "Upload Thumbnail (Max 2MB)" : module === 'gl-press' ? "Upload Cover Image (Max 2MB)" : "Upload PDF Document (Max 2MB)"}
                     </label>
                     <div className="flex items-center gap-4">
                       <label className="flex-1 cursor-pointer">
@@ -629,7 +805,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
                           <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">
                             {formData.document 
                               ? (module.startsWith('gl-') ? "Change Selected Photo" : "Change Selected PDF") 
-                              : (module.startsWith('gl-') ? "Click to Choose Photo" : "Click to Choose PDF")}
+                              : (module.startsWith('gl-') ? "Click to Choose Photo (Max 2MB)" : "Click to Choose PDF (Max 2MB)")}
                           </span>
                         </div>
                       </label>
@@ -658,12 +834,32 @@ export default function WebsiteEditorPage({ module, addToast }) {
                     </div>
                   </div>
                   {module === 'gl-video' && (
-                    <FormInput 
-                      label="Video Link (YouTube/Vimeo)" 
-                      placeholder="https://youtube.com/watch?v=..." 
-                      value={formData.videoUrl}
-                      onChange={(val) => setFormData(prev => ({ ...prev, videoUrl: val }))}
-                    />
+                    <>
+                      <FormInput 
+                        label="Video Link (YouTube)" 
+                        placeholder="https://youtube.com/watch?v=..." 
+                        value={formData.videoUrl}
+                        onChange={(val) => setFormData(prev => ({ ...prev, videoUrl: val }))}
+                      />
+                      <div className="mb-4 mt-4">
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Or Upload Video (MP4 - Max 5MB)</label>
+                        <div className="flex items-center gap-4">
+                          <label className="flex-1 cursor-pointer">
+                            <input 
+                              type="file" 
+                              accept="video/*"
+                              className="hidden" 
+                              onChange={(e) => handleFileUpload(e, 'uploadedVideo')} 
+                            />
+                            <div className="px-6 py-4 rounded-xl border-2 border-dashed border-gray-200 text-center hover:border-blue-400 hover:bg-blue-50 transition-all">
+                              <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">
+                                {formData.uploadedVideo ? "Video Uploaded - Click to Change" : "Click to Upload Video (Max 5MB)"}
+                              </span>
+                            </div>
+                          </label>
+                        </div>
+                      </div>
+                    </>
                   )}
                 </>
               )}

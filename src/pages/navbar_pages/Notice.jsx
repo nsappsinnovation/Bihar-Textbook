@@ -291,7 +291,7 @@ const Notice = () => {
                             </td>
                             <td className="px-8 py-8 text-right">
                               <motion.a
-                                href={notice.document}
+                                href={notice.link || notice.document}
                                 target="_blank" rel="noopener noreferrer"
                                 whileHover={{ scale: 1.05, x: 5 }}
                                 whileTap={{ scale: 0.95 }}
@@ -335,7 +335,7 @@ const Notice = () => {
                           {formatDate(notice.date)}
                         </div>
                         <a 
-                          href={notice.document}
+                          href={notice.link || notice.document}
                           target="_blank" rel="noopener noreferrer"
                           className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#0d0e23] text-white font-black text-[10px] uppercase whitespace-nowrap"
                         >

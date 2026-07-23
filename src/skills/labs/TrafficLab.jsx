@@ -384,7 +384,7 @@ const WrongSideSimulator = () => {
       </motion.div>
 
       <div className="flex justify-center">
-        <button onClick={status === 'idle' ? handleTest : () => setStatus('idle')} className="px-12 py-5 bg-slate-800 hover:bg-slate-700 text-white font-black text-[15px] tracking-widest uppercase rounded-2xl shadow-[0_6px_0_#0f172a] active:translate-y-1.5 active:shadow-none transition-all cursor-pointer">
+        <button onClick={status === 'idle' ? handleTest : () => setStatus('idle')} className={`px-12 py-5 font-black text-sm tracking-widest uppercase rounded-2xl active:translate-y-1.5 active:shadow-none transition-all cursor-pointer ${status === 'idle' ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-[0_6px_0_#047857]' : 'bg-slate-100 hover:bg-slate-200 text-slate-600 shadow-[0_6px_0_#e2e8f0]'}`}>
           {status === 'idle' ? 'Test Scenario' : 'Reset Scenario'}
         </button>
       </div>

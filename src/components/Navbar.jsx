@@ -58,7 +58,7 @@ const Navbar = () => {
           <Link to="/">
             <img
               src="/logo.png"
-              alt="BSTPC Logo"
+              alt="BSTBPC Logo"
               className="h-10 sm:h-12 md:h-16 w-auto object-contain"
             />
           </Link>

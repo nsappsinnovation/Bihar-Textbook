@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 
 const MdMessage = () => {
   const [mdData, setMdData] = useState({
-    name: 'Sri Yatendra Kumar Pal',
+    name: 'Shri Yatendra Kumar Pal',
     photo: '/images/KeyParticipants/shri_yatendra_pal.png',
     welcomeNote: 'It gives me immense pleasure to connect with all stakeholders through this platform. The Bihar State Text Book Publishing Corporation Ltd. plays a pivotal role in strengthening the foundation of education by ensuring the timely production and distribution of quality textbooks across the state.'
   });
@@ -20,7 +20,7 @@ const MdMessage = () => {
         const parsed = JSON.parse(saved);
         if (parsed) {
           if (parsed.name) {
-            parsed.name = parsed.name.replace(/^Shri\b/gi, 'Sri');
+            parsed.name = parsed.name.replace(/^Sri\b/gi, 'Shri');
           }
           setMdData(prev => ({ ...prev, ...parsed }));
         }
@@ -194,7 +194,7 @@ const MdMessage = () => {
             </div>
             <div>
               <h4 className="text-[16px] font-black text-slate-900 leading-tight">{mdData.name}</h4>
-              <p className="text-[11px] font-bold text-blue-600 uppercase tracking-wide mt-1">MANAGING DIRECTOR, BSTPC</p>
+              <p className="text-[11px] font-bold text-blue-600 uppercase tracking-wide mt-1">MANAGING DIRECTOR, BSTBPC</p>
             </div>
           </div>
           

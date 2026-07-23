@@ -24,20 +24,36 @@ const Photogallery = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
-    const saved = localStorage.getItem('module_content_gl-photo');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        // Commented out to prevent broken localStorage data from overriding default images
-        // setItems(parsed.map(item => ({
-        //   type: "image",
-        //   src: item.document,
-        //   alt: item.title || "Gallery Image"
-        // })));
-      } catch (e) {
-        console.error("Error parsing gallery images", e);
+    const loadData = () => {
+      const saved = localStorage.getItem('module_content_gl-photo');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed && Array.isArray(parsed) && parsed.length > 0) {
+            setItems(parsed.map((item) => {
+              const hasValidDoc = item.document && typeof item.document === 'string' && item.document.trim() !== "" && item.document !== "undefined" && item.document !== "null";
+              const finalSrc = hasValidDoc ? item.document : "";
+
+              return {
+                type: "image",
+                src: finalSrc,
+                alt: item.title || "Gallery Image"
+              };
+            }));
+          } else {
+             setItems(defaultGalleryItems);
+          }
+        } catch (e) {
+          console.error("Error parsing gallery images", e);
+        }
+      } else {
+        setItems(defaultGalleryItems);
       }
-    }
+    };
+    
+    loadData();
+    window.addEventListener('storage', loadData);
+    return () => window.removeEventListener('storage', loadData);
   }, []);
 
   const itemsPerPage = 6;
@@ -59,34 +75,22 @@ const Photogallery = () => {
   };
 
   return (
-    <section className="w-full bg-[#fdfbf9] relative py-16 lg:py-24 overflow-hidden min-h-screen">
+    <section className="w-full bg-white relative pt-8 pb-16 lg:pt-12 lg:pb-24 overflow-hidden min-h-screen">
 
       {/* Premium background grid & floating shapes matching the screenshot */}
       <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-75 pointer-events-none" />
       <div className="absolute right-[-100px] top-1/4 w-80 h-80 border border-slate-200/50 rounded-[48px] rotate-[22deg] pointer-events-none" />
       <div className="absolute left-[-150px] bottom-1/4 w-[400px] h-[400px] border border-slate-200/40 rounded-full pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 font-sans">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 font-display">
 
         {/* Header */}
         <div className="mb-16 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-blue-50/80 backdrop-blur-sm border border-blue-100 mb-6 shadow-sm"
-          >
-            <span className="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse"></span>
-            <span className="text-blue-800 text-xs font-bold tracking-wider uppercase">
-              Visual Highlights
-            </span>
-          </motion.div>
-
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-800 tracking-tight leading-tight mb-6"
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-800 tracking-tight leading-tight mb-2"
           >
             Photo <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Gallery</span>
           </motion.h2>

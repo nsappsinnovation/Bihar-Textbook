@@ -41,27 +41,54 @@ const defaultVideoItems = [
   }
 ];
 
+const getYouTubeId = (url) => {
+  if (!url) return null;
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : null;
+};
+
 const Videogallery = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [items, setItems] = useState(defaultVideoItems);
   const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
-    const saved = localStorage.getItem('module_content_gl-video');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        // Commented out to prevent broken localStorage data from overriding default videos
-        // setItems(parsed.map(item => ({
-        //   type: "video",
-        //   src: item.document, // Thumbnail
-        //   videoUrl: item.videoUrl || "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        //   alt: item.title || "Video Highlight"
-        // })));
-      } catch (e) {
-        console.error("Error parsing video gallery items", e);
+    const loadData = () => {
+      const saved = localStorage.getItem('module_content_gl-video');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (parsed && Array.isArray(parsed) && parsed.length > 0) {
+            setItems(parsed.map((item) => {
+              const ytId = getYouTubeId(item.videoUrl);
+              const autoThumbnail = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : null;
+              
+              const hasValidDoc = item.document && typeof item.document === 'string' && item.document.trim() !== "" && item.document !== "undefined" && item.document !== "null";
+              const finalSrc = hasValidDoc ? item.document : (autoThumbnail || "");
+
+              return {
+                type: "video",
+                src: finalSrc,
+                videoUrl: item.videoUrl || "",
+                uploadedVideo: item.uploadedVideo || "",
+                alt: item.title || "Video Highlight"
+              };
+            }));
+          } else {
+            setItems(defaultVideoItems);
+          }
+        } catch (e) {
+          console.error("Error parsing video gallery items", e);
+        }
+      } else {
+        setItems(defaultVideoItems);
       }
-    }
+    };
+
+    loadData();
+    window.addEventListener('storage', loadData);
+    return () => window.removeEventListener('storage', loadData);
   }, []);
 
   const itemsPerPage = 6;
@@ -98,34 +125,22 @@ const Videogallery = () => {
   }
 
   return (
-    <section className="w-full bg-[#fdfbf9] relative py-16 lg:py-24 overflow-hidden min-h-screen">
+    <section className="w-full bg-white relative pt-8 pb-16 lg:pt-12 lg:pb-24 overflow-hidden min-h-screen">
 
       {/* Background patterns */}
       <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-75 pointer-events-none" />
       <div className="absolute left-[-100px] top-1/4 w-80 h-80 border border-slate-200/50 rounded-[48px] rotate-[15deg] pointer-events-none" />
       <div className="absolute right-[-150px] bottom-1/4 w-[400px] h-[400px] border border-slate-200/40 rounded-full pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 font-sans">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 font-display">
 
         {/* Header */}
         <div className="mb-16 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-blue-50/80 backdrop-blur-sm border border-blue-100 mb-6 shadow-sm"
-          >
-            <span className="w-2.5 h-2.5 rounded-full bg-blue-600 animate-pulse"></span>
-            <span className="text-blue-800 text-xs font-bold tracking-wider uppercase">
-              Video Highlights & Testimonials
-            </span>
-          </motion.div>
-
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-800 tracking-tight leading-tight mb-6"
+            className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-800 tracking-tight leading-tight mb-2"
           >
             Video <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Gallery</span>
           </motion.h2>
@@ -379,14 +394,23 @@ const Videogallery = () => {
               className="relative max-w-4xl w-full aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/10"
               onClick={(e) => e.stopPropagation()}
             >
-              <iframe
-                src={getEmbedUrl(selectedVideo.videoUrl)}
-                title={selectedVideo.alt}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-                className="absolute inset-0 w-full h-full"
-              />
+              {selectedVideo.uploadedVideo ? (
+                <video
+                  src={selectedVideo.uploadedVideo}
+                  controls
+                  autoPlay
+                  className="absolute inset-0 w-full h-full object-contain bg-black"
+                />
+              ) : (
+                <iframe
+                  src={getEmbedUrl(selectedVideo.videoUrl)}
+                  title={selectedVideo.alt}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  className="absolute inset-0 w-full h-full bg-black"
+                />
+              )}
             </motion.div>
 
             {/* Video Description */}

@@ -5,17 +5,17 @@ import Modal from '../components/Modal';
 import { useActivityLog } from '../hooks/useCustomHooks';
 
 /**
- * Register Printers Management Page
+ * Empanalled Printers Management Page
  * Just for managing the Official Printer Registry PDF
  */
 export default function RegisterPrintersPage({ addToast }) {
   const { logActivity } = useActivityLog();
-  const storageKey = 'website_registered_printers_pdf';
+  const storageKey = 'website_empanalled_printers_pdf';
 
   const [data, setData] = useState(() => {
     const saved = localStorage.getItem(storageKey);
     return saved ? JSON.parse(saved) : {
-      officialList: { pdfUrl: '/printer.pdf', fileName: 'REGISTERED_PRINTERS.PDF' }
+      officialList: { pdfUrl: '/printer.pdf', fileName: 'EMPANALLED_PRINTERS.PDF' }
     };
   });
 
@@ -47,8 +47,8 @@ export default function RegisterPrintersPage({ addToast }) {
     reader.onloadend = () => {
       const updated = { officialList: { pdfUrl: reader.result, fileName: file.name } };
       saveToStorage(updated);
-      addToast?.('Registered Printers PDF updated successfully', 'success');
-      logActivity('Updated Registered Printers PDF', 'Admin', 'upload');
+      addToast?.('Empanalled Printers PDF updated successfully', 'success');
+      logActivity('Updated Empanalled Printers PDF', 'Admin', 'upload');
     };
     reader.readAsDataURL(file);
   };
@@ -56,8 +56,8 @@ export default function RegisterPrintersPage({ addToast }) {
   const handleDeletePdf = () => {
     const updated = { officialList: { pdfUrl: '', fileName: 'No PDF Uploaded' } };
     saveToStorage(updated);
-    addToast?.('Registered Printers PDF deleted successfully', 'success');
-    logActivity('Deleted Registered Printers PDF', 'Admin', 'delete');
+    addToast?.('Empanalled Printers PDF deleted successfully', 'success');
+    logActivity('Deleted Empanalled Printers PDF', 'Admin', 'delete');
   };
 
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
@@ -101,7 +101,7 @@ export default function RegisterPrintersPage({ addToast }) {
         <div className="p-8 border-b border-gray-50 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <h3 className="text-xl font-black text-gray-900 uppercase tracking-widest">Official Printer Registry</h3>
-            <p className="text-sm text-gray-400 font-medium mt-1">Manage the central directory PDF document for registered printers</p>
+            <p className="text-sm text-gray-400 font-medium mt-1">Manage the central directory PDF document for empanalled printers</p>
           </div>
           <div className="flex items-center gap-3">
             <button 

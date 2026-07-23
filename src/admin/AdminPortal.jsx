@@ -15,7 +15,7 @@ import EducationExcellencePage from './pages/EducationExcellencePage';
 import LeadersManagementPage from './pages/LeadersManagementPage';
 import WebsiteEditorPage from './pages/WebsiteEditorPage';
 import EmployeesManagementPage from './pages/EmployeesManagementPage';
-import WholesalerDepotPage from './pages/WholesalerDepotPage';
+
 import RegisterPrintersPage from './pages/RegisterPrintersPage';
 import CSRPolicyPage from './pages/CSRPolicyPage';
 import WebsiteManagementHub from './pages/WebsiteManagementHub';
@@ -52,8 +52,7 @@ function App() {
         return <CSRPolicyPage addToast={addToast} />;
       case 'ku-employee':
         return <EmployeesManagementPage addToast={addToast} />;
-      case 'ku-wholeseller':
-        return <WholesalerDepotPage addToast={addToast} />;
+
       case 'ku-printers':
         return <RegisterPrintersPage addToast={addToast} />;
       default:

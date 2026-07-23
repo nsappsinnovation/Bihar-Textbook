@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { 
   ArrowLeft, Volume2, CheckCircle, ChevronRight, Star, Trophy, 
@@ -923,7 +923,7 @@ const cleanForLookup = (str) => {
   if (!str) return "";
   return str
     .replace(/\s*\([^)]*\)\s*/g, '')
-    .replace(/[?.,!¿¡'":;।?]/g, '')
+    .replace(/[?.,!¿¡":;।？]/g, '')
     .replace(/\s+/g, ' ')
     .trim()
     .toLowerCase();
@@ -1298,6 +1298,8 @@ export default function LingModule({ type }) {
   const [streak, setStreak] = useState(0);
   const [dailyProgress, setDailyProgress] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const currentAudioRef = useRef(null);
   
   const currentItem = items[step];
   const dailyTotal = type === 'conversations' ? 10 : 20;
@@ -1357,11 +1359,19 @@ export default function LingModule({ type }) {
   }, [isCorrect]);
 
   const fallbackTTS = (text, langCode) => {
+    setIsAudioPlaying(true);
     const shortLang = langCode.split('-')[0];
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = langCode;
     utterance.rate = 0.9;
     
+    utterance.onend = () => {
+      setIsAudioPlaying(false);
+    };
+    utterance.onerror = () => {
+      setIsAudioPlaying(false);
+    };
+
     const voices = window.speechSynthesis.getVoices();
     const targetVoices = voices.filter(v => v.lang.startsWith(shortLang));
     if (targetVoices.length > 0) {
@@ -1372,14 +1382,33 @@ export default function LingModule({ type }) {
     }
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(utterance);
+
+    setTimeout(() => {
+      setIsAudioPlaying(false);
+    }, 7000);
   };
 
   const handleSpeak = (text, langCode, audioFileName) => {
+    if (currentAudioRef.current) {
+      currentAudioRef.current.pause();
+      currentAudioRef.current = null;
+    }
+    setIsAudioPlaying(true);
+
     if (audioFileName) {
       const folderName = type === 'conversations' ? 'conversation' : type;
       const audioUrl = `/audio/${folderName}/${langCode}/${audioFileName}.mp3`;
       const audio = new Audio(audioUrl);
-      
+      currentAudioRef.current = audio;
+
+      audio.onended = () => {
+        setIsAudioPlaying(false);
+      };
+      audio.onerror = () => {
+        console.warn("Failed to play local audio, falling back to TTS");
+        fallbackTTS(text, langCode);
+      };
+
       audio.play().catch((err) => {
         console.warn("Failed to play local audio, falling back to TTS:", err);
         fallbackTTS(text, langCode);
@@ -1390,12 +1419,14 @@ export default function LingModule({ type }) {
   };
 
   const handleNext = () => {
+    if (isAudioPlaying) return;
     if (step < items.length - 1) {
       const nextStep = step + 1;
       setStep(nextStep);
       setInputValue("");
       setShowFeedback(false);
       setIsCorrect(null);
+      setIsAudioPlaying(true);
       if (type === 'conversations') {
         const newDailyProgress = Math.min(dailyProgress + 1, dailyTotal);
         setDailyProgress(newDailyProgress);
@@ -1431,16 +1462,22 @@ export default function LingModule({ type }) {
 
   const handleBack = () => {
     if (step > 0) {
+      if (currentAudioRef.current) {
+        currentAudioRef.current.pause();
+      }
+      window.speechSynthesis.cancel();
       setStep(step - 1);
       setInputValue("");
       setShowFeedback(false);
       setIsCorrect(null);
+      setIsAudioPlaying(false);
     }
   };
 
   const shuffledOptions = useMemo(() => {
     if (!currentItem || type === 'conversations') return [];
-    return [...currentItem.distractors, currentItem.target].sort(() => Math.random() - 0.5);
+    const uniqueOptions = Array.from(new Set([...currentItem.distractors, currentItem.target]));
+    return uniqueOptions.sort(() => Math.random() - 0.5);
   }, [currentItem, type]);
 
   if (isCompleted) {
@@ -1588,9 +1625,14 @@ export default function LingModule({ type }) {
 
                 <button 
                   onClick={handleNext}
-                  className="px-14 py-3.5 bg-[#0BB562] text-white rounded-2xl font-black text-[18px] shadow-xl shadow-emerald-100 border-b-4 border-emerald-700 hover:translate-y-[-2px] active:border-b-0 active:translate-y-[2px] transition-all flex items-center gap-3 group"
+                  disabled={isAudioPlaying}
+                  className={`px-14 py-3.5 rounded-2xl font-black text-[18px] transition-all flex items-center gap-3 group ${
+                    isAudioPlaying
+                      ? 'bg-slate-300 text-slate-500 border-b-4 border-slate-400 cursor-not-allowed opacity-75'
+                      : 'bg-[#0BB562] text-white shadow-xl shadow-emerald-100 border-b-4 border-emerald-700 hover:translate-y-[-2px] active:border-b-0 active:translate-y-[2px] cursor-pointer'
+                  }`}
                 >
-                  {step === items.length - 1 ? 'Finish' : 'Next'} <ArrowRight size={24} strokeWidth={3} className="group-hover:translate-x-1.5 transition-transform" />
+                  {step === items.length - 1 ? 'Finish' : 'Next'} <ArrowRight size={24} strokeWidth={3} className={`transition-transform ${isAudioPlaying ? '' : 'group-hover:translate-x-1.5'}`} />
                 </button>
              </div>
           </div>
@@ -1612,22 +1654,22 @@ export default function LingModule({ type }) {
                   <div className="text-center"><div className="text-4xl font-black mb-1">{currentItem.native}</div><div className="h-0.5 w-20 bg-[#F1FAF6] mx-auto mb-2" /><div className="text-[14px] text-slate-400 font-bold tracking-widest uppercase opacity-60">{currentItem.translation}</div></div>
               </div>
               <div className="w-full max-w-[380px] space-y-3">
-                <div className="flex flex-wrap justify-center gap-2">
+                <div className={`${type === 'phrases' ? 'grid grid-cols-2' : 'flex flex-wrap justify-center'} gap-2 w-full`}>
                   {shuffledOptions.map((option, idx) => {
                     const syllables = getSyllables(option);
                     return (
                       <button 
                         key={idx} 
                         onClick={() => !showFeedback && setInputValue(option)} 
-                        className={`px-5 py-2 rounded-2xl font-black transition-all border-2 active:scale-95 flex flex-col items-center min-w-[100px] ${
+                        className={`px-3 py-2.5 rounded-2xl font-black transition-all border-2 active:scale-95 flex flex-col items-center justify-center min-w-[100px] ${
                           inputValue === option 
                             ? "bg-[#0BB562] text-white border-[#0BB562] shadow-lg shadow-emerald-100" 
                             : "bg-white text-slate-600 border-slate-100 hover:border-emerald-100"
-                        }`}
+                        } ${type === 'phrases' ? 'w-full' : ''}`}
                       >
-                        <span className="text-[14px]">{option}</span>
+                        <span className="text-[13.5px] text-center leading-tight">{option}</span>
                         {syllables && (
-                          <span className={`text-[9.5px] font-bold mt-0.5 tracking-wide ${
+                          <span className={`text-[9px] font-bold mt-1 tracking-wide text-center leading-tight ${
                             inputValue === option ? 'text-emerald-100' : 'text-slate-400'
                           }`}>
                             {syllables}
@@ -1637,6 +1679,13 @@ export default function LingModule({ type }) {
                     );
                   })}
                 </div>
+              </div>
+              
+              {/* Action Buttons */}
+              <div className="flex justify-center items-center gap-3 text-center mt-10 z-20 w-full max-w-[480px]">
+                {step > 0 && (<button onClick={handleBack} className="w-[90px] py-2.5 bg-white border border-slate-300 rounded-[16px] text-[13px] font-black text-slate-400 hover:text-slate-600 flex items-center justify-center gap-1.5 shadow-sm"><ArrowLeft size={16} strokeWidth={3} /> {t.back}</button>)}
+                <button onClick={() => setInputValue(currentItem.target)} className="w-[140px] py-2.5 bg-white border border-slate-300 rounded-[16px] text-[13px] font-black text-slate-500 hover:text-slate-700 shadow-sm">{t.dont_know}</button>
+                <button onClick={handleCheck} disabled={!inputValue || showFeedback} className={`w-[140px] justify-center py-2.5 rounded-[16px] font-black text-[14px] flex items-center gap-2 shadow-lg transition-all active:scale-95 ${!inputValue || showFeedback ? 'bg-slate-100 text-slate-300' : 'bg-[#0BB562] text-white shadow-emerald-200'}`}>{t.check} <ArrowRight size={16} strokeWidth={3} /></button>
               </div>
             </div>
             <div className="relative h-full flex flex-col justify-end items-center pb-4">
@@ -1663,14 +1712,6 @@ export default function LingModule({ type }) {
           </>
         )}
       </main>
-
-      {type !== 'conversations' && (
-        <div className="flex justify-center items-center gap-3 text-center mr-24 mb-6 z-20">
-          {step > 0 && (<button onClick={handleBack} className="w-[100px] py-2.5 bg-white border border-slate-300 rounded-[16px] text-[13px] font-black text-slate-400 hover:text-slate-600 flex items-center justify-center gap-1.5 shadow-sm"><ArrowLeft size={16} strokeWidth={3} /> {t.back}</button>)}
-          <button onClick={() => setInputValue(currentItem.target)} className="w-[170px] py-2.5 bg-white border border-slate-300 rounded-[16px] text-[13px] font-black text-slate-500 hover:text-slate-700 shadow-sm">{t.dont_know}</button>
-          <button onClick={handleCheck} disabled={!inputValue || showFeedback} className={`w-[190px] justify-center py-2.5 rounded-[16px] font-black text-[14px] flex items-center gap-2 shadow-lg transition-all active:scale-95 ${!inputValue || showFeedback ? 'bg-slate-100 text-slate-300' : 'bg-[#0BB562] text-white shadow-emerald-200'}`}>{t.check} <ArrowRight size={16} strokeWidth={3} /></button>
-        </div>
-      )}
     </div>
   );
 }

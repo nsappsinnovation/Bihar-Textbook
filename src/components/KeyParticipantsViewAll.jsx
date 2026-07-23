@@ -6,25 +6,25 @@ import { motion } from "framer-motion";
 // Data from KeyParticipant.jsx
 const industryData = [
   {
-    name: "Sri Samrat Choudhary",
+    name: "Shri Samrat Choudhary",
     role: "Hon'ble Chief Minister, Bihar",
     image: "/images/KeyParticipants/samrat.png",
     category: "Leadership",
   },
   {
-    name: "Sri Mithilesh Tiwari",
+    name: "Shri Mithilesh Tiwari",
     role: "Hon'ble Education Minister, Bihar",
     image: "/images/KeyParticipants/sri_mithlesh.png",
     category: "Leadership",
   },
   {
-    name: "Sri Vinod Singh Gunjiyal",
+    name: "Shri Vinod Singh Gunjiyal",
     role: "Secretary, Education Department",
     image: "/images/KeyParticipants/sri-vinod.png",
     category: "Leadership",
   },
   {
-    name: "Sri Yatendra Kumar Pal, IAS",
+    name: "Shri Yatendra Kumar Pal, IAS",
     role: "Managing Director, Bihar State Text Book Publishing Corporation (BSTBPC)",
     image: "/images/KeyParticipants/shri_yatendra_pal.png",
     category: "Leadership",
@@ -71,23 +71,28 @@ export default function KeyParticipantViewAll() {
         let parsed = JSON.parse(saved);
         let updated = false;
         parsed = parsed.map(item => {
-          if (item.name === "Shri Sunil Kumar" || item.name === "Sri Sunil Kumar") {
+          let name = item.name ? item.name.replace(/^Sri\b/gi, 'Shri') : item.name;
+          if (name === "Shri Sunil Kumar") {
             updated = true;
             return {
               ...item,
-              name: "Sri Mithilesh Tiwari",
+              name: "Shri Mithilesh Tiwari",
               role: "Hon'ble Education Minister, Bihar",
               image: "/images/KeyParticipants/sri_mithlesh.png"
             };
           }
-          if (item.name === "Shri Dr. B. Rajender, IAS" || item.name === "Dr. B. Rajender") {
+          if (name === "Shri Dr. B. Rajender, IAS" || name === "Dr. B. Rajender") {
             updated = true;
             return {
               ...item,
-              name: "Sri Vinod Singh Gunjiyal",
+              name: "Shri Vinod Singh Gunjiyal",
               role: "Secretary, Education Department",
               image: "/images/KeyParticipants/sri-vinod.png"
             };
+          }
+          if (item.name !== name) {
+            updated = true;
+            return { ...item, name };
           }
           return item;
         });

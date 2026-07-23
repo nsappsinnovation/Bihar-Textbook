@@ -71,8 +71,8 @@ const Footer = () => {
               <FooterLink to="/know-us/organisation-structure" label="Organisation Structure" />
               <FooterLink to="/know-us/officers" label="Officers List" />
               <FooterLink to="/know-us/employees" label="Our Employees" />
-              <FooterLink to="/know-us/wholesellers" label="Wholesellers & Depots" />
-              <FooterLink to="/know-us/registered-printers" label="Registered Printers" />
+
+              <FooterLink to="/know-us/empanalled-printers" label="Empanalled Printers" />
             </ul>
           </div>
 

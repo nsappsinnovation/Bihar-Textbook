@@ -19,16 +19,17 @@ export default function LeadersManagementPage({ addToast }) {
         let parsed = JSON.parse(saved);
         let updated = false;
         parsed = parsed.map(item => {
-          if (item.name === "Shri Sunil Kumar" || item.name === "Sri Sunil Kumar") {
+          let name = item.name ? item.name.replace(/^Sri\b/gi, 'Shri') : item.name;
+          if (name === "Shri Sunil Kumar") {
             updated = true;
             return {
               ...item,
-              name: "Sri Mithilesh Tiwari",
+              name: "Shri Mithilesh Tiwari",
               role: "Hon'ble Education Minister, Bihar",
               image: "/images/KeyParticipants/sri_mithlesh.png"
             };
           }
-          if (item.name === "Shri Dr. B. Rajender, IAS" || item.name === "Dr. B. Rajender") {
+          if (name === "Shri Dr. B. Rajender, IAS" || name === "Dr. B. Rajender") {
             updated = true;
             return {
               ...item,
@@ -36,6 +37,10 @@ export default function LeadersManagementPage({ addToast }) {
               role: "Secretary, Education Department",
               image: "/images/KeyParticipants/sri-vinod.png"
             };
+          }
+          if (item.name !== name) {
+            updated = true;
+            return { ...item, name };
           }
           return item;
         });
@@ -50,14 +55,14 @@ export default function LeadersManagementPage({ addToast }) {
     return [
       { 
         id: 1, 
-        name: 'Sri Samrat Choudhary', 
+        name: 'Shri Samrat Choudhary', 
         role: "Hon'ble Chief Minister, Bihar", 
         tag: 'LEADERSHIP', 
         image: '/images/KeyParticipants/samrat.png' 
       },
       { 
         id: 2, 
-        name: 'Sri Mithilesh Tiwari', 
+        name: 'Shri Mithilesh Tiwari', 
         role: "Hon'ble Education Minister, Bihar", 
         tag: 'LEADERSHIP', 
         image: '/images/KeyParticipants/sri_mithlesh.png' 
@@ -71,7 +76,7 @@ export default function LeadersManagementPage({ addToast }) {
       },
       { 
         id: 4, 
-        name: 'Sri Yatendra Kumar Pal, IAS', 
+        name: 'Shri Yatendra Kumar Pal, IAS', 
         role: 'Managing Director, Bihar State Text Book Publishing Corporation (BSTBPC)', 
         tag: 'LEADERSHIP', 
         image: '/images/KeyParticipants/shri_yatendra_pal.png' 
@@ -315,7 +320,7 @@ export default function LeadersManagementPage({ addToast }) {
           </div>
 
           <div>
-            <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-3">Portrait Photo</label>
+            <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-3">Portrait Photo (Max 1MB)</label>
             <div className="flex flex-col items-center justify-center w-full">
               <label className="flex flex-col items-center justify-center w-full h-44 border-2 border-dashed border-gray-200 rounded-3xl cursor-pointer bg-gray-50/50 hover:bg-gray-50 transition-all overflow-hidden">
                 {formData.image ? (

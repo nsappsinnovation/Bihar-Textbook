@@ -30,14 +30,10 @@ export const Knowconfig = [
     label: "Organisational Structure",
     component: "OrgStructure"
   },
-   {
-    id: "wholesellers",
-    label: "Wholeseller/Depo",
-    component: "Wholesellers"
-  },
+
   {
-    id: "registered-printers",
-    label: "Register Printers",
+    id: "empanalled-printers",
+    label: "Empanalled Printers",
     component: "RegisterPrinters"
   }
 ];

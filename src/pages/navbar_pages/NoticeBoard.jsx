@@ -21,7 +21,7 @@ for (let i = 0; i < maxLength; i++) {
       ref: `NTC-${n.id}`,
       isUrgent: n.isUrgent || false,
       fileSize: "PDF",
-      link: n.document
+      link: n.link || n.document
     });
   }
   if (i < tendersData.length) {

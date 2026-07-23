@@ -17,8 +17,8 @@ const getInitials = (name) => {
 const ListOfMD = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [list, setList] = useState([
-    { id: 1, name: "Sri Sunny Sinha", from: "29/11/2023", to: "29/04/2024" },
-    { id: 2, name: "Sri Baidya Nath Yadav, IAS", from: "09/04/2023", to: "29/11/2023" },
+    { id: 1, name: "Shri Sunny Sinha", from: "29/11/2023", to: "29/04/2024" },
+    { id: 2, name: "Shri Baidya Nath Yadav, IAS", from: "09/04/2023", to: "29/11/2023" },
     { id: 3, name: "Shri Manoj Kumar IAS", from: "05/08/2021", to: "31/12/2022" },
     { id: 4, name: "Dr. Ranjit Kumar Singh IAS", from: "18/09/2019", to: "30/07/2021" },
     { id: 5, name: "Shri Arvind Kumar Verma IAS", from: "14/05/2018", to: "31/08/2019" },
@@ -72,7 +72,7 @@ const ListOfMD = () => {
           if (Array.isArray(parsed)) {
             setList(parsed.map(item => ({
               id: item.id,
-              name: item.name || item.title,
+              name: (item.name || item.title || '').replace(/^Sri\b/gi, 'Shri'),
               from: item.from,
               to: item.to
             })));

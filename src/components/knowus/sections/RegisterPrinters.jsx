@@ -5,20 +5,20 @@ import { FiSearch, FiExternalLink } from 'react-icons/fi';
 const RegisterPrinters = () => {
   const [isInteracting, setIsInteracting] = useState(false);
   const [pdfUrl, setPdfUrl] = useState('/printer.pdf'); // Fallback PDF if none exists
-  const [fileName, setFileName] = useState('REGISTERED_PRINTERS.PDF');
+  const [fileName, setFileName] = useState('EMPANALLED_PRINTERS.PDF');
 
   useEffect(() => {
     const loadPdfData = () => {
-      const saved = localStorage.getItem('website_registered_printers_pdf');
+      const saved = localStorage.getItem('website_empanalled_printers_pdf');
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
           if (parsed.officialList && parsed.officialList.pdfUrl) {
             setPdfUrl(parsed.officialList.pdfUrl);
-            setFileName(parsed.officialList.fileName || 'REGISTERED_PRINTERS.PDF');
+            setFileName(parsed.officialList.fileName || 'EMPANALLED_PRINTERS.PDF');
           }
         } catch (e) {
-          console.error('Failed to parse registered printers data from storage');
+          console.error('Failed to parse empanalled printers data from storage');
         }
       }
     };
@@ -36,11 +36,11 @@ const RegisterPrinters = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-3xl md:text-4xl font-extrabold text-[#0d0e23] tracking-tight mb-4"
         >
-          Registered <span className="text-blue-600">Printers</span>
+          Empanalled <span className="text-blue-600">Printers</span>
         </motion.h1>
         
         <p className="text-slate-500 text-sm max-w-2xl mx-auto leading-relaxed font-medium">
-          Our empaneled network of high-tech printing houses ensuring quality and integrity in every page.
+          Our empanalled network of high-tech printing houses ensuring quality and integrity in every page.
         </p>
       </section>
 
@@ -58,7 +58,7 @@ const RegisterPrinters = () => {
            <div className="h-[700px] w-full bg-slate-100 flex items-center justify-center relative overflow-hidden group">
               <iframe
                 src={`${pdfUrl}#toolbar=1`}
-                title="Registered Printers Directory"
+                title="Empanalled Printers Directory"
                 className="w-full h-full border-none"
               />
               

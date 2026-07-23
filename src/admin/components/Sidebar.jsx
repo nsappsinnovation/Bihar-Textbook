@@ -44,8 +44,8 @@ const navGroups = [
           { id: 'ku-list-md', label: 'List of MD' },
           { id: 'ku-officers', label: 'Officers List' },
           { id: 'ku-employee', label: 'Our Employee' },
-          { id: 'ku-wholeseller', label: 'Wholeseller/Depo' },
-          { id: 'ku-printers', label: 'Register Printers' },
+
+          { id: 'ku-printers', label: 'Empanalled Printers' },
         ]
       },
       { 

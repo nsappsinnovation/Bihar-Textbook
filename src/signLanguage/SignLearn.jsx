@@ -501,14 +501,14 @@ const FingerspellComponent = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm"
+            className="fixed inset-0 z-[110] flex items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm"
             onClick={() => setPreviewGif(null)}
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="bg-white rounded-[32px] p-8 max-w-sm w-full relative flex flex-col items-center shadow-2xl border border-slate-100"
+              className="bg-white rounded-[32px] p-8 max-w-sm md:max-w-xl w-full relative flex flex-col items-center shadow-2xl border border-slate-100"
               onClick={e => e.stopPropagation()}
             >
               <button
@@ -519,17 +519,29 @@ const FingerspellComponent = () => {
               </button>
 
               <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full uppercase tracking-wider mb-2 mt-2">
-                Sign Animation
+                Sign Details
               </span>
               <h4 className="text-3xl font-black text-slate-900 mb-6">{previewGif.word}</h4>
 
-              <div className="w-56 h-56 bg-slate-50 rounded-[24px] border-2 border-slate-100 flex items-center justify-center p-4 mb-6 shadow-inner relative overflow-hidden">
-                <img
-                  src={`/explore sign/${previewGif.word.toLowerCase()}.gif`}
-                  onError={(e) => { e.target.onerror = null; e.target.src = previewGif.image; }}
-                  alt={`Sign animation for ${previewGif.word}`}
-                  className="w-full h-full object-contain mix-blend-multiply"
-                />
+              <div className="flex flex-col md:flex-row gap-6 mb-6 w-full justify-center items-center">
+                <div className="w-48 h-48 bg-slate-50 rounded-[24px] border-2 border-slate-100 flex flex-col items-center justify-center p-4 shadow-inner relative overflow-hidden">
+                  <span className="absolute top-3 left-3 text-[10px] font-bold text-slate-400 uppercase bg-white/80 px-2 py-0.5 rounded-md backdrop-blur-sm z-10">Photo</span>
+                  <img
+                    src={previewGif.image}
+                    onError={(e) => { e.target.onerror = null; e.target.src = '/images/signlanguage/hand.png'; }}
+                    alt={`Sign photo for ${previewGif.word}`}
+                    className="w-full h-full object-contain mix-blend-multiply"
+                  />
+                </div>
+                <div className="w-48 h-48 bg-slate-50 rounded-[24px] border-2 border-slate-100 flex flex-col items-center justify-center p-4 shadow-inner relative overflow-hidden">
+                  <span className="absolute top-3 left-3 text-[10px] font-bold text-emerald-500 uppercase bg-white/80 px-2 py-0.5 rounded-md backdrop-blur-sm z-10">GIF</span>
+                  <img
+                    src={`/explore sign/${previewGif.word.toLowerCase()}.gif`}
+                    onError={(e) => { e.target.onerror = null; e.target.src = previewGif.image; }}
+                    alt={`Sign animation for ${previewGif.word}`}
+                    className="w-full h-full object-contain mix-blend-multiply"
+                  />
+                </div>
               </div>
 
               <p className="text-slate-500 text-center font-medium leading-relaxed mb-6 px-4">
@@ -538,7 +550,7 @@ const FingerspellComponent = () => {
 
               <button
                 onClick={() => setPreviewGif(null)}
-                className="w-full py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm transition-colors shadow-md shadow-emerald-500/20 cursor-pointer"
+                className="w-full md:w-64 py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm transition-colors shadow-md shadow-emerald-500/20 cursor-pointer"
               >
                 Got it!
               </button>
@@ -576,28 +588,20 @@ const FingerspellComponent = () => {
 
               <div 
                 ref={listRef}
-                onPointerDown={handleListPointerDown}
-                onPointerMove={handleListPointerMove}
-                onPointerUp={handleListPointerUp}
-                onPointerLeave={handleListPointerUp}
-                onPointerCancel={handleListPointerUp}
                 data-lenis-prevent="true"
                 style={{
                   WebkitOverflowScrolling: 'touch',
                   overscrollBehavior: 'contain',
                   touchAction: 'pan-y'
                 }}
-                className="flex-1 overflow-y-auto pr-2 space-y-2 cyber-scrollbar select-none cursor-grab active:cursor-grabbing"
+                className="flex-1 overflow-y-auto pr-2 space-y-2 cyber-scrollbar select-none"
               >
                 {dictionary.map(item => (
                   <div
                     key={item.word}
                     onClick={() => {
-                      if (hasDraggedRef.current) {
-                        hasDraggedRef.current = false;
-                        return;
-                      }
                       selectWord(item);
+                      setPreviewGif(item);
                       setShowDictionary(false);
                     }}
                     className="flex items-center gap-4 p-3 rounded-xl hover:bg-emerald-50 border border-transparent hover:border-emerald-100 cursor-pointer transition-all group"

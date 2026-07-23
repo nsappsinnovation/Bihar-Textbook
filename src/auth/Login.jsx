@@ -142,8 +142,8 @@ const Login = () => {
       ringColor: "focus:ring-violet-100 focus:border-violet-500",
       btnShadow: "shadow-[0_10px_30px_-10px_rgba(109,40,217,0.5)]",
       title: "Publisher Portal Access",
-      desc: "Sign in to manage textbook print queues, check tender notices, and view wholesaler depots status.",
-      illustrationDesc: "Manage printing timelines, submit depot statements, and review tender filings.",
+      desc: "Sign in to manage textbook print queues and check tender notices.",
+      illustrationDesc: "Manage printing timelines and review tender filings.",
       illustrationTitle: "Supply Chain Info"
     }
   };
