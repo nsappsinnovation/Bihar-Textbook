@@ -101,7 +101,7 @@ const Footer = () => {
                 </div>
                 <span className="text-white/70 leading-relaxed mt-1">
                   <strong className="text-white/90 block mb-1">Registered Office:</strong>
-                  Pathya Pustak Bhawan, Buddh Marg, Fraser Road Area, Patna - 800001
+                  Pathya Pustak Bhawan, Buddh Marg, Fraser Road Area, Patna - 800001, Bihar, India.
                 </span>
               </div>
 

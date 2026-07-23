@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const industryData = [
   {
-    name: "Shri Samrat Choudhary",
+    name: "Sri Samrat Choudhary",
     role: "Hon'ble Chief Minister, Bihar",
     image: "/images/KeyParticipants/samrat.png",
   },
@@ -18,8 +18,8 @@ const industryData = [
     image: "/images/KeyParticipants/sri-vinod.png",
   },
   {
-    name: "Shri Yatendra Kumar Pal, IAS",
-    role: "Managing Director, Bihar State Text Book Publishing Corporation (BSTBPC)",
+    name: "Sri Yatendra Kumar Pal, IAS",
+    role: "Managing Director, BSTBPC",
     image: "/images/KeyParticipants/shri_yatendra_pal.png",
   },
 ];
