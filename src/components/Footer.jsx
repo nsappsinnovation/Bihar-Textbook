@@ -82,7 +82,6 @@ const Footer = () => {
               Documents
             </h4>
             <ul className="space-y-3 pt-2">
-              <FooterLink to="/documents/hrd" label="HRD" />
               <FooterLink to="/documents/registration-form" label="Registration Forms" />
               <FooterLink to="/documents/rti" label="RTI" />
             </ul>
