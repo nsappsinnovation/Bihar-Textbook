@@ -479,7 +479,7 @@ const SYLLABLE_MAP = {
   "नमस्ते": "न-म-स्ते",
   "अलविदा": "अल-वि-दा",
   "धन्यवाद": "धन्य-वाद",
-  "maaf kre": "maaf kre",
+  "माफ़ करें": "मा-फ़ क-रें",
   "हाँ": "हाँ",
   "नहीं": "नहीं",
   "शायद": "शा-यद",
@@ -493,7 +493,7 @@ const SYLLABLE_MAP = {
   "रुको": "रु-को",
   "जाओ": "जा-ओ",
   "आओ": "आ-ओ",
-  "mai ni smjhta": "mai ni smjhta",
+  "मैं नहीं समझता": "मैं न-हीं स-मझ-ता",
   "मुझे पता है": "मु-झे प-ता है",
   "मैंने देखा": "मै-ने दे-खा",
   "मैंने सुना": "मै-ने सु-ना",
@@ -517,7 +517,7 @@ const SYLLABLE_MAP = {
   "मैं ठीक हूँ": "मैं ठीक हूँ",
   "मैं बीमार हूँ": "मैं बी-मार हूँ",
   "मैं व्यस्त हूँ": "मैं व्य-स्त हूँ",
-  "aap kya kr rhe hai": "aap kya kr rhe hai",
+  "आप क्या कर रहे हैं": "आप क्या कर र-हे हैं",
   "आप कहाँ हैं": "आप क-हाँ हैं",
   "आप कब आएंगे": "आप कब आ-एं-गे",
   "कल मिलते हैं": "कल मिल-ते हैं",
@@ -1075,7 +1075,7 @@ const PHRASE_CONCEPTS = [
   { 
     id: 3, 
     translations: { hi: "धन्यवाद", en: "Thank you", de: "Danke", fr: "Merci", es: "Gracias", ja: "ありがとう (Arigatō)", it: "Grazie" }, 
-    distractors: { hi: ["maaf kre", "हाँ", "नहीं"], en: ["Sorry", "Yes", "No"], de: ["Entschuldigung", "Ja", "Nein"], fr: ["Pardon", "Oui", "Non"], es: ["Perdón", "Sí", "No"], ja: ["ごめんなさい (Gomen nasai)", "はい (Hai)", "いいえ (Iie)"], it: ["Scusa", "Sì", "No"] },
+    distractors: { hi: ["माफ़ करें", "हाँ", "नहीं"], en: ["Sorry", "Yes", "No"], de: ["Entschuldigung", "Ja", "Nein"], fr: ["Pardon", "Oui", "Non"], es: ["Perdón", "Sí", "No"], ja: ["ごめんなさい (Gomen nasai)", "はい (Hai)", "いいえ (Iie)"], it: ["Scusa", "Sì", "No"] },
     icon: "🙏" 
   },
   { 
@@ -1092,7 +1092,7 @@ const PHRASE_CONCEPTS = [
   },
   { 
     id: 6, 
-    translations: { hi: "maaf kre", en: "Excuse me", de: "Entschuldigen Sie", fr: "Excusez-moi", es: "Perdone", ja: "すみません (Sumimasen)", it: "Scusami" }, 
+    translations: { hi: "माफ़ करें", en: "Excuse me", de: "Entschuldigen Sie", fr: "Excusez-moi", es: "Perdone", ja: "すみません (Sumimasen)", it: "Scusami" }, 
     distractors: { hi: ["धन्यवाद", "अलविदा", "नमस्ते"], en: ["Thank you", "Goodbye", "Hello"], de: ["Danke", "Auf Wiedersehen", "Hallo"], fr: ["Merci", "Au revoir", "Bonjour"], es: ["Gracias", "Adiós", "Hola"], ja: ["ありがとう (Arigatō)", "さようなら (Sayōnara)", "こんにちは (Konnichiwa)"], it: ["Grazie", "Arrivederci", "Ciao"] },
     icon: "🙋" 
   },
@@ -1122,7 +1122,7 @@ const PHRASE_CONCEPTS = [
   },
   { 
     id: 11, 
-    translations: { hi: "mai ni smjhta", en: "I don't understand", de: "Ich verstehe nicht", fr: "Je ne comprends pas", es: "No entiendo", ja: "わかりません (Wakarimasen)", it: "Non capisco" }, 
+    translations: { hi: "मैं नहीं समझता", en: "I don't understand", de: "Ich verstehe nicht", fr: "Je ne comprends pas", es: "No entiendo", ja: "わかりません (Wakarimasen)", it: "Non capisco" }, 
     distractors: { hi: ["मुझे पता है", "मैंने देखा", "मैंने सुना"], en: ["I know", "I saw", "I heard"], de: ["Ich weiß", "Ich sah", "Ich hörte"], fr: ["Je sais", "J'ai vu", "J'ai entendu"], es: ["Lo sé", "Vi", "Escuché"], ja: ["知っています (Shitte imasu)", "見ました (Mimashita)", "聞きました (Kikimashita)"], it: ["Lo so", "Ho visto", "Ho sentito"] },
     icon: "🤷" 
   },
@@ -1164,7 +1164,7 @@ const PHRASE_CONCEPTS = [
   },
   { 
     id: 18, 
-    translations: { hi: "aap kya kr rhe hai?", en: "What are you doing?", de: "Was machst du?", fr: "Que fais-tu ?", es: "¿Qué haces?", ja: "何をしていますか？ (Nani o shiteimasu ka?)", it: "Cosa stai facendo?" }, 
+    translations: { hi: "आप क्या कर रहे हैं?", en: "What are you doing?", de: "Was machst du?", fr: "Que fais-tu ?", es: "¿Qué haces?", ja: "何をしていますか？ (Nani o shiteimasu ka?)", it: "Cosa stai facendo?" }, 
     distractors: { hi: ["आप कहाँ हैं?", "आप कब आएंगे?", "यह क्या है?"], en: ["Where are you?", "When will you come?", "What is this?"], de: ["Wo bist du?", "Wann kommst du?", "Was ist das?"], fr: ["Où es-tu ?", "Quand viens-tu ?", "Qu'est-ce que c'est ?"], es: ["¿Dónde estás?", "¿Cuándo vendrás?", "¿Qué es esto?"], ja: ["どこにいますか？ (Doko ni imasu ka?)", "いつ来ますか？ (Itsu kimasu ka?)", "これは何ですか？ (Kore wa nan desu ka?)"], it: ["Dove sei?", "Quando vieni?", "Cos'è questo?"] },
     icon: "🤔" 
   },
