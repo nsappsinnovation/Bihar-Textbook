@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import { 
   FiMail, 
   FiLock, 
@@ -62,6 +63,7 @@ const Login = () => {
     setTimeout(() => {
       setIsLoading(false);
       setLoginSuccess(true);
+      toast.success("Login Successful! Redirecting to Admin Portal.");
       
       // Navigate after success message displays
       setTimeout(() => {
@@ -86,6 +88,7 @@ const Login = () => {
     setTimeout(() => {
       setForgotLoading(false);
       setForgotSubmitted(true);
+      toast.success("Password recovery instructions sent to your email!");
     }, 1200);
   };
 

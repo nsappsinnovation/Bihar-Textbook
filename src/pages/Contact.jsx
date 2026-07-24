@@ -4,8 +4,29 @@ import {
   GraduationCap, PenTool, Send, User, ChevronDown, BookOpen, MessageSquare
 } from "lucide-react";
 import { motion } from "framer-motion";
+import toast from "react-hot-toast";
+import { useState } from "react";
 
 const Contact = () => {
+  const [isSending, setIsSending] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', purpose: 'General Support', message: '' });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email || !formData.message) {
+      toast.error("Please fill in all required fields.");
+      return;
+    }
+    
+    setIsSending(true);
+    // Simulate server response
+    setTimeout(() => {
+      setIsSending(false);
+      toast.success("Message sent successfully! We'll be in touch soon.");
+      setFormData({ name: '', email: '', purpose: 'General Support', message: '' });
+    }, 1500);
+  };
+
   return (
     <div className="bg-[#FAFAFA] min-h-screen font-sans">
       
@@ -122,7 +143,7 @@ const Contact = () => {
                         </div>
                     </div>
 
-                    <form className="mt-8 space-y-6">
+                    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {/* Name */}
                             <div className="space-y-2">
@@ -131,6 +152,8 @@ const Contact = () => {
                                     <input 
                                         type="text" 
                                         placeholder="e.g. S. Kumar" 
+                                        value={formData.name}
+                                        onChange={(e) => setFormData({...formData, name: e.target.value})}
                                         className="w-full pl-4 pr-10 py-3.5 rounded-xl border border-slate-200 bg-white text-[14px] font-medium text-slate-800 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all placeholder:text-slate-400"
                                     />
                                     <User className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300 pointer-events-none" />
@@ -143,6 +166,8 @@ const Contact = () => {
                                     <input 
                                         type="email" 
                                         placeholder="example@mail.com" 
+                                        value={formData.email}
+                                        onChange={(e) => setFormData({...formData, email: e.target.value})}
                                         className="w-full pl-4 pr-10 py-3.5 rounded-xl border border-slate-200 bg-white text-[14px] font-medium text-slate-800 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all placeholder:text-slate-400"
                                     />
                                     <Mail className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300 pointer-events-none" />
@@ -154,7 +179,11 @@ const Contact = () => {
                         <div className="space-y-2">
                             <label className="text-[12px] font-black text-slate-700">Inquiry Purpose <span className="text-red-500">*</span></label>
                             <div className="relative">
-                                <select className="w-full pl-4 pr-10 py-3.5 rounded-xl border border-slate-200 bg-white text-[14px] font-medium text-slate-800 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all appearance-none cursor-pointer">
+                                <select 
+                                  value={formData.purpose}
+                                  onChange={(e) => setFormData({...formData, purpose: e.target.value})}
+                                  className="w-full pl-4 pr-10 py-3.5 rounded-xl border border-slate-200 bg-white text-[14px] font-medium text-slate-800 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all appearance-none cursor-pointer"
+                                >
                                     <option>General Support</option>
                                     <option>Textbook Inquiries</option>
                                     <option>Corporate Assistance</option>
@@ -170,20 +199,36 @@ const Contact = () => {
                                 <textarea 
                                     rows="5"
                                     placeholder="Briefly describe your inquiry..." 
+                                    value={formData.message}
+                                    onChange={(e) => setFormData({...formData, message: e.target.value})}
                                     className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-white text-[14px] font-medium text-slate-800 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all resize-none placeholder:text-slate-400"
                                 ></textarea>
-                                <div className="absolute bottom-3 right-4 text-[10px] font-bold text-slate-400">0 / 500</div>
+                                <div className="absolute bottom-3 right-4 text-[10px] font-bold text-slate-400">{formData.message.length} / 500</div>
                             </div>
                         </div>
 
                         {/* Submit Button */}
                         <motion.button 
+                            type="submit"
+                            disabled={isSending}
                             whileHover={{ y: -2 }}
                             whileTap={{ scale: 0.98 }}
-                            className="w-full py-4 bg-blue-700 hover:bg-blue-800 text-white rounded-xl font-bold text-[14px] flex items-center justify-center gap-3 transition-colors shadow-lg shadow-blue-700/20"
+                            className="w-full py-4 bg-blue-700 hover:bg-blue-800 text-white rounded-xl font-bold text-[14px] flex items-center justify-center gap-3 transition-colors shadow-lg shadow-blue-700/20 disabled:opacity-70"
                         >
-                            <Send className="w-4 h-4" />
-                            Send Message
+                            {isSending ? (
+                              <>
+                                <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                                </svg>
+                                Sending...
+                              </>
+                            ) : (
+                              <>
+                                <Send className="w-4 h-4" />
+                                Send Message
+                              </>
+                            )}
                         </motion.button>
                     </form>
                 </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft, ArrowRight, Clock,
@@ -1187,7 +1188,8 @@ const LifeSkills = () => {
                     ) : (
                       <button
                         onClick={() => {
-                          alert(`🎉 Congratulations! You have completed the step-by-step tutorial for ${selectedGuideSkill.title}!`);
+                          setCurrentGuideStep(0);
+                          toast.success(`🎉 Congratulations! You have completed the step-by-step tutorial for ${selectedGuideSkill.title}!`);
                           setSelectedGuideSkill(null);
                         }}
                         className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold rounded-xl text-xs active:scale-95 transition-all shadow-lg shadow-emerald-200 cursor-pointer"

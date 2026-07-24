@@ -5,6 +5,7 @@ import { ReactLenis } from "lenis/react";
 import Nav from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import ScrollToTop from "./components/ScrollToTop";
+import { Toaster } from "react-hot-toast";
 
 /* Lazily loaded Pages & Components */
 const Blog = lazy(() => import("./pages/navbar_pages/Blog.jsx"));
@@ -74,6 +75,7 @@ function App() {
 
   return (
     <ReactLenis root>
+      <Toaster position="top-right" />
       <ScrollToTop />
       {!isNoNavPage && <Nav />}
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
@@ -217,7 +218,7 @@ const Basicskills = () => {
       setShoppingStep(1); // Ask for change
     } else {
       playSound('fail');
-      alert(`Insufficient cash! You paid ₹${paidAmount}, but the item costs ₹${itemPrice}.`);
+      toast.error(`Insufficient cash! You paid ₹${paidAmount}, but the item costs ₹${itemPrice}.`);
     }
   };
 

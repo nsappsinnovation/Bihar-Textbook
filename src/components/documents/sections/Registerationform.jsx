@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import toast from 'react-hot-toast';
 import { FiFileText, FiDownload, FiSearch, FiFilter, FiBriefcase, FiUser, FiHome, FiCheckCircle, FiEye } from "react-icons/fi";
 import { motion } from "framer-motion";
 
@@ -27,7 +28,7 @@ const RegistrationForms = () => {
 
   const handlePreview = (form) => {
     if (!form.document) {
-      alert("No document available for preview.");
+      toast.error("No document available for preview.");
       return;
     }
     try {
@@ -45,13 +46,13 @@ const RegistrationForms = () => {
       }
     } catch (err) {
       console.error('View Error:', err);
-      alert('Error preparing document preview');
+      toast.error('Error preparing document preview');
     }
   };
 
   const handleDownload = (form) => {
     if (!form.document) {
-      alert("No document available for download.");
+      toast.error("No document available for download.");
       return;
     }
     const link = document.createElement('a');

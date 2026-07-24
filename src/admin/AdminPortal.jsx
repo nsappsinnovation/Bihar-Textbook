@@ -20,7 +20,6 @@ import RegisterPrintersPage from './pages/RegisterPrintersPage';
 import CSRPolicyPage from './pages/CSRPolicyPage';
 import WebsiteManagementHub from './pages/WebsiteManagementHub';
 import NotificationsPage from './pages/NotificationsPage';
-import ToastContainer from './components/ToastContainer';
 import { useToast } from './hooks/useCustomHooks';
 
 function App() {
@@ -118,9 +117,6 @@ function App() {
           </main>
         </div>
       </div>
-
-      {/* Toast Notifications */}
-      <ToastContainer toasts={toasts} removeToast={removeToast} />
     </div>
   );
 }

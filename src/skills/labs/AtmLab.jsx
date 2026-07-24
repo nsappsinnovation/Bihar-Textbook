@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CreditCard, Shield, AlertCircle, CheckCircle2, RefreshCw } from 'lucide-react';
+import toast from 'react-hot-toast';
 
 const AtmLab = () => {
   // --- ATM Simulator State ---
@@ -173,7 +174,7 @@ const AtmLab = () => {
                       key={`left-btn-${btnIdx}`}
                       onClick={() => {
                         if (atmStep === 'option') {
-                          alert("Simulation: Fast Cash is disabled. Please choose Cash Withdrawal.");
+                          toast.error("Simulation: Fast Cash is disabled. Please choose Cash Withdrawal.");
                         } else if (atmStep === 'accountType') {
                           setSelectedAccountType('Current');
                           setAtmStep('amountInput');
@@ -249,13 +250,13 @@ const AtmLab = () => {
                       <div className="grid grid-cols-2 gap-x-2 gap-y-3 mt-1.5">
                         <div className="space-y-2 text-left">
                           <button
-                            onClick={() => alert("Simulation: Fast Cash is disabled. Please choose Cash Withdrawal.")}
+                            onClick={() => toast.error("Simulation: Fast Cash is disabled. Please choose Cash Withdrawal.")}
                             className="w-full text-left pl-1.5 py-1 bg-sky-950/45 text-[9px] font-black rounded border border-transparent hover:border-sky-300 cursor-pointer"
                           >
                             ⬳ FAST CASH
                           </button>
                           <button
-                            onClick={() => alert("Simulation: Balance Inquiry is disabled. Please choose Cash Withdrawal.")}
+                            onClick={() => toast.error("Simulation: Balance Inquiry is disabled. Please choose Cash Withdrawal.")}
                             className="w-full text-left pl-1.5 py-1 bg-sky-950/45 text-[9px] font-black rounded border border-transparent hover:border-sky-300 cursor-pointer"
                           >
                             ⬳ BALANCE INQUIRY
@@ -269,7 +270,7 @@ const AtmLab = () => {
                             CASH WITHDRAWAL ➔
                           </button>
                           <button
-                            onClick={() => alert("Simulation: PIN Change is disabled.")}
+                            onClick={() => toast.error("Simulation: PIN Change is disabled.")}
                             className="w-[125px] py-1 bg-sky-950/45 text-white text-[9px] font-black rounded-lg border border-sky-400/20 text-center cursor-pointer"
                           >
                             PIN CHANGE ➔
@@ -457,7 +458,7 @@ const AtmLab = () => {
                           if (btnIdx === 1) {
                             setAtmStep('accountType');
                           } else if (btnIdx === 2) {
-                            alert("Simulation: PIN Change is disabled.");
+                            toast.error("Simulation: PIN Change is disabled.");
                           }
                         } else if (atmStep === 'accountType') {
                           if (btnIdx === 1) {

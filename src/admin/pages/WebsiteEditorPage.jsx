@@ -276,7 +276,6 @@ export default function WebsiteEditorPage({ module, addToast }) {
       const maxSize = field === 'uploadedVideo' ? 5 * 1024 * 1024 : 2 * 1024 * 1024; // 5MB for video, 2MB for images/docs
       if (file.size > maxSize) {
         addToast?.(`File too large! Max allowed is ${field === 'uploadedVideo' ? '5MB' : '2MB'}.`, 'error');
-        alert(`Error: File exceeds the maximum limit of ${field === 'uploadedVideo' ? '5' : '2'}MB.`);
         return;
       }
 
@@ -395,7 +394,6 @@ export default function WebsiteEditorPage({ module, addToast }) {
     } catch (e) {
       console.error("Storage Error:", e);
       addToast?.('Storage limit exceeded! File too large.', 'error');
-      alert("Failed to save. The uploaded image is too large for the browser's local storage limit.");
     }
   };
 

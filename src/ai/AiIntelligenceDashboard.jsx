@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import toast from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 import {   
   ArrowLeft, ArrowRight, BookOpen, Clock,
@@ -763,7 +764,7 @@ const PromptAcademyComponent = () => {
 
   const handleSpeak = () => {
     if (!window.speechSynthesis) {
-      alert("Text-to-speech is not supported in this browser.");
+      toast.error("Text-to-speech is not supported in this browser.");
       return;
     }
     if (isSpeaking) {
@@ -928,7 +929,7 @@ const PromptAcademyComponent = () => {
       if (activeLessonIdx < lessonsData.length - 1) {
         selectLesson(activeLessonIdx + 1);
       } else {
-        alert(`Congratulations! You have completed all ${lessonsData.length} lessons of the AI Prompt Academy and unlocked the Prompt Grandmaster rank!`);
+        toast.success(`🎉 Congratulations! You have completed all ${lessonsData.length} lessons of the AI Prompt Academy and unlocked the Prompt Grandmaster rank!`);
       }
     } else {
       setSelectedOption(null);
@@ -1220,7 +1221,7 @@ const PromptAcademyComponent = () => {
                                if (activeLessonIdx < lessonsData.length - 1) {
                                   selectLesson(activeLessonIdx + 1);
                                } else {
-                                  alert("Congratulations! You completed all lessons!");
+                                  toast.success("Congratulations! You completed all lessons!");
                                }
                             }} className="w-full py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-xl font-black font-display text-sm shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all cursor-pointer flex items-center justify-center gap-2">
                                Complete Lesson & Next <ArrowRight size={16} />

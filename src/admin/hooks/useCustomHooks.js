@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import toast from 'react-hot-toast';
 
 /**
  * Custom hook for animated counter effect
@@ -81,21 +82,21 @@ export function useDebounce(value, delay = 300) {
  * Toast notification system
  */
 export function useToast() {
-  const [toasts, setToasts] = useState([]);
-
   const addToast = useCallback((message, type = 'info', duration = 3000) => {
-    const id = Date.now();
-    setToasts(prev => [...prev, { id, message, type }]);
-    setTimeout(() => {
-      setToasts(prev => prev.filter(t => t.id !== id));
-    }, duration);
+    if (type === 'success') {
+      toast.success(message, { duration });
+    } else if (type === 'error') {
+      toast.error(message, { duration });
+    } else {
+      toast(message, { duration, icon: type === 'warning' ? '⚠️' : 'ℹ️' });
+    }
   }, []);
 
   const removeToast = useCallback((id) => {
-    setToasts(prev => prev.filter(t => t.id !== id));
+    toast.dismiss(id);
   }, []);
 
-  return { toasts, addToast, removeToast };
+  return { toasts: [], addToast, removeToast };
 }
 
 /**

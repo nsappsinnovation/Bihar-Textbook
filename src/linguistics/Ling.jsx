@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import toast from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
 import { 
   BookOpen, MessageSquare, User, 
@@ -179,7 +180,7 @@ export default function LinguisticApp() {
                     if (!sourceLang || !targetLang) return;
                     const isTargetInSource = SOURCE_LANGUAGES.some(l => l.id === targetLang);
                     if (!isTargetInSource) {
-                      alert("Selected target language is not available as a source language yet.");
+                      toast.error("Selected target language is not available as a source language yet.");
                       return;
                     }
                     const temp = sourceLang;

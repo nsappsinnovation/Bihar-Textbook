@@ -8,14 +8,7 @@ const defaultGalleryItems = [
   { type: "image", src: "/images/hero/sign.png", alt: "Inclusive Sign Language Training Class" },
   { type: "image", src: "/images/hero/linguistic.png", alt: "Diverse Regional Dialects Learning Program" },
   { type: "image", src: "/images/csr.png", alt: "Corporate Social Responsibility Initiatives" },
-  { type: "image", src: "/images/goodnight.png", alt: "Educational Campaigns" },
-  { type: "image", src: "/images/KeyParticipants/sri_mithlesh.png", alt: "Key Participant Session" },
-  { type: "image", src: "/images/KeyParticipants/girish_kumar_choudhary.png", alt: "Conference Highlights" },
-  { type: "image", src: "/images/KeyParticipants/abhyanand.png", alt: "Academic Discussions" },
-  { type: "image", src: "/images/KeyParticipants/sri-vinod.png", alt: "Leadership Meeting" },
-  { type: "image", src: "/images/KeyParticipants/shri_yatendra_pal.png", alt: "Executive Briefing" },
-  { type: "image", src: "/images/KeyParticipants/samrat.png", alt: "Community Outreach" },
-  { type: "image", src: "/images/KeyParticipants/anand.png", alt: "Student Engagement" }
+  { type: "image", src: "/images/goodnight.png", alt: "Educational Campaigns" }
 ];
 
 const Photogallery = () => {

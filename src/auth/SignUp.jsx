@@ -1,11 +1,26 @@
 import React, { useState } from "react";
 import { FiMail, FiLock, FiEye, FiEyeOff, FiUser } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const [role, setRole] = useState("admin");
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    
+    // Simulate server response
+    setTimeout(() => {
+      setIsLoading(false);
+      toast.success("Registration Successful! Please log in.");
+      navigate("/login");
+    }, 1500);
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f8fafc] px-4 py-8 relative overflow-hidden">
@@ -45,7 +60,7 @@ const SignUp = () => {
           <div className="flex-1 overflow-y-auto px-8 lg:px-14 pb-10 custom-scrollbar">
 
             {/* ===== FORM ===== */}
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleRegister}>
               <Input icon={<FiUser />} label="Full Name" placeholder="e.g. Anushka Nandan" />
               <Input icon={<FiMail />} label="Email Address" placeholder="name@example.com" />
 
@@ -89,9 +104,20 @@ const SignUp = () => {
 
               <button
                 type="submit"
-                className="w-full py-4 rounded-2xl bg-indigo-900 hover:bg-indigo-800 text-white font-bold text-base shadow-[0_10px_30px_-10px_rgba(49,46,129,0.5)] hover:shadow-[0_20px_40px_-10px_rgba(49,46,129,0.6)] transition-all duration-300 transform hover:-translate-y-1 active:scale-[0.98] mt-4"
+                disabled={isLoading}
+                className="w-full py-4 rounded-2xl bg-indigo-900 hover:bg-indigo-800 text-white font-bold text-base shadow-[0_10px_30px_-10px_rgba(49,46,129,0.5)] hover:shadow-[0_20px_40px_-10px_rgba(49,46,129,0.6)] transition-all duration-300 transform hover:-translate-y-1 active:scale-[0.98] mt-4 flex items-center justify-center gap-2"
               >
-                Register as Admin
+                {isLoading ? (
+                  <>
+                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    </svg>
+                    <span>Registering...</span>
+                  </>
+                ) : (
+                  "Register as Admin"
+                )}
               </button>
 
               <div className="text-center text-xs text-gray-500 font-bold tracking-wide mt-6">
