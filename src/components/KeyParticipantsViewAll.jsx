@@ -31,34 +31,7 @@ const industryData = [
   },
 ];
 
-const academiaData = [
-  {
-    name: "Anand Kumar",
-    role: "Founder, Super 30 & Mathematician",
-    image: "/images/KeyParticipants/Anand kumar pic.png",
-    category: "Visionaries",
-  },
-  {
-    name: "HC Verma",
-    role: "Renowned Physicist & Educator, IIT Kanpur (Born in Bihar)",
-    image: "/images/KeyParticipants/hc-verma-pic.png",
-    category: "Visionaries",
-  },
-  {
-    name: "Prof. Girish Kumar Choudhary",
-    role: "Vice Chancellor, Patna University",
-    image: "/images/KeyParticipants/girish_kumar_choudhary.png",
-    category: "Visionaries",
-  },
-  {
-    name: "Abhayanand",
-    role: "Former DGP Bihar & Co-founder of Super 30",
-    image: "/images/KeyParticipants/abhyanand.png",
-    category: "Visionaries",
-  },
-];
-
-const allParticipants = [...industryData, ...academiaData];
+const allParticipants = [...industryData];
 
 export default function KeyParticipantViewAll() {
   const [filter, setFilter] = useState("All");
@@ -135,7 +108,7 @@ export default function KeyParticipantViewAll() {
                 >
                   <span className="w-2.5 h-2.5 rounded-full bg-indigo-600 animate-pulse"></span>
                   <span className="text-indigo-800 text-xs font-bold tracking-wider uppercase">
-                    Leadership & Academia
+                    Leadership
                   </span>
                 </motion.div>
                 
@@ -157,7 +130,7 @@ export default function KeyParticipantViewAll() {
                   transition={{ duration: 0.5, delay: 0.2 }}
                   className="text-slate-500 text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed"
                 >
-                    Meet the distinguished leaders and visionary educators who are driving the transformation of Bihar's educational landscape.
+                    Meet the distinguished leaders who are driving the transformation of Bihar's educational landscape.
                 </motion.p>
           </div>
       </div>
@@ -184,7 +157,7 @@ export default function KeyParticipantViewAll() {
 
                 {/* Filters */}
                 <div className="flex p-1 bg-slate-100/80 rounded-xl">
-                    {["All", "Leadership", "Visionaries"].map((item) => (
+                    {["All", "Leadership"].map((item) => (
                         <button
                             key={item}
                             onClick={() => setFilter(item)}

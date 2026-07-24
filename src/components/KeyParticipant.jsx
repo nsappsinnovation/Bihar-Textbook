@@ -24,31 +24,9 @@ const industryData = [
   },
 ];
 
-const academiaData = [
-  {
-    name: "Anand Kumar",
-    role: "Founder, Super 30 & Mathematician",
-    image: "/images/KeyParticipants/Anand kumar pic.png",
-  },
-  {
-    name: "HC Verma",
-    role: "Renowned Physicist & Educator, IIT Kanpur (Born in Bihar)",
-    image: "/images/KeyParticipants/hc-verma-pic.png",
-  },
-  {
-    name: "Prof. Girish Kumar Choudhary",
-    role: "Vice Chancellor, Patna University",
-    image: "/images/KeyParticipants/girish_kumar_choudhary.png",
-  },
-  {
-    name: "Abhayanand",
-    role: "Former DGP Bihar & Co-founder of Super 30",
-    image: "/images/KeyParticipants/abhyanand.png",
-  },
-];
+
 
 export default function KeyParticipant() {
-  const [tab, setTab] = useState("industry");
   const scrollRef = useRef(null);
 
   const [allData, setAllData] = useState(() => {
@@ -91,15 +69,10 @@ export default function KeyParticipant() {
         console.error(e);
       }
     }
-    return [
-      ...industryData.map(i => ({...i, tag: 'LEADERSHIP'})),
-      ...academiaData.map(a => ({...a, tag: 'VISIONARIES'}))
-    ];
+    return industryData.map(i => ({...i, tag: 'LEADERSHIP'}));
   });
 
-  const industryList = allData.filter(d => d.tag === 'LEADERSHIP');
-  const academiaList = allData.filter(d => d.tag === 'VISIONARIES' || d.tag === 'EDUCATORS');
-  const data = tab === "industry" ? industryList : academiaList;
+  const data = allData.filter(d => d.tag === 'LEADERSHIP');
 
   const scroll = (direction) => {
     if (scrollRef.current) {
@@ -121,14 +94,14 @@ export default function KeyParticipant() {
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 mb-4">
               <div className="h-px w-6 bg-blue-600"></div>
-              <span className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em]">Leadership & Academia</span>
+              <span className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em]">Leadership</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
               Leading The Way <br />
               <span className="text-slate-400 font-medium">In Educational Excellence</span>
             </h2>
             <p className="text-sm text-slate-500 font-medium leading-relaxed mb-4">
-              Meet the visionary leaders and esteemed educators shaping the future of learning in Bihar.
+              Meet the visionary leaders shaping the future of learning in Bihar.
             </p>
           </div>
 
@@ -166,28 +139,6 @@ export default function KeyParticipant() {
         </div>
 
         <div className="max-w-[1280px] mx-auto">
-          {/* Tabs */}
-          <div className="flex gap-8 border-b border-gray-200 mb-6">
-            <button
-              onClick={() => setTab("industry")}
-              className={`pb-3 text-sm font-bold tracking-wide transition-all ${tab === "industry"
-                ? "text-[#332F82] border-b-2 border-[#332F82]"
-                : "text-gray-400 hover:text-gray-600"
-                }`}
-            >
-              Leadership
-            </button>
-            <button
-              onClick={() => setTab("academia")}
-              className={`pb-3 text-sm font-bold tracking-wide transition-all ${tab === "academia"
-                ? "text-[#332F82] border-b-2 border-[#332F82]"
-                : "text-gray-400 hover:text-gray-600"
-                }`}
-            >
-              Visionaries & Educators
-            </button>
-          </div>
-
           {/* Carousel */}
           <div
             ref={scrollRef}

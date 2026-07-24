@@ -80,34 +80,6 @@ export default function LeadersManagementPage({ addToast }) {
         role: 'Managing Director, Bihar State Text Book Publishing Corporation (BSTBPC)', 
         tag: 'LEADERSHIP', 
         image: '/images/KeyParticipants/shri_yatendra_pal.png' 
-      },
-      { 
-        id: 5, 
-        name: 'Anand Kumar', 
-        role: 'Founder, Super 30 & Mathematician', 
-        tag: 'VISIONARIES', 
-        image: '/images/KeyParticipants/Anand kumar pic.png' 
-      },
-      { 
-        id: 6, 
-        name: 'HC Verma', 
-        role: 'Renowned Physicist & Educator, IIT Kanpur (Born in Bihar)', 
-        tag: 'VISIONARIES', 
-        image: '/images/KeyParticipants/hc-verma-pic.png' 
-      },
-      { 
-        id: 7, 
-        name: 'Prof. Girish Kumar Choudhary', 
-        role: 'Vice Chancellor, Patna University', 
-        tag: 'VISIONARIES', 
-        image: '/images/KeyParticipants/girish_kumar_choudhary.png' 
-      },
-      { 
-        id: 8, 
-        name: 'Abhayanand', 
-        role: 'Former DGP Bihar & Co-founder of Super 30', 
-        tag: 'VISIONARIES', 
-        image: '/images/KeyParticipants/abhyanand.png' 
       }
     ];
   });
@@ -191,8 +163,8 @@ export default function LeadersManagementPage({ addToast }) {
     >
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-black text-gray-900 tracking-tight">Leaders & Educators</h1>
-          <p className="text-sm text-gray-500 mt-1 font-medium">Manage Visionaries and Leadership profiles</p>
+          <h1 className="text-3xl font-black text-gray-900 tracking-tight">Leadership</h1>
+          <p className="text-sm text-gray-500 mt-1 font-medium">Manage Leadership profiles</p>
         </div>
         <button 
           onClick={handleOpenAdd}
@@ -279,7 +251,7 @@ export default function LeadersManagementPage({ addToast }) {
           <div className="col-span-full py-24 bg-white rounded-[2.5rem] border-2 border-dashed border-gray-100 flex flex-col items-center justify-center text-center">
             <User className="w-12 h-12 text-gray-200 mb-4" />
             <h3 className="text-lg font-bold text-gray-900">No Profiles Added</h3>
-            <p className="text-sm text-gray-400 mt-1">Add leaders and visionaries to display them on the website.</p>
+            <p className="text-sm text-gray-400 mt-1">Add leaders to display them on the website.</p>
           </div>
         )}
       </div>
@@ -312,9 +284,7 @@ export default function LeadersManagementPage({ addToast }) {
                 value={formData.tag}
                 onChange={(e) => setFormData(prev => ({ ...prev, tag: e.target.value }))}
               >
-                <option value="VISIONARIES">VISIONARIES</option>
                 <option value="LEADERSHIP">LEADERSHIP</option>
-                <option value="EDUCATORS">EDUCATORS</option>
               </select>
             </div>
           </div>
