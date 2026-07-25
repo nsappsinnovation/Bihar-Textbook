@@ -16,12 +16,12 @@ const AnimatedRoad = ({ speed = 2, isMoving = false, showCrosswalk = false, show
       {showDivider && (
         <div className="absolute inset-x-0 h-1 top-1/2 -translate-y-1/2 flex overflow-hidden opacity-80">
           <motion.div 
-            animate={isMoving ? { x: [0, -100] } : { x: 0 }} 
-            transition={{ repeat: isMoving ? Infinity : 0, duration: speed, ease: "linear" }}
-            className="flex w-[200%]"
+            animate={isMoving ? { x: [0, -96] } : { x: 0 }} 
+            transition={{ repeat: isMoving ? Infinity : 0, duration: isMoving ? speed : 0, ease: "linear" }}
+            className="flex w-max"
           >
             {[...Array(30)].map((_, i) => (
-              <div key={i} className="w-12 h-1.5 bg-yellow-400 mx-6 rounded-full shadow-[0_0_5px_rgba(250,204,21,0.5)]" />
+              <div key={i} className="w-12 h-1.5 shrink-0 bg-yellow-400 mx-6 rounded-full shadow-[0_0_5px_rgba(250,204,21,0.5)]" />
             ))}
           </motion.div>
         </div>
@@ -251,7 +251,7 @@ const SpeedingSimulator = () => {
              : (status === 'driving' || status === 'braking' || status === 'safe') ? { right: '20%' }
              : { right: '15%' } // slightly bumped on crash
            }
-           transition={{ duration: status === 'driving' ? 1.2 : 0.2 }}
+           transition={{ duration: status === 'idle' ? 0 : status === 'driving' ? 1.2 : 0.2 }}
            className="absolute z-20 drop-shadow-2xl text-6xl"
          >
            🐄
@@ -278,7 +278,7 @@ const SpeedingSimulator = () => {
              : { left: '72%', rotate: -15, y: -10 } // Crashes
            }
            transition={ { 
-             duration: status === 'idle' ? 0.5 
+             duration: status === 'idle' ? 0 
                      : status === 'driving' ? 1.2 
                      : status === 'braking' ? (speed === 'fast' ? 0.5 : 0.8) 
                      : 0.3,
@@ -350,7 +350,7 @@ const WrongSideSimulator = () => {
              : status === 'crash' ? { right: '35%' }
              : { right: '120%' }
            }
-           transition={{ duration: status === 'crash' ? 1.2 : 2.5, ease: 'linear' }}
+           transition={{ duration: status === 'idle' ? 0 : status === 'crash' ? 1.2 : 2.5, ease: 'linear' }}
            className="absolute bottom-12 z-20 drop-shadow-xl text-7xl"
          >
            🚛
@@ -363,7 +363,7 @@ const WrongSideSimulator = () => {
              top: side === 'correct' ? '25px' : '150px', 
              rotate: status === 'crash' ? 25 : 0
            }}
-           transition={{ duration: status === 'crash' ? 1.2 : 0.5, ease: 'linear' }}
+           transition={{ duration: status === 'idle' ? 0 : status === 'crash' ? 1.2 : 0.5, ease: 'linear' }}
            className="absolute z-30 drop-shadow-xl text-7xl scale-x-[-1]"
          >
            {status === 'crash' ? '💥' : '🚗'}
@@ -431,7 +431,7 @@ const DistractedSimulator = () => {
              : { left: ['20%', '45%'], top: ['50px', '15px'], rotate: [0, -15] } // Drifting motion
            }
            transition={{ 
-             duration: status === 'idle' ? 0.5 : (status === 'crash' ? 0.2 : 2.5), 
+             duration: status === 'idle' ? 0 : (status === 'crash' ? 0.2 : 2.5), 
              ease: 'linear',
              repeat: (focus === 'road' && status === 'running') ? Infinity : 0
            }}
