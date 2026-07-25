@@ -36,20 +36,14 @@ const Navbar = () => {
 
   const getLinkClass = (path) => {
     const active = isActive(path);
-    if (isHomePage) {
-      return active
-        ? "text-blue-400 font-bold relative pb-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-blue-400 after:rounded-full transition-all flex items-center gap-1 cursor-pointer"
-        : "text-white/80 hover:text-blue-300 transition-colors flex items-center gap-1 cursor-pointer";
-    } else {
-      return active
-        ? "text-blue-600 font-bold relative pb-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-blue-600 after:rounded-full transition-all flex items-center gap-1 cursor-pointer"
-        : "text-slate-700 hover:text-blue-600 transition-colors flex items-center gap-1 cursor-pointer";
-    }
+    return active
+      ? "text-blue-600 font-bold relative pb-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-blue-600 after:rounded-full transition-all flex items-center gap-1 cursor-pointer"
+      : "text-gray-900 hover:text-blue-600 transition-colors flex items-center gap-1 cursor-pointer";
   };
 
   return (
     <header className={`absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-6 py-4 w-full transition-all duration-300 ${
-      isHomePage ? "bg-transparent border-b border-white/10" : "bg-white shadow-sm border-b border-gray-100"
+      isHomePage ? "bg-gradient-to-b from-white/60 to-transparent backdrop-blur-sm border-b border-blue-200/50" : "bg-white shadow-sm border-b border-gray-100"
     }`}>
 
       <div className="flex h-16 w-full items-center justify-between px-2 md:px-6">
@@ -65,14 +59,12 @@ const Navbar = () => {
         </div>
 
         {/* CENTER: Navigation (Desktop) */}
-        <nav className={`hidden lg:flex mx-auto items-center gap-6 xl:gap-10 text-[14px] font-medium transition-colors duration-300 ${
-          isHomePage ? "text-white/90" : "text-gray-700"
-        }`}>
+        <nav className="hidden lg:flex mx-auto items-center gap-6 xl:gap-10 text-[14px] font-medium transition-colors duration-300 text-gray-700">
           <Link to="/" className={getLinkClass("/")}>Home</Link>
 
           <div className="relative group">
             <span className={getLinkClass("/know-us")}>
-              Know Us <ChevronDown size={14} className={isActive("/know-us") ? (isHomePage ? "text-blue-400" : "text-blue-600") : ""} />
+              Know Us <ChevronDown size={14} className={isActive("/know-us") ? "text-blue-600" : ""} />
             </span>
             <div data-lenis-prevent="true" className="dropdown-menu absolute left-0 top-full mt-3 w-64 rounded-md bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50 max-h-96 overflow-y-auto scrollbar-hide border border-slate-100 py-1">
               {Knowconfig.map(item => {
@@ -96,7 +88,7 @@ const Navbar = () => {
 
           <div className="relative group">
             <span className={getLinkClass("/books")}>
-              Books <ChevronDown size={14} className={isActive("/books") ? (isHomePage ? "text-blue-400" : "text-blue-600") : ""} />
+              Books <ChevronDown size={14} className={isActive("/books") ? "text-blue-600" : ""} />
             </span>
             <div data-lenis-prevent="true" className="dropdown-menu absolute left-0 top-full mt-3 w-64 rounded-md bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50 max-h-96 overflow-y-auto scrollbar-hide border border-slate-100 py-1">
               {[...Array(12)].map((_, index) => {
@@ -121,7 +113,7 @@ const Navbar = () => {
 
           <div className="relative group">
             <span className={getLinkClass("/gallery")}>
-              Gallery <ChevronDown size={14} className={isActive("/gallery") ? (isHomePage ? "text-blue-400" : "text-blue-600") : ""} />
+              Gallery <ChevronDown size={14} className={isActive("/gallery") ? "text-blue-600" : ""} />
             </span>
             <div data-lenis-prevent="true" className="dropdown-menu absolute left-0 top-full mt-3 w-64 rounded-md bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50 max-h-96 overflow-y-auto scrollbar-hide border border-slate-100 py-1">
               {Galleryconfig.map(item => {
@@ -145,7 +137,7 @@ const Navbar = () => {
 
           <div className="relative group">
             <span className={getLinkClass("/documents")}>
-              Documents <ChevronDown size={14} className={isActive("/documents") ? (isHomePage ? "text-blue-400" : "text-blue-600") : ""} />
+              Documents <ChevronDown size={14} className={isActive("/documents") ? "text-blue-600" : ""} />
             </span>
             <div data-lenis-prevent="true" className="dropdown-menu absolute left-0 top-full mt-3 w-64 rounded-md bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50 max-h-96 overflow-y-auto scrollbar-hide border border-slate-100 py-1">
               {Docuconfig.map(item => {
@@ -179,24 +171,17 @@ const Navbar = () => {
           
           {/* Translate Button */}
           <button 
-            className={`flex items-center gap-1 px-2 py-1.5 rounded-full border transition-all cursor-pointer group shadow-sm ${
-              isHomePage 
-                ? "text-white border-white/20 bg-white/5 hover:bg-white/20 backdrop-blur-sm" 
-                : "text-slate-700 border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300"
+            className={`flex items-center gap-1.5 px-3.5 py-2.5 rounded-full border transition-all cursor-pointer group shadow-sm text-slate-700 border-slate-200 hover:bg-slate-50 hover:border-slate-300 ${
+              isHomePage ? "bg-white/50 backdrop-blur-sm" : "bg-white"
             }`}
             title="Language"
           >
-            <Languages size={15} className={`transition-transform group-hover:scale-110 ${isHomePage ? "text-white" : "text-blue-600"}`} />
-            <span className="text-[10px] font-extrabold tracking-wider hidden sm:block pt-0.5"></span>
+            <Languages size={20} className="transition-transform group-hover:scale-110 text-blue-600" />
           </button>
 
           <div className="hidden lg:block">
             <Link to="/login">
-              <button className={`relative px-8 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 overflow-hidden group shadow-md ${
-                isHomePage
-                  ? "bg-white/10 text-white border border-white/20 backdrop-blur-md hover:bg-white/20 hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]"
-                  : "bg-gradient-to-r from-blue-600 to-indigo-700 text-white hover:from-blue-700 hover:to-indigo-800 shadow-blue-500/20 hover:shadow-blue-500/40"
-                } hover:-translate-y-0.5 active:scale-95`}>
+              <button className="relative px-8 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 overflow-hidden group shadow-md bg-gradient-to-br from-[#0b2b4f] to-[#124d9c] hover:opacity-90 text-white shadow-blue-500/20 hover:shadow-blue-500/40 hover:-translate-y-0.5 active:scale-95">
                 <span className="relative z-10 flex items-center gap-2">
                   Login
                   <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -211,10 +196,8 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className={`lg:hidden p-2 rounded-xl border transition-all cursor-pointer ${
-              isHomePage 
-                ? "text-white border-white/20 bg-white/10 hover:bg-white/20" 
-                : "text-slate-700 border-slate-200 bg-slate-50 hover:bg-slate-100"
+            className={`lg:hidden p-2 rounded-xl border transition-all cursor-pointer text-slate-700 border-slate-200 hover:bg-slate-100 ${
+              isHomePage ? "bg-white/50 backdrop-blur-sm" : "bg-slate-50"
             }`}
           >
             {isOpen ? <X size={22} /> : <Menu size={22} />}
@@ -412,7 +395,7 @@ const Navbar = () => {
           
           <div className="pt-4">
             <Link to="/login" onClick={() => setIsOpen(false)} className="block w-full">
-              <button className="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-full font-bold text-sm text-center shadow-lg active:scale-98">
+              <button className="w-full py-3 bg-gradient-to-br from-[#0b2b4f] to-[#124d9c] text-white rounded-full font-bold text-sm text-center shadow-lg active:scale-98">
                 Login
               </button>
             </Link>

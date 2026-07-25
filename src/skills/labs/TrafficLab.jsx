@@ -136,7 +136,7 @@ const CrossingSimulator = () => {
             : { left: ['-20%', '120%'] }
           }
           transition={
-            trafficLight === 'red' ? { duration: 0.6, type: 'spring', bounce: 0.2 }
+            trafficLight === 'red' ? { duration: 0 }
             : crossingResult === 'crash' ? { duration: 0.2 }
             : { duration: trafficLight === 'yellow' ? 6 : 2, repeat: Infinity, ease: 'linear' }
           }
@@ -152,7 +152,7 @@ const CrossingSimulator = () => {
             : { right: ['-20%', '120%'] }
           }
           transition={
-            trafficLight === 'red' ? { duration: 0.6, type: 'spring', bounce: 0.2 }
+            trafficLight === 'red' ? { duration: 0 }
             : { duration: trafficLight === 'yellow' ? 5 : 1.5, repeat: Infinity, ease: 'linear' }
           }
           className="absolute bottom-10 z-20 text-6xl drop-shadow-xl"
@@ -171,7 +171,7 @@ const CrossingSimulator = () => {
                 ? { y: -110, x: -60, rotate: 90 }
                 : { y: 0, x: 0, rotate: 0 }
           }
-          transition={ crossingResult === 'crash' ? { duration: 0.6, ease: "easeOut" } : { duration: 2.2, ease: "linear" } }
+          transition={ !isCrossing ? { duration: 0 } : crossingResult === 'crash' ? { duration: 0.6, ease: "easeOut" } : { duration: 2.2, ease: "linear" } }
           className="absolute left-[48%] text-5xl z-30 drop-shadow-xl"
           style={{ bottom: '-15px' }}
         >
@@ -261,34 +261,36 @@ const SpeedingSimulator = () => {
          {status === 'braking' || status === 'crash' || status === 'safe' ? (
            <motion.div 
              initial={{ opacity: 0, scaleX: 0 }}
-             animate={{ opacity: 0.6, scaleX: 1 }}
+             animate={{ opacity: 0.8, scaleX: 1 }}
              transition={{ duration: 0.5 }}
-             className="absolute top-[55%] h-6 bg-black/40 blur-[1px] origin-right z-10"
-             style={{ left: '5%', right: speed === 'fast' ? '65%' : '45%' }}
+             className="absolute top-[55%] h-6 bg-black/60 blur-[1px] origin-right z-10"
+             style={{ left: '5%', right: speed === 'fast' ? '40%' : '65%' }}
            />
          ) : null}
 
          {/* Player Car (Left to Right) */}
          <motion.div
            animate={
-             status === 'idle' ? { left: '5%' }
-             : status === 'driving' ? { left: speed === 'fast' ? '40%' : '20%' }
-             : status === 'braking' ? { left: speed === 'fast' ? '60%' : '35%', rotate: speed === 'fast' ? -5 : 0 }
-             : status === 'safe' ? { left: '45%' } // Stops safely
+             status === 'idle' ? { left: '5%', rotate: 0 }
+             : status === 'driving' ? { left: speed === 'fast' ? '40%' : '20%', rotate: 0 }
+             : status === 'braking' ? { left: speed === 'fast' ? '60%' : '35%', rotate: -8 }
+             : status === 'safe' ? { left: '45%', rotate: 0 } // Stops safely
              : { left: '72%', rotate: -15, y: -10 } // Crashes
            }
-           transition={{ 
+           transition={ { 
              duration: status === 'idle' ? 0.5 
                      : status === 'driving' ? 1.2 
                      : status === 'braking' ? (speed === 'fast' ? 0.5 : 0.8) 
                      : 0.3,
              ease: status === 'braking' ? 'easeOut' : 'linear'
-           }}
-           className="absolute top-1/2 -translate-y-1/2 z-30 drop-shadow-xl flex items-center text-7xl scale-x-[-1]"
+           } }
+           className={`absolute top-1/2 -translate-y-1/2 z-30 flex items-center text-7xl scale-x-[-1] transition-all duration-300 ${status === 'braking' ? 'drop-shadow-[15px_0_20px_rgba(239,68,68,0.9)]' : 'drop-shadow-xl'}`}
          >
            {status === 'crash' ? '💥' : '🏎️'}
            {status === 'braking' && (
-             <div className="absolute -left-12 top-0 bg-white/80 text-black text-[10px] font-black px-2 py-0.5 rounded-full animate-pulse scale-x-[-1]">BRAKING!</div>
+             <div className="absolute -left-16 -top-8 bg-red-600 text-white text-sm font-black px-4 py-1.5 rounded-full animate-bounce scale-x-[-1] shadow-[0_0_15px_rgba(239,68,68,0.8)] border-2 border-white">
+               BRAKING!
+             </div>
            )}
          </motion.div>
 
