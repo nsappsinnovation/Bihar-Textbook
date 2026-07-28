@@ -1,88 +1,543 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  FileText, Users, Layers, IndianRupee, Settings2,
+  Target, LineChart, Info, BookMarked, ScrollText,
+  Download, Printer, ArrowUp, List, ChevronDown, FileDown
+} from "lucide-react";
+import { csrPolicyContents, romanize, loadCsrPolicy } from "../data/csrPolicyData";
+
+const sectionIcons = {
+  introduction: FileText,
+  vision: ScrollText,
+  committee: Users,
+  scope: Layers,
+  budget: IndianRupee,
+  implementation: Settings2,
+  activities: Target,
+  monitoring: LineChart,
+  miscellaneous: Info,
+  annexure: BookMarked
+};
+
+/* Print rules: strip the chrome so "Print / Save as PDF" yields a clean document */
+const printStyles = `
+  @media print {
+    .csr-no-print { display: none !important; }
+    .csr-doc { box-shadow: none !important; border: none !important; padding: 0 !important; }
+    .csr-section { break-inside: avoid; page-break-inside: avoid; border: none !important;
+                   box-shadow: none !important; padding: 0 0 18px 0 !important; }
+    body { background: #fff !important; }
+  }
+`;
+
+/* ---------- Building blocks ---------- */
+
+const Section = ({ no, anchor, title, children }) => {
+  const Icon = sectionIcons[anchor] || FileText;
+  return (
+    <motion.section
+      id={anchor}
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.45, ease: "easeOut" }}
+      className="csr-section scroll-mt-28 bg-white border border-slate-200/80 rounded-[28px] p-7 md:p-11 shadow-[0_2px_20px_rgb(15,23,42,0.04)] hover:shadow-[0_8px_36px_rgb(15,23,42,0.07)] transition-shadow duration-300"
+    >
+      <div className="flex items-start gap-4 md:gap-5 pb-6 mb-7 border-b border-slate-100">
+        <div className="w-12 h-12 shrink-0 rounded-2xl bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center text-white shadow-lg shadow-blue-600/20">
+          <Icon className="w-[22px] h-[22px]" />
+        </div>
+        <div className="pt-0.5">
+          <div className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 mb-1.5">
+            Section {no}
+          </div>
+          <h2 className="text-[20px] md:text-[25px] font-black text-slate-900 leading-[1.2] tracking-tight">
+            {title}
+          </h2>
+        </div>
+      </div>
+      <div>{children}</div>
+    </motion.section>
+  );
+};
+
+const Paragraph = ({ children }) => (
+  <p className="text-[15.5px] text-slate-600 font-medium leading-[1.9] mb-5 last:mb-0">
+    {children}
+  </p>
+);
+
+/* Bulleted list — the objectives in section 2 are bulleted in the source document */
+const BulletList = ({ items }) => (
+  <ul className="space-y-4">
+    {items.map((item, idx) => (
+      <li
+        key={idx}
+        className="flex gap-4 rounded-2xl px-4 py-3.5 -mx-1 hover:bg-slate-50/80 transition-colors"
+      >
+        <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0 mt-[11px]" />
+        <span className="text-[15px] text-slate-600 font-medium leading-[1.85]">{item}</span>
+      </li>
+    ))}
+  </ul>
+);
+
+/* Roman-numbered list — mirrors the (i), (ii), (iii) clause numbering of the document */
+const RomanList = ({ items }) => (
+  <ol className="space-y-2">
+    {items.map((item, idx) => (
+      <li
+        key={idx}
+        className="group flex gap-4 rounded-2xl px-4 py-4 -mx-1 hover:bg-blue-50/40 transition-colors"
+      >
+        <span className="shrink-0 w-9 h-9 rounded-xl bg-slate-100 group-hover:bg-blue-100 border border-slate-200 group-hover:border-blue-200 text-[11px] font-black text-slate-500 group-hover:text-blue-700 flex items-center justify-center transition-colors">
+          {romanize(idx)}
+        </span>
+        <span className="text-[15px] text-slate-600 font-medium leading-[1.85] pt-1">{item}</span>
+      </li>
+    ))}
+  </ol>
+);
+
+/* Primary download control, reused in the hero, sidebar and mobile bar */
+const DownloadButton = ({ url, fileName, size, variant = "primary", className = "" }) => {
+  const base =
+    "csr-no-print group inline-flex items-center justify-center gap-3 rounded-2xl font-black transition-all";
+  const styles = {
+    primary:
+      "px-7 py-4 bg-blue-600 text-white text-[14px] shadow-xl shadow-blue-600/25 hover:bg-blue-700 hover:shadow-2xl hover:shadow-blue-600/30 hover:-translate-y-0.5",
+    ghost:
+      "px-7 py-4 bg-white border border-slate-200 text-slate-700 text-[14px] hover:border-slate-300 hover:bg-slate-50",
+    block:
+      "w-full px-5 py-4 bg-blue-600 text-white text-[13px] shadow-lg shadow-blue-600/20 hover:bg-blue-700"
+  };
+  return (
+    <a
+      href={url}
+      download={fileName}
+      className={`${base} ${styles[variant]} ${className}`}
+    >
+      <Download className="w-[18px] h-[18px] transition-transform group-hover:translate-y-0.5" />
+      <span>Download Policy (PDF)</span>
+      {size && (
+        <span
+          className={`text-[11px] font-bold ${
+            variant === "ghost" ? "text-slate-400" : "text-white/70"
+          }`}
+        >
+          {size}
+        </span>
+      )}
+    </a>
+  );
+};
 
 const CsrPolicy = () => {
+  const [csr, setCsr] = useState(loadCsrPolicy);
+  const [activeSection, setActiveSection] = useState("introduction");
+  const [progress, setProgress] = useState(0);
+  const [showTop, setShowTop] = useState(false);
+  const [mobileTocOpen, setMobileTocOpen] = useState(false);
+
+  /* Stay in sync when an admin saves from the CSR Policy Hub */
+  useEffect(() => {
+    const onUpdate = () => setCsr(loadCsrPolicy());
+    window.addEventListener("websiteDataUpdated", onUpdate);
+    return () => window.removeEventListener("websiteDataUpdated", onUpdate);
+  }, []);
+
+  /* Reading progress + back-to-top visibility */
+  useEffect(() => {
+    const onScroll = () => {
+      const el = document.documentElement;
+      const scrollable = el.scrollHeight - el.clientHeight;
+      setProgress(scrollable > 0 ? (el.scrollTop / scrollable) * 100 : 0);
+      setShowTop(el.scrollTop > 600);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  /* Highlight the contents entry for the section currently in view */
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { rootMargin: "-20% 0px -70% 0px" }
+    );
+    csrPolicyContents.forEach(({ anchor }) => {
+      const el = document.getElementById(anchor);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  const goToSection = useCallback((anchor) => {
+    document.getElementById(anchor)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setMobileTocOpen(false);
+  }, []);
+
+  const activeIndex = csrPolicyContents.findIndex((s) => s.anchor === activeSection);
+
   return (
-    <div className="min-h-screen bg-[#f8fafc]">
-      {/* ================= HERO SECTION ================= */}
-      <section className="relative pt-24 pb-56 text-center text-white overflow-hidden bg-gradient-to-br from-[#0b2b4f] to-[#124d9c]">
-        {/* Subtle Background Pattern */}
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
-        
-        {/* Decorative elements */}
-        <div className="absolute top-20 left-10 md:left-32 grid grid-cols-3 gap-2 opacity-20">
-            {[...Array(9)].map((_, i) => <div key={i} className="w-1.5 h-1.5 rounded-full bg-white"></div>)}
-        </div>
-        <div className="absolute bottom-40 right-10 md:right-32 grid grid-cols-3 gap-2 opacity-20">
-            {[...Array(9)].map((_, i) => <div key={i} className="w-1.5 h-1.5 rounded-full bg-white"></div>)}
-        </div>
+    <div className="bg-[#F7F8FA] min-h-screen font-sans text-slate-800 pb-32 lg:pb-24">
+      <style>{printStyles}</style>
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6">
-          <motion.h1 
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4"
-          >
-            CSR Policy
-          </motion.h1>
-          <motion.div 
-            initial={{ width: 0 }}
-            animate={{ width: 100 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="h-1.5 w-24 bg-gradient-to-r from-blue-500 to-indigo-600 mx-auto rounded-full mb-8 shadow-[0_0_15px_rgba(59,130,246,0.5)]"
-          />
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-white/60 text-xs md:text-sm max-w-xl mx-auto leading-relaxed font-light"
-          >
-            Corporate Social Responsibility Policy for Bihar State Text Book Publishing Corporation Ltd.
-          </motion.p>
-        </div>
+      {/* ================= READING PROGRESS ================= */}
+      <div className="csr-no-print fixed top-0 left-0 right-0 h-1 bg-transparent z-50">
+        <div
+          className="h-full bg-gradient-to-r from-blue-500 to-blue-700 transition-[width] duration-150 ease-out"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
 
-        {/* CSS Wave Bottom */}
-        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-0">
-          <svg className="relative block w-full h-[60px] md:h-[120px]" preserveAspectRatio="none" viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-             <path d="M0 0C480 130 960 130 1440 0V100H0V0Z" fill="#f8fafc" />
-          </svg>
-        </div>
-      </section>
+      {/* ================= HERO ================= */}
+      <section className="relative w-full overflow-hidden bg-white">
+        <div
+          className="absolute inset-0 z-0 opacity-70"
+          style={{
+            backgroundImage: `url('images/csr.png')`,
+            backgroundPosition: "right center",
+            backgroundSize: "cover",
+            backgroundRepeat: "no-repeat"
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/20 md:to-transparent z-10" />
 
-      {/* ================= MAIN CONTENT ================= */}
-      <section className="relative -mt-44 pb-24 px-6 z-20">
-        <div className="max-w-5xl mx-auto">
-          {/* ELEVATED CONTAINER */}
-          <div className="bg-white rounded-3xl shadow-[0_20px_50px_-12px_rgba(0,0,0,0.1)] border border-slate-200/50 p-4 md:p-8">
-            <div className="w-full h-[800px] rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 flex items-center justify-center">
-              <iframe 
-                src="/csr-policy.pdf" 
-                className="w-full h-full border-0" 
-                title="CSR Policy Document"
-              >
-                <p className="text-slate-500 text-sm">
-                  This browser does not support PDFs. 
-                  <a href="/csr-policy.pdf" className="text-blue-600 underline ml-1">Download the PDF</a>.
-                </p>
-              </iframe>
-            </div>
-            <div className="mt-6 flex justify-center">
-                <a 
-                    href="/csr-policy.pdf" 
-                    download="CSR_Policy_BSTBPC.pdf" 
-                    target="_blank" rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-[#0b2b4f] text-white font-bold text-sm shadow-[0_10px_20px_rgba(11,43,79,0.2)] hover:bg-[#124d9c] hover:shadow-[0_15px_30px_rgba(18,77,156,0.3)] hover:-translate-y-1 transition-all duration-300"
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20 md:py-28">
+          <div className="max-w-3xl">
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2.5 text-[10px] md:text-[11px] font-black uppercase tracking-[0.18em] text-blue-700 border border-blue-200 bg-blue-50/80 rounded-full pl-3 pr-4 py-2 mb-7"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-600" />
+              {csr.organisation}
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.08 }}
+              className="text-[38px] md:text-[58px] font-black text-slate-900 leading-[1.05] tracking-tight"
+            >
+              Corporate Social<br />
+              <span className="text-blue-700">Responsibility Policy</span>
+            </motion.h1>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mt-8 flex flex-wrap items-center gap-2.5"
+            >
+              {[
+                `${csrPolicyContents.length} Sections`,
+                "Companies Act, 2013",
+                "Schedule VII",
+                "CSR Rules, 2014"
+              ].map((chip) => (
+                <span
+                  key={chip}
+                  className="text-[11px] font-bold text-slate-500 bg-white/90 border border-slate-200 rounded-lg px-3 py-2"
                 >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                    </svg>
-                    Download CSR Policy
-                </a>
-            </div>
+                  {chip}
+                </span>
+              ))}
+            </motion.div>
+
+            {/* Primary calls to action */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="mt-10 flex flex-col sm:flex-row gap-3"
+            >
+              <DownloadButton
+                url={csr.pdfUrl}
+                fileName={csr.pdfFileName}
+                size={csr.pdfSizeLabel}
+              />
+              <button
+                onClick={() => window.print()}
+                className="csr-no-print inline-flex items-center justify-center gap-3 px-7 py-4 rounded-2xl bg-white border border-slate-200 text-slate-700 text-[14px] font-black hover:bg-slate-50 hover:border-slate-300 transition-all"
+              >
+                <Printer className="w-[18px] h-[18px]" />
+                <span>Print</span>
+              </button>
+            </motion.div>
           </div>
         </div>
       </section>
+
+      {/* ================= MOBILE CONTENTS (collapsible) ================= */}
+      <div className="csr-no-print lg:hidden max-w-7xl mx-auto px-4 sm:px-6 mt-8">
+        <div className="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden">
+          <button
+            onClick={() => setMobileTocOpen((v) => !v)}
+            className="w-full flex items-center justify-between px-5 py-4"
+          >
+            <span className="flex items-center gap-3 text-[13px] font-black text-slate-900 uppercase tracking-wider">
+              <List className="w-4 h-4 text-blue-600" />
+              Contents
+            </span>
+            <ChevronDown
+              className={`w-4 h-4 text-slate-400 transition-transform ${
+                mobileTocOpen ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+          <AnimatePresence initial={false}>
+            {mobileTocOpen && (
+              <motion.nav
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="overflow-hidden border-t border-slate-100"
+              >
+                <div className="p-3 space-y-1">
+                  {csrPolicyContents.map(({ no, topic, anchor }) => (
+                    <button
+                      key={anchor}
+                      onClick={() => goToSection(anchor)}
+                      className={`w-full flex gap-3 items-start text-left rounded-xl px-3 py-2.5 transition-colors ${
+                        activeSection === anchor
+                          ? "bg-blue-50 text-blue-700"
+                          : "text-slate-600 hover:bg-slate-50"
+                      }`}
+                    >
+                      <span className="text-[11px] font-black text-slate-400 shrink-0 mt-[2px]">
+                        {String(no).padStart(2, "0")}
+                      </span>
+                      <span className="text-[12.5px] font-bold leading-snug">{topic}</span>
+                    </button>
+                  ))}
+                </div>
+              </motion.nav>
+            )}
+          </AnimatePresence>
+        </div>
+      </div>
+
+      {/* ================= CONTENTS + DOCUMENT ================= */}
+      <div className="csr-doc relative z-30 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 lg:mt-14">
+        <div className="flex flex-col lg:flex-row gap-8">
+
+          {/* --- Sidebar: contents + download --- */}
+          <aside className="csr-no-print hidden lg:block lg:w-[310px] shrink-0">
+            <div className="lg:sticky lg:top-24 space-y-4">
+
+              <div className="bg-white border border-slate-200 rounded-[28px] p-6 shadow-[0_4px_28px_rgb(15,23,42,0.05)]">
+                <div className="flex items-center justify-between mb-5">
+                  <h2 className="text-[12px] font-black uppercase tracking-[0.15em] text-slate-900">
+                    Contents
+                  </h2>
+                  <span className="text-[10px] font-black text-slate-400 tabular-nums">
+                    {Math.max(activeIndex + 1, 1)} / {csrPolicyContents.length}
+                  </span>
+                </div>
+
+                <nav className="space-y-0.5">
+                  {csrPolicyContents.map(({ no, topic, anchor }) => {
+                    const isActive = activeSection === anchor;
+                    return (
+                      <button
+                        key={anchor}
+                        onClick={() => goToSection(anchor)}
+                        className={`relative w-full flex gap-3 items-start text-left rounded-xl pl-4 pr-3 py-2.5 transition-all ${
+                          isActive
+                            ? "bg-blue-50 text-blue-700"
+                            : "text-slate-500 hover:bg-slate-50 hover:text-slate-800"
+                        }`}
+                      >
+                        <span
+                          className={`absolute left-0 top-1/2 -translate-y-1/2 w-[3px] rounded-full bg-blue-600 transition-all ${
+                            isActive ? "h-6 opacity-100" : "h-0 opacity-0"
+                          }`}
+                        />
+                        <span
+                          className={`text-[10px] font-black shrink-0 mt-[3px] tabular-nums ${
+                            isActive ? "text-blue-600" : "text-slate-300"
+                          }`}
+                        >
+                          {String(no).padStart(2, "0")}
+                        </span>
+                        <span className="text-[12.5px] font-bold leading-snug">{topic}</span>
+                      </button>
+                    );
+                  })}
+                </nav>
+              </div>
+
+              {/* Download card */}
+              <div className="bg-slate-900 rounded-[28px] p-6 shadow-xl relative overflow-hidden">
+                <div className="absolute -right-8 -top-8 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl" />
+                <div className="relative z-10">
+                  <div className="w-11 h-11 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center mb-4">
+                    <FileDown className="w-5 h-5 text-blue-300" />
+                  </div>
+                  <h3 className="text-[14px] font-black text-white leading-snug mb-1.5">
+                    Official policy document
+                  </h3>
+                  <p className="text-[12px] text-slate-400 font-medium leading-relaxed mb-5">
+                    Download the complete signed copy as published in the public domain.
+                  </p>
+                  <DownloadButton
+                    url={csr.pdfUrl}
+                    fileName={csr.pdfFileName}
+                    size={csr.pdfSizeLabel}
+                    variant="block"
+                  />
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          {/* --- Policy body --- */}
+          <div className="flex-1 space-y-5">
+
+            {/* 1. Introduction & Background */}
+            <Section no={1} anchor="introduction" title="Introduction & Background">
+              {csr.introParagraphs.map((para, idx) => (
+                <Paragraph key={idx}>{para}</Paragraph>
+              ))}
+            </Section>
+
+            {/* 2. CSR Vision & Policy Statement */}
+            <Section
+              no={2}
+              anchor="vision"
+              title="CSR Vision & Policy Statement — Objectives of this CSR Policy"
+            >
+              <Paragraph>{csr.objectivesIntro}</Paragraph>
+              <div className="mt-6">
+                <BulletList items={csr.objectives} />
+              </div>
+            </Section>
+
+            {/* 3. CSR Committee Composition and Responsibility */}
+            <Section no={3} anchor="committee" title="CSR Committee Composition and Responsibility">
+              <Paragraph>{csr.committeeText}</Paragraph>
+            </Section>
+
+            {/* 4. Scope & Applicability */}
+            <Section no={4} anchor="scope" title="Scope & Applicability">
+              <Paragraph>{csr.scopeText}</Paragraph>
+            </Section>
+
+            {/* 5. CSR Budget */}
+            <Section no={5} anchor="budget" title="CSR Budget">
+              <RomanList items={csr.budgetItems} />
+            </Section>
+
+            {/* 6. Implementation */}
+            <Section no={6} anchor="implementation" title="Implementation">
+              <RomanList items={csr.implementationItems} />
+            </Section>
+
+            {/* 7. Activities / Focus Areas */}
+            <Section no={7} anchor="activities" title="Activities / Focus Areas">
+              <Paragraph>{csr.activitiesIntro}</Paragraph>
+              <div className="mt-6">
+                <RomanList items={csr.activities} />
+              </div>
+            </Section>
+
+            {/* 8. Monitoring */}
+            <Section no={8} anchor="monitoring" title="Monitoring">
+              <RomanList items={csr.monitoringItems} />
+            </Section>
+
+            {/* 9. Miscellaneous Information */}
+            <Section no={9} anchor="miscellaneous" title="Miscellaneous Information">
+              <ol className="space-y-2">
+                {csr.miscellaneousItems.map((item, idx) => (
+                  <li
+                    key={idx}
+                    className="group flex gap-4 rounded-2xl px-4 py-4 -mx-1 hover:bg-blue-50/40 transition-colors"
+                  >
+                    <span className="shrink-0 w-9 h-9 rounded-xl bg-slate-100 group-hover:bg-blue-100 border border-slate-200 group-hover:border-blue-200 text-[11px] font-black text-slate-500 group-hover:text-blue-700 flex items-center justify-center transition-colors">
+                      {romanize(idx)}
+                    </span>
+                    <span className="text-[15px] text-slate-600 font-medium leading-[1.85] pt-1">
+                      <span className="font-black text-slate-900">{item.label}:</span> {item.text}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </Section>
+
+            {/* 10. Annexure A */}
+            <Section no={10} anchor="annexure" title="Annexure">
+              <a
+                href={csr.pdfUrl}
+                download={csr.pdfFileName}
+                className="group flex items-center gap-4 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-200 rounded-2xl px-5 py-5 transition-colors"
+              >
+                <BookMarked className="w-5 h-5 text-blue-600 shrink-0" />
+                <span className="flex-1 text-[15px] font-bold text-slate-700">
+                  {csr.annexureTitle}
+                </span>
+                <Download className="csr-no-print w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
+              </a>
+            </Section>
+
+            {/* Closing download banner */}
+            <div className="csr-no-print bg-white border border-slate-200 rounded-[28px] p-7 md:p-9 flex flex-col md:flex-row md:items-center gap-6 shadow-[0_2px_20px_rgb(15,23,42,0.04)]">
+              <div className="flex-1">
+                <h3 className="text-[17px] font-black text-slate-900 mb-1.5">
+                  Read the full policy document
+                </h3>
+                <p className="text-[13.5px] text-slate-500 font-medium leading-relaxed">
+                  {csr.documentTitle} — {csr.organisation}
+                </p>
+              </div>
+              <DownloadButton
+                url={csr.pdfUrl}
+                fileName={csr.pdfFileName}
+                size={csr.pdfSizeLabel}
+                className="shrink-0"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ================= MOBILE STICKY DOWNLOAD BAR ================= */}
+      <div className="csr-no-print lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-4 py-3">
+        <a
+          href={csr.pdfUrl}
+          download={csr.pdfFileName}
+          className="w-full flex items-center justify-center gap-3 px-6 py-3.5 rounded-2xl bg-blue-600 text-white text-[14px] font-black shadow-lg shadow-blue-600/25 active:scale-[0.99] transition-transform"
+        >
+          <Download className="w-[18px] h-[18px]" />
+          <span>Download Policy (PDF)</span>
+          <span className="text-[11px] font-bold text-white/70">{csr.pdfSizeLabel}</span>
+        </a>
+      </div>
+
+      {/* ================= BACK TO TOP ================= */}
+      <AnimatePresence>
+        {showTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.85 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="csr-no-print hidden lg:flex fixed bottom-8 right-8 z-40 w-12 h-12 rounded-2xl bg-slate-900 text-white items-center justify-center shadow-xl hover:bg-black transition-colors"
+            aria-label="Back to top"
+          >
+            <ArrowUp className="w-5 h-5" />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
