@@ -55,7 +55,7 @@ const OurEmployee = () => {
         </motion.h1>
         
         <p className="text-slate-500 text-sm max-w-2xl mx-auto leading-relaxed font-medium">
-          The heartbeat of BSTBPC. Meet the dedicated team working tirelessly behind the scenes to educate the future of Bihar.
+          Meet the dedicated professionals driving innovation, ensuring quality, and working tirelessly to shape the future of education in Bihar.
         </p>
       </section>
 

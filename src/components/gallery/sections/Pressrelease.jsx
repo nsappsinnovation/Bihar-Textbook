@@ -190,52 +190,14 @@ const Pressrelease = () => {
           </motion.p>
         </div>
 
-        {/* --- Dynamic Asymmetric Collage Grid (Repeats every 6 items) --- */}
-        {Array.from({ length: Math.ceil(items.length / 6) }, (_, i) => items.slice(i * 6, i * 6 + 6)).map((chunk, chunkIndex) => (
-          <div key={chunkIndex} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 items-stretch mb-8">
-            
-            {/* Column 1: Card 1 (Aspect 4/3 - centered vertically) */}
-            <div className="lg:col-span-3 py-6 flex flex-col justify-center">
-              {chunk[0] && (
-                <RenderCard item={chunk[0]} aspectClass="aspect-[4/3]" />
-              )}
+        {/* --- Simple Card Grid --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {items.map((item) => (
+            <div key={item.id} className="flex flex-col">
+              <RenderCard item={item} aspectClass="aspect-[4/3]" />
             </div>
-
-            {/* Column 2: Card 2 & Card 4 */}
-            <div className="lg:col-span-3 flex flex-col gap-8 justify-between">
-              {/* Card 2 - Aspect 3/4 */}
-              {chunk[1] && (
-                <RenderCard item={chunk[1]} aspectClass="aspect-[3/4]" />
-              )}
-
-              {/* Card 4 - Aspect Square */}
-              {chunk[3] && (
-                <RenderCard item={chunk[3]} aspectClass="aspect-square" />
-              )}
-            </div>
-
-            {/* Column 3: Card 3 & Card 5 */}
-            <div className="lg:col-span-3 flex flex-col gap-8 justify-between">
-              {/* Card 3 - Aspect 4/3 */}
-              {chunk[2] && (
-                <RenderCard item={chunk[2]} aspectClass="aspect-[4/3]" />
-              )}
-
-              {/* Card 5 - Aspect 4/3 */}
-              {chunk[4] && (
-                <RenderCard item={chunk[4]} aspectClass="aspect-[4/3]" />
-              )}
-            </div>
-
-            {/* Column 4: Card 6 */}
-            <div className="lg:col-span-3 py-6 flex flex-col justify-center">
-              {chunk[5] && (
-                <RenderCard item={chunk[5]} aspectClass="aspect-[4/3]" />
-              )}
-            </div>
-
-          </div>
-        ))}
+          ))}
+        </div>
 
       </div>
 

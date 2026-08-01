@@ -132,20 +132,20 @@ export default function StakeHolder() {
       : item.quote;
 
     return (
-      <div className={`w-[260px] sm:w-[300px] h-[160px] sm:h-[175px] shrink-0 bg-white border border-slate-100 rounded-xl p-4 sm:p-5 shadow-[0_2px_12px_rgba(0,0,0,0.015)] ${theme.border} hover:shadow-[0_8px_24px_rgba(0,0,0,0.035)] transition-all duration-500 ease-out flex flex-col justify-between relative overflow-hidden group`}>
+      <div className={`w-[260px] sm:w-[300px] h-[160px] sm:h-[175px] shrink-0 bg-white border border-slate-100 rounded-xl p-4 sm:p-5 shadow-[0_2px_12px_rgba(0,0,0,0.015)] ${theme.border} hover:shadow-[0_8px_24px_rgba(0,0,0,0.035)] transition-all duration-500 ease-out flex flex-col justify-between relative overflow-hidden group cursor-pointer`}>
         
         {/* Quote symbol */}
-        <span className={`absolute -top-2 left-3 text-5xl font-serif ${theme.quote} select-none pointer-events-none`}>
+        <span className={`absolute -top-2 left-3 text-5xl font-serif ${theme.quote} select-none pointer-events-none transition-colors duration-500`}>
           “
         </span>
 
         {/* Quote Content */}
-        <p className="text-slate-800 font-semibold text-[13px] sm:text-sm leading-snug relative z-10 pt-2 mb-4 whitespace-normal">
+        <p className="text-slate-800 font-semibold text-[13px] sm:text-sm leading-snug relative z-10 pt-2 mb-4 whitespace-normal transition-colors duration-500">
           “{cleanQuote}”
         </p>
 
         {/* Profile / Author Section */}
-        <div className="flex items-center gap-2.5 border-t border-slate-50 pt-3 mt-auto">
+        <div className="flex items-center gap-2.5 border-t border-slate-50 pt-3 mt-auto transition-colors duration-500">
           <img
             src={item.image}
             alt={item.name}
@@ -155,10 +155,10 @@ export default function StakeHolder() {
             }}
           />
           <div>
-            <h4 className="font-extrabold text-[#1E293B] text-[11px] sm:text-[12px] leading-tight group-hover:text-blue-600 transition-colors">
+            <h4 className="font-extrabold text-[#1E293B] group-hover:text-blue-600 text-[11px] sm:text-[12px] leading-tight transition-colors duration-500">
               {item.name}
             </h4>
-            <span className={`text-[8px] font-extrabold tracking-wider ${theme.role} block mt-0.5`}>
+            <span className={`text-[8px] font-extrabold tracking-wider ${theme.role} block mt-0.5 transition-colors duration-500`}>
               {item.role}
             </span>
           </div>
@@ -211,7 +211,7 @@ export default function StakeHolder() {
 
         {/* ROW 1 - Right to Left */}
         <div className="flex overflow-hidden">
-          <div className="flex gap-5 animate-marquee whitespace-nowrap">
+          <div className="flex gap-5 animate-marquee hover:[animation-play-state:paused] whitespace-nowrap">
             {[...row1, ...row1].map((item, i) => (
               <TestimonialCard 
                 key={`row1-${item.id}-${i}`} 
@@ -224,7 +224,7 @@ export default function StakeHolder() {
 
         {/* ROW 2 - Left to Right */}
         <div className="flex overflow-hidden">
-          <div className="flex gap-5 animate-marquee-reverse whitespace-nowrap">
+          <div className="flex gap-5 animate-marquee-reverse hover:[animation-play-state:paused] whitespace-nowrap">
             {[...row2, ...row2].map((item, i) => (
               <TestimonialCard 
                 key={`row2-${item.id}-${i}`} 

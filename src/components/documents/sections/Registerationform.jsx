@@ -93,7 +93,7 @@ const RegistrationForms = () => {
             className="h-1.5 w-20 bg-blue-600 mx-auto rounded-full mb-6" 
           />
           <p className="text-slate-400 text-xs md:text-sm max-w-xl mx-auto leading-relaxed">
-            Download official registration forms, applications, and requisition documents for all BSTBPC stakeholders.
+            Download official forms, applications, and other important documents for BSTBPC services.
           </p>
         </div>
 

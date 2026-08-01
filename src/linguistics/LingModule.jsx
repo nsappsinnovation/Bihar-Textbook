@@ -1587,12 +1587,7 @@ export default function LingModule({ type }) {
                          </div>
                          <div className="flex-1">
                             <h2 className="text-[17px] font-black text-slate-800 leading-snug mb-0.5">{currentItem.text}</h2>
-                            <p className="text-[13px] font-medium text-slate-500 leading-tight">{currentItem.native}
-                             {getSyllables(currentItem.text) && (
-                               <span className="block text-[11px] font-bold text-emerald-600 mt-1">
-                                 Syllables: {getSyllables(currentItem.text)}
-                               </span>
-                             )}</p>
+                            <p className="text-[13px] font-medium text-slate-500 leading-tight">{currentItem.native}</p>
                          </div>
                       </div>
 

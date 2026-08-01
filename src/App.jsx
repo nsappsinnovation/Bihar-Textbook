@@ -40,6 +40,7 @@ const NoticeBoard = lazy(() => import("./pages/navbar_pages/NoticeBoard.jsx"));
 const Login = lazy(() => import("./auth/Login.jsx"));
 const SignUp = lazy(() => import("./auth/SignUp.jsx"));
 const AdminPortal = lazy(() => import("./admin/AdminPortal.jsx"));
+const Developer = lazy(() => import("./pages/Developer.jsx"));
 
 const LoadingFallback = () => (
   <div className="min-h-screen flex items-center justify-center bg-[#FDFDFD]">
@@ -161,6 +162,7 @@ function App() {
     
               {/* Misc */}
               <Route path="/key-participants" element={<KeyParticipantViewAll />} />
+              <Route path="/developer" element={<Developer />} />
             </Routes>
           </Suspense>
         </main>

@@ -652,7 +652,7 @@ const signTheme = {
 
 const SignLearn = () => {
   const navigate = useNavigate();
-  const [activeFilter, setActiveFilter] = useState('Learn ISL');
+  const [activeFilter, setActiveFilter] = useState('Explore Signs');
   const [activeVideo, setActiveVideo] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [videoCategoryFilter, setVideoCategoryFilter] = useState('All');
@@ -1339,9 +1339,9 @@ const SignLearn = () => {
   });
 
   const quickStats = [
-    { label: 'Learn ISL', value: `${allSignVideos.length} Video Lectures`, icon: <BookOpen className={signTheme.card1Icon} />, color: signTheme.card1Bg },
-    { label: 'Explore Signs', value: 'Visual library', icon: <Hand className={signTheme.card2Icon} />, color: signTheme.card2Bg },
-    { label: 'Type to Sign', value: 'Fingerspell Translator', icon: <Keyboard className={signTheme.card3Icon} />, color: signTheme.card3Bg },
+    { label: 'Explore Signs', value: 'Visual library', icon: <Hand className={signTheme.card1Icon} />, color: signTheme.card1Bg },
+    { label: 'Type to Sign', value: 'Fingerspell Translator', icon: <Keyboard className={signTheme.card2Icon} />, color: signTheme.card2Bg },
+    { label: 'Learn ISL', value: `${allSignVideos.length} Video Lectures`, icon: <BookOpen className={signTheme.card3Icon} />, color: signTheme.card3Bg },
   ];
 
   return (

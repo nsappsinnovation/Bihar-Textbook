@@ -161,15 +161,15 @@ const CoreMissions = () => {
         <div className="hidden lg:flex justify-center items-center h-[900px] relative -mt-32">
 
           {/* Main Container - Centered */}
-          <div className="relative w-[1000px] h-[1000px] flex items-center justify-center">
+          <div className="relative w-[1000px] h-[1000px] flex items-center justify-center group/orbit pointer-events-none">
 
             {/* 1. CENTRAL HUB (Static - does not orbit) */}
-            <div className="absolute z-30 w-32 h-32 bg-white rounded-full border border-gray-100/60 flex items-center justify-center p-6 shadow-sm">
+            <div className="absolute z-30 w-32 h-32 bg-white rounded-full border border-gray-100/60 flex items-center justify-center p-6 shadow-sm pointer-events-auto">
               <CentralBook />
             </div>
 
             {/* 2. ORBIT SYSTEM (Rotates CW) */}
-            <div className="absolute inset-0 animate-[slowOrbit_60s_linear_infinite]">
+            <div className="absolute inset-0 animate-[slowOrbit_60s_linear_infinite] group-hover/orbit:[animation-play-state:paused]">
               {missions.map((mission, idx) => {
                 // Calculate position on the circle
                 const angleDeg = idx * (360 / missions.length);
@@ -191,7 +191,7 @@ const CoreMissions = () => {
                       This cancels the system rotation, keeping the node upright.
                       The Icon is the absolute CENTER.
                     */}
-                    <div className="animate-[slowOrbitReverse_60s_linear_infinite] relative group flex items-center justify-center w-12 h-12">
+                    <div className="animate-[slowOrbitReverse_60s_linear_infinite] group-hover/orbit:[animation-play-state:paused] relative group flex items-center justify-center w-12 h-12 pointer-events-auto">
 
                       {/* ICON (The Anchor) */}
                       <div

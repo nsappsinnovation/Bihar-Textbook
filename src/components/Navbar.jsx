@@ -171,12 +171,16 @@ const Navbar = () => {
           
           {/* Translate Button */}
           <button 
-            className={`flex items-center gap-1.5 px-3.5 py-2.5 rounded-full border transition-all cursor-pointer group shadow-sm text-slate-700 border-slate-200 hover:bg-slate-50 hover:border-slate-300 ${
+            className={`flex items-center gap-1.5 px-4 py-2 rounded-full border transition-all cursor-pointer group shadow-sm text-slate-700 border-slate-200 hover:bg-slate-50 hover:border-slate-300 ${
               isHomePage ? "bg-white/50 backdrop-blur-sm" : "bg-white"
             }`}
-            title="Language"
+            title="Change Language"
           >
-            <Languages size={20} className="transition-transform group-hover:scale-110 text-blue-600" />
+            <span className="text-blue-600 font-bold transition-transform group-hover:scale-105 flex items-center gap-1.5 leading-none">
+              <span className="text-[16px] -mt-0.5">अ</span>
+              <span className="text-slate-300 font-normal text-sm">/</span>
+              <span className="text-[13px] tracking-wide">EN</span>
+            </span>
           </button>
 
           <div className="hidden lg:block">

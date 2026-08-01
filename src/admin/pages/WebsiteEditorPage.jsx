@@ -598,7 +598,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
                           <h4 className="text-sm font-bold text-gray-700">{item.title}</h4>
                           <div className="flex items-center gap-2 mt-1">
                             <span className="text-[10px] bg-blue-50 text-blue-600 px-1.5 py-0.5 rounded font-bold uppercase tracking-wider">
-                              {item.category || item.status || 'General'}
+                              {item.category || (module === 'ku-board' ? 'Director' : 'General')}
                             </span>
                             {module.startsWith('gl-') ? (
                               <span className="text-[10px] text-gray-400 font-semibold uppercase">
@@ -736,13 +736,6 @@ export default function WebsiteEditorPage({ module, addToast }) {
                 placeholder="e.g. 2023" 
                 value={formData.since}
                 onChange={(val) => setFormData(prev => ({ ...prev, since: val }))}
-              />
-              <FormInput 
-                label="Status" 
-                type="select"
-                options={["Active", "Ex-Director"]}
-                value={formData.status}
-                onChange={(val) => setFormData(prev => ({ ...prev, status: val }))}
               />
             </>
           )}

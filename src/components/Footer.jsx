@@ -130,23 +130,10 @@ const Footer = () => {
             <span className="hidden md:inline text-white/10">|</span>
             <p>
               Designed by{" "}
-              <span className="text-white font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-400">
+              <Link to="/" className="font-semibold text-white hover:text-blue-400 transition-colors duration-300">
                  A Startup Product of Bihar
-              </span>
+              </Link>
             </p>
-          </div>
-
-          <div className="flex flex-wrap justify-center gap-6 font-medium">
-            <button
-              className="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-[1.5px] after:bg-blue-500 hover:after:w-full after:transition-all after:duration-300 cursor-pointer"
-            >
-              Privacy Policy
-            </button>
-            <button
-              className="hover:text-white transition-colors relative after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:w-0 after:h-[1.5px] after:bg-blue-500 hover:after:w-full after:transition-all after:duration-300 cursor-pointer"
-            >
-              Terms of Service
-            </button>
           </div>
         </div>
       </div>

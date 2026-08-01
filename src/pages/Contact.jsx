@@ -147,7 +147,7 @@ const Contact = () => {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {/* Name */}
                             <div className="space-y-2">
-                                <label className="text-[12px] font-black text-slate-700">Your Name <span className="text-red-500">*</span></label>
+                                <label className="text-[12px] font-black text-slate-700">Full Name <span className="text-red-500">*</span></label>
                                 <div className="relative">
                                     <input 
                                         type="text" 
@@ -175,22 +175,7 @@ const Contact = () => {
                             </div>
                         </div>
 
-                        {/* Dropdown */}
-                        <div className="space-y-2">
-                            <label className="text-[12px] font-black text-slate-700">Inquiry Purpose <span className="text-red-500">*</span></label>
-                            <div className="relative">
-                                <select 
-                                  value={formData.purpose}
-                                  onChange={(e) => setFormData({...formData, purpose: e.target.value})}
-                                  className="w-full pl-4 pr-10 py-3.5 rounded-xl border border-slate-200 bg-white text-[14px] font-medium text-slate-800 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all appearance-none cursor-pointer"
-                                >
-                                    <option>General Support</option>
-                                    <option>Textbook Inquiries</option>
-                                    <option>Corporate Assistance</option>
-                                </select>
-                                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none" />
-                            </div>
-                        </div>
+                        
 
                         {/* Textarea */}
                         <div className="space-y-2">

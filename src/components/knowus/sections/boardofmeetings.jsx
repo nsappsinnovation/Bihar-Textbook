@@ -64,8 +64,7 @@ const BoardOfDirectors = () => {
                 <tr className="bg-slate-200 border-b border-slate-300 text-[#0d0e23]">
                   <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Name</th>
                   <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Designation</th>
-                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Since</th>
-                  <th className="px-6 py-4 text-sm font-bold">Status</th>
+                  <th className="px-6 py-4 text-sm font-bold">Since</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-300">
@@ -73,8 +72,7 @@ const BoardOfDirectors = () => {
                   <tr key={member.id} className="text-[#0d0e23]">
                     <td className="px-6 py-4 text-sm border-r border-slate-300 font-semibold">{member.name}</td>
                     <td className="px-6 py-4 text-sm border-r border-slate-300">{member.designation}</td>
-                    <td className="px-6 py-4 text-sm border-r border-slate-300">{member.from}</td>
-                    <td className="px-6 py-4 text-sm">{member.status}</td>
+                    <td className="px-6 py-4 text-sm">{member.from}</td>
                   </tr>
                 ))}
               </tbody>
