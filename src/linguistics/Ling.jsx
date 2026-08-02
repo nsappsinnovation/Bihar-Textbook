@@ -149,7 +149,7 @@ export default function LinguisticApp() {
               {/* Know Language Card */}
               <div className="xl:w-1/3 bg-white border border-slate-100 rounded-[32px] p-6 lg:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative flex flex-col">
                  <div className="flex items-center gap-4 mb-8">
-                   <div className="w-12 h-12 rounded-[16px] bg-slate-50 flex items-center justify-center text-slate-500 border border-slate-100/50 shadow-sm">
+                   <div className="w-12 h-12 rounded-[16px] bg-emerald-50 flex items-center justify-center text-emerald-500 border border-emerald-100/50 shadow-sm">
                      <MessageSquare size={22} strokeWidth={2.5} />
                    </div>
                    <div>
@@ -199,7 +199,7 @@ export default function LinguisticApp() {
                  <div className="absolute top-0 right-0 w-64 h-64 bg-slate-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/4 pointer-events-none" />
                  
                  <div className="flex items-center gap-4 mb-8 relative z-10">
-                   <div className="w-12 h-12 rounded-[16px] bg-slate-50 flex items-center justify-center text-slate-500 border border-slate-100/50 shadow-sm">
+                   <div className="w-12 h-12 rounded-[16px] bg-emerald-50 flex items-center justify-center text-emerald-500 border border-emerald-100/50 shadow-sm">
                      <Globe size={22} strokeWidth={2.5} />
                    </div>
                    <div>
