@@ -7,22 +7,22 @@ import {
 } from "lucide-react";
 
 const lingTheme = {
-  backButtonHover: 'hover:text-[#0BB562]',
-  heroHighlightText: 'text-[#0BB562]',
+  backButtonHover: 'hover:text-[#334155]',
+  heroHighlightText: 'text-[#334155]',
   
-  card1Icon: 'text-emerald-600',
-  card1Bg: 'bg-emerald-50',
-  card2Icon: 'text-emerald-600',
-  card2Bg: 'bg-emerald-50',
-  card3Icon: 'text-emerald-600',
-  card3Bg: 'bg-emerald-50',
+  card1Icon: 'text-slate-600',
+  card1Bg: 'bg-slate-50',
+  card2Icon: 'text-slate-600',
+  card2Bg: 'bg-slate-50',
+  card3Icon: 'text-slate-600',
+  card3Bg: 'bg-slate-50',
   
-  activeBorder: 'border-emerald-600 ring-2 ring-emerald-600/10 shadow-md',
-  inactiveBorder: 'border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:border-emerald-300',
-  activeIconBg: 'bg-emerald-600 text-white',
-  activeTitleText: 'text-emerald-800',
-  inactiveTitleHover: 'text-slate-800 group-hover:text-emerald-600',
-  activeSubtitleText: 'text-emerald-600',
+  activeBorder: 'border-slate-600 ring-2 ring-slate-600/10 shadow-md',
+  inactiveBorder: 'border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:border-slate-300',
+  activeIconBg: 'bg-slate-600 text-white',
+  activeTitleText: 'text-slate-800',
+  inactiveTitleHover: 'text-slate-800 group-hover:text-slate-600',
+  activeSubtitleText: 'text-slate-600',
   inactiveSubtitleText: 'text-slate-500'
 };
 
@@ -149,7 +149,7 @@ export default function LinguisticApp() {
               {/* Know Language Card */}
               <div className="xl:w-1/3 bg-white border border-slate-100 rounded-[32px] p-6 lg:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative flex flex-col">
                  <div className="flex items-center gap-4 mb-8">
-                   <div className="w-12 h-12 rounded-[16px] bg-emerald-50 flex items-center justify-center text-emerald-500 border border-emerald-100/50 shadow-sm">
+                   <div className="w-12 h-12 rounded-[16px] bg-slate-50 flex items-center justify-center text-slate-500 border border-slate-100/50 shadow-sm">
                      <MessageSquare size={22} strokeWidth={2.5} />
                    </div>
                    <div>
@@ -187,7 +187,7 @@ export default function LinguisticApp() {
                     setSourceLang(targetLang);
                     setTargetLang(temp);
                   }}
-                  className={`w-14 h-14 bg-white border-2 border-slate-50 rounded-full flex items-center justify-center text-[#0BB562] shadow-[0_8px_20px_rgba(11,181,98,0.15)] cursor-pointer hover:scale-110 hover:border-emerald-100 hover:bg-emerald-50/50 transition-all relative ${(!sourceLang || !targetLang) && 'opacity-30 cursor-not-allowed grayscale'}`}
+                  className={`w-14 h-14 bg-white border-2 border-slate-50 rounded-full flex items-center justify-center text-[#334155] shadow-[0_8px_20px_rgba(11,181,98,0.15)] cursor-pointer hover:scale-110 hover:border-slate-100 hover:bg-slate-50/50 transition-all relative ${(!sourceLang || !targetLang) && 'opacity-30 cursor-not-allowed grayscale'}`}
                 >
                   <ArrowRightLeft size={22} strokeWidth={2.5} />
                 </div>
@@ -196,10 +196,10 @@ export default function LinguisticApp() {
               {/* Target Language Card */}
               <div className="xl:w-2/3 bg-white border border-slate-100 rounded-[32px] p-6 lg:p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex flex-col relative overflow-hidden">
                  {/* Decorative background blur */}
-                 <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/4 pointer-events-none" />
+                 <div className="absolute top-0 right-0 w-64 h-64 bg-slate-50 rounded-full blur-3xl opacity-50 -translate-y-1/2 translate-x-1/4 pointer-events-none" />
                  
                  <div className="flex items-center gap-4 mb-8 relative z-10">
-                   <div className="w-12 h-12 rounded-[16px] bg-emerald-50 flex items-center justify-center text-emerald-500 border border-emerald-100/50 shadow-sm">
+                   <div className="w-12 h-12 rounded-[16px] bg-slate-50 flex items-center justify-center text-slate-500 border border-slate-100/50 shadow-sm">
                      <Globe size={22} strokeWidth={2.5} />
                    </div>
                    <div>
@@ -229,7 +229,7 @@ export default function LinguisticApp() {
               <button 
                 disabled={!sourceLang || !targetLang}
                 onClick={() => handleStartLearning(lastModule)}
-                className={`bg-[#0BB562] hover:bg-emerald-700 text-white font-bold px-12 py-4 rounded-full shadow-[0_8px_25px_rgba(11,181,98,0.3)] flex items-center gap-3 transition-all hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(11,181,98,0.4)] group ${(!sourceLang || !targetLang) && 'opacity-50 cursor-not-allowed grayscale hover:translate-y-0 hover:shadow-none'}`}
+                className={`bg-[#334155] hover:bg-slate-700 text-white font-bold px-12 py-4 rounded-full shadow-[0_8px_25px_rgba(11,181,98,0.3)] flex items-center gap-3 transition-all hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(11,181,98,0.4)] group ${(!sourceLang || !targetLang) && 'opacity-50 cursor-not-allowed grayscale hover:translate-y-0 hover:shadow-none'}`}
               >
                 Start Learning <ArrowRight size={20} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform" />
               </button>

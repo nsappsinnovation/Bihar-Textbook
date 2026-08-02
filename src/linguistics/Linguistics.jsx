@@ -238,7 +238,7 @@ const Linguistics = () => {
           <div className="w-full h-full flex flex-col justify-between p-6 sm:p-8 bg-slate-950 text-slate-100 relative">
             <div className="flex justify-between items-center">
               <div className="space-y-0.5">
-                <span className="text-[10px] font-mono text-emerald-400 tracking-wider uppercase font-semibold">Phonetic Syllable Explorer</span>
+                <span className="text-[10px] font-mono text-slate-400 tracking-wider uppercase font-semibold">Phonetic Syllable Explorer</span>
                 <h3 className="text-base sm:text-lg font-bold text-white">Indian Languages Hub</h3>
               </div>
               <div className="flex gap-1 bg-slate-900 p-1 rounded-lg border border-slate-800">
@@ -251,7 +251,7 @@ const Linguistics = () => {
                     }}
                     className={`px-2.5 py-1 rounded-md text-[10px] font-bold transition-all cursor-pointer ${
                       selectedIndianLang === idx 
-                        ? 'bg-emerald-500 text-slate-950 shadow-md' 
+                        ? 'bg-slate-500 text-slate-950 shadow-md' 
                         : 'text-slate-400 hover:text-slate-200'
                     }`}
                   >
@@ -265,11 +265,11 @@ const Linguistics = () => {
             <div className="my-auto flex flex-col items-center space-y-6">
               <div className="text-center space-y-2">
                 <p className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">Selected Greeting ({currentData.script} Script)</p>
-                <h4 className="text-3xl sm:text-4xl font-extrabold text-emerald-400 tracking-wide flex items-center justify-center gap-3">
+                <h4 className="text-3xl sm:text-4xl font-extrabold text-slate-400 tracking-wide flex items-center justify-center gap-3">
                   {currentData.greeting}
                   <button 
                     onClick={() => playSpeech(currentData.greeting, currentData.name === "Hindi" ? "hi" : currentData.name === "Bengali" ? "bn" : currentData.name === "Tamil" ? "ta" : currentData.name === "Telugu" ? "te" : "en")}
-                    className="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 hover:bg-emerald-500 hover:text-slate-950 flex items-center justify-center transition-all cursor-pointer shadow-sm"
+                    className="w-8 h-8 rounded-full bg-slate-500/20 text-slate-400 hover:bg-slate-500 hover:text-slate-950 flex items-center justify-center transition-all cursor-pointer shadow-sm"
                     title="Listen pronunciation"
                   >
                     <Mic size={16} />
@@ -289,7 +289,7 @@ const Linguistics = () => {
                       onMouseLeave={() => setHoveredSyllable(null)}
                       className={`px-4 py-3 rounded-xl border transition-all duration-300 flex flex-col items-center min-w-[64px] cursor-pointer ${
                         hoveredSyllable === idx 
-                          ? 'bg-emerald-950/45 border-emerald-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.15)]' 
+                          ? 'bg-slate-950/45 border-slate-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.15)]' 
                           : 'bg-slate-900/40 border-slate-800 text-slate-300 hover:border-slate-700'
                       }`}
                     >

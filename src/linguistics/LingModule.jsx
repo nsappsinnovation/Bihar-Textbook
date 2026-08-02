@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { 
   ArrowLeft, Volume2, CheckCircle, ChevronRight, Star, Trophy, 
-  X, ArrowRight, LayoutGrid, Flame
+  X, ArrowRight, LayoutGrid, Flame, Eye, EyeOff
 } from "lucide-react";
 
 // Syllable Map for phonetic breakdowns of words, phrases, and distractors in all target/source languages
@@ -923,7 +923,7 @@ const cleanForLookup = (str) => {
   if (!str) return "";
   return str
     .replace(/\s*\([^)]*\)\s*/g, '')
-    .replace(/[?.,!¿¡":;।？]/g, '')
+    .replace(/[?.,!¿¡":;।？、。]/g, '')
     .replace(/\s+/g, ' ')
     .trim()
     .toLowerCase();
@@ -1299,6 +1299,7 @@ export default function LingModule({ type }) {
   const [dailyProgress, setDailyProgress] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+  const [showSyllables, setShowSyllables] = useState(false);
   const currentAudioRef = useRef(null);
   
   const currentItem = items[step];
@@ -1426,6 +1427,7 @@ export default function LingModule({ type }) {
       setInputValue("");
       setShowFeedback(false);
       setIsCorrect(null);
+      setShowSyllables(false);
       setIsAudioPlaying(true);
       if (type === 'conversations') {
         const newDailyProgress = Math.min(dailyProgress + 1, dailyTotal);
@@ -1470,6 +1472,7 @@ export default function LingModule({ type }) {
       setInputValue("");
       setShowFeedback(false);
       setIsCorrect(null);
+      setShowSyllables(false);
       setIsAudioPlaying(false);
     }
   };
@@ -1562,9 +1565,9 @@ export default function LingModule({ type }) {
         </div>
       )}
 
-       <main className={`flex-1 ${type === 'conversations' ? 'flex flex-col' : 'grid grid-cols-[1fr_1fr_1fr] items-center px-4 md:px-12 pb-5 gap-2'} min-h-0 relative max-w-[1400px] mx-auto w-full z-10`}>
-        <button onClick={() => navigate("/ling", { state: { source: sourceLang, target: targetLang } })} className="absolute top-4 left-8 w-10 h-10 bg-white/80 backdrop-blur-sm rounded-full shadow-sm flex items-center justify-center text-slate-400 hover:text-slate-600 transition-all border border-slate-50 z-50">
-          <ArrowLeft size={20} strokeWidth={2.5} />
+       <main className={`flex-1 ${type === 'conversations' ? 'flex flex-col' : 'grid grid-cols-1 lg:grid-cols-[1fr_1fr_1fr] items-center px-4 md:px-12 pb-5 gap-2'} min-h-0 relative max-w-[1400px] mx-auto w-full z-10`}>
+        <button onClick={() => navigate("/ling", { state: { source: sourceLang, target: targetLang } })} className="absolute top-4 left-2 md:left-8 w-8 h-8 md:w-10 md:h-10 bg-white/80 backdrop-blur-sm rounded-full shadow-sm flex items-center justify-center text-slate-400 hover:text-slate-600 transition-all border border-slate-50 z-50">
+          <ArrowLeft strokeWidth={2.5} className="w-4 h-4 md:w-5 md:h-5" />
         </button>
 
         {type === 'conversations' ? (
@@ -1588,6 +1591,18 @@ export default function LingModule({ type }) {
                          <div className="flex-1">
                             <h2 className="text-[17px] font-black text-slate-800 leading-snug mb-0.5">{currentItem.text}</h2>
                             <p className="text-[13px] font-medium text-slate-500 leading-tight">{currentItem.native}</p>
+                            {showSyllables && getSyllables(currentItem.text) && (
+                               <p className={`text-[12px] font-bold mt-1 tracking-wide leading-tight italic ${currentItem.speaker === 'boy' ? 'text-emerald-500' : 'text-orange-500'}`}>
+                                 ({getSyllables(currentItem.text)})
+                               </p>
+                            )}
+                         </div>
+                         <div
+                           onClick={() => setShowSyllables(!showSyllables)}
+                           className={`w-8 h-8 rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform shadow-sm flex-shrink-0 bg-white ${showSyllables ? (currentItem.speaker === 'boy' ? 'text-emerald-500' : 'text-orange-500') : 'text-slate-400 hover:text-slate-600'}`}
+                           title="Toggle Syllables"
+                         >
+                           <Eye size={16} />
                          </div>
                       </div>
 
@@ -1612,7 +1627,7 @@ export default function LingModule({ type }) {
                 {step > 0 && (
                    <button 
                      onClick={handleBack}
-                     className="px-8 py-3.5 bg-white text-slate-400 rounded-2xl font-black text-[17px] shadow-lg border-b-4 border-slate-200 hover:translate-y-[-2px] active:border-b-0 active:translate-y-[2px] transition-all flex items-center gap-2 group"
+                     className="px-6 md:px-8 py-3.5 bg-white text-slate-400 rounded-2xl font-black text-[15px] md:text-[17px] shadow-lg border-b-4 border-slate-200 hover:translate-y-[-2px] active:border-b-0 active:translate-y-[2px] transition-all flex items-center gap-2 group"
                    >
                      <ArrowLeft size={20} strokeWidth={3} className="group-hover:-translate-x-1.5 transition-transform" /> Back
                    </button>
@@ -1621,7 +1636,7 @@ export default function LingModule({ type }) {
                 <button 
                   onClick={handleNext}
                   disabled={isAudioPlaying}
-                  className={`px-14 py-3.5 rounded-2xl font-black text-[18px] transition-all flex items-center gap-3 group ${
+                  className={`px-10 md:px-14 py-3.5 rounded-2xl font-black text-[16px] md:text-[18px] transition-all flex items-center gap-3 group ${
                     isAudioPlaying
                       ? 'bg-slate-300 text-slate-500 border-b-4 border-slate-400 cursor-not-allowed opacity-75'
                       : 'bg-[#0BB562] text-white shadow-xl shadow-emerald-100 border-b-4 border-emerald-700 hover:translate-y-[-2px] active:border-b-0 active:translate-y-[2px] cursor-pointer'
@@ -1633,11 +1648,11 @@ export default function LingModule({ type }) {
           </div>
         ) : (
           <>
-            <div className="relative h-full flex flex-col justify-end items-center pb-4">
+            <div className="hidden lg:flex relative h-full flex-col justify-end items-center pb-4">
               <div className="absolute top-[18%] left-[60%] -translate-x-1/2 w-40 p-3 bg-[#EDF9F2] rounded-[20px] rounded-bl-none shadow-md border border-emerald-50 z-10"><p className="text-[14px] font-medium leading-relaxed">{t.question_sia(currentItem.native, targetLangName)}</p><div className="absolute -bottom-7 left-6 flex flex-col gap-2"><div className="w-5 h-5 rounded-full bg-[#EDF9F2]" /><div className="w-3 h-3 rounded-full bg-[#EDF9F2]" /></div></div>
-              <img src="/images/linguistic/boy.png" alt="Boy" className="w-[200px] h-auto object-contain max-h-[45vh] -ml-24" />
+              <img src="/images/linguistic/boy.png" alt="Boy" className="w-[260px] h-auto object-contain max-h-[55vh] -ml-24 -translate-y-12" />
             </div>
-            <div className="flex flex-col items-center gap-3 py-2 -ml-16">
+            <div className="flex flex-col items-center gap-3 py-2 lg:-ml-16 mx-auto w-full">
               <h1 className="text-lg font-black text-center mb-0">{t.question_main(targetLangName)}</h1>
               <div className="w-full max-w-[280px] aspect-[1/1.1] bg-white rounded-[32px] shadow-xl shadow-slate-300/40 flex flex-col items-center justify-center p-6 relative border border-slate-50">
                   <div onClick={() => handleSpeak(currentItem.target, targetLang, currentItem.audioFile)} className="absolute top-4 right-4 w-9 h-9 bg-[#F1FAF6] rounded-full flex items-center justify-center text-[#0BB562] cursor-pointer hover:scale-110 transition-transform active:scale-90"><Volume2 size={18} /></div>
@@ -1677,13 +1692,13 @@ export default function LingModule({ type }) {
               </div>
               
               {/* Action Buttons */}
-              <div className="flex justify-center items-center gap-3 text-center mt-10 z-20 w-full max-w-[480px]">
-                {step > 0 && (<button onClick={handleBack} className="w-[90px] py-2.5 bg-white border border-slate-300 rounded-[16px] text-[13px] font-black text-slate-400 hover:text-slate-600 flex items-center justify-center gap-1.5 shadow-sm"><ArrowLeft size={16} strokeWidth={3} /> {t.back}</button>)}
-                <button onClick={() => setInputValue(currentItem.target)} className="w-[140px] py-2.5 bg-white border border-slate-300 rounded-[16px] text-[13px] font-black text-slate-500 hover:text-slate-700 shadow-sm">{t.dont_know}</button>
-                <button onClick={handleCheck} disabled={!inputValue || showFeedback} className={`w-[140px] justify-center py-2.5 rounded-[16px] font-black text-[14px] flex items-center gap-2 shadow-lg transition-all active:scale-95 ${!inputValue || showFeedback ? 'bg-slate-100 text-slate-300' : 'bg-[#0BB562] text-white shadow-emerald-200'}`}>{t.check} <ArrowRight size={16} strokeWidth={3} /></button>
+              <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-3 text-center mt-10 z-20 w-full max-w-[480px]">
+                {step > 0 && (<button onClick={handleBack} className="flex-1 min-w-[80px] py-2.5 bg-white border border-slate-300 rounded-[16px] text-[13px] font-black text-slate-400 hover:text-slate-600 flex items-center justify-center gap-1.5 shadow-sm"><ArrowLeft size={16} strokeWidth={3} /> {t.back}</button>)}
+                <button onClick={() => setInputValue(currentItem.target)} className="flex-1 min-w-[100px] py-2.5 bg-white border border-slate-300 rounded-[16px] text-[13px] font-black text-slate-500 hover:text-slate-700 shadow-sm">{t.dont_know}</button>
+                <button onClick={handleCheck} disabled={!inputValue || showFeedback} className={`flex-[1.5] min-w-[120px] justify-center py-2.5 rounded-[16px] font-black text-[14px] flex items-center gap-2 shadow-lg transition-all active:scale-95 ${!inputValue || showFeedback ? 'bg-slate-100 text-slate-300' : 'bg-[#0BB562] text-white shadow-emerald-200'}`}>{t.check} <ArrowRight size={16} strokeWidth={3} /></button>
               </div>
             </div>
-            <div className="relative h-full flex flex-col justify-end items-center pb-4">
+            <div className="hidden lg:flex relative h-full flex-col justify-end items-center pb-4">
               <div className="absolute top-[20%] right-[75%] translate-x-1/2 w-44 p-3 bg-orange-50 rounded-[20px] rounded-br-none shadow-md border border-yellow-100 z-10">
                 <p className="text-[14px] font-medium leading-relaxed text-slate-800">
                   {t.guess_girl(currentItem.target)}
@@ -1696,13 +1711,13 @@ export default function LingModule({ type }) {
                 <div className="absolute -bottom-7 right-6 flex flex-col gap-2"><div className="w-5 h-5 rounded-full bg-orange-50 shadow-sm" /><div className="w-3 h-3 rounded-full bg-[#FFFDF9] shadow-sm" /></div>
               </div>
               
-              <div className="absolute top-1/2 right-0 sm:right-2 md:right-4 -translate-y-1/2 w-[160px] bg-white rounded-[32px] p-6 shadow-xl border border-slate-50 z-30 scale-95 origin-center">
+              <div className="absolute top-1/2 -right-2 sm:-right-4 md:-right-8 -translate-y-1/2 w-[160px] bg-white rounded-[32px] p-6 shadow-xl border border-slate-50 z-30 scale-95 origin-center">
                   <div className="text-center"><div className="text-[13px] font-medium text-slate-600 mb-4">{t.streak}</div><div className="relative w-24 h-24 mx-auto flex items-center justify-center"><svg className="w-full h-full -rotate-90" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="transparent" stroke="#FFF8EA" strokeWidth="8" /><circle cx="50" cy="50" r="40" fill="transparent" stroke="#FF9800" strokeWidth="8" strokeDasharray="251" strokeDashoffset={251 - ((streak % 7 || 7) / 7) * 251} strokeLinecap="round" className="transition-all duration-1000" /></svg><div className="absolute flex flex-col items-center"><div className="flex items-center gap-1"><Flame size={20} className="text-[#FF9800] fill-[#FF9800]" /><span className="text-2xl font-black text-[#1A1C2E]">{streak}</span></div><span className="text-[10px] font-bold text-slate-400">{t.days}</span></div></div></div>
                   <div className="space-y-3 mt-4"><div className="text-[13px] text-center font-medium text-slate-600">{t.goal}</div><div className="flex items-baseline gap-1"><span className="text-sm font-black text-[#1A1C2E]">{Math.min(dailyProgress, dailyTotal)} / {dailyTotal}</span><span className="text-[10px] font-bold text-slate-400">{t.words}</span></div><div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden"><div className="h-full bg-[#0BB562] transition-all duration-500 rounded-full" style={{ width: `${Math.min((dailyProgress/dailyTotal) * 100, 100)}%` }} /></div></div>
                   <div className="text-center pt-2 mt-4"><div className="text-[13px] font-medium text-slate-600 mb-4">{t.progress}</div><div className="relative w-24 h-24 mx-auto flex items-center justify-center"><svg className="w-full h-full -rotate-90" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="transparent" stroke="#F1FAF6" strokeWidth="8" /><circle cx="50" cy="50" r="40" fill="transparent" stroke="#0BB562" strokeWidth="8" strokeDasharray="251" strokeDashoffset={251 - ((step/items.length)*251)} strokeLinecap="round" /></svg><div className="absolute flex flex-col items-center"><div className="text-xl font-black text-[#1A1C2E]">{step + 1}/{items.length}</div><span className="text-[10px] font-bold text-slate-400">{t.words}</span></div></div></div>
               </div>
 
-              <img src="/images/linguistic/girl.png" alt="Girl" className="w-[170px] h-auto object-contain max-h-[45vh] -ml-28" />
+              <img src="/images/linguistic/girl.png" alt="Girl" className="w-[230px] h-auto object-contain max-h-[55vh] -ml-20 -translate-y-12" />
             </div>
           </>
         )}

@@ -105,37 +105,7 @@ export default function KeyParticipant() {
             </p>
           </div>
 
-          <div className="flex flex-col md:flex-row justify-between items-end gap-4 mt-8 md:-mt-12">
-            <div></div> {/* Spacer for grid alignment if needed */}
-            <div className="flex items-center gap-4">
-              {/* Navigation Arrows */}
-              <div className="flex gap-3">
-                <button
-                  onClick={() => scroll("left")}
-                  className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-indigo-600 hover:border-indigo-600 transition-all"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                  </svg>
-                </button>
-                <button
-                  onClick={() => scroll("right")}
-                  className="w-10 h-10 rounded-full border border-slate-200 flex items-center justify-center text-slate-400 hover:text-indigo-600 hover:border-indigo-600 transition-all"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                  </svg>
-                </button>
-              </div>
 
-              <Link
-                to="/key-participants"
-                className="px-6 py-2.5 bg-slate-900 text-white text-xs font-bold rounded-xl hover:bg-slate-800 transition-colors shadow-lg shadow-slate-200 flex items-center gap-2 uppercase tracking-tight"
-              >
-                View All
-              </Link>
-            </div>
-          </div>
         </div>
 
         <div className="max-w-[1280px] mx-auto">
@@ -170,8 +140,8 @@ function ParticipantCard({ item }) {
       <div
         className="
           absolute inset-0 bg-[#332F82]
-          transition-[clip-path] duration-1500
-          ease-[cubic-bezier(0.22,1,0.36,1)]
+          transition-[clip-path] duration-[1800ms]
+          ease-in-out
           z-0
           [clip-path:ellipse(75%_50%_at_50%_100%)]
           group-hover:[clip-path:ellipse(180%_180%_at_50%_50%)]
@@ -183,7 +153,7 @@ function ParticipantCard({ item }) {
         <h3
           className="
             text-lg font-bold text-[#1a1a1a] leading-snug
-            transition-colors duration-300
+            transition-colors duration-[1800ms] ease-in-out
             group-hover:text-white
           "
         >
@@ -193,7 +163,7 @@ function ParticipantCard({ item }) {
         <p
           className="
             mt-2 text-[13px] leading-relaxed text-gray-500 font-medium
-            transition-colors duration-300
+            transition-colors duration-[1800ms] ease-in-out
             group-hover:text-indigo-100
           "
         >
@@ -208,8 +178,8 @@ function ParticipantCard({ item }) {
           alt={item.name}
           className={`
             block ${isMithilesh ? 'h-[265px]' : 'h-[300px]'} max-w-full object-contain object-bottom drop-shadow-2xl
-            transition-transform duration-700
-            ease-[cubic-bezier(0.22,1,0.36,1)]
+            transition-transform duration-[1500ms]
+            ease-in-out
             group-hover:scale-105
             group-hover:translate-y-0
             origin-bottom

@@ -110,12 +110,30 @@ const testimonials = [
   }
 ];
 
-const colors = [
-  {
-    quote: "text-blue-400/20",
-    role: "text-slate-500",
-    border: "hover:border-blue-100",
-  }
+const getInitials = (name) => {
+  const map = {
+    "Dr. Rajendra Prasad": "RP",
+    "Jayaprakash Narayan": "JN",
+    "Satyendra Narayan Sinha": "SS",
+    "Shri Krishna Sinha": "SK",
+    "Anugrah Narayan Sinha": "AS",
+    "Karpoori Thakur": "KT",
+    "Shri Nitish Kumar": "NK",
+    "Jagjivan Ram": "JR",
+    "Dr. Sachchidananda Sinha": "DS",
+    "Ramdhari Singh Dinkar": "RS"
+  };
+  if (map[name]) return map[name];
+  const words = name.replace(/^(Dr\.\s*)/i, '').trim().split(' ');
+  if (words.length >= 2) return (words[0][0] + words[words.length - 1][0]).toUpperCase();
+  return name.substring(0, 2).toUpperCase();
+};
+
+const avatarColors = [
+  "bg-[#1e293b]", // dark slate
+  "bg-[#64748b]", // light slate
+  "bg-[#475569]", // medium slate
+  "bg-[#334155]", // slate
 ];
 
 export default function StakeHolder() {
@@ -124,43 +142,42 @@ export default function StakeHolder() {
   const row2 = testimonials.slice(8);
 
   const TestimonialCard = ({ item, index }) => {
-    const theme = colors[index % colors.length];
-    
     // Clean escape quotes from strings for display
     const cleanQuote = item.quote.startsWith('"') && item.quote.endsWith('"')
       ? item.quote.slice(1, -1)
       : item.quote;
+      
+    const avatarBg = avatarColors[index % avatarColors.length];
 
     return (
-      <div className={`w-[260px] sm:w-[300px] h-[160px] sm:h-[175px] shrink-0 bg-white border border-slate-100 rounded-xl p-4 sm:p-5 shadow-[0_2px_12px_rgba(0,0,0,0.015)] ${theme.border} hover:shadow-[0_8px_24px_rgba(0,0,0,0.035)] transition-all duration-500 ease-out flex flex-col justify-between relative overflow-hidden group cursor-pointer`}>
+      <div className="w-[280px] sm:w-[320px] h-[210px] shrink-0 bg-white border border-slate-200 rounded-2xl p-5 md:p-6 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between whitespace-normal">
         
-        {/* Quote symbol */}
-        <span className={`absolute -top-2 left-3 text-5xl font-serif ${theme.quote} select-none pointer-events-none transition-colors duration-500`}>
-          “
-        </span>
+        <div>
+          {/* Quote symbol */}
+          <div className="text-4xl text-blue-300/80 font-serif leading-none mb-2 select-none">
+            “
+          </div>
 
-        {/* Quote Content */}
-        <p className="text-slate-800 font-semibold text-[13px] sm:text-sm leading-snug relative z-10 pt-2 mb-4 whitespace-normal transition-colors duration-500">
-          “{cleanQuote}”
-        </p>
+          {/* Quote Content */}
+          <p className="text-slate-800 font-serif text-[14px] sm:text-[15px] leading-snug line-clamp-3">
+            {cleanQuote}
+          </p>
+        </div>
 
         {/* Profile / Author Section */}
-        <div className="flex items-center gap-2.5 border-t border-slate-50 pt-3 mt-auto transition-colors duration-500">
-          <img
-            src={item.image}
-            alt={item.name}
-            className="w-8 h-8 rounded-full object-cover border border-slate-100 shadow-sm shrink-0"
-            onError={(e) => {
-              e.target.src = `https://api.dicebear.com/7.x/initials/svg?seed=${item.name}`;
-            }}
-          />
-          <div>
-            <h4 className="font-extrabold text-[#1E293B] group-hover:text-blue-600 text-[11px] sm:text-[12px] leading-tight transition-colors duration-500">
-              {item.name}
-            </h4>
-            <span className={`text-[8px] font-extrabold tracking-wider ${theme.role} block mt-0.5 transition-colors duration-500`}>
-              {item.role}
-            </span>
+        <div className="border-t border-slate-100 pt-4 mt-auto">
+          <div className="flex items-center gap-3">
+            <div className={`w-10 h-10 rounded-full ${avatarBg} flex items-center justify-center text-white font-medium text-[14px] shrink-0`}>
+              {getInitials(item.name)}
+            </div>
+            <div>
+              <h4 className="font-semibold text-slate-900 text-[13px] leading-tight mb-0.5 truncate">
+                {item.name}
+              </h4>
+              <span className="text-[9px] sm:text-[10px] font-medium text-slate-500 uppercase tracking-wider block line-clamp-1">
+                {item.role}
+              </span>
+            </div>
           </div>
         </div>
       </div>

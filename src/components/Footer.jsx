@@ -131,7 +131,7 @@ const Footer = () => {
             <p>
               Designed by{" "}
               <Link to="/" className="font-semibold text-white hover:text-blue-400 transition-colors duration-300">
-                 A Startup Product of Bihar
+                 <span style={{ fontFamily: 'italics', letterSpacing: '1px' }}>NS Apps Innovations</span> - A Product of Startup Bihar
               </Link>
             </p>
           </div>

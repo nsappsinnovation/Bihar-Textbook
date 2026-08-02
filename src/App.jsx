@@ -33,7 +33,6 @@ const AiIntelligenceDashboard = lazy(() => import("./ai/AiIntelligenceDashboard.
 const VrDashboard = lazy(() => import("./vr/VrDashboard.jsx"));
 const CyberSecurityDashboard = lazy(() => import("./cyberSecurity/CyberSecurityDashboard.jsx"));
 const VrTechLearning = lazy(() => import("./vr/VrTechLearning.jsx"));
-const KeyParticipantViewAll = lazy(() => import("./components/KeyParticipantsViewAll"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Notice = lazy(() => import("./pages/navbar_pages/Notice.jsx"));
 const NoticeBoard = lazy(() => import("./pages/navbar_pages/NoticeBoard.jsx"));
@@ -161,7 +160,6 @@ function App() {
               <Route path="/csr-policy" element={<CsrPolicy />} />
     
               {/* Misc */}
-              <Route path="/key-participants" element={<KeyParticipantViewAll />} />
               <Route path="/developer" element={<Developer />} />
             </Routes>
           </Suspense>

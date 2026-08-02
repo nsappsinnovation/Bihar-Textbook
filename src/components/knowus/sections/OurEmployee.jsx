@@ -55,7 +55,7 @@ const OurEmployee = () => {
         </motion.h1>
         
         <p className="text-slate-500 text-sm max-w-2xl mx-auto leading-relaxed font-medium">
-          Meet the dedicated professionals driving innovation, ensuring quality, and working tirelessly to shape the future of education in Bihar.
+          Our team of educators, professionals, and innovators works together to make quality education accessible, inclusive, and impactful for every learner in Bihar.
         </p>
       </section>
 
