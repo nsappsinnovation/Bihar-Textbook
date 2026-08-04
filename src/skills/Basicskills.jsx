@@ -317,12 +317,12 @@ const Basicskills = () => {
   return (
     <div className="relative min-h-screen bg-[#F8FAFC] text-slate-900 overflow-hidden font-sans pb-24">
       {/* Subtle organic background elements */}
-      <div className="absolute top-0 right-0 -z-10 w-[700px] h-[700px] rounded-full bg-gradient-to-br from-emerald-500/5 to-teal-500/5 blur-[120px]" />
-      <div className="absolute bottom-0 left-0 -z-10 w-[600px] h-[600px] rounded-full bg-gradient-to-tr from-teal-500/5 to-emerald-500/5 blur-[120px]" />
+      <div className="absolute top-0 right-0 -z-10 w-[700px] h-[700px] rounded-full bg-gradient-to-br from-teal-500/5 to-teal-500/5 blur-[120px]" />
+      <div className="absolute bottom-0 left-0 -z-10 w-[600px] h-[600px] rounded-full bg-gradient-to-tr from-teal-500/5 to-teal-500/5 blur-[120px]" />
 
       <button
         onClick={() => navigate("/#missions-grid")}
-        className="absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-emerald-600 hover:shadow-lg transition-all border border-slate-100 group cursor-pointer"
+        className="absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-teal-600 hover:shadow-lg transition-all border border-slate-100 group cursor-pointer"
       >
         <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
       </button>
@@ -339,12 +339,12 @@ const Basicskills = () => {
               transition={{ duration: 0.5 }}
               className="space-y-4"
             >
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50/80 backdrop-blur-sm text-emerald-750 border border-emerald-200/50 rounded-full text-[10px] sm:text-xs font-bold tracking-wider uppercase">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-teal-50/80 backdrop-blur-sm text-teal-750 border border-teal-200/50 rounded-full text-[10px] sm:text-xs font-bold tracking-wider uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-teal-600 animate-pulse" />
                 Basic Life Skills
               </span>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-[1.1] tracking-tight">
-                Essential <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">Daily Life</span> Skills
+                Essential <span className="bg-gradient-to-r from-teal-600 to-teal-600 bg-clip-text text-transparent">Daily Life</span> Skills
               </h1>
               <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed max-w-2xl">
                 Practical lessons teaching students road safety, traffic rules, ATM usage, and responsible everyday behavior in modern society. Bridge textbook theory with interactive visual simulations.
@@ -359,7 +359,7 @@ const Basicskills = () => {
             >
               <button 
                 onClick={() => navigate("/life-skills")}
-                className="group inline-flex items-center gap-2.5 px-6 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-750 hover:to-teal-750 text-white rounded-full text-xs sm:text-sm font-bold shadow-md shadow-emerald-500/10 hover:shadow-lg hover:shadow-teal-500/20 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
+                className="group inline-flex items-center gap-2.5 px-6 py-3.5 bg-gradient-to-r from-teal-600 to-teal-600 hover:from-teal-750 hover:to-teal-750 text-white rounded-full text-xs sm:text-sm font-bold shadow-md shadow-teal-500/10 hover:shadow-lg hover:shadow-teal-500/20 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
               >
                 Start Learning
                 <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
@@ -382,7 +382,7 @@ const Basicskills = () => {
             >
               <div className="p-3.5 bg-white hover:bg-slate-50 border border-slate-200/60 rounded-2xl hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1">
                 <div className="text-slate-900 font-bold flex items-center gap-1.5 text-xs sm:text-sm">
-                  <Shield size={14} className="text-emerald-600" />
+                  <Shield size={14} className="text-teal-600" />
                   Road Safety
                 </div>
                 <p className="text-[10px] text-slate-500 leading-normal font-medium">Learn vital traffic signals & road crossing rules.</p>
@@ -413,7 +413,7 @@ const Basicskills = () => {
               className="relative w-full max-w-[340px] group"
             >
               {/* Soft decorative glow background */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/10 to-teal-500/15 rounded-full blur-[70px] -z-10 animate-pulse duration-[4000ms]" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-teal-500/10 to-teal-500/15 rounded-full blur-[70px] -z-10 animate-pulse duration-[4000ms]" />
               
               <img
                 src="/images/skills/a.png"
@@ -426,7 +426,7 @@ const Basicskills = () => {
 
         {/* Section title & subtitle for the simulator */}
         <div id="simulator-section" className="text-center max-w-2xl mx-auto mb-10 -mt-20 space-y-2 pt-4">
-          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full text-[10px] font-bold tracking-widest uppercase">
+          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-teal-50 text-teal-700 border border-teal-100 rounded-full text-[10px] font-bold tracking-widest uppercase">
             Simulated Sandbox
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Interactive Life Skills Sandbox</h2>
@@ -450,17 +450,17 @@ const Basicskills = () => {
                     }}
                     className={`w-full text-left p-4 rounded-2xl border transition-all duration-300 flex items-start gap-4 cursor-pointer relative overflow-hidden group ${
                       activeModule === idx 
-                        ? 'border-emerald-500 bg-emerald-50/50 shadow-sm shadow-emerald-500/5' 
+                        ? 'border-teal-500 bg-teal-50/50 shadow-sm shadow-teal-500/5' 
                         : 'border-slate-100 bg-white hover:border-slate-200 hover:bg-slate-50/40 hover:-translate-y-0.5 shadow-sm'
                     }`}
                   >
                     {activeModule === idx && (
-                      <span className="absolute left-0 top-0 bottom-0 w-1.5 bg-emerald-650" />
+                      <span className="absolute left-0 top-0 bottom-0 w-1.5 bg-teal-650" />
                     )}
 
                     <div className={`p-2.5 rounded-xl border transition-colors duration-300 ${
                       activeModule === idx 
-                        ? 'bg-emerald-600 border-emerald-600 text-white' 
+                        ? 'bg-teal-600 border-teal-600 text-white' 
                         : 'bg-slate-50 border-slate-100 text-slate-500 group-hover:bg-slate-100'
                     }`}>
                       {idx === 0 && <Navigation size={16} />}
@@ -469,7 +469,7 @@ const Basicskills = () => {
                     </div>
 
                     <div className="space-y-0.5">
-                      <h3 className="text-sm font-bold text-slate-800 leading-snug group-hover:text-emerald-600 transition-colors">
+                      <h3 className="text-sm font-bold text-slate-800 leading-snug group-hover:text-teal-600 transition-colors">
                         {item.title}
                       </h3>
                       <p className="text-[11px] text-slate-500 font-medium">
@@ -508,7 +508,7 @@ const Basicskills = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-slate-950/40" />
                     
                     <div className="absolute bottom-6 left-6 right-6 text-left space-y-2 z-10">
-                      <span className="inline-block px-2.5 py-0.5 bg-emerald-600/20 text-emerald-400 border border-emerald-500/30 rounded-md text-[9px] font-bold font-mono tracking-widest uppercase">
+                      <span className="inline-block px-2.5 py-0.5 bg-teal-600/20 text-teal-400 border border-teal-500/30 rounded-md text-[9px] font-bold font-mono tracking-widest uppercase">
                         PREVIEW STATE
                       </span>
                       <h4 className="text-white font-extrabold text-base tracking-tight">{modules[activeModule].title}</h4>
@@ -541,7 +541,7 @@ const Basicskills = () => {
                       className="absolute inset-0 bg-slate-950/95 backdrop-blur-sm z-20 flex flex-col items-center justify-center p-6 text-center text-white"
                     >
                       <div className="space-y-4 max-w-xs w-full">
-                        <div className="w-8 h-8 rounded-full border-2 border-slate-800 border-t-emerald-500 animate-spin mx-auto" />
+                        <div className="w-8 h-8 rounded-full border-2 border-slate-800 border-t-teal-500 animate-spin mx-auto" />
                         <div className="space-y-1">
                           <p className="text-xs font-bold tracking-wider text-slate-300 font-mono">
                             {getLoadingStatus(progress)}
@@ -551,13 +551,13 @@ const Basicskills = () => {
                         
                         <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden border border-slate-800">
                           <motion.div 
-                            className="bg-gradient-to-r from-emerald-500 to-teal-500 h-full"
+                            className="bg-gradient-to-r from-teal-500 to-teal-500 h-full"
                             initial={{ width: '0%' }}
                             animate={{ width: `${progress}%` }}
                             transition={{ ease: "easeInOut" }}
                           />
                         </div>
-                        <span className="text-xs text-emerald-400 font-mono">{progress}% READY</span>
+                        <span className="text-xs text-teal-400 font-mono">{progress}% READY</span>
                       </div>
                     </motion.div>
                   )}
@@ -582,8 +582,8 @@ const Basicskills = () => {
                         {/* Visual Road Scene */}
                         <div className="relative w-full h-32 bg-slate-800 border-y-4 border-dashed border-slate-600 rounded-xl overflow-hidden flex items-center justify-center">
                           {/* Grass background top/bottom */}
-                          <div className="absolute top-0 left-0 right-0 h-4 bg-emerald-950/40" />
-                          <div className="absolute bottom-0 left-0 right-0 h-4 bg-emerald-950/40" />
+                          <div className="absolute top-0 left-0 right-0 h-4 bg-teal-950/40" />
+                          <div className="absolute bottom-0 left-0 right-0 h-4 bg-teal-950/40" />
 
                           {/* Zebra crossing stripes (Horizontal bars) */}
                           <div className="absolute left-1/2 -translate-x-1/2 w-16 h-full flex flex-col justify-evenly py-1 pointer-events-none">
@@ -618,10 +618,10 @@ const Basicskills = () => {
                             {/* Visual Signal */}
                             <div className="bg-slate-900 px-2 py-3 rounded-xl flex flex-col gap-2 border border-slate-800">
                               <div className={`w-5 h-5 rounded-full ${pedestrianSignal === 'RED' ? 'bg-red-500 shadow-lg shadow-red-500/50 animate-pulse' : 'bg-red-950'}`} />
-                              <div className={`w-5 h-5 rounded-full ${pedestrianSignal === 'GREEN' ? 'bg-emerald-500 shadow-lg shadow-emerald-500/50 animate-pulse' : 'bg-emerald-950'}`} />
+                              <div className={`w-5 h-5 rounded-full ${pedestrianSignal === 'GREEN' ? 'bg-teal-500 shadow-lg shadow-teal-500/50 animate-pulse' : 'bg-teal-950'}`} />
                             </div>
                             <div className="space-y-0.5 font-mono text-[10px] text-slate-400">
-                              <div>PEDESTRIAN: <span className={pedestrianSignal === 'GREEN' ? 'text-emerald-400 font-bold' : 'text-red-400 font-bold'}>{pedestrianSignal}</span></div>
+                              <div>PEDESTRIAN: <span className={pedestrianSignal === 'GREEN' ? 'text-teal-400 font-bold' : 'text-red-400 font-bold'}>{pedestrianSignal}</span></div>
                               <div>TRAFFIC: <span className="text-white">{pedestrianSignal === 'RED' ? 'FLOWING' : 'STOPPED'}</span></div>
                             </div>
                           </div>
@@ -639,16 +639,16 @@ const Basicskills = () => {
                           <button
                             onClick={handleCrossRoad}
                             disabled={pedestrianWalk}
-                            className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-md transition-all cursor-pointer active:scale-95 flex items-center gap-2"
+                            className="px-6 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl text-xs shadow-md transition-all cursor-pointer active:scale-95 flex items-center gap-2"
                           >
                             🚶 Walk Across zebra crossing
                           </button>
                         ) : (
                           <div className="space-y-3 w-full">
-                            <div className={`p-3.5 rounded-xl border text-xs leading-normal ${roadCrossStatus === 'SAFE' ? 'bg-emerald-950/60 border-emerald-500/30 text-emerald-250' : 'bg-red-950/60 border-red-500/30 text-red-250 shadow-[0_0_20px_rgba(239,68,68,0.15)]'}`}>
+                            <div className={`p-3.5 rounded-xl border text-xs leading-normal ${roadCrossStatus === 'SAFE' ? 'bg-teal-950/60 border-teal-500/30 text-teal-250' : 'bg-red-950/60 border-red-500/30 text-red-250 shadow-[0_0_20px_rgba(239,68,68,0.15)]'}`}>
                               {roadCrossStatus === 'SAFE' ? (
                                 <div className="space-y-1">
-                                  <div className="font-bold flex items-center gap-1.5 text-emerald-450"><CheckCircle2 size={15} /> Correct Decision!</div>
+                                  <div className="font-bold flex items-center gap-1.5 text-teal-450"><CheckCircle2 size={15} /> Correct Decision!</div>
                                   <p className="text-[10.5px] text-slate-300 leading-normal">You waited for the signal to turn green and crossed safely. Always look left, right, and left again before crossing!</p>
                                 </div>
                               ) : (
@@ -684,7 +684,7 @@ const Basicskills = () => {
                         <div className="bg-slate-950 border-[6px] border-slate-800 rounded-2xl w-full p-4 flex flex-col min-h-[250px] justify-between relative shadow-2xl">
                           
                           {/* Screen Header */}
-                          <div className="flex justify-between items-center text-[8px] font-mono text-emerald-500 border-b border-slate-900 pb-1.5">
+                          <div className="flex justify-between items-center text-[8px] font-mono text-teal-500 border-b border-slate-900 pb-1.5">
                             <span>STATE BANK OF BIHAR</span>
                             <span>TERMINAL #024B</span>
                           </div>
@@ -715,7 +715,7 @@ const Basicskills = () => {
                             {atmStep === 2 && (
                               <div className="space-y-3 w-full max-w-[190px]">
                                 <p className="font-bold text-slate-200">Enter 4-Digit Secure PIN</p>
-                                <div className="bg-slate-900 py-2 rounded border border-slate-800 font-mono text-center tracking-[0.4em] text-lg text-emerald-450 h-10 flex items-center justify-center">
+                                <div className="bg-slate-900 py-2 rounded border border-slate-800 font-mono text-center tracking-[0.4em] text-lg text-teal-450 h-10 flex items-center justify-center">
                                   {atmPin.split('').map(() => '*').join('')}
                                 </div>
                                 <p className="text-[9px] text-slate-500 italic">Always cover the keypad while entering your PIN!</p>
@@ -761,7 +761,7 @@ const Basicskills = () => {
 
                             {atmStep === 5 && (
                               <div className="space-y-3">
-                                <div className="w-8 h-8 rounded-full border-2 border-slate-800 border-t-emerald-500 animate-spin mx-auto" />
+                                <div className="w-8 h-8 rounded-full border-2 border-slate-800 border-t-teal-500 animate-spin mx-auto" />
                                 <p className="font-bold text-slate-300 text-[11px] font-mono">PROCESSING TRANSACTION...</p>
                                 <p className="text-[9px] text-slate-500">Please do not remove your card.</p>
                               </div>
@@ -769,7 +769,7 @@ const Basicskills = () => {
 
                             {atmStep === 6 && (
                               <div className="space-y-3">
-                                <span className="text-emerald-400 text-2xl animate-bounce block">💵</span>
+                                <span className="text-teal-400 text-2xl animate-bounce block">💵</span>
                                 <p className="font-bold text-slate-150">Please Collect Cash</p>
                                 <p className="text-[10px] text-slate-400">Click the cash note at the bottom slot to collect your ₹{atmSelectedAmount}.</p>
                               </div>
@@ -777,7 +777,7 @@ const Basicskills = () => {
 
                             {atmStep === 7 && (
                               <div className="space-y-2.5">
-                                <span className="text-emerald-450 text-2xl block">✔️</span>
+                                <span className="text-teal-450 text-2xl block">✔️</span>
                                 <p className="font-bold text-slate-100">Transaction Complete!</p>
                                 <div className="bg-slate-900/60 p-2.5 rounded border border-slate-850 text-[9.5px] text-left text-slate-400 leading-normal space-y-1">
                                   <div>🚨 <span className="font-bold text-white">Security Checklist:</span></div>
@@ -817,9 +817,9 @@ const Basicskills = () => {
                                 ) : (
                                   <button 
                                     onClick={handleInsertCard}
-                                    className="text-[9px] text-emerald-400 font-bold hover:text-emerald-350 cursor-pointer flex items-center gap-1.5"
+                                    className="text-[9px] text-teal-400 font-bold hover:text-teal-350 cursor-pointer flex items-center gap-1.5"
                                   >
-                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                                    <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse" />
                                     Insert Card
                                   </button>
                                 )}
@@ -833,7 +833,7 @@ const Basicskills = () => {
                                 {cashDispensed && (
                                   <button 
                                     onClick={collectCash}
-                                    className="w-14 h-5 bg-emerald-600 hover:bg-emerald-500 border border-emerald-500 rounded text-[9px] font-extrabold text-white flex items-center justify-center shadow-lg animate-bounce cursor-pointer"
+                                    className="w-14 h-5 bg-teal-600 hover:bg-teal-500 border border-teal-500 rounded text-[9px] font-extrabold text-white flex items-center justify-center shadow-lg animate-bounce cursor-pointer"
                                   >
                                     💵 Take ₹{atmSelectedAmount}
                                   </button>
@@ -868,7 +868,7 @@ const Basicskills = () => {
                               </button>
                               <button
                                 onClick={submitAtmPin}
-                                className="bg-emerald-600 hover:bg-emerald-650 text-white font-bold py-1.5 rounded-lg text-[8px] font-mono transition-all active:scale-95 border border-emerald-500"
+                                className="bg-teal-600 hover:bg-teal-650 text-white font-bold py-1.5 rounded-lg text-[8px] font-mono transition-all active:scale-95 border border-teal-500"
                               >
                                 ENTER
                               </button>
@@ -913,7 +913,7 @@ const Basicskills = () => {
                               disabled={shoppingStep !== 0}
                               className={`p-2.5 rounded-xl border flex flex-col items-center text-center gap-1.5 transition-all ${
                                 activeShopItem === idx 
-                                  ? 'bg-emerald-950 border-emerald-500 text-emerald-400 shadow-md' 
+                                  ? 'bg-teal-950 border-teal-500 text-teal-400 shadow-md' 
                                   : 'bg-slate-950 border-slate-850 text-slate-450'
                               }`}
                             >
@@ -932,7 +932,7 @@ const Basicskills = () => {
                           </div>
                           <div className="text-right">
                             <div className="text-[8px] text-slate-500 font-mono">CASH ON COUNTER</div>
-                            <div className="text-emerald-450 font-extrabold text-base">
+                            <div className="text-teal-450 font-extrabold text-base">
                               ₹{cashTray.reduce((sum, val) => sum + val, 0)}
                             </div>
                           </div>
@@ -962,7 +962,7 @@ const Basicskills = () => {
                               <div className="p-2.5 bg-slate-900 border border-slate-800 rounded-xl flex flex-wrap gap-2 items-center justify-between">
                                 <div className="flex flex-wrap gap-1.5">
                                   {cashTray.map((note, idx) => (
-                                    <span key={idx} className="px-2 py-0.5 bg-emerald-950 border border-emerald-500 text-emerald-400 rounded text-[9px] font-bold">
+                                    <span key={idx} className="px-2 py-0.5 bg-teal-950 border border-teal-500 text-teal-400 rounded text-[9px] font-bold">
                                       ₹{note}
                                     </span>
                                   ))}
@@ -979,7 +979,7 @@ const Basicskills = () => {
                             <button
                               onClick={handlePay}
                               disabled={cashTray.length === 0}
-                              className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs shadow-md transition-all disabled:opacity-50 cursor-pointer"
+                              className="w-full py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl text-xs shadow-md transition-all disabled:opacity-50 cursor-pointer"
                             >
                               Submit Payment
                             </button>
@@ -1021,10 +1021,10 @@ const Basicskills = () => {
                               const isCorrect = correctChange === 0 || changeAnswer === correctChange;
 
                               return (
-                                <div className={`p-4 rounded-xl border text-xs leading-normal ${isCorrect ? 'bg-emerald-950/60 border-emerald-500/30 text-emerald-250' : 'bg-red-950/60 border-red-500/30 text-red-250 shadow-[0_0_20px_rgba(239,68,68,0.15)]'}`}>
+                                <div className={`p-4 rounded-xl border text-xs leading-normal ${isCorrect ? 'bg-teal-950/60 border-teal-500/30 text-teal-250' : 'bg-red-950/60 border-red-500/30 text-red-250 shadow-[0_0_20px_rgba(239,68,68,0.15)]'}`}>
                                   {isCorrect ? (
                                     <div className="space-y-1">
-                                      <div className="font-bold flex items-center gap-1.5 text-emerald-450"><CheckCircle2 size={15} /> Correct Transaction!</div>
+                                      <div className="font-bold flex items-center gap-1.5 text-teal-450"><CheckCircle2 size={15} /> Correct Transaction!</div>
                                       <p className="text-[10.5px] text-slate-300 leading-normal">
                                         Perfect! You paid ₹{paidAmount} for the ₹{itemPrice} item {correctChange > 0 ? `and correctly collected ₹${correctChange} change.` : `using exact change.`} Always count your change before leaving the counter!
                                       </p>
@@ -1070,7 +1070,7 @@ const Basicskills = () => {
                 <button
                   onClick={() => setIsSimulating(true)}
                   disabled={isSimulating}
-                  className="px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-750 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all shadow-md shadow-emerald-500/10 hover:shadow-lg disabled:opacity-50 cursor-pointer"
+                  className="px-4 py-2 bg-gradient-to-r from-teal-600 to-teal-600 hover:from-teal-700 hover:to-teal-750 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all shadow-md shadow-teal-500/10 hover:shadow-lg disabled:opacity-50 cursor-pointer"
                 >
                   <Play size={11} fill="currentColor" />
                   Launch Sandbox
@@ -1083,7 +1083,7 @@ const Basicskills = () => {
         {/* Sober Info Stats Grid */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12 border-t border-slate-200/80 max-w-4xl mx-auto text-center">
           <div className="p-5 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1">
-            <h5 className="text-3xl font-extrabold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">5+</h5>
+            <h5 className="text-3xl font-extrabold bg-gradient-to-r from-teal-600 to-teal-600 bg-clip-text text-transparent">5+</h5>
             <p className="text-xs sm:text-sm font-bold text-slate-800">Skills Modules</p>
             <p className="text-[11px] text-slate-500 font-medium leading-relaxed">Spanning road awareness, ATM safety, and money handling.</p>
           </div>

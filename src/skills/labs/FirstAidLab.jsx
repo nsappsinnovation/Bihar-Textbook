@@ -311,18 +311,18 @@ const FirstAidLab = () => {
                         <div 
                           key={stepId}
                           className={`flex items-start gap-3 p-3 rounded-xl border-2 transition-all
-                            ${isCompletedStep ? 'bg-emerald-50 border-emerald-200' : 
+                            ${isCompletedStep ? 'bg-teal-50 border-teal-200' : 
                               isCurrentStep ? 'bg-white border-blue-200 shadow-sm ring-2 ring-blue-500/10' : 'bg-slate-100/50 border-slate-200 opacity-60'}`}
                         >
-                          <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-[13px] font-black ${isCompletedStep ? 'bg-emerald-500 text-white' : isCurrentStep ? 'bg-blue-500 text-white' : 'bg-slate-200 text-slate-500'}`}>
+                          <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 text-[13px] font-black ${isCompletedStep ? 'bg-teal-500 text-white' : isCurrentStep ? 'bg-blue-500 text-white' : 'bg-slate-200 text-slate-500'}`}>
                             {isCompletedStep ? <CheckCircle size={15} /> : index + 1}
                           </div>
                           <div className="flex-1 min-w-0 pt-0.5">
-                            <div className={`text-[15px] font-bold ${isCompletedStep ? 'text-emerald-800' : isCurrentStep ? 'text-blue-900' : 'text-slate-500'}`}>
+                            <div className={`text-[15px] font-bold ${isCompletedStep ? 'text-teal-800' : isCurrentStep ? 'text-blue-900' : 'text-slate-500'}`}>
                               {isCompletedStep ? optionData.label : isCurrentStep ? 'Awaiting Action...' : 'Pending'}
                             </div>
                             {isCompletedStep && (
-                              <p className="text-[12px] text-emerald-650 mt-1 font-medium leading-snug">
+                              <p className="text-[12px] text-teal-650 mt-1 font-medium leading-snug">
                                 {activeScenario.hints[stepId]}
                               </p>
                             )}
@@ -335,7 +335,7 @@ const FirstAidLab = () => {
                   {isCompleted && (
                     <motion.div 
                       initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-                      className="bg-emerald-500 text-white p-3 rounded-xl font-bold text-center text-sm shadow-md flex items-center justify-center gap-2"
+                      className="bg-teal-500 text-white p-3 rounded-xl font-bold text-center text-sm shadow-md flex items-center justify-center gap-2"
                     >
                       <CheckCircle size={18} /> Protocol Completed Successfully!
                     </motion.div>
@@ -386,7 +386,7 @@ const FirstAidLab = () => {
                         <div className={`p-3 rounded-xl border flex items-start gap-2.5 mt-4
                           ${feedback.type === 'error' ? 'bg-rose-50 border-rose-200 text-rose-700' : 
                             feedback.type === 'warning' ? 'bg-amber-50 border-amber-200 text-amber-700' : 
-                            'bg-emerald-50 border-emerald-200 text-emerald-700'}`}
+                            'bg-teal-50 border-teal-200 text-teal-700'}`}
                         >
                           <div className="shrink-0 mt-0.5">
                             {feedback.type === 'error' ? <XCircle size={16} /> : 

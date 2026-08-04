@@ -160,25 +160,8 @@ const CsrPolicy = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* Highlight the contents entry for the section currently in view */
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActiveSection(entry.target.id);
-        });
-      },
-      { rootMargin: "-20% 0px -70% 0px" }
-    );
-    csrPolicyContents.forEach(({ anchor }) => {
-      const el = document.getElementById(anchor);
-      if (el) observer.observe(el);
-    });
-    return () => observer.disconnect();
-  }, []);
-
   const goToSection = useCallback((anchor) => {
-    document.getElementById(anchor)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    setActiveSection(anchor);
     setMobileTocOpen(false);
   }, []);
 
@@ -264,13 +247,6 @@ const CsrPolicy = () => {
                 fileName={csr.pdfFileName}
                 size={csr.pdfSizeLabel}
               />
-              <button
-                onClick={() => window.print()}
-                className="csr-no-print inline-flex items-center justify-center gap-3 px-7 py-4 rounded-2xl bg-white border border-slate-200 text-slate-700 text-[14px] font-black hover:bg-slate-50 hover:border-slate-300 transition-all"
-              >
-                <Printer className="w-[18px] h-[18px]" />
-                <span>Print</span>
-              </button>
             </motion.div>
           </div>
         </div>
@@ -376,27 +352,7 @@ const CsrPolicy = () => {
                 </nav>
               </div>
 
-              {/* Download card */}
-              <div className="bg-slate-900 rounded-[28px] p-6 shadow-xl relative overflow-hidden">
-                <div className="absolute -right-8 -top-8 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl" />
-                <div className="relative z-10">
-                  <div className="w-11 h-11 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center mb-4">
-                    <FileDown className="w-5 h-5 text-blue-300" />
-                  </div>
-                  <h3 className="text-[14px] font-black text-white leading-snug mb-1.5">
-                    Official policy document
-                  </h3>
-                  <p className="text-[12px] text-slate-400 font-medium leading-relaxed mb-5">
-                    Download the complete signed copy as published in the public domain.
-                  </p>
-                  <DownloadButton
-                    url={csr.pdfUrl}
-                    fileName={csr.pdfFileName}
-                    size={csr.pdfSizeLabel}
-                    variant="block"
-                  />
-                </div>
-              </div>
+
             </div>
           </aside>
 
@@ -404,124 +360,115 @@ const CsrPolicy = () => {
           <div className="flex-1 space-y-5">
 
             {/* 1. Introduction & Background */}
-            <Section no={1} anchor="introduction" title="Introduction & Background">
-              {csr.introParagraphs.map((para, idx) => (
-                <Paragraph key={idx}>{para}</Paragraph>
-              ))}
-            </Section>
+            {activeSection === "introduction" && (
+              <Section no={1} anchor="introduction" title="Introduction & Background">
+                {csr.introParagraphs.map((para, idx) => (
+                  <Paragraph key={idx}>{para}</Paragraph>
+                ))}
+              </Section>
+            )}
 
             {/* 2. CSR Vision & Policy Statement */}
-            <Section
-              no={2}
-              anchor="vision"
-              title="CSR Vision & Policy Statement — Objectives of this CSR Policy"
-            >
-              <Paragraph>{csr.objectivesIntro}</Paragraph>
-              <div className="mt-6">
-                <BulletList items={csr.objectives} />
-              </div>
-            </Section>
+            {activeSection === "vision" && (
+              <Section
+                no={2}
+                anchor="vision"
+                title="CSR Vision & Policy Statement — Objectives of this CSR Policy"
+              >
+                <Paragraph>{csr.objectivesIntro}</Paragraph>
+                <div className="mt-6">
+                  <BulletList items={csr.objectives} />
+                </div>
+              </Section>
+            )}
 
             {/* 3. CSR Committee Composition and Responsibility */}
-            <Section no={3} anchor="committee" title="CSR Committee Composition and Responsibility">
-              <Paragraph>{csr.committeeText}</Paragraph>
-            </Section>
+            {activeSection === "committee" && (
+              <Section no={3} anchor="committee" title="CSR Committee Composition and Responsibility">
+                <Paragraph>{csr.committeeText}</Paragraph>
+              </Section>
+            )}
 
             {/* 4. Scope & Applicability */}
-            <Section no={4} anchor="scope" title="Scope & Applicability">
-              <Paragraph>{csr.scopeText}</Paragraph>
-            </Section>
+            {activeSection === "scope" && (
+              <Section no={4} anchor="scope" title="Scope & Applicability">
+                <Paragraph>{csr.scopeText}</Paragraph>
+              </Section>
+            )}
 
             {/* 5. CSR Budget */}
-            <Section no={5} anchor="budget" title="CSR Budget">
-              <RomanList items={csr.budgetItems} />
-            </Section>
+            {activeSection === "budget" && (
+              <Section no={5} anchor="budget" title="CSR Budget">
+                <RomanList items={csr.budgetItems} />
+              </Section>
+            )}
 
             {/* 6. Implementation */}
-            <Section no={6} anchor="implementation" title="Implementation">
-              <RomanList items={csr.implementationItems} />
-            </Section>
+            {activeSection === "implementation" && (
+              <Section no={6} anchor="implementation" title="Implementation">
+                <RomanList items={csr.implementationItems} />
+              </Section>
+            )}
 
             {/* 7. Activities / Focus Areas */}
-            <Section no={7} anchor="activities" title="Activities / Focus Areas">
-              <Paragraph>{csr.activitiesIntro}</Paragraph>
-              <div className="mt-6">
-                <RomanList items={csr.activities} />
-              </div>
-            </Section>
+            {activeSection === "activities" && (
+              <Section no={7} anchor="activities" title="Activities / Focus Areas">
+                <Paragraph>{csr.activitiesIntro}</Paragraph>
+                <div className="mt-6">
+                  <RomanList items={csr.activities} />
+                </div>
+              </Section>
+            )}
 
             {/* 8. Monitoring */}
-            <Section no={8} anchor="monitoring" title="Monitoring">
-              <RomanList items={csr.monitoringItems} />
-            </Section>
+            {activeSection === "monitoring" && (
+              <Section no={8} anchor="monitoring" title="Monitoring">
+                <RomanList items={csr.monitoringItems} />
+              </Section>
+            )}
 
             {/* 9. Miscellaneous Information */}
-            <Section no={9} anchor="miscellaneous" title="Miscellaneous Information">
-              <ol className="space-y-2">
-                {csr.miscellaneousItems.map((item, idx) => (
-                  <li
-                    key={idx}
-                    className="group flex gap-4 rounded-2xl px-4 py-4 -mx-1 hover:bg-blue-50/40 transition-colors"
-                  >
-                    <span className="shrink-0 w-9 h-9 rounded-xl bg-slate-100 group-hover:bg-blue-100 border border-slate-200 group-hover:border-blue-200 text-[11px] font-black text-slate-500 group-hover:text-blue-700 flex items-center justify-center transition-colors">
-                      {romanize(idx)}
-                    </span>
-                    <span className="text-[15px] text-slate-600 font-medium leading-[1.85] pt-1">
-                      <span className="font-black text-slate-900">{item.label}:</span> {item.text}
-                    </span>
-                  </li>
-                ))}
-              </ol>
-            </Section>
+            {activeSection === "miscellaneous" && (
+              <Section no={9} anchor="miscellaneous" title="Miscellaneous Information">
+                <ol className="space-y-2">
+                  {csr.miscellaneousItems.map((item, idx) => (
+                    <li
+                      key={idx}
+                      className="group flex gap-4 rounded-2xl px-4 py-4 -mx-1 hover:bg-blue-50/40 transition-colors"
+                    >
+                      <span className="shrink-0 w-9 h-9 rounded-xl bg-slate-100 group-hover:bg-blue-100 border border-slate-200 group-hover:border-blue-200 text-[11px] font-black text-slate-500 group-hover:text-blue-700 flex items-center justify-center transition-colors">
+                        {romanize(idx)}
+                      </span>
+                      <span className="text-[15px] text-slate-600 font-medium leading-[1.85] pt-1">
+                        <span className="font-black text-slate-900">{item.label}:</span> {item.text}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              </Section>
+            )}
 
             {/* 10. Annexure A */}
-            <Section no={10} anchor="annexure" title="Annexure">
-              <a
-                href={csr.pdfUrl}
-                download={csr.pdfFileName}
-                className="group flex items-center gap-4 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-200 rounded-2xl px-5 py-5 transition-colors"
-              >
-                <BookMarked className="w-5 h-5 text-blue-600 shrink-0" />
-                <span className="flex-1 text-[15px] font-bold text-slate-700">
-                  {csr.annexureTitle}
-                </span>
-                <Download className="csr-no-print w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
-              </a>
-            </Section>
+            {activeSection === "annexure" && (
+              <Section no={10} anchor="annexure" title="Annexure">
+                <a
+                  href={csr.pdfUrl}
+                  download={csr.pdfFileName}
+                  className="group flex items-center gap-4 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-200 rounded-2xl px-5 py-5 transition-colors"
+                >
+                  <BookMarked className="w-5 h-5 text-blue-600 shrink-0" />
+                  <span className="flex-1 text-[15px] font-bold text-slate-700">
+                    {csr.annexureTitle}
+                  </span>
+                  <Download className="csr-no-print w-4 h-4 text-slate-400 group-hover:text-blue-600 transition-colors" />
+                </a>
+              </Section>
+            )}
 
-            {/* Closing download banner */}
-            <div className="csr-no-print bg-white border border-slate-200 rounded-[28px] p-7 md:p-9 flex flex-col md:flex-row md:items-center gap-6 shadow-[0_2px_20px_rgb(15,23,42,0.04)]">
-              <div className="flex-1">
-                <h3 className="text-[17px] font-black text-slate-900 mb-1.5">
-                  Read the full policy document
-                </h3>
-                <p className="text-[13.5px] text-slate-500 font-medium leading-relaxed">
-                  {csr.documentTitle} — {csr.organisation}
-                </p>
-              </div>
-              <DownloadButton
-                url={csr.pdfUrl}
-                fileName={csr.pdfFileName}
-                size={csr.pdfSizeLabel}
-                className="shrink-0"
-              />
-            </div>
           </div>
         </div>
       </div>
 
-      {/* ================= MOBILE STICKY DOWNLOAD BAR ================= */}
-      <div className="csr-no-print lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-4 py-3">
-        <a
-          href={csr.pdfUrl}
-          download={csr.pdfFileName}
-          className="w-full flex items-center justify-center gap-3 px-6 py-3.5 rounded-2xl bg-blue-600 text-white text-[14px] font-black shadow-lg shadow-blue-600/25 active:scale-[0.99] transition-transform"
-        >
-          <Download className="w-[18px] h-[18px]" />
-          <span>Download Policy (PDF)</span>
-          <span className="text-[11px] font-bold text-white/70">{csr.pdfSizeLabel}</span>
-        </a>
-      </div>
 
       {/* ================= BACK TO TOP ================= */}
       <AnimatePresence>

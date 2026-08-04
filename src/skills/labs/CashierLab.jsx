@@ -400,14 +400,14 @@ const CashierLab = () => {
               </div>
 
               {/* Cash received and expected change */}
-              <div className="bg-emerald-50/50 border border-emerald-100 rounded-xl p-3 space-y-2 mt-3 text-emerald-800">
+              <div className="bg-teal-50/50 border border-teal-100 rounded-xl p-3 space-y-2 mt-3 text-teal-800">
                 <div className="flex justify-between items-center font-semibold">
                   <span>Cash Received:</span>
                   <span className="font-black">₹{cashierPaidAmount}</span>
                 </div>
-                <div className="flex justify-between items-center font-black text-[13px] border-t border-emerald-200/50 pt-2 mt-1">
+                <div className="flex justify-between items-center font-black text-[13px] border-t border-teal-200/50 pt-2 mt-1">
                   <span>CHANGE DUE:</span>
-                  <span className="text-emerald-700">₹{cashierPaidAmount - cashierCurrentItem.price}</span>
+                  <span className="text-teal-700">₹{cashierPaidAmount - cashierCurrentItem.price}</span>
                 </div>
               </div>
 
@@ -535,7 +535,7 @@ const CashierLab = () => {
 
               <div className="flex justify-between items-center text-[12px] text-slate-500 font-black uppercase tracking-wider mb-3 z-10">
                 <span className="flex items-center gap-1.5">
-                  <Coins size={12} className="text-emerald-500 animate-pulse" />
+                  <Coins size={12} className="text-teal-500 animate-pulse" />
                   Handover Tray
                 </span>
                 <div className="flex items-center gap-2">
@@ -586,7 +586,7 @@ const CashierLab = () => {
               {/* Footer details */}
               <div className="flex justify-between items-center border-t border-slate-200 pt-3 mt-3 z-10">
                 <div className="text-[15px] font-bold text-slate-600">
-                  Total Tray: <span className="font-mono text-emerald-600 font-black text-base">₹{
+                  Total Tray: <span className="font-mono text-teal-600 font-black text-base">₹{
                     Object.keys(cashierChangeTray).reduce((sum, val) => sum + parseInt(val, 10) * cashierChangeTray[val], 0)
                   }</span>
                 </div>
@@ -594,7 +594,7 @@ const CashierLab = () => {
                   <button
                     onClick={checkCashierChange}
                     disabled={Object.values(cashierChangeTray).every(v => v === 0)}
-                    className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-40 disabled:pointer-events-none text-white rounded-xl text-[13px] font-black uppercase tracking-wider transition-all cursor-pointer shadow-md hover:shadow-emerald-950/50"
+                    className="px-5 py-2.5 bg-teal-600 hover:bg-teal-700 disabled:opacity-40 disabled:pointer-events-none text-white rounded-xl text-[13px] font-black uppercase tracking-wider transition-all cursor-pointer shadow-md hover:shadow-teal-950/50"
                   >
                     Hand Over Change
                   </button>
@@ -630,16 +630,16 @@ const CashierLab = () => {
               }}
             >
               {/* Decorative background accents */}
-              <div className={`absolute top-0 right-0 w-24 h-24 rounded-full opacity-10 blur-xl pointer-events-none ${cashierFeedback.type === 'success' ? 'bg-emerald-400' : 'bg-rose-500'
+              <div className={`absolute top-0 right-0 w-24 h-24 rounded-full opacity-10 blur-xl pointer-events-none ${cashierFeedback.type === 'success' ? 'bg-teal-400' : 'bg-rose-500'
                 }`} />
 
               <div className="flex flex-col items-center text-center space-y-4">
                 {/* Character speaking section */}
                 <div className="flex items-center gap-4 w-full">
-                  <div className={`shrink-0 w-20 h-20 ${cashierFeedback.type === 'success' ? 'bg-emerald-50 border-emerald-200 text-emerald-600' : 'bg-rose-50 border-rose-200 text-rose-600'} border-2 rounded-full flex items-center justify-center shadow-md relative text-5xl font-black`}>
+                  <div className={`shrink-0 w-20 h-20 ${cashierFeedback.type === 'success' ? 'bg-teal-50 border-teal-200 text-teal-600' : 'bg-rose-50 border-rose-200 text-rose-600'} border-2 rounded-full flex items-center justify-center shadow-md relative text-5xl font-black`}>
                     ₹
                     {/* Badge */}
-                    <div className={`absolute -bottom-1 -right-1 text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full text-white ${cashierFeedback.type === 'success' ? 'bg-emerald-500' : 'bg-rose-500'
+                    <div className={`absolute -bottom-1 -right-1 text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full text-white ${cashierFeedback.type === 'success' ? 'bg-teal-500' : 'bg-rose-500'
                       }`}>
                       {cashierFeedback.isGameFinish ? 'GRADUATE' : cashierFeedback.isLevelUp ? 'LEVEL UP' : cashierFeedback.type === 'success' ? 'SUCCESS' : 'CHECK'}
                     </div>
@@ -662,7 +662,7 @@ const CashierLab = () => {
 
                 {/* Big Badge Header */}
                 <div className="w-full text-left border-b border-slate-100 pb-3">
-                  <div className={`text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-md inline-block ${cashierFeedback.type === 'success' ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700'
+                  <div className={`text-[10px] font-black uppercase tracking-wider px-3 py-1 rounded-md inline-block ${cashierFeedback.type === 'success' ? 'bg-teal-50 text-teal-700' : 'bg-rose-50 text-rose-700'
                     }`}>
                     {cashierFeedback.isGameFinish ? 'Course Completed' : cashierFeedback.isLevelUp ? 'Level Up Cleared' : cashierFeedback.type === 'success' ? 'Correct Change Served' : 'Counting Guide Alert'}
                   </div>
@@ -685,7 +685,7 @@ const CashierLab = () => {
                   </div>
                   <div className="flex justify-between items-center text-[14px] bg-white border border-slate-100 p-2 rounded-lg mt-2 shadow-sm">
                     <span className="font-bold text-slate-700">Change You Gave:</span>
-                    <span className={`font-black ${Object.keys(cashierChangeTray).reduce((sum, val) => sum + parseInt(val, 10) * cashierChangeTray[val], 0) === cashierPaidAmount - cashierCurrentItem.price ? 'text-emerald-600' : 'text-rose-600'}`}>
+                    <span className={`font-black ${Object.keys(cashierChangeTray).reduce((sum, val) => sum + parseInt(val, 10) * cashierChangeTray[val], 0) === cashierPaidAmount - cashierCurrentItem.price ? 'text-teal-600' : 'text-rose-600'}`}>
                       ₹{Object.keys(cashierChangeTray).reduce((sum, val) => sum + parseInt(val, 10) * cashierChangeTray[val], 0)}
                     </span>
                   </div>
@@ -714,7 +714,7 @@ const CashierLab = () => {
                     ) : (
                       <button
                         onClick={() => generateNewCashierCustomer(cashierLevel)}
-                        className="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer shadow-lg hover:shadow-emerald-600/20 text-center"
+                        className="flex-1 py-3 bg-teal-600 hover:bg-teal-700 text-white rounded-2xl text-xs font-black uppercase tracking-wider transition-all cursor-pointer shadow-lg hover:shadow-teal-600/20 text-center"
                       >
                         Next Customer
                       </button>

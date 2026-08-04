@@ -119,7 +119,7 @@ const Books = () => {
 
           {/* --- Books Grid --- */}
           {filteredBooks.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-10 px-2 sm:px-4">
               {filteredBooks.map((book) => (
                 <BookCard key={book.id} book={book} placeholder={PLACEHOLDER_IMG} classId={classId} />
               ))}
@@ -141,54 +141,57 @@ const Books = () => {
 const BookCard = ({ book, placeholder, classId }) => {
   const resolvedImage = useResolvedUrl(book.image);
 
-  const authorName = book.author || "Bihar Board";
-  const rawDescription =
-    book.description ||
-    `Official Bihar Board Class ${classId} textbook for '${book.title}'.`;
-  const descriptionText = rawDescription.replace(/[\s\.]*Complete digital reading material\s*&\s*chapters\.?/gi, "");
+  // Map subjects to beautiful audiobook covers to replace the plain placeholder
+  const getFallbackCover = (subject) => {
+    const sub = (subject || "").toLowerCase();
+    if (sub.includes("hindi") || sub.includes("sarangi") || sub.includes("kompal") || sub.includes("kislay")) return "https://ciet.ncert.gov.in/storage/app/public/photos/17/ahsr1cc.jpg";
+    if (sub.includes("ganit") || sub.includes("math") || sub.includes("hisab")) return "https://ciet.ncert.gov.in/storage/app/public/photos/17/aejm1cc.jpg";
+    if (sub.includes("english") || sub.includes("mridang") || sub.includes("radiance") || sub.includes("blossom")) return "https://ciet.ncert.gov.in/storage/app/public/photos/17/Audios/Class%201/mridang.jpg";
+    if (sub.includes("science") || sub.includes("paryawaran") || sub.includes("mahauliat") || sub.includes("duniya")) return "https://ciet.ncert.gov.in/storage/app/public/photos/19/Bookcover/chve1cc.jpg";
+    if (sub.includes("urdu") || sub.includes("gulshan") || sub.includes("farozan") || sub.includes("misbahul")) return "https://ciet.ncert.gov.in/storage/app/public/photos/19/Bookcover/cesa1cc.jpg";
+    if (sub.includes("sanskrit") || sub.includes("amrita")) return "https://ciet.ncert.gov.in/storage/app/public/photos/17/Class%202/bhsr1cc.jpg";
+    return "https://ciet.ncert.gov.in/storage/app/public/photos/19/Bookcover/cemm1cc.jpg"; // default fallback
+  };
+
+  const finalImage = (!resolvedImage || resolvedImage.includes("bookcover.png") || resolvedImage.includes("no-cover")) 
+    ? getFallbackCover(book.subject) 
+    : resolvedImage;
 
   return (
-    <div className="bg-white rounded-2xl border border-blue-200 p-3 sm:p-4 shadow-[0_2px_14px_rgba(37,99,235,0.06)] hover:shadow-[0_8px_24px_rgba(37,99,235,0.15)] hover:border-blue-300 transition-all duration-300 grid grid-cols-2 gap-3.5 sm:gap-4 group">
-      {/* Book Cover Image (Left 50%) */}
-      <div className="relative w-full h-full rounded-xl overflow-hidden shadow-sm border border-blue-100 bg-blue-50/40 min-h-[160px] sm:min-h-[200px]">
-        <img
-          src={resolvedImage || placeholder}
-          alt={book.title}
-          onError={(e) => { e.target.src = placeholder; }}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          loading="lazy"
-        />
-      </div>
+    <div className="relative aspect-[3/4] bg-white rounded-r-2xl rounded-l-md overflow-hidden shadow-[0_10px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] transition-all duration-500 group border-y border-r border-slate-200/60 border-l-[4px] border-l-slate-300 cursor-pointer hover:-translate-y-3 hover:rotate-1">
+      {/* 3D Physical Book Spine Effect */}
+      <div className="absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-black/40 via-black/10 to-transparent z-10 pointer-events-none mix-blend-multiply" />
+      <div className="absolute inset-y-0 left-0 w-[2px] bg-white/70 z-10 pointer-events-none" />
+      <div className="absolute inset-y-0 left-6 w-[1px] bg-black/10 z-10 pointer-events-none shadow-sm" />
+      
+      {/* Lighting Glare on Cover */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/30 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-      {/* Book Metadata, Description & Button (Right 50%) */}
-      <div className="flex flex-col justify-between min-w-0 py-0.5">
-        <div className="flex flex-col flex-1">
-          {/* Book Title */}
-          <h3 className="text-sm sm:text-xl font-bold text-slate-800 leading-snug line-clamp-2 mb-1 group-hover:text-blue-600 transition-colors font-display">
-            {book.title}
-          </h3>
+      {/* Book Cover Image */}
+      <img
+        src={finalImage}
+        alt={book.title}
+        onError={(e) => { e.target.src = getFallbackCover(book.subject); }}
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+        loading="lazy"
+      />
 
-          {/* Author / Publisher */}
-          <p className="text-xs sm:text-sm font-semibold text-slate-400 mb-1.5">
-            {authorName}
-          </p>
-
-          {/* Description / Summary */}
-          <p className="text-[11px] sm:text-xs text-slate-500 leading-relaxed line-clamp-4 sm:line-clamp-5">
-            {descriptionText}
-          </p>
-        </div>
-
-        {/* Read Now Button (Full width of the right 50% column) */}
-        <div className="mt-3">
-          <Link
-            to={`/class/${classId}/read/${book.subject || "General"}`}
-            className="w-full flex items-center justify-center gap-1.5 bg-[#2563EB] hover:bg-[#1D4ED8] text-white font-bold py-2 px-4 rounded-xl shadow-sm shadow-blue-500/20 transition-all text-xs sm:text-sm"
-          >
-            <BookOpen className="w-4 h-4 text-white shrink-0" />
-            <span>Read Now</span>
-          </Link>
-        </div>
+      {/* Premium Cinematic Hover Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col items-center justify-center pt-12 z-20">
+        
+        {/* Title */}
+        <h3 className="text-white font-bold text-center text-lg md:text-xl mb-5 translate-y-6 group-hover:translate-y-0 transition-all duration-300 line-clamp-2 drop-shadow-md px-4">
+          {book.title}
+        </h3>
+        
+        {/* Read Now Button */}
+        <Link
+          to={`/class/${classId}/read/${book.subject || "General"}`}
+          className="flex items-center justify-center gap-2 bg-[#F8FAFC] text-[#2563EB] hover:bg-white hover:shadow-lg font-bold py-2.5 px-6 rounded-full transition-all translate-y-6 group-hover:translate-y-0 duration-300 delay-75 active:scale-95"
+        >
+          <BookOpen className="w-[18px] h-[18px] shrink-0" />
+          <span className="text-[15px]">Read Now</span>
+        </Link>
       </div>
     </div>
   );

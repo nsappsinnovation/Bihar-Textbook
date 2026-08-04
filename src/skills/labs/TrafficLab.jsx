@@ -732,7 +732,7 @@ const AnimatedRoad = ({
   return (
     <div className="absolute inset-0 bg-[#1e293b] flex flex-col justify-center overflow-hidden">
       {/* Top Curb & Grass */}
-      <div className="absolute top-0 inset-x-0 h-[25%] bg-gradient-to-b from-emerald-900 to-emerald-800 border-b-4 border-slate-600 shadow-[inset_0_4px_10px_rgba(0,0,0,0.4)]" />
+      <div className="absolute top-0 inset-x-0 h-[25%] bg-gradient-to-b from-teal-900 to-teal-800 border-b-4 border-slate-600 shadow-[inset_0_4px_10px_rgba(0,0,0,0.4)]" />
 
       {/* Asphalt Texture overlay */}
       <div className="absolute inset-0 opacity-30 bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
@@ -774,7 +774,7 @@ const AnimatedRoad = ({
 
 
       {/* Bottom Curb & Grass */}
-      <div className="absolute bottom-0 inset-x-0 h-[25%] bg-gradient-to-t from-emerald-900 to-emerald-800 border-t-4 border-slate-600 shadow-[inset_0_-4px_10px_rgba(0,0,0,0.4)]" />
+      <div className="absolute bottom-0 inset-x-0 h-[25%] bg-gradient-to-t from-teal-900 to-teal-800 border-t-4 border-slate-600 shadow-[inset_0_-4px_10px_rgba(0,0,0,0.4)]" />
     </div>
   );
 };
@@ -1106,8 +1106,8 @@ const CrossingSimulator = () => {
               <div
                 className={`w-4 h-4 rounded-full transition-all duration-300 ${
                   trafficLight === "green"
-                    ? "bg-emerald-500 shadow-[0_0_14px_#10b981] animate-pulse"
-                    : "bg-emerald-950 opacity-20"
+                    ? "bg-teal-500 shadow-[0_0_14px_#10b981] animate-pulse"
+                    : "bg-teal-950 opacity-20"
                 }`}
               />
             </div>
@@ -1138,10 +1138,10 @@ const CrossingSimulator = () => {
             {/* Green LED: Glows when road is available to cross */}
             <div className="flex items-center gap-1">
               <div
-                className={`w-3.5 h-3.5 rounded-full transition-all duration-300 ${trafficLight === "red" ? "bg-emerald-400 shadow-[0_0_14px_#10b981] animate-pulse" : "bg-slate-800 opacity-30"}`}
+                className={`w-3.5 h-3.5 rounded-full transition-all duration-300 ${trafficLight === "red" ? "bg-teal-400 shadow-[0_0_14px_#10b981] animate-pulse" : "bg-slate-800 opacity-30"}`}
               />
               <span
-                className={`text-[9px] font-black tracking-wider ${trafficLight === "red" ? "text-emerald-400" : "text-slate-600"}`}
+                className={`text-[9px] font-black tracking-wider ${trafficLight === "red" ? "text-teal-400" : "text-slate-600"}`}
               >
                 WALK
               </span>
@@ -1156,7 +1156,7 @@ const CrossingSimulator = () => {
               isButtonRequested
                 ? "bg-amber-500 text-slate-950 animate-pulse shadow-md"
                 : trafficLight === "red"
-                  ? "bg-emerald-500 border-2 border-emerald-300 text-white shadow-[0_0_18px_rgba(16,185,129,0.8)] cursor-default animate-pulse"
+                  ? "bg-teal-500 border-2 border-teal-300 text-white shadow-[0_0_18px_rgba(16,185,129,0.8)] cursor-default animate-pulse"
                   : "bg-teal-600 hover:bg-teal-500 text-white shadow-md"
             }`}
           >

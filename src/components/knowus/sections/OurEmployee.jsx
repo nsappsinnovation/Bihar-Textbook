@@ -5,15 +5,30 @@ import { FiUsers, FiAward, FiHeart, FiTrendingUp, FiSearch } from 'react-icons/f
 const OurEmployee = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [employees, setEmployees] = useState([
-    { id: 1, name: "Shri. Manoj Kumar", designation: "Accountant", department: "Finance", employeeId: "EMP001" },
-    { id: 2, name: "Ms. Suman Kumari", designation: "Office Assistant", department: "Administration", employeeId: "EMP002" },
-    { id: 3, name: "Shri. Rakesh Singh", designation: "Data Entry Operator", department: "Production", employeeId: "EMP003" },
-    { id: 4, name: "Ms. Anita Devi", designation: "Clerk", department: "Sales", employeeId: "EMP004" },
+    { id: 1, employeeId: 'EMP001', name: 'Azimul Hassan', designation: 'Assistant Cum Cashier', type: 'Regular', department: 'Establishment' },
+    { id: 2, employeeId: 'EMP002', name: 'Binod Kumar', designation: 'Sales Assistant', type: 'Regular', department: 'Sales' },
+    { id: 3, employeeId: 'EMP003', name: 'Santosh Kumar', designation: 'Dispatch', type: 'Regular', department: 'Dispatch' },
+    { id: 4, employeeId: 'EMP004', name: 'Rajesh Hembrom', designation: 'Security Encharge', type: 'Regular', department: 'Security' },
+    { id: 5, employeeId: 'EMP005', name: 'Binod Kumar', designation: 'Peon', type: 'Regular', department: 'MD Cell' },
+    { id: 6, employeeId: 'EMP006', name: 'Rakesh Kumar', designation: 'Account Assistant', type: 'Contract', department: 'Accounts' },
+    { id: 7, employeeId: 'EMP007', name: 'Sukriti Kumari', designation: 'Account Assistant', type: 'Contract', department: 'Accounts' },
+    { id: 8, employeeId: 'EMP008', name: 'MD Ashad', designation: 'Assistant', type: 'Contract', department: 'Accounts' },
+    { id: 9, employeeId: 'EMP009', name: 'KN Rai', designation: 'Assistant', type: 'Contract', department: 'Legal' },
+    { id: 10, employeeId: 'EMP010', name: 'CK Yadav', designation: 'Sales Assistant', type: 'Contract', department: 'Sales' },
+    { id: 11, employeeId: 'EMP011', name: 'Mukesh Kumar Ojha', designation: 'Account Expert', type: 'Outsource', department: 'Accounts' },
+    { id: 12, employeeId: 'EMP012', name: 'Kishan', designation: 'Programmer', type: 'Outsource', department: 'MD Cell' },
+    { id: 13, employeeId: 'EMP013', name: 'Alok Kumar', designation: 'Computer Operator', type: 'Outsource', department: 'Accounts' },
+    { id: 14, employeeId: 'EMP014', name: 'Jyotish Kumar', designation: 'Computer Operator', type: 'Outsource', department: 'Sales & Marketing' },
+    { id: 15, employeeId: 'EMP015', name: 'Jitendra Kumar', designation: 'Computer Operator', type: 'Outsource', department: 'Establishment' },
+    { id: 16, employeeId: 'EMP016', name: 'Sandeep Kumar', designation: 'Computer Operator', type: 'Outsource', department: 'Accounts' },
+    { id: 17, employeeId: 'EMP017', name: 'Soni Kumari', designation: 'Computer Operator', type: 'Outsource', department: 'Company Secretary' },
+    { id: 18, employeeId: 'EMP018', name: 'Shruti Sailesh', designation: 'Computer Operator', type: 'Outsource', department: 'Establishment' },
+    { id: 19, employeeId: 'EMP019', name: 'Ruhi', designation: 'Computer Operator', type: 'Outsource', department: 'Legal' }
   ]);
 
   useEffect(() => {
     const loadEmployees = () => {
-      const saved = localStorage.getItem('module_content_ku-employee');
+      const saved = localStorage.getItem('module_content_ku-employee_v2');
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
@@ -22,6 +37,7 @@ const OurEmployee = () => {
               id: item.id,
               name: item.name || item.title,
               designation: item.designation,
+              type: item.type || 'Regular',
               department: item.department,
               employeeId: item.employeeId
             })));
@@ -39,6 +55,7 @@ const OurEmployee = () => {
   const filteredEmployees = employees.filter(emp => 
     emp.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
     emp.designation.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (emp.type || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
     emp.department.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -87,6 +104,7 @@ const OurEmployee = () => {
                   <th className="w-20 px-4 py-4 text-sm font-bold border-r border-slate-300 text-center">S.No.</th>
                   <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Name</th>
                   <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Designation</th>
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Type</th>
                   <th className="px-6 py-4 text-sm font-bold">Department</th>
                 </tr>
               </thead>
@@ -101,6 +119,9 @@ const OurEmployee = () => {
                     </td>
                     <td className="px-6 py-4 text-sm border-r border-slate-300">
                       {emp.designation}
+                    </td>
+                    <td className="px-6 py-4 text-sm border-r border-slate-300">
+                      {emp.type}
                     </td>
                     <td className="px-6 py-4 text-sm">
                       <span className="px-3 py-1 bg-slate-100 text-xs font-bold uppercase tracking-wider text-slate-600">

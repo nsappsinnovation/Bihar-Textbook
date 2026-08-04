@@ -359,7 +359,7 @@ const Signlanguage = () => {
                         animate={{ opacity: 1, scale: 1 }}
                         className="text-center space-y-4 max-w-xs"
                       >
-                        <div className="w-12 h-12 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center mx-auto shadow-sm animate-bounce">
+                        <div className="w-12 h-12 rounded-full bg-teal-50 border border-teal-200 text-teal-600 flex items-center justify-center mx-auto shadow-sm animate-bounce">
                           <Check size={20} strokeWidth={3} />
                         </div>
                         <div className="space-y-1">
@@ -394,13 +394,13 @@ const Signlanguage = () => {
                             <>
                               <div className={`px-3 py-1 rounded-full border text-[9px] font-mono tracking-wider uppercase font-extrabold ${
                                 viewportIsCorrect 
-                                  ? 'bg-emerald-50 border-emerald-200 text-emerald-700' 
+                                  ? 'bg-teal-50 border-teal-200 text-teal-700' 
                                   : 'bg-rose-50 border-rose-200 text-rose-700'
                               }`}>
                                 {viewportIsCorrect ? 'Correct Match (100%)' : 'Mismatch Detected'}
                               </div>
                               <p className={`text-[10px] font-bold text-center max-w-[280px] tracking-wide leading-tight ${
-                                viewportIsCorrect ? 'text-emerald-600' : 'text-rose-600'
+                                viewportIsCorrect ? 'text-teal-600' : 'text-rose-600'
                               }`}>
                                 {viewportIsCorrect 
                                   ? viewportQuizQuestions[viewportQuizIdx].explanation
@@ -548,7 +548,7 @@ const Signlanguage = () => {
                                 className={`px-4 py-2 rounded-lg text-xs font-extrabold uppercase transition-all border cursor-pointer ${
                                   isChosen
                                     ? isCorrectOpt
-                                      ? 'bg-emerald-600 border-emerald-600 text-white shadow-sm'
+                                      ? 'bg-teal-600 border-teal-600 text-white shadow-sm'
                                       : 'bg-rose-600 border-rose-600 text-white shadow-sm'
                                     : 'bg-white border-slate-200 hover:bg-slate-100 text-slate-750'
                                 }`}
@@ -627,7 +627,7 @@ const Signlanguage = () => {
                               setViewportShowResult(true);
                             }
                           }}
-                          className="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition-all shadow-sm cursor-pointer hover:-translate-y-0.5"
+                          className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition-all shadow-sm cursor-pointer hover:-translate-y-0.5"
                         >
                           Next Challenge <ArrowRight size={11} />
                         </button>

@@ -24,15 +24,30 @@ import { useActivityLog } from '../hooks/useCustomHooks';
  */
 export default function EmployeesManagementPage({ addToast }) {
   const { logActivity } = useActivityLog();
-  const storageKey = 'module_content_ku-employee';
+  const storageKey = 'module_content_ku-employee_v2';
   
   const [employees, setEmployees] = useState(() => {
     const saved = localStorage.getItem(storageKey);
     return saved ? JSON.parse(saved) : [
-      { id: 1, employeeId: 'EMP001', name: 'Shri. Manoj Kumar', designation: 'Accountant', department: 'FINANCE' },
-      { id: 2, employeeId: 'EMP002', name: 'Ms. Suman Kumari', designation: 'Office Assistant', department: 'ADMINISTRATION' },
-      { id: 3, employeeId: 'EMP003', name: 'Shri. Rakesh Singh', designation: 'Data Entry Operator', department: 'PRODUCTION' },
-      { id: 4, employeeId: 'EMP004', name: 'Ms. Anita Devi', designation: 'Clerk', department: 'SALES' },
+      { id: 1, employeeId: 'EMP001', name: 'Azimul Hassan', designation: 'Assistant Cum Cashier', type: 'Regular', department: 'Establishment' },
+      { id: 2, employeeId: 'EMP002', name: 'Binod Kumar', designation: 'Sales Assistant', type: 'Regular', department: 'Sales' },
+      { id: 3, employeeId: 'EMP003', name: 'Santosh Kumar', designation: 'Dispatch', type: 'Regular', department: 'Dispatch' },
+      { id: 4, employeeId: 'EMP004', name: 'Rajesh Hembrom', designation: 'Security Encharge', type: 'Regular', department: 'Security' },
+      { id: 5, employeeId: 'EMP005', name: 'Binod Kumar', designation: 'Peon', type: 'Regular', department: 'MD Cell' },
+      { id: 6, employeeId: 'EMP006', name: 'Rakesh Kumar', designation: 'Account Assistant', type: 'Contract', department: 'Accounts' },
+      { id: 7, employeeId: 'EMP007', name: 'Sukriti Kumari', designation: 'Account Assistant', type: 'Contract', department: 'Accounts' },
+      { id: 8, employeeId: 'EMP008', name: 'MD Ashad', designation: 'Assistant', type: 'Contract', department: 'Accounts' },
+      { id: 9, employeeId: 'EMP009', name: 'KN Rai', designation: 'Assistant', type: 'Contract', department: 'Legal' },
+      { id: 10, employeeId: 'EMP010', name: 'CK Yadav', designation: 'Sales Assistant', type: 'Contract', department: 'Sales' },
+      { id: 11, employeeId: 'EMP011', name: 'Mukesh Kumar Ojha', designation: 'Account Expert', type: 'Outsource', department: 'Accounts' },
+      { id: 12, employeeId: 'EMP012', name: 'Kishan', designation: 'Programmer', type: 'Outsource', department: 'MD Cell' },
+      { id: 13, employeeId: 'EMP013', name: 'Alok Kumar', designation: 'Computer Operator', type: 'Outsource', department: 'Accounts' },
+      { id: 14, employeeId: 'EMP014', name: 'Jyotish Kumar', designation: 'Computer Operator', type: 'Outsource', department: 'Sales & Marketing' },
+      { id: 15, employeeId: 'EMP015', name: 'Jitendra Kumar', designation: 'Computer Operator', type: 'Outsource', department: 'Establishment' },
+      { id: 16, employeeId: 'EMP016', name: 'Sandeep Kumar', designation: 'Computer Operator', type: 'Outsource', department: 'Accounts' },
+      { id: 17, employeeId: 'EMP017', name: 'Soni Kumari', designation: 'Computer Operator', type: 'Outsource', department: 'Company Secretary' },
+      { id: 18, employeeId: 'EMP018', name: 'Shruti Sailesh', designation: 'Computer Operator', type: 'Outsource', department: 'Establishment' },
+      { id: 19, employeeId: 'EMP019', name: 'Ruhi', designation: 'Computer Operator', type: 'Outsource', department: 'Legal' }
     ];
   });
 
@@ -43,7 +58,8 @@ export default function EmployeesManagementPage({ addToast }) {
     employeeId: '',
     name: '',
     designation: '',
-    department: 'FINANCE'
+    type: 'Regular',
+    department: 'Accounts'
   });
 
   const saveToStorage = (updated) => {
@@ -57,7 +73,8 @@ export default function EmployeesManagementPage({ addToast }) {
       employeeId: `EMP${String(employees.length + 1).padStart(3, '0')}`,
       name: '',
       designation: '',
-      department: 'FINANCE'
+      type: 'Regular',
+      department: 'Accounts'
     });
     setIsModalOpen(true);
   };
@@ -102,6 +119,7 @@ export default function EmployeesManagementPage({ addToast }) {
     emp.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     emp.employeeId.toLowerCase().includes(searchTerm.toLowerCase()) ||
     emp.designation.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (emp.type || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
     emp.department.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -149,6 +167,7 @@ export default function EmployeesManagementPage({ addToast }) {
                 <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50">Employee ID</th>
                 <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50">Name</th>
                 <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50">Designation</th>
+                <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50">Type</th>
                 <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50">Department</th>
                 <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50 text-right">Actions</th>
               </tr>
@@ -177,6 +196,9 @@ export default function EmployeesManagementPage({ addToast }) {
                     </td>
                     <td className="px-8 py-5">
                       <span className="text-sm font-bold text-gray-500">{emp.designation}</span>
+                    </td>
+                    <td className="px-8 py-5">
+                      <span className="text-sm font-bold text-gray-500">{emp.type}</span>
                     </td>
                     <td className="px-8 py-5">
                       <span className="px-3 py-1 bg-gray-100 text-[10px] font-bold text-gray-500 rounded-lg uppercase tracking-wider">
@@ -232,28 +254,33 @@ export default function EmployeesManagementPage({ addToast }) {
               onChange={(val) => setFormData(prev => ({ ...prev, employeeId: val }))}
             />
             <div>
-              <label className="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-2">Department</label>
+              <label className="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-2">Type</label>
               <select 
                 className="w-full px-4 py-3 rounded-2xl bg-gray-50 border-none text-sm font-bold text-gray-700 focus:ring-2 focus:ring-blue-500/20 transition-all"
-                value={formData.department}
-                onChange={(e) => setFormData(prev => ({ ...prev, department: e.target.value }))}
+                value={formData.type}
+                onChange={(e) => setFormData(prev => ({ ...prev, type: e.target.value }))}
               >
-                <option value="FINANCE">FINANCE</option>
-                <option value="ADMINISTRATION">ADMINISTRATION</option>
-                <option value="PRODUCTION">PRODUCTION</option>
-                <option value="SALES">SALES</option>
-                <option value="ACADEMICS">ACADEMICS</option>
-                <option value="HR">HR</option>
+                <option value="Regular">Regular</option>
+                <option value="Contract">Contract</option>
+                <option value="Outsource">Outsource</option>
               </select>
             </div>
           </div>
 
-          <FormInput 
-            label="Full Name" 
-            placeholder="e.g. Shri. Manoj Kumar" 
-            value={formData.name}
-            onChange={(val) => setFormData(prev => ({ ...prev, name: val }))}
-          />
+          <div className="grid grid-cols-2 gap-4">
+            <FormInput 
+              label="Full Name" 
+              placeholder="e.g. Shri. Manoj Kumar" 
+              value={formData.name}
+              onChange={(val) => setFormData(prev => ({ ...prev, name: val }))}
+            />
+            <FormInput 
+              label="Department" 
+              placeholder="e.g. Accounts" 
+              value={formData.department}
+              onChange={(val) => setFormData(prev => ({ ...prev, department: val }))}
+            />
+          </div>
 
           <FormInput 
             label="Designation" 

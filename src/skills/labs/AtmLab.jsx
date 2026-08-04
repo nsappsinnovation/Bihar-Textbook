@@ -93,7 +93,7 @@ const AtmLab = () => {
           <div className="lg:col-span-5 space-y-5 pl-18">
             <div className="bg-slate-50 rounded-2xl py-5 pl-7 pr-5 border border-slate-200/60 shadow-sm space-y-4">
               <h3 className="text-sm font-black text-slate-800 uppercase tracking-wider flex items-center gap-2 -ml-2">
-                <Shield size={16} className="text-emerald-600" /> ATM Operation Guide
+                <Shield size={16} className="text-teal-600" /> ATM Operation Guide
               </h3>
 
               <div className="space-y-2">
@@ -117,14 +117,14 @@ const AtmLab = () => {
                     <div
                       key={step.key}
                       className={`flex items-start gap-3.5 p-3 rounded-xl border transition-all ${isActive
-                        ? 'bg-emerald-50 border-emerald-300 text-emerald-800 shadow-sm ring-1 ring-emerald-300/30'
+                        ? 'bg-teal-50 border-teal-300 text-teal-800 shadow-sm ring-1 ring-teal-300/30'
                         : isCompleted
                           ? 'bg-slate-100/80 border-slate-200 text-slate-400 opacity-75'
                           : 'bg-white border-slate-150 text-slate-400'
                         }`}
                     >
                       <div className={`w-5.5 h-5.5 rounded-full flex items-center justify-center text-[10.5px] font-black shrink-0 ${isActive
-                        ? 'bg-emerald-600 text-white'
+                        ? 'bg-teal-600 text-white'
                         : isCompleted
                           ? 'bg-slate-400 text-white'
                           : 'bg-slate-200 text-slate-400'
@@ -418,10 +418,10 @@ const AtmLab = () => {
                   {atmStep === 'success' && (
                     <div className="flex-1 flex flex-col justify-between py-2 text-center font-bold z-20">
                       <div className="flex flex-col items-center space-y-1">
-                        <div className="w-10 h-10 bg-emerald-500/10 rounded-full flex items-center justify-center text-emerald-300 border border-emerald-500/30">
+                        <div className="w-10 h-10 bg-teal-500/10 rounded-full flex items-center justify-center text-teal-300 border border-teal-500/30">
                           <CheckCircle2 size={24} />
                         </div>
-                        <h4 className="text-xs font-black text-emerald-300">TRANSACTION SUCCESS</h4>
+                        <h4 className="text-xs font-black text-teal-300">TRANSACTION SUCCESS</h4>
                         <p className="text-[8.5px] text-sky-100 leading-normal">
                           Please remove your card.<br />
                           Thank you for banking with State Bank.
@@ -483,7 +483,7 @@ const AtmLab = () => {
                 <div className="bg-[#111827] border border-slate-700 p-3 rounded-2xl flex items-center justify-between text-white shadow-inner select-none">
                   <div className="text-[8.5px] font-black text-slate-300 tracking-wider leading-none">
                     RECEIPT
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 mt-1 shadow-sm shadow-emerald-500/50 animate-pulse" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-teal-500 mt-1 shadow-sm shadow-teal-500/50 animate-pulse" />
                   </div>
                   <div className="w-20 h-1 bg-slate-950 rounded shadow-inner relative overflow-hidden">
                     <div className="absolute inset-x-0 bottom-0 h-0.5 bg-slate-200 animate-bounce" />
@@ -522,7 +522,7 @@ const AtmLab = () => {
                     <motion.div
                       initial={{ y: 15 }}
                       animate={{ y: 0 }}
-                      className="text-[11px] font-black text-emerald-450 animate-bounce flex items-center gap-1.5 cursor-pointer select-none"
+                      className="text-[11px] font-black text-teal-450 animate-bounce flex items-center gap-1.5 cursor-pointer select-none"
                       onClick={() => setAtmStep('success')}
                     >
                       💵 Take ₹{selectedAmount} Cash (Click here)
@@ -576,7 +576,7 @@ const AtmLab = () => {
                     <button
                       onClick={handlePinSubmit}
                       disabled={atmStep !== 'pin' && atmStep !== 'amountInput'}
-                      className="flex-1 py-2 bg-gradient-to-b from-emerald-500 to-emerald-600 hover:from-emerald-450 hover:to-emerald-550 border border-emerald-600 border-b-4 border-emerald-800 text-white font-black text-[10px] rounded-lg shadow-md active:translate-y-0.5 active:border-b-2 disabled:opacity-40 transition-all flex items-center justify-center cursor-pointer"
+                      className="flex-1 py-2 bg-gradient-to-b from-teal-500 to-teal-600 hover:from-teal-450 hover:to-teal-550 border border-teal-600 border-b-4 border-teal-800 text-white font-black text-[10px] rounded-lg shadow-md active:translate-y-0.5 active:border-b-2 disabled:opacity-40 transition-all flex items-center justify-center cursor-pointer"
                     >
                       ENTER
                     </button>

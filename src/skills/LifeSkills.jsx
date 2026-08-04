@@ -55,15 +55,15 @@ const QuizComponent = () => {
 
   const getOptionStyle = (idx) => {
     if (!isAnswered) return selectedOption === idx
-      ? 'bg-emerald-50 border-emerald-500 text-emerald-700'
-      : 'bg-white border-slate-200 text-slate-700 hover:border-emerald-300 hover:bg-emerald-50/50';
+      ? 'bg-teal-50 border-teal-500 text-teal-700'
+      : 'bg-white border-slate-200 text-slate-700 hover:border-teal-300 hover:bg-teal-50/50';
     if (idx === quizQuestions[currentQ].correct) return 'bg-green-50 border-green-500 text-green-700';
     if (idx === selectedOption) return 'bg-rose-50 border-rose-500 text-rose-700';
     return 'bg-slate-50 border-slate-100 text-slate-400';
   };
 
   const getLabelBg = (idx) => {
-    if (!isAnswered) return selectedOption === idx ? 'bg-emerald-500 text-white' : 'bg-slate-100 text-slate-500';
+    if (!isAnswered) return selectedOption === idx ? 'bg-teal-500 text-white' : 'bg-slate-100 text-slate-500';
     if (idx === quizQuestions[currentQ].correct) return 'bg-green-500 text-white';
     if (idx === selectedOption) return 'bg-rose-500 text-white';
     return 'bg-slate-200 text-slate-400';
@@ -76,7 +76,7 @@ const QuizComponent = () => {
     <div className="w-full flex justify-center py-8 relative rounded-2xl overflow-hidden border border-slate-100">
       <div className="absolute inset-0 z-0">
         <img src="/images/life skill/bg.png" alt="Quiz Background" className="w-full h-full object-cover opacity-90" />
-        <div className="absolute inset-0 bg-emerald-900/10 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-teal-900/10 backdrop-blur-[2px]" />
       </div>
 
       <div className="w-full max-w-[450px] shrink-0 transition-all duration-300 relative z-10 px-4">
@@ -87,7 +87,7 @@ const QuizComponent = () => {
 
                 <div className="flex items-center justify-between mb-5">
                   <div className="flex items-center gap-2 flex-row text-left">
-                    <div className="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center shadow-inner">
+                    <div className="w-8 h-8 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center shadow-inner">
                       <Brain size={16} />
                     </div>
                     <div>
@@ -97,12 +97,12 @@ const QuizComponent = () => {
                   </div>
                   <div className="bg-slate-50/80 px-3 py-1.5 rounded-lg border border-slate-200/60 text-center">
                     <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider block mb-0.5">Score</span>
-                    <span className="text-sm font-black text-emerald-600 leading-none">{score}</span>
+                    <span className="text-sm font-black text-teal-600 leading-none">{score}</span>
                   </div>
                 </div>
 
                 <div className="w-full h-1 bg-slate-100 rounded-full mb-5 overflow-hidden">
-                  <motion.div animate={{ width: `${progress}%` }} className="h-full bg-emerald-500 rounded-full" />
+                  <motion.div animate={{ width: `${progress}%` }} className="h-full bg-teal-500 rounded-full" />
                 </div>
 
                 <h2 className="text-[15px] font-bold text-slate-900 leading-snug mb-5 text-left">
@@ -138,7 +138,7 @@ const QuizComponent = () => {
 
                   {isAnswered && (
                     <button onClick={handleNext}
-                      className="flex items-center gap-1.5 px-5 py-2 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white rounded-full text-xs font-bold transition-all shadow-md shadow-emerald-200 active:scale-95 cursor-pointer"
+                      className="flex items-center gap-1.5 px-5 py-2 bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white rounded-full text-xs font-bold transition-all shadow-md shadow-teal-200 active:scale-95 cursor-pointer"
                     >
                       {currentQ < quizQuestions.length - 1 ? 'Next' : 'Results'} <ArrowRight size={14} />
                     </button>
@@ -151,7 +151,7 @@ const QuizComponent = () => {
           {showResult && (
             <motion.div key="quiz-results" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="w-full">
               <div className="bg-white/80 backdrop-blur-md rounded-xl p-6 sm:p-8 border border-white shadow-[0_8px_30px_rgb(0,0,0,0.08)] text-center">
-                <div className="w-16 h-16 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-inner">
+                <div className="w-16 h-16 bg-teal-50 text-teal-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-inner">
                   <Trophy size={32} />
                 </div>
                 <h2 className="text-xl font-bold text-slate-900 mb-1">Challenge Completed!</h2>
@@ -159,12 +159,12 @@ const QuizComponent = () => {
 
                 <div className="bg-slate-50/80 rounded-[16px] p-5 mb-6 border border-slate-200/60 inline-block min-w-[180px]">
                   <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Total Score</span>
-                  <span className="text-3xl font-black text-emerald-600">{score}</span>
+                  <span className="text-3xl font-black text-teal-600">{score}</span>
                   <span className="text-[10px] font-bold text-slate-400 block mt-1">out of {quizQuestions.length * 10}</span>
                 </div>
 
                 <div className="flex justify-center">
-                  <button onClick={handleRestart} className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white rounded-full text-xs font-bold transition-all shadow-md shadow-emerald-200 active:scale-95 cursor-pointer">
+                  <button onClick={handleRestart} className="px-6 py-2.5 bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white rounded-full text-xs font-bold transition-all shadow-md shadow-teal-200 active:scale-95 cursor-pointer">
                     Play Again
                   </button>
                 </div>
@@ -444,11 +444,11 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
         <div className="w-full max-w-[280px] bg-white rounded-2xl border border-slate-150 p-5 shadow-sm space-y-4">
           {stepIndex === 0 && ( // Track Income
             <div className="space-y-3 text-left">
-              <div className="flex items-center gap-3 bg-emerald-50/50 p-2 rounded-xl border border-emerald-100/50">
+              <div className="flex items-center gap-3 bg-teal-50/50 p-2 rounded-xl border border-teal-100/50">
                 <BoyAvatarSVG expression="smile" className="w-9 h-9 shrink-0" />
                 <div>
-                  <div className="text-[10px] font-black text-emerald-800">Pocket Money (Income)</div>
-                  <div className="text-xs font-black text-emerald-600">+₹500</div>
+                  <div className="text-[10px] font-black text-teal-800">Pocket Money (Income)</div>
+                  <div className="text-xs font-black text-teal-600">+₹500</div>
                 </div>
               </div>
               <div className="flex justify-between items-center bg-slate-50 p-2 rounded-lg text-slate-500">
@@ -472,8 +472,8 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
                 <GirlAvatarSVG expression="smile" className="w-12 h-12" />
               </div>
               <div className="grid grid-cols-2 gap-3 text-left">
-                <div className="bg-emerald-50/50 p-2.5 rounded-xl border border-emerald-100/50">
-                  <span className="text-[9px] font-black text-emerald-800 uppercase tracking-wider block mb-1">Needs</span>
+                <div className="bg-teal-50/50 p-2.5 rounded-xl border border-teal-100/50">
+                  <span className="text-[9px] font-black text-teal-800 uppercase tracking-wider block mb-1">Needs</span>
                   <div className="space-y-1">
                     <div className="text-[10px] font-bold text-slate-700">📚 Text Books</div>
                     <div className="text-[10px] font-bold text-slate-700">🍎 Healthy Food</div>
@@ -493,16 +493,16 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
             <div className="space-y-3">
               <div className="relative w-16 h-16 mx-auto">
                 <BoyAvatarSVG expression="smile" className="w-16 h-16" />
-                <div className="absolute -top-1.5 -right-1.5 bg-emerald-500 text-white rounded-full p-1 shadow-md animate-bounce">
+                <div className="absolute -top-1.5 -right-1.5 bg-teal-500 text-white rounded-full p-1 shadow-md animate-bounce">
                   <Coins size={12} />
                 </div>
               </div>
               <div className="space-y-1">
                 <div className="text-xs font-black text-slate-805">Savings Target (20%)</div>
-                <div className="text-base font-black text-emerald-600">₹100 Saved First!</div>
+                <div className="text-base font-black text-teal-600">₹100 Saved First!</div>
               </div>
               <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                <div className="bg-emerald-500 h-full w-[80%] rounded-full" />
+                <div className="bg-teal-500 h-full w-[80%] rounded-full" />
               </div>
             </div>
           )}
@@ -545,15 +545,15 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
               </div>
               <div className="space-y-1.5 text-left">
                 <div className="flex items-center gap-2 bg-slate-50 p-1.5 rounded-lg">
-                  <input type="checkbox" checked readOnly className="rounded text-emerald-600 focus:ring-emerald-500 w-3 h-3" />
+                  <input type="checkbox" checked readOnly className="rounded text-teal-600 focus:ring-teal-500 w-3 h-3" />
                   <span className="text-[10px] font-bold text-slate-500 line-through">Math Homework</span>
                 </div>
                 <div className="flex items-center gap-2 bg-slate-50 p-1.5 rounded-lg">
-                  <input type="checkbox" checked readOnly className="rounded text-emerald-600 focus:ring-emerald-500 w-3 h-3" />
+                  <input type="checkbox" checked readOnly className="rounded text-teal-600 focus:ring-teal-500 w-3 h-3" />
                   <span className="text-[10px] font-bold text-slate-500 line-through">Read Chapter 2</span>
                 </div>
                 <div className="flex items-center gap-2 bg-slate-50 p-1.5 rounded-lg">
-                  <input type="checkbox" disabled className="rounded text-emerald-600 focus:ring-emerald-500 w-3 h-3" />
+                  <input type="checkbox" disabled className="rounded text-teal-600 focus:ring-teal-500 w-3 h-3" />
                   <span className="text-[10px] font-bold text-slate-800">Draw Art Project</span>
                 </div>
               </div>
@@ -616,7 +616,7 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
                   <div className="bg-slate-50 p-2 rounded-xl border border-slate-150 text-[10px] font-bold text-slate-500">
                     "I felt sad when the test was postponed."
                   </div>
-                  <div className="bg-emerald-50 p-2 rounded-xl border border-emerald-100 text-[10px] font-black text-emerald-800">
+                  <div className="bg-teal-50 p-2 rounded-xl border border-teal-100 text-[10px] font-black text-teal-800">
                     "I understand. You worked hard for it."
                   </div>
                 </div>
@@ -630,7 +630,7 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
               </div>
               <div className="text-xs font-black text-slate-805">Use Polite Words</div>
               <div className="flex flex-wrap gap-1.5 justify-center">
-                <span className="bg-emerald-50 border border-emerald-100 text-emerald-800 text-[9px] font-black px-2.5 py-1 rounded-full">Please</span>
+                <span className="bg-teal-50 border border-teal-100 text-teal-800 text-[9px] font-black px-2.5 py-1 rounded-full">Please</span>
                 <span className="bg-blue-50 border border-blue-100 text-blue-800 text-[9px] font-black px-2.5 py-1 rounded-full">Thank you</span>
               </div>
             </div>
@@ -667,7 +667,7 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
           {stepIndex === 2 && ( // Tighten
             <div className="space-y-2">
               <div className="text-xs font-black text-slate-805">Righty-Tighty, Lefty-Loosey</div>
-              <div className="w-14 h-14 border-4 border-dashed border-emerald-400 rounded-full flex items-center justify-center mx-auto animate-spin" style={{ animationDuration: '10s' }}>
+              <div className="w-14 h-14 border-4 border-dashed border-teal-400 rounded-full flex items-center justify-center mx-auto animate-spin" style={{ animationDuration: '10s' }}>
                 <span className="text-lg">⚙️</span>
               </div>
               <p className="text-[9px] font-semibold text-slate-400">Turn clockwise (right) to tighten screws, counter-clockwise (left) to loosen.</p>
@@ -685,11 +685,11 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
                 P@$$w0rd#2026
               </div>
               <div className="flex items-center justify-between text-[9px] font-black">
-                <span className="text-emerald-600">STRENGTH: STRONG</span>
+                <span className="text-teal-600">STRENGTH: STRONG</span>
                 <span className="text-slate-400">12 Chars</span>
               </div>
               <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
-                <div className="bg-emerald-500 h-full w-full rounded-full" />
+                <div className="bg-teal-500 h-full w-full rounded-full" />
               </div>
             </div>
           )}
@@ -726,17 +726,17 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
             <div className="space-y-3">
               <div className="text-xs font-black text-slate-805">Identify Your Mood</div>
               <div className="grid grid-cols-4 gap-1.5">
-                <div className="bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-center text-lg filter grayscale cursor-pointer hover:grayscale-0 hover:border-emerald-400 transition-all">😊</div>
-                <div className="bg-emerald-50 border border-emerald-300 p-2.5 rounded-xl text-center text-lg filter-none cursor-pointer">😌</div>
-                <div className="bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-center text-lg filter grayscale cursor-pointer hover:grayscale-0 hover:border-emerald-400 transition-all">😢</div>
-                <div className="bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-center text-lg filter grayscale cursor-pointer hover:grayscale-0 hover:border-emerald-400 transition-all">😠</div>
+                <div className="bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-center text-lg filter grayscale cursor-pointer hover:grayscale-0 hover:border-teal-400 transition-all">😊</div>
+                <div className="bg-teal-50 border border-teal-300 p-2.5 rounded-xl text-center text-lg filter-none cursor-pointer">😌</div>
+                <div className="bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-center text-lg filter grayscale cursor-pointer hover:grayscale-0 hover:border-teal-400 transition-all">😢</div>
+                <div className="bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-center text-lg filter grayscale cursor-pointer hover:grayscale-0 hover:border-teal-400 transition-all">😠</div>
               </div>
-              <div className="text-[10px] font-black text-emerald-600">CURRENT MOOD: CALM</div>
+              <div className="text-[10px] font-black text-teal-600">CURRENT MOOD: CALM</div>
             </div>
           )}
           {stepIndex === 1 && ( // Breathe
             <div className="space-y-3">
-              <div className="w-16 h-16 bg-emerald-50 border border-emerald-105 rounded-full flex items-center justify-center mx-auto text-emerald-650 animate-pulse animate-duration-3000">
+              <div className="w-16 h-16 bg-teal-50 border border-teal-105 rounded-full flex items-center justify-center mx-auto text-teal-650 animate-pulse animate-duration-3000">
                 <Heart size={28} />
               </div>
               <div className="text-xs font-black text-slate-805">Deep Breathing</div>
@@ -745,7 +745,7 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
           )}
           {stepIndex === 2 && ( // Empathy
             <div className="space-y-3">
-              <div className="w-14 h-14 bg-emerald-50 rounded-full flex items-center justify-center mx-auto text-emerald-500">
+              <div className="w-14 h-14 bg-teal-50 rounded-full flex items-center justify-center mx-auto text-teal-500">
                 <Smile size={28} />
               </div>
               <div className="text-xs font-black text-slate-855">Walk in their shoes</div>
@@ -759,22 +759,22 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
 };
 
 const lifeTheme = {
-  backButtonHover: 'hover:text-emerald-600',
-  heroHighlightText: 'text-emerald-600',
+  backButtonHover: 'hover:text-teal-600',
+  heroHighlightText: 'text-teal-600',
   
-  card1Icon: 'text-emerald-600',
-  card1Bg: 'bg-emerald-50',
-  card2Icon: 'text-emerald-600',
-  card2Bg: 'bg-emerald-50',
-  card3Icon: 'text-emerald-600',
-  card3Bg: 'bg-emerald-50',
+  card1Icon: 'text-teal-600',
+  card1Bg: 'bg-teal-50',
+  card2Icon: 'text-teal-600',
+  card2Bg: 'bg-teal-50',
+  card3Icon: 'text-teal-600',
+  card3Bg: 'bg-teal-50',
   
-  activeBorder: 'border-emerald-500 ring-2 ring-emerald-500/10 shadow-md',
+  activeBorder: 'border-teal-500 ring-2 ring-teal-500/10 shadow-md',
   inactiveBorder: 'border-slate-50 shadow-[0_4px_20px_rgba(0,0,0,0.06)]',
-  activeIconBg: 'bg-emerald-600 text-white',
-  activeTitleText: 'text-emerald-700',
-  inactiveTitleHover: 'text-[#1e1b4b] group-hover:text-emerald-600',
-  activeSubtitleText: 'text-emerald-600/80',
+  activeIconBg: 'bg-teal-600 text-white',
+  activeTitleText: 'text-teal-700',
+  inactiveTitleHover: 'text-[#1e1b4b] group-hover:text-teal-600',
+  activeSubtitleText: 'text-teal-600/80',
   inactiveSubtitleText: 'text-slate-500'
 };
 
@@ -815,20 +815,19 @@ const LifeSkills = () => {
         >
           {/* Front */}
           <div
-            className="absolute inset-0 w-full h-full bg-white rounded-xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col group-hover:border-emerald-200 transition-colors"
+            className="absolute inset-0 w-full h-full bg-white rounded-xl p-5 border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col group-hover:border-slate-200 transition-colors"
             style={{ backfaceVisibility: 'hidden' }}
           >
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 bg-emerald-50 rounded-lg flex items-center justify-center text-emerald-600 text-xl shadow-inner">
+              <div className="w-10 h-10 bg-teal-50 rounded-lg flex items-center justify-center text-teal-600 text-xl shadow-inner">
                 {skill.icon}
               </div>
-              <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-1 rounded-md uppercase tracking-wider">{skill.tag}</span>
             </div>
 
             <h3 className="text-[15px] font-bold text-slate-900 mb-2 leading-tight">{skill.title}</h3>
             <p className="text-[11px] text-slate-500 font-medium line-clamp-3">{skill.desc}</p>
 
-            <div className="mt-auto pt-4 flex items-center justify-between text-[10px] font-bold text-emerald-600">
+            <div className="mt-auto pt-4 flex items-center justify-between text-[10px] font-bold text-slate-600">
               <span>Tap to flip</span>
               <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </div>
@@ -836,10 +835,10 @@ const LifeSkills = () => {
 
           {/* Back */}
           <div
-            className="absolute inset-0 w-full h-full bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl p-5 shadow-[0_8px_30px_rgb(16,185,129,0.3)] flex flex-col text-white"
+            className="absolute inset-0 w-full h-full bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl p-5 shadow-[0_8px_30px_rgb(16,185,129,0.3)] flex flex-col text-white"
             style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
           >
-            <h3 className="text-[11px] font-bold mb-2 flex items-center gap-1.5 text-emerald-100 uppercase tracking-wider">
+            <h3 className="text-[11px] font-bold mb-2 flex items-center gap-1.5 text-teal-100 uppercase tracking-wider">
               <Lightbulb size={13} /> Key Takeaway
             </h3>
             <p className="text-[12px] font-semibold leading-relaxed flex-1 overflow-y-auto text-white mb-2 scrollbar-none pr-1">
@@ -851,11 +850,11 @@ const LifeSkills = () => {
                 setSelectedGuideSkill(skill);
                 setCurrentGuideStep(0);
               }}
-              className="w-full py-1.5 bg-white hover:bg-emerald-50 text-emerald-600 font-extrabold rounded-lg text-[10px] tracking-wide shadow transition-all flex items-center justify-center gap-1 cursor-pointer select-none"
+              className="w-full py-1.5 bg-white hover:bg-teal-50 text-teal-600 font-extrabold rounded-lg text-[10px] tracking-wide shadow transition-all flex items-center justify-center gap-1 cursor-pointer select-none"
             >
               Start Guide ➔
             </button>
-            <div className="text-[8px] font-bold text-emerald-250 uppercase tracking-widest text-center mt-2 opacity-80">
+            <div className="text-[8px] font-bold text-teal-250 uppercase tracking-widest text-center mt-2 opacity-80">
               Tap anywhere else to flip back
             </div>
           </div>
@@ -955,10 +954,10 @@ const LifeSkills = () => {
                           desc: 'Practice withdrawing cash safely.',
                           difficulty: 'Medium',
                           icon: <CreditCard />,
-                          activeStyle: 'bg-white border-emerald-500 ring-1 ring-emerald-500 shadow-md text-slate-900 scale-[1.02]',
+                          activeStyle: 'bg-white border-teal-500 ring-1 ring-teal-500 shadow-md text-slate-900 scale-[1.02]',
                           inactiveStyle: 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-sm text-slate-700 hover:text-slate-900',
-                          iconBgActive: 'bg-emerald-50 text-emerald-600',
-                          iconBgInactive: 'bg-slate-50 text-slate-400 group-hover:text-emerald-500'
+                          iconBgActive: 'bg-teal-50 text-teal-600',
+                          iconBgInactive: 'bg-slate-50 text-slate-400 group-hover:text-teal-500'
                         },
                         {
                           id: 'traffic',
@@ -966,10 +965,10 @@ const LifeSkills = () => {
                           desc: 'Learn how to read traffic signals.',
                           difficulty: 'Easy',
                           icon: <AlertCircle />,
-                          activeStyle: 'bg-white border-emerald-500 ring-1 ring-emerald-500 shadow-md text-slate-900 scale-[1.02]',
+                          activeStyle: 'bg-white border-teal-500 ring-1 ring-teal-500 shadow-md text-slate-900 scale-[1.02]',
                           inactiveStyle: 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-sm text-slate-700 hover:text-slate-900',
-                          iconBgActive: 'bg-emerald-50 text-emerald-600',
-                          iconBgInactive: 'bg-slate-50 text-slate-400 group-hover:text-emerald-500'
+                          iconBgActive: 'bg-teal-50 text-teal-600',
+                          iconBgInactive: 'bg-slate-50 text-slate-400 group-hover:text-teal-500'
                         },
                         {
                           id: 'cashier',
@@ -977,10 +976,10 @@ const LifeSkills = () => {
                           desc: 'Calculate the correct change to give back.',
                           difficulty: 'Medium',
                           icon: <Coins />,
-                          activeStyle: 'bg-white border-emerald-500 ring-1 ring-emerald-500 shadow-md text-slate-900 scale-[1.02]',
+                          activeStyle: 'bg-white border-teal-500 ring-1 ring-teal-500 shadow-md text-slate-900 scale-[1.02]',
                           inactiveStyle: 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-sm text-slate-700 hover:text-slate-900',
-                          iconBgActive: 'bg-emerald-50 text-emerald-600',
-                          iconBgInactive: 'bg-slate-50 text-slate-400 group-hover:text-emerald-500'
+                          iconBgActive: 'bg-teal-50 text-teal-600',
+                          iconBgInactive: 'bg-slate-50 text-slate-400 group-hover:text-teal-500'
                         },
                         {
                           id: 'firstaid',
@@ -988,10 +987,10 @@ const LifeSkills = () => {
                           desc: 'Learn how to treat minor wounds.',
                           difficulty: 'Hard',
                           icon: <HeartPulse />,
-                          activeStyle: 'bg-white border-emerald-500 ring-1 ring-emerald-500 shadow-md text-slate-900 scale-[1.02]',
+                          activeStyle: 'bg-white border-teal-500 ring-1 ring-teal-500 shadow-md text-slate-900 scale-[1.02]',
                           inactiveStyle: 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-sm text-slate-700 hover:text-slate-900',
-                          iconBgActive: 'bg-emerald-50 text-emerald-600',
-                          iconBgInactive: 'bg-slate-50 text-slate-400 group-hover:text-emerald-500'
+                          iconBgActive: 'bg-teal-50 text-teal-600',
+                          iconBgInactive: 'bg-slate-50 text-slate-400 group-hover:text-teal-500'
                         }
                       ].map(lab => {
                         const isActive = selectedLab === lab.id;
@@ -1079,12 +1078,12 @@ const LifeSkills = () => {
               {/* Header Bar */}
               <div className="flex items-center justify-between px-5 md:px-7 py-3.5 border-b border-slate-100 bg-gradient-to-r from-slate-50/80 to-white shrink-0">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center shadow-inner">
+                  <div className="w-9 h-9 bg-teal-50 text-teal-600 rounded-xl flex items-center justify-center shadow-inner">
                     {selectedGuideSkill.icon}
                   </div>
                   <div className="text-left">
                     <h3 className="text-sm md:text-base font-black text-slate-800 leading-tight">{selectedGuideSkill.title}</h3>
-                    <p className="text-[9px] md:text-[10px] font-bold text-emerald-600 uppercase tracking-widest mt-0.5">Step-by-Step Guide</p>
+                    <p className="text-[9px] md:text-[10px] font-bold text-teal-600 uppercase tracking-widest mt-0.5">Step-by-Step Guide</p>
                   </div>
                 </div>
                 <button
@@ -1121,7 +1120,7 @@ const LifeSkills = () => {
                     Step {currentGuideStep + 1} / {skillStepsData[selectedGuideSkill.id]?.length || 3}
                   </div>
                   {/* Decorative corner accent */}
-                  <div className="absolute bottom-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-tl-[60px]" />
+                  <div className="absolute bottom-0 right-0 w-24 h-24 bg-teal-500/5 rounded-tl-[60px]" />
                 </div>
 
                 {/* RIGHT: Text + Controls Panel */}
@@ -1131,7 +1130,7 @@ const LifeSkills = () => {
                     {/* Progress Bar */}
                     <div className="w-full h-2 bg-slate-100 rounded-full mb-5 overflow-hidden">
                       <motion.div
-                        className="h-full bg-gradient-to-r from-emerald-400 to-emerald-600 rounded-full"
+                        className="h-full bg-gradient-to-r from-teal-400 to-teal-600 rounded-full"
                         initial={{ width: 0 }}
                         animate={{ width: `${((currentGuideStep + 1) / (skillStepsData[selectedGuideSkill.id]?.length || 3)) * 100}%` }}
                         transition={{ duration: 0.4, ease: "easeOut" }}
@@ -1146,7 +1145,7 @@ const LifeSkills = () => {
                           onClick={() => setCurrentGuideStep(idx)}
                           className={`h-7 rounded-full text-[10px] font-black transition-all duration-300 cursor-pointer ${
                             currentGuideStep === idx
-                              ? 'bg-emerald-600 text-white px-4 shadow-md shadow-emerald-200'
+                              ? 'bg-teal-600 text-white px-4 shadow-md shadow-teal-200'
                               : 'bg-slate-100 text-slate-400 px-3 hover:bg-slate-200'
                           }`}
                         >
@@ -1181,7 +1180,7 @@ const LifeSkills = () => {
                     {currentGuideStep < (skillStepsData[selectedGuideSkill.id]?.length || 3) - 1 ? (
                       <button
                         onClick={() => setCurrentGuideStep(prev => prev + 1)}
-                        className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs active:scale-95 transition-all shadow-md shadow-emerald-200 cursor-pointer"
+                        className="px-6 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl text-xs active:scale-95 transition-all shadow-md shadow-teal-200 cursor-pointer"
                       >
                         Next Step →
                       </button>
@@ -1192,7 +1191,7 @@ const LifeSkills = () => {
                           toast.success(`🎉 Congratulations! You have completed the step-by-step tutorial for ${selectedGuideSkill.title}!`);
                           setSelectedGuideSkill(null);
                         }}
-                        className="px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold rounded-xl text-xs active:scale-95 transition-all shadow-lg shadow-emerald-200 cursor-pointer"
+                        className="px-6 py-2.5 bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white font-bold rounded-xl text-xs active:scale-95 transition-all shadow-lg shadow-teal-200 cursor-pointer"
                       >
                         Finish Guide 
                       </button>

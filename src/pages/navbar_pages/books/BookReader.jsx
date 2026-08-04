@@ -148,38 +148,38 @@ const BookReader = () => {
                         <div className="mb-8 flex items-center gap-3">
                             <Link
                                 to={`/books/${classId}`}
-                                className="w-10 h-10 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-600 flex items-center justify-center transition-all border border-blue-100/60 shadow-sm shrink-0"
+                                className="w-8 h-8 rounded-[10px] bg-[#F8FAFC] hover:bg-blue-50 text-[#1e293b] flex items-center justify-center transition-all border border-slate-200 shadow-[0_2px_4px_rgba(0,0,0,0.02)] shrink-0"
                                 title={`Back to Class ${classId} Books`}
                             >
-                                <FaChevronLeft size={14} />
+                                <FaChevronLeft size={12} className="text-blue-600" />
                             </Link>
-                            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                            <h1 className="text-xl sm:text-[22px] font-black text-[#0f172a] tracking-tight uppercase mt-0.5">
                                 {bookTitle}
                             </h1>
                         </div>
 
                         {/* --- Full-Width Table of Contents --- */}
                         <div className="w-full space-y-6">
-                            <div className="border-b border-slate-200 pb-4 mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                                <div className="flex items-center gap-3">
-                                    <span className="w-1.5 h-6 bg-[#2563eb] rounded-full"></span>
-                                    <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Table of Contents</h2>
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
+                                <div className="flex items-center gap-2">
+                                    <span className="w-1.5 h-5 bg-[#2563eb] rounded-full"></span>
+                                    <h2 className="text-lg sm:text-[20px] font-black text-[#0f172a] tracking-tight">Table of Contents</h2>
                                 </div>
                                 <div className="relative w-full sm:w-64">
                                     <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
-                                        <Search size={16} className="text-slate-400" />
+                                        <Search size={14} className="text-slate-400" />
                                     </div>
                                     <input
                                         type="text"
                                         placeholder="Search chapters..."
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
-                                        className="w-full pl-9 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                        className="w-full pl-8 pr-4 py-2 bg-[#F8FAFC] border border-slate-200 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-[0_2px_4px_rgba(0,0,0,0.02)]"
                                     />
                                 </div>
                             </div>
 
-                            <div className="border border-slate-200/80 rounded-2xl overflow-hidden bg-white shadow-sm">
+                            <div className="border border-slate-200/80 rounded-[16px] overflow-hidden bg-white shadow-sm">
                                 <style>{`
                                     .custom-scrollbar::-webkit-scrollbar {
                                         width: 6px;
@@ -195,35 +195,35 @@ const BookReader = () => {
                                         background-color: #94a3b8;
                                     }
                                 `}</style>
-                                <div className="max-h-[450px] overflow-y-auto custom-scrollbar-hidden" data-lenis-prevent>
+                                <div className="max-h-[500px] overflow-y-auto custom-scrollbar" data-lenis-prevent>
                                     {filteredChapters.length > 0 ? (
                                         filteredChapters.map((chapter, index) => (
                                             <Link
                                                 key={index}
                                                 to={`/book/${classId}/${bookSubject || "Hindi"}/${chapter.id}/flip`}
-                                                className="w-full flex items-center justify-between py-5 px-4 sm:px-6 border-b border-slate-100 last:border-0 group transition-all hover:bg-blue-50/40"
+                                                className="w-full flex items-center justify-between py-4 px-4 sm:px-6 border-b border-slate-100 last:border-0 hover:bg-slate-50/50 transition-colors group"
                                             >
                                                 <div className="flex items-center gap-4 sm:gap-6 min-w-0 pr-4">
-                                                    <div className="w-8 sm:w-12 text-slate-300 group-hover:text-blue-600 text-sm sm:text-base font-bold font-mono shrink-0 transition-colors">
+                                                    <div className="w-8 sm:w-10 text-[#cbd5e1] text-xs sm:text-sm font-black font-mono shrink-0">
                                                         {String(index + 1).padStart(2, '0')}
                                                     </div>
-                                                    <div className="min-w-0">
-                                                        <h3 className="text-base sm:text-lg font-bold text-slate-800 group-hover:text-blue-600 transition-colors truncate">
+                                                    <div className="min-w-0 flex flex-col justify-center">
+                                                        <h3 className="text-sm sm:text-[15px] font-black text-[#1e293b] leading-snug truncate uppercase">
                                                             {chapter.hindiTitle}
                                                         </h3>
-                                                        <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mt-0.5 truncate">
+                                                        <p className="text-[10px] font-bold text-[#94a3b8] uppercase tracking-widest mt-0.5 truncate">
                                                             {chapter.title}
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <div className="inline-flex items-center gap-2 bg-blue-50 group-hover:bg-[#2563eb] text-blue-600 group-hover:text-white text-xs font-bold px-4 py-2.5 rounded-xl transition-all shrink-0">
+                                                <div className="inline-flex items-center gap-1.5 bg-[#eff6ff] text-[#2563eb] text-[10px] font-black px-4 py-2 rounded-full transition-colors shrink-0 group-hover:bg-[#2563eb] group-hover:text-white">
                                                     <span>READ NOW</span>
-                                                    <FaChevronRight size={10} />
+                                                    <FaChevronRight size={8} />
                                                 </div>
                                             </Link>
                                         ))
                                     ) : (
-                                        <div className="text-center py-12 text-slate-500 font-medium">
+                                        <div className="text-center py-12 text-slate-500 font-medium text-sm">
                                             No chapters found matching "{searchQuery}"
                                         </div>
                                     )}
