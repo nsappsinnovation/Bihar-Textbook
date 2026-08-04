@@ -33,7 +33,7 @@ const RealisticCar = ({
     >
       {/* Headlight Beam Projection */}
       {isHeadlightsOn && (
-        <div className="absolute top-1/2 -left-28 -translate-y-1/2 w-32 h-16 bg-gradient-to-l from-yellow-200/40 via-yellow-100/15 to-transparent blur-md pointer-events-none rounded-l-full" />
+        <div className="absolute top-1/2 -left-28 -translate-y-1/2 w-32 h-16 bg-gradient-to-l from-yellow-200/40 via-yellow-100/15 to-transparent blur-md pointer-events-none rounded-l-full -z-10" />
       )}
 
       <svg
@@ -42,7 +42,7 @@ const RealisticCar = ({
         viewBox="0 0 110 52"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="drop-shadow-2xl"
+        className="relative z-10 drop-shadow-2xl"
       >
         {/* Car Body Shadow */}
         <ellipse
@@ -142,7 +142,7 @@ const RealisticTruck = ({ scaleX = 1 }) => {
       className={`relative inline-block ${scaleX === -1 ? "scale-x-[-1]" : ""}`}
     >
       {/* Headlight Beams */}
-      <div className="absolute top-1/2 -left-36 -translate-y-1/2 w-40 h-24 bg-gradient-to-l from-amber-100/50 via-amber-100/20 to-transparent blur-lg pointer-events-none rounded-l-full" />
+      <div className="absolute top-1/2 -left-36 -translate-y-1/2 w-40 h-24 bg-gradient-to-l from-amber-100/50 via-amber-100/20 to-transparent blur-lg pointer-events-none rounded-l-full -z-10" />
 
       <svg
         width="140"
@@ -150,7 +150,7 @@ const RealisticTruck = ({ scaleX = 1 }) => {
         viewBox="0 0 140 60"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="drop-shadow-2xl"
+        className="relative z-10 drop-shadow-2xl"
       >
         {/* Shadow */}
         <rect
@@ -259,7 +259,7 @@ const RealisticPoliceCar = ({ scaleX = 1 }) => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-20 bg-blue-500/25 rounded-full blur-xl pointer-events-none animate-pulse" />
 
       {/* Headlight Beam */}
-      <div className="absolute top-1/2 -left-28 -translate-y-1/2 w-32 h-16 bg-gradient-to-l from-yellow-200/40 via-yellow-100/15 to-transparent blur-md pointer-events-none rounded-l-full" />
+      <div className="absolute top-1/2 -left-28 -translate-y-1/2 w-32 h-16 bg-gradient-to-l from-yellow-200/40 via-yellow-100/15 to-transparent blur-md pointer-events-none rounded-l-full -z-10" />
 
       <svg
         width="115"
@@ -267,7 +267,7 @@ const RealisticPoliceCar = ({ scaleX = 1 }) => {
         viewBox="0 0 115 54"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="drop-shadow-2xl"
+        className="relative z-10 drop-shadow-2xl"
       >
         <ellipse
           cx="57"
@@ -347,12 +347,12 @@ const RealisticPoliceCar = ({ scaleX = 1 }) => {
 };
 
 // --- REALISTIC VEHICLE SVG: CITY BUS ---
-const RealisticBus = ({ scaleX = 1 }) => {
+const RealisticBus = ({ color = "#ea580c", scaleX = 1 }) => {
   return (
     <div
       className={`relative inline-block ${scaleX === -1 ? "scale-x-[-1]" : ""}`}
     >
-      <div className="absolute top-1/2 -left-32 -translate-y-1/2 w-36 h-20 bg-gradient-to-l from-yellow-200/40 via-yellow-100/15 to-transparent blur-md pointer-events-none rounded-l-full" />
+      <div className="absolute top-1/2 -left-32 -translate-y-1/2 w-36 h-20 bg-gradient-to-l from-yellow-200/40 via-yellow-100/15 to-transparent blur-md pointer-events-none rounded-l-full -z-10" />
 
       <svg
         width="150"
@@ -360,7 +360,7 @@ const RealisticBus = ({ scaleX = 1 }) => {
         viewBox="0 0 150 58"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="drop-shadow-2xl"
+        className="relative z-10 drop-shadow-2xl"
       >
         <ellipse
           cx="75"
@@ -378,8 +378,8 @@ const RealisticBus = ({ scaleX = 1 }) => {
           width="134"
           height="42"
           rx="8"
-          fill="#0d9488"
-          stroke="#14b8a6"
+          fill={color}
+          stroke="#f97316"
           strokeWidth="2"
         />
 
@@ -732,7 +732,7 @@ const AnimatedRoad = ({
   return (
     <div className="absolute inset-0 bg-[#1e293b] flex flex-col justify-center overflow-hidden">
       {/* Top Curb & Grass */}
-      <div className="absolute top-0 inset-x-0 h-[25%] bg-gradient-to-b from-emerald-900 to-emerald-800 border-b-4 border-slate-600 shadow-[inset_0_4px_10px_rgba(0,0,0,0.4)] animate-pulse" />
+      <div className="absolute top-0 inset-x-0 h-[25%] bg-gradient-to-b from-emerald-900 to-emerald-800 border-b-4 border-slate-600 shadow-[inset_0_4px_10px_rgba(0,0,0,0.4)]" />
 
       {/* Asphalt Texture overlay */}
       <div className="absolute inset-0 opacity-30 bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
@@ -774,13 +774,13 @@ const AnimatedRoad = ({
 
 
       {/* Bottom Curb & Grass */}
-      <div className="absolute bottom-0 inset-x-0 h-[25%] bg-gradient-to-t from-emerald-900 to-emerald-800 border-t-4 border-slate-600 shadow-[inset_0_-4px_10px_rgba(0,0,0,0.4)] animate-pulse" />
+      <div className="absolute bottom-0 inset-x-0 h-[25%] bg-gradient-to-t from-emerald-900 to-emerald-800 border-t-4 border-slate-600 shadow-[inset_0_-4px_10px_rgba(0,0,0,0.4)]" />
     </div>
   );
 };
 
 // --- SIMULATOR 1: Zebra Crossing ---
-const CrossingSimulator = ({ onScoreUpdate }) => {
+const CrossingSimulator = () => {
   const [trafficLight, setTrafficLight] = useState("green");
   const [isCrossing, setIsCrossing] = useState(false);
   const [crossingResult, setCrossingResult] = useState("");
@@ -788,15 +788,135 @@ const CrossingSimulator = ({ onScoreUpdate }) => {
   const [isAutoMode, setIsAutoMode] = useState(true);
   const [pedestrianSignal, setPedestrianSignal] = useState("STOP");
 
+  // --- VEHICLE POSITIONS FOR SMOOTH SIMULATION ---
+  const [topCar1Pos, setTopCar1Pos] = useState(60);
+  const [topCar2Pos, setTopCar2Pos] = useState(82);
+  const [bottomCar1Pos, setBottomCar1Pos] = useState(24);
+  const [bottomCar2Pos, setBottomCar2Pos] = useState(2);
+
+  const topCar1Ref = useRef(60);
+  const topCar2Ref = useRef(82);
+  const bottomCar1Ref = useRef(24);
+  const bottomCar2Ref = useRef(2);
+
+  // Freeze pedestrian position on crash
+  const crashStepRef = useRef(null);
+
+  // High-performance physics simulation loop
+  useEffect(() => {
+    let animationId;
+
+    // Zebra crossing zone: roughly 42% to 58%
+    // Top lane vehicles (R-to-L) must stop BEFORE entering the crossing => stop at 60%
+    // Bottom lane vehicles (L-to-R) must stop BEFORE entering the crossing => stop at 28%
+    const TOP_STOP_LINE = 60;
+    const BOTTOM_STOP_LINE = 28;
+    const LANE_GAP = 22;
+    const SPEED = 0.55;
+
+    const updatePhysics = () => {
+      if (crossingResult !== "crash") {
+        const isStopped = trafficLight === "red";
+        // During red, cars past the crossing drive 2x faster to wrap around and queue up quickly
+        const DRIVE_SPEED = isStopped ? SPEED * 2 : SPEED;
+
+        // --- Top Car 1 (Yellow Sedan): Right to Left ---
+        let p1 = topCar1Ref.current;
+        if (isStopped && p1 >= TOP_STOP_LINE) {
+          // Approaching the crossing — decelerate and stop at the line
+          const dist = p1 - TOP_STOP_LINE;
+          if (dist < 0.1) {
+            p1 = TOP_STOP_LINE; // Snap to stop
+          } else {
+            const brake = Math.max(0.08, SPEED * Math.min(1, dist / 12));
+            p1 = Math.max(TOP_STOP_LINE, p1 - brake);
+          }
+        } else {
+          p1 -= DRIVE_SPEED;
+        }
+        if (p1 < -30) p1 = 145;
+        topCar1Ref.current = p1;
+        setTopCar1Pos(p1);
+
+        // --- Top Car 2 (Truck): Right to Left ---
+        let p2 = topCar2Ref.current;
+        const topCar2StopLine = TOP_STOP_LINE + LANE_GAP;
+        if (isStopped && p2 >= topCar2StopLine) {
+          const dist = p2 - topCar2StopLine;
+          if (dist < 0.1) {
+            p2 = topCar2StopLine;
+          } else {
+            const brake = Math.max(0.08, SPEED * Math.min(1, dist / 12));
+            p2 = Math.max(topCar2StopLine, p2 - brake);
+          }
+        } else {
+          p2 -= DRIVE_SPEED;
+        }
+        if (p2 < -30) p2 = 145;
+        // Prevent overlap: truck must stay behind sedan (only when both are nearby, not across wrap)
+        if (p2 > p1 && p2 - p1 < LANE_GAP) {
+          p2 = p1 + LANE_GAP;
+        }
+        topCar2Ref.current = p2;
+        setTopCar2Pos(p2);
+
+        // --- Bottom Car 1 (Red Sports Car): Left to Right ---
+        let b1 = bottomCar1Ref.current;
+        if (isStopped && b1 <= BOTTOM_STOP_LINE) {
+          // Approaching the crossing — decelerate and stop at the line
+          const dist = BOTTOM_STOP_LINE - b1;
+          if (dist < 0.1) {
+            b1 = BOTTOM_STOP_LINE; // Snap to stop
+          } else {
+            const brake = Math.max(0.08, SPEED * Math.min(1, dist / 12));
+            b1 = Math.min(BOTTOM_STOP_LINE, b1 + brake);
+          }
+        } else {
+          b1 += DRIVE_SPEED;
+        }
+        if (b1 > 120) b1 = -55;
+        bottomCar1Ref.current = b1;
+        setBottomCar1Pos(b1);
+
+        // --- Bottom Car 2 (Police Car): Left to Right ---
+        let b2 = bottomCar2Ref.current;
+        const bottomCar2StopLine = BOTTOM_STOP_LINE - LANE_GAP;
+        if (isStopped && b2 <= bottomCar2StopLine) {
+          const dist = bottomCar2StopLine - b2;
+          if (dist < 0.1) {
+            b2 = bottomCar2StopLine;
+          } else {
+            const brake = Math.max(0.08, SPEED * Math.min(1, dist / 12));
+            b2 = Math.min(bottomCar2StopLine, b2 + brake);
+          }
+        } else {
+          b2 += DRIVE_SPEED;
+        }
+        if (b2 > 120) b2 = -55;
+        // Prevent overlap: police must stay behind sports car (only when both are nearby, not across wrap)
+        if (b2 < b1 && b1 - b2 < LANE_GAP) {
+          b2 = b1 - LANE_GAP;
+        }
+        bottomCar2Ref.current = b2;
+        setBottomCar2Pos(b2);
+      }
+
+      animationId = requestAnimationFrame(updatePhysics);
+    };
+
+    animationId = requestAnimationFrame(updatePhysics);
+    return () => cancelAnimationFrame(animationId);
+  }, [trafficLight, crossingResult]);
+
   // --- REF TO FREEZE TRAFFIC SIGNAL AT MOMENT OF CRASH ---
   const crashedSignalRef = useRef("green");
 
   // --- INTERACTIVE GAME STATE ---
   const [crossStep, setCrossStep] = useState(0);
-  const [lives, setLives] = useState(3);
   const [isButtonRequested, setIsButtonRequested] = useState(false);
   const [honking, setHonking] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
+  const [resetKey, setResetKey] = useState(0);
 
   useEffect(() => {
     if (!isAutoMode) return;
@@ -811,6 +931,10 @@ const CrossingSimulator = ({ onScoreUpdate }) => {
           } else if (trafficLight === "yellow") {
             nextLight = "red";
             nextTime = 6;
+          } else if (trafficLight === "red") {
+            nextLight = "green";
+            nextTime = 6;
+            setIsButtonRequested(false);
           }
           setTrafficLight(nextLight);
           return nextTime;
@@ -826,17 +950,11 @@ const CrossingSimulator = ({ onScoreUpdate }) => {
   }, [trafficLight]);
 
   const handleRequestPedestrianWalk = () => {
-    if (isButtonRequested || trafficLight === "red") return;
+    if (isButtonRequested || trafficLight === "red" || trafficLight === "yellow") return;
     setIsButtonRequested(true);
-    setIsAutoMode(false);
-    setTrafficTimer(3);
+    setTrafficTimer(2);
     setTrafficLight("yellow");
     toast.success("Pedestrian button pressed! Traffic light changing to RED.");
-    setTimeout(() => {
-      setTrafficLight("red");
-      setTrafficTimer(6);
-      setIsButtonRequested(false);
-    }, 2000);
   };
 
   const handleCrossRoad = () => {
@@ -856,9 +974,10 @@ const CrossingSimulator = ({ onScoreUpdate }) => {
       setTimeout(() => setHonking(false), 1500);
       setCrossStep(2);
       crashedSignalRef.current = trafficLight;
+      // Freeze pedestrian at crash position (step 2)
+      crashStepRef.current = 2;
       setTimeout(() => {
         setCrossingResult("crash");
-        setLives((prev) => Math.max(0, prev - 1));
         toast.error(
           `Collision! Stepped onto moving traffic during ${trafficLight.toUpperCase()} light.`,
         );
@@ -875,14 +994,21 @@ const CrossingSimulator = ({ onScoreUpdate }) => {
     setCrossStep(0);
     setIsButtonRequested(false);
     setHonking(false);
-    if (lives <= 0) {
-      setLives(3);
-    }
+    crashStepRef.current = null;
+    setResetKey((k) => k + 1);
+    topCar1Ref.current = 60;
+    topCar2Ref.current = 82;
+    bottomCar1Ref.current = 24;
+    bottomCar2Ref.current = 2;
+    setTopCar1Pos(60);
+    setTopCar2Pos(82);
+    setBottomCar1Pos(24);
+    setBottomCar2Pos(2);
   };
 
   return (
     <div className="space-y-6">
-      {/* Game Objective & Lives Banner */}
+      {/* Game Objective Banner */}
       <div className="bg-gradient-to-r from-teal-900/10 via-slate-900/10 to-teal-900/10 border border-teal-500/30 p-4 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 text-xs shadow-sm">
         <div className="flex items-center gap-3">
           <span className="px-2.5 py-1 bg-teal-600 text-white rounded-lg font-black text-[10px] uppercase tracking-wider shadow">
@@ -893,51 +1019,27 @@ const CrossingSimulator = ({ onScoreUpdate }) => {
             <strong>WALK SAFE</strong>.
           </span>
         </div>
-
-        {/* Prominent Lives Counter */}
-        <div className="flex items-center gap-2 shrink-0 bg-white px-4 py-2 rounded-xl border border-slate-200 shadow-sm">
-          <span className="text-[11px] font-black tracking-wider text-slate-500 uppercase">
-            LIVES:
-          </span>
-          <div className="flex gap-1.5 items-center">
-            {[...Array(3)].map((_, i) => (
-              <Heart
-                key={i}
-                size={22}
-                className={
-                  i < lives
-                    ? "fill-rose-500 text-rose-500 drop-shadow-[0_0_8px_rgba(244,63,94,0.7)] animate-pulse"
-                    : "fill-slate-200 text-slate-300"
-                }
-              />
-            ))}
-          </div>
-        </div>
       </div>
 
       {/* Dashboard Top HUD */}
       <div className="flex flex-wrap items-center justify-between gap-4 bg-slate-100/90 p-4 rounded-2xl border border-slate-200">
-        {/* Signal Light Control Panel */}
+        {/* Signal Light Status Indicator (Read-Only) */}
         <div className="flex items-center gap-3">
           <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">
-            Traffic Light:
+            Traffic Light State:
           </span>
           <div className="flex bg-slate-900 p-2 rounded-xl border border-slate-700 shadow-md gap-2">
             {["red", "yellow", "green"].map((c) => (
-              <button
+              <div
                 key={c}
-                onClick={() => {
-                  setIsAutoMode(false);
-                  setTrafficLight(c);
-                }}
-                className={`w-8 h-8 rounded-full transition-all cursor-pointer border-2 ${
+                className={`w-7 h-7 rounded-full transition-all border-2 ${
                   trafficLight === c
                     ? c === "red"
                       ? "bg-rose-500 border-rose-300 shadow-[0_0_12px_#f43f5e] scale-110"
                       : c === "yellow"
                         ? "bg-amber-400 border-amber-200 shadow-[0_0_12px_#fbbf24] scale-110"
                         : "bg-teal-400 border-teal-200 shadow-[0_0_12px_#2dd4bf] scale-110"
-                    : "bg-slate-800 border-slate-700 opacity-40 hover:opacity-75"
+                    : "bg-slate-800 border-slate-700 opacity-20"
                 }`}
               />
             ))}
@@ -946,10 +1048,10 @@ const CrossingSimulator = ({ onScoreUpdate }) => {
 
         {/* Auto Timer & Reset */}
         <div className="flex items-center justify-end gap-3">
-          <div className="text-xs font-mono font-bold tracking-widest text-teal-700 bg-teal-50 px-3 py-2 rounded-xl border border-teal-200">
-            {isAutoMode
-              ? `AUTO: 00:0${trafficTimer}`
-              : "MANUAL OVERRIDE"}
+          <div className="text-xs font-mono font-bold tracking-widest text-teal-700 bg-teal-50 px-3.5 py-2.5 rounded-xl border border-teal-200">
+            {trafficLight === "red"
+              ? `WALK SAFE: 00:0${trafficTimer}s`
+              : `AUTO TIMER: 00:0${trafficTimer}s`}
           </div>
           <button
             onClick={reset}
@@ -974,7 +1076,7 @@ const CrossingSimulator = ({ onScoreUpdate }) => {
         {/* Full Screen Toggle Button */}
         <button
           onClick={() => setIsFullScreen(!isFullScreen)}
-          className="absolute top-4 left-4 z-40 p-2.5 bg-slate-800/80 hover:bg-slate-700/90 text-white rounded-xl border border-slate-700/50 backdrop-blur-sm transition-all cursor-pointer shadow-lg active:scale-95 flex items-center justify-center"
+          className="absolute top-4 left-4 z-50 p-2.5 bg-slate-800/80 hover:bg-slate-700/90 text-white rounded-xl border border-slate-700/50 backdrop-blur-sm transition-all cursor-pointer shadow-lg active:scale-95 flex items-center justify-center"
           title={isFullScreen ? "Exit Full Screen" : "Play Full Screen"}
         >
           {isFullScreen ? <Minimize size={18} /> : <Maximize size={18} />}
@@ -1063,7 +1165,7 @@ const CrossingSimulator = ({ onScoreUpdate }) => {
             ) : (
               <ShieldAlert size={14} />
             )}
-            {isButtonRequested
+            {isButtonRequested && trafficLight !== "red"
               ? "SIGNAL REQUESTED..."
               : trafficLight === "red"
                 ? "WALK SAFE (GO NOW)"
@@ -1086,100 +1188,57 @@ const CrossingSimulator = ({ onScoreUpdate }) => {
         </AnimatePresence>
 
         {/* Top Lane Vehicle 1: Yellow Taxi/Sedan (Drives Right to Left) */}
-        <motion.div
-          key={`top-car1-${trafficLight}`}
-          initial={trafficLight === "red" ? { left: "18%" } : { left: "120%" }}
-          animate={trafficLight === "red" ? { left: "18%" } : { left: "-30%" }}
-          transition={{
-            duration:
-              trafficLight === "red"
-                ? 0.5
-                : trafficLight === "yellow"
-                  ? 4.5
-                  : 2.2,
-            repeat: trafficLight === "red" ? 0 : Infinity,
-            ease: "linear",
-          }}
+        <div
+          key="top-car1-stable"
           className="absolute top-[35%] z-20 pointer-events-none"
+          style={{ left: `${topCar1Pos}%`, willChange: "left" }}
         >
           <RealisticCar
             color="#fbbf24"
             isHeadlightsOn={trafficLight !== "red"}
             scaleX={1}
           />
-        </motion.div>
+        </div>
 
         {/* Top Lane Vehicle 2: Heavy Cargo Truck (Follows behind Sedan) */}
-        <motion.div
-          key={`top-car2-${trafficLight}`}
-          initial={trafficLight === "red" ? { left: "-5%" } : { left: "175%" }}
-          animate={trafficLight === "red" ? { left: "-5%" } : { left: "20%" }}
-          transition={{
-            duration:
-              trafficLight === "red"
-                ? 0.5
-                : trafficLight === "yellow"
-                  ? 5.0
-                  : 2.5,
-            repeat: trafficLight === "red" ? 0 : Infinity,
-            ease: "linear",
-          }}
+        <div
+          key="top-car2-stable"
           className="absolute top-[35%] z-20 pointer-events-none"
+          style={{ left: `${topCar2Pos}%`, willChange: "left" }}
         >
           <RealisticTruck scaleX={1} />
-        </motion.div>
+        </div>
 
         {/* Bottom Lane Vehicle 1: Red Sports Car (Drives Left to Right) */}
-        <motion.div
-          key={`bottom-car1-${trafficLight}`}
-          initial={trafficLight === "red" ? { left: "68%" } : { left: "-25%" }}
-          animate={trafficLight === "red" ? { left: "68%" } : { left: "125%" }}
-          transition={{
-            duration:
-              trafficLight === "red"
-                ? 0.5
-                : trafficLight === "yellow"
-                  ? 4.0
-                  : 1.8,
-            repeat: trafficLight === "red" ? 0 : Infinity,
-            ease: "linear",
-          }}
+        <div
+          key="bottom-car1-stable"
           className="absolute bottom-[35%] z-20 pointer-events-none"
+          style={{ left: `${bottomCar1Pos}%`, willChange: "left" }}
         >
           <RealisticCar
             color="#f43f5e"
             isHeadlightsOn={trafficLight !== "red"}
             scaleX={-1}
           />
-        </motion.div>
+        </div>
 
-        {/* Bottom Lane Vehicle 2: Police Cruiser (Follows behind Sports Car with Flashing Emergency LEDs) */}
-        <motion.div
-          key={`bottom-car2-${trafficLight}`}
-          initial={trafficLight === "red" ? { left: "88%" } : { left: "-80%" }}
-          animate={trafficLight === "red" ? { left: "88%" } : { left: "70%" }}
-          transition={{
-            duration:
-              trafficLight === "red"
-                ? 0.5
-                : trafficLight === "yellow"
-                  ? 4.2
-                  : 2.0,
-            repeat: trafficLight === "red" ? 0 : Infinity,
-            ease: "linear",
-          }}
+        {/* Bottom Lane Vehicle 2: Police Cruiser (Follows behind Sports Car) */}
+        <div
+          key="bottom-car2-stable"
           className="absolute bottom-[35%] z-20 pointer-events-none"
+          style={{ left: `${bottomCar2Pos}%`, willChange: "left" }}
         >
           <RealisticPoliceCar scaleX={-1} />
-        </motion.div>
+        </div>
 
-        {/* Pedestrian Character (Strict Vertical Movement starting at Bottom-Center of Crosswalk) */}
+        {/* Pedestrian Character (Strict Vertical Movement - freezes at crash position, remounts on reset to avoid backtracking) */}
         <motion.div
+          key={`pedestrian-${resetKey}`}
           initial={{
-            bottom: `${20 + crossStep * 13.75}%`,
+            bottom: `${20 + (crashStepRef.current !== null ? crashStepRef.current : crossStep) * 13.75}%`,
           }}
           animate={{
-            bottom: `${20 + crossStep * 13.75}%`,
+            bottom: `${20 + (crashStepRef.current !== null ? crashStepRef.current : crossStep) * 13.75}%`,
           }}
           transition={{ duration: 2.2, ease: "easeInOut" }}
           className="absolute left-1/2 -translate-x-1/2 z-30 pointer-events-none"
@@ -1202,20 +1261,16 @@ const CrossingSimulator = ({ onScoreUpdate }) => {
                 <AlertOctagon size={36} />
               </div>
               <span className="text-3xl md:text-5xl font-black uppercase tracking-widest text-rose-400 drop-shadow-[0_0_20px_rgba(244,63,94,0.8)]">
-                {lives <= 0
-                  ? "GAME OVER"
-                  : "CRASHED!"}
+                CRASHED!
               </span>
               <p className="text-sm md:text-base font-semibold leading-relaxed mt-3 text-rose-100 bg-rose-900/60 px-6 py-3 rounded-2xl border border-rose-700/50 text-center max-w-md">
-                {lives <= 0
-                  ? `Out of Lives! You stepped onto moving traffic during ${crashedSignalRef.current.toUpperCase()} light.`
-                  : `Never cross on ${crashedSignalRef.current.toUpperCase()} light! Vehicles cannot stop in time.`}
+                Never cross on {crashedSignalRef.current.toUpperCase()} light! Vehicles cannot stop in time.
               </p>
               <button
                 onClick={reset}
                 className="mt-6 px-8 py-3 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all shadow-lg cursor-pointer"
               >
-                {lives <= 0 ? "RESTART LAB (3 LIVES)" : "Try Again"}
+                Try Again
               </button>
             </motion.div>
           )}
@@ -1363,7 +1418,7 @@ const Speedometer = ({ value }) => {
 };
 
 // --- SIMULATOR 2: Over Speeding ---
-const SpeedingSimulator = ({ onScoreUpdate }) => {
+const SpeedingSimulator = () => {
   const [stage, setStage] = useState("idle"); // idle | accel | decel | success | fail
   const [currentSpeed, setCurrentSpeed] = useState(40);
   const [signBoard, setSignBoard] = useState(null); // null | 80 | 40
@@ -1386,6 +1441,7 @@ const SpeedingSimulator = ({ onScoreUpdate }) => {
 
   const handleAccelerate = () => {
     if (stage !== "accel" && stage !== "decel") return;
+    setStatus("driving");
     setCurrentSpeed((prev) => {
       const nextSpeed = Math.min(prev + 10, 110);
       
@@ -1425,6 +1481,7 @@ const SpeedingSimulator = ({ onScoreUpdate }) => {
 
   const handleBrake = () => {
     if (stage !== "accel" && stage !== "decel") return;
+    setStatus("braking");
     setCurrentSpeed((prev) => Math.max(prev - 10, 0));
   };
 
@@ -1441,7 +1498,6 @@ const SpeedingSimulator = ({ onScoreUpdate }) => {
             if (currentSpeed <= 40) {
               setStatus("safe");
               setStage("success");
-              if (onScoreUpdate) onScoreUpdate(120);
             } else {
               setStatus("crash");
               setStage("fail");
@@ -1487,7 +1543,7 @@ const SpeedingSimulator = ({ onScoreUpdate }) => {
         {/* Full Screen Toggle Button */}
         <button
           onClick={() => setIsFullScreen(!isFullScreen)}
-          className="absolute top-4 right-4 z-40 p-2.5 bg-slate-800/80 hover:bg-slate-700/90 text-white rounded-xl border border-slate-700/50 backdrop-blur-sm transition-all cursor-pointer shadow-lg active:scale-95 flex items-center justify-center"
+          className="absolute top-4 right-4 z-50 p-2.5 bg-slate-800/80 hover:bg-slate-700/90 text-white rounded-xl border border-slate-700/50 backdrop-blur-sm transition-all cursor-pointer shadow-lg active:scale-95 flex items-center justify-center"
           title={isFullScreen ? "Exit Full Screen" : "Play Full Screen"}
         >
           {isFullScreen ? <Minimize size={18} /> : <Maximize size={18} />}
@@ -1517,14 +1573,14 @@ const SpeedingSimulator = ({ onScoreUpdate }) => {
 
         {/* Dynamic HUD Speedometer Overlay (Central Bottom) */}
         {stage !== "idle" && (
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-40 bg-slate-950/85 backdrop-blur-md px-5 py-2.5 rounded-3xl border border-slate-700/40 shadow-2xl flex flex-col items-center select-none">
+          <div className={`absolute ${isFullScreen ? "bottom-28" : "bottom-4"} left-1/2 -translate-x-1/2 z-40 bg-slate-950/85 backdrop-blur-md px-5 py-2.5 rounded-3xl border border-slate-700/40 shadow-2xl flex flex-col items-center select-none`}>
             <Speedometer value={currentSpeed} />
           </div>
         )}
 
         <AnimatedRoad
           isMoving={stage === "accel" || stage === "decel"}
-          speed={currentSpeed > 60 ? 0.6 : 1.2}
+          speed={currentSpeed > 0 ? (48 / currentSpeed) : 1.2}
           showBuildings={stage === "decel"}
         />
 
@@ -1565,20 +1621,36 @@ const SpeedingSimulator = ({ onScoreUpdate }) => {
         <motion.div
           animate={
             status === "idle"
-              ? { left: "6%" }
+              ? { left: "6%", rotate: 0, y: 0 }
               : status === "driving"
-                ? { left: "20%" }
+                ? {
+                    left: `${15 + (currentSpeed - 40) * 0.2}%`,
+                    rotate: -1.5,
+                    y: currentSpeed > 70 ? [0, -1, 1, 0] : 0
+                  }
                 : status === "braking"
-                  ? { left: "20%" }
+                  ? {
+                      left: `${15 + (currentSpeed - 40) * 0.2}%`,
+                      rotate: 3.5,
+                      y: currentSpeed > 70 ? [0, -1, 1, 0] : 0
+                    }
                   : status === "safe"
-                    ? { left: "30%" }
+                    ? { left: "30%", rotate: 0, y: 0 }
                     : { left: "60%", rotate: -15, y: -10 }
           }
-          transition={{
-            duration: status === "safe" ? 0.5 : status === "crash" ? 0.4 : 0.8,
-            ease: "easeOut",
-          }}
-          className="absolute top-1/2 -translate-y-1/2 z-30"
+          transition={
+            status === "driving" || status === "braking"
+              ? {
+                  left: { type: "spring", stiffness: 80, damping: 15 },
+                  rotate: { type: "spring", stiffness: 120, damping: 10 },
+                  y: { repeat: Infinity, duration: 0.12, ease: "linear" }
+                }
+              : {
+                  duration: status === "safe" ? 0.5 : status === "crash" ? 0.4 : 0.8,
+                  ease: "easeOut",
+                }
+          }
+          className="absolute top-[62%] -translate-y-1/2 z-30"
         >
           {status === "crash" ? (
             <AlertOctagon size={48} className="text-rose-500 animate-ping" />
@@ -1738,12 +1810,31 @@ const SpeedingSimulator = ({ onScoreUpdate }) => {
 };
 
 // --- SIMULATOR 3: Wrong Side Driving ---
-const WrongSideSimulator = ({ onScoreUpdate }) => {
+const WrongSideSimulator = () => {
   const [side, setSide] = useState(null); // null | "correct" | "wrong"
   const [status, setStatus] = useState("idle"); // idle | running | safe | jam
   const [showHonk, setShowHonk] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [showOutcome, setShowOutcome] = useState(false);
+
+  // Tracks collision state during active physics simulation to keep the RAF loop alive
+  const [hasCollided, setHasCollided] = useState(false);
+  const hasCollidedRef = useRef(false);
+
+  // Real-time coordinates for collision physics
+  const [playerCarPos, setPlayerCarPos] = useState(10);
+  const [truckPos, setTruckPos] = useState(75);
+  const [busPos, setBusPos] = useState(93);
+  const [taxiPos, setTaxiPos] = useState(111);
+  const [policePos, setPolicePos] = useState(129);
+  const [sportsPos, setSportsPos] = useState(147);
+
+  const playerCarRef = useRef(10);
+  const truckRef = useRef(75);
+  const busRef = useRef(93);
+  const taxiRef = useRef(111);
+  const policeRef = useRef(129);
+  const sportsRef = useRef(147);
 
   // Audio ref for honk sound
   const honkAudioRef = useRef(new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_2b28e7e5a6.mp3?filename=car-horn-12345.mp3'));
@@ -1765,69 +1856,186 @@ const WrongSideSimulator = ({ onScoreUpdate }) => {
     }
   }, [status]);
 
-  // Timeouts references for proper clearing
-  const honkTimeoutRef = useRef(null);
-  const jamTimeoutRef = useRef(null);
-  const successTimeoutRef = useRef(null);
+  // Outcome timeout reference
   const outcomeTimeoutRef = useRef(null);
 
   const handleSelectSide = (selectedSide) => {
-    // Clear any previous running timeouts
-    if (honkTimeoutRef.current) clearTimeout(honkTimeoutRef.current);
-    if (jamTimeoutRef.current) clearTimeout(jamTimeoutRef.current);
-    if (successTimeoutRef.current) clearTimeout(successTimeoutRef.current);
     if (outcomeTimeoutRef.current) clearTimeout(outcomeTimeoutRef.current);
 
     setSide(selectedSide);
     setStatus("running");
     setShowHonk(false);
     setShowOutcome(false);
+    setHasCollided(false);
+    hasCollidedRef.current = false;
+
+    // Initialize coordinate values for both directions
+    playerCarRef.current = 10;
+    truckRef.current = 75;
+    busRef.current = 93;
+    taxiRef.current = 111;
+    policeRef.current = 129;
+    sportsRef.current = 147;
+    setPlayerCarPos(10);
+    setTruckPos(75);
+    setBusPos(93);
+    setTaxiPos(111);
+    setPolicePos(129);
+    setSportsPos(147);
 
     localStorage.setItem("traffic_wrong_side_choice", selectedSide);
     localStorage.setItem("traffic_wrong_side_status", "running");
     localStorage.setItem("traffic_wrong_side_show_outcome", "false");
-
-    if (selectedSide === "correct") {
-      // Drives safely for 3.5 seconds then success
-      successTimeoutRef.current = setTimeout(() => {
-        setStatus("safe");
-        setShowOutcome(true);
-        setShowHonk(false);
-        localStorage.setItem("traffic_wrong_side_status", "safe");
-        localStorage.setItem("traffic_wrong_side_show_outcome", "true");
-        if (onScoreUpdate) onScoreUpdate(120);
-      }, 3500);
-    } else {
-      // Wrong side: show honk text after 1500ms, then trigger jam/collision at 5000ms (5.0s)
-      honkTimeoutRef.current = setTimeout(() => {
-        setShowHonk(true);
-      }, 1500);
-      jamTimeoutRef.current = setTimeout(() => {
-        setStatus("jam");
-        setShowHonk(false);
-        localStorage.setItem("traffic_wrong_side_status", "jam");
-      }, 5000);
-      // Show outcome overlay 1.5s after collision (at 6.5s total)
-      outcomeTimeoutRef.current = setTimeout(() => {
-        setShowOutcome(true);
-        localStorage.setItem("traffic_wrong_side_show_outcome", "true");
-      }, 6500);
-    }
   };
 
   const handleReset = () => {
-    if (honkTimeoutRef.current) clearTimeout(honkTimeoutRef.current);
-    if (jamTimeoutRef.current) clearTimeout(jamTimeoutRef.current);
-    if (successTimeoutRef.current) clearTimeout(successTimeoutRef.current);
     if (outcomeTimeoutRef.current) clearTimeout(outcomeTimeoutRef.current);
     setSide(null);
     setStatus("idle");
     setShowHonk(false);
     setShowOutcome(false);
+    setHasCollided(false);
+    hasCollidedRef.current = false;
+
+    playerCarRef.current = 10;
+    truckRef.current = 75;
+    busRef.current = 93;
+    taxiRef.current = 111;
+    policeRef.current = 129;
+    sportsRef.current = 147;
+    setPlayerCarPos(10);
+    setTruckPos(75);
+    setBusPos(93);
+    setTaxiPos(111);
+    setPolicePos(129);
+    setSportsPos(147);
+
     localStorage.removeItem("traffic_wrong_side_choice");
     localStorage.setItem("traffic_wrong_side_status", "idle");
     localStorage.setItem("traffic_wrong_side_show_outcome", "false");
   };
+
+  // Physics animation and contact detection loop
+  useEffect(() => {
+    if (status !== "running") return;
+
+    let animationId;
+    let lastTime = performance.now();
+
+    const updatePhysics = (time) => {
+      const delta = (time - lastTime) / 16.666;
+      lastTime = time;
+
+      const isCrashed = hasCollidedRef.current;
+
+      // Move player car (if not crashed)
+      let p = playerCarRef.current;
+      if (!isCrashed) {
+        const pSpeed = (side === "correct" ? 0.36 : 0.16) * delta;
+        p += pSpeed;
+        playerCarRef.current = p;
+        setPlayerCarPos(p);
+      }
+
+      // Move oncoming truck (if not crashed)
+      let t = truckRef.current;
+      if (!isCrashed) {
+        const tSpeed = 0.48 * delta;
+        t -= tSpeed;
+        truckRef.current = t;
+        setTruckPos(t);
+      }
+
+      // Move oncoming bus (roll up and stop 18% behind truck)
+      let b = busRef.current;
+      const bTarget = t + 18;
+      if (b > bTarget) {
+        const bSpeed = 0.48 * delta;
+        b -= bSpeed;
+        if (b < bTarget) b = bTarget;
+        busRef.current = b;
+        setBusPos(b);
+      }
+
+      // Move oncoming taxi (roll up and stop 18% behind bus)
+      let tx = taxiRef.current;
+      const txTarget = b + 18;
+      if (tx > txTarget) {
+        const txSpeed = 0.48 * delta;
+        tx -= txSpeed;
+        if (tx < txTarget) tx = txTarget;
+        taxiRef.current = tx;
+        setTaxiPos(tx);
+      }
+
+      // Move oncoming police car (roll up and stop 18% behind taxi)
+      let pc = policeRef.current;
+      const pcTarget = tx + 18;
+      if (pc > pcTarget) {
+        const pcSpeed = 0.48 * delta;
+        pc -= pcSpeed;
+        if (pc < pcTarget) pc = pcTarget;
+        policeRef.current = pc;
+        setPolicePos(pc);
+      }
+
+      // Move oncoming sports car (roll up and stop 18% behind police)
+      let sp = sportsRef.current;
+      const spTarget = pc + 18;
+      if (sp > spTarget) {
+        const spSpeed = 0.48 * delta;
+        sp -= spSpeed;
+        if (sp < spTarget) sp = spTarget;
+        sportsRef.current = sp;
+        setSportsPos(sp);
+      }
+
+      if (!isCrashed) {
+        if (side === "wrong") {
+          // Honk warning significantly before contact
+          if (t - (p + 11.75) < 32 && t - (p + 11.75) > 0) {
+            setShowHonk(true);
+          }
+
+          // Contact collision detection
+          if (p + 11.75 >= t) {
+            hasCollidedRef.current = true;
+            setHasCollided(true);
+            setShowHonk(false);
+
+            // Visual crash overlap correction
+            const collisionPoint = (p + t) / 2;
+            playerCarRef.current = collisionPoint - 5.875;
+            setPlayerCarPos(collisionPoint - 5.875);
+            truckRef.current = collisionPoint + 5.875;
+            setTruckPos(collisionPoint + 5.875);
+
+            outcomeTimeoutRef.current = setTimeout(() => {
+              setStatus("jam");
+              localStorage.setItem("traffic_wrong_side_status", "jam");
+              setShowOutcome(true);
+              localStorage.setItem("traffic_wrong_side_show_outcome", "true");
+            }, 250);
+          }
+        } else if (side === "correct") {
+          // Success when player safely exits screen
+          if (p >= 115) {
+            setStatus("safe");
+            localStorage.setItem("traffic_wrong_side_status", "safe");
+            outcomeTimeoutRef.current = setTimeout(() => {
+              setShowOutcome(true);
+              localStorage.setItem("traffic_wrong_side_show_outcome", "true");
+            }, 250);
+          }
+        }
+      }
+
+      animationId = requestAnimationFrame(updatePhysics);
+    };
+
+    animationId = requestAnimationFrame(updatePhysics);
+    return () => cancelAnimationFrame(animationId);
+  }, [status, side]);
 
   // Safely restore state from localStorage on mount
   useEffect(() => {
@@ -1842,6 +2050,21 @@ const WrongSideSimulator = ({ onScoreUpdate }) => {
         setSide(savedSide);
         setStatus(savedStatus);
         setShowOutcome(savedShowOutcome);
+
+        // Restore visual state positions
+        if (savedStatus === "safe") {
+          setPlayerCarPos(115);
+        } else if (savedStatus === "jam") {
+          setHasCollided(true);
+          hasCollidedRef.current = true;
+          // Set to a completed pile-up layout with zero overlap
+          setPlayerCarPos(31);
+          setTruckPos(43);
+          setBusPos(61);
+          setTaxiPos(79);
+          setPolicePos(97);
+          setSportsPos(115);
+        }
       }
     } else {
       handleReset();
@@ -1851,9 +2074,6 @@ const WrongSideSimulator = ({ onScoreUpdate }) => {
   // Clean up timeouts on unmount
   useEffect(() => {
     return () => {
-      if (honkTimeoutRef.current) clearTimeout(honkTimeoutRef.current);
-      if (jamTimeoutRef.current) clearTimeout(jamTimeoutRef.current);
-      if (successTimeoutRef.current) clearTimeout(successTimeoutRef.current);
       if (outcomeTimeoutRef.current) clearTimeout(outcomeTimeoutRef.current);
     };
   }, []);
@@ -1862,13 +2082,14 @@ const WrongSideSimulator = ({ onScoreUpdate }) => {
     <div className="space-y-6">
       {/* Simulator Viewport */}
       <motion.div
-        animate={status === "jam" ? { x: [0, -25, 25, -20, 20, -10, 10, 0] } : {}}
+        animate={(hasCollided || status === "jam") ? { x: [0, -22, 22, -16, 16, -10, 10, -4, 4, 0], y: [0, 10, -10, 6, -6, 0] } : {}}
+        transition={{ duration: 0.5, ease: "easeOut" }}
         className={isFullScreen ? "fixed inset-0 z-50 bg-slate-900 border-none rounded-none overflow-hidden flex flex-col justify-center select-none" : "relative rounded-3xl h-[450px] w-full border-8 border-slate-800 overflow-hidden shadow-xl flex flex-col justify-center select-none"}
       >
         {/* Full Screen Toggle Button */}
         <button
           onClick={() => setIsFullScreen(!isFullScreen)}
-          className="absolute top-4 right-4 z-40 p-2.5 bg-slate-800/80 hover:bg-slate-700/90 text-white rounded-xl border border-slate-700/50 backdrop-blur-sm transition-all cursor-pointer shadow-lg active:scale-95 flex items-center justify-center"
+          className="absolute top-4 right-4 z-50 p-2.5 bg-slate-800/80 hover:bg-slate-700/90 text-white rounded-xl border border-slate-700/50 backdrop-blur-sm transition-all cursor-pointer shadow-lg active:scale-95 flex items-center justify-center"
           title={isFullScreen ? "Exit Full Screen" : "Play Full Screen"}
         >
           {isFullScreen ? <Minimize size={18} /> : <Maximize size={18} />}
@@ -1881,11 +2102,11 @@ const WrongSideSimulator = ({ onScoreUpdate }) => {
 
         {/* Choice Overlay Screen when Idle */}
         {status === "idle" && (
-          <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-md z-40 flex flex-col items-center justify-center p-6 text-white">
+          <div className="absolute inset-0 bg-slate-950/80 backdrop-blur-md z-40 flex flex-col items-center justify-center p-6 text-white animate-fade-in">
             <span className="text-xl md:text-2xl font-black tracking-wider text-teal-400 mb-2 uppercase text-center animate-pulse">
               Choose Your Driving Side
             </span>
-            <p className="text-xs md:text-sm text-slate-300 text-center max-w-md mb-6 leading-relaxed">
+            <p className="text-xs md:text-sm text-slate-350 text-center max-w-md mb-6 leading-relaxed font-medium">
               Select which side of the road you want to drive on to begin your
               journey. Choose wisely to avoid accidents and keep traffic
               flowing.
@@ -1893,14 +2114,14 @@ const WrongSideSimulator = ({ onScoreUpdate }) => {
             <div className="flex flex-col sm:flex-row gap-4 w-full max-w-md justify-center">
               <button
                 onClick={() => handleSelectSide("correct")}
-                className="flex-1 px-5 py-4 bg-teal-600 hover:bg-teal-500 active:scale-95 transition-all text-white font-black text-xs md:text-sm tracking-wider uppercase rounded-2xl cursor-pointer border border-teal-400/30 shadow-lg shadow-teal-500/20 flex items-center justify-center gap-2"
+                className="flex-1 px-5 py-4 bg-teal-650 hover:bg-teal-600 active:scale-95 transition-all text-white font-black text-xs md:text-sm tracking-wider uppercase rounded-2xl cursor-pointer border border-teal-500/30 shadow-lg shadow-teal-500/20 flex items-center justify-center gap-2"
               >
                 <ShieldCheck size={18} />
                 Drive Left
               </button>
               <button
                 onClick={() => handleSelectSide("wrong")}
-                className="flex-1 px-5 py-4 bg-rose-600 hover:bg-rose-500 active:scale-95 transition-all text-white font-black text-xs md:text-sm tracking-wider uppercase rounded-2xl cursor-pointer border border-rose-400/30 shadow-lg shadow-rose-500/20 flex items-center justify-center gap-2"
+                className="flex-1 px-5 py-4 bg-rose-650 hover:bg-rose-600 active:scale-95 transition-all text-white font-black text-xs md:text-sm tracking-wider uppercase rounded-2xl cursor-pointer border border-rose-500/30 shadow-lg shadow-rose-500/20 flex items-center justify-center gap-2"
               >
                 <AlertTriangle size={18} />
                 Drive Right
@@ -1909,47 +2130,97 @@ const WrongSideSimulator = ({ onScoreUpdate }) => {
           </div>
         )}
 
-        {/* Oncoming Traffic flow for Correct Drive (They stay in bottom lane, player is in top lane) */}
+        {/* Oncoming & Lead Traffic flow for Correct Drive */}
         {side === "correct" && (status === "running" || status === "safe") && (
           <>
-            {/* Truck passing in the bottom lane */}
+            {/* Truck passing continuously in the bottom lane (oncoming direction) */}
             <motion.div
-              initial={{ left: "110%" }}
-              animate={{ left: "-30%" }}
-              transition={{ duration: 3.5, ease: "linear" }}
-              className="absolute bottom-[35%] z-20"
+              key="correct-truck"
+              animate={{ left: ["110%", "-30%"] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: "linear", delay: 0.0 }}
+              className="absolute top-[64%] -translate-y-1/2 z-20 pointer-events-none"
             >
               <RealisticTruck />
             </motion.div>
 
-            {/* Police Cruiser following the truck in bottom lane */}
+            {/* Police Cruiser following the truck in bottom lane, staggered */}
             <motion.div
-              initial={{ left: "150%" }}
-              animate={{ left: "10%" }}
-              transition={{ duration: 3.5, ease: "linear" }}
-              className="absolute bottom-[35%] z-20"
+              key="correct-police"
+              animate={{ left: ["110%", "-30%"] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: "linear", delay: 1.1 }}
+              className="absolute top-[64%] -translate-y-1/2 z-20 pointer-events-none"
             >
               <RealisticPoliceCar />
             </motion.div>
 
-            {/* Added: Taxi driving ahead of the player in the top lane (left side) */}
+            {/* Oncoming City Bus in bottom lane */}
             <motion.div
-              initial={{ left: "50%" }}
-              animate={{ left: "150%" }}
-              transition={{ duration: 3.5, ease: "linear" }}
-              className="absolute top-[35%] z-20"
+              key="correct-bus"
+              animate={{ left: ["110%", "-30%"] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: "linear", delay: 2.2 }}
+              className="absolute top-[64%] -translate-y-1/2 z-20 pointer-events-none"
+            >
+              <RealisticBus />
+            </motion.div>
+
+            {/* Oncoming Yellow Taxi in bottom lane */}
+            <motion.div
+              key="correct-oncoming-taxi"
+              animate={{ left: ["110%", "-30%"] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: "linear", delay: 3.3 }}
+              className="absolute top-[64%] -translate-y-1/2 z-20 pointer-events-none"
+            >
+              <RealisticCar color="#fbbf24" scaleX={1} />
+            </motion.div>
+
+            {/* Oncoming Red Sports Car in bottom lane */}
+            <motion.div
+              key="correct-oncoming-sports"
+              animate={{ left: ["110%", "-30%"] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: "linear", delay: 4.4 }}
+              className="absolute top-[64%] -translate-y-1/2 z-20 pointer-events-none"
+            >
+              <RealisticCar color="#f43f5e" scaleX={1} />
+            </motion.div>
+
+            {/* Lead Taxi driving ahead of the player in top lane */}
+            <motion.div
+              key="correct-lead-taxi"
+              animate={{ left: ["45%", "145%"] }}
+              transition={{ duration: 4.5, ease: "linear" }}
+              className="absolute top-[36%] -translate-y-1/2 z-20 pointer-events-none"
             >
               <RealisticCar color="#fbbf24" scaleX={-1} />
             </motion.div>
 
-            {/* Added: Red Sports Car driving behind the player in the top lane (left side) */}
+            {/* Lead Blue Sedan driving further ahead in top lane */}
             <motion.div
-              initial={{ left: "-20%" }}
-              animate={{ left: "80%" }}
-              transition={{ duration: 5.5, ease: "linear" }}
-              className="absolute top-[35%] z-20"
+              key="correct-lead-blue"
+              animate={{ left: ["75%", "175%"] }}
+              transition={{ duration: 4.5, ease: "linear" }}
+              className="absolute top-[36%] -translate-y-1/2 z-20 pointer-events-none"
             >
-              <RealisticCar color="#f43f5e" scaleX={-1} />
+              <RealisticCar color="#3b82f6" scaleX={-1} />
+            </motion.div>
+
+            {/* Following Green Sedan trailing safely behind the player in top lane */}
+            <motion.div
+              key="correct-follow-green"
+              animate={{ left: ["-15%", "115%"] }}
+              transition={{ duration: 5.85, ease: "linear" }}
+              className="absolute top-[36%] -translate-y-1/2 z-20 pointer-events-none"
+            >
+              <RealisticCar color="#10b981" scaleX={-1} />
+            </motion.div>
+
+            {/* Following Red Sports Car trailing further behind the player in top lane */}
+            <motion.div
+              key="correct-follow-red"
+              animate={{ left: ["-45%", "115%"] }}
+              transition={{ duration: 7.2, ease: "linear" }}
+              className="absolute top-[36%] -translate-y-1/2 z-20 pointer-events-none"
+            >
+              <RealisticCar color="#ef4444" scaleX={-1} />
             </motion.div>
           </>
         )}
@@ -1957,17 +2228,15 @@ const WrongSideSimulator = ({ onScoreUpdate }) => {
         {/* Oncoming Traffic Jam for Wrong Drive (They block the player in the bottom lane) */}
         {side === "wrong" && (status === "running" || status === "jam") && (
           <>
-            {/* Truck blocking the lane (Stops head-on with Player and collides) */}
-            <motion.div
-              initial={{ left: "110%" }}
-              animate={{
-                left: status === "jam" ? "42%" : "38%",
+            {/* Truck approaching head-on in bottom lane — comes from right, stops on jam */}
+            <div
+              key="wrong-truck"
+              className="absolute top-[64%] -translate-y-1/2 z-20 pointer-events-none transition-transform"
+              style={{
+                left: `${truckPos}%`,
+                willChange: "left",
+                transform: `translateY(-50%) ${(status === "jam" || hasCollided) ? "rotate(4deg) scale(0.98)" : ""}`,
               }}
-              transition={{
-                duration: status === "jam" ? 0.25 : 5.0,
-                ease: status === "jam" ? "easeOut" : "linear",
-              }}
-              className="absolute bottom-[35%] z-20"
             >
               <RealisticTruck />
               {showHonk && (
@@ -1975,150 +2244,203 @@ const WrongSideSimulator = ({ onScoreUpdate }) => {
                   initial={{ scale: 0, y: 10 }}
                   animate={{ scale: 1, y: 0 }}
                   exit={{ scale: 0 }}
-                  className="absolute -top-16 left-1/2 -translate-x-1/2 bg-yellow-400 text-black text-xs font-black px-3 py-1.5 rounded-xl border-2 border-black shadow-lg uppercase whitespace-nowrap flex items-center gap-1.5 z-30"
+                  className="absolute -top-16 left-1/2 -translate-x-1/2 bg-yellow-400 text-black text-xs font-black px-3 py-1.5 rounded-xl border-2 border-black shadow-lg uppercase whitespace-nowrap flex items-center gap-1.5 z-30 pointer-events-none"
                 >
                   <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-red-600"></span>
                   HONK! HONK! 🔊
                 </motion.div>
               )}
-            </motion.div>
+            </div>
 
-            {/* City Bus stopping behind the truck */}
-            <motion.div
-              initial={{ left: "150%" }}
-              animate={{
-                left: "58%",
-              }}
-              transition={{
-                duration: 5.0,
-                delay: 0.3,
-                ease: "easeOut",
-              }}
-              className="absolute bottom-[35%] z-20"
+            {/* Bus following behind the truck — staggered start, stops behind truck on jam */}
+            <div
+              key="wrong-bus"
+              className="absolute top-[64%] -translate-y-1/2 z-20 pointer-events-none"
+              style={{ left: `${busPos}%`, willChange: "left" }}
             >
               <RealisticBus />
-              {showHonk && (
-                <motion.div
-                  initial={{ scale: 0, y: 10 }}
-                  animate={{ scale: 0.9, y: 0 }}
-                  className="absolute -top-16 left-1/3 bg-amber-400 text-black text-[10px] font-black px-2 py-1 rounded-lg border border-black shadow-md uppercase whitespace-nowrap z-30"
-                >
-                  BEEP! 🔊
-                </motion.div>
-              )}
-            </motion.div>
+            </div>
 
-            {/* Taxi car stopping behind the bus */}
-            <motion.div
-              initial={{ left: "190%" }}
-              animate={{
-                left: "78%",
-              }}
-              transition={{
-                duration: 5.0,
-                delay: 0.6,
-                ease: "easeOut",
-              }}
-              className="absolute bottom-[35%] z-20"
+            {/* Taxi — staggered further back, stops behind bus on jam */}
+            <div
+              key="wrong-taxi"
+              className="absolute top-[64%] -translate-y-1/2 z-20 pointer-events-none"
+              style={{ left: `${taxiPos}%`, willChange: "left" }}
             >
               <RealisticCar color="#fbbf24" scaleX={1} />
-              {showHonk && (
-                <motion.div
-                  initial={{ scale: 0, y: 10 }}
-                  animate={{ scale: 0.8, y: 0 }}
-                  className="absolute -top-12 left-1/2 bg-yellow-300 text-black text-[9px] font-black px-2 py-1 rounded-lg border border-black shadow-sm uppercase whitespace-nowrap z-30"
-                >
-                  HONK! 🔊
-                </motion.div>
-              )}
-            </motion.div>
+            </div>
 
-            {/* Added: City Bus driving smoothly in the top lane (left side) since it's unblocked */}
+            {/* Police Cruiser — stops behind taxi on jam */}
+            <div
+              key="wrong-police"
+              className="absolute top-[64%] -translate-y-1/2 z-20 pointer-events-none"
+              style={{ left: `${policePos}%`, willChange: "left" }}
+            >
+              <RealisticPoliceCar />
+            </div>
+
+            {/* Sports Car — stops behind police car on jam */}
+            <div
+              key="wrong-sports"
+              className="absolute top-[64%] -translate-y-1/2 z-20 pointer-events-none"
+              style={{ left: `${sportsPos}%`, willChange: "left" }}
+            >
+              <RealisticCar color="#f43f5e" scaleX={1} />
+            </div>
+
+            {/* Top lane (left side) — vehicles driving smoothly in the correct direction, looping */}
             <motion.div
-              initial={{ left: "-10%" }}
-              animate={{ left: "120%" }}
-              transition={{ duration: 3.2, ease: "linear" }}
-              className="absolute top-[35%] z-20"
+              key="wrong-top-bus"
+              animate={{ left: ["50%", "120%"] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: "linear" }}
+              className="absolute top-[36%] -translate-y-1/2 z-20 pointer-events-none"
             >
               <RealisticBus scaleX={-1} />
             </motion.div>
 
-            {/* Added: Police Cruiser driving smoothly behind the bus in the top lane (left side) */}
             <motion.div
-              initial={{ left: "-55%" }}
-              animate={{ left: "75%" }}
-              transition={{ duration: 3.2, ease: "linear" }}
-              className="absolute top-[35%] z-20"
+              key="wrong-top-police"
+              animate={{ left: ["15%", "120%"] }}
+              transition={{ duration: 3.3, repeat: Infinity, ease: "linear" }}
+              className="absolute top-[36%] -translate-y-1/2 z-20 pointer-events-none"
             >
               <RealisticPoliceCar scaleX={-1} />
+            </motion.div>
+
+            <motion.div
+              key="wrong-top-taxi"
+              animate={{ left: ["-20%", "120%"] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: "linear", delay: 0.2 }}
+              className="absolute top-[36%] -translate-y-1/2 z-20 pointer-events-none"
+            >
+              <RealisticCar color="#fbbf24" scaleX={-1} />
+            </motion.div>
+
+            <motion.div
+              key="wrong-top-sports"
+              animate={{ left: ["-20%", "120%"] }}
+              transition={{ duration: 4.2, repeat: Infinity, ease: "linear", delay: 0.6 }}
+              className="absolute top-[36%] -translate-y-1/2 z-20 pointer-events-none"
+            >
+              <RealisticCar color="#f43f5e" scaleX={-1} />
+            </motion.div>
+
+            <motion.div
+              key="wrong-top-blue"
+              animate={{ left: ["-20%", "120%"] }}
+              transition={{ duration: 4.8, repeat: Infinity, ease: "linear", delay: 1.0 }}
+              className="absolute top-[36%] -translate-y-1/2 z-20 pointer-events-none"
+            >
+              <RealisticCar color="#3b82f6" scaleX={-1} />
             </motion.div>
           </>
         )}
 
         {/* Player Car */}
         {side && (
-          <motion.div
-            initial={{
-              left: "15%",
-              top: side === "correct" ? "35%" : "65%",
+          <div
+            className="absolute z-20 pointer-events-none transition-transform"
+            style={{
+              left: `${playerCarPos}%`,
+              top: side === "correct" ? "36%" : "64%",
+              willChange: "left",
+              transform: `translateY(-50%) ${(status === "jam" || hasCollided) ? "rotate(-7deg) scale(0.97)" : ""}`,
             }}
-            animate={{
-              left:
-                side === "correct"
-                  ? "115%"
-                  : status === "jam"
-                    ? "26%"
-                    : "38%",
-              top: side === "correct" ? "35%" : "65%",
-              rotate: status === "jam" ? [-12, 0, -8] : 0,
-            }}
-            transition={{
-              duration:
-                side === "correct"
-                  ? 5.5
-                  : status === "jam"
-                    ? 0.25
-                    : 5.0,
-              ease:
-                side === "correct"
-                  ? "linear"
-                  : status === "jam"
-                    ? "easeOut"
-                    : "linear",
-            }}
-            className="absolute z-30"
           >
             {/* Aesthetic Floating "YOU" Label */}
             <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-teal-500 text-[8px] font-black tracking-wider text-white px-2 py-0.5 rounded-full border border-teal-300 shadow-[0_2px_6px_rgba(20,184,166,0.6)] uppercase select-none animate-bounce">
               YOU
             </div>
             <RealisticCar color="#0d9488" scaleX={-1} />
-          </motion.div>
+          </div>
         )}
 
-        {/* Collision/Explosion Effect */}
-        {status === "jam" && side === "wrong" && (
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: [0, 1.5, 1.2], opacity: [0, 1, 0.9] }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="absolute left-[38%] top-[55%] z-45 pointer-events-none flex flex-col items-center"
-          >
-            {/* Explosion cloud/flame effect */}
-            <div className="relative">
-              <div className="absolute inset-0 bg-red-500 rounded-full blur-xl opacity-80 animate-ping" style={{ width: "80px", height: "80px" }} />
-              <div className="absolute inset-0 bg-amber-500 rounded-full blur-md opacity-90" style={{ width: "60px", height: "60px", transform: "translate(10px, 10px)" }} />
-              <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="drop-shadow-[0_0_15px_#f43f5e]">
-                <path d="M50 0 L60 30 L90 20 L70 50 L100 60 L70 70 L90 90 L50 80 L30 90 L40 70 L0 60 L30 50 L10 20 L40 30 Z" fill="#ef4444" />
-                <path d="M50 15 L57 37 L78 30 L64 51 L85 58 L64 65 L78 79 L50 72 L36 79 L43 65 L15 58 L36 51 L22 30 L43 37 Z" fill="#f59e0b" />
-                <path d="M50 30 L53 43 L65 39 L57 51 L69 55 L57 59 L65 67 L50 63 L41 67 L45 59 L31 55 L43 51 L35 39 L47 43 Z" fill="#fef08a" />
-              </svg>
-              <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-red-600 text-white font-black text-[10px] px-2 py-0.5 rounded shadow border border-white uppercase whitespace-nowrap animate-bounce">
+        {/* Collision Impact Effect */}
+        <AnimatePresence>
+          {(status === "jam" || hasCollided) && side === "wrong" && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="absolute top-[64%] -translate-y-1/2 z-40 pointer-events-none"
+              style={{ left: `${playerCarPos + 7}%` }}
+            >
+              {/* White Radial Shockwave Flash Ring */}
+              <motion.div
+                initial={{ scale: 0, opacity: 1 }}
+                animate={{ scale: [0, 3.2], opacity: [1, 0] }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="absolute inset-0 rounded-full border-4 border-amber-300 shadow-[0_0_30px_rgba(251,191,36,1)] pointer-events-none"
+              />
+
+              {/* Central impact fire core */}
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: [0, 2.0, 1.2], opacity: [0, 1, 0.8] }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+                className="relative w-24 h-24 -ml-12 -mt-12"
+              >
+                <div className="absolute inset-0 bg-white rounded-full blur-xl opacity-90 animate-pulse" />
+                <div className="absolute inset-1 bg-gradient-to-br from-amber-400 via-orange-600 to-red-700 rounded-full blur-lg opacity-90" />
+                <div className="absolute inset-4 bg-yellow-200 rounded-full blur-md opacity-90" />
+              </motion.div>
+
+              {/* High-speed Exploding Spark Fragments */}
+              {[...Array(14)].map((_, i) => {
+                const angle = (i / 14) * Math.PI * 2;
+                const distance = 40 + (i % 3) * 18;
+                const x = Math.cos(angle) * distance;
+                const y = Math.sin(angle) * distance;
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ x: 0, y: 0, scale: 1, opacity: 1 }}
+                    animate={{ x, y, scale: [1, 0], opacity: [1, 0] }}
+                    transition={{ duration: 0.5 + (i % 3) * 0.1, ease: "easeOut" }}
+                    className="absolute top-0 left-0 w-2.5 h-2.5 bg-amber-300 rounded-full shadow-[0_0_12px_#fde047]"
+                  />
+                );
+              })}
+
+              {/* Smoke clouds expanding outward */}
+              <motion.div
+                initial={{ scale: 0, opacity: 0, y: 0 }}
+                animate={{ scale: [0, 2.5], opacity: [0.7, 0], y: -25 }}
+                transition={{ duration: 1.4, ease: "easeOut", delay: 0.1 }}
+                className="absolute -top-12 -left-12 w-24 h-24 bg-slate-700 rounded-full blur-2xl"
+              />
+              {/* Debris particles flying out */}
+              {[...Array(8)].map((_, i) => {
+                const angle = (i / 8) * Math.PI * 2;
+                const dist = 40 + Math.random() * 30;
+                return (
+                  <motion.div
+                    key={i}
+                    initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+                    animate={{
+                      x: Math.cos(angle) * dist,
+                      y: Math.sin(angle) * dist,
+                      opacity: 0,
+                      scale: 0.3,
+                    }}
+                    transition={{ duration: 0.6 + Math.random() * 0.3, ease: "easeOut", delay: 0.05 }}
+                    className="absolute top-0 left-0 w-2 h-2 bg-slate-400 rounded-sm"
+                  />
+                );
+              })}
+
+              {/* Animated Floating COLLISION Label */}
+              <motion.div
+                initial={{ y: 10, opacity: 0, scale: 0.8 }}
+                animate={{ y: -35, opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: 0.15, ease: "easeOut" }}
+                className="absolute -top-10 left-1/2 -translate-x-1/2 bg-rose-600 text-white font-black text-xs px-3 py-1 rounded-xl shadow-lg border-2 border-rose-400 uppercase whitespace-nowrap tracking-wider z-50 pointer-events-none"
+              >
                 💥 COLLISION!
-              </div>
-            </div>
-          </motion.div>
-        )}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Overlays for Outcomes */}
         <AnimatePresence>
@@ -2183,7 +2505,7 @@ const WrongSideSimulator = ({ onScoreUpdate }) => {
                 SAFE & SMOOTH JOURNEY
               </span>
               <div className="mt-3 text-xs md:text-sm font-semibold leading-relaxed bg-teal-900/60 p-4 rounded-2xl border border-teal-700/50 text-teal-100 max-w-md space-y-1.5 text-center">
-                <p className="font-bold text-teal-300">
+                <p className="font-bold text-teal-350">
                   EXCELLENT ROAD DISCIPLINE:
                 </p>
                 <p>
@@ -2232,7 +2554,7 @@ const WrongSideSimulator = ({ onScoreUpdate }) => {
 };
 
 // --- SIMULATOR 4: Distracted Driving ---
-const DistractedSimulator = ({ onScoreUpdate }) => {
+const DistractedSimulator = () => {
   // phase: idle | driving | notification | responded | ignored | crash | success
   const [phase, setPhase] = useState("idle");
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -2263,7 +2585,6 @@ const DistractedSimulator = ({ onScoreUpdate }) => {
     setPhase("ignored");
     setTimeout(() => {
       setPhase("success");
-      onScoreUpdate(120);
     }, 1000);
   };
 
@@ -2293,7 +2614,7 @@ const DistractedSimulator = ({ onScoreUpdate }) => {
         {/* Full Screen Toggle Button */}
         <button
           onClick={() => setIsFullScreen(!isFullScreen)}
-          className="absolute top-4 right-4 z-40 p-2.5 bg-slate-800/80 hover:bg-slate-700/90 text-white rounded-xl border border-slate-700/50 backdrop-blur-sm transition-all cursor-pointer shadow-lg active:scale-95 flex items-center justify-center"
+          className="absolute top-4 right-4 z-50 p-2.5 bg-slate-800/80 hover:bg-slate-700/90 text-white rounded-xl border border-slate-700/50 backdrop-blur-sm transition-all cursor-pointer shadow-lg active:scale-95 flex items-center justify-center"
           title={isFullScreen ? "Exit Full Screen" : "Play Full Screen"}
         >
           {isFullScreen ? <Minimize size={18} /> : <Maximize size={18} />}
@@ -2538,60 +2859,48 @@ const DistractedSimulator = ({ onScoreUpdate }) => {
 // --- MAIN TRAFFIC LAB COMPONENT ---
 const TrafficLab = () => {
   const [activeScenario, setActiveScenario] = useState("crossing");
-  const [safetyScore, setSafetyScore] = useState(0);
-
-  const handleScoreUpdate = (points) => {
-    setSafetyScore((prev) => prev + points);
-  };
 
   return (
     <div className="bg-white rounded-[32px] border border-slate-100 shadow-[0_12px_40px_rgba(0,0,0,0.03)] p-4 md:p-6 w-full max-w-none">
-      <div className="w-full text-left space-y-8">
-        <div className="border-b border-slate-100 pb-5">
-          <h2 className="text-2xl md:text-3xl font-display font-bold text-slate-800 tracking-tight">
-            Road Safety Simulators
-          </h2>
-          <p className="text-[13px] text-slate-500 font-medium mt-1">
-            Experience realistic road hazards and learn why traffic rules save lives.
-          </p>
-        </div>
-
+      <div className="w-full text-left space-y-6">
         {/* Tab Navigation - Distinct Teal Safety Green Theme */}
-        <div className="flex flex-wrap gap-3">
-          {[
-            {
-              id: "crossing",
-              label: "Zebra Crossing",
-              icon: <Activity size={16} />,
-            },
-            {
-              id: "speeding",
-              label: "Over Speeding",
-              icon: <Zap size={16} />,
-            },
-            {
-              id: "wrongSide",
-              label: "Lane Discipline",
-              icon: <AlertTriangle size={16} />,
-            },
-            {
-              id: "distracted",
-              label: "Distracted Driving",
-              icon: <Smartphone size={16} />,
-            },
-          ].map((sc) => (
-            <button
-              key={sc.id}
-              onClick={() => setActiveScenario(sc.id)}
-              className={`px-5 py-3 rounded-2xl text-xs md:text-sm font-black uppercase tracking-wider flex items-center gap-2.5 transition-all cursor-pointer ${
-                activeScenario === sc.id
-                  ? "bg-teal-600 text-white shadow-teal-500/20 shadow-lg scale-105 font-black"
-                  : "bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200"
-              }`}
-            >
-              {sc.icon} {sc.label}
-            </button>
-          ))}
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-5">
+          <div className="flex flex-wrap gap-2.5">
+            {[
+              {
+                id: "crossing",
+                label: "Zebra Crossing",
+                icon: <Activity size={16} />,
+              },
+              {
+                id: "speeding",
+                label: "Over Speeding",
+                icon: <Zap size={16} />,
+              },
+              {
+                id: "wrongSide",
+                label: "Lane Discipline",
+                icon: <AlertTriangle size={16} />,
+              },
+              {
+                id: "distracted",
+                label: "Distracted Driving",
+                icon: <Smartphone size={16} />,
+              },
+            ].map((sc) => (
+              <button
+                key={sc.id}
+                onClick={() => setActiveScenario(sc.id)}
+                className={`px-5 py-3 rounded-2xl text-xs md:text-sm font-black uppercase tracking-wider flex items-center gap-2.5 transition-all cursor-pointer ${
+                  activeScenario === sc.id
+                    ? "bg-teal-600 text-white shadow-teal-500/20 shadow-lg scale-105 font-black"
+                    : "bg-slate-100 text-slate-600 hover:bg-slate-200 border border-slate-200"
+                }`}
+              >
+                {sc.icon} {sc.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Active Simulator Section Container - Clean Slate Background */}
@@ -2605,7 +2914,7 @@ const TrafficLab = () => {
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.2 }}
               >
-                <CrossingSimulator onScoreUpdate={handleScoreUpdate} />
+                <CrossingSimulator />
               </motion.div>
             )}
             {activeScenario === "speeding" && (
@@ -2616,7 +2925,7 @@ const TrafficLab = () => {
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.2 }}
               >
-                <SpeedingSimulator onScoreUpdate={handleScoreUpdate} />
+                <SpeedingSimulator />
               </motion.div>
             )}
             {activeScenario === "wrongSide" && (
@@ -2627,7 +2936,7 @@ const TrafficLab = () => {
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.2 }}
               >
-                <WrongSideSimulator onScoreUpdate={handleScoreUpdate} />
+                <WrongSideSimulator />
               </motion.div>
             )}
             {activeScenario === "distracted" && (
@@ -2638,7 +2947,7 @@ const TrafficLab = () => {
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.2 }}
               >
-                <DistractedSimulator onScoreUpdate={handleScoreUpdate} />
+                <DistractedSimulator />
               </motion.div>
             )}
           </AnimatePresence>
