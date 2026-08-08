@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const defaultGalleryItems = [
-  { type: "image", src: "/images/hero/classroom.png", alt: "Primary Classroom Learning Environment" },
-  { type: "image", src: "/images/hero/audio.png", alt: "E-Learning & Digital Books Portal" },
-  { type: "image", src: "/images/hero/vr.png", alt: "Mobile VR Lab Tour Experience" },
-  { type: "image", src: "/images/hero/sign.png", alt: "Inclusive Sign Language Training Class" },
-  { type: "image", src: "/images/hero/linguistic.png", alt: "Diverse Regional Dialects Learning Program" },
-  { type: "image", src: "/images/csr.png", alt: "Corporate Social Responsibility Initiatives" },
-  { type: "image", src: "/images/goodnight.png", alt: "Educational Campaigns" }
+  { type: "image", src: "/images/hero/classroom.webp", alt: "Primary Classroom Learning Environment" },
+  { type: "image", src: "/images/hero/audio.webp", alt: "E-Learning & Digital Books Portal" },
+  { type: "image", src: "/images/hero/vr.webp", alt: "Mobile VR Lab Tour Experience" },
+  { type: "image", src: "/images/hero/sign.webp", alt: "Inclusive Sign Language Training Class" },
+  { type: "image", src: "/images/hero/linguistic.webp", alt: "Diverse Regional Dialects Learning Program" },
+  { type: "image", src: "/images/csr.webp", alt: "Corporate Social Responsibility Initiatives" },
+  { type: "image", src: "/images/goodnight.webp", alt: "Educational Campaigns" }
 ];
 
 const Photogallery = () => {

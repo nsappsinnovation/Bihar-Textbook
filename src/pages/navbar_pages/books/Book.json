@@ -7,7 +7,7 @@
         {
           "id": "c1b1",
           "title": "Hindi",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "hindi",
           "status": "Published",
           "localOnly": false
@@ -15,7 +15,7 @@
         {
           "id": "c1b2",
           "title": "Hindi 2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "hindi_2",
           "status": "Published",
           "localOnly": false
@@ -23,7 +23,7 @@
         {
           "id": "c1b3",
           "title": "GANIT",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "ganit",
           "status": "Published",
           "localOnly": false
@@ -31,7 +31,7 @@
         {
           "id": "c1b4",
           "title": "HINDI (ANKUR HINDI)",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "hindi_ankur_hindi",
           "status": "Published",
           "localOnly": false
@@ -39,7 +39,7 @@
         {
           "id": "c1b5",
           "title": "ENGLISH",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "english",
           "status": "Published",
           "localOnly": false
@@ -47,7 +47,7 @@
         {
           "id": "c1b6",
           "title": "URDU",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "urdu",
           "status": "Published",
           "localOnly": false
@@ -55,7 +55,7 @@
         {
           "id": "c1b7",
           "title": "HISAB",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "hisab",
           "status": "Published",
           "localOnly": false
@@ -63,7 +63,7 @@
         {
           "id": "c1b8",
           "title": "Bengali",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bengali",
           "status": "Published",
           "localOnly": false
@@ -71,7 +71,7 @@
         {
           "id": "c1b9",
           "title": "Maithili",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "maithili",
           "status": "Published",
           "localOnly": false
@@ -85,7 +85,7 @@
         {
           "id": "c2b1",
           "title": "GANIT",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "ganit",
           "status": "Published",
           "localOnly": false
@@ -93,7 +93,7 @@
         {
           "id": "c2b2",
           "title": "HINDI",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "hindi",
           "status": "Published",
           "localOnly": false
@@ -101,7 +101,7 @@
         {
           "id": "c2b3",
           "title": "ENGLISH",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "english",
           "status": "Published",
           "localOnly": false
@@ -109,7 +109,7 @@
         {
           "id": "c2b4",
           "title": "Hisab",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "hisab",
           "status": "Published",
           "localOnly": false
@@ -117,7 +117,7 @@
         {
           "id": "c2b5",
           "title": "Gulshan a Urdu",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "gulshan_a_urdu",
           "status": "Published",
           "localOnly": false
@@ -125,7 +125,7 @@
         {
           "id": "c2b6",
           "title": "Bengali",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bengali",
           "status": "Published",
           "localOnly": false
@@ -133,7 +133,7 @@
         {
           "id": "c2b7",
           "title": "Maithili",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "maithili",
           "status": "Published",
           "localOnly": false
@@ -147,7 +147,7 @@
         {
           "id": "c3b1",
           "title": "GANIT",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "ganit",
           "status": "Published",
           "localOnly": false
@@ -155,7 +155,7 @@
         {
           "id": "c3b2",
           "title": "KOMPAL HINDI",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "kompal_hindi",
           "status": "Published",
           "localOnly": false
@@ -163,7 +163,7 @@
         {
           "id": "c3b3",
           "title": "BLOSSOM ENGLISH",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "blossom_english",
           "status": "Published",
           "localOnly": false
@@ -171,7 +171,7 @@
         {
           "id": "c3b4",
           "title": "PARYAWARAN AUR HUM",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "paryawaran_aur_hum",
           "status": "Published",
           "localOnly": false
@@ -179,7 +179,7 @@
         {
           "id": "c3b5",
           "title": "GULSHAN E URDU",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "gulshan_e_urdu",
           "status": "Published",
           "localOnly": false
@@ -187,7 +187,7 @@
         {
           "id": "c3b6",
           "title": "HISAB URDU",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "hisab_urdu",
           "status": "Published",
           "localOnly": false
@@ -195,7 +195,7 @@
         {
           "id": "c3b7",
           "title": "MAHAULIAT AUR HUM",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "mahauliat_aur_hum",
           "status": "Published",
           "localOnly": false
@@ -203,7 +203,7 @@
         {
           "id": "c3b8",
           "title": "Bengali",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bengali",
           "status": "Published",
           "localOnly": false
@@ -211,7 +211,7 @@
         {
           "id": "c3b9",
           "title": "Maithili",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "maithili",
           "status": "Published",
           "localOnly": false
@@ -225,7 +225,7 @@
         {
           "id": "c4b1",
           "title": "GANIT",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "ganit",
           "status": "Published",
           "localOnly": false
@@ -233,7 +233,7 @@
         {
           "id": "c4b2",
           "title": "BLOSSOM ENGLISH",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "blossom_english",
           "status": "Published",
           "localOnly": false
@@ -241,7 +241,7 @@
         {
           "id": "c4b3",
           "title": "GULSHAN-E-URDU",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "gulshan_e_urdu",
           "status": "Published",
           "localOnly": false
@@ -249,7 +249,7 @@
         {
           "id": "c4b4",
           "title": "HISAB-URDU",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "hisab_urdu",
           "status": "Published",
           "localOnly": false
@@ -257,7 +257,7 @@
         {
           "id": "c4b5",
           "title": "MAHULIYAT-URDU",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "mahuliyat_urdu",
           "status": "Published",
           "localOnly": false
@@ -265,7 +265,7 @@
         {
           "id": "c4b6",
           "title": "KOMPAL",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "kompal",
           "status": "Published",
           "localOnly": false
@@ -273,7 +273,7 @@
         {
           "id": "c4b7",
           "title": "PARYAVARAN AUR HUM",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "paryavaran_aur_hum",
           "status": "Published",
           "localOnly": false
@@ -281,7 +281,7 @@
         {
           "id": "c4b8",
           "title": "Bengali",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bengali",
           "status": "Published",
           "localOnly": false
@@ -289,7 +289,7 @@
         {
           "id": "c4b9",
           "title": "Maithili",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "maithili",
           "status": "Published",
           "localOnly": false
@@ -303,7 +303,7 @@
         {
           "id": "c5b1",
           "title": "Ganit",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "ganit",
           "status": "Published",
           "localOnly": false
@@ -311,7 +311,7 @@
         {
           "id": "c5b2",
           "title": "Ganit (GANIT)",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "ganit_ganit",
           "status": "Published",
           "localOnly": false
@@ -319,7 +319,7 @@
         {
           "id": "c5b3",
           "title": "English",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "english",
           "status": "Published",
           "localOnly": false
@@ -327,7 +327,7 @@
         {
           "id": "c5b4",
           "title": "English (Blossom English)",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "english_blossom_english",
           "status": "Published",
           "localOnly": false
@@ -335,7 +335,7 @@
         {
           "id": "c5b5",
           "title": "Paryawaran Aur Hum",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "paryawaran_aur_hum",
           "status": "Published",
           "localOnly": false
@@ -343,7 +343,7 @@
         {
           "id": "c5b6",
           "title": "Paryawaran Aur Hum (Paryawaran Aur Hum)",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "paryawaran_aur_hum_paryawaran_aur_hum",
           "status": "Published",
           "localOnly": false
@@ -351,7 +351,7 @@
         {
           "id": "c5b7",
           "title": "KOMPAL",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "kompal",
           "status": "Published",
           "localOnly": false
@@ -359,7 +359,7 @@
         {
           "id": "c5b8",
           "title": "KOMPAL (KOMPAL)",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "kompal_kompal",
           "status": "Published",
           "localOnly": false
@@ -367,7 +367,7 @@
         {
           "id": "c5b9",
           "title": "GUSANE-E- URDU",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "gusane_e_urdu",
           "status": "Published",
           "localOnly": false
@@ -375,7 +375,7 @@
         {
           "id": "c5b10",
           "title": "GUSANE-E- URDU (GULSANE-E-URDU)",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "gusane_e_urdu_gulsane_e_urdu",
           "status": "Published",
           "localOnly": false
@@ -383,7 +383,7 @@
         {
           "id": "c5b11",
           "title": "HISAB",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "hisab",
           "status": "Published",
           "localOnly": false
@@ -391,7 +391,7 @@
         {
           "id": "c5b12",
           "title": "HISAB (HISAB -URDU)",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "hisab_hisab_urdu",
           "status": "Published",
           "localOnly": false
@@ -399,7 +399,7 @@
         {
           "id": "c5b13",
           "title": "Bengali",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bengali",
           "status": "Published",
           "localOnly": false
@@ -407,7 +407,7 @@
         {
           "id": "c5b14",
           "title": "Bengali (Bengali)",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bengali_bengali",
           "status": "Published",
           "localOnly": false
@@ -415,7 +415,7 @@
         {
           "id": "c5b15",
           "title": "Maithili",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "maithili",
           "status": "Published",
           "localOnly": false
@@ -423,7 +423,7 @@
         {
           "id": "c5b16",
           "title": "Maithili (Maithili)",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "maithili_maithili",
           "status": "Published",
           "localOnly": false
@@ -437,7 +437,7 @@
         {
           "id": "c6b1",
           "title": "RADIANCE",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "radiance",
           "status": "Published",
           "localOnly": false
@@ -445,7 +445,7 @@
         {
           "id": "c6b2",
           "title": "SAMAJIK -ARTHIK",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "samajik_arthik",
           "status": "Published",
           "localOnly": false
@@ -453,7 +453,7 @@
         {
           "id": "c6b3",
           "title": "HAMARI DUNIYA",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "hamari_duniya",
           "status": "Published",
           "localOnly": false
@@ -461,7 +461,7 @@
         {
           "id": "c6b4",
           "title": "AATIT SE VARTAMAN",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "aatit_se_vartaman",
           "status": "Published",
           "localOnly": false
@@ -469,7 +469,7 @@
         {
           "id": "c6b5",
           "title": "AMRITA-SANSKRIT",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "amrita_sanskrit",
           "status": "Published",
           "localOnly": false
@@ -477,7 +477,7 @@
         {
           "id": "c6b6",
           "title": "SCIENCE",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "science",
           "status": "Published",
           "localOnly": false
@@ -485,7 +485,7 @@
         {
           "id": "c6b7",
           "title": "GANIT",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "ganit",
           "status": "Published",
           "localOnly": false
@@ -493,7 +493,7 @@
         {
           "id": "c6b8",
           "title": "KISLAY BHAG",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "kislay_bhag",
           "status": "Published",
           "localOnly": false
@@ -501,7 +501,7 @@
         {
           "id": "c6b9",
           "title": "FAROZAN",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "farozan",
           "status": "Published",
           "localOnly": false
@@ -509,7 +509,7 @@
         {
           "id": "c6b10",
           "title": "HAMARI DUNIYA (U)",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "hamari_duniya_u",
           "status": "Published",
           "localOnly": false
@@ -517,7 +517,7 @@
         {
           "id": "c6b11",
           "title": "HISAB",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "hisab",
           "status": "Published",
           "localOnly": false
@@ -525,7 +525,7 @@
         {
           "id": "c6b12",
           "title": "AATIT SE VARTAMAN (U)",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "aatit_se_vartaman_u",
           "status": "Published",
           "localOnly": false
@@ -533,7 +533,7 @@
         {
           "id": "c6b13",
           "title": "MISBAHUL ARABIA",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "misbahul_arabia",
           "status": "Published",
           "localOnly": false
@@ -541,7 +541,7 @@
         {
           "id": "c6b14",
           "title": "SAMAJIK-URDU",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "samajik_urdu",
           "status": "Published",
           "localOnly": false
@@ -549,7 +549,7 @@
         {
           "id": "c6b15",
           "title": "SCIENCE-URDU",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "science_urdu",
           "status": "Published",
           "localOnly": false
@@ -557,7 +557,7 @@
         {
           "id": "c6b16",
           "title": "SEEMA-E-PHARSI",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "seema_e_pharsi",
           "status": "Published",
           "localOnly": false
@@ -565,7 +565,7 @@
         {
           "id": "c6b17",
           "title": "Bengali",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bengali",
           "status": "Published",
           "localOnly": false
@@ -573,7 +573,7 @@
         {
           "id": "c6b18",
           "title": "Maithili",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "maithili",
           "status": "Published",
           "localOnly": false
@@ -587,7 +587,7 @@
         {
           "id": "c7b1",
           "title": "&nbsp;",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "nbsp",
           "status": "Published",
           "localOnly": false
@@ -595,7 +595,7 @@
         {
           "id": "c7b2",
           "title": "Science",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "science",
           "status": "Published",
           "localOnly": false
@@ -603,7 +603,7 @@
         {
           "id": "c7b3",
           "title": "Radiance",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "radiance",
           "status": "Published",
           "localOnly": false
@@ -611,7 +611,7 @@
         {
           "id": "c7b4",
           "title": "Amrita",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "amrita",
           "status": "Published",
           "localOnly": false
@@ -619,7 +619,7 @@
         {
           "id": "c7b5",
           "title": "Hamari Duniya",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "hamari_duniya",
           "status": "Published",
           "localOnly": false
@@ -627,7 +627,7 @@
         {
           "id": "c7b6",
           "title": "Atit Se Vartaman",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "atit_se_vartaman",
           "status": "Published",
           "localOnly": false
@@ -635,7 +635,7 @@
         {
           "id": "c7b7",
           "title": "Kislay",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "kislay",
           "status": "Published",
           "localOnly": false
@@ -643,7 +643,7 @@
         {
           "id": "c7b8",
           "title": "Atit Se Vartaman-Urdu",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "atit_se_vartaman_urdu",
           "status": "Published",
           "localOnly": false
@@ -651,7 +651,7 @@
         {
           "id": "c7b9",
           "title": "Samajik-Urdu",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "samajik_urdu",
           "status": "Published",
           "localOnly": false
@@ -659,7 +659,7 @@
         {
           "id": "c7b10",
           "title": "Samajik Arthik",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "samajik_arthik",
           "status": "Published",
           "localOnly": false
@@ -667,7 +667,7 @@
         {
           "id": "c7b11",
           "title": "Science-Urdu",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "science_urdu",
           "status": "Published",
           "localOnly": false
@@ -675,7 +675,7 @@
         {
           "id": "c7b12",
           "title": "Farozan-Urdu",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "farozan_urdu",
           "status": "Published",
           "localOnly": false
@@ -683,7 +683,7 @@
         {
           "id": "c7b13",
           "title": "Hamari Duniya-Urdu",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "hamari_duniya_urdu",
           "status": "Published",
           "localOnly": false
@@ -691,7 +691,7 @@
         {
           "id": "c7b14",
           "title": "Hisab-Urdu",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "hisab_urdu",
           "status": "Published",
           "localOnly": false
@@ -699,7 +699,7 @@
         {
           "id": "c7b15",
           "title": "Misbahul-Urdu",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "misbahul_urdu",
           "status": "Published",
           "localOnly": false
@@ -707,7 +707,7 @@
         {
           "id": "c7b16",
           "title": "Seema-E-Pharsi",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "seema_e_pharsi",
           "status": "Published",
           "localOnly": false
@@ -721,7 +721,7 @@
         {
           "id": "c8b1",
           "title": "Ganit",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "ganit",
           "status": "Published",
           "localOnly": false
@@ -729,7 +729,7 @@
         {
           "id": "c8b2",
           "title": "Science",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "science",
           "status": "Published",
           "localOnly": false
@@ -737,7 +737,7 @@
         {
           "id": "c8b3",
           "title": "Aatit Se vartaman",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "aatit_se_vartaman",
           "status": "Published",
           "localOnly": false
@@ -745,7 +745,7 @@
         {
           "id": "c8b4",
           "title": "Kislay",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "kislay",
           "status": "Published",
           "localOnly": false
@@ -753,7 +753,7 @@
         {
           "id": "c8b5",
           "title": "Radiance",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "radiance",
           "status": "Published",
           "localOnly": false
@@ -761,7 +761,7 @@
         {
           "id": "c8b6",
           "title": "Samajit Arthik Rajnetik jiwan",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "samajit_arthik_rajnetik_jiwan",
           "status": "Published",
           "localOnly": false
@@ -769,7 +769,7 @@
         {
           "id": "c8b7",
           "title": "Geography",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "geography",
           "status": "Published",
           "localOnly": false
@@ -777,7 +777,7 @@
         {
           "id": "c8b8",
           "title": "AMRITA",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "amrita",
           "status": "Published",
           "localOnly": false
@@ -785,7 +785,7 @@
         {
           "id": "c8b9",
           "title": "Hisab - Urdu",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "hisab_urdu",
           "status": "Published",
           "localOnly": false
@@ -793,7 +793,7 @@
         {
           "id": "c8b10",
           "title": "Science Urdu",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "science_urdu",
           "status": "Published",
           "localOnly": false
@@ -801,7 +801,7 @@
         {
           "id": "c8b11",
           "title": "Hamari Duniya Urdu",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "hamari_duniya_urdu",
           "status": "Published",
           "localOnly": false
@@ -809,7 +809,7 @@
         {
           "id": "c8b12",
           "title": "Firozan",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "firozan",
           "status": "Published",
           "localOnly": false
@@ -817,7 +817,7 @@
         {
           "id": "c8b13",
           "title": "Misbahul Arabia",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "misbahul_arabia",
           "status": "Published",
           "localOnly": false
@@ -825,7 +825,7 @@
         {
           "id": "c8b14",
           "title": "Atit Se Vartaman Urdu",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "atit_se_vartaman_urdu",
           "status": "Published",
           "localOnly": false
@@ -833,7 +833,7 @@
         {
           "id": "c8b15",
           "title": "Samajit Arthik Rajneti Urdu",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "samajit_arthik_rajneti_urdu",
           "status": "Published",
           "localOnly": false
@@ -841,7 +841,7 @@
         {
           "id": "c8b16",
           "title": "Sima-e-Pharsi Pharsi",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "sima_e_pharsi_pharsi",
           "status": "Published",
           "localOnly": false
@@ -855,7 +855,7 @@
         {
           "id": "c9b1",
           "title": "Ganit",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "ganit",
           "status": "Published",
           "localOnly": false
@@ -863,7 +863,7 @@
         {
           "id": "c9b2",
           "title": "Maths",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "maths",
           "status": "Published",
           "localOnly": false
@@ -871,7 +871,7 @@
         {
           "id": "c9b3",
           "title": "Vigyan",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "vigyan",
           "status": "Published",
           "localOnly": false
@@ -879,7 +879,7 @@
         {
           "id": "c9b4",
           "title": "Science",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "science",
           "status": "Published",
           "localOnly": false
@@ -887,7 +887,7 @@
         {
           "id": "c9b5",
           "title": "Kislay",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "kislay",
           "status": "Published",
           "localOnly": false
@@ -895,7 +895,7 @@
         {
           "id": "c9b6",
           "title": "English Reader",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "english_reader",
           "status": "Published",
           "localOnly": false
@@ -903,7 +903,7 @@
         {
           "id": "c9b7",
           "title": "Bhugol",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bhugol",
           "status": "Published",
           "localOnly": false
@@ -911,7 +911,7 @@
         {
           "id": "c9b8",
           "title": "History",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "history",
           "status": "Published",
           "localOnly": false
@@ -919,7 +919,7 @@
         {
           "id": "c9b9",
           "title": "Godhuli",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "godhuli",
           "status": "Published",
           "localOnly": false
@@ -927,7 +927,7 @@
         {
           "id": "c9b10",
           "title": "Loktantrik Rajneeti",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "loktantrik_rajneeti",
           "status": "Published",
           "localOnly": false
@@ -935,7 +935,7 @@
         {
           "id": "c9b11",
           "title": "Economics-Hindi",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "economics_hindi",
           "status": "Published",
           "localOnly": false
@@ -943,7 +943,7 @@
         {
           "id": "c9b12",
           "title": "Geography",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "geography",
           "status": "Published",
           "localOnly": false
@@ -951,7 +951,7 @@
         {
           "id": "c9b13",
           "title": "Democratic Politics",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "democratic_politics",
           "status": "Published",
           "localOnly": false
@@ -959,7 +959,7 @@
         {
           "id": "c9b14",
           "title": "Economics",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "economics",
           "status": "Published",
           "localOnly": false
@@ -967,7 +967,7 @@
         {
           "id": "c9b15",
           "title": "Mithilak Dharohar",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "mithilak_dharohar",
           "status": "Published",
           "localOnly": false
@@ -975,7 +975,7 @@
         {
           "id": "c9b16",
           "title": "Praveshika-Maithili",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "praveshika_maithili",
           "status": "Published",
           "localOnly": false
@@ -983,7 +983,7 @@
         {
           "id": "c9b17",
           "title": "Mahua-Bhojpuri",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "mahua_bhojpuri",
           "status": "Published",
           "localOnly": false
@@ -991,7 +991,7 @@
         {
           "id": "c9b18",
           "title": "Pan-Phool",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "pan_phool",
           "status": "Published",
           "localOnly": false
@@ -999,7 +999,7 @@
         {
           "id": "c9b19",
           "title": "Piyusham",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "piyusham",
           "status": "Published",
           "localOnly": false
@@ -1007,7 +1007,7 @@
         {
           "id": "c9b20",
           "title": "Piyusham-Dwipathya",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "piyusham_dwipathya",
           "status": "Published",
           "localOnly": false
@@ -1015,7 +1015,7 @@
         {
           "id": "c9b21",
           "title": "Nakhatul-Darsahul",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "nakhatul_darsahul",
           "status": "Published",
           "localOnly": false
@@ -1023,7 +1023,7 @@
         {
           "id": "c9b22",
           "title": "Seema-E-Adab",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "seema_e_adab",
           "status": "Published",
           "localOnly": false
@@ -1031,7 +1031,7 @@
         {
           "id": "c9b23",
           "title": "Aj-Ajharul-Arabia",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "aj_ajharul_arabia",
           "status": "Published",
           "localOnly": false
@@ -1039,7 +1039,7 @@
         {
           "id": "c9b24",
           "title": "Darakhshan",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "darakhshan",
           "status": "Published",
           "localOnly": false
@@ -1047,7 +1047,7 @@
         {
           "id": "c9b25",
           "title": "Lal O Gul",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "lal_o_gul",
           "status": "Published",
           "localOnly": false
@@ -1055,7 +1055,7 @@
         {
           "id": "c9b26",
           "title": "Roshani",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "roshani",
           "status": "Published",
           "localOnly": false
@@ -1063,7 +1063,7 @@
         {
           "id": "c9b27",
           "title": "Anhad Bhag-1",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "anhad_bhag_1",
           "status": "Published",
           "localOnly": false
@@ -1071,7 +1071,7 @@
         {
           "id": "c9b28",
           "title": "Manthanam",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "manthanam",
           "status": "Published",
           "localOnly": false
@@ -1079,7 +1079,7 @@
         {
           "id": "c9b29",
           "title": "Nupur",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "nupur",
           "status": "Published",
           "localOnly": false
@@ -1087,7 +1087,7 @@
         {
           "id": "c9b30",
           "title": "Ucch Ganit",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "ucch_ganit",
           "status": "Published",
           "localOnly": false
@@ -1095,7 +1095,7 @@
         {
           "id": "c9b31",
           "title": "Varnika",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "varnika",
           "status": "Published",
           "localOnly": false
@@ -1103,7 +1103,7 @@
         {
           "id": "c9b32",
           "title": "History-Eng",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "history_eng",
           "status": "Published",
           "localOnly": false
@@ -1111,7 +1111,7 @@
         {
           "id": "c9b33",
           "title": "Arthshastra",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "arthshastra",
           "status": "Published",
           "localOnly": false
@@ -1119,7 +1119,7 @@
         {
           "id": "c9b34",
           "title": "Panorama Part-1",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "panorama_part_1",
           "status": "Published",
           "localOnly": false
@@ -1133,7 +1133,7 @@
         {
           "id": "c10b1",
           "title": "Maths",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "maths",
           "status": "Published",
           "localOnly": false
@@ -1141,7 +1141,7 @@
         {
           "id": "c10b2",
           "title": "Ganit",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "ganit",
           "status": "Published",
           "localOnly": false
@@ -1149,7 +1149,7 @@
         {
           "id": "c10b3",
           "title": "Science",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "science",
           "status": "Published",
           "localOnly": false
@@ -1157,7 +1157,7 @@
         {
           "id": "c10b4",
           "title": "Vigyan",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "vigyan",
           "status": "Published",
           "localOnly": false
@@ -1165,7 +1165,7 @@
         {
           "id": "c10b5",
           "title": "History",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "history",
           "status": "Published",
           "localOnly": false
@@ -1173,7 +1173,7 @@
         {
           "id": "c10b6",
           "title": "Itihas",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "itihas",
           "status": "Published",
           "localOnly": false
@@ -1181,7 +1181,7 @@
         {
           "id": "c10b7",
           "title": "Bhugol",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bhugol",
           "status": "Published",
           "localOnly": false
@@ -1189,7 +1189,7 @@
         {
           "id": "c10b8",
           "title": "Geography",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "geography",
           "status": "Published",
           "localOnly": false
@@ -1197,7 +1197,7 @@
         {
           "id": "c10b9",
           "title": "Economics",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "economics",
           "status": "Published",
           "localOnly": false
@@ -1205,7 +1205,7 @@
         {
           "id": "c10b10",
           "title": "Arthvyavastha",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "arthvyavastha",
           "status": "Published",
           "localOnly": false
@@ -1213,7 +1213,7 @@
         {
           "id": "c10b11",
           "title": "Rajneetishashtra",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "rajneetishashtra",
           "status": "Published",
           "localOnly": false
@@ -1221,7 +1221,7 @@
         {
           "id": "c10b12",
           "title": "Civics",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "civics",
           "status": "Published",
           "localOnly": false
@@ -1229,7 +1229,7 @@
         {
           "id": "c10b13",
           "title": "Godhuli",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "godhuli",
           "status": "Published",
           "localOnly": false
@@ -1237,7 +1237,7 @@
         {
           "id": "c10b14",
           "title": "Warnika",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "warnika",
           "status": "Published",
           "localOnly": false
@@ -1245,7 +1245,7 @@
         {
           "id": "c10b15",
           "title": "Panorama 2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "panorama_2",
           "status": "Published",
           "localOnly": false
@@ -1253,7 +1253,7 @@
         {
           "id": "c10b16",
           "title": "Panorama Reader",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "panorama_reader",
           "status": "Published",
           "localOnly": false
@@ -1261,7 +1261,7 @@
         {
           "id": "c10b17",
           "title": "Piyusham",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "piyusham",
           "status": "Published",
           "localOnly": false
@@ -1269,7 +1269,7 @@
         {
           "id": "c10b18",
           "title": "Darkhashan",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "darkhashan",
           "status": "Published",
           "localOnly": false
@@ -1277,7 +1277,7 @@
         {
           "id": "c10b19",
           "title": "Lal-O-Gul",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "lal_o_gul",
           "status": "Published",
           "localOnly": false
@@ -1285,7 +1285,7 @@
         {
           "id": "c10b20",
           "title": "Seema-a-Adab",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "seema_a_adab",
           "status": "Published",
           "localOnly": false
@@ -1293,7 +1293,7 @@
         {
           "id": "c10b21",
           "title": "Nakhbat-Arabia",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "nakhbat_arabia",
           "status": "Published",
           "localOnly": false
@@ -1301,7 +1301,7 @@
         {
           "id": "c10b22",
           "title": "Mithila Vibhuti",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "mithila_vibhuti",
           "status": "Published",
           "localOnly": false
@@ -1309,7 +1309,7 @@
         {
           "id": "c10b23",
           "title": "Pan Phool",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "pan_phool",
           "status": "Published",
           "localOnly": false
@@ -1317,7 +1317,7 @@
         {
           "id": "c10b24",
           "title": "Bagaicha",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bagaicha",
           "status": "Published",
           "localOnly": false
@@ -1325,7 +1325,7 @@
         {
           "id": "c10b25",
           "title": "Kaushiki",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "kaushiki",
           "status": "Published",
           "localOnly": false
@@ -1333,7 +1333,7 @@
         {
           "id": "c10b26",
           "title": "Kislay",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "kislay",
           "status": "Published",
           "localOnly": false
@@ -1341,7 +1341,7 @@
         {
           "id": "c10b27",
           "title": "Praveshika Maithili",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "praveshika_maithili",
           "status": "Published",
           "localOnly": false
@@ -1349,7 +1349,7 @@
         {
           "id": "c10b28",
           "title": "Ucch Ganit",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "ucch_ganit",
           "status": "Published",
           "localOnly": false
@@ -1357,7 +1357,7 @@
         {
           "id": "c10b29",
           "title": "ARIPAN",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "aripan",
           "status": "Published",
           "localOnly": false
@@ -1365,7 +1365,7 @@
         {
           "id": "c10b30",
           "title": "Mantham Duitya Bhag",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "mantham_duitya_bhag",
           "status": "Published",
           "localOnly": false
@@ -1373,7 +1373,7 @@
         {
           "id": "c10b31",
           "title": "Griah Vigyan",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "griah_vigyan",
           "status": "Published",
           "localOnly": false
@@ -1381,7 +1381,7 @@
         {
           "id": "c10b32",
           "title": "Piyusum anupurak putika",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "piyusum_anupurak_putika",
           "status": "Published",
           "localOnly": false
@@ -1395,7 +1395,7 @@
         {
           "id": "c11b1",
           "title": "Maths",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "maths",
           "status": "Published",
           "localOnly": false
@@ -1403,7 +1403,7 @@
         {
           "id": "c11b2",
           "title": "CHEMISTRY PART-1",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "chemistry_part_1",
           "status": "Published",
           "localOnly": false
@@ -1411,7 +1411,7 @@
         {
           "id": "c11b3",
           "title": "CHEMISTRY PART-2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "chemistry_part_2",
           "status": "Published",
           "localOnly": false
@@ -1419,7 +1419,7 @@
         {
           "id": "c11b4",
           "title": "ACCOUNTANCY PART 1",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "accountancy_part_1",
           "status": "Published",
           "localOnly": false
@@ -1427,7 +1427,7 @@
         {
           "id": "c11b5",
           "title": "ACCOUNTANCY PART 2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "accountancy_part_2",
           "status": "Published",
           "localOnly": false
@@ -1435,7 +1435,7 @@
         {
           "id": "c11b6",
           "title": "PHYSICS PART 1",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "physics_part_1",
           "status": "Published",
           "localOnly": false
@@ -1443,7 +1443,7 @@
         {
           "id": "c11b7",
           "title": "PHYSICS PART 2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "physics_part_2",
           "status": "Published",
           "localOnly": false
@@ -1451,7 +1451,7 @@
         {
           "id": "c11b8",
           "title": "BUSINESS STUDIES",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "business_studies",
           "status": "Published",
           "localOnly": false
@@ -1459,7 +1459,7 @@
         {
           "id": "c11b9",
           "title": "FUNDAMENTALS OF PHYSICAL GOEGRAPHY",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "fundamentals_of_physical_goegraphy",
           "status": "Published",
           "localOnly": false
@@ -1467,7 +1467,7 @@
         {
           "id": "c11b10",
           "title": "INDIAN CONSTITUTION",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "indian_constitution",
           "status": "Published",
           "localOnly": false
@@ -1475,7 +1475,7 @@
         {
           "id": "c11b11",
           "title": "ECONOMIC DEVELOPMENT",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "economic_development",
           "status": "Published",
           "localOnly": false
@@ -1483,7 +1483,7 @@
         {
           "id": "c11b12",
           "title": "PHYSICAL ENVIRONMENT",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "physical_environment",
           "status": "Published",
           "localOnly": false
@@ -1491,7 +1491,7 @@
         {
           "id": "c11b13",
           "title": "SOCIOLOGY",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "sociology",
           "status": "Published",
           "localOnly": false
@@ -1499,7 +1499,7 @@
         {
           "id": "c11b14",
           "title": "AL HADIQAT",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "al_hadiqat",
           "status": "Published",
           "localOnly": false
@@ -1507,7 +1507,7 @@
         {
           "id": "c11b15",
           "title": "LAL-O-GUHAR",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "lal_o_guhar",
           "status": "Published",
           "localOnly": false
@@ -1515,7 +1515,7 @@
         {
           "id": "c11b16",
           "title": "POLITICAL THEORY",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "political_theory",
           "status": "Published",
           "localOnly": false
@@ -1523,7 +1523,7 @@
         {
           "id": "c11b17",
           "title": "URDU KAHKASA",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "urdu_kahkasa",
           "status": "Published",
           "localOnly": false
@@ -1531,7 +1531,7 @@
         {
           "id": "c11b18",
           "title": "PRACTICAL GEOGRAPHY",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "practical_geography",
           "status": "Published",
           "localOnly": false
@@ -1539,7 +1539,7 @@
         {
           "id": "c11b19",
           "title": "URDU LITERATURE HISTORY",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "urdu_literature_history",
           "status": "Published",
           "localOnly": false
@@ -1547,7 +1547,7 @@
         {
           "id": "c11b20",
           "title": "PSYCHOLOGY",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "psychology",
           "status": "Published",
           "localOnly": false
@@ -1555,7 +1555,7 @@
         {
           "id": "c11b21",
           "title": "URDU GRAMMAR",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "urdu_grammar",
           "status": "Published",
           "localOnly": false
@@ -1563,7 +1563,7 @@
         {
           "id": "c11b22",
           "title": "PERSIAN GRAMMAR",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "persian_grammar",
           "status": "Published",
           "localOnly": false
@@ -1571,7 +1571,7 @@
         {
           "id": "c11b23",
           "title": "PERSIAN LITERATURE",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "persian_literature",
           "status": "Published",
           "localOnly": false
@@ -1579,7 +1579,7 @@
         {
           "id": "c11b24",
           "title": "RAINBOW ENGLISH",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "rainbow_english",
           "status": "Published",
           "localOnly": false
@@ -1587,7 +1587,7 @@
         {
           "id": "c11b25",
           "title": "RAINBOW GRAMMAR",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "rainbow_grammar",
           "status": "Published",
           "localOnly": false
@@ -1595,7 +1595,7 @@
         {
           "id": "c11b26",
           "title": "STATISTICS - ECONOMICS",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "statistics_economics",
           "status": "Published",
           "localOnly": false
@@ -1603,7 +1603,7 @@
         {
           "id": "c11b27",
           "title": "HISTORY",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "history",
           "status": "Published",
           "localOnly": false
@@ -1611,7 +1611,7 @@
         {
           "id": "c11b28",
           "title": "UNDERSTANDING SOCIETY",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "understanding_society",
           "status": "Published",
           "localOnly": false
@@ -1619,7 +1619,7 @@
         {
           "id": "c11b29",
           "title": "GANIT",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "ganit",
           "status": "Published",
           "localOnly": false
@@ -1627,7 +1627,7 @@
         {
           "id": "c11b30",
           "title": "LEKHASHASTRA 1",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "lekhashastra_1",
           "status": "Published",
           "localOnly": false
@@ -1635,7 +1635,7 @@
         {
           "id": "c11b31",
           "title": "LEKHASHASTRA 2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "lekhashastra_2",
           "status": "Published",
           "localOnly": false
@@ -1643,7 +1643,7 @@
         {
           "id": "c11b32",
           "title": "MAGAHI BHASHA",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "magahi_bhasha",
           "status": "Published",
           "localOnly": false
@@ -1651,7 +1651,7 @@
         {
           "id": "c11b33",
           "title": "MAGAHI VYAKARAN",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "magahi_vyakaran",
           "status": "Published",
           "localOnly": false
@@ -1659,7 +1659,7 @@
         {
           "id": "c11b34",
           "title": "BHAUTIKI 1",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bhautiki_1",
           "status": "Published",
           "localOnly": false
@@ -1667,7 +1667,7 @@
         {
           "id": "c11b35",
           "title": "BHAUTIKI 2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bhautiki_2",
           "status": "Published",
           "localOnly": false
@@ -1675,7 +1675,7 @@
         {
           "id": "c11b36",
           "title": "RASAYAN VIGYAN 1",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "rasayan_vigyan_1",
           "status": "Published",
           "localOnly": false
@@ -1683,7 +1683,7 @@
         {
           "id": "c11b37",
           "title": "RASAYAN VIGYAN 2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "rasayan_vigyan_2",
           "status": "Published",
           "localOnly": false
@@ -1691,7 +1691,7 @@
         {
           "id": "c11b38",
           "title": "JEEV VIGYAN",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "jeev_vigyan",
           "status": "Published",
           "localOnly": false
@@ -1699,7 +1699,7 @@
         {
           "id": "c11b39",
           "title": "MAGAHI-PAATLI",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "magahi_paatli",
           "status": "Published",
           "localOnly": false
@@ -1707,7 +1707,7 @@
         {
           "id": "c11b40",
           "title": "BHOJPURI VYAKARAN",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bhojpuri_vyakaran",
           "status": "Published",
           "localOnly": false
@@ -1715,7 +1715,7 @@
         {
           "id": "c11b41",
           "title": "BHOJPURI DUBIDHAN",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bhojpuri_dubidhan",
           "status": "Published",
           "localOnly": false
@@ -1723,7 +1723,7 @@
         {
           "id": "c11b42",
           "title": "HINDI BHASHA",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "hindi_bhasha",
           "status": "Published",
           "localOnly": false
@@ -1731,7 +1731,7 @@
         {
           "id": "c11b43",
           "title": "HINDI VYAKARAN",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "hindi_vyakaran",
           "status": "Published",
           "localOnly": false
@@ -1739,7 +1739,7 @@
         {
           "id": "c11b44",
           "title": "DINGAT",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "dingat",
           "status": "Published",
           "localOnly": false
@@ -1747,7 +1747,7 @@
         {
           "id": "c11b45",
           "title": "BHARATIYA ARTHVYAVASTA",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bharatiya_arthvyavasta",
           "status": "Published",
           "localOnly": false
@@ -1755,7 +1755,7 @@
         {
           "id": "c11b46",
           "title": "BHARAT SAMVIDHAN",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bharat_samvidhan",
           "status": "Published",
           "localOnly": false
@@ -1763,7 +1763,7 @@
         {
           "id": "c11b47",
           "title": "KRISHI VIGYAN",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "krishi_vigyan",
           "status": "Published",
           "localOnly": false
@@ -1771,7 +1771,7 @@
         {
           "id": "c11b48",
           "title": "MANO VIGYAN",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "mano_vigyan",
           "status": "Published",
           "localOnly": false
@@ -1779,7 +1779,7 @@
         {
           "id": "c11b49",
           "title": "VISWA ITIHAS",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "viswa_itihas",
           "status": "Published",
           "localOnly": false
@@ -1787,7 +1787,7 @@
         {
           "id": "c11b50",
           "title": "Bhautik Bhugol Ke Siddhant",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bhautik_bhugol_ke_siddhant",
           "status": "Published",
           "localOnly": false
@@ -1795,7 +1795,7 @@
         {
           "id": "c11b51",
           "title": "Biology",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "biology",
           "status": "Published",
           "localOnly": false
@@ -1803,7 +1803,7 @@
         {
           "id": "c11b52",
           "title": "Bharat Bhautik Paryavaran",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bharat_bhautik_paryavaran",
           "status": "Published",
           "localOnly": false
@@ -1811,7 +1811,7 @@
         {
           "id": "c11b53",
           "title": "Bhugol Me Prayogatmak Karya",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bhugol_me_prayogatmak_karya",
           "status": "Published",
           "localOnly": false
@@ -1819,7 +1819,7 @@
         {
           "id": "c11b54",
           "title": "Arthshastra Me Sankhyaki",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "arthshastra_me_sankhyaki",
           "status": "Published",
           "localOnly": false
@@ -1827,7 +1827,7 @@
         {
           "id": "c11b55",
           "title": "Rajnitik Siddhant",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "rajnitik_siddhant",
           "status": "Published",
           "localOnly": false
@@ -1835,7 +1835,7 @@
         {
           "id": "c11b56",
           "title": "Samajshastra Parichay",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "samajshastra_parichay",
           "status": "Published",
           "localOnly": false
@@ -1843,7 +1843,7 @@
         {
           "id": "c11b57",
           "title": "Samaj Ka Bodh",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "samaj_ka_bodh",
           "status": "Published",
           "localOnly": false
@@ -1851,7 +1851,7 @@
         {
           "id": "c11b58",
           "title": "Vyavasaya Adhyayan",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "vyavasaya_adhyayan",
           "status": "Published",
           "localOnly": false
@@ -1859,7 +1859,7 @@
         {
           "id": "c11b59",
           "title": "Aripan",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "aripan",
           "status": "Published",
           "localOnly": false
@@ -1867,7 +1867,7 @@
         {
           "id": "c11b60",
           "title": "Satibhasa",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "satibhasa",
           "status": "Published",
           "localOnly": false
@@ -1875,7 +1875,7 @@
         {
           "id": "c11b61",
           "title": "Sanskrit Sahitya Dhara",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "sanskrit_sahitya_dhara",
           "status": "Published",
           "localOnly": false
@@ -1883,7 +1883,7 @@
         {
           "id": "c11b62",
           "title": "Kaustiv Bhag1",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "kaustiv_bhag1",
           "status": "Published",
           "localOnly": false
@@ -1891,7 +1891,7 @@
         {
           "id": "c11b63",
           "title": "Maithili vyakran Rachna o Sahitya rup",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "maithili_vyakran_rachna_o_sahitya_rup",
           "status": "Published",
           "localOnly": false
@@ -1899,7 +1899,7 @@
         {
           "id": "c11b64",
           "title": "Rainbow",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "rainbow",
           "status": "Published",
           "localOnly": false
@@ -1907,7 +1907,7 @@
         {
           "id": "c11b65",
           "title": "Tilkor",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "tilkor",
           "status": "Published",
           "localOnly": false
@@ -1915,7 +1915,7 @@
         {
           "id": "c11b66",
           "title": "SANKSHIPT BANGLA VYAKRAN",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "sankshipt_bangla_vyakran",
           "status": "Published",
           "localOnly": false
@@ -1923,7 +1923,7 @@
         {
           "id": "c11b67",
           "title": "Arbi Sahitya Ka  Itihas",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "arbi_sahitya_ka_itihas",
           "status": "Published",
           "localOnly": false
@@ -1937,7 +1937,7 @@
         {
           "id": "c12b1",
           "title": "Ganit Bhag1",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "ganit_bhag1",
           "status": "Published",
           "localOnly": false
@@ -1945,7 +1945,7 @@
         {
           "id": "c12b2",
           "title": "Ganit Bhag2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "ganit_bhag2",
           "status": "Published",
           "localOnly": false
@@ -1953,7 +1953,7 @@
         {
           "id": "c12b3",
           "title": "Bhautiki Bhag 1",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bhautiki_bhag_1",
           "status": "Published",
           "localOnly": false
@@ -1961,7 +1961,7 @@
         {
           "id": "c12b4",
           "title": "Bhautiki Bhag 2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bhautiki_bhag_2",
           "status": "Published",
           "localOnly": false
@@ -1969,7 +1969,7 @@
         {
           "id": "c12b5",
           "title": "Rasayan Sastra 1",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "rasayan_sastra_1",
           "status": "Published",
           "localOnly": false
@@ -1977,7 +1977,7 @@
         {
           "id": "c12b6",
           "title": "Rasayan Sastra 2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "rasayan_sastra_2",
           "status": "Published",
           "localOnly": false
@@ -1985,7 +1985,7 @@
         {
           "id": "c12b7",
           "title": "Jiv Vigyan",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "jiv_vigyan",
           "status": "Published",
           "localOnly": false
@@ -1993,7 +1993,7 @@
         {
           "id": "c12b8",
           "title": "Itihas 1",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "itihas_1",
           "status": "Published",
           "localOnly": false
@@ -2001,7 +2001,7 @@
         {
           "id": "c12b9",
           "title": "Itihas 2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "itihas_2",
           "status": "Published",
           "localOnly": false
@@ -2009,7 +2009,7 @@
         {
           "id": "c12b10",
           "title": "Itihas 3",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "itihas_3",
           "status": "Published",
           "localOnly": false
@@ -2017,7 +2017,7 @@
         {
           "id": "c12b11",
           "title": "Chemistry Part1",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "chemistry_part1",
           "status": "Published",
           "localOnly": false
@@ -2025,7 +2025,7 @@
         {
           "id": "c12b12",
           "title": "Accountancy 2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "accountancy_2",
           "status": "Published",
           "localOnly": false
@@ -2033,7 +2033,7 @@
         {
           "id": "c12b13",
           "title": "Biology",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "biology",
           "status": "Published",
           "localOnly": false
@@ -2041,7 +2041,7 @@
         {
           "id": "c12b14",
           "title": "Geography",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "geography",
           "status": "Published",
           "localOnly": false
@@ -2049,7 +2049,7 @@
         {
           "id": "c12b15",
           "title": "Bhugol",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bhugol",
           "status": "Published",
           "localOnly": false
@@ -2057,7 +2057,7 @@
         {
           "id": "c12b16",
           "title": "Maths Part1",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "maths_part1",
           "status": "Published",
           "localOnly": false
@@ -2065,7 +2065,7 @@
         {
           "id": "c12b17",
           "title": "Physics Part1",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "physics_part1",
           "status": "Published",
           "localOnly": false
@@ -2073,7 +2073,7 @@
         {
           "id": "c12b18",
           "title": "History",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "history",
           "status": "Published",
           "localOnly": false
@@ -2081,7 +2081,7 @@
         {
           "id": "c12b19",
           "title": "Arthashastra",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "arthashastra",
           "status": "Published",
           "localOnly": false
@@ -2089,7 +2089,7 @@
         {
           "id": "c12b20",
           "title": "Samashty Arthashastra",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "samashty_arthashastra",
           "status": "Published",
           "localOnly": false
@@ -2097,7 +2097,7 @@
         {
           "id": "c12b21",
           "title": "Psycology",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "psycology",
           "status": "Published",
           "localOnly": false
@@ -2105,7 +2105,7 @@
         {
           "id": "c12b22",
           "title": "Vyavasai Adhyan-1",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "vyavasai_adhyan_1",
           "status": "Published",
           "localOnly": false
@@ -2113,7 +2113,7 @@
         {
           "id": "c12b23",
           "title": "Vyavasai Adhyan-2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "vyavasai_adhyan_2",
           "status": "Published",
           "localOnly": false
@@ -2121,7 +2121,7 @@
         {
           "id": "c12b24",
           "title": "Lekhashastra Part 1",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "lekhashastra_part_1",
           "status": "Published",
           "localOnly": false
@@ -2129,7 +2129,7 @@
         {
           "id": "c12b25",
           "title": "Politics In India",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "politics_in_india",
           "status": "Published",
           "localOnly": false
@@ -2137,7 +2137,7 @@
         {
           "id": "c12b26",
           "title": "Arthvyavastha",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "arthvyavastha",
           "status": "Published",
           "localOnly": false
@@ -2145,7 +2145,7 @@
         {
           "id": "c12b27",
           "title": "Indian Society",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "indian_society",
           "status": "Published",
           "localOnly": false
@@ -2153,7 +2153,7 @@
         {
           "id": "c12b28",
           "title": "Geography 2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "geography_2",
           "status": "Published",
           "localOnly": false
@@ -2161,7 +2161,7 @@
         {
           "id": "c12b29",
           "title": "Macroeconomics",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "macroeconomics",
           "status": "Published",
           "localOnly": false
@@ -2169,7 +2169,7 @@
         {
           "id": "c12b30",
           "title": "Samaj Shastra",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "samaj_shastra",
           "status": "Published",
           "localOnly": false
@@ -2177,7 +2177,7 @@
         {
           "id": "c12b31",
           "title": "Microeconomics",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "microeconomics",
           "status": "Published",
           "localOnly": false
@@ -2185,7 +2185,7 @@
         {
           "id": "c12b32",
           "title": "Sociology",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "sociology",
           "status": "Published",
           "localOnly": false
@@ -2193,7 +2193,7 @@
         {
           "id": "c12b33",
           "title": "Bhugol 2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "bhugol_2",
           "status": "Published",
           "localOnly": false
@@ -2201,7 +2201,7 @@
         {
           "id": "c12b34",
           "title": "Manovigyan",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "manovigyan",
           "status": "Published",
           "localOnly": false
@@ -2209,7 +2209,7 @@
         {
           "id": "c12b35",
           "title": "Rajniti Shastra",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "rajniti_shastra",
           "status": "Published",
           "localOnly": false
@@ -2217,7 +2217,7 @@
         {
           "id": "c12b36",
           "title": "Geography 3",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "geography_3",
           "status": "Published",
           "localOnly": false
@@ -2225,7 +2225,7 @@
         {
           "id": "c12b37",
           "title": "Political Science",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "political_science",
           "status": "Published",
           "localOnly": false
@@ -2233,7 +2233,7 @@
         {
           "id": "c12b38",
           "title": "History 2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "history_2",
           "status": "Published",
           "localOnly": false
@@ -2241,7 +2241,7 @@
         {
           "id": "c12b39",
           "title": "History 3",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "history_3",
           "status": "Published",
           "localOnly": false
@@ -2249,7 +2249,7 @@
         {
           "id": "c12b40",
           "title": "Chemistry Part2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "chemistry_part2",
           "status": "Published",
           "localOnly": false
@@ -2257,7 +2257,7 @@
         {
           "id": "c12b41",
           "title": "Maths Part2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "maths_part2",
           "status": "Published",
           "localOnly": false
@@ -2265,7 +2265,7 @@
         {
           "id": "c12b42",
           "title": "Physics Part2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "physics_part2",
           "status": "Published",
           "localOnly": false
@@ -2273,7 +2273,7 @@
         {
           "id": "c12b43",
           "title": "Accountancy 1",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "accountancy_1",
           "status": "Published",
           "localOnly": false
@@ -2281,7 +2281,7 @@
         {
           "id": "c12b44",
           "title": "Business Studies 1",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "business_studies_1",
           "status": "Published",
           "localOnly": false
@@ -2289,7 +2289,7 @@
         {
           "id": "c12b45",
           "title": "Business Studies 2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "business_studies_2",
           "status": "Published",
           "localOnly": false
@@ -2297,7 +2297,7 @@
         {
           "id": "c12b46",
           "title": "Rajneetishashtra 2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "rajneetishashtra_2",
           "status": "Published",
           "localOnly": false
@@ -2305,7 +2305,7 @@
         {
           "id": "c12b47",
           "title": "Nagrik Shashtra",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "nagrik_shashtra",
           "status": "Published",
           "localOnly": false
@@ -2313,7 +2313,7 @@
         {
           "id": "c12b48",
           "title": "Lekhashastra Part 2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "lekhashastra_part_2",
           "status": "Published",
           "localOnly": false
@@ -2321,7 +2321,7 @@
         {
           "id": "c12b49",
           "title": "Rainbow English",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "rainbow_english",
           "status": "Published",
           "localOnly": false
@@ -2329,7 +2329,7 @@
         {
           "id": "c12b50",
           "title": "Dingat",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "dingat",
           "status": "Published",
           "localOnly": false
@@ -2337,7 +2337,7 @@
         {
           "id": "c12b51",
           "title": "Urdu Kahkashan",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "urdu_kahkashan",
           "status": "Published",
           "localOnly": false
@@ -2345,7 +2345,7 @@
         {
           "id": "c12b52",
           "title": "Dhubhidhan",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "dhubhidhan",
           "status": "Published",
           "localOnly": false
@@ -2353,7 +2353,7 @@
         {
           "id": "c12b53",
           "title": "Kaustuv bhag2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "kaustuv_bhag2",
           "status": "Published",
           "localOnly": false
@@ -2361,7 +2361,7 @@
         {
           "id": "c12b54",
           "title": "Patil Bhag2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "patil_bhag2",
           "status": "Published",
           "localOnly": false
@@ -2369,7 +2369,7 @@
         {
           "id": "c12b55",
           "title": "TILKOR-BHAG-2",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "tilkor_bhag_2",
           "status": "Published",
           "localOnly": false
@@ -2377,7 +2377,7 @@
         {
           "id": "c12b56",
           "title": "Lall O Guhar",
-          "image": "/bookcover.png",
+          "image": "/bookcover.webp",
           "subject": "lall_o_guhar",
           "status": "Published",
           "localOnly": false

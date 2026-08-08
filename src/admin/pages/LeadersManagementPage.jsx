@@ -26,7 +26,7 @@ export default function LeadersManagementPage({ addToast }) {
               ...item,
               name: "Shri Mithilesh Tiwari",
               role: "Hon'ble Education Minister, Bihar",
-              image: "/images/KeyParticipants/sri_mithlesh.png"
+              image: "/images/KeyParticipants/sri_mithlesh.webp"
             };
           }
           if (name === "Shri Dr. B. Rajender, IAS" || name === "Dr. B. Rajender") {
@@ -35,7 +35,7 @@ export default function LeadersManagementPage({ addToast }) {
               ...item,
               name: "Shri Vinod Singh Gunjiyal",
               role: "Secretary, Education Department",
-              image: "/images/KeyParticipants/sri-vinod.png"
+              image: "/images/KeyParticipants/sri-vinod.webp"
             };
           }
           if (item.name !== name) {
@@ -58,28 +58,28 @@ export default function LeadersManagementPage({ addToast }) {
         name: 'Shri Samrat Choudhary', 
         role: "Hon'ble Chief Minister, Bihar", 
         tag: 'LEADERSHIP', 
-        image: '/images/KeyParticipants/samrat.png' 
+        image: '/images/KeyParticipants/samrat.webp' 
       },
       { 
         id: 2, 
         name: 'Shri Mithilesh Tiwari', 
         role: "Hon'ble Education Minister, Bihar", 
         tag: 'LEADERSHIP', 
-        image: '/images/KeyParticipants/sri_mithlesh.png' 
+        image: '/images/KeyParticipants/sri_mithlesh.webp' 
       },
       { 
         id: 3, 
         name: 'Shri Vinod Singh Gunjiyal', 
         role: 'Secretary, Education Department', 
         tag: 'LEADERSHIP', 
-        image: '/images/KeyParticipants/sri-vinod.png' 
+        image: '/images/KeyParticipants/sri-vinod.webp' 
       },
       { 
         id: 4, 
         name: 'Shri Yatendra Kumar Pal, IAS', 
         role: 'Managing Director, Bihar State Text Book Publishing Corporation (BSTBPC)', 
         tag: 'LEADERSHIP', 
-        image: '/images/KeyParticipants/shri_yatendra_pal.png' 
+        image: '/images/KeyParticipants/shri_yatendra_pal.webp' 
       }
     ];
   });

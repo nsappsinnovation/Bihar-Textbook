@@ -359,7 +359,7 @@ const Audiolib = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/10 to-indigo-500/15 rounded-full blur-[70px] -z-10" />
               <img
-                src="/images/audio/audio.png"
+                src="/images/audio/audio.webp"
                 alt="Audio Experience Illustration"
                 className="w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(147,51,234,0.06)] select-none"
               />

@@ -111,7 +111,7 @@ export default function LinguisticApp() {
 
               <div className="hidden lg:block absolute top-0 right-0 w-[55%] h-full">
                  <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
-                 <img src="/images/linguistic/rhs.png" alt="Language Learning" className="w-full h-full object-cover object-right-top" />
+                 <img src="/images/linguistic/rhs.webp" alt="Language Learning" className="w-full h-full object-cover object-right-top" />
               </div>
             </section>
 

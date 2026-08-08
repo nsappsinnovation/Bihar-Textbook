@@ -75,7 +75,7 @@ const QuizComponent = () => {
   return (
     <div className="w-full flex justify-center py-8 relative rounded-2xl overflow-hidden border border-slate-100">
       <div className="absolute inset-0 z-0">
-        <img src="/images/life skill/bg.png" alt="Quiz Background" className="w-full h-full object-cover opacity-90" />
+        <img src="/images/life skill/bg.webp" alt="Quiz Background" className="w-full h-full object-cover opacity-90" />
         <div className="absolute inset-0 bg-teal-900/10 backdrop-blur-[2px]" />
       </div>
 
@@ -182,170 +182,170 @@ const skillStepsData = {
     {
       title: "Wash Vegetables & Prepare Ingredients / सब्जियां धोएं और सामग्री तैयार करें",
       desc: "Always wash fresh vegetables under clean running water. Chop them safely on a cutting board using a small knife. / ताजी सब्जियों को साफ बहते पानी में धोएं। एक छोटे चाकू का उपयोग करके उन्हें कटिंग बोर्ड पर सुरक्षित रूप से काटें।",
-      image: "/images/life skill/cooking_step1.png"
+      image: "/images/life skill/cooking_step1.webp"
     },
     {
       title: "Light the Stove Safely / सावधानी से गैस चूल्हा जलाएं",
       desc: "Turn on the gas knob and use a lighter to ignite the burner. Keep your face and loose clothing away from the flame. / गैस का नॉब घुमाएं और बर्नर को जलाने के लिए लाइटर का उपयोग करें। अपने चेहरे और ढीले कपड़ों को आंच से दूर रखें।",
-      image: "/images/life skill/cooking_step2.png"
+      image: "/images/life skill/cooking_step2.webp"
     },
     {
       title: "Stir and Simmer / चलाएं और धीमी आंच पर पकाएं",
       desc: "Use a wooden spatula to stir. Never leave the stove unattended while cooking. Turn off the burner immediately when done. / चलाने के लिए लकड़ी के स्पैटुला का उपयोग करें। खाना बनाते समय चूल्हे को कभी भी अकेला न छोड़ें। काम पूरा होने पर तुरंत बर्नर बंद कर दें।",
-      image: "/images/life skill/cooking_step3.png"
+      image: "/images/life skill/cooking_step3.webp"
     }
   ],
   2: [
     {
       title: "Track Your Income / अपनी आय ट्रैक करें",
       desc: "Record how much money you receive (allowance, pocket money, or earnings). / आपको मिलने वाले कुल पैसे (भत्ता, जेब खर्च या कमाई) को रिकॉर्ड करें।",
-      image: "/images/life skill/bg.png"
+      image: "/images/life skill/bg.webp"
     },
     {
       title: "Identify Needs vs. Wants / जरूरतें बनाम इच्छाएं पहचानें",
       desc: "Needs are essential (food, books, rent). Wants are optional (toys, candies, video games). Prioritize needs first. / जरूरतें आवश्यक हैं (भोजन, किताबें, किराया)। इच्छाएं वैकल्पिक हैं (खिलौने, कैंडी, वीडियो गेम)। पहले जरूरतों को प्राथमिकता दें।",
-      image: "/images/life skill/bg.png"
+      image: "/images/life skill/bg.webp"
     },
     {
       title: "Save First, Spend Later / पहले बचत करें, बाद में खर्च करें",
       desc: "Set aside at least 10-20% of your money in a savings box or bank account before spending the rest. / बाकी खर्च करने से पहले अपने पैसों का कम से कम 10-20% गुल्लक या बैंक खाते में अलग रख दें।",
-      image: "/images/life skill/bg.png"
+      image: "/images/life skill/bg.webp"
     }
   ],
   3: [
     {
       title: "Inspect the ATM Machine / एटीएम मशीन की जांच करें",
       desc: "Check the card reader slot for any extra attachments (skimmers). Look around to ensure no strangers are close. / कार्ड रीडर स्लॉट में किसी भी अतिरिक्त अटैचमेंट (स्किमर) की जांच करें। यह सुनिश्चित करने के लिए चारों ओर देखें कि कोई अजनबी पास न हो।",
-      image: "/images/life skill/atm_step1.png"
+      image: "/images/life skill/atm_step1.webp"
     },
     {
       title: "Shield the Keypad / कीपैड को ढकें",
       desc: "When entering your 4-digit PIN, cover the keypad with your free hand so no camera or person can see it. / अपना 4-अंकीय पिन दर्ज करते समय, कीपैड को अपने दूसरे हाथ से ढकें ताकि कोई कैमरा या व्यक्ति इसे न देख सके।",
-      image: "/images/life skill/atm_step2.png"
+      image: "/images/life skill/atm_step2.webp"
     },
     {
       title: "Collect Cash and Reset / नकद लें और रीसेट करें",
       desc: "Take your debit card and cash. Wait for the ATM screen to show the green 'Welcome' screen before leaving. / अपना डेबिट कार्ड और नकद लें। जाने से पहले एटीएम स्क्रीन पर हरे रंग की 'वेलकम' स्क्रीन दिखने का इंतजार करें।",
-      image: "/images/life skill/atm_step3.png"
+      image: "/images/life skill/atm_step3.webp"
     }
   ],
   4: [
     {
       title: "Stop at the Sidewalk / फुटपाथ पर रुकें",
       desc: "Never run straight onto the road. Stop and stand safely behind the curb. / कभी भी सीधे सड़क पर न भागें। रुकें और फुटपाथ के किनारे के पीछे सुरक्षित रूप से खड़े रहें।",
-      image: "/images/life skill/road_step1.png"
+      image: "/images/life skill/road_step1.webp"
     },
     {
       title: "Look Right, Left, and Right / दाएं, बाएं और फिर दाएं देखें",
       desc: "Look Right, then Left, then Right again to ensure no speeding vehicles are approaching. / यह सुनिश्चित करने के लिए कि कोई तेज गति वाला वाहन न आ रहा हो, दाएं, फिर बाएं, फिर दोबारा दाएं देखें।",
-      image: "/images/life skill/road_step2.png"
+      image: "/images/life skill/road_step2.webp"
     },
     {
       title: "Cross on Zebra Crossing / जेब्रा क्रॉसिंग पर पार करें",
       desc: "Wait for the pedestrian signal to turn green or for vehicles to stop completely before crossing smoothly. / सुचारू रूप से पार करने से पहले पैदल यात्री सिग्नल के हरे होने या वाहनों के पूरी तरह से रुकने का इंतजार करें।",
-      image: "/images/life skill/road_safety_step.png"
+      image: "/images/life skill/road_safety_step.webp"
     }
   ],
   5: [
     {
       title: "Wash the Wound / घाव को धोएं",
       desc: "Clean the scraped skin under clean water using mild soap to remove dirt and bacteria. / गंदगी और बैक्टीरिया को हटाने के लिए हल्के साबुन का उपयोग करके साफ पानी से छिल गई त्वचा को साफ करें।",
-      image: "/images/life skill/first_aid_step.png"
+      image: "/images/life skill/first_aid_step.webp"
     },
     {
       title: "Apply Antiseptic / एंटीसेप्टिक लगाएं",
       desc: "Gently apply antiseptic cream or ointment over the clean wound to prevent infection. / संक्रमण को रोकने के लिए साफ घाव पर धीरे से एंटीसेप्टिक क्रीम या मलहम लगाएं।",
-      image: "/images/life skill/first_aid_step.png"
+      image: "/images/life skill/first_aid_step.webp"
     },
     {
       title: "Cover with Bandage / पट्टी से ढकें",
       desc: "Place a sterile adhesive band-aid or gauze over the wound to keep it protected from dust and germs. / धूल और कीटाणुओं से बचाने के लिए घाव पर एक साफ चिपकने वाली पट्टी (बैंड-एड) या धुंध लगाएं।",
-      image: "/images/life skill/first_aid_step.png"
+      image: "/images/life skill/first_aid_step.webp"
     }
   ],
   6: [
     {
       title: "Create a Task List / कार्यों की सूची बनाएं",
       desc: "Write down everything you need to accomplish today. / आज आपको जो कुछ भी पूरा करना है उसे लिख लें।",
-      image: "/images/life skill/bg.png"
+      image: "/images/life skill/bg.webp"
     },
     {
       title: "Prioritize Tasks / कार्यों को प्राथमिकता दें",
       desc: "Mark the most important and urgent tasks and focus on them first. / सबसे महत्वपूर्ण और आवश्यक कार्यों को चिह्नित करें और पहले उन पर ध्यान केंद्रित करें।",
-      image: "/images/life skill/bg.png"
+      image: "/images/life skill/bg.webp"
     },
     {
       title: "Take Focused Breaks (Pomodoro) / ध्यान केंद्रित अंतराल लें",
       desc: "Work for 25 minutes, then take a short 5-minute break to refresh your mind. / 25 मिनट काम करें, फिर अपने दिमाग को तरोताजा करने के लिए 5 मिनट का छोटा अंतराल लें।",
-      image: "/images/life skill/bg.png"
+      image: "/images/life skill/bg.webp"
     }
   ],
   7: [
     {
       title: "Maintain Eye Contact / नजरें मिलाकर बात करें",
       desc: "Look at the person who is speaking to show that you are paying attention. / यह दिखाने के लिए कि आप ध्यान दे रहे हैं, बात करने वाले व्यक्ति की ओर देखें।",
-      image: "/images/life skill/bg.png"
+      image: "/images/life skill/bg.webp"
     },
     {
       title: "Listen Actively / सक्रिय रूप से सुनें",
       desc: "Listen to the words without interrupting. Try to understand their message fully. / बिना टोके शब्दों को सुनें। उनके संदेश को पूरी तरह से समझने की कोशिश करें।",
-      image: "/images/life skill/bg.png"
+      image: "/images/life skill/bg.webp"
     },
     {
       title: "Respond Respectfully / सम्मानपूर्वक प्रतिक्रिया दें",
       desc: "Speak clearly and calmly. Use polite words to express your ideas. / स्पष्ट and शांति से बोलें। अपने विचारों को व्यक्त करने के लिए विनम्र शब्दों का प्रयोग करें।",
-      image: "/images/life skill/bg.png"
+      image: "/images/life skill/bg.webp"
     }
   ],
   8: [
     {
       title: "Gather the Tools / उपकरण इकट्ठा करें",
       desc: "Choose the correct screwdriver, wrench, or tape required for the specific repair. / विशिष्ट मरम्मत के लिए आवश्यक सही पेचकश (स्क्रूड्राइवर), रिंच या टेप का चयन करें।",
-      image: "/images/life skill/bg.png"
+      image: "/images/life skill/bg.webp"
     },
     {
       title: "Turn Off Power/Water / बिजली/पानी बंद करें",
       desc: "If changing a bulb or fixing a tap, turn off the main switch or valve first for safety. / यदि कोई बल्ब बदल रहे हैं या नल ठीक कर रहे हैं, तो सुरक्षा के लिए सबसे पहले मुख्य स्विच या वाल्व बंद करें।",
-      image: "/images/life skill/bg.png"
+      image: "/images/life skill/bg.webp"
     },
     {
       title: "Tighten and Secure / कसें और सुरक्षित करें",
       desc: "Tighten screws or bolts in clockwise direction and double-check stability before testing. / स्क्रू या बोल्ट को घड़ी की दिशा (क्लॉकवाइज) में कसें और परीक्षण करने से पहले स्थिरता की दोबारा जांच करें।",
-      image: "/images/life skill/bg.png"
+      image: "/images/life skill/bg.webp"
     }
   ],
   9: [
     {
       title: "Create Strong Passwords / मजबूत पासवर्ड बनाएं",
       desc: "Use a mix of letters, numbers, and symbols. Never share your password with anyone. / अक्षरों, संख्याओं और प्रतीकों के मिश्रण का उपयोग करें। अपना पासवर्ड कभी किसी के साथ साझा न करें।",
-      image: "/images/life skill/bg.png"
+      image: "/images/life skill/bg.webp"
     },
     {
       title: "Verify the Sender / प्रेषक की पुष्टि करें",
       desc: "Before clicking links or downloading files, check if the email or message sender is trusted. / लिंक पर क्लिक करने या फाइलें डाउनलोड करने से पहले, जांच लें कि ईमेल या संदेश भेजने वाला विश्वसनीय है या नहीं।",
-      image: "/images/life skill/bg.png"
+      image: "/images/life skill/bg.webp"
     },
     {
       title: "Log Out Safely / सुरक्षित रूप से लॉग आउट करें",
       desc: "Always log out of your accounts when using shared devices in public spaces or school labs. / सार्वजनिक स्थानों या स्कूल लैब में साझा उपकरणों का उपयोग करते समय हमेशा अपने खातों से लॉग आउट करें।",
-      image: "/images/life skill/bg.png"
+      image: "/images/life skill/bg.webp"
     }
   ],
   10: [
     {
       title: "Recognize Your Emotion / अपनी भावना को पहचानें",
       desc: "Take a moment to notice if you feel angry, sad, anxious, or excited. / यह ध्यान देने के लिए एक क्षण लें कि क्या आप गुस्से में हैं, उदास हैं, चिंतित हैं, या उत्साहित हैं।",
-      image: "/images/life skill/bg.png"
+      image: "/images/life skill/bg.webp"
     },
     {
       title: "Breathe and Pause / सांस लें और रुकें",
       desc: "Inhale deeply for 4 seconds, hold, and exhale slowly before reacting or responding. / प्रतिक्रिया देने या उत्तर देने से पहले 4 सेकंड के लिए गहरी सांस लें, रोकें और धीरे-धीरे छोड़ें।",
-      image: "/images/life skill/bg.png"
+      image: "/images/life skill/bg.webp"
     },
     {
       title: "Practice Empathy / सहानुभूति का अभ्यास करें",
       desc: "Think about the other person's situation and feelings. Ask yourself why they are reacting this way. / दूसरे व्यक्ति की स्थिति और भावनाओं के बारे में सोचें। खुद से पूछें कि वे इस तरह क्यों प्रतिक्रिया दे रहे हैं।",
-      image: "/images/life skill/bg.png"
+      image: "/images/life skill/bg.webp"
     }
   ]
 };
@@ -406,24 +406,24 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
   // If the skill has a pre-existing PNG image, we return that
   const imageMap = {
     1: { // Cooking
-      0: "/images/life skill/cooking_step1.png",
-      1: "/images/life skill/cooking_step2.png",
-      2: "/images/life skill/cooking_step3.png"
+      0: "/images/life skill/cooking_step1.webp",
+      1: "/images/life skill/cooking_step2.webp",
+      2: "/images/life skill/cooking_step3.webp"
     },
     3: { // ATM Security
-      0: "/images/life skill/atm_step1.png",
-      1: "/images/life skill/atm_step2.png",
-      2: "/images/life skill/atm_step3.png"
+      0: "/images/life skill/atm_step1.webp",
+      1: "/images/life skill/atm_step2.webp",
+      2: "/images/life skill/atm_step3.webp"
     },
     4: { // Road Safety
-      0: "/images/life skill/road_step1.png",
-      1: "/images/life skill/road_step2.png",
-      2: "/images/life skill/road_safety_step.png"
+      0: "/images/life skill/road_step1.webp",
+      1: "/images/life skill/road_step2.webp",
+      2: "/images/life skill/road_safety_step.webp"
     },
     5: { // First Aid
-      0: "/images/life skill/first_aid_step.png",
-      1: "/images/life skill/first_aid_step.png",
-      2: "/images/life skill/first_aid_step.png"
+      0: "/images/life skill/first_aid_step.webp",
+      1: "/images/life skill/first_aid_step.webp",
+      2: "/images/life skill/first_aid_step.webp"
     }
   };
 
@@ -901,7 +901,7 @@ const LifeSkills = () => {
 
               <div className="hidden lg:block absolute top-0 right-0 w-[55%] h-full">
                 <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white via-white/10 to-transparent z-10" />
-                <img src="/images/life skill/right.png" alt="Life Skills" className="w-full h-auto object-contain object-right" />
+                <img src="/images/life skill/right.webp" alt="Life Skills" className="w-full h-auto object-contain object-right" />
               </div>
             </section>
 

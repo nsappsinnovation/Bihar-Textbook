@@ -51,7 +51,7 @@ const SignUp = () => {
           
           {/* ===== FIXED HEADER ===== */}
           <div className="p-8 pb-4 text-center">
-            <img src="/logo.png" alt="Logo" className="h-10 mx-auto mb-4" />
+            <img src="/logo.webp" alt="Logo" className="h-10 mx-auto mb-4" />
             <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">Admin Registration</h2>
             <p className="text-gray-400 text-xs font-semibold mt-1 tracking-wider uppercase">Create a new administrator profile</p>
           </div>

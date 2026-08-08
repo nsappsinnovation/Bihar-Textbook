@@ -19,7 +19,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
   const [mdData, setMdData] = useState({
     name: 'Shri Yatendra Kumar Pal',
     designation: 'Managing Director',
-    photo: '/images/KeyParticipants/shri_yatendra_pal.png',
+    photo: '/images/KeyParticipants/shri_yatendra_pal.webp',
     quote: 'Ensuring that textiles of knowledge reach every student in Bihar, timely and with uncompromised quality.',
     welcomeNote: 'It gives me immense pleasure to connect with all stakeholders through this platform. The Bihar State Text Book Publishing Corporation Ltd. plays a pivotal role in strengthening the foundation of education by ensuring the timely production and distribution of quality textbooks across the state.',
     qualityNote: 'Quality remains at the core of our operations. From manuscript approval to final printing, every stage undergoes strict supervision and inspection.',
@@ -84,11 +84,11 @@ export default function WebsiteEditorPage({ module, addToast }) {
             
             if (module.startsWith('gl-')) {
               const defaults = module === 'gl-photo' ? [
-                "/images/hero/classroom.png", "/images/hero/audio.png", "/images/hero/vr.png", "/images/hero/sign.png", "/images/hero/linguistic.png", "/images/csr.png"
+                "/images/hero/classroom.webp", "/images/hero/audio.webp", "/images/hero/vr.webp", "/images/hero/sign.webp", "/images/hero/linguistic.webp", "/images/csr.webp"
               ] : module === 'gl-video' ? [
-                "/images/hero/classroom.png", "/images/hero/audio.png", "/images/hero/vr.png", "/images/KeyParticipants/shri_yatendra_pal.png", "/images/hero/sign.png", "/images/hero/linguistic.png"
+                "/images/hero/classroom.webp", "/images/hero/audio.webp", "/images/hero/vr.webp", "/images/KeyParticipants/shri_yatendra_pal.webp", "/images/hero/sign.webp", "/images/hero/linguistic.webp"
               ] : [
-                "/images/hero/classroom.png", "/images/hero/audio.png", "/images/hero/vr.png", "/images/hero/sign.png", "/images/hero/linguistic.png"
+                "/images/hero/classroom.webp", "/images/hero/audio.webp", "/images/hero/vr.webp", "/images/hero/sign.webp", "/images/hero/linguistic.webp"
               ];
               
               const getYouTubeIdLocal = (url) => {
@@ -105,12 +105,12 @@ export default function WebsiteEditorPage({ module, addToast }) {
                   let autoThumbnail = "";
                   if (module === 'gl-video' && item.videoUrl) {
                     const ytId = getYouTubeIdLocal(item.videoUrl);
-                    if (ytId) autoThumbnail = `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg`;
+                    if (ytId) autoThumbnail = `https://img.youtube.com/vi/${ytId}/maxresdefault.webp`;
                   }
                   
                   let finalFallback = autoThumbnail;
                   if (!finalFallback) {
-                    finalFallback = module === 'gl-video' ? "/images/hero/audio.png" : "/images/hero/classroom.png";
+                    finalFallback = module === 'gl-video' ? "/images/hero/audio.webp" : "/images/hero/classroom.webp";
                   }
                   
                   return { ...item, document: finalFallback };
@@ -168,37 +168,37 @@ export default function WebsiteEditorPage({ module, addToast }) {
         ];
       } else if (module === 'gl-photo') {
         dummy = [
-          { id: 1, title: "Primary Classroom Learning Environment", document: "/images/hero/classroom.png" },
-          { id: 2, title: "E-Learning & Digital Books Portal", document: "/images/hero/audio.png" },
-          { id: 3, title: "Mobile VR Lab Tour Experience", document: "/images/hero/vr.png" },
-          { id: 4, title: "Inclusive Sign Language Training Class", document: "/images/hero/sign.png" },
-          { id: 5, title: "Diverse Regional Dialects Learning Program", document: "/images/hero/linguistic.png" },
-          { id: 6, title: "Corporate Social Responsibility Initiatives", document: "/images/csr.png" },
-          { id: 7, title: "Educational Campaigns", document: "/images/goodnight.png" },
-          { id: 8, title: "Key Participant Session", document: "/images/KeyParticipants/sri_mithlesh.png" },
-          { id: 9, title: "Conference Highlights", document: "/images/KeyParticipants/girish_kumar_choudhary.png" },
-          { id: 10, title: "Academic Discussions", document: "/images/KeyParticipants/abhyanand.png" },
-          { id: 11, title: "Leadership Meeting", document: "/images/KeyParticipants/sri-vinod.png" },
-          { id: 12, title: "Executive Briefing", document: "/images/KeyParticipants/shri_yatendra_pal.png" },
-          { id: 13, title: "Community Outreach", document: "/images/KeyParticipants/samrat.png" },
-          { id: 14, title: "Student Engagement", document: "/images/KeyParticipants/anand.png" }
+          { id: 1, title: "Primary Classroom Learning Environment", document: "/images/hero/classroom.webp" },
+          { id: 2, title: "E-Learning & Digital Books Portal", document: "/images/hero/audio.webp" },
+          { id: 3, title: "Mobile VR Lab Tour Experience", document: "/images/hero/vr.webp" },
+          { id: 4, title: "Inclusive Sign Language Training Class", document: "/images/hero/sign.webp" },
+          { id: 5, title: "Diverse Regional Dialects Learning Program", document: "/images/hero/linguistic.webp" },
+          { id: 6, title: "Corporate Social Responsibility Initiatives", document: "/images/csr.webp" },
+          { id: 7, title: "Educational Campaigns", document: "/images/goodnight.webp" },
+          { id: 8, title: "Key Participant Session", document: "/images/KeyParticipants/sri_mithlesh.webp" },
+          { id: 9, title: "Conference Highlights", document: "/images/KeyParticipants/girish_kumar_choudhary.webp" },
+          { id: 10, title: "Academic Discussions", document: "/images/KeyParticipants/abhyanand.webp" },
+          { id: 11, title: "Leadership Meeting", document: "/images/KeyParticipants/sri-vinod.webp" },
+          { id: 12, title: "Executive Briefing", document: "/images/KeyParticipants/shri_yatendra_pal.webp" },
+          { id: 13, title: "Community Outreach", document: "/images/KeyParticipants/samrat.webp" },
+          { id: 14, title: "Student Engagement", document: "/images/KeyParticipants/anand.webp" }
         ];
       } else if (module === 'gl-video') {
         dummy = [
-          { id: 1, title: "Bihar Digital Classrooms Launch Highlights", document: "/images/hero/classroom.png", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Launch" },
-          { id: 2, title: "Rural Literacy Outreach & Community Distribution Drives", document: "/images/hero/audio.png", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Community" },
-          { id: 3, title: "Teacher Training Workshop on Interactive Smart Textbooks", document: "/images/hero/vr.png", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Training" },
-          { id: 4, title: "Academic Session 2026-27 High-Level Inauguration Ceremony", document: "/images/KeyParticipants/shri_yatendra_pal.png", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Ceremony" },
-          { id: 5, title: "Accessible Audio Books and Inclusive Pedagogy Program", document: "/images/hero/sign.png", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Program" },
-          { id: 6, title: "Smart AI Revision Modules Student Pilot Feedback", document: "/images/hero/linguistic.png", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Feedback" }
+          { id: 1, title: "Bihar Digital Classrooms Launch Highlights", document: "/images/hero/classroom.webp", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Launch" },
+          { id: 2, title: "Rural Literacy Outreach & Community Distribution Drives", document: "/images/hero/audio.webp", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Community" },
+          { id: 3, title: "Teacher Training Workshop on Interactive Smart Textbooks", document: "/images/hero/vr.webp", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Training" },
+          { id: 4, title: "Academic Session 2026-27 High-Level Inauguration Ceremony", document: "/images/KeyParticipants/shri_yatendra_pal.webp", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Ceremony" },
+          { id: 5, title: "Accessible Audio Books and Inclusive Pedagogy Program", document: "/images/hero/sign.webp", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Program" },
+          { id: 6, title: "Smart AI Revision Modules Student Pilot Feedback", document: "/images/hero/linguistic.webp", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Feedback" }
         ];
       } else if (module === 'gl-press') {
         dummy = [
-          { id: 1, title: "Launch of Digital Learning Initiatives Across 500 Schools", document: "/images/hero/classroom.png", category: "Initiatives", desc: "The State Text Book Publishing Corporation today announced a major rollout of VR and AR educational tools, aiming to modernize learning infrastructure in rural districts.", date: "2025-10-15" },
-          { id: 2, title: "New Curriculum Guidelines Released for Upcoming Academic Year", document: "/images/hero/audio.png", category: "Curriculum", desc: "Updated guidelines emphasize regional history, environmental awareness, and foundational literacy skills. All textbooks have been revised accordingly.", date: "2025-09-28" },
-          { id: 3, title: "Partnership Announced with National Digital Library", document: "/images/hero/vr.png", category: "Partnerships", desc: "To expand access to supplementary reading materials across remote districts, a strategic partnership has been formalized.", date: "2025-08-10" },
-          { id: 4, title: "Annual Board Meeting Summary and Future Outlook", document: "/images/hero/sign.png", category: "Corporate", desc: "Key stakeholders convened to discuss the previous quarter's achievements and outline strategic directions for upcoming distributions.", date: "2025-07-22" },
-          { id: 5, title: "NEP 2020 Textbook Alignment Milestone Completed", document: "/images/hero/linguistic.png", category: "Reform", desc: "The corporation has successfully completed the alignment of all primary and secondary level textbooks with the New Education Policy 2020 standards.", date: "2025-05-10" },
+          { id: 1, title: "Launch of Digital Learning Initiatives Across 500 Schools", document: "/images/hero/classroom.webp", category: "Initiatives", desc: "The State Text Book Publishing Corporation today announced a major rollout of VR and AR educational tools, aiming to modernize learning infrastructure in rural districts.", date: "2025-10-15" },
+          { id: 2, title: "New Curriculum Guidelines Released for Upcoming Academic Year", document: "/images/hero/audio.webp", category: "Curriculum", desc: "Updated guidelines emphasize regional history, environmental awareness, and foundational literacy skills. All textbooks have been revised accordingly.", date: "2025-09-28" },
+          { id: 3, title: "Partnership Announced with National Digital Library", document: "/images/hero/vr.webp", category: "Partnerships", desc: "To expand access to supplementary reading materials across remote districts, a strategic partnership has been formalized.", date: "2025-08-10" },
+          { id: 4, title: "Annual Board Meeting Summary and Future Outlook", document: "/images/hero/sign.webp", category: "Corporate", desc: "Key stakeholders convened to discuss the previous quarter's achievements and outline strategic directions for upcoming distributions.", date: "2025-07-22" },
+          { id: 5, title: "NEP 2020 Textbook Alignment Milestone Completed", document: "/images/hero/linguistic.webp", category: "Reform", desc: "The corporation has successfully completed the alignment of all primary and secondary level textbooks with the New Education Policy 2020 standards.", date: "2025-05-10" },
         ];
       } else if (module === 'ku-list-md') {
         dummy = [
@@ -368,12 +368,12 @@ export default function WebsiteEditorPage({ module, addToast }) {
         };
         const ytId = getYouTubeId(finalFormData.videoUrl);
         if (ytId) {
-          finalFormData.document = `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg`;
+          finalFormData.document = `https://img.youtube.com/vi/${ytId}/maxresdefault.webp`;
         } else {
-          finalFormData.document = "/images/hero/audio.png";
+          finalFormData.document = "/images/hero/audio.webp";
         }
       } else {
-        finalFormData.document = "/images/hero/classroom.png";
+        finalFormData.document = "/images/hero/classroom.webp";
       }
     }
 
@@ -547,7 +547,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
                         className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" 
                         onError={(e) => {
                           e.target.onerror = null; 
-                          e.target.src = module === 'gl-video' ? "/images/hero/audio.png" : "/images/hero/classroom.png";
+                          e.target.src = module === 'gl-video' ? "/images/hero/audio.webp" : "/images/hero/classroom.webp";
                           
                           // Also try to heal localStorage silently
                           try {

@@ -8,105 +8,105 @@ const testimonials = [
     quote: "\"Education must build character, discipline, and a spirit of service to the nation.\"",
     name: "Dr. Rajendra Prasad",
     role: "FIRST PRESIDENT OF INDIA | FROM BIHAR",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Dr._Rajendra_Prasad.jpg/800px-Dr._Rajendra_Prasad.jpg"
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Dr._Rajendra_Prasad.webp/800px-Dr._Rajendra_Prasad.webp"
   },
   {
     id: 2,
     quote: "\"The purpose of education is not only employment, but the awakening of social responsibility.\"",
     name: "Jayaprakash Narayan",
     role: "LOKNAYAK | SOCIAL REFORMER",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Jayaprakash_Narayan_1975_stamp_of_India.jpg/800px-Jayaprakash_Narayan_1975_stamp_of_India.jpg"
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Jayaprakash_Narayan_1975_stamp_of_India.webp/800px-Jayaprakash_Narayan_1975_stamp_of_India.webp"
   },
   {
     id: 3,
     quote: "\"Education is the strongest foundation on which a modern and progressive Bihar can be built.\"",
     name: "Satyendra Narayan Sinha",
     role: "FORMER CHIEF MINISTER | EDUCATION REFORMER",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Satyendra_Narayan_Sinha.jpg/800px-Satyendra_Narayan_Sinha.jpg"
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Satyendra_Narayan_Sinha.webp/800px-Satyendra_Narayan_Sinha.webp"
   },
   {
     id: 4,
     quote: "\"The progress of Bihar depends on schools, colleges, good governance, and equal opportunity for all.\"",
     name: "Shri Krishna Sinha",
     role: "FIRST CHIEF MINISTER OF BIHAR",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Sri_Krishna_Sinha.jpg/800px-Sri_Krishna_Sinha.jpg"
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Sri_Krishna_Sinha.webp/800px-Sri_Krishna_Sinha.webp"
   },
   {
     id: 5,
     quote: "\"Knowledge becomes meaningful when it is used for public service and social development.\"",
     name: "Anugrah Narayan Sinha",
     role: "BIHAR VIBHUTI | EDUCATIONIST",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Anugrah_Narayan_Sinha.jpg/800px-Anugrah_Narayan_Sinha.jpg"
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Anugrah_Narayan_Sinha.webp/800px-Anugrah_Narayan_Sinha.webp"
   },
   {
     id: 6,
     quote: "\"Education should not remain a privilege of a few; it must become the strength of every common student.\"",
     name: "Karpoori Thakur",
     role: "JAN NAYAK | FORMER CHIEF MINISTER",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Karpoori_Thakur.jpg/800px-Karpoori_Thakur.jpg"
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Karpoori_Thakur.webp/800px-Karpoori_Thakur.webp"
   },
   {
     id: 7,
     quote: "\"The doors of education must remain open for the poor, the backward, and the marginalized.\"",
     name: "Karpoori Thakur",
     role: "JAN NAYAK | FORMER CHIEF MINISTER",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Karpoori_Thakur.jpg/800px-Karpoori_Thakur.jpg"
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Karpoori_Thakur.webp/800px-Karpoori_Thakur.webp"
   },
   {
     id: 8,
     quote: "\"Educating children, especially girls, is the most powerful way to change the future of Bihar.\"",
     name: "Shri Nitish Kumar",
     role: "Ex-CHIEF MINISTER, BIHAR",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Nitish_Kumar_in_2022.jpg/800px-Nitish_Kumar_in_2022.jpg"
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Nitish_Kumar_in_2022.webp/800px-Nitish_Kumar_in_2022.webp"
   },
   {
     id: 9,
     quote: "\"A society moves forward when every child receives education, dignity, and opportunity.\"",
     name: "Jagjivan Ram",
     role: "NATIONAL LEADER | SOCIAL JUSTICE LEADER",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Jagjivan_Ram_1976_stamp_of_India.jpg/800px-Jagjivan_Ram_1976_stamp_of_India.jpg"
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Jagjivan_Ram_1976_stamp_of_India.webp/800px-Jagjivan_Ram_1976_stamp_of_India.webp"
   },
   {
     id: 10,
     quote: "\"Education gives confidence to the weak, dignity to the poor, and strength to democracy.\"",
     name: "Jagjivan Ram",
     role: "NATIONAL LEADER | SOCIAL JUSTICE LEADER",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Jagjivan_Ram_1976_stamp_of_India.jpg/800px-Jagjivan_Ram_1976_stamp_of_India.jpg"
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Jagjivan_Ram_1976_stamp_of_India.webp/800px-Jagjivan_Ram_1976_stamp_of_India.webp"
   },
   {
     id: 11,
     quote: "\"Education creates the intellectual strength required for public life, self-governance, and national progress.\"",
     name: "Dr. Sachchidananda Sinha",
     role: "EDUCATIONIST | CONSTITUENT ASSEMBLY PRESIDENT",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Sachchidananda_Sinha.jpg/800px-Sachchidananda_Sinha.jpg"
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Sachchidananda_Sinha.webp/800px-Sachchidananda_Sinha.webp"
   },
   {
     id: 12,
     quote: "\"The real power of learning lies in creating responsible citizens and a just society.\"",
     name: "Dr. Sachchidananda Sinha",
     role: "EDUCATIONIST | CONSTITUENT ASSEMBLY PRESIDENT",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Sachchidananda_Sinha.jpg/800px-Sachchidananda_Sinha.jpg"
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Sachchidananda_Sinha.webp/800px-Sachchidananda_Sinha.webp"
   },
   {
     id: 13,
     quote: "\"Good education must reach the village, the poor household, and the first-generation learner.\"",
     name: "Ramdhari Singh Dinkar",
     role: "RASHTRAKAVI | EDUCATIONAL THINKER",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Ramdhari_Singh_Dinkar_1999_stamp_of_India.jpg/800px-Ramdhari_Singh_Dinkar_1999_stamp_of_India.jpg"
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Ramdhari_Singh_Dinkar_1999_stamp_of_India.webp/800px-Ramdhari_Singh_Dinkar_1999_stamp_of_India.webp"
   },
   {
     id: 14,
     quote: "\"Learning is the light that removes fear, inequality, and darkness from society.\"",
     name: "Ramdhari Singh Dinkar",
     role: "RASHTRAKAVI | EDUCATIONAL THINKER",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Ramdhari_Singh_Dinkar_1999_stamp_of_India.jpg/800px-Ramdhari_Singh_Dinkar_1999_stamp_of_India.jpg"
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Ramdhari_Singh_Dinkar_1999_stamp_of_India.webp/800px-Ramdhari_Singh_Dinkar_1999_stamp_of_India.webp"
   },
   {
     id: 15,
     quote: "\"A strong education system is the path to a strong Bihar, a strong society, and a strong India.\"",
     name: "Shri Nitish Kumar",
     role: "Ex-CHIEF MINISTER, BIHAR",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Nitish_Kumar_in_2022.jpg/800px-Nitish_Kumar_in_2022.jpg"
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Nitish_Kumar_in_2022.webp/800px-Nitish_Kumar_in_2022.webp"
   }
 ];
 

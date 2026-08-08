@@ -9,8 +9,8 @@ export default function EducationExcellencePage({ addToast, title = "Tools & Res
   const [missions, setMissions] = useState(() => {
     const saved = localStorage.getItem(storageKey);
     return saved ? JSON.parse(saved) : [
-      { id: 1, title: 'VIRTUAL REALITY LAB', desc: 'Immersive Learning Experiences', image: '/images/missions/headset.png', link: '/vr', content: 'Our VR Lab provides students with cutting-edge immersive learning experiences across various subjects.' },
-      { id: 2, title: 'AUDIO LIBRARY', desc: 'Accessible Digital Content', image: '/images/missions/audio-book.png', link: '/audio-books', content: 'A comprehensive collection of audiobooks and podcasts designed for accessibility and on-the-go learning.' },
+      { id: 1, title: 'VIRTUAL REALITY LAB', desc: 'Immersive Learning Experiences', image: '/images/missions/headset.webp', link: '/vr', content: 'Our VR Lab provides students with cutting-edge immersive learning experiences across various subjects.' },
+      { id: 2, title: 'AUDIO LIBRARY', desc: 'Accessible Digital Content', image: '/images/missions/audio-book.webp', link: '/audio-books', content: 'A comprehensive collection of audiobooks and podcasts designed for accessibility and on-the-go learning.' },
     ];
   });
 

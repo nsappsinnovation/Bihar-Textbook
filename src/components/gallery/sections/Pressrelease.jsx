@@ -11,7 +11,7 @@ const pressReleases = [
     category: "Initiatives",
     fileSize: "1.2 MB",
     cardStyle: "gradient", // Solid blue/indigo gradient
-    image: "/images/hero/classroom.png"
+    image: "/images/hero/classroom.webp"
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ const pressReleases = [
     category: "Curriculum",
     fileSize: "4.5 MB",
     cardStyle: "image", // Library image background
-    image: "/images/hero/audio.png"
+    image: "/images/hero/audio.webp"
   },
   {
     id: 3,
@@ -31,7 +31,7 @@ const pressReleases = [
     category: "Partnerships",
     fileSize: "800 KB",
     cardStyle: "glass", // White glass panel
-    image: "/images/hero/vr.png"
+    image: "/images/hero/vr.webp"
   },
   {
     id: 4,
@@ -41,7 +41,7 @@ const pressReleases = [
     category: "Corporate",
     fileSize: "2.1 MB",
     cardStyle: "dark", // Dark slate block
-    image: "/images/hero/sign.png"
+    image: "/images/hero/sign.webp"
   },
   {
     id: 5,
@@ -51,7 +51,7 @@ const pressReleases = [
     category: "Reform",
     fileSize: "3.4 MB",
     cardStyle: "glass", // White glass panel
-    image: "/images/hero/linguistic.png"
+    image: "/images/hero/linguistic.webp"
   }
 ];
 

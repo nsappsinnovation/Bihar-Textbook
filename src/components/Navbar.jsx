@@ -51,7 +51,7 @@ const Navbar = () => {
         <div className="flex items-center shrink-0">
           <Link to="/">
             <img
-              src="/logo.png"
+              src="/logo.webp"
               alt="BSTBPC Logo"
               className="h-10 sm:h-12 md:h-16 w-auto object-contain"
             />

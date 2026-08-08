@@ -1524,7 +1524,7 @@ export default function LingModule({ type }) {
         .animate-bounce-subtle { animation: bounce-subtle 3s ease-in-out infinite; }
         @keyframes fade-in-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .animate-fade-in-up { animation: fade-in-up 0.4s ease-out forwards; }
-        .convo-bg { background-image: url('/images/linguistic/convo.png'); background-size: cover; background-position: center; position: absolute; inset: 0; opacity: 0.9; }
+        .convo-bg { background-image: url('/images/linguistic/convo.webp'); background-size: cover; background-position: center; position: absolute; inset: 0; opacity: 0.9; }
         .bubble-glow { box-shadow: 0 0 40px rgba(255, 255, 255, 0.4), 0 10px 20px rgba(0, 0, 0, 0.1); }
       `}</style>
       
@@ -1650,7 +1650,7 @@ export default function LingModule({ type }) {
           <>
             <div className="hidden lg:flex relative h-full flex-col justify-end items-center pb-4">
               <div className="absolute top-[18%] left-[60%] -translate-x-1/2 w-40 p-3 bg-[#DBEAFE] rounded-[20px] rounded-bl-none shadow-md border border-blue-50 z-10"><p className="text-[14px] font-medium leading-relaxed">{t.question_sia(currentItem.native, targetLangName)}</p><div className="absolute -bottom-7 left-6 flex flex-col gap-2"><div className="w-5 h-5 rounded-full bg-[#DBEAFE]" /><div className="w-3 h-3 rounded-full bg-[#DBEAFE]" /></div></div>
-              <img src="/images/linguistic/boy.png" alt="Boy" className="w-[260px] h-auto object-contain max-h-[55vh] -ml-24 -translate-y-12" />
+              <img src="/images/linguistic/boy.webp" alt="Boy" className="w-[260px] h-auto object-contain max-h-[55vh] -ml-24 -translate-y-12" />
             </div>
             <div className="flex flex-col items-center gap-3 py-2 lg:-ml-16 mx-auto w-full">
               <h1 className="text-lg font-black text-center mb-0">{t.question_main(targetLangName)}</h1>
@@ -1717,7 +1717,7 @@ export default function LingModule({ type }) {
                   <div className="text-center pt-2 mt-4"><div className="text-[13px] font-medium text-slate-600 mb-4">{t.progress}</div><div className="relative w-24 h-24 mx-auto flex items-center justify-center"><svg className="w-full h-full -rotate-90" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="transparent" stroke="#EFF6FF" strokeWidth="8" /><circle cx="50" cy="50" r="40" fill="transparent" stroke="#2563EB" strokeWidth="8" strokeDasharray="251" strokeDashoffset={251 - ((step/items.length)*251)} strokeLinecap="round" /></svg><div className="absolute flex flex-col items-center"><div className="text-xl font-black text-[#1A1C2E]">{step + 1}/{items.length}</div><span className="text-[10px] font-bold text-slate-400">{t.words}</span></div></div></div>
               </div>
 
-              <img src="/images/linguistic/girl.png" alt="Girl" className="w-[230px] h-auto object-contain max-h-[55vh] -ml-20 -translate-y-12" />
+              <img src="/images/linguistic/girl.webp" alt="Girl" className="w-[230px] h-auto object-contain max-h-[55vh] -ml-20 -translate-y-12" />
             </div>
           </>
         )}

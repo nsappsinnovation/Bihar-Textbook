@@ -15,7 +15,7 @@ import {
 import { useDebounce } from '../hooks/useCustomHooks';
 import { storeFile, useResolvedUrl } from '../../utils/fileStorage';
 
-const ResolvedImage = ({ src, alt, className, onError, placeholder = '/bookcover.png' }) => {
+const ResolvedImage = ({ src, alt, className, onError, placeholder = '/bookcover.webp' }) => {
   const resolved = useResolvedUrl(src);
   return (
     <img
@@ -67,7 +67,7 @@ export default function BooksPage({ addToast, forcedClass }) {
   const [addClassId, setAddClassId] = useState('1');
   const [addSubject, setAddSubject] = useState('General');
   const [addAuthor, setAddAuthor] = useState('Bihar Board');
-  const [addImage, setAddImage] = useState('/bookcover.png');
+  const [addImage, setAddImage] = useState('/bookcover.webp');
   const [addDescription, setAddDescription] = useState('');
   const [addStatus, setAddStatus] = useState(true); // true = Published
 
@@ -112,7 +112,7 @@ export default function BooksPage({ addToast, forcedClass }) {
     setAddClassId('1');
     setAddSubject('General');
     setAddAuthor('Bihar Board');
-    setAddImage('/bookcover.png');
+    setAddImage('/bookcover.webp');
     setAddDescription('');
     setAddStatus(true);
     setChaptersList([]);
@@ -159,7 +159,7 @@ export default function BooksPage({ addToast, forcedClass }) {
     setEditClassId(String(book.classId || 1));
     setEditSubject(book.subject || 'General');
     setEditAuthor(book.author || 'Bihar Board');
-    setEditImage(book.image || '/bookcover.png');
+    setEditImage(book.image || '/bookcover.webp');
     setEditDescription(book.description || '');
     setEditStatus(book.status !== 'Draft');
     setChaptersList(book.chapters || []);
@@ -176,7 +176,7 @@ export default function BooksPage({ addToast, forcedClass }) {
       classId: addClassId,
       subject: addSubject.trim() || 'General',
       author: addAuthor.trim() || 'Bihar Board',
-      image: addImage.trim() || '/bookcover.png',
+      image: addImage.trim() || '/bookcover.webp',
       description:
         addDescription.trim() ||
         `Official Bihar Board Class ${addClassId} textbook for '${addTitle}'.`,
@@ -203,7 +203,7 @@ export default function BooksPage({ addToast, forcedClass }) {
       classId: Number(editClassId),
       subject: editSubject.trim() || 'General',
       author: editAuthor.trim() || 'Bihar Board',
-      image: editImage.trim() || '/bookcover.png',
+      image: editImage.trim() || '/bookcover.webp',
       description: editDescription.trim(),
       status: editStatus ? 'Published' : 'Draft',
       chapters: chaptersList,
@@ -370,10 +370,10 @@ export default function BooksPage({ addToast, forcedClass }) {
                         <div className="flex items-center gap-3">
                           <div className="w-11 h-14 rounded-lg overflow-hidden bg-blue-50 flex items-center justify-center border border-blue-100/60 shrink-0">
                             <img
-                              src={book.image || '/bookcover.png'}
+                              src={book.image || '/bookcover.webp'}
                               alt={book.title}
                               className="w-full h-full object-cover"
-                              onError={(e) => { e.target.src = '/bookcover.png'; }}
+                              onError={(e) => { e.target.src = '/bookcover.webp'; }}
                             />
                           </div>
                           <div>
@@ -472,8 +472,8 @@ export default function BooksPage({ addToast, forcedClass }) {
                       src={book.image}
                       alt={book.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      onError={(e) => { e.target.src = '/bookcover.png'; }}
-                      placeholder="/bookcover.png"
+                      onError={(e) => { e.target.src = '/bookcover.webp'; }}
+                      placeholder="/bookcover.webp"
                     />
                   </div>
                   <div className="absolute top-3 right-3">

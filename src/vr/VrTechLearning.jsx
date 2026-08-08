@@ -20,24 +20,24 @@ const lessons = [
     badge: "VR Explorer",
     topic: "3D Worlds & Headsets",
     summary: "Discover how VR headsets surround your eyes with 360-degree digital worlds!",
-    image: "/images/vr/vr_intro.png",
+    image: "/images/vr/vr_intro.webp",
     learnSections: [
       {
         title: "From Flat Screens to 360 Headsets",
         desc: "When you watch TV or play on a computer, you look at a flat screen in front of you. A VR headset is worn over your eyes so the screen surrounds your entire view. Wherever you turn your head—up, down, left, or right—you see a full 360-degree digital world!",
-        image: "/images/vr/magic_goggles.png",
+        image: "/images/vr/magic_goggles.webp",
         funFact: "The very first virtual reality machine was built in 1962! Called the 'Sensorama', it let viewers ride a virtual motorcycle with 3D visuals, stereo sound, wind, and even flower scents!"
       },
       {
         title: "How Two Eyes See 3D Depth",
         desc: "Try closing one eye, then the other—notice how your left and right eyes see from slightly different angles? VR headsets use this same natural trick! Inside the headset, two separate images are shown (one for each eye). Your brain combines them to see realistic 3D depth and distance.",
-        image: "/images/vr/brain_trick.png",
+        image: "/images/vr/brain_trick.webp",
         funFact: "Because our two eyes are slightly apart, each sees a slightly different angle. VR headsets use this principle—called stereoscopy—to create true 3D depth inside flat displays!"
       },
       {
         title: "3D Sound That Moves With You",
         desc: "VR doesn't just trick your eyes; it uses 3D Spatial Audio for your ears! If a virtual rocket takes off to your right, the sound comes from the right earphone. When you turn your head toward the rocket, the sound moves right in front of you.",
-        image: "/images/vr/mars_whale.png",
+        image: "/images/vr/mars_whale.webp",
         funFact: "NASA astronauts train for real spacewalks inside VR headsets before ever leaving Earth, practicing how to use tools in zero gravity!"
       }
     ],
@@ -68,24 +68,24 @@ const lessons = [
     badge: "Sensor Detective",
     topic: "Lenses & Gyro Sensors",
     summary: "Learn how curved glass lenses keep screens clear and how smart sensors track your head.",
-    image: "/images/vr/vr_sensors_chip.png",
+    image: "/images/vr/vr_sensors_chip.webp",
     learnSections: [
       {
         title: "Why VR Headsets Need Lenses",
         desc: "If you hold a phone screen two inches from your nose, it looks blurry and hurts your eyes. VR headsets place special curved glass lenses between your eyes and the screen. These lenses bend light rays so your eyes can focus clearly without straining.",
-        image: "/images/vr/lenses.png",
+        image: "/images/vr/lenses.webp",
         funFact: "VR headset lenses use concentric Fresnel grooves to stay extremely thin and light while bending display light precisely to your eyes!"
       },
       {
         title: "Gyroscope Motion Sensors",
         desc: "How does the virtual world move instantly when you turn your head? Inside the headset is a tiny sensor called a Gyroscope. It measures your head turns more than 1,000 times every second so the camera moves exactly when you move!",
-        image: "/images/vr/gyro_sensor.png",
+        image: "/images/vr/gyro_sensor.webp",
         funFact: "A modern VR gyroscope measures head turns over 1,000 times per second—more than 10 times faster than the blink of a human eye!"
       },
       {
         title: "Fast Screen Refresh Rate",
         desc: "If a screen updates too slowly when you look around, it can make you feel dizzy. Good VR headsets refresh the picture 90 to 120 times every single second! This super-fast speed keeps motion smooth and natural.",
-        image: "/images/vr/low_latency.png",
+        image: "/images/vr/low_latency.webp",
         funFact: "Human eyes notice motion lag if it takes more than 20 milliseconds—modern VR screens refresh up to 120 times every second!"
       }
     ],
@@ -116,24 +116,24 @@ const lessons = [
     badge: "Tech Master",
     topic: "Hand Tracking & Vibration",
     summary: "Find out how wireless controllers track your hands and vibrate when you touch virtual objects!",
-    image: "/images/vr/vr_controllers.png",
+    image: "/images/vr/vr_controllers.webp",
     learnSections: [
       {
         title: "Tracking Your Hands in 3D Space",
         desc: "To grab objects in VR, you hold wireless hand controllers. Cameras on the headset track hidden infrared lights on the controllers. When you raise your real hand or wave, your virtual hand inside the headset moves the exact same way!",
-        image: "/images/vr/virtual_hands.png",
+        image: "/images/vr/virtual_hands.webp",
         funFact: "VR controllers have tiny hidden infrared LEDs that cameras track with sub-millimeter precision in 3D space!"
       },
       {
         title: "Buttons, Joysticks & Grab Triggers",
         desc: "VR controllers have joysticks for walking and trigger buttons under your fingers. When you squeeze the trigger button, your virtual hand closes to pick up lab beakers, throw a basketball, or use scientific tools.",
-        image: "/images/vr/controllers_buttons.png",
+        image: "/images/vr/controllers_buttons.webp",
         funFact: "Advanced VR gloves can simulate physical resistance so grabbing a virtual baseball or bow feels solid and real in your hand!"
       },
       {
         title: "Feeling Virtual Contact (Haptic Vibration)",
         desc: "Have you noticed how a phone vibrates when you get a notification? VR controllers use tiny vibration motors inside. When your virtual hand touches a table or catches a ball, the controller rumbles so you actually feel the contact!",
-        image: "/images/vr/haptics.png",
+        image: "/images/vr/haptics.webp",
         funFact: "Haptic feedback uses linear resonant actuators—the exact same ultra-precise vibration motors used in high-end smartphones!"
       }
     ],
@@ -164,24 +164,24 @@ const lessons = [
     badge: "Reality Explorer",
     topic: "VR, AR & MR",
     summary: "Understand the difference between full virtual worlds and digital holograms in your room!",
-    image: "/images/vr/vr_ar_mr.png",
+    image: "/images/vr/vr_ar_mr.webp",
     learnSections: [
       {
         title: "Virtual Reality (VR) - Full Digital World",
         desc: "In Virtual Reality (VR), your view of the real room is completely replaced by a computer-generated 3D world. You can visit outer space, dive deep into the ocean, or walk inside an atom simulation.",
-        image: "/images/vr/closed_eye.png",
+        image: "/images/vr/closed_eye.webp",
         funFact: "Surgeons practice complex brain and heart operations inside VR medical simulators before ever operating on a real patient!"
       },
       {
         title: "Augmented Reality (AR) - Digital Overlays",
         desc: "Augmented Reality (AR) lets you see your real physical room while adding digital information or pictures on top. For example, pointing a tablet camera at a plant to see floating labels of its leaves and roots.",
-        image: "/images/vr/augmented_overlay.png",
+        image: "/images/vr/augmented_overlay.webp",
         funFact: "Pilots have used head-up augmented reality displays projected onto jet cockpits since the late 1970s!"
       },
       {
         title: "Mixed Reality (MR) - Smart Holograms",
         desc: "Mixed Reality (MR) uses headset cameras to scan your actual furniture. Digital 3D objects can recognize your real table or walls—like a virtual science ball that bounces off your real study desk!",
-        image: "/images/vr/mixed_reality.png",
+        image: "/images/vr/mixed_reality.webp",
         funFact: "Mixed Reality headsets use depth sensors to scan your room and build an exact 3D wireframe mesh of your furniture in real time!"
       }
     ],
@@ -212,24 +212,24 @@ const lessons = [
     badge: "Safety Champion",
     topic: "Guardian & Eye Rules",
     summary: "Learn how to set up a safe play boundary and care for your eyes during VR learning.",
-    image: "/images/vr/vr_safety_zone.png",
+    image: "/images/vr/vr_safety_zone.webp",
     learnSections: [
       {
         title: "The Guardian Safety Boundary",
         desc: "Because you can't see your real room inside VR, you draw a digital safety circle on your floor before starting. If you walk too close to your real wall or desk, a glowing grid lights up to warn you so you don't bump into anything!",
-        image: "/images/vr/guardian_boundary.png",
+        image: "/images/vr/guardian_boundary.webp",
         funFact: "The Guardian boundary system uses real-time computer vision to draw a safety grid in mid-air the moment you step within 6 inches of a wall!"
       },
       {
         title: "Matching Lens Width to Your Eyes (IPD)",
         desc: "Everyone's eyes are spaced slightly differently. Headsets have a slider wheel to adjust the distance between the two lenses. Aligning the lenses with the center of your pupils keeps the picture sharp and comfortable.",
-        image: "/images/vr/clear_floor.png",
+        image: "/images/vr/clear_floor.webp",
         funFact: "Professional VR labs measure every student's IPD in millimeters to customize optical lens spacing before simulations!"
       },
       {
         title: "The 20-20 Rest Rule for Healthy Eyes",
         desc: "Looking at any screen for too long can tire your eyes. Follow the 20-20 rule: every 20 minutes, take off your headset and look at something 20 feet away for 20 seconds to relax your eye muscles!",
-        image: "/images/vr/eye_break.png",
+        image: "/images/vr/eye_break.webp",
         funFact: "Looking at an object 20 feet away completely relaxes the internal ciliary muscle inside your eye, instantly easing eye fatigue!"
       }
     ],
@@ -398,7 +398,7 @@ const HeadsetGame = ({ onComplete }) => {
 
           <div className="w-full h-56 sm:h-64 rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 flex items-center justify-center relative group">
             <img
-              src="/images/vr/vr_headset_table.png"
+              src="/images/vr/vr_headset_table.webp"
               alt="VR Headset on table"
               className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
             />
@@ -426,7 +426,7 @@ const HeadsetGame = ({ onComplete }) => {
 
           <div className="w-full h-56 sm:h-64 rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 flex items-center justify-center relative">
             <img
-              src="/images/vr/v3.png"
+              src="/images/vr/v3.webp"
               alt="Blur Space Portal"
               className="w-full h-full object-cover transition-all duration-100"
               style={{ filter: `blur(${blurAmount}px)` }}
@@ -510,7 +510,7 @@ const HeadsetGame = ({ onComplete }) => {
 
           <div className="w-full h-56 sm:h-64 rounded-2xl overflow-hidden border-2 border-[#0BB562] bg-slate-50 flex items-center justify-center relative shadow-sm">
             <img
-              src="/images/vr/vr_headset_work.png"
+              src="/images/vr/vr_headset_work.webp"
               alt="Space Portal Active"
               className="w-full h-full object-cover"
             />
@@ -592,7 +592,7 @@ const GyroGame = ({ onComplete }) => {
 
           <div className="w-full h-56 sm:h-64 rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 flex items-center justify-center relative group">
             <img
-              src="/images/vr/vr_sensors_chip.png"
+              src="/images/vr/vr_sensors_chip.webp"
               alt="VR Headset Sensors"
               className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
             />
@@ -746,7 +746,7 @@ const GyroGame = ({ onComplete }) => {
 
           <div className="w-full h-56 sm:h-64 rounded-2xl overflow-hidden border-2 border-[#0BB562] bg-slate-50 flex items-center justify-center relative shadow-sm">
             <img
-              src="/images/vr/a1.png"
+              src="/images/vr/a1.webp"
               alt="Astronaut Space Calibration Active"
               className="w-full h-full object-cover"
             />
@@ -917,7 +917,7 @@ const ControllersGame = ({ onComplete }) => {
 
           <div className="w-full h-56 sm:h-64 rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 flex items-center justify-center relative">
             <img
-              src="/images/vr/vr_controllers.png"
+              src="/images/vr/vr_controllers.webp"
               alt="VR Controllers"
               className="w-full h-full object-cover"
             />
@@ -1185,7 +1185,7 @@ const RealityGame = ({ onComplete }) => {
           {selectedMode === 'VR' && (
             <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-slate-100">
               <img
-                src="/images/vr/vr_hero.png"
+                src="/images/vr/vr_hero.webp"
                 alt="VR Environment"
                 className="absolute inset-0 w-full h-full object-cover opacity-90"
               />
@@ -1208,7 +1208,7 @@ const RealityGame = ({ onComplete }) => {
           {selectedMode === 'AR' && (
             <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-slate-50">
               <img
-                src="/images/vr/rhs.png"
+                src="/images/vr/rhs.webp"
                 alt="Real room table"
                 className="absolute inset-0 w-full h-full object-cover opacity-80"
               />
@@ -1236,7 +1236,7 @@ const RealityGame = ({ onComplete }) => {
           {selectedMode === 'MR' && (
             <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-slate-50">
               <img
-                src="/images/vr/rhs.png"
+                src="/images/vr/rhs.webp"
                 alt="Real room table"
                 className="absolute inset-0 w-full h-full object-cover opacity-80"
               />
@@ -1342,7 +1342,7 @@ const SafetyGame = ({ onComplete }) => {
 
         <div className="w-full h-60 sm:h-72 bg-slate-50 border border-slate-200 rounded-2xl relative overflow-hidden flex items-center justify-center shadow-inner">
           <img 
-            src="/images/vr/heaven.png" 
+            src="/images/vr/heaven.webp" 
             alt="Safety Room Play Zone" 
             className="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none"
           />

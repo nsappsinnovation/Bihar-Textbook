@@ -293,21 +293,21 @@ const Basicskills = () => {
   const modules = [
     {
       title: "Road Safety & Signals",
-      image: "/images/skills/a1.png",
+      image: "/images/skills/a1.webp",
       description: "Learn vital traffic signals, road crossing rules, and pedestrian safety protocols. Walk safely in public environments.",
       duration: "10 min",
       difficulty: "Beginner"
     },
     {
       title: "How to Use an ATM",
-      image: "/images/skills/i1.png",
+      image: "/images/skills/i1.webp",
       description: "A step-by-step interactive simulation to safely use an ATM machine, enter your PIN securely, and withdraw cash.",
       duration: "15 min",
       difficulty: "Intermediate"
     },
     {
       title: "Basic Money Handling",
-      image: "/images/skills/image.png",
+      image: "/images/skills/image.webp",
       description: "Learn how to manage, count, and combine currency notes responsibly to pay exact amounts and verify change in daily life.",
       duration: "12 min",
       difficulty: "Beginner"
@@ -416,7 +416,7 @@ const Basicskills = () => {
               <div className="absolute inset-0 bg-gradient-to-tr from-teal-500/10 to-teal-500/15 rounded-full blur-[70px] -z-10 animate-pulse duration-[4000ms]" />
               
               <img
-                src="/images/skills/a.png"
+                src="/images/skills/a.webp"
                 alt="Basic Skills Experience Illustration"
                 className="w-full h-auto object-contain select-none group-hover:scale-[1.02] transition-transform duration-500"
               />
