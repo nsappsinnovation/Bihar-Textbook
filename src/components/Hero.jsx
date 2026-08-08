@@ -30,17 +30,14 @@ const Hero = () => {
                     </div>
 
                     {/* Main Heading */}
-                    <h1 className="text-[clamp(2rem,5vw,4.5rem)] font-black text-[#0b2b4f] leading-[1.05] tracking-tight">
-                        BIHAR STATE<br />
-                        <span className="text-blue-600">TEXTBOOK</span><br />
-                        PUBLISHING<br />
-                        CORPORATION
+                    <h1 className="text-[clamp(1.5rem,4vw,3.5rem)] font-black text-[#0b2b4f] leading-[1.05] tracking-tight">
+                        Bihar State<br />
+                        <span className="text-blue-600">Textbook</span><br />
+                        Publishing<br />
+                        Corporation Ltd.
                     </h1>
 
-                    {/* Subtext */}
-                    <p className="mt-[clamp(0.8rem,2vw,1.5rem)] text-[#0b2b4f] font-semibold text-[clamp(0.75rem,1.5vw,1rem)] max-w-[85%] opacity-80">
-                        Shiksha se Samriddhi, Gyaan se Vikaas.
-                    </p>
+                   
 
                     {/* Feature Icons Row */}
                     <div className="mt-[clamp(2rem,4vw,3rem)] flex flex-wrap lg:flex-nowrap items-center gap-[clamp(0.6rem,2vw,2rem)]">
