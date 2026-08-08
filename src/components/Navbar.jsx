@@ -43,7 +43,7 @@ const Navbar = () => {
 
   return (
     <header className={`absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-6 py-4 w-full transition-all duration-300 ${
-      isHomePage ? "bg-gradient-to-b from-white/60 to-transparent backdrop-blur-sm border-b border-blue-200/50" : "bg-white shadow-sm border-b border-gray-100"
+      isHomePage ? "bg-transparent" : "bg-white shadow-sm border-b border-gray-100"
     }`}>
 
       <div className="flex h-16 w-full items-center justify-between px-2 md:px-6">

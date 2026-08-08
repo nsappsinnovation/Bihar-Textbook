@@ -27,7 +27,6 @@ const industryData = [
 
 
 export default function KeyParticipant() {
-  const scrollRef = useRef(null);
 
   const [allData, setAllData] = useState(() => {
     const saved = localStorage.getItem('website_leaders_v3');
@@ -74,18 +73,6 @@ export default function KeyParticipant() {
 
   const data = allData.filter(d => d.tag === 'LEADERSHIP');
 
-  const scroll = (direction) => {
-    if (scrollRef.current) {
-      const { current } = scrollRef;
-      const scrollAmount = 320; // Approx card width
-      if (direction === "left") {
-        current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-      } else {
-        current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-      }
-    }
-  };
-
   return (
     <section id="key-participants" className="bg-[#f8f9fa] py-14 px-6 font-sans">
       <div className="max-w-[1400px] mx-auto">
@@ -109,14 +96,10 @@ export default function KeyParticipant() {
         </div>
 
         <div className="max-w-[1280px] mx-auto">
-          {/* Carousel */}
-          <div
-            ref={scrollRef}
-            className="flex overflow-x-auto gap-5 pb-6 snap-x scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
+          {/* Grid View */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pb-6">
             {data.map((item, i) => (
-              <div key={i} className="min-w-[280px] md:min-w-[310px] snap-center">
+              <div key={i} className="w-full">
                 <ParticipantCard item={item} />
               </div>
             ))}

@@ -25,3 +25,8 @@ dist-ssr
 public/images/classes/
 public/PDFs/
 
+# Secrets & MCP config (contains API keys)
+.env
+.env.local
+.mcp.json
+
