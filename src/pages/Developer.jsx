@@ -7,7 +7,7 @@ const Developer = () => {
     <div className="min-h-screen bg-[#fcfcfd] font-sans pt-12 pb-24">
       {/* Hero Section */}
       <div className="bg-gradient-to-br from-blue-900 via-indigo-900 to-blue-800 text-white py-20 px-6 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.webp')] opacity-10"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
         <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-500 rounded-full blur-[100px] opacity-30"></div>
         
         <div className="max-w-4xl mx-auto relative z-10 text-center">

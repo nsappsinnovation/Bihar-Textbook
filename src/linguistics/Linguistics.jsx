@@ -591,7 +591,7 @@ const Linguistics = () => {
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/10 to-indigo-500/10 rounded-full blur-[60px] -z-10 animate-pulse duration-[5000ms]" />
               <div className="relative z-10 w-full flex flex-col items-center">
                 <img
-                  src="/images/diverse_hero.webp"
+                  src="/images/diverse_hero.png"
                   alt="Diverse Language avatar"
                   className="w-[320px] sm:w-[380px] lg:w-[400px] h-auto object-contain select-none transform hover:scale-[1.02] transition-transform duration-500 z-10"
                 />

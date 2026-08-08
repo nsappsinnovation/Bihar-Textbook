@@ -1220,7 +1220,7 @@ export const tendersData = [
   {
     "id": 175,
     "title": "Corrigendum Notice for Ek Tha Mohan printing with paper, packing & supply to District headquarters",
-    "link": "https://bstbpc.bihar.gov.in/Admin/tender/tender147.webp",
+    "link": "https://bstbpc.bihar.gov.in/Admin/tender/tender147.jpg",
     "date": "",
     "category": "Procurement"
   },
@@ -1269,7 +1269,7 @@ export const tendersData = [
   {
     "id": 182,
     "title": "Quotation for pinting of Prapatra, QAB",
-    "link": "https://bstbpc.bihar.gov.in/Admin/tender/tender34.webp",
+    "link": "https://bstbpc.bihar.gov.in/Admin/tender/tender34.jpg",
     "date": "",
     "category": "Procurement"
   },
@@ -1409,7 +1409,7 @@ export const tendersData = [
   {
     "id": 202,
     "title": "Corrigendum Notice for for printing & supply of Table DRR Calendar are invited from the experienced and reputed printers",
-    "link": "https://bstbpc.bihar.gov.in/Admin/tender/tender82.webp",
+    "link": "https://bstbpc.bihar.gov.in/Admin/tender/tender82.jpg",
     "date": "",
     "category": "Procurement"
   },
@@ -1437,7 +1437,7 @@ export const tendersData = [
   {
     "id": 206,
     "title": "Important Notice for Financial Bid opening for Printing of Text Book and Printing of Cover paper",
-    "link": "https://bstbpc.bihar.gov.in/Admin/tender/tender78.webp",
+    "link": "https://bstbpc.bihar.gov.in/Admin/tender/tender78.jpg",
     "date": "",
     "category": "Procurement"
   },

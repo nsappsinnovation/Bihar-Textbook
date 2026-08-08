@@ -32,7 +32,7 @@ const OrgStructure = () => {
 
           <div className="relative rounded-2xl overflow-hidden bg-slate-50 border border-slate-100 flex items-center justify-center min-h-[500px]">
             <img
-              src="/images/classes/orgstructure.webp"
+              src="/images/classes/orgstructure.png"
               alt="BSTBPC Organisational Hierarchy"
               className="w-full h-auto object-contain transition-transform duration-700 hover:scale-105"
               onError={(e) => {

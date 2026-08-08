@@ -41,7 +41,7 @@ const vrDemosList = [
 
 const TexturedEarth = () => {
   // Using a realistic NASA Earth map with meshBasicMaterial to ensure it is evenly bright 360 degrees (no night shadows)
-  const texture = useTexture('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_atmos_2048.webp');
+  const texture = useTexture('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/planets/earth_atmos_2048.jpg');
   return (
     <mesh>
       <sphereGeometry args={[2.5, 64, 64]} />

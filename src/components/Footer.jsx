@@ -22,7 +22,7 @@ const Footer = () => {
                 <div className="relative">
                   <div className="absolute inset-0 bg-blue-500 rounded-xl blur opacity-50 group-hover:opacity-80 transition-opacity"></div>
                   <img
-                    src="/bstbpc_logo.webp"
+                    src="/bstbpc_logo.png"
                     alt="BSTBPC Logo"
                     className="relative h-14 w-auto object-contain bg-white/10 rounded-xl p-1.5 border border-white/20 backdrop-blur-sm"
                   />

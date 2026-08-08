@@ -5,22 +5,22 @@ const industryData = [
   {
     name: "Shri Samrat Choudhary",
     role: "Hon'ble Chief Minister, Bihar",
-    image: "/images/KeyParticipants/samrat.webp",
+    image: "/images/KeyParticipants/samrat.png",
   },
   {
     name: "Shri Mithilesh Tiwari",
     role: "Hon'ble Education Minister, Bihar",
-    image: "/images/KeyParticipants/sri_mithlesh.webp",
+    image: "/images/KeyParticipants/sri_mithlesh.png",
   },
   {
     name: "Shri Vinod Singh Gunjiyal",
     role: "Secretary, Education Department",
-    image: "/images/KeyParticipants/sri-vinod.webp",
+    image: "/images/KeyParticipants/sri-vinod.png",
   },
   {
     name: "Shri Yatendra Kumar Pal, IAS",
     role: "Managing Director, BSTBPC",
-    image: "/images/KeyParticipants/shri_yatendra_pal.webp",
+    image: "/images/KeyParticipants/shri_yatendra_pal.png",
   },
 ];
 
@@ -42,7 +42,7 @@ export default function KeyParticipant() {
               ...item,
               name: "Shri Mithilesh Tiwari",
               role: "Hon'ble Education Minister, Bihar",
-              image: "/images/KeyParticipants/sri_mithlesh.webp"
+              image: "/images/KeyParticipants/sri_mithlesh.png"
             };
           }
           if (name === "Shri Dr. B. Rajender, IAS" || name === "Dr. B. Rajender") {
@@ -51,7 +51,7 @@ export default function KeyParticipant() {
               ...item,
               name: "Shri Vinod Singh Gunjiyal",
               role: "Secretary, Education Department",
-              image: "/images/KeyParticipants/sri-vinod.webp"
+              image: "/images/KeyParticipants/sri-vinod.png"
             };
           }
           if (item.name !== name) {

@@ -146,8 +146,8 @@ const CyberSecurityQuiz = () => {
       {/* High-Tech Cyber Background Picture with Gradient & Mesh Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="/images/cybersecurity/cs_quiz_background.webp" 
-          onError={(e) => { e.target.src = '/images/cybersecurity/rhs.webp'; }}
+          src="/images/cybersecurity/cs_quiz_background.png" 
+          onError={(e) => { e.target.src = '/images/cybersecurity/rhs.png'; }}
           alt="Cyber Security Background" 
           className="w-full h-full object-cover object-center scale-105 transition-transform duration-1000"
         />
@@ -1513,30 +1513,30 @@ const lessons = [
     badge: "Cyber Explorer",
     topic: "Basics of Online Safety",
     summary: "Start from the basics: learn what cybersecurity means and why computers and phones need protection.",
-    image: "/images/cybersecurity/lesson1.webp",
+    image: "/images/cybersecurity/lesson1.png",
     learnSections: [
       {
         title: "What Does 'Cybersecurity' Mean?",
         desc: "Just like we lock our house doors at night to keep our family and belongings safe, Cybersecurity means locking and protecting our digital world—our computers, mobile phones, internet accounts, and private information.",
-        image: "/images/cybersecurity/cs_digital_playground.webp",
+        image: "/images/cybersecurity/cs_digital_playground.png",
         funFact: "The word 'Cyber' comes from 'Cybernetics', meaning anything related to computers, networks, and virtual reality!"
       },
       {
         title: "What Are We Protecting?",
         desc: "When you use the internet, your device holds valuable digital treasures: your school projects, family photos, email messages, game progress, and your parents' online banking details. Cybersecurity keeps these treasures safe from being stolen or damaged.",
-        image: "/images/cybersecurity/cs_online_pretenders.webp",
+        image: "/images/cybersecurity/cs_online_pretenders.png",
         funFact: "Every day, over 300 billion emails are sent across the internet containing personal and professional data!"
       },
       {
         title: "Who Are Online Hackers?",
         desc: "Hackers or cybercriminals are people who search the internet looking for unlocked digital doors or weak security systems. They try to sneak into accounts to steal information or cause trouble.",
-        image: "/images/cybersecurity/cs_golden_rules.webp",
+        image: "/images/cybersecurity/cs_golden_rules.png",
         funFact: "Not all hackers are bad! 'Ethical Hackers' (White Hat Hackers) are cybersecurity professionals hired by companies to test and strengthen their security locks!"
       },
       {
         title: "The 3 Golden Pillars (C-I-A)",
         desc: "Cybersecurity relies on 3 main rules:\n1. Confidentiality: Keeping private secrets private.\n2. Integrity: Making sure data is not altered or damaged.\n3. Availability: Ensuring your computer and internet work when you need them.",
-        image: "/images/cybersecurity/cs_chat_checklist.webp",
+        image: "/images/cybersecurity/cs_chat_checklist.png",
         funFact: "The C-I-A Triad is the foundational rule taught to every cybersecurity engineer around the world!"
       }
     ],
@@ -1569,30 +1569,30 @@ const lessons = [
     badge: "Privacy Defender",
     topic: "Personal Data & Footprints",
     summary: "Understand what personal data is and how everything you do online leaves a lasting digital footprint.",
-    image: "/images/cybersecurity/lesson2.webp",
+    image: "/images/cybersecurity/lesson2.png",
     learnSections: [
       {
         title: "What is a Digital Footprint?",
         desc: "Every time you visit a website, post a comment, or play an online game, you leave behind a trail of information called your Digital Footprint. Once something is shared online, it can stay there for a very long time.",
-        image: "/images/cybersecurity/cs_fishing_hooks.webp",
+        image: "/images/cybersecurity/cs_fishing_hooks.png",
         funFact: "Did you know? Search engines can index web pages in seconds, meaning an online post can be saved even if deleted later!"
       },
       {
         title: "Personal Information (PII)",
         desc: "Personally Identifiable Information (PII) is any detail that can identify who you are or where you live. Never share your full legal name, home address, school name, phone number, or parents' bank details with strangers online.",
-        image: "/images/cybersecurity/cs_panic_trap.webp",
+        image: "/images/cybersecurity/cs_panic_trap.png",
         funFact: "Professional esports gamers use anonymous gamer tags and never share their real birthdate or hometown publicly!"
       },
       {
         title: "Social Engineering Tricks",
         desc: "Sometimes cybercriminals don't hack computers—they trick people! This is called Social Engineering. A stranger in a game might pretend to be a game moderator offering 'free diamonds' if you tell them your email or password.",
-        image: "/images/cybersecurity/cs_decoding_links.webp",
+        image: "/images/cybersecurity/cs_decoding_links.png",
         funFact: "Cybersecurity studies show that over 80% of cyber attacks start by tricking a person rather than hacking a machine!"
       },
       {
         title: "Smart Privacy Checklist",
         desc: "DO: Keep your gaming profiles and social media accounts set to Private.\nDO: Ask a parent or teacher before entering personal details on any website.\nDON'T: Send personal photos or your home address to online chat strangers.\nDON'T: Share OTP verification codes sent to your phone.",
-        image: "/images/cybersecurity/cs_link_checklist.webp",
+        image: "/images/cybersecurity/cs_link_checklist.png",
         funFact: "Banks and official platforms never ask for OTP verification codes over chat messages!"
       }
     ],
@@ -1625,30 +1625,30 @@ const lessons = [
     badge: "Lock Master",
     topic: "Passwords & Two-Factor Auth",
     summary: "Learn how to build strong passphrases and use Two-Factor Authentication to lock your accounts.",
-    image: "/images/cybersecurity/lesson3.webp",
+    image: "/images/cybersecurity/lesson3.png",
     learnSections: [
       {
         title: "Why Simple Passwords Are Unsafe",
         desc: "If your password is short or common—like '123456', 'password', or your pet's name—automated computer programs can guess it in less than a second. Your password is the key to your digital lock!",
-        image: "/images/cybersecurity/cs_fortress_gate.webp",
+        image: "/images/cybersecurity/cs_fortress_gate.png",
         funFact: "An 8-character simple lowercase password can be cracked in less than 1 second by modern computers!"
       },
       {
         title: "Building a Strong Passphrase",
         desc: "Instead of a short word, create a memorable Passphrase combining 4 unrelated words plus numbers and symbols! For example: 'BlueRocketCoffeeJump#99' is easy for you to remember but takes millions of years for a computer to guess.",
-        image: "/images/cybersecurity/cs_materials_defense.webp",
+        image: "/images/cybersecurity/cs_materials_defense.png",
         funFact: "A 14-character passphrase with uppercase, lowercase, numbers, and symbols takes over 200 million years to crack!"
       },
       {
         title: "Never Reuse Passwords",
         desc: "If you use the exact same password for your email, school account, and games, a hacker who discovers it on one site can unlock all your accounts. Always use a unique password for each important service.",
-        image: "/images/cybersecurity/cs_secret_sentence.webp",
+        image: "/images/cybersecurity/cs_secret_sentence.png",
         funFact: "Password managers use military-grade AES-256 encryption to safely store unique passwords for every site!"
       },
       {
         title: "Two-Factor Authentication (2FA)",
         desc: "Two-Factor Authentication (2FA) adds a second lock! To log in, you need your password PLUS a temporary code sent to your phone. Even if someone discovers your password, they cannot get in without that second code.",
-        image: "/images/cybersecurity/cs_password_checklist.webp",
+        image: "/images/cybersecurity/cs_password_checklist.png",
         funFact: "Enabling Two-Factor Authentication (2FA) blocks over 99.9% of automated hacking attempts instantly!"
       }
     ],
@@ -1681,30 +1681,30 @@ const lessons = [
     badge: "Link Detective",
     topic: "Phishing & Fake Messages",
     summary: "Master how to recognize fake messages, urgency traps, and suspicious web links before clicking.",
-    image: "/images/cybersecurity/lesson4.webp",
+    image: "/images/cybersecurity/lesson4.png",
     learnSections: [
       {
         title: "What is Phishing?",
         desc: "Phishing is an online scam where attackers send fake SMS messages or emails pretending to be a trusted company (like a bank, delivery company, or game platform) to trick you into clicking harmful links.",
-        image: "/images/cybersecurity/cs_loud_popups.webp",
+        image: "/images/cybersecurity/cs_loud_popups.png",
         funFact: "The word 'phishing' was coined in 1996 as a metaphor for using digital bait to hook unsuspecting users!"
       },
       {
         title: "The Panic & Urgency Trap",
         desc: "Scams almost always try to make you panic! They use alarming words like 'URGENT!', 'YOUR ACCOUNT IS BLOCKED!', or 'YOU WON A FREE GIFT!'. They want you to rush and click without thinking. Stop, breathe, and verify!",
-        image: "/images/cybersecurity/cs_disarm_trap.webp",
+        image: "/images/cybersecurity/cs_disarm_trap.png",
         funFact: "Scam messages deliberately create artificial panic because stress makes human brains skip logical safety checks!"
       },
       {
         title: "Checking Web Links (URLs)",
         desc: "Always inspect the web link before clicking! Safe official websites use HTTPS and correct spelling (like google.com). Phishing links often have subtle spelling mistakes or strange extensions like bank-security-verify.xyz.",
-        image: "/images/cybersecurity/cs_shield_refills.webp",
+        image: "/images/cybersecurity/cs_shield_refills.png",
         funFact: "A padlock icon (HTTPS) means data connection is encrypted, but always double-check the domain spelling!"
       },
       {
         title: "Link Safety Checklist",
         desc: "DO: Check unexpected messages with a parent or teacher.\nDO: Look closely at the website domain spelling.\nDON'T: Click links in SMS messages claiming you won a lottery or reward.\nDON'T: Enter login details on unfamiliar pages.",
-        image: "/images/cybersecurity/cs_device_checklist.webp",
+        image: "/images/cybersecurity/cs_device_checklist.png",
         funFact: "Modern web browsers check links against real-time security databases to block millions of phishing sites daily!"
       }
     ],
@@ -1737,30 +1737,30 @@ const lessons = [
     badge: "System Protector",
     topic: "Updates & App Permissions",
     summary: "Learn how to handle fake virus alerts, update your device software, and manage app permissions.",
-    image: "/images/cybersecurity/lesson5.webp",
+    image: "/images/cybersecurity/lesson5.png",
     learnSections: [
       {
         title: "Ignoring Fake Virus Pop-ups",
         desc: "While browsing, you might see flashing pop-up ads claiming 'YOUR DEVICE IS INFECTED WITH 50 VIRUSES! CLICK TO CLEAN!'. Don't panic—these are scareware ads trying to trick you into downloading harmful software.",
-        image: "/images/cybersecurity/cs_double_lock.webp",
+        image: "/images/cybersecurity/cs_double_lock.png",
         funFact: "Real operating systems and web browsers never display alarming countdown timers in pop-up security alerts!"
       },
       {
         title: "Safe Browsing Habits",
         desc: "Never click buttons inside suspicious pop-up banners. Safely close the browser tab by clicking the small 'X' or pressing Alt+F4 on your keyboard without downloading anything.",
-        image: "/images/cybersecurity/cs_sneaky_apps.webp",
+        image: "/images/cybersecurity/cs_sneaky_apps.png",
         funFact: "Closing the browser tab instantly stops any unwanted pop-up script from running!"
       },
       {
         title: "Why Software Updates Matter",
         desc: "Software updates don't just add new features—they include essential 'security patches'. Developers release updates to fix newly discovered security bugs so hackers cannot exploit your device.",
-        image: "/images/cybersecurity/cs_permission_shield.webp",
+        image: "/images/cybersecurity/cs_permission_shield.png",
         funFact: "Automatic updates protect your devices while you sleep so your operating system stays secure 24/7!"
       },
       {
         title: "Smart App Permissions",
         desc: "When installing an app, check what permissions it asks for. While a navigation map app needs location access, a simple calculator app should never ask to see your photos, microphone, or contacts!",
-        image: "/images/cybersecurity/cs_permission_checklist.webp",
+        image: "/images/cybersecurity/cs_permission_checklist.png",
         funFact: "Denying unnecessary app permissions prevents apps from secretly tracking your daily habits!"
       }
     ],
@@ -2195,7 +2195,7 @@ const CyberSecurityDashboard = () => {
 
               <div className="hidden lg:block absolute top-0 right-0 w-[55%] h-full">
                 <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white via-white/40 to-transparent z-10" />
-                <img src="/images/cybersecurity/rhs.webp" alt="Cyber Security" className="w-full h-full object-cover object-right-top" />
+                <img src="/images/cybersecurity/rhs.png" alt="Cyber Security" className="w-full h-full object-cover object-right-top" />
               </div>
             </section>
 

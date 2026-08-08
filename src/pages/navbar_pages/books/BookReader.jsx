@@ -48,7 +48,7 @@ const BookReader = () => {
     const classData = textbookData.classes?.find((cls) => cls.id === Number(classId));
     const allBooks = classData?.books || [];
     const book = allBooks.find(b => (b.subject || "General") === bookSubject || b.title === bookSubject);
-    const bookImage = book?.image || "/images/placeholders/no-cover.webp";
+    const bookImage = book?.image || "/images/placeholders/no-cover.png";
     const bookTitle = book?.title || bookSubject || "Hindi";
 
     useEffect(() => {

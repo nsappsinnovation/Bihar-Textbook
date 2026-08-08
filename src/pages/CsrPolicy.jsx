@@ -184,7 +184,7 @@ const CsrPolicy = () => {
         <div
           className="absolute inset-0 z-0 opacity-70"
           style={{
-            backgroundImage: `url('images/csr.webp')`,
+            backgroundImage: `url('images/csr.png')`,
             backgroundPosition: "right center",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat"

@@ -30,7 +30,7 @@ const Books = () => {
   const classData = textbookData?.classes?.find((cls) => cls.id === Number(classId));
 
   // Placeholder image URL
-  const PLACEHOLDER_IMG = "/images/placeholders/no-cover.webp";
+  const PLACEHOLDER_IMG = "/images/placeholders/no-cover.png";
 
   if (!classData) {
     return (
@@ -144,16 +144,16 @@ const BookCard = ({ book, placeholder, classId }) => {
   // Map subjects to beautiful audiobook covers to replace the plain placeholder
   const getFallbackCover = (subject) => {
     const sub = (subject || "").toLowerCase();
-    if (sub.includes("hindi") || sub.includes("sarangi") || sub.includes("kompal") || sub.includes("kislay")) return "https://ciet.ncert.gov.in/storage/app/public/photos/17/ahsr1cc.webp";
-    if (sub.includes("ganit") || sub.includes("math") || sub.includes("hisab")) return "https://ciet.ncert.gov.in/storage/app/public/photos/17/aejm1cc.webp";
-    if (sub.includes("english") || sub.includes("mridang") || sub.includes("radiance") || sub.includes("blossom")) return "https://ciet.ncert.gov.in/storage/app/public/photos/17/Audios/Class%201/mridang.webp";
-    if (sub.includes("science") || sub.includes("paryawaran") || sub.includes("mahauliat") || sub.includes("duniya")) return "https://ciet.ncert.gov.in/storage/app/public/photos/19/Bookcover/chve1cc.webp";
-    if (sub.includes("urdu") || sub.includes("gulshan") || sub.includes("farozan") || sub.includes("misbahul")) return "https://ciet.ncert.gov.in/storage/app/public/photos/19/Bookcover/cesa1cc.webp";
-    if (sub.includes("sanskrit") || sub.includes("amrita")) return "https://ciet.ncert.gov.in/storage/app/public/photos/17/Class%202/bhsr1cc.webp";
-    return "https://ciet.ncert.gov.in/storage/app/public/photos/19/Bookcover/cemm1cc.webp"; // default fallback
+    if (sub.includes("hindi") || sub.includes("sarangi") || sub.includes("kompal") || sub.includes("kislay")) return "https://ciet.ncert.gov.in/storage/app/public/photos/17/ahsr1cc.jpg";
+    if (sub.includes("ganit") || sub.includes("math") || sub.includes("hisab")) return "https://ciet.ncert.gov.in/storage/app/public/photos/17/aejm1cc.jpg";
+    if (sub.includes("english") || sub.includes("mridang") || sub.includes("radiance") || sub.includes("blossom")) return "https://ciet.ncert.gov.in/storage/app/public/photos/17/Audios/Class%201/mridang.jpg";
+    if (sub.includes("science") || sub.includes("paryawaran") || sub.includes("mahauliat") || sub.includes("duniya")) return "https://ciet.ncert.gov.in/storage/app/public/photos/19/Bookcover/chve1cc.jpg";
+    if (sub.includes("urdu") || sub.includes("gulshan") || sub.includes("farozan") || sub.includes("misbahul")) return "https://ciet.ncert.gov.in/storage/app/public/photos/19/Bookcover/cesa1cc.jpg";
+    if (sub.includes("sanskrit") || sub.includes("amrita")) return "https://ciet.ncert.gov.in/storage/app/public/photos/17/Class%202/bhsr1cc.jpg";
+    return "https://ciet.ncert.gov.in/storage/app/public/photos/19/Bookcover/cemm1cc.jpg"; // default fallback
   };
 
-  const finalImage = (!resolvedImage || resolvedImage.includes("bookcover.webp") || resolvedImage.includes("no-cover")) 
+  const finalImage = (!resolvedImage || resolvedImage.includes("bookcover.png") || resolvedImage.includes("no-cover")) 
     ? getFallbackCover(book.subject) 
     : resolvedImage;
 

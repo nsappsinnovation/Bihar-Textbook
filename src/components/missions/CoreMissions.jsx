@@ -116,7 +116,7 @@ const CoreMissions = () => {
       <div
         className="absolute inset-0 opacity-[0.25] pointer-events-none bg-no-repeat bg-center mix-blend-multiply"
         style={{
-          backgroundImage: "url('/images/core_mission_bg.webp')",
+          backgroundImage: "url('/images/core_mission_bg.png')",
           backgroundSize: "75% auto",
         }}
       />

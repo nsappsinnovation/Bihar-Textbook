@@ -1,34 +1,21 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { BookOpen, GraduationCap, Users, TrendingUp, BookOpenText } from 'lucide-react';
 
 const Hero = () => {
-    const [isImageLoaded, setIsImageLoaded] = useState(false);
-    const imgRef = useRef(null);
-
-    // Safety check in case image is cached and loads before hydration
-    useEffect(() => {
-        if (imgRef.current?.complete) {
-            setIsImageLoaded(true);
-        }
-    }, []);
     return (
         <section className="relative w-full min-h-screen bg-[#f8f5f0] overflow-hidden font-sans pt-[clamp(120px,15vh,160px)] flex flex-col justify-center">
             
             {/* Decorative Background Elements */}
             <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
                 <img 
-                    ref={imgRef}
-                    src="/hero.webp" 
+                    src="/hero.png" 
                     alt="Background decorative elements" 
                     className="absolute inset-0 w-full h-full object-cover object-right"
-                    fetchPriority="high"
-                    loading="eager"
-                    onLoad={() => setIsImageLoaded(true)}
                 />
             </div>
 
             {/* Main Content Container */}
-            <div className={`relative z-10 w-full max-w-[1536px] mx-auto px-[clamp(1.5rem,5vw,4rem)] h-full flex flex-col justify-center pb-[5vh] ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}>
+            <div className="relative z-10 w-full max-w-[1536px] mx-auto px-[clamp(1.5rem,5vw,4rem)] h-full flex flex-col justify-center pb-[5vh]">
                 
                 <div className="max-w-[85vw] xl:max-w-3xl">
                     {/* Top pre-heading */}
@@ -47,10 +34,13 @@ const Hero = () => {
                         BIHAR STATE<br />
                         <span className="text-blue-600">TEXTBOOK</span><br />
                         PUBLISHING<br />
-                        CORPORATION LTD.
+                        CORPORATION
                     </h1>
 
-                  
+                    {/* Subtext */}
+                    <p className="mt-[clamp(0.8rem,2vw,1.5rem)] text-[#0b2b4f] font-semibold text-[clamp(0.75rem,1.5vw,1rem)] max-w-[85%] opacity-80">
+                        Shiksha se Samriddhi, Gyaan se Vikaas.
+                    </p>
 
                     {/* Feature Icons Row */}
                     <div className="mt-[clamp(2rem,4vw,3rem)] flex flex-wrap lg:flex-nowrap items-center gap-[clamp(0.6rem,2vw,2rem)]">
@@ -108,7 +98,7 @@ const Hero = () => {
 
             {/* Right side floating box content */}
             <div 
-                className={`absolute bottom-[clamp(2.5rem,8vw,5rem)] right-[clamp(1.5rem,6vw,5rem)] z-20 flex items-center gap-[clamp(1rem,2vw,1.5rem)] ${isImageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                className="absolute bottom-[clamp(2.5rem,8vw,5rem)] right-[clamp(1.5rem,6vw,5rem)] z-20 flex items-center gap-[clamp(1rem,2vw,1.5rem)]"
             >
                 <div className="flex items-center gap-[clamp(0.8rem,1.5vw,1.2rem)]">
                     <div className="w-[clamp(2rem,4vw,3rem)] h-[clamp(2rem,4vw,3rem)] flex items-center justify-center shrink-0">

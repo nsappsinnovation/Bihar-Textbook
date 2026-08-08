@@ -358,7 +358,7 @@ const CashierLab = () => {
               {/* Store Name Header */}
               <div className="text-center space-y-2 mb-4">
                 <img
-                  src="/images/life skill/mithila_bazar_banner.webp"
+                  src="/images/life skill/mithila_bazar_banner.png"
                   alt="Mithila Smart Bazar Banner"
                   className="w-full h-32 object-cover rounded-lg shadow-sm border border-slate-100"
                 />
