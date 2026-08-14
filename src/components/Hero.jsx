@@ -8,7 +8,10 @@ const Hero = () => {
             {/* Decorative Background Elements */}
             <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
                 <img 
-                    src="/hero.png" 
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
+                    src="/hero.webp" 
                     alt="Background decorative elements" 
                     className="absolute inset-0 w-full h-full object-cover object-right"
                 />

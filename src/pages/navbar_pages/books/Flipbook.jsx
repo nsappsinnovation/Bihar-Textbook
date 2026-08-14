@@ -504,10 +504,10 @@ function Flipbook({ pdfFile: propPdfFile }) {
                         <div className="p-4 border-b border-slate-100 bg-slate-50/50">
                             <div className="flex gap-3">
                                 <div className="w-14 h-18 rounded-lg overflow-hidden border border-slate-200 shadow-sm shrink-0 bg-white flex items-center justify-center">
-                                    <img 
-                                        src={resolvedCoverImage || "/bookcover.png"} 
+                                    <img loading="lazy" decoding="async" 
+                                        src={resolvedCoverImage || "/bookcover.webp"} 
                                         alt={bookTitle}
-                                        onError={(e) => { e.target.src = "/bookcover.png"; }}
+                                        onError={(e) => { e.target.src = "/bookcover.webp"; }}
                                         className="w-full h-full object-cover"
                                     />
                                 </div>

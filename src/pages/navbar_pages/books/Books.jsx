@@ -30,7 +30,7 @@ const Books = () => {
   const classData = textbookData?.classes?.find((cls) => cls.id === Number(classId));
 
   // Placeholder image URL
-  const PLACEHOLDER_IMG = "/images/placeholders/no-cover.png";
+  const PLACEHOLDER_IMG = "/images/placeholders/no-cover.webp";
 
   if (!classData) {
     return (
@@ -153,7 +153,7 @@ const BookCard = ({ book, placeholder, classId }) => {
     return "https://ciet.ncert.gov.in/storage/app/public/photos/19/Bookcover/cemm1cc.jpg"; // default fallback
   };
 
-  const finalImage = (!resolvedImage || resolvedImage.includes("bookcover.png") || resolvedImage.includes("no-cover")) 
+  const finalImage = (!resolvedImage || resolvedImage.includes("bookcover.webp") || resolvedImage.includes("no-cover")) 
     ? getFallbackCover(book.subject) 
     : resolvedImage;
 
@@ -168,7 +168,7 @@ const BookCard = ({ book, placeholder, classId }) => {
       <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/30 z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
       {/* Book Cover Image */}
-      <img
+      <img loading="lazy" decoding="async"
         src={finalImage}
         alt={book.title}
         onError={(e) => { e.target.src = getFallbackCover(book.subject); }}

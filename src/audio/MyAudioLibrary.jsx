@@ -5943,7 +5943,7 @@ const MyAudioLibrary = () => {
                     <div className="flex gap-3 items-start relative z-10">
                       {/* Cover Photo */}
                       <div className="relative w-20 h-24 rounded-xl overflow-hidden shadow-sm shrink-0 border border-slate-100 group-hover:scale-105 transition-transform duration-300">
-                        <img src={book.cover} alt={book.title} className="w-full h-full object-cover" />
+                        <img loading="lazy" decoding="async" src={book.cover} alt={book.title} className="w-full h-full object-cover" />
                         
                         {/* Play/Pause Overlay on Cover */}
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -6061,7 +6061,7 @@ const MyAudioLibrary = () => {
             {/* Book Info Showcase */}
             <div className="text-center space-y-4">
               <div className="w-36 h-48 rounded-2xl overflow-hidden mx-auto shadow-md border border-slate-100 relative group">
-                <img src={selectedBook.cover} alt={selectedBook.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                <img loading="lazy" decoding="async" src={selectedBook.cover} alt={selectedBook.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                 {selectedBook.youtubeId && (
                   <button
                     onClick={() => openVideo(selectedBook)}
@@ -6143,7 +6143,7 @@ const MyAudioLibrary = () => {
             {/* Track Info */}
             <div className="flex items-center gap-3 min-w-0">
               <div className="w-10 h-12 rounded-lg overflow-hidden shadow-sm shrink-0 border border-slate-100">
-                <img src={selectedBook.cover} alt={selectedBook.title} className="w-full h-full object-cover" />
+                <img loading="lazy" decoding="async" src={selectedBook.cover} alt={selectedBook.title} className="w-full h-full object-cover" />
               </div>
               <div className="min-w-0">
                 <h4 className="text-xs sm:text-sm font-extrabold text-slate-900 truncate leading-snug">{selectedBook.title}</h4>
@@ -6337,7 +6337,7 @@ const MyAudioLibrary = () => {
               {/* Modal Footer / Context */}
               <div className="p-6 bg-slate-50 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <img src={selectedBook.cover} alt={selectedBook.title} className="w-10 h-12 rounded-lg object-cover border border-slate-200 shadow-sm" />
+                  <img loading="lazy" decoding="async" src={selectedBook.cover} alt={selectedBook.title} className="w-10 h-12 rounded-lg object-cover border border-slate-200 shadow-sm" />
                   <div>
                     <h4 className="font-black text-slate-800 text-xs">{selectedBook.title}</h4>
                     <p className="text-[10px] text-slate-500 font-medium">Author: {selectedBook.author}</p>

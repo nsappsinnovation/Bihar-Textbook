@@ -358,8 +358,8 @@ const Audiolib = () => {
               className="relative w-full max-w-[480px]"
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/10 to-indigo-500/15 rounded-full blur-[70px] -z-10" />
-              <img
-                src="/images/audio/audio.png"
+              <img loading="lazy" decoding="async"
+                src="/images/audio/audio.webp"
                 alt="Audio Experience Illustration"
                 className="w-full h-auto object-contain drop-shadow-[0_20px_50px_rgba(147,51,234,0.06)] select-none"
               />
@@ -402,7 +402,7 @@ const Audiolib = () => {
 
                     {/* Miniature book cover */}
                     <div className="w-12 h-16 rounded-lg overflow-hidden shadow-md shrink-0 group-hover:scale-105 transition-transform duration-300 relative border border-slate-100 bg-slate-50">
-                      <img src={item.cover} alt={item.title} className="w-full h-full object-cover" />
+                      <img loading="lazy" decoding="async" src={item.cover} alt={item.title} className="w-full h-full object-cover" />
                       <div className="absolute inset-0 bg-black/10" />
                     </div>
 
@@ -456,7 +456,7 @@ const Audiolib = () => {
 
                       {/* Cover Center Label */}
                       <div className="w-16 h-16 rounded-full overflow-hidden border border-zinc-800 shadow-inner relative flex items-center justify-center">
-                        <img 
+                        <img loading="lazy" decoding="async" 
                           src={modules[activeModule].cover} 
                           alt="Disc Artwork" 
                           className="w-full h-full object-cover select-none pointer-events-none"

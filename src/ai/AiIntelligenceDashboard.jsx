@@ -300,8 +300,8 @@ const lessonsData = [
       characterMsg: "I want to paint a cosmic sea turtle, but in a cool neon chalk style on a dark blackboard. Help me choose the right style and lighting details to generate this image!",
       targetType: "Image Creator",
       boringPrompt: "a turtle in space",
-      boringOutputImage: "/images/ai/flat_turtle.png",
-      superOutputImage: "/images/ai/neon_turtle.png",
+      boringOutputImage: "/images/ai/flat_turtle.webp",
+      superOutputImage: "/images/ai/neon_turtle.webp",
       badge: "Master Artist",
       ingredients: [
         { id: "l9_role", label: "Medium Power-up", text: "A glowing neon chalk illustration drawn on a dark slate blackboard,", type: "role", desc: "Sets the specific art medium." },
@@ -505,7 +505,7 @@ const lessonsData = [
 const BoringVsSuperPromptImage = ({ imageUrl, altText, isAwesome }) => {
   if (imageUrl) {
     return (
-      <img
+      <img loading="lazy" decoding="async"
         src={imageUrl}
         alt={altText}
         className={`h-48 sm:h-56 w-auto object-contain rounded-xl shadow-md ${isAwesome ? "" : "filter grayscale-[30%]"}`}
@@ -536,7 +536,7 @@ const BoringVsSuperPromptImage = ({ imageUrl, altText, isAwesome }) => {
 const getCharacterImage = (lesson) => {
   if (lesson.quest.characterImage) {
     return (
-      <img
+      <img loading="lazy" decoding="async"
         src={lesson.quest.characterImage}
         className="w-full h-full object-cover rounded-full"
         alt={lesson.quest.characterName}
@@ -690,7 +690,7 @@ const PromptAcademyComponent = () => {
                     ))}
                  </div>
                  {hasSubject ? (
-                    <img src={activeLesson.quest.boringOutputImage || "/images/ai/flat_turtle.png"} className="rounded-lg w-full border border-slate-200 opacity-90 shadow-sm" alt="Boring Result" />
+                    <img loading="lazy" decoding="async" src={activeLesson.quest.boringOutputImage || "/images/ai/flat_turtle.webp"} className="rounded-lg w-full border border-slate-200 opacity-90 shadow-sm" alt="Boring Result" />
                  ) : (
                     <div className="text-xs text-rose-500 italic font-mono bg-rose-50 p-2 rounded-md border border-rose-100">{outputText}</div>
                  )}
@@ -1200,7 +1200,7 @@ const PromptAcademyComponent = () => {
                                  <div className="bg-emerald-50/50 p-3 rounded-xl border border-emerald-100">
                                     {activeLesson.quest.targetType === "Image Creator" ? (
                                       <div className="rounded-xl overflow-hidden shadow-sm border border-emerald-200/50">
-                                        <img src={activeLesson.quest.superOutputImage} alt="Generated AI Masterpiece" className="w-full h-auto object-cover" />
+                                        <img loading="lazy" decoding="async" src={activeLesson.quest.superOutputImage} alt="Generated AI Masterpiece" className="w-full h-auto object-cover" />
                                         <div className="p-2 bg-slate-900 text-center">
                                           <span className="text-[10px] text-emerald-400 font-mono tracking-wider font-black">AI Image Successfully Generated</span>
                                         </div>
@@ -1640,7 +1640,7 @@ const QuizComponent = () => {
     <div className="w-full flex justify-center py-8 mb-16 relative rounded-2xl overflow-hidden border border-slate-100">
       {/* Background Image with translucent overlay */}
       <div className="absolute inset-0 z-0">
-        <img src="/images/ai/challenge.png" alt="Quiz Background" className="w-full h-full object-cover" />
+        <img loading="lazy" decoding="async" src="/images/ai/challenge.webp" alt="Quiz Background" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-purple-950/15 backdrop-blur-[2px]" />
       </div>
 
@@ -1822,7 +1822,7 @@ const AiIntelligenceDashboard = () => {
 
               <div className="hidden lg:block absolute top-0 right-0 w-[55%] h-full">
                 <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
-                <img src="/images/ai/rhs.png" alt="AI Intelligence" className="w-full h-full object-cover object-right-top" />
+                <img loading="lazy" decoding="async" src="/images/ai/rhs.webp" alt="AI Intelligence" className="w-full h-full object-cover object-right-top" />
               </div>
             </section>
 
@@ -1936,7 +1936,7 @@ const AiIntelligenceDashboard = () => {
                     ></iframe>
                   ) : (
                     <>
-                      <img src={selectedItem.image} alt={selectedItem.title} className="w-full h-full object-cover opacity-50" />
+                      <img loading="lazy" decoding="async" src={selectedItem.image} alt={selectedItem.title} className="w-full h-full object-cover opacity-50" />
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="w-16 h-16 rounded-full bg-blue-600/90 text-white flex items-center justify-center shadow-lg shadow-blue-500/30 cursor-pointer hover:scale-110 hover:bg-blue-600 transition-all">
                           <Play className="ml-1.5 w-8 h-8 fill-current" />
