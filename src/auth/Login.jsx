@@ -166,7 +166,7 @@ const Login = () => {
 
         {/* ================= LEFT ILLUSTRATION ================= */}
         <div className="hidden md:flex flex-col items-center justify-center bg-indigo-600/5 p-10 lg:p-16 border-r border-gray-100/80">
-          <img
+          <img loading="lazy" decoding="async"
             src="https://illustrations.popsy.co/blue/studying.svg"
             alt="Studying Illustration"
             className="max-w-xs lg:max-w-sm drop-shadow-2xl animate-pulse-slow"
@@ -187,7 +187,7 @@ const Login = () => {
           {/* Logo & Welcome Header */}
           <div className="text-center mb-8">
             <div className="inline-flex p-3 bg-indigo-50/50 rounded-3xl border border-indigo-100/30 mb-4 shadow-sm">
-              <img src="/logo.png" alt="BSTBPC Logo" className="h-12 w-auto object-contain" />
+              <img loading="lazy" decoding="async" src="/logo.webp" alt="BSTBPC Logo" className="h-12 w-auto object-contain" />
             </div>
             <h2 className="text-2xl lg:text-3xl font-extrabold text-gray-950 tracking-tight">
               Admin Portal Access

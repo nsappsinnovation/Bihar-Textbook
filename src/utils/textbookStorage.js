@@ -57,7 +57,7 @@ export const getAllTextbooksFlat = () => {
         title: book.title || "Untitled Book",
         author: book.author || "Bihar Board",
         subject: book.subject || "General",
-        image: book.image || "/bookcover.png",
+        image: book.image || "/bookcover.webp",
         description:
           book.description ||
           `Official Bihar Board ${cls.name} textbook for '${book.title}'.`,
@@ -84,7 +84,7 @@ export const addTextbook = (newBook) => {
     title: newBook.title,
     author: newBook.author || "Bihar Board",
     subject: (newBook.subject || "General").toLowerCase(),
-    image: newBook.image || "/bookcover.png",
+    image: newBook.image || "/bookcover.webp",
     description: newBook.description,
     status: newBook.status || "Published",
     uploadDate: new Date().toISOString().split("T")[0],

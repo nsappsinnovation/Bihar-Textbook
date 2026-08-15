@@ -445,7 +445,7 @@ const AudioLibraryDashboard = () => {
 
               <div className="hidden lg:block absolute top-0 right-0 w-[55%] h-full">
                  <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
-                 <img src="/images/audio/rhs.png" alt="Audio Library" className="w-full h-full object-cover object-right-top" />
+                 <img loading="lazy" decoding="async" src="/images/audio/rhs.webp" alt="Audio Library" className="w-full h-full object-cover object-right-top" />
                  <div className="absolute bottom-12 right-24 flex items-center gap-1.5 opacity-80 z-20">
                    {[1,2,3,4,5,6].map(i => (
                       <motion.div 
@@ -583,7 +583,7 @@ const AudioLibraryDashboard = () => {
                             className="relative w-24 h-32 rounded-xl overflow-hidden shadow-md shrink-0 border border-slate-100 group-hover:scale-105 transition-transform duration-300 block cursor-pointer"
                             title={isBookPlaying ? "Pause audiobook" : "Play now"}
                           >
-                            <img src={book.cover} alt={book.title} className="w-full h-full object-cover" />
+                            <img loading="lazy" decoding="async" src={book.cover} alt={book.title} className="w-full h-full object-cover" />
 
                             {/* Play Now / Pause Overlay */}
                             <div className={`absolute inset-0 bg-slate-900/35 flex items-center justify-center transition-opacity duration-200 ${
@@ -734,7 +734,7 @@ const AudioLibraryDashboard = () => {
                 className="w-10 h-12 rounded-lg overflow-hidden shadow-sm shrink-0 border border-slate-100 relative group cursor-pointer"
                 title={isPlaying ? "Pause" : "Play"}
               >
-                <img src={selectedBook.cover} alt={selectedBook.title} className="w-full h-full object-cover" />
+                <img loading="lazy" decoding="async" src={selectedBook.cover} alt={selectedBook.title} className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
                   {isPlaying ? <Pause className="w-3.5 h-3.5 text-white" /> : <Play className="w-3.5 h-3.5 text-white ml-0.5" />}
                 </div>
@@ -921,7 +921,7 @@ const AudioLibraryDashboard = () => {
               {/* Modal Header */}
               <div className="shrink-0 p-6 bg-gradient-to-r from-purple-600 to-purple-950 text-white flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3.5">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={viewTimestampsBook.cover}
                     alt={viewTimestampsBook.title}
                     className="w-12 h-16 rounded-lg object-cover shadow-md border border-white/20 shrink-0"

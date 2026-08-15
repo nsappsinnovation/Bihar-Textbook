@@ -5,37 +5,37 @@ import { FaPlay } from 'react-icons/fa';
 const defaultVideoItems = [
   {
     type: "video",
-    src: "/images/hero/classroom.png",
+    src: "/images/hero/classroom.webp",
     videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     alt: "Bihar Digital Classrooms Launch Highlights"
   },
   {
     type: "video",
-    src: "/images/hero/audio.png",
+    src: "/images/hero/audio.webp",
     videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     alt: "Rural Literacy Outreach & Community Distribution Drives"
   },
   {
     type: "video",
-    src: "/images/hero/vr.png",
+    src: "/images/hero/vr.webp",
     videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     alt: "Teacher Training Workshop on Interactive Smart Textbooks"
   },
   {
     type: "video",
-    src: "/images/KeyParticipants/shri_yatendra_pal.png",
+    src: "/images/KeyParticipants/shri_yatendra_pal.webp",
     videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     alt: "Academic Session 2026-27 High-Level Inauguration Ceremony"
   },
   {
     type: "video",
-    src: "/images/hero/sign.png",
+    src: "/images/hero/sign.webp",
     videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     alt: "Accessible Audio Books and Inclusive Pedagogy Program"
   },
   {
     type: "video",
-    src: "/images/hero/linguistic.png",
+    src: "/images/hero/linguistic.webp",
     videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     alt: "Smart AI Revision Modules Student Pilot Feedback"
   }
@@ -173,7 +173,7 @@ const Videogallery = () => {
                   onClick={() => setSelectedVideo(pageItems[0])}
                   className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-slate-100 aspect-[4/3] w-full"
                 >
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={pageItems[0].src}
                     alt={pageItems[0].alt}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
@@ -201,7 +201,7 @@ const Videogallery = () => {
                   onClick={() => setSelectedVideo(pageItems[1])}
                   className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-slate-100 aspect-[3/4] w-full"
                 >
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={pageItems[1].src}
                     alt={pageItems[1].alt}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
@@ -226,7 +226,7 @@ const Videogallery = () => {
                   onClick={() => setSelectedVideo(pageItems[3])}
                   className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-slate-100 aspect-square w-full"
                 >
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={pageItems[3].src}
                     alt={pageItems[3].alt}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
@@ -254,7 +254,7 @@ const Videogallery = () => {
                   onClick={() => setSelectedVideo(pageItems[2])}
                   className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-slate-100 aspect-[4/3] w-full"
                 >
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={pageItems[2].src}
                     alt={pageItems[2].alt}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
@@ -279,7 +279,7 @@ const Videogallery = () => {
                   onClick={() => setSelectedVideo(pageItems[4])}
                   className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-slate-100 aspect-[4/3] w-full"
                 >
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={pageItems[4].src}
                     alt={pageItems[4].alt}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
@@ -306,7 +306,7 @@ const Videogallery = () => {
                   onClick={() => setSelectedVideo(pageItems[5])}
                   className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-slate-100 aspect-[4/3] w-full"
                 >
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={pageItems[5].src}
                     alt={pageItems[5].alt}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"

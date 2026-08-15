@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const MdMessage = () => {
   const [mdData, setMdData] = useState({
     name: 'Shri Yatendra Kumar Pal',
-    photo: '/images/KeyParticipants/shri_yatendra_pal.png',
+    photo: '/images/KeyParticipants/shri_yatendra_pal.webp',
     welcomeNote: 'It gives me immense pleasure to connect with all stakeholders through this platform. The Bihar State Text Book Publishing Corporation Ltd. plays a pivotal role in strengthening the foundation of education by ensuring the timely production and distribution of quality textbooks across the state.'
   });
 
@@ -43,7 +43,7 @@ const MdMessage = () => {
               
               {/* MD Photo */}
               <div className="relative z-10 w-64 lg:w-full max-w-[280px] aspect-[4/5] rounded-[32px] overflow-hidden bg-slate-100 shadow-sm border border-slate-100">
-                <img 
+                <img loading="lazy" decoding="async" 
                   src={mdData.photo} 
                   alt={mdData.name} 
                   className="w-full h-full object-cover"

@@ -203,7 +203,7 @@ export default function Navbar({ isMobileOpen, setIsMobileOpen, activePage, setA
               whileTap={{ scale: 0.98 }}
             >
               {userSettings.avatar ? (
-                <img src={userSettings.avatar} alt="Avatar" className="w-10 h-10 rounded-xl object-cover" />
+                <img loading="lazy" decoding="async" src={userSettings.avatar} alt="Avatar" className="w-10 h-10 rounded-xl object-cover" />
               ) : (
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white text-xs font-black">
                   {userInitials}

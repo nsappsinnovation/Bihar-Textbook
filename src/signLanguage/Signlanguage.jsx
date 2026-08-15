@@ -46,55 +46,55 @@ const Signlanguage = () => {
 
   const viewportQuizQuestions = [
     {
-      image: '/images/signlanguage/hello.png',
+      image: '/images/signlanguage/hello.webp',
       options: ['Goodbye', 'Please', 'Hello'],
       correct: 'Hello',
       explanation: 'Wave your hand gently side to side to greet someone.'
     },
     {
-      image: '/images/signlanguage/thankyou.png',
+      image: '/images/signlanguage/thankyou.webp',
       options: ['Thank You', 'Sorry', 'Welcome'],
       correct: 'Thank You',
       explanation: 'Touch your chin with fingers, then move hand forward.'
     },
     {
-      image: '/images/signlanguage/mother.png',
+      image: '/images/signlanguage/mother.webp',
       options: ['Father', 'Mother', 'Friend'],
       correct: 'Mother',
       explanation: 'Tap your thumb on your chin with an open hand facing sideways.'
     },
     {
-      image: '/images/signlanguage/father.png',
+      image: '/images/signlanguage/father.webp',
       options: ['Mother', 'Teacher', 'Father'],
       correct: 'Father',
       explanation: 'Tap your thumb on your forehead with an open hand facing sideways.'
     },
     {
-      image: '/images/signlanguage/happy.png',
+      image: '/images/signlanguage/happy.webp',
       options: ['Sad', 'Angry', 'Happy'],
       correct: 'Happy',
       explanation: 'Brush both flat hands upward on your chest to show joy.'
     },
     {
-      image: '/images/signlanguage/sad.png',
+      image: '/images/signlanguage/sad.webp',
       options: ['Happy', 'Sad', 'Cry'],
       correct: 'Sad',
       explanation: 'Place both hands in front of your face and pull them down while making a sad face.'
     },
     {
-      image: '/images/signlanguage/eat.png',
+      image: '/images/signlanguage/eat.webp',
       options: ['Drink', 'Eat', 'Sleep'],
       correct: 'Eat',
       explanation: 'Bring your flattened O-hand to your mouth repeatedly.'
     },
     {
-      image: '/images/signlanguage/sorry.png',
+      image: '/images/signlanguage/sorry.webp',
       options: ['Please', 'Sorry', 'Happy'],
       correct: 'Sorry',
       explanation: 'Rub a closed fist in a circular motion over your heart.'
     },
     {
-      image: '/images/signlanguage/welcome.png',
+      image: '/images/signlanguage/welcome.webp',
       options: ['Welcome', 'Hello', 'Eat'],
       correct: 'Welcome',
       explanation: 'Bring both hands towards your chest in a welcoming motion.'
@@ -102,16 +102,16 @@ const Signlanguage = () => {
   ];
 
   const greetingList = [
-    { name: 'HELLO', image: '/images/signlanguage/hello.png', desc: 'Wave your hand gently from side to side to say hello.' },
-    { name: 'THANK YOU', image: '/images/signlanguage/thankyou.png', desc: 'Touch your chin with fingers, then move hand forward towards the person.' },
-    { name: 'MOTHER', image: '/images/signlanguage/mother.png', desc: 'Tap your thumb on your chin with an open hand facing sideways.' },
-    { name: 'FATHER', image: '/images/signlanguage/father.png', desc: 'Tap your thumb on your forehead with an open hand facing sideways.' },
-    { name: 'HAPPY', image: '/images/signlanguage/happy.png', desc: 'Brush both flat hands upward on your chest to show joy.' },
-    { name: 'SAD', image: '/images/signlanguage/sad.png', desc: 'Place both hands in front of your face and pull them down while making a sad face.' },
-    { name: 'SORRY', image: '/images/signlanguage/sorry.png', desc: 'Rub a closed fist in a circular motion over your heart.' },
-    { name: 'EAT', image: '/images/signlanguage/eat.png', desc: 'Bring your flattened O-hand to your mouth a few times.' },
-    { name: 'WELCOME', image: '/images/signlanguage/welcome.png', desc: 'Bring both hands towards your chest in a welcoming motion.' },
-    { name: 'PLEASE', image: '/images/signlanguage/please.png', desc: 'Place your flat palm on your chest and move it in a circular motion.' }
+    { name: 'HELLO', image: '/images/signlanguage/hello.webp', desc: 'Wave your hand gently from side to side to say hello.' },
+    { name: 'THANK YOU', image: '/images/signlanguage/thankyou.webp', desc: 'Touch your chin with fingers, then move hand forward towards the person.' },
+    { name: 'MOTHER', image: '/images/signlanguage/mother.webp', desc: 'Tap your thumb on your chin with an open hand facing sideways.' },
+    { name: 'FATHER', image: '/images/signlanguage/father.webp', desc: 'Tap your thumb on your forehead with an open hand facing sideways.' },
+    { name: 'HAPPY', image: '/images/signlanguage/happy.webp', desc: 'Brush both flat hands upward on your chest to show joy.' },
+    { name: 'SAD', image: '/images/signlanguage/sad.webp', desc: 'Place both hands in front of your face and pull them down while making a sad face.' },
+    { name: 'SORRY', image: '/images/signlanguage/sorry.webp', desc: 'Rub a closed fist in a circular motion over your heart.' },
+    { name: 'EAT', image: '/images/signlanguage/eat.webp', desc: 'Bring your flattened O-hand to your mouth a few times.' },
+    { name: 'WELCOME', image: '/images/signlanguage/welcome.webp', desc: 'Bring both hands towards your chest in a welcoming motion.' },
+    { name: 'PLEASE', image: '/images/signlanguage/please.webp', desc: 'Place your flat palm on your chest and move it in a circular motion.' }
   ];
 
   const getLoadingStatus = (prog) => {
@@ -248,8 +248,8 @@ const Signlanguage = () => {
               <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/10 to-violet-500/10 rounded-full blur-[60px] -z-10 animate-pulse duration-[5000ms]" />
               
               {/* Pedestal Avatar Image (Even bigger layout) */}
-              <img
-                src="/images/hello.png"
+              <img loading="lazy" decoding="async"
+                src="/images/hello.webp"
                 alt="Sign Language avatar greeting hello"
                 className="w-[320px] sm:w-[360px] lg:w-[400px] h-auto object-contain select-none z-10 drop-shadow-[0_10px_25px_rgba(99,102,241,0.1)] transform hover:scale-[1.02] transition-transform duration-500"
               />
@@ -381,7 +381,7 @@ const Signlanguage = () => {
                         {/* Enlarged full color cartoon drawing container */}
                         <div className="w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] bg-white border border-slate-200/60 rounded-2xl flex items-center justify-center p-5 shadow-sm relative">
                           <div className="absolute inset-1.5 border border-slate-100 rounded-lg pointer-events-none" />
-                          <img 
+                          <img loading="lazy" decoding="async" 
                             src={viewportQuizQuestions[viewportQuizIdx].image}
                             alt="Sign Language challenge gesture"
                             className="w-full h-full object-contain select-none"
@@ -429,9 +429,9 @@ const Signlanguage = () => {
                     >
                       <div className="w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] bg-white border border-slate-200/60 rounded-2xl flex items-center justify-center p-5 shadow-sm relative">
                         <div className="absolute inset-1.5 border border-slate-100 rounded-lg pointer-events-none" />
-                        <img 
-                          src={`/images/signlanguage/alphabets/${activeAlphabet}.png`}
-                          onError={(e) => { e.target.onerror = null; e.target.src = '/images/signlanguage/hand.png'; }}
+                        <img loading="lazy" decoding="async" 
+                          src={`/images/signlanguage/alphabets/${activeAlphabet}.webp`}
+                          onError={(e) => { e.target.onerror = null; e.target.src = '/images/signlanguage/hand.webp'; }}
                           alt={`Sign for letter ${activeAlphabet}`}
                           className="w-full h-full object-contain"
                         />
@@ -454,7 +454,7 @@ const Signlanguage = () => {
                     >
                       <div className="w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] bg-white border border-slate-200/60 rounded-2xl flex items-center justify-center p-5 shadow-sm relative">
                         <div className="absolute inset-1.5 border border-slate-100 rounded-lg pointer-events-none" />
-                        <img 
+                        <img loading="lazy" decoding="async" 
                           src={greetingList[activeGreetingIdx].image}
                           alt={`Sign for greeting ${greetingList[activeGreetingIdx].name}`}
                           className="w-full h-full object-contain"

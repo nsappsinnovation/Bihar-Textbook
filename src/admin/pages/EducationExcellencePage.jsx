@@ -9,8 +9,8 @@ export default function EducationExcellencePage({ addToast, title = "Tools & Res
   const [missions, setMissions] = useState(() => {
     const saved = localStorage.getItem(storageKey);
     return saved ? JSON.parse(saved) : [
-      { id: 1, title: 'VIRTUAL REALITY LAB', desc: 'Immersive Learning Experiences', image: '/images/missions/headset.png', link: '/vr', content: 'Our VR Lab provides students with cutting-edge immersive learning experiences across various subjects.' },
-      { id: 2, title: 'AUDIO LIBRARY', desc: 'Accessible Digital Content', image: '/images/missions/audio-book.png', link: '/audio-books', content: 'A comprehensive collection of audiobooks and podcasts designed for accessibility and on-the-go learning.' },
+      { id: 1, title: 'VIRTUAL REALITY LAB', desc: 'Immersive Learning Experiences', image: '/images/missions/headset.webp', link: '/vr', content: 'Our VR Lab provides students with cutting-edge immersive learning experiences across various subjects.' },
+      { id: 2, title: 'AUDIO LIBRARY', desc: 'Accessible Digital Content', image: '/images/missions/audio-book.webp', link: '/audio-books', content: 'A comprehensive collection of audiobooks and podcasts designed for accessibility and on-the-go learning.' },
     ];
   });
 
@@ -130,7 +130,7 @@ export default function EducationExcellencePage({ addToast, title = "Tools & Res
                 </div>
 
                 <div className="w-28 h-28 mb-6 flex items-center justify-center relative transition-transform duration-300 group-hover:scale-105 overflow-hidden rounded-2xl bg-gray-50 border border-gray-100">
-                  <img 
+                  <img loading="lazy" decoding="async" 
                     src={mission.image} 
                     alt={mission.title} 
                     className="w-full h-full object-cover"
@@ -206,7 +206,7 @@ export default function EducationExcellencePage({ addToast, title = "Tools & Res
             <div className="flex flex-col items-center justify-center w-full">
               <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-200 rounded-3xl cursor-pointer bg-gray-50/50 hover:bg-gray-50 transition-all overflow-hidden">
                 {formData.image ? (
-                  <img src={formData.image} alt="Preview" className="w-full h-full object-cover" />
+                  <img loading="lazy" decoding="async" src={formData.image} alt="Preview" className="w-full h-full object-cover" />
                 ) : (
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <Plus className="w-8 h-8 text-gray-300 mb-2" />

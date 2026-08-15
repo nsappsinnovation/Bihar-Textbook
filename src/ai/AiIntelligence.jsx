@@ -479,8 +479,8 @@ const AiIntelligence = () => {
               className="relative w-full max-w-[480px] group"
             >
               <div className="absolute inset-0 bg-gradient-to-tr from-indigo-500/20 to-violet-500/25 rounded-full blur-[70px] -z-10 animate-pulse duration-[4000ms]" />
-              <img
-                src="/images/ai/hero_new.png"
+              <img loading="lazy" decoding="async"
+                src="/images/ai/hero_new.webp"
                 alt="AI Experience Illustration"
                 className="w-auto h-auto max-h-[400px] object-contain select-none group-hover:scale-[1.02] transition-transform duration-500"
               />

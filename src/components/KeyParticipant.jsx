@@ -5,22 +5,22 @@ const industryData = [
   {
     name: "Shri Samrat Choudhary",
     role: "Hon'ble Chief Minister, Bihar",
-    image: "/images/KeyParticipants/samrat.png",
+    image: "/images/KeyParticipants/samrat.webp",
   },
   {
     name: "Shri Mithilesh Tiwari",
     role: "Hon'ble Education Minister, Bihar",
-    image: "/images/KeyParticipants/sri_mithlesh.png",
+    image: "/images/KeyParticipants/sri_mithlesh.webp",
   },
   {
     name: "Shri Vinod Singh Gunjiyal",
     role: "Secretary, Education Department",
-    image: "/images/KeyParticipants/sri-vinod.png",
+    image: "/images/KeyParticipants/sri-vinod.webp",
   },
   {
     name: "Shri Yatendra Kumar Pal, IAS",
     role: "Managing Director, BSTBPC",
-    image: "/images/KeyParticipants/shri_yatendra_pal.png",
+    image: "/images/KeyParticipants/shri_yatendra_pal.webp",
   },
 ];
 
@@ -42,7 +42,7 @@ export default function KeyParticipant() {
               ...item,
               name: "Shri Mithilesh Tiwari",
               role: "Hon'ble Education Minister, Bihar",
-              image: "/images/KeyParticipants/sri_mithlesh.png"
+              image: "/images/KeyParticipants/sri_mithlesh.webp"
             };
           }
           if (name === "Shri Dr. B. Rajender, IAS" || name === "Dr. B. Rajender") {
@@ -51,7 +51,7 @@ export default function KeyParticipant() {
               ...item,
               name: "Shri Vinod Singh Gunjiyal",
               role: "Secretary, Education Department",
-              image: "/images/KeyParticipants/sri-vinod.png"
+              image: "/images/KeyParticipants/sri-vinod.webp"
             };
           }
           if (item.name !== name) {
@@ -156,7 +156,7 @@ function ParticipantCard({ item }) {
 
       {/* IMAGE FIXED TO CARD BOTTOM */}
       <div className={`absolute bottom-0 left-0 right-0 z-20 flex ${isMithilesh ? 'h-[320px]' : 'h-[385px]'} items-end justify-center px-0`}>
-        <img
+        <img loading="lazy" decoding="async"
           src={item.image}
           alt={item.name}
           className={`

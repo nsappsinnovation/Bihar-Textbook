@@ -35,7 +35,7 @@ const BlogPost = ({ title, pageid, snippet, timestamp }) => {
           
       <div className=" relative h-[210px] rounded-2xl overflow-hidden">
         {details?.thumbnail ? (
-          <img
+          <img loading="lazy" decoding="async"
             src={details.thumbnail}
             alt={title}
             className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"

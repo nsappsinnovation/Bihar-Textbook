@@ -7,8 +7,8 @@ const MissionGrid = () => {
             id: 1,
             title: "Virtual Reality Lab",
             desc: "Immersive Learning Experiences",
-            image: "/images/missions/headset.png",
-            hoverImage: "/images/missions/headsethov.png",
+            image: "/images/missions/headset.webp",
+            hoverImage: "/images/missions/headsethov.webp",
             link: "/vr-dashboard",
             accent: "blue"
         },
@@ -16,8 +16,8 @@ const MissionGrid = () => {
             id: 2,
             title: "Audio Library",
             desc: "Accessible Digital Content",
-            image: "/images/missions/audio-book.png",
-            hoverImage: "/images/missions/audio-bookhov.png",
+            image: "/images/missions/audio-book.webp",
+            hoverImage: "/images/missions/audio-bookhov.webp",
             link: "/audio-library-dashboard",
             accent: "blue"
         },
@@ -25,8 +25,8 @@ const MissionGrid = () => {
             id: 3,
             title: "Sign Language",
             desc: "Learn Indian Sign Language",
-            image: "/images/missions/friend.png",
-            hoverImage: "/images/missions/friendhov.png",
+            image: "/images/missions/friend.webp",
+            hoverImage: "/images/missions/friendhov.webp",
             link: "/sign-learn",
             accent: "blue"
         },
@@ -34,8 +34,8 @@ const MissionGrid = () => {
             id: 4,
             title: "Diverse Language",
             desc: "Explore New Languages",
-            image: "/images/missions/diverse.png",
-            hoverImage: "/images/missions/diversehov.png",
+            image: "/images/missions/diverse.webp",
+            hoverImage: "/images/missions/diversehov.webp",
             link: "/ling",
             accent: "blue"
         },
@@ -43,8 +43,8 @@ const MissionGrid = () => {
             id: 5,
             title: "AI Intelligence",
             desc: "Learn AI Basics",
-            image: "/images/missions/ai.png",
-            hoverImage: "/images/missions/aihov.png",
+            image: "/images/missions/ai.webp",
+            hoverImage: "/images/missions/aihov.webp",
             link: "/ai-intelligence-dashboard",
             accent: "blue"
         },
@@ -52,8 +52,8 @@ const MissionGrid = () => {
             id: 7,
             title: "Cyber Security",
             desc: "Digital Safety Guidelines",
-            image: "/images/missions/cyber-security.png",
-            hoverImage: "/images/missions/cyber-securityhov.png",
+            image: "/images/missions/cyber-security.webp",
+            hoverImage: "/images/missions/cyber-securityhov.webp",
             link: "/cyber-security-dashboard",
             accent: "blue"
         },
@@ -61,8 +61,8 @@ const MissionGrid = () => {
             id: 8,
             title: "Heritage Archive",
             desc: "Learn about Heritage",
-            image: "/images/missions/history.png",
-            hoverImage: "/images/missions/historyhov.png",
+            image: "/images/missions/history.webp",
+            hoverImage: "/images/missions/historyhov.webp",
             link: "/heritage-dashboard",
             accent: "blue"
         },
@@ -70,8 +70,8 @@ const MissionGrid = () => {
             id: 10,
             title: "Basic Learning Skills",
             desc: "Foundational Learning Tools",
-            image: "/images/missions/abilities.png",
-            hoverImage: "/images/missions/abilitieshov.png",
+            image: "/images/missions/abilities.webp",
+            hoverImage: "/images/missions/abilitieshov.webp",
             link: "/life-skills",
             accent: "emerald"
         }
@@ -91,12 +91,12 @@ const MissionGrid = () => {
                         >
                             {/* Icon Container */}
                             <div className="w-14 h-14 mb-5 flex items-center justify-center relative transition-transform duration-300 group-hover:-translate-y-1">
-                                <img 
+                                <img loading="lazy" decoding="async" 
                                     src={mission.image} 
                                     alt={mission.title} 
                                     className="w-full h-full object-contain transition-opacity duration-300 group-hover:opacity-0 absolute"
                                 />
-                                <img 
+                                <img loading="lazy" decoding="async" 
                                     src={mission.hoverImage || mission.image} 
                                     alt={`${mission.title} hover`} 
                                     className="w-full h-full object-contain opacity-0 transition-opacity duration-300 group-hover:opacity-100 absolute"

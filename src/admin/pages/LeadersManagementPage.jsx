@@ -26,7 +26,7 @@ export default function LeadersManagementPage({ addToast }) {
               ...item,
               name: "Shri Mithilesh Tiwari",
               role: "Hon'ble Education Minister, Bihar",
-              image: "/images/KeyParticipants/sri_mithlesh.png"
+              image: "/images/KeyParticipants/sri_mithlesh.webp"
             };
           }
           if (name === "Shri Dr. B. Rajender, IAS" || name === "Dr. B. Rajender") {
@@ -35,7 +35,7 @@ export default function LeadersManagementPage({ addToast }) {
               ...item,
               name: "Shri Vinod Singh Gunjiyal",
               role: "Secretary, Education Department",
-              image: "/images/KeyParticipants/sri-vinod.png"
+              image: "/images/KeyParticipants/sri-vinod.webp"
             };
           }
           if (item.name !== name) {
@@ -58,28 +58,28 @@ export default function LeadersManagementPage({ addToast }) {
         name: 'Shri Samrat Choudhary', 
         role: "Hon'ble Chief Minister, Bihar", 
         tag: 'LEADERSHIP', 
-        image: '/images/KeyParticipants/samrat.png' 
+        image: '/images/KeyParticipants/samrat.webp' 
       },
       { 
         id: 2, 
         name: 'Shri Mithilesh Tiwari', 
         role: "Hon'ble Education Minister, Bihar", 
         tag: 'LEADERSHIP', 
-        image: '/images/KeyParticipants/sri_mithlesh.png' 
+        image: '/images/KeyParticipants/sri_mithlesh.webp' 
       },
       { 
         id: 3, 
         name: 'Shri Vinod Singh Gunjiyal', 
         role: 'Secretary, Education Department', 
         tag: 'LEADERSHIP', 
-        image: '/images/KeyParticipants/sri-vinod.png' 
+        image: '/images/KeyParticipants/sri-vinod.webp' 
       },
       { 
         id: 4, 
         name: 'Shri Yatendra Kumar Pal, IAS', 
         role: 'Managing Director, Bihar State Text Book Publishing Corporation (BSTBPC)', 
         tag: 'LEADERSHIP', 
-        image: '/images/KeyParticipants/shri_yatendra_pal.png' 
+        image: '/images/KeyParticipants/shri_yatendra_pal.webp' 
       }
     ];
   });
@@ -189,7 +189,7 @@ export default function LeadersManagementPage({ addToast }) {
               {/* Photo Area */}
               <div className="relative aspect-[4/5] bg-gray-50 overflow-hidden">
                 {leader.image ? (
-                  <img 
+                  <img loading="lazy" decoding="async" 
                     src={leader.image} 
                     alt={leader.name} 
                     onError={(e) => {
@@ -294,7 +294,7 @@ export default function LeadersManagementPage({ addToast }) {
             <div className="flex flex-col items-center justify-center w-full">
               <label className="flex flex-col items-center justify-center w-full h-44 border-2 border-dashed border-gray-200 rounded-3xl cursor-pointer bg-gray-50/50 hover:bg-gray-50 transition-all overflow-hidden">
                 {formData.image ? (
-                  <img src={formData.image} alt="Preview" className="w-full h-full object-cover" />
+                  <img loading="lazy" decoding="async" src={formData.image} alt="Preview" className="w-full h-full object-cover" />
                 ) : (
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <ImageIcon className="w-8 h-8 text-gray-300 mb-2" />

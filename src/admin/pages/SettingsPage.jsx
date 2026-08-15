@@ -121,7 +121,7 @@ export default function SettingsPage({ addToast }) {
                 <h3 className="text-lg font-bold text-gray-800 mb-6 border-b border-gray-100 pb-4">Profile Settings</h3>
                 <div className="flex items-center gap-6 mb-8">
                   {settings.avatar ? (
-                    <img src={settings.avatar} alt="Avatar" className="w-24 h-24 rounded-2xl object-cover border border-gray-100" />
+                    <img loading="lazy" decoding="async" src={settings.avatar} alt="Avatar" className="w-24 h-24 rounded-2xl object-cover border border-gray-100" />
                   ) : (
                     <div className="w-24 h-24 rounded-2xl bg-blue-600 flex items-center justify-center text-white text-3xl font-bold uppercase">
                       {settings.firstName[0]}{settings.lastName[0]}
