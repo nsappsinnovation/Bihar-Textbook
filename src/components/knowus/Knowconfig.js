@@ -15,11 +15,7 @@ export const Knowconfig = [
     label: "List of MD",
     component: "ListOfMD"
   },
-  {
-    id: "officers",
-    label: "Officers List",
-    component: "OfficersList"
-  },
+
   {
     id: "employees",
     label: "Our Employee",
@@ -31,9 +27,9 @@ export const Knowconfig = [
     component: "OrgStructure"
   },
 
-  {
-    id: "empanalled-printers",
-    label: "Empanalled Printers",
-    component: "RegisterPrinters"
-  }
+  // {
+  //   id: "empanalled-printers",
+  //   label: "Empanalled Printers",
+  //   component: "RegisterPrinters"
+  // }
 ];

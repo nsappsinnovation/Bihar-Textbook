@@ -45,7 +45,7 @@ const Footer = () => {
           </div>
 
           {/* SITE NAVIGATION */}
-          <div className="md:col-span-3 lg:col-span-2">
+          <div className="md:col-span-6 lg:col-span-3">
             <h4 className="text-white font-bold mb-6 tracking-wider text-sm uppercase relative inline-block after:content-[''] after:absolute after:bottom-[-6px] after:left-0 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded">
               Quick Navigation
             </h4>
@@ -56,12 +56,13 @@ const Footer = () => {
               <FooterLink to="/tenders" label="Tenders" />
               <FooterLink to="/gallery/photo" label="Gallery" />
               <FooterLink to="/csr-policy" label="CSR Policy" />
+              <FooterLink to="/rti" label="RTI" />
               <FooterLink to="/contact" label="Contact Us" />
             </ul>
           </div>
 
           {/* KNOW US */}
-          <div className="md:col-span-3 lg:col-span-2">
+          <div className="md:col-span-6 lg:col-span-3">
             <h4 className="text-white font-bold mb-6 tracking-wider text-sm uppercase relative inline-block after:content-[''] after:absolute after:bottom-[-6px] after:left-0 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded">
               Know Us
             </h4>
@@ -69,26 +70,14 @@ const Footer = () => {
               <FooterLink to="/know-us/md-message" label="MD Message" />
               <FooterLink to="/know-us/board-of-directors" label="Board of Directors" />
               <FooterLink to="/know-us/organisation-structure" label="Organisation Structure" />
-              <FooterLink to="/know-us/officers" label="Officers List" />
               <FooterLink to="/know-us/employees" label="Our Employees" />
 
-              <FooterLink to="/know-us/empanalled-printers" label="Empanalled Printers" />
-            </ul>
-          </div>
-
-          {/* DOCUMENTS */}
-          <div className="md:col-span-3 lg:col-span-2">
-            <h4 className="text-white font-bold mb-6 tracking-wider text-sm uppercase relative inline-block after:content-[''] after:absolute after:bottom-[-6px] after:left-0 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded">
-              Documents
-            </h4>
-            <ul className="space-y-3 pt-2">
-              <FooterLink to="/documents/registration-form" label="Registration Forms" />
-              <FooterLink to="/documents/rti" label="RTI" />
+              {/* <FooterLink to="/know-us/empanalled-printers" label="Empanalled Printers" /> */}
             </ul>
           </div>
 
           {/* CONTACT INFO */}
-          <div className="md:col-span-9 lg:col-span-3">
+          <div className="md:col-span-6 lg:col-span-3">
             <h4 className="text-white font-bold mb-6 tracking-wider text-sm uppercase relative inline-block after:content-[''] after:absolute after:bottom-[-6px] after:left-0 after:w-8 after:h-[2px] after:bg-blue-500 after:rounded">
               Contact Information
             </h4>
@@ -100,7 +89,9 @@ const Footer = () => {
                 </div>
                 <span className="text-white/70 leading-relaxed mt-1">
                   <strong className="text-white/90 block mb-1">Registered Office:</strong>
-                  Pathya Pustak Bhawan, Buddh Marg, Fraser Road Area, Patna - 800001, Bihar, India.
+                  Pathya Pustak Bhawan, Buddh Marg,<br />
+                  Fraser Road Area, Patna - 800001,<br />
+                  Bihar, India.
                 </span>
               </div>
 

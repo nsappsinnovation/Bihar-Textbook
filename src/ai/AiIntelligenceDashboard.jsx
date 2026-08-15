@@ -1813,7 +1813,7 @@ const AiIntelligenceDashboard = () => {
               <div className="relative z-10 p-5 sm:p-8 md:p-10 lg:w-1/2 space-y-3 md:space-y-4">
                 <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
                   Build. Learn. &amp; <br /> Think Smarter with <br />
-                  <span className={aiTheme.heroHighlightText}>AI Intelligence</span>
+                  <span className={aiTheme.heroHighlightText}>Artificial Intelligence</span>
                 </h1>
                 <p className="text-slate-500 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed max-w-sm">
                   Your hub to master AI concepts, learn prompt engineering, and explore smart tools.
@@ -1822,7 +1822,7 @@ const AiIntelligenceDashboard = () => {
 
               <div className="hidden lg:block absolute top-0 right-0 w-[55%] h-full">
                 <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
-                <img loading="lazy" decoding="async" src="/images/ai/rhs.webp" alt="AI Intelligence" className="w-full h-full object-cover object-right-top" />
+                <img loading="lazy" decoding="async" src="/images/ai/rhs.webp" alt="Artificial Intelligence" className="w-full h-full object-cover object-right-top" />
               </div>
             </section>
 

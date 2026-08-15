@@ -41,7 +41,7 @@ const MissionGrid = () => {
         },
         {
             id: 5,
-            title: "AI Intelligence",
+            title: "Artificial Intelligence",
             desc: "Learn AI Basics",
             image: "/images/missions/ai.webp",
             hoverImage: "/images/missions/aihov.webp",

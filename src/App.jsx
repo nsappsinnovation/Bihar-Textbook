@@ -17,7 +17,7 @@ const Books = lazy(() => import("./pages/navbar_pages/books/Books.jsx"));
 const BookReader = lazy(() => import("./pages/navbar_pages/books/BookReader.jsx"));
 const Flipbook = lazy(() => import("./pages/navbar_pages/books/Flipbook.jsx"));
 const Gallery = lazy(() => import("./pages/Gallery.jsx"));
-const Document = lazy(() => import("./pages/Document.jsx"));
+const Rti = lazy(() => import("./pages/Rti.jsx"));
 const Ling = lazy(() => import("./linguistics/Ling.jsx"));
 const LingModule = lazy(() => import("./linguistics/LingModule.jsx"));
 const Sign = lazy(() => import("./signLanguage/Signlanguage.jsx"));
@@ -37,7 +37,6 @@ const Contact = lazy(() => import("./pages/Contact"));
 const Notice = lazy(() => import("./pages/navbar_pages/Notice.jsx"));
 const NoticeBoard = lazy(() => import("./pages/navbar_pages/NoticeBoard.jsx"));
 const Login = lazy(() => import("./auth/Login.jsx"));
-const SignUp = lazy(() => import("./auth/SignUp.jsx"));
 const AdminPortal = lazy(() => import("./admin/AdminPortal.jsx"));
 const Developer = lazy(() => import("./pages/Developer.jsx"));
 
@@ -52,7 +51,6 @@ function App() {
 
   const isIsolatedPage =
     location.pathname === "/login" ||
-    location.pathname === "/signup" ||
     location.pathname.startsWith("/admin") ||
     location.pathname.includes("/flip") ||
     location.pathname === "/ling/conversations";
@@ -95,7 +93,6 @@ function App() {
 
               {/* Auth */}
               <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<SignUp />} />
 
               {/* Learning Modules */}
               <Route path="/sign" element={<Sign />} />
@@ -144,9 +141,8 @@ function App() {
               <Route path="/class/:classId/read/:bookSubject" element={<BookReader />} />
               <Route path="/book/:classId/:bookSubject/:chapterId/flip" element={<Flipbook />} />
 
-              {/* Gallery & Docs */}
+              {/* Gallery */}
               <Route path="/gallery/:sectionId" element={<Gallery />} />
-              <Route path="/documents/:sectionId" element={<Document />} />
 
               {/* Know Us */}
               <Route path="/know-us/:sectionId" element={<KnowUs />} />
@@ -158,6 +154,7 @@ function App() {
               <Route path="/notice" element={<Notice />} />
               <Route path="/tenders" element={<Tenders />} />
               <Route path="/csr-policy" element={<CsrPolicy />} />
+              <Route path="/rti" element={<Rti />} />
     
               {/* Misc */}
               <Route path="/developer" element={<Developer />} />

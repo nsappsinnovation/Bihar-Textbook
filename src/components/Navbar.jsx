@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown, Languages } from "lucide-react";
 import { Knowconfig } from './knowus/Knowconfig';
 import { Galleryconfig } from './gallery/Galleryconfig';
-import { Docuconfig } from './documents/Docuconfig';
 
 const Navbar = () => {
   const location = useLocation();
@@ -135,34 +134,11 @@ const Navbar = () => {
             </div>
           </div>
 
-          <div className="relative group">
-            <span className={getLinkClass("/documents")}>
-              Documents <ChevronDown size={14} className={isActive("/documents") ? "text-blue-600" : ""} />
-            </span>
-            <div data-lenis-prevent="true" className="dropdown-menu absolute left-0 top-full mt-3 w-64 rounded-md bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50 max-h-96 overflow-y-auto scrollbar-hide border border-slate-100 py-1">
-              {Docuconfig.map(item => {
-                const subActive = location.pathname === `/documents/${item.id}`;
-                return (
-                  <Link
-                    key={item.id}
-                    to={`/documents/${item.id}`}
-                    className={`block px-4 py-2.5 text-sm transition-all ${
-                      subActive
-                        ? "bg-blue-50 text-blue-600 font-bold border-l-4 border-blue-600"
-                        : "text-slate-800 hover:bg-slate-50 hover:text-blue-600"
-                    }`}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-
           <Link to="/blog" className={getLinkClass("/blog")}>Gyan Kendra</Link>
           <Link to="/notice" className={getLinkClass("/notice")}>Notice</Link>
           <Link to="/tenders" className={getLinkClass("/tenders")}>Tenders</Link>
           <Link to="/csr-policy" className={`whitespace-nowrap ${getLinkClass("/csr-policy")}`}>CSR Policy</Link>
+          <Link to="/rti" className={getLinkClass("/rti")}>RTI</Link>
           <Link to="/contact" className={getLinkClass("/contact")}>Contact</Link>
         </nav>
 
@@ -319,65 +295,6 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Dropdown 4 */}
-          <div className="flex flex-col border-b border-slate-50 py-2">
-            <button
-              onClick={() => toggleDropdown('docs')}
-              className={`flex items-center justify-between text-base font-bold w-full text-left transition-colors ${
-                isActive("/documents") ? "text-blue-600 font-extrabold" : "text-slate-800 hover:text-blue-600"
-              }`}
-            >
-              <span>Documents</span>
-              <ChevronDown size={16} className={`transition-transform duration-200 ${activeDropdown === 'docs' ? 'rotate-180 text-blue-600' : isActive("/documents") ? "text-blue-600" : "text-slate-400"}`} />
-            </button>
-            {activeDropdown === 'docs' && (
-              <div className="flex flex-col pl-4 mt-2 gap-2 border-l-2 border-blue-100">
-                {Docuconfig.map(item => {
-                  const subActive = location.pathname === `/documents/${item.id}`;
-                  return (
-                    <Link
-                      key={item.id}
-                      to={`/documents/${item.id}`}
-                      onClick={() => setIsOpen(false)}
-                      className={`text-sm font-semibold py-1 transition-colors ${
-                        subActive ? "text-blue-600 font-bold" : "text-slate-600 hover:text-blue-600"
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-
-          <Link
-            to="/blog"
-            onClick={() => setIsOpen(false)}
-            className={`text-base font-bold py-2 border-b border-slate-50 transition-colors ${
-              isActive("/blog") ? "text-blue-600 font-extrabold" : "text-slate-800 hover:text-blue-600"
-            }`}
-          >
-            Gyan Kendra
-          </Link>
-          <Link
-            to="/notice"
-            onClick={() => setIsOpen(false)}
-            className={`text-base font-bold py-2 border-b border-slate-50 transition-colors ${
-              isActive("/notice") ? "text-blue-600 font-extrabold" : "text-slate-800 hover:text-blue-600"
-            }`}
-          >
-            Notice
-          </Link>
-          <Link
-            to="/tenders"
-            onClick={() => setIsOpen(false)}
-            className={`text-base font-bold py-2 border-b border-slate-50 transition-colors ${
-              isActive("/tenders") ? "text-blue-600 font-extrabold" : "text-slate-800 hover:text-blue-600"
-            }`}
-          >
-            Tenders
-          </Link>
           <Link
             to="/csr-policy"
             onClick={() => setIsOpen(false)}
@@ -386,6 +303,15 @@ const Navbar = () => {
             }`}
           >
             CSR Policy
+          </Link>
+          <Link
+            to="/rti"
+            onClick={() => setIsOpen(false)}
+            className={`text-base font-bold py-2 border-b border-slate-50 transition-colors ${
+              isActive("/rti") ? "text-blue-600 font-extrabold" : "text-slate-800 hover:text-blue-600"
+            }`}
+          >
+            RTI
           </Link>
           <Link
             to="/contact"

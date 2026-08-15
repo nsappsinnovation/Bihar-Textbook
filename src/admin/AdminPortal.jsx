@@ -16,7 +16,7 @@ import LeadersManagementPage from './pages/LeadersManagementPage';
 import WebsiteEditorPage from './pages/WebsiteEditorPage';
 import EmployeesManagementPage from './pages/EmployeesManagementPage';
 
-import RegisterPrintersPage from './pages/RegisterPrintersPage';
+// import RegisterPrintersPage from './pages/RegisterPrintersPage';
 import CSRPolicyPage from './pages/CSRPolicyPage';
 import WebsiteManagementHub from './pages/WebsiteManagementHub';
 import NotificationsPage from './pages/NotificationsPage';
@@ -52,8 +52,8 @@ function App() {
       case 'ku-employee':
         return <EmployeesManagementPage addToast={addToast} />;
 
-      case 'ku-printers':
-        return <RegisterPrintersPage addToast={addToast} />;
+      // case 'ku-printers':
+      //   return <RegisterPrintersPage addToast={addToast} />;
       default:
         // Handle Books Sub-items (Class 1-12)
         if (activePage.startsWith('book-class-')) {

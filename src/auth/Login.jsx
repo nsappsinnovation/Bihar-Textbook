@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { 
   FiMail, 
@@ -330,13 +330,7 @@ const Login = () => {
               )}
             </button>
 
-            {/* Redirect to Register */}
-            <div className="text-center text-xs text-slate-500 font-bold tracking-wider mt-6 uppercase">
-              Need account access?{" "}
-              <Link to="/signup" className="text-indigo-600 hover:text-indigo-800 transition-all ml-1 border-b-2 border-indigo-100 hover:border-indigo-600 pb-0.5">
-                Register Here
-              </Link>
-            </div>
+
           </form>
         </div>
       </div>

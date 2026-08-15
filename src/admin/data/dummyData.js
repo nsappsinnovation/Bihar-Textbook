@@ -18,9 +18,9 @@ export const dashboardStats = [
   },
   {
     id: 2,
-    title: 'Total Officers',
-    value: 384,
-    change: '+3.2%',
+    title: 'Empanelled Printers',
+    value: 48,
+    change: '+5.4%',
     trend: 'up',
     icon: 'Users',
     color: 'indigo',
@@ -213,74 +213,7 @@ export const books = [
   },
 ];
 
-export const officers = [
-  {
-    id: 1,
-    name: 'Dr. Rajendra Prasad Yadav',
-    designation: 'Director',
-    department: 'Administration',
-    email: 'rajendra.yadav@bstbpc.gov.in',
-    phone: '+91 9876543210',
-    status: 'Active',
-    avatar: 'RP',
-    description: 'Head of BSTBPC administration overseeing all publishing operations.',
-  },
-  {
-    id: 2,
-    name: 'Smt. Anita Kumari',
-    designation: 'Deputy Director',
-    department: 'Publishing',
-    email: 'anita.kumari@bstbpc.gov.in',
-    phone: '+91 9876543211',
-    status: 'Active',
-    avatar: 'AK',
-    description: 'Manages textbook publishing and quality assurance.',
-  },
-  {
-    id: 3,
-    name: 'Shri Manoj Kumar',
-    designation: 'Assistant Director',
-    department: 'IT Department',
-    email: 'manoj.kumar@bstbpc.gov.in',
-    phone: '+91 9876543212',
-    status: 'Active',
-    avatar: 'MK',
-    description: 'Oversees digital infrastructure and e-publishing initiatives.',
-  },
-  {
-    id: 4,
-    name: 'Dr. Sunita Singh',
-    designation: 'Content Head',
-    department: 'Editorial',
-    email: 'sunita.singh@bstbpc.gov.in',
-    phone: '+91 9876543213',
-    status: 'On Leave',
-    avatar: 'SS',
-    description: 'Leads the editorial team for content review and curation.',
-  },
-  {
-    id: 5,
-    name: 'Shri Arvind Mishra',
-    designation: 'Finance Officer',
-    department: 'Finance',
-    email: 'arvind.mishra@bstbpc.gov.in',
-    phone: '+91 9876543214',
-    status: 'Active',
-    avatar: 'AM',
-    description: 'Manages financial operations, budgeting, and procurement.',
-  },
-  {
-    id: 6,
-    name: 'Smt. Kavita Devi',
-    designation: 'Section Officer',
-    department: 'Distribution',
-    email: 'kavita.devi@bstbpc.gov.in',
-    phone: '+91 9876543215',
-    status: 'Active',
-    avatar: 'KD',
-    description: 'Coordinates textbook distribution across Bihar.',
-  },
-];
+export const officers = [];
 
 const formattedNotices = noticesData.map((item) => {
   let isoDate = new Date().toISOString();

@@ -86,7 +86,7 @@ export default function Navbar({ isMobileOpen, setIsMobileOpen, activePage, setA
             <Search className={`absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 transition-colors ${isSearchFocused ? 'text-blue-600' : 'text-gray-400'}`} />
             <input
               type="text"
-              placeholder="Search books, officers, notices..."
+              placeholder="Search books, notices..."
               value={searchQuery}
               onFocus={() => setIsSearchFocused(true)}
               onChange={(e) => setSearchQuery(e.target.value)}

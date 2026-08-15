@@ -42,10 +42,9 @@ const navGroups = [
           { id: 'ku-md-message', label: 'MD Message' },
           { id: 'ku-board', label: 'Board of Directors' },
           { id: 'ku-list-md', label: 'List of MD' },
-          { id: 'ku-officers', label: 'Officers List' },
           { id: 'ku-employee', label: 'Our Employee' },
 
-          { id: 'ku-printers', label: 'Empanalled Printers' },
+          // { id: 'ku-printers', label: 'Empanalled Printers' },
         ]
       },
       { 
@@ -66,16 +65,7 @@ const navGroups = [
           { id: 'gl-press', label: 'Press Release' },
         ]
       },
-      { 
-        id: 'dc', 
-        label: 'Documents', 
-        icon: FileText,
-        hasSubItems: true,
-        subItems: [
-          { id: 'dc-reg-forms', label: 'Registration Forms' },
-          { id: 'dc-rti', label: 'RTI' },
-        ]
-      },
+      { id: 'dc-rti', label: 'RTI', icon: FileText },
       { 
         id: 'notice-tender', 
         label: 'Notice & Tender', 

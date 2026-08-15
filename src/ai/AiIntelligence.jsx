@@ -407,10 +407,10 @@ const AiIntelligence = () => {
             >
               <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-50/80 backdrop-blur-sm text-indigo-700 border border-indigo-200/50 rounded-full text-[10px] sm:text-xs font-bold tracking-wider uppercase">
                 <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-pulse" />
-                AI Intelligence Mission
+                Artificial Intelligence Mission
               </span>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-[1.1] tracking-tight">
-                Adaptive <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">AI Intelligence</span> Programs
+                Adaptive <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">Artificial Intelligence</span> Programs
               </h1>
               <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed max-w-2xl">
                 Leveraging artificial intelligence to provide personalized learning experiences and real-time support. Tailored for every student, our smart modules adapt to your unique learning pace.

@@ -76,7 +76,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
           }
         } else {
           const parsedArray = Array.isArray(parsed) ? parsed : [];
-          if (parsedArray.length === 0 && (module === 'ku-board' || module === 'gl-photo' || module === 'gl-video' || module === 'gl-press' || module === 'ku-list-md' || module === 'ku-officers' || module === 'ku-employees')) {
+          if (parsedArray.length === 0 && (module === 'ku-board' || module === 'gl-photo' || module === 'gl-video' || module === 'gl-press' || module === 'ku-list-md' || module === 'ku-employees')) {
             dataLoaded = false; 
           } else if (parsedArray.length > 0) {
             let processedArray = parsedArray;
@@ -134,16 +134,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
 
     if (!dataLoaded) {
       let dummy = [];
-      if (module === 'dc-reg-forms') {
-        dummy = [
-          { id: 1, title: "Vendor Registration Form", category: "Stakeholder", type: "PDF" },
-          { id: 2, title: "Author Empanelment Application", category: "Educational", type: "PDF" },
-          { id: 3, title: "Publisher Registration Portal Form", category: "Corporate", type: "DOCX" },
-          { id: 4, title: "School Textbook Requisition Form", category: "Stakeholder", type: "PDF" },
-          { id: 5, title: "Employee Benefit Claim Form", category: "HR", type: "PDF" },
-          { id: 6, title: "New Distribution Agency Request", category: "Corporate", type: "PDF" },
-        ];
-      } else if (module === 'ku-board') {
+      if (module === 'ku-board') {
         dummy = [
           { id: 1, title: "Shri. S. Siddharth, IAS", designation: "ACS, Dept. of Education (Chairman)", since: "Current", status: "Active" },
           { id: 2, title: "Shri. Sunny Sinha", designation: "Managing Director", since: "Current", status: "Active" },
@@ -151,14 +142,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
           { id: 4, title: "Ms. Rekha Kumari", designation: "Director, Secondary Education", since: "2022", status: "Active" },
           { id: 5, title: "Shri. Manoj Kumar", designation: "Spl. Secretary, Finance Dept.", since: "2023", status: "Active" },
         ];
-      } else if (module === 'ku-officers') {
-        dummy = [
-          { id: 1, title: "Shri. Rajesh Kumar", designation: "Chief Administrative Officer", email: "rajesh.cao@bihar.gov.in", phone: "+91 612 222 1975" },
-          { id: 2, title: "Ms. Neha Sharma", designation: "General Manager (Sales)", email: "neha.gm@bstbpc.in", phone: "+91 612 222 1976" },
-          { id: 3, title: "Shri. Amit Singh", designation: "Finance Controller", email: "amit.finance@bstbpc.in", phone: "+91 612 222 1977" },
-          { id: 4, title: "Shri. Vipul Agarwal", designation: "Production Manager", email: "vipul.prod@bstbpc.in", phone: "+91 612 222 1978" },
-          { id: 5, title: "Ms. Priyanka Verma", designation: "Academic Coordinator", email: "priyanka.acad@bstbpc.in", phone: "+91 612 222 1979" },
-        ];
+
       } else if (module === 'ku-employees') {
         dummy = [
           { id: 1, title: "Shri. Manoj Kumar", designation: "Accountant", department: "Finance", employeeId: "EMP001" },
@@ -608,7 +592,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
                               <span className="text-[10px] text-gray-400 font-semibold uppercase">
                                 {item.from && item.to ? `${item.from} - ${item.to}` : (item.from ? `From ${item.from}` : '')}
                               </span>
-                            ) : module === 'ku-officers' || module === 'ku-employees' ? (
+                            ) : module === 'ku-employees' ? (
                               <span className="text-[10px] text-gray-400 font-semibold uppercase">
                                 {item.designation || item.department || ''}
                               </span>
@@ -658,7 +642,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
       >
         <div className="space-y-4">
           <FormInput 
-            label={module === 'gl-photo' ? "Photo Description" : module === 'ku-board' || module === 'ku-list-md' || module === 'ku-officers' || module === 'ku-employees' ? "Full Name" : "Title / Name"} 
+            label={module === 'gl-photo' ? "Photo Description" : module === 'ku-board' || module === 'ku-list-md' || module === 'ku-employees' ? "Full Name" : "Title / Name"} 
             placeholder={module === 'gl-photo' ? "Enter description for this photo" : "Enter name"} 
             value={formData.title}
             onChange={(val) => setFormData(prev => ({ ...prev, title: val }))}
@@ -685,28 +669,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
               />
             </>
           )}
-          {module === 'ku-officers' && (
-            <>
-              <FormInput 
-                label="Designation" 
-                placeholder="e.g. Chief Administrative Officer" 
-                value={formData.designation}
-                onChange={(val) => setFormData(prev => ({ ...prev, designation: val }))}
-              />
-              <FormInput 
-                label="Email Address" 
-                placeholder="e.g. name@example.com" 
-                value={formData.email}
-                onChange={(val) => setFormData(prev => ({ ...prev, email: val }))}
-              />
-              <FormInput 
-                label="Phone Number" 
-                placeholder="e.g. +91 1234567890" 
-                value={formData.phone}
-                onChange={(val) => setFormData(prev => ({ ...prev, phone: val }))}
-              />
-            </>
-          )}
+
           {module === 'ku-list-md' && (
             <>
               <FormInput 
@@ -739,9 +702,9 @@ export default function WebsiteEditorPage({ module, addToast }) {
               />
             </>
           )}
-          {(module === 'dc-reg-forms' || module.startsWith('gl-') || module === 'ku-board' || module === 'ku-list-md' || module === 'ku-officers' || module === 'ku-employees') ? (
+          {(module.startsWith('gl-') || module === 'ku-board' || module === 'ku-list-md' || module === 'ku-employees') ? (
             <>
-              { (module === 'ku-board' || module === 'ku-list-md' || module === 'ku-officers' || module === 'ku-employees') ? null : (
+              { (module === 'ku-board' || module === 'ku-list-md' || module === 'ku-employees') ? null : (
                 <>
                   {(module === 'gl-video' || module === 'gl-press') ? (
                     <>
@@ -770,14 +733,6 @@ export default function WebsiteEditorPage({ module, addToast }) {
                         </>
                       )}
                     </>
-                  ) : module === 'dc-reg-forms' ? (
-                    <FormInput 
-                      label="Category" 
-                      type="select"
-                      options={categoryOptions}
-                      value={formData.category}
-                      onChange={(val) => setFormData(prev => ({ ...prev, category: val }))}
-                    />
                   ) : null}
                   <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-700 mb-2">

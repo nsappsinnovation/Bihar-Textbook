@@ -3,7 +3,6 @@ import { useState } from "react";
 import MDMessage from "../components/knowus/sections/MDMessage";
 import BoardOfDirectors from "../components/knowus/sections/boardofmeetings";
 import ListOfMD from "../components/knowus/sections/ListOfMD";
-import OfficersList from "../components/knowus/sections/OfficersList";
 import OurEmployee from "../components/knowus/sections/OurEmployee";
 import OrgStructure from "../components/knowus/sections/OrgStructure";
 import RegisterPrinters from "../components/knowus/sections/RegisterPrinters";
@@ -15,7 +14,6 @@ const componentMap = {
   MDMessage,
   BoardOfDirectors,
   ListOfMD,
-  OfficersList,
   OurEmployee,
   OrgStructure,
 
