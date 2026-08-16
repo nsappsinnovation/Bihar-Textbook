@@ -30,7 +30,7 @@ const navGroups = [
       { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
       { 
         id: 'ee', 
-        label: 'Leaders and Educators', 
+        label: 'Leaders', 
         icon: Users,
       },
       { 

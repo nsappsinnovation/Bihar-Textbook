@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import DashboardCards from '../components/DashboardCards';
-import AnalyticsCharts from '../components/AnalyticsCharts';
 import RecentActivities from '../components/RecentActivities';
 import { dashboardStats } from '../data/dummyData';
 import { Sparkles, Plus } from 'lucide-react';
@@ -47,9 +46,6 @@ export default function DashboardPage() {
 
       {/* Statistics Cards */}
       <DashboardCards stats={dashboardStats} />
-
-      {/* Analytics Charts */}
-      <AnalyticsCharts />
 
       {/* Recent Activities */}
       <div className="mt-6">

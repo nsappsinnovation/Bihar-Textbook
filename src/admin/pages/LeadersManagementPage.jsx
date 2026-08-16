@@ -5,8 +5,7 @@ import Modal, { FormInput } from '../components/Modal';
 import { useActivityLog } from '../hooks/useCustomHooks';
 
 /**
- * Leaders and Educators Management Page
- * Designed to match the 'Visionaries' and 'Leadership' screenshots
+ * Leaders Management Page
  */
 export default function LeadersManagementPage({ addToast }) {
   const { logActivity } = useActivityLog();
@@ -96,7 +95,6 @@ export default function LeadersManagementPage({ addToast }) {
   const [formData, setFormData] = useState({ 
     name: '', 
     role: '', 
-    tag: 'LEADERSHIP', 
     image: '' 
   });
 
@@ -122,7 +120,7 @@ export default function LeadersManagementPage({ addToast }) {
 
   const handleOpenAdd = () => {
     setEditingItem(null);
-    setFormData({ name: '', role: '', tag: 'LEADERSHIP', image: '' });
+    setFormData({ name: '', role: '', image: '' });
     setIsModalOpen(true);
   };
 
@@ -170,15 +168,15 @@ export default function LeadersManagementPage({ addToast }) {
     >
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-black text-gray-900 tracking-tight">Leadership</h1>
-          <p className="text-sm text-gray-500 mt-1 font-medium">Manage Leadership profiles</p>
+          <h1 className="text-3xl font-black text-gray-900 tracking-tight">Leaders</h1>
+          <p className="text-sm text-gray-500 mt-1 font-medium">Manage Leader profiles</p>
         </div>
         <button 
           onClick={handleOpenAdd}
           className="flex items-center gap-2 px-6 py-3.5 bg-indigo-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-indigo-600/20 hover:bg-indigo-700 transition-all"
         >
           <Plus className="w-4 h-4" />
-          <span>Add</span>
+          <span>Add Leader</span>
         </button>
       </div>
 
@@ -232,17 +230,7 @@ export default function LeadersManagementPage({ addToast }) {
 
               {/* Info Area */}
               <div className="p-6 flex flex-col flex-1 bg-white">
-                <div className="mb-4">
-                  <span className={`px-3 py-1 text-[9px] font-black rounded-lg uppercase tracking-[0.15em] ${
-                    leader.tag === 'VISIONARIES' ? 'bg-purple-50 text-purple-600' :
-                    leader.tag === 'EDUCATORS' ? 'bg-emerald-50 text-emerald-600' :
-                    'bg-blue-50 text-blue-600'
-                  }`}>
-                    {leader.tag}
-                  </span>
-                </div>
-                
-                <h3 className="text-lg font-extrabold text-gray-900 leading-tight mb-2">
+                <h3 className="text-lg font-extrabold text-gray-900 leading-tight mb-1">
                   {leader.name}
                 </h3>
                 
@@ -277,24 +265,12 @@ export default function LeadersManagementPage({ addToast }) {
             onChange={(val) => setFormData(prev => ({ ...prev, name: val }))}
           />
           
-          <div className="grid grid-cols-2 gap-4">
-            <FormInput 
-              label="Role / Designation" 
-              placeholder="e.g. Founder, Super 30" 
-              value={formData.role}
-              onChange={(val) => setFormData(prev => ({ ...prev, role: val }))}
-            />
-            <div>
-              <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-2">Category</label>
-              <select 
-                className="w-full px-4 py-3 rounded-2xl bg-gray-50 border-none text-sm font-bold text-gray-700 focus:ring-2 focus:ring-indigo-500/20 transition-all"
-                value={formData.tag}
-                onChange={(e) => setFormData(prev => ({ ...prev, tag: e.target.value }))}
-              >
-                <option value="LEADERSHIP">LEADERSHIP</option>
-              </select>
-            </div>
-          </div>
+          <FormInput 
+            label="Role / Designation" 
+            placeholder="e.g. Managing Director, BSTBPC" 
+            value={formData.role}
+            onChange={(val) => setFormData(prev => ({ ...prev, role: val }))}
+          />
 
           <div>
             <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-3">Portrait Photo (Max 1MB)</label>

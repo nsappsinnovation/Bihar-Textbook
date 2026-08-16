@@ -18,7 +18,7 @@ export default function WebsiteManagementHub({ setActivePage }) {
   const sections = [
     { id: 'opmp', label: 'Platform Sections', sub: 'One Platform Many Possibilities', icon: Layout, color: 'text-blue-600', bg: 'bg-blue-50' },
     { id: 'cl', label: 'Collaborative Learning', sub: 'CL Management & Initiatives', icon: BookOpen, color: 'text-indigo-600', bg: 'bg-indigo-50' },
-    { id: 'ee', label: 'Education Leaders', sub: 'EE Excellence & Leader Profiles', icon: Users, color: 'text-emerald-600', bg: 'bg-emerald-50' },
+    { id: 'ee', label: 'Leaders', sub: 'Leader Profiles', icon: Users, color: 'text-emerald-600', bg: 'bg-emerald-50' },
     { id: 'ku', label: 'Know Us / Bio', sub: 'KU Identity & Corporate Info', icon: Info, color: 'text-amber-600', bg: 'bg-amber-50' },
     { id: 'gl', label: 'Media Gallery', sub: 'GL Visuals & Photo Albums', icon: ImageIcon, color: 'text-purple-600', bg: 'bg-purple-50' },
     { id: 'dc', label: 'Documents/PDFs', sub: 'DC Repository & Downloads', icon: FileText, color: 'text-cyan-600', bg: 'bg-cyan-50' },
