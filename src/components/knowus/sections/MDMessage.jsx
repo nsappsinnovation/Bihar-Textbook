@@ -22,6 +22,9 @@ const MdMessage = () => {
           if (parsed.name) {
             parsed.name = parsed.name.replace(/^Sri\b/gi, 'Shri');
           }
+          if (!parsed.photo || parsed.photo.startsWith('blob:')) {
+            parsed.photo = '/images/KeyParticipants/shri_yatendra_pal.webp';
+          }
           setMdData(prev => ({ ...prev, ...parsed }));
         }
       } catch (e) {}
@@ -44,11 +47,15 @@ const MdMessage = () => {
               {/* MD Photo */}
               <div className="relative z-10 w-64 lg:w-full max-w-[280px] aspect-[4/5] rounded-[32px] overflow-hidden bg-slate-100 shadow-sm border border-slate-100">
                 <img loading="lazy" decoding="async" 
-                  src={mdData.photo} 
+                  src={mdData.photo || '/images/KeyParticipants/shri_yatendra_pal.webp'} 
                   alt={mdData.name} 
                   className="w-full h-full object-cover"
                   onError={(e) => {
-                    e.target.src = 'https://ui-avatars.com/api/?name=Yatendra+Kumar+Pal&background=f1f5f9&color=0f172a&size=512';
+                    if (!e.target.src.endsWith('/images/KeyParticipants/shri_yatendra_pal.webp')) {
+                      e.target.src = '/images/KeyParticipants/shri_yatendra_pal.webp';
+                    } else {
+                      e.target.src = 'https://ui-avatars.com/api/?name=Yatendra+Kumar+Pal&background=f1f5f9&color=0f172a&size=512';
+                    }
                   }}
                 />
               </div>

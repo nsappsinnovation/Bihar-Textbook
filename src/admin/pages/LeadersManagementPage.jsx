@@ -20,6 +20,13 @@ export default function LeadersManagementPage({ addToast }) {
         let updated = false;
         parsed = parsed.map(item => {
           let name = item.name ? item.name.replace(/^Sri\b/gi, 'Shri') : item.name;
+          let image = item.image;
+          if (name?.includes("Yatendra") || item.name?.includes("Yatendra")) {
+            if (!image || image.startsWith('blob:')) {
+              image = "/images/KeyParticipants/shri_yatendra_pal.webp";
+              updated = true;
+            }
+          }
           if (name === "Shri Sunil Kumar") {
             updated = true;
             return {
@@ -38,9 +45,9 @@ export default function LeadersManagementPage({ addToast }) {
               image: "/images/KeyParticipants/sri-vinod.webp"
             };
           }
-          if (item.name !== name) {
+          if (item.name !== name || item.image !== image) {
             updated = true;
-            return { ...item, name };
+            return { ...item, name, image };
           }
           return item;
         });

@@ -36,6 +36,13 @@ export default function KeyParticipant() {
         let updated = false;
         parsed = parsed.map(item => {
           let name = item.name ? item.name.replace(/^Sri\b/gi, 'Shri') : item.name;
+          let image = item.image;
+          if (name?.includes("Yatendra") || item.name?.includes("Yatendra")) {
+            if (!image || image.startsWith('blob:')) {
+              image = "/images/KeyParticipants/shri_yatendra_pal.webp";
+              updated = true;
+            }
+          }
           if (name === "Shri Sunil Kumar") {
             updated = true;
             return {
@@ -54,9 +61,9 @@ export default function KeyParticipant() {
               image: "/images/KeyParticipants/sri-vinod.webp"
             };
           }
-          if (item.name !== name) {
+          if (item.name !== name || item.image !== image) {
             updated = true;
-            return { ...item, name };
+            return { ...item, name, image };
           }
           return item;
         });
@@ -157,8 +164,13 @@ function ParticipantCard({ item }) {
       {/* IMAGE FIXED TO CARD BOTTOM */}
       <div className={`absolute bottom-0 left-0 right-0 z-20 flex ${isMithilesh ? 'h-[320px]' : 'h-[385px]'} items-end justify-center px-0`}>
         <img loading="lazy" decoding="async"
-          src={item.image}
+          src={item.image || (item.name?.includes("Yatendra") ? "/images/KeyParticipants/shri_yatendra_pal.webp" : "")}
           alt={item.name}
+          onError={(e) => {
+            if (item.name?.includes("Yatendra") && !e.target.src.endsWith('/images/KeyParticipants/shri_yatendra_pal.webp')) {
+              e.target.src = "/images/KeyParticipants/shri_yatendra_pal.webp";
+            }
+          }}
           className={`
             block ${isMithilesh ? 'h-[265px]' : 'h-[300px]'} max-w-full object-contain object-bottom drop-shadow-2xl
             transition-transform duration-[1500ms]

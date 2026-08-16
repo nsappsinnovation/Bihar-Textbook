@@ -71,6 +71,9 @@ export default function WebsiteEditorPage({ module, addToast }) {
           }
         } else if (module === 'ku-md-message') {
           if (parsed && typeof parsed === 'object' && parsed.name) {
+            if (!parsed.photo || parsed.photo.startsWith('blob:')) {
+              parsed.photo = '/images/KeyParticipants/shri_yatendra_pal.webp';
+            }
             setMdData(parsed);
             dataLoaded = true;
           }
@@ -470,14 +473,27 @@ export default function WebsiteEditorPage({ module, addToast }) {
                   <label className="flex-1 cursor-pointer">
                     <input type="file" accept="image/*" className="hidden" onChange={(e) => {
                       const file = e.target.files[0];
-                      if (file) setMdData(prev => ({ ...prev, photo: URL.createObjectURL(file) }));
+                      if (file) {
+                        const reader = new FileReader();
+                        reader.onloadend = () => {
+                          setMdData(prev => ({ ...prev, photo: reader.result }));
+                        };
+                        reader.readAsDataURL(file);
+                      }
                     }} />
                     <div className="px-4 py-3 rounded-xl border-2 border-dashed border-gray-200 text-center hover:border-blue-400 transition-all">
                       <span className="text-xs font-bold text-gray-500 uppercase tracking-widest">Change Photo</span>
                     </div>
                   </label>
                   <div className="w-16 h-20 rounded-lg overflow-hidden border border-gray-200 bg-gray-50">
-                    <img loading="lazy" decoding="async" src={mdData.photo} alt="MD" className="w-full h-full object-cover" />
+                    <img loading="lazy" decoding="async" 
+                      src={mdData.photo || '/images/KeyParticipants/shri_yatendra_pal.webp'} 
+                      alt="MD" 
+                      className="w-full h-full object-cover" 
+                      onError={(e) => {
+                        e.target.src = '/images/KeyParticipants/shri_yatendra_pal.webp';
+                      }}
+                    />
                   </div>
                 </div>
               </div>
