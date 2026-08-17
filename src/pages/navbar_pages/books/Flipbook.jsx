@@ -580,11 +580,6 @@ function Flipbook({ pdfFile: propPdfFile }) {
                                                 }`}>
                                                     {chap.hindiTitle || chap.title}
                                                 </h4>
-                                                {chap.title && chap.title !== chap.hindiTitle && (
-                                                    <p className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider truncate mt-0.5">
-                                                        {chap.title}
-                                                    </p>
-                                                )}
                                             </div>
 
                                             <div className="shrink-0 text-slate-300 group-hover:text-blue-600 transition-colors">

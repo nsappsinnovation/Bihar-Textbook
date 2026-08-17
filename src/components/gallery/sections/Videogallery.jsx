@@ -59,7 +59,7 @@ const Videogallery = () => {
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
-          if (parsed && Array.isArray(parsed) && parsed.length > 0) {
+          if (parsed && Array.isArray(parsed)) {
             setItems(parsed.map((item) => {
               const ytId = getYouTubeId(item.videoUrl);
               const autoThumbnail = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : null;

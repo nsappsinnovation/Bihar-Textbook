@@ -22,7 +22,7 @@ const Photogallery = () => {
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
-          if (parsed && Array.isArray(parsed) && parsed.length > 0) {
+          if (parsed && Array.isArray(parsed)) {
             setItems(parsed.map((item) => {
               const hasValidDoc = item.document && typeof item.document === 'string' && item.document.trim() !== "" && item.document !== "undefined" && item.document !== "null";
               const finalSrc = hasValidDoc ? item.document : "";

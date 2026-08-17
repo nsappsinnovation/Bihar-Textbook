@@ -131,18 +131,7 @@ function StatCard({ stat, index }) {
         <p className="text-sm text-gray-500 mt-0.5 font-medium">{stat.title}</p>
       </div>
 
-      {/* Trend */}
-      <div className="relative flex items-center gap-1.5 mt-3">
-        <span className={`inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full ${
-          stat.trend === 'up'
-            ? 'bg-emerald-50 text-emerald-600'
-            : 'bg-red-50 text-red-500'
-        }`}>
-          {stat.trend === 'up' ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
-          {stat.change}
-        </span>
-        <span className="text-xs text-gray-400">vs last month</span>
-      </div>
+
     </motion.div>
   );
 }

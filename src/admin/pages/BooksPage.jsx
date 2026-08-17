@@ -64,10 +64,10 @@ export default function BooksPage({ addToast, forcedClass }) {
   // Add Book Modal State
   const [showAddModal, setShowAddModal] = useState(false);
   const [addTitle, setAddTitle] = useState('');
-  const [addClassId, setAddClassId] = useState('1');
-  const [addSubject, setAddSubject] = useState('General');
+  const [addClassId, setAddClassId] = useState('');
+  const [addSubject, setAddSubject] = useState('');
   const [addAuthor, setAddAuthor] = useState('Bihar Board');
-  const [addImage, setAddImage] = useState('/bookcover.webp');
+  const [addImage, setAddImage] = useState('');
   const [addDescription, setAddDescription] = useState('');
   const [addStatus, setAddStatus] = useState(true); // true = Published
 
@@ -88,8 +88,8 @@ export default function BooksPage({ addToast, forcedClass }) {
       ...prev,
       {
         id: `chap_${Date.now()}_${prev.length + 1}`,
-        title: `Chapter ${prev.length + 1}`,
-        hindiTitle: `अध्याय ${prev.length + 1}`,
+        title: '',
+        hindiTitle: '',
         pdfUrl: ''
       }
     ]);
@@ -109,10 +109,10 @@ export default function BooksPage({ addToast, forcedClass }) {
 
   const handleOpenAdd = () => {
     setAddTitle('');
-    setAddClassId('1');
-    setAddSubject('General');
+    setAddClassId('');
+    setAddSubject('');
     setAddAuthor('Bihar Board');
-    setAddImage('/bookcover.webp');
+    setAddImage('');
     setAddDescription('');
     setAddStatus(true);
     setChaptersList([]);
@@ -171,10 +171,19 @@ export default function BooksPage({ addToast, forcedClass }) {
       addToast('Please enter a book name', 'error');
       return;
     }
+    if (!addClassId) {
+      addToast('Please select a class', 'error');
+      return;
+    }
+    if (!addSubject.trim()) {
+      addToast('Please enter a subject', 'error');
+      return;
+    }
+
     addTextbook({
       title: addTitle.trim(),
       classId: addClassId,
-      subject: addSubject.trim() || 'General',
+      subject: addSubject.trim(),
       author: addAuthor.trim() || 'Bihar Board',
       image: addImage.trim() || '/bookcover.webp',
       description:
@@ -187,7 +196,8 @@ export default function BooksPage({ addToast, forcedClass }) {
     setShowAddModal(false);
     // Reset form
     setAddTitle('');
-    setAddSubject('General');
+    setAddClassId('');
+    setAddSubject('');
     setAddDescription('');
     setChaptersList([]);
     addToast('New textbook added successfully!', 'success');
@@ -559,6 +569,7 @@ export default function BooksPage({ addToast, forcedClass }) {
               onChange={(e) => setAddClassId(e.target.value)}
               className="w-full px-4 py-2.5 rounded-xl bg-gray-50 border border-gray-200 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-300"
             >
+              <option value="" disabled>Select Class</option>
               {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((num) => (
                 <option key={num} value={num}>Class {num}</option>
               ))}
@@ -668,20 +679,13 @@ export default function BooksPage({ addToast, forcedClass }) {
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 flex-1">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 flex-1">
                     <input
                       type="text"
-                      placeholder="Chapter Title (English)"
+                      placeholder="Chapter Name"
                       value={chap.title || ''}
                       onChange={(e) => handleUpdateChapterRow(idx, 'title', e.target.value)}
-                      className="px-3 py-1.5 text-xs bg-white border border-gray-200 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Hindi Title (e.g. अध्याय 1)"
-                      value={chap.hindiTitle || ''}
-                      onChange={(e) => handleUpdateChapterRow(idx, 'hindiTitle', e.target.value)}
-                      className="px-3 py-1.5 text-xs bg-white border border-gray-200 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      className="px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     />
                       <div className="relative flex items-center h-full min-h-[34px]">
                         {chap.pdfUrl ? (
@@ -891,20 +895,13 @@ export default function BooksPage({ addToast, forcedClass }) {
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 flex-1">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 flex-1">
                     <input
                       type="text"
-                      placeholder="Chapter Title (English)"
+                      placeholder="Chapter Name"
                       value={chap.title || ''}
                       onChange={(e) => handleUpdateChapterRow(idx, 'title', e.target.value)}
-                      className="px-3 py-1.5 text-xs bg-white border border-gray-200 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Hindi Title (e.g. अध्याय 1)"
-                      value={chap.hindiTitle || ''}
-                      onChange={(e) => handleUpdateChapterRow(idx, 'hindiTitle', e.target.value)}
-                      className="px-3 py-1.5 text-xs bg-white border border-gray-200 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                      className="px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     />
                       <div className="relative flex items-center h-full min-h-[34px]">
                         {chap.pdfUrl ? (

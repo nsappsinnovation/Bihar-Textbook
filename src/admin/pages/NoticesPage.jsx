@@ -122,6 +122,7 @@ export default function NoticesPage({ addToast, forcedCategory }) {
     }
     setNoticeList(updatedList);
     localStorage.setItem('website_notices_v6', JSON.stringify(updatedList));
+    localStorage.setItem('website_notices_last_updated', new Date().toISOString());
     window.dispatchEvent(new Event('websiteDataUpdated'));
     setShowAddModal(false);
     setEditingNotice(null);
@@ -133,6 +134,7 @@ export default function NoticesPage({ addToast, forcedCategory }) {
     const updatedList = noticeList.filter(n => n.id !== id);
     setNoticeList(updatedList);
     localStorage.setItem('website_notices_v6', JSON.stringify(updatedList));
+    localStorage.setItem('website_notices_last_updated', new Date().toISOString());
     window.dispatchEvent(new Event('websiteDataUpdated'));
     addToast('Notice deleted', 'error');
     if (itemToDelete) {

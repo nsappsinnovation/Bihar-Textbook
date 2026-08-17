@@ -156,7 +156,7 @@ export default function Navbar({ isMobileOpen, setIsMobileOpen, activePage, setA
                       
                     </div>
                   </div>
-                  <div className="max-h-[400px] overflow-y-auto scrollbar-hide">
+                  <div className="max-h-[400px] overflow-y-auto custom-scrollbar">
                     {activities.map((notif) => (
                       <div
                         key={notif.id}

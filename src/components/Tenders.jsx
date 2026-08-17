@@ -13,6 +13,11 @@ const Tenders = () => {
     return tendersData;
   });
 
+  const [lastUpdated, setLastUpdated] = useState(() => {
+    const val = localStorage.getItem('website_notices_last_updated');
+    return val ? val : null;
+  });
+
   useEffect(() => {
     const handleUpdate = () => {
       const saved = localStorage.getItem('website_notices_v6');
@@ -21,6 +26,11 @@ const Tenders = () => {
         setLiveTenders(adminTenders);
       } else {
         setLiveTenders(tendersData);
+      }
+
+      const updatedTime = localStorage.getItem('website_notices_last_updated');
+      if (updatedTime) {
+        setLastUpdated(updatedTime);
       }
     };
     window.addEventListener('websiteDataUpdated', handleUpdate);
@@ -167,7 +177,7 @@ const Tenders = () => {
             </div>
             <div className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 flex items-center gap-2 backdrop-blur-sm">
               <FiClock className="text-blue-400" />
-              <span className="text-white/80">Last Updated Today</span>
+              <span className="text-white/80">Last Updated: {lastUpdated ? formatDate(lastUpdated) : (liveTenders.length > 0 ? formatDate(liveTenders[0].date) : 'N/A')}</span>
             </div>
           </motion.div>
         </div>

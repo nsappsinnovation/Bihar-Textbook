@@ -68,8 +68,9 @@ const Footer = () => {
             </h4>
             <ul className="space-y-3 pt-2">
               <FooterLink to="/know-us/md-message" label="MD Message" />
+              <FooterLink to="/know-us/list-md" label="List of MD" />
               <FooterLink to="/know-us/board-of-directors" label="Board of Directors" />
-              <FooterLink to="/know-us/organisation-structure" label="Organisation Structure" />
+              <FooterLink to="/know-us/organisation-structure" label="Organisational Structure" />
               <FooterLink to="/know-us/employees" label="Our Employees" />
 
               {/* <FooterLink to="/know-us/empanalled-printers" label="Empanalled Printers" /> */}

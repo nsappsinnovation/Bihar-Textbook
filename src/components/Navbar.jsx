@@ -242,7 +242,7 @@ const Navbar = () => {
               <ChevronDown size={16} className={`transition-transform duration-200 ${activeDropdown === 'books' ? 'rotate-180 text-blue-600' : isActive("/books") ? "text-blue-600" : "text-slate-400"}`} />
             </button>
             {activeDropdown === 'books' && (
-              <div className="grid grid-cols-2 gap-2 pl-4 mt-2 border-l-2 border-blue-100">
+              <div className="flex flex-col pl-4 mt-2 gap-2 border-l-2 border-blue-100">
                 {[...Array(12)].map((_, index) => {
                   const classId = index + 1;
                   const subActive = location.pathname === `/books/${classId}`;

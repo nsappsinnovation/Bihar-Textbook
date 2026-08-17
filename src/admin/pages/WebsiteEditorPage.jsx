@@ -1,8 +1,32 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Save, Plus, Trash2, Edit2, Image as ImageIcon, User as UserIcon, FileText, Upload, RefreshCw, Eye, Sparkles, Quote, BadgeCheck, Camera, CheckCircle2 } from 'lucide-react';
+import { Save, Plus, Trash2, Edit2, Image as ImageIcon, User as UserIcon, FileText, Upload, RefreshCw, Eye, Sparkles, Quote, BadgeCheck, Camera, CheckCircle2, Calendar, Search } from 'lucide-react';
 import Modal, { FormInput } from '../components/Modal';
 import { useActivityLog } from '../hooks/useCustomHooks';
+
+const parseToIsoDate = (dateStr) => {
+  if (!dateStr) return '';
+  if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return dateStr;
+  if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateStr)) {
+    const parts = dateStr.split('/');
+    if (parts.length === 3) {
+      const d = parts[0].padStart(2, '0');
+      const m = parts[1].padStart(2, '0');
+      const y = parts[2];
+      return `${y}-${m}-${d}`;
+    }
+  }
+  return '';
+};
+
+const formatIsoToDdMmYyyy = (isoStr) => {
+  if (!isoStr) return '';
+  if (/^\d{4}-\d{2}-\d{2}$/.test(isoStr)) {
+    const [y, m, d] = isoStr.split('-');
+    return `${d}/${m}/${y}`;
+  }
+  return isoStr;
+};
 
 export default function WebsiteEditorPage({ module, addToast }) {
   const { logActivity } = useActivityLog();
@@ -10,6 +34,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   const [formData, setFormData] = useState({ title: '', desc: '', type: '', category: '', document: '' });
+  const [mdSearchQuery, setMdSearchQuery] = useState('');
   const [rtiData, setRtiData] = useState({ 
     officer: 'Shri. Rajesh Kumar', 
     phone: '06122221975', 
@@ -343,6 +368,9 @@ export default function WebsiteEditorPage({ module, addToast }) {
   const saveItem = () => {
     let updated;
     const finalFormData = { ...formData };
+    if (module === 'ku-list-md') {
+      finalFormData.name = finalFormData.title;
+    }
     
     // Auto-assign default image if none is provided
     if (module.startsWith('gl-') && (!finalFormData.document || finalFormData.document.trim() === "")) {
@@ -376,6 +404,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
     
     try {
       localStorage.setItem(`module_content_${module}`, JSON.stringify(updated));
+      window.dispatchEvent(new Event('storage'));
       setContent(updated);
       setIsModalOpen(false);
     } catch (e) {
@@ -395,6 +424,14 @@ export default function WebsiteEditorPage({ module, addToast }) {
     }
   };
 
+  const filteredMdList = content.filter(item => {
+    const name = (item.title || item.name || '').toLowerCase();
+    const from = (item.from || item.designation || '').toLowerCase();
+    const to = (item.to || item.department || item.employeeId || '').toLowerCase();
+    const q = mdSearchQuery.toLowerCase();
+    return name.includes(q) || from.includes(q) || to.includes(q);
+  });
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -404,7 +441,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
 
 
       {module === 'dc-rti' ? (
-        <div className="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 sm:p-8 max-w-2xl space-y-6">
+        <div className="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 sm:p-8 space-y-6 w-full">
           <div className="flex items-center justify-between pb-4 border-b border-slate-100">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shadow-sm">
@@ -451,7 +488,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
           </div>
         </div>
       ) : module === 'ku-md-message' ? (
-        <div className="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 sm:p-8 space-y-6 max-w-6xl">
+        <div className="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 sm:p-8 space-y-6 w-full">
           <div className="flex items-center justify-between pb-4 border-b border-slate-100">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shadow-sm">
@@ -602,6 +639,142 @@ export default function WebsiteEditorPage({ module, addToast }) {
             </button>
           </div>
         </div>
+      ) : (module === 'ku-list-md' || module === 'ku-board' || module === 'ku-employees') ? (
+        <div className="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 sm:p-8 space-y-6 w-full">
+          {/* Top Header */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+            <div className="flex items-center gap-3.5">
+              <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shadow-sm">
+                <UserIcon className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-slate-900 tracking-tight">
+                  {module === 'ku-list-md' ? 'List of Managing Directors' : module === 'ku-board' ? 'Board of Directors' : 'Our Employees'}
+                </h3>
+                <p className="text-xs text-slate-500 font-medium mt-0.5">
+                  {module === 'ku-list-md' ? 'Manage official historical directory of MDs & appointment dates' : 'Manage and organize staff directory profiles'}
+                </p>
+              </div>
+            </div>
+
+            <button 
+              onClick={openAddModal}
+              className="flex items-center justify-center gap-2 px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold text-xs uppercase tracking-wider shadow-lg shadow-blue-600/20 transition-all"
+            >
+              <Plus className="w-4 h-4" />
+              <span>Add Profile</span>
+            </button>
+          </div>
+
+          {/* Search & Statistics Bar */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-50/70 p-4 rounded-2xl border border-slate-100">
+            <div className="relative w-full sm:w-80">
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <input 
+                type="text"
+                placeholder="Filter by name, date or department..."
+                value={mdSearchQuery}
+                onChange={(e) => setMdSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 bg-white rounded-xl border border-slate-200 text-xs font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all shadow-sm"
+              />
+            </div>
+
+            <div className="flex items-center gap-3 w-full sm:w-auto justify-end text-xs font-semibold text-slate-600">
+              <span className="bg-white px-3.5 py-2 rounded-xl border border-slate-200 shadow-sm">
+                Total Records: <span className="text-blue-600 font-bold">{content.length}</span>
+              </span>
+            </div>
+          </div>
+
+          {/* MD Directory Table */}
+          <div className="overflow-hidden rounded-2xl border border-slate-200/80 shadow-sm bg-white">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="bg-slate-100/70 text-slate-600 text-[11px] font-semibold uppercase tracking-wider border-b border-slate-200">
+                    <th className="py-3.5 px-4 text-center w-12">S.No.</th>
+                    <th className="py-3.5 px-5">{module === 'ku-list-md' ? 'Managing Director' : module === 'ku-board' ? 'Board Member' : 'Employee'}</th>
+                    <th className="py-3.5 px-5">{module === 'ku-list-md' ? 'Appointment Date' : 'Designation'}</th>
+                    <th className="py-3.5 px-5">{module === 'ku-list-md' ? 'Tenure End' : module === 'ku-board' ? 'Since' : 'Department & ID'}</th>
+                    <th className="py-3.5 px-4 text-center">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 text-xs">
+                  {filteredMdList.map((item, idx) => (
+                    <tr key={item.id} className="hover:bg-slate-50/60 transition-colors group">
+                      <td className="py-4 px-4 text-center font-medium text-slate-400">
+                        {(idx + 1).toString().padStart(2, '0')}
+                      </td>
+                      <td className="py-4 px-5">
+                        <div>
+                          <p className="font-semibold text-slate-800 text-sm">{item.title || item.name}</p>
+                          <p className="text-[10px] text-slate-400 font-normal">
+                             {module === 'ku-list-md' ? 'Managing Director, BSTBPC' : module === 'ku-board' ? 'Board Member, BSTBPC' : 'Employee, BSTBPC'}
+                          </p>
+                        </div>
+                      </td>
+                      <td className="py-4 px-5">
+                        {module === 'ku-list-md' ? (
+                          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50/60 text-blue-700 rounded-xl font-medium border border-blue-100/80 text-[11px]">
+                            <Calendar className="w-3.5 h-3.5 text-blue-500" />
+                            <span>{item.from || 'N/A'}</span>
+                          </div>
+                        ) : (
+                          <span className="font-semibold text-slate-700 text-[13px]">{item.designation || 'N/A'}</span>
+                        )}
+                      </td>
+                      <td className="py-4 px-5">
+                        {module === 'ku-list-md' ? (
+                          <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl font-medium border text-[11px] ${
+                            item.to?.toLowerCase() === 'present' || !item.to
+                              ? 'bg-emerald-50 text-emerald-700 border-emerald-100'
+                              : 'bg-slate-50 text-slate-700 border-slate-200'
+                          }`}>
+                            <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                            <span>{item.to || 'Present'}</span>
+                          </div>
+                        ) : module === 'ku-board' ? (
+                          <div className="flex flex-col gap-1.5">
+                             <span className="text-[13px] text-slate-800 font-semibold">{item.since || 'Current'}</span>
+                          </div>
+                        ) : (
+                          <div className="flex flex-col gap-1.5">
+                             <span className="text-[11px] text-slate-600 font-medium">Dept: <span className="font-bold">{item.department || 'N/A'}</span></span>
+                             <span className="text-[10px] uppercase font-bold tracking-wider w-fit px-2 py-0.5 rounded-md border bg-blue-50 text-blue-600 border-blue-200">ID: {item.employeeId || 'N/A'}</span>
+                          </div>
+                        )}
+                      </td>
+                      <td className="py-4 px-4 text-center">
+                        <div className="flex items-center justify-center gap-2">
+                          <button 
+                            onClick={() => openEditModal(item)}
+                            className="p-2 text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"
+                            title="Edit Profile"
+                          >
+                            <Edit2 className="w-4 h-4" />
+                          </button>
+                          <button 
+                            onClick={() => removeItem(item.id)}
+                            className="p-2 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all"
+                            title="Delete Profile"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+
+            {filteredMdList.length === 0 && (
+              <div className="py-12 text-center text-slate-400 font-medium">
+                No records match "{mdSearchQuery}"
+              </div>
+            )}
+          </div>
+        </div>
       ) : (
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden p-6">
           <div className="flex items-center justify-between mb-8">
@@ -687,10 +860,6 @@ export default function WebsiteEditorPage({ module, addToast }) {
                               <span className="text-[10px] text-gray-400 font-semibold uppercase">
                                 {module === 'gl-photo' ? 'Image' : 'Video'}
                               </span>
-                            ) : module === 'ku-list-md' ? (
-                              <span className="text-[10px] text-gray-400 font-semibold uppercase">
-                                {item.from && item.to ? `${item.from} - ${item.to}` : (item.from ? `From ${item.from}` : '')}
-                              </span>
                             ) : module === 'ku-employees' ? (
                               <span className="text-[10px] text-gray-400 font-semibold uppercase">
                                 {item.designation || item.department || ''}
@@ -737,7 +906,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
       <Modal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
-        title={editingItem ? "Edit Item" : "Add Item"} 
+        title={editingItem ? "Edit Profile" : "Add Profile"} 
       >
         <div className="space-y-4">
           <FormInput 
@@ -770,20 +939,47 @@ export default function WebsiteEditorPage({ module, addToast }) {
           )}
 
           {module === 'ku-list-md' && (
-            <>
-              <FormInput 
-                label="Appointment Date" 
-                placeholder="e.g. 29/11/2023" 
-                value={formData.from}
-                onChange={(val) => setFormData(prev => ({ ...prev, from: val }))}
-              />
-              <FormInput 
-                label="Tenure End" 
-                placeholder="e.g. 29/04/2024" 
-                value={formData.to}
-                onChange={(val) => setFormData(prev => ({ ...prev, to: val }))}
-              />
-            </>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center justify-between">
+                  <span>Appointment Date</span>
+                  <span className="text-[10px] text-blue-600 font-bold flex items-center gap-1">
+                    <Calendar className="w-3 h-3" /> Calendar Picker
+                  </span>
+                </label>
+                <div className="relative flex items-center">
+                  <input 
+                    type="date"
+                    value={parseToIsoDate(formData.from)}
+                    onChange={(e) => {
+                      const raw = e.target.value;
+                      setFormData(prev => ({ ...prev, from: formatIsoToDdMmYyyy(raw) }));
+                    }}
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm font-semibold text-slate-800 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 transition-all shadow-sm cursor-pointer"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center justify-between">
+                  <span>Tenure End</span>
+                  <span className="text-[10px] text-blue-600 font-bold flex items-center gap-1">
+                    <Calendar className="w-3 h-3" /> Calendar Picker
+                  </span>
+                </label>
+                <div className="relative flex items-center">
+                  <input 
+                    type="date"
+                    value={parseToIsoDate(formData.to)}
+                    onChange={(e) => {
+                      const raw = e.target.value;
+                      setFormData(prev => ({ ...prev, to: formatIsoToDdMmYyyy(raw) }));
+                    }}
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 text-sm font-semibold text-slate-800 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-600 transition-all shadow-sm cursor-pointer"
+                  />
+                </div>
+              </div>
+            </div>
           )}
           {module === 'ku-board' && (
             <>
@@ -795,7 +991,9 @@ export default function WebsiteEditorPage({ module, addToast }) {
               />
               <FormInput 
                 label="Since / From" 
-                placeholder="e.g. 2023" 
+                type="select"
+                options={["Current", ...Array.from({length: 50}, (_, i) => String(new Date().getFullYear() - 1 - i))]}
+                placeholder="Select Year" 
                 value={formData.since}
                 onChange={(val) => setFormData(prev => ({ ...prev, since: val }))}
               />

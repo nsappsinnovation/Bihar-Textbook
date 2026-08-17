@@ -209,11 +209,8 @@ const BookReader = () => {
                                                     </div>
                                                     <div className="min-w-0 flex flex-col justify-center">
                                                         <h3 className="text-sm sm:text-[15px] font-black text-[#1e293b] leading-snug truncate uppercase">
-                                                            {chapter.hindiTitle}
+                                                            {chapter.hindiTitle || chapter.title}
                                                         </h3>
-                                                        <p className="text-[10px] font-bold text-[#94a3b8] uppercase tracking-widest mt-0.5 truncate">
-                                                            {chapter.title}
-                                                        </p>
                                                     </div>
                                                 </div>
                                                 <div className="inline-flex items-center gap-1.5 bg-[#eff6ff] text-[#2563eb] text-[10px] font-black px-4 py-2 rounded-full transition-colors shrink-0 group-hover:bg-[#2563eb] group-hover:text-white">

@@ -50,7 +50,7 @@ export default function RecentActivities() {
         </button>
       </div>
 
-      <div className="space-y-2">
+      <div className="space-y-2 max-h-[500px] overflow-y-auto custom-scrollbar pr-2">
         <AnimatePresence initial={false}>
           {displayedActivities.map((activity, index) => {
             const config = activityConfig[activity.type] || activityConfig.system;
