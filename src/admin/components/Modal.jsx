@@ -118,9 +118,9 @@ export function FormInput({ label, type = 'text', placeholder, value, onChange, 
           <p className="text-xs text-gray-400 mt-1">PDF, PNG, JPG up to 10MB</p>
         </div>
       ) : type === 'select' ? (
-        <div className="relative">
+        <div className="relative" ref={containerRef}>
           <div 
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={handleToggle}
             className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-700 bg-white flex justify-between items-center cursor-pointer hover:border-blue-300 transition-all focus:ring-2 focus:ring-blue-500/20"
           >
             <span className={value ? "text-gray-800 font-medium" : "text-gray-400"}>
@@ -128,38 +128,47 @@ export function FormInput({ label, type = 'text', placeholder, value, onChange, 
             </span>
             <svg className={`w-4 h-4 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
           </div>
-          <AnimatePresence>
-            {isOpen && (
-              <>
-                <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)}></div>
-                <motion.div 
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.15 }}
-                  className="absolute z-50 w-full mt-2 bg-white border border-gray-100 rounded-xl shadow-xl max-h-60 overflow-y-auto top-full origin-top"
-                >
-                  {placeholder && (
-                    <div 
-                      className="px-4 py-2.5 text-sm text-gray-400 hover:bg-gray-50 cursor-pointer border-b border-gray-50"
-                      onClick={() => { onChange(''); setIsOpen(false); }}
-                    >
-                      {placeholder}
-                    </div>
-                  )}
-                  {options && options.map(opt => (
-                    <div 
-                      key={opt.value || opt}
-                      className={`px-4 py-2.5 text-sm cursor-pointer hover:bg-blue-50 transition-colors ${value === (opt.value || opt) ? 'bg-blue-50 text-blue-600 font-bold' : 'text-gray-700 font-medium'}`}
-                      onClick={() => { onChange(opt.value || opt); setIsOpen(false); }}
-                    >
-                      {opt.label || opt}
-                    </div>
-                  ))}
-                </motion.div>
-              </>
-            )}
-          </AnimatePresence>
+          {rect && typeof document !== 'undefined' && createPortal(
+            <AnimatePresence>
+              {isOpen && (
+                <>
+                  <div className="fixed inset-0 z-[100]" onClick={() => setIsOpen(false)}></div>
+                  <motion.div 
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.15 }}
+                    style={{
+                      position: 'fixed',
+                      top: rect.bottom + 8,
+                      left: rect.left,
+                      width: rect.width,
+                    }}
+                    className="z-[110] bg-white border border-gray-100 rounded-xl shadow-xl max-h-60 overflow-y-auto origin-top"
+                  >
+                    {placeholder && (
+                      <div 
+                        className="px-4 py-2.5 text-sm text-gray-400 hover:bg-gray-50 cursor-pointer border-b border-gray-50"
+                        onClick={() => { onChange(''); setIsOpen(false); }}
+                      >
+                        {placeholder}
+                      </div>
+                    )}
+                    {options && options.map(opt => (
+                      <div 
+                        key={opt.value || opt}
+                        className={`px-4 py-2.5 text-sm cursor-pointer hover:bg-blue-50 transition-colors ${value === (opt.value || opt) ? 'bg-blue-50 text-blue-600 font-bold' : 'text-gray-700 font-medium'}`}
+                        onClick={() => { onChange(opt.value || opt); setIsOpen(false); }}
+                      >
+                        {opt.label || opt}
+                      </div>
+                    ))}
+                  </motion.div>
+                </>
+              )}
+            </AnimatePresence>,
+            document.body
+          )}
         </div>
       ) : (
         <input

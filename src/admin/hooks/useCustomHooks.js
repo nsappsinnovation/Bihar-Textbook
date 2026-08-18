@@ -124,12 +124,8 @@ export function useActivityLog() {
     const saved = localStorage.getItem('admin_activities');
     if (saved) return JSON.parse(saved);
     
-    // Default initial activities
-    return [
-      { id: 1, user: 'Rajesh Kumar Singh', action: 'Updated officer profile information', type: 'update', time: '2 minutes ago', avatar: 'RK', status: 'completed', read: false },
-      { id: 2, user: 'Priya Sharma', action: 'Uploaded new notice regarding exam schedule', type: 'upload', time: '15 minutes ago', avatar: 'PS', status: 'completed', read: true },
-      { id: 3, user: 'Amit Verma', action: 'Added new textbook - Mathematics Class 10', type: 'create', time: '1 hour ago', avatar: 'AV', status: 'completed', read: true },
-    ];
+    // Start with empty activities, only show actual changes
+    return [];
   });
 
   const logActivity = useCallback((action, user = 'Admin', type = 'system', link = null, status = 'completed') => {
