@@ -180,37 +180,24 @@ export default function WebsiteEditorPage({ module, addToast }) {
         ];
       } else if (module === 'gl-photo') {
         dummy = [
-          { id: 1, title: "Primary Classroom Learning Environment", document: "/images/hero/classroom.webp" },
-          { id: 2, title: "E-Learning & Digital Books Portal", document: "/images/hero/audio.webp" },
-          { id: 3, title: "Mobile VR Lab Tour Experience", document: "/images/hero/vr.webp" },
-          { id: 4, title: "Inclusive Sign Language Training Class", document: "/images/hero/sign.webp" },
-          { id: 5, title: "Diverse Regional Dialects Learning Program", document: "/images/hero/linguistic.webp" },
-          { id: 6, title: "Corporate Social Responsibility Initiatives", document: "/images/csr.webp" },
-          { id: 7, title: "Educational Campaigns", document: "/images/goodnight.webp" },
-          { id: 8, title: "Key Participant Session", document: "/images/KeyParticipants/sri_mithlesh.webp" },
-          { id: 9, title: "Conference Highlights", document: "/images/KeyParticipants/girish_kumar_choudhary.webp" },
-          { id: 10, title: "Academic Discussions", document: "/images/KeyParticipants/abhyanand.webp" },
-          { id: 11, title: "Leadership Meeting", document: "/images/KeyParticipants/sri-vinod.webp" },
-          { id: 12, title: "Executive Briefing", document: "/images/KeyParticipants/shri_yatendra_pal.webp" },
-          { id: 13, title: "Community Outreach", document: "/images/KeyParticipants/samrat.webp" },
-          { id: 14, title: "Student Engagement", document: "/images/KeyParticipants/anand.webp" }
+          { id: 1, title: "Primary Classroom Learning Environment", document: "/images/hero/classroom.webp", category: "Event" },
+          { id: 2, title: "E-Learning & Digital Books Portal", document: "/images/hero/audio.webp", category: "Milestone" },
+          { id: 3, title: "Mobile VR Lab Tour Experience", document: "/images/hero/vr.webp", category: "Technology" },
+          { id: 4, title: "Inclusive Sign Language Training Class", document: "/images/hero/sign.webp", category: "Training" },
+          { id: 5, title: "Diverse Regional Dialects Learning Program", document: "/images/hero/linguistic.webp", category: "Education" },
+          { id: 6, title: "Primary Classroom Learning Environment", document: "/images/hero/classroom.webp", category: "Event" }
         ];
       } else if (module === 'gl-video') {
         dummy = [
           { id: 1, title: "Bihar Digital Classrooms Launch Highlights", document: "/images/hero/classroom.webp", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Launch" },
           { id: 2, title: "Rural Literacy Outreach & Community Distribution Drives", document: "/images/hero/audio.webp", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Community" },
-          { id: 3, title: "Teacher Training Workshop on Interactive Smart Textbooks", document: "/images/hero/vr.webp", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Training" },
-          { id: 4, title: "Academic Session 2026-27 High-Level Inauguration Ceremony", document: "/images/KeyParticipants/shri_yatendra_pal.webp", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Ceremony" },
-          { id: 5, title: "Accessible Audio Books and Inclusive Pedagogy Program", document: "/images/hero/sign.webp", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Program" },
-          { id: 6, title: "Smart AI Revision Modules Student Pilot Feedback", document: "/images/hero/linguistic.webp", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Feedback" }
+          { id: 3, title: "Teacher Training Workshop on Interactive Smart Textbooks", document: "/images/hero/vr.webp", videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", category: "Training" }
         ];
       } else if (module === 'gl-press') {
         dummy = [
           { id: 1, title: "Launch of Digital Learning Initiatives Across 500 Schools", document: "/images/hero/classroom.webp", category: "Initiatives", desc: "The State Text Book Publishing Corporation today announced a major rollout of VR and AR educational tools, aiming to modernize learning infrastructure in rural districts.", date: "2025-10-15" },
           { id: 2, title: "New Curriculum Guidelines Released for Upcoming Academic Year", document: "/images/hero/audio.webp", category: "Curriculum", desc: "Updated guidelines emphasize regional history, environmental awareness, and foundational literacy skills. All textbooks have been revised accordingly.", date: "2025-09-28" },
-          { id: 3, title: "Partnership Announced with National Digital Library", document: "/images/hero/vr.webp", category: "Partnerships", desc: "To expand access to supplementary reading materials across remote districts, a strategic partnership has been formalized.", date: "2025-08-10" },
-          { id: 4, title: "Annual Board Meeting Summary and Future Outlook", document: "/images/hero/sign.webp", category: "Corporate", desc: "Key stakeholders convened to discuss the previous quarter's achievements and outline strategic directions for upcoming distributions.", date: "2025-07-22" },
-          { id: 5, title: "NEP 2020 Textbook Alignment Milestone Completed", document: "/images/hero/linguistic.webp", category: "Reform", desc: "The corporation has successfully completed the alignment of all primary and secondary level textbooks with the New Education Policy 2020 standards.", date: "2025-05-10" },
+          { id: 3, title: "Partnership Announced with National Digital Library", document: "/images/hero/vr.webp", category: "Partnerships", desc: "To expand access to supplementary reading materials across remote districts, a strategic partnership has been formalized.", date: "2025-08-10" }
         ];
       } else if (module === 'ku-list-md') {
         dummy = [
@@ -694,53 +681,53 @@ export default function WebsiteEditorPage({ module, addToast }) {
                   <tr className="bg-slate-100/70 text-slate-600 text-[11px] font-semibold uppercase tracking-wider border-b border-slate-200">
                     <th className="py-3.5 px-4 text-center w-12">S.No.</th>
                     <th className="py-3.5 px-5">{module === 'ku-list-md' ? 'Managing Director' : module === 'ku-board' ? 'Board Member' : 'Employee'}</th>
-                    <th className="py-3.5 px-5">{module === 'ku-list-md' ? 'Appointment Date' : 'Designation'}</th>
-                    <th className="py-3.5 px-5">{module === 'ku-list-md' ? 'Tenure End' : module === 'ku-board' ? 'Since' : 'Department & ID'}</th>
+                    <th className="py-3.5 px-5 text-center">{module === 'ku-list-md' ? 'From' : 'Designation'}</th>
+                    <th className="py-3.5 px-5 text-center">{module === 'ku-list-md' ? 'To' : module === 'ku-board' ? 'Since' : 'Department & ID'}</th>
                     <th className="py-3.5 px-4 text-center">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 text-xs">
+                <tbody className="divide-y divide-slate-100 text-sm">
                   {filteredMdList.map((item, idx) => (
                     <tr key={item.id} className="hover:bg-slate-50/60 transition-colors group">
-                      <td className="py-4 px-4 text-center font-medium text-slate-400">
+                      <td className="py-4 px-4 text-center font-semibold text-slate-500 text-[13px]">
                         {(idx + 1).toString().padStart(2, '0')}
                       </td>
                       <td className="py-4 px-5">
                         <div>
-                          <p className="font-semibold text-slate-800 text-sm">{item.title || item.name}</p>
-                          <p className="text-[10px] text-slate-400 font-normal">
+                          <p className="font-bold text-slate-800 text-base">{item.title || item.name}</p>
+                          <p className="text-xs text-slate-400 font-medium">
                              {module === 'ku-list-md' ? 'Managing Director, BSTBPC' : module === 'ku-board' ? 'Board Member, BSTBPC' : 'Employee, BSTBPC'}
                           </p>
                         </div>
                       </td>
-                      <td className="py-4 px-5">
+                      <td className="py-4 px-5 text-center">
                         {module === 'ku-list-md' ? (
-                          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50/60 text-blue-700 rounded-xl font-medium border border-blue-100/80 text-[11px]">
-                            <Calendar className="w-3.5 h-3.5 text-blue-500" />
+                          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50/60 text-blue-700 rounded-xl font-bold border border-blue-100/80 text-[13px] justify-center w-full max-w-[130px]">
+                            <Calendar className="w-4 h-4 text-blue-500 shrink-0" />
                             <span>{item.from || 'N/A'}</span>
                           </div>
                         ) : (
-                          <span className="font-semibold text-slate-700 text-[13px]">{item.designation || 'N/A'}</span>
+                          <span className="font-bold text-slate-700 text-[15px]">{item.designation || 'N/A'}</span>
                         )}
                       </td>
-                      <td className="py-4 px-5">
+                      <td className="py-4 px-5 text-center">
                         {module === 'ku-list-md' ? (
-                          <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl font-medium border text-[11px] ${
+                          <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl font-bold border text-[13px] justify-center w-full max-w-[130px] ${
                             item.to?.toLowerCase() === 'present' || !item.to
                               ? 'bg-emerald-50 text-emerald-700 border-emerald-100'
                               : 'bg-slate-50 text-slate-700 border-slate-200'
                           }`}>
-                            <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                            <Calendar className="w-4 h-4 text-slate-400 shrink-0" />
                             <span>{item.to || 'Present'}</span>
                           </div>
                         ) : module === 'ku-board' ? (
-                          <div className="flex flex-col gap-1.5">
-                             <span className="text-[13px] text-slate-800 font-semibold">{item.since || 'Current'}</span>
+                          <div className="flex flex-col gap-1.5 text-left">
+                             <span className="text-[15px] text-slate-800 font-bold">{item.since || 'Current'}</span>
                           </div>
                         ) : (
-                          <div className="flex flex-col gap-1.5">
-                             <span className="text-[11px] text-slate-600 font-medium">Dept: <span className="font-bold">{item.department || 'N/A'}</span></span>
-                             <span className="text-[10px] uppercase font-bold tracking-wider w-fit px-2 py-0.5 rounded-md border bg-blue-50 text-blue-600 border-blue-200">ID: {item.employeeId || 'N/A'}</span>
+                          <div className="flex flex-col gap-1.5 text-left">
+                             <span className="text-xs text-slate-600 font-medium">Dept: <span className="font-bold">{item.department || 'N/A'}</span></span>
+                             <span className="text-[11px] uppercase font-bold tracking-wider w-fit px-2 py-0.5 rounded-md border bg-blue-50 text-blue-600 border-blue-200">ID: {item.employeeId || 'N/A'}</span>
                           </div>
                         )}
                       </td>
@@ -942,7 +929,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
             <div className="space-y-4">
               <div>
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center justify-between">
-                  <span>Appointment Date</span>
+                  <span>From</span>
                   <span className="text-[10px] text-blue-600 font-bold flex items-center gap-1">
                     <Calendar className="w-3 h-3" /> Calendar Picker
                   </span>
@@ -962,7 +949,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
 
               <div>
                 <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center justify-between">
-                  <span>Tenure End</span>
+                  <span>To</span>
                   <span className="text-[10px] text-blue-600 font-bold flex items-center gap-1">
                     <Calendar className="w-3 h-3" /> Calendar Picker
                   </span>

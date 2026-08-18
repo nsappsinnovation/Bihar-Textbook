@@ -20,24 +20,6 @@ const defaultVideoItems = [
     src: "/images/hero/vr.webp",
     videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
     alt: "Teacher Training Workshop on Interactive Smart Textbooks"
-  },
-  {
-    type: "video",
-    src: "/images/KeyParticipants/shri_yatendra_pal.webp",
-    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    alt: "Academic Session 2026-27 High-Level Inauguration Ceremony"
-  },
-  {
-    type: "video",
-    src: "/images/hero/sign.webp",
-    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    alt: "Accessible Audio Books and Inclusive Pedagogy Program"
-  },
-  {
-    type: "video",
-    src: "/images/hero/linguistic.webp",
-    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    alt: "Smart AI Revision Modules Student Pilot Feedback"
   }
 ];
 
@@ -177,7 +159,6 @@ const Videogallery = () => {
                     src={pageItems[0].src}
                     alt={pageItems[0].alt}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
-                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors duration-300 flex items-center justify-center">
                     <div className="w-12 h-12 rounded-full bg-white/25 backdrop-blur-md border border-white/40 flex items-center justify-center text-white scale-90 group-hover:scale-100 group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 shadow-xl">
@@ -205,7 +186,6 @@ const Videogallery = () => {
                     src={pageItems[1].src}
                     alt={pageItems[1].alt}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
-                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors duration-300 flex items-center justify-center">
                     <div className="w-12 h-12 rounded-full bg-white/25 backdrop-blur-md border border-white/40 flex items-center justify-center text-white scale-90 group-hover:scale-100 group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 shadow-xl">
@@ -230,7 +210,6 @@ const Videogallery = () => {
                     src={pageItems[3].src}
                     alt={pageItems[3].alt}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
-                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors duration-300 flex items-center justify-center">
                     <div className="w-12 h-12 rounded-full bg-white/25 backdrop-blur-md border border-white/40 flex items-center justify-center text-white scale-90 group-hover:scale-100 group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 shadow-xl">
@@ -258,7 +237,6 @@ const Videogallery = () => {
                     src={pageItems[2].src}
                     alt={pageItems[2].alt}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
-                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors duration-300 flex items-center justify-center">
                     <div className="w-12 h-12 rounded-full bg-white/25 backdrop-blur-md border border-white/40 flex items-center justify-center text-white scale-90 group-hover:scale-100 group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 shadow-xl">
@@ -283,7 +261,6 @@ const Videogallery = () => {
                     src={pageItems[4].src}
                     alt={pageItems[4].alt}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
-                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors duration-300 flex items-center justify-center">
                     <div className="w-12 h-12 rounded-full bg-white/25 backdrop-blur-md border border-white/40 flex items-center justify-center text-white scale-90 group-hover:scale-100 group-hover:bg-blue-600 group-hover:border-blue-500 transition-all duration-300 shadow-xl">
@@ -310,7 +287,6 @@ const Videogallery = () => {
                     src={pageItems[5].src}
                     alt={pageItems[5].alt}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
-                    loading="lazy"
                   />
 
                   {/* Expand / Play button overlay matching reference layout */}

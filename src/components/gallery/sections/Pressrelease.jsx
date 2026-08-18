@@ -32,26 +32,6 @@ const pressReleases = [
     fileSize: "800 KB",
     cardStyle: "glass", // White glass panel
     image: "/images/hero/vr.webp"
-  },
-  {
-    id: 4,
-    date: "July 22, 2025",
-    title: "Annual Board Meeting Summary and Future Outlook",
-    excerpt: "Key stakeholders convened to discuss the previous quarter's achievements and outline strategic directions for upcoming distributions.",
-    category: "Corporate",
-    fileSize: "2.1 MB",
-    cardStyle: "dark", // Dark slate block
-    image: "/images/hero/sign.webp"
-  },
-  {
-    id: 5,
-    date: "May 10, 2025",
-    title: "NEP 2020 Textbook Alignment Milestone Completed",
-    excerpt: "The corporation has successfully completed the alignment of all primary and secondary level textbooks with the New Education Policy 2020 standards.",
-    category: "Reform",
-    fileSize: "3.4 MB",
-    cardStyle: "glass", // White glass panel
-    image: "/images/hero/linguistic.webp"
   }
 ];
 

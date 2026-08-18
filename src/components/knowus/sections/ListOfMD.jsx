@@ -141,8 +141,8 @@ const ListOfMD = () => {
                 <tr className="bg-slate-200 border-b border-slate-300 text-[#0d0e23]">
                   <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">S.No.</th>
                   <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Managing Director</th>
-                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Appointment Date</th>
-                  <th className="px-6 py-4 text-sm font-bold">Tenure End</th>
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300 text-center">From</th>
+                  <th className="px-6 py-4 text-sm font-bold text-center">To</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-300">
@@ -159,11 +159,11 @@ const ListOfMD = () => {
                       </div>
                     </td>
 
-                    <td className="px-6 py-4 text-sm border-r border-slate-300">
+                    <td className="px-6 py-4 text-sm border-r border-slate-300 text-center">
                         {md.from}
                     </td>
 
-                    <td className="px-6 py-4 text-sm">
+                    <td className="px-6 py-4 text-sm text-center">
                         {md.to}
                     </td>
                   </tr>

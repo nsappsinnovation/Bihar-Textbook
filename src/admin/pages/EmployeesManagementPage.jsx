@@ -55,11 +55,10 @@ export default function EmployeesManagementPage({ addToast }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingEmployee, setEditingEmployee] = useState(null);
   const [formData, setFormData] = useState({
-    employeeId: '',
     name: '',
     designation: '',
     type: 'Regular',
-    department: 'Accounts'
+    department: ''
   });
 
   const saveToStorage = (updated) => {
@@ -70,11 +69,10 @@ export default function EmployeesManagementPage({ addToast }) {
   const handleOpenAdd = () => {
     setEditingEmployee(null);
     setFormData({
-      employeeId: `EMP${String(employees.length + 1).padStart(3, '0')}`,
       name: '',
       designation: '',
       type: 'Regular',
-      department: 'Accounts'
+      department: ''
     });
     setIsModalOpen(true);
   };
@@ -86,7 +84,7 @@ export default function EmployeesManagementPage({ addToast }) {
   };
 
   const handleSave = () => {
-    if (!formData.name || !formData.employeeId || !formData.designation) {
+    if (!formData.name || !formData.designation) {
       addToast?.('Please fill all required fields', 'error');
       return;
     }
@@ -117,7 +115,6 @@ export default function EmployeesManagementPage({ addToast }) {
 
   const filteredEmployees = employees.filter(emp => 
     emp.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    emp.employeeId.toLowerCase().includes(searchTerm.toLowerCase()) ||
     emp.designation.toLowerCase().includes(searchTerm.toLowerCase()) ||
     (emp.type || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
     emp.department.toLowerCase().includes(searchTerm.toLowerCase())
@@ -132,110 +129,123 @@ export default function EmployeesManagementPage({ addToast }) {
     >
 
       {/* Directory Section */}
-      <div className="bg-white rounded-[2.5rem] border border-gray-100 shadow-sm overflow-hidden">
-        <div className="p-8 border-b border-gray-50 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-          <div>
-            <h3 className="text-xl font-bold text-gray-900">Employee Directory</h3>
-            <p className="text-sm text-gray-400 font-medium mt-1">Official registry of BSTBPC staff members</p>
+      <div className="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 sm:p-8 space-y-6 w-full">
+        {/* Top Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+          <div className="flex items-center gap-3.5">
+            <div className="w-12 h-12 rounded-2xl bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 shadow-sm">
+              <Users className="w-6 h-6" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-slate-900 tracking-tight">Our Employees</h3>
+              <p className="text-xs text-slate-500 font-medium mt-0.5">Manage and organize staff directory profiles</p>
+            </div>
           </div>
           
-          <div className="flex flex-col sm:flex-row items-center gap-4">
-            <div className="relative w-full sm:w-80">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input 
-                type="text"
-                placeholder="Search by name, role or dept..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-11 pr-4 py-3.5 bg-gray-50 border-none rounded-2xl text-sm font-medium placeholder:text-gray-400 focus:ring-2 focus:ring-blue-500/20 transition-all"
-              />
-            </div>
-            <button 
-              onClick={handleOpenAdd}
-              className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3.5 bg-blue-600 text-white rounded-2xl font-bold text-sm shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-all"
-            >
-              <Plus className="w-4 h-4" />
-              <span>Add</span>
-            </button>
+          <button 
+            onClick={handleOpenAdd}
+            className="flex items-center justify-center gap-2 px-5 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-2xl font-bold text-xs uppercase tracking-wider shadow-lg shadow-blue-600/20 transition-all"
+          >
+            <Plus className="w-4 h-4" />
+            <span>Add Profile</span>
+          </button>
+        </div>
+
+        {/* Search & Statistics Bar */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-slate-50/70 p-4 rounded-2xl border border-slate-100">
+          <div className="relative w-full sm:w-80">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <input 
+              type="text"
+              placeholder="Filter by name, designation or dept..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-10 pr-4 py-2.5 bg-white rounded-xl border border-slate-200 text-xs font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition-all shadow-sm"
+            />
+          </div>
+
+          <div className="flex items-center gap-3 w-full sm:w-auto justify-end text-xs font-semibold text-slate-600">
+            <span className="bg-white px-3.5 py-2 rounded-xl border border-slate-200 shadow-sm">
+              Total Records: <span className="text-blue-600 font-bold">{employees.length}</span>
+            </span>
           </div>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr className="bg-gray-50/50">
-                <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50">Employee ID</th>
-                <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50">Name</th>
-                <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50">Designation</th>
-                <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50">Type</th>
-                <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50">Department</th>
-                <th className="px-8 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-widest border-b border-gray-50 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-50">
-              <AnimatePresence>
-                {filteredEmployees.map((emp) => (
-                  <motion.tr 
-                    key={emp.id}
-                    layout
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="group hover:bg-gray-50/30 transition-colors"
-                  >
-                    <td className="px-8 py-5">
-                      <span className="text-sm font-bold text-blue-600 tracking-tight">{emp.employeeId}</span>
-                    </td>
-                    <td className="px-8 py-5">
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
-                          <UserCheck className="w-4 h-4" />
+        {/* Directory Table */}
+        <div className="overflow-hidden rounded-2xl border border-slate-200/80 shadow-sm bg-white">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-slate-100/70 text-slate-600 text-[11px] font-semibold uppercase tracking-wider border-b border-slate-200">
+                  <th className="py-3.5 px-4 text-center w-12">S.No.</th>
+                  <th className="py-3.5 px-5">Employee Name</th>
+                  <th className="py-3.5 px-5">Designation</th>
+                  <th className="py-3.5 px-5">Type</th>
+                  <th className="py-3.5 px-5">Department</th>
+                  <th className="py-3.5 px-4 text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100 text-sm">
+                <AnimatePresence>
+                  {filteredEmployees.map((emp, index) => (
+                    <motion.tr 
+                      key={emp.id}
+                      layout
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="hover:bg-slate-50/60 transition-colors group"
+                    >
+                      <td className="py-4 px-4 text-center font-semibold text-slate-500 text-[13px]">
+                        {(index + 1).toString().padStart(2, '0')}
+                      </td>
+                      <td className="py-4 px-5">
+                        <div>
+                          <p className="font-bold text-slate-800 text-base">{emp.name}</p>
+                          <p className="text-xs text-slate-400 font-medium">Employee, BSTBPC</p>
                         </div>
-                        <span className="text-sm font-bold text-gray-900">{emp.name}</span>
-                      </div>
-                    </td>
-                    <td className="px-8 py-5">
-                      <span className="text-sm font-bold text-gray-500">{emp.designation}</span>
-                    </td>
-                    <td className="px-8 py-5">
-                      <span className="text-sm font-bold text-gray-500">{emp.type}</span>
-                    </td>
-                    <td className="px-8 py-5">
-                      <span className="px-3 py-1 bg-gray-100 text-[10px] font-bold text-gray-500 rounded-lg uppercase tracking-wider">
-                        {emp.department}
-                      </span>
-                    </td>
-                    <td className="px-8 py-5 text-right">
-                      <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button 
-                          onClick={() => handleOpenEdit(emp)}
-                          className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"
-                        >
-                          <Edit2 className="w-4 h-4" />
-                        </button>
-                        <button 
-                          onClick={() => handleDelete(emp.id)}
-                          className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </td>
-                  </motion.tr>
-                ))}
-              </AnimatePresence>
-            </tbody>
-          </table>
-          
-          {filteredEmployees.length === 0 && (
-            <div className="py-20 text-center">
-              <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Search className="w-6 h-6 text-gray-200" />
+                      </td>
+                      <td className="py-4 px-5">
+                        <span className="font-bold text-slate-700 text-[15px]">{emp.designation}</span>
+                      </td>
+                      <td className="py-4 px-5">
+                        <span className="text-slate-600 font-medium">{emp.type}</span>
+                      </td>
+                      <td className="py-4 px-5">
+                        <div className="flex flex-col gap-1.5">
+                           <span className="text-xs text-slate-600 font-medium">Dept: <span className="font-bold">{emp.department}</span></span>
+                        </div>
+                      </td>
+                      <td className="py-4 px-4 text-center">
+                        <div className="flex items-center justify-center gap-2">
+                          <button 
+                            onClick={() => handleOpenEdit(emp)}
+                            className="p-2 text-slate-500 hover:text-blue-600 hover:bg-blue-50 rounded-xl transition-all"
+                            title="Edit Profile"
+                          >
+                            <Edit2 className="w-4 h-4" />
+                          </button>
+                          <button 
+                            onClick={() => handleDelete(emp.id)}
+                            className="p-2 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all"
+                            title="Delete Profile"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </td>
+                    </motion.tr>
+                  ))}
+                </AnimatePresence>
+              </tbody>
+            </table>
+            
+            {filteredEmployees.length === 0 && (
+              <div className="py-12 text-center text-slate-400 font-medium">
+                No records match "{searchTerm}"
               </div>
-              <h3 className="text-lg font-bold text-gray-900">No matches found</h3>
-              <p className="text-sm text-gray-400 mt-1">Try adjusting your search terms</p>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       </div>
 
@@ -246,12 +256,12 @@ export default function EmployeesManagementPage({ addToast }) {
         title={editingEmployee ? "Edit Employee Details" : "Register New Employee"} 
       >
         <div className="space-y-5">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormInput 
-              label="Employee ID" 
-              placeholder="e.g. EMP001" 
-              value={formData.employeeId}
-              onChange={(val) => setFormData(prev => ({ ...prev, employeeId: val }))}
+              label="Full Name" 
+              placeholder="e.g. Shri. Manoj Kumar" 
+              value={formData.name}
+              onChange={(val) => setFormData(prev => ({ ...prev, name: val }))}
             />
             <div>
               <label className="block text-[11px] font-bold text-gray-400 uppercase tracking-widest mb-2">Type</label>
@@ -267,12 +277,12 @@ export default function EmployeesManagementPage({ addToast }) {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormInput 
-              label="Full Name" 
-              placeholder="e.g. Shri. Manoj Kumar" 
-              value={formData.name}
-              onChange={(val) => setFormData(prev => ({ ...prev, name: val }))}
+              label="Designation" 
+              placeholder="e.g. Accountant" 
+              value={formData.designation}
+              onChange={(val) => setFormData(prev => ({ ...prev, designation: val }))}
             />
             <FormInput 
               label="Department" 
@@ -282,12 +292,7 @@ export default function EmployeesManagementPage({ addToast }) {
             />
           </div>
 
-          <FormInput 
-            label="Designation" 
-            placeholder="e.g. Accountant" 
-            value={formData.designation}
-            onChange={(val) => setFormData(prev => ({ ...prev, designation: val }))}
-          />
+
 
           <div className="flex items-center justify-end gap-3 mt-8 pt-6 border-t border-gray-100">
             <button

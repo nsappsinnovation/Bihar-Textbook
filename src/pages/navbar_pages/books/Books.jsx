@@ -173,7 +173,6 @@ const BookCard = ({ book, placeholder, classId }) => {
         alt={book.title}
         onError={(e) => { e.target.src = getFallbackCover(book.subject); }}
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-        loading="lazy"
       />
 
       {/* Premium Cinematic Hover Overlay */}

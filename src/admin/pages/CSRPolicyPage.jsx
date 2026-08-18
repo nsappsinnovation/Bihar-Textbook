@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
   Shield, Save, Plus, Trash2, RotateCcw, Download, ExternalLink, FileDown,
@@ -92,6 +92,7 @@ const ListEditor = ({ items, marker, onChange, onAdd, onRemove, addLabel, rows =
 export default function CSRPolicyPage({ addToast }) {
   const [formData, setFormData] = useState(loadCsrPolicy);
   const [savedSnapshot, setSavedSnapshot] = useState(() => JSON.stringify(loadCsrPolicy()));
+  const [activeSection, setActiveSection] = useState(1);
 
   const isDirty = JSON.stringify(formData) !== savedSnapshot;
 
@@ -154,8 +155,8 @@ export default function CSRPolicyPage({ addToast }) {
       className="space-y-6 pb-20 scrollbar-hide"
     >
       {/* Header Sticky Bar */}
-      <div className="sticky top-0 z-20 bg-[#F8FAFC]/95 backdrop-blur-md pt-4 pb-3 border-b border-gray-100 space-y-3">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="sticky top-0 z-20 bg-[#F8FAFC]/95 backdrop-blur-md pt-4 pb-4 border-b border-gray-100 space-y-3">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-4 max-w-7xl mx-auto w-full">
           <div>
             <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
               <Shield className="w-6 h-6 text-blue-600" />
@@ -202,26 +203,9 @@ export default function CSRPolicyPage({ addToast }) {
             </button>
           </div>
         </div>
-
-        {/* Quick jump to a section */}
-        <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-1">
-          {csrPolicyContents.map(({ no, topic }) => (
-            <button
-              key={no}
-              onClick={() =>
-                document.getElementById(`csr-admin-${no}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-              }
-              className="shrink-0 flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white border border-gray-200 text-[11px] font-bold text-gray-500 hover:border-blue-400 hover:text-blue-600 transition-colors"
-            >
-              <span className="text-gray-300 font-black">{String(no).padStart(2, '0')}</span>
-              <span className="whitespace-nowrap max-w-[180px] truncate">{topic}</span>
-            </button>
-          ))}
-        </div>
       </div>
 
-      <div className="max-w-5xl mx-auto space-y-10">
-
+      <div className="max-w-7xl mx-auto px-4 space-y-10 mb-10">
         {/* Document header */}
         <div className="bg-white rounded-[2rem] p-6 md:p-8 border border-gray-100 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-6">
           <Field label="Document Title">
@@ -233,17 +217,17 @@ export default function CSRPolicyPage({ addToast }) {
         </div>
 
         {/* Downloadable PDF */}
-        <div className="bg-slate-900 rounded-[2rem] p-6 md:p-8 shadow-xl relative overflow-hidden">
-          <div className="absolute -right-10 -top-10 w-44 h-44 bg-blue-500/20 rounded-full blur-3xl" />
+        <div className="bg-white rounded-[2rem] p-6 md:p-8 border border-gray-100 shadow-sm relative overflow-hidden">
+          <div className="absolute -right-10 -top-10 w-44 h-44 bg-blue-50 rounded-full blur-3xl" />
           <div className="relative z-10 space-y-6">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="flex items-center gap-4">
-                <div className="w-11 h-11 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center shrink-0">
-                  <FileDown className="w-5 h-5 text-blue-300" />
+                <div className="w-11 h-11 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center shrink-0">
+                  <FileDown className="w-5 h-5 text-blue-600" />
                 </div>
                 <div>
-                  <h3 className="text-[15px] font-black text-white">Downloadable Policy PDF</h3>
-                  <p className="text-[12px] text-slate-400 font-medium mt-0.5">
+                  <h3 className="text-[15px] font-black text-slate-900">Downloadable Policy PDF</h3>
+                  <p className="text-[12px] text-slate-500 font-medium mt-0.5">
                     Shown as the primary download button across the public page
                   </p>
                 </div>
@@ -251,7 +235,7 @@ export default function CSRPolicyPage({ addToast }) {
               <a
                 href={formData.pdfUrl}
                 download={formData.pdfFileName}
-                className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white/10 border border-white/15 text-white text-[12px] font-black hover:bg-white/20 transition-colors shrink-0"
+                className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 text-[12px] font-black hover:bg-slate-100 transition-colors shrink-0"
               >
                 <Download className="w-4 h-4" />
                 Test Download
@@ -268,10 +252,10 @@ export default function CSRPolicyPage({ addToast }) {
                   value={formData.pdfUrl}
                   onChange={handleChange}
                   placeholder="/csr-policy.pdf"
-                  className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-sm font-bold text-white placeholder-slate-500 outline-none focus:border-blue-400 focus:bg-white/10 transition-all"
+                  className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-sm font-bold text-slate-900 placeholder-slate-400 outline-none focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all"
                 />
                 <p className="text-[11px] text-slate-500 font-medium ml-1">
-                  Place the file in the site's <span className="text-slate-300 font-bold">public/</span> folder, or paste a full https:// link.
+                  Place the file in the site's <span className="text-slate-700 font-bold">public/</span> folder, or paste a full https:// link.
                 </p>
               </div>
               <div className="md:col-span-2 space-y-2">
@@ -282,7 +266,7 @@ export default function CSRPolicyPage({ addToast }) {
                   name="pdfFileName"
                   value={formData.pdfFileName}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-sm font-bold text-white placeholder-slate-500 outline-none focus:border-blue-400 focus:bg-white/10 transition-all"
+                  className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-sm font-bold text-slate-900 placeholder-slate-400 outline-none focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all"
                 />
               </div>
               <div className="space-y-2">
@@ -294,119 +278,187 @@ export default function CSRPolicyPage({ addToast }) {
                   value={formData.pdfSizeLabel}
                   onChange={handleChange}
                   placeholder="5.1 MB"
-                  className="w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 text-sm font-bold text-white placeholder-slate-500 outline-none focus:border-blue-400 focus:bg-white/10 transition-all"
+                  className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-sm font-bold text-slate-900 placeholder-slate-400 outline-none focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all"
                 />
               </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row gap-8">
+        
+        {/* --- Sidebar Navigation --- */}
+        <aside className="hidden lg:block lg:w-[280px] shrink-0">
+          <div className="sticky top-28 space-y-4">
+            <div className="bg-white border border-gray-200 rounded-[24px] p-5 shadow-sm">
+              <h2 className="text-[11px] font-black uppercase tracking-[0.15em] text-gray-900 mb-4 px-2">
+                Contents
+              </h2>
+              <nav className="space-y-0.5">
+                {csrPolicyContents.map(({ no, topic }) => {
+                  const isActive = activeSection === no;
+                  return (
+                    <button
+                      key={no}
+                      onClick={() => setActiveSection(no)}
+                      className={`relative w-full flex gap-3 items-start text-left rounded-xl pl-4 pr-3 py-2.5 transition-all ${
+                        isActive
+                          ? "bg-blue-50 text-blue-700"
+                          : "text-gray-500 hover:bg-gray-50 hover:text-gray-800"
+                      }`}
+                    >
+                      <span
+                        className={`absolute left-0 top-1/2 -translate-y-1/2 w-[3px] rounded-full bg-blue-600 transition-all ${
+                          isActive ? "h-5 opacity-100" : "h-0 opacity-0"
+                        }`}
+                      />
+                      <span
+                        className={`text-[10px] font-black shrink-0 mt-[3px] tabular-nums ${
+                          isActive ? "text-blue-600" : "text-gray-300"
+                        }`}
+                      >
+                        {String(no).padStart(2, "0")}
+                      </span>
+                      <span className="text-[12px] font-bold leading-snug">{topic}</span>
+                    </button>
+                  );
+                })}
+              </nav>
+            </div>
+          </div>
+        </aside>
+
+        {/* --- Main Content --- */}
+        <div className="flex-1 min-w-0 pb-10">
 
         {/* 1. Introduction & Background */}
-        <Section no={1} title="Introduction & Background" hint="Opening paragraphs of the policy">
-          <ListEditor
-            {...listProps('introParagraphs', {
-              marker: 'number',
-              addLabel: 'Add paragraph',
-              rows: 5
-            })}
-          />
-        </Section>
+        {activeSection === 1 && (
+          <Section no={1} title="Introduction & Background" hint="Opening paragraphs of the policy">
+            <ListEditor
+              {...listProps('introParagraphs', {
+                marker: 'number',
+                addLabel: 'Add paragraph',
+                rows: 5
+              })}
+            />
+          </Section>
+        )}
 
         {/* 2. CSR Vision & Policy Statement */}
-        <Section
-          no={2}
-          title="CSR Vision & Policy Statement"
-          hint="Objectives of this CSR Policy"
-        >
-          <Field label="Introductory Line">
-            <textarea name="objectivesIntro" value={formData.objectivesIntro} onChange={handleChange} rows={3} className={textareaClass} />
-          </Field>
-          <Field label="Objectives (bulleted on the website)">
-            <ListEditor {...listProps('objectives', { marker: 'number', addLabel: 'Add objective', rows: 4 })} />
-          </Field>
-        </Section>
+        {activeSection === 2 && (
+          <Section
+            no={2}
+            title="CSR Vision & Policy Statement"
+            hint="Objectives of this CSR Policy"
+          >
+            <Field label="Introductory Line">
+              <textarea name="objectivesIntro" value={formData.objectivesIntro} onChange={handleChange} rows={3} className={textareaClass} />
+            </Field>
+            <Field label="Objectives (bulleted on the website)">
+              <ListEditor {...listProps('objectives', { marker: 'number', addLabel: 'Add objective', rows: 4 })} />
+            </Field>
+          </Section>
+        )}
 
         {/* 3. CSR Committee */}
-        <Section no={3} title="CSR Committee Composition and Responsibility">
-          <textarea name="committeeText" value={formData.committeeText} onChange={handleChange} rows={4} className={textareaClass} />
-        </Section>
+        {activeSection === 3 && (
+          <Section no={3} title="CSR Committee Composition and Responsibility">
+            <textarea name="committeeText" value={formData.committeeText} onChange={handleChange} rows={4} className={textareaClass} />
+          </Section>
+        )}
 
         {/* 4. Scope & Applicability */}
-        <Section no={4} title="Scope & Applicability">
-          <textarea name="scopeText" value={formData.scopeText} onChange={handleChange} rows={2} className={textareaClass} />
-        </Section>
+        {activeSection === 4 && (
+          <Section no={4} title="Scope & Applicability">
+            <textarea name="scopeText" value={formData.scopeText} onChange={handleChange} rows={2} className={textareaClass} />
+          </Section>
+        )}
 
         {/* 5. CSR Budget */}
-        <Section no={5} title="CSR Budget" hint="Numbered (i), (ii), … on the website">
-          <ListEditor {...listProps('budgetItems', { addLabel: 'Add clause', rows: 4 })} />
-        </Section>
+        {activeSection === 5 && (
+          <Section no={5} title="CSR Budget" hint="Numbered (i), (ii), … on the website">
+            <ListEditor {...listProps('budgetItems', { addLabel: 'Add clause', rows: 4 })} />
+          </Section>
+        )}
 
         {/* 6. Implementation */}
-        <Section no={6} title="Implementation" hint="Numbered (i), (ii), … on the website">
-          <ListEditor {...listProps('implementationItems', { addLabel: 'Add clause', rows: 4 })} />
-        </Section>
+        {activeSection === 6 && (
+          <Section no={6} title="Implementation" hint="Numbered (i), (ii), … on the website">
+            <ListEditor {...listProps('implementationItems', { addLabel: 'Add clause', rows: 4 })} />
+          </Section>
+        )}
 
         {/* 7. Activities / Focus Areas */}
-        <Section no={7} title="Activities / Focus Areas" hint="Key thrust areas">
-          <Field label="Introductory Line">
-            <textarea name="activitiesIntro" value={formData.activitiesIntro} onChange={handleChange} rows={2} className={textareaClass} />
-          </Field>
-          <Field label="Focus Areas">
-            <ListEditor {...listProps('activities', { addLabel: 'Add focus area', rows: 4 })} />
-          </Field>
-        </Section>
+        {activeSection === 7 && (
+          <Section no={7} title="Activities / Focus Areas" hint="Key thrust areas">
+            <Field label="Introductory Line">
+              <textarea name="activitiesIntro" value={formData.activitiesIntro} onChange={handleChange} rows={2} className={textareaClass} />
+            </Field>
+            <Field label="Focus Areas">
+              <ListEditor {...listProps('activities', { addLabel: 'Add focus area', rows: 4 })} />
+            </Field>
+          </Section>
+        )}
 
         {/* 8. Monitoring */}
-        <Section no={8} title="Monitoring" hint="Monitoring process clauses">
-          <ListEditor {...listProps('monitoringItems', { addLabel: 'Add clause', rows: 4 })} />
-        </Section>
+        {activeSection === 8 && (
+          <Section no={8} title="Monitoring" hint="Monitoring process clauses">
+            <ListEditor {...listProps('monitoringItems', { addLabel: 'Add clause', rows: 4 })} />
+          </Section>
+        )}
 
         {/* 9. Miscellaneous */}
-        <Section no={9} title="Miscellaneous Information" hint="Each entry has a bold label and body text">
-          <div className="space-y-3">
-            {formData.miscellaneousItems.map((item, idx) => (
-              <div key={idx} className="flex gap-3 items-start">
-                <span className="shrink-0 min-w-[38px] h-9 px-2 rounded-xl bg-gray-100 border border-gray-200 text-[11px] font-black text-gray-500 flex items-center justify-center mt-1">
-                  ({romanize(idx)})
-                </span>
-                <div className="flex-1 space-y-2">
-                  <input
-                    value={item.label}
-                    onChange={(e) => updateMisc(idx, 'label', e.target.value)}
-                    placeholder="Label e.g. Dissemination"
-                    className={inputClass}
-                  />
-                  <textarea
-                    rows={4}
-                    value={item.text}
-                    onChange={(e) => updateMisc(idx, 'text', e.target.value)}
-                    className={textareaClass}
-                  />
+        {activeSection === 9 && (
+          <Section no={9} title="Miscellaneous Information" hint="Each entry has a bold label and body text">
+            <div className="space-y-3">
+              {formData.miscellaneousItems.map((item, idx) => (
+                <div key={idx} className="flex gap-3 items-start">
+                  <span className="shrink-0 min-w-[38px] h-9 px-2 rounded-xl bg-gray-100 border border-gray-200 text-[11px] font-black text-gray-500 flex items-center justify-center mt-1">
+                    ({romanize(idx)})
+                  </span>
+                  <div className="flex-1 space-y-2">
+                    <input
+                      value={item.label}
+                      onChange={(e) => updateMisc(idx, 'label', e.target.value)}
+                      placeholder="Label e.g. Dissemination"
+                      className={inputClass}
+                    />
+                    <textarea
+                      rows={4}
+                      value={item.text}
+                      onChange={(e) => updateMisc(idx, 'text', e.target.value)}
+                      className={textareaClass}
+                    />
+                  </div>
+                  <button
+                    onClick={() => removeItem('miscellaneousItems', idx)}
+                    title="Remove entry"
+                    className="shrink-0 p-2.5 mt-1 rounded-xl bg-red-50 text-red-500 hover:bg-red-100 transition-colors"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
                 </div>
-                <button
-                  onClick={() => removeItem('miscellaneousItems', idx)}
-                  title="Remove entry"
-                  className="shrink-0 p-2.5 mt-1 rounded-xl bg-red-50 text-red-500 hover:bg-red-100 transition-colors"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
-              </div>
-            ))}
-            <button
-              onClick={() => addItem('miscellaneousItems', { label: '', text: '' })}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-dashed border-gray-300 text-[12px] font-bold text-gray-500 hover:border-blue-400 hover:text-blue-600 transition-colors"
-            >
-              <Plus className="w-4 h-4" />
-              Add entry
-            </button>
-          </div>
-        </Section>
+              ))}
+              <button
+                onClick={() => addItem('miscellaneousItems', { label: '', text: '' })}
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-dashed border-gray-300 text-[12px] font-bold text-gray-500 hover:border-blue-400 hover:text-blue-600 transition-colors"
+              >
+                <Plus className="w-4 h-4" />
+                Add entry
+              </button>
+            </div>
+          </Section>
+        )}
 
         {/* 10. Annexure */}
-        <Section no={10} title="Annexure" hint="Listed in the document's table of contents">
-          <input name="annexureTitle" value={formData.annexureTitle} onChange={handleChange} className={inputClass} />
-        </Section>
+        {activeSection === 10 && (
+          <Section no={10} title="Annexure" hint="Listed in the document's table of contents">
+            <input name="annexureTitle" value={formData.annexureTitle} onChange={handleChange} className={inputClass} />
+          </Section>
+        )}
 
+        </div>
       </div>
     </motion.div>
   );

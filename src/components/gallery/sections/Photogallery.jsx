@@ -7,8 +7,7 @@ const defaultGalleryItems = [
   { type: "image", src: "/images/hero/vr.webp", alt: "Mobile VR Lab Tour Experience" },
   { type: "image", src: "/images/hero/sign.webp", alt: "Inclusive Sign Language Training Class" },
   { type: "image", src: "/images/hero/linguistic.webp", alt: "Diverse Regional Dialects Learning Program" },
-  { type: "image", src: "/images/csr.webp", alt: "Corporate Social Responsibility Initiatives" },
-  { type: "image", src: "/images/goodnight.webp", alt: "Educational Campaigns" }
+  { type: "image", src: "/images/hero/classroom.webp", alt: "Primary Classroom Learning Environment" }
 ];
 
 const Photogallery = () => {
@@ -120,7 +119,6 @@ const Photogallery = () => {
                     src={pageItems[0].src}
                     alt={pageItems[0].alt}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                     <span className="text-white text-xs font-medium line-clamp-2">{pageItems[0].alt}</span>
@@ -141,7 +139,6 @@ const Photogallery = () => {
                     src={pageItems[1].src}
                     alt={pageItems[1].alt}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                     <span className="text-white text-xs font-medium line-clamp-2">{pageItems[1].alt}</span>
@@ -159,7 +156,6 @@ const Photogallery = () => {
                     src={pageItems[3].src}
                     alt={pageItems[3].alt}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                     <span className="text-white text-xs font-medium line-clamp-2">{pageItems[3].alt}</span>
@@ -180,7 +176,6 @@ const Photogallery = () => {
                     src={pageItems[2].src}
                     alt={pageItems[2].alt}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                     <span className="text-white text-xs font-medium line-clamp-2">{pageItems[2].alt}</span>
@@ -198,7 +193,6 @@ const Photogallery = () => {
                     src={pageItems[4].src}
                     alt={pageItems[4].alt}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                     <span className="text-white text-xs font-medium line-clamp-2">{pageItems[4].alt}</span>
@@ -218,7 +212,6 @@ const Photogallery = () => {
                     src={pageItems[5].src}
                     alt={pageItems[5].alt}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                    loading="lazy"
                   />
 
                   {/* Expand icon overlay matching the reference image layout */}
