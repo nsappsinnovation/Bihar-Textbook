@@ -75,7 +75,7 @@ export default function DashboardPage() {
         },
         {
           id: 3,
-          title: 'Active Tenders',
+          title: 'Tenders',
           value: tenderCount,
           icon: 'Building2',
           color: 'indigo',

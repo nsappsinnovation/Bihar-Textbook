@@ -28,7 +28,17 @@ export default function EmployeesManagementPage({ addToast }) {
   
   const [employees, setEmployees] = useState(() => {
     const saved = localStorage.getItem(storageKey);
-    return saved ? JSON.parse(saved) : [
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) {
+          return parsed.filter(emp => emp.type !== 'Outsource');
+        }
+      } catch (e) {
+        console.error("Error parsing stored employees", e);
+      }
+    }
+    return [
       { id: 1, employeeId: 'EMP001', name: 'Azimul Hassan', designation: 'Assistant Cum Cashier', type: 'Regular', department: 'Establishment' },
       { id: 2, employeeId: 'EMP002', name: 'Binod Kumar', designation: 'Sales Assistant', type: 'Regular', department: 'Sales' },
       { id: 3, employeeId: 'EMP003', name: 'Santosh Kumar', designation: 'Dispatch', type: 'Regular', department: 'Dispatch' },
@@ -38,16 +48,7 @@ export default function EmployeesManagementPage({ addToast }) {
       { id: 7, employeeId: 'EMP007', name: 'Sukriti Kumari', designation: 'Account Assistant', type: 'Contract', department: 'Accounts' },
       { id: 8, employeeId: 'EMP008', name: 'MD Ashad', designation: 'Assistant', type: 'Contract', department: 'Accounts' },
       { id: 9, employeeId: 'EMP009', name: 'KN Rai', designation: 'Assistant', type: 'Contract', department: 'Legal' },
-      { id: 10, employeeId: 'EMP010', name: 'CK Yadav', designation: 'Sales Assistant', type: 'Contract', department: 'Sales' },
-      { id: 11, employeeId: 'EMP011', name: 'Mukesh Kumar Ojha', designation: 'Account Expert', type: 'Outsource', department: 'Accounts' },
-      { id: 12, employeeId: 'EMP012', name: 'Kishan', designation: 'Programmer', type: 'Outsource', department: 'MD Cell' },
-      { id: 13, employeeId: 'EMP013', name: 'Alok Kumar', designation: 'Computer Operator', type: 'Outsource', department: 'Accounts' },
-      { id: 14, employeeId: 'EMP014', name: 'Jyotish Kumar', designation: 'Computer Operator', type: 'Outsource', department: 'Sales & Marketing' },
-      { id: 15, employeeId: 'EMP015', name: 'Jitendra Kumar', designation: 'Computer Operator', type: 'Outsource', department: 'Establishment' },
-      { id: 16, employeeId: 'EMP016', name: 'Sandeep Kumar', designation: 'Computer Operator', type: 'Outsource', department: 'Accounts' },
-      { id: 17, employeeId: 'EMP017', name: 'Soni Kumari', designation: 'Computer Operator', type: 'Outsource', department: 'Company Secretary' },
-      { id: 18, employeeId: 'EMP018', name: 'Shruti Sailesh', designation: 'Computer Operator', type: 'Outsource', department: 'Establishment' },
-      { id: 19, employeeId: 'EMP019', name: 'Ruhi', designation: 'Computer Operator', type: 'Outsource', department: 'Legal' }
+      { id: 10, employeeId: 'EMP010', name: 'CK Yadav', designation: 'Sales Assistant', type: 'Contract', department: 'Sales' }
     ];
   });
 
@@ -272,7 +273,6 @@ export default function EmployeesManagementPage({ addToast }) {
               >
                 <option value="Regular">Regular</option>
                 <option value="Contract">Contract</option>
-                <option value="Outsource">Outsource</option>
               </select>
             </div>
           </div>

@@ -6,8 +6,9 @@ import {
   FiTruck,
   FiCreditCard,
   FiZap,
+  FiSun,
 } from "react-icons/fi";
-import { RiGraduationCapLine, RiFlaskLine } from "react-icons/ri";
+import { RiGraduationCapLine, RiFlaskLine, RiBookmarkLine, RiLeafLine } from "react-icons/ri";
 import { motion } from "framer-motion";
 
 /**
@@ -36,10 +37,10 @@ const CoreMissions = () => {
       },
       {
         id: 3,
-        title: "Digital Learning Ecosystem",
-        icon: <FiMonitor />,
+        title: "Cultural Integration",
+        icon: <FiSun />,
         color: "#22c55e", // Green
-        description: "Expanding access via e-books and interactive content aligned with modern needs.",
+        description: "Integrating Bihar's rich cultural heritage and history into the foundational learning materials.",
       },
       {
         id: 4,
@@ -71,10 +72,10 @@ const CoreMissions = () => {
       },
       {
         id: 8,
-        title: "Research & Innovation",
-        icon: <RiFlaskLine />,
+        title: "Sustainable Publishing",
+        icon: <RiLeafLine />,
         color: "#db2777", // Pink
-        description: "Fostering educational research and innovative practices for systemic growth.",
+        description: "Adopting eco-friendly printing processes and sustainable materials for book production.",
       },
     ],
     []

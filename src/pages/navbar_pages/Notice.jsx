@@ -46,7 +46,7 @@ const Notice = () => {
   const [activeFilter, setActiveFilter] = useState("All");
   const noticesPerPage = 10;
 
-  const filters = ["All", "Recruitment", "Financial", "Technical", "Circular", "Tender", "Corrigendum"];
+  const filters = ["All", "Recruitment", "Financial", "Technical", "Circular", "Corrigendum"];
 
   const isWithinOneMonth = (dateStr) => {
     try {

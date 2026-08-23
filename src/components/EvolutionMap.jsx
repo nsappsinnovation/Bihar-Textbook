@@ -415,8 +415,8 @@ const EvolutionMap = () => {
                       transition={{ type: "spring", bounce: 0.5, delay: 0.2 }}
                       className="absolute top-[10%] left-[5%] flex items-center gap-2.5 bg-white/90 backdrop-blur-xl px-4 py-2.5 rounded-2xl border border-fuchsia-100 shadow-[0_8px_30px_rgba(217,70,239,0.15)]"
                     >
-                      <Glasses className="w-5 h-5 text-fuchsia-600" />
-                      <span className="text-slate-700 text-[10px] font-bold uppercase tracking-wider">VR Active</span>
+                      <MonitorPlay className="w-5 h-5 text-fuchsia-600" />
+                      <span className="text-slate-700 text-[10px] font-bold uppercase tracking-wider">E-Library</span>
                     </motion.div>
                     
                     <motion.div
@@ -437,8 +437,8 @@ const EvolutionMap = () => {
                       transition={{ type: "spring", bounce: 0.5, delay: 0.6 }}
                       className="absolute top-[20%] right-[15%] flex items-center gap-2.5 bg-white/90 backdrop-blur-xl px-4 py-2.5 rounded-2xl border border-blue-100 shadow-[0_8px_30px_rgba(59,130,246,0.15)]"
                     >
-                      <Cpu className="w-5 h-5 text-blue-600" />
-                      <span className="text-slate-700 text-[10px] font-bold uppercase tracking-wider">AI Synced</span>
+                      <BookOpen className="w-5 h-5 text-blue-600" />
+                      <span className="text-slate-700 text-[10px] font-bold uppercase tracking-wider">Curriculum Based Textbooks</span>
                     </motion.div>
                   </div>
                 )}

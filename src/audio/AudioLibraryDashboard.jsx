@@ -52,6 +52,8 @@ const AudioLibraryDashboard = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [favorites, setFavorites] = useState([]); // Book IDs favorited
   const [activeChapterIdx, setActiveChapterIdx] = useState(null);
+  const [playbackRate, setPlaybackRate] = useState(1);
+  const [showSpeedMenu, setShowSpeedMenu] = useState(false);
   
   // Refs
   const audioRef = useRef(null);
@@ -104,6 +106,7 @@ const AudioLibraryDashboard = () => {
     if (!audioEl) return;
     audioEl.volume = isMuted ? 0 : volume;
     audioEl.muted = isMuted;
+    audioEl.playbackRate = playbackRate;
 
     if (isPlaying) {
       const playPromise = audioEl.play();
@@ -115,7 +118,7 @@ const AudioLibraryDashboard = () => {
     } else {
       audioEl.pause();
     }
-  }, [isPlaying, selectedBook?.id, selectedBook?.audioUrl, volume, isMuted]);
+  }, [isPlaying, selectedBook?.id, selectedBook?.audioUrl, volume, isMuted, playbackRate]);
 
   // Sync tab with search parameters if changed
   useEffect(() => {
@@ -399,6 +402,7 @@ const AudioLibraryDashboard = () => {
           ref={audioRef}
           url={selectedBook ? selectedBook.audioUrl : ''}
           playing={isPlaying}
+          playbackRate={playbackRate}
           volume={isMuted ? 0 : volume}
           muted={isMuted}
           onProgress={({ playedSeconds }) => setCurrentTime(playedSeconds)}
@@ -870,7 +874,29 @@ const AudioLibraryDashboard = () => {
                   </button>
 
                   <div className="flex items-center gap-2">
-                    <button onClick={toggleMute} className="text-slate-400 hover:text-slate-800 transition-colors cursor-pointer">
+                    {/* Playback Rate Control */}
+                    <div className="relative">
+                      <button 
+                        onClick={() => setShowSpeedMenu(!showSpeedMenu)}
+                        title="Playback Speed"
+                        className="w-10 h-7 bg-purple-50 text-purple-600 text-[10px] font-bold rounded-lg flex items-center justify-center cursor-pointer hover:bg-purple-100 transition-colors border border-purple-200 shrink-0"
+                      >
+                        {playbackRate}x
+                      </button>
+                      <div className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-white shadow-xl rounded-xl border border-slate-100 py-1.5 flex-col w-16 overflow-hidden z-50 ${showSpeedMenu ? 'flex' : 'hidden'}`}>
+                        {[0.5, 0.75, 1, 1.25, 1.5, 2].map(rate => (
+                          <button 
+                            key={rate}
+                            onClick={() => { setPlaybackRate(rate); setShowSpeedMenu(false); }}
+                            className={`px-3 py-1.5 text-[10px] font-bold text-center transition-colors cursor-pointer ${playbackRate === rate ? 'text-purple-600 bg-purple-50' : 'text-slate-600 hover:bg-slate-50 hover:text-purple-500'}`}
+                          >
+                            {rate}x
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <button onClick={toggleMute} className="text-slate-400 hover:text-slate-800 transition-colors cursor-pointer ml-2">
                       {isMuted ? <VolumeX className="w-4 h-4 text-rose-500" /> : <Volume2 className="w-4 h-4" />}
                     </button>
                     <input

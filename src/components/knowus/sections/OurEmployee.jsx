@@ -14,16 +14,7 @@ const OurEmployee = () => {
     { id: 7, employeeId: 'EMP007', name: 'Sukriti Kumari', designation: 'Account Assistant', type: 'Contract', department: 'Accounts' },
     { id: 8, employeeId: 'EMP008', name: 'MD Ashad', designation: 'Assistant', type: 'Contract', department: 'Accounts' },
     { id: 9, employeeId: 'EMP009', name: 'KN Rai', designation: 'Assistant', type: 'Contract', department: 'Legal' },
-    { id: 10, employeeId: 'EMP010', name: 'CK Yadav', designation: 'Sales Assistant', type: 'Contract', department: 'Sales' },
-    { id: 11, employeeId: 'EMP011', name: 'Mukesh Kumar Ojha', designation: 'Account Expert', type: 'Outsource', department: 'Accounts' },
-    { id: 12, employeeId: 'EMP012', name: 'Kishan', designation: 'Programmer', type: 'Outsource', department: 'MD Cell' },
-    { id: 13, employeeId: 'EMP013', name: 'Alok Kumar', designation: 'Computer Operator', type: 'Outsource', department: 'Accounts' },
-    { id: 14, employeeId: 'EMP014', name: 'Jyotish Kumar', designation: 'Computer Operator', type: 'Outsource', department: 'Sales & Marketing' },
-    { id: 15, employeeId: 'EMP015', name: 'Jitendra Kumar', designation: 'Computer Operator', type: 'Outsource', department: 'Establishment' },
-    { id: 16, employeeId: 'EMP016', name: 'Sandeep Kumar', designation: 'Computer Operator', type: 'Outsource', department: 'Accounts' },
-    { id: 17, employeeId: 'EMP017', name: 'Soni Kumari', designation: 'Computer Operator', type: 'Outsource', department: 'Company Secretary' },
-    { id: 18, employeeId: 'EMP018', name: 'Shruti Sailesh', designation: 'Computer Operator', type: 'Outsource', department: 'Establishment' },
-    { id: 19, employeeId: 'EMP019', name: 'Ruhi', designation: 'Computer Operator', type: 'Outsource', department: 'Legal' }
+    { id: 10, employeeId: 'EMP010', name: 'CK Yadav', designation: 'Sales Assistant', type: 'Contract', department: 'Sales' }
   ]);
 
   useEffect(() => {
@@ -33,7 +24,8 @@ const OurEmployee = () => {
         try {
           const parsed = JSON.parse(saved);
           if (Array.isArray(parsed)) {
-            setEmployees(parsed.map(item => ({
+            const validEmployees = parsed.filter(item => item.type !== 'Outsource');
+            setEmployees(validEmployees.map(item => ({
               id: item.id,
               name: item.name || item.title,
               designation: item.designation,

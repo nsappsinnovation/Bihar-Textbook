@@ -1,32 +1,11 @@
 import React from "react";
 import { 
   Phone, Mail, MapPin, Clock, Twitter, Facebook, Linkedin, 
-  GraduationCap, PenTool, Send, User, ChevronDown, BookOpen, MessageSquare
+  GraduationCap, PenTool, ChevronDown, BookOpen, MessageSquare
 } from "lucide-react";
 import { motion } from "framer-motion";
-import toast from "react-hot-toast";
-import { useState } from "react";
 
 const Contact = () => {
-  const [isSending, setIsSending] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', purpose: 'General Support', message: '' });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) {
-      toast.error("Please fill in all required fields.");
-      return;
-    }
-    
-    setIsSending(true);
-    // Simulate server response
-    setTimeout(() => {
-      setIsSending(false);
-      toast.success("Message sent successfully! We'll be in touch soon.");
-      setFormData({ name: '', email: '', purpose: 'General Support', message: '' });
-    }, 1500);
-  };
-
   return (
     <div className="bg-[#FAFAFA] min-h-screen font-sans">
       
@@ -89,21 +68,19 @@ const Contact = () => {
             <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
               
               {/* LEFT SIDE - Info */}
-              <div className="lg:w-[45%] flex flex-col">
-                <div className="mb-10">
-                   
+              <div className="w-full flex flex-col text-center items-center">
+                <div className="mb-14">
                     <h2 className="text-2xl md:text-[28px] font-black text-slate-900 leading-tight mb-4">
-                        Committed to <br />
-                        <span className="text-blue-600">Educational Success</span>
+                        Committed to Educational Success
                     </h2>
-                    <p className="text-[14.5px] text-slate-500 font-medium leading-relaxed">
+                    <p className="text-[14.5px] text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
                         We're here to support every student, teacher, and school across Bihar. Our dedicated helpdesk ensures your queries never go unanswered.
                     </p>
                 </div>
 
-                <div className="space-y-8 flex-grow">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full text-left">
                   <InfoItem icon={<MapPin className="w-5 h-5" />} title="Registered Office">
-                    Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001<br />
+                    Pathya Pustak Bhawan, Buddh Marg,<br/> Budh Vihar, Fraser Road Area, Patna - 800001<br />
                     Bihar, India
                   </InfoItem>
 
@@ -122,106 +99,15 @@ const Contact = () => {
                     <div>
                       <h4 className="text-[15px] font-black text-slate-900 mb-1">Service Hours</h4>
                       <div className="flex items-center gap-3">
-                        <span className="text-[13px] text-slate-500 font-medium italic">Monday to Saturday</span>
+                        <span className="text-[13px] text-slate-500 font-medium italic">Mon to Sat</span>
                         <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-[11px] font-bold tracking-wide">10 AM — 5 PM</span>
                       </div>
                     </div>
                   </div>
                 </div>
-
-                
-              </div>
-
-              {/* RIGHT SIDE - Form Card */}
-              <div className="lg:w-[55%]">
-                <div className="bg-[#FAFAFA] rounded-[32px] p-8 md:p-10 border border-slate-100">
-                    <div className="flex items-center gap-4 mb-2">
-                        
-                        <div>
-                            <h3 className="text-xl font-black text-slate-900">Quick Query Form</h3>
-                            <p className="text-[13px] text-slate-500 font-medium">We'll get back to you as soon as possible.</p>
-                        </div>
-                    </div>
-
-                    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {/* Name */}
-                            <div className="space-y-2">
-                                <label className="text-[12px] font-black text-slate-700">Full Name <span className="text-red-500">*</span></label>
-                                <div className="relative">
-                                    <input 
-                                        type="text" 
-                                        placeholder="e.g. S. Kumar" 
-                                        value={formData.name}
-                                        onChange={(e) => setFormData({...formData, name: e.target.value})}
-                                        className="w-full pl-4 pr-10 py-3.5 rounded-xl border border-slate-200 bg-white text-[14px] font-medium text-slate-800 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all placeholder:text-slate-400"
-                                    />
-                                    <User className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300 pointer-events-none" />
-                                </div>
-                            </div>
-                            {/* Email */}
-                            <div className="space-y-2">
-                                <label className="text-[12px] font-black text-slate-700">Email Address <span className="text-red-500">*</span></label>
-                                <div className="relative">
-                                    <input 
-                                        type="email" 
-                                        placeholder="example@mail.com" 
-                                        value={formData.email}
-                                        onChange={(e) => setFormData({...formData, email: e.target.value})}
-                                        className="w-full pl-4 pr-10 py-3.5 rounded-xl border border-slate-200 bg-white text-[14px] font-medium text-slate-800 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all placeholder:text-slate-400"
-                                    />
-                                    <Mail className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-300 pointer-events-none" />
-                                </div>
-                            </div>
-                        </div>
-
-                        
-
-                        {/* Textarea */}
-                        <div className="space-y-2">
-                            <label className="text-[12px] font-black text-slate-700">Your Message <span className="text-red-500">*</span></label>
-                            <div className="relative">
-                                <textarea 
-                                    rows="5"
-                                    placeholder="Briefly describe your inquiry..." 
-                                    value={formData.message}
-                                    onChange={(e) => setFormData({...formData, message: e.target.value})}
-                                    className="w-full px-4 py-3.5 rounded-xl border border-slate-200 bg-white text-[14px] font-medium text-slate-800 focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all resize-none placeholder:text-slate-400"
-                                ></textarea>
-                                <div className="absolute bottom-3 right-4 text-[10px] font-bold text-slate-400">{formData.message.length} / 500</div>
-                            </div>
-                        </div>
-
-                        {/* Submit Button */}
-                        <motion.button 
-                            type="submit"
-                            disabled={isSending}
-                            whileHover={{ y: -2 }}
-                            whileTap={{ scale: 0.98 }}
-                            className="w-full py-4 bg-blue-700 hover:bg-blue-800 text-white rounded-xl font-bold text-[14px] flex items-center justify-center gap-3 transition-colors shadow-lg shadow-blue-700/20 disabled:opacity-70"
-                        >
-                            {isSending ? (
-                              <>
-                                <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
-                                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                                </svg>
-                                Sending...
-                              </>
-                            ) : (
-                              <>
-                                <Send className="w-4 h-4" />
-                                Send Message
-                              </>
-                            )}
-                        </motion.button>
-                    </form>
-                </div>
               </div>
             </div>
           </div>
-
-          
         </div>
       </section>
     </div>

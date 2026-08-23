@@ -161,23 +161,23 @@ export default function NoticeBoard() {
                 Official Notices <br /> <span className="text-slate-400 font-medium">& Circulars</span>
               </h2>
               <p className="text-sm text-slate-500 font-medium leading-relaxed mb-4">
-                Stay updated with the latest administrative announcements, active tenders, and educational circulars from the Bihar State Text Book Publishing Corporation Ltd.
+                Stay updated with the latest administrative announcements, tenders, and educational circulars from the Bihar State Text Book Publishing Corporation Ltd.
               </p>
 
               {/* Premium Stats Overview Widget */}
               <div className="flex flex-col gap-4 mt-6 mb-8">
-                {/* Active Tenders Card */}
+                {/* Tenders Card */}
                 <div className="bg-white/80 backdrop-blur-xl p-5 rounded-2xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex items-center justify-between group hover:shadow-md transition-all duration-300">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center border border-amber-500/20 shadow-[0_0_15px_rgba(245,158,11,0.1)] group-hover:scale-110 transition-transform">
                       <FileText className="text-amber-500" size={22} />
                     </div>
                     <div>
-                      <h4 className="text-xs font-black text-slate-800 tracking-wider">Active Tenders</h4>
+                      <h4 className="text-xs font-black text-slate-800 tracking-wider">Tenders</h4>
                       <p className="text-[11px] text-slate-400 mt-0.5 font-medium">E-procurement & contracts</p>
                     </div>
                   </div>
-                  <span className="text-2xl font-black text-amber-500 tracking-tight">{totalTenders}+</span>
+                  <span className="text-2xl font-black text-amber-500 tracking-tight">{totalTenders}</span>
                 </div>
 
                 {/* Live Notices Card */}
@@ -191,7 +191,7 @@ export default function NoticeBoard() {
                       <p className="text-[11px] text-slate-400 mt-0.5 font-medium">Administrative announcements</p>
                     </div>
                   </div>
-                  <span className="text-2xl font-black text-rose-500 tracking-tight">{totalNotices}+</span>
+                  <span className="text-2xl font-black text-rose-500 tracking-tight">{totalNotices}</span>
                 </div>
 
                 {/* Academic Circulars Card */}
@@ -205,7 +205,7 @@ export default function NoticeBoard() {
                       <p className="text-[11px] text-slate-400 mt-0.5 font-medium">Curriculum & syllabus updates</p>
                     </div>
                   </div>
-                  <span className="text-2xl font-black text-blue-500 tracking-tight">{totalCirculars}+</span>
+                  <span className="text-2xl font-black text-blue-500 tracking-tight">{totalCirculars}</span>
                 </div>
               </div>
             </div>
