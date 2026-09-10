@@ -73,7 +73,7 @@ const Real3DSkeleton = () => {
             <pointLight position={[-10, -10, -10]} intensity={1} color="#ccffff" />
             
             <AnatomicalSkeleton />
-            
+            {/* ojjj */}
             <ContactShadows 
               position={[0, -3, 0]} 
               opacity={0.7} 
