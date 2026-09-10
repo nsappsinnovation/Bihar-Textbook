@@ -1,30 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiSearch, FiExternalLink } from 'react-icons/fi';
+import { getSetting } from '../../../services/settingService';
+import { fileUrl } from '../../../services/api';
 
 const RegisterPrinters = () => {
   const [isInteracting, setIsInteracting] = useState(false);
   const [pdfUrl, setPdfUrl] = useState('/printer.pdf'); // Fallback PDF if none exists
   const [fileName, setFileName] = useState('EMPANALLED_PRINTERS.PDF');
 
+  // The printer list PDF is stored in the "printer_registry_doc" setting
   useEffect(() => {
-    const loadPdfData = () => {
-      const saved = localStorage.getItem('website_empanalled_printers_pdf');
-      if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          if (parsed.officialList && parsed.officialList.pdfUrl) {
-            setPdfUrl(parsed.officialList.pdfUrl);
-            setFileName(parsed.officialList.fileName || 'EMPANALLED_PRINTERS.PDF');
-          }
-        } catch (e) {
-          console.error('Failed to parse empanalled printers data from storage');
+    getSetting('printer_registry_doc')
+      .then((path) => {
+        if (path) {
+          setPdfUrl(fileUrl(path));
+          setFileName(path.split('/').pop().toUpperCase());
         }
-      }
-    };
-    loadPdfData();
-    window.addEventListener('storage', loadPdfData);
-    return () => window.removeEventListener('storage', loadPdfData);
+      })
+      .catch(() => {});
   }, []);
 
   return (

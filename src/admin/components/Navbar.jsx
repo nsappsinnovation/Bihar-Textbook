@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Search,
@@ -16,27 +16,13 @@ import { useClickOutside, useActivityLog } from '../hooks/useCustomHooks';
 /**
  * Navbar Component
  */
-export default function Navbar({ isMobileOpen, setIsMobileOpen, activePage, setActivePage }) {
+export default function Navbar({ isMobileOpen, setIsMobileOpen, activePage, setActivePage, user, onLogout }) {
   const { activities, markAsRead } = useActivityLog();
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   
-  const [userSettings, setUserSettings] = useState(() => {
-    const saved = localStorage.getItem('adminSettings');
-    return saved ? JSON.parse(saved) : { firstName: 'Anushka', lastName: 'Nandan', bio: 'ADMIN' };
-  });
-
-  useEffect(() => {
-    const handleUpdate = () => {
-      const saved = localStorage.getItem('adminSettings');
-      if (saved) setUserSettings(JSON.parse(saved));
-    };
-    window.addEventListener('settingsUpdated', handleUpdate);
-    return () => window.removeEventListener('settingsUpdated', handleUpdate);
-  }, []);
-
   const profileRef = useRef(null);
   const notifRef = useRef(null);
   const searchRef = useRef(null);
@@ -46,7 +32,8 @@ export default function Navbar({ isMobileOpen, setIsMobileOpen, activePage, setA
   useClickOutside(searchRef, () => setIsSearchFocused(false));
 
   const unreadCount = activities.filter(a => !a.read).length;
-  const userInitials = (userSettings.firstName[0] + userSettings.lastName[0]).toUpperCase();
+  const userName = user?.fullName || 'Admin';
+  const userInitials = userName.split(' ').map((part) => part[0]).join('').slice(0, 2).toUpperCase();
 
   const handleNotifClick = (notif) => {
     markAsRead(notif.id);
@@ -202,16 +189,12 @@ export default function Navbar({ isMobileOpen, setIsMobileOpen, activePage, setA
               className="flex items-center gap-3 pl-2 pr-4 py-2 rounded-2xl hover:bg-gray-50 transition-all border border-transparent hover:border-gray-100"
               whileTap={{ scale: 0.98 }}
             >
-              {userSettings.avatar ? (
-                <img loading="lazy" decoding="async" src={userSettings.avatar} alt="Avatar" className="w-10 h-10 rounded-xl object-cover" />
-              ) : (
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white text-xs font-black">
-                  {userInitials}
-                </div>
-              )}
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center text-white text-xs font-black">
+                {userInitials}
+              </div>
               <div className="hidden sm:block text-left">
-                <p className="text-sm font-bold text-gray-900 leading-tight">{userSettings.firstName} {userSettings.lastName}</p>
-                <p className="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mt-0.5">{userSettings.bio}</p>
+                <p className="text-sm font-bold text-gray-900 leading-tight">{userName}</p>
+                <p className="text-[10px] font-extrabold text-gray-400 uppercase tracking-widest mt-0.5">Admin</p>
               </div>
               <ChevronDown className={`w-4 h-4 text-gray-300 transition-transform ${showProfileMenu ? 'rotate-180' : ''}`} />
             </motion.button>
@@ -226,8 +209,8 @@ export default function Navbar({ isMobileOpen, setIsMobileOpen, activePage, setA
                   className="absolute right-0 top-14 w-60 bg-white rounded-3xl shadow-2xl shadow-black/15 border border-gray-100 overflow-hidden"
                 >
                   <div className="px-6 py-5 border-b border-gray-50 bg-gray-50/30">
-                    <p className="text-sm font-bold text-gray-900">{userSettings.firstName} {userSettings.lastName}</p>
-                    <p className="text-xs text-gray-500 font-medium">admin@bstbpc.gov.in</p>
+                    <p className="text-sm font-bold text-gray-900">{userName}</p>
+                    <p className="text-xs text-gray-500 font-medium">{user?.email}</p>
                   </div>
                   <div className="py-2">
                     {[
@@ -245,7 +228,7 @@ export default function Navbar({ isMobileOpen, setIsMobileOpen, activePage, setA
                   </div>
                   <div className="border-t border-gray-50 py-2">
                     <button 
-                      onClick={() => window.location.href = '/'}
+                      onClick={onLogout}
                       className="w-full flex items-center gap-3.5 px-6 py-3 text-sm font-bold text-red-500 hover:bg-red-50 transition-all"
                     >
                       <LogOut className="w-4.5 h-4.5" />

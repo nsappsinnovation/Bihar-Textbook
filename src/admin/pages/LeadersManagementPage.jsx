@@ -1,120 +1,42 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Trash2, Edit2, User, LayoutGrid, Image as ImageIcon, X } from 'lucide-react';
+import { Plus, Trash2, Edit2, User, Image as ImageIcon } from 'lucide-react';
 import Modal, { FormInput } from '../components/Modal';
 import { useActivityLog } from '../hooks/useCustomHooks';
+import { getDirectory, createDirectoryRow, updateDirectoryRow, deleteDirectoryRow } from '../../services/directoryService';
+import { uploadFile } from '../../services/uploadService';
+import { fileUrl, errorMessage } from '../../services/api';
+
+const TYPE = 'leader';
 
 /**
  * Leaders Management Page
  */
 export default function LeadersManagementPage({ addToast }) {
   const { logActivity } = useActivityLog();
-  
-  const storageKey = 'website_leaders_v3';
-  const [leaders, setLeaders] = useState(() => {
-    const saved = localStorage.getItem(storageKey);
-    if (saved) {
-      try {
-        let parsed = JSON.parse(saved);
-        let updated = false;
-        parsed = parsed.map(item => {
-          let name = item.name ? item.name.replace(/^Sri\b/gi, 'Shri') : item.name;
-          let image = item.image;
-          if (name?.includes("Yatendra") || item.name?.includes("Yatendra")) {
-            if (!image || image.startsWith('blob:')) {
-              image = "/images/KeyParticipants/shri_yatendra_pal.webp";
-              updated = true;
-            }
-          }
-          if (name === "Shri Sunil Kumar") {
-            updated = true;
-            return {
-              ...item,
-              name: "Shri Mithilesh Tiwari",
-              role: "Hon'ble Education Minister, Bihar",
-              image: "/images/KeyParticipants/sri_mithlesh.webp"
-            };
-          }
-          if (name === "Shri Dr. B. Rajender, IAS" || name === "Dr. B. Rajender") {
-            updated = true;
-            return {
-              ...item,
-              name: "Shri Vinod Singh Gunjiyal",
-              role: "Secretary, Education Department",
-              image: "/images/KeyParticipants/sri-vinod.webp"
-            };
-          }
-          if (item.name !== name || item.image !== image) {
-            updated = true;
-            return { ...item, name, image };
-          }
-          return item;
-        });
-        if (updated) {
-          localStorage.setItem(storageKey, JSON.stringify(parsed));
-        }
-        return parsed;
-      } catch (e) {
-        console.error(e);
-      }
-    }
-    return [
-      { 
-        id: 1, 
-        name: 'Shri Samrat Choudhary', 
-        role: "Hon'ble Chief Minister, Bihar", 
-        tag: 'LEADERSHIP', 
-        image: '/images/KeyParticipants/samrat.webp' 
-      },
-      { 
-        id: 2, 
-        name: 'Shri Mithilesh Tiwari', 
-        role: "Hon'ble Education Minister, Bihar", 
-        tag: 'LEADERSHIP', 
-        image: '/images/KeyParticipants/sri_mithlesh.webp' 
-      },
-      { 
-        id: 3, 
-        name: 'Shri Vinod Singh Gunjiyal', 
-        role: 'Secretary, Education Department', 
-        tag: 'LEADERSHIP', 
-        image: '/images/KeyParticipants/sri-vinod.webp' 
-      },
-      { 
-        id: 4, 
-        name: 'Shri Yatendra Kumar Pal, IAS', 
-        role: 'Managing Director, Bihar State Text Book Publishing Corporation (BSTBPC)', 
-        tag: 'LEADERSHIP', 
-        image: '/images/KeyParticipants/shri_yatendra_pal.webp' 
-      }
-    ];
-  });
-
+  const [leaders, setLeaders] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
-  const [formData, setFormData] = useState({ 
-    name: '', 
-    role: '', 
-    image: '' 
-  });
+  const [formData, setFormData] = useState({ name: '', role: '', image: '' });
 
-  const saveToStorage = (updated) => {
-    setLeaders(updated);
-    localStorage.setItem(storageKey, JSON.stringify(updated));
-  };
+  const loadLeaders = useCallback(() => {
+    getDirectory(TYPE)
+      .then((rows) => setLeaders(rows.map((r) => ({ id: r.id, name: r.name, role: r.designation || '', image: r.photoUrl || '' }))))
+      .catch(() => addToast?.('Could not load leaders', 'error'));
+  }, [addToast]);
 
-  const handleImageChange = (e) => {
+  useEffect(() => {
+    loadLeaders();
+  }, [loadLeaders]);
+
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      if (file.size > 1024 * 1024) {
-        addToast?.('Image is too large (Max 1MB)', 'error');
-        return;
-      }
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData(prev => ({ ...prev, image: reader.result }));
-      };
-      reader.readAsDataURL(file);
+    if (!file) return;
+    try {
+      const path = await uploadFile(file, 'image');
+      setFormData(prev => ({ ...prev, image: path }));
+    } catch (error) {
+      addToast?.(errorMessage(error, 'Image upload failed'), 'error');
     }
   };
 
@@ -130,33 +52,40 @@ export default function LeadersManagementPage({ addToast }) {
     setIsModalOpen(true);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!formData.name || !formData.role || !formData.image) {
       addToast?.('Please fill all required fields', 'error');
       return;
     }
 
-    let updated;
-    if (editingItem) {
-      updated = leaders.map(l => l.id === editingItem.id ? { ...l, ...formData } : l);
-      addToast?.('Leader Updated', 'success');
-      logActivity(`Updated Leader: ${formData.name}`, 'Admin', 'edit');
-    } else {
-      updated = [...leaders, { id: Date.now(), ...formData }];
-      addToast?.('Leader Added', 'success');
-      logActivity(`Added new Leader: ${formData.name}`, 'Admin', 'create');
+    const row = { name: formData.name, designation: formData.role, photoUrl: formData.image };
+    try {
+      if (editingItem) {
+        await updateDirectoryRow(TYPE, editingItem.id, row);
+        addToast?.('Leader Updated', 'success');
+        logActivity(`Updated Leader: ${formData.name}`, 'Admin', 'edit');
+      } else {
+        await createDirectoryRow(TYPE, { ...row, sortOrder: leaders.length });
+        addToast?.('Leader Added', 'success');
+        logActivity(`Added new Leader: ${formData.name}`, 'Admin', 'create');
+      }
+      setIsModalOpen(false);
+      loadLeaders();
+    } catch (error) {
+      addToast?.(errorMessage(error, 'Could not save leader'), 'error');
     }
-    saveToStorage(updated);
-    setIsModalOpen(false);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     const itemToDelete = leaders.find(l => l.id === id);
-    const updated = leaders.filter(l => l.id !== id);
-    saveToStorage(updated);
-    addToast?.('Leader Removed', 'info');
-    if (itemToDelete) {
-      logActivity(`Removed Leader: ${itemToDelete.name}`, 'Admin', 'delete');
+    if (!window.confirm(`Remove ${itemToDelete?.name}?`)) return;
+    try {
+      await deleteDirectoryRow(TYPE, id);
+      addToast?.('Leader Removed', 'info');
+      logActivity(`Removed Leader: ${itemToDelete?.name}`, 'Admin', 'delete');
+      loadLeaders();
+    } catch (error) {
+      addToast?.(errorMessage(error, 'Could not remove leader'), 'error');
     }
   };
 
@@ -195,7 +124,7 @@ export default function LeadersManagementPage({ addToast }) {
               <div className="relative aspect-[4/5] bg-gray-50 overflow-hidden">
                 {leader.image ? (
                   <img loading="lazy" decoding="async" 
-                    src={leader.image} 
+                    src={fileUrl(leader.image)} 
                     alt={leader.name} 
                     onError={(e) => {
                       e.target.style.display = 'none';
@@ -273,11 +202,11 @@ export default function LeadersManagementPage({ addToast }) {
           />
 
           <div>
-            <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-3">Portrait Photo (Max 1MB)</label>
+            <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-3">Portrait Photo (Max 2MB)</label>
             <div className="flex flex-col items-center justify-center w-full">
               <label className="flex flex-col items-center justify-center w-full h-44 border-2 border-dashed border-gray-200 rounded-3xl cursor-pointer bg-gray-50/50 hover:bg-gray-50 transition-all overflow-hidden">
                 {formData.image ? (
-                  <img loading="lazy" decoding="async" src={formData.image} alt="Preview" className="w-full h-full object-cover" />
+                  <img loading="lazy" decoding="async" src={fileUrl(formData.image)} alt="Preview" className="w-full h-full object-cover" />
                 ) : (
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <ImageIcon className="w-8 h-8 text-gray-300 mb-2" />

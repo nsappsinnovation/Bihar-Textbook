@@ -1,84 +1,17 @@
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
+import { getDirectory } from "../services/directoryService";
+import { fileUrl } from "../services/api";
 import { Link } from "react-router-dom";
 
-const industryData = [
-  {
-    name: "Shri Samrat Choudhary",
-    role: "Hon'ble Chief Minister, Bihar",
-    image: "/images/KeyParticipants/samrat.webp",
-  },
-  {
-    name: "Shri Mithilesh Tiwari",
-    role: "Hon'ble Education Minister, Bihar",
-    image: "/images/KeyParticipants/sri_mithlesh.webp",
-  },
-  {
-    name: "Shri Vinod Singh Gunjiyal",
-    role: "Secretary, Education Department",
-    image: "/images/KeyParticipants/sri-vinod.webp",
-  },
-  {
-    name: "Shri Yatendra Kumar Pal, IAS",
-    role: "Managing Director, BSTBPC",
-    image: "/images/KeyParticipants/shri_yatendra_pal.webp",
-  },
-];
-
-
-
 export default function KeyParticipant() {
+  // Leaders are managed in Admin → Leaders
+  const [data, setData] = useState([]);
 
-  const [allData, setAllData] = useState(() => {
-    const saved = localStorage.getItem('website_leaders_v3');
-    if (saved) {
-      try {
-        let parsed = JSON.parse(saved);
-        let updated = false;
-        parsed = parsed.map(item => {
-          let name = item.name ? item.name.replace(/^Sri\b/gi, 'Shri') : item.name;
-          let image = item.image;
-          if (name?.includes("Yatendra") || item.name?.includes("Yatendra")) {
-            if (!image || image.startsWith('blob:')) {
-              image = "/images/KeyParticipants/shri_yatendra_pal.webp";
-              updated = true;
-            }
-          }
-          if (name === "Shri Sunil Kumar") {
-            updated = true;
-            return {
-              ...item,
-              name: "Shri Mithilesh Tiwari",
-              role: "Hon'ble Education Minister, Bihar",
-              image: "/images/KeyParticipants/sri_mithlesh.webp"
-            };
-          }
-          if (name === "Shri Dr. B. Rajender, IAS" || name === "Dr. B. Rajender") {
-            updated = true;
-            return {
-              ...item,
-              name: "Shri Vinod Singh Gunjiyal",
-              role: "Secretary, Education Department",
-              image: "/images/KeyParticipants/sri-vinod.webp"
-            };
-          }
-          if (item.name !== name || item.image !== image) {
-            updated = true;
-            return { ...item, name, image };
-          }
-          return item;
-        });
-        if (updated) {
-          localStorage.setItem('website_leaders_v3', JSON.stringify(parsed));
-        }
-        return parsed;
-      } catch (e) {
-        console.error(e);
-      }
-    }
-    return industryData.map(i => ({...i, tag: 'LEADERSHIP'}));
-  });
-
-  const data = allData.filter(d => d.tag === 'LEADERSHIP');
+  useEffect(() => {
+    getDirectory("leader")
+      .then((rows) => setData(rows.map((r) => ({ name: r.name, role: r.designation, image: fileUrl(r.photoUrl) }))))
+      .catch(() => setData([]));
+  }, []);
 
   return (
     <section id="key-participants" className="bg-[#f8f9fa] py-14 px-6 font-sans">

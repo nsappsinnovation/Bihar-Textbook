@@ -1,7 +1,7 @@
 // Content transcribed from the official BSTBPCL "Corporate Social Responsibility Policy"
 // document. Section numbering and wording follow the source document exactly.
 
-export const CSR_STORAGE_KEY = 'website_csr_data';
+import { getSetting } from '../services/settingService';
 
 export const csrPolicyDefaults = {
   documentTitle: 'Corporate Social Responsibility Policy',
@@ -101,13 +101,9 @@ export const csrPolicyContents = [
 
 export const romanize = (n) => ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x'][n] || n + 1;
 
-// Admin-saved content merged over the document defaults, so sections added to the
-// defaults later still appear for sites that saved an older shape.
-export const loadCsrPolicy = () => {
-  try {
-    const saved = localStorage.getItem(CSR_STORAGE_KEY);
-    return saved ? { ...csrPolicyDefaults, ...JSON.parse(saved) } : csrPolicyDefaults;
-  } catch {
-    return csrPolicyDefaults;
-  }
-};
+// Admin-saved content (setting "csr_policy_content") merged over the document defaults,
+// so sections added to the defaults later still appear for older saved content.
+export const loadCsrPolicy = () =>
+  getSetting('csr_policy_content')
+    .then((saved) => (saved ? { ...csrPolicyDefaults, ...saved } : csrPolicyDefaults))
+    .catch(() => csrPolicyDefaults);

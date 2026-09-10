@@ -1,27 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaPlay } from 'react-icons/fa';
-
-const defaultVideoItems = [
-  {
-    type: "video",
-    src: "/images/hero/classroom.webp",
-    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    alt: "Bihar Digital Classrooms Launch Highlights"
-  },
-  {
-    type: "video",
-    src: "/images/hero/audio.webp",
-    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    alt: "Rural Literacy Outreach & Community Distribution Drives"
-  },
-  {
-    type: "video",
-    src: "/images/hero/vr.webp",
-    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    alt: "Teacher Training Workshop on Interactive Smart Textbooks"
-  }
-];
+import { getSections } from '../../../services/sectionService';
+import { fileUrl } from '../../../services/api';
 
 const getYouTubeId = (url) => {
   if (!url) return null;
@@ -32,45 +13,26 @@ const getYouTubeId = (url) => {
 
 const Videogallery = () => {
   const [selectedVideo, setSelectedVideo] = useState(null);
-  const [items, setItems] = useState(defaultVideoItems);
+  const [items, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
 
+  // Videos are managed in Admin → Gallery → Video Gallery.
+  // videoUrl holds either a YouTube link or an uploaded "/uploads/videos/..." file.
   useEffect(() => {
-    const loadData = () => {
-      const saved = localStorage.getItem('module_content_gl-video');
-      if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          if (parsed && Array.isArray(parsed)) {
-            setItems(parsed.map((item) => {
-              const ytId = getYouTubeId(item.videoUrl);
-              const autoThumbnail = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : null;
-              
-              const hasValidDoc = item.document && typeof item.document === 'string' && item.document.trim() !== "" && item.document !== "undefined" && item.document !== "null";
-              const finalSrc = hasValidDoc ? item.document : (autoThumbnail || "");
-
-              return {
-                type: "video",
-                src: finalSrc,
-                videoUrl: item.videoUrl || "",
-                uploadedVideo: item.uploadedVideo || "",
-                alt: item.title || "Video Highlight"
-              };
-            }));
-          } else {
-            setItems(defaultVideoItems);
-          }
-        } catch (e) {
-          console.error("Error parsing video gallery items", e);
-        }
-      } else {
-        setItems(defaultVideoItems);
-      }
-    };
-
-    loadData();
-    window.addEventListener('storage', loadData);
-    return () => window.removeEventListener('storage', loadData);
+    getSections('gl-video')
+      .then((rows) => setItems(rows.map((row) => {
+        const isUploaded = (row.videoUrl || '').startsWith('/uploads/');
+        const ytId = isUploaded ? null : getYouTubeId(row.videoUrl);
+        const autoThumbnail = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : "";
+        return {
+          type: "video",
+          src: fileUrl(row.imageUrl) || autoThumbnail,
+          videoUrl: isUploaded ? "" : row.videoUrl || "",
+          uploadedVideo: isUploaded ? fileUrl(row.videoUrl) : "",
+          alt: row.title || "Gallery Video",
+        };
+      })))
+      .catch(() => setItems([]));
   }, []);
 
   const itemsPerPage = 6;

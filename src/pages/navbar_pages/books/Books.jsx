@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getStoredTextbooksData } from "../../../utils/textbookStorage";
+import { CLASSES, getBooksByClass } from "../../../services/bookService";
+import { fileUrl } from "../../../services/api";
 import Sidebar from "../../../components/Sidebar";
 import { Menu, X, Filter, Download, Search, BookOpen } from "lucide-react";
-import { useResolvedUrl } from "../../../utils/fileStorage";
 
 const Books = () => {
   const { classId } = useParams();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Mobile state
   const [searchQuery, setSearchQuery] = useState(""); // Search state
-  const [textbookData, setTextbookData] = useState(() => getStoredTextbooksData());
+  const [loaded, setLoaded] = useState({ classId: null, books: [] });
 
   useEffect(() => {
     // Close sidebar on route change (mobile)
@@ -19,20 +19,21 @@ const Books = () => {
   }, [classId]);
 
   useEffect(() => {
-    const handleStorageUpdate = () => {
-      setTextbookData(getStoredTextbooksData());
-    };
-    window.addEventListener("textbooks_updated", handleStorageUpdate);
-    return () => window.removeEventListener("textbooks_updated", handleStorageUpdate);
-  }, []);
+    getBooksByClass(classId)
+      .then((books) => setLoaded({ classId, books }))
+      .catch(() => setLoaded({ classId, books: [] }));
+  }, [classId]);
+
+  // null while the current class is still loading
+  const books = loaded.classId === classId ? loaded.books : null;
 
   // Find the class data
-  const classData = textbookData?.classes?.find((cls) => cls.id === Number(classId));
+  const classData = CLASSES.find((cls) => cls.id === Number(classId));
 
   // Placeholder image URL
   const PLACEHOLDER_IMG = "/images/placeholders/no-cover.webp";
 
-  if (!classData) {
+  if (!classData || !books) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen space-y-4">
         <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
@@ -42,7 +43,7 @@ const Books = () => {
   }
 
   // Get unique subjects for filter (exclude Drafts / localOnly unless published)
-  const allBooks = classData.books.filter(b => b.status ? b.status === "Published" : !b.localOnly);
+  const allBooks = books.filter(b => b.status === "Published");
 
   const filteredBooks = allBooks.filter(book => {
     const matchesSearch = book.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -68,7 +69,7 @@ const Books = () => {
           ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
         `}
       >
-        <Sidebar classes={textbookData.classes} currentClassId={classId} />
+        <Sidebar classes={CLASSES} currentClassId={classId} />
       </aside>
 
       {/* Main Content */}
@@ -139,7 +140,7 @@ const Books = () => {
 
 // --- Sub-Component: Book Card (Compact Textbook Style) ---
 const BookCard = ({ book, placeholder, classId }) => {
-  const resolvedImage = useResolvedUrl(book.image);
+  const resolvedImage = fileUrl(book.image);
 
   // Map subjects to beautiful audiobook covers to replace the plain placeholder
   const getFallbackCover = (subject) => {
@@ -153,7 +154,7 @@ const BookCard = ({ book, placeholder, classId }) => {
     return "https://ciet.ncert.gov.in/storage/app/public/photos/19/Bookcover/cemm1cc.jpg"; // default fallback
   };
 
-  const finalImage = (!resolvedImage || resolvedImage.includes("bookcover.webp") || resolvedImage.includes("no-cover")) 
+  const finalImage = (!resolvedImage || resolvedImage.includes("bookcover") || resolvedImage.includes("no-cover")) 
     ? getFallbackCover(book.subject) 
     : resolvedImage;
 

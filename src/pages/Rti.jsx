@@ -1,6 +1,7 @@
 import React from "react";
 import { FiInfo, FiUser, FiPhone, FiMail, FiMapPin, FiExternalLink, FiShield, FiFileText, FiCheckCircle } from "react-icons/fi";
 import { motion } from "framer-motion";
+import { getSetting } from "../services/settingService";
 
 const RTI = () => {
   const [rtiData, setRtiData] = React.useState({ 
@@ -10,11 +11,11 @@ const RTI = () => {
     address: 'Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001' 
   });
 
+  // Managed in Admin → RTI; the values above are shown until it loads
   React.useEffect(() => {
-    const saved = localStorage.getItem('module_content_dc-rti');
-    if (saved) {
-      setRtiData(JSON.parse(saved));
-    }
+    getSetting('dc-rti')
+      .then((value) => value && setRtiData(value))
+      .catch(() => {});
   }, []);
 
   return (

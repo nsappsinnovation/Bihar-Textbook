@@ -6,8 +6,11 @@ import {
   Target, LineChart, Info, BookMarked, ScrollText
 } from 'lucide-react';
 import {
-  csrPolicyDefaults, csrPolicyContents, romanize, loadCsrPolicy, CSR_STORAGE_KEY
+  csrPolicyDefaults, csrPolicyContents, romanize, loadCsrPolicy
 } from '../../data/csrPolicyData';
+import { saveSetting } from '../../services/settingService';
+import { uploadFile } from '../../services/uploadService';
+import { fileUrl, errorMessage } from '../../services/api';
 
 const sectionIcons = {
   1: FileText, 2: ScrollText, 3: Users, 4: Layers, 5: IndianRupee,
@@ -90,17 +93,44 @@ const ListEditor = ({ items, marker, onChange, onAdd, onRemove, addLabel, rows =
 );
 
 export default function CSRPolicyPage({ addToast }) {
-  const [formData, setFormData] = useState(loadCsrPolicy);
-  const [savedSnapshot, setSavedSnapshot] = useState(() => JSON.stringify(loadCsrPolicy()));
+  const [formData, setFormData] = useState(csrPolicyDefaults);
+  const [savedSnapshot, setSavedSnapshot] = useState(() => JSON.stringify(csrPolicyDefaults));
   const [activeSection, setActiveSection] = useState(1);
+
+  useEffect(() => {
+    loadCsrPolicy().then((data) => {
+      setFormData(data);
+      setSavedSnapshot(JSON.stringify(data));
+    });
+  }, []);
 
   const isDirty = JSON.stringify(formData) !== savedSnapshot;
 
-  const handleSave = () => {
-    localStorage.setItem(CSR_STORAGE_KEY, JSON.stringify(formData));
-    setSavedSnapshot(JSON.stringify(formData));
-    addToast?.('CSR Policy Updated Successfully', 'success');
-    window.dispatchEvent(new Event('websiteDataUpdated'));
+  const handleSave = async () => {
+    try {
+      await saveSetting('csr_policy_content', formData, 'CSR');
+      setSavedSnapshot(JSON.stringify(formData));
+      addToast?.('CSR Policy Updated Successfully', 'success');
+    } catch (error) {
+      addToast?.(errorMessage(error, 'Could not save CSR policy'), 'error');
+    }
+  };
+
+  const handlePdfUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    try {
+      const path = await uploadFile(file, 'document');
+      setFormData((prev) => ({
+        ...prev,
+        pdfUrl: path,
+        pdfFileName: file.name,
+        pdfSizeLabel: `${(file.size / (1024 * 1024)).toFixed(1)} MB`,
+      }));
+      addToast?.('PDF uploaded — click Save to publish', 'success');
+    } catch (error) {
+      addToast?.(errorMessage(error, 'PDF upload failed'), 'error');
+    }
   };
 
   const handleReset = () => {
@@ -233,7 +263,7 @@ export default function CSRPolicyPage({ addToast }) {
                 </div>
               </div>
               <a
-                href={formData.pdfUrl}
+                href={fileUrl(formData.pdfUrl)}
                 download={formData.pdfFileName}
                 className="flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 text-[12px] font-black hover:bg-slate-100 transition-colors shrink-0"
               >
@@ -254,9 +284,16 @@ export default function CSRPolicyPage({ addToast }) {
                   placeholder="/csr-policy.pdf"
                   className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-sm font-bold text-slate-900 placeholder-slate-400 outline-none focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all"
                 />
-                <p className="text-[11px] text-slate-500 font-medium ml-1">
-                  Place the file in the site's <span className="text-slate-700 font-bold">public/</span> folder, or paste a full https:// link.
-                </p>
+                <div className="flex items-center gap-3 ml-1">
+                  <label className="cursor-pointer inline-flex items-center gap-2 px-3.5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs transition-all">
+                    <Download className="w-3.5 h-3.5 rotate-180" />
+                    <span>Upload PDF</span>
+                    <input type="file" accept="application/pdf" className="hidden" onChange={handlePdfUpload} />
+                  </label>
+                  <p className="text-[11px] text-slate-500 font-medium">
+                    Upload a PDF (max 20 MB), or paste a full https:// link above.
+                  </p>
+                </div>
               </div>
               <div className="md:col-span-2 space-y-2">
                 <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1 block">

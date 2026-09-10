@@ -1,47 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FiUsers, FiAward, FiHeart, FiTrendingUp, FiSearch } from 'react-icons/fi';
+import { getDirectory } from '../../../services/directoryService';
 
 const OurEmployee = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [employees, setEmployees] = useState([
-    { id: 1, employeeId: 'EMP001', name: 'Azimul Hassan', designation: 'Assistant Cum Cashier', type: 'Regular', department: 'Establishment' },
-    { id: 2, employeeId: 'EMP002', name: 'Binod Kumar', designation: 'Sales Assistant', type: 'Regular', department: 'Sales' },
-    { id: 3, employeeId: 'EMP003', name: 'Santosh Kumar', designation: 'Dispatch', type: 'Regular', department: 'Dispatch' },
-    { id: 4, employeeId: 'EMP004', name: 'Rajesh Hembrom', designation: 'Security Encharge', type: 'Regular', department: 'Security' },
-    { id: 5, employeeId: 'EMP005', name: 'Binod Kumar', designation: 'Peon', type: 'Regular', department: 'MD Cell' },
-    { id: 6, employeeId: 'EMP006', name: 'Rakesh Kumar', designation: 'Account Assistant', type: 'Contract', department: 'Accounts' },
-    { id: 7, employeeId: 'EMP007', name: 'Sukriti Kumari', designation: 'Account Assistant', type: 'Contract', department: 'Accounts' },
-    { id: 8, employeeId: 'EMP008', name: 'MD Ashad', designation: 'Assistant', type: 'Contract', department: 'Accounts' },
-    { id: 9, employeeId: 'EMP009', name: 'KN Rai', designation: 'Assistant', type: 'Contract', department: 'Legal' },
-    { id: 10, employeeId: 'EMP010', name: 'CK Yadav', designation: 'Sales Assistant', type: 'Contract', department: 'Sales' }
-  ]);
+  const [employees, setEmployees] = useState([]);
 
+  // Employees are managed in Admin → Our Employee (employment type is stored in `tag`)
   useEffect(() => {
-    const loadEmployees = () => {
-      const saved = localStorage.getItem('module_content_ku-employee_v2');
-      if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          if (Array.isArray(parsed)) {
-            const validEmployees = parsed.filter(item => item.type !== 'Outsource');
-            setEmployees(validEmployees.map(item => ({
-              id: item.id,
-              name: item.name || item.title,
-              designation: item.designation,
-              type: item.type || 'Regular',
-              department: item.department,
-              employeeId: item.employeeId
-            })));
-          }
-        } catch (e) {
-          console.error("Error loading employee data", e);
-        }
-      }
-    };
-    loadEmployees();
-    window.addEventListener('storage', loadEmployees);
-    return () => window.removeEventListener('storage', loadEmployees);
+    getDirectory('employee')
+      .then((rows) => setEmployees(
+        rows
+          .filter((row) => row.tag !== 'Outsource')
+          .map((row) => ({
+            id: row.id,
+            name: row.name,
+            designation: row.designation || '',
+            type: row.tag || 'Regular',
+            department: row.department || '',
+          }))
+      ))
+      .catch(() => setEmployees([]));
   }, []);
 
   const filteredEmployees = employees.filter(emp => 

@@ -1,31 +1,23 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Search, Plus, Filter, LayoutGrid, List, Edit3, Trash2, Eye, Download,
-  ChevronDown, BookOpen, X, RotateCcw, Upload,
+  ChevronDown, BookOpen, X, Upload,
 } from 'lucide-react';
 import Modal, { FormInput, ToggleSwitch } from '../components/Modal';
-import {
-  getAllTextbooksFlat,
-  addTextbook,
-  updateTextbook,
-  deleteTextbook,
-  resetTextbooksData,
-} from '../../utils/textbookStorage';
 import { useDebounce } from '../hooks/useCustomHooks';
-import { storeFile, useResolvedUrl } from '../../utils/fileStorage';
+import { getBooks, getBook, createBook, updateBook, deleteBook, saveChapters } from '../../services/bookService';
+import { uploadFile } from '../../services/uploadService';
+import { fileUrl, errorMessage } from '../../services/api';
 
-const ResolvedImage = ({ src, alt, className, onError, placeholder = '/bookcover.webp' }) => {
-  const resolved = useResolvedUrl(src);
-  return (
-    <img loading="lazy" decoding="async"
-      src={resolved || placeholder}
-      alt={alt}
-      className={className}
-      onError={onError}
-    />
-  );
-};
+const ResolvedImage = ({ src, alt, className, onError, placeholder = '/bookcover.webp' }) => (
+  <img loading="lazy" decoding="async"
+    src={fileUrl(src) || placeholder}
+    alt={alt}
+    className={className}
+    onError={onError}
+  />
+);
 
 // Status badge styles
 const statusStyles = {
@@ -59,7 +51,7 @@ export default function BooksPage({ addToast, forcedClass }) {
   const [selectedClass, setSelectedClass] = useState(forcedClass || 'All Classes');
   const [selectedSubject, setSelectedSubject] = useState('All Subjects');
   const [viewMode, setViewMode] = useState('table');
-  const [booksList, setBooksList] = useState(() => getAllTextbooksFlat());
+  const [booksList, setBooksList] = useState([]);
 
   // Add Book Modal State
   const [showAddModal, setShowAddModal] = useState(false);
@@ -121,14 +113,15 @@ export default function BooksPage({ addToast, forcedClass }) {
 
   const debouncedSearch = useDebounce(searchQuery);
 
-  // Listen to custom event for real-time synchronization
+  const loadBooks = useCallback(() => {
+    getBooks()
+      .then(setBooksList)
+      .catch(() => addToast('Could not load books', 'error'));
+  }, [addToast]);
+
   useEffect(() => {
-    const handleStorageUpdate = () => {
-      setBooksList(getAllTextbooksFlat());
-    };
-    window.addEventListener('textbooks_updated', handleStorageUpdate);
-    return () => window.removeEventListener('textbooks_updated', handleStorageUpdate);
-  }, []);
+    loadBooks();
+  }, [loadBooks]);
 
   // Dynamic subjects list from current textbooks
   const subjectOptions = useMemo(() => {
@@ -153,7 +146,14 @@ export default function BooksPage({ addToast, forcedClass }) {
     });
   }, [booksList, debouncedSearch, selectedClass, selectedSubject]);
 
-  const handleOpenEdit = (book) => {
+  const handleOpenEdit = async (listBook) => {
+    let book;
+    try {
+      book = await getBook(listBook.id); // includes chapters
+    } catch (error) {
+      addToast(errorMessage(error, 'Could not load book'), 'error');
+      return;
+    }
     setEditingBook(book);
     setEditTitle(book.title || '');
     setEditClassId(String(book.classId || 1));
@@ -166,7 +166,7 @@ export default function BooksPage({ addToast, forcedClass }) {
     setShowEditModal(true);
   };
 
-  const handleSaveAdd = () => {
+  const handleSaveAdd = async () => {
     if (!addTitle.trim()) {
       addToast('Please enter a book name', 'error');
       return;
@@ -180,19 +180,24 @@ export default function BooksPage({ addToast, forcedClass }) {
       return;
     }
 
-    addTextbook({
-      title: addTitle.trim(),
-      classId: addClassId,
-      subject: addSubject.trim(),
-      author: addAuthor.trim() || 'Bihar Board',
-      image: addImage.trim() || '/bookcover.webp',
-      description:
-        addDescription.trim() ||
-        `Official Bihar Board Class ${addClassId} textbook for '${addTitle}'.`,
-      status: addStatus ? 'Published' : 'Draft',
-      chapters: chaptersList,
-    });
-    setBooksList(getAllTextbooksFlat());
+    try {
+      const newBook = await createBook({
+        title: addTitle.trim(),
+        classId: addClassId,
+        subject: addSubject.trim(),
+        author: addAuthor.trim() || 'Bihar Board',
+        image: addImage,
+        description:
+          addDescription.trim() ||
+          `Official Bihar Board Class ${addClassId} textbook for '${addTitle}'.`,
+        status: addStatus ? 'Published' : 'Draft',
+      });
+      await saveChapters(newBook.id, chaptersList);
+    } catch (error) {
+      addToast(errorMessage(error, 'Could not add textbook'), 'error');
+      return;
+    }
+    loadBooks();
     setShowAddModal(false);
     // Reset form
     setAddTitle('');
@@ -203,39 +208,40 @@ export default function BooksPage({ addToast, forcedClass }) {
     addToast('New textbook added successfully!', 'success');
   };
 
-  const handleSaveEdit = () => {
+  const handleSaveEdit = async () => {
     if (!editingBook || !editTitle.trim()) {
       addToast('Please enter a valid book title', 'error');
       return;
     }
-    updateTextbook(editingBook.id, {
-      title: editTitle.trim(),
-      classId: Number(editClassId),
-      subject: editSubject.trim() || 'General',
-      author: editAuthor.trim() || 'Bihar Board',
-      image: editImage.trim() || '/bookcover.webp',
-      description: editDescription.trim(),
-      status: editStatus ? 'Published' : 'Draft',
-      chapters: chaptersList,
-    });
-    setBooksList(getAllTextbooksFlat());
+    try {
+      await updateBook(editingBook.id, {
+        title: editTitle.trim(),
+        classId: Number(editClassId),
+        subject: editSubject.trim() || 'General',
+        author: editAuthor.trim() || 'Bihar Board',
+        image: editImage,
+        description: editDescription.trim(),
+        status: editStatus ? 'Published' : 'Draft',
+      });
+      await saveChapters(editingBook.id, chaptersList, editingBook.chapters);
+    } catch (error) {
+      addToast(errorMessage(error, 'Could not update textbook'), 'error');
+      return;
+    }
+    loadBooks();
     setShowEditModal(false);
     addToast('Textbook updated successfully!', 'success');
   };
 
-  const handleDelete = (book) => {
+  const handleDelete = async (book) => {
     if (window.confirm(`Are you sure you want to delete '${book.title || book.name}'?`)) {
-      deleteTextbook(book.id);
-      setBooksList(getAllTextbooksFlat());
-      addToast(`Deleted textbook: ${book.title || book.name}`, 'error');
-    }
-  };
-
-  const handleResetLibrary = () => {
-    if (window.confirm('Reset all textbooks to default Bihar Board library? Any custom additions will be cleared.')) {
-      resetTextbooksData();
-      setBooksList(getAllTextbooksFlat());
-      addToast('Textbook library restored to default!', 'success');
+      try {
+        await deleteBook(book.id);
+        loadBooks();
+        addToast(`Deleted textbook: ${book.title || book.name}`, 'error');
+      } catch (error) {
+        addToast(errorMessage(error, 'Could not delete textbook'), 'error');
+      }
     }
   };
 
@@ -253,16 +259,6 @@ export default function BooksPage({ addToast, forcedClass }) {
           <p className="text-sm text-gray-500 mt-0.5">Live management for Bihar Board Class 1–12 Textbooks</p>
         </div>
         <div className="flex items-center gap-3">
-          <motion.button
-            onClick={handleResetLibrary}
-            className="flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-gray-100 text-gray-700 hover:bg-gray-200 text-sm font-semibold transition-colors"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            title="Reset library to original Bihar Board defaults"
-          >
-            <RotateCcw className="w-4 h-4 text-gray-600" />
-            Reset Defaults
-          </motion.button>
 
           <motion.button
             onClick={handleOpenAdd}
@@ -380,7 +376,7 @@ export default function BooksPage({ addToast, forcedClass }) {
                         <div className="flex items-center gap-3">
                           <div className="w-11 h-14 rounded-lg overflow-hidden bg-blue-50 flex items-center justify-center border border-blue-100/60 shrink-0">
                             <img loading="lazy" decoding="async"
-                              src={book.image || '/bookcover.webp'}
+                              src={fileUrl(book.image) || '/bookcover.webp'}
                               alt={book.title}
                               className="w-full h-full object-cover"
                               onError={(e) => { e.target.src = '/bookcover.webp'; }}
@@ -609,7 +605,7 @@ export default function BooksPage({ addToast, forcedClass }) {
               <div className="relative border-2 border-dashed border-gray-300 rounded-2xl p-6 bg-gray-50/50 hover:bg-gray-100/50 transition-colors flex flex-col items-center justify-center text-center cursor-pointer group min-h-[120px]">
                 <Upload className="w-8 h-8 text-gray-400 mb-2 group-hover:text-blue-500 transition-colors" />
                 <span className="text-xs font-bold text-gray-700 mb-1">Click to upload cover image</span>
-                <span className="text-[10px] text-gray-400 font-medium">JPEG, PNG, WEBP up to 5MB</span>
+                <span className="text-[10px] text-gray-400 font-medium">JPEG, PNG, WEBP up to 2MB</span>
                 <input
                   type="file"
                   accept="image/*"
@@ -619,13 +615,10 @@ export default function BooksPage({ addToast, forcedClass }) {
                     const file = e.target.files?.[0];
                     if (file) {
                       try {
-                        const key = `cover_${Date.now()}`;
-                        await storeFile(key, file);
-                        setAddImage(`db:${key}`);
+                        setAddImage(await uploadFile(file, 'image'));
                         addToast('Cover image uploaded successfully!', 'success');
                       } catch (err) {
-                        console.error(err);
-                        addToast('Failed to upload cover image', 'error');
+                        addToast(errorMessage(err, 'Failed to upload cover image'), 'error');
                       }
                     }
                   }}
@@ -713,13 +706,10 @@ export default function BooksPage({ addToast, forcedClass }) {
                                   const file = e.target.files?.[0];
                                   if (file) {
                                     try {
-                                      const key = `pdf_${Date.now()}_${idx}`;
-                                      await storeFile(key, file);
-                                      handleUpdateChapterRow(idx, 'pdfUrl', `db:${key}`);
+                                      handleUpdateChapterRow(idx, 'pdfUrl', await uploadFile(file, 'document'));
                                       addToast('Chapter PDF uploaded successfully!', 'success');
                                     } catch (err) {
-                                      console.error(err);
-                                      addToast('Failed to upload PDF', 'error');
+                                      addToast(errorMessage(err, 'Failed to upload PDF'), 'error');
                                     }
                                   }
                                 }}
@@ -825,7 +815,7 @@ export default function BooksPage({ addToast, forcedClass }) {
               <div className="relative border-2 border-dashed border-gray-300 rounded-2xl p-6 bg-gray-50/50 hover:bg-gray-100/50 transition-colors flex flex-col items-center justify-center text-center cursor-pointer group min-h-[120px]">
                 <Upload className="w-8 h-8 text-gray-400 mb-2 group-hover:text-blue-500 transition-colors" />
                 <span className="text-xs font-bold text-gray-700 mb-1">Click to upload cover image</span>
-                <span className="text-[10px] text-gray-400 font-medium">JPEG, PNG, WEBP up to 5MB</span>
+                <span className="text-[10px] text-gray-400 font-medium">JPEG, PNG, WEBP up to 2MB</span>
                 <input
                   type="file"
                   accept="image/*"
@@ -835,13 +825,10 @@ export default function BooksPage({ addToast, forcedClass }) {
                     const file = e.target.files?.[0];
                     if (file) {
                       try {
-                        const key = `cover_${Date.now()}`;
-                        await storeFile(key, file);
-                        setEditImage(`db:${key}`);
+                        setEditImage(await uploadFile(file, 'image'));
                         addToast('Cover image uploaded successfully!', 'success');
                       } catch (err) {
-                        console.error(err);
-                        addToast('Failed to upload cover image', 'error');
+                        addToast(errorMessage(err, 'Failed to upload cover image'), 'error');
                       }
                     }
                   }}
@@ -929,13 +916,10 @@ export default function BooksPage({ addToast, forcedClass }) {
                                   const file = e.target.files?.[0];
                                   if (file) {
                                     try {
-                                      const key = `pdf_${Date.now()}_${idx}`;
-                                      await storeFile(key, file);
-                                      handleUpdateChapterRow(idx, 'pdfUrl', `db:${key}`);
+                                      handleUpdateChapterRow(idx, 'pdfUrl', await uploadFile(file, 'document'));
                                       addToast('Chapter PDF uploaded successfully!', 'success');
                                     } catch (err) {
-                                      console.error(err);
-                                      addToast('Failed to upload PDF', 'error');
+                                      addToast(errorMessage(err, 'Failed to upload PDF'), 'error');
                                     }
                                   }
                                 }}

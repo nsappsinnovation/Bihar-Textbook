@@ -1,28 +1,13 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import {
-  Search, Plus, Edit3, Trash2, Pin, Paperclip, Calendar,
-  Bell, ChevronDown, AlertCircle, Clock,
-} from 'lucide-react';
+import { Search, Plus, Edit3, Trash2, Pin, Paperclip, Calendar, Bell } from 'lucide-react';
 import Modal, { FormInput, ToggleSwitch } from '../components/Modal';
-import { notices, noticeCategories } from '../data/dummyData';
-import { noticesData } from '../../pages/navbar_pages/Notice';
-import { tendersData } from '../../data/tendersData';
-import { useDebounce } from '../hooks/useCustomHooks';
+import { useDebounce, useActivityLog } from '../hooks/useCustomHooks';
+import { getNotices, createNotice, updateNotice, deleteNotice } from '../../services/noticeService';
+import { uploadFile } from '../../services/uploadService';
+import { errorMessage } from '../../services/api';
 
-const priorityStyles = {
-  High: 'bg-red-50 text-red-600 border-red-200',
-  Medium: 'bg-amber-50 text-amber-600 border-amber-200',
-  Low: 'bg-blue-50 text-blue-600 border-blue-200',
-};
-
-const priorityIcons = {
-  High: AlertCircle,
-  Medium: Clock,
-  Low: Bell,
-};
-
-import { useActivityLog } from '../hooks/useCustomHooks';
+const today = () => new Date().toISOString().slice(0, 10);
 
 /**
  * Notices & Announcements Page
@@ -34,130 +19,108 @@ export default function NoticesPage({ addToast, forcedCategory }) {
   const [showAddModal, setShowAddModal] = useState(false);
   const [editingNotice, setEditingNotice] = useState(null);
   
-  // Local state for notices with persistence
-  const [noticeList, setNoticeList] = useState(() => {
-    const saved = localStorage.getItem('website_notices_v6');
-    if (saved) {
-      return JSON.parse(saved);
-    }
-    return [
-      ...noticesData.map(n => ({ ...n, id: `notice-${n.id}` })),
-      ...tendersData.map(t => ({ ...t, id: `tender-${t.id}` }))
-    ];
-  });
+  const [noticeList, setNoticeList] = useState([]);
+  const [isUploading, setIsUploading] = useState(false);
 
   const noticeOptions = ["Recruitment", "Financial", "Technical", "Circular", "Corrigendum", "Other"];
   const tenderOptions = ["Active", "E-Tender", "Procurement", "Services", "Other"];
   const categoryOptions = forcedCategory === 'Tender' ? tenderOptions : noticeOptions;
+  const itemType = forcedCategory === 'Tender' ? 'Tender' : 'Notice';
 
-  const [formData, setFormData] = useState({
+  const emptyForm = () => ({
     title: '',
     description: '',
+    type: itemType,
     category: categoryOptions[0],
-    priority: 'Low',
     pinned: false,
-    date: new Date().toISOString(),
-    author: 'Admin',
-    document: null
+    date: today(),
+    document: '',
   });
+  const [formData, setFormData] = useState(emptyForm);
 
   const debouncedSearch = useDebounce(searchQuery);
 
-  const parseDate = (dateStr) => {
-    try {
-      if (!dateStr) return new Date();
-      if (typeof dateStr === 'string' && dateStr.includes('/')) {
-        const parts = dateStr.split('/');
-        return new Date(parts[2], parts[1] - 1, parts[0]);
-      }
-      const d = new Date(dateStr);
-      return isNaN(d.getTime()) ? new Date() : d;
-    } catch {
-      return new Date();
-    }
-  };
+  const loadNotices = useCallback(() => {
+    getNotices(forcedCategory)
+      .then(setNoticeList)
+      .catch(() => addToast('Could not load notices', 'error'));
+  }, [forcedCategory, addToast]);
 
-  const formatDate = (dateStr) => {
-    try {
-      const d = parseDate(dateStr);
-      return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
-    } catch { return dateStr || ''; }
-  };
+  useEffect(() => {
+    loadNotices();
+  }, [loadNotices]);
 
-  const filteredNotices = useMemo(() => {
+  const formatDate = (dateStr) =>
+    dateStr ? new Date(dateStr).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+
+  // The list from the API is already sorted with pinned items first
+  const sortedNotices = useMemo(() => {
     return noticeList.filter((notice) => {
       const matchesSearch = notice.title.toLowerCase().includes(debouncedSearch.toLowerCase());
-      
-      let matchesCategory = true;
-      if (forcedCategory) {
-        if (forcedCategory === 'Tender') {
-          matchesCategory = tenderOptions.includes(notice.category) || notice.category.toLowerCase().includes('tender');
-        } else {
-          matchesCategory = !tenderOptions.includes(notice.category) && !notice.category.toLowerCase().includes('tender');
-        }
-      } else {
-        matchesCategory = selectedCategory === 'All' || notice.category === selectedCategory;
-      }
-
+      const matchesCategory = selectedCategory === 'All' || selectedCategory === forcedCategory || notice.category === selectedCategory;
       return matchesSearch && matchesCategory;
     });
   }, [noticeList, debouncedSearch, selectedCategory, forcedCategory]);
 
-  // Sort pinned notices first
-  const sortedNotices = useMemo(() => {
-    return [...filteredNotices].sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
-  }, [filteredNotices]);
-
-  const handleSaveNotice = () => {
-    let updatedList;
-    if (editingNotice) {
-      updatedList = noticeList.map(n => n.id === editingNotice.id ? { ...formData, id: n.id } : n);
-      addToast('Updated', 'success');
-      logActivity(`Updated notice: ${formData.title}`, 'Admin', 'edit');
-    } else {
-      const newNotice = { ...formData, id: Date.now() };
-      updatedList = [newNotice, ...noticeList];
-      addToast('Notice published successfully!', 'success');
-      logActivity(`Published new notice: ${formData.title}`, 'Admin', 'upload');
+  const handleSaveNotice = async () => {
+    if (!formData.title.trim()) {
+      addToast('Please enter a title', 'error');
+      return;
     }
-    setNoticeList(updatedList);
-    localStorage.setItem('website_notices_v6', JSON.stringify(updatedList));
-    localStorage.setItem('website_notices_last_updated', new Date().toISOString());
-    window.dispatchEvent(new Event('websiteDataUpdated'));
-    setShowAddModal(false);
-    setEditingNotice(null);
-    resetForm();
+    try {
+      if (editingNotice) {
+        await updateNotice(editingNotice.id, formData);
+        addToast('Updated', 'success');
+        logActivity(`Updated ${itemType.toLowerCase()}: ${formData.title}`, 'Admin', 'edit');
+      } else {
+        await createNotice(formData);
+        addToast(`${itemType} published successfully!`, 'success');
+        logActivity(`Published new ${itemType.toLowerCase()}: ${formData.title}`, 'Admin', 'upload');
+      }
+      setShowAddModal(false);
+      setEditingNotice(null);
+      resetForm();
+      loadNotices();
+    } catch (error) {
+      addToast(errorMessage(error, 'Could not save'), 'error');
+    }
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     const itemToDelete = noticeList.find(n => n.id === id);
-    const updatedList = noticeList.filter(n => n.id !== id);
-    setNoticeList(updatedList);
-    localStorage.setItem('website_notices_v6', JSON.stringify(updatedList));
-    localStorage.setItem('website_notices_last_updated', new Date().toISOString());
-    window.dispatchEvent(new Event('websiteDataUpdated'));
-    addToast('Notice deleted', 'error');
-    if (itemToDelete) {
-      logActivity(`Deleted notice: ${itemToDelete.title}`, 'Admin', 'delete');
+    if (!window.confirm(`Delete "${itemToDelete?.title}"?`)) return;
+    try {
+      await deleteNotice(id);
+      addToast(`${itemType} deleted`, 'error');
+      logActivity(`Deleted ${itemType.toLowerCase()}: ${itemToDelete?.title}`, 'Admin', 'delete');
+      loadNotices();
+    } catch (error) {
+      addToast(errorMessage(error, 'Could not delete'), 'error');
+    }
+  };
+
+  const handleDocumentChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    setIsUploading(true);
+    try {
+      const path = await uploadFile(file, 'document');
+      setFormData(prev => ({ ...prev, document: path }));
+      addToast('Document uploaded', 'success');
+    } catch (error) {
+      addToast(errorMessage(error, 'Upload failed'), 'error');
+    } finally {
+      setIsUploading(false);
     }
   };
 
   const resetForm = () => {
-    setFormData({
-      title: '',
-      description: '',
-      category: categoryOptions[0],
-      priority: 'Low',
-      pinned: false,
-      date: new Date().toISOString(),
-      author: 'Admin',
-      document: null
-    });
+    setFormData(emptyForm());
   };
 
   const handleEdit = (notice) => {
     setEditingNotice(notice);
-    setFormData(notice);
+    setFormData({ ...notice });
     setShowAddModal(true);
   };
 
@@ -207,7 +170,7 @@ export default function NoticesPage({ addToast, forcedCategory }) {
           {/* Category pills - Only show if not forced */}
           {!forcedCategory && (
             <div className="flex items-center gap-2 flex-wrap">
-              {noticeCategories.map((cat) => (
+              {['All', ...categoryOptions].map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
@@ -228,8 +191,6 @@ export default function NoticesPage({ addToast, forcedCategory }) {
       {/* Notice Cards */}
       <div className="space-y-4">
         {sortedNotices.map((notice, index) => {
-          const PriorityIcon = priorityIcons[notice.priority] || Bell;
-
           return (
             <motion.div
               key={notice.id}
@@ -242,13 +203,9 @@ export default function NoticesPage({ addToast, forcedCategory }) {
               }`}
             >
               <div className="flex items-start gap-4">
-                {/* Priority Icon */}
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
-                  notice.priority === 'High' ? 'bg-red-100 text-red-500' :
-                  notice.priority === 'Medium' ? 'bg-amber-100 text-amber-500' :
-                  'bg-blue-100 text-blue-500'
-                }`}>
-                  <PriorityIcon className="w-5 h-5" />
+                {/* Icon */}
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 bg-blue-100 text-blue-500">
+                  <Bell className="w-5 h-5" />
                 </div>
 
                 {/* Content */}
@@ -263,11 +220,6 @@ export default function NoticesPage({ addToast, forcedCategory }) {
 
                   {/* Meta */}
                   <div className="flex items-center flex-wrap gap-3">
-                    {notice.priority && (
-                      <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border ${priorityStyles[notice.priority]}`}>
-                        {notice.priority}
-                      </span>
-                    )}
                     <span className="text-xs text-gray-400 flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
                       {formatDate(notice.date)}
@@ -275,11 +227,11 @@ export default function NoticesPage({ addToast, forcedCategory }) {
                     <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
                       {notice.category}
                     </span>
-                    {notice.document && (
-                      <span className="text-xs text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full flex items-center gap-1 font-medium">
+                    {notice.link && (
+                      <a href={notice.link} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full flex items-center gap-1 font-medium hover:underline">
                         <Paperclip className="w-3 h-3" />
-                        {notice.document}
-                      </span>
+                        View document
+                      </a>
                     )}
                   </div>
                 </div>
@@ -318,7 +270,7 @@ export default function NoticesPage({ addToast, forcedCategory }) {
       <Modal 
         isOpen={showAddModal} 
         onClose={() => setShowAddModal(false)} 
-        title={editingNotice ? "Edit Notice" : "Add New Notice"} 
+        title={editingNotice ? `Edit ${itemType}` : `Add New ${itemType}`} 
         size="lg"
       >
         <div className="space-y-4">
@@ -339,13 +291,13 @@ export default function NoticesPage({ addToast, forcedCategory }) {
             onChange={(val) => setFormData(prev => ({ ...prev, description: val }))}
             id="notice-description" 
           />
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-1.5">Date</label>
               <input 
                 type="date"
-                value={parseDate(formData.date).toISOString().split('T')[0]}
-                onChange={(e) => setFormData(prev => ({ ...prev, date: new Date(e.target.value).toISOString() }))}
+                value={formData.date}
+                onChange={(e) => setFormData(prev => ({ ...prev, date: e.target.value }))}
                 className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-300 transition-all bg-white" 
                 id="notice-date"
               />
@@ -361,19 +313,6 @@ export default function NoticesPage({ addToast, forcedCategory }) {
                 {categoryOptions.map(cat => <option key={cat} value={cat}>{cat}</option>)}
               </select>
             </div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Priority</label>
-              <select 
-                value={formData.priority}
-                onChange={(e) => setFormData(prev => ({ ...prev, priority: e.target.value }))}
-                className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-300 transition-all bg-white" 
-                id="notice-priority"
-              >
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-              </select>
-            </div>
           </div>
           <ToggleSwitch 
             label="Pin this notice" 
@@ -387,12 +326,15 @@ export default function NoticesPage({ addToast, forcedCategory }) {
             <input 
               type="file" 
               accept=".pdf"
-              onChange={(e) => setFormData(prev => ({ ...prev, document: e.target.files[0]?.name }))}
+              onChange={handleDocumentChange}
+              disabled={isUploading}
               className="w-full px-4 py-2 rounded-xl border border-gray-200 text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all bg-white"
             />
-            {formData.document && (
+            {isUploading && <p className="mt-2 text-xs text-gray-500">Uploading…</p>}
+            {formData.document && !isUploading && (
               <p className="mt-2 text-xs text-emerald-600 font-medium flex items-center gap-1">
-                <Paperclip className="w-3 h-3" /> {formData.document}
+                <Paperclip className="w-3 h-3" /> {formData.document.split('/').pop()}
+                <button type="button" onClick={() => setFormData(prev => ({ ...prev, document: '' }))} className="ml-2 text-red-500 hover:underline">Remove</button>
               </p>
             )}
           </div>
@@ -406,11 +348,12 @@ export default function NoticesPage({ addToast, forcedCategory }) {
             </button>
             <motion.button
               onClick={handleSaveNotice}
+              disabled={isUploading}
               className="px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold shadow-lg shadow-blue-500/20"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              {editingNotice ? "Update Notice" : "Publish Notice"}
+              {editingNotice ? `Update ${itemType}` : `Publish ${itemType}`}
             </motion.button>
           </div>
         </div>

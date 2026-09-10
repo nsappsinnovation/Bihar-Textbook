@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { getActivities, createActivity, markActivityRead, deleteActivity, clearActivities } from '../../services/activityService';
 import toast from 'react-hot-toast';
 
 /**
@@ -117,75 +118,36 @@ export function useClickOutside(ref, handler) {
   }, [ref, handler]);
 }
 /**
- * Hook to manage real-time activity logging
+ * Admin activity feed stored in the backend (Notifications page, navbar bell, dashboard).
+ * Every mounted copy of this hook reloads when any of them changes the feed.
  */
 export function useActivityLog() {
-  const [activities, setActivities] = useState(() => {
-    const saved = localStorage.getItem('admin_activities');
-    if (saved) return JSON.parse(saved);
-    
-    // Start with empty activities, only show actual changes
-    return [];
-  });
+  const [activities, setActivities] = useState([]);
 
-  const logActivity = useCallback((action, user = 'Admin', type = 'system', link = null, status = 'completed') => {
-    const newActivity = {
-      id: Date.now(),
-      user,
-      action,
-      type,
-      status,
-      link,
-      time: 'Just now',
-      read: false,
-      avatar: user.split(' ').map(n => n[0]).join('').toUpperCase()
-    };
-    
-    setActivities(prev => {
-      const updated = [newActivity, ...prev].slice(0, 30); // Keep last 30 for view all
-      localStorage.setItem('admin_activities', JSON.stringify(updated));
-      window.dispatchEvent(new Event('activitiesUpdated'));
-      return updated;
-    });
+  useEffect(() => {
+    const refresh = () => getActivities().then(setActivities).catch(() => {});
+    refresh();
+    window.addEventListener('activitiesUpdated', refresh);
+    return () => window.removeEventListener('activitiesUpdated', refresh);
+  }, []);
+
+  const notifyChanged = () => window.dispatchEvent(new Event('activitiesUpdated'));
+
+  // The second argument (user name) is ignored: the backend records the logged-in admin
+  const logActivity = useCallback((action, _user, type = 'system') => {
+    createActivity(action, type).then(notifyChanged).catch(() => {});
   }, []);
 
   const markAsRead = useCallback((id) => {
-    setActivities(prev => {
-      const updated = prev.map(a => a.id === id ? { ...a, read: true } : a);
-      localStorage.setItem('admin_activities', JSON.stringify(updated));
-      window.dispatchEvent(new Event('activitiesUpdated'));
-      return updated;
-    });
+    markActivityRead(id).then(notifyChanged).catch(() => {});
   }, []);
 
   const removeActivity = useCallback((id) => {
-    setActivities(prev => {
-      const updated = prev.filter(a => a.id !== id);
-      localStorage.setItem('admin_activities', JSON.stringify(updated));
-      window.dispatchEvent(new Event('activitiesUpdated'));
-      return updated;
-    });
+    deleteActivity(id).then(notifyChanged).catch(() => {});
   }, []);
 
   const clearAllActivities = useCallback(() => {
-    setActivities([]);
-    localStorage.removeItem('admin_activities');
-    window.dispatchEvent(new Event('activitiesUpdated'));
-  }, []);
-
-  useEffect(() => {
-    const handleUpdate = () => {
-      const saved = localStorage.getItem('admin_activities');
-      if (saved) setActivities(JSON.parse(saved));
-      else setActivities([]);
-    };
-
-    window.addEventListener('activitiesUpdated', handleUpdate);
-    window.addEventListener('storage', handleUpdate);
-    return () => {
-      window.removeEventListener('activitiesUpdated', handleUpdate);
-      window.removeEventListener('storage', handleUpdate);
-    };
+    clearActivities().then(notifyChanged).catch(() => {});
   }, []);
 
   return { activities, logActivity, markAsRead, removeActivity, clearAllActivities };

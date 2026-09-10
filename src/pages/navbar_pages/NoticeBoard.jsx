@@ -1,44 +1,48 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ArrowUpRight, Bell, Eye, Activity, Calendar, FileText, Award } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-import { noticesData as actualNotices } from './Notice';
-import { tendersData } from '../../data/tendersData';
+import { getNotices } from '../../services/noticeService';
 
-const combinedData = [];
-const maxLength = Math.max(actualNotices.length, tendersData.length);
+// "2026-06-22" -> "22/06/2026" ("Recent" when the item has no date)
+const toDisplayDate = (isoDate) => (isoDate ? isoDate.split('-').reverse().join('/') : 'Recent');
 
-for (let i = 0; i < maxLength; i++) {
-  if (i < actualNotices.length) {
-    const n = actualNotices[i];
-    combinedData.push({
-      id: `notice-${n.id}`,
-      category: ["Circular", "Tender"].includes(n.category) ? n.category : "Notice",
-      title: n.title,
-      date: n.date || "Recent",
-      deadline: null,
-      ref: `NTC-${n.id}`,
-      isUrgent: n.isUrgent || false,
-      fileSize: "PDF",
-      link: n.link || n.document
-    });
+// Alternate notices and tenders so the board shows a mix of both
+const buildBoardItems = (notices, tenders) => {
+  const items = [];
+  for (let i = 0; i < Math.max(notices.length, tenders.length); i++) {
+    const n = notices[i];
+    if (n) {
+      items.push({
+        id: `notice-${n.id}`,
+        category: n.category === 'Circular' ? 'Circular' : 'Notice',
+        title: n.title,
+        date: toDisplayDate(n.date),
+        deadline: null,
+        ref: `NTC-${n.id}`,
+        isUrgent: n.isUrgent,
+        fileSize: 'PDF',
+        link: n.link,
+      });
+    }
+    const t = tenders[i];
+    if (t) {
+      items.push({
+        id: `tender-${t.id}`,
+        category: 'Tender',
+        title: t.title,
+        date: toDisplayDate(t.date),
+        deadline: null,
+        ref: `TND-${t.id}`,
+        isUrgent: t.isUrgent,
+        fileSize: 'PDF',
+        link: t.link,
+      });
+    }
   }
-  if (i < tendersData.length) {
-    const t = tendersData[i];
-    combinedData.push({
-      id: `tender-${t.id}`,
-      category: "Tender",
-      title: t.title,
-      date: "Recent", 
-      deadline: null,
-      ref: `TND-${t.id}`,
-      isUrgent: false,
-      fileSize: "PDF",
-      link: t.link
-    });
-  }
-}
+  return items;
+};
 
 const NoticeCard = ({ notice }) => (
   <a 
@@ -98,15 +102,23 @@ const NoticeCard = ({ notice }) => (
 
 export default function NoticeBoard() {
   const [activeTab, setActiveTab] = useState("All");
+  const [notices, setNotices] = useState([]);
+  const [tenders, setTenders] = useState([]);
 
-  const filteredNotices = combinedData.filter(notice => 
+  useEffect(() => {
+    getNotices().then((all) => {
+      setNotices(all.filter((n) => n.type === 'Notice'));
+      setTenders(all.filter((n) => n.type === 'Tender'));
+    }).catch(() => {});
+  }, []);
+
+  const filteredNotices = buildBoardItems(notices, tenders).filter(notice => 
     activeTab === "All" ? true : notice.category === activeTab
   ).slice(0, 8); // Showing 8 for a better mix view
 
-  // Hardcoded values as per exact user requirements
-  const totalNotices = actualNotices.filter(n => n.category !== 'Circular').length;
-  const totalCirculars = actualNotices.filter(n => n.category === 'Circular').length;
-  const totalTenders = tendersData.length;
+  const totalNotices = notices.filter(n => n.category !== 'Circular').length;
+  const totalCirculars = notices.filter(n => n.category === 'Circular').length;
+  const totalTenders = tenders.length;
 
   return (
     <section className="w-full bg-[#fcfcfd] py-16 px-6 md:px-12 lg:px-24 font-sans text-slate-900 border-t border-slate-100 overflow-hidden relative">

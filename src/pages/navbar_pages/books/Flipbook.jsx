@@ -25,8 +25,8 @@ import {
     ChevronUp
 } from "lucide-react";
 import { useNavigate, useParams, Link } from "react-router-dom";
-import { getStoredTextbooksData } from "../../../utils/textbookStorage";
-import { useResolvedUrl } from "../../../utils/fileStorage";
+import { findBook } from "../../../services/bookService";
+import { fileUrl } from "../../../services/api";
 
 // Use CDN worker
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
@@ -75,10 +75,7 @@ function Flipbook({ pdfFile: propPdfFile }) {
     useEffect(() => {
         const fetchBookDetailsAndChapters = async () => {
             try {
-                const textbooksData = getStoredTextbooksData();
-                const classData = textbooksData.classes?.find((cls) => cls.id === Number(classId));
-                const allBooks = classData?.books || [];
-                const currentBook = allBooks.find(b => (b.subject || "General") === bookSubject || b.title === bookSubject);
+                const currentBook = await findBook(classId, bookSubject);
                 setBookInfo(currentBook);
 
                 // Fetch chapters list
@@ -129,12 +126,9 @@ function Flipbook({ pdfFile: propPdfFile }) {
             try {
                 setLoading(true);
 
-                // First check if the book has chapters in local storage with a custom PDF URL
-                const textbooksData = getStoredTextbooksData();
-                const classData = textbooksData.classes?.find((cls) => cls.id === Number(classId));
-                const allBooks = classData?.books || [];
-                const book = allBooks.find(b => (b.subject || "General") === bookSubject || b.title === bookSubject);
-                
+                // First check if the book has a chapter with an uploaded PDF
+                const book = await findBook(classId, bookSubject);
+
                 if (book && book.chapters) {
                     const chapterData = book.chapters.find(c => String(c.id) === String(chapterId));
                     if (chapterData && chapterData.pdfUrl) {
@@ -201,8 +195,8 @@ function Flipbook({ pdfFile: propPdfFile }) {
         return () => clearTimeout(timer);
     }, [chapterId, chapters]);
 
-    const resolvedPdf = useResolvedUrl(pdfPath);
-    const resolvedCoverImage = useResolvedUrl(bookInfo?.image);
+    const resolvedPdf = fileUrl(pdfPath);
+    const resolvedCoverImage = fileUrl(bookInfo?.image);
     const pdfFile = resolvedPdf;
 
     function onDocumentLoadSuccess({ numPages }) {

@@ -1,45 +1,16 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { FiSearch, FiFileText, FiBell, FiArrowRight, FiCalendar, FiClock, FiFilter } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
-import { noticesData } from "../../data/noticesData";
-export { noticesData };
+import { getNotices, lastUpdatedOf } from "../../services/noticeService";
 
 const Notice = () => {
-  const [liveNotices, setLiveNotices] = useState(() => {
-    const saved = localStorage.getItem('website_notices_v6');
-    if (saved) {
-      return JSON.parse(saved).filter(t => 
-        !t.category || t.category.toLowerCase() !== 'tender'
-      );
-    }
-    return noticesData;
-  });
-
-  const [lastUpdated, setLastUpdated] = useState(() => {
-    const val = localStorage.getItem('website_notices_last_updated');
-    return val ? val : null;
-  });
+  const [liveNotices, setLiveNotices] = useState([]);
 
   useEffect(() => {
-    const handleUpdate = () => {
-      const saved = localStorage.getItem('website_notices_v6');
-      if (saved) {
-        const adminNotices = JSON.parse(saved).filter(t => 
-          !t.category || t.category.toLowerCase() !== 'tender'
-        );
-        setLiveNotices(adminNotices);
-      } else {
-        setLiveNotices(noticesData);
-      }
-      
-      const updatedTime = localStorage.getItem('website_notices_last_updated');
-      if (updatedTime) {
-        setLastUpdated(updatedTime);
-      }
-    };
-    window.addEventListener('websiteDataUpdated', handleUpdate);
-    return () => window.removeEventListener('websiteDataUpdated', handleUpdate);
+    getNotices("Notice").then(setLiveNotices).catch(() => setLiveNotices([]));
   }, []);
+
+  const lastUpdated = lastUpdatedOf(liveNotices);
 
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);

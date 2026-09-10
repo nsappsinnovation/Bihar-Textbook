@@ -1,40 +1,46 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Trash2, Edit2, Save, X, LayoutGrid } from 'lucide-react';
 import Modal, { FormInput } from '../components/Modal';
 import { useActivityLog } from '../hooks/useCustomHooks';
+import { getSections, createSection, updateSection, deleteSection } from '../../services/sectionService';
+import { uploadFile } from '../../services/uploadService';
+import { fileUrl, errorMessage } from '../../services/api';
 
-export default function EducationExcellencePage({ addToast, title = "Tools & Resources", storageKey = "website_missions" }) {
+// module: section list to edit — "tr" (Tools & Resources) or "cl" (Latest Initiatives)
+export default function EducationExcellencePage({ addToast, title = "Tools & Resources", module = "tr" }) {
   const { logActivity } = useActivityLog();
-  const [missions, setMissions] = useState(() => {
-    const saved = localStorage.getItem(storageKey);
-    return saved ? JSON.parse(saved) : [
-      { id: 1, title: 'VIRTUAL REALITY LAB', desc: 'Immersive Learning Experiences', image: '/images/missions/headset.webp', link: '/vr', content: 'Our VR Lab provides students with cutting-edge immersive learning experiences across various subjects.' },
-      { id: 2, title: 'AUDIO LIBRARY', desc: 'Accessible Digital Content', image: '/images/missions/audio-book.webp', link: '/audio-books', content: 'A comprehensive collection of audiobooks and podcasts designed for accessibility and on-the-go learning.' },
-    ];
-  });
+  const [missions, setMissions] = useState([]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   const [formData, setFormData] = useState({ title: '', desc: '', link: '', image: '', content: '' });
 
-  const saveToStorage = (updated) => {
-    setMissions(updated);
-    localStorage.setItem(storageKey, JSON.stringify(updated));
-  };
+  const loadMissions = useCallback(() => {
+    getSections(module, { includeDrafts: true })
+      .then((rows) => setMissions(rows.map((row) => ({
+        id: row.id,
+        title: row.title,
+        desc: row.description || '',
+        link: row.link || '',
+        image: row.imageUrl || '',
+        content: row.content || '',
+      }))))
+      .catch(() => addToast?.('Could not load items', 'error'));
+  }, [module, addToast]);
 
-  const handleImageChange = (e) => {
+  useEffect(() => {
+    loadMissions();
+  }, [loadMissions]);
+
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      if (file.size > 1024 * 1024) {
-        addToast?.('Image is too large (Max 1MB)', 'error');
-        return;
-      }
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData(prev => ({ ...prev, image: reader.result }));
-      };
-      reader.readAsDataURL(file);
+    if (!file) return;
+    try {
+      const path = await uploadFile(file, 'image');
+      setFormData(prev => ({ ...prev, image: path }));
+    } catch (error) {
+      addToast?.(errorMessage(error, 'Image upload failed'), 'error');
     }
   };
 
@@ -50,33 +56,47 @@ export default function EducationExcellencePage({ addToast, title = "Tools & Res
     setIsModalOpen(true);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!formData.title || !formData.desc || !formData.image) {
       addToast?.('Please fill required fields', 'error');
       return;
     }
 
-    let updated;
-    if (editingItem) {
-      updated = missions.map(m => m.id === editingItem.id ? { ...m, ...formData } : m);
-      addToast?.('Item Updated', 'success');
-      logActivity(`Updated ${title}: ${formData.title}`, 'Admin', 'edit');
-    } else {
-      updated = [...missions, { id: Date.now(), ...formData }];
-      addToast?.('Item Added', 'success');
-      logActivity(`Added new ${title}: ${formData.title}`, 'Admin', 'create');
+    const section = {
+      module,
+      title: formData.title,
+      description: formData.desc,
+      link: formData.link,
+      imageUrl: formData.image,
+      content: formData.content,
+    };
+    try {
+      if (editingItem) {
+        await updateSection(editingItem.id, section);
+        addToast?.('Item Updated', 'success');
+        logActivity(`Updated ${title}: ${formData.title}`, 'Admin', 'edit');
+      } else {
+        await createSection({ ...section, sortOrder: missions.length });
+        addToast?.('Item Added', 'success');
+        logActivity(`Added new ${title}: ${formData.title}`, 'Admin', 'create');
+      }
+      setIsModalOpen(false);
+      loadMissions();
+    } catch (error) {
+      addToast?.(errorMessage(error, 'Could not save item'), 'error');
     }
-    saveToStorage(updated);
-    setIsModalOpen(false);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     const itemToDelete = missions.find(m => m.id === id);
-    const updated = missions.filter(m => m.id !== id);
-    saveToStorage(updated);
-    addToast?.('Item Deleted', 'info');
-    if (itemToDelete) {
-      logActivity(`Deleted ${title}: ${itemToDelete.title}`, 'Admin', 'delete');
+    if (!window.confirm(`Delete "${itemToDelete?.title}"?`)) return;
+    try {
+      await deleteSection(id);
+      addToast?.('Item Deleted', 'info');
+      logActivity(`Deleted ${title}: ${itemToDelete?.title}`, 'Admin', 'delete');
+      loadMissions();
+    } catch (error) {
+      addToast?.(errorMessage(error, 'Could not delete item'), 'error');
     }
   };
 
@@ -131,7 +151,7 @@ export default function EducationExcellencePage({ addToast, title = "Tools & Res
 
                 <div className="w-28 h-28 mb-6 flex items-center justify-center relative transition-transform duration-300 group-hover:scale-105 overflow-hidden rounded-2xl bg-gray-50 border border-gray-100">
                   <img loading="lazy" decoding="async" 
-                    src={mission.image} 
+                    src={fileUrl(mission.image)} 
                     alt={mission.title} 
                     className="w-full h-full object-cover"
                   />
@@ -206,7 +226,7 @@ export default function EducationExcellencePage({ addToast, title = "Tools & Res
             <div className="flex flex-col items-center justify-center w-full">
               <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-200 rounded-3xl cursor-pointer bg-gray-50/50 hover:bg-gray-50 transition-all overflow-hidden">
                 {formData.image ? (
-                  <img loading="lazy" decoding="async" src={formData.image} alt="Preview" className="w-full h-full object-cover" />
+                  <img loading="lazy" decoding="async" src={fileUrl(formData.image)} alt="Preview" className="w-full h-full object-cover" />
                 ) : (
                   <div className="flex flex-col items-center justify-center pt-5 pb-6">
                     <Plus className="w-8 h-8 text-gray-300 mb-2" />

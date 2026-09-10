@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Sidebar from './components/Sidebar';
 import Navbar from './components/Navbar';
@@ -20,17 +21,35 @@ import EmployeesManagementPage from './pages/EmployeesManagementPage';
 import CSRPolicyPage from './pages/CSRPolicyPage';
 import WebsiteManagementHub from './pages/WebsiteManagementHub';
 import NotificationsPage from './pages/NotificationsPage';
+import BookDistributionPage from './pages/BookDistributionPage';
 import { useToast } from './hooks/useCustomHooks';
+import { getMe, logout } from '../services/authService';
 
 function App() {
   const [activePage, setActivePage] = useState('dashboard');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { toasts, addToast, removeToast } = useToast();
+  const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+
+  // Only logged-in admins can see the portal
+  useEffect(() => {
+    getMe()
+      .then(setUser)
+      .catch(() => navigate('/login', { replace: true }));
+  }, [navigate]);
+
+  const handleLogout = async () => {
+    await logout().catch(() => {});
+    navigate('/login', { replace: true });
+  };
 
   const renderPage = () => {
     switch (activePage) {
       case 'dashboard':
         return <DashboardPage addToast={addToast} setActivePage={setActivePage} />;
+      case 'distribution':
+        return <BookDistributionPage addToast={addToast} />;
       case 'books':
         return <BooksPage addToast={addToast} />;
       case 'website-management':
@@ -44,7 +63,7 @@ function App() {
       case 'settings':
         return <SettingsPage addToast={addToast} />;
       case 'cl':
-        return <EducationExcellencePage addToast={addToast} title="Latest Initiatives" storageKey="website_initiatives" />;
+        return <EducationExcellencePage addToast={addToast} title="Latest Initiatives" module="cl" />;
       case 'ee':
         return <LeadersManagementPage addToast={addToast} />;
       case 'csr':
@@ -70,13 +89,15 @@ function App() {
         }
 
         if (activePage === 'tr') {
-          return <EducationExcellencePage addToast={addToast} title="Tools & Resources" storageKey="website_missions" />;
+          return <EducationExcellencePage addToast={addToast} title="Tools & Resources" module="tr" />;
         }
 
         // Default to dashboard
         return <DashboardPage addToast={addToast} setActivePage={setActivePage} />;
     }
   };
+
+  if (!user) return null;
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-sans text-gray-800 overflow-x-hidden flex">
@@ -86,6 +107,8 @@ function App() {
         setActivePage={setActivePage}
         isMobileOpen={isMobileMenuOpen}
         setIsMobileOpen={setIsMobileMenuOpen}
+        user={user}
+        onLogout={handleLogout}
       />
 
       {/* Main Content Area */}
@@ -98,6 +121,8 @@ function App() {
             setIsMobileOpen={setIsMobileMenuOpen}
             activePage={activePage}
             setActivePage={setActivePage}
+            user={user}
+            onLogout={handleLogout}
           />
 
           {/* Page Content inside the card */}

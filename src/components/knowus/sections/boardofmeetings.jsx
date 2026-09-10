@@ -1,41 +1,24 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FiUsers, FiAward, FiCalendar, FiUser, FiInfo } from 'react-icons/fi';
+import { getDirectory } from '../../../services/directoryService';
 
 
 
 const BoardOfDirectors = () => {
-  const [items, setItems] = React.useState([
-    { id: 1, name: "Shri. S. Siddharth, IAS", designation: "ACS, Dept. of Education (Chairman)", from: "Current", status: "Active" },
-    { id: 2, name: "Shri. Sunny Sinha", designation: "Managing Director", from: "Current", status: "Active" },
-    { id: 3, name: "Shri. Anand Sharma", designation: "Director, Primary Education", from: "2023", status: "Active" },
-    { id: 4, name: "Ms. Rekha Kumari", designation: "Director, Secondary Education", from: "2022", status: "Active" },
-    { id: 5, name: "Shri. Manoj Kumar", designation: "Spl. Secretary, Finance Dept.", from: "2023", status: "Active" },
-  ]);
+  const [items, setItems] = React.useState([]);
 
+  // Board members are managed in Admin → Know Us → Board of Directors
   React.useEffect(() => {
-    const loadBoard = () => {
-      const saved = localStorage.getItem('module_content_ku-board');
-      if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          if (Array.isArray(parsed)) {
-            setItems(parsed.map(item => ({
-              id: item.id,
-              name: item.name || item.title,
-              designation: item.designation,
-              from: item.organization || item.since || "Current",
-              status: item.status || "Active"
-            })));
-          }
-        } catch (e) {
-          console.error("Error loading board data", e);
-        }
-      }
-    };
-    loadBoard();
-    window.addEventListener('storage', loadBoard);
-    return () => window.removeEventListener('storage', loadBoard);
+    getDirectory('board_member')
+      .then((rows) => setItems(rows.map((row) => ({
+        id: row.id,
+        name: row.name,
+        designation: row.designation,
+        from: row.tenureFrom || "Current",
+        status: row.status || "Active",
+      }))))
+      .catch(() => setItems([]));
   }, []);
 
   return (

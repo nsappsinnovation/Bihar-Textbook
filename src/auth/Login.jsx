@@ -1,22 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import { 
-  FiMail, 
-  FiLock, 
-  FiEye, 
-  FiEyeOff, 
-  FiShield, 
-  FiBookOpen, 
-  FiUser, 
-  FiPrinter, 
-  FiCheck, 
-  FiX, 
-  FiAlertCircle 
-} from "react-icons/fi";
+import { login } from "../services/authService";
+import { FiMail, FiLock, FiEye, FiEyeOff, FiCheck, FiAlertCircle } from "react-icons/fi";
 
 const Login = () => {
-  const [role, setRole] = useState("admin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -25,13 +13,6 @@ const Login = () => {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [loginSuccess, setLoginSuccess] = useState(false);
-
-  // Forgot password modal state
-  const [isForgotModalOpen, setIsForgotModalOpen] = useState(false);
-  const [forgotEmail, setForgotEmail] = useState("");
-  const [forgotSubmitted, setForgotSubmitted] = useState(false);
-  const [forgotError, setForgotError] = useState("");
-  const [forgotLoading, setForgotLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -53,105 +34,33 @@ const Login = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
 
     setIsLoading(true);
-    
-    // Simulate login server delay
-    setTimeout(() => {
-      setIsLoading(false);
+
+    try {
+      // Backend sets the HttpOnly JWT cookie on success
+      await login(email, password);
+
       setLoginSuccess(true);
       toast.success("Login Successful! Redirecting to Admin Portal.");
-      
+
       // Navigate after success message displays
       setTimeout(() => {
         navigate("/admin");
       }, 1000);
-    }, 1500);
-  };
-
-  const handleForgotPasswordSubmit = (e) => {
-    e.preventDefault();
-    if (!forgotEmail) {
-      setForgotError("Email address is required");
-      return;
-    } else if (!/\S+@\S+\.\S+/.test(forgotEmail)) {
-      setForgotError("Please enter a valid email address");
-      return;
-    }
-    
-    setForgotError("");
-    setForgotLoading(true);
-    
-    setTimeout(() => {
-      setForgotLoading(false);
-      setForgotSubmitted(true);
-      toast.success("Password recovery instructions sent to your email!");
-    }, 1200);
-  };
-
-  const closeForgotModal = () => {
-    setIsForgotModalOpen(false);
-    setForgotEmail("");
-    setForgotSubmitted(false);
-    setForgotError("");
-  };
-
-  // Role metadata for active styling & contextual copy
-  const roleConfig = {
-    admin: {
-      color: "indigo",
-      colorClass: "indigo-950",
-      hoverClass: "indigo-900",
-      accentBg: "bg-indigo-50/70 border-indigo-100",
-      ringColor: "focus:ring-indigo-100 focus:border-indigo-500",
-      btnShadow: "shadow-[0_10px_30px_-10px_rgba(49,46,129,0.5)]",
-      title: "Admin Portal Access",
-      desc: "Sign in instantly to access the Administrator Dashboard to oversee textbooks, tenders, and library databases.",
-      illustrationDesc: "Oversee publisher registrations, textbooks list, and website notices.",
-      illustrationTitle: "System Controls"
-    },
-    teacher: {
-      color: "emerald",
-      colorClass: "emerald-700",
-      hoverClass: "emerald-600",
-      accentBg: "bg-emerald-50/70 border-emerald-100",
-      ringColor: "focus:ring-emerald-100 focus:border-emerald-500",
-      btnShadow: "shadow-[0_10px_30px_-10px_rgba(4,120,87,0.5)]",
-      title: "Teacher Portal Access",
-      desc: "Log in to access digital syllabus guidelines, classroom resources, and state teaching support materials.",
-      illustrationDesc: "Access state curricula, download lesson guides, and track learning modules.",
-      illustrationTitle: "Academic Guides"
-    },
-    student: {
-      color: "amber",
-      colorClass: "amber-600",
-      hoverClass: "amber-500",
-      accentBg: "bg-amber-50/70 border-amber-100",
-      ringColor: "focus:ring-amber-100 focus:border-amber-500",
-      btnShadow: "shadow-[0_10px_30px_-10px_rgba(217,119,6,0.5)]",
-      title: "Student Portal Access",
-      desc: "Log in to open interactive textbooks, read digital audiobooks, or access language tools.",
-      illustrationDesc: "Read digital books, take interactive quizzes, and explore audio libraries.",
-      illustrationTitle: "Digital Library"
-    },
-    publisher: {
-      color: "violet",
-      colorClass: "violet-700",
-      hoverClass: "violet-600",
-      accentBg: "bg-violet-50/70 border-violet-100",
-      ringColor: "focus:ring-violet-100 focus:border-violet-500",
-      btnShadow: "shadow-[0_10px_30px_-10px_rgba(109,40,217,0.5)]",
-      title: "Publisher Portal Access",
-      desc: "Sign in to manage textbook print queues and check tender notices.",
-      illustrationDesc: "Manage printing timelines and review tender filings.",
-      illustrationTitle: "Supply Chain Info"
+    } catch (error) {
+      const message = error.response
+        ? error.response.data?.message || "Invalid email or password"
+        : "Unable to reach the server. Please try again later.";
+      toast.error(message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  const currentRole = roleConfig[role];
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#f8fafc] px-4 py-8 relative overflow-hidden font-sans">
@@ -250,13 +159,6 @@ const Login = () => {
                 <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">
                   Password
                 </label>
-                <button
-                  type="button"
-                  onClick={() => setIsForgotModalOpen(true)}
-                  className="text-[10px] font-bold text-indigo-650 hover:text-indigo-800 tracking-widest uppercase hover:underline transition-all cursor-pointer"
-                >
-                  Forgot Password?
-                </button>
               </div>
               <div className="relative group">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-600 transition-colors">
@@ -334,106 +236,6 @@ const Login = () => {
           </form>
         </div>
       </div>
-
-      {/* ================= FORGOT PASSWORD DIALOG ================= */}
-      {isForgotModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-md">
-          <div className="bg-white rounded-3xl shadow-2xl border border-slate-100 w-full max-w-md overflow-hidden relative animate-pop p-6">
-            
-            {/* Close Button */}
-            <button
-              onClick={closeForgotModal}
-              className="absolute right-4 top-4 p-2 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition-all cursor-pointer"
-            >
-              <FiX className="text-lg" />
-            </button>
-
-            {/* Modal Content */}
-            {!forgotSubmitted ? (
-              <div className="mt-2">
-                <div className="flex justify-center mb-4 text-indigo-600">
-                  <div className="p-3 bg-indigo-50 rounded-2xl">
-                    <FiLock className="text-3xl" />
-                  </div>
-                </div>
-                
-                <h3 className="text-xl font-extrabold text-gray-950 text-center tracking-tight">Recover Password</h3>
-                <p className="text-slate-500 text-xs text-center mt-2 px-2 leading-relaxed">
-                  Enter your verified email address below. If your account is registered, we will send password reset instructions to your inbox.
-                </p>
-
-                <form onSubmit={handleForgotPasswordSubmit} className="mt-6 space-y-4">
-                  <div className="space-y-1.5">
-                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.15em] ml-1">Email Address</label>
-                    <div className="relative group">
-                      <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-650 transition-colors" />
-                      <input
-                        type="email"
-                        value={forgotEmail}
-                        onChange={(e) => {
-                          setForgotEmail(e.target.value);
-                          if (forgotError) setForgotError("");
-                        }}
-                        placeholder="name@example.com"
-                        className="w-full pl-11 pr-4 py-3.5 rounded-2xl border border-slate-200 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:border-indigo-500 transition-all bg-slate-50/50 font-medium text-slate-700 text-sm"
-                      />
-                    </div>
-                    {forgotError && (
-                      <p className="text-red-500 text-xs font-bold flex items-center gap-1 ml-1 animate-pop">
-                        <FiAlertCircle /> {forgotError}
-                      </p>
-                    )}
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={forgotLoading}
-                    className="w-full py-4 rounded-2xl bg-indigo-950 hover:bg-indigo-900 text-white font-bold text-sm shadow-[0_10px_30px_-10px_rgba(30,27,75,0.4)] transition-all cursor-pointer flex items-center justify-center gap-2"
-                  >
-                    {forgotLoading ? (
-                      <>
-                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                        </svg>
-                        <span>Sending Link...</span>
-                      </>
-                    ) : (
-                      <span>Send Recovery Instructions</span>
-                    )}
-                  </button>
-                </form>
-              </div>
-            ) : (
-              <div className="mt-2 text-center py-4 animate-pop">
-                <div className="flex justify-center mb-4 text-emerald-600">
-                  <div className="p-3 bg-emerald-50 rounded-2xl">
-                    <FiCheck className="text-3xl" />
-                  </div>
-                </div>
-                
-                <h3 className="text-xl font-extrabold text-gray-950 tracking-tight">Instructions Sent!</h3>
-                <p className="text-slate-500 text-xs mt-3 px-4 leading-relaxed">
-                  We have sent email instructions containing a password recovery link to:
-                  <span className="block font-bold text-indigo-950 mt-1 select-all">{forgotEmail}</span>
-                </p>
-                <p className="text-slate-450 text-[10px] mt-4 font-semibold italic">
-                  Note: Please check your Spam folder if you do not receive the email within a few minutes.
-                </p>
-
-                <button
-                  onClick={closeForgotModal}
-                  className="mt-6 w-full py-3.5 rounded-2xl border border-slate-200 hover:bg-slate-55 text-slate-700 font-bold text-sm transition-all cursor-pointer"
-                >
-                  Return to Sign In
-                </button>
-              </div>
-            )}
-
-          </div>
-        </div>
-      )}
-
     </div>
   );
 };

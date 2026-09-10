@@ -1,51 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-
-const defaultGalleryItems = [
-  { type: "image", src: "/images/hero/classroom.webp", alt: "Primary Classroom Learning Environment" },
-  { type: "image", src: "/images/hero/audio.webp", alt: "E-Learning & Digital Books Portal" },
-  { type: "image", src: "/images/hero/vr.webp", alt: "Mobile VR Lab Tour Experience" },
-  { type: "image", src: "/images/hero/sign.webp", alt: "Inclusive Sign Language Training Class" },
-  { type: "image", src: "/images/hero/linguistic.webp", alt: "Diverse Regional Dialects Learning Program" },
-  { type: "image", src: "/images/hero/classroom.webp", alt: "Primary Classroom Learning Environment" }
-];
+import { getSections } from '../../../services/sectionService';
+import { fileUrl } from '../../../services/api';
 
 const Photogallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [items, setItems] = useState(defaultGalleryItems);
+  const [items, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
 
+  // Photos are managed in Admin → Gallery → Photo Gallery
   useEffect(() => {
-    const loadData = () => {
-      const saved = localStorage.getItem('module_content_gl-photo');
-      if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          if (parsed && Array.isArray(parsed)) {
-            setItems(parsed.map((item) => {
-              const hasValidDoc = item.document && typeof item.document === 'string' && item.document.trim() !== "" && item.document !== "undefined" && item.document !== "null";
-              const finalSrc = hasValidDoc ? item.document : "";
-
-              return {
-                type: "image",
-                src: finalSrc,
-                alt: item.title || "Gallery Image"
-              };
-            }));
-          } else {
-             setItems(defaultGalleryItems);
-          }
-        } catch (e) {
-          console.error("Error parsing gallery images", e);
-        }
-      } else {
-        setItems(defaultGalleryItems);
-      }
-    };
-    
-    loadData();
-    window.addEventListener('storage', loadData);
-    return () => window.removeEventListener('storage', loadData);
+    getSections('gl-photo')
+      .then((rows) => setItems(rows.map((row) => ({
+        type: "image",
+        src: fileUrl(row.imageUrl) || "",
+        alt: row.title || "Gallery Image",
+      }))))
+      .catch(() => setItems([]));
   }, []);
 
   const itemsPerPage = 6;

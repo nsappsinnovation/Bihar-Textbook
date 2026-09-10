@@ -14,7 +14,8 @@ import {
 } from "react-icons/fa";
 import { Menu, Search } from "lucide-react";
 import Sidebar from "../../../components/Sidebar";
-import { getStoredTextbooksData } from "../../../utils/textbookStorage";
+import { CLASSES, findBook } from "../../../services/bookService";
+import { fileUrl } from "../../../services/api";
 
 const BookReader = () => {
     const { classId, bookSubject } = useParams();
@@ -25,15 +26,7 @@ const BookReader = () => {
     const [loading, setLoading] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
 
-    const [textbookData, setTextbookData] = useState(() => getStoredTextbooksData());
-
-    useEffect(() => {
-        const handleStorageUpdate = () => {
-            setTextbookData(getStoredTextbooksData());
-        };
-        window.addEventListener("textbooks_updated", handleStorageUpdate);
-        return () => window.removeEventListener("textbooks_updated", handleStorageUpdate);
-    }, []);
+    const [book, setBook] = useState(null);
 
     const toggleSection = (index) => {
         setOpenSection(openSection === index ? null : index);
@@ -44,28 +37,22 @@ const BookReader = () => {
         (c.hindiTitle && c.hindiTitle.toLowerCase().includes(searchQuery.toLowerCase()))
     );
 
-    // Get book data for image
-    const classData = textbookData.classes?.find((cls) => cls.id === Number(classId));
-    const allBooks = classData?.books || [];
-    const book = allBooks.find(b => (b.subject || "General") === bookSubject || b.title === bookSubject);
-    const bookImage = book?.image || "/images/placeholders/no-cover.webp";
+    const bookImage = fileUrl(book?.image) || "/images/placeholders/no-cover.webp";
     const bookTitle = book?.title || bookSubject || "Hindi";
 
     useEffect(() => {
         setIsSidebarOpen(false);
     }, [classId, bookSubject]);
 
-    // Fetch chapters from manifest or local storage
+    // Fetch the book and its chapters from the API (manifest / static list as fallback)
     useEffect(() => {
         const fetchChapters = async () => {
             try {
-                // First check if the book has chapters in local storage
-                const classDataLocal = textbookData.classes?.find((cls) => cls.id === Number(classId));
-                const allBooksLocal = classDataLocal?.books || [];
-                const bookLocal = allBooksLocal.find(b => (b.subject || "General") === bookSubject || b.title === bookSubject);
+                const bookFromApi = await findBook(classId, bookSubject);
+                setBook(bookFromApi);
 
-                if (bookLocal && bookLocal.chapters && bookLocal.chapters.length > 0) {
-                    setChapters(bookLocal.chapters);
+                if (bookFromApi && bookFromApi.chapters.length > 0) {
+                    setChapters(bookFromApi.chapters);
                     setLoading(false);
                     return;
                 }
@@ -126,7 +113,7 @@ const BookReader = () => {
                     ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
                 `}
             >
-                <Sidebar classes={textbookData.classes || []} currentClassId={classId} />
+                <Sidebar classes={CLASSES} currentClassId={classId} />
             </aside>
 
             {/* Main Content */}

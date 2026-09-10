@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   LayoutDashboard,
+  Truck,
   Users,
   Bell,
   Building2,
@@ -28,6 +29,7 @@ const navGroups = [
     title: 'MANAGEMENT',
     items: [
       { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+      { id: 'distribution', label: 'Book Distribution', icon: Truck },
       { 
         id: 'ee', 
         label: 'Leaders', 
@@ -87,22 +89,8 @@ const navGroups = [
   }
 ];
 
-export default function Sidebar({ activePage, setActivePage, isMobileOpen, setIsMobileOpen }) {
+export default function Sidebar({ activePage, setActivePage, isMobileOpen, setIsMobileOpen, onLogout }) {
   const [expandedItems, setExpandedItems] = useState([]); // All sections closed by default
-  const [userSettings, setUserSettings] = useState(() => {
-    const saved = localStorage.getItem('adminSettings');
-    return saved ? JSON.parse(saved) : { firstName: 'Anushka', lastName: 'Nandan', bio: 'ADMIN' };
-  });
-
-  useEffect(() => {
-    const handleUpdate = () => {
-      const saved = localStorage.getItem('adminSettings');
-      if (saved) setUserSettings(JSON.parse(saved));
-    };
-
-    window.addEventListener('settingsUpdated', handleUpdate);
-    return () => window.removeEventListener('settingsUpdated', handleUpdate);
-  }, []);
 
   const handleNavClick = (item) => {
     if (item.hasSubItems) {
@@ -201,7 +189,7 @@ export default function Sidebar({ activePage, setActivePage, isMobileOpen, setIs
       <div className="p-3 mt-auto space-y-4">
         {/* Log out */}
         <button 
-          onClick={() => window.location.href = '/'}
+          onClick={onLogout}
           className="w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-[13px] font-semibold text-[#6B7280] hover:bg-red-50 hover:text-red-600 transition-all group"
         >
           <LogOut className="w-[18px] h-[18px] text-gray-400 group-hover:text-red-500" />

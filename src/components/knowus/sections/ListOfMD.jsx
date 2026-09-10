@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Calendar, User, Clock } from 'lucide-react';
-import { motion } from 'framer-motion'; 
+import { motion } from 'framer-motion';
+import { getDirectory } from '../../../services/directoryService';
 
 
 
@@ -16,75 +17,18 @@ const getInitials = (name) => {
 
 const ListOfMD = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [list, setList] = useState([
-    { id: 1, name: "Shri Sunny Sinha", from: "29/11/2023", to: "29/04/2024" },
-    { id: 2, name: "Shri Baidya Nath Yadav, IAS", from: "09/04/2023", to: "29/11/2023" },
-    { id: 3, name: "Shri Manoj Kumar IAS", from: "05/08/2021", to: "31/12/2022" },
-    { id: 4, name: "Dr. Ranjit Kumar Singh IAS", from: "18/09/2019", to: "30/07/2021" },
-    { id: 5, name: "Shri Arvind Kumar Verma IAS", from: "14/05/2018", to: "31/08/2019" },
-    { id: 6, name: "Shri M. Ramchandrudu IAS", from: "31/10/2016", to: "14/05/2018" },
-    { id: 7, name: "Shri Vishaw Mohan Patel IAS", from: "04/07/2015", to: "31/10/2016" },
-    { id: 8, name: "Shri K. Senthil Kumar IAS", from: "06/04/2015", to: "04/07/2015" },
-    { id: 9, name: "Shri Dilip Kumar IAS", from: "18/12/2014", to: "06/04/2015" },
-    { id: 10, name: "Shri J.K.P. Singh I.R.P.S", from: "28/09/2011", to: "18/12/2014" },
-    { id: 11, name: "Shri Ashutosh IAS", from: "06/05/2009", to: "28/09/2011" },
-    { id: 12, name: "Hasnain Ahmad IAS", from: "18/03/2008", to: "30/04/2009" },
-    { id: 13, name: "Freaq Ahmad IAS", from: "11/06/2007", to: "17/03/2008" },
-    { id: 14, name: "Shri Ashok Kumar Singh IAS", from: "07/05/2007", to: "30/06/2007" },
-    { id: 15, name: "Shri Vaidhnath Mishra IAS", from: "04/03/2006", to: "30/04/2007" },
-    { id: 16, name: "Shri Ashok Kumar Singh IAS", from: "10/02/2006", to: "23/02/2006" },
-    { id: 17, name: "Shri R.S.B. Singh IAS", from: "15/04/2005", to: "31/12/2005" },
-    { id: 18, name: "Shri Maheshwar Prasad Singh IAS", from: "04/01/2001", to: "14/04/2005" },
-    { id: 19, name: "Shri Vaidhnath Prasad IAS", from: "16/12/2000", to: "03/01/2001" },
-    { id: 20, name: "Shri Avinash Kumar IAS", from: "19/05/2000", to: "27/11/2000" },
-    { id: 21, name: "Shri Arvind Kumar Choudhary IAS", from: "20/08/1999", to: "14/05/2000" },
-    { id: 22, name: "Shri W.N. Singh B.A.S", from: "06/10/1998", to: "19/08/1999" },
-    { id: 23, name: "Shri Dipak Kumar IAS", from: "09/07/1998", to: "05/10/1998" },
-    { id: 24, name: "Shri S. Shamimuddin IAS", from: "01/12/1997", to: "08/07/1998" },
-    { id: 25, name: "Shri Badunath Prasad Rai IAS", from: "26/09/1996", to: "30/11/1997" },
-    { id: 26, name: "Shri Vishnu Kumar IAS", from: "26/07/1996", to: "21/09/1996" },
-    { id: 27, name: "Shri Vijay Prakash IAS", from: "03/06/1995", to: "26/07/1996" },
-    { id: 28, name: "Shri Ram Krishan Khandelwal IAS", from: "13/07/1994", to: "13/06/1995" },
-    { id: 29, name: "Shri B.P. Choudhary IAS", from: "07/12/1992", to: "15/04/1993" },
-    { id: 30, name: "Shri Indu Shekhar Chaturvedi IAS", from: "01/10/1992", to: "07/12/1992" },
-    { id: 31, name: "Shri A.B. Chaturvedi IAS", from: "28/02/1992", to: "01/10/1992" },
-    { id: 32, name: "Shri Phool Singh IAS", from: "28/08/1991", to: "28/02/1992" },
-    { id: 33, name: "Shri N.K. Sinha IAS", from: "05/06/1991", to: "28/08/1991" },
-    { id: 34, name: "Shri B. Ram", from: "14/10/1977", to: "16/12/1977" },
-    { id: 35, name: "Shri B.P. Sinha", from: "17/07/1975", to: "14/10/1977" },
-    { id: 36, name: "Shri Mithilesh Kumar IAS", from: "13/06/1989", to: "05/06/1991" },
-    { id: 37, name: "Shri H.K. Prasad IAS", from: "07/12/1986", to: "13/06/1989" },
-    { id: 38, name: "Shri A.K. Dubey IAS", from: "06/12/1986", to: "07/12/1986" },
-    { id: 39, name: "Shri Pancham Lal IAS", from: "22/05/1986", to: "25/11/1986" },
-    { id: 40, name: "Shri B.N. Choudhary IAS", from: "12/09/1984", to: "22/05/1986" },
-    { id: 41, name: "Shri R.C.P. Verma", from: "15/10/1980", to: "08/06/1981" },
-    { id: 42, name: "Shrimati Krishna Singh IAS", from: "16/12/1977", to: "07/06/1978" },
-    { id: 43, name: "Shri R.N. Rai", from: "08/06/1981", to: "14/07/1981" },
-    { id: 44, name: "Shri R.S. Chaube", from: "05/03/1975", to: "17/07/1975" }
-  ]);
+  const [list, setList] = useState([]);
 
+  // Past MDs are managed in Admin → Know Us → List of MD
   useEffect(() => {
-    const loadList = () => {
-      const saved = localStorage.getItem('module_content_ku-list-md');
-      if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          if (Array.isArray(parsed)) {
-            setList(parsed.map(item => ({
-              id: item.id,
-              name: (item.name || item.title || '').replace(/^Sri\b/gi, 'Shri'),
-              from: item.from,
-              to: item.to
-            })));
-          }
-        } catch (e) {
-          console.error("Error loading MD list", e);
-        }
-      }
-    };
-    loadList();
-    window.addEventListener('storage', loadList);
-    return () => window.removeEventListener('storage', loadList);
+    getDirectory('past_md')
+      .then((rows) => setList(rows.map((row) => ({
+        id: row.id,
+        name: row.name,
+        from: row.tenureFrom,
+        to: row.tenureTo,
+      }))))
+      .catch(() => setList([]));
   }, []);
 
   const filteredList = list.filter(md => 

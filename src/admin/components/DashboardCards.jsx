@@ -100,7 +100,8 @@ function StatCard({ stat, index }) {
           <Icon className="w-6 h-6 text-white" />
         </div>
 
-        {/* Sparkline */}
+        {/* Sparkline (only when the stat has trend data) */}
+        {stat.sparkline?.length > 1 && (
         <svg width="100" height="32" className="opacity-60 group-hover:opacity-100 transition-opacity">
           <defs>
             <linearGradient id={`gradient-${stat.id}`} x1="0" y1="0" x2="0" y2="1">
@@ -121,6 +122,7 @@ function StatCard({ stat, index }) {
             fill={`url(#gradient-${stat.id})`}
           />
         </svg>
+        )}
       </div>
 
       {/* Value */}

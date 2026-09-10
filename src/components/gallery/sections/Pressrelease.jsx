@@ -1,72 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, FileText, ArrowRight, FileDown, X } from 'lucide-react';
-
-const pressReleases = [
-  {
-    id: 1,
-    date: "October 15, 2025",
-    title: "Launch of Digital Learning Initiatives Across 500 Schools",
-    excerpt: "The State Text Book Publishing Corporation today announced a major rollout of VR and AR educational tools, aiming to modernize learning infrastructure in rural districts.",
-    category: "Initiatives",
-    fileSize: "1.2 MB",
-    cardStyle: "gradient", // Solid blue/indigo gradient
-    image: "/images/hero/classroom.webp"
-  },
-  {
-    id: 2,
-    date: "September 28, 2025",
-    title: "New Curriculum Guidelines Released for Upcoming Academic Year",
-    excerpt: "Updated guidelines emphasize regional history, environmental awareness, and foundational literacy skills. All textbooks have been revised accordingly.",
-    category: "Curriculum",
-    fileSize: "4.5 MB",
-    cardStyle: "image", // Library image background
-    image: "/images/hero/audio.webp"
-  },
-  {
-    id: 3,
-    date: "August 10, 2025",
-    title: "Partnership Announced with National Digital Library",
-    excerpt: "To expand access to supplementary reading materials across remote districts, a strategic partnership has been formalized.",
-    category: "Partnerships",
-    fileSize: "800 KB",
-    cardStyle: "glass", // White glass panel
-    image: "/images/hero/vr.webp"
-  }
-];
+import { getSections } from '../../../services/sectionService';
+import { fileUrl } from '../../../services/api';
 
 const Pressrelease = () => {
   const [selectedRelease, setSelectedRelease] = useState(null);
-  const [items, setItems] = useState(pressReleases);
+  const [items, setItems] = useState([]);
 
+  // Press releases are managed in Admin → Gallery → Press Release
   useEffect(() => {
-    const loadData = () => {
-      const saved = localStorage.getItem('module_content_gl-press');
-      if (saved) {
-        try {
-          const parsed = JSON.parse(saved);
-          if (parsed && Array.isArray(parsed)) {
-            setItems(parsed.map((item, index) => ({
-              id: item.id || Date.now() + index,
-              date: item.date ? new Date(item.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
-              title: item.title || "Press Release",
-              excerpt: item.desc || "Official press release.",
-              category: item.category || "General",
-              fileSize: "1.2 MB",
-              cardStyle: index % 3 === 0 ? "gradient" : index % 3 === 1 ? "image" : "glass",
-              image: item.document || null,
-              fileUrl: item.document
-            })));
-          }
-        } catch (e) {
-          console.error("Error parsing press release items", e);
-        }
-      }
-    };
-    
-    loadData();
-    window.addEventListener('storage', loadData);
-    return () => window.removeEventListener('storage', loadData);
+    const formatDate = (date) =>
+      (date ? new Date(date) : new Date()).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+    getSections('gl-press')
+      .then((rows) => setItems(rows.map((row, index) => ({
+        id: row.id,
+        date: formatDate(row.publishDate),
+        title: row.title || "Press Release",
+        excerpt: row.description || "Official press release.",
+        category: row.category || "General",
+        fileSize: "1.2 MB",
+        cardStyle: index % 3 === 0 ? "gradient" : index % 3 === 1 ? "image" : "glass",
+        image: fileUrl(row.imageUrl) || null,
+        fileUrl: fileUrl(row.imageUrl),
+      }))))
+      .catch(() => setItems([]));
   }, []);
 
   const handleDownload = (e, release) => {

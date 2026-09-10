@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Users, 
@@ -17,40 +17,27 @@ import {
 } from 'lucide-react';
 import Modal, { FormInput } from '../components/Modal';
 import { useActivityLog } from '../hooks/useCustomHooks';
+import { getDirectory, createDirectoryRow, updateDirectoryRow, deleteDirectoryRow } from '../../services/directoryService';
+import { errorMessage } from '../../services/api';
 
 /**
  * Employees Management Page
  * Featuring real-time stats and a professional directory table
  */
+const TYPE = 'employee';
+
+// Directory row → employee shown in the table (employment type is stored in `tag`)
+const toEmployee = (row) => ({
+  id: row.id,
+  name: row.name,
+  designation: row.designation || '',
+  type: row.tag || 'Regular',
+  department: row.department || '',
+});
+
 export default function EmployeesManagementPage({ addToast }) {
   const { logActivity } = useActivityLog();
-  const storageKey = 'module_content_ku-employee_v2';
-  
-  const [employees, setEmployees] = useState(() => {
-    const saved = localStorage.getItem(storageKey);
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (Array.isArray(parsed)) {
-          return parsed.filter(emp => emp.type !== 'Outsource');
-        }
-      } catch (e) {
-        console.error("Error parsing stored employees", e);
-      }
-    }
-    return [
-      { id: 1, employeeId: 'EMP001', name: 'Azimul Hassan', designation: 'Assistant Cum Cashier', type: 'Regular', department: 'Establishment' },
-      { id: 2, employeeId: 'EMP002', name: 'Binod Kumar', designation: 'Sales Assistant', type: 'Regular', department: 'Sales' },
-      { id: 3, employeeId: 'EMP003', name: 'Santosh Kumar', designation: 'Dispatch', type: 'Regular', department: 'Dispatch' },
-      { id: 4, employeeId: 'EMP004', name: 'Rajesh Hembrom', designation: 'Security Encharge', type: 'Regular', department: 'Security' },
-      { id: 5, employeeId: 'EMP005', name: 'Binod Kumar', designation: 'Peon', type: 'Regular', department: 'MD Cell' },
-      { id: 6, employeeId: 'EMP006', name: 'Rakesh Kumar', designation: 'Account Assistant', type: 'Contract', department: 'Accounts' },
-      { id: 7, employeeId: 'EMP007', name: 'Sukriti Kumari', designation: 'Account Assistant', type: 'Contract', department: 'Accounts' },
-      { id: 8, employeeId: 'EMP008', name: 'MD Ashad', designation: 'Assistant', type: 'Contract', department: 'Accounts' },
-      { id: 9, employeeId: 'EMP009', name: 'KN Rai', designation: 'Assistant', type: 'Contract', department: 'Legal' },
-      { id: 10, employeeId: 'EMP010', name: 'CK Yadav', designation: 'Sales Assistant', type: 'Contract', department: 'Sales' }
-    ];
-  });
+  const [employees, setEmployees] = useState([]);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -62,10 +49,15 @@ export default function EmployeesManagementPage({ addToast }) {
     department: ''
   });
 
-  const saveToStorage = (updated) => {
-    setEmployees(updated);
-    localStorage.setItem(storageKey, JSON.stringify(updated));
-  };
+  const loadEmployees = useCallback(() => {
+    getDirectory(TYPE)
+      .then((rows) => setEmployees(rows.map(toEmployee)))
+      .catch(() => addToast?.('Could not load employees', 'error'));
+  }, [addToast]);
+
+  useEffect(() => {
+    loadEmployees();
+  }, [loadEmployees]);
 
   const handleOpenAdd = () => {
     setEditingEmployee(null);
@@ -84,33 +76,40 @@ export default function EmployeesManagementPage({ addToast }) {
     setIsModalOpen(true);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!formData.name || !formData.designation) {
       addToast?.('Please fill all required fields', 'error');
       return;
     }
 
-    let updated;
-    if (editingEmployee) {
-      updated = employees.map(e => e.id === editingEmployee.id ? { ...e, ...formData } : e);
-      addToast?.('Employee details updated', 'success');
-      logActivity(`Updated Employee: ${formData.name}`, 'Admin', 'edit');
-    } else {
-      updated = [...employees, { id: Date.now(), ...formData }];
-      addToast?.('New employee added to registry', 'success');
-      logActivity(`Added new Employee: ${formData.name}`, 'Admin', 'create');
+    const row = { name: formData.name, designation: formData.designation, department: formData.department, tag: formData.type };
+    try {
+      if (editingEmployee) {
+        await updateDirectoryRow(TYPE, editingEmployee.id, row);
+        addToast?.('Employee details updated', 'success');
+        logActivity(`Updated Employee: ${formData.name}`, 'Admin', 'edit');
+      } else {
+        await createDirectoryRow(TYPE, { ...row, sortOrder: employees.length });
+        addToast?.('New employee added to registry', 'success');
+        logActivity(`Added new Employee: ${formData.name}`, 'Admin', 'create');
+      }
+      setIsModalOpen(false);
+      loadEmployees();
+    } catch (error) {
+      addToast?.(errorMessage(error, 'Could not save employee'), 'error');
     }
-    saveToStorage(updated);
-    setIsModalOpen(false);
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     const empToDelete = employees.find(e => e.id === id);
-    const updated = employees.filter(e => e.id !== id);
-    saveToStorage(updated);
-    addToast?.('Employee removed from registry', 'info');
-    if (empToDelete) {
-      logActivity(`Removed Employee: ${empToDelete.name}`, 'Admin', 'delete');
+    if (!window.confirm(`Remove ${empToDelete?.name}?`)) return;
+    try {
+      await deleteDirectoryRow(TYPE, id);
+      addToast?.('Employee removed from registry', 'info');
+      logActivity(`Removed Employee: ${empToDelete?.name}`, 'Admin', 'delete');
+      loadEmployees();
+    } catch (error) {
+      addToast?.(errorMessage(error, 'Could not remove employee'), 'error');
     }
   };
 

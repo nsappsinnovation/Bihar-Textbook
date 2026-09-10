@@ -1,41 +1,17 @@
 import React, { useState, useMemo } from "react";
 import { FiSearch, FiFileText, FiBell, FiArrowRight, FiCalendar, FiClock, FiFilter } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
-import { tendersData } from "../data/tendersData.js";
 import { useEffect } from "react";
+import { getNotices, lastUpdatedOf } from "../services/noticeService";
 
 const Tenders = () => {
-  const [liveTenders, setLiveTenders] = useState(() => {
-    const saved = localStorage.getItem('website_notices_v6');
-    if (saved) {
-      return JSON.parse(saved).filter(t => t.category && t.category.toLowerCase() === 'tender');
-    }
-    return tendersData;
-  });
-
-  const [lastUpdated, setLastUpdated] = useState(() => {
-    const val = localStorage.getItem('website_notices_last_updated');
-    return val ? val : null;
-  });
+  const [liveTenders, setLiveTenders] = useState([]);
 
   useEffect(() => {
-    const handleUpdate = () => {
-      const saved = localStorage.getItem('website_notices_v6');
-      if (saved) {
-        const adminTenders = JSON.parse(saved).filter(t => t.category && t.category.toLowerCase() === 'tender');
-        setLiveTenders(adminTenders);
-      } else {
-        setLiveTenders(tendersData);
-      }
-
-      const updatedTime = localStorage.getItem('website_notices_last_updated');
-      if (updatedTime) {
-        setLastUpdated(updatedTime);
-      }
-    };
-    window.addEventListener('websiteDataUpdated', handleUpdate);
-    return () => window.removeEventListener('websiteDataUpdated', handleUpdate);
+    getNotices("Tender").then(setLiveTenders).catch(() => setLiveTenders([]));
   }, []);
+
+  const lastUpdated = lastUpdatedOf(liveTenders);
 
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);

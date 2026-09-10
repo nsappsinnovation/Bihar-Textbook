@@ -5,7 +5,8 @@ import {
   Target, LineChart, Info, BookMarked, ScrollText,
   Download, Printer, ArrowUp, List, ChevronDown, FileDown
 } from "lucide-react";
-import { csrPolicyContents, romanize, loadCsrPolicy } from "../data/csrPolicyData";
+import { csrPolicyDefaults, csrPolicyContents, romanize, loadCsrPolicy } from "../data/csrPolicyData";
+import { fileUrl } from "../services/api";
 
 const sectionIcons = {
   introduction: FileText,
@@ -134,17 +135,15 @@ const DownloadButton = ({ url, fileName, size, variant = "primary", className = 
 };
 
 const CsrPolicy = () => {
-  const [csr, setCsr] = useState(loadCsrPolicy);
+  const [csr, setCsr] = useState(csrPolicyDefaults);
   const [activeSection, setActiveSection] = useState("introduction");
   const [progress, setProgress] = useState(0);
   const [showTop, setShowTop] = useState(false);
   const [mobileTocOpen, setMobileTocOpen] = useState(false);
 
-  /* Stay in sync when an admin saves from the CSR Policy Hub */
+  /* Content is managed in Admin → CSR Policy */
   useEffect(() => {
-    const onUpdate = () => setCsr(loadCsrPolicy());
-    window.addEventListener("websiteDataUpdated", onUpdate);
-    return () => window.removeEventListener("websiteDataUpdated", onUpdate);
+    loadCsrPolicy().then(setCsr);
   }, []);
 
   /* Reading progress + back-to-top visibility */
@@ -243,7 +242,7 @@ const CsrPolicy = () => {
               className="mt-10 flex flex-col sm:flex-row gap-3"
             >
               <DownloadButton
-                url={csr.pdfUrl}
+                url={fileUrl(csr.pdfUrl)}
                 fileName={csr.pdfFileName}
                 size={csr.pdfSizeLabel}
               />
@@ -452,7 +451,7 @@ const CsrPolicy = () => {
             {activeSection === "annexure" && (
               <Section no={10} anchor="annexure" title="Annexure">
                 <a
-                  href={csr.pdfUrl}
+                  href={fileUrl(csr.pdfUrl)}
                   download={csr.pdfFileName}
                   className="group flex items-center gap-4 bg-slate-50 hover:bg-blue-50 border border-slate-200 hover:border-blue-200 rounded-2xl px-5 py-5 transition-colors"
                 >

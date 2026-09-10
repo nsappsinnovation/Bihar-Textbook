@@ -4,7 +4,8 @@ import {
   BookOpen, CalendarCheck, ShieldCheck, UserCheck, 
   Monitor, Target, TrendingUp, ChevronsRight, Star, Award, Quote, GraduationCap
 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { getSetting } from '../../../services/settingService';
+import { fileUrl } from '../../../services/api';
 
 const MdMessage = () => {
   const [mdData, setMdData] = useState({
@@ -13,22 +14,11 @@ const MdMessage = () => {
     welcomeNote: 'It gives me immense pleasure to connect with all stakeholders through this platform. The Bihar State Text Book Publishing Corporation Ltd. plays a pivotal role in strengthening the foundation of education by ensuring the timely production and distribution of quality textbooks across the state.'
   });
 
+  // Managed in Admin → Know Us → MD Message; the values above are shown until it loads
   useEffect(() => {
-    const saved = localStorage.getItem('module_content_ku-md-message');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        if (parsed) {
-          if (parsed.name) {
-            parsed.name = parsed.name.replace(/^Sri\b/gi, 'Shri');
-          }
-          if (!parsed.photo || parsed.photo.startsWith('blob:')) {
-            parsed.photo = '/images/KeyParticipants/shri_yatendra_pal.webp';
-          }
-          setMdData(prev => ({ ...prev, ...parsed }));
-        }
-      } catch (e) {}
-    }
+    getSetting('md_message')
+      .then((value) => value && setMdData((prev) => ({ ...prev, ...value, photo: fileUrl(value.photo) || prev.photo })))
+      .catch(() => {});
   }, []);
 
   return (

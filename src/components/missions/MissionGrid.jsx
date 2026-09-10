@@ -1,83 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { getSections } from '../../services/sectionService';
+import { fileUrl } from '../../services/api';
+
+// Built-in icons have a hover variant named "<name>hov.webp"; uploaded icons reuse the same image
+const hoverImageFor = (image) =>
+    image?.startsWith('/images/missions/') ? image.replace(/\.webp$/, 'hov.webp') : fileUrl(image);
 
 const MissionGrid = () => {
-    const defaultMissions = [
-        {
-            id: 1,
-            title: "Virtual Reality Lab",
-            desc: "Immersive Learning Experiences",
-            image: "/images/missions/headset.webp",
-            hoverImage: "/images/missions/headsethov.webp",
-            link: "/vr-dashboard",
-            accent: "blue"
-        },
-        {
-            id: 2,
-            title: "Audio Library",
-            desc: "Accessible Digital Content",
-            image: "/images/missions/audio-book.webp",
-            hoverImage: "/images/missions/audio-bookhov.webp",
-            link: "/audio-library-dashboard",
-            accent: "blue"
-        },
-        {
-            id: 3,
-            title: "Sign Language",
-            desc: "Learn Indian Sign Language",
-            image: "/images/missions/friend.webp",
-            hoverImage: "/images/missions/friendhov.webp",
-            link: "/sign-learn",
-            accent: "blue"
-        },
-        {
-            id: 4,
-            title: "Diverse Language",
-            desc: "Explore New Languages",
-            image: "/images/missions/diverse.webp",
-            hoverImage: "/images/missions/diversehov.webp",
-            link: "/ling",
-            accent: "blue"
-        },
-        {
-            id: 5,
-            title: "Artificial Intelligence",
-            desc: "Learn AI Basics",
-            image: "/images/missions/ai.webp",
-            hoverImage: "/images/missions/aihov.webp",
-            link: "/ai-intelligence-dashboard",
-            accent: "blue"
-        },
-        {
-            id: 7,
-            title: "Cyber Security",
-            desc: "Digital Safety Guidelines",
-            image: "/images/missions/cyber-security.webp",
-            hoverImage: "/images/missions/cyber-securityhov.webp",
-            link: "/cyber-security-dashboard",
-            accent: "blue"
-        },
-        {
-            id: 8,
-            title: "Heritage Archive",
-            desc: "Learn about Heritage",
-            image: "/images/missions/history.webp",
-            hoverImage: "/images/missions/historyhov.webp",
-            link: "/heritage-dashboard",
-            accent: "blue"
-        },
-        {
-            id: 10,
-            title: "Basic Learning Skills",
-            desc: "Foundational Learning Tools",
-            image: "/images/missions/abilities.webp",
-            hoverImage: "/images/missions/abilitieshov.webp",
-            link: "/life-skills",
-            accent: "emerald"
-        }
-    ];
+    // Items are managed in Admin → Tools & Resources
+    const [missions, setMissions] = useState([]);
 
-    const missions = defaultMissions;
+    useEffect(() => {
+        getSections('tr')
+            .then((rows) => setMissions(rows.map((row) => ({
+                id: row.id,
+                title: row.title,
+                desc: row.description,
+                image: fileUrl(row.imageUrl),
+                hoverImage: hoverImageFor(row.imageUrl),
+                link: row.link,
+            }))))
+            .catch(() => setMissions([]));
+    }, []);
 
     return (
         <section id="missions-grid" className="pt-28 lg:pt-36 pb-16 px-4 md:px-8 bg-white font-sans">
