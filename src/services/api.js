@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
+// Set VITE_API_URL in .env (local) and in Vercel → Settings → Environment Variables (production)
+export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 // Shared client for BiharTextBookBackend. withCredentials sends the HttpOnly JWT cookie.
 const api = axios.create({
