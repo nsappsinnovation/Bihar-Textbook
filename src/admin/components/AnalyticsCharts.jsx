@@ -4,7 +4,7 @@ import { TrendingUp, BarChart3, Package } from 'lucide-react';
 import { recentYears } from '../../services/dashboardService';
 
 /**
- * Custom tooltip for 
+ * Custom tooltip 
  */
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
