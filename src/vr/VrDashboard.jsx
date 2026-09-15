@@ -107,7 +107,7 @@ const VrDashboard = () => {
 
               <div className="hidden lg:block absolute top-0 right-0 w-[55%] h-full">
                  <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
-                 <img src="/images/vr/rhs.png" alt={t('vrDashboard.heroAlt')} className="w-full h-full object-cover object-right-top" />
+                 <img src="/images/vr/rhs.webp" onError={(e) => { e.currentTarget.src = "/images/vr/rhs.png"; }} alt={t('vrDashboard.heroAlt')} className="w-full h-full object-cover object-right-top" />
               </div>
             </section>
 
