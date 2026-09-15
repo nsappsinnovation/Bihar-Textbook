@@ -6329,5 +6329,31 @@
     "companiesAct": "Companies Act, 2013",
     "scheduleVII": "Schedule VII",
     "csrRules": "CSR Rules, 2014"
+  },
+  "rtiPage": {
+    "titlePart1": "Right To",
+    "titleHighlight": "Information",
+    "titlePart2": "(RTI)",
+    "subtitle": "Ensuring transparency and accountability in governance through the Right to Information Act, 2005.",
+    "nodalOfficer": "Nodal Officer",
+    "pioLabel": "Public Information Officer",
+    "phoneLabel": "Contact Number",
+    "emailLabel": "Email Address",
+    "addressLabel": "Office Address",
+    "defaultOfficer": "Shri. Rajesh Kumar",
+    "defaultAddress": "Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001",
+    "fileOnline": "File Online RTI",
+    "proactiveDisclosures": "Proactive Disclosures",
+    "disclosuresIntro": "Under Section 4(1)(b) of the RTI Act 2005, every public authority has the obligation to provide information to the public at regular intervals through various means of communication.",
+    "items": {
+      "orgStructure": "Organization Structure",
+      "duties": "Duties & Responsibilities",
+      "decisionMaking": "Decision Making Process",
+      "directory": "Directory of Officers",
+      "remuneration": "Monthly Remuneration",
+      "budget": "Budget Allocation",
+      "subsidy": "Execution of Subsidy Programs",
+      "licenses": "Grant of Licenses"
+    }
   }
 }
