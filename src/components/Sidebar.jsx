@@ -1,8 +1,12 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useBookTranslation } from "../utils/useBookTranslation";
 
 const Sidebar = ({ classes, currentClassId }) => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
+    const { translateClassName } = useBookTranslation();
 
     // Manual drag-to-scroll state
     const listRef = useRef(null);
@@ -37,7 +41,7 @@ const Sidebar = ({ classes, currentClassId }) => {
         <div className="w-full md:w-64 flex-shrink-0 flex flex-col pt-6 px-4 h-full z-30 select-none overflow-hidden">
             <div className="shrink-0">
                 <div className="px-3 mb-2 flex items-center justify-between">
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Classes</span>
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{t("sidebar.classrooms", "Classes")}</span>
                 </div>
             </div>
 
@@ -81,7 +85,7 @@ const Sidebar = ({ classes, currentClassId }) => {
                                         >
                                             {cls.id}
                                         </div>
-                                        <span className="text-sm font-bold tracking-tight">{cls.name}</span>
+                                        <span className="text-sm font-bold tracking-tight">{translateClassName(cls.name)}</span>
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +93,7 @@ const Sidebar = ({ classes, currentClassId }) => {
                     })
                 ) : (
                     <div className="py-12 text-center text-slate-400">
-                        <p className="text-sm font-bold">No results found</p>
+                        <p className="text-sm font-bold">{t("sidebar.noResults", "No results found")}</p>
                     </div>
                 )}
             </div>

@@ -1,11 +1,15 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { CLASSES, getBooksByClass } from "../../../services/bookService";
 import { fileUrl } from "../../../services/api";
 import Sidebar from "../../../components/Sidebar";
 import { Menu, X, Filter, Download, Search, BookOpen } from "lucide-react";
+import { useBookTranslation } from "../../../utils/useBookTranslation";
 
 const Books = () => {
+  const { t } = useTranslation();
+  const { translateClassName, translateBookTitle } = useBookTranslation();
   const { classId } = useParams();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Mobile state
   const [searchQuery, setSearchQuery] = useState(""); // Search state
@@ -37,7 +41,7 @@ const Books = () => {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen space-y-4">
         <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-        <p className="text-xl text-gray-400 font-medium">Loading Class Data...</p>
+        <p className="text-xl text-gray-400 font-medium">{t("booksPage.loadingClass", "Loading Class Data...")}</p>
       </div>
     );
   }
@@ -81,7 +85,7 @@ const Books = () => {
             <button onClick={() => setIsSidebarOpen(true)} className="text-slate-600">
               <Menu size={24} />
             </button>
-            <span className="font-bold text-slate-800">Class {classId}</span>
+            <span className="font-bold text-slate-800">{translateClassName(`Class ${classId}`)}</span>
           </div>
         </div>
 
@@ -93,10 +97,10 @@ const Books = () => {
             {/* Left Content (Text) */}
             <div className="flex-1 flex flex-col gap-1 text-center lg:text-left mt-0">
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-display font-black text-slate-900 leading-[1.1] mb-1 tracking-tight">
-                {classData.name} <span className="text-blue-600">Textbooks</span>
+                {translateClassName(classData.name)} <span className="text-blue-600">{t("booksPage.textbooksHeader", "Textbooks")}</span>
               </h1>
               <p className="text-slate-500 text-xs md:text-sm leading-relaxed max-w-xl">
-                Access the complete collection of Bihar Board textbooks for {classData.name}. Select a book to read online.
+                {t("booksPage.subtitleDesc", "Access the complete collection of Bihar Board textbooks for {{className}}. Select a book to read online.", { className: translateClassName(classData.name) })}
               </p>
             </div>
 
@@ -108,7 +112,7 @@ const Books = () => {
                 </div>
                 <input
                   type="text"
-                  placeholder="Search books..."
+                  placeholder={t("sidebar.searchPlaceholder", "Search books...")}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-full text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-sm"
@@ -122,14 +126,14 @@ const Books = () => {
           {filteredBooks.length > 0 ? (
             <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-10 px-2 sm:px-4">
               {filteredBooks.map((book) => (
-                <BookCard key={book.id} book={book} placeholder={PLACEHOLDER_IMG} classId={classId} />
+                <BookCard key={book.id} book={book} placeholder={PLACEHOLDER_IMG} classId={classId} translateBookTitle={translateBookTitle} t={t} />
               ))}
             </div>
           ) : (
             <div className="flex flex-col items-center justify-center py-20 bg-white rounded-2xl border border-dashed border-slate-300">
               <BookOpen className="w-12 h-12 text-slate-300 mb-4" />
-              <h3 className="text-lg font-bold text-slate-700">No books found</h3>
-              <p className="text-slate-400 text-sm">Content for this class is coming soon.</p>
+              <h3 className="text-lg font-bold text-slate-700">{t("booksPage.noBooksFound", "No books found")}</h3>
+              <p className="text-slate-400 text-sm">{t("booksPage.comingSoon", "Content for this class is coming soon.")}</p>
             </div>
           )}
         </div>
@@ -139,7 +143,7 @@ const Books = () => {
 };
 
 // --- Sub-Component: Book Card (Compact Textbook Style) ---
-const BookCard = ({ book, placeholder, classId }) => {
+const BookCard = ({ book, placeholder, classId, translateBookTitle, t }) => {
   const resolvedImage = fileUrl(book.image);
 
   // Map subjects to beautiful audiobook covers to replace the plain placeholder
@@ -158,6 +162,8 @@ const BookCard = ({ book, placeholder, classId }) => {
     ? getFallbackCover(book.subject) 
     : resolvedImage;
 
+  const displayTitle = translateBookTitle ? translateBookTitle(book.title, book.subject) : book.title;
+
   return (
     <div className="relative aspect-[3/4] bg-white rounded-r-2xl rounded-l-md overflow-hidden shadow-[0_10px_20px_rgba(0,0,0,0.08)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.25)] transition-all duration-500 group border-y border-r border-slate-200/60 border-l-[4px] border-l-slate-300 cursor-pointer hover:-translate-y-3 hover:rotate-1">
       {/* 3D Physical Book Spine Effect */}
@@ -171,7 +177,7 @@ const BookCard = ({ book, placeholder, classId }) => {
       {/* Book Cover Image */}
       <img loading="lazy" decoding="async"
         src={finalImage}
-        alt={book.title}
+        alt={displayTitle}
         onError={(e) => { e.target.src = getFallbackCover(book.subject); }}
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
       />
@@ -181,7 +187,7 @@ const BookCard = ({ book, placeholder, classId }) => {
         
         {/* Title */}
         <h3 className="text-white font-bold text-center text-lg md:text-xl mb-5 translate-y-6 group-hover:translate-y-0 transition-all duration-300 line-clamp-2 drop-shadow-md px-4">
-          {book.title}
+          {displayTitle}
         </h3>
         
         {/* Read Now Button */}
@@ -190,7 +196,7 @@ const BookCard = ({ book, placeholder, classId }) => {
           className="flex items-center justify-center gap-2 bg-[#F8FAFC] text-[#2563EB] hover:bg-white hover:shadow-lg font-bold py-2.5 px-6 rounded-full transition-all translate-y-6 group-hover:translate-y-0 duration-300 delay-75 active:scale-95"
         >
           <BookOpen className="w-[18px] h-[18px] shrink-0" />
-          <span className="text-[15px]">Read Now</span>
+          <span className="text-[15px]">{t ? t("booksPage.readNow", "Read Now") : "Read Now"}</span>
         </Link>
       </div>
     </div>

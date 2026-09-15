@@ -1,113 +1,23 @@
 import React from "react";
 import { motion } from "framer-motion";
-
+import { useTranslation } from "react-i18next";
 
 const testimonials = [
-  {
-    id: 1,
-    quote: "\"Education must build character, discipline, and a spirit of service to the nation.\"",
-    name: "Dr. Rajendra Prasad",
-    role: "FIRST PRESIDENT OF INDIA | FROM BIHAR",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Dr._Rajendra_Prasad.jpg/800px-Dr._Rajendra_Prasad.jpg"
-  },
-  {
-    id: 2,
-    quote: "\"The purpose of education is not only employment, but the awakening of social responsibility.\"",
-    name: "Jayaprakash Narayan",
-    role: "LOKNAYAK | SOCIAL REFORMER",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Jayaprakash_Narayan_1975_stamp_of_India.jpg/800px-Jayaprakash_Narayan_1975_stamp_of_India.jpg"
-  },
-  {
-    id: 3,
-    quote: "\"Education is the strongest foundation on which a modern and progressive Bihar can be built.\"",
-    name: "Satyendra Narayan Sinha",
-    role: "FORMER CHIEF MINISTER | EDUCATION REFORMER",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Satyendra_Narayan_Sinha.jpg/800px-Satyendra_Narayan_Sinha.jpg"
-  },
-  {
-    id: 4,
-    quote: "\"The progress of Bihar depends on schools, colleges, good governance, and equal opportunity for all.\"",
-    name: "Shri Krishna Sinha",
-    role: "FIRST CHIEF MINISTER OF BIHAR",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Sri_Krishna_Sinha.jpg/800px-Sri_Krishna_Sinha.jpg"
-  },
-  {
-    id: 5,
-    quote: "\"Knowledge becomes meaningful when it is used for public service and social development.\"",
-    name: "Anugrah Narayan Sinha",
-    role: "BIHAR VIBHUTI | EDUCATIONIST",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Anugrah_Narayan_Sinha.jpg/800px-Anugrah_Narayan_Sinha.jpg"
-  },
-  {
-    id: 6,
-    quote: "\"Education should not remain a privilege of a few; it must become the strength of every common student.\"",
-    name: "Karpoori Thakur",
-    role: "JAN NAYAK | FORMER CHIEF MINISTER",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Karpoori_Thakur.jpg/800px-Karpoori_Thakur.jpg"
-  },
-  {
-    id: 7,
-    quote: "\"The doors of education must remain open for the poor, the backward, and the marginalized.\"",
-    name: "Karpoori Thakur",
-    role: "JAN NAYAK | FORMER CHIEF MINISTER",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Karpoori_Thakur.jpg/800px-Karpoori_Thakur.jpg"
-  },
-  {
-    id: 8,
-    quote: "\"Educating children, especially girls, is the most powerful way to change the future of Bihar.\"",
-    name: "Shri Nitish Kumar",
-    role: "Ex-CHIEF MINISTER, BIHAR",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Nitish_Kumar_in_2022.jpg/800px-Nitish_Kumar_in_2022.jpg"
-  },
-  {
-    id: 9,
-    quote: "\"A society moves forward when every child receives education, dignity, and opportunity.\"",
-    name: "Jagjivan Ram",
-    role: "NATIONAL LEADER | SOCIAL JUSTICE LEADER",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Jagjivan_Ram_1976_stamp_of_India.jpg/800px-Jagjivan_Ram_1976_stamp_of_India.jpg"
-  },
-  {
-    id: 10,
-    quote: "\"Education gives confidence to the weak, dignity to the poor, and strength to democracy.\"",
-    name: "Jagjivan Ram",
-    role: "NATIONAL LEADER | SOCIAL JUSTICE LEADER",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Jagjivan_Ram_1976_stamp_of_India.jpg/800px-Jagjivan_Ram_1976_stamp_of_India.jpg"
-  },
-  {
-    id: 11,
-    quote: "\"Education creates the intellectual strength required for public life, self-governance, and national progress.\"",
-    name: "Dr. Sachchidananda Sinha",
-    role: "EDUCATIONIST | CONSTITUENT ASSEMBLY PRESIDENT",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Sachchidananda_Sinha.jpg/800px-Sachchidananda_Sinha.jpg"
-  },
-  {
-    id: 12,
-    quote: "\"The real power of learning lies in creating responsible citizens and a just society.\"",
-    name: "Dr. Sachchidananda Sinha",
-    role: "EDUCATIONIST | CONSTITUENT ASSEMBLY PRESIDENT",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Sachchidananda_Sinha.jpg/800px-Sachchidananda_Sinha.jpg"
-  },
-  {
-    id: 13,
-    quote: "\"Good education must reach the village, the poor household, and the first-generation learner.\"",
-    name: "Ramdhari Singh Dinkar",
-    role: "RASHTRAKAVI | EDUCATIONAL THINKER",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Ramdhari_Singh_Dinkar_1999_stamp_of_India.jpg/800px-Ramdhari_Singh_Dinkar_1999_stamp_of_India.jpg"
-  },
-  {
-    id: 14,
-    quote: "\"Learning is the light that removes fear, inequality, and darkness from society.\"",
-    name: "Ramdhari Singh Dinkar",
-    role: "RASHTRAKAVI | EDUCATIONAL THINKER",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Ramdhari_Singh_Dinkar_1999_stamp_of_India.jpg/800px-Ramdhari_Singh_Dinkar_1999_stamp_of_India.jpg"
-  },
-  {
-    id: 15,
-    quote: "\"A strong education system is the path to a strong Bihar, a strong society, and a strong India.\"",
-    name: "Shri Nitish Kumar",
-    role: "Ex-CHIEF MINISTER, BIHAR",
-    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Nitish_Kumar_in_2022.jpg/800px-Nitish_Kumar_in_2022.jpg"
-  }
+  { id: 1, quote: "\"Education must build character, discipline, and a spirit of service to the nation.\"", name: "Dr. Rajendra Prasad", role: "FIRST PRESIDENT OF INDIA | FROM BIHAR" },
+  { id: 2, quote: "\"The purpose of education is not only employment, but the awakening of social responsibility.\"", name: "Jayaprakash Narayan", role: "LOKNAYAK | SOCIAL REFORMER" },
+  { id: 3, quote: "\"Education is the strongest foundation on which a modern and progressive Bihar can be built.\"", name: "Satyendra Narayan Sinha", role: "FORMER CHIEF MINISTER | EDUCATION REFORMER" },
+  { id: 4, quote: "\"The progress of Bihar depends on schools, colleges, good governance, and equal opportunity for all.\"", name: "Shri Krishna Sinha", role: "FIRST CHIEF MINISTER OF BIHAR" },
+  { id: 5, quote: "\"Knowledge becomes meaningful when it is used for public service and social development.\"", name: "Anugrah Narayan Sinha", role: "BIHAR VIBHUTI | EDUCATIONIST" },
+  { id: 6, quote: "\"Education should not remain a privilege of a few; it must become the strength of every common student.\"", name: "Karpoori Thakur", role: "JAN NAYAK | FORMER CHIEF MINISTER" },
+  { id: 7, quote: "\"The doors of education must remain open for the poor, the backward, and the marginalized.\"", name: "Karpoori Thakur", role: "JAN NAYAK | FORMER CHIEF MINISTER" },
+  { id: 8, quote: "\"Educating children, especially girls, is the most powerful way to change the future of Bihar.\"", name: "Shri Nitish Kumar", role: "Ex-CHIEF MINISTER, BIHAR" },
+  { id: 9, quote: "\"A society moves forward when every child receives education, dignity, and opportunity.\"", name: "Jagjivan Ram", role: "NATIONAL LEADER | SOCIAL JUSTICE LEADER" },
+  { id: 10, quote: "\"Education gives confidence to the weak, dignity to the poor, and strength to democracy.\"", name: "Jagjivan Ram", role: "NATIONAL LEADER | SOCIAL JUSTICE LEADER" },
+  { id: 11, quote: "\"Education creates the intellectual strength required for public life, self-governance, and national progress.\"", name: "Dr. Sachchidananda Sinha", role: "EDUCATIONIST | CONSTITUENT ASSEMBLY PRESIDENT" },
+  { id: 12, quote: "\"The real power of learning lies in creating responsible citizens and a just society.\"", name: "Dr. Sachchidananda Sinha", role: "EDUCATIONIST | CONSTITUENT ASSEMBLY PRESIDENT" },
+  { id: 13, quote: "\"Good education must reach the village, the poor household, and the first-generation learner.\"", name: "Ramdhari Singh Dinkar", role: "RASHTRAKAVI | EDUCATIONAL THINKER" },
+  { id: 14, quote: "\"Learning is the light that removes fear, inequality, and darkness from society.\"", name: "Ramdhari Singh Dinkar", role: "RASHTRAKAVI | EDUCATIONAL THINKER" },
+  { id: 15, quote: "\"A strong education system is the path to a strong Bihar, a strong society, and a strong India.\"", name: "Shri Nitish Kumar", role: "Ex-CHIEF MINISTER, BIHAR" }
 ];
 
 const getInitials = (name) => {
@@ -130,41 +40,38 @@ const getInitials = (name) => {
 };
 
 const avatarColors = [
-  "bg-[#1e293b]", // dark slate
-  "bg-[#64748b]", // light slate
-  "bg-[#475569]", // medium slate
-  "bg-[#334155]", // slate
+  "bg-[#1e293b]",
+  "bg-[#64748b]",
+  "bg-[#475569]",
+  "bg-[#334155]",
 ];
 
 export default function StakeHolder() {
-  // Partition testimonials into two rows
+  const { t } = useTranslation();
   const row1 = testimonials.slice(0, 8);
   const row2 = testimonials.slice(8);
 
   const TestimonialCard = ({ item, index }) => {
-    // Clean escape quotes from strings for display
-    const cleanQuote = item.quote.startsWith('"') && item.quote.endsWith('"')
-      ? item.quote.slice(1, -1)
-      : item.quote;
+    const rawQuote = t(`stakeholder.testimonials.quote${item.id}`, item.quote);
+    const cleanQuote = rawQuote.startsWith('"') && rawQuote.endsWith('"')
+      ? rawQuote.slice(1, -1)
+      : rawQuote;
       
+    const name = t(`stakeholder.testimonials.name${item.id}`, item.name);
+    const role = t(`stakeholder.testimonials.role${item.id}`, item.role);
     const avatarBg = avatarColors[index % avatarColors.length];
 
     return (
       <div className="w-[280px] sm:w-[320px] h-[210px] shrink-0 bg-white border border-slate-200 rounded-2xl p-5 md:p-6 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between whitespace-normal">
-        
         <div>
-          {/* Quote symbol */}
           <div className="text-4xl text-blue-300/80 font-serif leading-none mb-2 select-none">
             “
           </div>
-
-          {/* Quote Content */}
           <p className="text-slate-800 font-serif text-[14px] sm:text-[15px] leading-snug line-clamp-3">
             {cleanQuote}
           </p>
         </div>
 
-        {/* Profile / Author Section */}
         <div className="border-t border-slate-100 pt-4 mt-auto">
           <div className="flex items-center gap-3">
             <div className={`w-10 h-10 rounded-full ${avatarBg} flex items-center justify-center text-white font-medium text-[14px] shrink-0`}>
@@ -172,10 +79,10 @@ export default function StakeHolder() {
             </div>
             <div>
               <h4 className="font-semibold text-slate-900 text-[13px] leading-tight mb-0.5 truncate">
-                {item.name}
+                {name}
               </h4>
               <span className="text-[9px] sm:text-[10px] font-medium text-slate-500 uppercase tracking-wider block line-clamp-1">
-                {item.role}
+                {role}
               </span>
             </div>
           </div>
@@ -204,14 +111,14 @@ export default function StakeHolder() {
                transition={{ duration: 0.6, delay: 0.3 }}
                className="h-px bg-blue-600"
              ></motion.div>
-             <span className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em]">Our Inspiration</span>
+             <span className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em]">{t("stakeholder.badge", "Our Inspiration")}</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
-            Voices For An <br />
-            <span className="text-slate-400 font-medium">Educated & Empowered Bihar</span>
+            {t("stakeholder.heading", "Voices For An")} <br />
+            <span className="text-slate-400 font-medium">{t("stakeholder.headingHighlight", "Educated & Empowered Bihar")}</span>
           </h2>
           <p className="text-sm text-slate-500 font-medium leading-relaxed pr-4">
-            Insights and inspiring words from Bihar's visionary leaders, educators, and reformers who continue to shape the state's educational journey.
+            {t("stakeholder.description", "Insights and inspiring words from Bihar's visionary leaders, educators, and reformers who continue to shape the state's educational journey.")}
           </p>
         </motion.div>
       </div>

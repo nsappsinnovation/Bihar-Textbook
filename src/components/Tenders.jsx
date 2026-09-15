@@ -2,9 +2,11 @@ import React, { useState, useMemo } from "react";
 import { FiSearch, FiFileText, FiBell, FiArrowRight, FiCalendar, FiClock, FiFilter } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { getNotices, lastUpdatedOf } from "../services/noticeService";
 
 const Tenders = () => {
+  const { t } = useTranslation();
   const [liveTenders, setLiveTenders] = useState([]);
 
   useEffect(() => {
@@ -124,7 +126,7 @@ const Tenders = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4"
           >
-            Tenders & Bids
+            {t("tendersPage.title", "Tenders & Bids")}
           </motion.h1>
           <motion.div 
             initial={{ width: 0 }}
@@ -138,7 +140,7 @@ const Tenders = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-white/60 text-xs md:text-sm max-w-xl mx-auto leading-relaxed font-light"
           >
-            Explore current procurement opportunities, e-tenders, and strategic partnership proposals at BSTBPC.
+            {t("tendersPage.subtitle", "Explore current procurement opportunities, e-tenders, and strategic partnership proposals at BSTBPC.")}
           </motion.p>
           
           <motion.div 
@@ -149,11 +151,11 @@ const Tenders = () => {
           >
             <div className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 flex items-center gap-2 backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-              <span className="text-white/80">{liveTenders.length} Active Opportunities</span>
+              <span className="text-white/80">{liveTenders.length} {t("tendersPage.activeOpps", "Active Opportunities")}</span>
             </div>
             <div className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 flex items-center gap-2 backdrop-blur-sm">
               <FiClock className="text-blue-400" />
-              <span className="text-white/80">Last Updated: {lastUpdated ? formatDate(lastUpdated) : (liveTenders.length > 0 ? formatDate(liveTenders[0].date) : 'N/A')}</span>
+              <span className="text-white/80">{t("tendersPage.lastUpdated", "Last Updated")}: {lastUpdated ? formatDate(lastUpdated) : (liveTenders.length > 0 ? formatDate(liveTenders[0].date) : 'N/A')}</span>
             </div>
           </motion.div>
         </div>

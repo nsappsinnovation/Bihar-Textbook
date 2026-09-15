@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { getDirectory } from "../services/directoryService";
 import { fileUrl } from "../services/api";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function KeyParticipant() {
+  const { t } = useTranslation();
   // Leaders are managed in Admin → Leaders
   const [data, setData] = useState([]);
 
@@ -21,18 +23,16 @@ export default function KeyParticipant() {
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 mb-4">
               <div className="h-px w-6 bg-blue-600"></div>
-              <span className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em]">Leadership</span>
+              <span className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em]">{t("keyParticipant.badge", "Leadership")}</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
-              Leading The Way <br />
-              <span className="text-slate-400 font-medium">In Educational Excellence</span>
+              {t("keyParticipant.heading", "Leading The Way")} <br />
+              <span className="text-slate-400 font-medium">{t("keyParticipant.headingHighlight", "In Educational Excellence")}</span>
             </h2>
             <p className="text-sm text-slate-500 font-medium leading-relaxed mb-4">
-              Meet the visionary leaders shaping the future of learning in Bihar.
+              {t("keyParticipant.description", "Meet the visionary leaders shaping the future of learning in Bihar.")}
             </p>
           </div>
-
-
         </div>
 
         <div className="max-w-[1280px] mx-auto">
