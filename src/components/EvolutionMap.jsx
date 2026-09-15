@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AnimatePresence } from 'framer-motion';
+import { motion,  AnimatePresence } from 'framer-motion';
 import { BookOpen, Map, MonitorPlay, Glasses, Sparkles, BookHeadphones, MapPin, Cpu, Printer } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
@@ -321,6 +321,7 @@ const EvolutionMap = () => {
                   {connections.map(([sourceId, targetId], i) => {
                     const source = cities.find(c => c.id === sourceId);
                     const target = cities.find(c => c.id === targetId);
+                    if (!source || !target) return null;
                     
                     const isVisible = activeIndex >= 3; // Show from 1970s-2000s expansion
                     const isAnimated = activeIndex >= 4; // Data flow from 2010s-2020s

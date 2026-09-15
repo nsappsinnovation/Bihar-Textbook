@@ -18,14 +18,13 @@ export function useBookTranslation() {
    * or for custom names stored in the data.
    */
   const translateClassName = (name) => {
-    if (!name) return name;
-    // Match "Class 1", "Class 12", etc.
-    const match = name.match(/^class\s+(\d+)$/i);
+    if (name === null || name === undefined) return "";
+    const str = String(name).trim();
+    const match = str.match(/^class\s+(\d+)$/i);
     if (match) {
-      return `${t("booksPage.classWord")} ${match[1]}`;
+      return `${t("booksPage.classWord", "Class")} ${match[1]}`;
     }
-    // Fallback: return as-is
-    return name;
+    return str;
   };
 
   /**
