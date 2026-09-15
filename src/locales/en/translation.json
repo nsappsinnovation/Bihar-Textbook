@@ -429,6 +429,14 @@
     }
   },
   "contact": {
+    "title": "Contact",
+    "titleHighlight": "Us",
+    "subtitle": "Empowering education through transparent communication. Get in touch for institutional support, textbook inquiries, or corporate assistance.",
+    "commitmentHeader": "Committed to Educational Success",
+    "commitmentDesc": "We're here to support every student, teacher, and school across Bihar. Our dedicated helpdesk ensures your queries never go unanswered.",
+    "emailId": "Email Id",
+    "phoneNumber": "Phone Number",
+    "monToSat": "Mon to Sat",
     "heroTitle": "Contact",
     "heroTitleHighlight": "Us",
     "heroDescription": "Empowering education through transparent communication. Get in touch for institutional support, textbook inquiries, or corporate assistance.",
