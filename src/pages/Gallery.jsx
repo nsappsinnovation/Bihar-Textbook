@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Galleryconfig } from "../components/gallery/Galleryconfig";
 import PhotoGallery from "../components/gallery/sections/Photogallery";
 import VideoGallery from "../components/gallery/sections/Videogallery";
@@ -13,6 +14,7 @@ const componentMap = {
 
 const Gallery = () => {
   const { sectionId } = useParams();
+  const { t } = useTranslation();
 
   const sectionData = Galleryconfig.find(
     section => section.id === sectionId
@@ -21,8 +23,8 @@ const Gallery = () => {
   if (!sectionData) {
     return (
       <div className="min-h-screen pt-32 text-center bg-white">
-        <h2 className="text-2xl font-black text-slate-800">Section Not Found</h2>
-        <p className="text-slate-500 mt-2">The requested gallery section could not be found.</p>
+        <h2 className="text-2xl font-black text-slate-800">{t("galleryPage.errors.notFoundTitle")}</h2>
+        <p className="text-slate-500 mt-2">{t("galleryPage.errors.notFoundDesc")}</p>
       </div>
     );
   }
@@ -32,8 +34,8 @@ const Gallery = () => {
   if (!ActiveComponent) {
     return (
       <div className="min-h-screen pt-32 text-center bg-white">
-        <h2 className="text-2xl font-black text-slate-800">Section Under Maintenance</h2>
-        <p className="text-slate-500 mt-2">This gallery section is currently being updated. Please check back later.</p>
+        <h2 className="text-2xl font-black text-slate-800">{t("galleryPage.errors.maintenanceTitle")}</h2>
+        <p className="text-slate-500 mt-2">{t("galleryPage.errors.maintenanceDesc")}</p>
       </div>
     );
   }

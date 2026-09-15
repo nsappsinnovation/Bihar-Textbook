@@ -1,8 +1,48 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaPlay } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 import { getSections } from '../../../services/sectionService';
 import { fileUrl } from '../../../services/api';
+
+const defaultVideoItems = [
+  {
+    type: "video",
+    src: "/images/hero/classroom.webp",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    altKey: "galleryPage.video.items.classroom"
+  },
+  {
+    type: "video",
+    src: "/images/hero/audio.webp",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    altKey: "galleryPage.video.items.outreach"
+  },
+  {
+    type: "video",
+    src: "/images/hero/vr.webp",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    altKey: "galleryPage.video.items.training"
+  },
+  {
+    type: "video",
+    src: "/images/KeyParticipants/shri_yatendra_pal.webp",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    altKey: "galleryPage.video.items.inauguration"
+  },
+  {
+    type: "video",
+    src: "/images/hero/sign.webp",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    altKey: "galleryPage.video.items.inclusive"
+  },
+  {
+    type: "video",
+    src: "/images/hero/linguistic.webp",
+    videoUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    altKey: "galleryPage.video.items.ai"
+  }
+];
 
 const getYouTubeId = (url) => {
   if (!url) return null;
@@ -12,28 +52,37 @@ const getYouTubeId = (url) => {
 };
 
 const Videogallery = () => {
+  const { t } = useTranslation();
   const [selectedVideo, setSelectedVideo] = useState(null);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(defaultVideoItems);
   const [currentPage, setCurrentPage] = useState(0);
+
+  const getVideoLabel = (item) => (item ? (item.altKey ? t(item.altKey) : item.alt) : "");
 
   // Videos are managed in Admin → Gallery → Video Gallery.
   // videoUrl holds either a YouTube link or an uploaded "/uploads/videos/..." file.
   useEffect(() => {
     getSections('gl-video')
-      .then((rows) => setItems(rows.map((row) => {
-        const isUploaded = (row.videoUrl || '').startsWith('/uploads/');
-        const ytId = isUploaded ? null : getYouTubeId(row.videoUrl);
-        const autoThumbnail = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : "";
-        return {
-          type: "video",
-          src: fileUrl(row.imageUrl) || autoThumbnail,
-          videoUrl: isUploaded ? "" : row.videoUrl || "",
-          uploadedVideo: isUploaded ? fileUrl(row.videoUrl) : "",
-          alt: row.title || "Gallery Video",
-        };
-      })))
-      .catch(() => setItems([]));
-  }, []);
+      .then((rows) => {
+        if (rows && rows.length > 0) {
+          setItems(rows.map((row) => {
+            const isUploaded = (row.videoUrl || '').startsWith('/uploads/');
+            const ytId = isUploaded ? null : getYouTubeId(row.videoUrl);
+            const autoThumbnail = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : "";
+            return {
+              type: "video",
+              src: fileUrl(row.imageUrl) || autoThumbnail,
+              videoUrl: isUploaded ? "" : row.videoUrl || "",
+              uploadedVideo: isUploaded ? fileUrl(row.videoUrl) : "",
+              alt: row.title || t("galleryPage.video.fallbackAlt"),
+            };
+          }));
+        } else {
+          setItems(defaultVideoItems);
+        }
+      })
+      .catch(() => setItems(defaultVideoItems));
+  }, [t]);
 
   const itemsPerPage = 6;
   const totalPages = Math.ceil(items.length / itemsPerPage);
@@ -86,7 +135,10 @@ const Videogallery = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-800 tracking-tight leading-tight mb-2"
           >
-            Video <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Gallery</span>
+            {t("galleryPage.video.headingPrefix")}{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+              {t("galleryPage.video.headingHighlight")}
+            </span>
           </motion.h2>
 
           <motion.p
@@ -95,7 +147,7 @@ const Videogallery = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-slate-500 text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed"
           >
-            Watch our academic programs, smart textbook launches, and rural distribution initiatives unfold in real time.
+            {t("galleryPage.video.description")}
           </motion.p>
         </div>
 
@@ -119,7 +171,7 @@ const Videogallery = () => {
                 >
                   <img loading="lazy" decoding="async"
                     src={pageItems[0].src}
-                    alt={pageItems[0].alt}
+                    alt={getVideoLabel(pageItems[0])}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors duration-300 flex items-center justify-center">
@@ -129,7 +181,7 @@ const Videogallery = () => {
                   </div>
                   <div className="absolute bottom-4 left-4 right-4 text-white pointer-events-none">
                     <span className="text-[10px] font-bold line-clamp-1 bg-black/40 px-2.5 py-1 rounded-full w-fit backdrop-blur-sm">
-                      {pageItems[0].alt}
+                      {getVideoLabel(pageItems[0])}
                     </span>
                   </div>
                 </div>
@@ -146,7 +198,7 @@ const Videogallery = () => {
                 >
                   <img loading="lazy" decoding="async"
                     src={pageItems[1].src}
-                    alt={pageItems[1].alt}
+                    alt={getVideoLabel(pageItems[1])}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors duration-300 flex items-center justify-center">
@@ -156,7 +208,7 @@ const Videogallery = () => {
                   </div>
                   <div className="absolute bottom-4 left-4 right-4 text-white pointer-events-none">
                     <span className="text-[10px] font-bold line-clamp-1 bg-black/40 px-2.5 py-1 rounded-full w-fit backdrop-blur-sm">
-                      {pageItems[1].alt}
+                      {getVideoLabel(pageItems[1])}
                     </span>
                   </div>
                 </div>
@@ -170,7 +222,7 @@ const Videogallery = () => {
                 >
                   <img loading="lazy" decoding="async"
                     src={pageItems[3].src}
-                    alt={pageItems[3].alt}
+                    alt={getVideoLabel(pageItems[3])}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors duration-300 flex items-center justify-center">
@@ -180,7 +232,7 @@ const Videogallery = () => {
                   </div>
                   <div className="absolute bottom-4 left-4 right-4 text-white pointer-events-none">
                     <span className="text-[10px] font-bold line-clamp-1 bg-black/40 px-2.5 py-1 rounded-full w-fit backdrop-blur-sm">
-                      {pageItems[3].alt}
+                      {getVideoLabel(pageItems[3])}
                     </span>
                   </div>
                 </div>
@@ -197,7 +249,7 @@ const Videogallery = () => {
                 >
                   <img loading="lazy" decoding="async"
                     src={pageItems[2].src}
-                    alt={pageItems[2].alt}
+                    alt={getVideoLabel(pageItems[2])}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors duration-300 flex items-center justify-center">
@@ -207,7 +259,7 @@ const Videogallery = () => {
                   </div>
                   <div className="absolute bottom-4 left-4 right-4 text-white pointer-events-none">
                     <span className="text-[10px] font-bold line-clamp-1 bg-black/40 px-2.5 py-1 rounded-full w-fit backdrop-blur-sm">
-                      {pageItems[2].alt}
+                      {getVideoLabel(pageItems[2])}
                     </span>
                   </div>
                 </div>
@@ -221,7 +273,7 @@ const Videogallery = () => {
                 >
                   <img loading="lazy" decoding="async"
                     src={pageItems[4].src}
-                    alt={pageItems[4].alt}
+                    alt={getVideoLabel(pageItems[4])}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute inset-0 bg-black/20 group-hover:bg-black/35 transition-colors duration-300 flex items-center justify-center">
@@ -231,7 +283,7 @@ const Videogallery = () => {
                   </div>
                   <div className="absolute bottom-4 left-4 right-4 text-white pointer-events-none">
                     <span className="text-[10px] font-bold line-clamp-1 bg-black/40 px-2.5 py-1 rounded-full w-fit backdrop-blur-sm">
-                      {pageItems[4].alt}
+                      {getVideoLabel(pageItems[4])}
                     </span>
                   </div>
                 </div>
@@ -247,7 +299,7 @@ const Videogallery = () => {
                 >
                   <img loading="lazy" decoding="async"
                     src={pageItems[5].src}
-                    alt={pageItems[5].alt}
+                    alt={getVideoLabel(pageItems[5])}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
                   />
 
@@ -262,7 +314,7 @@ const Videogallery = () => {
 
                   <div className="absolute bottom-4 left-4 right-4 text-white pointer-events-none">
                     <span className="text-[10px] font-bold line-clamp-1 bg-black/40 px-2.5 py-1 rounded-full w-fit backdrop-blur-sm">
-                      {pageItems[5].alt}
+                      {getVideoLabel(pageItems[5])}
                     </span>
                   </div>
                 </div>
@@ -280,7 +332,7 @@ const Videogallery = () => {
               disabled={currentPage === 0}
               className="px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 bg-white hover:bg-slate-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed font-bold text-xs uppercase tracking-widest shadow-sm"
             >
-              Prev
+              {t("common.prev")}
             </button>
             <div className="flex gap-2">
               {[...Array(totalPages)].map((_, i) => (
@@ -297,7 +349,7 @@ const Videogallery = () => {
               disabled={currentPage === totalPages - 1}
               className="px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 bg-white hover:bg-slate-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed font-bold text-xs uppercase tracking-widest shadow-sm"
             >
-              Next
+              {t("common.next")}
             </button>
           </div>
         )}
@@ -342,7 +394,7 @@ const Videogallery = () => {
               ) : (
                 <iframe
                   src={getEmbedUrl(selectedVideo.videoUrl)}
-                  title={selectedVideo.alt}
+                  title={getVideoLabel(selectedVideo)}
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
@@ -352,14 +404,14 @@ const Videogallery = () => {
             </motion.div>
 
             {/* Video Description */}
-            {selectedVideo.alt && (
+            {getVideoLabel(selectedVideo) && (
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 className="mt-6 text-center max-w-2xl px-6 pointer-events-none"
               >
                 <p className="text-white/90 text-sm font-semibold leading-relaxed drop-shadow-md">
-                  {selectedVideo.alt}
+                  {getVideoLabel(selectedVideo)}
                 </p>
               </motion.div>
             )}

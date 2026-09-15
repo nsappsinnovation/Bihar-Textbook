@@ -1,23 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { getSections } from '../../../services/sectionService';
 import { fileUrl } from '../../../services/api';
 
+const defaultGalleryItems = [
+  { type: "image", src: "/images/hero/classroom.webp", altKey: "galleryPage.photo.items.classroom" },
+  { type: "image", src: "/images/hero/audio.webp", altKey: "galleryPage.photo.items.audio" },
+  { type: "image", src: "/images/hero/vr.webp", altKey: "galleryPage.photo.items.vr" },
+  { type: "image", src: "/images/hero/sign.webp", altKey: "galleryPage.photo.items.sign" },
+  { type: "image", src: "/images/hero/linguistic.webp", altKey: "galleryPage.photo.items.linguistic" },
+  { type: "image", src: "/images/csr.webp", altKey: "galleryPage.photo.items.csr" },
+  { type: "image", src: "/images/goodnight.webp", altKey: "galleryPage.photo.items.campaigns" }
+];
+
 const Photogallery = () => {
+  const { t } = useTranslation();
   const [selectedImage, setSelectedImage] = useState(null);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(defaultGalleryItems);
   const [currentPage, setCurrentPage] = useState(0);
+
+  const getImageLabel = (item) => (item ? (item.altKey ? t(item.altKey) : item.alt) : "");
 
   // Photos are managed in Admin → Gallery → Photo Gallery
   useEffect(() => {
     getSections('gl-photo')
-      .then((rows) => setItems(rows.map((row) => ({
-        type: "image",
-        src: fileUrl(row.imageUrl) || "",
-        alt: row.title || "Gallery Image",
-      }))))
-      .catch(() => setItems([]));
-  }, []);
+      .then((rows) => {
+        if (rows && rows.length > 0) {
+          setItems(rows.map((row) => ({
+            type: "image",
+            src: fileUrl(row.imageUrl) || "",
+            alt: row.title || t("galleryPage.photo.fallbackAlt"),
+          })));
+        } else {
+          setItems(defaultGalleryItems);
+        }
+      })
+      .catch(() => setItems(defaultGalleryItems));
+  }, [t]);
 
   const itemsPerPage = 6;
   const totalPages = Math.ceil(items.length / itemsPerPage);
@@ -33,7 +53,7 @@ const Photogallery = () => {
 
   const handlePrevPage = () => {
     if (currentPage > 0) {
-      setCurrentPage(prev => prev - 0.5 - 0.5); // safe calculation
+      setCurrentPage(prev => prev - 1);
     }
   };
 
@@ -55,7 +75,10 @@ const Photogallery = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-800 tracking-tight leading-tight mb-2"
           >
-            Photo <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Gallery</span>
+            {t("galleryPage.photo.headingPrefix")}{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+              {t("galleryPage.photo.headingHighlight")}
+            </span>
           </motion.h2>
 
           <motion.p
@@ -64,7 +87,7 @@ const Photogallery = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-slate-500 text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed"
           >
-            Explore our state-wide initiatives, active classrooms, teacher conferences, and key moments in digital education.
+            {t("galleryPage.photo.description")}
           </motion.p>
         </div>
 
@@ -88,11 +111,11 @@ const Photogallery = () => {
                 >
                   <img loading="lazy" decoding="async"
                     src={pageItems[0].src}
-                    alt={pageItems[0].alt}
+                    alt={getImageLabel(pageItems[0])}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    <span className="text-white text-xs font-medium line-clamp-2">{pageItems[0].alt}</span>
+                    <span className="text-white text-xs font-medium line-clamp-2">{getImageLabel(pageItems[0])}</span>
                   </div>
                 </div>
               )}
@@ -108,11 +131,11 @@ const Photogallery = () => {
                 >
                   <img loading="lazy" decoding="async"
                     src={pageItems[1].src}
-                    alt={pageItems[1].alt}
+                    alt={getImageLabel(pageItems[1])}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    <span className="text-white text-xs font-medium line-clamp-2">{pageItems[1].alt}</span>
+                    <span className="text-white text-xs font-medium line-clamp-2">{getImageLabel(pageItems[1])}</span>
                   </div>
                 </div>
               )}
@@ -125,11 +148,11 @@ const Photogallery = () => {
                 >
                   <img loading="lazy" decoding="async"
                     src={pageItems[3].src}
-                    alt={pageItems[3].alt}
+                    alt={getImageLabel(pageItems[3])}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    <span className="text-white text-xs font-medium line-clamp-2">{pageItems[3].alt}</span>
+                    <span className="text-white text-xs font-medium line-clamp-2">{getImageLabel(pageItems[3])}</span>
                   </div>
                 </div>
               )}
@@ -145,11 +168,11 @@ const Photogallery = () => {
                 >
                   <img loading="lazy" decoding="async"
                     src={pageItems[2].src}
-                    alt={pageItems[2].alt}
+                    alt={getImageLabel(pageItems[2])}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    <span className="text-white text-xs font-medium line-clamp-2">{pageItems[2].alt}</span>
+                    <span className="text-white text-xs font-medium line-clamp-2">{getImageLabel(pageItems[2])}</span>
                   </div>
                 </div>
               )}
@@ -162,11 +185,11 @@ const Photogallery = () => {
                 >
                   <img loading="lazy" decoding="async"
                     src={pageItems[4].src}
-                    alt={pageItems[4].alt}
+                    alt={getImageLabel(pageItems[4])}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                    <span className="text-white text-xs font-medium line-clamp-2">{pageItems[4].alt}</span>
+                    <span className="text-white text-xs font-medium line-clamp-2">{getImageLabel(pageItems[4])}</span>
                   </div>
                 </div>
               )}
@@ -181,7 +204,7 @@ const Photogallery = () => {
                 >
                   <img loading="lazy" decoding="async"
                     src={pageItems[5].src}
-                    alt={pageItems[5].alt}
+                    alt={getImageLabel(pageItems[5])}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
 
@@ -196,7 +219,7 @@ const Photogallery = () => {
 
                   <div className="absolute bottom-4 left-4 right-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                     <span className="text-xs font-semibold line-clamp-1 bg-black/30 px-3 py-1 rounded-full w-fit backdrop-blur-sm">
-                      {pageItems[5].alt}
+                      {getImageLabel(pageItems[5])}
                     </span>
                   </div>
                 </div>
@@ -214,7 +237,7 @@ const Photogallery = () => {
               disabled={currentPage === 0}
               className="px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 bg-white hover:bg-slate-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed font-bold text-xs uppercase tracking-widest shadow-sm"
             >
-              Prev
+              {t("common.prev")}
             </button>
             <div className="flex gap-2">
               {[...Array(totalPages)].map((_, i) => (
@@ -231,7 +254,7 @@ const Photogallery = () => {
               disabled={currentPage === totalPages - 1}
               className="px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 bg-white hover:bg-slate-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed font-bold text-xs uppercase tracking-widest shadow-sm"
             >
-              Next
+              {t("common.next")}
             </button>
           </div>
         )}
@@ -268,20 +291,20 @@ const Photogallery = () => {
             >
               <img loading="lazy" decoding="async"
                 src={selectedImage.src}
-                alt={selectedImage.alt}
+                alt={getImageLabel(selectedImage)}
                 className="max-w-full max-h-full object-contain rounded-2xl shadow-[0_30px_60px_rgba(0,0,0,0.5)] border border-white/10"
               />
             </motion.div>
 
             {/* Caption */}
-            {selectedImage.alt && (
+            {getImageLabel(selectedImage) && (
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 className="mt-6 text-center max-w-2xl px-6 pointer-events-none"
               >
                 <p className="text-white/90 text-sm font-semibold leading-relaxed drop-shadow-md">
-                  {selectedImage.alt}
+                  {getImageLabel(selectedImage)}
                 </p>
               </motion.div>
             )}

@@ -1,32 +1,100 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, FileText, ArrowRight, FileDown, X } from 'lucide-react';
+import { Calendar, FileText, FileDown, X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { getSections } from '../../../services/sectionService';
 import { fileUrl } from '../../../services/api';
 
+const pressReleases = [
+  {
+    id: 1,
+    date: "2025-10-15",
+    titleKey: "galleryPage.press.items.digital.title",
+    excerptKey: "galleryPage.press.items.digital.excerpt",
+    categoryKey: "galleryPage.press.categories.initiatives",
+    fileSize: "1.2 MB",
+    cardStyle: "gradient",
+    image: "/images/hero/classroom.webp"
+  },
+  {
+    id: 2,
+    date: "2025-09-28",
+    titleKey: "galleryPage.press.items.curriculum.title",
+    excerptKey: "galleryPage.press.items.curriculum.excerpt",
+    categoryKey: "galleryPage.press.categories.curriculum",
+    fileSize: "4.5 MB",
+    cardStyle: "image",
+    image: "/images/hero/audio.webp"
+  },
+  {
+    id: 3,
+    date: "2025-08-10",
+    titleKey: "galleryPage.press.items.partnership.title",
+    excerptKey: "galleryPage.press.items.partnership.excerpt",
+    categoryKey: "galleryPage.press.categories.partnerships",
+    fileSize: "800 KB",
+    cardStyle: "glass",
+    image: "/images/hero/vr.webp"
+  },
+  {
+    id: 4,
+    date: "2025-07-22",
+    titleKey: "galleryPage.press.items.board.title",
+    excerptKey: "galleryPage.press.items.board.excerpt",
+    categoryKey: "galleryPage.press.categories.corporate",
+    fileSize: "2.1 MB",
+    cardStyle: "dark",
+    image: "/images/hero/sign.webp"
+  },
+  {
+    id: 5,
+    date: "2025-05-10",
+    titleKey: "galleryPage.press.items.nep.title",
+    excerptKey: "galleryPage.press.items.nep.excerpt",
+    categoryKey: "galleryPage.press.categories.reform",
+    fileSize: "3.4 MB",
+    cardStyle: "glass",
+    image: "/images/hero/linguistic.webp"
+  }
+];
+
 const Pressrelease = () => {
+  const { t, i18n } = useTranslation();
   const [selectedRelease, setSelectedRelease] = useState(null);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(pressReleases);
+
+  const dateLocale = i18n.language === "hi" ? "hi-IN" : "en-US";
+  const formatDate = (dateValue) => {
+    if (!dateValue) return new Date().toLocaleDateString(dateLocale, { month: 'long', day: 'numeric', year: 'numeric' });
+    return new Date(dateValue).toLocaleDateString(dateLocale, { month: 'long', day: 'numeric', year: 'numeric' });
+  };
+  const getReleaseTitle = (item) => (item ? (item.titleKey ? t(item.titleKey) : item.title) : "");
+  const getReleaseExcerpt = (item) => (item ? (item.excerptKey ? t(item.excerptKey) : item.excerpt) : "");
+  const getReleaseCategory = (item) => (item ? (item.categoryKey ? t(item.categoryKey) : item.category) : "");
+  const getReleaseDate = (item) => (item ? formatDate(item.date) : "");
 
   // Press releases are managed in Admin → Gallery → Press Release
   useEffect(() => {
-    const formatDate = (date) =>
-      (date ? new Date(date) : new Date()).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-
     getSections('gl-press')
-      .then((rows) => setItems(rows.map((row, index) => ({
-        id: row.id,
-        date: formatDate(row.publishDate),
-        title: row.title || "Press Release",
-        excerpt: row.description || "Official press release.",
-        category: row.category || "General",
-        fileSize: "1.2 MB",
-        cardStyle: index % 3 === 0 ? "gradient" : index % 3 === 1 ? "image" : "glass",
-        image: fileUrl(row.imageUrl) || null,
-        fileUrl: fileUrl(row.imageUrl),
-      }))))
-      .catch(() => setItems([]));
-  }, []);
+      .then((rows) => {
+        if (rows && rows.length > 0) {
+          setItems(rows.map((row, index) => ({
+            id: row.id,
+            date: row.publishDate || new Date().toISOString(),
+            title: row.title || t("galleryPage.press.fallbackTitle"),
+            excerpt: row.description || t("galleryPage.press.fallbackExcerpt"),
+            category: row.category || t("galleryPage.press.categories.general"),
+            fileSize: "1.2 MB",
+            cardStyle: index % 3 === 0 ? "gradient" : index % 3 === 1 ? "image" : "glass",
+            image: fileUrl(row.imageUrl) || null,
+            fileUrl: fileUrl(row.imageUrl),
+          })));
+        } else {
+          setItems(pressReleases);
+        }
+      })
+      .catch(() => setItems(pressReleases));
+  }, [t]);
 
   const handleDownload = (e, release) => {
     e.stopPropagation();
@@ -52,20 +120,20 @@ const Pressrelease = () => {
             {/* Image Version */}
             <img loading="lazy" decoding="async"
               src={item.image}
-              alt={item.title}
+              alt={getReleaseTitle(item)}
               className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent flex flex-col justify-end p-6" />
             <div className="absolute inset-0 flex flex-col justify-between p-6 z-10 text-white">
               <span className="px-2.5 py-0.5 bg-blue-500 rounded-full text-[9px] font-bold uppercase tracking-wider block w-fit shadow-sm">
-                {item.category}
+                {getReleaseCategory(item)}
               </span>
               <div>
                 <h3 className="text-sm font-black tracking-tight leading-snug line-clamp-3 mb-3 group-hover:text-blue-200 transition-colors">
-                  {item.title}
+                  {getReleaseTitle(item)}
                 </h3>
                 <div className="flex items-center justify-between pt-3 border-t border-white/20">
-                  <span className="text-[10px] text-white/70 font-semibold uppercase">{item.date}</span>
+                  <span className="text-[10px] text-white/70 font-semibold uppercase">{getReleaseDate(item)}</span>
                   <button className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all backdrop-blur-sm">
                     <FileDown size={14} />
                   </button>
@@ -78,14 +146,14 @@ const Pressrelease = () => {
             {/* White Background Version */}
             <div className="absolute inset-0 p-6 flex flex-col justify-between bg-white text-slate-800">
               <span className="px-2.5 py-0.5 bg-blue-50 text-blue-600 rounded-full text-[9px] font-bold uppercase tracking-wider block w-fit mb-3 border border-blue-100">
-                {item.category}
+                {getReleaseCategory(item)}
               </span>
               <div>
                 <h3 className="text-sm font-black tracking-tight leading-snug line-clamp-3 mb-3 group-hover:text-blue-600 transition-colors">
-                  {item.title}
+                  {getReleaseTitle(item)}
                 </h3>
                 <div className="flex items-center justify-between pt-3 border-t border-slate-100">
-                  <span className="text-[10px] text-slate-500 font-semibold uppercase">{item.date}</span>
+                  <span className="text-[10px] text-slate-500 font-semibold uppercase">{getReleaseDate(item)}</span>
                   <button className="p-2 rounded-full bg-slate-50 hover:bg-blue-50 text-slate-500 hover:text-blue-600 transition-all border border-slate-200">
                     <FileDown size={14} />
                   </button>
@@ -116,7 +184,10 @@ const Pressrelease = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-800 tracking-tight leading-tight mb-2"
           >
-            Press <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Releases</span>
+            {t("galleryPage.press.headingPrefix")}{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+              {t("galleryPage.press.headingHighlight")}
+            </span>
           </motion.h2>
 
           <motion.p
@@ -125,7 +196,7 @@ const Pressrelease = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-slate-500 text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed"
           >
-            Stay updated with our latest organizational statements, curriculum reforms, policy alignments, and strategic reviews.
+            {t("galleryPage.press.description")}
           </motion.p>
         </div>
 
@@ -161,7 +232,7 @@ const Pressrelease = () => {
 
               {/* Cover Image Header */}
               <div className="w-full h-48 md:h-64 relative shrink-0">
-                <img loading="lazy" decoding="async" src={selectedRelease.image} alt={selectedRelease.title} className="w-full h-full object-cover" />
+                <img loading="lazy" decoding="async" src={selectedRelease.image} alt={getReleaseTitle(selectedRelease)} className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent" />
                 <button
                   onClick={() => setSelectedRelease(null)}
@@ -173,14 +244,14 @@ const Pressrelease = () => {
                 {/* Overlay Text in Header */}
                 <div className="absolute bottom-0 left-0 right-0 p-8 z-10">
                   <span className="px-3 py-1 bg-white/20 backdrop-blur text-white rounded-full text-[10px] font-extrabold uppercase tracking-widest block w-fit mb-3 border border-white/20">
-                    {selectedRelease.category}
+                    {getReleaseCategory(selectedRelease)}
                   </span>
                   <h2 className="text-2xl md:text-3xl font-black text-white leading-snug drop-shadow-md">
-                    {selectedRelease.title}
+                    {getReleaseTitle(selectedRelease)}
                   </h2>
                   <div className="flex items-center gap-2 mt-4 text-xs font-bold text-slate-300">
                     <Calendar size={14} className="text-blue-400" />
-                    <span className="uppercase">{selectedRelease.date}</span>
+                    <span className="uppercase">{getReleaseDate(selectedRelease)}</span>
                   </div>
                 </div>
               </div>
@@ -188,14 +259,14 @@ const Pressrelease = () => {
               {/* Excerpt/Body */}
               <div className="p-8 md:p-10 overflow-y-auto space-y-6 flex-grow custom-scrollbar">
                 <div className="space-y-4">
-                  <h4 className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">Official Excerpt</h4>
+                  <h4 className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">{t("galleryPage.press.officialExcerpt")}</h4>
                   <p className="text-base text-slate-600 leading-relaxed font-light">
-                    {selectedRelease.excerpt}
+                    {getReleaseExcerpt(selectedRelease)}
                   </p>
                 </div>
                 <div className="p-5 bg-blue-50/50 rounded-2xl border border-blue-100/50">
                   <p className="text-xs text-blue-700 font-medium leading-relaxed">
-                    This is an official media briefing published by the Bihar State Text Book Publishing Corporation (BSTBPC). You can download the complete press kit including images and statements below.
+                    {t("galleryPage.press.modalNote")}
                   </p>
                 </div>
               </div>
@@ -204,13 +275,13 @@ const Pressrelease = () => {
               <div className="p-6 md:p-8 border-t border-slate-100 flex items-center justify-between bg-slate-50">
                 <div className="flex items-center gap-1.5 text-xs text-slate-400 font-semibold">
                   <FileText size={14} className="text-blue-500" />
-                  <span>Size: {selectedRelease.fileSize}</span>
+                  <span>{t("galleryPage.press.sizeLabel", { size: selectedRelease.fileSize })}</span>
                 </div>
                 <button
                   onClick={(e) => handleDownload(e, selectedRelease)}
                   className="px-6 py-3 bg-blue-600 text-white rounded-full text-xs font-extrabold uppercase tracking-widest hover:bg-blue-700 transition-all shadow-md shadow-blue-500/10 flex items-center gap-2"
                 >
-                  <FileDown size={14} /> Download Press Release
+                  <FileDown size={14} /> {t("galleryPage.press.download")}
                 </button>
               </div>
 
