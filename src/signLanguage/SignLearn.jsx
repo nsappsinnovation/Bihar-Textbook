@@ -214,6 +214,7 @@ const getDictionary = (t) => [
 
 const FingerspellComponent = () => {
   const { t } = useTranslation();
+  const dictionary = getDictionary(t);
   const [text, setText] = useState('HELLO');
   const [zoomedChar, setZoomedChar] = useState(null);
   const [selectedWordSign, setSelectedWordSign] = useState(null);
@@ -284,7 +285,7 @@ const FingerspellComponent = () => {
   };
 
   const suggestions = isFocused && text.trim() && (!selectedWordSign || text !== selectedWordSign.word)
-    ? getDictionary(t).filter(item => item.word.includes(text.toUpperCase()))
+    ? dictionary.filter(item => item.word.includes(text.toUpperCase()))
     : [];
 
   return (
