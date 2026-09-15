@@ -246,7 +246,7 @@ export default function NoticeBoard() {
                     activeTab === tab ? "text-blue-600" : "text-slate-400 hover:text-slate-600"
                   }`}
                 >
-                  {t(`noticeBoard.tabs.${tab}`, tab)}
+                  {t(`noticeBoard.tab.${tab.toLowerCase()}`, tab)}
                   {activeTab === tab && (
                     <motion.span 
                       layoutId="activeTab"

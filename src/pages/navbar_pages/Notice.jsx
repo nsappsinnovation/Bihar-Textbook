@@ -1,9 +1,11 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { FiSearch, FiFileText, FiBell, FiArrowRight, FiCalendar, FiClock, FiFilter } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { getNotices, lastUpdatedOf } from "../../services/noticeService";
 
 const Notice = () => {
+  const { t, i18n } = useTranslation();
   const [liveNotices, setLiveNotices] = useState([]);
 
   useEffect(() => {
@@ -41,14 +43,15 @@ const Notice = () => {
       if (!dateStr) return '';
       if (dateStr.includes('/')) return dateStr;
       const d = new Date(dateStr);
-      return d.toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+      const dateLocale = i18n.language === 'hi' ? 'hi-IN' : 'en-IN';
+      return d.toLocaleDateString(dateLocale, { day: '2-digit', month: '2-digit', year: 'numeric' });
     } catch { return dateStr; }
   };
 
   const filteredNotices = useMemo(() => {
     const filtered = liveNotices.filter((n) => {
-      const matchesSearch = n.title.toLowerCase().includes(search.toLowerCase()) ||
-                          n.description.toLowerCase().includes(search.toLowerCase());
+      const matchesSearch = (n.title || '').toLowerCase().includes(search.toLowerCase()) ||
+                           (n.description || '').toLowerCase().includes(search.toLowerCase());
       const matchesFilter = activeFilter === "All" || n.category === activeFilter;
       return matchesSearch && matchesFilter;
     });
@@ -106,7 +109,7 @@ const Notice = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4"
           >
-            Notice Board
+            {t("noticePage.title")}
           </motion.h1>
           <motion.div 
             initial={{ width: 0 }}
@@ -120,7 +123,7 @@ const Notice = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-white/60 text-xs md:text-sm max-w-xl mx-auto leading-relaxed font-light"
           >
-            Stay updated with official notices, circulars, tenders & important announcements from the Bihar State Text Book Publishing Corporation Ltd.
+            {t("noticePage.subtitle")}
           </motion.p>
           
           <motion.div 
@@ -131,11 +134,11 @@ const Notice = () => {
           >
             <div className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 flex items-center gap-2 backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-              <span className="text-white/80">{liveNotices.length} Total Notices</span>
+              <span className="text-white/80">{t("noticePage.totalNotices", { count: liveNotices.length })}</span>
             </div>
             <div className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 flex items-center gap-2 backdrop-blur-sm">
               <FiClock className="text-blue-400" />
-              <span className="text-white/80">Last Updated: {lastUpdated ? formatDate(lastUpdated) : (liveNotices.length > 0 ? formatDate(liveNotices[0].date) : 'N/A')}</span>
+              <span className="text-white/80">{t("noticePage.lastUpdated", { date: lastUpdated ? formatDate(lastUpdated) : (liveNotices.length > 0 ? formatDate(liveNotices[0].date) : 'N/A') })}</span>
             </div>
           </motion.div>
         </div>
@@ -160,8 +163,8 @@ const Notice = () => {
                     <FiBell className="text-xl text-white" />
                   </div>
                   <div>
-                    <h2 className="text-xl font-bold text-[#0d0e23]">Directives & Results</h2>
-                    <p className="text-slate-500 text-xs">Real-time repository for official communication</p>
+                    <h2 className="text-xl font-bold text-[#0d0e23]">{t("noticePage.directivesTitle")}</h2>
+                    <p className="text-slate-500 text-xs">{t("noticePage.directivesSubtitle")}</p>
                   </div>
                 </div>
 
@@ -169,7 +172,7 @@ const Notice = () => {
                   <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors text-lg" />
                   <input
                     type="text"
-                    placeholder="Search by keyword or department..."
+                    placeholder={t("noticePage.searchPlaceholder")}
                     value={search}
                     onChange={handleSearch}
                     className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 bg-white focus:bg-white focus:ring-4 focus:ring-blue-100 focus:border-blue-600 outline-none transition-all text-xs text-slate-700 shadow-inner"
@@ -189,7 +192,7 @@ const Notice = () => {
                         : 'bg-slate-100 text-slate-600 hover:bg-slate-200 active:scale-95'
                     }`}
                   >
-                    {filter}
+                    {t(`noticePage.filters.${filter}`, filter)}
                   </button>
                 ))}
               </div>
@@ -204,9 +207,11 @@ const Notice = () => {
                   <div className="w-24 h-24 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
                     <FiSearch className="text-4xl text-slate-300" />
                   </div>
-                  <h3 className="text-2xl font-bold text-slate-800">No results found</h3>
-                  <p className="text-slate-500 mt-2">Try adjusting your search terms or filters.</p>
-                  <button onClick={() => { setSearch(""); setActiveFilter("All"); }} className="mt-8 text-blue-600 font-bold hover:underline">Clear all filters</button>
+                  <h3 className="text-2xl font-bold text-slate-800">{t("noticePage.noResults")}</h3>
+                  <p className="text-slate-500 mt-2">{t("noticePage.noResultsDesc")}</p>
+                  <button onClick={() => { setSearch(""); setActiveFilter("All"); }} className="mt-8 text-blue-600 font-bold hover:underline">
+                    {t("noticePage.clearFilters")}
+                  </button>
                 </motion.div>
               ) : (
                 <motion.div
@@ -217,10 +222,10 @@ const Notice = () => {
                     <table className="w-full text-left">
                       <thead>
                         <tr className="border-b border-slate-200">
-                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">S.No</th>
-                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">Details</th>
-                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">Date</th>
-                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400 text-right">Action</th>
+                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">{t("noticePage.table.sNo")}</th>
+                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">{t("noticePage.table.details")}</th>
+                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">{t("noticePage.table.date")}</th>
+                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400 text-right">{t("noticePage.table.action")}</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-100 bg-white">
@@ -240,20 +245,22 @@ const Notice = () => {
                                 <div className="space-y-2">
                                   <div className="flex flex-wrap items-center gap-2">
                                     {(notice.isPinned || notice.pinned) && isWithinOneMonth(notice.date) && (
-                                      <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-600 text-[10px] font-black border border-amber-200">PINNED</span>
+                                      <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-600 text-[10px] font-black border border-amber-200">
+                                        {t("noticePage.badges.pinned")}
+                                      </span>
                                     )}
                                     {isWithinOneMonth(notice.date) && (
                                       <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
-                                        <span className="w-1 h-1 bg-blue-500 rounded-full" /> NEW
+                                        <span className="w-1 h-1 bg-blue-500 rounded-full" /> {t("noticePage.badges.new")}
                                       </span>
                                     )}
                                     {notice.isUrgent && (
                                       <span className="px-2 py-0.5 rounded-md bg-blue-100 text-blue-700 text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
-                                        URGENT
+                                        {t("noticePage.badges.urgent")}
                                       </span>
                                     )}
                                     <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-wider">
-                                      {notice.category}
+                                      {t(`noticePage.filters.${notice.category}`, notice.category)}
                                     </span>
                                   </div>
                                   <h4 className="text-base font-bold text-slate-800 leading-tight group-hover:text-blue-700 transition-colors">
@@ -279,7 +286,7 @@ const Notice = () => {
                                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#0d0e23] text-white text-[10px] whitespace-nowrap font-black shadow-lg shadow-slate-200 hover:shadow-blue-200 hover:bg-blue-700 transition-all uppercase tracking-widest"
                               >
                                 <FiFileText className="text-base" />
-                                View PDF
+                                {t("noticePage.viewPdf")}
                                 <FiArrowRight className="transition-transform group-hover:translate-x-1" />
                               </motion.a>
                             </td>
@@ -301,12 +308,18 @@ const Notice = () => {
                         <div className="flex justify-between items-start">
                           <div className="flex gap-2">
                              {(notice.isPinned || notice.pinned) && isWithinOneMonth(notice.date) && (
-                                <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-600 text-[10px] font-black border border-amber-200">PINNED</span>
+                                <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-600 text-[10px] font-black border border-amber-200">
+                                  {t("noticePage.badges.pinned")}
+                                </span>
                              )}
                              {isWithinOneMonth(notice.date) && (
-                                <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-600 text-[10px] font-black">NEW</span>
+                                <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-600 text-[10px] font-black">
+                                  {t("noticePage.badges.new")}
+                                </span>
                              )}
-                             <span className="px-2 py-0.5 rounded-md bg-blue-100 text-blue-700 text-[10px] font-black uppercase">{notice.category}</span>
+                             <span className="px-2 py-0.5 rounded-md bg-blue-100 text-blue-700 text-[10px] font-black uppercase">
+                               {t(`noticePage.filters.${notice.category}`, notice.category)}
+                             </span>
                           </div>
                           <span className="text-slate-400 font-bold text-xs">{(currentPage - 1) * noticesPerPage + index + 1}</span>
                         </div>
@@ -320,7 +333,7 @@ const Notice = () => {
                           target="_blank" rel="noopener noreferrer"
                           className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-[#0d0e23] text-white font-black text-[10px] uppercase whitespace-nowrap"
                         >
-                          <FiFileText /> View PDF
+                          <FiFileText /> {t("noticePage.viewPdf")}
                         </a>
                       </motion.div>
                     ))}
@@ -330,7 +343,11 @@ const Notice = () => {
                   {totalPages > 1 && (
                     <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-8 pt-10 border-t border-slate-100">
                       <p className="text-slate-500 font-medium">
-                        Showing <span className="text-[#0d0e23] font-black">{(currentPage - 1) * noticesPerPage + 1}</span> to <span className="text-[#0d0e23] font-black">{Math.min(currentPage * noticesPerPage, filteredNotices.length)}</span> of <span className="text-[#0d0e23] font-black">{filteredNotices.length}</span> notices
+                        {t("noticePage.pagination.showing", {
+                          start: (currentPage - 1) * noticesPerPage + 1,
+                          end: Math.min(currentPage * noticesPerPage, filteredNotices.length),
+                          total: filteredNotices.length
+                        })}
                       </p>
                       
                       <div className="flex items-center gap-2">
@@ -339,7 +356,7 @@ const Notice = () => {
                           disabled={currentPage === 1}
                           className="px-6 py-3 rounded-2xl bg-white border border-slate-200 text-slate-600 font-bold text-sm hover:border-blue-500 hover:text-blue-600 disabled:opacity-30 disabled:pointer-events-none transition-all"
                         >
-                          Prev
+                          {t("noticePage.pagination.prev")}
                         </button>
                         <div className="flex gap-2">
                           {getPaginationGroup().map((item) => (
@@ -359,7 +376,7 @@ const Notice = () => {
                           disabled={currentPage === totalPages}
                           className="px-6 py-3 rounded-2xl bg-white border border-slate-200 text-slate-600 font-bold text-sm hover:border-blue-500 hover:text-blue-600 disabled:opacity-30 disabled:pointer-events-none transition-all"
                         >
-                          Next
+                          {t("noticePage.pagination.next")}
                         </button>
                       </div>
                     </div>
