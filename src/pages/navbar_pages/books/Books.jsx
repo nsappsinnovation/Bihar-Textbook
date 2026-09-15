@@ -97,10 +97,10 @@ const Books = () => {
             {/* Left Content (Text) */}
             <div className="flex-1 flex flex-col gap-1 text-center lg:text-left mt-0">
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-display font-black text-slate-900 leading-[1.1] mb-1 tracking-tight">
-                {translateClassName(classData.name)} <span className="text-blue-600">{t("booksPage.textbooksHeader", "Textbooks")}</span>
+                {translateClassName(classData.name)} <span className="text-blue-600">{t("booksPage.textbooks", "Textbooks")}</span>
               </h1>
               <p className="text-slate-500 text-xs md:text-sm leading-relaxed max-w-xl">
-                {t("booksPage.subtitleDesc", "Access the complete collection of Bihar Board textbooks for {{className}}. Select a book to read online.", { className: translateClassName(classData.name) })}
+                {t("booksPage.desc", { className: translateClassName(classData.name) })}
               </p>
             </div>
 
