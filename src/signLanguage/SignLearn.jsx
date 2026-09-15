@@ -432,7 +432,7 @@ const FingerspellComponent = () => {
                     className="w-16 h-20 md:w-20 md:h-24 bg-white rounded-[16px] border-2 border-teal-100 flex flex-col items-center justify-center relative shadow-[0_4px_15px_rgb(16,185,129,0.1)] overflow-hidden group hover:border-teal-400 hover:shadow-[0_8px_20px_rgb(16,185,129,0.2)] hover:-translate-y-1 transition-all cursor-pointer"
                   >
                     <img loading="lazy" decoding="async"
-                      src={`/images/signlanguage/alphabets/${char}.webp`}
+                      src={`/images/signlanguage/alphabets/${char.toUpperCase()}.webp`}
                       onError={(e) => { e.target.onerror = null; e.target.src = '/images/signlanguage/hand.webp'; }}
                       alt={`Sign for ${char}`}
                       className="w-10 h-10 md:w-12 md:h-12 object-contain mix-blend-multiply opacity-80 mb-3 group-hover:scale-110 group-hover:opacity-100 transition-all"
@@ -480,12 +480,12 @@ const FingerspellComponent = () => {
                 <XCircle size={24} />
               </button>
 
-              <h4 className="text-4xl font-black text-slate-900 mb-6">{t('signLearn.letter', 'Letter')} {zoomedChar}</h4>
+              <h4 className="text-4xl font-black text-slate-900 mb-6">{t('signLearn.letter', 'Letter')} {zoomedChar ? zoomedChar.toUpperCase() : ''}</h4>
 
               <div className="w-56 h-56 bg-slate-50 rounded-[24px] border-2 border-slate-100 flex items-center justify-center p-6 mb-8 shadow-inner relative overflow-hidden">
                 <div className="absolute inset-0 bg-teal-500/5 mix-blend-multiply pointer-events-none" />
                 <img loading="lazy" decoding="async"
-                  src={`/images/signlanguage/alphabets/${zoomedChar}.webp`}
+                  src={`/images/signlanguage/alphabets/${zoomedChar ? zoomedChar.toUpperCase() : ''}.webp`}
                   onError={(e) => { e.target.onerror = null; e.target.src = '/images/signlanguage/hand.webp'; }}
                   alt={`Zoomed sign for ${zoomedChar}`}
                   className="w-full h-full object-contain mix-blend-multiply drop-shadow-md"
@@ -493,7 +493,7 @@ const FingerspellComponent = () => {
               </div>
 
               <p className="text-slate-500 text-center font-medium leading-relaxed">
-                Practice the ISL sign for the alphabet <strong className="text-slate-800 text-lg">{zoomedChar}</strong>.
+                Practice the ISL sign for the alphabet <strong className="text-slate-800 text-lg">{zoomedChar ? zoomedChar.toUpperCase() : ''}</strong>.
               </p>
             </motion.div>
           </motion.div>
