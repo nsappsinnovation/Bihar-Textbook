@@ -1846,7 +1846,12 @@
     "curriculumAligned": "Curriculum Aligned",
     "mappedLessons": "Mapped directly to secondary school lessons.",
     "interactiveDemos": "Interactive Demos",
-    "skeletalHand": "Skeletal hand matching and dictionary explorers."
+    "skeletalHand": "Skeletal hand matching and dictionary explorers.",
+    "questionCounter": "Question",
+    "letterLabel": "Letter",
+    "mismatchHint": "Look closely at the hand gestures and try again.",
+    "activeBadge": "Active",
+    "tryViewportSandbox": "Try Viewport Sandbox"
   },
   "ling": {
     "letsLearn": "Let's learn",

@@ -1896,7 +1896,12 @@
     "curriculumAligned": "पाठ्यचर्या संरेखित",
     "mappedLessons": "सीधे माध्यमिक विद्यालय के पाठों में मैप किया गया।",
     "interactiveDemos": "इंटरैक्टिव डेमो",
-    "skeletalHand": "कंकाल हाथ मिलान और शब्दकोश खोजकर्ता।"
+    "skeletalHand": "कंकाल हाथ मिलान और शब्दकोश खोजकर्ता।",
+    "questionCounter": "प्रश्न",
+    "letterLabel": "अक्षर",
+    "mismatchHint": "हाथों के इशारों को ध्यान से देखें और पुनः प्रयास करें।",
+    "activeBadge": "सक्रिय",
+    "tryViewportSandbox": "व्यूपोर्ट सैंडबॉक्स आज़माएँ"
   },
   "ling": {
     "letsLearn": "आओ सीखें",

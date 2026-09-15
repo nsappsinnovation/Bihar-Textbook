@@ -327,7 +327,7 @@ const Signlanguage = () => {
                         <p className={`text-[10px] font-semibold transition-colors ${
                           isActive ? 'text-indigo-200' : 'text-slate-400'
                         }`}>
-                          {idx === 0 ? 'Interactive Matcher' : idx === 1 ? 'Dictionary Builder' : 'Conversational Phrases'}
+                          {idx === 0 ? t('signLanguage.interactiveMatcher', 'Interactive Matcher') : idx === 1 ? t('signLanguage.dictionaryBuilder', 'Dictionary Builder') : t('signLanguage.conversationalPhrases', 'Conversational Phrases')}
                         </p>
                       </div>
                     </button>
@@ -399,14 +399,14 @@ const Signlanguage = () => {
                                   ? 'bg-teal-50 border-teal-200 text-teal-700' 
                                   : 'bg-rose-50 border-rose-200 text-rose-700'
                               }`}>
-                                {viewportIsCorrect ? 'Correct Match (100%)' : 'Mismatch Detected'}
+                                {viewportIsCorrect ? t('signLanguage.correctMatch', 'Correct Match (100%)') : t('signLanguage.mismatchDetected', 'Mismatch Detected')}
                               </div>
                               <p className={`text-[10px] font-bold text-center max-w-[280px] tracking-wide leading-tight ${
                                 viewportIsCorrect ? 'text-teal-600' : 'text-rose-600'
                               }`}>
                                 {viewportIsCorrect 
                                   ? viewportQuizQuestions[viewportQuizIdx].explanation
-                                  : 'Look closely at the hand gestures and try again.'}
+                                  : t('signLanguage.mismatchHint', 'Look closely at the hand gestures and try again.')}
                               </p>
                             </>
                           ) : (
@@ -439,7 +439,7 @@ const Signlanguage = () => {
                         />
                       </div>
                       <span className="px-4 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 font-bold text-xs tracking-wider uppercase">
-                        Letter {activeAlphabet}
+                        {t('signLanguage.letterLabel', 'Letter')} {activeAlphabet}
                       </span>
                     </motion.div>
                   </div>
@@ -616,7 +616,7 @@ const Signlanguage = () => {
                   {activeSandboxModule === 0 && !viewportShowResult && (
                     <div className="flex items-center gap-3">
                       <span className="text-[10px] font-mono text-slate-500 font-bold uppercase">
-                        Question {viewportQuizIdx + 1}/{viewportQuizQuestions.length}
+                        {t('signLanguage.questionCounter', 'Question')} {viewportQuizIdx + 1}/{viewportQuizQuestions.length}
                       </span>
                       {viewportIsCorrect === true && (
                         <button
@@ -656,7 +656,7 @@ const Signlanguage = () => {
             <p className="text-[11px] text-slate-500 font-medium leading-relaxed">{t('signLanguage.mappedLessons', 'Mapped directly to secondary school lessons.')}</p>
           </div>
           <div className="p-5 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1">
-            <h5 className="text-3xl font-extrabold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Active</h5>
+            <h5 className="text-3xl font-extrabold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">{t('signLanguage.activeBadge', 'Active')}</h5>
             <p className="text-xs sm:text-sm font-bold text-slate-800">{t('signLanguage.interactiveDemos', 'Interactive Demos')}</p>
             <p className="text-[11px] text-slate-500 font-medium leading-relaxed">{t('signLanguage.skeletalHand', 'Skeletal hand matching and dictionary explorers.')}</p>
           </div>
