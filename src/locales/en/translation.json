@@ -6363,5 +6363,80 @@
       "subsidy": "Execution of Subsidy Programs",
       "licenses": "Grant of Licenses"
     }
+  },
+  "knowUsPage": {
+    "mdMessage": {
+      "titlePart1": "Managing Director's",
+      "titlePart2": "Message",
+      "designation": "Managing Director",
+      "corporation": "Bihar State Text Book Publishing Corporation Ltd.",
+      "visionText": "A vision for excellence in educational resources and equitable access across Bihar.",
+      "welcomeNoteHeader": "Welcome Note",
+      "ourCommitment": "OUR COMMITMENT",
+      "commitment1": "Timely printing and distribution of textbooks",
+      "commitment2": "Maintaining the highest standards of quality",
+      "commitment3": "Strengthening transparency and accountability",
+      "commitment4": "Ensuring textbooks reach every student across the state",
+      "focusTitle": "FOCUS ON QUALITY & INNOVATION",
+      "collaborationTitle": "COLLABORATION",
+      "collaborationDesc": "Working together with all stakeholders to achieve our shared goals.",
+      "qualityTitle": "QUALITY FIRST",
+      "qualityDesc": "Every stage is carefully supervised to deliver excellence.",
+      "movingForwardTitle": "MOVING FORWARD",
+      "movingForwardDesc": "Committed to timely delivery and better learning outcomes for every student."
+    },
+    "boardOfDirectors": {
+      "titlePart1": "Board of",
+      "titleHighlight": "Directors",
+      "subtitle": "The governing body responsible for strategic decision making and oversight of the Corporation's operations.",
+      "colName": "Name",
+      "colDesignation": "Designation",
+      "colSince": "Since"
+    },
+    "listOfMd": {
+      "titlePart1": "Legacy of",
+      "titleHighlight": "Leadership",
+      "subtitle": "Honoring the Managing Directors who have shaped the journey and success of Bihar State Text Book Publishing Corporation Ltd.",
+      "cardTitle": "Official Directory",
+      "searchPlaceholder": "Search by name...",
+      "colSNo": "S.No.",
+      "colMd": "Managing Director",
+      "colFrom": "From",
+      "colTo": "To",
+      "noResults": "No records matching \"{{term}}\"",
+      "totalRecords": "Total Records: {{count}}"
+    },
+    "ourEmployee": {
+      "titlePart1": "Our",
+      "titleHighlight": "Employees",
+      "subtitle": "Our team of educators, professionals, and innovators works together to make quality education accessible, inclusive, and impactful for every learner in Bihar.",
+      "directoryTitle": "Employee Directory",
+      "directorySubtitle": "Official registry of BSTBPC staff members",
+      "searchPlaceholder": "Search by name, role or dept...",
+      "colSNo": "S.No.",
+      "colName": "Name",
+      "colDesignation": "Designation",
+      "colType": "Type",
+      "colDept": "Department",
+      "noResults": "No employees found matching your search."
+    },
+    "orgStructure": {
+      "titlePart1": "Organisational",
+      "titleHighlight": "Structure",
+      "subtitle": "Our hierarchical framework designed to ensure transparency, accountability, and excellence in the educational publishing ecosystem of Bihar.",
+      "govTitle": "Governance",
+      "govDesc": "Headed by the Managing Director under the Department of Education, Bihar.",
+      "opsTitle": "Operations",
+      "opsDesc": "Structured into specialized wings: Academic, Sales, Accounts, and Printing.",
+      "transTitle": "Transparency",
+      "transDesc": "Standard protocols for decision making and administrative flows."
+    },
+    "empanalledPrinters": {
+      "titlePart1": "Empanalled",
+      "titleHighlight": "Printers",
+      "subtitle": "Our empanalled network of high-tech printing houses ensuring quality and integrity in every page.",
+      "docPreview": "Document Preview: {{name}}",
+      "clickToInteract": "Click to interact with PDF"
+    }
   }
 }

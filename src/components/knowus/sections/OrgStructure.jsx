@@ -1,8 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FiLayers, FiDownload, FiMaximize2 } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
+import { FiLayers } from 'react-icons/fi';
 
 const OrgStructure = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen bg-[#f8fafc] py-12">
       {/* ================= HERO SECTION ================= */}
@@ -12,11 +15,11 @@ const OrgStructure = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-3xl md:text-4xl font-extrabold text-[#0d0e23] tracking-tight mb-4"
         >
-          Organisational <span className="text-blue-600">Structure</span>
+          {t("knowUsPage.orgStructure.titlePart1", "Organisational")} <span className="text-blue-600">{t("knowUsPage.orgStructure.titleHighlight", "Structure")}</span>
         </motion.h1>
         
         <p className="text-slate-500 text-sm max-w-2xl mx-auto leading-relaxed font-medium">
-          Our hierarchical framework designed to ensure transparency, accountability, and excellence in the educational publishing ecosystem of Bihar.
+          {t("knowUsPage.orgStructure.subtitle", "Our hierarchical framework designed to ensure transparency, accountability, and excellence in the educational publishing ecosystem of Bihar.")}
         </p>
       </section>
 
@@ -42,9 +45,9 @@ const OrgStructure = () => {
           </div>
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-slate-100">
-            <Feature icon={<FiLayers />} title="Governance" desc="Headed by the Managing Director under the Department of Education, Bihar." />
-            <Feature icon={<FiLayers />} title="Operations" desc="Structured into specialized wings: Academic, Sales, Accounts, and Printing." />
-            <Feature icon={<FiLayers />} title="Transparency" desc="Standard protocols for decision making and administrative flows." />
+            <Feature icon={<FiLayers />} title={t("knowUsPage.orgStructure.govTitle", "Governance")} desc={t("knowUsPage.orgStructure.govDesc", "Headed by the Managing Director under the Department of Education, Bihar.")} />
+            <Feature icon={<FiLayers />} title={t("knowUsPage.orgStructure.opsTitle", "Operations")} desc={t("knowUsPage.orgStructure.opsDesc", "Structured into specialized wings: Academic, Sales, Accounts, and Printing.")} />
+            <Feature icon={<FiLayers />} title={t("knowUsPage.orgStructure.transTitle", "Transparency")} desc={t("knowUsPage.orgStructure.transDesc", "Standard protocols for decision making and administrative flows.")} />
           </div>
         </motion.div>
       </section>

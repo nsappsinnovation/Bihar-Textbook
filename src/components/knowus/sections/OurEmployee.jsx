@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FiUsers, FiAward, FiHeart, FiTrendingUp, FiSearch } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next';
+import { FiSearch } from 'react-icons/fi';
 import { getDirectory } from '../../../services/directoryService';
 
 const OurEmployee = () => {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const [employees, setEmployees] = useState([]);
 
@@ -40,11 +42,11 @@ const OurEmployee = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-3xl md:text-4xl font-extrabold text-[#0d0e23] tracking-tight mb-4"
         >
-          Our <span className="text-blue-600">Employees</span>
+          {t("knowUsPage.ourEmployee.titlePart1", "Our")} <span className="text-blue-600">{t("knowUsPage.ourEmployee.titleHighlight", "Employees")}</span>
         </motion.h1>
         
         <p className="text-slate-500 text-sm max-w-2xl mx-auto leading-relaxed font-medium">
-          Our team of educators, professionals, and innovators works together to make quality education accessible, inclusive, and impactful for every learner in Bihar.
+          {t("knowUsPage.ourEmployee.subtitle", "Our team of educators, professionals, and innovators works together to make quality education accessible, inclusive, and impactful for every learner in Bihar.")}
         </p>
       </section>
 
@@ -54,14 +56,14 @@ const OurEmployee = () => {
         <div className="bg-transparent border border-slate-300 overflow-hidden font-sans">
           <div className="p-6 border-b border-slate-300 flex flex-col md:flex-row justify-between items-center gap-6 bg-transparent">
             <div>
-              <h3 className="text-lg font-bold text-[#0d0e23]">Employee Directory</h3>
-              <p className="text-xs text-slate-500">Official registry of BSTBPC staff members</p>
+              <h3 className="text-lg font-bold text-[#0d0e23]">{t("knowUsPage.ourEmployee.directoryTitle", "Employee Directory")}</h3>
+              <p className="text-xs text-slate-500">{t("knowUsPage.ourEmployee.directorySubtitle", "Official registry of BSTBPC staff members")}</p>
             </div>
             <div className="relative w-full md:w-80">
               <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
               <input 
                 type="text" 
-                placeholder="Search by name, role or dept..."
+                placeholder={t("knowUsPage.ourEmployee.searchPlaceholder", "Search by name, role or dept...")}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-12 pr-4 py-2 bg-transparent border border-slate-300 focus:border-blue-500 transition-all outline-none text-sm text-[#0d0e23]"
@@ -73,11 +75,11 @@ const OurEmployee = () => {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-slate-200 border-b border-slate-300 text-[#0d0e23]">
-                  <th className="w-20 px-4 py-4 text-sm font-bold border-r border-slate-300 text-center">S.No.</th>
-                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Name</th>
-                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Designation</th>
-                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Type</th>
-                  <th className="px-6 py-4 text-sm font-bold">Department</th>
+                  <th className="w-20 px-4 py-4 text-sm font-bold border-r border-slate-300 text-center">{t("knowUsPage.ourEmployee.colSNo", "S.No.")}</th>
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">{t("knowUsPage.ourEmployee.colName", "Name")}</th>
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">{t("knowUsPage.ourEmployee.colDesignation", "Designation")}</th>
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">{t("knowUsPage.ourEmployee.colType", "Type")}</th>
+                  <th className="px-6 py-4 text-sm font-bold">{t("knowUsPage.ourEmployee.colDept", "Department")}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-300">
@@ -108,7 +110,7 @@ const OurEmployee = () => {
 
           {filteredEmployees.length === 0 && (
             <div className="py-10 text-center text-slate-500">
-               <p className="text-sm">No employees found matching your search.</p>
+               <p className="text-sm">{t("knowUsPage.ourEmployee.noResults", "No employees found matching your search.")}</p>
             </div>
           )}
         </div>
@@ -116,23 +118,5 @@ const OurEmployee = () => {
     </div>
   );
 };
-
-/* Helper Components */
-const StatCard = ({ icon, value, label, color }) => (
-  <div className="bg-transparent p-6 border border-slate-300 flex flex-col items-center text-center">
-    <div className={`w-12 h-12 text-blue-600 flex items-center justify-center text-xl mb-4`}>
-       {icon}
-    </div>
-    <div className="text-2xl font-bold text-[#0d0e23]">{value}</div>
-    <div className="text-xs font-bold uppercase text-slate-500 tracking-tighter">{label}</div>
-  </div>
-);
-
-const CultureCard = ({ title, desc }) => (
-  <div className="p-4 flex justify-between items-center bg-transparent">
-    <h4 className="text-sm font-bold text-[#0d0e23] mb-1">{title}</h4>
-    <p className="text-xs text-slate-500">{desc}</p>
-  </div>
-);
 
 export default OurEmployee;

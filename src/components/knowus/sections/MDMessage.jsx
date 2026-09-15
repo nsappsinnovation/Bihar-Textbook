@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { 
   BookOpen, CalendarCheck, ShieldCheck, UserCheck, 
-  Monitor, Target, TrendingUp, ChevronsRight, Star, Award, Quote, GraduationCap
+  Target, TrendingUp, ChevronsRight, Award, GraduationCap
 } from 'lucide-react';
 import { getSetting } from '../../../services/settingService';
 import { fileUrl } from '../../../services/api';
 
 const MdMessage = () => {
+  const { t, i18n } = useTranslation();
+  const isHindi = i18n.language === 'hi';
+
   const [mdData, setMdData] = useState({
     name: 'Shri Yatendra Kumar Pal',
     photo: '/images/KeyParticipants/shri_yatendra_pal.webp',
@@ -20,6 +24,8 @@ const MdMessage = () => {
       .then((value) => value && setMdData((prev) => ({ ...prev, ...value, photo: fileUrl(value.photo) || prev.photo })))
       .catch(() => {});
   }, []);
+
+  const displayName = isHindi && mdData.name === 'Shri Yatendra Kumar Pal' ? 'श्री यतेंद्र कुमार पाल' : mdData.name;
 
   return (
     <div className="bg-white text-slate-800 pb-8">
@@ -38,7 +44,7 @@ const MdMessage = () => {
               <div className="relative z-10 w-64 lg:w-full max-w-[280px] aspect-[4/5] rounded-[32px] overflow-hidden bg-slate-100 shadow-sm border border-slate-100">
                 <img loading="lazy" decoding="async" 
                   src={mdData.photo || '/images/KeyParticipants/shri_yatendra_pal.webp'} 
-                  alt={mdData.name} 
+                  alt={displayName} 
                   className="w-full h-full object-cover"
                   onError={(e) => {
                     if (!e.target.src.endsWith('/images/KeyParticipants/shri_yatendra_pal.webp')) {
@@ -51,10 +57,12 @@ const MdMessage = () => {
               </div>
             </div>
 
-            <h2 className="text-2xl font-black text-slate-900 mb-1">{mdData.name}</h2>
-            <p className="text-sm font-bold text-blue-600 tracking-wide uppercase mb-2">Managing Director</p>
+            <h2 className="text-2xl font-black text-slate-900 mb-1">{displayName}</h2>
+            <p className="text-sm font-bold text-blue-600 tracking-wide uppercase mb-2">
+              {t("knowUsPage.mdMessage.designation", "Managing Director")}
+            </p>
             <p className="text-sm text-slate-600 leading-snug mb-6">
-              Bihar State Text Book Publishing<br className="hidden lg:block"/> Corporation Ltd.
+              {t("knowUsPage.mdMessage.corporation", "Bihar State Text Book Publishing Corporation Ltd.")}
             </p>
             <div className="w-12 h-1 bg-blue-600 rounded-full mb-8 lg:mx-0 mx-auto"></div>
 
@@ -64,8 +72,8 @@ const MdMessage = () => {
           {/* Right Main Content */}
           <div className="lg:col-span-8 pt-4 lg:pt-0">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 leading-[1.1] mb-2 tracking-tight">
-              Managing Director's<br/>
-              <span className="text-blue-700">Message</span>
+              {t("knowUsPage.mdMessage.titlePart1", "Managing Director's")}<br/>
+              <span className="text-blue-700">{t("knowUsPage.mdMessage.titlePart2", "Message")}</span>
             </h1>
             <div className="w-16 h-1.5 bg-blue-700 rounded-full mb-10 mt-6"></div>
 
@@ -75,14 +83,14 @@ const MdMessage = () => {
                 <BookOpen className="text-blue-600 w-6 h-6" />
               </div>
               <p className="text-slate-700 font-semibold text-lg leading-snug">
-                A vision for excellence in educational resources and equitable access across Bihar.
+                {t("knowUsPage.mdMessage.visionText", "A vision for excellence in educational resources and equitable access across Bihar.")}
               </p>
             </div>
 
             {/* Welcome Note */}
             <div>
               <h3 className="text-[13px] font-black text-slate-800 tracking-[0.2em] uppercase mb-5">
-                Welcome Note
+                {t("knowUsPage.mdMessage.welcomeNoteHeader", "Welcome Note")}
               </h3>
               <div className="prose prose-slate prose-lg max-w-none text-slate-600 whitespace-pre-wrap font-medium leading-relaxed">
                 {mdData.welcomeNote}
@@ -95,7 +103,7 @@ const MdMessage = () => {
         <div className="border border-slate-200/80 rounded-[32px] p-6 md:p-10 mb-10 relative bg-white shadow-[0_4px_40px_rgb(0,0,0,0.02)]">
           <div className="text-center mb-12">
             <h3 className="text-[15px] font-black text-slate-900 tracking-[0.15em] uppercase inline-block relative pb-4">
-              OUR COMMITMENT
+              {t("knowUsPage.mdMessage.ourCommitment", "OUR COMMITMENT")}
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-blue-600 rounded-full"></span>
             </h3>
           </div>
@@ -107,7 +115,7 @@ const MdMessage = () => {
                 <CalendarCheck className="text-blue-600 w-7 h-7" />
               </div>
               <p className="text-[13px] font-bold text-slate-700 leading-relaxed">
-                Timely printing and distribution of textbooks
+                {t("knowUsPage.mdMessage.commitment1", "Timely printing and distribution of textbooks")}
               </p>
             </div>
             
@@ -117,7 +125,7 @@ const MdMessage = () => {
                 <ShieldCheck className="text-blue-600 w-7 h-7" />
               </div>
               <p className="text-[13px] font-bold text-slate-700 leading-relaxed">
-                Maintaining the highest standards of quality
+                {t("knowUsPage.mdMessage.commitment2", "Maintaining the highest standards of quality")}
               </p>
             </div>
 
@@ -127,7 +135,7 @@ const MdMessage = () => {
                 <UserCheck className="text-blue-600 w-7 h-7" />
               </div>
               <p className="text-[13px] font-bold text-slate-700 leading-relaxed">
-                Strengthening transparency and accountability
+                {t("knowUsPage.mdMessage.commitment3", "Strengthening transparency and accountability")}
               </p>
             </div>
 
@@ -137,7 +145,7 @@ const MdMessage = () => {
                 <GraduationCap className="text-blue-600 w-7 h-7" />
               </div>
               <p className="text-[13px] font-bold text-slate-700 leading-relaxed">
-                Ensuring textbooks reach every student across the state
+                {t("knowUsPage.mdMessage.commitment4", "Ensuring textbooks reach every student across the state")}
               </p>
             </div>
           </div>
@@ -149,7 +157,7 @@ const MdMessage = () => {
         <div className="mb-10">
           <div className="text-center mb-12">
             <h3 className="text-[18px] font-black text-slate-900 tracking-wide uppercase">
-              FOCUS ON QUALITY & INNOVATION
+              {t("knowUsPage.mdMessage.focusTitle", "FOCUS ON QUALITY & INNOVATION")}
             </h3>
           </div>
 
@@ -157,27 +165,33 @@ const MdMessage = () => {
             {/* Feature 1 */}
             <div className="flex flex-col items-center text-center">
               <Target className="text-blue-600 w-12 h-12 mb-4" strokeWidth={1.5} />
-              <h4 className="text-[12px] font-black text-slate-900 tracking-wider uppercase mb-3">COLLABORATION</h4>
+              <h4 className="text-[12px] font-black text-slate-900 tracking-wider uppercase mb-3">
+                {t("knowUsPage.mdMessage.collaborationTitle", "COLLABORATION")}
+              </h4>
               <p className="text-[14px] text-slate-600 font-medium leading-relaxed">
-                Working together with all stakeholders to achieve our shared goals.
+                {t("knowUsPage.mdMessage.collaborationDesc", "Working together with all stakeholders to achieve our shared goals.")}
               </p>
             </div>
 
             {/* Feature 2 */}
             <div className="flex flex-col items-center text-center">
               <TrendingUp className="text-blue-600 w-12 h-12 mb-4" strokeWidth={1.5} />
-              <h4 className="text-[12px] font-black text-slate-900 tracking-wider uppercase mb-3">QUALITY FIRST</h4>
+              <h4 className="text-[12px] font-black text-slate-900 tracking-wider uppercase mb-3">
+                {t("knowUsPage.mdMessage.qualityTitle", "QUALITY FIRST")}
+              </h4>
               <p className="text-[14px] text-slate-600 font-medium leading-relaxed">
-                Every stage is carefully supervised to deliver excellence.
+                {t("knowUsPage.mdMessage.qualityDesc", "Every stage is carefully supervised to deliver excellence.")}
               </p>
             </div>
 
             {/* Feature 3 */}
             <div className="flex flex-col items-center text-center">
               <ChevronsRight className="text-blue-600 w-12 h-12 mb-4" strokeWidth={1.5} />
-              <h4 className="text-[12px] font-black text-slate-900 tracking-wider uppercase mb-3">MOVING FORWARD</h4>
+              <h4 className="text-[12px] font-black text-slate-900 tracking-wider uppercase mb-3">
+                {t("knowUsPage.mdMessage.movingForwardTitle", "MOVING FORWARD")}
+              </h4>
               <p className="text-[14px] text-slate-600 font-medium leading-relaxed">
-                Committed to timely delivery and better learning outcomes for every student.
+                {t("knowUsPage.mdMessage.movingForwardDesc", "Committed to timely delivery and better learning outcomes for every student.")}
               </p>
             </div>
           </div>
@@ -190,8 +204,10 @@ const MdMessage = () => {
               <Award className="text-blue-600 w-6 h-6" />
             </div>
             <div>
-              <h4 className="text-[16px] font-black text-slate-900 leading-tight">{mdData.name}</h4>
-              <p className="text-[11px] font-bold text-blue-600 uppercase tracking-wide mt-1">MANAGING DIRECTOR, BSTBPC</p>
+              <h4 className="text-[16px] font-black text-slate-900 leading-tight">{displayName}</h4>
+              <p className="text-[11px] font-bold text-blue-600 uppercase tracking-wide mt-1">
+                {t("knowUsPage.mdMessage.designation", "MANAGING DIRECTOR")}, BSTBPC
+              </p>
             </div>
           </div>
           
@@ -199,7 +215,7 @@ const MdMessage = () => {
             <p 
               className="text-[18px] md:text-[20px] text-blue-700 font-serif italic font-semibold leading-relaxed text-center md:text-left"
             >
-              Bihar State Text Book Publishing Corporation Ltd.
+              {t("knowUsPage.mdMessage.corporation", "Bihar State Text Book Publishing Corporation Ltd.")}
             </p>
           </div>
         </div>
