@@ -5,6 +5,32 @@
     "hint": "You can change this anytime from the globe icon"
   },
   "hero": {
+    "exploreNow": "Explore Now",
+    "slide0": {
+      "title": "BIHAR STATE",
+      "subtitle": "TEXT BOOK\nPUBLISHING CORPORATION",
+      "description": "Delivering reliable, well-designed textbooks so every Bihar Board student learns from clear and standardized academic resources."
+    },
+    "slide1": {
+      "title": "IMMERSIVE",
+      "subtitle": "Mobile\nVR Learning",
+      "description": "Our travelling VR labs reach schools across the state, letting students explore science, space, and the human body through interactive experiences."
+    },
+    "slide2": {
+      "title": "Empowering Communication",
+      "subtitle": "Through\nSign Language",
+      "description": "Structured programs help students communicate confidently and encourage a more inclusive and supportive school community."
+    },
+    "slide3": {
+      "title": "Multilingual",
+      "subtitle": "Learning\nPrograms",
+      "description": "Courses in foreign languages, Indian languages, and regional dialects expand cultural understanding and learning opportunities."
+    },
+    "slide4": {
+      "title": "Accessible",
+      "subtitle": " Learning with\nAudiobooks",
+      "description": "Audio study materials assist special children and dyslexic learners, enabling comfortable and independent study."
+    },
     "tagline": "Empowering minds. Enriching futures.",
     "titlePart1": "Bihar State",
     "titleHighlight": "Textbook",
@@ -82,34 +108,6 @@
       "gallery": "Gallery",
       "csrPolicy": "CSR Policy",
       "contactUs": "Contact Us"
-    }
-  },
-  "hero": {
-    "exploreNow": "Explore Now",
-    "slide0": {
-      "title": "BIHAR STATE",
-      "subtitle": "TEXT BOOK\nPUBLISHING CORPORATION",
-      "description": "Delivering reliable, well-designed textbooks so every Bihar Board student learns from clear and standardized academic resources."
-    },
-    "slide1": {
-      "title": "IMMERSIVE",
-      "subtitle": "Mobile\nVR Learning",
-      "description": "Our travelling VR labs reach schools across the state, letting students explore science, space, and the human body through interactive experiences."
-    },
-    "slide2": {
-      "title": "Empowering Communication",
-      "subtitle": "Through\nSign Language",
-      "description": "Structured programs help students communicate confidently and encourage a more inclusive and supportive school community."
-    },
-    "slide3": {
-      "title": "Multilingual",
-      "subtitle": "Learning\nPrograms",
-      "description": "Courses in foreign languages, Indian languages, and regional dialects expand cultural understanding and learning opportunities."
-    },
-    "slide4": {
-      "title": "Accessible",
-      "subtitle": " Learning with\nAudiobooks",
-      "description": "Audio study materials assist special children and dyslexic learners, enabling comfortable and independent study."
     }
   },
   "sidebar": {
@@ -3024,13 +3022,34 @@
         "secPoint4": "Never share your ATM PIN with any stranger.",
         "secPoint5": "Wait for the screen to show \"Welcome\" before leaving the ATM chamber.",
         "steps": {
-          "insert": { "label": "Insert Debit Card", "desc": "Place your card into the card reader slot." },
-          "language": { "label": "Choose Language", "desc": "Select English or Hindi for instruction." },
-          "option": { "label": "Select Withdrawal", "desc": "Choose \"Cash Withdrawal\" from the options." },
-          "accountType": { "label": "Select Account Type", "desc": "Choose \"Savings Account\" for personal funds." },
-          "amountInput": { "label": "Enter Amount", "desc": "Specify amount in multiples of ₹100." },
-          "pin": { "label": "Enter Secret PIN", "desc": "Input your 4-digit code using the keypad." },
-          "success": { "label": "Dispense & Collect Cash", "desc": "Collect paper cash from the green slot." }
+          "insert": {
+            "label": "Insert Debit Card",
+            "desc": "Place your card into the card reader slot."
+          },
+          "language": {
+            "label": "Choose Language",
+            "desc": "Select English or Hindi for instruction."
+          },
+          "option": {
+            "label": "Select Withdrawal",
+            "desc": "Choose \"Cash Withdrawal\" from the options."
+          },
+          "accountType": {
+            "label": "Select Account Type",
+            "desc": "Choose \"Savings Account\" for personal funds."
+          },
+          "amountInput": {
+            "label": "Enter Amount",
+            "desc": "Specify amount in multiples of ₹100."
+          },
+          "pin": {
+            "label": "Enter Secret PIN",
+            "desc": "Input your 4-digit code using the keypad."
+          },
+          "success": {
+            "label": "Dispense & Collect Cash",
+            "desc": "Collect paper cash from the green slot."
+          }
         },
         "errors": {
           "pinLength": "Please enter a 4-digit PIN.",
@@ -3127,52 +3146,159 @@
         "selectAction": "Select Medical Action",
         "wrongTime": "That is the right supply, but not the right time. Follow the correct medical protocol order!",
         "scenarios": {
-          "burn": { "title": "Minor Heat Burn", "desc": "A minor burn from touching a hot surface or liquid. The skin is red and painful, but not blistered." },
-          "scrape": { "title": "Scraped Knee", "desc": "A surface-level scrape from a fall. There is minor bleeding and some dirt in the wound." },
-          "bee-sting": { "title": "Bee Sting", "desc": "A bee stung the arm. The area is swelling, red, and itching heavily. The stinger is still visible." },
-          "nosebleed": { "title": "Sudden Nosebleed", "desc": "Due to dry air, a sudden nosebleed has started. The patient is sitting upright." },
-          "sprain": { "title": "Sprained Ankle", "desc": "The ankle was twisted during sports. It is starting to swell rapidly and hurts to put weight on." },
-          "choking": { "title": "Choking Episode", "desc": "The person is clutching their throat, unable to speak or cough, and their face is turning red." },
-          "fainting": { "title": "Fainting (Syncope)", "desc": "The patient felt dizzy and briefly lost consciousness. They are breathing normally but still lying on the floor." },
-          "eye-debris": { "title": "Dust or Sand in Eye", "desc": "Wind blew dust into the patient's eye. It is watering profusely and feels scratchy." },
-          "splinter": { "title": "Wooden Splinter", "desc": "A small wooden splinter is embedded in the finger. It is painful to touch." },
-          "asthma": { "title": "Asthma Attack", "desc": "The patient is wheezing, clutching their chest, and struggling to catch their breath." }
+          "burn": {
+            "title": "Minor Heat Burn",
+            "desc": "A minor burn from touching a hot surface or liquid. The skin is red and painful, but not blistered."
+          },
+          "scrape": {
+            "title": "Scraped Knee",
+            "desc": "A surface-level scrape from a fall. There is minor bleeding and some dirt in the wound."
+          },
+          "bee-sting": {
+            "title": "Bee Sting",
+            "desc": "A bee stung the arm. The area is swelling, red, and itching heavily. The stinger is still visible."
+          },
+          "nosebleed": {
+            "title": "Sudden Nosebleed",
+            "desc": "Due to dry air, a sudden nosebleed has started. The patient is sitting upright."
+          },
+          "sprain": {
+            "title": "Sprained Ankle",
+            "desc": "The ankle was twisted during sports. It is starting to swell rapidly and hurts to put weight on."
+          },
+          "choking": {
+            "title": "Choking Episode",
+            "desc": "The person is clutching their throat, unable to speak or cough, and their face is turning red."
+          },
+          "fainting": {
+            "title": "Fainting (Syncope)",
+            "desc": "The patient felt dizzy and briefly lost consciousness. They are breathing normally but still lying on the floor."
+          },
+          "eye-debris": {
+            "title": "Dust or Sand in Eye",
+            "desc": "Wind blew dust into the patient's eye. It is watering profusely and feels scratchy."
+          },
+          "splinter": {
+            "title": "Wooden Splinter",
+            "desc": "A small wooden splinter is embedded in the finger. It is painful to touch."
+          },
+          "asthma": {
+            "title": "Asthma Attack",
+            "desc": "The patient is wheezing, clutching their chest, and struggling to catch their breath."
+          }
         },
         "options": {
-          "ice-pack": { "label": "Ice Pack", "error": "Never put ice on fresh burns! Extreme cold damages tissue." },
-          "cool-water": { "label": "Cool Running Water" },
-          "aloe-vera": { "label": "Aloe Vera Gel" },
-          "loose-gauze": { "label": "Loose Gauze Bandage" },
-          "wash": { "label": "Wash with Sterile Water" },
-          "antiseptic": { "label": "Antiseptic Ointment" },
-          "tweezer": { "label": "Tweezers", "error": "There is no splinter to remove. Tweezers will only enlarge scrapes!" },
-          "bandage": { "label": "Adhesive Bandage" },
-          "scrape-stinger": { "label": "Scrape Stinger" },
-          "antihistamine": { "label": "Antihistamine Cream" },
-          "heat-pad": { "label": "Heating Pad", "error": "Heat increases blood flow and swelling, spreading venom! Always use cold." },
-          "lean-forward": { "label": "Lean Head Forward" },
-          "lean-backward": { "label": "Lean Head Backward", "error": "Never lean backward! Blood will flow down the throat, risking choking or nausea." },
-          "pinch-nose": { "label": "Pinch Soft Nose Part" },
-          "cold-pack": { "label": "Cold Pack on Neck" },
-          "elastic-wrap": { "label": "Elastic Wrap" },
-          "elevate": { "label": "Elevate Leg" },
-          "encourage-cough": { "label": "Encourage Coughing" },
-          "back-blows": { "label": "Give 5 Back Blows" },
-          "abdominal-thrusts": { "label": "Abdominal Thrusts (Heimlich)" },
-          "drink-water": { "label": "Drink Water", "error": "Never give water to a choking person! It could push the object deeper." },
-          "lay-flat": { "label": "Lay Flat" },
-          "elevate-legs": { "label": "Elevate Legs" },
-          "loosen-clothes": { "label": "Loosen Clothing" },
-          "sit-up": { "label": "Force to Sit Up", "error": "Don't force them up immediately! Blood flow to the brain must be maintained." },
-          "wash-hands": { "label": "Wash Hands with Soap" },
-          "blink": { "label": "Blink Repeatedly" },
-          "flush-water": { "label": "Flush Eye with Water" },
-          "rub-eye": { "label": "Rub Eye", "error": "Never rub your eye! Sand particles will scratch the cornea." },
-          "squeeze": { "label": "Squeeze Skin", "error": "Never squeeze the skin! That forces the splinter deeper." },
-          "sit-upright": { "label": "Sit Upright" },
-          "inhaler": { "label": "Use Inhaler" },
-          "calm-breathing": { "label": "Calm Slow Breathing" },
-          "lay-down": { "label": "Lay Down Patient", "error": "Do not lay the patient down! Lying flat restricts lung expansion." }
+          "ice-pack": {
+            "label": "Ice Pack",
+            "error": "Never put ice on fresh burns! Extreme cold damages tissue."
+          },
+          "cool-water": {
+            "label": "Cool Running Water"
+          },
+          "aloe-vera": {
+            "label": "Aloe Vera Gel"
+          },
+          "loose-gauze": {
+            "label": "Loose Gauze Bandage"
+          },
+          "wash": {
+            "label": "Wash with Sterile Water"
+          },
+          "antiseptic": {
+            "label": "Antiseptic Ointment"
+          },
+          "tweezer": {
+            "label": "Tweezers",
+            "error": "There is no splinter to remove. Tweezers will only enlarge scrapes!"
+          },
+          "bandage": {
+            "label": "Adhesive Bandage"
+          },
+          "scrape-stinger": {
+            "label": "Scrape Stinger"
+          },
+          "antihistamine": {
+            "label": "Antihistamine Cream"
+          },
+          "heat-pad": {
+            "label": "Heating Pad",
+            "error": "Heat increases blood flow and swelling, spreading venom! Always use cold."
+          },
+          "lean-forward": {
+            "label": "Lean Head Forward"
+          },
+          "lean-backward": {
+            "label": "Lean Head Backward",
+            "error": "Never lean backward! Blood will flow down the throat, risking choking or nausea."
+          },
+          "pinch-nose": {
+            "label": "Pinch Soft Nose Part"
+          },
+          "cold-pack": {
+            "label": "Cold Pack on Neck"
+          },
+          "elastic-wrap": {
+            "label": "Elastic Wrap"
+          },
+          "elevate": {
+            "label": "Elevate Leg"
+          },
+          "encourage-cough": {
+            "label": "Encourage Coughing"
+          },
+          "back-blows": {
+            "label": "Give 5 Back Blows"
+          },
+          "abdominal-thrusts": {
+            "label": "Abdominal Thrusts (Heimlich)"
+          },
+          "drink-water": {
+            "label": "Drink Water",
+            "error": "Never give water to a choking person! It could push the object deeper."
+          },
+          "lay-flat": {
+            "label": "Lay Flat"
+          },
+          "elevate-legs": {
+            "label": "Elevate Legs"
+          },
+          "loosen-clothes": {
+            "label": "Loosen Clothing"
+          },
+          "sit-up": {
+            "label": "Force to Sit Up",
+            "error": "Don't force them up immediately! Blood flow to the brain must be maintained."
+          },
+          "wash-hands": {
+            "label": "Wash Hands with Soap"
+          },
+          "blink": {
+            "label": "Blink Repeatedly"
+          },
+          "flush-water": {
+            "label": "Flush Eye with Water"
+          },
+          "rub-eye": {
+            "label": "Rub Eye",
+            "error": "Never rub your eye! Sand particles will scratch the cornea."
+          },
+          "squeeze": {
+            "label": "Squeeze Skin",
+            "error": "Never squeeze the skin! That forces the splinter deeper."
+          },
+          "sit-upright": {
+            "label": "Sit Upright"
+          },
+          "inhaler": {
+            "label": "Use Inhaler"
+          },
+          "calm-breathing": {
+            "label": "Calm Slow Breathing"
+          },
+          "lay-down": {
+            "label": "Lay Down Patient",
+            "error": "Do not lay the patient down! Lying flat restricts lung expansion."
+          }
         },
         "hints": {
           "cool-water": "First, immediately cool under running water to stop tissue damage.",
@@ -3213,54 +3339,144 @@
     },
     "stepGuides": {
       "1": [
-        { "title": "Wash Vegetables & Prepare Ingredients", "desc": "Always wash fresh vegetables under clean running water. Chop them safely on a cutting board using a small knife." },
-        { "title": "Light the Stove Safely", "desc": "Turn on the gas knob and use a lighter to ignite the burner. Keep your face and loose clothing away from the flame." },
-        { "title": "Stir and Simmer", "desc": "Use a wooden spatula to stir. Never leave the stove unattended while cooking. Turn off the burner immediately when done." }
+        {
+          "title": "Wash Vegetables & Prepare Ingredients",
+          "desc": "Always wash fresh vegetables under clean running water. Chop them safely on a cutting board using a small knife."
+        },
+        {
+          "title": "Light the Stove Safely",
+          "desc": "Turn on the gas knob and use a lighter to ignite the burner. Keep your face and loose clothing away from the flame."
+        },
+        {
+          "title": "Stir and Simmer",
+          "desc": "Use a wooden spatula to stir. Never leave the stove unattended while cooking. Turn off the burner immediately when done."
+        }
       ],
       "2": [
-        { "title": "Track Your Income", "desc": "Record how much money you receive (allowance, pocket money, or earnings)." },
-        { "title": "Identify Needs vs. Wants", "desc": "Needs are essential (food, books, rent). Wants are optional (toys, candies, video games). Prioritize needs first." },
-        { "title": "Save First, Spend Later", "desc": "Set aside at least 10-20% of your money in a savings box or bank account before spending the rest." }
+        {
+          "title": "Track Your Income",
+          "desc": "Record how much money you receive (allowance, pocket money, or earnings)."
+        },
+        {
+          "title": "Identify Needs vs. Wants",
+          "desc": "Needs are essential (food, books, rent). Wants are optional (toys, candies, video games). Prioritize needs first."
+        },
+        {
+          "title": "Save First, Spend Later",
+          "desc": "Set aside at least 10-20% of your money in a savings box or bank account before spending the rest."
+        }
       ],
       "3": [
-        { "title": "Inspect the ATM Machine", "desc": "Check the card reader slot for any extra attachments (skimmers). Look around to ensure no strangers are close." },
-        { "title": "Shield the Keypad", "desc": "When entering your 4-digit PIN, cover the keypad with your free hand so no camera or person can see it." },
-        { "title": "Collect Cash and Reset", "desc": "Take your debit card and cash. Wait for the ATM screen to show the green 'Welcome' screen before leaving." }
+        {
+          "title": "Inspect the ATM Machine",
+          "desc": "Check the card reader slot for any extra attachments (skimmers). Look around to ensure no strangers are close."
+        },
+        {
+          "title": "Shield the Keypad",
+          "desc": "When entering your 4-digit PIN, cover the keypad with your free hand so no camera or person can see it."
+        },
+        {
+          "title": "Collect Cash and Reset",
+          "desc": "Take your debit card and cash. Wait for the ATM screen to show the green 'Welcome' screen before leaving."
+        }
       ],
       "4": [
-        { "title": "Stop at the Sidewalk", "desc": "Never run straight onto the road. Stop and stand safely behind the curb." },
-        { "title": "Look Right, Left, and Right", "desc": "Look Right, then Left, then Right again to ensure no speeding vehicles are approaching." },
-        { "title": "Cross on Zebra Crossing", "desc": "Wait for the pedestrian signal to turn green or for vehicles to stop completely before crossing smoothly." }
+        {
+          "title": "Stop at the Sidewalk",
+          "desc": "Never run straight onto the road. Stop and stand safely behind the curb."
+        },
+        {
+          "title": "Look Right, Left, and Right",
+          "desc": "Look Right, then Left, then Right again to ensure no speeding vehicles are approaching."
+        },
+        {
+          "title": "Cross on Zebra Crossing",
+          "desc": "Wait for the pedestrian signal to turn green or for vehicles to stop completely before crossing smoothly."
+        }
       ],
       "5": [
-        { "title": "Wash the Wound", "desc": "Clean the scraped skin under clean water using mild soap to remove dirt and bacteria." },
-        { "title": "Apply Antiseptic", "desc": "Gently apply antiseptic cream or ointment over the clean wound to prevent infection." },
-        { "title": "Cover with Bandage", "desc": "Place a sterile adhesive band-aid or gauze over the wound to keep it protected from dust and germs." }
+        {
+          "title": "Wash the Wound",
+          "desc": "Clean the scraped skin under clean water using mild soap to remove dirt and bacteria."
+        },
+        {
+          "title": "Apply Antiseptic",
+          "desc": "Gently apply antiseptic cream or ointment over the clean wound to prevent infection."
+        },
+        {
+          "title": "Cover with Bandage",
+          "desc": "Place a sterile adhesive band-aid or gauze over the wound to keep it protected from dust and germs."
+        }
       ],
       "6": [
-        { "title": "Create a Task List", "desc": "Write down everything you need to accomplish today." },
-        { "title": "Prioritize Tasks", "desc": "Mark the most important and urgent tasks and focus on them first." },
-        { "title": "Take Focused Breaks (Pomodoro)", "desc": "Work for 25 minutes, then take a short 5-minute break to refresh your mind." }
+        {
+          "title": "Create a Task List",
+          "desc": "Write down everything you need to accomplish today."
+        },
+        {
+          "title": "Prioritize Tasks",
+          "desc": "Mark the most important and urgent tasks and focus on them first."
+        },
+        {
+          "title": "Take Focused Breaks (Pomodoro)",
+          "desc": "Work for 25 minutes, then take a short 5-minute break to refresh your mind."
+        }
       ],
       "7": [
-        { "title": "Maintain Eye Contact", "desc": "Look at the person who is speaking to show that you are paying attention." },
-        { "title": "Listen Actively", "desc": "Listen to the words without interrupting. Try to understand their message fully." },
-        { "title": "Respond Respectfully", "desc": "Speak clearly and calmly. Use polite words to express your ideas." }
+        {
+          "title": "Maintain Eye Contact",
+          "desc": "Look at the person who is speaking to show that you are paying attention."
+        },
+        {
+          "title": "Listen Actively",
+          "desc": "Listen to the words without interrupting. Try to understand their message fully."
+        },
+        {
+          "title": "Respond Respectfully",
+          "desc": "Speak clearly and calmly. Use polite words to express your ideas."
+        }
       ],
       "8": [
-        { "title": "Gather the Tools", "desc": "Choose the correct screwdriver, wrench, or tape required for the specific repair." },
-        { "title": "Turn Off Power/Water", "desc": "If changing a bulb or fixing a tap, turn off the main switch or valve first for safety." },
-        { "title": "Tighten and Secure", "desc": "Tighten screws or bolts in clockwise direction and double-check stability before testing." }
+        {
+          "title": "Gather the Tools",
+          "desc": "Choose the correct screwdriver, wrench, or tape required for the specific repair."
+        },
+        {
+          "title": "Turn Off Power/Water",
+          "desc": "If changing a bulb or fixing a tap, turn off the main switch or valve first for safety."
+        },
+        {
+          "title": "Tighten and Secure",
+          "desc": "Tighten screws or bolts in clockwise direction and double-check stability before testing."
+        }
       ],
       "9": [
-        { "title": "Create Strong Passwords", "desc": "Use a mix of letters, numbers, and symbols. Never share your password with anyone." },
-        { "title": "Verify the Sender", "desc": "Before clicking links or downloading files, check if the email or message sender is trusted." },
-        { "title": "Log Out Safely", "desc": "Always log out of your accounts when using shared devices in public spaces or school labs." }
+        {
+          "title": "Create Strong Passwords",
+          "desc": "Use a mix of letters, numbers, and symbols. Never share your password with anyone."
+        },
+        {
+          "title": "Verify the Sender",
+          "desc": "Before clicking links or downloading files, check if the email or message sender is trusted."
+        },
+        {
+          "title": "Log Out Safely",
+          "desc": "Always log out of your accounts when using shared devices in public spaces or school labs."
+        }
       ],
       "10": [
-        { "title": "Recognize Your Emotion", "desc": "Take a moment to notice if you feel angry, sad, anxious, or excited." },
-        { "title": "Breathe and Pause", "desc": "Inhale deeply for 4 seconds, hold, and exhale slowly before reacting or responding." },
-        { "title": "Practice Empathy", "desc": "Think about the other person's situation and feelings. Ask yourself why they are reacting this way." }
+        {
+          "title": "Recognize Your Emotion",
+          "desc": "Take a moment to notice if you feel angry, sad, anxious, or excited."
+        },
+        {
+          "title": "Breathe and Pause",
+          "desc": "Inhale deeply for 4 seconds, hold, and exhale slowly before reacting or responding."
+        },
+        {
+          "title": "Practice Empathy",
+          "desc": "Think about the other person's situation and feelings. Ask yourself why they are reacting this way."
+        }
       ]
     },
     "quiz": {
@@ -3278,23 +3494,48 @@
       "questions": [
         {
           "question": "What is the first thing you should do when you get a small cut?",
-          "options": ["Put a bandage on it immediately", "Wash it with clean water and soap", "Ignore it", "Blow on it"]
+          "options": [
+            "Put a bandage on it immediately",
+            "Wash it with clean water and soap",
+            "Ignore it",
+            "Blow on it"
+          ]
         },
         {
           "question": "Why is it important to create a budget?",
-          "options": ["To buy everything you want", "To track income and expenses", "To show off your money", "To stop spending completely"]
+          "options": [
+            "To buy everything you want",
+            "To track income and expenses",
+            "To show off your money",
+            "To stop spending completely"
+          ]
         },
         {
           "question": "What is a healthy way to manage stress?",
-          "options": ["Yelling at someone", "Taking deep breaths or talking to a friend", "Eating lots of junk food", "Sleeping all day"]
+          "options": [
+            "Yelling at someone",
+            "Taking deep breaths or talking to a friend",
+            "Eating lots of junk food",
+            "Sleeping all day"
+          ]
         },
         {
           "question": "When boiling water on a stove, you should:",
-          "options": ["Leave it unattended", "Turn the handles inward", "Touch the pot to see if it's hot", "Put your face over it"]
+          "options": [
+            "Leave it unattended",
+            "Turn the handles inward",
+            "Touch the pot to see if it's hot",
+            "Put your face over it"
+          ]
         },
         {
           "question": "What does a balanced diet mean?",
-          "options": ["Only eating vegetables", "Eating from all food groups", "Eating equal amounts of pizza and burgers", "Skipping meals"]
+          "options": [
+            "Only eating vegetables",
+            "Eating from all food groups",
+            "Eating equal amounts of pizza and burgers",
+            "Skipping meals"
+          ]
         }
       ]
     },
