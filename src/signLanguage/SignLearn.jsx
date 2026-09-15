@@ -270,10 +270,11 @@ const FingerspellComponent = () => {
   };
 
   const handleInputChange = (val) => {
-    const uppercaseVal = val.toUpperCase().replace(/[^A-Z ]/g, '');
-    setText(uppercaseVal);
+    // Allow letters, numbers, spaces, and Devanagari characters (Hindi)
+    const cleanVal = val.replace(/[^A-Za-z0-9 \u0900-\u097F]/g, '');
+    setText(cleanVal);
     setIsFocused(true);
-    if (selectedWordSign && uppercaseVal !== selectedWordSign.word) {
+    if (selectedWordSign && cleanVal.toUpperCase() !== selectedWordSign.word.toUpperCase()) {
       setSelectedWordSign(null);
     }
   };
@@ -284,8 +285,12 @@ const FingerspellComponent = () => {
     setIsFocused(false);
   };
 
-  const suggestions = isFocused && text.trim() && (!selectedWordSign || text !== selectedWordSign.word)
-    ? dictionary.filter(item => item.word.includes(text.toUpperCase()))
+  const q = text.trim().toLowerCase();
+  const suggestions = isFocused && q && (!selectedWordSign || text.toUpperCase() !== selectedWordSign.word.toUpperCase())
+    ? dictionary.filter(item => 
+        (item.word && item.word.toLowerCase().includes(q)) ||
+        (item.desc && item.desc.toLowerCase().includes(q))
+      )
     : [];
 
   return (
@@ -299,7 +304,7 @@ const FingerspellComponent = () => {
 
         <h3 className="text-2xl md:text-3xl font-black text-slate-900 mb-3 tracking-tight">{t('signLearn.typeToSign', 'Type to Sign')}</h3>
         <p className="text-[15px] font-medium text-slate-500 mb-10 max-w-md">
-          Type your name or any English word to instantly see how to spell it using sign language alphabet (Fingerspelling).
+          {t('signLearn.fingerSpellDesc', 'Type your name or any English word to instantly see how to spell it using sign language alphabet (Fingerspelling).')}
         </p>
 
         <div className="w-full relative mb-12">
@@ -315,7 +320,7 @@ const FingerspellComponent = () => {
           />
           <div className="absolute -bottom-7 left-0 right-0 flex justify-between items-center px-4">
             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-              Max 15 characters
+              {t('signLearn.maxChars', 'Max 15 characters')}
             </div>
             <button 
               onClick={() => setShowDictionary(true)}
