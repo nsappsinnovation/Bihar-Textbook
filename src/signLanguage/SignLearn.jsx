@@ -149,67 +149,67 @@ const ExploreSignsComponent = () => {
 };
 
 const getDictionary = (t) => [
-  { word: t('signLearn.dict_hello_word', 'HELLO'), image: '/images/signlanguage/hello.webp', desc: t('signLearn.dict_hello_desc', 'Wave your hand gently from side to side to say hello.') },
-  { word: t('signLearn.dict_thankyou_word', 'THANK YOU'), image: '/images/signlanguage/thankyou.webp', desc: t('signLearn.dict_thankyou_desc', 'Touch your chin with fingers, then move hand forward towards the person.') },
-  { word: t('signLearn.dict_sorry_word', 'SORRY'), image: '/images/signlanguage/sorry.webp', desc: t('signLearn.dict_sorry_desc', 'Rub a closed fist in a circular motion over your heart.') },
-  { word: t('signLearn.dict_happy_word', 'HAPPY'), image: '/images/signlanguage/happy.webp', desc: t('signLearn.dict_happy_desc', 'Brush both flat hands upward on your chest to show joy.') },
-  { word: t('signLearn.dict_sad_word', 'SAD'), image: '/images/signlanguage/sad.webp', desc: t('signLearn.dict_sad_desc', 'Place both hands in front of your face and pull them down while making a sad face.') },
-  { word: t('signLearn.dict_mother_word', 'MOTHER'), image: '/images/signlanguage/mother.webp', desc: t('signLearn.dict_mother_desc', 'Tap your thumb on your chin with an open hand facing sideways.') },
-  { word: t('signLearn.dict_father_word', 'FATHER'), image: '/images/signlanguage/father.webp', desc: t('signLearn.dict_father_desc', 'Tap your thumb on your forehead with an open hand facing sideways.') },
-  { word: t('signLearn.dict_eat_word', 'EAT'), image: '/images/signlanguage/eat.webp', desc: t('signLearn.dict_eat_desc', 'Bring your flattened O-hand to your mouth a few times.') },
-  { word: t('signLearn.dict_goodmorning_word', 'GOOD MORNING'), image: '/images/signlanguage/goodmorning.webp', desc: t('signLearn.dict_goodmorning_desc', 'Make a thumbs-up sign, then bring your hands up in a rising sun motion.') },
-  { word: t('signLearn.dict_goodafternoon_word', 'GOOD AFTERNOON'), image: '/images/signlanguage/goodafternoon.webp', desc: t('signLearn.dict_goodafternoon_desc', 'Make a thumbs-up sign, then place one hand flat with the other pointing down at it.') },
-  { word: t('signLearn.dict_goodevening_word', 'GOOD EVENING'), image: '/images/signlanguage/goodevening.webp', desc: t('signLearn.dict_goodevening_desc', 'Make a thumbs-up sign, then cover one hand over the other in a setting sun motion.') },
-  { word: t('signLearn.dict_goodnight_word', 'GOOD NIGHT'), image: '/images/signlanguage/goodnight.webp', desc: t('signLearn.dict_goodnight_desc', 'Make a thumbs-up sign, then close your eyes and lay your head on folded hands.') },
-  { word: t('signLearn.dict_welcome_word', 'WELCOME'), image: '/images/signlanguage/welcome.webp', desc: t('signLearn.dict_welcome_desc', 'Bring both hands towards your chest in a welcoming motion.') },
-  { word: t('signLearn.dict_please_word', 'PLEASE'), image: '/images/signlanguage/please.webp', desc: t('signLearn.dict_please_desc', 'Place your flat palm on your chest and move it in a circular motion.') },
-  { word: 'YES', image: '/images/signlanguage/yes.webp', desc: 'Make a fist and nod it up and down like a head nodding yes.' },
-  { word: 'NO', image: '/images/signlanguage/no.webp', desc: 'Extend your index and middle fingers and tap them against your thumb.' },
-  { word: 'HELP', image: '/images/signlanguage/help.webp', desc: 'Place your closed fist with thumb up on top of your flat open palm.' },
-  { word: 'PLAY', image: '/images/signlanguage/play.webp', desc: 'Extend your thumb and pinky fingers, then shake your hands gently.' },
-  { word: 'SCHOOL', image: '/images/signlanguage/school.webp', desc: 'Clap your flat hands together twice horizontally.' },
-  { word: 'TEACHER', image: '/images/signlanguage/teacher.webp', desc: 'Bring your fingertips to your forehead and move them forward twice.' },
-  { word: 'STUDENT', image: '/images/signlanguage/student.webp', desc: 'Touch your forehead with fingertips, then mimic holding a book.' },
-  { word: 'FRIEND', image: '/images/signlanguage/friend.webp', desc: 'Clasp your hands together in an interlocking hook gesture.' },
-  { word: 'FAMILY', image: '/images/signlanguage/family.webp', desc: 'Form circles with thumb and index fingers of both hands, touching them, then circle outwards.' },
-  { word: 'HOME', image: '/images/signlanguage/home.webp', desc: 'Touch your flat palms together overhead to form a roof shape.' },
-  { word: 'BOOK', image: '/images/signlanguage/book.webp', desc: 'Place palms together, then open them up like opening a book.' },
-  { word: 'WATER', image: '/images/signlanguage/water.webp', desc: 'Form a \'W\' shape with index, middle, and ring fingers and touch it to your chin.' },
-  { word: 'FOOD', image: '/images/signlanguage/food.webp', desc: 'Bring fingertips of your hand to your mouth repeatedly.' },
-  { word: 'DRINK', image: '/images/signlanguage/drink.webp', desc: 'Mimic holding a cup and tipping it towards your mouth.' },
-  { word: 'MORE', image: '/images/signlanguage/more.webp', desc: 'Bring your fingertips of both hands together to touch repeatedly.' },
-  { word: 'SLEEP', image: '/images/signlanguage/sleep.webp', desc: 'Place both hands together beside your cheek, tilting your head.' },
-  { word: 'BATH', image: '/images/signlanguage/bath.webp', desc: 'Rub both closed fists up and down your chest.' },
-  { word: 'TOILET', image: '/images/signlanguage/toilet.webp', desc: 'Shake your closed fist with the thumb tucked under the index finger.' },
-  { word: 'COME', image: '/images/signlanguage/come.webp', desc: 'Beckon forward with your palm facing upwards.' },
-  { word: 'GO', image: '/images/signlanguage/go.webp', desc: 'Point your index finger in the direction you want to go.' },
-  { word: 'STOP', image: '/images/signlanguage/stop.webp', desc: 'Extend one hand flat, palm facing forward, in a blocking motion.' },
-  { word: 'TODAY', image: '/images/signlanguage/today.webp', desc: 'Bring both hands in \'Y\' shape (thumb and pinky extended) downward twice.' },
-  { word: 'TOMORROW', image: '/images/signlanguage/tomorrow.webp', desc: 'Place your thumb on your cheek and flick it forward.' },
-  { word: 'YESTERDAY', image: '/images/signlanguage/yesterday.webp', desc: 'Touch your chin with your index finger, then point backward over your shoulder.' },
-  { word: 'TIME', image: '/images/signlanguage/time.webp', desc: 'Tap your index finger on your opposite wrist, as if pointing to a watch.' },
-  { word: 'NAME', image: '/images/signlanguage/name.webp', desc: 'Touch your index and middle fingers to your forehead, then point forward.' },
-  { word: 'AGE', image: '/images/signlanguage/age.webp', desc: 'Place your hand at your chin and pull downward as if showing a beard.' },
-  { word: 'HOT', image: '/images/signlanguage/hot.webp', desc: 'Place a clawed hand near your mouth, then quickly turn it away and open it.' },
-  { word: 'COLD', image: '/images/signlanguage/cold.webp', desc: 'Hug yourself and shiver slightly with closed fists.' },
-  { word: 'BIG', image: '/images/signlanguage/big.webp', desc: 'Hold both flat hands in front of you, then pull them far apart.' },
-  { word: 'SMALL', image: '/images/signlanguage/small.webp', desc: 'Hold your index finger and thumb close together to show a tiny gap.' },
-  { word: 'LOVE', image: '/images/signlanguage/love.webp', desc: 'Cross both arms over your chest, placing hands on opposite shoulders.' },
-  { word: 'ANGRY', image: '/images/signlanguage/angry.webp', desc: 'Bring a clawed hand in front of your face with a frowning expression.' },
-  { word: 'LAUGH', image: '/images/signlanguage/laugh.webp', desc: 'Point both index fingers towards your mouth and smile widely.' },
-  { word: 'CRY', image: '/images/signlanguage/cry.webp', desc: 'Trace your index fingers down your cheeks to mimic tears falling.' },
-  { word: 'CLEAN', image: '/images/signlanguage/clean.webp', desc: 'Slide the palm of your dominant hand across the palm of your other hand.' },
-  { word: 'DIRTY', image: '/images/signlanguage/dirty.webp', desc: 'Place the back of your hand under your chin and wiggle your fingers.' },
-  { word: 'SUN', image: '/images/signlanguage/sun.webp', desc: 'Draw a circle in the air with your index finger, then open your fingers wide like rays.' },
-  { word: 'MOON', image: '/images/signlanguage/moon.webp', desc: 'Form a \'C\' shape with index finger and thumb, then hold it up near your eye.' },
-  { word: 'STAR', image: '/images/signlanguage/star.webp', desc: 'Point your index fingers upward alternately towards the sky.' },
-  { word: 'RAIN', image: '/images/signlanguage/rain.webp', desc: 'Bring both open hands downward from head level while wiggling all fingers.' },
-  { word: 'WIND', image: '/images/signlanguage/wind.webp', desc: 'Wave both flat hands back and forth in front of your face.' },
-  { word: 'RUN', image: '/images/signlanguage/run.webp', desc: 'Hook the index finger of one hand onto the thumb of the other, and move both forward.' },
-  { word: 'WALK', image: '/images/signlanguage/walk.webp', desc: 'Mimic two legs walking by moving your flat hands back and forth.' },
-  { word: 'WRITE', image: '/images/signlanguage/write.webp', desc: 'Mimic writing with a pen on the open palm of your other hand.' },
-  { word: 'READ', image: '/images/signlanguage/read.webp', desc: 'Move your index and middle fingers down your open palm like scanning a page.' },
-  { word: 'HAPPY NEW YEAR', image: '/images/signlanguage/happynewyear.webp', desc: 'Brush hands upward on your chest, then raise flat hands forward.' }
+  { word: t('signLearn.dict_hello_word', 'HELLO'), rawWord: 'HELLO', image: '/images/signlanguage/hello.webp', desc: t('signLearn.dict_hello_desc', 'Wave your hand gently from side to side to say hello.'), rawDesc: 'Wave your hand gently from side to side to say hello.' },
+  { word: t('signLearn.dict_thankyou_word', 'THANK YOU'), rawWord: 'THANK YOU', image: '/images/signlanguage/thankyou.webp', desc: t('signLearn.dict_thankyou_desc', 'Touch your chin with fingers, then move hand forward towards the person.'), rawDesc: 'Touch your chin with fingers, then move hand forward towards the person.' },
+  { word: t('signLearn.dict_sorry_word', 'SORRY'), rawWord: 'SORRY', image: '/images/signlanguage/sorry.webp', desc: t('signLearn.dict_sorry_desc', 'Rub a closed fist in a circular motion over your heart.'), rawDesc: 'Rub a closed fist in a circular motion over your heart.' },
+  { word: t('signLearn.dict_happy_word', 'HAPPY'), rawWord: 'HAPPY', image: '/images/signlanguage/happy.webp', desc: t('signLearn.dict_happy_desc', 'Brush both flat hands upward on your chest to show joy.'), rawDesc: 'Brush both flat hands upward on your chest to show joy.' },
+  { word: t('signLearn.dict_sad_word', 'SAD'), rawWord: 'SAD', image: '/images/signlanguage/sad.webp', desc: t('signLearn.dict_sad_desc', 'Place both hands in front of your face and pull them down while making a sad face.'), rawDesc: 'Place both hands in front of your face and pull them down while making a sad face.' },
+  { word: t('signLearn.dict_mother_word', 'MOTHER'), rawWord: 'MOTHER', image: '/images/signlanguage/mother.webp', desc: t('signLearn.dict_mother_desc', 'Tap your thumb on your chin with an open hand facing sideways.'), rawDesc: 'Tap your thumb on your chin with an open hand facing sideways.' },
+  { word: t('signLearn.dict_father_word', 'FATHER'), rawWord: 'FATHER', image: '/images/signlanguage/father.webp', desc: t('signLearn.dict_father_desc', 'Tap your thumb on your forehead with an open hand facing sideways.'), rawDesc: 'Tap your thumb on your forehead with an open hand facing sideways.' },
+  { word: t('signLearn.dict_eat_word', 'EAT'), rawWord: 'EAT', image: '/images/signlanguage/eat.webp', desc: t('signLearn.dict_eat_desc', 'Bring your flattened O-hand to your mouth a few times.'), rawDesc: 'Bring your flattened O-hand to your mouth a few times.' },
+  { word: t('signLearn.dict_goodmorning_word', 'GOOD MORNING'), rawWord: 'GOOD MORNING', image: '/images/signlanguage/goodmorning.webp', desc: t('signLearn.dict_goodmorning_desc', 'Make a thumbs-up sign, then bring your hands up in a rising sun motion.'), rawDesc: 'Make a thumbs-up sign, then bring your hands up in a rising sun motion.' },
+  { word: t('signLearn.dict_goodafternoon_word', 'GOOD AFTERNOON'), rawWord: 'GOOD AFTERNOON', image: '/images/signlanguage/goodafternoon.webp', desc: t('signLearn.dict_goodafternoon_desc', 'Make a thumbs-up sign, then place one hand flat with the other pointing down at it.'), rawDesc: 'Make a thumbs-up sign, then place one hand flat with the other pointing down at it.' },
+  { word: t('signLearn.dict_goodevening_word', 'GOOD EVENING'), rawWord: 'GOOD EVENING', image: '/images/signlanguage/goodevening.webp', desc: t('signLearn.dict_goodevening_desc', 'Make a thumbs-up sign, then cover one hand over the other in a setting sun motion.'), rawDesc: 'Make a thumbs-up sign, then cover one hand over the other in a setting sun motion.' },
+  { word: t('signLearn.dict_goodnight_word', 'GOOD NIGHT'), rawWord: 'GOOD NIGHT', image: '/images/signlanguage/goodnight.webp', desc: t('signLearn.dict_goodnight_desc', 'Make a thumbs-up sign, then close your eyes and lay your head on folded hands.'), rawDesc: 'Make a thumbs-up sign, then close your eyes and lay your head on folded hands.' },
+  { word: t('signLearn.dict_welcome_word', 'WELCOME'), rawWord: 'WELCOME', image: '/images/signlanguage/welcome.webp', desc: t('signLearn.dict_welcome_desc', 'Bring both hands towards your chest in a welcoming motion.'), rawDesc: 'Bring both hands towards your chest in a welcoming motion.' },
+  { word: t('signLearn.dict_please_word', 'PLEASE'), rawWord: 'PLEASE', image: '/images/signlanguage/please.webp', desc: t('signLearn.dict_please_desc', 'Place your flat palm on your chest and move it in a circular motion.'), rawDesc: 'Place your flat palm on your chest and move it in a circular motion.' },
+  { word: t('signLearn.dict_yes_word', 'YES'), rawWord: 'YES', image: '/images/signlanguage/yes.webp', desc: t('signLearn.dict_yes_desc', 'Make a fist and nod it up and down like a head nodding yes.'), rawDesc: 'Make a fist and nod it up and down like a head nodding yes.' },
+  { word: t('signLearn.dict_no_word', 'NO'), rawWord: 'NO', image: '/images/signlanguage/no.webp', desc: t('signLearn.dict_no_desc', 'Extend your index and middle fingers and tap them against your thumb.'), rawDesc: 'Extend your index and middle fingers and tap them against your thumb.' },
+  { word: t('signLearn.dict_help_word', 'HELP'), rawWord: 'HELP', image: '/images/signlanguage/help.webp', desc: t('signLearn.dict_help_desc', 'Place your closed fist with thumb up on top of your flat open palm.'), rawDesc: 'Place your closed fist with thumb up on top of your flat open palm.' },
+  { word: t('signLearn.dict_play_word', 'PLAY'), rawWord: 'PLAY', image: '/images/signlanguage/play.webp', desc: t('signLearn.dict_play_desc', 'Extend your thumb and pinky fingers, then shake your hands gently.'), rawDesc: 'Extend your thumb and pinky fingers, then shake your hands gently.' },
+  { word: t('signLearn.dict_school_word', 'SCHOOL'), rawWord: 'SCHOOL', image: '/images/signlanguage/school.webp', desc: t('signLearn.dict_school_desc', 'Clap your flat hands together twice horizontally.'), rawDesc: 'Clap your flat hands together twice horizontally.' },
+  { word: t('signLearn.dict_teacher_word', 'TEACHER'), rawWord: 'TEACHER', image: '/images/signlanguage/teacher.webp', desc: t('signLearn.dict_teacher_desc', 'Bring your fingertips to your forehead and move them forward twice.'), rawDesc: 'Bring your fingertips to your forehead and move them forward twice.' },
+  { word: t('signLearn.dict_student_word', 'STUDENT'), rawWord: 'STUDENT', image: '/images/signlanguage/student.webp', desc: t('signLearn.dict_student_desc', 'Touch your forehead with fingertips, then mimic holding a book.'), rawDesc: 'Touch your forehead with fingertips, then mimic holding a book.' },
+  { word: t('signLearn.dict_friend_word', 'FRIEND'), rawWord: 'FRIEND', image: '/images/signlanguage/friend.webp', desc: t('signLearn.dict_friend_desc', 'Clasp your hands together in an interlocking hook gesture.'), rawDesc: 'Clasp your hands together in an interlocking hook gesture.' },
+  { word: t('signLearn.dict_family_word', 'FAMILY'), rawWord: 'FAMILY', image: '/images/signlanguage/family.webp', desc: t('signLearn.dict_family_desc', 'Form circles with thumb and index fingers of both hands, touching them, then circle outwards.'), rawDesc: 'Form circles with thumb and index fingers of both hands, touching them, then circle outwards.' },
+  { word: t('signLearn.dict_home_word', 'HOME'), rawWord: 'HOME', image: '/images/signlanguage/home.webp', desc: t('signLearn.dict_home_desc', 'Touch your flat palms together overhead to form a roof shape.'), rawDesc: 'Touch your flat palms together overhead to form a roof shape.' },
+  { word: t('signLearn.dict_book_word', 'BOOK'), rawWord: 'BOOK', image: '/images/signlanguage/book.webp', desc: t('signLearn.dict_book_desc', 'Place palms together, then open them up like opening a book.'), rawDesc: 'Place palms together, then open them up like opening a book.' },
+  { word: t('signLearn.dict_water_word', 'WATER'), rawWord: 'WATER', image: '/images/signlanguage/water.webp', desc: t('signLearn.dict_water_desc', 'Form a \'W\' shape with index, middle, and ring fingers and touch it to your chin.'), rawDesc: 'Form a \'W\' shape with index, middle, and ring fingers and touch it to your chin.' },
+  { word: t('signLearn.dict_food_word', 'FOOD'), rawWord: 'FOOD', image: '/images/signlanguage/food.webp', desc: t('signLearn.dict_food_desc', 'Bring fingertips of your hand to your mouth repeatedly.'), rawDesc: 'Bring fingertips of your hand to your mouth repeatedly.' },
+  { word: t('signLearn.dict_drink_word', 'DRINK'), rawWord: 'DRINK', image: '/images/signlanguage/drink.webp', desc: t('signLearn.dict_drink_desc', 'Mimic holding a cup and tipping it towards your mouth.'), rawDesc: 'Mimic holding a cup and tipping it towards your mouth.' },
+  { word: t('signLearn.dict_more_word', 'MORE'), rawWord: 'MORE', image: '/images/signlanguage/more.webp', desc: t('signLearn.dict_more_desc', 'Bring your fingertips of both hands together to touch repeatedly.'), rawDesc: 'Bring your fingertips of both hands together to touch repeatedly.' },
+  { word: t('signLearn.dict_sleep_word', 'SLEEP'), rawWord: 'SLEEP', image: '/images/signlanguage/sleep.webp', desc: t('signLearn.dict_sleep_desc', 'Place both hands together beside your cheek, tilting your head.'), rawDesc: 'Place both hands together beside your cheek, tilting your head.' },
+  { word: t('signLearn.dict_bath_word', 'BATH'), rawWord: 'BATH', image: '/images/signlanguage/bath.webp', desc: t('signLearn.dict_bath_desc', 'Rub both closed fists up and down your chest.'), rawDesc: 'Rub both closed fists up and down your chest.' },
+  { word: t('signLearn.dict_toilet_word', 'TOILET'), rawWord: 'TOILET', image: '/images/signlanguage/toilet.webp', desc: t('signLearn.dict_toilet_desc', 'Shake your closed fist with the thumb tucked under the index finger.'), rawDesc: 'Shake your closed fist with the thumb tucked under the index finger.' },
+  { word: t('signLearn.dict_come_word', 'COME'), rawWord: 'COME', image: '/images/signlanguage/come.webp', desc: t('signLearn.dict_come_desc', 'Beckon forward with your palm facing upwards.'), rawDesc: 'Beckon forward with your palm facing upwards.' },
+  { word: t('signLearn.dict_go_word', 'GO'), rawWord: 'GO', image: '/images/signlanguage/go.webp', desc: t('signLearn.dict_go_desc', 'Point your index finger in the direction you want to go.'), rawDesc: 'Point your index finger in the direction you want to go.' },
+  { word: t('signLearn.dict_stop_word', 'STOP'), rawWord: 'STOP', image: '/images/signlanguage/stop.webp', desc: t('signLearn.dict_stop_desc', 'Extend one hand flat, palm facing forward, in a blocking motion.'), rawDesc: 'Extend one hand flat, palm facing forward, in a blocking motion.' },
+  { word: t('signLearn.dict_today_word', 'TODAY'), rawWord: 'TODAY', image: '/images/signlanguage/today.webp', desc: t('signLearn.dict_today_desc', 'Bring both hands in \'Y\' shape (thumb and pinky extended) downward twice.'), rawDesc: 'Bring both hands in \'Y\' shape (thumb and pinky extended) downward twice.' },
+  { word: t('signLearn.dict_tomorrow_word', 'TOMORROW'), rawWord: 'TOMORROW', image: '/images/signlanguage/tomorrow.webp', desc: t('signLearn.dict_tomorrow_desc', 'Place your thumb on your cheek and flick it forward.'), rawDesc: 'Place your thumb on your cheek and flick it forward.' },
+  { word: t('signLearn.dict_yesterday_word', 'YESTERDAY'), rawWord: 'YESTERDAY', image: '/images/signlanguage/yesterday.webp', desc: t('signLearn.dict_yesterday_desc', 'Touch your chin with your index finger, then point backward over your shoulder.'), rawDesc: 'Touch your chin with your index finger, then point backward over your shoulder.' },
+  { word: t('signLearn.dict_time_word', 'TIME'), rawWord: 'TIME', image: '/images/signlanguage/time.webp', desc: t('signLearn.dict_time_desc', 'Tap your index finger on your opposite wrist, as if pointing to a watch.'), rawDesc: 'Tap your index finger on your opposite wrist, as if pointing to a watch.' },
+  { word: t('signLearn.dict_name_word', 'NAME'), rawWord: 'NAME', image: '/images/signlanguage/name.webp', desc: t('signLearn.dict_name_desc', 'Touch your index and middle fingers to your forehead, then point forward.'), rawDesc: 'Touch your index and middle fingers to your forehead, then point forward.' },
+  { word: t('signLearn.dict_age_word', 'AGE'), rawWord: 'AGE', image: '/images/signlanguage/age.webp', desc: t('signLearn.dict_age_desc', 'Place your hand at your chin and pull downward as if showing a beard.'), rawDesc: 'Place your hand at your chin and pull downward as if showing a beard.' },
+  { word: t('signLearn.dict_hot_word', 'HOT'), rawWord: 'HOT', image: '/images/signlanguage/hot.webp', desc: t('signLearn.dict_hot_desc', 'Place a clawed hand near your mouth, then quickly turn it away and open it.'), rawDesc: 'Place a clawed hand near your mouth, then quickly turn it away and open it.' },
+  { word: t('signLearn.dict_cold_word', 'COLD'), rawWord: 'COLD', image: '/images/signlanguage/cold.webp', desc: t('signLearn.dict_cold_desc', 'Hug yourself and shiver slightly with closed fists.'), rawDesc: 'Hug yourself and shiver slightly with closed fists.' },
+  { word: t('signLearn.dict_big_word', 'BIG'), rawWord: 'BIG', image: '/images/signlanguage/big.webp', desc: t('signLearn.dict_big_desc', 'Hold both flat hands in front of you, then pull them far apart.'), rawDesc: 'Hold both flat hands in front of you, then pull them far apart.' },
+  { word: t('signLearn.dict_small_word', 'SMALL'), rawWord: 'SMALL', image: '/images/signlanguage/small.webp', desc: t('signLearn.dict_small_desc', 'Hold your index finger and thumb close together to show a tiny gap.'), rawDesc: 'Hold your index finger and thumb close together to show a tiny gap.' },
+  { word: t('signLearn.dict_love_word', 'LOVE'), rawWord: 'LOVE', image: '/images/signlanguage/love.webp', desc: t('signLearn.dict_love_desc', 'Cross both arms over your chest, placing hands on opposite shoulders.'), rawDesc: 'Cross both arms over your chest, placing hands on opposite shoulders.' },
+  { word: t('signLearn.dict_angry_word', 'ANGRY'), rawWord: 'ANGRY', image: '/images/signlanguage/angry.webp', desc: t('signLearn.dict_angry_desc', 'Bring a clawed hand in front of your face with a frowning expression.'), rawDesc: 'Bring a clawed hand in front of your face with a frowning expression.' },
+  { word: t('signLearn.dict_laugh_word', 'LAUGH'), rawWord: 'LAUGH', image: '/images/signlanguage/laugh.webp', desc: t('signLearn.dict_laugh_desc', 'Point both index fingers towards your mouth and smile widely.'), rawDesc: 'Point both index fingers towards your mouth and smile widely.' },
+  { word: t('signLearn.dict_cry_word', 'CRY'), rawWord: 'CRY', image: '/images/signlanguage/cry.webp', desc: t('signLearn.dict_cry_desc', 'Trace your index fingers down your cheeks to mimic tears falling.'), rawDesc: 'Trace your index fingers down your cheeks to mimic tears falling.' },
+  { word: t('signLearn.dict_clean_word', 'CLEAN'), rawWord: 'CLEAN', image: '/images/signlanguage/clean.webp', desc: t('signLearn.dict_clean_desc', 'Slide the palm of your dominant hand across the palm of your other hand.'), rawDesc: 'Slide the palm of your dominant hand across the palm of your other hand.' },
+  { word: t('signLearn.dict_dirty_word', 'DIRTY'), rawWord: 'DIRTY', image: '/images/signlanguage/dirty.webp', desc: t('signLearn.dict_dirty_desc', 'Place the back of your hand under your chin and wiggle your fingers.'), rawDesc: 'Place the back of your hand under your chin and wiggle your fingers.' },
+  { word: t('signLearn.dict_sun_word', 'SUN'), rawWord: 'SUN', image: '/images/signlanguage/sun.webp', desc: t('signLearn.dict_sun_desc', 'Draw a circle in the air with your index finger, then open your fingers wide like rays.'), rawDesc: 'Draw a circle in the air with your index finger, then open your fingers wide like rays.' },
+  { word: t('signLearn.dict_moon_word', 'MOON'), rawWord: 'MOON', image: '/images/signlanguage/moon.webp', desc: t('signLearn.dict_moon_desc', 'Form a \'C\' shape with index finger and thumb, then hold it up near your eye.'), rawDesc: 'Form a \'C\' shape with index finger and thumb, then hold it up near your eye.' },
+  { word: t('signLearn.dict_star_word', 'STAR'), rawWord: 'STAR', image: '/images/signlanguage/star.webp', desc: t('signLearn.dict_star_desc', 'Point your index fingers upward alternately towards the sky.'), rawDesc: 'Point your index fingers upward alternately towards the sky.' },
+  { word: t('signLearn.dict_rain_word', 'RAIN'), rawWord: 'RAIN', image: '/images/signlanguage/rain.webp', desc: t('signLearn.dict_rain_desc', 'Bring both open hands downward from head level while wiggling all fingers.'), rawDesc: 'Bring both open hands downward from head level while wiggling all fingers.' },
+  { word: t('signLearn.dict_wind_word', 'WIND'), rawWord: 'WIND', image: '/images/signlanguage/wind.webp', desc: t('signLearn.dict_wind_desc', 'Wave both flat hands back and forth in front of your face.'), rawDesc: 'Wave both flat hands back and forth in front of your face.' },
+  { word: t('signLearn.dict_run_word', 'RUN'), rawWord: 'RUN', image: '/images/signlanguage/run.webp', desc: t('signLearn.dict_run_desc', 'Hook the index finger of one hand onto the thumb of the other, and move both forward.'), rawDesc: 'Hook the index finger of one hand onto the thumb of the other, and move both forward.' },
+  { word: t('signLearn.dict_walk_word', 'WALK'), rawWord: 'WALK', image: '/images/signlanguage/walk.webp', desc: t('signLearn.dict_walk_desc', 'Mimic two legs walking by moving your flat hands back and forth.'), rawDesc: 'Mimic two legs walking by moving your flat hands back and forth.' },
+  { word: t('signLearn.dict_write_word', 'WRITE'), rawWord: 'WRITE', image: '/images/signlanguage/write.webp', desc: t('signLearn.dict_write_desc', 'Mimic writing with a pen on the open palm of your other hand.'), rawDesc: 'Mimic writing with a pen on the open palm of your other hand.' },
+  { word: t('signLearn.dict_read_word', 'READ'), rawWord: 'READ', image: '/images/signlanguage/read.webp', desc: t('signLearn.dict_read_desc', 'Move your index and middle fingers down your open palm like scanning a page.'), rawDesc: 'Move your index and middle fingers down your open palm like scanning a page.' },
+  { word: t('signLearn.dict_happynewyear_word', 'HAPPY NEW YEAR'), rawWord: 'HAPPY NEW YEAR', image: '/images/signlanguage/happynewyear.webp', desc: t('signLearn.dict_happynewyear_desc', 'Brush hands upward on your chest, then raise flat hands forward.'), rawDesc: 'Brush hands upward on your chest, then raise flat hands forward.' }
 ];
 
 const FingerspellComponent = () => {
@@ -274,7 +274,7 @@ const FingerspellComponent = () => {
     const cleanVal = val.replace(/[^A-Za-z0-9 \u0900-\u097F]/g, '');
     setText(cleanVal);
     setIsFocused(true);
-    if (selectedWordSign && cleanVal.toUpperCase() !== selectedWordSign.word.toUpperCase()) {
+    if (selectedWordSign && cleanVal.toUpperCase() !== (selectedWordSign.word || '').toUpperCase() && cleanVal.toUpperCase() !== (selectedWordSign.rawWord || '').toUpperCase()) {
       setSelectedWordSign(null);
     }
   };
@@ -286,10 +286,12 @@ const FingerspellComponent = () => {
   };
 
   const q = text.trim().toLowerCase();
-  const suggestions = isFocused && q && (!selectedWordSign || text.toUpperCase() !== selectedWordSign.word.toUpperCase())
+  const suggestions = isFocused && q && (!selectedWordSign || (text.toUpperCase() !== (selectedWordSign.word || '').toUpperCase() && text.toUpperCase() !== (selectedWordSign.rawWord || '').toUpperCase()))
     ? dictionary.filter(item => 
         (item.word && item.word.toLowerCase().includes(q)) ||
-        (item.desc && item.desc.toLowerCase().includes(q))
+        (item.rawWord && item.rawWord.toLowerCase().includes(q)) ||
+        (item.desc && item.desc.toLowerCase().includes(q)) ||
+        (item.rawDesc && item.rawDesc.toLowerCase().includes(q))
       )
     : [];
 
