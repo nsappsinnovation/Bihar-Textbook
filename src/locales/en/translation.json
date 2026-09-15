@@ -4,6 +4,22 @@
     "subtitle": "अपनी भाषा चुनें · अपनी زبان منتخب کریں",
     "hint": "You can change this anytime from the globe icon"
   },
+  "hero": {
+    "tagline": "Empowering minds. Enriching futures.",
+    "titlePart1": "Bihar State",
+    "titleHighlight": "Textbook",
+    "titlePart2": "Publishing",
+    "titlePart3": "Corporation Ltd.",
+    "feat1Line1": "QUALITY",
+    "feat1Line2": "CONTENT",
+    "feat2Line1": "LEARNING",
+    "feat2Line2": "FOR ALL",
+    "feat3Line1": "INCLUSIVE",
+    "feat3Line2": "EDUCATION",
+    "feat4Line1": "EMPOWERING",
+    "feat4Line2": "BIHAR",
+    "floatingText": "Bringing world-class textbooks to every learner in Bihar."
+  },
   "nav": {
     "logoAlt": "BSTPC Logo",
     "home": "Home",
