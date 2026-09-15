@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, cloneElement } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowLeft, ArrowRight, BookOpen, 
@@ -31,6 +32,7 @@ const audioTheme = {
 };
 
 const AudioLibraryDashboard = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const filterParam = searchParams.get('filter') || 'all';
@@ -52,8 +54,6 @@ const AudioLibraryDashboard = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [favorites, setFavorites] = useState([]); // Book IDs favorited
   const [activeChapterIdx, setActiveChapterIdx] = useState(null);
-  const [playbackRate, setPlaybackRate] = useState(1);
-  const [showSpeedMenu, setShowSpeedMenu] = useState(false);
   
   // Refs
   const audioRef = useRef(null);
@@ -106,7 +106,6 @@ const AudioLibraryDashboard = () => {
     if (!audioEl) return;
     audioEl.volume = isMuted ? 0 : volume;
     audioEl.muted = isMuted;
-    audioEl.playbackRate = playbackRate;
 
     if (isPlaying) {
       const playPromise = audioEl.play();
@@ -118,7 +117,7 @@ const AudioLibraryDashboard = () => {
     } else {
       audioEl.pause();
     }
-  }, [isPlaying, selectedBook?.id, selectedBook?.audioUrl, volume, isMuted, playbackRate]);
+  }, [isPlaying, selectedBook?.id, selectedBook?.audioUrl, volume, isMuted]);
 
   // Sync tab with search parameters if changed
   useEffect(() => {
@@ -191,7 +190,7 @@ const AudioLibraryDashboard = () => {
     return {
       chapterNumber: activeIdx + 1,
       totalChapters: count,
-      chapterTitle: book.chapters[activeIdx],
+      chapterTitle: t(`audio.book_chap_${book.id}_${activeIdx}`, book.chapters[activeIdx]),
       duration: getChapterDuration(book, activeIdx)
     };
   };
@@ -371,10 +370,10 @@ const AudioLibraryDashboard = () => {
     return list;
   })();
 
-  const quickStats = [
-    { label: `${selectedCategory === 'All' ? 'Total Library' : selectedCategory + ' Library'}`, value: `${libraryCount} audiobooks`, icon: <Library className={audioTheme.card1Icon} />, color: audioTheme.card1Bg, tab: 'all' },
-    { label: 'Recently Played', value: `${recentlyPlayedCount} in ${selectedCategory}`, icon: <Clock className={audioTheme.card2Icon} />, color: audioTheme.card2Bg, tab: 'recent' },
-    { label: 'Favorites', value: `${favoritesCount} saved`, icon: <Heart className={`transition-colors ${audioTheme.card3Icon} ${favoritesCount > 0 ? 'fill-purple-600' : ''}`} />, color: audioTheme.card3Bg, tab: 'favorites' },
+  const libraryStats = [
+    { label: selectedCategory === 'All' ? t('audio.ui_TotalLibrary', 'Total Library') : t('audio.ui_ClassLibrary', '{{class}} Library', { class: t(`audio.cat_${selectedCategory.replace(' ', '')}`, selectedCategory) }), value: `${libraryCount} ${t('audio.ui_audiobooks', 'audiobooks')}`, icon: <Library className={audioTheme.card1Icon} />, color: audioTheme.card1Bg, tab: 'all' },
+    { label: t('audio.ui_RecentlyPlayed', 'Recently Played'), value: t('audio.ui_inClass', '{{count}} in {{class}}', { count: recentlyPlayedCount, class: t(`audio.cat_${selectedCategory.replace(' ', '')}`, selectedCategory) }), icon: <Clock className={audioTheme.card2Icon} />, color: audioTheme.card2Bg, tab: 'recent' },
+    { label: t('audio.ui_Favorites', 'Favorites'), value: `${favoritesCount} ${t('audio.ui_saved', 'saved')}`, icon: <Heart className={audioTheme.card3Icon} />, color: audioTheme.card3Bg, tab: 'favorites' }
   ];
 
   return (
@@ -402,7 +401,6 @@ const AudioLibraryDashboard = () => {
           ref={audioRef}
           url={selectedBook ? selectedBook.audioUrl : ''}
           playing={isPlaying}
-          playbackRate={playbackRate}
           volume={isMuted ? 0 : volume}
           muted={isMuted}
           onProgress={({ playedSeconds }) => setCurrentTime(playedSeconds)}
@@ -439,17 +437,17 @@ const AudioLibraryDashboard = () => {
             <section className="bg-white rounded-[16px] md:rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[200px] sm:min-h-[260px] md:min-h-[300px] lg:h-[387px] lg:min-h-[387px] pb-4 md:pb-6 lg:pb-0">
               <div className="relative z-10 p-5 sm:p-8 md:p-10 lg:w-1/2 space-y-3 md:space-y-4">
                  <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
-                    Listen, learn & <br /> grow with <br />
-                    <span className={audioTheme.heroHighlightText}>Audio Library</span>
+                    {t('audio.ui_Listenlearn_49c2', 'Listen, learn &')} <br /> {t('audio.ui_growwith_9563', 'grow with')} <br />
+                    <span className={audioTheme.heroHighlightText}>{t('audio.ui_AudioLibrary_6bbd', 'Audio Library')}</span>
                  </h1>
                  <p className="text-slate-500 text-[15px] md:text-[16px] font-medium leading-relaxed max-w-sm">
-                   Your pocket hub for audiobooks and knowledge.
+                   {t('audio.ui_Yourpockethubforaudi_f836', 'Your pocket hub for audiobooks and knowledge.')}
                  </p>
               </div>
 
               <div className="hidden lg:block absolute top-0 right-0 w-[55%] h-full">
                  <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
-                 <img loading="lazy" decoding="async" src="/images/audio/rhs.webp" alt="Audio Library" className="w-full h-full object-cover object-right-top" />
+                 <img src="/images/audio/rhs.png" alt="Audio Library" className="w-full h-full object-cover object-right-top" />
                  <div className="absolute bottom-12 right-24 flex items-center gap-1.5 opacity-80 z-20">
                    {[1,2,3,4,5,6].map(i => (
                       <motion.div 
@@ -464,7 +462,7 @@ const AudioLibraryDashboard = () => {
             </section>
 
             <section className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 relative z-20 -mt-8 px-4 md:px-12">
-              {quickStats.map((stat, i) => {
+              {libraryStats.map((stat, i) => {
                 const isActive = activeTab === stat.tab;
                 return (
                   <div 
@@ -477,7 +475,7 @@ const AudioLibraryDashboard = () => {
                     className={`bg-white rounded-[16px] p-3 md:p-4 border flex items-center gap-3 md:gap-4 hover:shadow-md hover:border-purple-300 transition-all cursor-pointer group ${isActive ? audioTheme.activeBorder + ' shadow-md' : audioTheme.inactiveBorder + ' shadow-[0_4px_20px_rgba(0,0,0,0.06)]'}`}
                   >
                      <div className={`w-[44px] h-[44px] rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5 ${isActive ? audioTheme.activeIconBg : stat.color}`}>
-                        {React.cloneElement(stat.icon, { className: isActive ? 'text-white' : stat.icon.props.className })}
+                        {cloneElement(stat.icon, { className: isActive ? 'text-white' : stat.icon.props.className })}
                      </div>
                      <div>
                         <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? audioTheme.activeTitleText : audioTheme.inactiveTitleHover}`}>{stat.label}</h4>
@@ -496,11 +494,11 @@ const AudioLibraryDashboard = () => {
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-white p-4 rounded-[20px] border border-slate-100 shadow-sm">
               <div className="flex flex-wrap gap-1.5 overflow-x-auto pb-1 md:pb-0 no-scrollbar">
                 {[
-                  { id: 'all', label: 'All Books', icon: <Library className="w-4 h-4" /> },
-                  { id: 'recent', label: 'Recently Played', icon: <Clock className="w-4 h-4" /> },
-                  { id: 'favorites', label: 'Favorites', icon: <Heart className="w-4 h-4" /> },
-                  { id: 'progress', label: 'In Progress', icon: <Play className="w-4 h-4" /> },
-                  { id: 'completed', label: 'Completed', icon: <CheckCircle className="w-4 h-4" /> },
+                  { id: 'all', label: t('audio.ui_AllBooks', 'All Books'), icon: <Library className="w-4 h-4" /> },
+                  { id: 'recent', label: t('audio.ui_RecentlyPlayed', 'Recently Played'), icon: <Clock className="w-4 h-4" /> },
+                  { id: 'favorites', label: t('audio.ui_Favorites', 'Favorites'), icon: <Heart className="w-4 h-4" /> },
+                  { id: 'progress', label: t('audio.ui_InProgress', 'In Progress'), icon: <Play className="w-4 h-4" /> },
+                  { id: 'completed', label: t('audio.ui_Completed', 'Completed'), icon: <CheckCircle className="w-4 h-4" /> },
                 ].map(tab => (
                   <button
                     key={tab.id}
@@ -521,7 +519,7 @@ const AudioLibraryDashboard = () => {
                 <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 w-4 h-4" />
                 <input
                   type="text"
-                  placeholder="Search audiobooks..."
+                  placeholder={t('audio.ui_Searchaudiobooks_c05e', 'Search audiobooks...')}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs outline-none focus:border-purple-600 focus:bg-white transition-all shadow-inner font-medium"
@@ -549,7 +547,7 @@ const AudioLibraryDashboard = () => {
                       : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-50 hover:border-slate-300'
                   }`}
                 >
-                  {cat}
+                  {t(`audio.cat_${cat.replace(' ', '')}`, cat)}
                 </button>
               ))}
             </div>
@@ -587,7 +585,7 @@ const AudioLibraryDashboard = () => {
                             className="relative w-24 h-32 rounded-xl overflow-hidden shadow-md shrink-0 border border-slate-100 group-hover:scale-105 transition-transform duration-300 block cursor-pointer"
                             title={isBookPlaying ? "Pause audiobook" : "Play now"}
                           >
-                            <img loading="lazy" decoding="async" src={book.cover} alt={book.title} className="w-full h-full object-cover" />
+                            <img src={book.cover} alt={book.title} className="w-full h-full object-cover" />
 
                             {/* Play Now / Pause Overlay */}
                             <div className={`absolute inset-0 bg-slate-900/35 flex items-center justify-center transition-opacity duration-200 ${
@@ -612,22 +610,22 @@ const AudioLibraryDashboard = () => {
                           <div className="flex-1 space-y-1 min-w-0">
                             <div className="flex items-center justify-between gap-1">
                               <span className="text-[10px] uppercase tracking-wider font-extrabold text-purple-600 bg-purple-50 border border-purple-200 px-2.5 py-0.5 rounded-full inline-block">
-                                {book.subject || book.category}
+                                {t(`audio.cat_${book.subject.replace(' ', '')}`, book.subject)}
                               </span>
                             </div>
                             <button
                               onClick={() => selectBook(book)}
                               className="font-extrabold text-slate-900 text-base group-hover:text-purple-600 transition-colors leading-tight line-clamp-2 block pt-0.5 text-left cursor-pointer"
                             >
-                              {book.title}
+                              {t(`audio.book_title_${book.id}`, book.title)}
                             </button>
-                            <p className="text-xs text-slate-500 font-medium truncate">By {book.author}</p>
+                            <p className="text-xs text-slate-500 font-medium truncate">{t('audio.ui_By', 'By')} {t(`audio.book_auth_${book.id}`, book.author)}</p>
                           </div>
                         </div>
 
                         {/* Synopsis preview */}
                         <p className="text-xs text-slate-500 line-clamp-2 mt-3.5 relative z-10 leading-relaxed font-medium">
-                          {book.description}
+                          {t(`audio.book_desc_${book.id}`, book.description)}
                         </p>
                       </div>
 
@@ -642,11 +640,11 @@ const AudioLibraryDashboard = () => {
                               e.stopPropagation();
                               setViewTimestampsBook(book);
                             }}
-                            className="flex items-center gap-1 font-bold text-purple-600 hover:text-purple-700 bg-purple-50 hover:bg-purple-200 px-2.5 py-1 rounded-lg transition-colors cursor-pointer"
+                            className={`flex items-center gap-1.5 font-bold ${book.accent}`}
                             title="Click to view all chapters and timestamps"
                           >
                             <Layers className="w-3.5 h-3.5" />
-                            <span>{book.chaptersCount} Chapters</span>
+                            <span>{book.chaptersCount} {t('audio.ui_Chapters', 'Chapters')}</span>
                           </button>
                         </div>
 
@@ -665,12 +663,12 @@ const AudioLibraryDashboard = () => {
                             {isBookPlaying ? (
                               <>
                                 <Pause className="w-4 h-4 fill-purple-600" />
-                                <span>Playing Now</span>
+                                <span>{t('audio.ui_PlayingNow_aedd', 'Playing Now')}</span>
                               </>
                             ) : (
                               <>
                                 <Play className="w-4 h-4 fill-white" />
-                                <span>Play Now</span>
+                                <span>{t('audio.ui_PlayNow_460a', 'Play Now')}</span>
                               </>
                             )}
                           </button>
@@ -684,7 +682,7 @@ const AudioLibraryDashboard = () => {
                             title="Open official NCERT CIET page"
                           >
                             <ExternalLink className="w-3.5 h-3.5" />
-                            <span className="hidden sm:inline">NCERT</span>
+                            <span className="hidden sm:inline">{t('audio.ui_NCERT_4b0c', 'NCERT')}</span>
                           </a>
 
                           <button
@@ -710,13 +708,13 @@ const AudioLibraryDashboard = () => {
                 {filteredBooks.length === 0 && (
                   <div className="col-span-1 sm:col-span-2 lg:col-span-3 xl:col-span-4 py-16 bg-white border border-slate-100 rounded-3xl flex flex-col items-center justify-center text-center p-6 shadow-sm">
                     <Library className="w-16 h-16 text-purple-300 mb-4" />
-                    <h3 className="text-base font-bold text-slate-800">No audiobooks found</h3>
-                    <p className="text-xs text-slate-500 max-w-xs mt-1">Try selecting another category or resetting your search terms.</p>
+                    <h3 className="text-base font-bold text-slate-800">{t('audio.ui_Noaudiobooksfound_cad3', 'No audiobooks found')}</h3>
+                    <p className="text-xs text-slate-500 max-w-xs mt-1">{t('audio.ui_Tryselectinganotherc_92d9', 'Try selecting another category or resetting your search terms.')}</p>
                     <button 
                       onClick={() => { setSelectedCategory('All'); setActiveTab('all'); setSearchQuery(''); }}
                       className="mt-4 px-5 py-2.5 bg-purple-600 text-white rounded-full text-xs font-bold hover:bg-purple-700 cursor-pointer shadow-sm transition-transform hover:scale-105"
                     >
-                      Reset Filters
+                      {t('audio.ui_ResetFilters_937d', 'Reset Filters')}
                     </button>
                   </div>
                 )}
@@ -738,7 +736,7 @@ const AudioLibraryDashboard = () => {
                 className="w-10 h-12 rounded-lg overflow-hidden shadow-sm shrink-0 border border-slate-100 relative group cursor-pointer"
                 title={isPlaying ? "Pause" : "Play"}
               >
-                <img loading="lazy" decoding="async" src={selectedBook.cover} alt={selectedBook.title} className="w-full h-full object-cover" />
+                <img src={selectedBook.cover} alt={selectedBook.title} className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
                   {isPlaying ? <Pause className="w-3.5 h-3.5 text-white" /> : <Play className="w-3.5 h-3.5 text-white ml-0.5" />}
                 </div>
@@ -762,7 +760,7 @@ const AudioLibraryDashboard = () => {
                     >
                       <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse shrink-0" />
                       <p className="text-[11px] font-bold text-purple-600 truncate underline decoration-purple-300 underline-offset-2">
-                        Ch {chInfo.chapterNumber}: {chInfo.chapterTitle} • {chInfo.duration}
+                        {t('audio.ui_Chapter', 'Ch')} {chInfo.chapterNumber}: {chInfo.chapterTitle} • {chInfo.duration}
                       </p>
                     </button>
                   );
@@ -843,7 +841,7 @@ const AudioLibraryDashboard = () => {
                       title="View Chapters & Timestamps List"
                     >
                       <Layers className="w-3.5 h-3.5" />
-                      <span className="hidden sm:inline">Chapters List</span>
+                      <span className="hidden sm:inline">{t('audio.ui_ChaptersList_de9b', 'Chapters List')}</span>
                     </button>
                   </div>
 
@@ -874,29 +872,7 @@ const AudioLibraryDashboard = () => {
                   </button>
 
                   <div className="flex items-center gap-2">
-                    {/* Playback Rate Control */}
-                    <div className="relative">
-                      <button 
-                        onClick={() => setShowSpeedMenu(!showSpeedMenu)}
-                        title="Playback Speed"
-                        className="w-10 h-7 bg-purple-50 text-purple-600 text-[10px] font-bold rounded-lg flex items-center justify-center cursor-pointer hover:bg-purple-100 transition-colors border border-purple-200 shrink-0"
-                      >
-                        {playbackRate}x
-                      </button>
-                      <div className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-white shadow-xl rounded-xl border border-slate-100 py-1.5 flex-col w-16 overflow-hidden z-50 ${showSpeedMenu ? 'flex' : 'hidden'}`}>
-                        {[0.5, 0.75, 1, 1.25, 1.5, 2].map(rate => (
-                          <button 
-                            key={rate}
-                            onClick={() => { setPlaybackRate(rate); setShowSpeedMenu(false); }}
-                            className={`px-3 py-1.5 text-[10px] font-bold text-center transition-colors cursor-pointer ${playbackRate === rate ? 'text-purple-600 bg-purple-50' : 'text-slate-600 hover:bg-slate-50 hover:text-purple-500'}`}
-                          >
-                            {rate}x
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    <button onClick={toggleMute} className="text-slate-400 hover:text-slate-800 transition-colors cursor-pointer ml-2">
+                    <button onClick={toggleMute} className="text-slate-400 hover:text-slate-800 transition-colors cursor-pointer">
                       {isMuted ? <VolumeX className="w-4 h-4 text-rose-500" /> : <Volume2 className="w-4 h-4" />}
                     </button>
                     <input
@@ -947,7 +923,7 @@ const AudioLibraryDashboard = () => {
               {/* Modal Header */}
               <div className="shrink-0 p-6 bg-gradient-to-r from-purple-600 to-purple-950 text-white flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3.5">
-                  <img loading="lazy" decoding="async"
+                  <img
                     src={viewTimestampsBook.cover}
                     alt={viewTimestampsBook.title}
                     className="w-12 h-16 rounded-lg object-cover shadow-md border border-white/20 shrink-0"
@@ -957,7 +933,7 @@ const AudioLibraryDashboard = () => {
                       {viewTimestampsBook.subject || viewTimestampsBook.category}
                     </span>
                     <h3 className="text-lg font-extrabold leading-tight">{viewTimestampsBook.title}</h3>
-                    <p className="text-xs text-purple-50 font-medium mt-0.5">Chapters & Timestamps</p>
+                    <p className="text-xs text-purple-50 font-medium mt-0.5">{t('audio.ui_ChaptersTimestamps_7706', 'Chapters & Timestamps')}</p>
                   </div>
                 </div>
                 <button
@@ -1012,18 +988,14 @@ const AudioLibraryDashboard = () => {
                       }`}
                     >
                       <div className="flex items-center gap-3.5 min-w-0">
-                        <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
-                          isCurrentChapter
-                            ? 'bg-purple-600 text-white shadow-sm'
-                            : 'bg-slate-100 text-slate-600 group-hover:bg-purple-50 group-hover:text-purple-600'
-                        }`}>
-                          {idx + 1}
-                        </div>
                         <div className="min-w-0">
-                          <h4 className={`text-xs font-bold truncate leading-snug ${
-                            isCurrentChapter ? 'text-purple-600' : 'text-slate-800'
-                          }`}>
-                            {chTitle}
+                          <h4 className={`text-xs font-bold truncate leading-snug`}>
+                          <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${isCurrentChapter ? 'bg-purple-100 text-purple-700' : 'bg-slate-100 text-slate-500 group-hover:bg-purple-50 group-hover:text-purple-600'}`}>
+                            {t('audio.ui_Chapter', 'Ch')} {idx + 1}
+                          </span>
+                          <span className={`text-sm font-bold truncate pr-4 ${isCurrentChapter ? 'text-purple-700' : 'text-slate-700 group-hover:text-purple-600'}`}>
+                            {t(`audio.book_chap_${viewTimestampsBook.id}_${idx}`, chTitle)}
+                          </span>
                           </h4>
                           <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-purple-600 mt-1">
                             <Clock className="w-3.5 h-3.5" />
@@ -1040,12 +1012,12 @@ const AudioLibraryDashboard = () => {
                         {isCurrentChapter && isPlaying ? (
                           <>
                             <Pause className="w-3 h-3 fill-current" />
-                            <span>Playing</span>
+                            <span>{t('audio.ui_Playing_c9db', 'Playing')}</span>
                           </>
                         ) : (
                           <>
                             <Play className="w-3 h-3 fill-current" />
-                            <span>Play Chapter</span>
+                            <span>{t('audio.ui_PlayChapter_af32', 'Play Chapter')}</span>
                           </>
                         )}
                       </button>
@@ -1056,12 +1028,12 @@ const AudioLibraryDashboard = () => {
 
               {/* Modal Footer */}
               <div className="shrink-0 p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500 font-medium">
-                <span>Total Chapters: {viewTimestampsBook.chaptersCount || viewTimestampsBook.chapters?.length}</span>
+                <span>{t('audio.ui_TotalChapters', 'Total Chapters')}: {viewTimestampsBook.chaptersCount || viewTimestampsBook.chapters?.length}</span>
                 <button
                   onClick={() => setViewTimestampsBook(null)}
                   className="px-4 py-2 bg-white border border-slate-200 hover:bg-slate-100 rounded-xl font-bold text-slate-700 transition-colors cursor-pointer"
                 >
-                  Close
+                  {t('audio.ui_Close_d3d2', 'Close')}
                 </button>
               </div>
             </motion.div>

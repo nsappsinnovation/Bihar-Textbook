@@ -130,7 +130,7 @@ const VrDashboard = () => {
                     className={`bg-white rounded-[16px] p-3 md:p-4 border flex items-center gap-3 md:gap-4 hover:shadow-md transition-shadow cursor-pointer group ${isActive ? vrTheme.activeBorder + ' shadow-md' : vrTheme.inactiveBorder + ' shadow-[0_4px_20px_rgba(0,0,0,0.06)]'}`}
                   >
                      <div className={`w-[44px] h-[44px] rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5 ${isActive ? vrTheme.activeIconBg : stat.color}`}>
-                        {React.cloneElement(stat.icon, { className: isActive ? 'text-white' : stat.icon.props.className })}
+                        {cloneElement(stat.icon, { className: isActive ? 'text-white' : stat.icon.props.className })}
                      </div>
                      <div>
                         <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? vrTheme.activeTitleText : vrTheme.inactiveTitleHover}`}>{stat.label}</h4>
