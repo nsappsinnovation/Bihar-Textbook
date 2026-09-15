@@ -520,7 +520,7 @@ const FingerspellComponent = () => {
               </button>
 
               <span className="text-[10px] font-black text-teal-600 bg-teal-50 px-3 py-1 rounded-full uppercase tracking-wider mb-2 mt-2">
-                Sign Details
+                {t('signLearn.signDetails', 'Sign Details')}
               </span>
               <h4 className="text-3xl font-black text-slate-900 mb-6">{previewGif.word}</h4>
 
@@ -553,7 +553,7 @@ const FingerspellComponent = () => {
                 onClick={() => setPreviewGif(null)}
                 className="w-full md:w-64 py-3.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm transition-colors shadow-md shadow-teal-500/20 cursor-pointer"
               >
-                Got it!
+                {t('signLearn.gotIt', 'Got it!')}
               </button>
             </motion.div>
           </motion.div>
