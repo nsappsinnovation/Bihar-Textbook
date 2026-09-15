@@ -320,6 +320,12 @@
     "heading": "Official Notices",
     "headingHighlight": "& Circulars",
     "description": "Stay updated with the latest notifications, tender releases, and educational announcements from BSTBPC.",
+    "tendersLabel": "Tenders",
+    "tendersSub": "E-procurement & contracts",
+    "noticesLabel": "Official Notices",
+    "noticesSub": "Administrative announcements",
+    "circularsLabel": "Academic Circulars",
+    "circularsSub": "Curriculum & syllabus updates",
     "stats": {
       "activeTenders": {
         "title": "Active Tenders",

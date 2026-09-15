@@ -325,6 +325,12 @@
     "heading": "आधिकारिक सूचनाएं",
     "headingHighlight": "और परिपत्र",
     "description": "BSTBPC से नवीनतम सूचनाओं, निविदा रिलीज और शैक्षिक घोषणाओं के साथ अपडेट रहें।",
+    "tendersLabel": "निविदाएं",
+    "tendersSub": "ई-प्रोक्योरमेंट और अनुबंध",
+    "noticesLabel": "आधिकारिक सूचनाएं",
+    "noticesSub": "प्रशासनिक घोषणाएं",
+    "circularsLabel": "शैक्षणिक परिपत्र",
+    "circularsSub": "पाठ्यक्रम और सिलेबस अपडेट",
     "stats": {
       "activeTenders": {
         "title": "सक्रिय निविदाएं",
