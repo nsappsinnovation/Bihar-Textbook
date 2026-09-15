@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import {
   FileText, Users, Layers, IndianRupee, Settings2,
   Target, LineChart, Info, BookMarked, ScrollText,
@@ -34,7 +35,7 @@ const printStyles = `
 
 /* ---------- Building blocks ---------- */
 
-const Section = ({ no, anchor, title, children }) => {
+const Section = ({ no, anchor, title, sectionLabel = "Section", children }) => {
   const Icon = sectionIcons[anchor] || FileText;
   return (
     <motion.section
@@ -51,7 +52,7 @@ const Section = ({ no, anchor, title, children }) => {
         </div>
         <div className="pt-0.5">
           <div className="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 mb-1.5">
-            Section {no}
+            {sectionLabel} {no}
           </div>
           <h2 className="text-[20px] md:text-[25px] font-black text-slate-900 leading-[1.2] tracking-tight">
             {title}
@@ -102,7 +103,7 @@ const RomanList = ({ items }) => (
 );
 
 /* Primary download control, reused in the hero, sidebar and mobile bar */
-const DownloadButton = ({ url, fileName, size, variant = "primary", className = "" }) => {
+const DownloadButton = ({ url, fileName, size, label = "Download Policy (PDF)", variant = "primary", className = "" }) => {
   const base =
     "csr-no-print group inline-flex items-center justify-center gap-3 rounded-2xl font-black transition-all";
   const styles = {
@@ -120,7 +121,7 @@ const DownloadButton = ({ url, fileName, size, variant = "primary", className = 
       className={`${base} ${styles[variant]} ${className}`}
     >
       <Download className="w-[18px] h-[18px] transition-transform group-hover:translate-y-0.5" />
-      <span>Download Policy (PDF)</span>
+      <span>{label}</span>
       {size && (
         <span
           className={`text-[11px] font-bold ${
@@ -135,6 +136,9 @@ const DownloadButton = ({ url, fileName, size, variant = "primary", className = 
 };
 
 const CsrPolicy = () => {
+  const { t, i18n } = useTranslation();
+  const isHindi = i18n.language === 'hi';
+
   const [csr, setCsr] = useState(csrPolicyDefaults);
   const [activeSection, setActiveSection] = useState("introduction");
   const [progress, setProgress] = useState(0);
@@ -143,8 +147,8 @@ const CsrPolicy = () => {
 
   /* Content is managed in Admin → CSR Policy */
   useEffect(() => {
-    loadCsrPolicy().then(setCsr);
-  }, []);
+    loadCsrPolicy(i18n.language).then(setCsr);
+  }, [i18n.language]);
 
   /* Reading progress + back-to-top visibility */
   useEffect(() => {
@@ -165,6 +169,14 @@ const CsrPolicy = () => {
   }, []);
 
   const activeIndex = csrPolicyContents.findIndex((s) => s.anchor === activeSection);
+
+  const getSectionTitle = (anchor, defaultTitle) => {
+    const item = csrPolicyContents.find(s => s.anchor === anchor);
+    if (!item) return defaultTitle;
+    return isHindi ? item.titleHi : item.titleEn;
+  };
+
+  const sectionLabelText = isHindi ? 'अनुभाग' : 'Section';
 
   return (
     <div className="bg-[#F7F8FA] min-h-screen font-sans text-slate-800 pb-32 lg:pb-24">
@@ -209,8 +221,8 @@ const CsrPolicy = () => {
               transition={{ duration: 0.6, delay: 0.08 }}
               className="text-[38px] md:text-[58px] font-black text-slate-900 leading-[1.05] tracking-tight"
             >
-              Corporate Social<br />
-              <span className="text-blue-700">Responsibility Policy</span>
+              {t('csrPolicyPage.titlePart1', 'Corporate Social')}<br />
+              <span className="text-blue-700">{t('csrPolicyPage.titlePart2', 'Responsibility Policy')}</span>
             </motion.h1>
 
             <motion.div
@@ -220,10 +232,10 @@ const CsrPolicy = () => {
               className="mt-8 flex flex-wrap items-center gap-2.5"
             >
               {[
-                `${csrPolicyContents.length} Sections`,
-                "Companies Act, 2013",
-                "Schedule VII",
-                "CSR Rules, 2014"
+                t('csrPolicyPage.sectionsCount', { count: csrPolicyContents.length, defaultValue: `${csrPolicyContents.length} Sections` }),
+                t('csrPolicyPage.companiesAct', 'Companies Act, 2013'),
+                t('csrPolicyPage.scheduleVII', 'Schedule VII'),
+                t('csrPolicyPage.csrRules', 'CSR Rules, 2014')
               ].map((chip) => (
                 <span
                   key={chip}
@@ -245,6 +257,7 @@ const CsrPolicy = () => {
                 url={fileUrl(csr.pdfUrl)}
                 fileName={csr.pdfFileName}
                 size={csr.pdfSizeLabel}
+                label={t('csrPolicyPage.downloadPdf', 'Download Policy (PDF)')}
               />
             </motion.div>
           </div>
@@ -260,7 +273,7 @@ const CsrPolicy = () => {
           >
             <span className="flex items-center gap-3 text-[13px] font-black text-slate-900 uppercase tracking-wider">
               <List className="w-4 h-4 text-blue-600" />
-              Contents
+              {t('csrPolicyPage.contents', 'Contents')}
             </span>
             <ChevronDown
               className={`w-4 h-4 text-slate-400 transition-transform ${
@@ -278,22 +291,25 @@ const CsrPolicy = () => {
                 className="overflow-hidden border-t border-slate-100"
               >
                 <div className="p-3 space-y-1">
-                  {csrPolicyContents.map(({ no, topic, anchor }) => (
-                    <button
-                      key={anchor}
-                      onClick={() => goToSection(anchor)}
-                      className={`w-full flex gap-3 items-start text-left rounded-xl px-3 py-2.5 transition-colors ${
-                        activeSection === anchor
-                          ? "bg-blue-50 text-blue-700"
-                          : "text-slate-600 hover:bg-slate-50"
-                      }`}
-                    >
-                      <span className="text-[11px] font-black text-slate-400 shrink-0 mt-[2px]">
-                        {String(no).padStart(2, "0")}
-                      </span>
-                      <span className="text-[12.5px] font-bold leading-snug">{topic}</span>
-                    </button>
-                  ))}
+                  {csrPolicyContents.map((item) => {
+                    const topicText = isHindi ? item.topicHi : item.topicEn;
+                    return (
+                      <button
+                        key={item.anchor}
+                        onClick={() => goToSection(item.anchor)}
+                        className={`w-full flex gap-3 items-start text-left rounded-xl px-3 py-2.5 transition-colors ${
+                          activeSection === item.anchor
+                            ? "bg-blue-50 text-blue-700"
+                            : "text-slate-600 hover:bg-slate-50"
+                        }`}
+                      >
+                        <span className="text-[11px] font-black text-slate-400 shrink-0 mt-[2px]">
+                          {String(item.no).padStart(2, "0")}
+                        </span>
+                        <span className="text-[12.5px] font-bold leading-snug">{topicText}</span>
+                      </button>
+                    );
+                  })}
                 </div>
               </motion.nav>
             )}
@@ -312,7 +328,7 @@ const CsrPolicy = () => {
               <div className="bg-white border border-slate-200 rounded-[28px] p-6 shadow-[0_4px_28px_rgb(15,23,42,0.05)]">
                 <div className="flex items-center justify-between mb-5">
                   <h2 className="text-[12px] font-black uppercase tracking-[0.15em] text-slate-900">
-                    Contents
+                    {t('csrPolicyPage.contents', 'Contents')}
                   </h2>
                   <span className="text-[10px] font-black text-slate-400 tabular-nums">
                     {Math.max(activeIndex + 1, 1)} / {csrPolicyContents.length}
@@ -320,12 +336,13 @@ const CsrPolicy = () => {
                 </div>
 
                 <nav className="space-y-0.5">
-                  {csrPolicyContents.map(({ no, topic, anchor }) => {
-                    const isActive = activeSection === anchor;
+                  {csrPolicyContents.map((item) => {
+                    const isActive = activeSection === item.anchor;
+                    const topicText = isHindi ? item.topicHi : item.topicEn;
                     return (
                       <button
-                        key={anchor}
-                        onClick={() => goToSection(anchor)}
+                        key={item.anchor}
+                        onClick={() => goToSection(item.anchor)}
                         className={`relative w-full flex gap-3 items-start text-left rounded-xl pl-4 pr-3 py-2.5 transition-all ${
                           isActive
                             ? "bg-blue-50 text-blue-700"
@@ -342,9 +359,9 @@ const CsrPolicy = () => {
                             isActive ? "text-blue-600" : "text-slate-300"
                           }`}
                         >
-                          {String(no).padStart(2, "0")}
+                          {String(item.no).padStart(2, "0")}
                         </span>
-                        <span className="text-[12.5px] font-bold leading-snug">{topic}</span>
+                        <span className="text-[12.5px] font-bold leading-snug">{topicText}</span>
                       </button>
                     );
                   })}
@@ -360,7 +377,7 @@ const CsrPolicy = () => {
 
             {/* 1. Introduction & Background */}
             {activeSection === "introduction" && (
-              <Section no={1} anchor="introduction" title="Introduction & Background">
+              <Section no={1} anchor="introduction" title={getSectionTitle('introduction', 'Introduction & Background')} sectionLabel={sectionLabelText}>
                 {csr.introParagraphs.map((para, idx) => (
                   <Paragraph key={idx}>{para}</Paragraph>
                 ))}
@@ -372,7 +389,8 @@ const CsrPolicy = () => {
               <Section
                 no={2}
                 anchor="vision"
-                title="CSR Vision & Policy Statement — Objectives of this CSR Policy"
+                title={getSectionTitle('vision', 'CSR Vision & Policy Statement — Objectives of this CSR Policy')}
+                sectionLabel={sectionLabelText}
               >
                 <Paragraph>{csr.objectivesIntro}</Paragraph>
                 <div className="mt-6">
@@ -383,35 +401,35 @@ const CsrPolicy = () => {
 
             {/* 3. CSR Committee Composition and Responsibility */}
             {activeSection === "committee" && (
-              <Section no={3} anchor="committee" title="CSR Committee Composition and Responsibility">
+              <Section no={3} anchor="committee" title={getSectionTitle('committee', 'CSR Committee Composition and Responsibility')} sectionLabel={sectionLabelText}>
                 <Paragraph>{csr.committeeText}</Paragraph>
               </Section>
             )}
 
             {/* 4. Scope & Applicability */}
             {activeSection === "scope" && (
-              <Section no={4} anchor="scope" title="Scope & Applicability">
+              <Section no={4} anchor="scope" title={getSectionTitle('scope', 'Scope & Applicability')} sectionLabel={sectionLabelText}>
                 <Paragraph>{csr.scopeText}</Paragraph>
               </Section>
             )}
 
             {/* 5. CSR Budget */}
             {activeSection === "budget" && (
-              <Section no={5} anchor="budget" title="CSR Budget">
+              <Section no={5} anchor="budget" title={getSectionTitle('budget', 'CSR Budget')} sectionLabel={sectionLabelText}>
                 <RomanList items={csr.budgetItems} />
               </Section>
             )}
 
             {/* 6. Implementation */}
             {activeSection === "implementation" && (
-              <Section no={6} anchor="implementation" title="Implementation">
+              <Section no={6} anchor="implementation" title={getSectionTitle('implementation', 'Implementation')} sectionLabel={sectionLabelText}>
                 <RomanList items={csr.implementationItems} />
               </Section>
             )}
 
             {/* 7. Activities / Focus Areas */}
             {activeSection === "activities" && (
-              <Section no={7} anchor="activities" title="Activities / Focus Areas">
+              <Section no={7} anchor="activities" title={getSectionTitle('activities', 'Activities / Focus Areas')} sectionLabel={sectionLabelText}>
                 <Paragraph>{csr.activitiesIntro}</Paragraph>
                 <div className="mt-6">
                   <RomanList items={csr.activities} />
@@ -421,14 +439,14 @@ const CsrPolicy = () => {
 
             {/* 8. Monitoring */}
             {activeSection === "monitoring" && (
-              <Section no={8} anchor="monitoring" title="Monitoring">
+              <Section no={8} anchor="monitoring" title={getSectionTitle('monitoring', 'Monitoring')} sectionLabel={sectionLabelText}>
                 <RomanList items={csr.monitoringItems} />
               </Section>
             )}
 
             {/* 9. Miscellaneous Information */}
             {activeSection === "miscellaneous" && (
-              <Section no={9} anchor="miscellaneous" title="Miscellaneous Information">
+              <Section no={9} anchor="miscellaneous" title={getSectionTitle('miscellaneous', 'Miscellaneous Information')} sectionLabel={sectionLabelText}>
                 <ol className="space-y-2">
                   {csr.miscellaneousItems.map((item, idx) => (
                     <li
@@ -449,7 +467,7 @@ const CsrPolicy = () => {
 
             {/* 10. Annexure A */}
             {activeSection === "annexure" && (
-              <Section no={10} anchor="annexure" title="Annexure">
+              <Section no={10} anchor="annexure" title={getSectionTitle('annexure', 'Annexure')} sectionLabel={sectionLabelText}>
                 <a
                   href={fileUrl(csr.pdfUrl)}
                   download={csr.pdfFileName}

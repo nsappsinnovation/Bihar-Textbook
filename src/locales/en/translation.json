@@ -6318,5 +6318,16 @@
     "fetchError": "Failed to fetch results. Please try again.",
     "noResults": "No results found. Try a different topic.",
     "viewDetails": "View Details"
+  },
+  "csrPolicyPage": {
+    "section": "Section {{no}}",
+    "contents": "Contents",
+    "downloadPdf": "Download Policy (PDF)",
+    "titlePart1": "Corporate Social",
+    "titlePart2": "Responsibility Policy",
+    "sectionsCount": "{{count}} Sections",
+    "companiesAct": "Companies Act, 2013",
+    "scheduleVII": "Schedule VII",
+    "csrRules": "CSR Rules, 2014"
   }
 }

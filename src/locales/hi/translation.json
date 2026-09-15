@@ -6368,5 +6368,16 @@
     "fetchError": "परिणाम प्राप्त करने में विफ़ल। कृपया पुनः प्रयास करें।",
     "noResults": "कोई परिणाम नहीं मिला। दूसरा विषय आज़माएँ।",
     "viewDetails": "विवरण देखें"
+  },
+  "csrPolicyPage": {
+    "section": "अनुभाग {{no}}",
+    "contents": "विषय-सूची",
+    "downloadPdf": "नीति डाउनलोड करें (PDF)",
+    "titlePart1": "कॉर्पोरेट सामाजिक",
+    "titlePart2": "उत्तरदायित्व नीति",
+    "sectionsCount": "{{count}} अनुभाग",
+    "companiesAct": "कंपनी अधिनियम, 2013",
+    "scheduleVII": "अनुसूची VII",
+    "csrRules": "सीएसआर नियम, 2014"
   }
 }
