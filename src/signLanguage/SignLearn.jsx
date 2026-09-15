@@ -1332,10 +1332,21 @@ const SignLearn = () => {
     if (videoLevelFilter !== 'All' && video.level !== videoLevelFilter) return false;
     if (videoSearchQuery.trim()) {
       const q = videoSearchQuery.toLowerCase();
-      const matchTitle = (video.title || '').toLowerCase().includes(q);
-      const matchDesc = (video.desc || '').toLowerCase().includes(q);
-      const matchChannel = (video.channelName || '').toLowerCase().includes(q);
-      if (!matchTitle && !matchDesc && !matchChannel) return false;
+      const vTitle = video.id <= 58 ? t(`signLearn.vid${video.id}_title`, video.title) : t(`signLearn.ext_${video.id}_title`, video.title);
+      const vDesc = video.id <= 58 ? t(`signLearn.vid${video.id}_desc`, video.desc) : t(`signLearn.ext_${video.id}_desc`, video.desc);
+      const vChannel = t(`signLearn.channel_${(video.channelName || '').replace(/[^a-zA-Z0-9]/g, '')}`, video.channelName || 'Lesson');
+      const vLevel = t(`signLearn.level_${video.level}`, video.level);
+
+      const matchRawTitle = (video.title || '').toLowerCase().includes(q);
+      const matchRawDesc = (video.desc || '').toLowerCase().includes(q);
+      const matchRawChannel = (video.channelName || '').toLowerCase().includes(q);
+
+      const matchTransTitle = (vTitle || '').toLowerCase().includes(q);
+      const matchTransDesc = (vDesc || '').toLowerCase().includes(q);
+      const matchTransChannel = (vChannel || '').toLowerCase().includes(q);
+      const matchTransLevel = (vLevel || '').toLowerCase().includes(q);
+
+      if (!matchRawTitle && !matchRawDesc && !matchRawChannel && !matchTransTitle && !matchTransDesc && !matchTransChannel && !matchTransLevel) return false;
     }
     return true;
   });
