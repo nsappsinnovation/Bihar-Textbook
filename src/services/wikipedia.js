@@ -1,12 +1,15 @@
 import axios from 'axios';
 
-const API_ENDPOINT = 'https://en.wikipedia.org/w/api.php';
+const getApiEndpoint = (lang = 'en') => {
+  const language = (lang || 'en').startsWith('hi') ? 'hi' : 'en';
+  return `https://${language}.wikipedia.org/w/api.php`;
+};
 
-export const searchArticles = async (query) => {
+export const searchArticles = async (query, lang = 'en') => {
     if (!query) return [];
 
     try {
-        const response = await axios.get(API_ENDPOINT, {
+        const response = await axios.get(getApiEndpoint(lang), {
             params: {
                 action: 'query',
                 list: 'search',
@@ -17,44 +20,43 @@ export const searchArticles = async (query) => {
             },
         });
 
-        return response.data.query.search;
+        return response.data?.query?.search || [];
     } catch (error) {
         console.error('Error fetching data from Wikipedia:', error);
         throw error;
     }
 };
 
-export const getArticleExtract = async (pageId) => {
+export const getArticleExtract = async (pageId, lang = 'en') => {
     try {
-        const response = await axios.get(API_ENDPOINT, {
+        const response = await axios.get(getApiEndpoint(lang), {
             params: {
                 action: 'query',
-                prop: 'extracts',
+                prop: 'extracts|pageimages',
                 exintro: true,
                 explaintext: true,
                 pageids: pageId,
                 format: 'json',
                 origin: '*',
-                pithumbsize: 500, // Request thumbnail if possible, though extracts don't always give it
-                prop: 'extracts|pageimages', // Get images too
+                pithumbsize: 500,
             }
         });
-        const page = response.data.query.pages[pageId];
+        const page = response.data?.query?.pages[pageId];
         return {
-            extract: page.extract,
-            thumbnail: page.thumbnail?.source
+            extract: page?.extract || '',
+            thumbnail: page?.thumbnail?.source || null
         };
     } catch (error) {
         console.error('Error fetching extract:', error);
         return { extract: '', thumbnail: null };
     }
-}
+};
 
-export  const getSuggestions = async (query) => {
+export const getSuggestions = async (query, lang = 'en') => {
     if (!query) return [];
 
     try {
-        const response = await axios.get(API_ENDPOINT, {
+        const response = await axios.get(getApiEndpoint(lang), {
             params: {
                 action: 'opensearch',
                 search: query,

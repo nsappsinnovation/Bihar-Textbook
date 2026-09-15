@@ -6310,5 +6310,13 @@
     "pa_ing_text_16_0": "Act as a fun geometry teacher,",
     "pa_ing_text_16_3": "and showing a basic number proof with clear bullet points.",
     "pa_ing_desc_16_2": "Adds real-world context."
+  },
+  "gyanKendraPage": {
+    "titlePrefix": "Gyan",
+    "titleHighlight": "Kendra",
+    "subtitle": "Your Center of Knowledge — where learning becomes simple, understanding becomes deeper, and every student is empowered to achieve their full potential",
+    "fetchError": "Failed to fetch results. Please try again.",
+    "noResults": "No results found. Try a different topic.",
+    "viewDetails": "View Details"
   }
 }
