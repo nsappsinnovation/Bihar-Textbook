@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Stars, Environment, Html } from '@react-three/drei';
 import * as THREE from 'three';
 import VRHand from './VRHand';
+import { useTranslation } from 'react-i18next';
 
 // Reusable Interactive Label Component
 const InteractiveLabel = ({ position, title, description, colorClass }) => {
@@ -34,6 +35,7 @@ const InteractiveLabel = ({ position, title, description, colorClass }) => {
 
 // 1. DNA Double Helix Model
 const DnaModel = () => {
+  const { t } = useTranslation();
   const groupRef = useRef();
 
   useFrame((state) => {
@@ -83,26 +85,26 @@ const DnaModel = () => {
       {pairs}
       <InteractiveLabel 
         position={[radius + 1.5, height / 2 - 2, 0]} 
-        title="Sugar-Phosphate Backbone" 
-        description="The structural framework of nucleic acids, including DNA and RNA. It is composed of alternating sugar and phosphate groups, protecting the genetic code inside."
+        title={t('vrVirtualLab.viewer.dna.label1Title', 'Sugar-Phosphate Backbone')} 
+        description={t('vrVirtualLab.viewer.dna.label1Desc', 'The structural framework of nucleic acids, including DNA and RNA. It is composed of alternating sugar and phosphate groups, protecting the genetic code inside.')}
         colorClass="text-emerald-400"
       />
       <InteractiveLabel 
         position={[0, 0, radius + 1.5]} 
-        title="Hydrogen Bond (Base Pair)" 
-        description="Adenine always pairs with Thymine (A-T), and Cytosine pairs with Guanine (C-G). These chemical bonds hold the two DNA strands together like rungs on a ladder."
+        title={t('vrVirtualLab.viewer.dna.label2Title', 'Hydrogen Bond (Base Pair)')} 
+        description={t('vrVirtualLab.viewer.dna.label2Desc', 'Adenine always pairs with Thymine (A-T), and Cytosine pairs with Guanine (C-G). These chemical bonds hold the two DNA strands together like rungs on a ladder.')}
         colorClass="text-blue-400"
       />
       <InteractiveLabel 
         position={[-radius - 1.5, 3, 0]} 
-        title="Adenine Base (Red)" 
-        description="Adenine is one of the four nucleobases in the nucleic acid of DNA. It always pairs with Thymine (Blue) via two hydrogen bonds."
+        title={t('vrVirtualLab.viewer.dna.label3Title', 'Adenine Base (Red)')} 
+        description={t('vrVirtualLab.viewer.dna.label3Desc', 'Adenine is one of the four nucleobases in the nucleic acid of DNA. It always pairs with Thymine (Blue) via two hydrogen bonds.')}
         colorClass="text-red-500"
       />
       <InteractiveLabel 
         position={[-radius - 1.5, -3, 0]} 
-        title="Guanine Base (Yellow)" 
-        description="Guanine is a nucleobase that always pairs with Cytosine (Green) via three hydrogen bonds, making this pair slightly stronger than A-T."
+        title={t('vrVirtualLab.viewer.dna.label4Title', 'Guanine Base (Yellow)')} 
+        description={t('vrVirtualLab.viewer.dna.label4Desc', 'Guanine is a nucleobase that always pairs with Cytosine (Green) via three hydrogen bonds, making this pair slightly stronger than A-T.')}
         colorClass="text-yellow-400"
       />
     </group>
@@ -111,6 +113,7 @@ const DnaModel = () => {
 
 // 2. Bacteriophage Virus Model
 const VirusModel = () => {
+  const { t } = useTranslation();
   const groupRef = useRef();
   
   useFrame((state) => {
@@ -157,20 +160,20 @@ const VirusModel = () => {
 
       <InteractiveLabel 
         position={[2.5, 2, 0]} 
-        title="Icosahedral Head (Capsid)" 
-        description="The protein shell of the virus. It acts as a protective container that stores the viral DNA or RNA, keeping it safe until it infects a host cell."
+        title={t('vrVirtualLab.viewer.virus.label1Title', 'Icosahedral Head (Capsid)')} 
+        description={t('vrVirtualLab.viewer.virus.label1Desc', 'The protein shell of the virus. It acts as a protective container that stores the viral DNA or RNA, keeping it safe until it infects a host cell.')}
         colorClass="text-blue-500"
       />
       <InteractiveLabel 
         position={[-2.5, -0.25, 0]} 
-        title="Contractile Sheath" 
-        description="Like a microscopic syringe, this sheath contracts during infection, driving a central tube through the bacteria's cell wall to inject the viral DNA."
+        title={t('vrVirtualLab.viewer.virus.label2Title', 'Contractile Sheath')} 
+        description={t('vrVirtualLab.viewer.virus.label2Desc', "Like a microscopic syringe, this sheath contracts during infection, driving a central tube through the bacteria's cell wall to inject the viral DNA.")}
         colorClass="text-slate-400"
       />
       <InteractiveLabel 
         position={[2.5, -2.5, 0]} 
-        title="Tail Fibers" 
-        description="These 'legs' are used by the bacteriophage to recognize and attach to specific receptors on the surface of a target bacterial cell."
+        title={t('vrVirtualLab.viewer.virus.label3Title', 'Tail Fibers')} 
+        description={t('vrVirtualLab.viewer.virus.label3Desc', "These 'legs' are used by the bacteriophage to recognize and attach to specific receptors on the surface of a target bacterial cell.")}
         colorClass="text-indigo-400"
       />
     </group>
@@ -179,6 +182,7 @@ const VirusModel = () => {
 
 // 3. Atomic Structure Model
 const AtomicModel = () => {
+  const { t } = useTranslation();
   const groupRef = useRef();
   const electron1 = useRef();
   const electron2 = useRef();
@@ -223,14 +227,14 @@ const AtomicModel = () => {
 
       <InteractiveLabel 
         position={[0, 2.5, 0]} 
-        title="Nucleus (Protons & Neutrons)" 
-        description="The dense center of the atom containing positively charged protons and neutral neutrons. It contains nearly all the mass of the atom."
+        title={t('vrVirtualLab.viewer.atom.label1Title', 'Nucleus (Protons & Neutrons)')} 
+        description={t('vrVirtualLab.viewer.atom.label1Desc', 'The dense center of the atom containing positively charged protons and neutral neutrons. It contains nearly all the mass of the atom.')}
         colorClass="text-red-500"
       />
       <InteractiveLabel 
         position={[7, 3, 0]} 
-        title="Electron Orbit (Bohr Model)" 
-        description="3 negatively charged electrons revolve around the nucleus in fixed orbits (Rutherford-Bohr Model of a Lithium atom)."
+        title={t('vrVirtualLab.viewer.atom.label2Title', 'Electron Orbit (Bohr Model)')} 
+        description={t('vrVirtualLab.viewer.atom.label2Desc', '3 negatively charged electrons revolve around the nucleus in fixed orbits (Rutherford-Bohr Model of a Lithium atom).')}
         colorClass="text-green-400"
       />
     </group>
@@ -238,22 +242,24 @@ const AtomicModel = () => {
 };
 
 const Generic3DViewer = ({ activeModel = 'dna' }) => {
+  const { t } = useTranslation();
+
   const getHeaderInfo = () => {
     switch(activeModel) {
       case 'virus': return { 
-        title: 'Microbiology: Bacteriophage', 
-        sub: 'Virus Structure • Icosahedral Capsid',
-        vrText: 'Viruses are too tiny to see with our eyes. VR makes them huge so you can spin them around, see their robot-like legs, and easily understand how they are built!'
+        title: t('vrVirtualLab.viewer.virus.headerTitle', 'Microbiology: Bacteriophage'), 
+        sub: t('vrVirtualLab.viewer.virus.headerSub', 'Virus Structure • Icosahedral Capsid'),
+        vrText: t('vrVirtualLab.viewer.virus.vrText', 'Viruses are too tiny to see with our eyes. VR makes them huge so you can spin them around, see their robot-like legs, and easily understand how they are built!')
       };
       case 'atom': return { 
-        title: 'Physics: Atomic Structure', 
-        sub: 'Rutherford-Bohr Model • Lithium (Li) Atom',
-        vrText: 'Atoms build everything in the world, but they are invisible! This 3D model depicts the Rutherford-Bohr Model of a Lithium atom (Li), showing 3 electrons orbiting the dense central nucleus (protons & neutrons).'
+        title: t('vrVirtualLab.viewer.atom.headerTitle', 'Physics: Atomic Structure'), 
+        sub: t('vrVirtualLab.viewer.atom.headerSub', 'Rutherford-Bohr Model • Lithium (Li) Atom'),
+        vrText: t('vrVirtualLab.viewer.atom.vrText', 'Atoms build everything in the world, but they are invisible! This 3D model depicts the Rutherford-Bohr Model of a Lithium atom (Li), showing 3 electrons orbiting the dense central nucleus (protons & neutrons).')
       };
       default: return { 
-        title: 'Genetics: 3D DNA Strand', 
-        sub: 'Molecular Biology • Interactive Double Helix',
-        vrText: 'DNA is a complex twisted ladder inside our bodies. By exploring it in 3D VR, you can rotate it and see exactly how the colorful puzzle pieces (bases) connect!'
+        title: t('vrVirtualLab.viewer.dna.headerTitle', 'Genetics: 3D DNA Strand'), 
+        sub: t('vrVirtualLab.viewer.dna.headerSub', 'Molecular Biology • Interactive Double Helix'),
+        vrText: t('vrVirtualLab.viewer.dna.vrText', 'DNA is a complex twisted ladder inside our bodies. By exploring it in 3D VR, you can rotate it and see exactly how the colorful puzzle pieces (bases) connect!')
       };
     }
   };
@@ -272,7 +278,7 @@ const Generic3DViewer = ({ activeModel = 'dna' }) => {
         </p>
         <div className="mt-4 bg-blue-900/40 border border-blue-500/30 p-3 rounded-xl max-w-sm backdrop-blur-sm shadow-xl">
           <p className="text-blue-100 text-[13px] leading-relaxed font-medium">
-            <span className="font-bold text-blue-300">Why in VR? </span> {info.vrText}
+            <span className="font-bold text-blue-300">{t('vrVirtualLab.whyInVR', 'Why in VR?')} </span> {info.vrText}
           </p>
         </div>
       </div>
@@ -302,7 +308,7 @@ const Generic3DViewer = ({ activeModel = 'dna' }) => {
       </Canvas>
 
       <div className="absolute bottom-4 text-blue-200/50 text-[10px] tracking-widest uppercase font-bold pointer-events-none w-full text-center">
-         Drag to rotate 3D structure • Click labels to read details
+         {t('vrVirtualLab.viewer.dragPrompt', 'Drag to rotate 3D structure • Click labels to read details')}
       </div>
     </div>
   );

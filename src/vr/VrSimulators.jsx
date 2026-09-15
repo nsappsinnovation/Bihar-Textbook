@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { 
   Rocket, Eye, Shield, Maximize2, Minimize2, 
   Info, CheckCircle2, RotateCcw, Orbit, Globe,
@@ -6,6 +7,7 @@ import {
 } from 'lucide-react';
 
 const VrSimulators = () => {
+  const { t } = useTranslation();
   const [activeSim, setActiveSim] = useState('space'); // 'space' | 'ocean'
   const [isVrMode, setIsVrMode] = useState(false); // Stereoscopic SBS Mode
   const [isFullscreen, setIsFullscreen] = useState(false);
@@ -52,13 +54,13 @@ const VrSimulators = () => {
         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
           <div>
             <span className="px-3 py-1 bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold rounded-full tracking-wider uppercase">
-              360° Immersive Labs
+              {t('vrSimulators.badge')}
             </span>
             <h2 className="text-xl md:text-2xl font-extrabold text-slate-800 mt-2 tracking-tight">
-              Interactive VR Simulation Hub
+              {t('vrSimulators.heading')}
             </h2>
             <p className="text-slate-500 text-xs md:text-sm mt-1">
-              Drag to look around in 360°. Toggle VR mode to view through Cardboard/VR headsets.
+              {t('vrSimulators.description')}
             </p>
           </div>
 
@@ -72,13 +74,13 @@ const VrSimulators = () => {
                   : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
               }`}
             >
-              <Eye size={14} /> {isVrMode ? 'VR Mode Active' : 'Enable SBS VR Mode'}
+              <Eye size={14} /> {isVrMode ? t('vrSimulators.vrModeActive') : t('vrSimulators.enableVrMode')}
             </button>
             
             <button 
               onClick={toggleFullscreen}
               className="p-2 bg-slate-50 hover:bg-slate-100 text-slate-600 border border-slate-200 rounded-full transition-colors active:scale-95"
-              title="Toggle Fullscreen"
+              title={t('vrSimulators.toggleFullscreen')}
             >
               {isFullscreen ? <Minimize2 size={14} /> : <Maximize2 size={14} />}
             </button>
@@ -97,7 +99,7 @@ const VrSimulators = () => {
                 : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100 hover:text-slate-800'
             }`}
           >
-            <Rocket size={14} /> Space 360°
+            <Rocket size={14} /> {t('vrSimulators.spaceTab')}
           </button>
 
           <button 
@@ -108,7 +110,7 @@ const VrSimulators = () => {
                 : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100 hover:text-slate-800'
             }`}
           >
-            <Shield size={14} /> Deep Ocean Trench VR
+            <Shield size={14} /> {t('vrSimulators.oceanTab')}
           </button>
         </div>
       )}
@@ -118,7 +120,7 @@ const VrSimulators = () => {
         <button 
           onClick={toggleFullscreen}
           className="absolute top-4 right-4 z-50 p-2.5 bg-black/40 hover:bg-black/80 text-white/70 hover:text-white rounded-full border border-white/20 backdrop-blur transition-all"
-          title="Exit Fullscreen"
+          title={t('vrSimulators.exitFullscreen')}
         >
           <Minimize2 size={16} />
         </button>
@@ -140,6 +142,7 @@ const VrSimulators = () => {
    ========================================================================= */
 const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
   const canvasRef = useRef(null);
+  const { t } = useTranslation();
   const [viewMode, setViewMode] = useState('system'); // 'system' | 'galaxy'
   const [activeObject, setActiveObject] = useState(null);
   const [zoom, setZoom] = useState(1.0); // Interactive zoom level
@@ -150,53 +153,53 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
 
   const planets = [
     { 
-      name: 'Mercury', 
+      name: t('vrSimulators.planets.mercury.name', 'Mercury'), 
       color: '#9ca3af', 
       dist: 70, 
       size: 3.5, 
       speed: 0.035, 
-      desc: 'Smallest and closest planet to the Sun. It experiences extreme temperature swings from baking hot days to freezing cold nights.',
+      desc: t('vrSimulators.planets.mercury.desc'),
       moons: []
     },
     { 
-      name: 'Venus', 
+      name: t('vrSimulators.planets.venus.name', 'Venus'), 
       color: '#f59e0b', 
       dist: 100, 
       size: 6.5, 
       speed: 0.026, 
-      desc: 'Hottest planet in our solar system with a thick toxic atmosphere of greenhouse gases.',
+      desc: t('vrSimulators.planets.venus.desc'),
       moons: []
     },
     { 
-      name: 'Earth', 
+      name: t('vrSimulators.planets.earth.name', 'Earth'), 
       color: '#3b82f6', 
       dist: 135, 
       size: 7, 
       speed: 0.018, 
-      desc: 'Our home planet and only known harbor of life, covered in liquid water oceans.',
+      desc: t('vrSimulators.planets.earth.desc'),
       moons: [
         { name: 'Luna', dist: 13, size: 1.5, speed: 0.065, color: '#d1d5db' }
       ]
     },
     { 
-      name: 'Mars', 
+      name: t('vrSimulators.planets.mars.name', 'Mars'), 
       color: '#ef4444', 
       dist: 170, 
       size: 5.5, 
       speed: 0.013, 
-      desc: 'The rusty-red desert planet hosting ancient dry river beds and massive volcanoes.',
+      desc: t('vrSimulators.planets.mars.desc'),
       moons: [
         { name: 'Phobos', dist: 9, size: 0.9, speed: 0.08, color: '#a1a1aa' },
         { name: 'Deimos', dist: 13, size: 0.7, speed: 0.055, color: '#71717a' }
       ]
     },
     { 
-      name: 'Jupiter', 
+      name: t('vrSimulators.planets.jupiter.name', 'Jupiter'), 
       color: '#ea580c', 
       dist: 215, 
       size: 14, 
       speed: 0.007, 
-      desc: 'Largest gas giant with active stormy belts and the famous Great Red Spot storm.',
+      desc: t('vrSimulators.planets.jupiter.desc'),
       moons: [
         { name: 'Io', dist: 22, size: 1.4, speed: 0.045, color: '#facc15' },
         { name: 'Europa', dist: 26, size: 1.2, speed: 0.035, color: '#93c5fd' },
@@ -205,12 +208,12 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
       ]
     },
     { 
-      name: 'Saturn', 
+      name: t('vrSimulators.planets.saturn.name', 'Saturn'), 
       color: '#eab308', 
       dist: 265, 
       size: 11.5, 
       speed: 0.005, 
-      desc: 'Famous for its spectacular ice and rock ring system, Saturn has over 140 moons.', 
+      desc: t('vrSimulators.planets.saturn.desc'), 
       rings: true,
       moons: [
         { name: 'Titan', dist: 24, size: 2.1, speed: 0.03, color: '#fbbf24' },
@@ -218,12 +221,12 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
       ]
     },
     { 
-      name: 'Uranus', 
+      name: t('vrSimulators.planets.uranus.name', 'Uranus'), 
       color: '#06b6d4', 
       dist: 315, 
       size: 8.5, 
       speed: 0.003, 
-      desc: 'An ice giant tilted completely on its side with faint vertical rings.', 
+      desc: t('vrSimulators.planets.uranus.desc'), 
       verticalRings: true,
       moons: [
         { name: 'Titania', dist: 18, size: 1.1, speed: 0.035, color: '#cbd5e1' },
@@ -231,12 +234,12 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
       ]
     },
     { 
-      name: 'Neptune', 
+      name: t('vrSimulators.planets.neptune.name', 'Neptune'), 
       color: '#2563eb', 
       dist: 360, 
       size: 8.5, 
       speed: 0.0025, 
-      desc: 'Deep blue gas giant experiencing supersonic storm winds and frozen ice chemistry.',
+      desc: t('vrSimulators.planets.neptune.desc'),
       moons: [
         { name: 'Triton', dist: 18, size: 1.3, speed: -0.03, color: '#93c5fd' }
       ]
@@ -245,30 +248,30 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
 
   const galaxyHotspots = [
     { 
-      name: 'Sagittarius A*', 
+      name: t('vrSimulators.galaxy.sagittariusA.name', 'Sagittarius A*'), 
       x: 0, 
       y: 0, 
       z: 0, 
       color: '#a855f7', 
-      desc: 'The supermassive black hole at the center of the Milky Way, holding 4.1 million solar masses.',
+      desc: t('vrSimulators.galaxy.sagittariusA.desc'),
       stats: { dist: '26,000 ly', mass: '4.1M Suns', type: 'Supermassive BH' }
     },
     { 
-      name: 'Sun / Orion Arm', 
+      name: t('vrSimulators.galaxy.sunOrionArm.name', 'Sun / Orion Arm'), 
       x: 120, 
       y: 0, 
       z: 120, 
       color: '#f59e0b', 
-      desc: 'Our solar system resides inside the Orion Spur, approximately 26,000 light years from the core.',
+      desc: t('vrSimulators.galaxy.sunOrionArm.desc'),
       stats: { dist: '0 ly', mass: '1.0 Sun', type: 'Yellow Dwarf System' }
     },
     { 
-      name: 'Pillars of Creation', 
+      name: t('vrSimulators.galaxy.pillarsOfCreation.name', 'Pillars of Creation'), 
       x: -80, 
       y: 20, 
       z: -100, 
       color: '#10b981', 
-      desc: 'A majestic star-forming region of gas columns inside the Eagle Nebula.',
+      desc: t('vrSimulators.galaxy.pillarsOfCreation.desc'),
       stats: { dist: '6,500 ly', mass: 'N/A', type: 'Emission Nebula' }
     }
   ];
@@ -940,14 +943,14 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
             <button 
               onClick={() => setZoom(z => Math.min(z * 1.5, 5.0))} 
               className="p-2 bg-slate-800/80 hover:bg-slate-700 text-white rounded-full border border-white/20 backdrop-blur transition-all shadow-lg active:scale-95"
-              title="Zoom In"
+              title={t('vrSimulators.zoomIn')}
             >
               <ZoomIn size={16} />
             </button>
             <button 
               onClick={() => setZoom(z => Math.max(z / 1.5, 0.1))} 
               className="p-2 bg-slate-800/80 hover:bg-slate-700 text-white rounded-full border border-white/20 backdrop-blur transition-all shadow-lg active:scale-95"
-              title="Zoom Out"
+              title={t('vrSimulators.zoomOut')}
             >
               <ZoomOut size={16} />
             </button>
@@ -969,20 +972,20 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
           <p className="text-[10px] text-slate-600 leading-relaxed">{activeObject.desc}</p>
           {viewMode === 'system' && activeObject.moons && activeObject.moons.length > 0 && (
             <div className="mt-1.5 text-[8px] text-slate-500 bg-slate-50 p-1.5 rounded border border-slate-100">
-              <strong className="text-slate-700">Moons ({activeObject.moons.length}):</strong>{' '}
+              <strong className="text-slate-700">{t('vrSimulators.moonsLabel')} ({activeObject.moons.length}):</strong>{' '}
               {activeObject.moons.map(m => m.name).join(', ')}
             </div>
           )}
           {activeObject.stats && (
             <div className="mt-1.5 grid grid-cols-2 gap-1 bg-slate-50 p-1.5 rounded border border-slate-100 text-[8px] text-slate-500 font-mono">
-              <div><strong className="text-slate-700">Distance:</strong> {activeObject.stats.dist}</div>
-              <div><strong className="text-slate-700">Mass:</strong> {activeObject.stats.mass}</div>
-              <div className="col-span-2"><strong className="text-slate-700">Type:</strong> {activeObject.stats.type}</div>
+              <div><strong className="text-slate-700">{t('vrSimulators.distanceLabel')}:</strong> {activeObject.stats.dist}</div>
+              <div><strong className="text-slate-700">{t('vrSimulators.massLabel')}:</strong> {activeObject.stats.mass}</div>
+              <div className="col-span-2"><strong className="text-slate-700">{t('vrSimulators.typeLabel')}:</strong> {activeObject.stats.type}</div>
             </div>
           )}
           <div className="mt-2 pt-1.5 border-t border-slate-100 flex justify-between text-[8px] text-slate-400 font-mono">
-            <span>Type: {viewMode === 'system' ? 'Planet' : 'Galaxy'}</span>
-            <span>Active</span>
+            <span>{t('vrSimulators.typeLabel')}: {viewMode === 'system' ? t('vrSimulators.planetType') : t('vrSimulators.galaxyType')}</span>
+            <span>{t('vrSimulators.active')}</span>
           </div>
         </div>
       )}
@@ -995,6 +998,7 @@ const SpaceSimulator = ({ isVrMode, isFullscreen }) => {
    ========================================================================= */
 const OceanSimulator = ({ isVrMode, isFullscreen }) => {
   const canvasRef = useRef(null);
+  const { t } = useTranslation();
   const isDragging = useRef(false);
   const prevMousePos = useRef({ x: 0, y: 0 });
   const cameraAngle = useRef({ yaw: 0, pitch: 0 });
@@ -1046,10 +1050,10 @@ const OceanSimulator = ({ isVrMode, isFullscreen }) => {
   }
 
   const creatures = [
-    { yaw: -0.3, pitch: 0.1, name: 'Bioluminescent Jellyfish', desc: 'Glowing jellyfish that utilize green & blue proteins to light up in pitch black water depths exceeding 3,000 meters.', size: 28 },
-    { yaw: 0.2, pitch: -0.15, name: 'Anglerfish', desc: 'A predator of the deep trench with a fleshy glowing bulb hanging in front of its mouth to attract prey.', size: 24 },
-    { yaw: -0.85, pitch: -0.05, name: 'Giant Squid', desc: 'A mysterious and massive cephalopod that lives at extreme deep ocean pressures. Highly elusive.', size: 45 },
-    { yaw: 0.6, pitch: 0.2, name: 'Comb Jelly', desc: 'Creates stunning rainbow-like shimmering lights along its cilia rows, reflecting light in procedural visual waves.', size: 20 }
+    { key: 'jellyfish', yaw: -0.3, pitch: 0.1, name: t('vrSimulators.creatures.jellyfish.name'), desc: t('vrSimulators.creatures.jellyfish.desc'), size: 28 },
+    { key: 'anglerfish', yaw: 0.2, pitch: -0.15, name: t('vrSimulators.creatures.anglerfish.name'), desc: t('vrSimulators.creatures.anglerfish.desc'), size: 24 },
+    { key: 'giantSquid', yaw: -0.85, pitch: -0.05, name: t('vrSimulators.creatures.giantSquid.name'), desc: t('vrSimulators.creatures.giantSquid.desc'), size: 45 },
+    { key: 'combJelly', yaw: 0.6, pitch: 0.2, name: t('vrSimulators.creatures.combJelly.name'), desc: t('vrSimulators.creatures.combJelly.desc'), size: 20 }
   ];
 
   const bubblesRef = useRef([]);
@@ -1754,7 +1758,7 @@ const OceanSimulator = ({ isVrMode, isFullscreen }) => {
           ctx.lineWidth = 2;
           ctx.fillStyle = 'rgba(14, 165, 233, 0.15)';
 
-          if (creature.name === 'Bioluminescent Jellyfish') {
+          if (creature.key === 'jellyfish') {
             // Semi-transparent glowing bell
             ctx.fillStyle = 'rgba(56, 189, 248, 0.35)';
             ctx.beginPath();
@@ -1783,7 +1787,7 @@ const OceanSimulator = ({ isVrMode, isFullscreen }) => {
             }
             ctx.stroke();
           } 
-          else if (creature.name === 'Anglerfish') {
+          else if (creature.key === 'anglerfish') {
             // Shaded body
             const bodyGrad = ctx.createRadialGradient(pt.x, pt.y, 0, pt.x, pt.y, creature.size);
             bodyGrad.addColorStop(0, '#1e293b');
@@ -1831,7 +1835,7 @@ const OceanSimulator = ({ isVrMode, isFullscreen }) => {
             ctx.arc(lX, lY, lureGlow * 3.5, 0, Math.PI * 2);
             ctx.fill();
           } 
-          else if (creature.name === 'Giant Squid') {
+          else if (creature.key === 'giantSquid') {
             // Dark reddish squid
             const squidGrad = ctx.createLinearGradient(pt.x - creature.size, pt.y, pt.x + creature.size, pt.y);
             squidGrad.addColorStop(0, '#991b1b');
@@ -1890,7 +1894,7 @@ const OceanSimulator = ({ isVrMode, isFullscreen }) => {
             
             ctx.fillStyle = '#10b981';
             ctx.font = 'bold 8px monospace';
-            ctx.fillText("READY TO SCAN", pt.x - 30, pt.y - creature.size - 14);
+            ctx.fillText(t('vrSimulators.readyToScan'), pt.x - 30, pt.y - creature.size - 14);
           }
           ctx.restore();
         });
@@ -2054,15 +2058,15 @@ const OceanSimulator = ({ isVrMode, isFullscreen }) => {
         const dist = Math.hypot(clickX - ptX, clickY - ptY);
         if (dist < fish.size * 1.5) {
           clickedCreature = {
-            name: fish.type === 'clownfish' ? 'Orange Clownfish' : 
-                  fish.type === 'blueTang' ? 'Royal Blue Tang' : 
-                  fish.type === 'yellowTang' ? 'Yellow Tang' : 
-                  fish.type === 'turtle' ? 'Green Sea Turtle' : 'Great White Shark',
-            desc: fish.type === 'clownfish' ? 'Clownfish live in symbiosis with stinging sea anemones, which protect them from predators while the clownfish cleans away parasites.' :
-                  fish.type === 'blueTang' ? 'Recognizable by their royal blue body and yellow tail. They play a vital role in coral reefs by grazing on algae to prevent it from suffocating corals.' :
-                  fish.type === 'yellowTang' ? 'A vibrant yellow marine fish that belongs to the surgeonfish family. They are active grazers found in shallow reefs.' :
-                  fish.type === 'turtle' ? 'A majestic marine reptile that can travel thousands of miles across oceans. They are currently endangered due to human activities.' : 
-                  'The ocean’s apex predator, capable of detecting a single drop of blood in 25 gallons of water and swimming at speeds of up to 35 mph.',
+            name: fish.type === 'clownfish' ? t('vrSimulators.fish.clownfish.name') : 
+                  fish.type === 'blueTang' ? t('vrSimulators.fish.blueTang.name') : 
+                  fish.type === 'yellowTang' ? t('vrSimulators.fish.yellowTang.name') : 
+                  fish.type === 'turtle' ? t('vrSimulators.fish.turtle.name') : t('vrSimulators.fish.shark.name'),
+            desc: fish.type === 'clownfish' ? t('vrSimulators.fish.clownfish.desc') :
+                  fish.type === 'blueTang' ? t('vrSimulators.fish.blueTang.desc') :
+                  fish.type === 'yellowTang' ? t('vrSimulators.fish.yellowTang.desc') :
+                  fish.type === 'turtle' ? t('vrSimulators.fish.turtle.desc') : 
+                  t('vrSimulators.fish.shark.desc'),
             size: fish.size,
             isFish: true
           };
@@ -2122,15 +2126,15 @@ const OceanSimulator = ({ isVrMode, isFullscreen }) => {
           <div className="flex justify-between items-center mb-1.5">
             <h5 className="text-emerald-600 text-[10px] font-mono font-bold flex items-center gap-1 truncate">
               <CheckCircle2 size={10} className="text-emerald-500 shrink-0" />
-              SCAN COMPLETED
+              {t('vrSimulators.scanCompleted')}
             </h5>
             <button onClick={() => setActiveCreature(null)} className="text-slate-400 hover:text-slate-600 text-xs font-bold shrink-0 ml-1">&times;</button>
           </div>
           <h4 className="text-slate-900 text-xs font-extrabold mb-1 tracking-wide truncate">{activeCreature.name}</h4>
           <p className="text-[10px] text-slate-600 leading-relaxed font-sans">{activeCreature.desc}</p>
           <div className="mt-2 pt-1.5 border-t border-emerald-50 flex justify-between items-center text-[8px] text-slate-400 font-mono">
-            <span>Pressure: ~350 atm</span>
-            <span className="px-1.5 py-0.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 rounded text-[8px]">Class: Abyssal</span>
+            <span>{t('vrSimulators.pressure')}: ~350 atm</span>
+            <span className="px-1.5 py-0.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 rounded text-[8px]">{t('vrSimulators.classLabel')}: {t('vrSimulators.abyssal')}</span>
           </div>
         </div>
       )}

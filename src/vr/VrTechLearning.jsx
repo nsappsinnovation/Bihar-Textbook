@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft, ArrowRight, BookOpen, Shield, Trophy,
@@ -20,24 +21,24 @@ const lessons = [
     badge: "VR Explorer",
     topic: "3D Worlds & Headsets",
     summary: "Discover how VR headsets surround your eyes with 360-degree digital worlds!",
-    image: "/images/vr/vr_intro.webp",
+    image: "/images/vr/vr_intro.png",
     learnSections: [
       {
         title: "From Flat Screens to 360 Headsets",
         desc: "When you watch TV or play on a computer, you look at a flat screen in front of you. A VR headset is worn over your eyes so the screen surrounds your entire view. Wherever you turn your head—up, down, left, or right—you see a full 360-degree digital world!",
-        image: "/images/vr/magic_goggles.webp",
+        image: "/images/vr/magic_goggles.png",
         funFact: "The very first virtual reality machine was built in 1962! Called the 'Sensorama', it let viewers ride a virtual motorcycle with 3D visuals, stereo sound, wind, and even flower scents!"
       },
       {
         title: "How Two Eyes See 3D Depth",
         desc: "Try closing one eye, then the other—notice how your left and right eyes see from slightly different angles? VR headsets use this same natural trick! Inside the headset, two separate images are shown (one for each eye). Your brain combines them to see realistic 3D depth and distance.",
-        image: "/images/vr/brain_trick.webp",
+        image: "/images/vr/brain_trick.png",
         funFact: "Because our two eyes are slightly apart, each sees a slightly different angle. VR headsets use this principle—called stereoscopy—to create true 3D depth inside flat displays!"
       },
       {
         title: "3D Sound That Moves With You",
         desc: "VR doesn't just trick your eyes; it uses 3D Spatial Audio for your ears! If a virtual rocket takes off to your right, the sound comes from the right earphone. When you turn your head toward the rocket, the sound moves right in front of you.",
-        image: "/images/vr/mars_whale.webp",
+        image: "/images/vr/mars_whale.png",
         funFact: "NASA astronauts train for real spacewalks inside VR headsets before ever leaving Earth, practicing how to use tools in zero gravity!"
       }
     ],
@@ -68,24 +69,24 @@ const lessons = [
     badge: "Sensor Detective",
     topic: "Lenses & Gyro Sensors",
     summary: "Learn how curved glass lenses keep screens clear and how smart sensors track your head.",
-    image: "/images/vr/vr_sensors_chip.webp",
+    image: "/images/vr/vr_sensors_chip.png",
     learnSections: [
       {
         title: "Why VR Headsets Need Lenses",
         desc: "If you hold a phone screen two inches from your nose, it looks blurry and hurts your eyes. VR headsets place special curved glass lenses between your eyes and the screen. These lenses bend light rays so your eyes can focus clearly without straining.",
-        image: "/images/vr/lenses.webp",
+        image: "/images/vr/lenses.png",
         funFact: "VR headset lenses use concentric Fresnel grooves to stay extremely thin and light while bending display light precisely to your eyes!"
       },
       {
         title: "Gyroscope Motion Sensors",
         desc: "How does the virtual world move instantly when you turn your head? Inside the headset is a tiny sensor called a Gyroscope. It measures your head turns more than 1,000 times every second so the camera moves exactly when you move!",
-        image: "/images/vr/gyro_sensor.webp",
+        image: "/images/vr/gyro_sensor.png",
         funFact: "A modern VR gyroscope measures head turns over 1,000 times per second—more than 10 times faster than the blink of a human eye!"
       },
       {
         title: "Fast Screen Refresh Rate",
         desc: "If a screen updates too slowly when you look around, it can make you feel dizzy. Good VR headsets refresh the picture 90 to 120 times every single second! This super-fast speed keeps motion smooth and natural.",
-        image: "/images/vr/low_latency.webp",
+        image: "/images/vr/low_latency.png",
         funFact: "Human eyes notice motion lag if it takes more than 20 milliseconds—modern VR screens refresh up to 120 times every second!"
       }
     ],
@@ -116,24 +117,24 @@ const lessons = [
     badge: "Tech Master",
     topic: "Hand Tracking & Vibration",
     summary: "Find out how wireless controllers track your hands and vibrate when you touch virtual objects!",
-    image: "/images/vr/vr_controllers.webp",
+    image: "/images/vr/vr_controllers.png",
     learnSections: [
       {
         title: "Tracking Your Hands in 3D Space",
         desc: "To grab objects in VR, you hold wireless hand controllers. Cameras on the headset track hidden infrared lights on the controllers. When you raise your real hand or wave, your virtual hand inside the headset moves the exact same way!",
-        image: "/images/vr/virtual_hands.webp",
+        image: "/images/vr/virtual_hands.png",
         funFact: "VR controllers have tiny hidden infrared LEDs that cameras track with sub-millimeter precision in 3D space!"
       },
       {
         title: "Buttons, Joysticks & Grab Triggers",
         desc: "VR controllers have joysticks for walking and trigger buttons under your fingers. When you squeeze the trigger button, your virtual hand closes to pick up lab beakers, throw a basketball, or use scientific tools.",
-        image: "/images/vr/controllers_buttons.webp",
+        image: "/images/vr/controllers_buttons.png",
         funFact: "Advanced VR gloves can simulate physical resistance so grabbing a virtual baseball or bow feels solid and real in your hand!"
       },
       {
         title: "Feeling Virtual Contact (Haptic Vibration)",
         desc: "Have you noticed how a phone vibrates when you get a notification? VR controllers use tiny vibration motors inside. When your virtual hand touches a table or catches a ball, the controller rumbles so you actually feel the contact!",
-        image: "/images/vr/haptics.webp",
+        image: "/images/vr/haptics.png",
         funFact: "Haptic feedback uses linear resonant actuators—the exact same ultra-precise vibration motors used in high-end smartphones!"
       }
     ],
@@ -164,24 +165,24 @@ const lessons = [
     badge: "Reality Explorer",
     topic: "VR, AR & MR",
     summary: "Understand the difference between full virtual worlds and digital holograms in your room!",
-    image: "/images/vr/vr_ar_mr.webp",
+    image: "/images/vr/vr_ar_mr.png",
     learnSections: [
       {
         title: "Virtual Reality (VR) - Full Digital World",
         desc: "In Virtual Reality (VR), your view of the real room is completely replaced by a computer-generated 3D world. You can visit outer space, dive deep into the ocean, or walk inside an atom simulation.",
-        image: "/images/vr/closed_eye.webp",
+        image: "/images/vr/closed_eye.png",
         funFact: "Surgeons practice complex brain and heart operations inside VR medical simulators before ever operating on a real patient!"
       },
       {
         title: "Augmented Reality (AR) - Digital Overlays",
         desc: "Augmented Reality (AR) lets you see your real physical room while adding digital information or pictures on top. For example, pointing a tablet camera at a plant to see floating labels of its leaves and roots.",
-        image: "/images/vr/augmented_overlay.webp",
+        image: "/images/vr/augmented_overlay.png",
         funFact: "Pilots have used head-up augmented reality displays projected onto jet cockpits since the late 1970s!"
       },
       {
         title: "Mixed Reality (MR) - Smart Holograms",
         desc: "Mixed Reality (MR) uses headset cameras to scan your actual furniture. Digital 3D objects can recognize your real table or walls—like a virtual science ball that bounces off your real study desk!",
-        image: "/images/vr/mixed_reality.webp",
+        image: "/images/vr/mixed_reality.png",
         funFact: "Mixed Reality headsets use depth sensors to scan your room and build an exact 3D wireframe mesh of your furniture in real time!"
       }
     ],
@@ -212,24 +213,24 @@ const lessons = [
     badge: "Safety Champion",
     topic: "Guardian & Eye Rules",
     summary: "Learn how to set up a safe play boundary and care for your eyes during VR learning.",
-    image: "/images/vr/vr_safety_zone.webp",
+    image: "/images/vr/vr_safety_zone.png",
     learnSections: [
       {
         title: "The Guardian Safety Boundary",
         desc: "Because you can't see your real room inside VR, you draw a digital safety circle on your floor before starting. If you walk too close to your real wall or desk, a glowing grid lights up to warn you so you don't bump into anything!",
-        image: "/images/vr/guardian_boundary.webp",
+        image: "/images/vr/guardian_boundary.png",
         funFact: "The Guardian boundary system uses real-time computer vision to draw a safety grid in mid-air the moment you step within 6 inches of a wall!"
       },
       {
         title: "Matching Lens Width to Your Eyes (IPD)",
         desc: "Everyone's eyes are spaced slightly differently. Headsets have a slider wheel to adjust the distance between the two lenses. Aligning the lenses with the center of your pupils keeps the picture sharp and comfortable.",
-        image: "/images/vr/clear_floor.webp",
+        image: "/images/vr/clear_floor.png",
         funFact: "Professional VR labs measure every student's IPD in millimeters to customize optical lens spacing before simulations!"
       },
       {
         title: "The 20-20 Rest Rule for Healthy Eyes",
         desc: "Looking at any screen for too long can tire your eyes. Follow the 20-20 rule: every 20 minutes, take off your headset and look at something 20 feet away for 20 seconds to relax your eye muscles!",
-        image: "/images/vr/eye_break.webp",
+        image: "/images/vr/eye_break.png",
         funFact: "Looking at an object 20 feet away completely relaxes the internal ciliary muscle inside your eye, instantly easing eye fatigue!"
       }
     ],
@@ -341,6 +342,7 @@ const useSpeechSynthesis = () => {
 
 // Lesson 1 Mini-Game: Wear the Headset
 const HeadsetGame = ({ onComplete }) => {
+  const { t } = useTranslation();
   const [step, setStep] = useState(1);
   const [ipd, setIpd] = useState(50);
   const [screenFlashed, setScreenFlashed] = useState(false);
@@ -380,25 +382,25 @@ const HeadsetGame = ({ onComplete }) => {
 
       <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
         <h4 className="font-extrabold text-indigo-700 flex items-center gap-2 text-base sm:text-lg">
-          <Gamepad2 size={22} className="text-indigo-600" /> Mini-Game: Wear and Setup Headset
+          <Gamepad2 size={22} className="text-indigo-600" /> {t('vrTechLearning.games.headset.title')}
         </h4>
         <span className="text-xs font-bold text-slate-600 bg-slate-100 border border-slate-200 px-3 py-1 rounded-full">
-          Step {step} of 3
+          {t('vrTechLearning.step')} {step} {t('vrTechLearning.of')} 3
         </span>
       </div>
 
       {step === 1 && (
         <div className="flex-grow flex flex-col justify-between space-y-6">
           <div className="text-center space-y-2">
-            <h5 className="text-lg font-bold text-[#1A1C2E]">Step 1: Pick Up The VR Headset</h5>
+            <h5 className="text-lg font-bold text-[#1A1C2E]">{t('vrTechLearning.games.headset.step1Title')}</h5>
             <p className="text-sm text-slate-600 max-w-md mx-auto">
-              Click the button below to put on the VR Headset sitting on the table and initialize the virtual world.
+              {t('vrTechLearning.games.headset.step1Desc')}
             </p>
           </div>
 
           <div className="w-full h-56 sm:h-64 rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 flex items-center justify-center relative group">
-            <img loading="lazy" decoding="async"
-              src="/images/vr/vr_headset_table.webp"
+            <img
+              src="/images/vr/vr_headset_table.png"
               alt="VR Headset on table"
               className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
             />
@@ -410,7 +412,7 @@ const HeadsetGame = ({ onComplete }) => {
             onClick={handlePutOn}
             className="w-full py-3.5 bg-[#0BB562] hover:bg-[#099b53] text-white rounded-xl text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
           >
-            Put On Headset <ArrowRight size={18} />
+            {t('vrTechLearning.games.headset.putOnHeadset')} <ArrowRight size={18} />
           </motion.button>
         </div>
       )}
@@ -418,15 +420,15 @@ const HeadsetGame = ({ onComplete }) => {
       {step === 2 && (
         <div className="flex-grow flex flex-col justify-between space-y-6">
           <div className="text-center space-y-2">
-            <h5 className="text-lg font-bold text-[#1A1C2E]">Step 2: Calibrate Lens Focus (IPD Slider)</h5>
+            <h5 className="text-lg font-bold text-[#1A1C2E]">{t('vrTechLearning.games.headset.step2Title')}</h5>
             <p className="text-sm text-slate-600 max-w-md mx-auto">
-              The display is blurry. Adjust the slider until the picture snaps into focus (Target: <span className="text-indigo-600 font-bold">65mm</span>).
+              {t('vrTechLearning.games.headset.step2Desc')} (<span className="text-indigo-600 font-bold">65mm</span>).
             </p>
           </div>
 
           <div className="w-full h-56 sm:h-64 rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 flex items-center justify-center relative">
-            <img loading="lazy" decoding="async"
-              src="/images/vr/v3.webp"
+            <img
+              src="/images/vr/v3.png"
               alt="Blur Space Portal"
               className="w-full h-full object-cover transition-all duration-100"
               style={{ filter: `blur(${blurAmount}px)` }}
@@ -434,13 +436,13 @@ const HeadsetGame = ({ onComplete }) => {
             {!isFocused ? (
               <div className="absolute inset-0 bg-white/70 backdrop-blur-[1px] flex items-center justify-center pointer-events-none">
                 <span className="bg-rose-600 text-white text-xs font-bold uppercase tracking-wider px-4 py-2 rounded-full shadow-sm">
-                  Lenses Misaligned ({ipd}mm)
+                  {t('vrTechLearning.games.headset.lensesMisaligned')} ({ipd}mm)
                 </span>
               </div>
             ) : (
               <div className="absolute inset-0 bg-emerald-500/15 flex items-center justify-center pointer-events-none">
                 <span className="bg-[#0BB562] text-white text-sm font-bold uppercase tracking-wider px-5 py-2 rounded-full shadow-sm">
-                  Focus Calibrated ({ipd}mm)
+                  {t('vrTechLearning.games.headset.focusCalibrated')} ({ipd}mm)
                 </span>
               </div>
             )}
@@ -448,7 +450,7 @@ const HeadsetGame = ({ onComplete }) => {
 
           <div className="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
             <div className="flex justify-between text-xs font-bold text-slate-700 uppercase">
-              <span>Lens Distance (IPD)</span>
+              <span>{t('vrTechLearning.games.headset.lensDistance')}</span>
               <span className={isFocused ? "text-[#0BB562] font-extrabold text-base" : "text-slate-600 font-bold text-sm"}>{ipd} mm</span>
             </div>
             <div className="flex items-center gap-4">
@@ -476,8 +478,8 @@ const HeadsetGame = ({ onComplete }) => {
               </button>
             </div>
             <div className="flex justify-between text-xs text-slate-500 font-medium">
-              <span>50mm (Narrow)</span>
-              <span>80mm (Wide)</span>
+              <span>50mm ({t('vrTechLearning.games.headset.narrow')})</span>
+              <span>80mm ({t('vrTechLearning.games.headset.wide')})</span>
             </div>
           </div>
 
@@ -492,7 +494,7 @@ const HeadsetGame = ({ onComplete }) => {
                 : 'bg-slate-200 text-slate-400 cursor-not-allowed'
             }`}
           >
-            Lock Focus and Continue <ArrowRight size={18} />
+            {t('vrTechLearning.games.headset.lockFocus')} <ArrowRight size={18} />
           </motion.button>
         </div>
       )}
@@ -501,21 +503,21 @@ const HeadsetGame = ({ onComplete }) => {
         <div className="flex-grow flex flex-col justify-between space-y-6">
           <div className="text-center space-y-2">
             <h5 className="text-lg font-bold text-[#0BB562] uppercase tracking-wider">
-              Step 3: Headset Initialized
+              {t('vrTechLearning.games.headset.step3Title')}
             </h5>
             <p className="text-sm text-slate-600 max-w-md mx-auto">
-              You calibrated the optics successfully. You are now inside the virtual learning environment.
+              {t('vrTechLearning.games.headset.step3Desc')}
             </p>
           </div>
 
           <div className="w-full h-56 sm:h-64 rounded-2xl overflow-hidden border-2 border-[#0BB562] bg-slate-50 flex items-center justify-center relative shadow-sm">
-            <img loading="lazy" decoding="async"
-              src="/images/vr/vr_headset_work.webp"
+            <img
+              src="/images/vr/vr_headset_work.png"
               alt="Space Portal Active"
               className="w-full h-full object-cover"
             />
             <div className="absolute bottom-4 left-4 bg-white border border-slate-200 px-3.5 py-1 rounded-full text-xs font-bold text-indigo-700 shadow-sm">
-              Lenses calibrated ({ipd}mm)
+              {t('vrTechLearning.games.headset.lensesCalibrated')} ({ipd}mm)
             </div>
           </div>
 
@@ -525,7 +527,7 @@ const HeadsetGame = ({ onComplete }) => {
             onClick={onComplete}
             className="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
           >
-            Complete Step and Continue <Check size={18} />
+            {t('vrTechLearning.games.completeStep')} <Check size={18} />
           </motion.button>
         </div>
       )}
@@ -535,6 +537,7 @@ const HeadsetGame = ({ onComplete }) => {
 
 // Lesson 2 Mini-Game: Gyro Head Tracking
 const GyroGame = ({ onComplete }) => {
+  const { t } = useTranslation();
   const [step, setStep] = useState(1);
   const [roll, setRoll] = useState(30);
   const [pitch, setPitch] = useState(-25);
@@ -574,25 +577,25 @@ const GyroGame = ({ onComplete }) => {
 
       <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
         <h4 className="font-extrabold text-indigo-700 flex items-center gap-2 text-base sm:text-lg">
-          <Eye size={22} className="text-indigo-600" /> Mini-Game: Gyroscope Calibration
+          <Eye size={22} className="text-indigo-600" /> {t('vrTechLearning.games.gyro.title')}
         </h4>
         <span className="text-xs font-bold text-slate-600 bg-slate-100 border border-slate-200 px-3 py-1 rounded-full">
-          Step {step} of 3
+          {t('vrTechLearning.step')} {step} {t('vrTechLearning.of')} 3
         </span>
       </div>
 
       {step === 1 && (
         <div className="flex-grow flex flex-col justify-between space-y-6">
           <div className="text-center space-y-2">
-            <h5 className="text-lg font-bold text-[#1A1C2E]">Step 1: Inspect the Sensors</h5>
+            <h5 className="text-lg font-bold text-[#1A1C2E]">{t('vrTechLearning.games.gyro.step1Title')}</h5>
             <p className="text-sm text-slate-600 max-w-md mx-auto">
-              The <span className="text-indigo-600 font-bold">Gyroscope</span> and <span className="text-indigo-600 font-bold">Accelerometer</span> chips track your rotational angles and movement speed.
+              {t('vrTechLearning.games.gyro.step1Desc1')} <span className="text-indigo-600 font-bold">{t('vrTechLearning.games.gyro.gyroscope')}</span> {t('vrTechLearning.games.gyro.step1Desc2')} <span className="text-indigo-600 font-bold">{t('vrTechLearning.games.gyro.accelerometer')}</span> {t('vrTechLearning.games.gyro.step1Desc3')}
             </p>
           </div>
 
           <div className="w-full h-56 sm:h-64 rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 flex items-center justify-center relative group">
-            <img loading="lazy" decoding="async"
-              src="/images/vr/vr_sensors_chip.webp"
+            <img
+              src="/images/vr/vr_sensors_chip.png"
               alt="VR Headset Sensors"
               className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500"
             />
@@ -604,7 +607,7 @@ const GyroGame = ({ onComplete }) => {
             onClick={handlePowerUp}
             className="w-full py-3.5 bg-[#0BB562] hover:bg-[#099b53] text-white rounded-xl text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
           >
-            Activate Sensor Pod <ArrowRight size={18} />
+            {t('vrTechLearning.games.gyro.activateSensorPod')} <ArrowRight size={18} />
           </motion.button>
         </div>
       )}
@@ -612,9 +615,9 @@ const GyroGame = ({ onComplete }) => {
       {step === 2 && (
         <div className="flex-grow flex flex-col justify-between space-y-6">
           <div className="text-center space-y-1">
-            <h5 className="text-lg font-bold text-[#1A1C2E]">Step 2: Center the Balance Indicator</h5>
+            <h5 className="text-lg font-bold text-[#1A1C2E]">{t('vrTechLearning.games.gyro.step2Title')}</h5>
             <p className="text-sm text-slate-600">
-              Use the buttons or sliders below to move the blue circle indicator into the center target ring.
+              {t('vrTechLearning.games.gyro.step2Desc')}
             </p>
           </div>
 
@@ -643,9 +646,9 @@ const GyroGame = ({ onComplete }) => {
 
             <div className="absolute bottom-4 left-4 bg-white border border-slate-200 px-3 py-1 rounded-full text-xs font-bold shadow-sm">
               Status: {isStable ? (
-                <span className="text-[#0BB562] font-bold">Stabilized ({roll} deg, {pitch} deg)</span>
+                <span className="text-[#0BB562] font-bold">{t('vrTechLearning.games.gyro.stabilized')} ({roll} deg, {pitch} deg)</span>
               ) : (
-                <span className="text-rose-600 font-bold">Tilted ({roll} deg, {pitch} deg)</span>
+                <span className="text-rose-600 font-bold">{t('vrTechLearning.games.gyro.tilted')} ({roll} deg, {pitch} deg)</span>
               )}
             </div>
           </div>
@@ -653,7 +656,7 @@ const GyroGame = ({ onComplete }) => {
           <div className="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
             <div className="space-y-1">
               <div className="flex justify-between text-xs font-bold text-slate-700 uppercase">
-                <span>Roll (Left / Right Tilt)</span>
+                <span>{t('vrTechLearning.games.gyro.roll')}</span>
                 <span className={Math.abs(roll) <= 5 ? "text-[#0BB562] font-bold" : "text-slate-600 font-bold"}>{roll} deg</span>
               </div>
               <div className="flex items-center gap-3">
@@ -684,7 +687,7 @@ const GyroGame = ({ onComplete }) => {
 
             <div className="space-y-1">
               <div className="flex justify-between text-xs font-bold text-slate-700 uppercase">
-                <span>Pitch (Forward / Backward Tilt)</span>
+                <span>{t('vrTechLearning.games.gyro.pitch')}</span>
                 <span className={Math.abs(pitch) <= 5 ? "text-[#0BB562] font-bold" : "text-slate-600 font-bold"}>{pitch} deg</span>
               </div>
               <div className="flex items-center gap-3">
@@ -722,11 +725,11 @@ const GyroGame = ({ onComplete }) => {
                 onClick={handleCalibrate}
                 className="w-full py-3.5 bg-[#0BB562] hover:bg-[#099b53] text-white rounded-xl text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
               >
-                Lock Calibration and Continue <ArrowRight size={18} />
+                {t('vrTechLearning.games.gyro.lockCalibration')} <ArrowRight size={18} />
               </motion.button>
             ) : (
               <div className="text-center py-3 bg-slate-100 border border-slate-200 rounded-xl text-xs text-slate-600 font-bold uppercase tracking-wider">
-                Align the blue indicator inside the center circle
+                {t('vrTechLearning.games.gyro.alignIndicator')}
               </div>
             )}
           </div>
@@ -737,21 +740,21 @@ const GyroGame = ({ onComplete }) => {
         <div className="flex-grow flex flex-col justify-between space-y-6">
           <div className="text-center space-y-2">
             <h5 className="text-lg font-bold text-[#0BB562] uppercase tracking-wider">
-              Step 3: Sensors Calibrated
+              {t('vrTechLearning.games.gyro.step3Title')}
             </h5>
             <p className="text-sm text-slate-600 max-w-md mx-auto">
-              The gyroscope and accelerometer are synchronized. Head movements will now register accurately without latency.
+              {t('vrTechLearning.games.gyro.step3Desc')}
             </p>
           </div>
 
           <div className="w-full h-56 sm:h-64 rounded-2xl overflow-hidden border-2 border-[#0BB562] bg-slate-50 flex items-center justify-center relative shadow-sm">
-            <img loading="lazy" decoding="async"
-              src="/images/vr/a1.webp"
+            <img
+              src="/images/vr/a1.png"
               alt="Astronaut Space Calibration Active"
               className="w-full h-full object-cover"
             />
             <div className="absolute bottom-4 left-4 bg-white border border-slate-200 px-3.5 py-1 rounded-full text-xs font-bold text-indigo-700 shadow-sm">
-              Calibration complete (0 deg Roll / 0 deg Pitch)
+              {t('vrTechLearning.games.gyro.calibrationComplete')}
             </div>
           </div>
 
@@ -761,7 +764,7 @@ const GyroGame = ({ onComplete }) => {
             onClick={onComplete}
             className="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
           >
-            Complete Step and Continue <Check size={18} />
+            {t('vrTechLearning.games.completeStep')} <Check size={18} />
           </motion.button>
         </div>
       )}
@@ -771,6 +774,7 @@ const GyroGame = ({ onComplete }) => {
 
 // Lesson 3 Mini-Game: Catch the falling stars
 const ControllersGame = ({ onComplete }) => {
+  const { t } = useTranslation();
   const [step, setStep] = useState(1);
   const [screenFlashed, setScreenFlashed] = useState(false);
   const [scanActive, setScanActive] = useState(false);
@@ -899,25 +903,25 @@ const ControllersGame = ({ onComplete }) => {
 
       <div className="flex items-center justify-between border-b border-slate-100 pb-4 mb-6">
         <h4 className="font-extrabold text-indigo-700 flex items-center gap-2 text-base sm:text-lg">
-          <Gamepad2 size={22} className="text-indigo-600" /> Mini-Game: Wireless Controller Setup
+          <Gamepad2 size={22} className="text-indigo-600" /> {t('vrTechLearning.games.controllers.title')}
         </h4>
         <span className="text-xs font-bold text-slate-600 bg-slate-100 border border-slate-200 px-3 py-1 rounded-full">
-          Step {step} of 3
+          {t('vrTechLearning.step')} {step} {t('vrTechLearning.of')} 3
         </span>
       </div>
 
       {step === 1 && (
         <div className="flex-grow flex flex-col justify-between space-y-6">
           <div className="text-center space-y-2">
-            <h5 className="text-lg font-bold text-[#1A1C2E]">Step 1: Scan Controller LED Ring</h5>
+            <h5 className="text-lg font-bold text-[#1A1C2E]">{t('vrTechLearning.games.controllers.step1Title')}</h5>
             <p className="text-sm text-slate-600 max-w-md mx-auto">
-              VR headsets use cameras to scan invisible <span className="text-indigo-600 font-bold">Infrared (IR) LED lights</span> on controllers. Click below to begin scanning.
+              {t('vrTechLearning.games.controllers.step1Desc1')} <span className="text-indigo-600 font-bold">{t('vrTechLearning.games.controllers.infraredLED')}</span> {t('vrTechLearning.games.controllers.step1Desc2')}
             </p>
           </div>
 
           <div className="w-full h-56 sm:h-64 rounded-2xl overflow-hidden border border-slate-200 bg-slate-50 flex items-center justify-center relative">
-            <img loading="lazy" decoding="async"
-              src="/images/vr/vr_controllers.webp"
+            <img
+              src="/images/vr/vr_controllers.png"
               alt="VR Controllers"
               className="w-full h-full object-cover"
             />
@@ -931,7 +935,7 @@ const ControllersGame = ({ onComplete }) => {
             {scanActive && (
               <div className="absolute inset-0 bg-white/80 backdrop-blur-[1px] flex flex-col items-center justify-center">
                 <span className="text-base font-bold text-indigo-700 tracking-wide">
-                  Scanning LEDs: {scanPercent}%
+                  {t('vrTechLearning.games.controllers.scanningLEDs')}: {scanPercent}%
                 </span>
               </div>
             )}
@@ -944,7 +948,7 @@ const ControllersGame = ({ onComplete }) => {
             disabled={scanActive}
             className="w-full py-3.5 bg-[#0BB562] hover:bg-[#099b53] disabled:bg-slate-200 disabled:text-slate-400 text-white rounded-xl text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
           >
-            {scanActive ? 'Scanning Controller LEDs...' : 'Start LED Detection Scan'} <ArrowRight size={18} />
+            {scanActive ? t('vrTechLearning.games.controllers.scanningControllerLEDs') : t('vrTechLearning.games.controllers.startLEDScan')} <ArrowRight size={18} />
           </motion.button>
         </div>
       )}
@@ -952,9 +956,9 @@ const ControllersGame = ({ onComplete }) => {
       {step === 2 && (
         <div className="flex-grow flex flex-col justify-between space-y-6">
           <div className="text-center space-y-1">
-            <h5 className="text-lg font-bold text-[#1A1C2E]">Step 2: Aim Laser Pointer and Fire Trigger</h5>
+            <h5 className="text-lg font-bold text-[#1A1C2E]">{t('vrTechLearning.games.controllers.step2Title')}</h5>
             <p className="text-sm text-slate-600">
-              Aim the virtual pointer at each target circle, then click <span className="text-[#0BB562] font-bold">Fire Trigger</span> to select it.
+              {t('vrTechLearning.games.controllers.step2Desc1')} <span className="text-[#0BB562] font-bold">{t('vrTechLearning.games.controllers.fireTriggerLabel')}</span> {t('vrTechLearning.games.controllers.step2Desc2')}
             </p>
           </div>
 
@@ -991,14 +995,14 @@ const ControllersGame = ({ onComplete }) => {
             </div>
 
             <div className="absolute bottom-3 right-3 bg-white border border-slate-200 px-3 py-1 rounded-full text-xs font-bold text-slate-700 shadow-sm">
-              Targets Selected: {targets.filter(t => t.popped).length} of 3
+              {t('vrTechLearning.games.controllers.targetsSelected')}: {targets.filter(t => t.popped).length} {t('vrTechLearning.of')} 3
             </div>
           </div>
 
           <div className="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
             <div className="space-y-1">
               <div className="flex justify-between text-xs font-bold text-slate-700 uppercase">
-                <span>Pointer Angle</span>
+                <span>{t('vrTechLearning.games.controllers.pointerAngle')}</span>
                 <span className="text-indigo-600 font-bold text-sm">{laserAngle} deg</span>
               </div>
               <div className="flex items-center gap-3">
@@ -1032,7 +1036,7 @@ const ControllersGame = ({ onComplete }) => {
               disabled={allTargetsPopped}
               className="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm uppercase tracking-wider rounded-lg transition-all shadow-sm active:scale-95 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
-              Fire Trigger
+              {t('vrTechLearning.games.controllers.fireTrigger')}
             </button>
           </div>
 
@@ -1057,17 +1061,17 @@ const ControllersGame = ({ onComplete }) => {
             <div className="flex-grow flex flex-col justify-between space-y-6">
               <div className="text-center space-y-2">
                 <h5 className="text-lg font-bold text-[#0BB562] uppercase tracking-wider">
-                  Star Catcher Mastered
+                  {t('vrTechLearning.games.controllers.starCatcherMastered')}
                 </h5>
                 <p className="text-sm text-slate-600 max-w-md mx-auto">
-                  You successfully navigated wireless controllers in spatial 3D space with accuracy.
+                  {t('vrTechLearning.games.controllers.step3CompleteDesc')}
                 </p>
               </div>
 
               <div className="w-full h-56 sm:h-64 rounded-2xl overflow-hidden border-2 border-[#0BB562] bg-slate-50 flex flex-col items-center justify-center relative py-6 space-y-4 shadow-sm">
                 <Trophy size={48} className="text-amber-500" />
                 <span className="text-xs font-bold uppercase text-slate-700 tracking-wider">
-                  Controllers Active and Synced
+                  {t('vrTechLearning.games.controllers.controllersActive')}
                 </span>
               </div>
 
@@ -1077,21 +1081,21 @@ const ControllersGame = ({ onComplete }) => {
                 onClick={onComplete}
                 className="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
               >
-                Complete Step and Continue <Check size={18} />
+                {t('vrTechLearning.games.completeStep')} <Check size={18} />
               </motion.button>
             </div>
           ) : (
             <div className="flex-grow flex flex-col justify-between space-y-6">
               <div className="text-center space-y-1">
-                <h5 className="text-lg font-bold text-[#1A1C2E]">Step 3: Catch 10 Star Items</h5>
+                <h5 className="text-lg font-bold text-[#1A1C2E]">{t('vrTechLearning.games.controllers.step3Title')}</h5>
                 <p className="text-sm text-slate-600">
-                  Catch <span className="text-indigo-600 font-bold">10 star items</span> by sliding the controller left and right.
+                  {t('vrTechLearning.games.controllers.catch10Stars1')} <span className="text-indigo-600 font-bold">{t('vrTechLearning.games.controllers.catch10Stars2')}</span> {t('vrTechLearning.games.controllers.catch10Stars3')}
                 </p>
               </div>
 
               <div className="w-full h-56 sm:h-60 bg-slate-50 rounded-2xl border border-slate-200 relative overflow-hidden shadow-inner">
                 <div className="absolute top-4 right-4 bg-white border border-slate-200 text-slate-700 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-sm">
-                  <Star size={14} className="text-amber-500 fill-amber-400" /> {score} of 10
+                  <Star size={14} className="text-amber-500 fill-amber-400" /> {score} {t('vrTechLearning.of')} 10
                 </div>
 
                 {stars.map(star => (
@@ -1119,7 +1123,7 @@ const ControllersGame = ({ onComplete }) => {
                   onClick={moveLeft}
                   className="py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold text-sm uppercase select-none cursor-pointer shadow-sm flex items-center justify-center gap-2"
                 >
-                  ◀ Slide Left
+                  ◀ {t('vrTechLearning.games.controllers.slideLeft')}
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.01 }}
@@ -1127,7 +1131,7 @@ const ControllersGame = ({ onComplete }) => {
                   onClick={moveRight}
                   className="py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-bold text-sm uppercase select-none cursor-pointer shadow-sm flex items-center justify-center gap-2"
                 >
-                  Slide Right ▶
+                  {t('vrTechLearning.games.controllers.slideRight')} ▶
                 </motion.button>
               </div>
             </div>
@@ -1184,8 +1188,8 @@ const RealityGame = ({ onComplete }) => {
 
           {selectedMode === 'VR' && (
             <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-slate-100">
-              <img loading="lazy" decoding="async"
-                src="/images/vr/vr_hero.webp"
+              <img
+                src="/images/vr/vr_hero.png"
                 alt="VR Environment"
                 className="absolute inset-0 w-full h-full object-cover opacity-90"
               />
@@ -1207,8 +1211,8 @@ const RealityGame = ({ onComplete }) => {
 
           {selectedMode === 'AR' && (
             <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-slate-50">
-              <img loading="lazy" decoding="async"
-                src="/images/vr/rhs.webp"
+              <img
+                src="/images/vr/rhs.png"
                 alt="Real room table"
                 className="absolute inset-0 w-full h-full object-cover opacity-80"
               />
@@ -1235,8 +1239,8 @@ const RealityGame = ({ onComplete }) => {
 
           {selectedMode === 'MR' && (
             <div className="absolute inset-0 flex flex-col items-center justify-center p-4 bg-slate-50">
-              <img loading="lazy" decoding="async"
-                src="/images/vr/rhs.webp"
+              <img
+                src="/images/vr/rhs.png"
                 alt="Real room table"
                 className="absolute inset-0 w-full h-full object-cover opacity-80"
               />
@@ -1296,7 +1300,7 @@ const RealityGame = ({ onComplete }) => {
             onClick={onComplete}
             className="w-full py-3.5 bg-[#0BB562] hover:bg-[#099b53] text-white rounded-xl text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
           >
-            Complete Step and Continue <Check size={18} />
+            {t('vrTechLearning.games.completeStep')} <Check size={18} />
           </motion.button>
         ) : (
           <div className="text-center py-2 text-xs text-slate-500 font-bold uppercase tracking-wider">
@@ -1341,8 +1345,8 @@ const SafetyGame = ({ onComplete }) => {
         </p>
 
         <div className="w-full h-60 sm:h-72 bg-slate-50 border border-slate-200 rounded-2xl relative overflow-hidden flex items-center justify-center shadow-inner">
-          <img loading="lazy" decoding="async" 
-            src="/images/vr/heaven.webp" 
+          <img 
+            src="/images/vr/heaven.png" 
             alt="Safety Room Play Zone" 
             className="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none"
           />
@@ -1411,7 +1415,7 @@ const SafetyGame = ({ onComplete }) => {
             onClick={onComplete}
             className="w-full py-3.5 bg-[#0BB562] hover:bg-[#099b53] text-white rounded-xl text-sm font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
           >
-            Complete Step and Continue <Check size={18} />
+            {t('vrTechLearning.games.completeStep')} <Check size={18} />
           </motion.button>
         ) : (
           <div className="text-center py-2 text-xs text-slate-500 font-bold uppercase tracking-wider">
@@ -1596,6 +1600,7 @@ const LessonQuiz = ({ questions, onComplete, lessonBadge }) => {
 
 // Main VR Technology Learning Dashboard Component
 const VrTechLearning = ({ isEmbedded = false, onBack }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [activeLessonId, setActiveLessonId] = useState(1);
   const unlockedLessons = [1, 2, 3, 4, 5];
@@ -1641,7 +1646,7 @@ const VrTechLearning = ({ isEmbedded = false, onBack }) => {
           onClick={() => navigate("/vr-dashboard")}
           className="fixed top-5 left-5 z-50 px-4 py-2 bg-white border border-slate-200 rounded-full shadow-sm flex items-center gap-2 text-xs font-bold text-slate-700 hover:text-indigo-600 transition-all cursor-pointer"
         >
-          <ArrowLeft size={16} /> Back to VR Dashboard
+          <ArrowLeft size={16} /> {t('vrTechLearning.backToVRDashboard')}
         </button>
       )}
 
@@ -1671,7 +1676,7 @@ const VrTechLearning = ({ isEmbedded = false, onBack }) => {
                       {less.id}
                     </span>
                     <span className="text-xs sm:text-sm truncate">
-                      {less.title.split(': ')[1]}
+                      {t('vrTechLearning.lessons.' + (less.id - 1) + '.titleShort', less.title.split(': ')[1])}
                     </span>
                   </div>
                 </button>
@@ -1684,10 +1689,10 @@ const VrTechLearning = ({ isEmbedded = false, onBack }) => {
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-5">
               <div>
                 <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight">
-                  {currentLesson.title}
+                  {t('vrTechLearning.lessons.' + (activeLessonId - 1) + '.title', currentLesson.title)}
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
-                  Topic Focus: <span className="text-indigo-600 font-bold">{currentLesson.topic}</span>
+                  {t('vrTechLearning.topicFocus')}: <span className="text-indigo-600 font-bold">{t('vrTechLearning.lessons.' + (activeLessonId - 1) + '.topic', currentLesson.topic)}</span>
                 </p>
               </div>
             </div>
@@ -1711,7 +1716,7 @@ const VrTechLearning = ({ isEmbedded = false, onBack }) => {
                         <div className="lg:col-span-4 flex flex-col gap-2.5">
                           <div className="px-1 pb-1">
                             <span className="text-xs font-extrabold text-slate-500 uppercase tracking-wider font-display">
-                              Lesson Topics ({currentLesson.learnSections.length})
+                              {t('vrTechLearning.lessonTopics')} ({currentLesson.learnSections.length})
                             </span>
                           </div>
                           {currentLesson.learnSections.map((sec, idx) => {
@@ -1730,10 +1735,10 @@ const VrTechLearning = ({ isEmbedded = false, onBack }) => {
                                   <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider font-display ${
                                     isTopicActive ? 'bg-indigo-200 text-indigo-900' : 'bg-slate-100 text-slate-600'
                                   }`}>
-                                    Section {idx + 1}
+                                    {t('vrTechLearning.section')} {idx + 1}
                                   </span>
                                   <h4 className="text-sm sm:text-base font-bold truncate font-display">
-                                    {sec.title}
+                                    {t('vrTechLearning.lessons.' + (activeLessonId - 1) + '.learnSections.' + idx + '.title', sec.title)}
                                   </h4>
                                 </div>
                                 <ChevronRight size={16} className={`shrink-0 transition-transform ${isTopicActive ? 'text-indigo-600 translate-x-0.5' : 'text-slate-400'}`} />
@@ -1747,7 +1752,7 @@ const VrTechLearning = ({ isEmbedded = false, onBack }) => {
                                   onClick={handleProceedNext}
                                   className="w-full py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider font-display transition-all duration-200 flex items-center justify-center gap-2 shadow-sm cursor-pointer group"
                                 >
-                                  <span>Proceed to Next Lesson</span>
+                                  <span>{t('vrTechLearning.proceedToNextLesson')}</span>
                                   <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                                 </button>
                               )}
@@ -1759,16 +1764,16 @@ const VrTechLearning = ({ isEmbedded = false, onBack }) => {
                           <div className="space-y-4">
                             <div className="flex items-center justify-between gap-3 flex-wrap border-b border-slate-100 pb-4">
                               <span className="px-3 py-1 rounded-full bg-indigo-100 text-indigo-800 text-xs font-bold uppercase tracking-wider font-display">
-                                Section {activeTopicIndex + 1} of {currentLesson.learnSections.length}
+                                {t('vrTechLearning.section')} {activeTopicIndex + 1} {t('vrTechLearning.of')} {currentLesson.learnSections.length}
                               </span>
                             </div>
 
                             <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight">
-                              {selectedSec.title}
+                              {t('vrTechLearning.lessons.' + (activeLessonId - 1) + '.learnSections.' + activeTopicIndex + '.title', selectedSec.title)}
                             </h3>
 
                             <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-normal whitespace-pre-line">
-                              {selectedSec.desc}
+                              {t('vrTechLearning.lessons.' + (activeLessonId - 1) + '.learnSections.' + activeTopicIndex + '.desc', selectedSec.desc)}
                             </p>
 
                             {selectedSec.funFact && (
@@ -1778,10 +1783,10 @@ const VrTechLearning = ({ isEmbedded = false, onBack }) => {
                                 </div>
                                 <div className="space-y-1">
                                   <span className="text-[11px] font-extrabold uppercase tracking-wider text-indigo-700 font-display block">
-                                    Did You Know? • VR Fun Fact
+                                    {t('vrTechLearning.didYouKnow')} • {t('vrTechLearning.vrFunFact')}
                                   </span>
                                   <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
-                                    {selectedSec.funFact}
+                                    {t('vrTechLearning.lessons.' + (activeLessonId - 1) + '.learnSections.' + activeTopicIndex + '.funFact', selectedSec.funFact)}
                                   </p>
                                 </div>
                               </div>
@@ -1799,7 +1804,7 @@ const VrTechLearning = ({ isEmbedded = false, onBack }) => {
                                   : 'bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer'
                               }`}
                             >
-                              Previous Section
+                              {t('vrTechLearning.previousSection')}
                             </button>
 
                             {activeTopicIndex < currentLesson.learnSections.length - 1 ? (
@@ -1807,21 +1812,21 @@ const VrTechLearning = ({ isEmbedded = false, onBack }) => {
                                 onClick={() => setActiveTopicIndex(prev => Math.min(currentLesson.learnSections.length - 1, prev + 1))}
                                 className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer font-display"
                               >
-                                Next Section <ChevronRight size={16} />
+                                {t('vrTechLearning.nextSection')} <ChevronRight size={16} />
                               </button>
                             ) : activeLessonId < lessons.length ? (
                               <button
                                 onClick={handleProceedNext}
                                 className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer font-display"
                               >
-                                Next Lesson <ArrowRight size={16} />
+                                {t('vrTechLearning.nextLesson')} <ArrowRight size={16} />
                               </button>
                             ) : (
                               <button
                                 onClick={handleProceedNext}
                                 className="px-5 py-2.5 rounded-xl bg-[#0BB562] hover:bg-[#099b53] text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer font-display"
                               >
-                                Return to Dashboard <ArrowRight size={16} />
+                                {t('vrTechLearning.returnToDashboard')} <ArrowRight size={16} />
                               </button>
                             )}
                           </div>

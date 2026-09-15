@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, ContactShadows, Environment, useGLTF, Html } from '@react-three/drei';
 import * as THREE from 'three';
 import VRHand from './VRHand';
+import { useTranslation } from 'react-i18next';
 
 const AnatomicalHeart = ({ isExploded }) => {
   const { scene } = useGLTF('/3d_models/human-heart-3d-model/source/human_heart.glb');
@@ -88,16 +89,17 @@ class ModelErrorBoundary extends React.Component {
 
 const Real3DHeart = () => {
   const [isExploded, setIsExploded] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <div className="w-full h-full rounded-3xl overflow-hidden relative shadow-2xl border border-blue-900/30" style={{ backgroundColor: '#020617' }}>
       
       <div className="absolute top-6 left-6 z-10 pointer-events-none">
         <h2 className="text-2xl font-black text-blue-400 drop-shadow-md tracking-wider">
-          Human Anatomy: 3D Heart
+          {t('vrModels.heart.title', 'Human Anatomy: 3D Heart')}
         </h2>
         <p className="text-blue-200/70 text-sm font-bold mt-1">
-          Interactive Medical Model • 360° View
+          {t('vrModels.heart.sub', 'Interactive Medical Model • 360° View')}
         </p>
       </div>
 
@@ -106,7 +108,7 @@ const Real3DHeart = () => {
           <Html center>
             <div className="flex flex-col items-center gap-3">
               <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-              <div className="text-blue-400 font-bold tracking-widest text-sm uppercase">Loading Anatomy...</div>
+              <div className="text-blue-400 font-bold tracking-widest text-sm uppercase">{t('vrModels.heart.loading', 'Loading Anatomy...')}</div>
             </div>
           </Html>
         }>
@@ -142,7 +144,7 @@ const Real3DHeart = () => {
       {/* Disassemble button removed */}
       
       <div className="absolute bottom-4 text-blue-200/50 text-[10px] tracking-widest uppercase font-bold pointer-events-none w-full text-center">
-         Drag mouse anywhere to rotate 360°
+         {t('vrModels.dragPrompt', 'Drag mouse anywhere to rotate 360°')}
       </div>
     </div>
   );
