@@ -9,22 +9,6 @@ import { getNotices } from '../../services/noticeService';
 // "2026-06-22" -> "22/06/2026" ("Recent" when the item has no date)
 const toDisplayDate = (isoDate) => (isoDate ? (isoDate.includes('/') ? isoDate : isoDate.split('-').reverse().join('/')) : 'Recent');
 
-const defaultNotices = [
-  { id: 1, title: "Empanelment of Printers for Printing of Various Material", date: "22/06/2026", category: "Circular", link: "https://bstbpc.bihar.gov.in/Admin/documents/181Notice.pdf", isUrgent: true, type: "Notice" },
-  { id: 2, title: "Financial Proceeding of BSTBPC / E-Tender/ Transfer Certificate 2026-27/ 399 dt 10/04/2026", date: "28/04/2026", category: "Circular", link: "https://bstbpc.bihar.gov.in/Admin/documents/180Notice.pdf", isUrgent: false, type: "Notice" },
-  { id: 3, title: "Financial opening notice of BSTBPC / E-Tender/ Transfer Certificate 2026-27/ 399 dt 10/04/2026", date: "27/04/2026", category: "Circular", link: "https://bstbpc.bihar.gov.in/Admin/documents/179Notice.pdf", isUrgent: false, type: "Notice" },
-  { id: 4, title: "Technical Proceeding of BSTBPC / E-Tender/ Transfer Certificate 2026-27/ 399 dt 10/04/2026", date: "27/04/2026", category: "Circular", link: "https://bstbpc.bihar.gov.in/Admin/documents/178Notice.pdf", isUrgent: false, type: "Notice" },
-  { id: 5, title: "Notice for meeting for SSA 2027-28", date: "08/04/2026", category: "Notice", link: "https://bstbpc.bihar.gov.in/Admin/documents/177Notice.pdf", isUrgent: true, type: "Notice" },
-  { id: 6, title: "Financial Bid Opening Notice of BSTBPC / E-Tender/ PBL Handbook/ 229 dt18/02/2026", date: "23/03/2026", category: "Circular", link: "https://bstbpc.bihar.gov.in/Admin/documents/176Notice.pdf", isUrgent: false, type: "Notice" },
-];
-
-const defaultTenders = [
-  { id: 1, title: "Corrigendum 03 BSTBPC/EOI/Empanelment/2026/486 dated 15/05/2026", date: "15/05/2026", category: "Tender", link: "https://bstbpc.bihar.gov.in/Admin/tender/415tender.pdf", isUrgent: true, type: "Tender" },
-  { id: 2, title: "BSTBPC/EOI/Empanelment/2026/486 dated 15/05/2026", date: "15/05/2026", category: "Tender", link: "https://bstbpc.bihar.gov.in/Admin/tender/414tender.pdf", isUrgent: false, type: "Tender" },
-  { id: 3, title: "CORRIGENDUM-01 BSTBPC/EOI/Empanelment/2026/486 dated 15/05/2026", date: "15/05/2026", category: "Tender", link: "https://bstbpc.bihar.gov.in/Admin/tender/413tender.pdf", isUrgent: false, type: "Tender" },
-  { id: 4, title: "Empanelment of printers for Printing of Various Material", date: "10/05/2026", category: "Tender", link: "https://bstbpc.bihar.gov.in/Admin/tender/412tender.pdf", isUrgent: false, type: "Tender" },
-];
-
 // Alternate notices and tenders so the board shows a mix of both
 const buildBoardItems = (notices, tenders) => {
   const items = [];
@@ -123,26 +107,14 @@ const NoticeCard = ({ notice }) => {
 export default function NoticeBoard() {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("All");
-  const [notices, setNotices] = useState(defaultNotices);
-  const [tenders, setTenders] = useState(defaultTenders);
+  const [notices, setNotices] = useState([]);
+  const [tenders, setTenders] = useState([]);
 
   useEffect(() => {
-    getNotices()
-      .then((all) => {
-        if (all && all.length > 0) {
-          const nList = all.filter((n) => n.type === 'Notice');
-          const tList = all.filter((n) => n.type === 'Tender');
-          setNotices(nList.length > 0 ? nList : defaultNotices);
-          setTenders(tList.length > 0 ? tList : defaultTenders);
-        } else {
-          setNotices(defaultNotices);
-          setTenders(defaultTenders);
-        }
-      })
-      .catch(() => {
-        setNotices(defaultNotices);
-        setTenders(defaultTenders);
-      });
+    getNotices().then((all) => {
+      setNotices(all.filter((n) => n.type === 'Notice'));
+      setTenders(all.filter((n) => n.type === 'Tender'));
+    }).catch(() => {});
   }, []);
 
   const filteredNotices = buildBoardItems(notices, tenders).filter(notice => 
