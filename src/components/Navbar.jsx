@@ -12,8 +12,11 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
 
+  const currentLang = (i18n.language || 'en').toLowerCase();
+  const isHindi = currentLang.startsWith('hi');
+
   const handleToggleLanguage = () => {
-    const nextLang = i18n.language === 'en' ? 'hi' : 'en';
+    const nextLang = isHindi ? 'en' : 'hi';
     i18n.changeLanguage(nextLang);
   };
 
@@ -161,9 +164,9 @@ const Navbar = () => {
             title="Change Language / भाषा बदलें"
           >
             <span className="text-blue-600 font-bold transition-transform group-hover:scale-105 flex items-center gap-1.5 leading-none">
-              <span className={`text-[16px] -mt-0.5 ${i18n.language === 'hi' ? 'text-blue-700 font-extrabold' : 'text-slate-500'}`}>अ</span>
+              <span className={`text-[16px] -mt-0.5 ${isHindi ? 'text-blue-700 font-extrabold' : 'text-slate-500'}`}>अ</span>
               <span className="text-slate-300 font-normal text-sm">/</span>
-              <span className={`text-[13px] tracking-wide ${i18n.language === 'en' ? 'text-blue-700 font-extrabold' : 'text-slate-500'}`}>EN</span>
+              <span className={`text-[13px] tracking-wide ${!isHindi ? 'text-blue-700 font-extrabold' : 'text-slate-500'}`}>EN</span>
             </span>
           </button>
 

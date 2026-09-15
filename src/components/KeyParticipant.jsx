@@ -50,7 +50,27 @@ export default function KeyParticipant() {
   );
 }
 function ParticipantCard({ item }) {
+  const { t } = useTranslation();
   const isMithilesh = item.name === "Sri Mithilesh Tiwari" || item.name === "Shri Mithilesh Tiwari";
+
+  const getTranslatedInfo = (name, role) => {
+    const nameLower = name ? String(name).toLowerCase() : "";
+    if (nameLower.includes("samrat")) {
+      return { name: t("keyParticipant.leaders.samrat.name", name), role: t("keyParticipant.leaders.samrat.role", role) };
+    }
+    if (nameLower.includes("mithilesh")) {
+      return { name: t("keyParticipant.leaders.mithilesh.name", name), role: t("keyParticipant.leaders.mithilesh.role", role) };
+    }
+    if (nameLower.includes("vinod")) {
+      return { name: t("keyParticipant.leaders.vinod.name", name), role: t("keyParticipant.leaders.vinod.role", role) };
+    }
+    if (nameLower.includes("yatendra")) {
+      return { name: t("keyParticipant.leaders.yatendra.name", name), role: t("keyParticipant.leaders.yatendra.role", role) };
+    }
+    return { name, role };
+  };
+
+  const info = getTranslatedInfo(item.name, item.role);
 
   return (
     <div
@@ -80,7 +100,7 @@ function ParticipantCard({ item }) {
             group-hover:text-white
           "
         >
-          {item.name}
+          {info.name}
         </h3>
 
         <p
@@ -90,7 +110,7 @@ function ParticipantCard({ item }) {
             group-hover:text-indigo-100
           "
         >
-          {item.role}
+          {info.role}
         </p>
       </div>
 
