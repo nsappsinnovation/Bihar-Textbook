@@ -257,14 +257,17 @@
     "badge": "Strategic Intent",
     "heading": "The Eight",
     "headingHighlight": "Core Pillars",
-    "description": "A structured framework guiding BSTPC's mission to strengthen learning outcomes across Bihar.",
-    "missions": {
+    "headingLine1": "The Eight",
+    "headingLine2": "Core Pillars",
+    "subheading": "A structured framework guiding BSTBPC’s mission to strengthen learning outcomes across Bihar.",
+    "description": "A structured framework guiding BSTBPC’s mission to strengthen learning outcomes across Bihar.",
+    "items": {
       "title0": "Inclusive & Equitable Learning",
       "desc0": "Ensuring every learner across Bihar has equal access to high-quality resources.",
       "title1": "Quality & Pedagogy Standards",
       "desc1": "Strengthening content accuracy via structured review and continuous improvement.",
-      "title2": "Digital Learning Ecosystem",
-      "desc2": "Expanding access via e-books and interactive content aligned with modern needs.",
+      "title2": "Cultural Integration",
+      "desc2": "Integrating Bihar's rich cultural heritage and history into the foundational learning materials.",
       "title3": "Seamless Supply Chain",
       "desc3": "Ensuring efficient textbook delivery to every school—down to the last mile.",
       "title4": "Affordable Textbooks",
@@ -273,8 +276,26 @@
       "desc5": "Supporting teachers through structured guides and training-aligned materials.",
       "title6": "Future-Ready Learners",
       "desc6": "Enabling 21st-century skills through updated curriculum and modern pedagogy.",
-      "title7": "Research & Innovation",
-      "desc7": "Fostering educational research and innovative practices for systemic growth."
+      "title7": "Sustainable Publishing",
+      "desc7": "Adopting eco-friendly printing processes and sustainable materials for book production."
+    },
+    "missions": {
+      "title0": "Inclusive & Equitable Learning",
+      "desc0": "Ensuring every learner across Bihar has equal access to high-quality resources.",
+      "title1": "Quality & Pedagogy Standards",
+      "desc1": "Strengthening content accuracy via structured review and continuous improvement.",
+      "title2": "Cultural Integration",
+      "desc2": "Integrating Bihar's rich cultural heritage and history into the foundational learning materials.",
+      "title3": "Seamless Supply Chain",
+      "desc3": "Ensuring efficient textbook delivery to every school—down to the last mile.",
+      "title4": "Affordable Textbooks",
+      "desc4": "Providing quality learning materials at minimal cost to support all families.",
+      "title5": "Empowered Educators",
+      "desc5": "Supporting teachers through structured guides and training-aligned materials.",
+      "title6": "Future-Ready Learners",
+      "desc6": "Enabling 21st-century skills through updated curriculum and modern pedagogy.",
+      "title7": "Sustainable Publishing",
+      "desc7": "Adopting eco-friendly printing processes and sustainable materials for book production."
     }
   },
   "missionGrid": {
