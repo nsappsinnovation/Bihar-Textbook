@@ -5923,7 +5923,9 @@
     "book_chap_1005_5": "Chapter 6: सुभाषितानि",
     "book_chap_905_5": "Chapter 6: लौहतुला",
     "book_chap_905_4": "Chapter 5: भ्रातो बालः",
-    "book_chap_905_3": "Chapter 4: सूक्तिमौक्तिकम्"
+    "book_chap_905_3": "Chapter 4: सूक्तिमौक्तिकम्",
+    "ui_TotalChapters": "Total Chapters",
+    "ui_Chapter": "Ch"
   },
   "ai": {
     "ai_pa_How_to_Give_Best_Prompts": "How to Give Best Prompts",
