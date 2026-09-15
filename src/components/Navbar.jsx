@@ -148,7 +148,7 @@ const Navbar = () => {
           <Link to="/notice" className={getLinkClass("/notice")}>{t("nav.notice")}</Link>
           <Link to="/tenders" className={getLinkClass("/tenders")}>{t("nav.tenders")}</Link>
           <Link to="/csr-policy" className={`whitespace-nowrap ${getLinkClass("/csr-policy")}`}>{t("nav.csrPolicy")}</Link>
-          <Link to="/rti" className={getLinkClass("/rti")}>RTI</Link>
+          <Link to="/rti" className={getLinkClass("/rti")}>{t("nav.documentsLinks.rti", "RTI")}</Link>
           <Link to="/contact" className={getLinkClass("/contact")}>{t("nav.contact")}</Link>
         </nav>
 
