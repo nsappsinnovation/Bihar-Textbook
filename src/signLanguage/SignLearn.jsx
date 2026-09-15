@@ -7,19 +7,21 @@ import {
   ExternalLink, Search, Landmark, Video
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-const toolsDataList = [
-  { name: 'Hello', tag: 'Greeting', desc: 'Wave your hand gently from side to side to say hello.', image: '/images/signlanguage/hello.webp', color: 'bg-slate-50 text-slate-600', icon: <Hand size={28} />, categories: ['Greetings', 'Daily'] },
-  { name: 'Thank You', tag: 'Greeting', desc: 'Touch your chin with fingers, then move hand forward towards the person.', image: '/images/signlanguage/thankyou.webp', color: 'bg-slate-50 text-slate-600', icon: <HeartHandshake size={28} />, categories: ['Greetings', 'Daily'] },
-  { name: 'Mother', tag: 'Family', desc: 'Tap your thumb on your chin with an open hand facing sideways.', image: '/images/signlanguage/mother.webp', color: 'bg-slate-50 text-slate-600', icon: <Users size={28} />, categories: ['Family'] },
-  { name: 'Happy', tag: 'Emotion', desc: 'Brush both flat hands upward on your chest to show joy.', image: '/images/signlanguage/happy.webp', color: 'bg-slate-50 text-slate-600', icon: <Smile size={28} />, categories: ['Emotions'] },
-  { name: 'Sorry', tag: 'Greeting', desc: 'Rub a closed fist in a circular motion over your heart.', image: '/images/signlanguage/sorry.webp', color: 'bg-slate-50 text-slate-600', icon: <Heart size={28} />, categories: ['Greetings', 'Emotions'] },
-  { name: 'Eat', tag: 'Daily', desc: 'Bring your flattened O-hand to your mouth a few times.', image: '/images/signlanguage/eat.webp', color: 'bg-slate-50 text-slate-600', icon: <Utensils size={28} />, categories: ['Daily'] },
-  { name: 'Father', tag: 'Family', desc: 'Tap your thumb on your forehead with an open hand facing sideways.', image: '/images/signlanguage/father.webp', color: 'bg-slate-50 text-slate-600', icon: <Users size={28} />, categories: ['Family'] },
-  { name: 'Sad', tag: 'Emotion', desc: 'Place both hands in front of your face and pull them down while making a sad face.', image: '/images/signlanguage/sad.webp', color: 'bg-slate-50 text-slate-600', icon: <Frown size={28} />, categories: ['Emotions'] }
+const getToolsDataList = (t) => [
+  { name: t('signLearn.tools_hello_name', 'Hello'), tag: t('signLearn.tools_hello_tag', 'Greeting'), desc: t('signLearn.tools_hello_desc', 'Wave your hand gently from side to side to say hello.'), image: '/images/signlanguage/hello.webp', color: 'bg-slate-50 text-slate-600', icon: <Hand size={28} />, categories: ['Greetings', 'Daily'] },
+  { name: t('signLearn.tools_thankyou_name', 'Thank You'), tag: t('signLearn.tools_thankyou_tag', 'Greeting'), desc: t('signLearn.tools_thankyou_desc', 'Touch your chin with fingers, then move hand forward towards the person.'), image: '/images/signlanguage/thankyou.webp', color: 'bg-slate-50 text-slate-600', icon: <HeartHandshake size={28} />, categories: ['Greetings', 'Daily'] },
+  { name: t('signLearn.tools_mother_name', 'Mother'), tag: t('signLearn.tools_mother_tag', 'Family'), desc: t('signLearn.tools_mother_desc', 'Tap your thumb on your chin with an open hand facing sideways.'), image: '/images/signlanguage/mother.webp', color: 'bg-slate-50 text-slate-600', icon: <Users size={28} />, categories: ['Family'] },
+  { name: t('signLearn.tools_happy_name', 'Happy'), tag: t('signLearn.tools_happy_tag', 'Emotion'), desc: t('signLearn.tools_happy_desc', 'Brush both flat hands upward on your chest to show joy.'), image: '/images/signlanguage/happy.webp', color: 'bg-slate-50 text-slate-600', icon: <Smile size={28} />, categories: ['Emotions'] },
+  { name: t('signLearn.tools_sorry_name', 'Sorry'), tag: t('signLearn.tools_sorry_tag', 'Greeting'), desc: t('signLearn.tools_sorry_desc', 'Rub a closed fist in a circular motion over your heart.'), image: '/images/signlanguage/sorry.webp', color: 'bg-slate-50 text-slate-600', icon: <Heart size={28} />, categories: ['Greetings', 'Emotions'] },
+  { name: t('signLearn.tools_eat_name', 'Eat'), tag: t('signLearn.tools_eat_tag', 'Daily'), desc: t('signLearn.tools_eat_desc', 'Bring your flattened O-hand to your mouth a few times.'), image: '/images/signlanguage/eat.webp', color: 'bg-slate-50 text-slate-600', icon: <Utensils size={28} />, categories: ['Daily'] },
+  { name: t('signLearn.tools_father_name', 'Father'), tag: t('signLearn.tools_father_tag', 'Family'), desc: t('signLearn.tools_father_desc', 'Tap your thumb on your forehead with an open hand facing sideways.'), image: '/images/signlanguage/father.webp', color: 'bg-slate-50 text-slate-600', icon: <Users size={28} />, categories: ['Family'] },
+  { name: t('signLearn.tools_sad_name', 'Sad'), tag: t('signLearn.tools_sad_tag', 'Emotion'), desc: t('signLearn.tools_sad_desc', 'Place both hands in front of your face and pull them down while making a sad face.'), image: '/images/signlanguage/sad.webp', color: 'bg-slate-50 text-slate-600', icon: <Frown size={28} />, categories: ['Emotions'] }
 ];
 
 const ExploreSignsComponent = () => {
+  const { t } = useTranslation();
   const [selectedGif, setSelectedGif] = useState(null);
 
   useEffect(() => {
@@ -48,7 +50,7 @@ const ExploreSignsComponent = () => {
 
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        {toolsDataList.map((tool, index) => (
+        {getToolsDataList(t).map((tool, index) => (
           <div
             key={tool.name}
             onClick={() => setSelectedGif(tool)}
@@ -64,7 +66,7 @@ const ExploreSignsComponent = () => {
                 <h4 className="text-lg font-extrabold text-slate-700 leading-tight">{tool.name}</h4>
                 <p className="text-[11px] text-slate-500 mt-3 line-clamp-2 font-medium">{tool.desc}</p>
                 <div className="mt-auto text-[9px] text-slate-600 font-bold uppercase tracking-widest bg-slate-50 px-3 py-1.5 rounded-full w-full">
-                  Hover to flip
+                  {t('signLearn.hoverToFlip', 'Hover to flip')}
                 </div>
               </div>
 
@@ -81,7 +83,7 @@ const ExploreSignsComponent = () => {
                   {tool.name}
                 </span>
                 <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-1.5">
-                  Click to play GIF
+                  {t('signLearn.clickToPlay', 'Click to play GIF')}
                 </span>
               </div>
 
@@ -115,13 +117,13 @@ const ExploreSignsComponent = () => {
               </button>
 
               <span className="text-[10px] font-black text-teal-600 bg-teal-50 px-3 py-1 rounded-full uppercase tracking-wider mb-2 mt-2">
-                Sign Animation
+                {t('signLearn.signAnimation', 'Sign Animation')}
               </span>
               <h4 className="text-3xl font-black text-slate-900 mb-6">{selectedGif.name}</h4>
 
               <div className="w-56 h-56 bg-slate-50 rounded-[24px] border-2 border-slate-100 flex items-center justify-center p-4 mb-6 shadow-inner relative overflow-hidden">
                 <img loading="lazy" decoding="async"
-                  src={`/explore sign/${selectedGif.name.toLowerCase()}.gif`}
+                  src={`/explore sign/${selectedGif.image.split('/').pop().replace(/\.[^/.]+$/, '')}.gif`}
                   onError={(e) => { e.target.onerror = null; e.target.src = selectedGif.image; }}
                   alt={`Sign animation for ${selectedGif.name}`}
                   className="w-full h-full object-contain mix-blend-multiply"
@@ -136,7 +138,7 @@ const ExploreSignsComponent = () => {
                 onClick={() => setSelectedGif(null)}
                 className="w-full py-3.5 rounded-full bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm transition-colors shadow-md shadow-teal-500/20 cursor-pointer"
               >
-                Got it!
+                {t('signLearn.gotIt', 'Got it!')}
               </button>
             </motion.div>
           </motion.div>
@@ -146,21 +148,21 @@ const ExploreSignsComponent = () => {
   );
 };
 
-const dictionary = [
-  { word: 'HELLO', image: '/images/signlanguage/hello.webp', desc: 'Wave your hand gently from side to side to say hello.' },
-  { word: 'THANK YOU', image: '/images/signlanguage/thankyou.webp', desc: 'Touch your chin with fingers, then move hand forward towards the person.' },
-  { word: 'SORRY', image: '/images/signlanguage/sorry.webp', desc: 'Rub a closed fist in a circular motion over your heart.' },
-  { word: 'HAPPY', image: '/images/signlanguage/happy.webp', desc: 'Brush both flat hands upward on your chest to show joy.' },
-  { word: 'SAD', image: '/images/signlanguage/sad.webp', desc: 'Place both hands in front of your face and pull them down while making a sad face.' },
-  { word: 'MOTHER', image: '/images/signlanguage/mother.webp', desc: 'Tap your thumb on your chin with an open hand facing sideways.' },
-  { word: 'FATHER', image: '/images/signlanguage/father.webp', desc: 'Tap your thumb on your forehead with an open hand facing sideways.' },
-  { word: 'EAT', image: '/images/signlanguage/eat.webp', desc: 'Bring your flattened O-hand to your mouth a few times.' },
-  { word: 'GOOD MORNING', image: '/images/signlanguage/goodmorning.webp', desc: 'Make a thumbs-up sign, then bring your hands up in a rising sun motion.' },
-  { word: 'GOOD AFTERNOON', image: '/images/signlanguage/goodafternoon.webp', desc: 'Make a thumbs-up sign, then place one hand flat with the other pointing down at it.' },
-  { word: 'GOOD EVENING', image: '/images/signlanguage/goodevening.webp', desc: 'Make a thumbs-up sign, then cover one hand over the other in a setting sun motion.' },
-  { word: 'GOOD NIGHT', image: '/images/signlanguage/goodnight.webp', desc: 'Make a thumbs-up sign, then close your eyes and lay your head on folded hands.' },
-  { word: 'WELCOME', image: '/images/signlanguage/welcome.webp', desc: 'Bring both hands towards your chest in a welcoming motion.' },
-  { word: 'PLEASE', image: '/images/signlanguage/please.webp', desc: 'Place your flat palm on your chest and move it in a circular motion.' },
+const getDictionary = (t) => [
+  { word: t('signLearn.dict_hello_word', 'HELLO'), image: '/images/signlanguage/hello.webp', desc: t('signLearn.dict_hello_desc', 'Wave your hand gently from side to side to say hello.') },
+  { word: t('signLearn.dict_thankyou_word', 'THANK YOU'), image: '/images/signlanguage/thankyou.webp', desc: t('signLearn.dict_thankyou_desc', 'Touch your chin with fingers, then move hand forward towards the person.') },
+  { word: t('signLearn.dict_sorry_word', 'SORRY'), image: '/images/signlanguage/sorry.webp', desc: t('signLearn.dict_sorry_desc', 'Rub a closed fist in a circular motion over your heart.') },
+  { word: t('signLearn.dict_happy_word', 'HAPPY'), image: '/images/signlanguage/happy.webp', desc: t('signLearn.dict_happy_desc', 'Brush both flat hands upward on your chest to show joy.') },
+  { word: t('signLearn.dict_sad_word', 'SAD'), image: '/images/signlanguage/sad.webp', desc: t('signLearn.dict_sad_desc', 'Place both hands in front of your face and pull them down while making a sad face.') },
+  { word: t('signLearn.dict_mother_word', 'MOTHER'), image: '/images/signlanguage/mother.webp', desc: t('signLearn.dict_mother_desc', 'Tap your thumb on your chin with an open hand facing sideways.') },
+  { word: t('signLearn.dict_father_word', 'FATHER'), image: '/images/signlanguage/father.webp', desc: t('signLearn.dict_father_desc', 'Tap your thumb on your forehead with an open hand facing sideways.') },
+  { word: t('signLearn.dict_eat_word', 'EAT'), image: '/images/signlanguage/eat.webp', desc: t('signLearn.dict_eat_desc', 'Bring your flattened O-hand to your mouth a few times.') },
+  { word: t('signLearn.dict_goodmorning_word', 'GOOD MORNING'), image: '/images/signlanguage/goodmorning.webp', desc: t('signLearn.dict_goodmorning_desc', 'Make a thumbs-up sign, then bring your hands up in a rising sun motion.') },
+  { word: t('signLearn.dict_goodafternoon_word', 'GOOD AFTERNOON'), image: '/images/signlanguage/goodafternoon.webp', desc: t('signLearn.dict_goodafternoon_desc', 'Make a thumbs-up sign, then place one hand flat with the other pointing down at it.') },
+  { word: t('signLearn.dict_goodevening_word', 'GOOD EVENING'), image: '/images/signlanguage/goodevening.webp', desc: t('signLearn.dict_goodevening_desc', 'Make a thumbs-up sign, then cover one hand over the other in a setting sun motion.') },
+  { word: t('signLearn.dict_goodnight_word', 'GOOD NIGHT'), image: '/images/signlanguage/goodnight.webp', desc: t('signLearn.dict_goodnight_desc', 'Make a thumbs-up sign, then close your eyes and lay your head on folded hands.') },
+  { word: t('signLearn.dict_welcome_word', 'WELCOME'), image: '/images/signlanguage/welcome.webp', desc: t('signLearn.dict_welcome_desc', 'Bring both hands towards your chest in a welcoming motion.') },
+  { word: t('signLearn.dict_please_word', 'PLEASE'), image: '/images/signlanguage/please.webp', desc: t('signLearn.dict_please_desc', 'Place your flat palm on your chest and move it in a circular motion.') },
   { word: 'YES', image: '/images/signlanguage/yes.webp', desc: 'Make a fist and nod it up and down like a head nodding yes.' },
   { word: 'NO', image: '/images/signlanguage/no.webp', desc: 'Extend your index and middle fingers and tap them against your thumb.' },
   { word: 'HELP', image: '/images/signlanguage/help.webp', desc: 'Place your closed fist with thumb up on top of your flat open palm.' },
@@ -211,6 +213,7 @@ const dictionary = [
 ];
 
 const FingerspellComponent = () => {
+  const { t } = useTranslation();
   const [text, setText] = useState('HELLO');
   const [zoomedChar, setZoomedChar] = useState(null);
   const [selectedWordSign, setSelectedWordSign] = useState(null);
@@ -281,7 +284,7 @@ const FingerspellComponent = () => {
   };
 
   const suggestions = isFocused && text.trim() && (!selectedWordSign || text !== selectedWordSign.word)
-    ? dictionary.filter(item => item.word.includes(text.toUpperCase()))
+    ? getDictionary(t).filter(item => item.word.includes(text.toUpperCase()))
     : [];
 
   return (
@@ -293,7 +296,7 @@ const FingerspellComponent = () => {
           <Keyboard size={32} />
         </div>
 
-        <h3 className="text-2xl md:text-3xl font-black text-slate-900 mb-3 tracking-tight">Type to Sign</h3>
+        <h3 className="text-2xl md:text-3xl font-black text-slate-900 mb-3 tracking-tight">{t('signLearn.typeToSign', 'Type to Sign')}</h3>
         <p className="text-[15px] font-medium text-slate-500 mb-10 max-w-md">
           Type your name or any English word to instantly see how to spell it using sign language alphabet (Fingerspelling).
         </p>
@@ -306,7 +309,7 @@ const FingerspellComponent = () => {
             onFocus={() => setIsFocused(true)}
             onBlur={() => setTimeout(() => setIsFocused(false), 200)}
             maxLength={15}
-            placeholder="TYPE A WORD..."
+            placeholder={t('signLearn.typeWord', 'TYPE A WORD...')}
             className="w-full px-8 py-5 rounded-full bg-white border-2 border-slate-200 text-center text-2xl font-black text-slate-800 placeholder-slate-300 focus:outline-none focus:border-teal-500 focus:ring-4 ring-teal-100 transition-all tracking-[0.2em] shadow-sm"
           />
           <div className="absolute -bottom-7 left-0 right-0 flex justify-between items-center px-4">
@@ -317,7 +320,7 @@ const FingerspellComponent = () => {
               onClick={() => setShowDictionary(true)}
               className="text-[10px] font-bold text-teal-600 uppercase tracking-widest flex items-center gap-1 hover:text-teal-700 cursor-pointer transition-colors bg-teal-50 px-3 py-1 rounded-full"
             >
-              <BookOpen size={12} /> Dictionary List
+              <BookOpen size={12} /> {t('signLearn.dictionaryList', 'Dictionary List')}
             </button>
           </div>
 
@@ -439,7 +442,7 @@ const FingerspellComponent = () => {
                   className="w-full h-full flex flex-col items-center justify-center text-slate-400 py-8"
                 >
                   <Hand size={32} className="mb-3 opacity-20" />
-                  <span className="text-sm font-bold uppercase tracking-wider">Start typing to see signs</span>
+                  <span className="text-sm font-bold uppercase tracking-wider">{t('signLearn.startTyping', 'Start typing to see signs')}</span>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -471,7 +474,7 @@ const FingerspellComponent = () => {
                 <XCircle size={24} />
               </button>
 
-              <h4 className="text-4xl font-black text-slate-900 mb-6">Letter {zoomedChar}</h4>
+              <h4 className="text-4xl font-black text-slate-900 mb-6">{t('signLearn.letter', 'Letter')} {zoomedChar}</h4>
 
               <div className="w-56 h-56 bg-slate-50 rounded-[24px] border-2 border-slate-100 flex items-center justify-center p-6 mb-8 shadow-inner relative overflow-hidden">
                 <div className="absolute inset-0 bg-teal-500/5 mix-blend-multiply pointer-events-none" />
@@ -522,7 +525,7 @@ const FingerspellComponent = () => {
 
               <div className="flex flex-col md:flex-row gap-6 mb-6 w-full justify-center items-center">
                 <div className="w-48 h-48 bg-slate-50 rounded-[24px] border-2 border-slate-100 flex flex-col items-center justify-center p-4 shadow-inner relative overflow-hidden">
-                  <span className="absolute top-3 left-3 text-[10px] font-bold text-slate-400 uppercase bg-white/80 px-2 py-0.5 rounded-md backdrop-blur-sm z-10">Photo</span>
+                  <span className="absolute top-3 left-3 text-[10px] font-bold text-slate-400 uppercase bg-white/80 px-2 py-0.5 rounded-md backdrop-blur-sm z-10">{t('signLearn.photo', 'Photo')}</span>
                   <img loading="lazy" decoding="async"
                     src={previewGif.image}
                     onError={(e) => { e.target.onerror = null; e.target.src = '/images/signlanguage/hand.webp'; }}
@@ -533,7 +536,7 @@ const FingerspellComponent = () => {
                 <div className="w-48 h-48 bg-slate-50 rounded-[24px] border-2 border-slate-100 flex flex-col items-center justify-center p-4 shadow-inner relative overflow-hidden">
                   <span className="absolute top-3 left-3 text-[10px] font-bold text-teal-500 uppercase bg-white/80 px-2 py-0.5 rounded-md backdrop-blur-sm z-10">GIF</span>
                   <img loading="lazy" decoding="async"
-                    src={`/explore sign/${previewGif.word.toLowerCase()}.gif`}
+                    src={`/explore sign/${previewGif.image.split('/').pop().replace(/\.[^/.]+$/, '')}.gif`}
                     onError={(e) => { e.target.onerror = null; e.target.src = previewGif.image; }}
                     alt={`Sign animation for ${previewGif.word}`}
                     className="w-full h-full object-contain mix-blend-multiply"
@@ -575,8 +578,8 @@ const FingerspellComponent = () => {
             >
               <div className="flex justify-between items-center mb-6">
                 <div>
-                  <h3 className="text-xl font-black text-slate-900">Sign Language Dictionary</h3>
-                  <p className="text-sm text-slate-500 font-medium mt-1">Words available with whole-word signs</p>
+                  <h3 className="text-xl font-black text-slate-900">{t('signLearn.dictionaryTitle', 'Sign Language Dictionary')}</h3>
+                  <p className="text-sm text-slate-500 font-medium mt-1">{t('signLearn.dictionaryDesc', 'Words available with whole-word signs')}</p>
                 </div>
                 <button onClick={() => setShowDictionary(false)} className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 transition-colors cursor-pointer">
                   <XCircle size={20} />
@@ -648,6 +651,7 @@ const signTheme = {
 };
 
 const SignLearn = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState('Explore Signs');
   const [activeVideo, setActiveVideo] = useState(null);
@@ -1336,9 +1340,9 @@ const SignLearn = () => {
   });
 
   const quickStats = [
-    { label: 'Explore Signs', value: 'Visual library', icon: <Hand className={signTheme.card1Icon} />, color: signTheme.card1Bg },
-    { label: 'Type to Sign', value: 'Fingerspell Translator', icon: <Keyboard className={signTheme.card2Icon} />, color: signTheme.card2Bg },
-    { label: 'Learn ISL', value: `${allSignVideos.length} Video Lectures`, icon: <BookOpen className={signTheme.card3Icon} />, color: signTheme.card3Bg },
+    { label: t('signLearn.tabExploreSigns', 'Explore Signs'), value: t('signLearn.valExploreSigns', 'Visual library'), icon: <Hand className={signTheme.card1Icon} />, color: signTheme.card1Bg, key: 'Explore Signs' },
+    { label: t('signLearn.tabTypeToSign', 'Type to Sign'), value: t('signLearn.valTypeToSign', 'Fingerspell Translator'), icon: <Keyboard className={signTheme.card2Icon} />, color: signTheme.card2Bg, key: 'Type to Sign' },
+    { label: t('signLearn.tabLearnISL', 'Learn ISL'), value: t('signLearn.valLearnISL', `${allSignVideos.length} Video Lectures`), icon: <BookOpen className={signTheme.card3Icon} />, color: signTheme.card3Bg, key: 'Learn ISL' },
   ];
 
   return (
@@ -1363,11 +1367,11 @@ const SignLearn = () => {
             <section className="bg-white rounded-[16px] md:rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[200px] sm:min-h-[260px] md:min-h-[300px] lg:h-[387px] lg:min-h-[387px] pb-4 md:pb-6 lg:pb-0">
               <div className="relative z-10 p-5 sm:p-8 md:p-10 lg:w-1/2 space-y-3 md:space-y-4">
                 <h1 className="text-[22px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
-                  Build. Learn. &amp; <br /> Talk with <br />
-                  <span className={signTheme.heroHighlightText}>Sign Language</span>
+                  {t('signLearn.heroTitle1', 'Build. Learn. &')} <br /> {t('signLearn.heroTitle2', 'Talk with')} <br />
+                  <span className={signTheme.heroHighlightText}>{t('signLearn.heroTitle3', 'Sign Language')}</span>
                 </h1>
                 <p className="text-slate-500 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed max-w-sm">
-                  Your visual learning hub for signs and expressions.
+                  {t('signLearn.heroSub', 'Your visual learning hub for signs and expressions.')}
                 </p>
               </div>
 
@@ -1380,12 +1384,12 @@ const SignLearn = () => {
             {/* Quick Stats Row — overlapping hero with negative margin */}
             <section className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 relative z-20 -mt-8 px-4 md:px-12">
               {quickStats.map((stat, i) => {
-                const isActive = activeFilter === stat.label;
+                const isActive = activeFilter === (stat.key || stat.label);
                 return (
                   <div
                     key={i}
                     onClick={() => {
-                      setActiveFilter(stat.label);
+                      setActiveFilter(stat.key || stat.label);
                       const target = document.getElementById("content-section");
                       if (target) target.scrollIntoView({ behavior: 'smooth' });
                     }}
@@ -1424,9 +1428,9 @@ const SignLearn = () => {
                         {/* Source Category Pills */}
                         <div className="flex flex-wrap items-center gap-2">
                           {[
-                            { id: 'All', label: 'All Videos', badge: `${allSignVideos.length}` },
-                            { id: 'Govt. Official (ISLRTC)', label: 'Govt. & Official (ISLRTC)', badge: `${allSignVideos.filter(v => v.sourceType === 'official').length}` },
-                            { id: 'Private & Community', label: 'Private & Community Creators', badge: `${allSignVideos.filter(v => v.sourceType === 'external').length}` }
+                            { id: 'All', label: t('signLearn.filterAll', 'All Videos'), badge: `${allSignVideos.length}` },
+                            { id: 'Govt. Official (ISLRTC)', label: t('signLearn.filterGovt', 'Govt. & Official (ISLRTC)'), badge: `${allSignVideos.filter(v => v.sourceType === 'official').length}` },
+                            { id: 'Private & Community', label: t('signLearn.filterPrivate', 'Private & Community Creators'), badge: `${allSignVideos.filter(v => v.sourceType === 'external').length}` }
                           ].map(tab => {
                             const isActive = videoCategoryFilter === tab.id;
                             return (
@@ -1455,7 +1459,7 @@ const SignLearn = () => {
                           <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                           <input
                             type="text"
-                            placeholder="Search ISL videos..."
+                            placeholder={t('signLearn.searchPlaceholder', 'Search ISL videos...')}
                             value={videoSearchQuery}
                             onChange={(e) => setVideoSearchQuery(e.target.value)}
                             className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-full text-xs sm:text-sm font-medium text-slate-800 placeholder-slate-400 focus:outline-none focus:border-teal-500 focus:ring-2 ring-teal-500/20 transition-all"

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowLeft, ArrowRight, Cpu, Target, Compass, Play, BookOpen, Hand, Move, RefreshCw, Check 
 } from 'lucide-react';
 
 const Signlanguage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [activeSandboxModule, setActiveSandboxModule] = useState(0);
   const [panActive, setPanActive] = useState(false);
@@ -25,101 +27,101 @@ const Signlanguage = () => {
 
   const sandboxModules = [
     {
-      title: "Practice Challenge",
-      description: "Interactive Sign Language Quiz. Look at the holographic gestures in the viewport feed and choose the correct meaning from the console below.",
+      title: t('signLanguage.practiceChallenge', "Practice Challenge"),
+      description: t('signLanguage.practiceChallengeDesc', "Interactive Sign Language Quiz. Look at the holographic gestures in the viewport feed and choose the correct meaning from the console below."),
       icon: <Target size={16} />,
-      badge: "Interactive"
+      badge: t('signLanguage.interactiveBadge', "Interactive")
     },
     {
-      title: "Fingerspelling Trainer",
-      description: "Click on any alphabet key to load the respective Indian Sign Language fingerspelling sign in the high-fidelity viewport.",
+      title: t('signLanguage.fingerspellingTrainer', "Fingerspelling Trainer"),
+      description: t('signLanguage.fingerspellingTrainerDesc', "Click on any alphabet key to load the respective Indian Sign Language fingerspelling sign in the high-fidelity viewport."),
       icon: <Compass size={16} />,
-      badge: "Dictionary"
+      badge: t('signLanguage.dictionaryBadge', "Dictionary")
     },
     {
-      title: "Essential Vocabulary",
-      description: "Explore core conversational gestures used for daily greetings, family members, emotions, and common communications in the deaf community.",
+      title: t('signLanguage.essentialVocabulary', "Essential Vocabulary"),
+      description: t('signLanguage.essentialVocabularyDesc', "Explore core conversational gestures used for daily greetings, family members, emotions, and common communications in the deaf community."),
       icon: <BookOpen size={16} />,
-      badge: "Vocabulary"
+      badge: t('signLanguage.vocabularyBadge', "Vocabulary")
     }
   ];
 
   const viewportQuizQuestions = [
     {
       image: '/images/signlanguage/hello.webp',
-      options: ['Goodbye', 'Please', 'Hello'],
-      correct: 'Hello',
-      explanation: 'Wave your hand gently side to side to greet someone.'
+      options: [t('signLanguage.goodbye', 'Goodbye'), t('signLanguage.please', 'Please'), t('signLanguage.hello', 'Hello')],
+      correct: t('signLanguage.hello', 'Hello'),
+      explanation: t('signLanguage.expHello', 'Wave your hand gently side to side to greet someone.')
     },
     {
       image: '/images/signlanguage/thankyou.webp',
-      options: ['Thank You', 'Sorry', 'Welcome'],
-      correct: 'Thank You',
-      explanation: 'Touch your chin with fingers, then move hand forward.'
+      options: [t('signLanguage.thankYou', 'Thank You'), t('signLanguage.sorry', 'Sorry'), t('signLanguage.welcome', 'Welcome')],
+      correct: t('signLanguage.thankYou', 'Thank You'),
+      explanation: t('signLanguage.expThankYou', 'Touch your chin with fingers, then move hand forward.')
     },
     {
       image: '/images/signlanguage/mother.webp',
-      options: ['Father', 'Mother', 'Friend'],
-      correct: 'Mother',
-      explanation: 'Tap your thumb on your chin with an open hand facing sideways.'
+      options: [t('signLanguage.father', 'Father'), t('signLanguage.mother', 'Mother'), t('signLanguage.friend', 'Friend')],
+      correct: t('signLanguage.mother', 'Mother'),
+      explanation: t('signLanguage.expMother', 'Tap your thumb on your chin with an open hand facing sideways.')
     },
     {
       image: '/images/signlanguage/father.webp',
-      options: ['Mother', 'Teacher', 'Father'],
-      correct: 'Father',
-      explanation: 'Tap your thumb on your forehead with an open hand facing sideways.'
+      options: [t('signLanguage.mother', 'Mother'), t('signLanguage.teacher', 'Teacher'), t('signLanguage.father', 'Father')],
+      correct: t('signLanguage.father', 'Father'),
+      explanation: t('signLanguage.expFather', 'Tap your thumb on your forehead with an open hand facing sideways.')
     },
     {
       image: '/images/signlanguage/happy.webp',
-      options: ['Sad', 'Angry', 'Happy'],
-      correct: 'Happy',
-      explanation: 'Brush both flat hands upward on your chest to show joy.'
+      options: [t('signLanguage.sad', 'Sad'), t('signLanguage.angry', 'Angry'), t('signLanguage.happy', 'Happy')],
+      correct: t('signLanguage.happy', 'Happy'),
+      explanation: t('signLanguage.expHappy', 'Brush both flat hands upward on your chest to show joy.')
     },
     {
       image: '/images/signlanguage/sad.webp',
-      options: ['Happy', 'Sad', 'Cry'],
-      correct: 'Sad',
-      explanation: 'Place both hands in front of your face and pull them down while making a sad face.'
+      options: [t('signLanguage.happy', 'Happy'), t('signLanguage.sad', 'Sad'), t('signLanguage.cry', 'Cry')],
+      correct: t('signLanguage.sad', 'Sad'),
+      explanation: t('signLanguage.expSad', 'Place both hands in front of your face and pull them down while making a sad face.')
     },
     {
       image: '/images/signlanguage/eat.webp',
-      options: ['Drink', 'Eat', 'Sleep'],
-      correct: 'Eat',
-      explanation: 'Bring your flattened O-hand to your mouth repeatedly.'
+      options: [t('signLanguage.drink', 'Drink'), t('signLanguage.eat', 'Eat'), t('signLanguage.sleep', 'Sleep')],
+      correct: t('signLanguage.eat', 'Eat'),
+      explanation: t('signLanguage.expEat', 'Bring your flattened O-hand to your mouth repeatedly.')
     },
     {
       image: '/images/signlanguage/sorry.webp',
-      options: ['Please', 'Sorry', 'Happy'],
-      correct: 'Sorry',
-      explanation: 'Rub a closed fist in a circular motion over your heart.'
+      options: [t('signLanguage.please', 'Please'), t('signLanguage.sorry', 'Sorry'), t('signLanguage.happy', 'Happy')],
+      correct: t('signLanguage.sorry', 'Sorry'),
+      explanation: t('signLanguage.expSorry', 'Rub a closed fist in a circular motion over your heart.')
     },
     {
       image: '/images/signlanguage/welcome.webp',
-      options: ['Welcome', 'Hello', 'Eat'],
-      correct: 'Welcome',
-      explanation: 'Bring both hands towards your chest in a welcoming motion.'
+      options: [t('signLanguage.welcome', 'Welcome'), t('signLanguage.hello', 'Hello'), t('signLanguage.eat', 'Eat')],
+      correct: t('signLanguage.welcome', 'Welcome'),
+      explanation: t('signLanguage.expWelcome', 'Bring both hands towards your chest in a welcoming motion.')
     }
   ];
 
   const greetingList = [
-    { name: 'HELLO', image: '/images/signlanguage/hello.webp', desc: 'Wave your hand gently from side to side to say hello.' },
-    { name: 'THANK YOU', image: '/images/signlanguage/thankyou.webp', desc: 'Touch your chin with fingers, then move hand forward towards the person.' },
-    { name: 'MOTHER', image: '/images/signlanguage/mother.webp', desc: 'Tap your thumb on your chin with an open hand facing sideways.' },
-    { name: 'FATHER', image: '/images/signlanguage/father.webp', desc: 'Tap your thumb on your forehead with an open hand facing sideways.' },
-    { name: 'HAPPY', image: '/images/signlanguage/happy.webp', desc: 'Brush both flat hands upward on your chest to show joy.' },
-    { name: 'SAD', image: '/images/signlanguage/sad.webp', desc: 'Place both hands in front of your face and pull them down while making a sad face.' },
-    { name: 'SORRY', image: '/images/signlanguage/sorry.webp', desc: 'Rub a closed fist in a circular motion over your heart.' },
-    { name: 'EAT', image: '/images/signlanguage/eat.webp', desc: 'Bring your flattened O-hand to your mouth a few times.' },
-    { name: 'WELCOME', image: '/images/signlanguage/welcome.webp', desc: 'Bring both hands towards your chest in a welcoming motion.' },
-    { name: 'PLEASE', image: '/images/signlanguage/please.webp', desc: 'Place your flat palm on your chest and move it in a circular motion.' }
+    { name: t('signLanguage.helloUpper', 'HELLO'), image: '/images/signlanguage/hello.webp', desc: t('signLanguage.descHello', 'Wave your hand gently from side to side to say hello.') },
+    { name: t('signLanguage.thankYouUpper', 'THANK YOU'), image: '/images/signlanguage/thankyou.webp', desc: t('signLanguage.descThankYou', 'Touch your chin with fingers, then move hand forward towards the person.') },
+    { name: t('signLanguage.motherUpper', 'MOTHER'), image: '/images/signlanguage/mother.webp', desc: t('signLanguage.descMother', 'Tap your thumb on your chin with an open hand facing sideways.') },
+    { name: t('signLanguage.fatherUpper', 'FATHER'), image: '/images/signlanguage/father.webp', desc: t('signLanguage.descFather', 'Tap your thumb on your forehead with an open hand facing sideways.') },
+    { name: t('signLanguage.happyUpper', 'HAPPY'), image: '/images/signlanguage/happy.webp', desc: t('signLanguage.descHappy', 'Brush both flat hands upward on your chest to show joy.') },
+    { name: t('signLanguage.sadUpper', 'SAD'), image: '/images/signlanguage/sad.webp', desc: t('signLanguage.descSad', 'Place both hands in front of your face and pull them down while making a sad face.') },
+    { name: t('signLanguage.sorryUpper', 'SORRY'), image: '/images/signlanguage/sorry.webp', desc: t('signLanguage.descSorry', 'Rub a closed fist in a circular motion over your heart.') },
+    { name: t('signLanguage.eatUpper', 'EAT'), image: '/images/signlanguage/eat.webp', desc: t('signLanguage.descEat', 'Bring your flattened O-hand to your mouth a few times.') },
+    { name: t('signLanguage.welcomeUpper', 'WELCOME'), image: '/images/signlanguage/welcome.webp', desc: t('signLanguage.descWelcome', 'Bring both hands towards your chest in a welcoming motion.') },
+    { name: t('signLanguage.pleaseUpper', 'PLEASE'), image: '/images/signlanguage/please.webp', desc: t('signLanguage.descPlease', 'Place your flat palm on your chest and move it in a circular motion.') }
   ];
 
   const getLoadingStatus = (prog) => {
-    if (prog < 25) return "Initializing challenge...";
-    if (prog < 50) return "Loading sign vector asset...";
-    if (prog < 75) return "Configuring viewport feed...";
-    if (prog < 90) return "Validating matches...";
-    return "Ready for challenge...";
+    if (prog < 25) return t('signLanguage.initializing', "Initializing challenge...");
+    if (prog < 50) return t('signLanguage.loadingAsset', "Loading sign vector asset...");
+    if (prog < 75) return t('signLanguage.configuringViewport', "Configuring viewport feed...");
+    if (prog < 90) return t('signLanguage.validatingMatches', "Validating matches...");
+    return t('signLanguage.ready', "Ready for challenge...");
   };
 
   // Skeletal Tracking simulation progress timer
@@ -173,13 +175,13 @@ const Signlanguage = () => {
             >
               <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-50/80 backdrop-blur-sm text-indigo-700 border border-indigo-200/50 rounded-full text-[10px] sm:text-xs font-bold tracking-wider uppercase">
                 <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-pulse" />
-                Sign Language Mission
+                {t('signLanguage.missionBadge', 'Sign Language Mission')}
               </span>
              <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
-                Interactive <span className="text-blue-600">Sign Language</span> Lab
+                {t('signLanguage.interactive', 'Interactive ')} <span className="text-blue-600">{t('signLanguage.signLanguage', 'Sign Language')}</span> {t('signLanguage.lab', 'Lab')}
               </h1>
               <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed max-w-2xl text-left">
-                Master Indian Sign Language (ISL) using our visual workspace, simulated skeletal node tracker, and fingerspelling dictionary. Designed to make learning inclusive and intuitive.
+                {t('signLanguage.heroDescription', 'Master Indian Sign Language (ISL) using our visual workspace, simulated skeletal node tracker, and fingerspelling dictionary. Designed to make learning inclusive and intuitive.')}
               </p>
             </motion.div>
 
@@ -193,7 +195,7 @@ const Signlanguage = () => {
                 onClick={() => navigate("/sign-learn")}
                 className="group inline-flex items-center gap-2.5 px-5 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full text-xs sm:text-sm font-bold shadow-md shadow-indigo-500/10 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
               >
-                Start Exploring
+                {t('signLanguage.startExploring', 'Start Exploring')}
                 <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
               </button>
               
@@ -201,7 +203,7 @@ const Signlanguage = () => {
                 href="#simulator-section"
                 className="inline-flex items-center gap-2 px-5 py-3 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 rounded-full text-xs sm:text-sm font-bold shadow-sm transition-all duration-300 hover:-translate-y-0.5"
               >
-                Try Viewport Sandbox
+                {t('signLanguage.tryViewportSandbox', 'Try Viewport Sandbox')}
               </a>
             </motion.div>
 
@@ -215,23 +217,23 @@ const Signlanguage = () => {
               <div className="p-3 bg-white hover:bg-slate-55 border border-slate-200/60 rounded-2xl hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1 text-left">
                 <div className="text-slate-900 font-bold flex items-center gap-1.5 text-xs sm:text-sm">
                   <Hand size={14} className="text-indigo-600" />
-                  Visual First
+                  {t('signLanguage.visualFirst', 'Visual First')}
                 </div>
-                <p className="text-[10px] text-slate-500 leading-normal font-medium">Learn gestures through animations.</p>
+                <p className="text-[10px] text-slate-500 leading-normal font-medium">{t('signLanguage.visualFirstDesc', 'Learn gestures through animations.')}</p>
               </div>
               <div className="p-3 bg-white hover:bg-slate-55 border border-slate-200/60 rounded-2xl hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1 text-left">
                 <div className="text-slate-900 font-bold flex items-center gap-1.5 text-xs sm:text-sm">
                   <Target size={14} className="text-violet-600" />
-                  Grades 8-12
+                  {t('signLanguage.grades', 'Grades 8-12')}
                 </div>
-                <p className="text-[10px] text-slate-500 leading-normal font-medium">Mapped to textbook standards.</p>
+                <p className="text-[10px] text-slate-500 leading-normal font-medium">{t('signLanguage.gradesDesc', 'Mapped to textbook standards.')}</p>
               </div>
               <div className="p-3 bg-white hover:bg-slate-55 border border-slate-200/60 rounded-2xl hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1 text-left">
                 <div className="text-slate-900 font-bold flex items-center gap-1.5 text-xs sm:text-sm">
                   <Cpu size={14} className="text-indigo-500" />
-                  AI Sandbox
+                  {t('signLanguage.aiSandbox', 'AI Sandbox')}
                 </div>
-                <p className="text-[10px] text-slate-500 leading-normal font-medium">Includes tracking simulator.</p>
+                <p className="text-[10px] text-slate-500 leading-normal font-medium">{t('signLanguage.aiSandboxDesc', 'Includes tracking simulator.')}</p>
               </div>
             </motion.div>
           </div>
@@ -260,10 +262,10 @@ const Signlanguage = () => {
         {/* Section Title & Subtitle for Simulator */}
         <div id="simulator-section" className="text-center max-w-2xl mx-auto mb-6 space-y-1.5 pt-0">
           <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-full text-[10px] font-bold tracking-widest uppercase">
-            Simulated Sandbox
+            {t('signLanguage.simulatedSandbox', 'Simulated Sandbox')}
           </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Interactive Viewport Sandbox</h2>
-          <p className="text-xs sm:text-sm text-slate-500 font-medium">Select a module below to test gestures, spelling, and skeletal node matching overlays.</p>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">{t('signLanguage.interactiveViewportSandbox', 'Interactive Viewport Sandbox')}</h2>
+          <p className="text-xs sm:text-sm text-slate-500 font-medium">{t('signLanguage.selectModuleDesc', 'Select a module below to test gestures, spelling, and skeletal node matching overlays.')}</p>
         </div>
 
         {/* Interactive Viewport Section - MATCHING VR LAB Aesthetic */}
@@ -272,7 +274,7 @@ const Signlanguage = () => {
           {/* Left Column: Selector */}
           <div className="lg:col-span-5 flex flex-col justify-between space-y-6 text-left">
             <div className="space-y-4">
-              <span className="text-[10px] font-bold tracking-widest text-slate-400 uppercase">Select Workspace Module</span>
+              <span className="text-[10px] font-bold tracking-widest text-slate-400 uppercase">{t('signLanguage.selectWorkspaceModule', 'Select Workspace Module')}</span>
               
               <div className="space-y-3">
                 {sandboxModules.map((item, idx) => {
@@ -336,7 +338,7 @@ const Signlanguage = () => {
 
             {/* Description Card */}
             <div className="bg-slate-50/60 border border-slate-200/60 p-5 rounded-2xl">
-              <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">Module Objective</h4>
+              <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1.5">{t('signLanguage.moduleObjective', 'Module Objective')}</h4>
               <p className="text-xs sm:text-sm text-slate-700 font-semibold leading-relaxed">
                 {sandboxModules[activeSandboxModule].description}
               </p>
@@ -363,11 +365,11 @@ const Signlanguage = () => {
                           <Check size={20} strokeWidth={3} />
                         </div>
                         <div className="space-y-1">
-                          <h4 className="text-sm font-bold text-slate-900 tracking-wide">Challenge Complete!</h4>
-                          <p className="text-[11px] text-slate-500 font-medium">You identified all conversational gestures.</p>
+                          <h4 className="text-sm font-bold text-slate-900 tracking-wide">{t('signLanguage.challengeComplete', 'Challenge Complete!')}</h4>
+                          <p className="text-[11px] text-slate-500 font-medium">{t('signLanguage.identifiedGestures', 'You identified all conversational gestures.')}</p>
                         </div>
                         <div className="bg-slate-100 border border-slate-200 rounded-xl p-3 font-mono text-center">
-                          <span className="text-[10px] text-slate-500 block uppercase font-bold tracking-wider">Final Score</span>
+                          <span className="text-[10px] text-slate-500 block uppercase font-bold tracking-wider">{t('signLanguage.finalScore', 'Final Score')}</span>
                           <span className="text-lg font-black text-indigo-600">{viewportQuizScore} / {viewportQuizQuestions.length}</span>
                         </div>
                       </motion.div>
@@ -409,7 +411,7 @@ const Signlanguage = () => {
                             </>
                           ) : (
                             <div className="px-3.5 py-1 bg-slate-100 border border-slate-200/80 text-slate-500 rounded-full text-[9px] font-mono tracking-wider uppercase font-bold">
-                              Awaiting Match Option...
+                              {t('signLanguage.awaitingMatch', 'Awaiting Match Option...')}
                             </div>
                           )}
                         </div>
@@ -485,7 +487,7 @@ const Signlanguage = () => {
                     
                     <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white/95 border border-slate-200 text-[9px] text-indigo-600 font-mono px-3 py-1 rounded-full tracking-wider uppercase flex items-center gap-1.5 shadow-sm">
                       <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-ping" />
-                      Sensor mapping active
+                      {t('signLanguage.sensorMapping', 'Sensor mapping active')}
                     </div>
                   </div>
                 )}
@@ -493,7 +495,7 @@ const Signlanguage = () => {
                 {/* SIM FEED Badge */}
                 <div className="absolute top-4 left-4 z-10 bg-white/90 border border-slate-200/80 backdrop-blur-sm text-[9px] text-slate-500 font-mono px-2.5 py-1 rounded-md flex items-center gap-1.5 font-bold shadow-sm">
                   <span className="w-1.5 h-1.5 rounded-full bg-indigo-550 animate-pulse" />
-                  WORKSPACE FEED
+                  {t('signLanguage.workspaceFeed', 'WORKSPACE FEED')}
                 </div>
 
                 {/* Simple clean framing corners */}
@@ -523,7 +525,7 @@ const Signlanguage = () => {
                           }}
                           className="px-6 py-2 bg-indigo-650 hover:bg-indigo-700 text-white rounded-lg text-xs font-bold transition-all shadow-md shadow-indigo-600/10 cursor-pointer"
                         >
-                          Restart Challenge
+                          {t('signLanguage.restartChallenge', 'Restart Challenge')}
                         </button>
                       </div>
                     ) : (
@@ -606,7 +608,7 @@ const Signlanguage = () => {
                     <Link to="/sign-learn">
                       <button className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all shadow-sm shadow-indigo-600/10 cursor-pointer hover:-translate-y-0.5">
                         <BookOpen size={12} />
-                        Open Full Course
+                        {t('signLanguage.openFullCourse', 'Open Full Course')}
                       </button>
                     </Link>
                   </div>
@@ -629,7 +631,7 @@ const Signlanguage = () => {
                           }}
                           className="px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-lg text-xs font-bold flex items-center gap-1 transition-all shadow-sm cursor-pointer hover:-translate-y-0.5"
                         >
-                          Next Challenge <ArrowRight size={11} />
+                          {t('signLanguage.nextChallenge', 'Next Challenge')} <ArrowRight size={11} />
                         </button>
                       )}
                     </div>
@@ -645,18 +647,18 @@ const Signlanguage = () => {
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12 border-t border-slate-200/80 max-w-4xl mx-auto text-center">
           <div className="p-5 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1">
             <h5 className="text-3xl font-extrabold bg-gradient-to-r from-indigo-600 to-violet-700 bg-clip-text text-transparent">4+</h5>
-            <p className="text-xs sm:text-sm font-bold text-slate-800">Visual Learning Modules</p>
-            <p className="text-[11px] text-slate-500 font-medium leading-relaxed">Covering alphabets, numbers, Hindi swar & greetings.</p>
+            <p className="text-xs sm:text-sm font-bold text-slate-800">{t('signLanguage.visualLearningModules', 'Visual Learning Modules')}</p>
+            <p className="text-[11px] text-slate-500 font-medium leading-relaxed">{t('signLanguage.coveringAlphabets', 'Covering alphabets, numbers, Hindi swar & greetings.')}</p>
           </div>
           <div className="p-5 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1">
             <h5 className="text-3xl font-extrabold bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">100%</h5>
-            <p className="text-xs sm:text-sm font-bold text-slate-800">Curriculum Aligned</p>
-            <p className="text-[11px] text-slate-500 font-medium leading-relaxed">Mapped directly to secondary school lessons.</p>
+            <p className="text-xs sm:text-sm font-bold text-slate-800">{t('signLanguage.curriculumAligned', 'Curriculum Aligned')}</p>
+            <p className="text-[11px] text-slate-500 font-medium leading-relaxed">{t('signLanguage.mappedLessons', 'Mapped directly to secondary school lessons.')}</p>
           </div>
           <div className="p-5 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1">
             <h5 className="text-3xl font-extrabold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">Active</h5>
-            <p className="text-xs sm:text-sm font-bold text-slate-800">Interactive Demos</p>
-            <p className="text-[11px] text-slate-500 font-medium leading-relaxed">Skeletal hand matching and dictionary explorers.</p>
+            <p className="text-xs sm:text-sm font-bold text-slate-800">{t('signLanguage.interactiveDemos', 'Interactive Demos')}</p>
+            <p className="text-[11px] text-slate-500 font-medium leading-relaxed">{t('signLanguage.skeletalHand', 'Skeletal hand matching and dictionary explorers.')}</p>
           </div>
         </section>
 
