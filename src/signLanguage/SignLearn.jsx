@@ -1473,8 +1473,8 @@ const SignLearn = () => {
                     {filteredVideos.length === 0 ? (
                       <div className="bg-white rounded-[24px] border border-slate-100 p-12 text-center space-y-3">
                         <Video size={40} className="text-slate-300 mx-auto" />
-                        <h4 className="text-lg font-bold text-slate-800">No matching videos found</h4>
-                        <p className="text-sm text-slate-500 max-w-sm mx-auto">Try selecting a different source category, level filter, or search term.</p>
+                        <h4 className="text-lg font-bold text-slate-800">{t('signLearn.noMatchingVideos', 'No matching videos found')}</h4>
+                        <p className="text-sm text-slate-500 max-w-sm mx-auto">{t('signLearn.tryDifferentFilter', 'Try selecting a different source category, level filter, or search term.')}</p>
                         <button
                           onClick={() => {
                             setVideoCategoryFilter('All');
@@ -1483,61 +1483,68 @@ const SignLearn = () => {
                           }}
                           className="mt-2 px-5 py-2 rounded-full bg-teal-600 text-white text-xs font-bold hover:bg-teal-700 transition-colors cursor-pointer shadow-sm"
                         >
-                          Reset All Filters
+                          {t('signLearn.resetAllFilters', 'Reset All Filters')}
                         </button>
                       </div>
                     ) : (
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                        {filteredVideos.map(video => (
-                          <div
-                            key={video.id}
-                            onClick={() => {
-                              if (video.sourceType === 'external' || video.redirectOnly) {
-                                window.open(video.directUrl || video.youtubeUrl, '_blank', 'noopener,noreferrer');
-                              } else {
-                                setActiveVideo(video);
-                                setIsModalOpen(true);
-                              }
-                            }}
-                            className="bg-white rounded-[20px] overflow-hidden border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg hover:-translate-y-1 transition-all cursor-pointer group flex flex-col"
-                          >
-                            <div className="relative aspect-video bg-slate-100 overflow-hidden shrink-0">
-                              <img loading="lazy" decoding="async" src={video.image} alt={video.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 flex items-center justify-center transition-colors">
-                                <div className="w-12 h-12 rounded-full bg-white/90 text-slate-800 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                                  {video.sourceType === 'external' ? (
-                                    <ExternalLink className="w-5 h-5 text-slate-800" />
-                                  ) : (
-                                    <Play className="ml-0.5 w-6 h-6 fill-current text-slate-800" />
-                                  )}
+                        {filteredVideos.map(video => {
+                          const vTitle = video.id <= 58 ? t(`signLearn.vid${video.id}_title`, video.title) : t(`signLearn.ext_${video.id}_title`, video.title);
+                          const vDesc = video.id <= 58 ? t(`signLearn.vid${video.id}_desc`, video.desc) : t(`signLearn.ext_${video.id}_desc`, video.desc);
+                          const vChannel = t(`signLearn.channel_${(video.channelName || '').replace(/[^a-zA-Z0-9]/g, '')}`, video.channelName || 'Lesson');
+                          const vLevel = t(`signLearn.level_${video.level}`, video.level);
+
+                          return (
+                            <div
+                              key={video.id}
+                              onClick={() => {
+                                if (video.sourceType === 'external' || video.redirectOnly) {
+                                  window.open(video.directUrl || video.youtubeUrl, '_blank', 'noopener,noreferrer');
+                                } else {
+                                  setActiveVideo(video);
+                                  setIsModalOpen(true);
+                                }
+                              }}
+                              className="bg-white rounded-[20px] overflow-hidden border border-slate-100 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-lg hover:-translate-y-1 transition-all cursor-pointer group flex flex-col"
+                            >
+                              <div className="relative aspect-video bg-slate-100 overflow-hidden shrink-0">
+                                <img loading="lazy" decoding="async" src={video.image} alt={vTitle} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 flex items-center justify-center transition-colors">
+                                  <div className="w-12 h-12 rounded-full bg-white/90 text-slate-800 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                    {video.sourceType === 'external' ? (
+                                      <ExternalLink className="w-5 h-5 text-slate-800" />
+                                    ) : (
+                                      <Play className="ml-0.5 w-6 h-6 fill-current text-slate-800" />
+                                    )}
+                                  </div>
+                                </div>
+                                <div className="absolute bottom-2 left-2 px-2 py-1 bg-black/70 backdrop-blur-sm rounded-md text-white text-[10px] font-bold flex items-center gap-1">
+                                  <Clock size={12} /> {video.duration}
                                 </div>
                               </div>
-                              <div className="absolute bottom-2 left-2 px-2 py-1 bg-black/70 backdrop-blur-sm rounded-md text-white text-[10px] font-bold flex items-center gap-1">
-                                <Clock size={12} /> {video.duration}
-                              </div>
-                            </div>
 
-                            <div className="p-4 flex-1 flex flex-col justify-between">
-                              <div>
-                                <div className="flex items-center justify-between gap-2 mb-2">
-                                  <span className="text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider bg-slate-100 text-slate-700">
-                                    {video.channelName || 'Lesson'}
-                                  </span>
-                                  <span className="flex items-center gap-1 text-[11px] font-bold text-slate-400">
-                                    <GraduationCap size={13} className="text-slate-400" /> {video.level}
-                                  </span>
+                              <div className="p-4 flex-1 flex flex-col justify-between">
+                                <div>
+                                  <div className="flex items-center justify-between gap-2 mb-2">
+                                    <span className="text-[10px] font-bold px-2.5 py-1 rounded-md uppercase tracking-wider bg-slate-100 text-slate-700">
+                                      {vChannel}
+                                    </span>
+                                    <span className="flex items-center gap-1 text-[11px] font-bold text-slate-400">
+                                      <GraduationCap size={13} className="text-slate-400" /> {vLevel}
+                                    </span>
+                                  </div>
+
+                                  <h3 className="text-[15px] font-bold text-slate-900 leading-tight mb-1.5 group-hover:text-slate-700 transition-colors line-clamp-2">
+                                    {vTitle}
+                                  </h3>
+                                  <p className="text-xs text-slate-500 font-medium line-clamp-2 mb-3">
+                                    {vDesc}
+                                  </p>
                                 </div>
-
-                                <h3 className="text-[15px] font-bold text-slate-900 leading-tight mb-1.5 group-hover:text-slate-700 transition-colors line-clamp-2">
-                                  {video.title}
-                                </h3>
-                                <p className="text-xs text-slate-500 font-medium line-clamp-2 mb-3">
-                                  {video.desc}
-                                </p>
                               </div>
                             </div>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     )}
                   </div>
@@ -1562,64 +1569,70 @@ const SignLearn = () => {
           className={`relative w-full max-w-3xl bg-white rounded-[24px] overflow-hidden shadow-2xl z-10 flex flex-col m-auto h-auto transition-all duration-300 transform ${isModalOpen ? 'scale-100 translate-y-0' : 'scale-95 translate-y-4'
             }`}
         >
-          {activeVideo && (
-            <>
-              <div className="p-3 sm:p-4 border-b border-slate-100 flex items-center justify-between bg-white shrink-0">
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center shrink-0">
-                    <Play size={16} className="fill-current" />
+          {activeVideo && (() => {
+            const mTitle = activeVideo.id <= 58 ? t(`signLearn.vid${activeVideo.id}_title`, activeVideo.title) : t(`signLearn.ext_${activeVideo.id}_title`, activeVideo.title);
+            const mLevel = t(`signLearn.level_${activeVideo.level}`, activeVideo.level);
+            const mContent = activeVideo.id <= 58 ? t(`signLearn.vid${activeVideo.id}_content`, activeVideo.content || activeVideo.desc) : t(`signLearn.ext_${activeVideo.id}_desc`, activeVideo.desc);
+
+            return (
+              <>
+                <div className="p-3 sm:p-4 border-b border-slate-100 flex items-center justify-between bg-white shrink-0">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center shrink-0">
+                      <Play size={16} className="fill-current" />
+                    </div>
+                    <div>
+                      <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-tight pr-8">{mTitle}</h2>
+                      <div className="flex items-center gap-3 text-[11px] font-bold text-slate-500 mt-0.5">
+                        <span className="flex items-center gap-1"><Clock size={12} /> {activeVideo.duration}</span>
+                        <span className="w-1 h-1 rounded-full bg-slate-300" />
+                        <span className="text-teal-600">{mLevel}</span>
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-tight pr-8">{activeVideo.title}</h2>
-                    <div className="flex items-center gap-3 text-[11px] font-bold text-slate-500 mt-0.5">
-                      <span className="flex items-center gap-1"><Clock size={12} /> {activeVideo.duration}</span>
-                      <span className="w-1 h-1 rounded-full bg-slate-300" />
-                      <span className="text-teal-600">{activeVideo.level}</span>
+                  <div className="absolute top-3 sm:top-4 right-3 sm:right-4 flex items-center gap-2">
+                    <button
+                      onClick={() => {
+                        window.open(activeVideo.directUrl || activeVideo.youtubeUrl, '_blank', 'noopener,noreferrer');
+                      }}
+                      className="px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-900 text-slate-700 hover:text-white border border-slate-200 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
+                      title="Watch directly on YouTube"
+                    >
+                      <span>{t('signLearn.watchOnYoutube', 'Watch on YouTube')}</span>
+                      <ExternalLink size={13} />
+                    </button>
+                    <button
+                      onClick={() => setIsModalOpen(false)}
+                      className="w-7 h-7 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-900 flex items-center justify-center transition-colors cursor-pointer"
+                    >
+                      <XCircle size={18} />
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex-1 flex flex-col">
+                  <div className="w-full aspect-video bg-slate-900 relative group">
+                    <iframe
+                      src={isModalOpen ? activeVideo.youtubeUrl.replace('youtube.com', 'youtube-nocookie.com') : ''}
+                      title={mTitle}
+                      className="w-full h-full border-0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  </div>
+
+                  <div className="p-5 sm:p-6 max-h-[200px] overflow-y-auto">
+                    <h3 className="text-[15px] sm:text-[16px] font-bold text-slate-900 mb-2 flex items-center gap-2">
+                      <BookOpen size={18} className="text-teal-500" /> {t('signLearn.lessonSummary', 'Lesson Summary')}
+                    </h3>
+                    <div className="prose prose-slate max-w-none text-slate-600 text-[13px] sm:text-[15px] leading-relaxed">
+                      <p>{mContent}</p>
                     </div>
                   </div>
                 </div>
-                <div className="absolute top-3 sm:top-4 right-3 sm:right-4 flex items-center gap-2">
-                  <button
-                    onClick={() => {
-                      window.open(activeVideo.directUrl || activeVideo.youtubeUrl, '_blank', 'noopener,noreferrer');
-                    }}
-                    className="px-3 py-1.5 rounded-full bg-slate-100 hover:bg-slate-900 text-slate-700 hover:text-white border border-slate-200 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-sm"
-                    title="Watch directly on YouTube"
-                  >
-                    <span>Watch on YouTube</span>
-                    <ExternalLink size={13} />
-                  </button>
-                  <button
-                    onClick={() => setIsModalOpen(false)}
-                    className="w-7 h-7 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 hover:text-slate-900 flex items-center justify-center transition-colors cursor-pointer"
-                  >
-                    <XCircle size={18} />
-                  </button>
-                </div>
-              </div>
-
-              <div className="flex-1 flex flex-col">
-                <div className="w-full aspect-video bg-slate-900 relative group">
-                  <iframe
-                    src={isModalOpen ? activeVideo.youtubeUrl.replace('youtube.com', 'youtube-nocookie.com') : ''}
-                    title={activeVideo.title}
-                    className="w-full h-full border-0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                </div>
-
-                <div className="p-5 sm:p-6 max-h-[200px] overflow-y-auto">
-                  <h3 className="text-[15px] sm:text-[16px] font-bold text-slate-900 mb-2 flex items-center gap-2">
-                    <BookOpen size={18} className="text-teal-500" /> Lesson Summary
-                  </h3>
-                  <div className="prose prose-slate max-w-none text-slate-600 text-[13px] sm:text-[15px] leading-relaxed">
-                    <p>{activeVideo.content}</p>
-                  </div>
-                </div>
-              </div>
-            </>
-          )}
+              </>
+            );
+          })()}
         </div>
       </div>
     </div>

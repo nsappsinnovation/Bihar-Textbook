@@ -1738,7 +1738,12 @@
     "ext_116_title": "ISL Learning: Road & Traffic Signs",
     "ext_116_desc": "Important road and traffic safety signs.",
     "ext_117_title": "ISL Learning: Facts About Indian Cities",
-    "ext_117_desc": "Learn signs for major cities and interesting facts."
+    "ext_117_desc": "Learn signs for major cities and interesting facts.",
+    "watchOnYoutube": "Watch on YouTube",
+    "lessonSummary": "Lesson Summary",
+    "noMatchingVideos": "No matching videos found",
+    "tryDifferentFilter": "Try selecting a different source category, level filter, or search term.",
+    "resetAllFilters": "Reset All Filters"
   },
   "signLanguage": {
     "practiceChallenge": "Practice Challenge",
