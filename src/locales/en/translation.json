@@ -6602,5 +6602,36 @@
       "docPreview": "Document Preview: {{name}}",
       "clickToInteract": "Click to interact with PDF"
     }
+  },
+  "ling": {
+    "letsLearn": "Let's learn",
+    "aNew": "a new",
+    "language": "language",
+    "heroDesc": "Have a conversation in different languages and explore diverse regional dialects.",
+    "basicWords": "Basic Words",
+    "basicWordsDesc": "Master foundational vocabulary",
+    "basicPhrases": "Basic Phrases",
+    "basicPhrasesDesc": "Learn essential daily sentences",
+    "conversations": "Conversations",
+    "conversationsDesc": "Interactive real-life dialogues",
+    "LanguageTitle": "Language",
+    "langYouKnow": "you know",
+    "langYouKnowDesc": "Select your primary language.",
+    "langYouWant": "you want to learn",
+    "langYouWantDesc": "Select a target language to start the module.",
+    "startLearning": "Start Learning",
+    "notAvailable": "Not available yet",
+    "lang_hi": "Hindi",
+    "lang_en": "English",
+    "lang_bho": "Bhojpuri",
+    "lang_mai": "Maithili",
+    "lang_mag": "Magahi",
+    "lang_anp": "Angika",
+    "lang_bjj": "Bajjika",
+    "lang_de": "German",
+    "lang_fr": "French",
+    "lang_es": "Spanish",
+    "lang_ja": "Japanese",
+    "lang_it": "Italian"
   }
 }
