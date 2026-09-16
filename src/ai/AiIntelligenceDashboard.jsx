@@ -1123,41 +1123,6 @@ const PromptAcademyComponent = () => {
                   exit={{ opacity: 0, y: -10 }}
                   className="space-y-6"
                 >
-                  {/* Quest Mission Banner */}
-                  <div className="bg-gradient-to-r from-purple-900 via-indigo-900 to-slate-900 text-white rounded-2xl p-4 sm:p-6 shadow-lg border border-purple-800/50 relative overflow-hidden">
-                    <div className="absolute -right-6 -bottom-6 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl pointer-events-none" />
-                    <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 relative z-10">
-                      <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-full border-2 border-purple-400/40 p-0.5 shrink-0 shadow-md bg-purple-950/80">
-                          {getCharacterImage(activeLesson)}
-                        </div>
-                        <div>
-                          <div className="flex items-center gap-2 flex-wrap mb-1">
-                            <span className="text-xs font-black uppercase text-purple-300 tracking-wider font-display">
-                              {t('ai.questMissionTitle', 'Practice Quest Mission')}
-                            </span>
-                            <span className="text-[10px] font-black uppercase bg-purple-500/30 text-purple-200 border border-purple-400/30 px-2.5 py-0.5 rounded-full flex items-center gap-1 shadow-sm">
-                              <Trophy size={12} className="text-amber-300" />
-                              {t('ai.targetBadge', 'Badge Reward')}: {t(`ai.badge_${activeLesson.id}`, activeLesson.quest.badge)}
-                            </span>
-                          </div>
-                          <h4 className="text-sm sm:text-base font-bold text-white leading-snug">
-                            <span className="text-amber-300 font-extrabold">{t(`ai.characterName_${activeLesson.id}`, activeLesson.quest.characterName)}:</span> "{t(`ai.characterMsg_${activeLesson.id}`, activeLesson.quest.characterMsg)}"
-                          </h4>
-                        </div>
-                      </div>
-
-                      <div className="shrink-0 bg-white/10 backdrop-blur-md rounded-xl p-3 border border-white/10 w-full md:w-auto md:max-w-[260px]">
-                        <span className="text-[10px] font-extrabold text-purple-200 uppercase tracking-wider block mb-1">
-                          {t('ai.initialBoringPrompt', 'Weak Initial Prompt')} 😴
-                        </span>
-                        <p className="text-xs font-mono text-amber-200 bg-black/40 px-2.5 py-1.5 rounded-lg border border-amber-500/20 truncate">
-                          "{t(`ai.boringPrompt_${activeLesson.id}`, activeLesson.quest.boringPrompt)}"
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
                   <div className="flex flex-col lg:flex-row gap-6 items-stretch">
                     {/* LEFT: Combination Builder */}
                     <div className="flex-1 flex flex-col w-full bg-slate-50/50 rounded-2xl p-4 sm:p-5 border border-slate-100 shadow-sm">
