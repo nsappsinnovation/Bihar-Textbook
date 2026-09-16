@@ -1030,10 +1030,10 @@ const PromptAcademyComponent = () => {
                       {t('ai.lesson', 'Lesson')} {lesson.id}
                     </span>
                     <h4 className="text-sm font-black font-display truncate leading-tight mb-0.5">
-                      {lesson.title}
+                      {t(`ai.lessonTitle_${lesson.id}`, lesson.title)}
                     </h4>
                     <span className="text-[11px] font-bold text-slate-400 truncate block">
-                      {lesson.concept}
+                      {t(`ai.lessonConcept_${lesson.id}`, lesson.concept)}
                     </span>
                   </div>
                 </div>
@@ -1091,16 +1091,16 @@ const PromptAcademyComponent = () => {
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <h3 className="text-lg sm:text-xl font-black text-slate-800 font-display mb-1">
-                        {activeLesson.learn.title}
+                        {t(`ai.lessonLearnTitle_${activeLesson.id}`, activeLesson.learn.title)}
                       </h3>
                       <p className="text-xs sm:text-sm text-purple-500 font-black font-display">
-                        {activeLesson.learn.subtitle}
+                        {t(`ai.lessonLearnSub_${activeLesson.id}`, activeLesson.learn.subtitle)}
                       </p>
                     </div>
                   </div>
 
                   <div className="bg-gradient-to-br from-purple-50/80 to-purple-50/40 border border-purple-100 rounded-2xl p-6 shadow-sm min-h-[200px]">
-                    {renderProfessionalTextOutput(activeLesson.learn.description, activeLesson.id)}
+                    {renderProfessionalTextOutput(t(`ai.lessonLearnDesc_${activeLesson.id}`, activeLesson.learn.description), activeLesson.id)}
                   </div>
 
                   <div className="pt-4 flex justify-end">
@@ -1568,12 +1568,12 @@ const ExploreToolsComponent = () => {
               <div>
                 <h4 className="text-base font-bold text-slate-900 group-hover:text-purple-600 transition-colors">{tool.name}</h4>
                 <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md mt-1 inline-block ${tool.color}`}>
-                  {tool.tag}
+                  {t(`ai.toolTag_${tool.name.replace(/[^a-zA-Z0-9]/g, '')}`, tool.tag)}
                 </span>
               </div>
             </div>
             <p className="text-sm text-slate-500 leading-relaxed font-medium">
-              {tool.desc}
+              {t(`ai.toolDesc_${tool.name.replace(/[^a-zA-Z0-9]/g, '')}`, tool.desc)}
             </p>
 
           </div>
