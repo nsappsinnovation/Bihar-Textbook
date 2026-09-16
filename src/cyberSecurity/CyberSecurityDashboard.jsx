@@ -1819,6 +1819,51 @@ const cyberTheme = {
   inactiveSubtitleText: 'text-slate-500'
 };
 
+const getQuickStats = (t) => [
+  { id: 'playzone', label: t("cyber.label_SafetyPlayzone_45e1", { defaultValue: "Safety Playzone" }), value: t("cyber.value_CyberSecurityModules_086c", { defaultValue: "Cyber Security Modules" }), icon: <Shield className={cyberTheme.card1Icon} />, color: cyberTheme.card1Bg },
+  { id: 'knowledge', label: t("cyber.label_KnowledgeBase_0830", { defaultValue: "Knowledge Base" }), value: t("cyber.value_GlossaryReadingMater_ddd4", { defaultValue: "Glossary & Reading Materials" }), icon: <BookOpen className={cyberTheme.card2Icon} />, color: cyberTheme.card2Bg },
+  { id: 'assessment', label: t("cyber.label_SkillAssessment_31f8", { defaultValue: "Skill Assessment" }), value: t("cyber.value_QuizzesVerification_607a", { defaultValue: "Quizzes & Verification" }), icon: <Trophy className={cyberTheme.card3Icon} />, color: cyberTheme.card3Bg },
+];
+
+const getArticles = (t) => [
+  {
+    id: 1,
+    title: t("cyber.title_CoreCyberSecurityGlo", { defaultValue: "Core Cyber Security Glossary & Definitions" }),
+    desc: t("cyber.desc_Essentialdefinitions", { defaultValue: "Essential definitions for core cyber security terminology and concepts." }),
+    content: t("cyber.content_MASTERINGCYBERSECURI_0eae", { defaultValue: "MASTERING CYBER SECURITY TERMINOLOGY\n\n• Phishing: Deceptive communications disguised as legitimate entities designed to trick users into disclosing sensitive credentials.\n• Ransomware: Malicious software that encrypts user files and demands financial ransom for the decryption key.\n• Multi-Factor Authentication (MFA): A security mechanism requiring two or more independent credentials to verify user identity.\n• Zero-Day Exploit: A cyber attack targeting a newly discovered software vulnerability before a patch is available.\n• End-to-End Encryption: Cryptographic protocols that secure data in transit so only authorized recipients can decipher it.\n• Social Engineering: Psychological manipulation techniques used by threat actors to breach human security barriers." })
+  },
+  {
+    id: 2,
+    title: t("cyber.title_Top10RulesforDigital", { defaultValue: "Top 10 Rules for Digital Footprint & Online Privacy" }),
+    desc: t("cyber.desc_Professionalchecklis", { defaultValue: "Professional checklist for maintaining personal privacy and securing your digital footprint." }),
+    content: t("cyber.content_PROTECTINGYOURONLINE_b167", { defaultValue: "PROTECTING YOUR ONLINE IDENTIFIER & FOOTPRINT\n\n1. Practice Data Minimization: Never enter unnecessary personal details on public web forms.\n2. Enable Multi-Factor Authentication (MFA) on all financial and primary email accounts.\n3. Audit Application Permissions: Regularly revoke microphone, location, and background data access from unused apps.\n4. Use Unique Passwords: Avoid credential reuse across multiple web platforms.\n5. Inspect URLs Carefully: Verify HTTPS protocol and exact domain spelling before entering authentication credentials.\n6. Keep Software Updated: System updates contain critical patches for known exploits.\n7. Avoid Unsecured Public Wi-Fi: Use a trusted VPN or mobile network when logging into private accounts on public networks.\n8. Restrict Social & Profile Privacy: Regularly audit privacy settings to ensure only trusted contacts view your posts and personal details.\n9. Protect OTPs & Verification Codes: Never share One-Time Passwords with anyone—banks and platform admins will never request them.\n10. Think Before You Post: Remember that everything shared online leaves a lasting digital footprint—be mindful of location tags, personal photos, and sensitive data." })
+  },
+  {
+    id: 3,
+    title: t("cyber.title_EmergencyIncidentRes", { defaultValue: "Emergency Incident Response: What to Do If Compromised" }),
+    desc: t("cyber.desc_Actionablestepbystep", { defaultValue: "Actionable step-by-step protocol to contain security breaches and recover compromised accounts." }),
+    content: t("cyber.content_IMMEDIATERESPONSEPRO_bb99", { defaultValue: "IMMEDIATE RESPONSE PROTOCOL FOR COMPROMISED ACCOUNTS\n\nStep 1: Isolate the Affected Device — Disconnect from Wi-Fi or cellular networks to prevent lateral malware spread.\nStep 2: Reset Primary Credentials — Use a clean, uncompromised device to reset passwords for your primary email and bank accounts.\nStep 3: Terminate Active Sessions — Use account security settings to force 'Log Out of All Devices'.\nStep 4: Run Full Diagnostic Scans — Execute a comprehensive anti-malware scan to remove persistent trojans or keyloggers.\nStep 5: Monitor Financial Statements — Notify banking institutions immediately if unauthorized transactions appear." })
+  },
+  {
+    id: 4,
+    title: t("cyber.title_AnatomyofModernPhish", { defaultValue: "Anatomy of Modern Phishing, Smishing & Vishing Attacks" }),
+    desc: t("cyber.desc_Indepthanalysisofema", { defaultValue: "In-depth analysis of email spoofing, SMS phishing (smishing), QR code scams (quishing), and AI voice calls." }),
+    content: t("cyber.content_UNDERSTANDINGMODERNS_3924", { defaultValue: "UNDERSTANDING MODERN SOCIAL ENGINEERING VECTORS\n\n• Email Phishing: Look for spoofed sender headers, urgent emotional triggers ('Immediate Account Suspension'), and hidden destination URLs.\n• Smishing (SMS Scams): Unsolicited text messages claiming package delivery failures or bank KYC verification links.\n• Quishing (QR Code Scams): Malicious QR codes placed over legitimate parking or payment displays that redirect to credential harvesting forms.\n• Vishing & Deepfake Audio: Scammers using voice cloning technology over phone calls to impersonate colleagues or family members." })
+  },
+  {
+    id: 5,
+    title: t("cyber.title_NISTPasswordGuidelin", { defaultValue: "NIST Password Guidelines & Credential Management" }),
+    desc: t("cyber.desc_Modernstandardsforpa", { defaultValue: "Modern standards for passphrase length, entropy, passkeys, and secure password managers." }),
+    content: t("cyber.content_MODERNPASSWORDHYGIEN_1b20", { defaultValue: "MODERN PASSWORD HYGIENE (NIST SPECIAL PUBLICATION 800-63B)\n\n• Prioritize Length Over Complexity: A 16-character passphrase composed of memorable words is far stronger than an 8-character complex string.\n• Adopt Password Managers: Zero-knowledge encrypted vaults eliminate human memory limitations and generate unique high-entropy secrets.\n• Transition to Passkeys: Public-key cryptography (FIDO2/WebAuthn) replaces vulnerable passwords with hardware-backed biometric verification." })
+  },
+  {
+    id: 6,
+    title: t("cyber.title_SecuringPublicWiFiMo", { defaultValue: "Securing Public Wi-Fi, Mobile Devices & Smart Home IoT" }),
+    desc: t("cyber.desc_Bestpracticesforsafe", { defaultValue: "Best practices for safe browsing on open networks and isolating connected smart devices." }),
+    content: t("cyber.content_NETWORKDEVICEHARDENI_6f53", { defaultValue: "NETWORK & DEVICE HARDENING GUIDELINES\n\n• Public Wi-Fi Precautions: Never perform sensitive banking or corporate logins over unencrypted open Wi-Fi without a verified Virtual Private Network (VPN).\n• Bluetooth & AirDrop Hardening: Disable discoverability when in public terminals or crowded transport hubs.\n• IoT Network Isolation: Place smart TVs, cameras, and IoT home appliances on a dedicated Guest Wi-Fi network separated from primary work computers." })
+  }
+];
+
 const CyberSecurityDashboard = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -1894,51 +1939,6 @@ const CyberSecurityDashboard = () => {
       document.body.style.width = '';
     };
   }, [selectedItem]);
-
-  const getQuickStats = (t) => [
-  { id: 'playzone', label: t("cyber.label_SafetyPlayzone_45e1", { defaultValue: "Safety Playzone" }), value: t("cyber.value_CyberSecurityModules_086c", { defaultValue: "Cyber Security Modules" }), icon: <Shield className={cyberTheme.card1Icon} />, color: cyberTheme.card1Bg },
-  { id: 'knowledge', label: t("cyber.label_KnowledgeBase_0830", { defaultValue: "Knowledge Base" }), value: t("cyber.value_GlossaryReadingMater_ddd4", { defaultValue: "Glossary & Reading Materials" }), icon: <BookOpen className={cyberTheme.card2Icon} />, color: cyberTheme.card2Bg },
-  { id: 'assessment', label: t("cyber.label_SkillAssessment_31f8", { defaultValue: "Skill Assessment" }), value: t("cyber.value_QuizzesVerification_607a", { defaultValue: "Quizzes & Verification" }), icon: <Trophy className={cyberTheme.card3Icon} />, color: cyberTheme.card3Bg },
-];
-
-  const getArticles = (t) => [
-    {
-      id: 1,
-      title: t("cyber.title_CoreCyberSecurityGlo", { defaultValue: "Core Cyber Security Glossary & Definitions" }),
-      desc: t("cyber.desc_Essentialdefinitions", { defaultValue: "Essential definitions for core cyber security terminology and concepts." }),
-      content: t("cyber.content_MASTERINGCYBERSECURI_0eae", { defaultValue: "MASTERING CYBER SECURITY TERMINOLOGY\n\n• Phishing: Deceptive communications disguised as legitimate entities designed to trick users into disclosing sensitive credentials.\n• Ransomware: Malicious software that encrypts user files and demands financial ransom for the decryption key.\n• Multi-Factor Authentication (MFA): A security mechanism requiring two or more independent credentials to verify user identity.\n• Zero-Day Exploit: A cyber attack targeting a newly discovered software vulnerability before a patch is available.\n• End-to-End Encryption: Cryptographic protocols that secure data in transit so only authorized recipients can decipher it.\n• Social Engineering: Psychological manipulation techniques used by threat actors to breach human security barriers." })
-    },
-    {
-      id: 2,
-      title: t("cyber.title_Top10RulesforDigital", { defaultValue: "Top 10 Rules for Digital Footprint & Online Privacy" }),
-      desc: t("cyber.desc_Professionalchecklis", { defaultValue: "Professional checklist for maintaining personal privacy and securing your digital footprint." }),
-      content: t("cyber.content_PROTECTINGYOURONLINE_b167", { defaultValue: "PROTECTING YOUR ONLINE IDENTIFIER & FOOTPRINT\n\n1. Practice Data Minimization: Never enter unnecessary personal details on public web forms.\n2. Enable Multi-Factor Authentication (MFA) on all financial and primary email accounts.\n3. Audit Application Permissions: Regularly revoke microphone, location, and background data access from unused apps.\n4. Use Unique Passwords: Avoid credential reuse across multiple web platforms.\n5. Inspect URLs Carefully: Verify HTTPS protocol and exact domain spelling before entering authentication credentials.\n6. Keep Software Updated: System updates contain critical patches for known exploits.\n7. Avoid Unsecured Public Wi-Fi: Use a trusted VPN or mobile network when logging into private accounts on public networks.\n8. Restrict Social & Profile Privacy: Regularly audit privacy settings to ensure only trusted contacts view your posts and personal details.\n9. Protect OTPs & Verification Codes: Never share One-Time Passwords with anyone—banks and platform admins will never request them.\n10. Think Before You Post: Remember that everything shared online leaves a lasting digital footprint—be mindful of location tags, personal photos, and sensitive data." })
-    },
-    {
-      id: 3,
-      title: t("cyber.title_EmergencyIncidentRes", { defaultValue: "Emergency Incident Response: What to Do If Compromised" }),
-      desc: t("cyber.desc_Actionablestepbystep", { defaultValue: "Actionable step-by-step protocol to contain security breaches and recover compromised accounts." }),
-      content: t("cyber.content_IMMEDIATERESPONSEPRO_bb99", { defaultValue: "IMMEDIATE RESPONSE PROTOCOL FOR COMPROMISED ACCOUNTS\n\nStep 1: Isolate the Affected Device — Disconnect from Wi-Fi or cellular networks to prevent lateral malware spread.\nStep 2: Reset Primary Credentials — Use a clean, uncompromised device to reset passwords for your primary email and bank accounts.\nStep 3: Terminate Active Sessions — Use account security settings to force 'Log Out of All Devices'.\nStep 4: Run Full Diagnostic Scans — Execute a comprehensive anti-malware scan to remove persistent trojans or keyloggers.\nStep 5: Monitor Financial Statements — Notify banking institutions immediately if unauthorized transactions appear." })
-    },
-    {
-      id: 4,
-      title: t("cyber.title_AnatomyofModernPhish", { defaultValue: "Anatomy of Modern Phishing, Smishing & Vishing Attacks" }),
-      desc: t("cyber.desc_Indepthanalysisofema", { defaultValue: "In-depth analysis of email spoofing, SMS phishing (smishing), QR code scams (quishing), and AI voice calls." }),
-      content: t("cyber.content_UNDERSTANDINGMODERNS_3924", { defaultValue: "UNDERSTANDING MODERN SOCIAL ENGINEERING VECTORS\n\n• Email Phishing: Look for spoofed sender headers, urgent emotional triggers ('Immediate Account Suspension'), and hidden destination URLs.\n• Smishing (SMS Scams): Unsolicited text messages claiming package delivery failures or bank KYC verification links.\n• Quishing (QR Code Scams): Malicious QR codes placed over legitimate parking or payment displays that redirect to credential harvesting forms.\n• Vishing & Deepfake Audio: Scammers using voice cloning technology over phone calls to impersonate colleagues or family members." })
-    },
-    {
-      id: 5,
-      title: t("cyber.title_NISTPasswordGuidelin", { defaultValue: "NIST Password Guidelines & Credential Management" }),
-      desc: t("cyber.desc_Modernstandardsforpa", { defaultValue: "Modern standards for passphrase length, entropy, passkeys, and secure password managers." }),
-      content: t("cyber.content_MODERNPASSWORDHYGIEN_1b20", { defaultValue: "MODERN PASSWORD HYGIENE (NIST SPECIAL PUBLICATION 800-63B)\n\n• Prioritize Length Over Complexity: A 16-character passphrase composed of memorable words is far stronger than an 8-character complex string.\n• Adopt Password Managers: Zero-knowledge encrypted vaults eliminate human memory limitations and generate unique high-entropy secrets.\n• Transition to Passkeys: Public-key cryptography (FIDO2/WebAuthn) replaces vulnerable passwords with hardware-backed biometric verification." })
-    },
-    {
-      id: 6,
-      title: t("cyber.title_SecuringPublicWiFiMo", { defaultValue: "Securing Public Wi-Fi, Mobile Devices & Smart Home IoT" }),
-      desc: t("cyber.desc_Bestpracticesforsafe", { defaultValue: "Best practices for safe browsing on open networks and isolating connected smart devices." }),
-      content: t("cyber.content_NETWORKDEVICEHARDENI_6f53", { defaultValue: "NETWORK & DEVICE HARDENING GUIDELINES\n\n• Public Wi-Fi Precautions: Never perform sensitive banking or corporate logins over unencrypted open Wi-Fi without a verified Virtual Private Network (VPN).\n• Bluetooth & AirDrop Hardening: Disable discoverability when in public terminals or crowded transport hubs.\n• IoT Network Isolation: Place smart TVs, cameras, and IoT home appliances on a dedicated Guest Wi-Fi network separated from primary work computers." })
-    }
-  ];
 
   const renderContent = () => {
     return (
