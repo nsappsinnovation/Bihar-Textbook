@@ -2299,7 +2299,7 @@ const CyberSecurityDashboard = () => {
                     <div className="pr-4 pb-2 mt-4 lg:mt-0">
                       <div className="flex flex-wrap items-center gap-3 mb-5">
                         <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-700 flex items-center gap-1.5">
-                          <Play size={12} fill="currentColor" /> VIDEO MODULE
+                          <Play size={12} fill="currentColor" /> {t("cyber.ui_VIDEOMODULE_9525", { defaultValue: "VIDEO MODULE" })}
                         </span>
                         {selectedItem.duration && <span className="flex items-center gap-1.5 text-[11px] font-bold text-slate-500"><Clock size={14} /> {selectedItem.duration}</span>}
                       </div>
@@ -2311,7 +2311,7 @@ const CyberSecurityDashboard = () => {
                       <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
                         <h3 className="text-sm font-black text-slate-800 mb-4 flex items-center gap-2 uppercase tracking-wide">
                            <Shield className="text-emerald-500" size={18}/>
-                           Lesson Details
+                           {t("cyber.ui_LessonDetails_b844", { defaultValue: "Lesson Details" })}
                         </h3>
                         <p className="text-sm font-medium text-slate-700 leading-relaxed whitespace-pre-line">
                           {selectedItem.content}
@@ -2347,7 +2347,7 @@ const CyberSecurityDashboard = () => {
                   <div className="relative z-10 pr-8">
                     <div className="flex items-center gap-2 mb-2.5">
                       <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-400/20 text-emerald-300 border border-emerald-400/30 flex items-center gap-1.5 shadow-sm">
-                        <FileText size={12} className="text-emerald-300" /> READING MATERIAL
+                        <FileText size={12} className="text-emerald-300" /> {t("cyber.ui_READINGMATERIAL_639b", { defaultValue: "READING MATERIAL" })}
                       </span>
                       {selectedItem.duration && (
                         <span className="flex items-center gap-1 text-[11px] font-bold text-emerald-200/80 bg-black/20 px-2.5 py-0.5 rounded-full">
