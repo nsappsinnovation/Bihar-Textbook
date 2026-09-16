@@ -1992,7 +1992,7 @@ const CyberSecurityDashboard = () => {
                       {currentLesson.title}
                     </h2>
                     <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
-                      Topic Focus: <span className="text-emerald-600 font-bold">{currentLesson.topic}</span>
+                      {t("cyber.ui_TopicFocus", { defaultValue: "Topic Focus:" })} <span className="text-emerald-600 font-bold">{currentLesson.topic}</span>
                     </p>
                   </div>
                 </div>
@@ -2003,7 +2003,7 @@ const CyberSecurityDashboard = () => {
                   <div className="lg:col-span-4 flex flex-col gap-2.5">
                     <div className="px-1 pb-1">
                       <span className="text-xs font-extrabold text-slate-500 uppercase tracking-wider font-display">
-                        Lesson Topics ({currentLesson.learnSections.length})
+                        {t("cyber.ui_LessonTopicsCount", { count: currentLesson.learnSections.length, defaultValue: `Lesson Topics (${currentLesson.learnSections.length})` })}
                       </span>
                     </div>
 
@@ -2023,7 +2023,7 @@ const CyberSecurityDashboard = () => {
                             <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider font-display ${
                               isTopicActive ? 'bg-emerald-200 text-emerald-900' : 'bg-slate-100 text-slate-600'
                             }`}>
-                              Section {idx + 1}
+                              {t("cyber.ui_SectionIdx", { idx: idx + 1, defaultValue: `Section ${idx + 1}` })}
                             </span>
                             <h4 className="text-sm sm:text-base font-bold truncate font-display">
                               {sec.title}
@@ -2060,7 +2060,7 @@ const CyberSecurityDashboard = () => {
                     <div className="space-y-4">
                       <div className="flex items-center justify-between gap-3 flex-wrap border-b border-slate-100 pb-4">
                         <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider font-display">
-                          Section {activeTopicIndex + 1} of {currentLesson.learnSections.length}
+                          {t("cyber.ui_SectionNofM", { current: activeTopicIndex + 1, total: currentLesson.learnSections.length, defaultValue: `Section ${activeTopicIndex + 1} of ${currentLesson.learnSections.length}` })}
                         </span>
                       </div>
 
@@ -2079,7 +2079,7 @@ const CyberSecurityDashboard = () => {
                           </div>
                           <div className="space-y-1">
                             <span className="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700 font-display block">
-                              Did You Know? • Cyber Security Fun Fact
+                              {t("cyber.ui_DidYouKnowCyberSecur_20f2", { defaultValue: "Did You Know? • Cyber Security Fun Fact" })}
                             </span>
                             <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
                               {selectedSec.funFact}

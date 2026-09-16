@@ -2624,7 +2624,10 @@
     "summary_Understandwhatperson_22f8": "Understand what personal data is and how everything you do online leaves a lasting digital footprint.",
     "summary_Learnhowtobuildstron_bfc6": "Learn how to build strong passphrases and use Two-Factor Authentication to lock your accounts.",
     "summary_Masterhowtorecognize_1d32": "Master how to recognize fake messages, urgency traps, and suspicious web links before clicking.",
-    "summary_Learnhowtohandlefake_cfdf": "Learn how to handle fake virus alerts, update your device software, and manage app permissions."
+    "summary_Learnhowtohandlefake_cfdf": "Learn how to handle fake virus alerts, update your device software, and manage app permissions.",
+    "ui_LessonTopicsCount": "Lesson Topics ({{count}})",
+    "ui_SectionIdx": "Section {{idx}}",
+    "ui_SectionNofM": "Section {{current}} of {{total}}"
   },
   "aiDashboard": {
     "heroTitle": "Build. Learn. & Think Smarter with",
