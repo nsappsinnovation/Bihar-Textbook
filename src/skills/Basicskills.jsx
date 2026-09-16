@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { 
   ArrowLeft, 
   ArrowRight, 
@@ -20,6 +21,7 @@ import {
 
 const Basicskills = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [activeModule, setActiveModule] = useState(0);
   const [isSimulating, setIsSimulating] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -184,11 +186,12 @@ const Basicskills = () => {
   // =========================================================================
   // SANDBOX 3: CASHIER BUDGETING & SHOPPING
   // =========================================================================
-  const shopItems = [
-    { name: 'School Backpack & Notebooks', price: 175, image: '🎒' },
-    { name: 'Lunch Box & Water Bottle', price: 95, image: '🍱' },
-    { name: 'Drawing Set & Crayons', price: 65, image: '🎨' }
-  ];
+  const shopItems = useMemo(() => [
+    { name: t("basicskills.item_backpack", { defaultValue: 'School Backpack & Notebooks' }), price: 175, image: '🎒' },
+    { name: t("basicskills.item_lunchbox", { defaultValue: 'Lunch Box & Water Bottle' }), price: 95, image: '🍱' },
+    { name: t("basicskills.item_crayons", { defaultValue: 'Drawing Set & Crayons' }), price: 65, image: '🎨' }
+  ], [t]);
+
   const [activeShopItem, setActiveShopItem] = useState(0);
   const [cashTray, setCashTray] = useState([]); // Selected notes
   const [shoppingStep, setShoppingStep] = useState(0); // 0: Pay, 1: Change Question, 2: Result
@@ -218,7 +221,7 @@ const Basicskills = () => {
       setShoppingStep(1); // Ask for change
     } else {
       playSound('fail');
-      toast.error(`Insufficient cash! You paid ₹${paidAmount}, but the item costs ₹${itemPrice}.`);
+      toast.error(t("basicskills.insufficient_cash_toast", { defaultValue: "Insufficient cash! You paid ₹{{paid}}, but the item costs ₹{{cost}}.", paid: paidAmount, cost: itemPrice }));
     }
   };
 
@@ -283,36 +286,36 @@ const Basicskills = () => {
   }, [isSimulating]);
 
   const getLoadingStatus = (prog) => {
-    if (prog < 25) return "Connecting to interactive simulation...";
-    if (prog < 50) return "Loading visual sandbox assets...";
-    if (prog < 75) return "Setting up environment physics...";
-    if (prog < 90) return "Preparing interactive controls...";
-    return "Optimizing simulator interface... Ready!";
+    if (prog < 25) return t("basicskills.loading_connecting", { defaultValue: "Connecting to interactive simulation..." });
+    if (prog < 50) return t("basicskills.loading_visual_assets", { defaultValue: "Loading visual sandbox assets..." });
+    if (prog < 75) return t("basicskills.loading_physics", { defaultValue: "Setting up environment physics..." });
+    if (prog < 90) return t("basicskills.loading_controls", { defaultValue: "Preparing interactive controls..." });
+    return t("basicskills.loading_optimizing", { defaultValue: "Optimizing simulator interface... Ready!" });
   };
 
-  const modules = [
+  const modules = useMemo(() => [
     {
-      title: "Road Safety & Signals",
+      title: t("basicskills.mod0_title", { defaultValue: "Road Safety & Signals" }),
       image: "/images/skills/a1.webp",
-      description: "Learn vital traffic signals, road crossing rules, and pedestrian safety protocols. Walk safely in public environments.",
-      duration: "10 min",
-      difficulty: "Beginner"
+      description: t("basicskills.mod0_desc", { defaultValue: "Learn vital traffic signals, road crossing rules, and pedestrian safety protocols. Walk safely in public environments." }),
+      duration: t("basicskills.mod0_dur", { defaultValue: "10 min" }),
+      difficulty: t("basicskills.mod0_diff", { defaultValue: "Beginner" })
     },
     {
-      title: "How to Use an ATM",
+      title: t("basicskills.mod1_title", { defaultValue: "How to Use an ATM" }),
       image: "/images/skills/i1.webp",
-      description: "A step-by-step interactive simulation to safely use an ATM machine, enter your PIN securely, and withdraw cash.",
-      duration: "15 min",
-      difficulty: "Intermediate"
+      description: t("basicskills.mod1_desc", { defaultValue: "A step-by-step interactive simulation to safely use an ATM machine, enter your PIN securely, and withdraw cash." }),
+      duration: t("basicskills.mod1_dur", { defaultValue: "15 min" }),
+      difficulty: t("basicskills.mod1_diff", { defaultValue: "Intermediate" })
     },
     {
-      title: "Basic Money Handling",
+      title: t("basicskills.mod2_title", { defaultValue: "Basic Money Handling" }),
       image: "/images/skills/image.webp",
-      description: "Learn how to manage, count, and combine currency notes responsibly to pay exact amounts and verify change in daily life.",
-      duration: "12 min",
-      difficulty: "Beginner"
+      description: t("basicskills.mod2_desc", { defaultValue: "Learn how to manage, count, and combine currency notes responsibly to pay exact amounts and verify change in daily life." }),
+      duration: t("basicskills.mod2_dur", { defaultValue: "12 min" }),
+      difficulty: t("basicskills.mod2_diff", { defaultValue: "Beginner" })
     }
-  ];
+  ], [t]);
 
   return (
     <div className="relative min-h-screen bg-[#F8FAFC] text-slate-900 overflow-hidden font-sans pb-24">
@@ -341,13 +344,17 @@ const Basicskills = () => {
             >
               <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-teal-50/80 backdrop-blur-sm text-teal-750 border border-teal-200/50 rounded-full text-[10px] sm:text-xs font-bold tracking-wider uppercase">
                 <span className="w-1.5 h-1.5 rounded-full bg-teal-600 animate-pulse" />
-                Basic Life Skills
+                {t("basicskills.hero_badge", { defaultValue: "Basic Life Skills" })}
               </span>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-[1.1] tracking-tight">
-                Essential <span className="bg-gradient-to-r from-teal-600 to-teal-600 bg-clip-text text-transparent">Daily Life</span> Skills
+                {t("basicskills.hero_title_prefix", { defaultValue: "Essential" })}{' '}
+                <span className="bg-gradient-to-r from-teal-600 to-teal-600 bg-clip-text text-transparent">
+                  {t("basicskills.hero_title_highlight", { defaultValue: "Daily Life" })}
+                </span>{' '}
+                {t("basicskills.hero_title_suffix", { defaultValue: "Skills" })}
               </h1>
               <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed max-w-2xl">
-                Practical lessons teaching students road safety, traffic rules, ATM usage, and responsible everyday behavior in modern society. Bridge textbook theory with interactive visual simulations.
+                {t("basicskills.hero_desc", { defaultValue: "Practical lessons teaching students road safety, traffic rules, ATM usage, and responsible everyday behavior in modern society. Bridge textbook theory with interactive visual simulations." })}
               </p>
             </motion.div>
 
@@ -361,7 +368,7 @@ const Basicskills = () => {
                 onClick={() => navigate("/life-skills")}
                 className="group inline-flex items-center gap-2.5 px-6 py-3.5 bg-gradient-to-r from-teal-600 to-teal-600 hover:from-teal-750 hover:to-teal-750 text-white rounded-full text-xs sm:text-sm font-bold shadow-md shadow-teal-500/10 hover:shadow-lg hover:shadow-teal-500/20 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
               >
-                Start Learning
+                {t("basicskills.start_learning", { defaultValue: "Start Learning" })}
                 <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
               </button>
               
@@ -369,7 +376,7 @@ const Basicskills = () => {
                 href="#simulator-section"
                 className="inline-flex items-center gap-2 px-6 py-3.5 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 rounded-full text-xs sm:text-sm font-bold shadow-sm transition-all duration-300 hover:-translate-y-0.5"
               >
-                Try Interactive Simulator
+                {t("basicskills.try_simulator", { defaultValue: "Try Interactive Simulator" })}
               </a>
             </motion.div>
 
@@ -383,23 +390,29 @@ const Basicskills = () => {
               <div className="p-3.5 bg-white hover:bg-slate-50 border border-slate-200/60 rounded-2xl hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1">
                 <div className="text-slate-900 font-bold flex items-center gap-1.5 text-xs sm:text-sm">
                   <Shield size={14} className="text-teal-600" />
-                  Road Safety
+                  {t("basicskills.spec1_title", { defaultValue: "Road Safety" })}
                 </div>
-                <p className="text-[10px] text-slate-500 leading-normal font-medium">Learn vital traffic signals & road crossing rules.</p>
+                <p className="text-[10px] text-slate-500 leading-normal font-medium">
+                  {t("basicskills.spec1_desc", { defaultValue: "Learn vital traffic signals & road crossing rules." })}
+                </p>
               </div>
               <div className="p-3.5 bg-white hover:bg-slate-50 border border-slate-200/60 rounded-2xl hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1">
                 <div className="text-slate-900 font-bold flex items-center gap-1.5 text-xs sm:text-sm">
                   <Award size={14} className="text-teal-600" />
-                  Financial Basics
+                  {t("basicskills.spec2_title", { defaultValue: "Financial Basics" })}
                 </div>
-                <p className="text-[10px] text-slate-500 leading-normal font-medium">Understand banking, ATM use, and safe money habits.</p>
+                <p className="text-[10px] text-slate-500 leading-normal font-medium">
+                  {t("basicskills.spec2_desc", { defaultValue: "Understand banking, ATM use, and safe money habits." })}
+                </p>
               </div>
               <div className="p-3.5 bg-white hover:bg-slate-50 border border-slate-200/60 rounded-2xl hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1">
                 <div className="text-slate-900 font-bold flex items-center gap-1.5 text-xs sm:text-sm">
                   <Users size={14} className="text-cyan-600" />
-                  Everyday Duty
+                  {t("basicskills.spec3_title", { defaultValue: "Everyday Duty" })}
                 </div>
-                <p className="text-[10px] text-slate-500 leading-normal font-medium">Build discipline and awareness in public spaces.</p>
+                <p className="text-[10px] text-slate-500 leading-normal font-medium">
+                  {t("basicskills.spec3_desc", { defaultValue: "Build discipline and awareness in public spaces." })}
+                </p>
               </div>
             </motion.div>
           </div>
@@ -427,10 +440,14 @@ const Basicskills = () => {
         {/* Section title & subtitle for the simulator */}
         <div id="simulator-section" className="text-center max-w-2xl mx-auto mb-10 -mt-20 space-y-2 pt-4">
           <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-teal-50 text-teal-700 border border-teal-100 rounded-full text-[10px] font-bold tracking-widest uppercase">
-            Simulated Sandbox
+            {t("basicskills.sim_badge", { defaultValue: "Simulated Sandbox" })}
           </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Interactive Life Skills Sandbox</h2>
-          <p className="text-xs sm:text-sm text-slate-500 font-medium">Select a life skill topic below to load its interactive simulation inside our viewport player.</p>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            {t("basicskills.sim_title", { defaultValue: "Interactive Life Skills Sandbox" })}
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-500 font-medium">
+            {t("basicskills.sim_subtitle", { defaultValue: "Select a life skill topic below to load its interactive simulation inside our viewport player." })}
+          </p>
         </div>
 
         {/* Interactive Viewport Section */}
@@ -439,7 +456,9 @@ const Basicskills = () => {
           {/* Left Column: Selector */}
           <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
             <div className="space-y-4">
-              <span className="text-[10px] font-bold tracking-widest text-slate-400 uppercase">Select learning world</span>
+              <span className="text-[10px] font-bold tracking-widest text-slate-400 uppercase">
+                {t("basicskills.select_world", { defaultValue: "Select learning world" })}
+              </span>
               
               <div className="space-y-3">
                 {modules.map((item, idx) => (
@@ -483,7 +502,9 @@ const Basicskills = () => {
 
             {/* Description card */}
             <div className="bg-slate-50/60 border border-slate-100/80 p-5 rounded-2xl">
-              <h4 className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mb-1.5">Module Objective</h4>
+              <h4 className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider mb-1.5">
+                {t("basicskills.module_objective", { defaultValue: "Module Objective" })}
+              </h4>
               <p className="text-xs sm:text-sm text-slate-600 font-medium leading-relaxed">
                 {modules[activeModule].description}
               </p>
@@ -509,10 +530,12 @@ const Basicskills = () => {
                     
                     <div className="absolute bottom-6 left-6 right-6 text-left space-y-2 z-10">
                       <span className="inline-block px-2.5 py-0.5 bg-teal-600/20 text-teal-400 border border-teal-500/30 rounded-md text-[9px] font-bold font-mono tracking-widest uppercase">
-                        PREVIEW STATE
+                        {t("basicskills.preview_state", { defaultValue: "PREVIEW STATE" })}
                       </span>
                       <h4 className="text-white font-extrabold text-base tracking-tight">{modules[activeModule].title}</h4>
-                      <p className="text-slate-400 text-xs leading-normal max-w-md font-medium">Click 'Launch Sandbox' below to start the interactive safety simulation.</p>
+                      <p className="text-slate-400 text-xs leading-normal max-w-md font-medium">
+                        {t("basicskills.preview_desc", { defaultValue: "Click 'Launch Sandbox' below to start the interactive safety simulation." })}
+                      </p>
                     </div>
                   </div>
                 )}
@@ -520,7 +543,7 @@ const Basicskills = () => {
                 {/* LIVE Badge */}
                 <div className="absolute top-4 left-4 z-10 bg-slate-950/70 border border-slate-800/80 backdrop-blur-sm text-[9px] text-slate-400 font-mono px-2 py-0.5 rounded-md flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-                  SIM FEED
+                  {t("basicskills.sim_feed", { defaultValue: "SIM FEED" })}
                 </div>
 
                 {/* Simple clean framing corners */}
@@ -546,7 +569,9 @@ const Basicskills = () => {
                           <p className="text-xs font-bold tracking-wider text-slate-300 font-mono">
                             {getLoadingStatus(progress)}
                           </p>
-                          <p className="text-[10px] text-slate-500 font-mono font-medium">Preparing simulation resources...</p>
+                          <p className="text-[10px] text-slate-500 font-mono font-medium">
+                            {t("basicskills.preparing_resources", { defaultValue: "Preparing simulation resources..." })}
+                          </p>
                         </div>
                         
                         <div className="w-full bg-slate-900 h-1.5 rounded-full overflow-hidden border border-slate-800">
@@ -557,7 +582,7 @@ const Basicskills = () => {
                             transition={{ ease: "easeInOut" }}
                           />
                         </div>
-                        <span className="text-xs text-teal-400 font-mono">{progress}% READY</span>
+                        <span className="text-xs text-teal-400 font-mono">{progress}% {t("basicskills.ready", { defaultValue: "READY" })}</span>
                       </div>
                     </motion.div>
                   )}
@@ -575,8 +600,12 @@ const Basicskills = () => {
                     {activeModule === 0 && (
                       <div className="w-full max-w-md space-y-4 flex flex-col items-center">
                         <div className="text-center space-y-1">
-                          <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider">Crosswalk Simulator Game</h4>
-                          <p className="text-[11px] text-slate-400">Cross the road safely. Toggle the light to stop oncoming traffic!</p>
+                          <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+                            {t("basicskills.mod0_game_title", { defaultValue: "Crosswalk Simulator Game" })}
+                          </h4>
+                          <p className="text-[11px] text-slate-400">
+                            {t("basicskills.mod0_game_subtitle", { defaultValue: "Cross the road safely. Toggle the light to stop oncoming traffic!" })}
+                          </p>
                         </div>
 
                         {/* Visual Road Scene */}
@@ -621,8 +650,8 @@ const Basicskills = () => {
                               <div className={`w-5 h-5 rounded-full ${pedestrianSignal === 'GREEN' ? 'bg-teal-500 shadow-lg shadow-teal-500/50 animate-pulse' : 'bg-teal-950'}`} />
                             </div>
                             <div className="space-y-0.5 font-mono text-[10px] text-slate-400">
-                              <div>PEDESTRIAN: <span className={pedestrianSignal === 'GREEN' ? 'text-teal-400 font-bold' : 'text-red-400 font-bold'}>{pedestrianSignal}</span></div>
-                              <div>TRAFFIC: <span className="text-white">{pedestrianSignal === 'RED' ? 'FLOWING' : 'STOPPED'}</span></div>
+                              <div>{t("basicskills.pedestrian", { defaultValue: "PEDESTRIAN" })}: <span className={pedestrianSignal === 'GREEN' ? 'text-teal-400 font-bold' : 'text-red-400 font-bold'}>{pedestrianSignal}</span></div>
+                              <div>{t("basicskills.traffic", { defaultValue: "TRAFFIC" })}: <span className="text-white">{pedestrianSignal === 'RED' ? t("basicskills.flowing", { defaultValue: "FLOWING" }) : t("basicskills.stopped", { defaultValue: "STOPPED" })}</span></div>
                             </div>
                           </div>
                           
@@ -630,7 +659,7 @@ const Basicskills = () => {
                             onClick={togglePedestrianSignal}
                             className="px-3.5 py-2 bg-slate-900 hover:bg-slate-850 border border-slate-800 text-amber-400 hover:text-amber-300 font-bold rounded-xl text-[11px] transition-all cursor-pointer"
                           >
-                            🚥 Change Signal
+                            {t("basicskills.change_signal", { defaultValue: "🚥 Change Signal" })}
                           </button>
                         </div>
 
@@ -641,20 +670,20 @@ const Basicskills = () => {
                             disabled={pedestrianWalk}
                             className="px-6 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl text-xs shadow-md transition-all cursor-pointer active:scale-95 flex items-center gap-2"
                           >
-                            🚶 Walk Across zebra crossing
+                            {t("basicskills.walk_across", { defaultValue: "🚶 Walk Across zebra crossing" })}
                           </button>
                         ) : (
                           <div className="space-y-3 w-full">
                             <div className={`p-3.5 rounded-xl border text-xs leading-normal ${roadCrossStatus === 'SAFE' ? 'bg-teal-950/60 border-teal-500/30 text-teal-250' : 'bg-red-950/60 border-red-500/30 text-red-250 shadow-[0_0_20px_rgba(239,68,68,0.15)]'}`}>
                               {roadCrossStatus === 'SAFE' ? (
                                 <div className="space-y-1">
-                                  <div className="font-bold flex items-center gap-1.5 text-teal-450"><CheckCircle2 size={15} /> Correct Decision!</div>
-                                  <p className="text-[10.5px] text-slate-300 leading-normal">You waited for the signal to turn green and crossed safely. Always look left, right, and left again before crossing!</p>
+                                  <div className="font-bold flex items-center gap-1.5 text-teal-450"><CheckCircle2 size={15} /> {t("basicskills.correct_decision", { defaultValue: "Correct Decision!" })}</div>
+                                  <p className="text-[10.5px] text-slate-300 leading-normal">{t("basicskills.correct_decision_desc", { defaultValue: "You waited for the signal to turn green and crossed safely. Always look left, right, and left again before crossing!" })}</p>
                                 </div>
                               ) : (
                                 <div className="space-y-1">
-                                  <div className="font-bold flex items-center gap-1.5 text-red-400"><AlertTriangle size={15} className="animate-pulse" /> Extreme Danger!</div>
-                                  <p className="text-[10.5px] text-slate-300 leading-normal">Never cross while the pedestrian signal is RED. Vehicles are moving at high speed and cannot stop instantly.</p>
+                                  <div className="font-bold flex items-center gap-1.5 text-red-400"><AlertTriangle size={15} className="animate-pulse" /> {t("basicskills.extreme_danger", { defaultValue: "Extreme Danger!" })}</div>
+                                  <p className="text-[10.5px] text-slate-300 leading-normal">{t("basicskills.extreme_danger_desc", { defaultValue: "Never cross while the pedestrian signal is RED. Vehicles are moving at high speed and cannot stop instantly." })}</p>
                                 </div>
                               )}
                             </div>
@@ -665,7 +694,7 @@ const Basicskills = () => {
                               }}
                               className="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold transition-all border border-slate-700 cursor-pointer"
                             >
-                              Reset Simulator
+                              {t("basicskills.reset_simulator", { defaultValue: "Reset Simulator" })}
                             </button>
                           </div>
                         )}
@@ -676,8 +705,12 @@ const Basicskills = () => {
                     {activeModule === 1 && (
                       <div className="w-full max-w-sm space-y-3 flex flex-col items-center">
                         <div className="text-center space-y-1">
-                          <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider">ATM Terminal Simulator</h4>
-                          <p className="text-[11px] text-slate-400">Complete a secure cash withdrawal transaction.</p>
+                          <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+                            {t("basicskills.mod1_game_title", { defaultValue: "ATM Terminal Simulator" })}
+                          </h4>
+                          <p className="text-[11px] text-slate-400">
+                            {t("basicskills.mod1_game_subtitle", { defaultValue: "Complete a secure cash withdrawal transaction." })}
+                          </p>
                         </div>
 
                         {/* ATM Screen Container */}
@@ -685,22 +718,22 @@ const Basicskills = () => {
                           
                           {/* Screen Header */}
                           <div className="flex justify-between items-center text-[8px] font-mono text-teal-500 border-b border-slate-900 pb-1.5">
-                            <span>STATE BANK OF BIHAR</span>
-                            <span>TERMINAL #024B</span>
+                            <span>{t("basicskills.bank_name", { defaultValue: "STATE BANK OF BIHAR" })}</span>
+                            <span>{t("basicskills.terminal_id", { defaultValue: "TERMINAL #024B" })}</span>
                           </div>
 
                           {/* Screen Body */}
                           <div className="flex-1 flex flex-col justify-center items-center py-2 text-center text-xs text-slate-200">
                             {atmStep === 0 && (
                               <div className="space-y-2.5">
-                                <p className="font-bold text-slate-200 text-sm">Welcome. Please Insert Your Card.</p>
-                                <p className="text-[10px] text-slate-400">Use the card slot below to insert your debit card.</p>
+                                <p className="font-bold text-slate-200 text-sm">{t("basicskills.atm_welcome", { defaultValue: "Welcome. Please Insert Your Card." })}</p>
+                                <p className="text-[10px] text-slate-400">{t("basicskills.atm_welcome_desc", { defaultValue: "Use the card slot below to insert your debit card." })}</p>
                               </div>
                             )}
 
                             {atmStep === 1 && (
                               <div className="space-y-2 w-full">
-                                <p className="font-bold text-slate-200">Select Language / भाषा चुनें</p>
+                                <p className="font-bold text-slate-200">{t("basicskills.atm_select_lang", { defaultValue: "Select Language / भाषा चुनें" })}</p>
                                 <div className="grid grid-cols-2 gap-2 mt-2">
                                   <button onClick={() => selectLanguage('en')} className="bg-slate-900 hover:bg-slate-850 border border-slate-800 py-1.5 px-2.5 rounded text-[10px] font-bold text-slate-300 text-left">
                                     ▶ English
@@ -714,29 +747,29 @@ const Basicskills = () => {
 
                             {atmStep === 2 && (
                               <div className="space-y-3 w-full max-w-[190px]">
-                                <p className="font-bold text-slate-200">Enter 4-Digit Secure PIN</p>
+                                <p className="font-bold text-slate-200">{t("basicskills.atm_enter_pin", { defaultValue: "Enter 4-Digit Secure PIN" })}</p>
                                 <div className="bg-slate-900 py-2 rounded border border-slate-800 font-mono text-center tracking-[0.4em] text-lg text-teal-450 h-10 flex items-center justify-center">
                                   {atmPin.split('').map(() => '*').join('')}
                                 </div>
-                                <p className="text-[9px] text-slate-500 italic">Always cover the keypad while entering your PIN!</p>
+                                <p className="text-[9px] text-slate-500 italic">{t("basicskills.atm_pin_hint", { defaultValue: "Always cover the keypad while entering your PIN!" })}</p>
                               </div>
                             )}
 
                             {atmStep === 3 && (
                               <div className="space-y-2 w-full">
-                                <p className="font-bold text-slate-200">Select Transaction Service</p>
+                                <p className="font-bold text-slate-200">{t("basicskills.atm_select_service", { defaultValue: "Select Transaction Service" })}</p>
                                 <div className="grid grid-cols-2 gap-2">
                                   <button onClick={() => handleSelectService('withdrawal')} className="bg-slate-900 hover:bg-slate-850 border border-slate-800 py-1.5 px-2 rounded text-[10px] font-bold text-slate-300 text-left">
-                                    ▶ Cash Withdrawal
+                                    {t("basicskills.atm_cash_withdrawal", { defaultValue: "▶ Cash Withdrawal" })}
                                   </button>
                                   <button className="bg-slate-900 opacity-45 border border-slate-850 py-1.5 px-2 rounded text-[10px] font-bold text-slate-500 text-left cursor-not-allowed">
-                                    ▶ Balance Inquiry
+                                    {t("basicskills.atm_balance_inquiry", { defaultValue: "▶ Balance Inquiry" })}
                                   </button>
                                   <button className="bg-slate-900 opacity-45 border border-slate-855 py-1.5 px-2 rounded text-[10px] font-bold text-slate-500 text-left cursor-not-allowed">
-                                    ▶ Mini Statement
+                                    {t("basicskills.atm_mini_statement", { defaultValue: "▶ Mini Statement" })}
                                   </button>
                                   <button className="bg-slate-900 opacity-45 border border-slate-855 py-1.5 px-2 rounded text-[10px] font-bold text-slate-500 text-left cursor-not-allowed">
-                                    ▶ PIN Change
+                                    {t("basicskills.atm_pin_change", { defaultValue: "▶ PIN Change" })}
                                   </button>
                                 </div>
                               </div>
@@ -744,7 +777,7 @@ const Basicskills = () => {
 
                             {atmStep === 4 && (
                               <div className="space-y-2 w-full">
-                                <p className="font-bold text-slate-200">Select Withdrawal Amount</p>
+                                <p className="font-bold text-slate-200">{t("basicskills.atm_select_amount", { defaultValue: "Select Withdrawal Amount" })}</p>
                                 <div className="grid grid-cols-2 gap-2">
                                   {[500, 1000, 2000, 5000].map((amt) => (
                                     <button 
@@ -762,29 +795,29 @@ const Basicskills = () => {
                             {atmStep === 5 && (
                               <div className="space-y-3">
                                 <div className="w-8 h-8 rounded-full border-2 border-slate-800 border-t-teal-500 animate-spin mx-auto" />
-                                <p className="font-bold text-slate-300 text-[11px] font-mono">PROCESSING TRANSACTION...</p>
-                                <p className="text-[9px] text-slate-500">Please do not remove your card.</p>
+                                <p className="font-bold text-slate-300 text-[11px] font-mono">{t("basicskills.atm_processing", { defaultValue: "PROCESSING TRANSACTION..." })}</p>
+                                <p className="text-[9px] text-slate-500">{t("basicskills.atm_dont_remove_card", { defaultValue: "Please do not remove your card." })}</p>
                               </div>
                             )}
 
                             {atmStep === 6 && (
                               <div className="space-y-3">
                                 <span className="text-teal-400 text-2xl animate-bounce block">💵</span>
-                                <p className="font-bold text-slate-150">Please Collect Cash</p>
-                                <p className="text-[10px] text-slate-400">Click the cash note at the bottom slot to collect your ₹{atmSelectedAmount}.</p>
+                                <p className="font-bold text-slate-150">{t("basicskills.atm_collect_cash", { defaultValue: "Please Collect Cash" })}</p>
+                                <p className="text-[10px] text-slate-400">{t("basicskills.atm_collect_cash_desc", { defaultValue: "Click the cash note at the bottom slot to collect your ₹{{amount}}.", amount: atmSelectedAmount })}</p>
                               </div>
                             )}
 
                             {atmStep === 7 && (
                               <div className="space-y-2.5">
                                 <span className="text-teal-450 text-2xl block">✔️</span>
-                                <p className="font-bold text-slate-100">Transaction Complete!</p>
+                                <p className="font-bold text-slate-100">{t("basicskills.atm_tx_complete", { defaultValue: "Transaction Complete!" })}</p>
                                 <div className="bg-slate-900/60 p-2.5 rounded border border-slate-850 text-[9.5px] text-left text-slate-400 leading-normal space-y-1">
-                                  <div>🚨 <span className="font-bold text-white">Security Checklist:</span></div>
+                                  <div>🚨 <span className="font-bold text-white">{t("basicskills.atm_sec_checklist", { defaultValue: "Security Checklist:" })}</span></div>
                                   <ul className="list-disc pl-3 space-y-0.5">
-                                    <li>Collect your card and receipt.</li>
-                                    <li>Wait for the screen to clear.</li>
-                                    <li>Never share your ATM PIN.</li>
+                                    <li>{t("basicskills.atm_check1", { defaultValue: "Collect your card and receipt." })}</li>
+                                    <li>{t("basicskills.atm_check2", { defaultValue: "Wait for the screen to clear." })}</li>
+                                    <li>{t("basicskills.atm_check3", { defaultValue: "Never share your ATM PIN." })}</li>
                                   </ul>
                                 </div>
                               </div>
@@ -793,7 +826,7 @@ const Basicskills = () => {
 
                           {/* Screen Footer */}
                           <div className="text-[8px] font-mono text-slate-500 border-t border-slate-900 pt-1.5 text-center">
-                            SECURE TRANSACTION SHIELD ACTIVE
+                            {t("basicskills.secure_shield_active", { defaultValue: "SECURE TRANSACTION SHIELD ACTIVE" })}
                           </div>
                         </div>
 
@@ -804,7 +837,7 @@ const Basicskills = () => {
                           <div className="flex justify-between items-center gap-4 border-b border-slate-800 pb-3">
                             {/* Card Slot */}
                             <div className="space-y-1 flex-1">
-                              <span className="text-[8px] font-mono text-slate-500 block uppercase">Card Slot</span>
+                              <span className="text-[8px] font-mono text-slate-500 block uppercase">{t("basicskills.card_slot", { defaultValue: "Card Slot" })}</span>
                               <div className="bg-slate-950 h-8 rounded-lg border border-slate-800 flex items-center justify-center relative overflow-hidden">
                                 {atmCardInserted ? (
                                   <motion.div 
@@ -812,7 +845,7 @@ const Basicskills = () => {
                                     animate={{ x: 0 }} 
                                     className="w-10 h-6 bg-blue-600 border border-blue-500 rounded text-[7px] font-bold text-white flex items-center justify-center shadow-md"
                                   >
-                                    CARD
+                                    {t("basicskills.card_text", { defaultValue: "CARD" })}
                                   </motion.div>
                                 ) : (
                                   <button 
@@ -820,7 +853,7 @@ const Basicskills = () => {
                                     className="text-[9px] text-teal-400 font-bold hover:text-teal-350 cursor-pointer flex items-center gap-1.5"
                                   >
                                     <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse" />
-                                    Insert Card
+                                    {t("basicskills.insert_card", { defaultValue: "Insert Card" })}
                                   </button>
                                 )}
                               </div>
@@ -828,14 +861,14 @@ const Basicskills = () => {
 
                             {/* Cash Dispenser */}
                             <div className="space-y-1 flex-1">
-                              <span className="text-[8px] font-mono text-slate-500 block uppercase">Cash Dispenser</span>
+                              <span className="text-[8px] font-mono text-slate-500 block uppercase">{t("basicskills.cash_dispenser", { defaultValue: "Cash Dispenser" })}</span>
                               <div className="bg-slate-950 h-8 rounded-lg border border-slate-800 flex items-center justify-center relative overflow-hidden">
                                 {cashDispensed && (
                                   <button 
                                     onClick={collectCash}
                                     className="w-14 h-5 bg-teal-600 hover:bg-teal-500 border border-teal-500 rounded text-[9px] font-extrabold text-white flex items-center justify-center shadow-lg animate-bounce cursor-pointer"
                                   >
-                                    💵 Take ₹{atmSelectedAmount}
+                                    {t("basicskills.take_cash", { defaultValue: "💵 Take ₹{{amount}}", amount: atmSelectedAmount })}
                                   </button>
                                 )}
                               </div>
@@ -858,7 +891,7 @@ const Basicskills = () => {
                                 onClick={() => setAtmPin('')}
                                 className="bg-red-600 hover:bg-red-750 text-white font-bold py-1.5 rounded-lg text-[8px] font-mono transition-all active:scale-95 border border-red-500"
                               >
-                                CLEAR
+                                {t("basicskills.key_clear", { defaultValue: "CLEAR" })}
                               </button>
                               <button
                                 onClick={() => handleAtmPinInput('0')}
@@ -870,7 +903,7 @@ const Basicskills = () => {
                                 onClick={submitAtmPin}
                                 className="bg-teal-600 hover:bg-teal-650 text-white font-bold py-1.5 rounded-lg text-[8px] font-mono transition-all active:scale-95 border border-teal-500"
                               >
-                                ENTER
+                                {t("basicskills.key_enter", { defaultValue: "ENTER" })}
                               </button>
                             </div>
                           )}
@@ -882,7 +915,7 @@ const Basicskills = () => {
                                 onClick={collectCard}
                                 className="px-5 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl text-xs shadow-md animate-pulse cursor-pointer"
                               >
-                                💳 Collect Card & End Session
+                                {t("basicskills.collect_card_exit", { defaultValue: "💳 Collect Card & End Session" })}
                               </button>
                             </div>
                           )}
@@ -894,8 +927,12 @@ const Basicskills = () => {
                     {activeModule === 2 && (
                       <div className="w-full max-w-md space-y-4 flex flex-col items-center">
                         <div className="text-center space-y-1">
-                          <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider">Cash Register Shopping Game</h4>
-                          <p className="text-[11px] text-slate-400">Select notes to pay. Compute correct change if you overpay.</p>
+                          <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+                            {t("basicskills.mod2_game_title", { defaultValue: "Cash Register Shopping Game" })}
+                          </h4>
+                          <p className="text-[11px] text-slate-400">
+                            {t("basicskills.mod2_game_subtitle", { defaultValue: "Select notes to pay. Compute correct change if you overpay." })}
+                          </p>
                         </div>
 
                         {/* Shopping Shelf */}
@@ -927,11 +964,11 @@ const Basicskills = () => {
                         {/* Bill Counter Screen */}
                         <div className="bg-slate-950 border border-slate-850 p-3.5 rounded-xl w-full flex justify-between items-center text-xs font-mono">
                           <div>
-                            <div className="text-[8px] text-slate-500">BILL TOTAL</div>
+                            <div className="text-[8px] text-slate-500">{t("basicskills.bill_total", { defaultValue: "BILL TOTAL" })}</div>
                             <div className="text-white font-extrabold text-base">₹{shopItems[activeShopItem].price}</div>
                           </div>
                           <div className="text-right">
-                            <div className="text-[8px] text-slate-500 font-mono">CASH ON COUNTER</div>
+                            <div className="text-[8px] text-slate-500 font-mono">{t("basicskills.cash_on_counter", { defaultValue: "CASH ON COUNTER" })}</div>
                             <div className="text-teal-450 font-extrabold text-base">
                               ₹{cashTray.reduce((sum, val) => sum + val, 0)}
                             </div>
@@ -942,7 +979,9 @@ const Basicskills = () => {
                         {shoppingStep === 0 && (
                           <div className="space-y-3 w-full">
                             <div className="space-y-1.5">
-                              <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest block">Your Wallet (Tap notes to place on counter):</span>
+                              <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest block">
+                                {t("basicskills.your_wallet", { defaultValue: "Your Wallet (Tap notes to place on counter):" })}
+                              </span>
                               <div className="grid grid-cols-5 gap-1.5">
                                 {availableNotes.map((note) => (
                                   <button
@@ -971,7 +1010,7 @@ const Basicskills = () => {
                                   onClick={clearTray} 
                                   className="text-[9px] text-red-450 hover:text-red-400 font-bold underline cursor-pointer"
                                 >
-                                  Clear Counter
+                                  {t("basicskills.clear_counter", { defaultValue: "Clear Counter" })}
                                 </button>
                               </div>
                             )}
@@ -981,7 +1020,7 @@ const Basicskills = () => {
                               disabled={cashTray.length === 0}
                               className="w-full py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl text-xs shadow-md transition-all disabled:opacity-50 cursor-pointer"
                             >
-                              Submit Payment
+                              {t("basicskills.submit_payment", { defaultValue: "Submit Payment" })}
                             </button>
                           </div>
                         )}
@@ -989,8 +1028,12 @@ const Basicskills = () => {
                         {/* Change Selection Question */}
                         {shoppingStep === 1 && (
                           <div className="space-y-3 w-full bg-slate-950 border border-slate-850 p-4 rounded-xl text-center">
-                            <h5 className="text-[11px] font-bold text-slate-300">You paid: ₹{cashTray.reduce((sum, val) => sum + val, 0)}. Cashier owes you change.</h5>
-                            <p className="text-xs font-extrabold text-amber-400">How much change should you get back?</p>
+                            <h5 className="text-[11px] font-bold text-slate-300">
+                              {t("basicskills.you_paid_msg", { defaultValue: "You paid: ₹{{paid}}. Cashier owes you change.", paid: cashTray.reduce((sum, val) => sum + val, 0) })}
+                            </h5>
+                            <p className="text-xs font-extrabold text-amber-400">
+                              {t("basicskills.how_much_change", { defaultValue: "How much change should you get back?" })}
+                            </p>
                             
                             <div className="grid grid-cols-3 gap-2 pt-1.5">
                               {[
@@ -1024,16 +1067,16 @@ const Basicskills = () => {
                                 <div className={`p-4 rounded-xl border text-xs leading-normal ${isCorrect ? 'bg-teal-950/60 border-teal-500/30 text-teal-250' : 'bg-red-950/60 border-red-500/30 text-red-250 shadow-[0_0_20px_rgba(239,68,68,0.15)]'}`}>
                                   {isCorrect ? (
                                     <div className="space-y-1">
-                                      <div className="font-bold flex items-center gap-1.5 text-teal-450"><CheckCircle2 size={15} /> Correct Transaction!</div>
+                                      <div className="font-bold flex items-center gap-1.5 text-teal-450"><CheckCircle2 size={15} /> {t("basicskills.correct_tx", { defaultValue: "Correct Transaction!" })}</div>
                                       <p className="text-[10.5px] text-slate-300 leading-normal">
-                                        Perfect! You paid ₹{paidAmount} for the ₹{itemPrice} item {correctChange > 0 ? `and correctly collected ₹${correctChange} change.` : `using exact change.`} Always count your change before leaving the counter!
+                                        {t("basicskills.correct_tx_desc", { defaultValue: "Perfect! You paid ₹{{paid}} for the ₹{{cost}} item {{changeStr}}. Always count your change before leaving the counter!", paid: paidAmount, cost: itemPrice, changeStr: correctChange > 0 ? `and correctly collected ₹${correctChange} change` : `using exact change` })}
                                       </p>
                                     </div>
                                   ) : (
                                     <div className="space-y-1">
-                                      <div className="font-bold flex items-center gap-1.5 text-red-450"><AlertTriangle size={15} className="animate-pulse" /> Math Error!</div>
+                                      <div className="font-bold flex items-center gap-1.5 text-red-450"><AlertTriangle size={15} className="animate-pulse" /> {t("basicskills.math_error", { defaultValue: "Math Error!" })}</div>
                                       <p className="text-[10.5px] text-slate-300 leading-normal">
-                                        Oh no! The correct change was ₹{correctChange}, but you collected ₹{changeAnswer}. Take your time and calculate carefully to avoid losing money.
+                                        {t("basicskills.math_error_desc", { defaultValue: "Oh no! The correct change was ₹{{correct}}, but you collected ₹{{collected}}. Take your time and calculate carefully to avoid losing money.", correct: correctChange, collected: changeAnswer })}
                                       </p>
                                     </div>
                                   )}
@@ -1049,7 +1092,7 @@ const Basicskills = () => {
                               }}
                               className="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold transition-all border border-slate-700 cursor-pointer"
                             >
-                              Play Again
+                              {t("basicskills.play_again", { defaultValue: "Play Again" })}
                             </button>
                           </div>
                         )}
@@ -1063,7 +1106,7 @@ const Basicskills = () => {
               {/* Viewport Control Panel */}
               <div className="mt-3.5 flex flex-wrap gap-3 items-center justify-between border-t border-slate-900/60 pt-3 px-1 text-slate-400 bg-slate-950/45 rounded-xl">
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-mono text-slate-500">CONTROL UNIT</span>
+                  <span className="text-[10px] font-mono text-slate-500">{t("basicskills.control_unit", { defaultValue: "CONTROL UNIT" })}</span>
                 </div>
 
                 {/* Launch Button */}
@@ -1073,7 +1116,7 @@ const Basicskills = () => {
                   className="px-4 py-2 bg-gradient-to-r from-teal-600 to-teal-600 hover:from-teal-700 hover:to-teal-750 text-white rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all shadow-md shadow-teal-500/10 hover:shadow-lg disabled:opacity-50 cursor-pointer"
                 >
                   <Play size={11} fill="currentColor" />
-                  Launch Sandbox
+                  {t("basicskills.launch_sandbox", { defaultValue: "Launch Sandbox" })}
                 </button>
               </div>
             </div>
@@ -1084,18 +1127,18 @@ const Basicskills = () => {
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12 border-t border-slate-200/80 max-w-4xl mx-auto text-center">
           <div className="p-5 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1">
             <h5 className="text-3xl font-extrabold bg-gradient-to-r from-teal-600 to-teal-600 bg-clip-text text-transparent">5+</h5>
-            <p className="text-xs sm:text-sm font-bold text-slate-800">Skills Modules</p>
-            <p className="text-[11px] text-slate-500 font-medium leading-relaxed">Spanning road awareness, ATM safety, and money handling.</p>
+            <p className="text-xs sm:text-sm font-bold text-slate-800">{t("basicskills.stat1_title", { defaultValue: "Skills Modules" })}</p>
+            <p className="text-[11px] text-slate-500 font-medium leading-relaxed">{t("basicskills.stat1_desc", { defaultValue: "Spanning road awareness, ATM safety, and money handling." })}</p>
           </div>
           <div className="p-5 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1">
             <h5 className="text-3xl font-extrabold bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent">100%</h5>
-            <p className="text-xs sm:text-sm font-bold text-slate-800">Practical & Safe</p>
-            <p className="text-[11px] text-slate-500 font-medium leading-relaxed">Learn safe behavior patterns in public environments.</p>
+            <p className="text-xs sm:text-sm font-bold text-slate-800">{t("basicskills.stat2_title", { defaultValue: "Practical & Safe" })}</p>
+            <p className="text-[11px] text-slate-500 font-medium leading-relaxed">{t("basicskills.stat2_desc", { defaultValue: "Learn safe behavior patterns in public environments." })}</p>
           </div>
           <div className="p-5 bg-white/60 backdrop-blur-sm border border-slate-200/60 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1">
-            <h5 className="text-3xl font-extrabold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">Active</h5>
-            <p className="text-xs sm:text-sm font-bold text-slate-800">Interactive Lessons</p>
-            <p className="text-[11px] text-slate-500 font-medium leading-relaxed">Includes built-in interactive sandboxes.</p>
+            <h5 className="text-3xl font-extrabold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">{t("basicskills.stat3_value", { defaultValue: "Active" })}</h5>
+            <p className="text-xs sm:text-sm font-bold text-slate-800">{t("basicskills.stat3_title", { defaultValue: "Interactive Lessons" })}</p>
+            <p className="text-[11px] text-slate-500 font-medium leading-relaxed">{t("basicskills.stat3_desc", { defaultValue: "Includes built-in interactive sandboxes." })}</p>
           </div>
         </section>
         
