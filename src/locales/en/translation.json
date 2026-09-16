@@ -7139,6 +7139,91 @@
     "lessonConcept_16": "Mathematics",
     "lessonLearnTitle_16": "The Geometry Guide",
     "lessonLearnSub_16": "Use AI to understand confusing theorems and shapes!",
-    "lessonLearnDesc_16": "Geometry proofs can be very confusing. AI can explain them using simple logic and real-world examples.\n\n**Systematic Blueprint:**\nWhen struggling with a theorem (like Pythagoras or Properties of Triangles):\n1. **Simple Definition**: Ask the AI to explain the theorem in one simple sentence.\n2. **Real World Example**: Ask how this is used in real life (like building a house).\n3. **Step-by-Step Proof**: Ask it to prove a simple example.\n\n**Important Rules:**\n- Always ask for a real-world application so your brain remembers it better!"
+    "lessonLearnDesc_16": "Geometry proofs can be very confusing. AI can explain them using simple logic and real-world examples.\n\n**Systematic Blueprint:**\nWhen struggling with a theorem (like Pythagoras or Properties of Triangles):\n1. **Simple Definition**: Ask the AI to explain the theorem in one simple sentence.\n2. **Real World Example**: Ask how this is used in real life (like building a house).\n3. **Step-by-Step Proof**: Ask it to prove a simple example.\n\n**Important Rules:**\n- Always ask for a real-world application so your brain remembers it better!",
+
+    "questMissionTitle": "Practice Quest Mission",
+    "targetBadge": "Badge Reward",
+    "initialBoringPrompt": "Weak Initial Prompt",
+    "goalBuildSuperPrompt": "Goal: Combine Power-ups to Build a Super Prompt!",
+
+    "characterName_1": "Timetable Helper",
+    "characterMsg_1": "I want to ask the AI to help me plan a study timetable for my class 7 exams. If I just say 'make a study plan', it gives a generic, useless schedule. Help me make a clear prompt!",
+    "badge_1": "Master Planner",
+    "boringPrompt_1": "make a study plan",
+
+    "characterName_2": "Algebra Wizard",
+    "characterMsg_2": "I am stuck on this algebra equation: '3x - 7 = 14'. I want the AI to explain how to solve it step-by-step so I can do it myself next time.",
+    "badge_2": "Math Genius",
+    "boringPrompt_2": "solve 3x-7=14",
+
+    "characterName_3": "Notice Editor",
+    "characterMsg_3": "As the School Head Boy, I need to write a formal notice for the school notice board about a Lost Water Bottle found in the playground. Help me format it correctly!",
+    "badge_3": "Star Editor",
+    "boringPrompt_3": "write lost bottle notice",
+
+    "characterName_4": "Party Planner",
+    "characterMsg_4": "I want to send an informal, exciting email to invite my best friend Rahul to my space-themed birthday party! I want it to sound super fun and friendly.",
+    "badge_4": "Email Pro",
+    "boringPrompt_4": "write birthday invite to rahul",
+
+    "characterName_5": "Creative Author",
+    "characterMsg_5": "I want to write a short essay about lions for my class. My boring prompt 'write an essay about lions' is just too long and messy. Can you help me prompt the AI to write a structured, 3-paragraph essay with a catchy title?",
+    "badge_5": "Master Essayist",
+    "boringPrompt_5": "write an essay about lions",
+
+    "characterName_6": "Literary Guide",
+    "characterMsg_6": "I have this short passage about the Invention of the Printing Press. I want the AI to help me summarize it and quiz me so I can study for my comprehension exam.",
+    "badge_6": "Text Explorer",
+    "boringPrompt_6": "explain this printing press paragraph",
+
+    "characterName_7": "Science Tutor",
+    "characterMsg_7": "I need to learn Photosynthesis for my science test tomorrow, but the textbook definition is too confusing. Help me prompt the AI to explain it like a cooking recipe!",
+    "badge_7": "Junior Scientist",
+    "boringPrompt_7": "what is photosynthesis",
+
+    "characterName_8": "Nature Explorer",
+    "characterMsg_8": "I need to remember the 4 stages of the water cycle for my science exam. Let's make a prompt that tells the adventure of a water droplet!",
+    "badge_8": "Eco Warrior",
+    "boringPrompt_8": "what are the stages of the water cycle",
+
+    "characterName_9": "AI Art Assistant",
+    "characterMsg_9": "I want to paint a cosmic sea turtle, but in a cool neon chalk style on a dark blackboard. Help me choose the right style and lighting details to generate this image!",
+    "badge_9": "Master Artist",
+    "boringPrompt_9": "a turtle in space",
+
+    "characterName_10": "Story Weaver",
+    "characterMsg_10": "I need to write a suspenseful short story for my English assignment about a lost treasure in a jungle. Help me prompt the AI to make it exciting!",
+    "badge_10": "Master Novelist",
+    "boringPrompt_10": "write a story about jungle treasure",
+
+    "characterName_11": "Poetry Bard",
+    "characterMsg_11": "I want to write a beautiful 2-stanza poem about the Moon for my school magazine. Let's make it rhyme perfectly!",
+    "badge_11": "Master Poet",
+    "boringPrompt_11": "write a poem about the moon",
+
+    "characterName_12": "Debate Captain",
+    "characterMsg_12": "I have a debate tomorrow. My topic is 'Junk Food should be banned in school canteens'. Help me prompt the AI to write a solid argumentative essay!",
+    "badge_12": "Master Debater",
+    "boringPrompt_12": "write an essay on banning junk food",
+
+    "characterName_13": "Word Painter",
+    "characterMsg_13": "I need to describe a 'Busy Train Station' for my English composition. Make sure the prompt tells the AI to use lots of sensory details!",
+    "badge_13": "Sensory Writer",
+    "boringPrompt_13": "describe a busy train station",
+
+    "characterName_14": "Visual Detective",
+    "characterMsg_14": "I have a picture of a little girl offering an umbrella to a stray dog in the rain. Let's describe it to the AI and have it write a touching composition!",
+    "badge_14": "Master Observer",
+    "boringPrompt_14": "write a story about a girl giving umbrella to dog",
+
+    "characterName_15": "Math Detective",
+    "characterMsg_15": "I have a tough word problem: 'A train travels 300km in 4 hours. What is its speed in km/h?'. Let's ask the AI to break it down perfectly.",
+    "badge_15": "Word Problem Ace",
+    "boringPrompt_15": "solve: train travels 300km in 4 hours what is speed",
+
+    "characterName_16": "Shape Master",
+    "characterMsg_16": "I don't understand the Pythagorean Theorem. Let's prompt the AI to explain it simply with a real-world example!",
+    "badge_16": "Geometry Genius",
+    "boringPrompt_16": "explain pythagoras theorem"
   }
 }
