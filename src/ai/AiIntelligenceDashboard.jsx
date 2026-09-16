@@ -661,16 +661,16 @@ const PromptAcademyComponent = () => {
     let outputText = "";
     let missingFeedback = [];
 
-    if (!hasRole) missingFeedback.push("Robotic Tone (Missing Role)");
-    if (!hasSubject) missingFeedback.push("No Topic (Missing Subject)");
-    if (!hasDetail) missingFeedback.push("Very Brief (Missing Details)");
-    if (!hasStyle) missingFeedback.push("Hard to Read (Missing Style)");
+    if (!hasRole) missingFeedback.push(t('ai.missingRole', "Robotic Tone (Missing Role)"));
+    if (!hasSubject) missingFeedback.push(t('ai.missingSubject', "No Topic (Missing Subject)"));
+    if (!hasDetail) missingFeedback.push(t('ai.missingDetail', "Very Brief (Missing Details)"));
+    if (!hasStyle) missingFeedback.push(t('ai.missingStyle', "Hard to Read (Missing Style)"));
 
     if (activeLesson.quest.targetType === "Image Creator") {
       if (!hasSubject) {
-        outputText = "Error: Cannot generate image. Please provide a Subject to draw!";
+        outputText = t('ai.errNoSubjectImg', "Error: Cannot generate image. Please provide a Subject to draw!");
       } else {
-        outputText = "Generating Image... [Result is very plain and lacks artistic direction. Add more rules!]";
+        outputText = t('ai.genImgPlain', "Generating Image... [Result is very plain and lacks artistic direction. Add more rules!]");
       }
       
       return (
@@ -680,10 +680,10 @@ const PromptAcademyComponent = () => {
            </div>
            <div className="bg-white border border-amber-200 text-slate-700 text-sm p-3.5 rounded-2xl rounded-tl-sm shadow-sm w-full">
               <span className="font-bold block mb-1 text-amber-500">
-                 {selectedIngredients.length === 1 ? 'Incomplete Prompt ⚠️' : selectedIngredients.length === 2 ? 'Getting Closer 💡' : 'Almost Perfect ✨'}
+                 {selectedIngredients.length === 1 ? t('ai.incompletePrompt', 'Incomplete Prompt ⚠️') : selectedIngredients.length === 2 ? t('ai.gettingCloser', 'Getting Closer 💡') : t('ai.almostPerfect', 'Almost Perfect ✨')}
               </span>
               <p className="mb-3 text-xs sm:text-sm text-slate-500">
-                 I analyzed your prompt. Here is the generated result and why it is failing:
+                 {t('ai.promptAnalyzedFeedback', 'I analyzed your prompt. Here is the generated result and why it is failing:')}
               </p>
               <div className="mt-2 bg-slate-50 p-3 rounded-xl border border-slate-100 shadow-inner">
                  <div className="flex gap-2 flex-wrap mb-3">
@@ -692,7 +692,7 @@ const PromptAcademyComponent = () => {
                     ))}
                  </div>
                  {hasSubject ? (
-                    <img loading="lazy" decoding="async" src={activeLesson.quest.boringOutputImage || "/images/ai/flat_turtle.webp"} className="rounded-lg w-full border border-slate-200 opacity-90 shadow-sm" alt="Boring Result" />
+                    <img loading="lazy" decoding="async" src={activeLesson.quest.boringOutputImage || "/images/ai/flat_turtle.webp"} className="rounded-lg w-full border border-slate-200 opacity-90 shadow-sm" alt={t('ai.boringResult', 'Boring Result')} />
                  ) : (
                     <div className="text-xs text-rose-500 italic font-mono bg-rose-50 p-2 rounded-md border border-rose-100">{outputText}</div>
                  )}
@@ -704,14 +704,14 @@ const PromptAcademyComponent = () => {
 
     // Text output logic
     if (!hasSubject) {
-       outputText = "I am ready to write... but I don't know what the topic is yet! Please give me a subject.";
+       outputText = t('ai.errNoSubjectText', "I am ready to write... but I don't know what the topic is yet! Please give me a subject.");
     } else {
-       outputText = activeLesson.quest.boringOutputText || "This is a very generic and boring response because the prompt lacks specific details.";
+       outputText = t(`ai.boringOutputText_${activeLesson.id}`, activeLesson.quest.boringOutputText || "This is a very generic and boring response because the prompt lacks specific details.");
        if (hasRole) {
-          outputText = "Hello! " + outputText;
+          outputText = t('ai.boringRolePrefix', "Hello! ") + outputText;
        }
        if (hasDetail) {
-          outputText += " [I tried to add some details but I am struggling without all the rules...]";
+          outputText += t('ai.boringDetailSuffix', " [I tried to add some details but I am struggling without all the rules...]");
        }
        if (hasStyle) {
           outputText = "• " + outputText.replace(/\n/g, "\n• ");
@@ -725,10 +725,10 @@ const PromptAcademyComponent = () => {
            </div>
            <div className="bg-white border border-amber-200 text-slate-700 text-sm p-3.5 rounded-2xl rounded-tl-sm shadow-sm w-full">
               <span className="font-bold block mb-1 text-amber-500">
-                 {selectedIngredients.length === 1 ? 'Incomplete Prompt ⚠️' : selectedIngredients.length === 2 ? 'Getting Closer 💡' : 'Almost Perfect ✨'}
+                 {selectedIngredients.length === 1 ? t('ai.incompletePrompt', 'Incomplete Prompt ⚠️') : selectedIngredients.length === 2 ? t('ai.gettingCloser', 'Getting Closer 💡') : t('ai.almostPerfect', 'Almost Perfect ✨')}
               </span>
               <p className="mb-3 text-xs sm:text-sm text-slate-500">
-                 I analyzed your prompt. Here is the generated result and why it is failing:
+                 {t('ai.promptAnalyzedFeedback', 'I analyzed your prompt. Here is the generated result and why it is failing:')}
               </p>
               <div className="mt-2 bg-slate-50 p-3 rounded-xl border border-slate-100 shadow-inner">
                  <div className="flex gap-2 flex-wrap mb-3">
@@ -859,7 +859,7 @@ const PromptAcademyComponent = () => {
         const idxB = activeLesson.quest.ingredients.findIndex(x => x.id === b.id);
         return idxA - idxB;
       })
-      .map(x => x.text)
+      .map(x => t(`ai.ingText_${x.id}`, x.text))
       .join(" ");
   };
 
@@ -867,7 +867,7 @@ const PromptAcademyComponent = () => {
     if (selectedIngredients.length === 0) {
       return (
         <span className="text-slate-400 italic">
-          Click the Power-up badges below to craft the prompt spell!
+          {t('ai.clickPowerUpBadges', 'Click the Power-up badges below to craft the prompt spell!')}
         </span>
       );
     }
@@ -894,7 +894,7 @@ const PromptAcademyComponent = () => {
             key={ing.id}
             className={`text-xs sm:text-sm font-bold px-2 py-0.5 rounded border ${getBadgeTypeColor(ing.type)}`}
           >
-            {ing.text}
+            {t(`ai.ingText_${ing.id}`, ing.text)}
           </span>
         ))}
       </div>
@@ -1149,10 +1149,10 @@ const PromptAcademyComponent = () => {
                                 </div>
                                 <div className="min-w-0">
                                   <span className={`text-xs font-black uppercase tracking-wider block mb-0.5 font-display ${isSelected ? 'text-purple-600' : 'text-slate-600'}`}>
-                                    {ing.label}
+                                    {t(`ai.ingLabel_${ing.id}`, ing.label)}
                                   </span>
                                   <span className="text-xs font-semibold text-slate-500 leading-snug block">
-                                    {ing.desc}
+                                    {t(`ai.ingDesc_${ing.id}`, ing.desc)}
                                   </span>
                                 </div>
                               </div>
