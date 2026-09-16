@@ -1208,7 +1208,7 @@ const PromptAcademyComponent = () => {
                                         </div>
                                       </div>
                                     ) : (
-                                      renderProfessionalTextOutput(activeLesson.quest.superOutputText, activeLesson.id)
+                                       renderProfessionalTextOutput(t(`ai.superOutputText_${activeLesson.id}`, activeLesson.quest.superOutputText), activeLesson.id)
                                     )}
                                  </div>
                               </div>
