@@ -1822,7 +1822,7 @@ const cyberTheme = {
 const CyberSecurityDashboard = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [activeFilterId, setActiveFilterId] = useState('playzone');
+  const [activeFilter, setActiveFilter] = useState('playzone');
   const [selectedItem, setSelectedItem] = useState(null);
 
   // Curriculum State
@@ -1896,10 +1896,10 @@ const CyberSecurityDashboard = () => {
   }, [selectedItem]);
 
   const getQuickStats = (t) => [
-    { label: t("cyber.label_SafetyPlayzone", { defaultValue: "Safety Playzone" }), value: t("cyber.value_CyberSecurityModules", { defaultValue: "Cyber Security Modules" }), icon: <Shield className={cyberTheme.card1Icon} />, color: cyberTheme.card1Bg },
-    { label: t("cyber.label_KnowledgeBase", { defaultValue: "Knowledge Base" }), value: t("cyber.value_GlossaryReadingMater", { defaultValue: "Glossary & Reading Materials" }), icon: <BookOpen className={cyberTheme.card2Icon} />, color: cyberTheme.card2Bg },
-    { label: t("cyber.label_SkillAssessment", { defaultValue: "Skill Assessment" }), value: t("cyber.value_QuizzesVerification", { defaultValue: "Quizzes & Verification" }), icon: <Trophy className={cyberTheme.card3Icon} />, color: cyberTheme.card3Bg },
-  ];
+  { id: 'playzone', label: t("cyber.label_SafetyPlayzone_45e1", { defaultValue: "Safety Playzone" }), value: t("cyber.value_CyberSecurityModules_086c", { defaultValue: "Cyber Security Modules" }), icon: <Shield className={cyberTheme.card1Icon} />, color: cyberTheme.card1Bg },
+  { id: 'knowledge', label: t("cyber.label_KnowledgeBase_0830", { defaultValue: "Knowledge Base" }), value: t("cyber.value_GlossaryReadingMater_ddd4", { defaultValue: "Glossary & Reading Materials" }), icon: <BookOpen className={cyberTheme.card2Icon} />, color: cyberTheme.card2Bg },
+  { id: 'assessment', label: t("cyber.label_SkillAssessment_31f8", { defaultValue: "Skill Assessment" }), value: t("cyber.value_QuizzesVerification_607a", { defaultValue: "Quizzes & Verification" }), icon: <Trophy className={cyberTheme.card3Icon} />, color: cyberTheme.card3Bg },
+];
 
   const getArticles = (t) => [
     {
@@ -1951,7 +1951,7 @@ const CyberSecurityDashboard = () => {
           transition={{ duration: 0.3 }}
           className="pb-12"
         >
-          {activeFilter === 'Safety Playzone' && (
+          {activeFilter === 'playzone' && (
             <div className="space-y-4 pt-2 sm:pt-4">
               {/* Top lesson selection bar matching VR module exactly */}
               <div className="bg-white border border-slate-100 rounded-[20px] p-2 shadow-[0_4px_20px_rgb(0,0,0,0.03)] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 mb-3">
@@ -2040,7 +2040,7 @@ const CyberSecurityDashboard = () => {
                           onClick={handleProceedNext}
                           className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider font-display transition-all duration-200 flex items-center justify-center gap-2 shadow-sm cursor-pointer group"
                         >
-                          <span>Proceed to Next Lesson</span>
+                          <span>{t("cyber.ui_ProceedtoNextLesson_4a12", { defaultValue: "Proceed to Next Lesson" })}</span>
                           <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                         </button>
                       ) : (
@@ -2048,7 +2048,7 @@ const CyberSecurityDashboard = () => {
                           onClick={handleProceedNext}
                           className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider font-display transition-all duration-200 flex items-center justify-center gap-2 shadow-sm cursor-pointer group"
                         >
-                          <span>Return to Dashboard</span>
+                          <span>{t("cyber.ui_ReturntoDashboard_e76b", { defaultValue: "Return to Dashboard" })}</span>
                           <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                         </button>
                       )}
@@ -2100,7 +2100,7 @@ const CyberSecurityDashboard = () => {
                             : 'bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer'
                         }`}
                       >
-                        Previous Section
+                        {t("cyber.ui_PreviousSection_ae60", { defaultValue: "Previous Section" })}
                       </button>
 
                       {activeTopicIndex < currentLesson.learnSections.length - 1 ? (
@@ -2108,21 +2108,21 @@ const CyberSecurityDashboard = () => {
                           onClick={() => setActiveTopicIndex(prev => Math.min(currentLesson.learnSections.length - 1, prev + 1))}
                           className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer font-display"
                         >
-                          Next Section <ChevronRight size={16} />
+                          {t("cyber.ui_NextSection_0955", { defaultValue: "Next Section" })} <ChevronRight size={16} />
                         </button>
                       ) : activeLessonId < lessons.length ? (
                         <button
                           onClick={handleProceedNext}
                           className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer font-display"
                         >
-                          Next Lesson <ArrowRight size={16} />
+                          {t("cyber.ui_NextLesson_46ef", { defaultValue: "Next Lesson" })} <ArrowRight size={16} />
                         </button>
                       ) : (
                         <button
                           onClick={handleProceedNext}
                           className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer font-display"
                         >
-                          Return to Dashboard <ArrowRight size={16} />
+                          {t("cyber.ui_ReturntoDashboard_e76b", { defaultValue: "Return to Dashboard" })} <ArrowRight size={16} />
                         </button>
                       )}
                     </div>
@@ -2132,16 +2132,16 @@ const CyberSecurityDashboard = () => {
             </div>
           )}
 
-          {activeFilter === 'Knowledge Base' && (
+          {activeFilter === 'knowledge' && (
             <div className="space-y-4 pt-2 sm:pt-4">
               <section className="bg-white rounded-[24px] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-5 sm:p-7 md:p-8 space-y-6">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-5">
                   <div>
                     <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight">
-                      Cyber Security Reading Materials & Glossary
+                      {t("cyber.ui_CyberSecurityReading_e188", { defaultValue: "Cyber Security Reading Materials & Glossary" })}
                     </h2>
                     <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
-                      Select an article or glossary card below to view detailed guidelines and definitions
+                      {t("cyber.ui_Selectanarticleorglo_e606", { defaultValue: "Select an article or glossary card below to view detailed guidelines and definitions" })}
                     </p>
                   </div>
                 </div>
@@ -2165,7 +2165,7 @@ const CyberSecurityDashboard = () => {
                         </p>
                       </div>
                       <div className="pt-3 border-t border-slate-100 flex items-center text-emerald-600 text-xs font-bold gap-1 font-display">
-                        <span>Read Full Guide</span>
+                        <span>{t("cyber.ui_ReadFullGuide_2700", { defaultValue: "Read Full Guide" })}</span>
                         <ChevronRight size={14} />
                       </div>
                     </div>
@@ -2175,7 +2175,7 @@ const CyberSecurityDashboard = () => {
             </div>
           )}
 
-          {activeFilter === 'Skill Assessment' && (
+          {activeFilter === 'assessment' && (
             <div className="space-y-4 pt-2 sm:pt-4">
               <CyberSecurityQuiz />
             </div>
@@ -2200,11 +2200,11 @@ const CyberSecurityDashboard = () => {
             <section className="bg-white rounded-[16px] md:rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[200px] sm:min-h-[260px] md:min-h-[300px] lg:h-[387px] lg:min-h-[387px] pb-4 md:pb-6 lg:pb-0">
               <div className="relative z-10 p-8 md:p-10 lg:w-1/2 space-y-4">
                 <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
-                  Stay Safe <br /> In The Digital <br />
-                  <span className={cyberTheme.heroHighlightText}>World.</span>
+                  {t("cyber.ui_StaySafe_c518", { defaultValue: "Stay Safe" })} <br /> {t("cyber.ui_InTheDigital_6b6f", { defaultValue: "In The Digital" })} <br />
+                  <span className={cyberTheme.heroHighlightText}>{t("cyber.ui_World_72b7", { defaultValue: "World." })}</span>
                 </h1>
                 <p className="text-slate-500 text-[15px] md:text-[16px] font-medium leading-relaxed max-w-sm">
-                  Learn to protect yourself from phishing, malware, and online scams.
+                  {t("cyber.ui_Learntoprotectyourse_9af4", { defaultValue: "Learn to protect yourself from phishing, malware, and online scams." })}
                 </p>
               </div>
 
@@ -2216,12 +2216,12 @@ const CyberSecurityDashboard = () => {
 
             <section className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 relative z-20 -mt-8 px-4 md:px-8">
               {quickStats.map((stat, i) => {
-                const isActive = activeFilter === stat.label;
+                const isActive = activeFilter === stat.id;
                 return (
                   <div
                     key={i}
                     onClick={() => {
-                      setActiveFilter(stat.label);
+                      setActiveFilter(stat.id);
                       const target = document.getElementById("content-section");
                       if (target) target.scrollIntoView({ behavior: 'smooth' });
                     }}
@@ -2370,7 +2370,7 @@ const CyberSecurityDashboard = () => {
                   <div className="bg-gradient-to-br from-emerald-50/80 to-teal-50/40 border border-emerald-500/15 rounded-2xl p-5 md:p-6 shadow-sm relative">
                     <div className="flex items-center gap-2 text-emerald-800 font-extrabold text-xs uppercase tracking-wider mb-3.5 pb-2.5 border-b border-emerald-500/10">
                       <Shield className="text-emerald-600 shrink-0" size={16} />
-                      <span>Lesson Details & Guidelines</span>
+                      <span>{t("cyber.ui_LessonDetailsGuideli_2867", { defaultValue: "Lesson Details & Guidelines" })}</span>
                     </div>
                     <div className="text-slate-700 font-semibold text-sm md:text-[15px] leading-relaxed whitespace-pre-line space-y-2">
                       {selectedItem.content}
@@ -2388,13 +2388,13 @@ const CyberSecurityDashboard = () => {
                 {/* Footer */}
                 <div className="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-4">
                   <span className="text-xs font-bold text-slate-400 hidden sm:flex items-center gap-1.5">
-                    <CheckCircle2 size={16} className="text-emerald-500 shrink-0" /> Stay secure & alert online!
+                    <CheckCircle2 size={16} className="text-emerald-500 shrink-0" /> {t("cyber.ui_Staysecurealertonlin_89ec", { defaultValue: "Stay secure & alert online!" })}
                   </span>
                   <button
                     onClick={() => setSelectedItem(null)}
                     className="w-full sm:w-auto ml-auto px-6 py-2.5 bg-gradient-to-r from-[#10b981] to-[#0d9488] hover:from-[#059669] hover:to-[#0f766e] text-white rounded-full text-xs font-black tracking-wide uppercase transition-all shadow-md shadow-emerald-500/25 cursor-pointer active:scale-95 flex items-center justify-center gap-1.5"
                   >
-                    Got It, Stay Safe <ChevronRight size={14} />
+                    {t("cyber.ui_GotItStaySafe_ac7e", { defaultValue: "Got It, Stay Safe" })} <ChevronRight size={14} />
                   </button>
                 </div>
               </motion.div>
