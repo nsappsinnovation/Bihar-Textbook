@@ -1279,23 +1279,20 @@ const LearnConceptsComponent = () => {
 
                     {/* Left Content */}
                     <div className="relative z-10 w-full md:w-3/5 space-y-5 text-left">
-                      {/* Badges */}
-
-
                       {/* Title & Text */}
                       <div className="space-y-4">
                         <h2 className="text-3xl sm:text-4xl md:text-5xl font-black font-display text-slate-900 tracking-tight leading-tight">
-                          What is Artificial Intelligence?
+                          {t('ai.whatIsAiTitle', 'What is Artificial Intelligence?')}
                         </h2>
                         <div className="space-y-3.5 text-sm sm:text-base text-slate-650 font-medium leading-relaxed max-w-xl text-left">
                           <p>
-                            Imagine a computer that can learn to play chess, recognize your pet’s face, or even write a funny poem, without a human coding the rules step-by-step. That is <strong className="text-indigo-600 font-bold">Artificial Intelligence (AI)</strong>!
+                            {t('ai.whatIsAiP1', 'Imagine a computer that can learn to play chess, recognize your pet’s face, or even write a funny poem, without a human coding the rules step-by-step. That is Artificial Intelligence (AI)!')}
                           </p>
                           <p>
-                            Normally, computers act like calculators—they only do exactly what we tell them to do using pre-written instructions. But AI acts more like a <strong className="text-purple-650 font-bold">curious student</strong>. It learns by studying thousands of examples (called <strong>Data</strong>), finding patterns on its own, and getting smarter over time!
+                            {t('ai.whatIsAiP2', 'Normally, computers act like calculators—they only do exactly what we tell them to do using pre-written instructions. But AI acts more like a curious student. It learns by studying thousands of examples (called Data), finding patterns on its own, and getting smarter over time!')}
                           </p>
                           <p>
-                            Just like how you learn to identify a mango by seeing it, smelling it, and tasting it a few times, an AI learns to identify a cat, a song, or a word by training on millions of pictures, audio clips, or sentences.
+                            {t('ai.whatIsAiP3', 'Just like how you learn to identify a mango by seeing it, smelling it, and tasting it a few times, an AI learns to identify a cat, a song, or a word by training on millions of pictures, audio clips, or sentences.')}
                           </p>
                         </div>
 
@@ -1303,7 +1300,7 @@ const LearnConceptsComponent = () => {
                         <div className="mt-6 bg-indigo-50/50 border border-indigo-100/80 rounded-xl p-3.5 flex items-start gap-3 max-w-xl shadow-sm">
                           <Lightbulb size={18} className="text-amber-500 shrink-0 mt-0.5" />
                           <p className="text-[13px] text-indigo-900 font-medium leading-relaxed">
-                            <strong>Fun Fact:</strong> The term "Artificial Intelligence" was actually invented way back in <strong>1956</strong> by a scientist named John McCarthy during a summer conference!
+                            {t('ai.funFactText', 'Fun Fact: The term "Artificial Intelligence" was actually invented way back in 1956 by a scientist named John McCarthy during a summer conference!')}
                           </p>
                         </div>
                       </div>
@@ -1315,19 +1312,19 @@ const LearnConceptsComponent = () => {
                       <div className="relative grid grid-cols-2 gap-4">
                         <div className="bg-white w-28 h-28 sm:w-32 sm:h-32 p-5 rounded-3xl shadow-md border border-indigo-50 flex flex-col items-center justify-center gap-2.5 transform -rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-300">
                           <div className="w-12 h-12 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center"><Eye size={24} /></div>
-                          <span className="text-[11px] font-black text-slate-700 uppercase tracking-wider">Vision</span>
+                          <span className="text-[11px] font-black text-slate-700 uppercase tracking-wider">{t('ai.cardVision', 'Vision')}</span>
                         </div>
                         <div className="bg-white w-28 h-28 sm:w-32 sm:h-32 p-5 rounded-3xl shadow-md border border-indigo-50 flex flex-col items-center justify-center gap-2.5 transform translate-y-4 rotate-3 hover:rotate-0 hover:scale-105 transition-all duration-300">
                           <div className="w-12 h-12 rounded-full bg-purple-50 text-purple-500 flex items-center justify-center"><MessageSquare size={24} /></div>
-                          <span className="text-[11px] font-black text-slate-700 uppercase tracking-wider">Chat</span>
+                          <span className="text-[11px] font-black text-slate-700 uppercase tracking-wider">{t('ai.cardChat', 'Chat')}</span>
                         </div>
                         <div className="bg-white w-28 h-28 sm:w-32 sm:h-32 p-5 rounded-3xl shadow-md border border-indigo-50 flex flex-col items-center justify-center gap-2.5 transform -translate-y-2 -rotate-2 hover:rotate-0 hover:scale-105 transition-all duration-300">
                           <div className="w-12 h-12 rounded-full bg-purple-50 text-purple-500 flex items-center justify-center"><Palette size={24} /></div>
-                          <span className="text-[11px] font-black text-slate-700 uppercase tracking-wider">Create</span>
+                          <span className="text-[11px] font-black text-slate-700 uppercase tracking-wider">{t('ai.cardCreate', 'Create')}</span>
                         </div>
                         <div className="bg-white w-28 h-28 sm:w-32 sm:h-32 p-5 rounded-3xl shadow-md border border-indigo-50 flex flex-col items-center justify-center gap-2.5 transform translate-y-6 rotate-6 hover:rotate-0 hover:scale-105 transition-all duration-300">
                           <div className="w-12 h-12 rounded-full bg-emerald-50 text-emerald-500 flex items-center justify-center"><Brain size={24} /></div>
-                          <span className="text-[11px] font-black text-slate-700 uppercase tracking-wider">Learn</span>
+                          <span className="text-[11px] font-black text-slate-700 uppercase tracking-wider">{t('ai.cardLearn', 'Learn')}</span>
                         </div>
                       </div>
                     </div>
@@ -1342,14 +1339,14 @@ const LearnConceptsComponent = () => {
                     <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 text-left px-2">
                       <div>
                         <span className="text-xs font-black text-purple-600 uppercase tracking-wider font-display">
-                          Capabilities
+                          {t('ai.capabilitiesTag', 'Capabilities')}
                         </span>
                         <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-display">
-                          4 Core Capabilities of AI
+                          {t('ai.capabilitiesTitle', '4 Core Capabilities of AI')}
                         </h3>
                       </div>
                       <p className="text-xs text-slate-500 font-semibold">
-                        How AI understands, sees, predicts, and creates
+                        {t('ai.capabilitiesSubtitle', 'How AI understands, sees, predicts, and creates')}
                       </p>
                     </div>
 
@@ -1361,15 +1358,15 @@ const LearnConceptsComponent = () => {
                             <Eye size={24} />
                           </div>
                           <h4 className="text-base font-black text-slate-900 font-display group-hover:text-purple-600 transition-colors">
-                            Computer Vision
+                            {t('ai.power1Title', 'Computer Vision')}
                           </h4>
                           <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                            AI analyzes pixels in images and videos to recognize objects, read handwriting, and identify face patterns.
+                            {t('ai.power1Desc', 'AI analyzes pixels in images and videos to recognize objects, read handwriting, and identify face patterns.')}
                           </p>
                         </div>
                         <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
                           <span className="text-[10px] font-extrabold text-purple-600 bg-purple-50 px-2 py-1 rounded-md uppercase font-mono tracking-wider">
-                            Google Lens &amp; FaceID
+                            {t('ai.power1Tag', 'Google Lens & FaceID')}
                           </span>
                         </div>
                       </div>
@@ -1381,15 +1378,15 @@ const LearnConceptsComponent = () => {
                             <MessageSquare size={24} />
                           </div>
                           <h4 className="text-base font-black text-slate-900 font-display group-hover:text-purple-600 transition-colors">
-                            Natural Language (NLP)
+                            {t('ai.power2Title', 'Natural Language (NLP)')}
                           </h4>
                           <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                            AI understands spoken words, translates sentences between languages, and answers questions like an assistant.
+                            {t('ai.power2Desc', 'AI understands spoken words, translates sentences between languages, and answers questions like an assistant.')}
                           </p>
                         </div>
                         <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
                           <span className="text-[10px] font-extrabold text-purple-600 bg-purple-50 px-2 py-1 rounded-md uppercase font-mono tracking-wider">
-                            Translate &amp; Siri
+                            {t('ai.power2Tag', 'Translate & Siri')}
                           </span>
                         </div>
                       </div>
@@ -1401,15 +1398,15 @@ const LearnConceptsComponent = () => {
                             <Brain size={24} />
                           </div>
                           <h4 className="text-base font-black text-slate-900 font-display group-hover:text-purple-600 transition-colors">
-                            Smart Predictions
+                            {t('ai.power3Title', 'Smart Predictions')}
                           </h4>
                           <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                            AI studies trends and large datasets to recommend your next video, estimate traffic, or predict weather changes.
+                            {t('ai.power3Desc', 'AI studies trends and large datasets to recommend your next video, estimate traffic, or predict weather changes.')}
                           </p>
                         </div>
                         <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
                           <span className="text-[10px] font-extrabold text-purple-600 bg-purple-50 px-2 py-1 rounded-md uppercase font-mono tracking-wider">
-                            Maps &amp; Recommendations
+                            {t('ai.power3Tag', 'Maps & Recommendations')}
                           </span>
                         </div>
                       </div>
@@ -1421,15 +1418,15 @@ const LearnConceptsComponent = () => {
                             <Palette size={24} />
                           </div>
                           <h4 className="text-base font-black text-slate-900 font-display group-hover:text-purple-600 transition-colors">
-                            Creative Generation
+                            {t('ai.power4Title', 'Creative Generation')}
                           </h4>
                           <p className="text-xs text-slate-600 font-medium leading-relaxed">
-                            AI writes letters, creates digital artwork, or builds slide presentations based on your text instructions.
+                            {t('ai.power4Desc', 'AI writes letters, creates digital artwork, or builds slide presentations based on your text instructions.')}
                           </p>
                         </div>
                         <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
                           <span className="text-[10px] font-extrabold text-purple-600 bg-purple-50 px-2 py-1 rounded-md uppercase font-mono tracking-wider">
-                            ChatGPT &amp; Midjourney
+                            {t('ai.power4Tag', 'ChatGPT & Midjourney')}
                           </span>
                         </div>
                       </div>
@@ -1446,10 +1443,10 @@ const LearnConceptsComponent = () => {
                     <div className="lg:col-span-6 bg-gradient-to-br from-slate-50 to-indigo-50/40 rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-sm flex flex-col justify-between text-left">
                       <div>
                         <span className="text-xs font-black text-indigo-600 uppercase tracking-wider font-display block mb-1">
-                          Simple Timeline
+                          {t('ai.howAiLearnsTag', 'Simple Timeline')}
                         </span>
                         <h3 className="text-lg sm:text-xl font-black text-slate-900 font-display mb-4">
-                          How Does AI Get Smart?
+                          {t('ai.howAiLearnsTitle', 'How Does AI Get Smart?')}
                         </h3>
 
                         <div className="space-y-4">
@@ -1458,8 +1455,8 @@ const LearnConceptsComponent = () => {
                               1
                             </div>
                             <div>
-                              <h4 className="text-sm font-black text-slate-900 font-display">Feed the Data</h4>
-                              <p className="text-xs text-slate-600 font-medium mt-0.5">We show AI millions of examples (photos, books, numbers) so it learns shapes and facts.</p>
+                              <h4 className="text-sm font-black text-slate-900 font-display">{t('ai.step1Title', 'Feed the Data')}</h4>
+                              <p className="text-xs text-slate-600 font-medium mt-0.5">{t('ai.step1Desc', 'We show AI millions of examples (photos, books, numbers) so it learns shapes and facts.')}</p>
                             </div>
                           </div>
 
@@ -1468,8 +1465,8 @@ const LearnConceptsComponent = () => {
                               2
                             </div>
                             <div>
-                              <h4 className="text-sm font-black text-slate-900 font-display">Practice &amp; Guess</h4>
-                              <p className="text-xs text-slate-600 font-medium mt-0.5">AI practices guessing. When it makes a mistake, we correct it until its score reaches 100%!</p>
+                              <h4 className="text-sm font-black text-slate-900 font-display">{t('ai.step2Title', 'Practice & Guess')}</h4>
+                              <p className="text-xs text-slate-600 font-medium mt-0.5">{t('ai.step2Desc', 'AI practices guessing. When it makes a mistake, we correct it until its score reaches 100%!')}</p>
                             </div>
                           </div>
 
@@ -1478,8 +1475,8 @@ const LearnConceptsComponent = () => {
                               3
                             </div>
                             <div>
-                              <h4 className="text-sm font-black text-slate-900 font-display">Spot Secrets</h4>
-                              <p className="text-xs text-slate-600 font-medium mt-0.5">AI works like a detective, automatically spotting patterns without human help!</p>
+                              <h4 className="text-sm font-black text-slate-900 font-display">{t('ai.step3Title', 'Spot Secrets')}</h4>
+                              <p className="text-xs text-slate-600 font-medium mt-0.5">{t('ai.step3Desc', 'AI works like a detective, automatically spotting patterns without human help!')}</p>
                             </div>
                           </div>
                         </div>
@@ -1490,35 +1487,35 @@ const LearnConceptsComponent = () => {
                     <div className="lg:col-span-6 bg-gradient-to-br from-slate-50 to-indigo-50/40 rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-sm flex flex-col justify-between text-left">
                       <div>
                         <span className="text-xs font-black text-indigo-600 uppercase tracking-wider font-display block mb-1">
-                          Safety First
+                          {t('ai.safetyTag', 'Safety First')}
                         </span>
                         <h3 className="text-lg sm:text-xl font-black text-slate-900 font-display mb-4">
-                          4 Smart Rules of Using AI
+                          {t('ai.safetyTitle', '4 Smart Rules of Using AI')}
                         </h3>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           <div className="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm">
                             <div className="mb-1 text-indigo-600"><Shield size={20} /></div>
-                            <h4 className="text-xs sm:text-sm font-black text-slate-900 font-display">Keep Secrets Secret</h4>
-                            <p className="text-[11px] text-slate-600 font-medium mt-0.5">Never share passwords, real addresses, or phone numbers with AI.</p>
+                            <h4 className="text-xs sm:text-sm font-black text-slate-900 font-display">{t('ai.rule1Title', 'Keep Secrets Secret')}</h4>
+                            <p className="text-[11px] text-slate-600 font-medium mt-0.5">{t('ai.rule1Desc', 'Never share passwords, real addresses, or phone numbers with AI.')}</p>
                           </div>
 
                           <div className="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm">
                             <div className="mb-1 text-indigo-600"><CheckCircle2 size={20} /></div>
-                            <h4 className="text-xs sm:text-sm font-black text-slate-900 font-display">Double-Check Facts</h4>
-                            <p className="text-[11px] text-slate-600 font-medium mt-0.5">AI can make silly mistakes. Verify important facts with a textbook or teacher.</p>
+                            <h4 className="text-xs sm:text-sm font-black text-slate-900 font-display">{t('ai.rule2Title', 'Double-Check Facts')}</h4>
+                            <p className="text-[11px] text-slate-600 font-medium mt-0.5">{t('ai.rule2Desc', 'AI can make silly mistakes. Verify important facts with a textbook or teacher.')}</p>
                           </div>
 
                           <div className="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm">
                             <div className="mb-1 text-indigo-600"><Brain size={20} /></div>
-                            <h4 className="text-xs sm:text-sm font-black text-slate-900 font-display">Learn, Don't Copy</h4>
-                            <p className="text-[11px] text-slate-600 font-medium mt-0.5">Let AI explain how to solve homework instead of just copying the answer.</p>
+                            <h4 className="text-xs sm:text-sm font-black text-slate-900 font-display">{t('ai.rule3Title', "Learn, Don't Copy")}</h4>
+                            <p className="text-[11px] text-slate-600 font-medium mt-0.5">{t('ai.rule3Desc', 'Let AI explain how to solve homework instead of just copying the answer.')}</p>
                           </div>
 
                           <div className="bg-white p-3.5 rounded-2xl border border-slate-100 shadow-sm">
                             <div className="mb-1 text-indigo-600"><Star size={20} /></div>
-                            <h4 className="text-xs sm:text-sm font-black text-slate-900 font-display">Be Creative &amp; Kind</h4>
-                            <p className="text-[11px] text-slate-600 font-medium mt-0.5">Use AI to brainstorm stories, practice coding, and build positive art!</p>
+                            <h4 className="text-xs sm:text-sm font-black text-slate-900 font-display">{t('ai.rule4Title', 'Be Creative & Kind')}</h4>
+                            <p className="text-[11px] text-slate-600 font-medium mt-0.5">{t('ai.rule4Desc', 'Use AI to brainstorm stories, practice coding, and build positive art!')}</p>
                           </div>
                         </div>
                       </div>
@@ -1533,6 +1530,7 @@ const LearnConceptsComponent = () => {
 
 
 const ExploreToolsComponent = () => {
+  const { t } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState('All');
   const filteredTools = selectedCategory === 'All' ? toolsDataList : toolsDataList.filter(t => t.categories.includes(selectedCategory));
 
@@ -1540,7 +1538,7 @@ const ExploreToolsComponent = () => {
     <div className="bg-white rounded-[24px] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-6 md:p-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div>
-          <h2 className="text-2xl font-bold text-slate-900 mb-2">Explore AI Tools</h2>
+          <h2 className="text-2xl font-bold text-slate-900 mb-2">{t('ai.exploreAiToolsTitle', 'Explore AI Tools')}</h2>
 
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -1553,7 +1551,7 @@ const ExploreToolsComponent = () => {
                 : 'bg-slate-50 text-slate-600 hover:bg-slate-100'
                 }`}
             >
-              <span>{cat.icon}</span> <span>{cat.label}</span>
+              <span>{cat.icon}</span> <span>{t('ai.toolCat_' + cat.id.replace(/\s+/g, ''), cat.label)}</span>
             </button>
           ))}
         </div>
