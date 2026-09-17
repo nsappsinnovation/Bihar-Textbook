@@ -29,7 +29,7 @@ const COLORS = ['#3B82F6', '#6366F1', '#06B6D4', '#10B981', '#F59E0B', '#F43F5E'
  * Analytics Charts Section for Dashboard (data comes from GET /api/admin/dashboard)
  * - distribution: 12 rows { monthName, distributed, target } for `year` (edited in Admin → Book Distribution)
  * - monthlyUploads: last 12 months { month, uploads }
- * - contentTypes: [{ name, value }] item counts
+ * - contentTypes: [{ name, value }] 
  */
 export default function AnalyticsCharts({ distribution = [], monthlyUploads = [], contentTypes = [], year, onYearChange }) {
   const hasDistribution = distribution.some((row) => row.distributed > 0 || row.target > 0);
