@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { 
   Brain, Sparkles, ArrowLeft, ArrowRight, CheckCircle2, 
   XCircle, Compass, Atom, RotateCcw, TrendingUp, Target, 
@@ -144,6 +145,7 @@ const SparkyMascot = ({ expression = 'idle' }) => {
 
 const AiIntelligence = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [simulatorStep, setSimulatorStep] = useState(1);
   const [selectedTopic, setSelectedTopic] = useState('space');
   const [assessmentAnswer, setAssessmentAnswer] = useState(null);
@@ -347,14 +349,14 @@ const AiIntelligence = () => {
                 <Award size={48} className="text-white" />
               </div>
               <div className="pt-8 space-y-2">
-                <h3 className="text-xl font-black text-slate-900">Congratulations!</h3>
-                <p className="text-xs text-slate-500 font-semibold">You have successfully unlocked the badge:</p>
+                <h3 className="text-xl font-black text-slate-900">{t('ai.congratulations', 'Congratulations!')}</h3>
+                <p className="text-xs text-slate-500 font-semibold">{t('ai.badgeUnlockedMsg', 'You have successfully unlocked the badge:')}</p>
                 <div className="inline-block px-4 py-2 bg-amber-50 border border-amber-100 rounded-2xl text-sm font-black text-amber-700 mt-2">
                   {topicData.badgeName}
                 </div>
               </div>
               <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                Your brain profile is now registered with the AI engine. Ready to take on real courses?
+                {t('ai.badgeModalDesc', 'Your brain profile is now registered with the AI engine. Ready to take on real courses?')}
               </p>
               <div className="flex gap-3">
                 <button 
@@ -364,13 +366,13 @@ const AiIntelligence = () => {
                   }}
                   className="flex-1 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-all"
                 >
-                  Close
+                  {t('ai.close', 'Close')}
                 </button>
                 <button 
                   onClick={() => navigate("/ai-intelligence-dashboard")}
                   className="flex-grow py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all shadow-md shadow-indigo-500/10"
                 >
-                  Go to Dashboard
+                  {t('ai.goToDashboard', 'Go to Dashboard')}
                 </button>
               </div>
             </motion.div>
@@ -407,13 +409,13 @@ const AiIntelligence = () => {
             >
               <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-indigo-50/80 backdrop-blur-sm text-indigo-700 border border-indigo-200/50 rounded-full text-[10px] sm:text-xs font-bold tracking-wider uppercase">
                 <span className="w-1.5 h-1.5 rounded-full bg-indigo-600 animate-pulse" />
-                Artificial Intelligence Mission
+                {t('ai.missionTag', 'Artificial Intelligence Mission')}
               </span>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 leading-[1.1] tracking-tight">
-                Adaptive <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">Artificial Intelligence</span> Programs
+                {t('ai.heroAdaptive', 'Adaptive')} <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">{t('ai.heroTitle2', 'Artificial Intelligence')}</span> {t('ai.heroPrograms', 'Programs')}
               </h1>
               <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed max-w-2xl">
-                Leveraging artificial intelligence to provide personalized learning experiences and real-time support. Tailored for every student, our smart modules adapt to your unique learning pace.
+                {t('ai.heroLandingDesc', 'Leveraging artificial intelligence to provide personalized learning experiences and real-time support. Tailored for every student, our smart modules adapt to your unique learning pace.')}
               </p>
             </motion.div>
 
@@ -427,7 +429,7 @@ const AiIntelligence = () => {
                 onClick={() => navigate("/ai-intelligence-dashboard")}
                 className="group inline-flex items-center gap-2.5 px-6 py-3.5 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white rounded-full text-xs sm:text-sm font-bold shadow-md shadow-indigo-500/10 hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300 hover:-translate-y-0.5 cursor-pointer"
               >
-                Start Learning
+                {t('ai.startLearning', 'Start Learning')}
                 <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
               </button>
               
@@ -435,7 +437,7 @@ const AiIntelligence = () => {
                 href="#simulator-section"
                 className="inline-flex items-center gap-2 px-6 py-3.5 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 rounded-full text-xs sm:text-sm font-bold shadow-sm transition-all duration-300 hover:-translate-y-0.5"
               >
-                Try Simulator
+                {t('ai.trySimulator', 'Try Simulator')}
               </a>
             </motion.div>
 
@@ -449,23 +451,23 @@ const AiIntelligence = () => {
               <div className="p-3.5 bg-white hover:bg-slate-50 border border-slate-200/60 rounded-2xl hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1">
                 <div className="text-slate-900 font-bold flex items-center gap-1.5 text-xs sm:text-sm">
                   <Brain size={14} className="text-indigo-600" />
-                  Adaptive Learning
+                  {t('ai.specAdaptive', 'Adaptive Learning')}
                 </div>
-                <p className="text-[10px] text-slate-500 leading-normal font-medium">Adjusts to each student's unique learning pace.</p>
+                <p className="text-[10px] text-slate-500 leading-normal font-medium">{t('ai.specAdaptiveDesc', "Adjusts to each student's unique learning pace.")}</p>
               </div>
               <div className="p-3.5 bg-white hover:bg-slate-50 border border-slate-200/60 rounded-2xl hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1">
                 <div className="text-slate-900 font-bold flex items-center gap-1.5 text-xs sm:text-sm">
                   <Target size={14} className="text-violet-600" />
-                  Data Driven
+                  {t('ai.specDataDriven', 'Data Driven')}
                 </div>
-                <p className="text-[10px] text-slate-500 leading-normal font-medium">Real-time analytics to help students improve.</p>
+                <p className="text-[10px] text-slate-500 leading-normal font-medium">{t('ai.specDataDrivenDesc', 'Real-time analytics to help students improve.')}</p>
               </div>
               <div className="p-3.5 bg-white hover:bg-slate-50 border border-slate-200/60 rounded-2xl hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1">
                 <div className="text-slate-900 font-bold flex items-center gap-1.5 text-xs sm:text-sm">
                   <Sparkles size={14} className="text-purple-600" />
-                  Smart Recs
+                  {t('ai.specSmartRecs', 'Smart Recs')}
                 </div>
-                <p className="text-[10px] text-slate-500 leading-normal font-medium">Suggests topics to reinforce strengths.</p>
+                <p className="text-[10px] text-slate-500 leading-normal font-medium">{t('ai.specSmartRecsDesc', 'Suggests topics to reinforce strengths.')}</p>
               </div>
             </motion.div>
           </div>
@@ -491,10 +493,10 @@ const AiIntelligence = () => {
         {/* Section title & subtitle for the simulator */}
         <div id="simulator-section" className="text-center max-w-2xl mx-auto mb-10 space-y-2 pt-4">
           <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-indigo-50 text-indigo-700 border border-indigo-100 rounded-full text-[10px] font-bold tracking-widest uppercase">
-            Simulated Sandbox
+            {t('ai.simulatedSandbox', 'Simulated Sandbox')}
           </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Interactive AI Viewport</h2>
-          <p className="text-xs sm:text-sm text-slate-500 font-medium">Take a test drive of our AI-driven learning cycle below to see how the platform adapts.</p>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">{t('ai.interactiveViewport', 'Interactive AI Viewport')}</h2>
+          <p className="text-xs sm:text-sm text-slate-500 font-medium">{t('ai.viewportDesc', 'Take a test drive of our AI-driven learning cycle below to see how the platform adapts.')}</p>
         </div>
 
         {/* Interactive Viewport Section - Sleek Glassmorphism */}
@@ -508,7 +510,7 @@ const AiIntelligence = () => {
                 setSoundEnabled(!soundEnabled);
               }}
               className="p-2 rounded-xl border border-slate-200/60 bg-white hover:bg-slate-50 text-slate-500 hover:text-slate-800 transition-all shadow-sm flex items-center justify-center"
-              title={soundEnabled ? "Mute Sounds" : "Unmute Sounds"}
+              title={soundEnabled ? t('ai.muteSounds', 'Mute Sounds') : t('ai.unmuteSounds', 'Unmute Sounds')}
             >
               {soundEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
             </button>
@@ -517,14 +519,14 @@ const AiIntelligence = () => {
           {/* Left Column: Step Indicators */}
           <div className="lg:col-span-5 flex flex-col justify-between space-y-6">
             <div className="space-y-4">
-              <span className="text-[10px] font-bold tracking-widest text-slate-400 uppercase">Simulation Steps</span>
+              <span className="text-[10px] font-bold tracking-widest text-slate-400 uppercase">{t('ai.simulationSteps', 'Simulation Steps')}</span>
               
               <div className="space-y-3">
                 {[
-                  { step: 1, label: 'Smart Assessment', desc: 'Determine baseline level' },
-                  { step: 2, label: 'Personalized Roadmap', desc: 'Tailored topic progression' },
-                  { step: 3, label: 'Real-time Feedback', desc: 'Instant tutor explanations' },
-                  { step: 4, label: 'Progress Analytics', desc: 'Visualizing learning growth' }
+                  { step: 1, label: t('ai.simStep1Title', 'Smart Assessment'), desc: t('ai.simStep1Desc', 'Determine baseline level') },
+                  { step: 2, label: t('ai.simStep2Title', 'Personalized Roadmap'), desc: t('ai.simStep2Desc', 'Tailored topic progression') },
+                  { step: 3, label: t('ai.simStep3Title', 'Real-time Feedback'), desc: t('ai.simStep3Desc', 'Instant tutor explanations') },
+                  { step: 4, label: t('ai.simStep4Title', 'Progress Analytics'), desc: t('ai.simStep4Desc', 'Visualizing learning growth') }
                 ].map((s) => {
                   const isActive = simulatorStep === s.step;
                   const isCompleted = simulatorStep > s.step;
@@ -574,13 +576,13 @@ const AiIntelligence = () => {
 
             {/* Reset Button */}
             <div className="bg-slate-50/60 border border-slate-100/80 p-5 rounded-2xl flex items-center justify-between">
-              <span className="text-[11px] text-slate-500 font-medium">Ready to start over?</span>
+              <span className="text-[11px] text-slate-500 font-medium">{t('ai.readyToStartOver', 'Ready to start over?')}</span>
               <button 
                 onClick={handleReset}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 shadow-sm transition-all"
               >
                 <RotateCcw size={12} />
-                Reset
+                {t('ai.reset', 'Reset')}
               </button>
             </div>
           </div>
@@ -892,14 +894,14 @@ const AiIntelligence = () => {
                             className="w-full py-2 bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-white rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 shadow-md shadow-amber-500/10 hover:shadow-lg animate-pulse"
                           >
                             <Award size={14} />
-                            Claim Badge!
+                            {t('ai.claimBadge', 'Claim Badge!')}
                           </button>
                         ) : (
                           <button 
                             onClick={() => navigate("/ai-intelligence-dashboard")}
                             className="w-full py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1"
                           >
-                            Launch Dashboard
+                            {t('ai.launchDashboard', 'Launch Dashboard')}
                             <ArrowRight size={12} />
                           </button>
                         )}
@@ -913,7 +915,7 @@ const AiIntelligence = () => {
             {/* Navigation Controls */}
             <div className="border-t border-slate-200/60 pt-4 mt-6 flex justify-between items-center">
               <div className="text-xs font-semibold text-slate-400">
-                Step {simulatorStep} of 4
+                {t('ai.stepProgress', 'Step {{step}} of {{total}}', { step: simulatorStep, total: 4 })}
               </div>
               <div className="flex gap-2">
                 {simulatorStep > 1 && (
@@ -924,7 +926,7 @@ const AiIntelligence = () => {
                     }}
                     className="px-4 py-2 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-colors"
                   >
-                    Previous
+                    {t('ai.previous', 'Previous')}
                   </button>
                 )}
                 {simulatorStep < 4 ? (
@@ -937,7 +939,7 @@ const AiIntelligence = () => {
                         : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm shadow-indigo-500/10'
                     }`}
                   >
-                    Continue
+                    {t('ai.continue', 'Continue')}
                     <ArrowRight size={13} />
                   </button>
                 ) : (
@@ -946,7 +948,7 @@ const AiIntelligence = () => {
                     className="px-4 py-2 border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5"
                   >
                     <RotateCcw size={12} />
-                    Try Again
+                    {t('ai.tryAgain', 'Try Again')}
                   </button>
                 )}
               </div>
@@ -958,18 +960,18 @@ const AiIntelligence = () => {
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12 border-t border-slate-200/80 max-w-4xl mx-auto text-center">
           <div className="p-5 bg-white border border-slate-200/60 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1">
             <h5 className="text-3xl font-extrabold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">10+</h5>
-            <p className="text-xs sm:text-sm font-bold text-slate-800">AI Learning Modules</p>
-            <p className="text-[11px] text-slate-500 leading-relaxed font-medium">Spanning interactive prompt academy, quizzes, and AI tools.</p>
+            <p className="text-xs sm:text-sm font-bold text-slate-800">{t('ai.infoStat1Title', 'AI Learning Modules')}</p>
+            <p className="text-[11px] text-slate-500 leading-relaxed font-medium">{t('ai.infoStat1Desc', 'Spanning interactive prompt academy, quizzes, and AI tools.')}</p>
           </div>
           <div className="p-5 bg-white border border-slate-200/60 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1">
             <h5 className="text-3xl font-extrabold bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent">100%</h5>
-            <p className="text-xs sm:text-sm font-bold text-slate-800">Curriculum Aligned</p>
-            <p className="text-[11px] text-slate-500 leading-relaxed font-medium">Mapped directly to board textbook lessons.</p>
+            <p className="text-xs sm:text-sm font-bold text-slate-800">{t('ai.infoStat2Title', 'Curriculum Aligned')}</p>
+            <p className="text-[11px] text-slate-500 leading-relaxed font-medium">{t('ai.infoStat2Desc', 'Mapped directly to board textbook lessons.')}</p>
           </div>
           <div className="p-5 bg-white border border-slate-200/60 rounded-2xl shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 space-y-1">
-            <h5 className="text-3xl font-extrabold bg-gradient-to-r from-fuchsia-600 to-pink-600 bg-clip-text text-transparent">Active</h5>
-            <p className="text-xs sm:text-sm font-bold text-slate-800">Interactive Lessons</p>
-            <p className="text-[11px] text-slate-500 leading-relaxed font-medium">Includes built-in interactive simulations.</p>
+            <h5 className="text-3xl font-extrabold bg-gradient-to-r from-fuchsia-600 to-pink-600 bg-clip-text text-transparent">{t('ai.infoStat3Badge', 'Active')}</h5>
+            <p className="text-xs sm:text-sm font-bold text-slate-800">{t('ai.infoStat3Title', 'Interactive Lessons')}</p>
+            <p className="text-[11px] text-slate-500 leading-relaxed font-medium">{t('ai.infoStat3Desc', 'Includes built-in interactive simulations.')}</p>
           </div>
         </section>
       </div>

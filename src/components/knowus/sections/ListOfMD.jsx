@@ -1,21 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Calendar, User, Clock } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { getDirectory } from '../../../services/directoryService';
 
-
-
-// Helper to generate initials
-const getInitials = (name) => {
-    return name
-      .split(' ')
-      .map(n => n[0])
-      .slice(0, 2)
-      .join('')
-      .toUpperCase();
-  };
-
 const ListOfMD = () => {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const [list, setList] = useState([]);
 
@@ -44,11 +34,11 @@ const ListOfMD = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-3xl md:text-4xl font-extrabold text-[#0d0e23] tracking-tight mb-4"
         >
-          Legacy of <span className="text-blue-600">Leadership</span>
+          {t("knowUsPage.listOfMd.titlePart1", "Legacy of")} <span className="text-blue-600">{t("knowUsPage.listOfMd.titleHighlight", "Leadership")}</span>
         </motion.h1>
         
         <p className="text-slate-500 text-sm max-w-2xl mx-auto leading-relaxed font-medium">
-          Honoring the Managing Directors who have shaped the journey and success of Bihar State Text Book Publishing Corporation Ltd.
+          {t("knowUsPage.listOfMd.subtitle", "Honoring the Managing Directors who have shaped the journey and success of Bihar State Text Book Publishing Corporation Ltd.")}
         </p>
       </section>
 
@@ -59,8 +49,7 @@ const ListOfMD = () => {
           <div className="bg-transparent border-b border-slate-300 p-6 flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-4">
                <div>
-                  <h3 className="text-lg font-bold text-[#0d0e23]">Official Directory</h3>
-                 
+                  <h3 className="text-lg font-bold text-[#0d0e23]">{t("knowUsPage.listOfMd.cardTitle", "Official Directory")}</h3>
                </div>
             </div>
 
@@ -71,7 +60,7 @@ const ListOfMD = () => {
                </div>
                <input
                  type="text"
-                 placeholder="Search by name..."
+                 placeholder={t("knowUsPage.listOfMd.searchPlaceholder", "Search by name...")}
                  value={searchTerm}
                  onChange={(e) => setSearchTerm(e.target.value)}
                  className="w-full pl-11 pr-4 py-2 bg-transparent border border-slate-300 text-sm focus:border-blue-500 transition-all outline-none text-[#0d0e23]"
@@ -83,10 +72,10 @@ const ListOfMD = () => {
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="bg-slate-200 border-b border-slate-300 text-[#0d0e23]">
-                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">S.No.</th>
-                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">Managing Director</th>
-                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300 text-center">From</th>
-                  <th className="px-6 py-4 text-sm font-bold text-center">To</th>
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">{t("knowUsPage.listOfMd.colSNo", "S.No.")}</th>
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">{t("knowUsPage.listOfMd.colMd", "Managing Director")}</th>
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300 text-center">{t("knowUsPage.listOfMd.colFrom", "From")}</th>
+                  <th className="px-6 py-4 text-sm font-bold text-center">{t("knowUsPage.listOfMd.colTo", "To")}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-300">
@@ -99,7 +88,6 @@ const ListOfMD = () => {
                     <td className="px-6 py-4 text-sm border-r border-slate-300">
                       <div className="flex flex-col">
                           <span className="font-semibold">{md.name}</span>
-                          
                       </div>
                     </td>
 
@@ -117,20 +105,20 @@ const ListOfMD = () => {
 
             {filteredList.length === 0 && (
                <div className="text-center py-10">
-                  <p className="text-slate-500 text-sm">No records matching "{searchTerm}"</p>
+                  <p className="text-slate-500 text-sm">{t("knowUsPage.listOfMd.noResults", { term: searchTerm, defaultValue: `No records matching "${searchTerm}"` })}</p>
                </div>
             )}
           </div>
 
           <div className="p-4 border-t border-slate-300 flex justify-end">
              <span className="text-sm text-slate-600">
-                Total Records: {list.length}
+                {t("knowUsPage.listOfMd.totalRecords", { count: list.length, defaultValue: `Total Records: ${list.length}` })}
              </span>
           </div>
         </div>
       </section>
     </div>
   );
-}
+};
 
 export default ListOfMD;

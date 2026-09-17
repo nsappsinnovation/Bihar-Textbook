@@ -5466,8 +5466,6 @@ const MyAudioLibrary = () => {
   const [isMuted, setIsMuted] = useState(false);
   const [favorites, setFavorites] = useState([1]); // Book IDs favorited
   const [currentChapterIndex, setCurrentChapterIndex] = useState(0);
-  const [playbackRate, setPlaybackRate] = useState(1);
-  const [showSpeedMenu, setShowSpeedMenu] = useState(false);
   
   // Video Modal State
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
@@ -5832,7 +5830,6 @@ const MyAudioLibrary = () => {
         ref={audioRef}
         url={selectedBook.chapterAudioUrls && selectedBook.chapterAudioUrls.length > 0 ? selectedBook.chapterAudioUrls[currentChapterIndex] : selectedBook.audioUrl}
         playing={isPlaying}
-        playbackRate={playbackRate}
         volume={volume}
         muted={isMuted}
         onProgress={({ playedSeconds }) => setCurrentTime(playedSeconds)}
@@ -5946,7 +5943,7 @@ const MyAudioLibrary = () => {
                     <div className="flex gap-3 items-start relative z-10">
                       {/* Cover Photo */}
                       <div className="relative w-20 h-24 rounded-xl overflow-hidden shadow-sm shrink-0 border border-slate-100 group-hover:scale-105 transition-transform duration-300">
-                        <img loading="lazy" decoding="async" src={book.cover} alt={book.title} className="w-full h-full object-cover" />
+                        <img src={book.cover} alt={book.title} className="w-full h-full object-cover" />
                         
                         {/* Play/Pause Overlay on Cover */}
                         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -6064,7 +6061,7 @@ const MyAudioLibrary = () => {
             {/* Book Info Showcase */}
             <div className="text-center space-y-4">
               <div className="w-36 h-48 rounded-2xl overflow-hidden mx-auto shadow-md border border-slate-100 relative group">
-                <img loading="lazy" decoding="async" src={selectedBook.cover} alt={selectedBook.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                <img src={selectedBook.cover} alt={selectedBook.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                 {selectedBook.youtubeId && (
                   <button
                     onClick={() => openVideo(selectedBook)}
@@ -6146,7 +6143,7 @@ const MyAudioLibrary = () => {
             {/* Track Info */}
             <div className="flex items-center gap-3 min-w-0">
               <div className="w-10 h-12 rounded-lg overflow-hidden shadow-sm shrink-0 border border-slate-100">
-                <img loading="lazy" decoding="async" src={selectedBook.cover} alt={selectedBook.title} className="w-full h-full object-cover" />
+                <img src={selectedBook.cover} alt={selectedBook.title} className="w-full h-full object-cover" />
               </div>
               <div className="min-w-0">
                 <h4 className="text-xs sm:text-sm font-extrabold text-slate-900 truncate leading-snug">{selectedBook.title}</h4>
@@ -6248,28 +6245,6 @@ const MyAudioLibrary = () => {
                     <Heart className={`w-5 h-5 ${favorites.includes(selectedBook.id) ? 'fill-rose-500 text-rose-500' : ''}`} />
                   </button>
 
-                  {/* Playback Rate Control */}
-                  <div className="relative">
-                    <button 
-                      onClick={() => setShowSpeedMenu(!showSpeedMenu)}
-                      title="Playback Speed"
-                      className="w-10 h-7 bg-purple-50 text-purple-600 text-[10px] font-bold rounded-lg flex items-center justify-center cursor-pointer hover:bg-purple-100 transition-colors border border-purple-200 shrink-0"
-                    >
-                      {playbackRate}x
-                    </button>
-                    <div className={`absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-white shadow-xl rounded-xl border border-slate-100 py-1.5 flex-col w-16 overflow-hidden z-50 ${showSpeedMenu ? 'flex' : 'hidden'}`}>
-                      {[0.5, 0.75, 1, 1.25, 1.5, 2].map(rate => (
-                        <button 
-                          key={rate}
-                          onClick={() => { setPlaybackRate(rate); setShowSpeedMenu(false); }}
-                          className={`px-3 py-1.5 text-[10px] font-bold text-center transition-colors cursor-pointer ${playbackRate === rate ? 'text-purple-600 bg-purple-50' : 'text-slate-600 hover:bg-slate-50 hover:text-purple-500'}`}
-                        >
-                          {rate}x
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
                   {/* Volume Control */}
                   <div className="flex items-center gap-2">
                     <button onClick={toggleMute} className="text-slate-400 hover:text-slate-800 transition-colors cursor-pointer">
@@ -6362,7 +6337,7 @@ const MyAudioLibrary = () => {
               {/* Modal Footer / Context */}
               <div className="p-6 bg-slate-50 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div className="flex items-center gap-3">
-                  <img loading="lazy" decoding="async" src={selectedBook.cover} alt={selectedBook.title} className="w-10 h-12 rounded-lg object-cover border border-slate-200 shadow-sm" />
+                  <img src={selectedBook.cover} alt={selectedBook.title} className="w-10 h-12 rounded-lg object-cover border border-slate-200 shadow-sm" />
                   <div>
                     <h4 className="font-black text-slate-800 text-xs">{selectedBook.title}</h4>
                     <p className="text-[10px] text-slate-500 font-medium">Author: {selectedBook.author}</p>

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { getSections } from '../../../services/sectionService';
 import { fileUrl } from '../../../services/api';
 
 const Photogallery = () => {
+  const { t } = useTranslation();
   const [selectedImage, setSelectedImage] = useState(null);
   const [items, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -14,10 +16,10 @@ const Photogallery = () => {
       .then((rows) => setItems(rows.map((row) => ({
         type: "image",
         src: fileUrl(row.imageUrl) || "",
-        alt: row.title || "Gallery Image",
+        alt: row.title || t("galleryPage.photo.fallbackAlt"),
       }))))
       .catch(() => setItems([]));
-  }, []);
+  }, [t]);
 
   const itemsPerPage = 6;
   const totalPages = Math.ceil(items.length / itemsPerPage);
@@ -33,7 +35,7 @@ const Photogallery = () => {
 
   const handlePrevPage = () => {
     if (currentPage > 0) {
-      setCurrentPage(prev => prev - 0.5 - 0.5); // safe calculation
+      setCurrentPage(prev => prev - 1);
     }
   };
 
@@ -55,7 +57,10 @@ const Photogallery = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-800 tracking-tight leading-tight mb-2"
           >
-            Photo <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Gallery</span>
+            {t("galleryPage.photo.headingPrefix")}{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+              {t("galleryPage.photo.headingHighlight")}
+            </span>
           </motion.h2>
 
           <motion.p
@@ -64,7 +69,7 @@ const Photogallery = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-slate-500 text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed"
           >
-            Explore our state-wide initiatives, active classrooms, teacher conferences, and key moments in digital education.
+            {t("galleryPage.photo.description")}
           </motion.p>
         </div>
 
@@ -214,7 +219,7 @@ const Photogallery = () => {
               disabled={currentPage === 0}
               className="px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 bg-white hover:bg-slate-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed font-bold text-xs uppercase tracking-widest shadow-sm"
             >
-              Prev
+              {t("common.prev")}
             </button>
             <div className="flex gap-2">
               {[...Array(totalPages)].map((_, i) => (
@@ -231,7 +236,7 @@ const Photogallery = () => {
               disabled={currentPage === totalPages - 1}
               className="px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 bg-white hover:bg-slate-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed font-bold text-xs uppercase tracking-widest shadow-sm"
             >
-              Next
+              {t("common.next")}
             </button>
           </div>
         )}

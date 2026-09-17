@@ -27,6 +27,8 @@ import {
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { findBook } from "../../../services/bookService";
 import { fileUrl } from "../../../services/api";
+import { useTranslation } from "react-i18next";
+import { useBookTranslation } from "../../../utils/useBookTranslation";
 
 // Use CDN worker
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
@@ -44,6 +46,8 @@ Pages.displayName = "Pages";
 function Flipbook({ pdfFile: propPdfFile }) {
     const { classId, bookSubject, chapterId } = useParams();
     const navigate = useNavigate();
+    const { t, i18n } = useTranslation();
+    const { translateBookTitle, translateClassName } = useBookTranslation();
     const bookRef = useRef();
     const scrollContainerRef = useRef(null);
 
@@ -507,8 +511,8 @@ function Flipbook({ pdfFile: propPdfFile }) {
                                 </div>
                                 <div className="min-w-0 flex-1 flex flex-col justify-center">
                                     <span className="text-[10px] font-bold text-blue-600 tracking-wider uppercase">Class {classId} textbook</span>
-                                    <h2 className="text-sm font-extrabold text-slate-900 truncate leading-snug">{bookTitle}</h2>
-                                    <p className="text-[11px] text-slate-400 font-semibold truncate mt-0.5">By {bookInfo?.author || "Bihar Board"}</p>
+                                    <h2 className="text-sm font-extrabold text-slate-900 truncate leading-snug">{translateBookTitle(bookTitle, bookSubject)}</h2>
+                                    <p className="text-[11px] text-slate-400 font-semibold truncate mt-0.5">{t("booksPage.flipbook.by", "By")} {bookInfo?.author || t("booksPage.biharBoard", "Bihar Board")}</p>
                                 </div>
                             </div>
                             {cleanedDescription && (
@@ -523,10 +527,10 @@ function Flipbook({ pdfFile: propPdfFile }) {
                             <div className="flex items-center justify-between mb-3">
                                 <h3 className="text-xs font-bold text-slate-800 tracking-wider uppercase flex items-center gap-1.5">
                                     <BookOpen size={14} className="text-blue-600" />
-                                    <span>Table of Contents</span>
+                                    <span>{t("booksPage.flipbook.tableOfContents", "Table of Contents")}</span>
                                 </h3>
                                 <span className="text-[10px] font-extrabold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">
-                                    {filteredChapters.length} Chapters
+                                    {filteredChapters.length} {t("booksPage.flipbook.chapters", "Chapters")}
                                 </span>
                             </div>
 
@@ -534,7 +538,7 @@ function Flipbook({ pdfFile: propPdfFile }) {
                                 <Search size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
                                 <input
                                     type="text"
-                                    placeholder="Search chapters..."
+                                    placeholder={t("booksPage.flipbook.searchChapters", "Search chapters...")}
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     className="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all placeholder:text-slate-400 text-slate-700"
@@ -572,7 +576,7 @@ function Flipbook({ pdfFile: propPdfFile }) {
                                                 <h4 className={`text-xs font-bold leading-snug truncate transition-colors ${
                                                     isActive ? "text-blue-700" : "text-slate-800 group-hover:text-blue-600"
                                                 }`}>
-                                                    {chap.hindiTitle || chap.title}
+                                                    {i18n.language === 'hi' ? (chap.hindiTitle || chap.title) : chap.title}
                                                 </h4>
                                             </div>
 
@@ -584,7 +588,7 @@ function Flipbook({ pdfFile: propPdfFile }) {
                                 })
                             ) : (
                                 <div className="text-center py-12 text-slate-400 text-xs font-medium">
-                                    No chapters found matching "{searchQuery}"
+                                    {t("booksPage.flipbook.noChaptersFound", "No chapters found matching")} "{searchQuery}"
                                 </div>
                             )}
                         </div>

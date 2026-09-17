@@ -1,10 +1,11 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { FiSearch, FiFileText, FiBell, FiArrowRight, FiCalendar, FiClock, FiFilter } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { getNotices, lastUpdatedOf } from "../services/noticeService";
 
 const Tenders = () => {
+  const { t, i18n } = useTranslation();
   const [liveTenders, setLiveTenders] = useState([]);
 
   useEffect(() => {
@@ -57,16 +58,17 @@ const Tenders = () => {
       if (!dateStr) return '';
       if (dateStr.includes('/')) return dateStr;
       const d = new Date(dateStr);
-      return d.toLocaleDateString('en-IN', { day: '2-digit', month: '2-digit', year: 'numeric' });
+      const dateLocale = i18n.language === 'hi' ? 'hi-IN' : 'en-IN';
+      return d.toLocaleDateString(dateLocale, { day: '2-digit', month: '2-digit', year: 'numeric' });
     } catch { return dateStr; }
   };
 
   const filteredTenders = useMemo(() => {
-    const filtered = liveTenders.filter((t) => {
-      const matchesSearch = t.title.toLowerCase().includes(search.toLowerCase());
+    const filtered = liveTenders.filter((tItem) => {
+      const matchesSearch = (tItem.title || '').toLowerCase().includes(search.toLowerCase());
       const matchesFilter = activeFilter === "All" || 
-                           (activeFilter === "E-Tender" && t.title.toLowerCase().includes("e-tender")) ||
-                           (activeFilter === "Services" && t.title.toLowerCase().includes("service"));
+                           (activeFilter === "E-Tender" && (tItem.title || '').toLowerCase().includes("e-tender")) ||
+                           (activeFilter === "Services" && (tItem.title || '').toLowerCase().includes("service"));
       return matchesSearch && matchesFilter;
     });
 
@@ -124,7 +126,7 @@ const Tenders = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4"
           >
-            Tenders & Bids
+            {t("tendersPage.title")}
           </motion.h1>
           <motion.div 
             initial={{ width: 0 }}
@@ -138,7 +140,7 @@ const Tenders = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-white/60 text-xs md:text-sm max-w-xl mx-auto leading-relaxed font-light"
           >
-            Explore current procurement opportunities, e-tenders, and strategic partnership proposals at BSTBPC.
+            {t("tendersPage.subtitle")}
           </motion.p>
           
           <motion.div 
@@ -149,11 +151,11 @@ const Tenders = () => {
           >
             <div className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 flex items-center gap-2 backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-              <span className="text-white/80">{liveTenders.length} Active Opportunities</span>
+              <span className="text-white/80">{t("tendersPage.activeOpportunities", { count: liveTenders.length })}</span>
             </div>
             <div className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 flex items-center gap-2 backdrop-blur-sm">
               <FiClock className="text-blue-400" />
-              <span className="text-white/80">Last Updated: {lastUpdated ? formatDate(lastUpdated) : (liveTenders.length > 0 ? formatDate(liveTenders[0].date) : 'N/A')}</span>
+              <span className="text-white/80">{t("tendersPage.lastUpdatedToday", "Last Updated")}: {lastUpdated ? formatDate(lastUpdated) : (liveTenders.length > 0 ? formatDate(liveTenders[0].date) : 'N/A')}</span>
             </div>
           </motion.div>
         </div>
@@ -181,8 +183,8 @@ const Tenders = () => {
                     <FiBell className="text-xl text-white" />
                   </div>
                   <div>
-                    <h2 className="text-xl font-bold text-[#0d0e23]">Procurement Desk</h2>
-                    <p className="text-slate-500 text-xs">Transparent & competitive bidding portal</p>
+                    <h2 className="text-xl font-bold text-[#0d0e23]">{t("tendersPage.procurementDesk")}</h2>
+                    <p className="text-slate-500 text-xs">{t("tendersPage.procurementDesc")}</p>
                   </div>
                 </div>
 
@@ -190,7 +192,7 @@ const Tenders = () => {
                   <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-600 transition-colors text-lg" />
                   <input
                     type="text"
-                    placeholder="Search by tender name or ID..."
+                    placeholder={t("tendersPage.searchPlaceholder")}
                     value={search}
                     onChange={handleSearch}
                     className="w-full pl-12 pr-4 py-3 rounded-xl border border-slate-200 bg-white focus:bg-white focus:ring-4 focus:ring-blue-100 focus:border-blue-600 outline-none transition-all text-xs text-slate-700 shadow-inner"
@@ -211,7 +213,7 @@ const Tenders = () => {
                         : 'bg-slate-100 text-slate-600 hover:bg-slate-200 active:scale-95'
                     }`}
                   >
-                    {filter}
+                    {t(`tendersPage.filters.${filter}`, filter)}
                   </button>
                 ))}
               </div>
@@ -227,9 +229,11 @@ const Tenders = () => {
                   <div className="w-24 h-24 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
                     <FiSearch className="text-4xl text-slate-300" />
                   </div>
-                  <h3 className="text-2xl font-bold text-slate-800">No tenders found</h3>
-                  <p className="text-slate-500 mt-2">Try adjusting your search terms or filters.</p>
-                  <button onClick={() => { setSearch(""); setActiveFilter("All"); }} className="mt-8 text-blue-600 font-bold hover:underline">Clear all filters</button>
+                  <h3 className="text-2xl font-bold text-slate-800">{t("tendersPage.noTenders")}</h3>
+                  <p className="text-slate-500 mt-2">{t("tendersPage.noTendersDesc")}</p>
+                  <button onClick={() => { setSearch(""); setActiveFilter("All"); }} className="mt-8 text-blue-600 font-bold hover:underline">
+                    {t("tendersPage.clearFilters")}
+                  </button>
                 </motion.div>
               ) : (
                 <motion.div
@@ -241,10 +245,10 @@ const Tenders = () => {
                     <table className="w-full text-left">
                       <thead>
                         <tr className="border-b border-slate-200">
-                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">S.No</th>
-                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">Tender Details</th>
-                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">Date</th>
-                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400 text-right">Action</th>
+                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">{t("tendersPage.table.sNo")}</th>
+                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">{t("tendersPage.table.details")}</th>
+                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">{t("tendersPage.table.date")}</th>
+                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400 text-right">{t("tendersPage.table.action")}</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-slate-100 bg-white">
@@ -263,15 +267,17 @@ const Tenders = () => {
                               <div className="space-y-3">
                                 <div className="flex flex-wrap items-center gap-2">
                                   {(tender.isPinned || tender.pinned) && isWithinOneMonth(tender.date) && (
-                                    <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-600 text-[10px] font-black border border-amber-200">PINNED</span>
+                                    <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-600 text-[10px] font-black border border-amber-200">
+                                      {t("tendersPage.badges.pinned")}
+                                    </span>
                                   )}
                                   {isNew(tender.date) && (
                                     <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
-                                      <span className="w-1 h-1 bg-blue-500 rounded-full" /> NEW
+                                      <span className="w-1 h-1 bg-blue-500 rounded-full" /> {t("tendersPage.badges.new")}
                                     </span>
                                   )}
                                   <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-wider">
-                                    {tender.title.toLowerCase().includes("e-tender") ? "Electronic" : "Physical"}
+                                    {tender.title.toLowerCase().includes("e-tender") ? t("tendersPage.badges.electronic") : t("tendersPage.badges.physical")}
                                   </span>
                                 </div>
                                 <h4 className="text-base font-bold text-slate-800 leading-tight group-hover:text-blue-700 transition-colors">
@@ -282,7 +288,7 @@ const Tenders = () => {
                             <td className="px-8 py-10 whitespace-nowrap">
                               <div className="flex flex-col">
                                 <span className="text-slate-700 font-bold bg-slate-100 px-3 py-1 rounded-lg text-sm">
-                                  {formatDate(tender.date) || 'Active Opportunity'}
+                                  {formatDate(tender.date) || t("tendersPage.activeOpportunity")}
                                 </span>
                               </div>
                             </td>
@@ -295,7 +301,7 @@ const Tenders = () => {
                                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#0d0e23] text-white text-[10px] whitespace-nowrap font-black shadow-lg shadow-slate-200 hover:shadow-blue-200 hover:bg-blue-600 transition-all uppercase tracking-widest"
                               >
                                 <FiFileText className="text-base" />
-                                View Details
+                                {t("tendersPage.viewDetails")}
                                 <FiArrowRight className="transition-transform group-hover:translate-x-1" />
                               </motion.a>
                             </td>
@@ -318,25 +324,31 @@ const Tenders = () => {
                         <div className="flex justify-between items-start">
                           <div className="flex gap-2">
                              {(tender.isPinned || tender.pinned) && isWithinOneMonth(tender.date) && (
-                                <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-600 text-[10px] font-black border border-amber-200">PINNED</span>
+                                <span className="px-2 py-0.5 rounded-md bg-amber-50 text-amber-600 text-[10px] font-black border border-amber-200">
+                                  {t("tendersPage.badges.pinned")}
+                                </span>
                              )}
                              {isNew(tender.date) && (
-                                <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-600 text-[10px] font-black">NEW</span>
+                                <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-600 text-[10px] font-black">
+                                  {t("tendersPage.badges.new")}
+                                </span>
                              )}
-                             <span className="px-2 py-0.5 rounded-md bg-blue-100 text-blue-700 text-[10px] font-black uppercase">TENDER</span>
+                             <span className="px-2 py-0.5 rounded-md bg-blue-100 text-blue-700 text-[10px] font-black uppercase">
+                               {t("tendersPage.badges.tender")}
+                             </span>
                           </div>
                           <span className="text-slate-400 font-bold text-xs">{(currentPage - 1) * tendersPerPage + index + 1}</span>
                         </div>
                         <h4 className="font-bold text-slate-800 text-base leading-tight">{tender.title}</h4>
                         <div className="flex items-center gap-2 text-slate-500 text-xs">
-                          <FiCalendar /> {formatDate(tender.date) || 'Ongoing'}
+                          <FiCalendar /> {formatDate(tender.date) || t("tendersPage.ongoing")}
                         </div>
                         <a 
                           href={tender.link || tender.document}
                           target="_blank" rel="noopener noreferrer"
                           className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-blue-600 text-white font-black text-[10px] uppercase shadow-lg shadow-blue-100 whitespace-nowrap"
                         >
-                          <FiFileText /> View PDF
+                          <FiFileText /> {t("tendersPage.viewPdf")}
                         </a>
                       </motion.div>
                     ))}
@@ -346,7 +358,11 @@ const Tenders = () => {
                   {totalPages > 1 && (
                     <div className="mt-12 flex flex-col md:flex-row items-center justify-between gap-8 pt-10 border-t border-slate-100">
                       <p className="text-slate-500 font-medium font-sans">
-                        Showing <span className="text-[#0d0e23] font-black">{(currentPage - 1) * tendersPerPage + 1}</span> to <span className="text-[#0d0e23] font-black">{Math.min(currentPage * tendersPerPage, filteredTenders.length)}</span> of <span className="text-[#0d0e23] font-black">{filteredTenders.length}</span> opportunities
+                        {t("tendersPage.pagination.showing", {
+                          start: (currentPage - 1) * tendersPerPage + 1,
+                          end: Math.min(currentPage * tendersPerPage, filteredTenders.length),
+                          total: filteredTenders.length
+                        })}
                       </p>
                       
                       <div className="flex items-center gap-2">
@@ -355,7 +371,7 @@ const Tenders = () => {
                           disabled={currentPage === 1}
                           className="px-6 py-3 rounded-2xl bg-white border border-slate-200 text-slate-600 font-bold text-sm hover:border-blue-500 hover:text-blue-600 disabled:opacity-30 disabled:pointer-events-none transition-all"
                         >
-                          Prev
+                          {t("tendersPage.pagination.prev")}
                         </button>
                         <div className="flex gap-2">
                           {getPaginationGroup().map((item) => (
@@ -375,7 +391,7 @@ const Tenders = () => {
                           disabled={currentPage === totalPages}
                           className="px-6 py-3 rounded-2xl bg-white border border-slate-200 text-slate-600 font-bold text-sm hover:border-blue-500 hover:text-blue-600 disabled:opacity-30 disabled:pointer-events-none transition-all"
                         >
-                          Next
+                          {t("tendersPage.pagination.next")}
                         </button>
                       </div>
                     </div>

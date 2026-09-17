@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RefreshCw, HelpCircle, Coins } from 'lucide-react';
 
@@ -175,6 +176,7 @@ const getChangeGuideSteps = (price, paid) => {
 };
 
 const CashierLab = () => {
+  const { t } = useTranslation();
   // --- Smart Cashier State ---
   const [cashierLevel, setCashierLevel] = useState(1);
   const [cashierLevelProgress, setCashierLevelProgress] = useState(0);
@@ -680,7 +682,7 @@ const CashierLab = () => {
                     <span className="font-black text-rose-600">- ₹{cashierCurrentItem.price}</span>
                   </div>
                   <div className="flex justify-between items-center text-[14px] border-t border-slate-200 pt-2">
-                    <span className="font-bold text-slate-700">Change Due:</span>
+                    <span className="font-bold text-slate-700">{t("basicskills.cashier_change_due", "Change Due:")}</span>
                     <span className="font-black text-slate-800">₹{cashierPaidAmount - cashierCurrentItem.price}</span>
                   </div>
                   <div className="flex justify-between items-center text-[14px] bg-white border border-slate-100 p-2 rounded-lg mt-2 shadow-sm">

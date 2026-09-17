@@ -4,8 +4,10 @@ import {
   GraduationCap, PenTool, ChevronDown, BookOpen, MessageSquare
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const Contact = () => {
+  const { t } = useTranslation();
   return (
     <div className="bg-[#FAFAFA] min-h-screen font-sans">
       
@@ -30,7 +32,7 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             className="text-4xl md:text-[58px] font-display font-black tracking-tight mb-4 text-white"
           >
-            Contact <span className="text-blue-500">Us</span>
+            {t("contact.title", "Contact")} <span className="text-blue-500">{t("contact.titleHighlight", "Us")}</span>
           </motion.h1>
 
           <motion.div 
@@ -46,8 +48,7 @@ const Contact = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-blue-50/80 text-[15px] md:text-[17px] font-medium leading-relaxed max-w-xl mx-auto"
           >
-            Empowering education through transparent communication.<br className="hidden md:block" />
-            Get in touch for institutional support, textbook inquiries, or corporate assistance.
+            {t("contact.subtitle", "Empowering education through transparent communication. Get in touch for institutional support, textbook inquiries, or corporate assistance.")}
           </motion.p>
         </div>
 
@@ -71,24 +72,24 @@ const Contact = () => {
               <div className="w-full flex flex-col text-center items-center">
                 <div className="mb-14">
                     <h2 className="text-2xl md:text-[28px] font-black text-slate-900 leading-tight mb-4">
-                        Committed to Educational Success
+                        {t("contact.commitmentHeader", "Committed to Educational Success")}
                     </h2>
                     <p className="text-[14.5px] text-slate-500 font-medium leading-relaxed max-w-2xl mx-auto">
-                        We're here to support every student, teacher, and school across Bihar. Our dedicated helpdesk ensures your queries never go unanswered.
+                        {t("contact.commitmentDesc", "We're here to support every student, teacher, and school across Bihar. Our dedicated helpdesk ensures your queries never go unanswered.")}
                     </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 w-full text-left">
-                  <InfoItem icon={<MapPin className="w-5 h-5" />} title="Registered Office">
-                    Pathya Pustak Bhawan, Buddh Marg,<br/> Budh Vihar, Fraser Road Area, Patna - 800001<br />
-                    Bihar, India
+                  <InfoItem icon={<MapPin className="w-5 h-5" />} title={t("footer.registeredOffice", "Registered Office")}>
+                    {t("footer.address", "Pathya Pustak Bhawan, Buddh Marg, Fraser Road Area, Patna - 800001")}<br />
+                    {t("footer.addressRegion", "Bihar, India")}
                   </InfoItem>
 
-                  <InfoItem icon={<Mail className="w-5 h-5" />} title="Email Id">
+                  <InfoItem icon={<Mail className="w-5 h-5" />} title={t("contact.emailId", "Email Id")}>
                     textbookmd@gmail.com
                   </InfoItem>
 
-                  <InfoItem icon={<Phone className="w-5 h-5" />} title="Phone Number">
+                  <InfoItem icon={<Phone className="w-5 h-5" />} title={t("contact.phoneNumber", "Phone Number")}>
                     06122221975
                   </InfoItem>
 
@@ -97,10 +98,10 @@ const Contact = () => {
                       <Clock className="w-5 h-5" />
                     </div>
                     <div>
-                      <h4 className="text-[15px] font-black text-slate-900 mb-1">Service Hours</h4>
+                      <h4 className="text-[15px] font-black text-slate-900 mb-1">{t("contact.serviceHours", "Service Hours")}</h4>
                       <div className="flex items-center gap-3">
-                        <span className="text-[13px] text-slate-500 font-medium italic">Mon to Sat</span>
-                        <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-[11px] font-bold tracking-wide">10 AM — 5 PM</span>
+                        <span className="text-[13px] text-slate-500 font-medium italic">{t("contact.monToSat", "Mon to Sat")}</span>
+                        <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-[11px] font-bold tracking-wide">{t("contact.serviceTime", "10 AM — 5 PM")}</span>
                       </div>
                     </div>
                   </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaPlay } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 import { getSections } from '../../../services/sectionService';
 import { fileUrl } from '../../../services/api';
 
@@ -12,6 +13,7 @@ const getYouTubeId = (url) => {
 };
 
 const Videogallery = () => {
+  const { t } = useTranslation();
   const [selectedVideo, setSelectedVideo] = useState(null);
   const [items, setItems] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
@@ -29,11 +31,11 @@ const Videogallery = () => {
           src: fileUrl(row.imageUrl) || autoThumbnail,
           videoUrl: isUploaded ? "" : row.videoUrl || "",
           uploadedVideo: isUploaded ? fileUrl(row.videoUrl) : "",
-          alt: row.title || "Gallery Video",
+          alt: row.title || t("galleryPage.video.fallbackAlt"),
         };
       })))
       .catch(() => setItems([]));
-  }, []);
+  }, [t]);
 
   const itemsPerPage = 6;
   const totalPages = Math.ceil(items.length / itemsPerPage);
@@ -86,7 +88,10 @@ const Videogallery = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-800 tracking-tight leading-tight mb-2"
           >
-            Video <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Gallery</span>
+            {t("galleryPage.video.headingPrefix")}{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+              {t("galleryPage.video.headingHighlight")}
+            </span>
           </motion.h2>
 
           <motion.p
@@ -95,7 +100,7 @@ const Videogallery = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-slate-500 text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed"
           >
-            Watch our academic programs, smart textbook launches, and rural distribution initiatives unfold in real time.
+            {t("galleryPage.video.description")}
           </motion.p>
         </div>
 
@@ -280,7 +285,7 @@ const Videogallery = () => {
               disabled={currentPage === 0}
               className="px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 bg-white hover:bg-slate-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed font-bold text-xs uppercase tracking-widest shadow-sm"
             >
-              Prev
+              {t("common.prev")}
             </button>
             <div className="flex gap-2">
               {[...Array(totalPages)].map((_, i) => (
@@ -297,7 +302,7 @@ const Videogallery = () => {
               disabled={currentPage === totalPages - 1}
               className="px-5 py-2.5 rounded-full border border-slate-200 text-slate-600 bg-white hover:bg-slate-50 transition-colors disabled:opacity-40 disabled:cursor-not-allowed font-bold text-xs uppercase tracking-widest shadow-sm"
             >
-              Next
+              {t("common.next")}
             </button>
           </div>
         )}

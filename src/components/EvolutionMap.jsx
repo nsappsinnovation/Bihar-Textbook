@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion,  AnimatePresence } from 'framer-motion';
 import { BookOpen, Map, MonitorPlay, Glasses, Sparkles, BookHeadphones, MapPin, Cpu, Printer } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const milestones = [
   {
     year: '1965',
+    titleKey: 'evolution.milestones.title0',
+    descKey: 'evolution.milestones.desc0',
     title: 'Foundation',
     description: 'BSTBPC was established with a vision to provide quality and accessible textbooks across Bihar.',
     icon: BookOpen,
@@ -14,6 +17,8 @@ const milestones = [
   },
   {
     year: '1967',
+    titleKey: 'evolution.milestones.title1',
+    descKey: 'evolution.milestones.desc1',
     title: 'GDR Printing Project',
     description: 'VEB Polygraph (GDR) printing project selected to modernize and standardize textbook production.',
     icon: Printer,
@@ -23,6 +28,8 @@ const milestones = [
   },
   {
     year: '1972',
+    titleKey: 'evolution.milestones.title2',
+    descKey: 'evolution.milestones.desc2',
     title: 'Production Started',
     description: 'First textbook printing unit started production in Bihar, boosting local publishing capability.',
     icon: Cpu,
@@ -32,6 +39,8 @@ const milestones = [
   },
   {
     year: '1970s–2000s',
+    titleKey: 'evolution.milestones.title3',
+    descKey: 'evolution.milestones.desc3',
     title: 'Statewide Expansion',
     description: 'Textbook printing and distribution network scaled rapidly to cover schools in all 38 districts of Bihar.',
     icon: Map,
@@ -41,6 +50,8 @@ const milestones = [
   },
   {
     year: '2010s–2020s',
+    titleKey: 'evolution.milestones.title4',
+    descKey: 'evolution.milestones.desc4',
     title: 'Digital Innovation',
     description: 'Transitioned to e-tenders, online textbook access, digital portals, and advanced administration.',
     icon: MonitorPlay,
@@ -138,15 +149,16 @@ const connections = [
 ];
 
 const EvolutionMap = () => {
+  const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoveredDistrict, setHoveredDistrict] = useState(null);
 
   // Auto advance timeline
   useEffect(() => {
-    const interval = setInterval(() => {
+    const timer = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % milestones.length);
-    }, 5000); // changes every 5 seconds for better reading time
-    return () => clearInterval(interval);
+    }, 4000);
+    return () => clearInterval(timer);
   }, []);
 
   return (
@@ -173,13 +185,13 @@ const EvolutionMap = () => {
                  transition={{ duration: 0.6, delay: 0.3 }}
                  className="h-px bg-blue-600"
                ></motion.div>
-               <span className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em]">Our Evolution</span>
+               <span className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em]">{t("evolution.badge", "Our Evolution")}</span>
             </div>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
-               Journey &amp; <br /> <span className="text-slate-400 font-medium">Digital Footprint</span>
+               {t("evolution.heading", "Journey &")} <br /> <span className="text-slate-400 font-medium">{t("evolution.headingHighlight", "Digital Footprint")}</span>
             </h2>
             <p className="text-sm text-slate-500 font-medium leading-relaxed mb-10 pr-4">
-               From physical textbook printing in 1965 to modern immersive digital learning in 2024. Witness our expansion and modernization across all 38 districts of Bihar.
+               {t("evolution.description", "From physical textbook printing in 1965 to modern immersive digital learning in 2024. Witness our expansion and modernization across all 38 districts of Bihar.")}
             </p>
 
             {/* The Milestones Timeline */}
@@ -193,10 +205,10 @@ const EvolutionMap = () => {
                   return (
                     <div 
                       key={milestone.year} 
-                      className={`relative flex items-start gap-5 cursor-pointer group transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-60 hover:opacity-100'}`}
                       onClick={() => setActiveIndex(index)}
+                      className={`relative flex items-start gap-5 cursor-pointer transition-opacity duration-300 ${isActive ? 'opacity-100' : 'opacity-60 hover:opacity-100'}`}
                     >
-                      {/* Line to next item */}
+                      {/* Vertical Connecting Line */}
                       {index < milestones.length - 1 && (
                         <div 
                           className="absolute left-[19px] top-[24px] w-0.5 bg-slate-200 z-0" 
@@ -231,7 +243,7 @@ const EvolutionMap = () => {
                             {milestone.year}
                           </span>
                           <h3 className={`text-lg font-bold ${isActive ? 'text-slate-900' : 'text-slate-500'}`}>
-                            {milestone.title}
+                            {t(milestone.titleKey, milestone.title)}
                           </h3>
                         </div>
                         <AnimatePresence>
@@ -242,7 +254,7 @@ const EvolutionMap = () => {
                               exit={{ opacity: 0, height: 0 }}
                               className="text-sm text-slate-500 leading-relaxed overflow-hidden"
                             >
-                              {milestone.description}
+                              {t(milestone.descKey, milestone.description)}
                             </motion.p>
                           )}
                         </AnimatePresence>
@@ -309,6 +321,7 @@ const EvolutionMap = () => {
                   {connections.map(([sourceId, targetId], i) => {
                     const source = cities.find(c => c.id === sourceId);
                     const target = cities.find(c => c.id === targetId);
+                    if (!source || !target) return null;
                     
                     const isVisible = activeIndex >= 3; // Show from 1970s-2000s expansion
                     const isAnimated = activeIndex >= 4; // Data flow from 2010s-2020s

@@ -1,9 +1,22 @@
 import React from "react";
-import { FiInfo, FiUser, FiPhone, FiMail, FiMapPin, FiExternalLink, FiShield, FiFileText, FiCheckCircle } from "react-icons/fi";
+import { FiUser, FiPhone, FiMail, FiMapPin, FiExternalLink, FiCheckCircle } from "react-icons/fi";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { getSetting } from "../services/settingService";
 
+const disclosureItems = [
+  { key: "orgStructure", defaultText: "Organization Structure" },
+  { key: "duties", defaultText: "Duties & Responsibilities" },
+  { key: "decisionMaking", defaultText: "Decision Making Process" },
+  { key: "directory", defaultText: "Directory of Officers" },
+  { key: "remuneration", defaultText: "Monthly Remuneration" },
+  { key: "budget", defaultText: "Budget Allocation" },
+  { key: "subsidy", defaultText: "Execution of Subsidy Programs" },
+  { key: "licenses", defaultText: "Grant of Licenses" }
+];
+
 const RTI = () => {
+  const { t } = useTranslation();
   const [rtiData, setRtiData] = React.useState({ 
     officer: 'Shri. Rajesh Kumar', 
     phone: '06122221975', 
@@ -17,6 +30,14 @@ const RTI = () => {
       .then((value) => value && setRtiData(value))
       .catch(() => {});
   }, []);
+
+  const displayOfficer = (rtiData.officer === 'Shri. Rajesh Kumar' || !rtiData.officer) 
+    ? t('rtiPage.defaultOfficer', 'Shri. Rajesh Kumar') 
+    : rtiData.officer;
+
+  const displayAddress = (rtiData.address === 'Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001' || !rtiData.address)
+    ? t('rtiPage.defaultAddress', 'Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001')
+    : rtiData.address;
 
   return (
     <div className="min-h-screen bg-[#f8fafc] -mt-24">
@@ -39,7 +60,7 @@ const RTI = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-3xl md:text-5xl font-extrabold tracking-tight mb-4"
           >
-            Right To <span className="text-blue-500">Information</span> (RTI)
+            {t('rtiPage.titlePart1', 'Right To')} <span className="text-blue-500">{t('rtiPage.titleHighlight', 'Information')}</span> {t('rtiPage.titlePart2', '(RTI)')}
           </motion.h1>
           <motion.div 
             initial={{ width: 0 }}
@@ -48,7 +69,7 @@ const RTI = () => {
             className="h-1.5 w-20 bg-blue-500 mx-auto rounded-full mb-6" 
           />
           <p className="text-white/90 text-sm md:text-base max-w-xl mx-auto leading-relaxed font-light">
-            Ensuring transparency and accountability in governance through the Right to Information Act, 2005.
+            {t('rtiPage.subtitle', 'Ensuring transparency and accountability in governance through the Right to Information Act, 2005.')}
           </p>
         </div>
 
@@ -71,18 +92,18 @@ const RTI = () => {
                 className="bg-white rounded-3xl p-8 shadow-xl border border-slate-100 h-full flex flex-col"
               >
                 
-                <h3 className="text-lg font-black text-[#0d0e23] mb-8">Nodal Officer</h3>
+                <h3 className="text-lg font-black text-[#0d0e23] mb-8">{t('rtiPage.nodalOfficer', 'Nodal Officer')}</h3>
                 
                 <div className="space-y-6">
-                  <ContactItem icon={<FiUser />} label="Public Information Officer" value={rtiData.officer} />
-                  <ContactItem icon={<FiPhone />} label="Contact Number" value={rtiData.phone} />
-                  <ContactItem icon={<FiMail />} label="Email Address" value={rtiData.email} />
-                  <ContactItem icon={<FiMapPin />} label="Office Address" value={rtiData.address} />
+                  <ContactItem icon={<FiUser />} label={t('rtiPage.pioLabel', 'Public Information Officer')} value={displayOfficer} />
+                  <ContactItem icon={<FiPhone />} label={t('rtiPage.phoneLabel', 'Contact Number')} value={rtiData.phone} />
+                  <ContactItem icon={<FiMail />} label={t('rtiPage.emailLabel', 'Email Address')} value={rtiData.email} />
+                  <ContactItem icon={<FiMapPin />} label={t('rtiPage.addressLabel', 'Office Address')} value={displayAddress} />
                 </div>
 
                 <div className="mt-auto pt-8 border-t border-slate-100">
                   <a href="https://rtionline.gov.in/" target="_blank" rel="noopener noreferrer" className="w-full py-4 rounded-xl bg-[#0d0e23] text-white text-xs md:text-sm font-black uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-blue-600 transition-all shadow-lg shadow-blue-100">
-                    File Online RTI <FiExternalLink />
+                    {t('rtiPage.fileOnline', 'File Online RTI')} <FiExternalLink />
                   </a>
                 </div>
               </div>
@@ -94,32 +115,21 @@ const RTI = () => {
                 className="bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-slate-100 h-full"
               >
                 <h2 className="text-xl md:text-2xl font-black text-[#0d0e23] mb-6 flex items-center gap-4">
-                 
-                  Proactive Disclosures
+                  {t('rtiPage.proactiveDisclosures', 'Proactive Disclosures')}
                 </h2>
                 <p className="text-sm md:text-base text-slate-600 font-medium leading-relaxed mb-10">
-                  Under Section 4(1)(b) of the RTI Act 2005, every public authority has the obligation to provide information to the public at regular intervals through various means of communication.
+                  {t('rtiPage.disclosuresIntro', 'Under Section 4(1)(b) of the RTI Act 2005, every public authority has the obligation to provide information to the public at regular intervals through various means of communication.')}
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {[
-                    "Organization Structure",
-                    "Duties & Responsibilities",
-                    "Decision Making Process",
-                    "Directory of Officers",
-                    "Monthly Remuneration",
-                    "Budget Allocation",
-                    "Execution of Subsidy Programs",
-                    "Grant of Licenses"
-                  ].map((item, idx) => (
+                  {disclosureItems.map((item, idx) => (
                     <div key={idx} className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl border border-slate-100 hover:border-blue-200 transition-all group cursor-default">
                       <FiCheckCircle className="text-blue-500 flex-shrink-0" />
-                      <span className="text-sm font-bold text-slate-700">{item}</span>
+                      <span className="text-sm font-bold text-slate-700">{t(`rtiPage.items.${item.key}`, item.defaultText)}</span>
                     </div>
                   ))}
                 </div>
 
-                
               </div>
             </div>
 
@@ -141,14 +151,6 @@ const ContactItem = ({ icon, label, value }) => (
       <div className="text-sm md:text-base font-bold text-slate-800 leading-tight">{value}</div>
     </div>
   </div>
-);
-
-const FiDownload = ({ className }) => (
-  <svg stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" className={className} height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-    <polyline points="7 10 12 15 17 10"></polyline>
-    <line x1="12" y1="15" x2="12" y2="3"></line>
-  </svg>
 );
 
 export default RTI;

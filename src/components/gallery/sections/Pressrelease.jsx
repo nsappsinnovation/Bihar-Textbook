@@ -1,32 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, FileText, ArrowRight, FileDown, X } from 'lucide-react';
+import { Calendar, FileText, FileDown, X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { getSections } from '../../../services/sectionService';
 import { fileUrl } from '../../../services/api';
 
 const Pressrelease = () => {
+  const { t, i18n } = useTranslation();
   const [selectedRelease, setSelectedRelease] = useState(null);
   const [items, setItems] = useState([]);
 
   // Press releases are managed in Admin → Gallery → Press Release
   useEffect(() => {
-    const formatDate = (date) =>
-      (date ? new Date(date) : new Date()).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    const formatDate = (date) => {
+      const dateLocale = i18n.language === "hi" ? "hi-IN" : "en-US";
+      return (date ? new Date(date) : new Date()).toLocaleDateString(dateLocale, { month: 'long', day: 'numeric', year: 'numeric' });
+    };
 
     getSections('gl-press')
       .then((rows) => setItems(rows.map((row, index) => ({
         id: row.id,
         date: formatDate(row.publishDate),
-        title: row.title || "Press Release",
-        excerpt: row.description || "Official press release.",
-        category: row.category || "General",
+        title: row.title || t("galleryPage.press.fallbackTitle"),
+        excerpt: row.description || t("galleryPage.press.fallbackExcerpt"),
+        category: row.category || t("galleryPage.press.categories.general"),
         fileSize: "1.2 MB",
         cardStyle: index % 3 === 0 ? "gradient" : index % 3 === 1 ? "image" : "glass",
         image: fileUrl(row.imageUrl) || null,
         fileUrl: fileUrl(row.imageUrl),
       }))))
       .catch(() => setItems([]));
-  }, []);
+  }, [t, i18n.language]);
 
   const handleDownload = (e, release) => {
     e.stopPropagation();
@@ -116,7 +120,10 @@ const Pressrelease = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-800 tracking-tight leading-tight mb-2"
           >
-            Press <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">Releases</span>
+            {t("galleryPage.press.headingPrefix")}{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
+              {t("galleryPage.press.headingHighlight")}
+            </span>
           </motion.h2>
 
           <motion.p
@@ -125,7 +132,7 @@ const Pressrelease = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-slate-500 text-base md:text-lg max-w-2xl mx-auto font-normal leading-relaxed"
           >
-            Stay updated with our latest organizational statements, curriculum reforms, policy alignments, and strategic reviews.
+            {t("galleryPage.press.description")}
           </motion.p>
         </div>
 
@@ -188,14 +195,14 @@ const Pressrelease = () => {
               {/* Excerpt/Body */}
               <div className="p-8 md:p-10 overflow-y-auto space-y-6 flex-grow custom-scrollbar">
                 <div className="space-y-4">
-                  <h4 className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">Official Excerpt</h4>
+                  <h4 className="text-[10px] font-black text-slate-300 uppercase tracking-[0.2em]">{t("galleryPage.press.officialExcerpt")}</h4>
                   <p className="text-base text-slate-600 leading-relaxed font-light">
                     {selectedRelease.excerpt}
                   </p>
                 </div>
                 <div className="p-5 bg-blue-50/50 rounded-2xl border border-blue-100/50">
                   <p className="text-xs text-blue-700 font-medium leading-relaxed">
-                    This is an official media briefing published by the Bihar State Text Book Publishing Corporation (BSTBPC). You can download the complete press kit including images and statements below.
+                    {t("galleryPage.press.modalNote")}
                   </p>
                 </div>
               </div>
@@ -204,13 +211,13 @@ const Pressrelease = () => {
               <div className="p-6 md:p-8 border-t border-slate-100 flex items-center justify-between bg-slate-50">
                 <div className="flex items-center gap-1.5 text-xs text-slate-400 font-semibold">
                   <FileText size={14} className="text-blue-500" />
-                  <span>Size: {selectedRelease.fileSize}</span>
+                  <span>{t("galleryPage.press.sizeLabel", { size: selectedRelease.fileSize })}</span>
                 </div>
                 <button
                   onClick={(e) => handleDownload(e, selectedRelease)}
                   className="px-6 py-3 bg-blue-600 text-white rounded-full text-xs font-extrabold uppercase tracking-widest hover:bg-blue-700 transition-all shadow-md shadow-blue-500/10 flex items-center gap-2"
                 >
-                  <FileDown size={14} /> Download Press Release
+                  <FileDown size={14} /> {t("galleryPage.press.download")}
                 </button>
               </div>
 

@@ -16,9 +16,13 @@ import { Menu, Search } from "lucide-react";
 import Sidebar from "../../../components/Sidebar";
 import { CLASSES, findBook } from "../../../services/bookService";
 import { fileUrl } from "../../../services/api";
+import { useTranslation } from "react-i18next";
+import { useBookTranslation } from "../../../utils/useBookTranslation";
 
 const BookReader = () => {
     const { classId, bookSubject } = useParams();
+    const { t, i18n } = useTranslation();
+    const { translateBookTitle, translateClassName } = useBookTranslation();
     const [openSection, setOpenSection] = useState(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -124,7 +128,7 @@ const BookReader = () => {
                         <button onClick={() => setIsSidebarOpen(true)} className="text-slate-600">
                             <Menu size={24} />
                         </button>
-                        <span className="font-bold text-slate-800">Class {classId} / {bookTitle}</span>
+                        <span className="font-bold text-slate-800">{translateClassName(`Class ${classId}`)} / {translateBookTitle(bookTitle, bookSubject)}</span>
                     </div>
                 </div>
 
@@ -136,12 +140,12 @@ const BookReader = () => {
                             <Link
                                 to={`/books/${classId}`}
                                 className="w-8 h-8 rounded-[10px] bg-[#F8FAFC] hover:bg-blue-50 text-[#1e293b] flex items-center justify-center transition-all border border-slate-200 shadow-[0_2px_4px_rgba(0,0,0,0.02)] shrink-0"
-                                title={`Back to Class ${classId} Books`}
+                                title={`Back to ${translateClassName(`Class ${classId}`)} Books`}
                             >
                                 <FaChevronLeft size={12} className="text-blue-600" />
                             </Link>
                             <h1 className="text-xl sm:text-[22px] font-black text-[#0f172a] tracking-tight uppercase mt-0.5">
-                                {bookTitle}
+                                {translateBookTitle(bookTitle, bookSubject)}
                             </h1>
                         </div>
 
@@ -150,7 +154,7 @@ const BookReader = () => {
                             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
                                 <div className="flex items-center gap-2">
                                     <span className="w-1.5 h-5 bg-[#2563eb] rounded-full"></span>
-                                    <h2 className="text-lg sm:text-[20px] font-black text-[#0f172a] tracking-tight">Table of Contents</h2>
+                                    <h2 className="text-lg sm:text-[20px] font-black text-[#0f172a] tracking-tight">{t("booksPage.reader.tableOfContents", "Table of Contents")}</h2>
                                 </div>
                                 <div className="relative w-full sm:w-64">
                                     <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
@@ -158,7 +162,7 @@ const BookReader = () => {
                                     </div>
                                     <input
                                         type="text"
-                                        placeholder="Search chapters..."
+                                        placeholder={t("booksPage.reader.searchChapters", "Search chapters...")}
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
                                         className="w-full pl-8 pr-4 py-2 bg-[#F8FAFC] border border-slate-200 rounded-xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all shadow-[0_2px_4px_rgba(0,0,0,0.02)]"
@@ -196,19 +200,19 @@ const BookReader = () => {
                                                     </div>
                                                     <div className="min-w-0 flex flex-col justify-center">
                                                         <h3 className="text-sm sm:text-[15px] font-black text-[#1e293b] leading-snug truncate uppercase">
-                                                            {chapter.hindiTitle || chapter.title}
+                                                            {i18n.language === 'hi' ? (chapter.hindiTitle || chapter.title) : chapter.title}
                                                         </h3>
                                                     </div>
                                                 </div>
                                                 <div className="inline-flex items-center gap-1.5 bg-[#eff6ff] text-[#2563eb] text-[10px] font-black px-4 py-2 rounded-full transition-colors shrink-0 group-hover:bg-[#2563eb] group-hover:text-white">
-                                                    <span>READ NOW</span>
+                                                    <span>{t("booksPage.reader.readNow", "READ NOW")}</span>
                                                     <FaChevronRight size={8} />
                                                 </div>
                                             </Link>
                                         ))
                                     ) : (
                                         <div className="text-center py-12 text-slate-500 font-medium text-sm">
-                                            No chapters found matching "{searchQuery}"
+                                            {t("booksPage.reader.noChaptersFound", "No chapters found matching")} "{searchQuery}"
                                         </div>
                                     )}
                                 </div>

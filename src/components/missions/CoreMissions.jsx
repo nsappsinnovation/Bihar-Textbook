@@ -10,75 +10,87 @@ import {
 } from "react-icons/fi";
 import { RiGraduationCapLine, RiFlaskLine, RiBookmarkLine, RiLeafLine } from "react-icons/ri";
 import { motion } from "framer-motion";
-
-/**
- * ✅ Improvements:
- * 1) "Ferris Wheel" Rotation: Nodes orbit the center, but text/icon stays upright.
- * 2) 8-Point Symmetry: Added "Research & Innovation" for perfect balance.
- * 3) Math-based positioning: Ensures a perfect circle (no uneven wobble).
- */
+import { useTranslation } from "react-i18next";
 
 const CoreMissions = () => {
+  const { t } = useTranslation();
+
   const missions = useMemo(
     () => [
       {
         id: 1,
+        titleKey: "coreMissions.items.title0",
+        descKey: "coreMissions.items.desc0",
         title: "Inclusive & Equitable Learning",
         icon: <FiUsers />,
-        color: "#6366f1", // Indigo
+        color: "#6366f1",
         description: "Ensuring every learner across Bihar has equal access to high-quality resources.",
       },
       {
         id: 2,
+        titleKey: "coreMissions.items.title1",
+        descKey: "coreMissions.items.desc1",
         title: "Quality & Pedagogy Standards",
         icon: <FiBookOpen />,
-        color: "#eab308", // Yellow
+        color: "#eab308",
         description: "Strengthening content accuracy via structured review and continuous improvement.",
       },
       {
         id: 3,
+        titleKey: "coreMissions.items.title2",
+        descKey: "coreMissions.items.desc2",
         title: "Cultural Integration",
         icon: <FiSun />,
-        color: "#22c55e", // Green
+        color: "#22c55e",
         description: "Integrating Bihar's rich cultural heritage and history into the foundational learning materials.",
       },
       {
         id: 4,
+        titleKey: "coreMissions.items.title3",
+        descKey: "coreMissions.items.desc3",
         title: "Seamless Supply Chain",
         icon: <FiTruck />,
-        color: "#3b82f6", // Blue
+        color: "#3b82f6",
         description: "Ensuring efficient textbook delivery to every school—down to the last mile.",
       },
       {
         id: 5,
+        titleKey: "coreMissions.items.title4",
+        descKey: "coreMissions.items.desc4",
         title: "Affordable Textbooks",
         icon: <FiCreditCard />,
-        color: "#ef4444", // Red
+        color: "#ef4444",
         description: "Providing quality learning materials at minimal cost to support all families.",
       },
       {
         id: 6,
+        titleKey: "coreMissions.items.title5",
+        descKey: "coreMissions.items.desc5",
         title: "Empowered Educators",
         icon: <FiZap />,
-        color: "#f97316", // Orange
+        color: "#f97316",
         description: "Supporting teachers through structured guides and training-aligned materials.",
       },
       {
         id: 7,
+        titleKey: "coreMissions.items.title6",
+        descKey: "coreMissions.items.desc6",
         title: "Future-Ready Learners",
         icon: <RiGraduationCapLine />,
-        color: "#a855f7", // Purple
+        color: "#a855f7",
         description: "Enabling 21st-century skills through updated curriculum and modern pedagogy.",
       },
       {
         id: 8,
+        titleKey: "coreMissions.items.title7",
+        descKey: "coreMissions.items.desc7",
         title: "Sustainable Publishing",
         icon: <RiLeafLine />,
-        color: "#db2777", // Pink
+        color: "#db2777",
         description: "Adopting eco-friendly printing processes and sustainable materials for book production.",
       },
     ],
-    []
+    [t]
   );
 
   const CentralBook = () => (
@@ -126,10 +138,10 @@ const CoreMissions = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-5xl md:text-7xl font-bold text-[#0d0e23] mb-6 tracking-tight">
-            The Eight <span className="text-blue-600/90">Core Pillars</span>
+            {t("coreMissions.headingLine1", "The Eight")} <span className="text-blue-600/90">{t("coreMissions.headingLine2", "Core Pillars")}</span>
           </h2>
           <p className="max-w-3xl mx-auto text-gray-500 text-lg font-light leading-relaxed">
-            A structured framework guiding BSTBPC’s mission to strengthen learning outcomes across Bihar.
+            {t("coreMissions.subheading", "A structured framework guiding BSTBPC’s mission to strengthen learning outcomes across Bihar.")}
           </p>
         </div>
 
@@ -148,10 +160,10 @@ const CoreMissions = () => {
               </div>
               <div>
                 <h3 className="font-semibold text-sm text-[#0d0e23] mb-1">
-                  {mission.title}
+                  {t(mission.titleKey, mission.title)}
                 </h3>
                 <p className="text-[11px] text-gray-500 leading-snug">
-                  {mission.description}
+                  {t(mission.descKey, mission.description)}
                 </p>
               </div>
             </div>
@@ -205,7 +217,7 @@ const CoreMissions = () => {
                       {/* MAIN TEXT (Title) - Attached Permanent Below */}
                       <div className="absolute top-[120%] left-1/2 -translate-x-1/2 w-[180px] text-center z-10 pointer-events-none">
                         <h4 className="font-bold text-[13px] text-slate-600 leading-tight inline-block">
-                          {mission.title}
+                          {t(mission.titleKey, mission.title)}
                         </h4>
                       </div>
 
@@ -213,7 +225,7 @@ const CoreMissions = () => {
                       <div className="absolute top-full mt-8 flex flex-col items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50 w-[220px]">
                         <div className="bg-white p-3 rounded-xl shadow-xl border border-gray-100 text-center relative after:content-[''] after:absolute after:bottom-full after:left-1/2 after:-translate-x-1/2 after:border-8 after:border-transparent after:border-b-white">
                           <p className="text-[11px] text-gray-500 leading-snug">
-                            {mission.description}
+                            {t(mission.descKey, mission.description)}
                           </p>
                         </div>
                       </div>

@@ -1,6 +1,7 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { ReactLenis } from "lenis/react";
+import { useTranslation } from "react-i18next";
 
 import Nav from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
@@ -48,6 +49,24 @@ const LoadingFallback = () => (
 
 function App() {
   const location = useLocation();
+  const { i18n } = useTranslation();
+
+  useEffect(() => {
+    const handleLangChange = (lang) => {
+      document.documentElement.lang = lang || 'en';
+      if (lang === 'hi') {
+        document.documentElement.classList.add('lang-hi');
+        document.body.classList.add('lang-hi');
+      } else {
+        document.documentElement.classList.remove('lang-hi');
+        document.body.classList.remove('lang-hi');
+      }
+    };
+
+    handleLangChange(i18n.language);
+    i18n.on('languageChanged', handleLangChange);
+    return () => i18n.off('languageChanged', handleLangChange);
+  }, [i18n]);
 
   const isIsolatedPage =
     location.pathname === "/login" ||

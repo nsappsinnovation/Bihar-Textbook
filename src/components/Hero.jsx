@@ -1,7 +1,9 @@
 import React from 'react';
 import { BookOpen, GraduationCap, Users, TrendingUp, BookOpenText } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const Hero = () => {
+    const { t } = useTranslation();
     return (
         <section className="relative w-full min-h-screen bg-[#f8f5f0] overflow-hidden font-sans pt-[clamp(120px,15vh,160px)] flex flex-col justify-center">
             
@@ -28,16 +30,16 @@ const Hero = () => {
                             <div className="w-[4px] h-[4px] rounded-full bg-[#124d9c] -ml-[2px]"></div>
                         </div>
                         <span className="text-[#124d9c] font-black text-[clamp(0.5rem,1vw,0.6rem)] tracking-[0.15em] uppercase">
-                            Empowering minds. Enriching futures.
+                            {t("hero.tagline", "Empowering minds. Enriching futures.")}
                         </span>
                     </div>
 
                     {/* Main Heading */}
                     <h1 className="text-[clamp(1.5rem,4vw,3.5rem)] font-black text-[#0b2b4f] leading-[1.05] tracking-tight">
-                        Bihar State<br />
-                        <span className="text-blue-600">Textbook</span><br />
-                        Publishing<br />
-                        Corporation Ltd.
+                        {t("hero.titlePart1", "Bihar State")}<br />
+                        <span className="text-blue-600">{t("hero.titleHighlight", "Textbook")}</span><br />
+                        {t("hero.titlePart2", "Publishing")}<br />
+                        {t("hero.titlePart3", "Corporation Ltd.")}
                     </h1>
 
                    
@@ -50,7 +52,7 @@ const Hero = () => {
                                 <BookOpen size="45%" strokeWidth={1.5} />
                             </div>
                             <span className="text-[clamp(0.4rem,0.75vw,0.6rem)] font-bold text-[#0b2b4f] text-center tracking-[0.08em] leading-tight opacity-90">
-                                QUALITY<br />CONTENT
+                                {t("hero.feat1Line1", "QUALITY")}<br />{t("hero.feat1Line2", "CONTENT")}
                             </span>
                         </div>
 
@@ -62,7 +64,7 @@ const Hero = () => {
                                 <GraduationCap size="50%" strokeWidth={1.5} />
                             </div>
                             <span className="text-[clamp(0.4rem,0.75vw,0.6rem)] font-bold text-[#0b2b4f] text-center tracking-[0.08em] leading-tight opacity-90">
-                                LEARNING<br />FOR ALL
+                                {t("hero.feat2Line1", "LEARNING")}<br />{t("hero.feat2Line2", "FOR ALL")}
                             </span>
                         </div>
 
@@ -74,7 +76,7 @@ const Hero = () => {
                                 <Users size="45%" strokeWidth={1.5} />
                             </div>
                             <span className="text-[clamp(0.4rem,0.75vw,0.6rem)] font-bold text-[#0b2b4f] text-center tracking-[0.08em] leading-tight opacity-90">
-                                INCLUSIVE<br />EDUCATION
+                                {t("hero.feat3Line1", "INCLUSIVE")}<br />{t("hero.feat3Line2", "EDUCATION")}
                             </span>
                         </div>
 
@@ -86,7 +88,7 @@ const Hero = () => {
                                 <TrendingUp size="45%" strokeWidth={1.5} />
                             </div>
                             <span className="text-[clamp(0.4rem,0.75vw,0.6rem)] font-bold text-[#0b2b4f] text-center tracking-[0.08em] leading-tight opacity-90">
-                                EMPOWERING<br />BIHAR
+                                {t("hero.feat4Line1", "EMPOWERING")}<br />{t("hero.feat4Line2", "BIHAR")}
                             </span>
                         </div>
                     </div>
@@ -106,7 +108,7 @@ const Hero = () => {
                     </div>
                     <div className="h-[clamp(2.5rem,5vw,3.5rem)] w-[2px] bg-white"></div>
                     <p className="text-white text-[clamp(0.65rem,1.2vw,0.85rem)] font-medium leading-[1.6] tracking-wide opacity-90 max-w-[10rem]">
-                        Bringing world-class textbooks to every learner in Bihar.
+                        {t("hero.floatingText", "Bringing world-class textbooks to every learner in Bihar.")}
                     </p>
                 </div>
 

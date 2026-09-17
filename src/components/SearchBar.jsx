@@ -1,19 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { getSuggestions } from '../services/wikipedia';
 
-const typingPhrases = [
-    "About Solar System",
-    "Prime Minister of India",
-    "Chief Minister of Bihar"
-];
-
 const SearchBar = ({ onSearch, isLoading }) => {
+    const { t } = useTranslation();
     const [term, setTerm] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
     const wrapperRef = useRef(null);
     const isSelection = useRef(false);
     const inputRef = useRef(null); // only added ref
+
+    const typingPhrases = [
+        t("searchBar.phrase0", "About Solar System"),
+        t("searchBar.phrase1", "Prime Minister of India"),
+        t("searchBar.phrase2", "Chief Minister of Bihar")
+    ];
 
     /* =========================
        Typing Animation (No styling changes)
@@ -63,7 +65,7 @@ const SearchBar = ({ onSearch, isLoading }) => {
             isActive = false;
             clearTimeout(timeoutId);
             if (inputRef.current) {
-                inputRef.current.placeholder = "Search for interesting topics...";
+                inputRef.current.placeholder = t("searchBar.placeholder", "Search for interesting topics...");
             }
         };
 
@@ -74,7 +76,7 @@ const SearchBar = ({ onSearch, isLoading }) => {
             clearTimeout(timeoutId);
             inputRef.current?.removeEventListener("focus", stopAnimation);
         };
-    }, []);
+    }, [t]);
 
     // Debounce effect for fetching suggestions
     useEffect(() => {
@@ -147,7 +149,7 @@ const SearchBar = ({ onSearch, isLoading }) => {
                             ? 'rounded-t-3xl rounded-b-none border-b-0'
                             : 'rounded-full'
                     }`}
-                    placeholder="Search for interesting topics..."
+                    placeholder={t("searchBar.placeholder", "Search for interesting topics...")}
                     required
                 />
                 <button
@@ -155,7 +157,7 @@ const SearchBar = ({ onSearch, isLoading }) => {
                     disabled={isLoading}
                     className="text-white bg-indigo-500  absolute right-2.5 bottom-2.5 font-medium rounded-full text-sm px-6 py-2.5 transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed transform active:scale-95"
                 >
-                    {isLoading ? 'Searching...' : 'Search'}
+                    {isLoading ? t("searchBar.searching", "Searching...") : t("searchBar.search", "Search")}
                 </button>
             </form>
 

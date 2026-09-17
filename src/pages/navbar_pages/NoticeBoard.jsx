@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import { ArrowUpRight, Bell, Eye, Activity, Calendar, FileText, Award } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 import { getNotices } from '../../services/noticeService';
 
 // "2026-06-22" -> "22/06/2026" ("Recent" when the item has no date)
-const toDisplayDate = (isoDate) => (isoDate ? isoDate.split('-').reverse().join('/') : 'Recent');
+const toDisplayDate = (isoDate) => (isoDate ? (isoDate.includes('/') ? isoDate : isoDate.split('-').reverse().join('/')) : 'Recent');
 
 // Alternate notices and tenders so the board shows a mix of both
 const buildBoardItems = (notices, tenders) => {
@@ -44,63 +45,67 @@ const buildBoardItems = (notices, tenders) => {
   return items;
 };
 
-const NoticeCard = ({ notice }) => (
-  <a 
-    href={notice.link}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="group cursor-pointer bg-white border border-slate-100 hover:border-blue-100 rounded-xl p-5 md:p-6 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col md:flex-row gap-4 md:items-center justify-between mx-1 block"
-  >
-    {/* Left Accent Line */}
-    <div className={`absolute left-0 top-0 bottom-0 w-1 transition-all duration-300 ${notice.category === 'Tender' ? 'bg-amber-400' : notice.category === 'Notice' ? 'bg-rose-400' : 'bg-blue-400'} opacity-70 group-hover:opacity-100 group-hover:w-1.5`}></div>
-    
-    <div className="flex-1 pl-2">
-      <div className="flex items-center gap-3 mb-2">
-        <span className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${
-          notice.category === 'Tender' ? 'bg-amber-50 text-amber-600' :
-          notice.category === 'Notice' ? 'bg-rose-50 text-rose-600' :
-          'bg-blue-50 text-blue-600'
-        }`}>
-          {notice.category}
-        </span>
-        {notice.isUrgent && (
-          <span className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider text-red-500 animate-pulse">
-            <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span> Urgent
+const NoticeCard = ({ notice }) => {
+  const { t } = useTranslation();
+  return (
+    <a 
+      href={notice.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group cursor-pointer bg-white border border-slate-100 hover:border-blue-100 rounded-xl p-5 md:p-6 shadow-sm hover:shadow-xl transition-all duration-300 relative overflow-hidden flex flex-col md:flex-row gap-4 md:items-center justify-between mx-1 block"
+    >
+      {/* Left Accent Line */}
+      <div className={`absolute left-0 top-0 bottom-0 w-1 transition-all duration-300 ${notice.category === 'Tender' ? 'bg-amber-400' : notice.category === 'Notice' ? 'bg-rose-400' : 'bg-blue-400'} opacity-70 group-hover:opacity-100 group-hover:w-1.5`}></div>
+      
+      <div className="flex-1 pl-2">
+        <div className="flex items-center gap-3 mb-2">
+          <span className={`px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider ${
+            notice.category === 'Tender' ? 'bg-amber-50 text-amber-600' :
+            notice.category === 'Notice' ? 'bg-rose-50 text-rose-600' :
+            'bg-blue-50 text-blue-600'
+          }`}>
+            {notice.category}
           </span>
-        )}
-        <span className="text-[10px] text-slate-400 font-medium flex items-center gap-1 ml-auto md:ml-0">
-           <Calendar size={10} /> {notice.date}
-        </span>
+          {notice.isUrgent && (
+            <span className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider text-red-500 animate-pulse">
+              <span className="w-1.5 h-1.5 rounded-full bg-red-500"></span> {t("noticeBoard.urgent", "Urgent")}
+            </span>
+          )}
+          <span className="text-[10px] text-slate-400 font-medium flex items-center gap-1 ml-auto md:ml-0">
+             <Calendar size={10} /> {notice.date}
+          </span>
+        </div>
+
+        <h3 className="text-base font-semibold text-slate-800 leading-snug mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
+          {notice.title}
+        </h3>
+
+        <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-500 mt-2">
+          <span className="flex items-center gap-1.5 bg-slate-50 px-2 py-1 rounded-md border border-slate-100">
+            {t("noticeBoard.ref", "Ref:")} {notice.ref}
+          </span>
+          {notice.deadline && (
+            <span className="flex items-center gap-1.5 text-amber-600 bg-amber-50 px-2 py-1 rounded-md border border-amber-100">
+              {t("noticeBoard.deadline", "Deadline:")} {notice.deadline}
+            </span>
+          )}
+        </div>
       </div>
 
-      <h3 className="text-base font-semibold text-slate-800 leading-snug mb-2 group-hover:text-blue-600 transition-colors line-clamp-2">
-        {notice.title}
-      </h3>
-
-      <div className="flex flex-wrap items-center gap-4 text-xs font-medium text-slate-500 mt-2">
-        <span className="flex items-center gap-1.5 bg-slate-50 px-2 py-1 rounded-md border border-slate-100">
-          Ref: {notice.ref}
-        </span>
-        {notice.deadline && (
-          <span className="flex items-center gap-1.5 text-amber-600 bg-amber-50 px-2 py-1 rounded-md border border-amber-100">
-            Deadline: {notice.deadline}
-          </span>
-        )}
+      {/* Actions */}
+      <div className="flex items-center gap-3 md:border-l md:border-slate-100 md:pl-6 pt-4 md:pt-0 border-t border-slate-50 md:border-t-0 mt-2 md:mt-0">
+         <div className="flex flex-col items-center justify-center px-4 py-2.5 rounded-full bg-slate-50 text-slate-600 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm group-hover:shadow-md group-hover:scale-105">
+            <span className="flex items-center gap-2 text-xs font-semibold tracking-wide">
+              <Eye size={16} /> <span className="hidden md:inline">{t("noticeBoard.viewPdf", "View PDF")}</span>
+            </span>
+         </div>
       </div>
-    </div>
-
-    {/* Actions */}
-    <div className="flex items-center gap-3 md:border-l md:border-slate-100 md:pl-6 pt-4 md:pt-0 border-t border-slate-50 md:border-t-0 mt-2 md:mt-0">
-       <div className="flex flex-col items-center justify-center px-4 py-2.5 rounded-full bg-slate-50 text-slate-600 group-hover:bg-blue-600 group-hover:text-white transition-all shadow-sm group-hover:shadow-md group-hover:scale-105">
-          <span className="flex items-center gap-2 text-xs font-semibold tracking-wide">
-            <Eye size={16} /> <span className="hidden md:inline">View PDF</span>
-          </span>
-       </div>
-    </div>
-  </a>
-);
+    </a>
+  );
+};
 
 export default function NoticeBoard() {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("All");
   const [notices, setNotices] = useState([]);
   const [tenders, setTenders] = useState([]);
@@ -145,8 +150,6 @@ export default function NoticeBoard() {
         `}
       </style>
 
-      
-
       <div className="max-w-[1280px] mx-auto relative z-10">
         <div className="flex flex-col lg:flex-row gap-12">
           
@@ -167,13 +170,13 @@ export default function NoticeBoard() {
                   transition={{ duration: 0.6, delay: 0.3 }}
                   className="h-px bg-blue-600"
                 ></motion.div>
-                <span className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em]">Updates & Tenders</span>
+                <span className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em]">{t("noticeBoard.badge", "Updates & Tenders")}</span>
               </div>
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
-                Official Notices <br /> <span className="text-slate-400 font-medium">& Circulars</span>
+                {t("noticeBoard.heading", "Official Notices")} <br /> <span className="text-slate-400 font-medium">{t("noticeBoard.headingHighlight", "& Circulars")}</span>
               </h2>
               <p className="text-sm text-slate-500 font-medium leading-relaxed mb-4">
-                Stay updated with the latest administrative announcements, tenders, and educational circulars from the Bihar State Text Book Publishing Corporation Ltd.
+                {t("noticeBoard.description", "Stay updated with the latest administrative announcements, tenders, and educational circulars from the Bihar State Text Book Publishing Corporation Ltd.")}
               </p>
 
               {/* Premium Stats Overview Widget */}
@@ -185,8 +188,8 @@ export default function NoticeBoard() {
                       <FileText className="text-amber-500" size={22} />
                     </div>
                     <div>
-                      <h4 className="text-xs font-black text-slate-800 tracking-wider">Tenders</h4>
-                      <p className="text-[11px] text-slate-400 mt-0.5 font-medium">E-procurement & contracts</p>
+                      <h4 className="text-xs font-black text-slate-800 tracking-wider">{t("noticeBoard.tendersLabel", "Tenders")}</h4>
+                      <p className="text-[11px] text-slate-400 mt-0.5 font-medium">{t("noticeBoard.tendersSub", "E-procurement & contracts")}</p>
                     </div>
                   </div>
                   <span className="text-2xl font-black text-amber-500 tracking-tight">{totalTenders}</span>
@@ -199,8 +202,8 @@ export default function NoticeBoard() {
                       <Bell className="text-rose-500" size={22} />
                     </div>
                     <div>
-                      <h4 className="text-xs font-black text-slate-800 tracking-wider">Official Notices</h4>
-                      <p className="text-[11px] text-slate-400 mt-0.5 font-medium">Administrative announcements</p>
+                      <h4 className="text-xs font-black text-slate-800 tracking-wider">{t("noticeBoard.noticesLabel", "Official Notices")}</h4>
+                      <p className="text-[11px] text-slate-400 mt-0.5 font-medium">{t("noticeBoard.noticesSub", "Administrative announcements")}</p>
                     </div>
                   </div>
                   <span className="text-2xl font-black text-rose-500 tracking-tight">{totalNotices}</span>
@@ -213,8 +216,8 @@ export default function NoticeBoard() {
                       <Award className="text-blue-500" size={22} />
                     </div>
                     <div>
-                      <h4 className="text-xs font-black text-slate-800 tracking-wider">Academic Circulars</h4>
-                      <p className="text-[11px] text-slate-400 mt-0.5 font-medium">Curriculum & syllabus updates</p>
+                      <h4 className="text-xs font-black text-slate-800 tracking-wider">{t("noticeBoard.circularsLabel", "Academic Circulars")}</h4>
+                      <p className="text-[11px] text-slate-400 mt-0.5 font-medium">{t("noticeBoard.circularsSub", "Curriculum & syllabus updates")}</p>
                     </div>
                   </div>
                   <span className="text-2xl font-black text-blue-500 tracking-tight">{totalCirculars}</span>
@@ -225,7 +228,7 @@ export default function NoticeBoard() {
             {/* View All Button */}
             <div className="hidden lg:block">
                <Link to="/notice" className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-full text-sm font-bold text-slate-700 hover:text-blue-600 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-500/10 transition-all group">
-                 View Document Archive
+                 {t("noticeBoard.viewArchive", "View Document Archive")}
                  <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                </Link>
             </div>
@@ -243,7 +246,7 @@ export default function NoticeBoard() {
                     activeTab === tab ? "text-blue-600" : "text-slate-400 hover:text-slate-600"
                   }`}
                 >
-                  {tab}
+                  {t(`noticeBoard.tab.${tab.toLowerCase()}`, tab)}
                   {activeTab === tab && (
                     <motion.span 
                       layoutId="activeTab"
@@ -268,7 +271,7 @@ export default function NoticeBoard() {
             </div>
 
             <Link to="/notice" className="lg:hidden mt-8 flex items-center justify-center w-full gap-2 px-6 py-3 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 hover:text-blue-600 transition-all group">
-                 View Document Archive 
+                 {t("noticeBoard.viewArchive", "View Document Archive")}
                  <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </div>

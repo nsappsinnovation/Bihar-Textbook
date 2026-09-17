@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import toast from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { 
   BookOpen, MessageSquare, User, 
   ArrowRight, ArrowLeft, ArrowRightLeft, Check, Globe
@@ -27,27 +28,28 @@ const lingTheme = {
 };
 
 const SOURCE_LANGUAGES = [
-  { id: "hi", name: "Hindi" },
-  { id: "en", name: "English" }
+  { id: "hi" },
+  { id: "en" }
 ];
 
 const TARGET_LANGUAGES = [
-  { id: "hi", name: "Hindi" },
-  { id: "en", name: "English" },
-  { id: "bho", name: "Bhojpuri", isComingSoon: true },
-  { id: "mai", name: "Maithili", isComingSoon: true },
-  { id: "mag", name: "Magahi", isComingSoon: true },
-  { id: "anp", name: "Angika", isComingSoon: true },
-  { id: "bjj", name: "Bajjika", isComingSoon: true },
-  { id: "de", name: "German" },
-  { id: "fr", name: "French" },
-  { id: "es", name: "Spanish" },
-  { id: "ja", name: "Japanese" },
-  { id: "it", name: "Italian" }
+  { id: "hi" },
+  { id: "en" },
+  { id: "bho", isComingSoon: true },
+  { id: "mai", isComingSoon: true },
+  { id: "mag", isComingSoon: true },
+  { id: "anp", isComingSoon: true },
+  { id: "bjj", isComingSoon: true },
+  { id: "de" },
+  { id: "fr" },
+  { id: "es" },
+  { id: "ja" },
+  { id: "it" }
 ];
 
 export default function LinguisticApp() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [sourceLang, setSourceLang] = useState(() => localStorage.getItem("ling_source_lang") || "hi");
   const [targetLang, setTargetLang] = useState(() => localStorage.getItem("ling_target_lang") || "en");
   const [lastModule, setLastModule] = useState(() => localStorage.getItem("ling_last_module") || "words");
@@ -75,9 +77,9 @@ export default function LinguisticApp() {
   };
 
   const quickStats = [
-    { label: 'Basic Words', value: 'Master foundational vocabulary', icon: <BookOpen className={lingTheme.card1Icon} />, color: lingTheme.card1Bg, module: 'words' },
-    { label: 'Basic Phrases', value: 'Learn essential daily sentences', icon: <MessageSquare className={lingTheme.card2Icon} />, color: lingTheme.card2Bg, module: 'phrases' },
-    { label: 'Conversations', value: 'Interactive real-life dialogues', icon: <User className={lingTheme.card3Icon} />, color: lingTheme.card3Bg, module: 'conversations' },
+    { label: t('ling.basicWords', 'Basic Words'), value: t('ling.basicWordsDesc', 'Master foundational vocabulary'), icon: <BookOpen className={lingTheme.card1Icon} />, color: lingTheme.card1Bg, module: 'words' },
+    { label: t('ling.basicPhrases', 'Basic Phrases'), value: t('ling.basicPhrasesDesc', 'Learn essential daily sentences'), icon: <MessageSquare className={lingTheme.card2Icon} />, color: lingTheme.card2Bg, module: 'phrases' },
+    { label: t('ling.conversations', 'Conversations'), value: t('ling.conversationsDesc', 'Interactive real-life dialogues'), icon: <User className={lingTheme.card3Icon} />, color: lingTheme.card3Bg, module: 'conversations' },
   ];
 
   return (
@@ -100,12 +102,12 @@ export default function LinguisticApp() {
             <section className="bg-white rounded-[16px] md:rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[200px] sm:min-h-[260px] md:min-h-[300px] lg:h-[387px] lg:min-h-[387px] pb-4 md:pb-6 lg:pb-0">
               <div className="relative z-10 p-5 sm:p-8 md:p-10 lg:w-1/2 space-y-3 md:space-y-4">
                  <h1 className="text-[22px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
-                    Let's learn <br />
-                    a new <br />
-                    <span className={lingTheme.heroHighlightText}>language</span>
+                    {t('ling.letsLearn', "Let's learn")} <br />
+                    {t('ling.aNew', 'a new')} <br />
+                    <span className={lingTheme.heroHighlightText}>{t('ling.language', 'language')}</span>
                  </h1>
                  <p className="text-slate-500 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed max-w-sm">
-                   Have a conversation in different languages and explore diverse regional dialects.
+                   {t('ling.heroDesc', 'Have a conversation in different languages and explore diverse regional dialects.')}
                  </p>
               </div>
 
@@ -153,8 +155,8 @@ export default function LinguisticApp() {
                      <MessageSquare size={22} strokeWidth={2.5} />
                    </div>
                    <div>
-                     <h3 className="text-[18px] font-extrabold text-slate-800 tracking-tight">Language <span className={lingTheme.heroHighlightText}>you know</span></h3>
-                     <p className="text-[13px] text-slate-500 font-medium mt-0.5">Select your primary language.</p>
+                     <h3 className="text-[18px] font-extrabold text-slate-800 tracking-tight">{t('ling.LanguageTitle', 'Language')} <span className={lingTheme.heroHighlightText}>{t('ling.langYouKnow', 'you know')}</span></h3>
+                     <p className="text-[13px] text-slate-500 font-medium mt-0.5">{t('ling.langYouKnowDesc', 'Select your primary language.')}</p>
                    </div>
                  </div>
 
@@ -168,6 +170,7 @@ export default function LinguisticApp() {
                           setSourceLang(lang.id);
                           if (targetLang === lang.id) setTargetLang(sourceLang || "en");
                         }} 
+                        t={t}
                       />
                     ))}
                  </div>
@@ -203,8 +206,8 @@ export default function LinguisticApp() {
                      <Globe size={22} strokeWidth={2.5} />
                    </div>
                    <div>
-                     <h3 className="text-[18px] font-extrabold text-slate-800 tracking-tight">Language <span className={lingTheme.heroHighlightText}>you want to learn</span></h3>
-                     <p className="text-[13px] text-slate-500 font-medium mt-0.5">Select a target language to start the module.</p>
+                     <h3 className="text-[18px] font-extrabold text-slate-800 tracking-tight">{t('ling.LanguageTitle', 'Language')} <span className={lingTheme.heroHighlightText}>{t('ling.langYouWant', 'you want to learn')}</span></h3>
+                     <p className="text-[13px] text-slate-500 font-medium mt-0.5">{t('ling.langYouWantDesc', 'Select a target language to start the module.')}</p>
                    </div>
                  </div>
 
@@ -215,9 +218,10 @@ export default function LinguisticApp() {
                         lang={lang} 
                         selected={targetLang === lang.id}
                         disabled={sourceLang === lang.id || lang.isComingSoon}
-                        title={lang.isComingSoon ? "Not available yet" : ""}
+                        title={lang.isComingSoon ? t('ling.notAvailable', 'Not available yet') : ""}
                         isTarget={true}
                         onClick={() => setTargetLang(lang.id)} 
+                        t={t}
                       />
                     ))}
                  </div>
@@ -231,7 +235,7 @@ export default function LinguisticApp() {
                 onClick={() => handleStartLearning(lastModule)}
                 className={`bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-12 py-4 rounded-full shadow-[0_8px_25px_rgba(11,181,98,0.3)] flex items-center gap-3 transition-all hover:-translate-y-1 hover:shadow-[0_12px_30px_rgba(11,181,98,0.4)] group ${(!sourceLang || !targetLang) && 'opacity-50 cursor-not-allowed grayscale hover:translate-y-0 hover:shadow-none'}`}
               >
-                Start Learning <ArrowRight size={20} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform" />
+                {t('ling.startLearning', 'Start Learning')} <ArrowRight size={20} strokeWidth={2.5} className="group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
           </div>
@@ -243,8 +247,9 @@ export default function LinguisticApp() {
 
 /* Helper Components */
 
-function LanguagePill({ lang, selected, disabled, title, isTarget, onClick }) {
+function LanguagePill({ lang, selected, disabled, title, isTarget, onClick, t }) {
   const activeColor = "emerald";
+  const displayName = t(`ling.lang_${lang.id}`, lang.id.toUpperCase());
   
   return (
     <button 
@@ -264,7 +269,7 @@ function LanguagePill({ lang, selected, disabled, title, isTarget, onClick }) {
       
       <span className={`text-[13.5px] font-bold tracking-wide flex-1 text-left
         ${selected ? `text-${activeColor}-900` : disabled ? "text-slate-400" : `text-slate-700 group-hover:text-${activeColor}-800`}`}>
-        {lang.name}
+        {displayName}
       </span>
       
       {selected && (

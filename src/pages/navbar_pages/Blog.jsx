@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import SearchBar from '../../components/SearchBar';
 import BlogPost from './BlogPost';
 import Back from '../../components/Background';
 import { searchArticles } from '../../services/wikipedia';
 
 function Blog() {
-      const [results, setResults] = useState([]);
+    const { t, i18n } = useTranslation();
+    const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
     const [searched, setSearched] = useState(false);
     const [error, setError] = useState(null);
@@ -15,10 +17,10 @@ function Blog() {
         setError(null);
         setSearched(true);
         try {
-            const data = await searchArticles(query);
+            const data = await searchArticles(query, i18n.language);
             setResults(data);
         } catch (err) {
-            setError('Failed to fetch results. Please try again.');
+            setError(t("gyanKendraPage.fetchError"));
         } finally {
             setLoading(false);
         }
@@ -27,27 +29,19 @@ function Blog() {
     return (
         <div className="relative min-h-screen w-full bg-white text-slate-900 font-sans selection:bg-blue-100 overflow-hidden">
             {/* Background Elements */}
-        
             <div className="absolute inset-0 z-0">
-      <Back />
-    </div>
+                <Back />
+            </div>
               
             <div className="relative z-10">
-            
                 <header className="pt-16 pb-14 px-4 text-center">
-
-
                     <h1 className="text-3xl md:text-5xl lg:text-6xl font-display font-black text-slate-900 leading-[1.1] mb-2 tracking-tight">
-                      Gyan <span className="text-blue-600">Kendra</span>
+                        {t("gyanKendraPage.titlePrefix")}{" "}
+                        <span className="text-blue-600">{t("gyanKendraPage.titleHighlight")}</span>
                     </h1>
 
-                    <p
-                        className="
-                     mt-4
-                     text-lg
-                      text-slate-600 max-w-2xl mx-auto mb-12 leading-relaxed"
-                    >
-                        Your Center of Knowledge — where learning becomes simple, understanding becomes deeper, and every student is empowered to achieve their full potential
+                    <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto mb-12 leading-relaxed">
+                        {t("gyanKendraPage.subtitle")}
                     </p>
 
                     <SearchBar onSearch={handleSearch} isLoading={loading} />
@@ -59,7 +53,6 @@ function Blog() {
                             {error}
                         </div>
                     )}
-
 
                     {loading ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-pulse">
@@ -91,7 +84,7 @@ function Blog() {
 
                     {searched && !loading && results.length === 0 && (
                         <div className="text-center py-20">
-                            <p className="text-xl text-slate-500">No results found. Try a different topic.</p>
+                            <p className="text-xl text-slate-500">{t("gyanKendraPage.noResults")}</p>
                         </div>
                     )}
                 </main>

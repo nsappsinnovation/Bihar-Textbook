@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft, ArrowRight, BookOpen, Shield, Trophy, Play, Clock, GraduationCap, FileText, ChevronRight, CheckCircle2, XCircle, Gamepad2, Key,
@@ -6,55 +7,55 @@ import {
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-const quizQuestions = [
+const getQuizQuestions = (t) => [
   {
-    question: "You get an email saying you won a lottery. What should you do?",
-    options: ["Click the link to claim it", "Reply with your bank details", "Delete it and do not click any links", "Forward it to your friends"],
+    question: t("cyber.question_Yougetanemailsayingy", { defaultValue: "You get an email saying you won a lottery. What should you do?" }),
+    options: [t("cyber.arr_Clickthelinktoclaimi", { defaultValue: "Click the link to claim it" }), t("cyber.arr_Replywithyourbankdet", { defaultValue: "Reply with your bank details" }), t("cyber.arr_Deleteitanddonotclic", { defaultValue: "Delete it and do not click any links" }), t("cyber.arr_Forwardittoyourfrien", { defaultValue: "Forward it to your friends" })],
     correct: 2,
   },
   {
-    question: "What makes a strong password?",
-    options: ["Your pet's name", "12345678", "A mix of letters, numbers, and symbols", "Your birthdate"],
+    question: t("cyber.question_Whatmakesastrongpass", { defaultValue: "What makes a strong password?" }),
+    options: [t("cyber.arr_Yourpetsname", { defaultValue: "Your pet's name" }), t("cyber.arr_12345678", { defaultValue: "12345678" }), t("cyber.arr_Amixoflettersnumbers", { defaultValue: "A mix of letters, numbers, and symbols" }), t("cyber.arr_Yourbirthdate", { defaultValue: "Your birthdate" })],
     correct: 2,
   },
   {
-    question: "Someone online asks for your home address to send a free game. What do you do?",
-    options: ["Give it to them", "Never share personal info online", "Ask your friends what to do", "Give a fake address"],
+    question: t("cyber.question_Someoneonlineasksfor", { defaultValue: "Someone online asks for your home address to send a free game. What do you do?" }),
+    options: [t("cyber.arr_Giveittothem", { defaultValue: "Give it to them" }), t("cyber.arr_Neversharepersonalin", { defaultValue: "Never share personal info online" }), t("cyber.arr_Askyourfriendswhatto", { defaultValue: "Ask your friends what to do" }), t("cyber.arr_Giveafakeaddress", { defaultValue: "Give a fake address" })],
     correct: 1,
   },
   {
-    question: "What is phishing?",
-    options: ["Catching fish in a pond", "A scam to trick you into sharing passwords", "A new video game", "A secure way to chat"],
+    question: t("cyber.question_Whatisphishing", { defaultValue: "What is phishing?" }),
+    options: [t("cyber.arr_Catchingfishinapond", { defaultValue: "Catching fish in a pond" }), t("cyber.arr_Ascamtotrickyouintos", { defaultValue: "A scam to trick you into sharing passwords" }), t("cyber.arr_Anewvideogame", { defaultValue: "A new video game" }), t("cyber.arr_Asecurewaytochat", { defaultValue: "A secure way to chat" })],
     correct: 1,
   },
   {
-    question: "Why should you update your apps and games?",
-    options: ["To make them load slower", "To get new colors", "To fix security bugs and keep hackers out", "To use more storage space"],
+    question: t("cyber.question_Whyshouldyouupdateyo", { defaultValue: "Why should you update your apps and games?" }),
+    options: [t("cyber.arr_Tomakethemloadslower", { defaultValue: "To make them load slower" }), t("cyber.arr_Togetnewcolors", { defaultValue: "To get new colors" }), t("cyber.arr_Tofixsecuritybugsand", { defaultValue: "To fix security bugs and keep hackers out" }), t("cyber.arr_Tousemorestoragespac", { defaultValue: "To use more storage space" })],
     correct: 2,
   },
   {
-    question: "You see a pop-up saying your computer has a virus. What should you do?",
-    options: ["Call the number on the screen", "Click 'Download Antivirus'", "Close the window and tell an adult", "Buy the suggested software"],
+    question: t("cyber.question_Youseeapopupsayingyo", { defaultValue: "You see a pop-up saying your computer has a virus. What should you do?" }),
+    options: [t("cyber.arr_Callthenumberonthesc", { defaultValue: "Call the number on the screen" }), t("cyber.arr_ClickDownloadAntivir", { defaultValue: "Click 'Download Antivirus'" }), t("cyber.arr_Closethewindowandtel", { defaultValue: "Close the window and tell an adult" }), t("cyber.arr_Buythesuggestedsoftw", { defaultValue: "Buy the suggested software" })],
     correct: 2,
   },
   {
-    question: "What does 2FA (Two-Factor Authentication) do?",
-    options: ["Adds an extra layer of security", "Makes your internet twice as fast", "Logs you in automatically", "Shares your password with two friends"],
+    question: t("cyber.question_Whatdoes2FATwoFactor", { defaultValue: "What does 2FA (Two-Factor Authentication) do?" }),
+    options: [t("cyber.arr_Addsanextralayerofse", { defaultValue: "Adds an extra layer of security" }), t("cyber.arr_Makesyourinternettwi", { defaultValue: "Makes your internet twice as fast" }), t("cyber.arr_Logsyouinautomatical", { defaultValue: "Logs you in automatically" }), t("cyber.arr_Sharesyourpasswordwi", { defaultValue: "Shares your password with two friends" })],
     correct: 0,
   },
   {
-    question: "Which of these is safe to share on public social media?",
-    options: ["Your school name and ID", "Your favorite movie", "Your exact live location", "Your phone number"],
+    question: t("cyber.question_Whichoftheseissafeto", { defaultValue: "Which of these is safe to share on public social media?" }),
+    options: [t("cyber.arr_YourschoolnameandID", { defaultValue: "Your school name and ID" }), t("cyber.arr_Yourfavoritemovie", { defaultValue: "Your favorite movie" }), t("cyber.arr_Yourexactlivelocatio", { defaultValue: "Your exact live location" }), t("cyber.arr_Yourphonenumber", { defaultValue: "Your phone number" })],
     correct: 1,
   },
   {
-    question: "What should you do before downloading a new app?",
-    options: ["Check reviews and permissions", "Download it blindly if it looks fun", "Turn off your antivirus", "Share it with everyone"],
+    question: t("cyber.question_Whatshouldyoudobefor", { defaultValue: "What should you do before downloading a new app?" }),
+    options: [t("cyber.arr_Checkreviewsandpermi", { defaultValue: "Check reviews and permissions" }), t("cyber.arr_Downloaditblindlyifi", { defaultValue: "Download it blindly if it looks fun" }), t("cyber.arr_Turnoffyourantivirus", { defaultValue: "Turn off your antivirus" }), t("cyber.arr_Shareitwitheveryone", { defaultValue: "Share it with everyone" })],
     correct: 0,
   },
   {
-    question: "A stranger sends you a friend request. What is the best action?",
-    options: ["Accept it immediately", "Chat with them first", "Ignore or decline it if you don't know them", "Send them your photo"],
+    question: t("cyber.question_Astrangersendsyouafr", { defaultValue: "A stranger sends you a friend request. What is the best action?" }),
+    options: [t("cyber.arr_Acceptitimmediately", { defaultValue: "Accept it immediately" }), t("cyber.arr_Chatwiththemfirst", { defaultValue: "Chat with them first" }), t("cyber.arr_Ignoreordeclineitify", { defaultValue: "Ignore or decline it if you don't know them" }), t("cyber.arr_Sendthemyourphoto", { defaultValue: "Send them your photo" })],
     correct: 2,
   },
 ];
@@ -62,6 +63,8 @@ const quizQuestions = [
 const optionLabels = ['A', 'B', 'C', 'D'];
 
 const CyberSecurityQuiz = () => {
+  const { t } = useTranslation();
+  const quizQuestions = useMemo(() => getQuizQuestions(t), [t]);
   const [currentQ, setCurrentQ] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
@@ -296,64 +299,66 @@ const CyberSecurityQuiz = () => {
   );
 }// Chat Patrol mini-game component
 const ChatPatrol = ({ onComplete }) => {
-  const chatMissions = [
+  const { t } = useTranslation();
+  const chatMissions = useMemo(() => getChatMissions(t), [t]);
+  const getChatMissions = (t) => [
     {
       id: 1,
-      title: "Robo-Gamer99's Cheat Trap",
+      title: t("cyber.title_RoboGamer99sCheatTra", { defaultValue: "Robo-Gamer99's Cheat Trap" }),
       character: "Robo-Gamer99",
       iconType: "bot",
       avatarBg: "bg-purple-600",
       initialMessage: "Hey friend! Want free infinite gold and diamond pets in your game? Just send me a picture of your parent's credit card (the plastic bank card) and tell me the 3 tiny numbers on the back!",
       options: [
         {
-          text: "Wow! Free gold! Let me find the credit card right now!",
+          text: t("cyber.arr_WowFreegoldLetmefind", { defaultValue: "Wow! Free gold! Let me find the credit card right now!" }),
           isCorrect: false,
-          feedback: "Oh no! The gaming monster bought 100 digital alien space-bananas with your parents' card! Rule: NEVER share credit cards or bank card details with online strangers!"
+          feedback: t("cyber.arr_OhnoThegamingmonster", { defaultValue: "Oh no! The gaming monster bought 100 digital alien space-bananas with your parents' card! Rule: NEVER share credit cards or bank card details with online strangers!" })
         },
         {
-          text: "Wait! Free stuff shouldn't ask for a credit card. I never share bank cards!",
+          text: t("cyber.text_WaitFreestuffshouldn", { defaultValue: "Wait! Free stuff shouldn't ask for a credit card. I never share bank cards!" }),
           isCorrect: true,
-          feedback: "Hooray! You blocked the monster! They got frustrated and self-destructed in a cloud of digital sparks!"
+          feedback: t("cyber.arr_HoorayYoublockedthem", { defaultValue: "Hooray! You blocked the monster! They got frustrated and self-destructed in a cloud of digital sparks!" })
         }
       ]
     },
     {
       id: 2,
-      title: "The Rainbow Unicorn Club",
+      title: t("cyber.title_TheRainbowUnicornClu", { defaultValue: "The Rainbow Unicorn Club" }),
       character: "Super-Unicorn-77",
       iconType: "unicorn",
       avatarBg: "bg-pink-500",
       initialMessage: "Omg! You won a giant, fluffy rainbow unicorn plushie! Tell me your home address and where you go to school so the delivery truck can drop it off right now!",
       options: [
         {
-          text: "Yay! My address is 123 Rainbow Street and I go to Sunshine School...",
+          text: t("cyber.arr_YayMyaddressis123Rai", { defaultValue: "Yay! My address is 123 Rainbow Street and I go to Sunshine School..." }),
           isCorrect: false,
-          feedback: "Oh no! The unicorn was actually a sneaky spyware robot in a costume! Now they know where you live and play. Rule: NEVER share your real name, address, or school online!"
+          feedback: t("cyber.arr_OhnoTheunicornwasact", { defaultValue: "Oh no! The unicorn was actually a sneaky spyware robot in a costume! Now they know where you live and play. Rule: NEVER share your real name, address, or school online!" })
         },
         {
-          text: "Stop! I don't give my home address or school name to people online!",
+          text: t("cyber.text_StopIdontgivemyhomea", { defaultValue: "Stop! I don't give my home address or school name to people online!" }),
           isCorrect: true,
-          feedback: "Amazing job! You protected your secret base! The robot unicorn malfunctioned and rolled away on a unicycle!"
+          feedback: t("cyber.arr_AmazingjobYouprotect", { defaultValue: "Amazing job! You protected your secret base! The robot unicorn malfunctioned and rolled away on a unicycle!" })
         }
       ]
     },
     {
       id: 3,
-      title: "Uncle Pockets' Vault Key",
+      title: t("cyber.title_UnclePocketsVaultKey", { defaultValue: "Uncle Pockets' Vault Key" }),
       character: "Uncle Pockets",
       iconType: "raccoon",
       avatarBg: "bg-amber-600",
       initialMessage: "Alert! Your digital piggy bank has a leak! Quick, read me the 4-digit code (OTP) that just popped up on your parent's phone so I can patch it!",
       options: [
         {
-          text: "Oh no! Stop the leak! The code is 9987!",
+          text: t("cyber.arr_OhnoStoptheleakTheco", { defaultValue: "Oh no! Stop the leak! The code is 9987!" }),
           isCorrect: false,
-          feedback: "Oh no! That code was the key to the vault! Uncle Pockets opened the piggy bank and flew away with all the coins! Rule: NEVER share OTP codes with anyone!"
+          feedback: t("cyber.arr_OhnoThatcodewastheke", { defaultValue: "Oh no! That code was the key to the vault! Uncle Pockets opened the piggy bank and flew away with all the coins! Rule: NEVER share OTP codes with anyone!" })
         },
         {
-          text: "Wait! I will ask my parents first. I never share security codes!",
+          text: t("cyber.arr_WaitIwillaskmyparent", { defaultValue: "Wait! I will ask my parents first. I never share security codes!" }),
           isCorrect: true,
-          feedback: "Perfect! You kept the vault locked! Uncle Pockets cried: 'Curses! Foiled again!' and vanished into a puff of smoke!"
+          feedback: t("cyber.arr_PerfectYoukeptthevau", { defaultValue: "Perfect! You kept the vault locked! Uncle Pockets cried: 'Curses! Foiled again!' and vanished into a puff of smoke!" })
         }
       ]
     }
@@ -539,10 +544,12 @@ const ChatPatrol = ({ onComplete }) => {
 
 // Scam Detective mini-game component
 const ScamDetective = ({ onComplete }) => {
-  const detectiveMissions = [
+  const { t } = useTranslation();
+  const detectiveMissions = useMemo(() => getDetectiveMissions(t), [t]);
+  const getDetectiveMissions = (t) => [
     {
       id: 1,
-      title: "The Suspicious Text Message",
+      title: t("cyber.title_TheSuspiciousTextMes", { defaultValue: "The Suspicious Text Message" }),
       type: "SMS Text Message",
       sender: "+1 (800) 555-SCAM (Claims: Bank of Safety)",
       messageTextPre: "ALERT: Your account is ",
@@ -554,16 +561,16 @@ const ScamDetective = ({ onComplete }) => {
       messageTextPost: " Do not delay!",
       flags: {
         1: {
-          label: "Scary Panic Words (SUSPENDED!)",
-          desc: "Scammers use scary words like 'SUSPENDED!' to make you panic and click quickly without thinking. Real banks or companies never talk to you like this! Always stay calm."
+          label: t("cyber.label_ScaryPanicWordsSUSPE", { defaultValue: "Scary Panic Words (SUSPENDED!)" }),
+          desc: t("cyber.desc_Scammersusescaryword", { defaultValue: "Scammers use scary words like 'SUSPENDED!' to make you panic and click quickly without thinking. Real banks or companies never talk to you like this! Always stay calm." })
         },
         2: {
-          label: "Threat of Losing Money (FOREVER:)",
-          desc: "Saying your money is gone 'FOREVER' is a scare tactic. They want to make you scared so you act fast. Real banks will never threat-text you. Show it to a parent!"
+          label: t("cyber.label_ThreatofLosingMoneyF", { defaultValue: "Threat of Losing Money (FOREVER:)" }),
+          desc: t("cyber.desc_Sayingyourmoneyisgon", { defaultValue: "Saying your money is gone 'FOREVER' is a scare tactic. They want to make you scared so you act fast. Real banks will never threat-text you. Show it to a parent!" })
         },
         3: {
-          label: "Weird Web Link",
-          desc: "Look at that address: it has random words and doesn't end in normal sites like '.com' or '.in'. Never click links in texts, they can steal your details or install bugs!"
+          label: t("cyber.label_WeirdWebLink", { defaultValue: "Weird Web Link" }),
+          desc: t("cyber.desc_Lookatthataddressith", { defaultValue: "Look at that address: it has random words and doesn't end in normal sites like '.com' or '.in'. Never click links in texts, they can steal your details or install bugs!" })
         }
       }
     }
@@ -739,6 +746,7 @@ const ScamDetective = ({ onComplete }) => {
 
 // Password Shield Forge mini-game component
 const PasswordForge = ({ onComplete }) => {
+  const { t } = useTranslation();
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [testResult, setTestResult] = useState(null);
@@ -768,7 +776,7 @@ const PasswordForge = ({ onComplete }) => {
       return {
         name: "No Shield",
         color: "border-dashed border-slate-700 bg-slate-905 text-slate-500",
-        desc: "Type a password to start forging!",
+        desc: t("cyber.desc_Typeapasswordtostart", { defaultValue: "Type a password to start forging!" }),
         iconType: "none"
       };
     }
@@ -778,35 +786,35 @@ const PasswordForge = ({ onComplete }) => {
         return {
           name: "Fragile Cardboard Shield",
           color: "border-amber-850 bg-[#352515] text-amber-500 shadow-amber-900/10",
-          desc: "Flimsy! Easily broken by the goblin's paper airplane.",
+          desc: t("cyber.desc_FlimsyEasilybrokenby", { defaultValue: "Flimsy! Easily broken by the goblin's paper airplane." }),
           iconType: "cardboard"
         };
       case 2:
         return {
           name: "Reinforced Wooden Shield",
           color: "border-yellow-750 bg-[#302510] text-yellow-600 shadow-[#302510]/10",
-          desc: "Decent! Can handle small rocks but will break under laser fire.",
+          desc: t("cyber.desc_DecentCanhandlesmall", { defaultValue: "Decent! Can handle small rocks but will break under laser fire." }),
           iconType: "wood"
         };
       case 3:
         return {
           name: "Polished Iron Bulwark",
           color: "border-slate-500 bg-slate-800 text-slate-300 shadow-slate-700/20",
-          desc: "Solid! Standard security that repels basic hacker slingshots.",
+          desc: t("cyber.desc_SolidStandardsecurit", { defaultValue: "Solid! Standard security that repels basic hacker slingshots." }),
           iconType: "iron"
         };
       case 4:
         return {
           name: "Glowing Emerald Forcefield",
           color: "border-emerald-400 bg-emerald-950/60 text-emerald-300 shadow-emerald-500/30 shadow-[0_0_20px_rgba(16,185,129,0.2)]",
-          desc: "Incredible! Reflects the Goblin's plasma cannon right back at them!",
+          desc: t("cyber.desc_IncredibleReflectsth", { defaultValue: "Incredible! Reflects the Goblin's plasma cannon right back at them!" }),
           iconType: "emerald"
         };
       default:
         return {
           name: "Cardboard Shield",
           color: "border-amber-800 bg-[#352515] text-amber-500",
-          desc: "Type a stronger password!",
+          desc: t("cyber.desc_Typeastrongerpasswor", { defaultValue: "Type a stronger password!" }),
           iconType: "cardboard"
         };
     }
@@ -991,24 +999,25 @@ const PasswordForge = ({ onComplete }) => {
 
 // Popup Blaster mini-game component (Lesson 4)
 const PopupBlaster = ({ onComplete }) => {
+  const { t } = useTranslation();
   const [alerts, setAlerts] = useState([
     {
       id: 1,
-      title: "CRITICAL COMPUTER DANGER!",
+      title: t("cyber.title_CRITICALCOMPUTERDANG", { defaultValue: "CRITICAL COMPUTER DANGER!" }),
       text: "Warning: 99 virus bugs detected in your system! Click to clean immediately!",
       actionText: "CLEAN DEVICE NOW",
       safeAction: "Close (X)",
     },
     {
       id: 2,
-      title: "FREE IPHONE 25 WINNER!",
+      title: t("cyber.title_FREEIPHONE25WINNER", { defaultValue: "FREE IPHONE 25 WINNER!" }),
       text: "Congratulations! You have been randomly chosen to receive a free phone! Click below to claim!",
       actionText: "CLAIM PRIZE",
       safeAction: "Close (X)",
     },
     {
       id: 3,
-      title: "SECURITY FIREWALL LEAK!",
+      title: t("cyber.title_SECURITYFIREWALLLEAK", { defaultValue: "SECURITY FIREWALL LEAK!" }),
       text: "Your computer security firewall has crashed! Click to download repairs!",
       actionText: "DOWNLOAD FIX",
       safeAction: "Close (X)",
@@ -1123,6 +1132,7 @@ const PopupBlaster = ({ onComplete }) => {
 
 // Permission Shield mini-game component (Lesson 5)
 const PermissionShield = ({ onComplete }) => {
+  const { t } = useTranslation();
   const apps = [
     {
       id: 1,
@@ -1506,58 +1516,58 @@ const ConfettiExplosion = () => {
 };
 
 // Curriculum Lessons Database (Class 6-8 Step-by-Step Progressive Cybersecurity Learning)
-const lessons = [
+const getLessons = (t) => [
   {
     id: 1,
-    title: "Lesson 1: What is Cybersecurity?",
-    badge: "Cyber Explorer",
-    topic: "Basics of Online Safety",
-    summary: "Start from the basics: learn what cybersecurity means and why computers and phones need protection.",
+    title: t("cyber.title_Lesson1WhatisCyberse", { defaultValue: "Lesson 1: What is Cybersecurity?" }),
+    badge: t("cyber.badge_CyberExplorer_8388", { defaultValue: "Cyber Explorer" }),
+    topic: t("cyber.topic_BasicsofOnlineSafety_555b", { defaultValue: "Basics of Online Safety" }),
+    summary: t("cyber.summary_Startfromthebasicsle_7381", { defaultValue: "Start from the basics: learn what cybersecurity means and why computers and phones need protection." }),
     image: "/images/cybersecurity/lesson1.webp",
     learnSections: [
       {
-        title: "What Does 'Cybersecurity' Mean?",
-        desc: "Just like we lock our house doors at night to keep our family and belongings safe, Cybersecurity means locking and protecting our digital world—our computers, mobile phones, internet accounts, and private information.",
+        title: t("cyber.title_WhatDoesCybersecurit", { defaultValue: "What Does 'Cybersecurity' Mean?" }),
+        desc: t("cyber.desc_Justlikewelockourhou", { defaultValue: "Just like we lock our house doors at night to keep our family and belongings safe, Cybersecurity means locking and protecting our digital world—our computers, mobile phones, internet accounts, and private information." }),
         image: "/images/cybersecurity/cs_digital_playground.webp",
-        funFact: "The word 'Cyber' comes from 'Cybernetics', meaning anything related to computers, networks, and virtual reality!"
+        funFact: t("cyber.funFact_ThewordCybercomesfro_0136", { defaultValue: "The word 'Cyber' comes from 'Cybernetics', meaning anything related to computers, networks, and virtual reality!" })
       },
       {
-        title: "What Are We Protecting?",
-        desc: "When you use the internet, your device holds valuable digital treasures: your school projects, family photos, email messages, game progress, and your parents' online banking details. Cybersecurity keeps these treasures safe from being stolen or damaged.",
+        title: t("cyber.title_WhatAreWeProtecting", { defaultValue: "What Are We Protecting?" }),
+        desc: t("cyber.desc_Whenyouusetheinterne", { defaultValue: "When you use the internet, your device holds valuable digital treasures: your school projects, family photos, email messages, game progress, and your parents' online banking details. Cybersecurity keeps these treasures safe from being stolen or damaged." }),
         image: "/images/cybersecurity/cs_online_pretenders.webp",
-        funFact: "Every day, over 300 billion emails are sent across the internet containing personal and professional data!"
+        funFact: t("cyber.funFact_Everydayover300billi_bca0", { defaultValue: "Every day, over 300 billion emails are sent across the internet containing personal and professional data!" })
       },
       {
-        title: "Who Are Online Hackers?",
-        desc: "Hackers or cybercriminals are people who search the internet looking for unlocked digital doors or weak security systems. They try to sneak into accounts to steal information or cause trouble.",
+        title: t("cyber.title_WhoAreOnlineHackers", { defaultValue: "Who Are Online Hackers?" }),
+        desc: t("cyber.desc_Hackersorcybercrimin", { defaultValue: "Hackers or cybercriminals are people who search the internet looking for unlocked digital doors or weak security systems. They try to sneak into accounts to steal information or cause trouble." }),
         image: "/images/cybersecurity/cs_golden_rules.webp",
-        funFact: "Not all hackers are bad! 'Ethical Hackers' (White Hat Hackers) are cybersecurity professionals hired by companies to test and strengthen their security locks!"
+        funFact: t("cyber.funFact_NotallhackersarebadE_6edb", { defaultValue: "Not all hackers are bad! 'Ethical Hackers' (White Hat Hackers) are cybersecurity professionals hired by companies to test and strengthen their security locks!" })
       },
       {
-        title: "The 3 Golden Pillars (C-I-A)",
-        desc: "Cybersecurity relies on 3 main rules:\n1. Confidentiality: Keeping private secrets private.\n2. Integrity: Making sure data is not altered or damaged.\n3. Availability: Ensuring your computer and internet work when you need them.",
+        title: t("cyber.title_The3GoldenPillarsCIA", { defaultValue: "The 3 Golden Pillars (C-I-A)" }),
+        desc: t("cyber.desc_Cybersecurityrelieso", { defaultValue: "Cybersecurity relies on 3 main rules:\n1. Confidentiality: Keeping private secrets private.\n2. Integrity: Making sure data is not altered or damaged.\n3. Availability: Ensuring your computer and internet work when you need them." }),
         image: "/images/cybersecurity/cs_chat_checklist.webp",
-        funFact: "The C-I-A Triad is the foundational rule taught to every cybersecurity engineer around the world!"
+        funFact: t("cyber.funFact_TheCIATriadisthefoun_018b", { defaultValue: "The C-I-A Triad is the foundational rule taught to every cybersecurity engineer around the world!" })
       }
     ],
-    content: "Welcome to Cybersecurity!\n\nWhat is Cybersecurity?\nIt is the practice of protecting computers, smartphones, and online accounts from unauthorized access or damage.\n\nWhy does it matter?\nBecause our digital lives hold valuable personal information that must be protected just like our physical homes.",
+    content: t("cyber.content_WelcometoCybersecuri_b3bd", { defaultValue: "Welcome to Cybersecurity!\n\nWhat is Cybersecurity?\nIt is the practice of protecting computers, smartphones, and online accounts from unauthorized access or damage.\n\nWhy does it matter?\nBecause our digital lives hold valuable personal information that must be protected just like our physical homes." }),
     game: "Chat Patrol",
     quiz: [
       {
-        question: "What is the main goal of Cybersecurity?",
+        question: t("cyber.question_WhatisthemaingoalofC", { defaultValue: "What is the main goal of Cybersecurity?" }),
         options: [
-          "To make computers run internet games faster",
-          "To protect computers, mobile phones, and online information from unauthorized access and harm",
-          "To turn off the internet at night"
+          t("cyber.arr_Tomakecomputersrunin", { defaultValue: "To make computers run internet games faster" }),
+          t("cyber.arr_Toprotectcomputersmo", { defaultValue: "To protect computers, mobile phones, and online information from unauthorized access and harm" }),
+          t("cyber.arr_Toturnofftheinternet", { defaultValue: "To turn off the internet at night" })
         ],
         correct: 1
       },
       {
-        question: "What is an 'Ethical Hacker' (White Hat Hacker)?",
+        question: t("cyber.question_WhatisanEthicalHacke", { defaultValue: "What is an 'Ethical Hacker' (White Hat Hacker)?" }),
         options: [
-          "A professional hired to test and improve computer security systems legally",
-          "Someone who breaks into computers to steal money",
-          "A robot that repairs computer screens"
+          t("cyber.arr_Aprofessionalhiredto", { defaultValue: "A professional hired to test and improve computer security systems legally" }),
+          t("cyber.arr_Someonewhobreaksinto", { defaultValue: "Someone who breaks into computers to steal money" }),
+          t("cyber.arr_Arobotthatrepairscom", { defaultValue: "A robot that repairs computer screens" })
         ],
         correct: 0
       }
@@ -1565,55 +1575,55 @@ const lessons = [
   },
   {
     id: 2,
-    title: "Lesson 2: Your Digital Footprint & Privacy",
-    badge: "Privacy Defender",
-    topic: "Personal Data & Footprints",
-    summary: "Understand what personal data is and how everything you do online leaves a lasting digital footprint.",
+    title: t("cyber.title_Lesson2YourDigitalFo", { defaultValue: "Lesson 2: Your Digital Footprint & Privacy" }),
+    badge: t("cyber.badge_PrivacyDefender_81bd", { defaultValue: "Privacy Defender" }),
+    topic: t("cyber.topic_PersonalDataFootprin_15fc", { defaultValue: "Personal Data & Footprints" }),
+    summary: t("cyber.summary_Understandwhatperson_22f8", { defaultValue: "Understand what personal data is and how everything you do online leaves a lasting digital footprint." }),
     image: "/images/cybersecurity/lesson2.webp",
     learnSections: [
       {
-        title: "What is a Digital Footprint?",
-        desc: "Every time you visit a website, post a comment, or play an online game, you leave behind a trail of information called your Digital Footprint. Once something is shared online, it can stay there for a very long time.",
+        title: t("cyber.title_WhatisaDigitalFootpr", { defaultValue: "What is a Digital Footprint?" }),
+        desc: t("cyber.desc_Everytimeyouvisitawe", { defaultValue: "Every time you visit a website, post a comment, or play an online game, you leave behind a trail of information called your Digital Footprint. Once something is shared online, it can stay there for a very long time." }),
         image: "/images/cybersecurity/cs_fishing_hooks.webp",
-        funFact: "Did you know? Search engines can index web pages in seconds, meaning an online post can be saved even if deleted later!"
+        funFact: t("cyber.funFact_DidyouknowSearchengi_8396", { defaultValue: "Did you know? Search engines can index web pages in seconds, meaning an online post can be saved even if deleted later!" })
       },
       {
-        title: "Personal Information (PII)",
-        desc: "Personally Identifiable Information (PII) is any detail that can identify who you are or where you live. Never share your full legal name, home address, school name, phone number, or parents' bank details with strangers online.",
+        title: t("cyber.title_PersonalInformationP", { defaultValue: "Personal Information (PII)" }),
+        desc: t("cyber.desc_PersonallyIdentifiab", { defaultValue: "Personally Identifiable Information (PII) is any detail that can identify who you are or where you live. Never share your full legal name, home address, school name, phone number, or parents' bank details with strangers online." }),
         image: "/images/cybersecurity/cs_panic_trap.webp",
-        funFact: "Professional esports gamers use anonymous gamer tags and never share their real birthdate or hometown publicly!"
+        funFact: t("cyber.funFact_Professionalesportsg_ba6f", { defaultValue: "Professional esports gamers use anonymous gamer tags and never share their real birthdate or hometown publicly!" })
       },
       {
-        title: "Social Engineering Tricks",
-        desc: "Sometimes cybercriminals don't hack computers—they trick people! This is called Social Engineering. A stranger in a game might pretend to be a game moderator offering 'free diamonds' if you tell them your email or password.",
+        title: t("cyber.title_SocialEngineeringTri", { defaultValue: "Social Engineering Tricks" }),
+        desc: t("cyber.desc_Sometimescybercrimin", { defaultValue: "Sometimes cybercriminals don't hack computers—they trick people! This is called Social Engineering. A stranger in a game might pretend to be a game moderator offering 'free diamonds' if you tell them your email or password." }),
         image: "/images/cybersecurity/cs_decoding_links.webp",
-        funFact: "Cybersecurity studies show that over 80% of cyber attacks start by tricking a person rather than hacking a machine!"
+        funFact: t("cyber.funFact_Cybersecuritystudies_42c2", { defaultValue: "Cybersecurity studies show that over 80% of cyber attacks start by tricking a person rather than hacking a machine!" })
       },
       {
-        title: "Smart Privacy Checklist",
-        desc: "DO: Keep your gaming profiles and social media accounts set to Private.\nDO: Ask a parent or teacher before entering personal details on any website.\nDON'T: Send personal photos or your home address to online chat strangers.\nDON'T: Share OTP verification codes sent to your phone.",
+        title: t("cyber.title_SmartPrivacyChecklis", { defaultValue: "Smart Privacy Checklist" }),
+        desc: t("cyber.desc_DOKeepyourgamingprof", { defaultValue: "DO: Keep your gaming profiles and social media accounts set to Private.\nDO: Ask a parent or teacher before entering personal details on any website.\nDON'T: Send personal photos or your home address to online chat strangers.\nDON'T: Share OTP verification codes sent to your phone." }),
         image: "/images/cybersecurity/cs_link_checklist.webp",
-        funFact: "Banks and official platforms never ask for OTP verification codes over chat messages!"
+        funFact: t("cyber.funFact_Banksandofficialplat_ebb6", { defaultValue: "Banks and official platforms never ask for OTP verification codes over chat messages!" })
       }
     ],
-    content: "Everything you share online creates your Digital Footprint.\n\nProtecting Your Identity:\n• Keep PII Private: Never share your home address, school name, phone number, or OTP codes.\n• Watch Out for Social Engineering: Never trust strangers asking for passwords or private details.",
+    content: t("cyber.content_Everythingyoushareon_e7d5", { defaultValue: "Everything you share online creates your Digital Footprint.\n\nProtecting Your Identity:\n• Keep PII Private: Never share your home address, school name, phone number, or OTP codes.\n• Watch Out for Social Engineering: Never trust strangers asking for passwords or private details." }),
     game: "Scam Detective",
     quiz: [
       {
-        question: "What is a 'Digital Footprint'?",
+        question: t("cyber.question_WhatisaDigitalFootpr", { defaultValue: "What is a 'Digital Footprint'?" }),
         options: [
-          "Shoe prints left on the floor near a computer desk",
-          "The trail of information and activity you leave behind whenever you use the internet",
-          "A fingerprint scanner on a smartphone"
+          t("cyber.arr_Shoeprintsleftonthef", { defaultValue: "Shoe prints left on the floor near a computer desk" }),
+          t("cyber.arr_Thetrailofinformatio", { defaultValue: "The trail of information and activity you leave behind whenever you use the internet" }),
+          t("cyber.arr_Afingerprintscannero", { defaultValue: "A fingerprint scanner on a smartphone" })
         ],
         correct: 1
       },
       {
-        question: "A stranger in an online game offers you free game coins if you tell them your school name and home address. What should you do?",
+        question: t("cyber.question_Astrangerinanonlineg", { defaultValue: "A stranger in an online game offers you free game coins if you tell them your school name and home address. What should you do?" }),
         options: [
-          "Give them the information to get the coins",
-          "Never share personal information with online strangers and tell a parent",
-          "Give them a friend's address instead"
+          t("cyber.arr_Givethemtheinformati", { defaultValue: "Give them the information to get the coins" }),
+          t("cyber.arr_Neversharepersonalin_aa96", { defaultValue: "Never share personal information with online strangers and tell a parent" }),
+          t("cyber.arr_Givethemafriendsaddr", { defaultValue: "Give them a friend's address instead" })
         ],
         correct: 1
       }
@@ -1621,55 +1631,55 @@ const lessons = [
   },
   {
     id: 3,
-    title: "Lesson 3: Strong Passwords & 2FA",
-    badge: "Lock Master",
-    topic: "Passwords & Two-Factor Auth",
-    summary: "Learn how to build strong passphrases and use Two-Factor Authentication to lock your accounts.",
+    title: t("cyber.title_Lesson3StrongPasswor", { defaultValue: "Lesson 3: Strong Passwords & 2FA" }),
+    badge: t("cyber.badge_LockMaster_41f7", { defaultValue: "Lock Master" }),
+    topic: t("cyber.topic_PasswordsTwoFactorAu_4c3f", { defaultValue: "Passwords & Two-Factor Auth" }),
+    summary: t("cyber.summary_Learnhowtobuildstron_bfc6", { defaultValue: "Learn how to build strong passphrases and use Two-Factor Authentication to lock your accounts." }),
     image: "/images/cybersecurity/lesson3.webp",
     learnSections: [
       {
-        title: "Why Simple Passwords Are Unsafe",
-        desc: "If your password is short or common—like '123456', 'password', or your pet's name—automated computer programs can guess it in less than a second. Your password is the key to your digital lock!",
+        title: t("cyber.title_WhySimplePasswordsAr", { defaultValue: "Why Simple Passwords Are Unsafe" }),
+        desc: t("cyber.desc_Ifyourpasswordisshor", { defaultValue: "If your password is short or common—like '123456', 'password', or your pet's name—automated computer programs can guess it in less than a second. Your password is the key to your digital lock!" }),
         image: "/images/cybersecurity/cs_fortress_gate.webp",
-        funFact: "An 8-character simple lowercase password can be cracked in less than 1 second by modern computers!"
+        funFact: t("cyber.funFact_An8charactersimplelo_97c8", { defaultValue: "An 8-character simple lowercase password can be cracked in less than 1 second by modern computers!" })
       },
       {
-        title: "Building a Strong Passphrase",
-        desc: "Instead of a short word, create a memorable Passphrase combining 4 unrelated words plus numbers and symbols! For example: 'BlueRocketCoffeeJump#99' is easy for you to remember but takes millions of years for a computer to guess.",
+        title: t("cyber.title_BuildingaStrongPassp", { defaultValue: "Building a Strong Passphrase" }),
+        desc: t("cyber.desc_Insteadofashortwordc", { defaultValue: "Instead of a short word, create a memorable Passphrase combining 4 unrelated words plus numbers and symbols! For example: 'BlueRocketCoffeeJump#99' is easy for you to remember but takes millions of years for a computer to guess." }),
         image: "/images/cybersecurity/cs_materials_defense.webp",
-        funFact: "A 14-character passphrase with uppercase, lowercase, numbers, and symbols takes over 200 million years to crack!"
+        funFact: t("cyber.funFact_A14characterpassphra_e3b1", { defaultValue: "A 14-character passphrase with uppercase, lowercase, numbers, and symbols takes over 200 million years to crack!" })
       },
       {
-        title: "Never Reuse Passwords",
-        desc: "If you use the exact same password for your email, school account, and games, a hacker who discovers it on one site can unlock all your accounts. Always use a unique password for each important service.",
+        title: t("cyber.title_NeverReusePasswords", { defaultValue: "Never Reuse Passwords" }),
+        desc: t("cyber.desc_Ifyouusetheexactsame", { defaultValue: "If you use the exact same password for your email, school account, and games, a hacker who discovers it on one site can unlock all your accounts. Always use a unique password for each important service." }),
         image: "/images/cybersecurity/cs_secret_sentence.webp",
-        funFact: "Password managers use military-grade AES-256 encryption to safely store unique passwords for every site!"
+        funFact: t("cyber.funFact_Passwordmanagersusem_6efa", { defaultValue: "Password managers use military-grade AES-256 encryption to safely store unique passwords for every site!" })
       },
       {
-        title: "Two-Factor Authentication (2FA)",
-        desc: "Two-Factor Authentication (2FA) adds a second lock! To log in, you need your password PLUS a temporary code sent to your phone. Even if someone discovers your password, they cannot get in without that second code.",
+        title: t("cyber.title_TwoFactorAuthenticat", { defaultValue: "Two-Factor Authentication (2FA)" }),
+        desc: t("cyber.desc_TwoFactorAuthenticat", { defaultValue: "Two-Factor Authentication (2FA) adds a second lock! To log in, you need your password PLUS a temporary code sent to your phone. Even if someone discovers your password, they cannot get in without that second code." }),
         image: "/images/cybersecurity/cs_password_checklist.webp",
-        funFact: "Enabling Two-Factor Authentication (2FA) blocks over 99.9% of automated hacking attempts instantly!"
+        funFact: t("cyber.funFact_EnablingTwoFactorAut_4b14", { defaultValue: "Enabling Two-Factor Authentication (2FA) blocks over 99.9% of automated hacking attempts instantly!" })
       }
     ],
-    content: "Lock your accounts with high-strength keys!\n\nPassword Rules:\n• Create Passphrases: Use 4 unrelated words + numbers & symbols.\n• Enable 2FA: Require a password PLUS a verification code to log in safely.",
+    content: t("cyber.content_Lockyouraccountswith_8b77", { defaultValue: "Lock your accounts with high-strength keys!\n\nPassword Rules:\n• Create Passphrases: Use 4 unrelated words + numbers & symbols.\n• Enable 2FA: Require a password PLUS a verification code to log in safely." }),
     game: "Password Forge",
     quiz: [
       {
-        question: "Which of these is the strongest and safest password choice?",
+        question: t("cyber.question_Whichoftheseisthestr", { defaultValue: "Which of these is the strongest and safest password choice?" }),
         options: [
-          "12345678",
-          "Your birthdate or pet's name",
-          "A 14-character passphrase combining words, numbers, and symbols like 'BlueRocketCoffeeJump#99'"
+          t("cyber.arr_12345678", { defaultValue: "12345678" }),
+          t("cyber.arr_Yourbirthdateorpetsn", { defaultValue: "Your birthdate or pet's name" }),
+          t("cyber.arr_A14characterpassphra", { defaultValue: "A 14-character passphrase combining words, numbers, and symbols like 'BlueRocketCoffeeJump#99'" })
         ],
         correct: 2
       },
       {
-        question: "What is Two-Factor Authentication (2FA)?",
+        question: t("cyber.question_WhatisTwoFactorAuthe", { defaultValue: "What is Two-Factor Authentication (2FA)?" }),
         options: [
-          "An extra security lock that requires both your password AND a verification code sent to your phone",
-          "Sharing your password with two friends",
-          "Typing your password twice as fast"
+          t("cyber.arr_Anextrasecuritylockt", { defaultValue: "An extra security lock that requires both your password AND a verification code sent to your phone" }),
+          t("cyber.arr_Sharingyourpasswordw", { defaultValue: "Sharing your password with two friends" }),
+          t("cyber.arr_Typingyourpasswordtw", { defaultValue: "Typing your password twice as fast" })
         ],
         correct: 0
       }
@@ -1677,55 +1687,55 @@ const lessons = [
   },
   {
     id: 4,
-    title: "Lesson 4: Spotting Scams & Phishing",
-    badge: "Link Detective",
-    topic: "Phishing & Fake Messages",
-    summary: "Master how to recognize fake messages, urgency traps, and suspicious web links before clicking.",
+    title: t("cyber.title_Lesson4SpottingScams", { defaultValue: "Lesson 4: Spotting Scams & Phishing" }),
+    badge: t("cyber.badge_LinkDetective_3976", { defaultValue: "Link Detective" }),
+    topic: t("cyber.topic_PhishingFakeMessages_1cfb", { defaultValue: "Phishing & Fake Messages" }),
+    summary: t("cyber.summary_Masterhowtorecognize_1d32", { defaultValue: "Master how to recognize fake messages, urgency traps, and suspicious web links before clicking." }),
     image: "/images/cybersecurity/lesson4.webp",
     learnSections: [
       {
-        title: "What is Phishing?",
-        desc: "Phishing is an online scam where attackers send fake SMS messages or emails pretending to be a trusted company (like a bank, delivery company, or game platform) to trick you into clicking harmful links.",
+        title: t("cyber.title_WhatisPhishing", { defaultValue: "What is Phishing?" }),
+        desc: t("cyber.desc_Phishingisanonlinesc", { defaultValue: "Phishing is an online scam where attackers send fake SMS messages or emails pretending to be a trusted company (like a bank, delivery company, or game platform) to trick you into clicking harmful links." }),
         image: "/images/cybersecurity/cs_loud_popups.webp",
-        funFact: "The word 'phishing' was coined in 1996 as a metaphor for using digital bait to hook unsuspecting users!"
+        funFact: t("cyber.funFact_Thewordphishingwasco_1938", { defaultValue: "The word 'phishing' was coined in 1996 as a metaphor for using digital bait to hook unsuspecting users!" })
       },
       {
-        title: "The Panic & Urgency Trap",
-        desc: "Scams almost always try to make you panic! They use alarming words like 'URGENT!', 'YOUR ACCOUNT IS BLOCKED!', or 'YOU WON A FREE GIFT!'. They want you to rush and click without thinking. Stop, breathe, and verify!",
+        title: t("cyber.title_ThePanicUrgencyTrap", { defaultValue: "The Panic & Urgency Trap" }),
+        desc: t("cyber.desc_Scamsalmostalwaystry", { defaultValue: "Scams almost always try to make you panic! They use alarming words like 'URGENT!', 'YOUR ACCOUNT IS BLOCKED!', or 'YOU WON A FREE GIFT!'. They want you to rush and click without thinking. Stop, breathe, and verify!" }),
         image: "/images/cybersecurity/cs_disarm_trap.webp",
-        funFact: "Scam messages deliberately create artificial panic because stress makes human brains skip logical safety checks!"
+        funFact: t("cyber.funFact_Scammessagesdelibera_3671", { defaultValue: "Scam messages deliberately create artificial panic because stress makes human brains skip logical safety checks!" })
       },
       {
-        title: "Checking Web Links (URLs)",
-        desc: "Always inspect the web link before clicking! Safe official websites use HTTPS and correct spelling (like google.com). Phishing links often have subtle spelling mistakes or strange extensions like bank-security-verify.xyz.",
+        title: t("cyber.title_CheckingWebLinksURLs", { defaultValue: "Checking Web Links (URLs)" }),
+        desc: t("cyber.desc_Alwaysinspectthewebl", { defaultValue: "Always inspect the web link before clicking! Safe official websites use HTTPS and correct spelling (like google.com). Phishing links often have subtle spelling mistakes or strange extensions like bank-security-verify.xyz." }),
         image: "/images/cybersecurity/cs_shield_refills.webp",
-        funFact: "A padlock icon (HTTPS) means data connection is encrypted, but always double-check the domain spelling!"
+        funFact: t("cyber.funFact_ApadlockiconHTTPSmea_8888", { defaultValue: "A padlock icon (HTTPS) means data connection is encrypted, but always double-check the domain spelling!" })
       },
       {
-        title: "Link Safety Checklist",
-        desc: "DO: Check unexpected messages with a parent or teacher.\nDO: Look closely at the website domain spelling.\nDON'T: Click links in SMS messages claiming you won a lottery or reward.\nDON'T: Enter login details on unfamiliar pages.",
+        title: t("cyber.title_LinkSafetyChecklist", { defaultValue: "Link Safety Checklist" }),
+        desc: t("cyber.desc_DOCheckunexpectedmes", { defaultValue: "DO: Check unexpected messages with a parent or teacher.\nDO: Look closely at the website domain spelling.\nDON'T: Click links in SMS messages claiming you won a lottery or reward.\nDON'T: Enter login details on unfamiliar pages." }),
         image: "/images/cybersecurity/cs_device_checklist.webp",
-        funFact: "Modern web browsers check links against real-time security databases to block millions of phishing sites daily!"
+        funFact: t("cyber.funFact_Modernwebbrowsersche_0c8c", { defaultValue: "Modern web browsers check links against real-time security databases to block millions of phishing sites daily!" })
       }
     ],
-    content: "Phishing attacks use deceptive messages to trick you into clicking harmful links.\n\nSpotting Phishing:\n• Beware of Panic Words: Messages demanding urgent action.\n• Inspect URLs: Check for strange domain names or misspelled websites before clicking.",
+    content: t("cyber.content_Phishingattacksusede_13d5", { defaultValue: "Phishing attacks use deceptive messages to trick you into clicking harmful links.\n\nSpotting Phishing:\n• Beware of Panic Words: Messages demanding urgent action.\n• Inspect URLs: Check for strange domain names or misspelled websites before clicking." }),
     game: "Pop-up Blaster",
     quiz: [
       {
-        question: "Why do phishing scam messages often use alarming words like 'URGENT!' or 'ACCOUNT BLOCKED!'?",
+        question: t("cyber.question_Whydophishingscammes", { defaultValue: "Why do phishing scam messages often use alarming words like 'URGENT!' or 'ACCOUNT BLOCKED!'?" }),
         options: [
-          "To create panic so you click the link without checking carefully",
-          "Because they want to give you free rewards",
-          "To make the message look decorative"
+          t("cyber.arr_Tocreatepanicsoyoucl", { defaultValue: "To create panic so you click the link without checking carefully" }),
+          t("cyber.arr_Becausetheywanttogiv", { defaultValue: "Because they want to give you free rewards" }),
+          t("cyber.arr_Tomakethemessagelook", { defaultValue: "To make the message look decorative" })
         ],
         correct: 0
       },
       {
-        question: "Which web link looks like a legitimate and secure website address?",
+        question: t("cyber.question_Whichweblinklookslik", { defaultValue: "Which web link looks like a legitimate and secure website address?" }),
         options: [
-          "http://secure-login-bank-alert.xyz/verify",
-          "https://www.google.com",
-          "http://free-gift-box.net/alert"
+          t("cyber.arr_httpsecureloginbanka", { defaultValue: "http://secure-login-bank-alert.xyz/verify" }),
+          t("cyber.arr_httpswwwgooglecom", { defaultValue: "https://www.google.com" }),
+          t("cyber.arr_httpfreegiftboxnetal", { defaultValue: "http://free-gift-box.net/alert" })
         ],
         correct: 1
       }
@@ -1733,55 +1743,55 @@ const lessons = [
   },
   {
     id: 5,
-    title: "Lesson 5: Device Safety & Apps",
-    badge: "System Protector",
-    topic: "Updates & App Permissions",
-    summary: "Learn how to handle fake virus alerts, update your device software, and manage app permissions.",
+    title: t("cyber.title_Lesson5DeviceSafetyA", { defaultValue: "Lesson 5: Device Safety & Apps" }),
+    badge: t("cyber.badge_SystemProtector_5d04", { defaultValue: "System Protector" }),
+    topic: t("cyber.topic_UpdatesAppPermission_877f", { defaultValue: "Updates & App Permissions" }),
+    summary: t("cyber.summary_Learnhowtohandlefake_cfdf", { defaultValue: "Learn how to handle fake virus alerts, update your device software, and manage app permissions." }),
     image: "/images/cybersecurity/lesson5.webp",
     learnSections: [
       {
-        title: "Ignoring Fake Virus Pop-ups",
-        desc: "While browsing, you might see flashing pop-up ads claiming 'YOUR DEVICE IS INFECTED WITH 50 VIRUSES! CLICK TO CLEAN!'. Don't panic—these are scareware ads trying to trick you into downloading harmful software.",
+        title: t("cyber.title_IgnoringFakeVirusPop", { defaultValue: "Ignoring Fake Virus Pop-ups" }),
+        desc: t("cyber.desc_Whilebrowsingyoumigh", { defaultValue: "While browsing, you might see flashing pop-up ads claiming 'YOUR DEVICE IS INFECTED WITH 50 VIRUSES! CLICK TO CLEAN!'. Don't panic—these are scareware ads trying to trick you into downloading harmful software." }),
         image: "/images/cybersecurity/cs_double_lock.webp",
-        funFact: "Real operating systems and web browsers never display alarming countdown timers in pop-up security alerts!"
+        funFact: t("cyber.funFact_Realoperatingsystems_9867", { defaultValue: "Real operating systems and web browsers never display alarming countdown timers in pop-up security alerts!" })
       },
       {
-        title: "Safe Browsing Habits",
-        desc: "Never click buttons inside suspicious pop-up banners. Safely close the browser tab by clicking the small 'X' or pressing Alt+F4 on your keyboard without downloading anything.",
+        title: t("cyber.title_SafeBrowsingHabits", { defaultValue: "Safe Browsing Habits" }),
+        desc: t("cyber.desc_Neverclickbuttonsins", { defaultValue: "Never click buttons inside suspicious pop-up banners. Safely close the browser tab by clicking the small 'X' or pressing Alt+F4 on your keyboard without downloading anything." }),
         image: "/images/cybersecurity/cs_sneaky_apps.webp",
-        funFact: "Closing the browser tab instantly stops any unwanted pop-up script from running!"
+        funFact: t("cyber.funFact_Closingthebrowsertab_9437", { defaultValue: "Closing the browser tab instantly stops any unwanted pop-up script from running!" })
       },
       {
-        title: "Why Software Updates Matter",
-        desc: "Software updates don't just add new features—they include essential 'security patches'. Developers release updates to fix newly discovered security bugs so hackers cannot exploit your device.",
+        title: t("cyber.title_WhySoftwareUpdatesMa", { defaultValue: "Why Software Updates Matter" }),
+        desc: t("cyber.desc_Softwareupdatesdontj", { defaultValue: "Software updates don't just add new features—they include essential 'security patches'. Developers release updates to fix newly discovered security bugs so hackers cannot exploit your device." }),
         image: "/images/cybersecurity/cs_permission_shield.webp",
-        funFact: "Automatic updates protect your devices while you sleep so your operating system stays secure 24/7!"
+        funFact: t("cyber.funFact_Automaticupdatesprot_d6bd", { defaultValue: "Automatic updates protect your devices while you sleep so your operating system stays secure 24/7!" })
       },
       {
-        title: "Smart App Permissions",
-        desc: "When installing an app, check what permissions it asks for. While a navigation map app needs location access, a simple calculator app should never ask to see your photos, microphone, or contacts!",
+        title: t("cyber.title_SmartAppPermissions", { defaultValue: "Smart App Permissions" }),
+        desc: t("cyber.desc_Wheninstallinganappc", { defaultValue: "When installing an app, check what permissions it asks for. While a navigation map app needs location access, a simple calculator app should never ask to see your photos, microphone, or contacts!" }),
         image: "/images/cybersecurity/cs_permission_checklist.webp",
-        funFact: "Denying unnecessary app permissions prevents apps from secretly tracking your daily habits!"
+        funFact: t("cyber.funFact_Denyingunnecessaryap_e565", { defaultValue: "Denying unnecessary app permissions prevents apps from secretly tracking your daily habits!" })
       }
     ],
-    content: "Keep your devices running safely!\n\nDevice Protection Rules:\n• Avoid Scareware: Never click buttons on pop-ups claiming your device has viruses.\n• Enable Automatic Updates: Regular software patches seal security holes.\n• Check App Permissions: Deny access if an app asks for permissions it doesn't need.",
+    content: t("cyber.content_Keepyourdevicesrunni_5594", { defaultValue: "Keep your devices running safely!\n\nDevice Protection Rules:\n• Avoid Scareware: Never click buttons on pop-ups claiming your device has viruses.\n• Enable Automatic Updates: Regular software patches seal security holes.\n• Check App Permissions: Deny access if an app asks for permissions it doesn't need." }),
     game: "Permission Shield",
     quiz: [
       {
-        question: "A website pop-up claims your computer has viruses and asks you to click 'Install Cleaner Now'. What should you do?",
+        question: t("cyber.question_Awebsitepopupclaimsy", { defaultValue: "A website pop-up claims your computer has viruses and asks you to click 'Install Cleaner Now'. What should you do?" }),
         options: [
-          "Click Install immediately",
-          "Safely close the browser tab without clicking the banner",
-          "Call the phone number shown on the screen"
+          t("cyber.arr_ClickInstallimmediat", { defaultValue: "Click Install immediately" }),
+          t("cyber.arr_Safelyclosethebrowse", { defaultValue: "Safely close the browser tab without clicking the banner" }),
+          t("cyber.arr_Callthephonenumbersh", { defaultValue: "Call the phone number shown on the screen" })
         ],
         correct: 1
       },
       {
-        question: "Why should you deny a simple calculator app if it requests permission to access your GPS location and photos?",
+        question: t("cyber.question_Whyshouldyoudenyasim", { defaultValue: "Why should you deny a simple calculator app if it requests permission to access your GPS location and photos?" }),
         options: [
-          "Because a calculator app does not need your location or photos to function",
-          "Because calculators only work offline",
-          "Because photos take too much memory"
+          t("cyber.arr_Becauseacalculatorap", { defaultValue: "Because a calculator app does not need your location or photos to function" }),
+          t("cyber.arr_Becausecalculatorson", { defaultValue: "Because calculators only work offline" }),
+          t("cyber.arr_Becausephotostaketoo", { defaultValue: "Because photos take too much memory" })
         ],
         correct: 0
       }
@@ -1809,9 +1819,55 @@ const cyberTheme = {
   inactiveSubtitleText: 'text-slate-500'
 };
 
+const getQuickStats = (t) => [
+  { id: 'playzone', label: t("cyber.label_SafetyPlayzone_45e1", { defaultValue: "Safety Playzone" }), value: t("cyber.value_CyberSecurityModules_086c", { defaultValue: "Cyber Security Modules" }), icon: <Shield className={cyberTheme.card1Icon} />, color: cyberTheme.card1Bg },
+  { id: 'knowledge', label: t("cyber.label_KnowledgeBase_0830", { defaultValue: "Knowledge Base" }), value: t("cyber.value_GlossaryReadingMater_ddd4", { defaultValue: "Glossary & Reading Materials" }), icon: <BookOpen className={cyberTheme.card2Icon} />, color: cyberTheme.card2Bg },
+  { id: 'assessment', label: t("cyber.label_SkillAssessment_31f8", { defaultValue: "Skill Assessment" }), value: t("cyber.value_QuizzesVerification_607a", { defaultValue: "Quizzes & Verification" }), icon: <Trophy className={cyberTheme.card3Icon} />, color: cyberTheme.card3Bg },
+];
+
+const getArticles = (t) => [
+  {
+    id: 1,
+    title: t("cyber.title_CoreCyberSecurityGlo", { defaultValue: "Core Cyber Security Glossary & Definitions" }),
+    desc: t("cyber.desc_Essentialdefinitions", { defaultValue: "Essential definitions for core cyber security terminology and concepts." }),
+    content: t("cyber.content_MASTERINGCYBERSECURI_0eae", { defaultValue: "MASTERING CYBER SECURITY TERMINOLOGY\n\n• Phishing: Deceptive communications disguised as legitimate entities designed to trick users into disclosing sensitive credentials.\n• Ransomware: Malicious software that encrypts user files and demands financial ransom for the decryption key.\n• Multi-Factor Authentication (MFA): A security mechanism requiring two or more independent credentials to verify user identity.\n• Zero-Day Exploit: A cyber attack targeting a newly discovered software vulnerability before a patch is available.\n• End-to-End Encryption: Cryptographic protocols that secure data in transit so only authorized recipients can decipher it.\n• Social Engineering: Psychological manipulation techniques used by threat actors to breach human security barriers." })
+  },
+  {
+    id: 2,
+    title: t("cyber.title_Top10RulesforDigital", { defaultValue: "Top 10 Rules for Digital Footprint & Online Privacy" }),
+    desc: t("cyber.desc_Professionalchecklis", { defaultValue: "Professional checklist for maintaining personal privacy and securing your digital footprint." }),
+    content: t("cyber.content_PROTECTINGYOURONLINE_b167", { defaultValue: "PROTECTING YOUR ONLINE IDENTIFIER & FOOTPRINT\n\n1. Practice Data Minimization: Never enter unnecessary personal details on public web forms.\n2. Enable Multi-Factor Authentication (MFA) on all financial and primary email accounts.\n3. Audit Application Permissions: Regularly revoke microphone, location, and background data access from unused apps.\n4. Use Unique Passwords: Avoid credential reuse across multiple web platforms.\n5. Inspect URLs Carefully: Verify HTTPS protocol and exact domain spelling before entering authentication credentials.\n6. Keep Software Updated: System updates contain critical patches for known exploits.\n7. Avoid Unsecured Public Wi-Fi: Use a trusted VPN or mobile network when logging into private accounts on public networks.\n8. Restrict Social & Profile Privacy: Regularly audit privacy settings to ensure only trusted contacts view your posts and personal details.\n9. Protect OTPs & Verification Codes: Never share One-Time Passwords with anyone—banks and platform admins will never request them.\n10. Think Before You Post: Remember that everything shared online leaves a lasting digital footprint—be mindful of location tags, personal photos, and sensitive data." })
+  },
+  {
+    id: 3,
+    title: t("cyber.title_EmergencyIncidentRes", { defaultValue: "Emergency Incident Response: What to Do If Compromised" }),
+    desc: t("cyber.desc_Actionablestepbystep", { defaultValue: "Actionable step-by-step protocol to contain security breaches and recover compromised accounts." }),
+    content: t("cyber.content_IMMEDIATERESPONSEPRO_bb99", { defaultValue: "IMMEDIATE RESPONSE PROTOCOL FOR COMPROMISED ACCOUNTS\n\nStep 1: Isolate the Affected Device — Disconnect from Wi-Fi or cellular networks to prevent lateral malware spread.\nStep 2: Reset Primary Credentials — Use a clean, uncompromised device to reset passwords for your primary email and bank accounts.\nStep 3: Terminate Active Sessions — Use account security settings to force 'Log Out of All Devices'.\nStep 4: Run Full Diagnostic Scans — Execute a comprehensive anti-malware scan to remove persistent trojans or keyloggers.\nStep 5: Monitor Financial Statements — Notify banking institutions immediately if unauthorized transactions appear." })
+  },
+  {
+    id: 4,
+    title: t("cyber.title_AnatomyofModernPhish", { defaultValue: "Anatomy of Modern Phishing, Smishing & Vishing Attacks" }),
+    desc: t("cyber.desc_Indepthanalysisofema", { defaultValue: "In-depth analysis of email spoofing, SMS phishing (smishing), QR code scams (quishing), and AI voice calls." }),
+    content: t("cyber.content_UNDERSTANDINGMODERNS_3924", { defaultValue: "UNDERSTANDING MODERN SOCIAL ENGINEERING VECTORS\n\n• Email Phishing: Look for spoofed sender headers, urgent emotional triggers ('Immediate Account Suspension'), and hidden destination URLs.\n• Smishing (SMS Scams): Unsolicited text messages claiming package delivery failures or bank KYC verification links.\n• Quishing (QR Code Scams): Malicious QR codes placed over legitimate parking or payment displays that redirect to credential harvesting forms.\n• Vishing & Deepfake Audio: Scammers using voice cloning technology over phone calls to impersonate colleagues or family members." })
+  },
+  {
+    id: 5,
+    title: t("cyber.title_NISTPasswordGuidelin", { defaultValue: "NIST Password Guidelines & Credential Management" }),
+    desc: t("cyber.desc_Modernstandardsforpa", { defaultValue: "Modern standards for passphrase length, entropy, passkeys, and secure password managers." }),
+    content: t("cyber.content_MODERNPASSWORDHYGIEN_1b20", { defaultValue: "MODERN PASSWORD HYGIENE (NIST SPECIAL PUBLICATION 800-63B)\n\n• Prioritize Length Over Complexity: A 16-character passphrase composed of memorable words is far stronger than an 8-character complex string.\n• Adopt Password Managers: Zero-knowledge encrypted vaults eliminate human memory limitations and generate unique high-entropy secrets.\n• Transition to Passkeys: Public-key cryptography (FIDO2/WebAuthn) replaces vulnerable passwords with hardware-backed biometric verification." })
+  },
+  {
+    id: 6,
+    title: t("cyber.title_SecuringPublicWiFiMo", { defaultValue: "Securing Public Wi-Fi, Mobile Devices & Smart Home IoT" }),
+    desc: t("cyber.desc_Bestpracticesforsafe", { defaultValue: "Best practices for safe browsing on open networks and isolating connected smart devices." }),
+    content: t("cyber.content_NETWORKDEVICEHARDENI_6f53", { defaultValue: "NETWORK & DEVICE HARDENING GUIDELINES\n\n• Public Wi-Fi Precautions: Never perform sensitive banking or corporate logins over unencrypted open Wi-Fi without a verified Virtual Private Network (VPN).\n• Bluetooth & AirDrop Hardening: Disable discoverability when in public terminals or crowded transport hubs.\n• IoT Network Isolation: Place smart TVs, cameras, and IoT home appliances on a dedicated Guest Wi-Fi network separated from primary work computers." })
+  }
+];
+
 const CyberSecurityDashboard = () => {
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const [activeFilter, setActiveFilter] = useState('Safety Playzone');
+  const [activeFilter, setActiveFilter] = useState('playzone');
   const [selectedItem, setSelectedItem] = useState(null);
 
   // Curriculum State
@@ -1838,6 +1894,10 @@ const CyberSecurityDashboard = () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
+
+  const lessons = useMemo(() => getLessons(t), [t]);
+  const quickStats = useMemo(() => getQuickStats(t), [t]);
+  const articles = useMemo(() => getArticles(t), [t]);
 
   const currentLesson = lessons.find(less => less.id === activeLessonId) || lessons[0];
   const selectedSec = currentLesson.learnSections[activeTopicIndex] || currentLesson.learnSections[0];
@@ -1880,51 +1940,6 @@ const CyberSecurityDashboard = () => {
     };
   }, [selectedItem]);
 
-  const quickStats = [
-    { label: 'Safety Playzone', value: 'Cyber Security Modules', icon: <Shield className={cyberTheme.card1Icon} />, color: cyberTheme.card1Bg },
-    { label: 'Knowledge Base', value: 'Glossary & Reading Materials', icon: <BookOpen className={cyberTheme.card2Icon} />, color: cyberTheme.card2Bg },
-    { label: 'Skill Assessment', value: 'Quizzes & Verification', icon: <Trophy className={cyberTheme.card3Icon} />, color: cyberTheme.card3Bg },
-  ];
-
-  const articles = [
-    {
-      id: 1,
-      title: 'Core Cyber Security Glossary & Definitions',
-      desc: 'Essential definitions for core cyber security terminology and concepts.',
-      content: "MASTERING CYBER SECURITY TERMINOLOGY\n\n• Phishing: Deceptive communications disguised as legitimate entities designed to trick users into disclosing sensitive credentials.\n• Ransomware: Malicious software that encrypts user files and demands financial ransom for the decryption key.\n• Multi-Factor Authentication (MFA): A security mechanism requiring two or more independent credentials to verify user identity.\n• Zero-Day Exploit: A cyber attack targeting a newly discovered software vulnerability before a patch is available.\n• End-to-End Encryption: Cryptographic protocols that secure data in transit so only authorized recipients can decipher it.\n• Social Engineering: Psychological manipulation techniques used by threat actors to breach human security barriers."
-    },
-    {
-      id: 2,
-      title: 'Top 10 Rules for Digital Footprint & Online Privacy',
-      desc: 'Professional checklist for maintaining personal privacy and securing your digital footprint.',
-      content: "PROTECTING YOUR ONLINE IDENTIFIER & FOOTPRINT\n\n1. Practice Data Minimization: Never enter unnecessary personal details on public web forms.\n2. Enable Multi-Factor Authentication (MFA) on all financial and primary email accounts.\n3. Audit Application Permissions: Regularly revoke microphone, location, and background data access from unused apps.\n4. Use Unique Passwords: Avoid credential reuse across multiple web platforms.\n5. Inspect URLs Carefully: Verify HTTPS protocol and exact domain spelling before entering authentication credentials.\n6. Keep Software Updated: System updates contain critical patches for known exploits.\n7. Avoid Unsecured Public Wi-Fi: Use a trusted VPN or mobile network when logging into private accounts on public networks.\n8. Restrict Social & Profile Privacy: Regularly audit privacy settings to ensure only trusted contacts view your posts and personal details.\n9. Protect OTPs & Verification Codes: Never share One-Time Passwords with anyone—banks and platform admins will never request them.\n10. Think Before You Post: Remember that everything shared online leaves a lasting digital footprint—be mindful of location tags, personal photos, and sensitive data."
-    },
-    {
-      id: 3,
-      title: 'Emergency Incident Response: What to Do If Compromised',
-      desc: 'Actionable step-by-step protocol to contain security breaches and recover compromised accounts.',
-      content: "IMMEDIATE RESPONSE PROTOCOL FOR COMPROMISED ACCOUNTS\n\nStep 1: Isolate the Affected Device — Disconnect from Wi-Fi or cellular networks to prevent lateral malware spread.\nStep 2: Reset Primary Credentials — Use a clean, uncompromised device to reset passwords for your primary email and bank accounts.\nStep 3: Terminate Active Sessions — Use account security settings to force 'Log Out of All Devices'.\nStep 4: Run Full Diagnostic Scans — Execute a comprehensive anti-malware scan to remove persistent trojans or keyloggers.\nStep 5: Monitor Financial Statements — Notify banking institutions immediately if unauthorized transactions appear."
-    },
-    {
-      id: 4,
-      title: 'Anatomy of Modern Phishing, Smishing & Vishing Attacks',
-      desc: 'In-depth analysis of email spoofing, SMS phishing (smishing), QR code scams (quishing), and AI voice calls.',
-      content: "UNDERSTANDING MODERN SOCIAL ENGINEERING VECTORS\n\n• Email Phishing: Look for spoofed sender headers, urgent emotional triggers ('Immediate Account Suspension'), and hidden destination URLs.\n• Smishing (SMS Scams): Unsolicited text messages claiming package delivery failures or bank KYC verification links.\n• Quishing (QR Code Scams): Malicious QR codes placed over legitimate parking or payment displays that redirect to credential harvesting forms.\n• Vishing & Deepfake Audio: Scammers using voice cloning technology over phone calls to impersonate colleagues or family members."
-    },
-    {
-      id: 5,
-      title: 'NIST Password Guidelines & Credential Management',
-      desc: 'Modern standards for passphrase length, entropy, passkeys, and secure password managers.',
-      content: "MODERN PASSWORD HYGIENE (NIST SPECIAL PUBLICATION 800-63B)\n\n• Prioritize Length Over Complexity: A 16-character passphrase composed of memorable words is far stronger than an 8-character complex string.\n• Adopt Password Managers: Zero-knowledge encrypted vaults eliminate human memory limitations and generate unique high-entropy secrets.\n• Transition to Passkeys: Public-key cryptography (FIDO2/WebAuthn) replaces vulnerable passwords with hardware-backed biometric verification."
-    },
-    {
-      id: 6,
-      title: 'Securing Public Wi-Fi, Mobile Devices & Smart Home IoT',
-      desc: 'Best practices for safe browsing on open networks and isolating connected smart devices.',
-      content: "NETWORK & DEVICE HARDENING GUIDELINES\n\n• Public Wi-Fi Precautions: Never perform sensitive banking or corporate logins over unencrypted open Wi-Fi without a verified Virtual Private Network (VPN).\n• Bluetooth & AirDrop Hardening: Disable discoverability when in public terminals or crowded transport hubs.\n• IoT Network Isolation: Place smart TVs, cameras, and IoT home appliances on a dedicated Guest Wi-Fi network separated from primary work computers."
-    }
-  ];
-
   const renderContent = () => {
     return (
       <AnimatePresence mode="wait">
@@ -1936,7 +1951,7 @@ const CyberSecurityDashboard = () => {
           transition={{ duration: 0.3 }}
           className="pb-12"
         >
-          {activeFilter === 'Safety Playzone' && (
+          {activeFilter === 'playzone' && (
             <div className="space-y-4 pt-2 sm:pt-4">
               {/* Top lesson selection bar matching VR module exactly */}
               <div className="bg-white border border-slate-100 rounded-[20px] p-2 shadow-[0_4px_20px_rgb(0,0,0,0.03)] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 mb-3">
@@ -1961,7 +1976,7 @@ const CyberSecurityDashboard = () => {
                           {less.id}
                         </span>
                         <span className="text-xs sm:text-sm truncate">
-                          {less.title.replace(/^Lesson \d+:\s*/, '')}
+                          {less.title.replace(/^(Lesson|पाठ)\s*\d+:\s*/i, '')}
                         </span>
                       </div>
                     </button>
@@ -1974,10 +1989,10 @@ const CyberSecurityDashboard = () => {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-5">
                   <div>
                     <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight">
-                      {currentLesson.title}
+                      {i18n.language === 'hi' ? `पाठ ${currentLesson.id}: ` : `Lesson ${currentLesson.id}: `}{currentLesson.title.replace(/^(Lesson|पाठ)\s*\d+:\s*/i, '')}
                     </h2>
                     <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
-                      Topic Focus: <span className="text-emerald-600 font-bold">{currentLesson.topic}</span>
+                      {t("cyber.ui_TopicFocus", { defaultValue: "Topic Focus:" })} <span className="text-emerald-600 font-bold">{currentLesson.topic}</span>
                     </p>
                   </div>
                 </div>
@@ -1988,7 +2003,7 @@ const CyberSecurityDashboard = () => {
                   <div className="lg:col-span-4 flex flex-col gap-2.5">
                     <div className="px-1 pb-1">
                       <span className="text-xs font-extrabold text-slate-500 uppercase tracking-wider font-display">
-                        Lesson Topics ({currentLesson.learnSections.length})
+                        {t("cyber.ui_LessonTopicsCount", { count: currentLesson.learnSections.length, defaultValue: `Lesson Topics (${currentLesson.learnSections.length})` })}
                       </span>
                     </div>
 
@@ -2008,7 +2023,7 @@ const CyberSecurityDashboard = () => {
                             <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider font-display ${
                               isTopicActive ? 'bg-emerald-200 text-emerald-900' : 'bg-slate-100 text-slate-600'
                             }`}>
-                              Section {idx + 1}
+                              {t("cyber.ui_SectionIdx", { idx: idx + 1, defaultValue: `Section ${idx + 1}` })}
                             </span>
                             <h4 className="text-sm sm:text-base font-bold truncate font-display">
                               {sec.title}
@@ -2025,7 +2040,7 @@ const CyberSecurityDashboard = () => {
                           onClick={handleProceedNext}
                           className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider font-display transition-all duration-200 flex items-center justify-center gap-2 shadow-sm cursor-pointer group"
                         >
-                          <span>Proceed to Next Lesson</span>
+                          <span>{t("cyber.ui_ProceedtoNextLesson_4a12", { defaultValue: "Proceed to Next Lesson" })}</span>
                           <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                         </button>
                       ) : (
@@ -2033,7 +2048,7 @@ const CyberSecurityDashboard = () => {
                           onClick={handleProceedNext}
                           className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider font-display transition-all duration-200 flex items-center justify-center gap-2 shadow-sm cursor-pointer group"
                         >
-                          <span>Return to Dashboard</span>
+                          <span>{t("cyber.ui_ReturntoDashboard_e76b", { defaultValue: "Return to Dashboard" })}</span>
                           <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
                         </button>
                       )}
@@ -2045,7 +2060,7 @@ const CyberSecurityDashboard = () => {
                     <div className="space-y-4">
                       <div className="flex items-center justify-between gap-3 flex-wrap border-b border-slate-100 pb-4">
                         <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider font-display">
-                          Section {activeTopicIndex + 1} of {currentLesson.learnSections.length}
+                          {t("cyber.ui_SectionNofM", { current: activeTopicIndex + 1, total: currentLesson.learnSections.length, defaultValue: `Section ${activeTopicIndex + 1} of ${currentLesson.learnSections.length}` })}
                         </span>
                       </div>
 
@@ -2064,7 +2079,7 @@ const CyberSecurityDashboard = () => {
                           </div>
                           <div className="space-y-1">
                             <span className="text-[11px] font-extrabold uppercase tracking-wider text-emerald-700 font-display block">
-                              Did You Know? • Cyber Security Fun Fact
+                              {t("cyber.ui_DidYouKnowCyberSecur_20f2", { defaultValue: "Did You Know? • Cyber Security Fun Fact" })}
                             </span>
                             <p className="text-xs sm:text-sm text-slate-700 leading-relaxed font-medium">
                               {selectedSec.funFact}
@@ -2085,7 +2100,7 @@ const CyberSecurityDashboard = () => {
                             : 'bg-slate-100 hover:bg-slate-200 text-slate-700 cursor-pointer'
                         }`}
                       >
-                        Previous Section
+                        {t("cyber.ui_PreviousSection_ae60", { defaultValue: "Previous Section" })}
                       </button>
 
                       {activeTopicIndex < currentLesson.learnSections.length - 1 ? (
@@ -2093,21 +2108,21 @@ const CyberSecurityDashboard = () => {
                           onClick={() => setActiveTopicIndex(prev => Math.min(currentLesson.learnSections.length - 1, prev + 1))}
                           className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer font-display"
                         >
-                          Next Section <ChevronRight size={16} />
+                          {t("cyber.ui_NextSection_0955", { defaultValue: "Next Section" })} <ChevronRight size={16} />
                         </button>
                       ) : activeLessonId < lessons.length ? (
                         <button
                           onClick={handleProceedNext}
                           className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer font-display"
                         >
-                          Next Lesson <ArrowRight size={16} />
+                          {t("cyber.ui_NextLesson_46ef", { defaultValue: "Next Lesson" })} <ArrowRight size={16} />
                         </button>
                       ) : (
                         <button
                           onClick={handleProceedNext}
                           className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all shadow-sm cursor-pointer font-display"
                         >
-                          Return to Dashboard <ArrowRight size={16} />
+                          {t("cyber.ui_ReturntoDashboard_e76b", { defaultValue: "Return to Dashboard" })} <ArrowRight size={16} />
                         </button>
                       )}
                     </div>
@@ -2117,16 +2132,16 @@ const CyberSecurityDashboard = () => {
             </div>
           )}
 
-          {activeFilter === 'Knowledge Base' && (
+          {activeFilter === 'knowledge' && (
             <div className="space-y-4 pt-2 sm:pt-4">
               <section className="bg-white rounded-[24px] border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] p-5 sm:p-7 md:p-8 space-y-6">
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-5">
                   <div>
                     <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight">
-                      Cyber Security Reading Materials & Glossary
+                      {t("cyber.ui_CyberSecurityReading_e188", { defaultValue: "Cyber Security Reading Materials & Glossary" })}
                     </h2>
                     <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
-                      Select an article or glossary card below to view detailed guidelines and definitions
+                      {t("cyber.ui_Selectanarticleorglo_e606", { defaultValue: "Select an article or glossary card below to view detailed guidelines and definitions" })}
                     </p>
                   </div>
                 </div>
@@ -2150,7 +2165,7 @@ const CyberSecurityDashboard = () => {
                         </p>
                       </div>
                       <div className="pt-3 border-t border-slate-100 flex items-center text-emerald-600 text-xs font-bold gap-1 font-display">
-                        <span>Read Full Guide</span>
+                        <span>{t("cyber.ui_ReadFullGuide_2700", { defaultValue: "Read Full Guide" })}</span>
                         <ChevronRight size={14} />
                       </div>
                     </div>
@@ -2160,7 +2175,7 @@ const CyberSecurityDashboard = () => {
             </div>
           )}
 
-          {activeFilter === 'Skill Assessment' && (
+          {activeFilter === 'assessment' && (
             <div className="space-y-4 pt-2 sm:pt-4">
               <CyberSecurityQuiz />
             </div>
@@ -2185,11 +2200,11 @@ const CyberSecurityDashboard = () => {
             <section className="bg-white rounded-[16px] md:rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[200px] sm:min-h-[260px] md:min-h-[300px] lg:h-[387px] lg:min-h-[387px] pb-4 md:pb-6 lg:pb-0">
               <div className="relative z-10 p-8 md:p-10 lg:w-1/2 space-y-4">
                 <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
-                  Stay Safe <br /> In The Digital <br />
-                  <span className={cyberTheme.heroHighlightText}>World.</span>
+                  {t("cyber.ui_StaySafe_c518", { defaultValue: "Stay Safe" })} <br /> {t("cyber.ui_InTheDigital_6b6f", { defaultValue: "In The Digital" })} <br />
+                  <span className={cyberTheme.heroHighlightText}>{t("cyber.ui_World_72b7", { defaultValue: "World." })}</span>
                 </h1>
                 <p className="text-slate-500 text-[15px] md:text-[16px] font-medium leading-relaxed max-w-sm">
-                  Learn to protect yourself from phishing, malware, and online scams.
+                  {t("cyber.ui_Learntoprotectyourse_9af4", { defaultValue: "Learn to protect yourself from phishing, malware, and online scams." })}
                 </p>
               </div>
 
@@ -2201,12 +2216,12 @@ const CyberSecurityDashboard = () => {
 
             <section className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 relative z-20 -mt-8 px-4 md:px-8">
               {quickStats.map((stat, i) => {
-                const isActive = activeFilter === stat.label;
+                const isActive = activeFilter === stat.id;
                 return (
                   <div
                     key={i}
                     onClick={() => {
-                      setActiveFilter(stat.label);
+                      setActiveFilter(stat.id);
                       const target = document.getElementById("content-section");
                       if (target) target.scrollIntoView({ behavior: 'smooth' });
                     }}
@@ -2284,7 +2299,7 @@ const CyberSecurityDashboard = () => {
                     <div className="pr-4 pb-2 mt-4 lg:mt-0">
                       <div className="flex flex-wrap items-center gap-3 mb-5">
                         <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-700 flex items-center gap-1.5">
-                          <Play size={12} fill="currentColor" /> VIDEO MODULE
+                          <Play size={12} fill="currentColor" /> {t("cyber.ui_VIDEOMODULE_9525", { defaultValue: "VIDEO MODULE" })}
                         </span>
                         {selectedItem.duration && <span className="flex items-center gap-1.5 text-[11px] font-bold text-slate-500"><Clock size={14} /> {selectedItem.duration}</span>}
                       </div>
@@ -2296,7 +2311,7 @@ const CyberSecurityDashboard = () => {
                       <div className="bg-slate-50 rounded-2xl p-6 border border-slate-100">
                         <h3 className="text-sm font-black text-slate-800 mb-4 flex items-center gap-2 uppercase tracking-wide">
                            <Shield className="text-emerald-500" size={18}/>
-                           Lesson Details
+                           {t("cyber.ui_LessonDetails_b844", { defaultValue: "Lesson Details" })}
                         </h3>
                         <p className="text-sm font-medium text-slate-700 leading-relaxed whitespace-pre-line">
                           {selectedItem.content}
@@ -2332,7 +2347,7 @@ const CyberSecurityDashboard = () => {
                   <div className="relative z-10 pr-8">
                     <div className="flex items-center gap-2 mb-2.5">
                       <span className="px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-400/20 text-emerald-300 border border-emerald-400/30 flex items-center gap-1.5 shadow-sm">
-                        <FileText size={12} className="text-emerald-300" /> READING MATERIAL
+                        <FileText size={12} className="text-emerald-300" /> {t("cyber.ui_READINGMATERIAL_639b", { defaultValue: "READING MATERIAL" })}
                       </span>
                       {selectedItem.duration && (
                         <span className="flex items-center gap-1 text-[11px] font-bold text-emerald-200/80 bg-black/20 px-2.5 py-0.5 rounded-full">
@@ -2355,7 +2370,7 @@ const CyberSecurityDashboard = () => {
                   <div className="bg-gradient-to-br from-emerald-50/80 to-teal-50/40 border border-emerald-500/15 rounded-2xl p-5 md:p-6 shadow-sm relative">
                     <div className="flex items-center gap-2 text-emerald-800 font-extrabold text-xs uppercase tracking-wider mb-3.5 pb-2.5 border-b border-emerald-500/10">
                       <Shield className="text-emerald-600 shrink-0" size={16} />
-                      <span>Lesson Details & Guidelines</span>
+                      <span>{t("cyber.ui_LessonDetailsGuideli_2867", { defaultValue: "Lesson Details & Guidelines" })}</span>
                     </div>
                     <div className="text-slate-700 font-semibold text-sm md:text-[15px] leading-relaxed whitespace-pre-line space-y-2">
                       {selectedItem.content}
@@ -2373,13 +2388,13 @@ const CyberSecurityDashboard = () => {
                 {/* Footer */}
                 <div className="px-6 py-4 bg-slate-50/80 border-t border-slate-100 flex items-center justify-between gap-4">
                   <span className="text-xs font-bold text-slate-400 hidden sm:flex items-center gap-1.5">
-                    <CheckCircle2 size={16} className="text-emerald-500 shrink-0" /> Stay secure & alert online!
+                    <CheckCircle2 size={16} className="text-emerald-500 shrink-0" /> {t("cyber.ui_Staysecurealertonlin_89ec", { defaultValue: "Stay secure & alert online!" })}
                   </span>
                   <button
                     onClick={() => setSelectedItem(null)}
                     className="w-full sm:w-auto ml-auto px-6 py-2.5 bg-gradient-to-r from-[#10b981] to-[#0d9488] hover:from-[#059669] hover:to-[#0f766e] text-white rounded-full text-xs font-black tracking-wide uppercase transition-all shadow-md shadow-emerald-500/25 cursor-pointer active:scale-95 flex items-center justify-center gap-1.5"
                   >
-                    Got It, Stay Safe <ChevronRight size={14} />
+                    {t("cyber.ui_GotItStaySafe_ac7e", { defaultValue: "Got It, Stay Safe" })} <ChevronRight size={14} />
                   </button>
                 </div>
               </motion.div>

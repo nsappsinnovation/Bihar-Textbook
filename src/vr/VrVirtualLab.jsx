@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, Suspense } from 'react';
+import { useTranslation } from 'react-i18next';
 import ReactPlayer from 'react-player';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Stars, useTexture } from '@react-three/drei';
@@ -15,29 +16,7 @@ import Real3DBrain from './Real3DBrain';
 import Real3DSkeleton from './Real3DSkeleton';
 import Generic3DViewer from './Generic3DViewer';
 
-const vrDemosList = [
-  {
-    title: "VR Headset Demo",
-    desc: "Headset pehenkar virtual world ka preview.",
-    icon: <Glasses size={32} />,
-    color: "from-blue-500 to-indigo-600",
-    shadow: "shadow-blue-500/20",
-  },
-  {
-    title: "3D Object Viewer",
-    desc: "Basic 3D object ko 360° me dekhna aur rotate karna.",
-    icon: <Box size={32} />,
-    color: "from-rose-400 to-pink-500",
-    shadow: "shadow-rose-500/20",
-  },
-  {
-    title: "3D Anatomy Explorer",
-    desc: "Human heart, brain, ya skeleton ko 3D me explore karna.",
-    icon: <Layers size={32} />,
-    color: "from-cyan-400 to-blue-500",
-    shadow: "shadow-cyan-500/20",
-  }
-];
+
 
 const TexturedEarth = () => {
   // Using a realistic NASA Earth map with meshBasicMaterial to ensure it is evenly bright 360 degrees (no night shadows)
@@ -116,7 +95,32 @@ const CustomDropdown = ({ icon: Icon, placeholder, value, options, activeTab, ta
 };
 
 const VrVirtualLab = () => {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('vr-headset');
+
+  const vrDemosList = [
+    {
+      title: t('vrVirtualLab.demos.vrHeadset.title'),
+      desc: t('vrVirtualLab.demos.vrHeadset.desc'),
+      icon: <Glasses size={32} />,
+      color: "from-blue-500 to-indigo-600",
+      shadow: "shadow-blue-500/20",
+    },
+    {
+      title: t('vrVirtualLab.demos.objectViewer.title'),
+      desc: t('vrVirtualLab.demos.objectViewer.desc'),
+      icon: <Box size={32} />,
+      color: "from-rose-400 to-pink-500",
+      shadow: "shadow-rose-500/20",
+    },
+    {
+      title: t('vrVirtualLab.demos.anatomy.title'),
+      desc: t('vrVirtualLab.demos.anatomy.desc'),
+      icon: <Layers size={32} />,
+      color: "from-cyan-400 to-blue-500",
+      shadow: "shadow-cyan-500/20",
+    }
+  ];
 
   // Tab 2: Color Mixer State
   const [redLight, setRedLight] = useState(255);
@@ -181,10 +185,10 @@ const VrVirtualLab = () => {
           <div className="absolute top-6 left-6 z-10 pointer-events-none flex flex-col gap-4">
             <div>
               <h2 className="text-3xl font-black text-white drop-shadow-lg tracking-wider">
-                VR Headset Demo
+                {t('vrVirtualLab.vrDemo.title')}
               </h2>
               <p className="text-sky-300 text-sm font-bold mt-1 drop-shadow-md">
-                Stereoscopic 3D • 360° Panorama
+                {t('vrVirtualLab.vrDemo.subtitle')}
               </p>
             </div>
 
@@ -192,23 +196,23 @@ const VrVirtualLab = () => {
               <summary className="p-3 flex items-center justify-between outline-none select-none list-none [&::-webkit-details-marker]:hidden">
                 <div className="flex items-center gap-2">
                   <Glasses className="text-sky-400" size={16} />
-                  <h3 className="font-bold text-sky-400 text-xs">How VR Works</h3>
+                  <h3 className="font-bold text-sky-400 text-xs">{t('vrVirtualLab.vrDemo.howItWorks')}</h3>
                 </div>
                 <span className="text-sky-400 group-open:rotate-180 transition-transform duration-200 text-[10px]">▼</span>
               </summary>
               <div className="px-3 pb-3 flex flex-col gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
                 <p className="text-slate-300 text-[11px] leading-relaxed font-medium border-t border-slate-700 pt-2">
-                  A VR headset uses <span className="text-white font-bold">two separate lenses</span> to show a slightly different picture to your left and right eye.
+                  {t('vrVirtualLab.vrDemo.howP1')}
                 </p>
                 <p className="text-slate-300 text-[11px] leading-relaxed font-medium">
-                  This tricks your brain into seeing a deep, immersive <span className="text-white font-bold">3D virtual world!</span>
+                  {t('vrVirtualLab.vrDemo.howP2')}
                 </p>
               </div>
             </details>
           </div>
 
           <div className="absolute bottom-8 text-white bg-black/70 px-6 py-3 rounded-full text-sm font-bold border border-white/10 tracking-widest uppercase pointer-events-none z-20">
-            Drag Earth to rotate 360°
+            {t('vrVirtualLab.vrDemo.dragPrompt')}
           </div>
         </div>
       );
@@ -243,9 +247,9 @@ const VrVirtualLab = () => {
       <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-4 border-b border-indigo-100/50 pb-5 mb-6 relative z-40">
         <div>
           <h2 className="text-xl md:text-2xl font-black text-black tracking-tight">
-            Interactive Digital Laboratory
+            {t('vrVirtualLab.heading')}
           </h2>
-          <p className="text-slate-500 text-sm font-medium mt-1">Explore concepts through immersive interactive experiences.</p>
+          <p className="text-slate-500 text-sm font-medium mt-1">{t('vrVirtualLab.subheading')}</p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
@@ -257,19 +261,19 @@ const VrVirtualLab = () => {
                 activeTab === 'vr-headset' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-500 hover:text-blue-600 hover:bg-white'
               }`}
             >
-              <Glasses size={16} /> VR Headset Demo
+              <Glasses size={16} /> {t('vrVirtualLab.tabs.vrHeadset')}
             </button>
             
             <CustomDropdown 
               icon={Box}
-              placeholder="3D Object Viewer"
+              placeholder={t('vrVirtualLab.tabs.objectViewer')}
               value={activeViewerModel}
               activeTab={activeTab}
               tabKey="3d-viewer"
               options={[
-                { label: 'DNA Strand', value: 'dna' },
-                { label: 'Bacteriophage Virus', value: 'virus' },
-                { label: 'Atomic Structure', value: 'atom' }
+                { label: t('vrVirtualLab.models.dna'), value: 'dna' },
+                { label: t('vrVirtualLab.models.virus'), value: 'virus' },
+                { label: t('vrVirtualLab.models.atom'), value: 'atom' }
               ]}
               onSelect={(val) => {
                 setActiveTab('3d-viewer');
@@ -279,14 +283,14 @@ const VrVirtualLab = () => {
             
             <CustomDropdown 
               icon={Layers}
-              placeholder="3D Anatomy Explorer"
+              placeholder={t('vrVirtualLab.tabs.anatomy')}
               value={activeModel}
               activeTab={activeTab}
               tabKey="3d-anatomy"
               options={[
-                { label: 'Human Heart', value: 'heart' },
-                { label: 'Human Brain', value: 'brain' },
-                { label: 'Skeleton Structure', value: 'skeleton' }
+                { label: t('vrVirtualLab.models.heart'), value: 'heart' },
+                { label: t('vrVirtualLab.models.brain'), value: 'brain' },
+                { label: t('vrVirtualLab.models.skeleton'), value: 'skeleton' }
               ]}
               onSelect={(val) => {
                 setActiveTab('3d-anatomy');
@@ -300,7 +304,7 @@ const VrVirtualLab = () => {
                 activeTab === 'color' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-500 hover:text-blue-600 hover:bg-white'
               }`}
             >
-              <Sliders size={16} /> Color Mixer
+              <Sliders size={16} /> {t('vrVirtualLab.tabs.colorMixer')}
             </button>
           </div>
         </div>
@@ -311,21 +315,21 @@ const VrVirtualLab = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 relative z-10">
           
           <div className="col-span-1 lg:col-span-3 bg-white/95 border border-blue-100 rounded-2xl p-4 shadow-sm">
-            <h2 className="text-xl font-black text-blue-700 tracking-wider">Physics: RGB Light Mixing</h2>
+            <h2 className="text-xl font-black text-blue-700 tracking-wider">{t('vrVirtualLab.colorMixer.heading')}</h2>
             <p className="mt-2 text-slate-600 text-[13px] font-medium leading-relaxed">
-              <span className="font-bold text-blue-600">Why in VR? </span> Every single color you see inside a VR headset or computer screen is made using just 3 tiny lights: <span className="text-rose-600 font-bold">Red</span>, <span className="text-emerald-600 font-bold">Green</span>, and <span className="text-sky-600 font-bold">Blue</span> (RGB). By changing how bright they are, VR screens can create millions of colors to build super realistic virtual worlds!
+              <span className="font-bold text-blue-600">{t('vrVirtualLab.colorMixer.whyVR')} </span> {t('vrVirtualLab.colorMixer.explanation')}
             </p>
           </div>
 
           <div className="bg-white/95 border border-blue-100 rounded-2xl p-4 space-y-4 shadow-sm">
             <h3 className="text-xs font-extrabold tracking-wider text-blue-700 uppercase">
-              RGB Light Sliders
+              {t('vrVirtualLab.colorMixer.slidersLabel')}
             </h3>
             
             <div className="space-y-3">
               <div className="space-y-1">
                 <div className="flex justify-between text-xs text-rose-600 font-extrabold">
-                  <span>Red Light</span>
+                  <span>{t('vrVirtualLab.colorMixer.red')}</span>
                   <span>{redLight}</span>
                 </div>
                 <input 
@@ -337,7 +341,7 @@ const VrVirtualLab = () => {
 
               <div className="space-y-1">
                 <div className="flex justify-between text-xs text-emerald-600 font-extrabold">
-                  <span>Green Light</span>
+                  <span>{t('vrVirtualLab.colorMixer.green')}</span>
                   <span>{greenLight}</span>
                 </div>
                 <input 
@@ -349,7 +353,7 @@ const VrVirtualLab = () => {
 
               <div className="space-y-1">
                 <div className="flex justify-between text-xs text-sky-600 font-extrabold">
-                  <span>Blue Light</span>
+                  <span>{t('vrVirtualLab.colorMixer.blue')}</span>
                   <span>{blueLight}</span>
                 </div>
                 <input 
@@ -361,16 +365,16 @@ const VrVirtualLab = () => {
             </div>
 
             <div className="bg-blue-50/80 p-3 rounded-xl border border-blue-200 text-[11px] text-slate-700 space-y-1 font-medium">
-              <div className="font-extrabold text-blue-900">Color Formulas:</div>
-              <div>Red + Green = Yellow</div>
-              <div>Green + Blue = Cyan</div>
-              <div>Red + Blue = Magenta</div>
-              <div>Red + Green + Blue = White Light</div>
+              <div className="font-extrabold text-blue-900">{t('vrVirtualLab.colorMixer.formulasLabel')}</div>
+              <div>{t('vrVirtualLab.colorMixer.formula1')}</div>
+              <div>{t('vrVirtualLab.colorMixer.formula2')}</div>
+              <div>{t('vrVirtualLab.colorMixer.formula3')}</div>
+              <div>{t('vrVirtualLab.colorMixer.formula4')}</div>
             </div>
           </div>
 
           <div className="lg:col-span-2 bg-white border border-blue-100 rounded-2xl p-5 flex flex-col items-center justify-center min-h-[300px] text-center shadow-sm">
-            <span className="text-xs text-slate-500 font-extrabold mb-4 uppercase tracking-wider">MIXED LIGHT OUTPUT</span>
+            <span className="text-xs text-slate-500 font-extrabold mb-4 uppercase tracking-wider">{t('vrVirtualLab.colorMixer.outputLabel')}</span>
             
             {/* The mixed color bulb */}
             <div 
@@ -385,7 +389,7 @@ const VrVirtualLab = () => {
               RGB: ({redLight}, {greenLight}, {blueLight})
             </span>
             <p className="text-slate-600 font-medium text-xs mt-3 max-w-sm">
-              VR screens use tiny Red, Green, and Blue subpixels close to each other. When they glow together, your eye mixes them to see this output.
+              {t('vrVirtualLab.colorMixer.outputDesc')}
             </p>
           </div>
         </div>

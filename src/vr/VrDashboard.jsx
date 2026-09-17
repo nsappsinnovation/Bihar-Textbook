@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, cloneElement } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ArrowLeft, ArrowRight, Globe, Rocket, FlaskConical } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import VrSimulators from './VrSimulators';
@@ -37,6 +38,7 @@ const vrTheme = {
 };
 
 const VrDashboard = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('tech-learning'); // 'simulators' | 'tech-learning' | 'virtual-lab'
 
@@ -56,20 +58,20 @@ const VrDashboard = () => {
 
   const quickStats = [
     { 
-      label: 'Learn VR Technology', 
-      value: 'How It Works?', 
+      label: t('vrDashboard.card1Label'), 
+      value: t('vrDashboard.card1Value'), 
       icon: <Rocket className={vrTheme.card1Icon} />, 
       color: vrTheme.card1Bg 
     },
     { 
-      label: 'VR Science Labs', 
-      value: 'Immersive Practice', 
+      label: t('vrDashboard.card2Label'), 
+      value: t('vrDashboard.card2Value'), 
       icon: <VrHeadsetIcon className={vrTheme.card2Icon} />, 
       color: vrTheme.card2Bg 
     },
     { 
-      label: '360° Worlds', 
-      value: 'Explore places', 
+      label: t('vrDashboard.card3Label'), 
+      value: t('vrDashboard.card3Value'), 
       icon: <Globe className={vrTheme.card3Icon} />, 
       color: vrTheme.card3Bg 
     },
@@ -95,17 +97,17 @@ const VrDashboard = () => {
             <section className="bg-white rounded-[16px] md:rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[200px] sm:min-h-[260px] md:min-h-[300px] lg:h-[387px] lg:min-h-[387px] pb-4 md:pb-6 lg:pb-0">
               <div className="relative z-10 p-5 sm:p-8 md:p-10 lg:w-1/2 space-y-3 md:space-y-4">
                  <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
-                    Step into <br /> Imagination. <br />
-                    <span className={vrTheme.heroHighlightText}>Learn in VR.</span>
+                    {t('vrDashboard.heroLine1')} <br /> {t('vrDashboard.heroLine2')} <br />
+                    <span className={vrTheme.heroHighlightText}>{t('vrDashboard.heroHighlight')}</span>
                  </h1>
                  <p className="text-slate-500 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed max-w-sm">
-                   Explore, interact and understand difficult concepts through immersive VR experiences.
+                   {t('vrDashboard.heroDesc')}
                  </p>
               </div>
 
               <div className="hidden lg:block absolute top-0 right-0 w-[55%] h-full">
                  <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
-                 <img loading="lazy" decoding="async" src="/images/vr/rhs.webp" alt="VR Learning" className="w-full h-full object-cover object-right-top" />
+                 <img src="/images/vr/rhs.webp" onError={(e) => { e.currentTarget.src = "/images/vr/rhs.png"; }} alt={t('vrDashboard.heroAlt')} className="w-full h-full object-cover object-right-top" />
               </div>
             </section>
 
@@ -128,7 +130,7 @@ const VrDashboard = () => {
                     className={`bg-white rounded-[16px] p-3 md:p-4 border flex items-center gap-3 md:gap-4 hover:shadow-md transition-shadow cursor-pointer group ${isActive ? vrTheme.activeBorder + ' shadow-md' : vrTheme.inactiveBorder + ' shadow-[0_4px_20px_rgba(0,0,0,0.06)]'}`}
                   >
                      <div className={`w-[44px] h-[44px] rounded-[12px] flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform [&>svg]:w-5 [&>svg]:h-5 ${isActive ? vrTheme.activeIconBg : stat.color}`}>
-                        {React.cloneElement(stat.icon, { className: isActive ? 'text-white' : stat.icon.props.className })}
+                        {cloneElement(stat.icon, { className: isActive ? 'text-white' : stat.icon.props.className })}
                      </div>
                      <div>
                         <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? vrTheme.activeTitleText : vrTheme.inactiveTitleHover}`}>{stat.label}</h4>
