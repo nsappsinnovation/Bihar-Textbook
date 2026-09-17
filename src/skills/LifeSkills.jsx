@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import toast from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -9,24 +9,24 @@ import {
   Droplets, Sparkles, Coins, HeartPulse, Utensils, Monitor, Smile, Home,
   RefreshCw, CreditCard, AlertCircle, Eye
 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import AtmLab from './labs/AtmLab';
 import TrafficLab from './labs/TrafficLab';
 import CashierLab from './labs/CashierLab';
 import FirstAidLab from './labs/FirstAidLab';
 
-const quizQuestions = [
-  { question: "What is the first thing you should do when you get a small cut?", options: ["Put a bandage on it immediately", "Wash it with clean water and soap", "Ignore it", "Blow on it"], correct: 1 },
-  { question: "Why is it important to create a budget?", options: ["To buy everything you want", "To track income and expenses", "To show off your money", "To stop spending completely"], correct: 1 },
-  { question: "What is a healthy way to manage stress?", options: ["Yelling at someone", "Taking deep breaths or talking to a friend", "Eating lots of junk food", "Sleeping all day"], correct: 1 },
-  { question: "When boiling water on a stove, you should:", options: ["Leave it unattended", "Turn the handles inward", "Touch the pot to see if it's hot", "Put your face over it"], correct: 1 },
-  { question: "What does a balanced diet mean?", options: ["Only eating vegetables", "Eating from all food groups", "Eating equal amounts of pizza and burgers", "Skipping meals"], correct: 1 },
+const getQuizQuestions = (t) => [
+  { question: t("lifeskills.q1", { defaultValue: "What is the first thing you should do when you get a small cut?" }), options: [t("lifeskills.q1_o1", { defaultValue: "Put a bandage on it immediately" }), t("lifeskills.q1_o2", { defaultValue: "Wash it with clean water and soap" }), t("lifeskills.q1_o3", { defaultValue: "Ignore it" }), t("lifeskills.q1_o4", { defaultValue: "Blow on it" })], correct: 1 },
+  { question: t("lifeskills.q2", { defaultValue: "Why is it important to create a budget?" }), options: [t("lifeskills.q2_o1", { defaultValue: "To buy everything you want" }), t("lifeskills.q2_o2", { defaultValue: "To track income and expenses" }), t("lifeskills.q2_o3", { defaultValue: "To show off your money" }), t("lifeskills.q2_o4", { defaultValue: "To stop spending completely" })], correct: 1 },
+  { question: t("lifeskills.q3", { defaultValue: "What is a healthy way to manage stress?" }), options: [t("lifeskills.q3_o1", { defaultValue: "Yelling at someone" }), t("lifeskills.q3_o2", { defaultValue: "Taking deep breaths or talking to a friend" }), t("lifeskills.q3_o3", { defaultValue: "Eating lots of junk food" }), t("lifeskills.q3_o4", { defaultValue: "Sleeping all day" })], correct: 1 },
+  { question: t("lifeskills.q4", { defaultValue: "When boiling water on a stove, you should:" }), options: [t("lifeskills.q4_o1", { defaultValue: "Leave it unattended" }), t("lifeskills.q4_o2", { defaultValue: "Turn the handles inward" }), t("lifeskills.q4_o3", { defaultValue: "Touch the pot to see if it's hot" }), t("lifeskills.q4_o4", { defaultValue: "Put your face over it" })], correct: 1 },
+  { question: t("lifeskills.q5", { defaultValue: "What does a balanced diet mean?" }), options: [t("lifeskills.q5_o1", { defaultValue: "Only eating vegetables" }), t("lifeskills.q5_o2", { defaultValue: "Eating from all food groups" }), t("lifeskills.q5_o3", { defaultValue: "Eating equal amounts of pizza and burgers" }), t("lifeskills.q5_o4", { defaultValue: "Skipping meals" })], correct: 1 },
 ];
 const optionLabels = ['A', 'B', 'C', 'D'];
 
 const QuizComponent = () => {
-  const [currentQ, setCurrentQ] = useState(0);
-  const [selectedOption, setSelectedOption] = useState(null);
+  const { t, i18n } = useTranslation();
   const [isAnswered, setIsAnswered] = useState(false);
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
@@ -92,11 +92,11 @@ const QuizComponent = () => {
                     </div>
                     <div>
                       <h3 className="text-xs font-bold text-slate-900">Question {currentQ + 1}/{quizQuestions.length}</h3>
-                      <p className="text-[10px] font-bold text-slate-400">Life Skills Test</p>
+                      <p className="text-[10px] font-bold text-slate-400">{t("lifeskills.lifeSkillsTest", { defaultValue: "Life Skills Test" })}</p>
                     </div>
                   </div>
                   <div className="bg-slate-50/80 px-3 py-1.5 rounded-lg border border-slate-200/60 text-center">
-                    <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider block mb-0.5">Score</span>
+                    <span className="text-[9px] font-bold text-slate-500 uppercase tracking-wider block mb-0.5">{t("lifeskills.score", { defaultValue: "Score" })}</span>
                     <span className="text-sm font-black text-teal-600 leading-none">{score}</span>
                   </div>
                 </div>
@@ -132,7 +132,7 @@ const QuizComponent = () => {
                     <span className={`text-xs font-bold ${selectedOption === q.correct ? 'text-green-600'
                       : selectedOption === null ? 'text-amber-600' : 'text-rose-600'
                       }`}>
-                      {selectedOption === q.correct ? 'Correct!' : selectedOption === null ? "Time is up!" : '❌ Wrong answer'}
+                      {selectedOption === q.correct ? t('lifeskills.correct', { defaultValue: 'Correct!' }) : selectedOption === null ? t('lifeskills.timeIsUp', { defaultValue: 'Time is up!' }) : t('lifeskills.wrongAnswer', { defaultValue: '❌ Wrong answer' })}
                     </span>
                   ) : <div />}
 
@@ -140,7 +140,7 @@ const QuizComponent = () => {
                     <button onClick={handleNext}
                       className="flex items-center gap-1.5 px-5 py-2 bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white rounded-full text-xs font-bold transition-all shadow-md shadow-teal-200 active:scale-95 cursor-pointer"
                     >
-                      {currentQ < quizQuestions.length - 1 ? 'Next' : 'Results'} <ArrowRight size={14} />
+                      {currentQ < quizQuestions.length - 1 ? t('lifeskills.next', { defaultValue: 'Next' }) : t('lifeskills.results', { defaultValue: 'Results' })} <ArrowRight size={14} />
                     </button>
                   )}
                 </div>
@@ -154,11 +154,11 @@ const QuizComponent = () => {
                 <div className="w-16 h-16 bg-teal-50 text-teal-500 rounded-full flex items-center justify-center mx-auto mb-3 shadow-inner">
                   <Trophy size={32} />
                 </div>
-                <h2 className="text-xl font-bold text-slate-900 mb-1">Challenge Completed!</h2>
-                <p className="text-xs text-slate-500 mb-6 font-medium">You've successfully finished the Life Skills Challenge.</p>
+                <h2 className="text-xl font-bold text-slate-900 mb-1">{t("lifeskills.challengeCompleted", { defaultValue: "Challenge Completed!" })}</h2>
+                <p className="text-xs text-slate-500 mb-6 font-medium">{t("lifeskills.challengeCompletedDesc", { defaultValue: "You've successfully finished the Life Skills Challenge." })}</p>
 
                 <div className="bg-slate-50/80 rounded-[16px] p-5 mb-6 border border-slate-200/60 inline-block min-w-[180px]">
-                  <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">Total Score</span>
+                  <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block mb-1">{t("lifeskills.totalScore", { defaultValue: "Total Score" })}</span>
                   <span className="text-3xl font-black text-teal-600">{score}</span>
                   <span className="text-[10px] font-bold text-slate-400 block mt-1">out of {quizQuestions.length * 10}</span>
                 </div>
@@ -403,6 +403,7 @@ const GirlAvatarSVG = ({ className = "w-14 h-14 mx-auto", expression = "smile" }
 );
 
 const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
+  const { t } = useTranslation();
   // If the skill has a pre-existing PNG image, we return that
   const imageMap = {
     1: { // Cooking
@@ -447,21 +448,21 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
               <div className="flex items-center gap-3 bg-teal-50/50 p-2 rounded-xl border border-teal-100/50">
                 <BoyAvatarSVG expression="smile" className="w-9 h-9 shrink-0" />
                 <div>
-                  <div className="text-[10px] font-black text-teal-800">Pocket Money (Income)</div>
+                  <div className="text-[10px] font-black text-teal-800">{t("lifeskills.pocketMoneyIncome", { defaultValue: "Pocket Money (Income)" })}</div>
                   <div className="text-xs font-black text-teal-600">+₹500</div>
                 </div>
               </div>
               <div className="flex justify-between items-center bg-slate-50 p-2 rounded-lg text-slate-500">
-                <span className="text-[10px] font-bold">📚 Buy Books</span>
+                <span className="text-[10px] font-bold">📚 {t("lifeskills.buyBooks", { defaultValue: "Buy Books" })}</span>
                 <span className="text-[10px] font-bold">-₹150</span>
               </div>
               <div className="flex justify-between items-center bg-slate-50 p-2 rounded-lg text-slate-500">
-                <span className="text-[10px] font-bold">🍿 Snacks</span>
+                <span className="text-[10px] font-bold">🍿 {t("lifeskills.snacks", { defaultValue: "Snacks" })}</span>
                 <span className="text-[10px] font-bold">-₹50</span>
               </div>
               <div className="h-px bg-slate-100" />
               <div className="flex justify-between items-center pt-1">
-                <span className="text-xs font-bold text-slate-705">Remaining Balance</span>
+                <span className="text-xs font-bold text-slate-705">{t("lifeskills.remainingBalance", { defaultValue: "Remaining Balance" })}</span>
                 <span className="text-xs font-black text-slate-800">₹300</span>
               </div>
             </div>
@@ -473,17 +474,17 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
               </div>
               <div className="grid grid-cols-2 gap-3 text-left">
                 <div className="bg-teal-50/50 p-2.5 rounded-xl border border-teal-100/50">
-                  <span className="text-[9px] font-black text-teal-800 uppercase tracking-wider block mb-1">Needs</span>
+                  <span className="text-[9px] font-black text-teal-800 uppercase tracking-wider block mb-1">{t("lifeskills.needsHeader", { defaultValue: "Needs" })}</span>
                   <div className="space-y-1">
-                    <div className="text-[10px] font-bold text-slate-700">📚 Text Books</div>
-                    <div className="text-[10px] font-bold text-slate-700">🍎 Healthy Food</div>
+                    <div className="text-[10px] font-bold text-slate-700">📚 {t("lifeskills.textBooks", { defaultValue: "Text Books" })}</div>
+                    <div className="text-[10px] font-bold text-slate-700">🍎 {t("lifeskills.healthyFood", { defaultValue: "Healthy Food" })}</div>
                   </div>
                 </div>
                 <div className="bg-amber-50/50 p-2.5 rounded-xl border border-amber-100/50">
-                  <span className="text-[9px] font-black text-amber-800 uppercase tracking-wider block mb-1">Wants</span>
+                  <span className="text-[9px] font-black text-amber-800 uppercase tracking-wider block mb-1">{t("lifeskills.wantsHeader", { defaultValue: "Wants" })}</span>
                   <div className="space-y-1">
-                    <div className="text-[10px] font-bold text-slate-650">🎮 Video Games</div>
-                    <div className="text-[10px] font-bold text-slate-650">🍬 Sweets</div>
+                    <div className="text-[10px] font-bold text-slate-650">🎮 {t("lifeskills.videoGames", { defaultValue: "Video Games" })}</div>
+                    <div className="text-[10px] font-bold text-slate-650">🍬 {t("lifeskills.sweets", { defaultValue: "Sweets" })}</div>
                   </div>
                 </div>
               </div>
@@ -498,8 +499,8 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
                 </div>
               </div>
               <div className="space-y-1">
-                <div className="text-xs font-black text-slate-805">Savings Target (20%)</div>
-                <div className="text-base font-black text-teal-600">₹100 Saved First!</div>
+                <div className="text-xs font-black text-slate-805">{t("lifeskills.savingsTarget", { defaultValue: "Savings Target (20%)" })}</div>
+                <div className="text-base font-black text-teal-600">{t("lifeskills.savedFirst", { defaultValue: "₹100 Saved First!" })}</div>
               </div>
               <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
                 <div className="bg-teal-500 h-full w-[80%] rounded-full" />
@@ -516,20 +517,20 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
           </div>
           {stepIndex === 0 && (
             <div className="space-y-2">
-              <div className="text-xs font-black text-slate-805">Wash under clean water</div>
-              <p className="text-[10px] font-semibold text-slate-500">Run clean water gently over the scrape.</p>
+              <div className="text-xs font-black text-slate-805">{t("lifeskills.washCleanWater", { defaultValue: "Wash under clean water" })}</div>
+              <p className="text-[10px] font-semibold text-slate-500">{t("lifeskills.washCleanWaterDesc", { defaultValue: "Run clean water gently over the scrape." })}</p>
             </div>
           )}
           {stepIndex === 1 && (
             <div className="space-y-2">
-              <div className="text-xs font-black text-slate-805">Apply Antiseptic Cream</div>
-              <p className="text-[10px] font-semibold text-slate-500">Squeeze a small pea-sized drop on the cut.</p>
+              <div className="text-xs font-black text-slate-805">{t("lifeskills.applyAntisepticCream", { defaultValue: "Apply Antiseptic Cream" })}</div>
+              <p className="text-[10px] font-semibold text-slate-500">{t("lifeskills.applyAntisepticCreamDesc", { defaultValue: "Squeeze a small pea-sized drop on the cut." })}</p>
             </div>
           )}
           {stepIndex === 2 && (
             <div className="space-y-2">
-              <div className="text-xs font-black text-slate-805">Cover with Bandage</div>
-              <p className="text-[10px] font-semibold text-slate-500">Wrap with sterile band-aid to keep germs away.</p>
+              <div className="text-xs font-black text-slate-805">{t("lifeskills.coverWithBandage", { defaultValue: "Cover with Bandage" })}</div>
+              <p className="text-[10px] font-semibold text-slate-500">{t("lifeskills.coverWithBandageDesc", { defaultValue: "Wrap with sterile band-aid to keep germs away." })}</p>
             </div>
           )}
         </div>
@@ -541,20 +542,20 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
             <div className="space-y-3">
               <div className="flex items-center gap-3 border-b border-slate-100 pb-2">
                 <GirlAvatarSVG expression="smile" className="w-9 h-9 shrink-0" />
-                <div className="text-xs font-black text-slate-805">Daily Planner</div>
+                <div className="text-xs font-black text-slate-805">{t("lifeskills.dailyPlanner", { defaultValue: "Daily Planner" })}</div>
               </div>
               <div className="space-y-1.5 text-left">
                 <div className="flex items-center gap-2 bg-slate-50 p-1.5 rounded-lg">
                   <input type="checkbox" checked readOnly className="rounded text-teal-600 focus:ring-teal-500 w-3 h-3" />
-                  <span className="text-[10px] font-bold text-slate-500 line-through">Math Homework</span>
+                  <span className="text-[10px] font-bold text-slate-500 line-through">{t("lifeskills.mathHomework", { defaultValue: "Math Homework" })}</span>
                 </div>
                 <div className="flex items-center gap-2 bg-slate-50 p-1.5 rounded-lg">
                   <input type="checkbox" checked readOnly className="rounded text-teal-600 focus:ring-teal-500 w-3 h-3" />
-                  <span className="text-[10px] font-bold text-slate-500 line-through">Read Chapter 2</span>
+                  <span className="text-[10px] font-bold text-slate-500 line-through">{t("lifeskills.readChapter2", { defaultValue: "Read Chapter 2" })}</span>
                 </div>
                 <div className="flex items-center gap-2 bg-slate-50 p-1.5 rounded-lg">
                   <input type="checkbox" disabled className="rounded text-teal-600 focus:ring-teal-500 w-3 h-3" />
-                  <span className="text-[10px] font-bold text-slate-800">Draw Art Project</span>
+                  <span className="text-[10px] font-bold text-slate-800">{t("lifeskills.drawArtProject", { defaultValue: "Draw Art Project" })}</span>
                 </div>
               </div>
             </div>
@@ -563,16 +564,16 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
             <div className="space-y-3">
               <div className="flex items-center gap-3 border-b border-slate-100 pb-2">
                 <BoyAvatarSVG expression="neutral" className="w-9 h-9 shrink-0" />
-                <div className="text-xs font-black text-slate-805">Important vs Urgent</div>
+                <div className="text-xs font-black text-slate-805">{t("lifeskills.importantVsUrgent", { defaultValue: "Important vs Urgent" })}</div>
               </div>
               <div className="grid grid-cols-2 gap-2 text-left">
                 <div className="bg-red-50 p-2 rounded-lg border border-red-100">
-                  <div className="text-[8px] font-black text-red-800 uppercase">Do Now</div>
-                  <div className="text-[10px] font-black text-red-600 mt-0.5">Exam Prep ✍️</div>
+                  <div className="text-[8px] font-black text-red-800 uppercase">{t("lifeskills.doNow", { defaultValue: "Do Now" })}</div>
+                  <div className="text-[10px] font-black text-red-600 mt-0.5">{t("lifeskills.examPrep", { defaultValue: "Exam Prep ✍️" })}</div>
                 </div>
                 <div className="bg-blue-50 p-2 rounded-lg border border-blue-100">
-                  <div className="text-[8px] font-black text-blue-800 uppercase">Plan later</div>
-                  <div className="text-[10px] font-black text-blue-600 mt-0.5">Exercise 🏃‍♂️</div>
+                  <div className="text-[8px] font-black text-blue-800 uppercase">{t("lifeskills.planLater", { defaultValue: "Plan later" })}</div>
+                  <div className="text-[10px] font-black text-blue-600 mt-0.5">{t("lifeskills.exerciseTask", { defaultValue: "Exercise 🏃‍♂️" })}</div>
                 </div>
               </div>
             </div>
@@ -586,10 +587,10 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
                 </div>
               </div>
               <div>
-                <div className="text-xs font-black text-slate-805">Pomodoro Focus Timer</div>
+                <div className="text-xs font-black text-slate-805">{t("lifeskills.pomodoroTimer", { defaultValue: "Pomodoro Focus Timer" })}</div>
                 <div className="text-lg font-black text-red-500 mt-0.5">25:00</div>
               </div>
-              <p className="text-[9px] font-semibold text-slate-400">Deep study for 25 mins without distraction!</p>
+              <p className="text-[9px] font-semibold text-slate-400">{t("lifeskills.deepStudyDesc", { defaultValue: "Deep study for 25 mins without distraction!" })}</p>
             </div>
           )}
         </div>
@@ -604,8 +605,8 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
                 <span className="text-lg animate-pulse">💬</span>
                 <GirlAvatarSVG expression="smile" className="w-12 h-12" />
               </div>
-              <div className="text-xs font-black text-slate-850">Keep Eye Contact</div>
-              <p className="text-[10px] font-semibold text-slate-500">Look at the other person politely and nod to show you are paying attention.</p>
+              <div className="text-xs font-black text-slate-850">{t("lifeskills.keepEyeContact", { defaultValue: "Keep Eye Contact" })}</div>
+              <p className="text-[10px] font-semibold text-slate-500">{t("lifeskills.keepEyeContactDesc", { defaultValue: "Look at the other person politely and nod to show you are paying attention." })}</p>
             </div>
           )}
           {stepIndex === 1 && ( // Active listening
@@ -614,10 +615,10 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
                 <BoyAvatarSVG expression="closed" className="w-12 h-12 shrink-0" />
                 <div className="space-y-1.5 text-left flex-1">
                   <div className="bg-slate-50 p-2 rounded-xl border border-slate-150 text-[10px] font-bold text-slate-500">
-                    "I felt sad when the test was postponed."
+                    {t("lifeskills.chatBubble1", { defaultValue: '"I felt sad when the test was postponed."' })}
                   </div>
                   <div className="bg-teal-50 p-2 rounded-xl border border-teal-100 text-[10px] font-black text-teal-800">
-                    "I understand. You worked hard for it."
+                    {t("lifeskills.chatBubble2", { defaultValue: '"I understand. You worked hard for it."' })}
                   </div>
                 </div>
               </div>
@@ -628,10 +629,10 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
               <div className="flex justify-center">
                 <GirlAvatarSVG expression="smile" className="w-12 h-12" />
               </div>
-              <div className="text-xs font-black text-slate-805">Use Polite Words</div>
+              <div className="text-xs font-black text-slate-805">{t("lifeskills.usePoliteWords", { defaultValue: "Use Polite Words" })}</div>
               <div className="flex flex-wrap gap-1.5 justify-center">
-                <span className="bg-teal-50 border border-teal-100 text-teal-800 text-[9px] font-black px-2.5 py-1 rounded-full">Please</span>
-                <span className="bg-blue-50 border border-blue-100 text-blue-800 text-[9px] font-black px-2.5 py-1 rounded-full">Thank you</span>
+                <span className="bg-teal-50 border border-teal-100 text-teal-800 text-[9px] font-black px-2.5 py-1 rounded-full">{t("lifeskills.pleaseWord", { defaultValue: "Please" })}</span>
+                <span className="bg-blue-50 border border-blue-100 text-blue-800 text-[9px] font-black px-2.5 py-1 rounded-full">{t("lifeskills.thankYouWord", { defaultValue: "Thank you" })}</span>
               </div>
             </div>
           )}
@@ -644,12 +645,12 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
             <div className="space-y-3">
               <div className="flex items-center gap-3 border-b border-slate-100 pb-2">
                 <BoyAvatarSVG expression="smile" className="w-9 h-9 shrink-0" />
-                <div className="text-xs font-black text-slate-805">Know Your Tools</div>
+                <div className="text-xs font-black text-slate-805">{t("lifeskills.knowYourTools", { defaultValue: "Know Your Tools" })}</div>
               </div>
               <div className="grid grid-cols-3 gap-1.5 text-[9px] font-bold">
-                <div className="bg-slate-50 p-1 rounded border border-slate-100">🔧 Wrench</div>
-                <div className="bg-slate-50 p-1 rounded border border-slate-100">🪛 Screwdriver</div>
-                <div className="bg-slate-50 p-1 rounded border border-slate-100">🩹 Tape</div>
+                <div className="bg-slate-50 p-1 rounded border border-slate-100">{t("lifeskills.wrenchTool", { defaultValue: "🔧 Wrench" })}</div>
+                <div className="bg-slate-50 p-1 rounded border border-slate-100">{t("lifeskills.screwdriverTool", { defaultValue: "🪛 Screwdriver" })}</div>
+                <div className="bg-slate-50 p-1 rounded border border-slate-100">{t("lifeskills.tapeTool", { defaultValue: "🩹 Tape" })}</div>
               </div>
             </div>
           )}
@@ -657,20 +658,20 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
             <div className="space-y-3">
               <div className="flex items-center gap-3 border-b border-slate-100 pb-2">
                 <BoyAvatarSVG expression="surprise" className="w-9 h-9 shrink-0" />
-                <div className="text-xs font-black text-red-650">Safety First!</div>
+                <div className="text-xs font-black text-red-650">{t("lifeskills.safetyFirst", { defaultValue: "Safety First!" })}</div>
               </div>
               <div className="bg-red-50/60 border border-red-150 p-2 rounded-lg text-slate-505 text-left">
-                <div className="text-[9px] font-black text-red-800 uppercase tracking-wider">Mains Switch Board</div>
+                <div className="text-[9px] font-black text-red-800 uppercase tracking-wider">{t("lifeskills.mainsSwitchBoard", { defaultValue: "Mains Switch Board" })}</div>
               </div>
             </div>
           )}
           {stepIndex === 2 && ( // Tighten
             <div className="space-y-2">
-              <div className="text-xs font-black text-slate-805">Righty-Tighty, Lefty-Loosey</div>
+              <div className="text-xs font-black text-slate-805">{t("lifeskills.tightenRule", { defaultValue: "Righty-Tighty, Lefty-Loosey" })}</div>
               <div className="w-14 h-14 border-4 border-dashed border-teal-400 rounded-full flex items-center justify-center mx-auto animate-spin" style={{ animationDuration: '10s' }}>
                 <span className="text-lg">⚙️</span>
               </div>
-              <p className="text-[9px] font-semibold text-slate-400">Turn clockwise (right) to tighten screws, counter-clockwise (left) to loosen.</p>
+              <p className="text-[9px] font-semibold text-slate-400">{t("lifeskills.tightenRuleDesc", { defaultValue: "Turn clockwise (right) to tighten screws, counter-clockwise (left) to loosen." })}</p>
             </div>
           )}
         </div>
@@ -680,13 +681,13 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
         <div className="w-full max-w-[280px] bg-white rounded-2xl border border-slate-150 p-5 shadow-sm space-y-4">
           {stepIndex === 0 && ( // Strong Password
             <div className="space-y-2 text-left">
-              <div className="text-xs font-black text-slate-850">Password Safety Meter</div>
+              <div className="text-xs font-black text-slate-850">{t("lifeskills.passwordMeter", { defaultValue: "Password Safety Meter" })}</div>
               <div className="bg-slate-50 p-2.5 rounded-lg border border-slate-150 font-mono text-[11px] text-slate-800">
-                P@$$w0rd#2026
+                P@$w0rd#2026
               </div>
               <div className="flex items-center justify-between text-[9px] font-black">
-                <span className="text-teal-600">STRENGTH: STRONG</span>
-                <span className="text-slate-400">12 Chars</span>
+                <span className="text-teal-600">{t("lifeskills.strengthStrong", { defaultValue: "STRENGTH: STRONG" })}</span>
+                <span className="text-slate-400">{t("lifeskills.twelveChars", { defaultValue: "12 Chars" })}</span>
               </div>
               <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
                 <div className="bg-teal-500 h-full w-full rounded-full" />
@@ -695,13 +696,13 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
           )}
           {stepIndex === 1 && ( // Verify Sender
             <div className="space-y-2 text-left">
-              <div className="text-xs font-black text-slate-855">Inbox Email check</div>
+              <div className="text-xs font-black text-slate-855">{t("lifeskills.inboxEmailCheck", { defaultValue: "Inbox Email check" })}</div>
               <div className="bg-amber-50/70 p-2.5 rounded-xl border border-amber-100 flex items-start gap-2">
                 <span className="text-base mt-0.5">📧</span>
                 <div>
-                  <div className="text-[10px] font-black text-amber-800">Urgent: Claim ₹10,000!</div>
-                  <div className="text-[8px] font-bold text-slate-400">From: win-prize@fake-bank.com</div>
-                  <div className="text-[9px] font-black text-red-600 mt-1">⚠️ DO NOT CLICK LINKS</div>
+                  <div className="text-[10px] font-black text-amber-800">{t("lifeskills.fakeEmailSubject", { defaultValue: "Urgent: Claim ₹10,000!" })}</div>
+                  <div className="text-[8px] font-bold text-slate-400">{t("lifeskills.fakeEmailSender", { defaultValue: "From: win-prize@fake-bank.com" })}</div>
+                  <div className="text-[9px] font-black text-red-600 mt-1">{t("lifeskills.doNotClickLinks", { defaultValue: "⚠️ DO NOT CLICK LINKS" })}</div>
                 </div>
               </div>
             </div>
@@ -711,9 +712,9 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
               <div className="w-14 h-14 bg-red-50 rounded-full flex items-center justify-center mx-auto text-red-500">
                 <Monitor size={26} />
               </div>
-              <div className="text-xs font-black text-slate-855 font-sans">Public Computer Lab</div>
+              <div className="text-xs font-black text-slate-855 font-sans">{t("lifeskills.publicCompLab", { defaultValue: "Public Computer Lab" })}</div>
               <button className="bg-red-600 hover:bg-red-700 text-white font-extrabold text-[10px] px-4 py-2 rounded-xl transition-all shadow-md">
-                LOG OUT OF ACCOUNT
+                {t("lifeskills.logoutOfAccount", { defaultValue: "LOG OUT OF ACCOUNT" })}
               </button>
             </div>
           )}
@@ -724,14 +725,14 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
         <div className="w-full max-w-[280px] bg-white rounded-2xl border border-slate-150 p-5 shadow-sm space-y-4">
           {stepIndex === 0 && ( // Identify emotion
             <div className="space-y-3">
-              <div className="text-xs font-black text-slate-805">Identify Your Mood</div>
+              <div className="text-xs font-black text-slate-805">{t("lifeskills.identifyMood", { defaultValue: "Identify Your Mood" })}</div>
               <div className="grid grid-cols-4 gap-1.5">
                 <div className="bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-center text-lg filter grayscale cursor-pointer hover:grayscale-0 hover:border-teal-400 transition-all">😊</div>
                 <div className="bg-teal-50 border border-teal-300 p-2.5 rounded-xl text-center text-lg filter-none cursor-pointer">😌</div>
                 <div className="bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-center text-lg filter grayscale cursor-pointer hover:grayscale-0 hover:border-teal-400 transition-all">😢</div>
                 <div className="bg-slate-50 border border-slate-200 p-2.5 rounded-xl text-center text-lg filter grayscale cursor-pointer hover:grayscale-0 hover:border-teal-400 transition-all">😠</div>
               </div>
-              <div className="text-[10px] font-black text-teal-600">CURRENT MOOD: CALM</div>
+              <div className="text-[10px] font-black text-teal-600">{t("lifeskills.currentMoodCalm", { defaultValue: "CURRENT MOOD: CALM" })}</div>
             </div>
           )}
           {stepIndex === 1 && ( // Breathe
@@ -739,8 +740,8 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
               <div className="w-16 h-16 bg-teal-50 border border-teal-105 rounded-full flex items-center justify-center mx-auto text-teal-650 animate-pulse animate-duration-3000">
                 <Heart size={28} />
               </div>
-              <div className="text-xs font-black text-slate-805">Deep Breathing</div>
-              <div className="text-[10px] font-bold text-slate-400">Inhale for 4s ... Pause ... Exhale for 4s</div>
+              <div className="text-xs font-black text-slate-805">{t("lifeskills.deepBreathingTitle", { defaultValue: "Deep Breathing" })}</div>
+              <div className="text-[10px] font-bold text-slate-400">{t("lifeskills.deepBreathingDesc", { defaultValue: "Inhale for 4s ... Pause ... Exhale for 4s" })}</div>
             </div>
           )}
           {stepIndex === 2 && ( // Empathy
@@ -748,8 +749,8 @@ const StepIllustration = ({ skillId, stepIndex, skillTitle }) => {
               <div className="w-14 h-14 bg-teal-50 rounded-full flex items-center justify-center mx-auto text-teal-500">
                 <Smile size={28} />
               </div>
-              <div className="text-xs font-black text-slate-855">Walk in their shoes</div>
-              <p className="text-[10px] font-semibold text-slate-500">Try to look at situations from the other person's eyes to build deep respect.</p>
+              <div className="text-xs font-black text-slate-855">{t("lifeskills.walkInTheirShoes", { defaultValue: "Walk in their shoes" })}</div>
+              <p className="text-[10px] font-semibold text-slate-500">{t("lifeskills.walkInTheirShoesDesc", { defaultValue: "Try to look at situations from the other person's eyes to build deep respect." })}</p>
             </div>
           )}
         </div>
@@ -780,23 +781,24 @@ const lifeTheme = {
 
 const LifeSkills = () => {
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
   const [activeFilter, setActiveFilter] = useState('Learn Skills');
   const [selectedLab, setSelectedLab] = useState('atm'); // 'atm', 'traffic', 'cashier', 'firstaid'
   const [selectedGuideSkill, setSelectedGuideSkill] = useState(null);
   const [currentGuideStep, setCurrentGuideStep] = useState(0);
 
-  const lifeSkillsFlashcards = [
-    { id: 1, title: 'Cooking Basics', tag: 'Food', desc: 'Learn how to make simple, healthy and delicious meals for you and your family.', icon: <ChefHat size={20} />, content: "Start with simple recipes like boiling eggs, making rice, and preparing a healthy salad. Always wash vegetables before cutting them and never leave a hot stove unattended!" },
-    { id: 2, title: 'Money Management', tag: 'Finance', desc: 'Learn how to save money, budget your expenses, and make smart financial decisions.', icon: <Wallet size={20} />, content: "Budgeting helps you track what you earn and what you spend. Always save a portion of your allowance or income for the future. Wants vs Needs is the core of budgeting." },
-    { id: 3, title: 'ATM Security & Banking', tag: 'Finance', desc: 'Master the safety checklist when withdrawing cash from an ATM machine securely.', icon: <CreditCard size={20} />, content: "Always inspect the card reader slot for skimming devices by wiggling it. Shield the numeric keypad with your free hand while entering your secret PIN. Make sure the ATM screen fully resets before leaving the counter." },
-    { id: 4, title: 'Road Safety & Signals', tag: 'Safety', desc: 'Learn crossing rules, traffic signals, and how to stay safe as a pedestrian on roads.', icon: <AlertCircle size={20} />, content: "Red light means Stop immediately. Yellow light means Get Ready. Green light means Go. Always cross at designated Zebra crossings, and look Left, Right, then Left again before stepping on the road." },
-    { id: 5, title: 'First Aid Essentials', tag: 'Safety', desc: 'Basic first aid skills everyone should know for emergencies.', icon: <Shield size={20} />, content: "Clean a wound with soap and water, apply an antibacterial ointment, and cover it with a bandage. For minor burns, run cool water over it for 10 minutes." },
-    { id: 6, title: 'Time Management', tag: 'Productivity', desc: 'Organize your day, set goals, and stop procrastinating.', icon: <Clock size={20} />, content: "Create a daily schedule. Prioritize your most important tasks first (eat the frog!) and take short 5-minute breaks every 30 minutes to stay fresh." },
-    { id: 7, title: 'Effective Comm.', tag: 'Social', desc: 'Learn to express your thoughts clearly and listen to others.', icon: <MessageCircle size={20} />, content: "Good communication involves 50% speaking and 50% active listening. Maintain eye contact, don't interrupt, and ask questions to show you are engaged." },
-    { id: 8, title: 'Basic Home Repair', tag: 'Maintenance', desc: 'Fix simple things around the house without calling a professional.', icon: <Wrench size={20} />, content: "Learn to tighten a loose screw, change a lightbulb safely (always turn off the switch first!), and unclog a sink using a plunger or baking soda and vinegar." },
-    { id: 9, title: 'Digital Literacy', tag: 'Technology', desc: 'Understand internet safety and basic computer hygiene.', icon: <Monitor size={20} />, content: "Never share your passwords with anyone. Always verify the source of emails before clicking any links, and keep your software updated." },
-    { id: 10, title: 'Emotional Intel.', tag: 'Mindset', desc: 'Recognize and manage your own emotions and others.', icon: <Smile size={20} />, content: "Pause and take a deep breath before reacting to anger. Try to understand things from the other person’s perspective before jumping to conclusions." },
-  ];
+  const lifeSkillsFlashcards = useMemo(() => [
+    { id: 1, title: t('lifeskills.card1_title', { defaultValue: 'Cooking Basics' }), tag: t('lifeskills.tag_Food', { defaultValue: 'Food' }), desc: t('lifeskills.card1_desc', { defaultValue: 'Learn how to make simple, healthy and delicious meals for you and your family.' }), icon: <ChefHat size={20} />, content: t('lifeskills.card1_content', { defaultValue: "Start with simple recipes like boiling eggs, making rice, and preparing a healthy salad. Always wash vegetables before cutting them and never leave a hot stove unattended!" }) },
+    { id: 2, title: t('lifeskills.card2_title', { defaultValue: 'Money Management' }), tag: t('lifeskills.tag_Finance', { defaultValue: 'Finance' }), desc: t('lifeskills.card2_desc', { defaultValue: 'Learn how to save money, budget your expenses, and make smart financial decisions.' }), icon: <Wallet size={20} />, content: t('lifeskills.card2_content', { defaultValue: "Budgeting helps you track what you earn and what you spend. Always save a portion of your allowance or income for the future. Wants vs Needs is the core of budgeting." }) },
+    { id: 3, title: t('lifeskills.card3_title', { defaultValue: 'ATM Security & Banking' }), tag: t('lifeskills.tag_Finance', { defaultValue: 'Finance' }), desc: t('lifeskills.card3_desc', { defaultValue: 'Master the safety checklist when withdrawing cash from an ATM machine securely.' }), icon: <CreditCard size={20} />, content: t('lifeskills.card3_content', { defaultValue: "Always inspect the card reader slot for skimming devices by wiggling it. Shield the numeric keypad with your free hand while entering your secret PIN. Make sure the ATM screen fully resets before leaving the counter." }) },
+    { id: 4, title: t('lifeskills.card4_title', { defaultValue: 'Road Safety & Signals' }), tag: t('lifeskills.tag_Safety', { defaultValue: 'Safety' }), desc: t('lifeskills.card4_desc', { defaultValue: 'Learn crossing rules, traffic signals, and how to stay safe as a pedestrian on roads.' }), icon: <AlertCircle size={20} />, content: t('lifeskills.card4_content', { defaultValue: "Red light means Stop immediately. Yellow light means Get Ready. Green light means Go. Always cross at designated Zebra crossings, and look Left, Right, then Left again before stepping on the road." }) },
+    { id: 5, title: t('lifeskills.card5_title', { defaultValue: 'First Aid Essentials' }), tag: t('lifeskills.tag_Safety', { defaultValue: 'Safety' }), desc: t('lifeskills.card5_desc', { defaultValue: 'Basic first aid skills everyone should know for emergencies.' }), icon: <Shield size={20} />, content: t('lifeskills.card5_content', { defaultValue: "Clean a wound with soap and water, apply an antibacterial ointment, and cover it with a bandage. For minor burns, run cool water over it for 10 minutes." }) },
+    { id: 6, title: t('lifeskills.card6_title', { defaultValue: 'Time Management' }), tag: t('lifeskills.tag_Productivity', { defaultValue: 'Productivity' }), desc: t('lifeskills.card6_desc', { defaultValue: 'Organize your day, set goals, and stop procrastinating.' }), icon: <Clock size={20} />, content: t('lifeskills.card6_content', { defaultValue: "Create a daily schedule. Prioritize your most important tasks first (eat the frog!) and take short 5-minute breaks every 30 minutes to stay fresh." }) },
+    { id: 7, title: t('lifeskills.card7_title', { defaultValue: 'Effective Comm.' }), tag: t('lifeskills.tag_Social', { defaultValue: 'Social' }), desc: t('lifeskills.card7_desc', { defaultValue: 'Learn to express your thoughts clearly and listen to others.' }), icon: <MessageCircle size={20} />, content: t('lifeskills.card7_content', { defaultValue: "Good communication involves 50% speaking and 50% active listening. Maintain eye contact, don't interrupt, and ask questions to show you are engaged." }) },
+    { id: 8, title: t('lifeskills.card8_title', { defaultValue: 'Basic Home Repair' }), tag: t('lifeskills.tag_Maintenance', { defaultValue: 'Maintenance' }), desc: t('lifeskills.card8_desc', { defaultValue: 'Fix simple things around the house without calling a professional.' }), icon: <Wrench size={20} />, content: t('lifeskills.card8_content', { defaultValue: "Learn to tighten a loose screw, change a lightbulb safely (always turn off the switch first!), and unclog a sink using a plunger or baking soda and vinegar." }) },
+    { id: 9, title: t('lifeskills.card9_title', { defaultValue: 'Digital Literacy' }), tag: t('lifeskills.tag_Technology', { defaultValue: 'Technology' }), desc: t('lifeskills.card9_desc', { defaultValue: 'Understand internet safety and basic computer hygiene.' }), icon: <Monitor size={20} />, content: t('lifeskills.card9_content', { defaultValue: "Never share your passwords with anyone. Always verify the source of emails before clicking any links, and keep your software updated." }) },
+    { id: 10, title: t('lifeskills.card10_title', { defaultValue: 'Emotional Intel.' }), tag: t('lifeskills.tag_Mindset', { defaultValue: 'Mindset' }), desc: t('lifeskills.card10_desc', { defaultValue: 'Recognize and manage your own emotions and others.' }), icon: <Smile size={20} />, content: t('lifeskills.card10_content', { defaultValue: "Pause and take a deep breath before reacting to anger. Try to understand things from the other person’s perspective before jumping to conclusions." }) }
+  ], [t]);
 
   const Flashcard = ({ skill }) => {
     const [isFlipped, setIsFlipped] = useState(false);
@@ -828,7 +830,7 @@ const LifeSkills = () => {
             <p className="text-[11px] text-slate-500 font-medium line-clamp-3">{skill.desc}</p>
 
             <div className="mt-auto pt-4 flex items-center justify-between text-[10px] font-bold text-slate-600">
-              <span>Tap to flip</span>
+              <span>{t('lifeskills.tapToFlip', { defaultValue: 'Tap to flip' })}</span>
               <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </div>
           </div>
@@ -839,7 +841,7 @@ const LifeSkills = () => {
             style={{ backfaceVisibility: 'hidden', transform: 'rotateY(180deg)' }}
           >
             <h3 className="text-[11px] font-bold mb-2 flex items-center gap-1.5 text-teal-100 uppercase tracking-wider">
-              <Lightbulb size={13} /> Key Takeaway
+              <Lightbulb size={13} /> {t('lifeskills.keyTakeaway', { defaultValue: 'Key Takeaway' })}
             </h3>
             <p className="text-[12px] font-semibold leading-relaxed flex-1 overflow-y-auto text-white mb-2 scrollbar-none pr-1">
               {skill.content}
@@ -852,10 +854,10 @@ const LifeSkills = () => {
               }}
               className="w-full py-1.5 bg-white hover:bg-teal-50 text-teal-600 font-extrabold rounded-lg text-[10px] tracking-wide shadow transition-all flex items-center justify-center gap-1 cursor-pointer select-none"
             >
-              Start Guide ➔
+              {t('lifeskills.startGuide', { defaultValue: 'Start Guide ➔' })}
             </button>
             <div className="text-[8px] font-bold text-teal-250 uppercase tracking-widest text-center mt-2 opacity-80">
-              Tap anywhere else to flip back
+              {t('lifeskills.tapToFlipBack', { defaultValue: 'Tap anywhere else to flip back' })}
             </div>
           </div>
         </motion.div>
@@ -864,9 +866,9 @@ const LifeSkills = () => {
   };
 
   const quickStats = [
-    { label: 'Learn Skills', value: 'Step by step', icon: <Lightbulb className={lifeTheme.card1Icon} />, color: lifeTheme.card1Bg },
-    { label: 'Practical Labs', value: 'Interactive labs', icon: <Target className={lifeTheme.card2Icon} />, color: lifeTheme.card2Bg },
-    { label: 'Take Challenges', value: 'Test skills', icon: <Trophy className={lifeTheme.card3Icon} />, color: lifeTheme.card3Bg },
+    { label: 'Learn Skills', displayLabel: t('lifeskills.tabLearnSkills', { defaultValue: 'Learn Skills' }), value: t('lifeskills.valLearnSkills', { defaultValue: 'Step by step' }), icon: <Lightbulb className={lifeTheme.card1Icon} />, color: lifeTheme.card1Bg },
+    { label: 'Practical Labs', displayLabel: t('lifeskills.tabPracticalLabs', { defaultValue: 'Practical Labs' }), value: t('lifeskills.valPracticalLabs', { defaultValue: 'Interactive labs' }), icon: <Target className={lifeTheme.card2Icon} />, color: lifeTheme.card2Bg },
+    { label: 'Take Challenges', displayLabel: t('lifeskills.tabTakeChallenges', { defaultValue: 'Take Challenges' }), value: t('lifeskills.valTakeChallenges', { defaultValue: 'Test skills' }), icon: <Trophy className={lifeTheme.card3Icon} />, color: lifeTheme.card3Bg },
   ];
 
   return (
@@ -888,11 +890,11 @@ const LifeSkills = () => {
             <section className="bg-white rounded-[16px] md:rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[200px] sm:min-h-[260px] md:min-h-[300px] lg:h-[387px] lg:min-h-[387px] pb-4 md:pb-6 lg:pb-0 text-left">
               <div className="relative z-10 p-6 sm:p-8 md:p-10 lg:p-12 lg:w-1/2 space-y-3 md:space-y-4">
                 <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
-                  Learn, Grow & <br /> Live Better with <br />
-                  <span className={lifeTheme.heroHighlightText}>Life Skills</span>
+                  {t('lifeskills.heroTitle1', { defaultValue: 'Learn, Grow &' })} <br /> {t('lifeskills.heroTitle2', { defaultValue: 'Live Better with' })} <br />
+                  <span className={lifeTheme.heroHighlightText}>{t('lifeskills.heroTitle3', { defaultValue: 'Life Skills' })}</span>
                 </h1>
                 <p className="text-slate-500 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed max-w-sm">
-                  Practical lessons and daily habits for an independent life.
+                  {t('lifeskills.heroDesc', { defaultValue: 'Practical lessons and daily habits for an independent life.' })}
                 </p>
 
                 <div className="pt-2">
@@ -924,7 +926,7 @@ const LifeSkills = () => {
                       {React.cloneElement(stat.icon, { className: isActive ? 'text-white' : stat.icon.props.className })}
                     </div>
                     <div>
-                      <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? lifeTheme.activeTitleText : lifeTheme.inactiveTitleHover}`}>{stat.label}</h4>
+                      <h4 className={`text-[13px] font-bold leading-tight transition-colors ${isActive ? lifeTheme.activeTitleText : lifeTheme.inactiveTitleHover}`}>{stat.displayLabel || stat.label}</h4>
                       <p className={`text-[11px] font-medium mt-0.5 ${isActive ? lifeTheme.activeSubtitleText : lifeTheme.inactiveSubtitleText}`}>{stat.value}</p>
                     </div>
                   </div>
@@ -950,8 +952,8 @@ const LifeSkills = () => {
                       {[
                         {
                           id: 'atm',
-                          title: 'ATM Simulator',
-                          desc: 'Practice withdrawing cash safely.',
+                          title: t('lifeskills.labAtmTitle', { defaultValue: 'ATM Simulator' }),
+                          desc: t('lifeskills.labAtmDesc', { defaultValue: 'Practice withdrawing cash safely.' }),
                           difficulty: 'Medium',
                           icon: <CreditCard />,
                           activeStyle: 'bg-white border-teal-500 ring-1 ring-teal-500 shadow-md text-slate-900 scale-[1.02]',
@@ -961,8 +963,8 @@ const LifeSkills = () => {
                         },
                         {
                           id: 'traffic',
-                          title: 'Road Crossing',
-                          desc: 'Learn how to read traffic signals.',
+                          title: t('lifeskills.labTrafficTitle', { defaultValue: 'Road Crossing' }),
+                          desc: t('lifeskills.labTrafficDesc', { defaultValue: 'Learn how to read traffic signals.' }),
                           difficulty: 'Easy',
                           icon: <AlertCircle />,
                           activeStyle: 'bg-white border-teal-500 ring-1 ring-teal-500 shadow-md text-slate-900 scale-[1.02]',
@@ -972,8 +974,8 @@ const LifeSkills = () => {
                         },
                         {
                           id: 'cashier',
-                          title: 'Cashier Math',
-                          desc: 'Calculate the correct change to give back.',
+                          title: t('lifeskills.labCashierTitle', { defaultValue: 'Cashier Math' }),
+                          desc: t('lifeskills.labCashierDesc', { defaultValue: 'Calculate the correct change to give back.' }),
                           difficulty: 'Medium',
                           icon: <Coins />,
                           activeStyle: 'bg-white border-teal-500 ring-1 ring-teal-500 shadow-md text-slate-900 scale-[1.02]',
@@ -983,8 +985,8 @@ const LifeSkills = () => {
                         },
                         {
                           id: 'firstaid',
-                          title: 'First Aid Basics',
-                          desc: 'Learn how to treat minor wounds.',
+                          title: t('lifeskills.labFirstAidTitle', { defaultValue: 'First Aid Basics' }),
+                          desc: t('lifeskills.labFirstAidDesc', { defaultValue: 'Learn how to treat minor wounds.' }),
                           difficulty: 'Hard',
                           icon: <HeartPulse />,
                           activeStyle: 'bg-white border-teal-500 ring-1 ring-teal-500 shadow-md text-slate-900 scale-[1.02]',
@@ -1083,7 +1085,7 @@ const LifeSkills = () => {
                   </div>
                   <div className="text-left">
                     <h3 className="text-sm md:text-base font-black text-slate-800 leading-tight">{selectedGuideSkill.title}</h3>
-                    <p className="text-[9px] md:text-[10px] font-bold text-teal-600 uppercase tracking-widest mt-0.5">Step-by-Step Guide</p>
+                    <p className="text-[9px] md:text-[10px] font-bold text-teal-600 uppercase tracking-widest mt-0.5">{t("lifeskills.stepByStepGuide", { defaultValue: "Step-by-Step Guide" })}</p>
                   </div>
                 </div>
                 <button
@@ -1117,7 +1119,7 @@ const LifeSkills = () => {
                   </AnimatePresence>
                   {/* Step Badge */}
                   <div className="absolute top-4 left-4 bg-slate-900/75 text-white text-[10px] font-black px-3 py-1.5 rounded-full backdrop-blur-sm z-10 shadow-lg">
-                    Step {currentGuideStep + 1} / {skillStepsData[selectedGuideSkill.id]?.length || 3}
+                    {t("lifeskills.stepIndicator", { defaultValue: "Step {{current}} / {{total}}", current: currentGuideStep + 1, total: skillStepsData[selectedGuideSkill.id]?.length || 3 })}
                   </div>
                   {/* Decorative corner accent */}
                   <div className="absolute bottom-0 right-0 w-24 h-24 bg-teal-500/5 rounded-tl-[60px]" />
@@ -1156,13 +1158,13 @@ const LifeSkills = () => {
 
                     {/* Step Title */}
                     <h4 className="text-lg md:text-xl font-black text-slate-900 leading-snug mb-5">
-                      {skillStepsData[selectedGuideSkill.id]?.[currentGuideStep]?.title.split(" / ")[0]}
+                      {(i18n.language === "hi" && skillStepsData[selectedGuideSkill.id]?.[currentGuideStep]?.title.split(" / ")[1]) ? skillStepsData[selectedGuideSkill.id]?.[currentGuideStep]?.title.split(" / ")[1] : skillStepsData[selectedGuideSkill.id]?.[currentGuideStep]?.title.split(" / ")[0]}
                     </h4>
 
                     {/* Description Box */}
                     <div className="p-4 md:p-5 bg-slate-50 border border-slate-100 rounded-2xl space-y-3 flex-1">
                       <p className="text-[13px] md:text-sm font-semibold text-slate-700 leading-relaxed">
-                        {skillStepsData[selectedGuideSkill.id]?.[currentGuideStep]?.desc.split(" / ")[0]}
+                        {(i18n.language === "hi" && skillStepsData[selectedGuideSkill.id]?.[currentGuideStep]?.desc.split(" / ")[1]) ? skillStepsData[selectedGuideSkill.id]?.[currentGuideStep]?.desc.split(" / ")[1] : skillStepsData[selectedGuideSkill.id]?.[currentGuideStep]?.desc.split(" / ")[0]}
                       </p>
                     </div>
                   </div>
@@ -1174,7 +1176,7 @@ const LifeSkills = () => {
                       disabled={currentGuideStep === 0}
                       className="px-4 py-2.5 border border-slate-200 text-slate-600 font-bold rounded-xl text-xs hover:bg-slate-100 active:scale-95 disabled:opacity-30 disabled:pointer-events-none transition-all cursor-pointer"
                     >
-                      ← Previous
+                      {t("lifeskills.prevStep", { defaultValue: "← Previous" })}
                     </button>
 
                     {currentGuideStep < (skillStepsData[selectedGuideSkill.id]?.length || 3) - 1 ? (
@@ -1182,7 +1184,7 @@ const LifeSkills = () => {
                         onClick={() => setCurrentGuideStep(prev => prev + 1)}
                         className="px-6 py-2.5 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl text-xs active:scale-95 transition-all shadow-md shadow-teal-200 cursor-pointer"
                       >
-                        Next Step →
+                        {t("lifeskills.nextStep", { defaultValue: "Next Step →" })}
                       </button>
                     ) : (
                       <button
@@ -1193,7 +1195,7 @@ const LifeSkills = () => {
                         }}
                         className="px-6 py-2.5 bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white font-bold rounded-xl text-xs active:scale-95 transition-all shadow-lg shadow-teal-200 cursor-pointer"
                       >
-                        Finish Guide 
+                        {t("lifeskills.finishGuide", { defaultValue: "Finish Guide" })} 
                       </button>
                     )}
                   </div>

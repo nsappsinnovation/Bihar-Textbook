@@ -781,6 +781,7 @@ const AnimatedRoad = ({
 
 // --- SIMULATOR 1: Zebra Crossing ---
 const CrossingSimulator = () => {
+  const { t } = useTranslation();
   const [trafficLight, setTrafficLight] = useState("green");
   const [isCrossing, setIsCrossing] = useState(false);
   const [crossingResult, setCrossingResult] = useState("");
@@ -1012,7 +1013,7 @@ const CrossingSimulator = () => {
       <div className="bg-gradient-to-r from-teal-900/10 via-slate-900/10 to-teal-900/10 border border-teal-500/30 p-4 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 text-xs shadow-sm">
         <div className="flex items-center gap-3">
           <span className="px-2.5 py-1 bg-teal-600 text-white rounded-lg font-black text-[10px] uppercase tracking-wider shadow">
-            MISSION
+            {t("basicskills.traffic_mission", "MISSION")}
           </span>
           <span className="font-semibold text-slate-700 leading-snug">
             Request signal and cross only when the Pedestrian Light is{" "}
@@ -1026,7 +1027,7 @@ const CrossingSimulator = () => {
         {/* Signal Light Status Indicator (Read-Only) */}
         <div className="flex items-center gap-3">
           <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">
-            Traffic Light State:
+            {t("basicskills.traffic_light_state", "Traffic Light State:")}
           </span>
           <div className="flex bg-slate-900 p-2 rounded-xl border border-slate-700 shadow-md gap-2">
             {["red", "yellow", "green"].map((c) => (
@@ -1050,8 +1051,8 @@ const CrossingSimulator = () => {
         <div className="flex items-center justify-end gap-3">
           <div className="text-xs font-mono font-bold tracking-widest text-teal-700 bg-teal-50 px-3.5 py-2.5 rounded-xl border border-teal-200">
             {trafficLight === "red"
-              ? `WALK SAFE: 00:0${trafficTimer}s`
-              : `AUTO TIMER: 00:0${trafficTimer}s`}
+              ? `${t("basicskills.traffic_walk_safe_timer", "WALK SAFE:")} 00:0${trafficTimer}s`
+              : `${t("basicskills.traffic_auto_timer", "AUTO TIMER:")} 00:0${trafficTimer}s`}
           </div>
           <button
             onClick={reset}
@@ -1166,10 +1167,10 @@ const CrossingSimulator = () => {
               <ShieldAlert size={14} />
             )}
             {isButtonRequested && trafficLight !== "red"
-              ? "SIGNAL REQUESTED..."
+              ? t("basicskills.traffic_signal_requested", "SIGNAL REQUESTED...")
               : trafficLight === "red"
-                ? "WALK SAFE (GO NOW)"
-                : "PRESS TO CROSS"}
+                ? t("basicskills.traffic_walk_safe_go", "WALK SAFE (GO NOW)")
+                : t("basicskills.traffic_press_to_cross", "PRESS TO CROSS")}
           </button>
         </div>
 
@@ -1261,10 +1262,10 @@ const CrossingSimulator = () => {
                 <AlertOctagon size={36} />
               </div>
               <span className="text-3xl md:text-5xl font-black uppercase tracking-widest text-rose-400 drop-shadow-[0_0_20px_rgba(244,63,94,0.8)]">
-                CRASHED!
+                {t("basicskills.traffic_crashed", "CRASHED!")}
               </span>
               <p className="text-sm md:text-base font-semibold leading-relaxed mt-3 text-rose-100 bg-rose-900/60 px-6 py-3 rounded-2xl border border-rose-700/50 text-center max-w-md">
-                Never cross on {crashedSignalRef.current.toUpperCase()} light! Vehicles cannot stop in time.
+                {t("basicskills.traffic_crossing_crash_msg", "Never cross on {{signal}} light! Vehicles cannot stop in time.", { signal: crashedSignalRef.current.toUpperCase() })}
               </p>
               <button
                 onClick={reset}
@@ -1286,16 +1287,16 @@ const CrossingSimulator = () => {
                 <ShieldCheck size={36} />
               </div>
               <span className="text-3xl md:text-5xl font-black uppercase tracking-widest text-teal-400 drop-shadow-[0_0_20px_rgba(45,212,191,0.8)]">
-                SAFE PASSAGE
+                {t("basicskills.traffic_safe_passage", "SAFE PASSAGE")}
               </span>
               <p className="text-sm md:text-base font-semibold leading-relaxed mt-3 text-teal-100 bg-teal-900/60 px-6 py-3 rounded-2xl border border-teal-700/50 text-center max-w-md">
-                Perfect! You crossed safely while cars were stopped on Red.
+                {t("basicskills.traffic_safe_passage_desc", "Perfect! You crossed safely while cars were stopped on Red.")}
               </p>
               <button
                 onClick={reset}
                 className="mt-6 px-8 py-3 bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all shadow-lg cursor-pointer"
               >
-                DONE
+                {t("basicskills.traffic_done", "DONE")}
               </button>
             </motion.div>
           )}
@@ -1310,7 +1311,7 @@ const CrossingSimulator = () => {
               className="px-6 py-3 bg-teal-600 hover:bg-teal-500 text-white font-black text-xs tracking-widest uppercase rounded-xl transition-all cursor-pointer flex items-center gap-2 shadow-lg disabled:opacity-50"
             >
               <Navigation size={16} />
-              CROSS THE ROAD
+              {t("basicskills.traffic_btn_cross_road", "CROSS THE ROAD")}
             </button>
             <button
               onClick={reset}
@@ -1333,7 +1334,7 @@ const CrossingSimulator = () => {
             className="px-8 py-4 bg-teal-600 hover:bg-teal-500 text-white font-black text-xs md:text-sm tracking-widest uppercase rounded-2xl transition-all cursor-pointer flex items-center gap-2 shadow-teal-500/30 shadow-xl active:scale-95 disabled:opacity-50"
           >
             <Navigation size={18} />
-            CROSS THE ROAD
+            {t("basicskills.traffic_btn_cross_road", "CROSS THE ROAD")}
           </button>
 
           {/* Reset Scenario Button */}
@@ -1419,6 +1420,7 @@ const Speedometer = ({ value }) => {
 
 // --- SIMULATOR 2: Over Speeding ---
 const SpeedingSimulator = () => {
+  const { t } = useTranslation();
   const [stage, setStage] = useState("idle"); // idle | accel | decel | success | fail
   const [currentSpeed, setCurrentSpeed] = useState(40);
   const [signBoard, setSignBoard] = useState(null); // null | 80 | 40
@@ -1556,13 +1558,13 @@ const SpeedingSimulator = () => {
           </span>
           {signBoard ? (
             <div className="flex items-center gap-1.5">
-              <span className="text-[10px] font-bold text-slate-300">Limit:</span>
+              <span className="text-[10px] font-bold text-slate-300">{t("basicskills.traffic_limit", "Limit:")}</span>
               <span className={`px-2 py-0.5 rounded-md text-[10px] font-mono font-black ${signBoard === 80 ? "bg-amber-500/20 text-amber-300" : "bg-teal-500/20 text-teal-300"}`}>
                 {signBoard} km/h
               </span>
             </div>
           ) : (
-            <span className="text-[10px] font-bold text-slate-400 italic">No Active Sign</span>
+            <span className="text-[10px] font-bold text-slate-400 italic">{t("basicskills.traffic_no_active_sign", "No Active Sign")}</span>
           )}
           {stage === "decel" && (
             <span className="text-[8px] font-black text-rose-400 animate-pulse uppercase mt-1">
@@ -1677,7 +1679,7 @@ const SpeedingSimulator = () => {
                 <AlertOctagon size={30} />
               </div>
               <span className="text-xl md:text-3xl font-black uppercase tracking-wider text-center text-rose-400 drop-shadow-[0_0_15px_rgba(244,63,94,0.8)]">
-                {failReason === "overspeeding" ? "SPEED LIMIT EXCEEDED!" : "SPEEDING CRASH & VIOLATION!"}
+                {failReason === "overspeeding" ? t("basicskills.traffic_speed_limit_exceeded", "SPEED LIMIT EXCEEDED!") : t("basicskills.traffic_speeding_crash_violation", "SPEEDING CRASH & VIOLATION!")}
               </span>
               <p className="text-xs md:text-sm font-semibold leading-relaxed mt-3 text-center bg-rose-900/60 p-4 rounded-2xl border border-rose-700/50 text-rose-100 max-w-md">
                 {failReason === "overspeeding"
@@ -1811,6 +1813,7 @@ const SpeedingSimulator = () => {
 
 // --- SIMULATOR 3: Wrong Side Driving ---
 const WrongSideSimulator = () => {
+  const { t } = useTranslation();
   const [side, setSide] = useState(null); // null | "correct" | "wrong"
   const [status, setStatus] = useState("idle"); // idle | running | safe | jam
   const [showHonk, setShowHonk] = useState(false);
@@ -2436,7 +2439,7 @@ const WrongSideSimulator = () => {
                 transition={{ duration: 0.4, delay: 0.15, ease: "easeOut" }}
                 className="absolute -top-10 left-1/2 -translate-x-1/2 bg-rose-600 text-white font-black text-xs px-3 py-1 rounded-xl shadow-lg border-2 border-rose-400 uppercase whitespace-nowrap tracking-wider z-50 pointer-events-none"
               >
-                💥 COLLISION!
+                {t("basicskills.traffic_collision", "💥 COLLISION!")}
               </motion.div>
             </motion.div>
           )}
@@ -2455,17 +2458,17 @@ const WrongSideSimulator = () => {
                 <AlertTriangle size={30} className="text-rose-500 animate-pulse" />
               </div>
               <span className="text-xl md:text-3xl font-black uppercase tracking-wider text-center text-rose-400 drop-shadow-[0_0_15px_rgba(244,63,94,0.8)]">
-                💥 HEAD-ON COLLISION DETECTED!
+                {t("basicskills.traffic_head_on_collision", "💥 HEAD-ON COLLISION DETECTED!")}
               </span>
 
               {/* Advisory Message Container */}
               <div className="mt-3 text-xs md:text-sm font-semibold leading-relaxed bg-rose-900/60 p-4 rounded-2xl border border-rose-700/50 text-rose-100 max-w-lg space-y-2">
                 <p className="text-center font-bold text-yellow-300">
-                  WRONG LANE COLLISION WARNING & ADVISORY:
+                  {t("basicskills.traffic_wrong_lane_warning", "WRONG LANE COLLISION WARNING & ADVISORY:")}
                 </p>
                 <ul className="list-disc pl-4 space-y-1 text-left">
                   <li>
-                    Driving on the wrong side has caused a direct head-on collision and hindered all vehicle movement.
+                    {t("basicskills.traffic_wrong_side_rule1", "Driving on the wrong side has caused a direct head-on collision and hindered all vehicle movement.")}
                   </li>
                   <li>
                     In left-hand drive countries (like India), always stick to
@@ -2506,7 +2509,7 @@ const WrongSideSimulator = () => {
               </span>
               <div className="mt-3 text-xs md:text-sm font-semibold leading-relaxed bg-teal-900/60 p-4 rounded-2xl border border-teal-700/50 text-teal-100 max-w-md space-y-1.5 text-center">
                 <p className="font-bold text-teal-350">
-                  EXCELLENT ROAD DISCIPLINE:
+                  {t("basicskills.traffic_excellent_discipline", "EXCELLENT ROAD DISCIPLINE:")}
                 </p>
                 <p>
                   Sticking to the left lane ensures optimal traffic flow, avoids
@@ -2555,6 +2558,7 @@ const WrongSideSimulator = () => {
 
 // --- SIMULATOR 4: Distracted Driving ---
 const DistractedSimulator = () => {
+  const { t } = useTranslation();
   // phase: idle | driving | notification | responded | ignored | crash | success
   const [phase, setPhase] = useState("idle");
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -2601,7 +2605,7 @@ const DistractedSimulator = () => {
           <Smartphone size={18} className="text-teal-600" />
         </div>
         <p className="text-xs md:text-sm text-slate-600 font-semibold leading-snug">
-          Start driving. A notification will appear — will you ignore it or get distracted? Your choice decides the outcome!
+          {t("basicskills.traffic_distracted_intro", "Start driving. A notification will appear — will you ignore it or get distracted? Your choice decides the outcome!")}
         </p>
       </div>
 
@@ -2693,10 +2697,10 @@ const DistractedSimulator = () => {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-[11px] font-black text-slate-800 truncate">
-                      Messages • now
+                      {t("basicskills.traffic_messages_now", "Messages • now")}
                     </p>
                     <p className="text-[10px] text-slate-500 font-medium">
-                      Rahul: "Hey! Are you there? 😄"
+                      {t("basicskills.traffic_msg_content", "Rahul: \"Hey! Are you there? 😄\"")}
                     </p>
                   </div>
                   <div className="flex gap-1.5 shrink-0">
@@ -2737,10 +2741,10 @@ const DistractedSimulator = () => {
                 <AlertOctagon size={36} />
               </div>
               <span className="text-2xl md:text-4xl font-black uppercase tracking-widest text-center text-rose-400 drop-shadow-[0_0_20px_rgba(244,63,94,0.8)]">
-                💥 CRASH!
+                {t("basicskills.traffic_distracted_crash_title", "💥 CRASH!")}
               </span>
               <p className="text-sm font-semibold leading-relaxed mt-3 text-center bg-rose-900/60 px-5 py-3 rounded-2xl border border-rose-700/50 text-rose-100 max-w-xs">
-                You replied to the notification while driving. Just 2 seconds of distraction was enough to cause an accident.
+                {t("basicskills.traffic_distracted_crash_desc", "You replied to the notification while driving. Just 2 seconds of distraction was enough to cause an accident.")}
               </p>
             </motion.div>
           )}
@@ -2758,10 +2762,10 @@ const DistractedSimulator = () => {
                 <ShieldCheck size={36} />
               </div>
               <span className="text-2xl md:text-4xl font-black uppercase tracking-widest text-center text-teal-400 drop-shadow-[0_0_20px_rgba(45,212,191,0.8)]">
-                ✅ FOCUSED DRIVE!
+                {t("basicskills.traffic_focused_drive_title", "✅ FOCUSED DRIVE!")}
               </span>
               <p className="text-sm font-semibold leading-relaxed mt-3 text-center bg-teal-900/60 px-5 py-3 rounded-2xl border border-teal-700/50 text-teal-100 max-w-xs">
-                Great call! You ignored the notification and kept everyone safe. That message can wait — your life cannot.
+                {t("basicskills.traffic_focused_drive_desc", "Great call! You ignored the notification and kept everyone safe. That message can wait — your life cannot.")}
               </p>
             </motion.div>
           )}
@@ -2805,25 +2809,25 @@ const DistractedSimulator = () => {
                 <ShieldAlert size={20} className="text-rose-600" />
               </div>
               <h4 className="text-sm font-black text-rose-800 uppercase tracking-wide">
-                ⚠️ Safety Advisory
+                {t("basicskills.traffic_safety_advisory", "⚠️ Safety Advisory")}
               </h4>
             </div>
             <ul className="space-y-2 text-xs text-rose-700 font-semibold leading-relaxed pl-2">
               <li className="flex gap-2 items-start">
                 <span className="text-rose-400 mt-0.5">▸</span>{" "}
-                Using a phone while driving increases crash risk by 4–23x.
+                {t("basicskills.traffic_distracted_rule1", "Using a phone while driving increases crash risk by 4–23x.")}
               </li>
               <li className="flex gap-2 items-start">
                 <span className="text-rose-400 mt-0.5">▸</span>{" "}
-                At 60 km/h, reading a text for 5 seconds = driving blindfolded for 83 meters.
+                {t("basicskills.traffic_distracted_rule2", "At 60 km/h, reading a text for 5 seconds = driving blindfolded for 83 meters.")}
               </li>
               <li className="flex gap-2 items-start">
                 <span className="text-rose-400 mt-0.5">▸</span>{" "}
-                Always put your phone on silent or 'Do Not Disturb' mode before driving.
+                {t("basicskills.traffic_distracted_rule3", "Always put your phone on silent or 'Do Not Disturb' mode before driving.")}
               </li>
               <li className="flex gap-2 items-start">
                 <span className="text-rose-400 mt-0.5">▸</span>{" "}
-                Pull over safely if you must make a call or send a message.
+                {t("basicskills.traffic_distracted_rule4", "Pull over safely if you must make a call or send a message.")}
               </li>
             </ul>
           </motion.div>
@@ -2869,22 +2873,22 @@ const TrafficLab = () => {
             {[
               {
                 id: "crossing",
-                label: "Zebra Crossing",
+                label: t("basicskills.traffic_tab_crossing", "Zebra Crossing"),
                 icon: <Activity size={16} />,
               },
               {
                 id: "speeding",
-                label: "Over Speeding",
+                label: t("basicskills.traffic_tab_speeding", "Over Speeding"),
                 icon: <Zap size={16} />,
               },
               {
                 id: "wrongSide",
-                label: "Lane Discipline",
+                label: t("basicskills.traffic_tab_lane", "Lane Discipline"),
                 icon: <AlertTriangle size={16} />,
               },
               {
                 id: "distracted",
-                label: "Distracted Driving",
+                label: t("basicskills.traffic_tab_distracted", "Distracted Driving"),
                 icon: <Smartphone size={16} />,
               },
             ].map((sc) => (

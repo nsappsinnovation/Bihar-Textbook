@@ -1387,7 +1387,7 @@ const SignLearn = () => {
               <div className="relative z-10 p-5 sm:p-8 md:p-10 lg:w-1/2 space-y-3 md:space-y-4">
                 <h1 className="text-[22px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
                   {t('signLearn.heroTitle1', 'Build. Learn. &')} <br /> {t('signLearn.heroTitle2', 'Talk with')} <br />
-                  <span className={signTheme.heroHighlightText}>{t('signLearn.heroTitle3', 'Sign Language')}</span>
+                  <span className={signTheme.heroHighlightText}>{t('signLearn.heroTitle3', 'Sign Language')}</span>{t('signLearn.heroTitleSuffix', '')}
                 </h1>
                 <p className="text-slate-500 text-[13px] sm:text-[14px] md:text-[15px] lg:text-[16px] font-medium leading-relaxed max-w-sm">
                   {t('signLearn.heroSub', 'Your visual learning hub for signs and expressions.')}

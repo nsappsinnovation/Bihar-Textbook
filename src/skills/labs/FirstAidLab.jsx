@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Flame, Droplet, Leaf, Snowflake, PlusSquare, Scissors, Hand, ArrowUp, ArrowDown, Activity, Bug, ShieldAlert, CheckCircle, AlertTriangle, RefreshCw, XCircle, Eye, UserX, Wind } from 'lucide-react';
 
@@ -186,6 +187,7 @@ const scenarios = [
 ];
 
 const FirstAidLab = () => {
+  const { t } = useTranslation();
   const [activeScenarioId, setActiveScenarioId] = useState(scenarios[0].id);
   const [completedSteps, setCompletedSteps] = useState([]);
   const [feedback, setFeedback] = useState(null);

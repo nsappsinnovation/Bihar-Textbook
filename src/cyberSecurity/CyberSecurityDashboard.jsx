@@ -1865,7 +1865,7 @@ const getArticles = (t) => [
 ];
 
 const CyberSecurityDashboard = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState('playzone');
   const [selectedItem, setSelectedItem] = useState(null);
@@ -1976,7 +1976,7 @@ const CyberSecurityDashboard = () => {
                           {less.id}
                         </span>
                         <span className="text-xs sm:text-sm truncate">
-                          {less.title.replace(/^Lesson \d+:\s*/, '')}
+                          {less.title.replace(/^(Lesson|पाठ)\s*\d+:\s*/i, '')}
                         </span>
                       </div>
                     </button>
@@ -1989,7 +1989,7 @@ const CyberSecurityDashboard = () => {
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-5">
                   <div>
                     <h2 className="text-xl sm:text-2xl font-black text-slate-900 font-display tracking-tight">
-                      {currentLesson.title}
+                      {i18n.language === 'hi' ? `पाठ ${currentLesson.id}: ` : `Lesson ${currentLesson.id}: `}{currentLesson.title.replace(/^(Lesson|पाठ)\s*\d+:\s*/i, '')}
                     </h2>
                     <p className="text-xs sm:text-sm text-slate-600 mt-1 font-medium">
                       {t("cyber.ui_TopicFocus", { defaultValue: "Topic Focus:" })} <span className="text-emerald-600 font-bold">{currentLesson.topic}</span>
