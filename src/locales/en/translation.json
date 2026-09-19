@@ -44,7 +44,7 @@
     "feat3Line2": "EDUCATION",
     "feat4Line1": "EMPOWERING",
     "feat4Line2": "BIHAR",
-    "floatingText": "Bringing world-class textbooks to every learner in Bihar."
+    "floatingText": "Ensuring access to quality textbooks for learners across Bihar."
   },
   "nav": {
     "logoAlt": "BSTPC Logo",
@@ -65,7 +65,7 @@
       "board-of-directors": "Board of Directors",
       "list-md": "List of MD",
       "officers": "Officers List",
-      "employees": "Our Employee",
+      "employees": "Our Employees",
       "organisation-structure": "Organisational Structure",
       "wholesellers": "Wholeseller/Depo",
       "registered-printers": "Register Printers",
@@ -92,8 +92,8 @@
     "documents": "Documents",
     "contactInfo": "Contact Information",
     "registeredOffice": "Registered Office:",
-    "address": "Pathya Pustak Bhawan, Buddh Marg, Fraser Road Area, Patna - 800001",
-    "addressRegion": "Bihar, India",
+    "address": "Pathya Pustak Bhawan, Buddh Marg, Fraser Road Area",
+    "addressRegion": "Patna - 800001, Bihar, India",
     "copyright": "© 2026 BSTBPC. All rights reserved.",
     "designedBy": "Designed by",
     "designerName": "NS Apps Innovations",
@@ -276,23 +276,30 @@
     "subheading": "A structured framework guiding BSTBPC’s mission to strengthen learning outcomes across Bihar.",
     "description": "A structured framework guiding BSTBPC’s mission to strengthen learning outcomes across Bihar.",
     "items": {
-      "title0": "Inclusive & Equitable Learning",
-      "desc0": "Ensuring every learner across Bihar has equal access to high-quality resources.",
-      "title1": "Quality & Pedagogy Standards",
-      "desc1": "Strengthening content accuracy via structured review and continuous improvement.",
-      "title2": "Cultural Integration",
-      "desc2": "Integrating Bihar's rich cultural heritage and history into the foundational learning materials.",
-      "title3": "Seamless Supply Chain",
-      "desc3": "Ensuring efficient textbook delivery to every school—down to the last mile.",
-      "title4": "Affordable Textbooks",
-      "desc4": "Providing quality learning materials at minimal cost to support all families.",
-      "title5": "Empowered Educators",
-      "desc5": "Supporting teachers through structured guides and training-aligned materials.",
-      "title6": "Future-Ready Learners",
-      "desc6": "Enabling 21st-century skills through updated curriculum and modern pedagogy.",
-      "title7": "Sustainable Publishing",
-      "desc7": "Adopting eco-friendly printing processes and sustainable materials for book production."
-    },
+  "title0": "Accessible Learning Resources",
+  "desc0": "Making textbooks and learning resources accessible to learners across Bihar.",
+
+  "title1": "Curriculum-Based Content",
+  "desc1": "Publishing textbooks prepared in accordance with the curriculum and academic framework of Bihar.",
+
+  "title2": "Local Language & Context",
+  "desc2": "Providing learning materials across subjects and languages relevant to learners in Bihar.",
+
+  "title3": "Statewide Textbook Supply",
+  "desc3": "Supporting the printing and distribution of textbooks to destinations across Bihar.",
+
+  "title4": "Affordable Textbooks",
+  "desc4": "Supporting access to textbooks for school students through the state's textbook publishing system.",
+
+  "title5": "Learning Support Materials",
+  "desc5": "Providing textbooks, workbooks, handbooks and other educational materials for students and educators.",
+
+  "title6": "Digital Access",
+  "desc6": "Making textbooks available online for students to access learning materials digitally.",
+
+  "title7": "Efficient Publishing",
+  "desc7": "Coordinating textbook printing, publishing and supply to support timely availability of learning materials."
+},
     "missions": {
       "title0": "Inclusive & Equitable Learning",
       "desc0": "Ensuring every learner across Bihar has equal access to high-quality resources.",
@@ -950,8 +957,8 @@
   "vrDashboard": {
     "heroLine1": "Step into",
     "heroLine2": "Imagination.",
-    "heroHighlight": "Learn in VR.",
-    "heroDesc": "Explore, interact and understand difficult concepts through immersive VR experiences.",
+    "heroHighlight": "Learn VR.",
+    "heroDesc": "Explore, interact and understand difficult concepts through our VR Science Labs.",
     "heroAlt": "VR Learning",
     "card1Label": "Learn VR Technology",
     "card1Value": "How It Works?",
@@ -1263,18 +1270,18 @@
         "topic": "3D Worlds & Headsets",
         "learnSections": {
           "0": {
-            "title": "From Flat Screens to 360 Headsets",
-            "desc": "When you watch TV or play on a computer, you look at a flat screen in front of you. A VR headset is worn over your eyes so the screen surrounds your entire view. Wherever you turn your head—up, down, left, or right—you see a full 360-degree digital world!",
+            "title": "From Flat Screens to 360° Headsets",
+            "desc": "When you watch TV or play on a computer, you look at a flat screen in front of you. But in case of a VR headset, it is worn over your eyes so the screen surrounds your entire view. Wherever you turn your head—up, down, left, or right then you experience a full 360° digital world!",
             "funFact": "The very first virtual reality machine was built in 1962! Called the 'Sensorama', it let viewers ride a virtual motorcycle with 3D visuals, stereo sound, wind, and even flower scents!"
           },
           "1": {
             "title": "How Two Eyes See 3D Depth",
             "desc": "Try closing one eye, then the other—notice how your left and right eyes see from slightly different angles? VR headsets use this same natural trick! Inside the headset, two separate images are shown (one for each eye). Your brain combines them to see realistic 3D depth and distance.",
-            "funFact": "Because our two eyes are slightly apart, each sees a slightly different angle. VR headsets use this principle—called stereoscopy—to create true 3D depth inside flat displays!"
+            "funFact": "Because our two eyes are slightly apart, each sees a slightly different angle. VR headsets use this principle called stereoscopy to create true 3D depth inside flat displays!"
           },
           "2": {
             "title": "3D Sound That Moves With You",
-            "desc": "VR doesn't just trick your eyes; it uses 3D Spatial Audio for your ears! If a virtual rocket takes off to your right, the sound comes from the right earphone. When you turn your head toward the rocket, the sound moves right in front of you.",
+            "desc": "VR doesn't just trick your eyes.It uses 3D Spatial Audio for your ears. If a virtual rocket takes off to your right, the sound comes from the right earphone. When you turn your head toward the rocket, the sound moves right in front of you.",
             "funFact": "NASA astronauts train for real spacewalks inside VR headsets before ever leaving Earth, practicing how to use tools in zero gravity!"
           }
         },
@@ -1293,13 +1300,13 @@
           },
           "1": {
             "title": "Gyroscope Motion Sensors",
-            "desc": "How does the virtual world move instantly when you turn your head? Inside the headset is a tiny sensor called a Gyroscope. It measures your head turns more than 1,000 times every second so the camera moves exactly when you move!",
+            "desc": "How does the virtual world move instantly when you turn your head?\n • Inside the headset is a tiny sensor called a Gyroscope. It measures your head turns more than 1,000 times every second so the camera moves exactly when you move!",
             "funFact": "A modern VR gyroscope measures head turns over 1,000 times per second—more than 10 times faster than the blink of a human eye!"
           },
           "2": {
             "title": "Fast Screen Refresh Rate",
             "desc": "If a screen updates too slowly when you look around, it can make you feel dizzy. Good VR headsets refresh the picture 90 to 120 times every single second! This super-fast speed keeps motion smooth and natural.",
-            "funFact": "Human eyes notice motion lag if it takes more than 20 milliseconds—modern VR screens refresh up to 120 times every second!"
+            "funFact": "Human eyes notice motion lag if it takes more than 20 milliseconds. Modern VR screens refresh up to 120 times every second!"
           }
         },
         "summary": "Learn how curved glass lenses keep screens clear and how smart sensors track your head."
@@ -1322,8 +1329,8 @@
           },
           "2": {
             "title": "Feeling Virtual Contact (Haptic Vibration)",
-            "desc": "Have you noticed how a phone vibrates when you get a notification? VR controllers use tiny vibration motors inside. When your virtual hand touches a table or catches a ball, the controller rumbles so you actually feel the contact!",
-            "funFact": "Haptic feedback uses linear resonant actuators—the exact same ultra-precise vibration motors used in high-end smartphones!"
+            "desc": "Have you noticed how a phone vibrates when you get a notification? \n• VR controllers use tiny vibration motors inside. When your virtual hand touches a table or catches a ball, the controller rumbles so you actually feel the contact!",
+            "funFact": "Haptic feedback uses linear resonant actuators. The exact same ultra-precise vibration motors used in high-end smartphones!"
           }
         },
         "summary": "Find out how wireless controllers track your hands and vibrate when you touch virtual objects!"
@@ -2044,7 +2051,7 @@
     "arr_Neversharepersonalin_aa96": "Never share personal information with online strangers and tell a parent",
     "arr_Givethemafriendsaddr_e3c7": "Give them a friend's address instead",
     "arr_Yourbirthdateorpetsn_f7c9": "Your birthdate or pet's name",
-    "arr_A14characterpassphra_57ae": "A 14-character passphrase combining words, numbers, and symbols like 'BlueRocketCoffeeJump#99'",
+    "arr_A14characterpassphra_57ae": "A long passphrase (16+ characters) combining words, numbers and symbols, like 'BlueRocketCoffeeJump#99'",
     "arr_Anextrasecuritylockt_75bb": "An extra security lock that requires both your password AND a verification code sent to your phone",
     "arr_Sharingyourpasswordw_f1c5": "Sharing your password with two friends",
     "arr_Typingyourpasswordtw_688a": "Typing your password twice as fast",

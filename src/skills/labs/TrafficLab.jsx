@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import {
   Activity,
   AlertTriangle,
@@ -787,7 +788,6 @@ const CrossingSimulator = () => {
   const [crossingResult, setCrossingResult] = useState("");
   const [trafficTimer, setTrafficTimer] = useState(6);
   const [isAutoMode, setIsAutoMode] = useState(true);
-  const [pedestrianSignal, setPedestrianSignal] = useState("STOP");
 
   // --- VEHICLE POSITIONS FOR SMOOTH SIMULATION ---
   const [topCar1Pos, setTopCar1Pos] = useState(60);
@@ -801,7 +801,7 @@ const CrossingSimulator = () => {
   const bottomCar2Ref = useRef(2);
 
   // Freeze pedestrian position on crash
-  const crashStepRef = useRef(null);
+  const [crashStep, setCrashStep] = useState(null);
 
   // High-performance physics simulation loop
   useEffect(() => {
@@ -910,7 +910,7 @@ const CrossingSimulator = () => {
   }, [trafficLight, crossingResult]);
 
   // --- REF TO FREEZE TRAFFIC SIGNAL AT MOMENT OF CRASH ---
-  const crashedSignalRef = useRef("green");
+  const [crashedSignal, setCrashedSignal] = useState("green");
 
   // --- INTERACTIVE GAME STATE ---
   const [crossStep, setCrossStep] = useState(0);
@@ -946,10 +946,6 @@ const CrossingSimulator = () => {
     return () => clearInterval(interval);
   }, [isAutoMode, trafficLight]);
 
-  useEffect(() => {
-    setPedestrianSignal(trafficLight === "red" ? "WALK" : "STOP");
-  }, [trafficLight]);
-
   const handleRequestPedestrianWalk = () => {
     if (isButtonRequested || trafficLight === "red" || trafficLight === "yellow") return;
     setIsButtonRequested(true);
@@ -974,9 +970,9 @@ const CrossingSimulator = () => {
       setHonking(true);
       setTimeout(() => setHonking(false), 1500);
       setCrossStep(2);
-      crashedSignalRef.current = trafficLight;
+      setCrashedSignal(trafficLight);
       // Freeze pedestrian at crash position (step 2)
-      crashStepRef.current = 2;
+      setCrashStep(2);
       setTimeout(() => {
         setCrossingResult("crash");
         toast.error(
@@ -995,7 +991,7 @@ const CrossingSimulator = () => {
     setCrossStep(0);
     setIsButtonRequested(false);
     setHonking(false);
-    crashStepRef.current = null;
+    setCrashStep(null);
     setResetKey((k) => k + 1);
     topCar1Ref.current = 60;
     topCar2Ref.current = 82;
@@ -1236,10 +1232,10 @@ const CrossingSimulator = () => {
         <motion.div
           key={`pedestrian-${resetKey}`}
           initial={{
-            bottom: `${20 + (crashStepRef.current !== null ? crashStepRef.current : crossStep) * 13.75}%`,
+            bottom: `${20 + (crashStep ?? crossStep) * 13.75}%`,
           }}
           animate={{
-            bottom: `${20 + (crashStepRef.current !== null ? crashStepRef.current : crossStep) * 13.75}%`,
+            bottom: `${20 + (crashStep ?? crossStep) * 13.75}%`,
           }}
           transition={{ duration: 2.2, ease: "easeInOut" }}
           className="absolute left-1/2 -translate-x-1/2 z-30 pointer-events-none"
@@ -1265,7 +1261,7 @@ const CrossingSimulator = () => {
                 {t("basicskills.traffic_crashed", "CRASHED!")}
               </span>
               <p className="text-sm md:text-base font-semibold leading-relaxed mt-3 text-rose-100 bg-rose-900/60 px-6 py-3 rounded-2xl border border-rose-700/50 text-center max-w-md">
-                {t("basicskills.traffic_crossing_crash_msg", "Never cross on {{signal}} light! Vehicles cannot stop in time.", { signal: crashedSignalRef.current.toUpperCase() })}
+                {t("basicskills.traffic_crossing_crash_msg", "Never cross on {{signal}} light! Vehicles cannot stop in time.", { signal: crashedSignal.toUpperCase() })}
               </p>
               <button
                 onClick={reset}
@@ -2413,9 +2409,7 @@ const WrongSideSimulator = () => {
                 className="absolute -top-12 -left-12 w-24 h-24 bg-slate-700 rounded-full blur-2xl"
               />
               {/* Debris particles flying out */}
-              {[...Array(8)].map((_, i) => {
-                const angle = (i / 8) * Math.PI * 2;
-                const dist = 40 + Math.random() * 30;
+              {DEBRIS_PARTICLES.map(({ angle, dist, duration }, i) => {
                 return (
                   <motion.div
                     key={i}
@@ -2426,7 +2420,7 @@ const WrongSideSimulator = () => {
                       opacity: 0,
                       scale: 0.3,
                     }}
-                    transition={{ duration: 0.6 + Math.random() * 0.3, ease: "easeOut", delay: 0.05 }}
+                    transition={{ duration, ease: "easeOut", delay: 0.05 }}
                     className="absolute top-0 left-0 w-2 h-2 bg-slate-400 rounded-sm"
                   />
                 );
@@ -2557,6 +2551,13 @@ const WrongSideSimulator = () => {
 };
 
 // --- SIMULATOR 4: Distracted Driving ---
+// Randomized once at load so debris stays stable across re-renders
+const DEBRIS_PARTICLES = Array.from({ length: 8 }, (_, i) => ({
+  angle: (i / 8) * Math.PI * 2,
+  dist: 40 + Math.random() * 30,
+  duration: 0.6 + Math.random() * 0.3,
+}));
+
 const DistractedSimulator = () => {
   const { t } = useTranslation();
   // phase: idle | driving | notification | responded | ignored | crash | success
@@ -2862,6 +2863,7 @@ const DistractedSimulator = () => {
 
 // --- MAIN TRAFFIC LAB COMPONENT ---
 const TrafficLab = () => {
+  const { t } = useTranslation();
   const [activeScenario, setActiveScenario] = useState("crossing");
 
   return (

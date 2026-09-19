@@ -27,6 +27,9 @@ const optionLabels = ['A', 'B', 'C', 'D'];
 
 const QuizComponent = () => {
   const { t, i18n } = useTranslation();
+  const quizQuestions = useMemo(() => getQuizQuestions(t), [t]);
+  const [currentQ, setCurrentQ] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);

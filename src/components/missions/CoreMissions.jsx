@@ -8,7 +8,12 @@ import {
   FiZap,
   FiSun,
 } from "react-icons/fi";
-import { RiGraduationCapLine, RiFlaskLine, RiBookmarkLine, RiLeafLine } from "react-icons/ri";
+import {
+  RiGraduationCapLine,
+  RiFlaskLine,
+  RiBookmarkLine,
+  RiLeafLine,
+} from "react-icons/ri";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
@@ -21,37 +26,41 @@ const CoreMissions = () => {
         id: 1,
         titleKey: "coreMissions.items.title0",
         descKey: "coreMissions.items.desc0",
-        title: "Inclusive & Equitable Learning",
+        title: "Accessible Learning Resources",
         icon: <FiUsers />,
         color: "#6366f1",
-        description: "Ensuring every learner across Bihar has equal access to high-quality resources.",
+        description:
+          "Making textbooks and learning resources accessible to learners across Bihar.",
       },
       {
         id: 2,
         titleKey: "coreMissions.items.title1",
         descKey: "coreMissions.items.desc1",
-        title: "Quality & Pedagogy Standards",
+        title: "Curriculum-Based Content",
         icon: <FiBookOpen />,
         color: "#eab308",
-        description: "Strengthening content accuracy via structured review and continuous improvement.",
+        description:
+          "Publishing textbooks prepared in accordance with the curriculum and academic framework of Bihar.",
       },
       {
         id: 3,
         titleKey: "coreMissions.items.title2",
         descKey: "coreMissions.items.desc2",
-        title: "Cultural Integration",
+        title: "Local Language & Context",
         icon: <FiSun />,
         color: "#22c55e",
-        description: "Integrating Bihar's rich cultural heritage and history into the foundational learning materials.",
+        description:
+          "Providing learning materials across subjects and languages relevant to learners in Bihar.",
       },
       {
         id: 4,
         titleKey: "coreMissions.items.title3",
         descKey: "coreMissions.items.desc3",
-        title: "Seamless Supply Chain",
+        title: "Statewide Textbook Supply",
         icon: <FiTruck />,
         color: "#3b82f6",
-        description: "Ensuring efficient textbook delivery to every school—down to the last mile.",
+        description:
+          "Supporting the printing and distribution of textbooks to destinations across Bihar.",
       },
       {
         id: 5,
@@ -60,37 +69,41 @@ const CoreMissions = () => {
         title: "Affordable Textbooks",
         icon: <FiCreditCard />,
         color: "#ef4444",
-        description: "Providing quality learning materials at minimal cost to support all families.",
+        description:
+          "Supporting access to textbooks for school students through the state's textbook publishing system.",
       },
       {
         id: 6,
         titleKey: "coreMissions.items.title5",
         descKey: "coreMissions.items.desc5",
-        title: "Empowered Educators",
+        title: "Learning Support Materials",
         icon: <FiZap />,
         color: "#f97316",
-        description: "Supporting teachers through structured guides and training-aligned materials.",
+        description:
+          "Providing textbooks, workbooks, handbooks and other educational materials for students and educators.",
       },
       {
         id: 7,
         titleKey: "coreMissions.items.title6",
         descKey: "coreMissions.items.desc6",
-        title: "Future-Ready Learners",
+        title: "Digital Access",
         icon: <RiGraduationCapLine />,
         color: "#a855f7",
-        description: "Enabling 21st-century skills through updated curriculum and modern pedagogy.",
+        description:
+          "Making textbooks available online for students to access learning materials digitally.",
       },
       {
         id: 8,
         titleKey: "coreMissions.items.title7",
         descKey: "coreMissions.items.desc7",
-        title: "Sustainable Publishing",
+        title: "Efficient Publishing",
         icon: <RiLeafLine />,
         color: "#db2777",
-        description: "Adopting eco-friendly printing processes and sustainable materials for book production.",
+        description:
+          "Coordinating textbook printing, publishing and supply to support timely availability of learning materials.",
       },
     ],
-    [t]
+    [t],
   );
 
   const CentralBook = () => (
@@ -138,10 +151,16 @@ const CoreMissions = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-5xl md:text-7xl font-bold text-[#0d0e23] mb-6 tracking-tight">
-            {t("coreMissions.headingLine1", "The Eight")} <span className="text-blue-600/90">{t("coreMissions.headingLine2", "Core Pillars")}</span>
+            {t("coreMissions.headingLine1", "The Eight")}{" "}
+            <span className="text-blue-600/90">
+              {t("coreMissions.headingLine2", "Core Pillars")}
+            </span>
           </h2>
           <p className="max-w-3xl mx-auto text-gray-500 text-lg font-light leading-relaxed">
-            {t("coreMissions.subheading", "A structured framework guiding BSTBPC’s mission to strengthen learning outcomes across Bihar.")}
+            {t(
+              "coreMissions.subheading",
+              "A structured framework guiding BSTBPC’s mission to strengthen learning outcomes across Bihar.",
+            )}
           </p>
         </div>
 
@@ -172,10 +191,8 @@ const CoreMissions = () => {
 
         {/* --- DESKTOP ORBIT VIEW --- */}
         <div className="hidden lg:flex justify-center items-center h-[900px] relative -mt-32">
-
           {/* Main Container - Centered */}
           <div className="relative w-[1000px] h-[1000px] flex items-center justify-center group/orbit pointer-events-none">
-
             {/* 1. CENTRAL HUB (Static - does not orbit) */}
             <div className="absolute z-30 w-32 h-32 bg-white rounded-full border border-gray-100/60 flex items-center justify-center p-6 shadow-sm pointer-events-auto">
               <CentralBook />
@@ -205,7 +222,6 @@ const CoreMissions = () => {
                       The Icon is the absolute CENTER.
                     */}
                     <div className="animate-[slowOrbitReverse_60s_linear_infinite] group-hover/orbit:[animation-play-state:paused] relative group flex items-center justify-center w-12 h-12 pointer-events-auto">
-
                       {/* ICON (The Anchor) */}
                       <div
                         className="w-16 h-16 shrink-0 rounded-full bg-white border border-gray-100 flex items-center justify-center text-2xl shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:border-blue-200 group-hover:shadow-lg cursor-pointer relative z-20"
@@ -229,7 +245,6 @@ const CoreMissions = () => {
                           </p>
                         </div>
                       </div>
-
                     </div>
                   </div>
                 );
@@ -238,7 +253,6 @@ const CoreMissions = () => {
 
             {/* Orbit Path Visual */}
             <div className="absolute inset-0 rounded-full border border-dashed border-gray-200/50 pointer-events-none scale-[0.8] opacity-50" />
-
           </div>
         </div>
       </div>

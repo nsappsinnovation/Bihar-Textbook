@@ -90,8 +90,8 @@ const Footer = () => {
                 </div>
                 <span className="text-white/70 leading-relaxed mt-1">
                   <strong className="text-white/90 block mb-1">{t("footer.registeredOffice", "Registered Office:")}</strong>
-                  {t("footer.address", "Pathya Pustak Bhawan, Buddh Marg, Fraser Road Area, Patna - 800001")},<br />
-                  {t("footer.addressRegion", "Bihar, India")}.
+                  {t("footer.address", "Pathya Pustak Bhawan, Buddh Marg, Fraser Road Area, ")},<br/>
+                  {t("footer.addressRegion", "Patna - 800001, Bihar, India")}.
                 </span>
               </div>
 

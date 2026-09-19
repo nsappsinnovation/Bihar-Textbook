@@ -108,7 +108,7 @@ const Hero = () => {
                     </div>
                     <div className="h-[clamp(2.5rem,5vw,3.5rem)] w-[2px] bg-white"></div>
                     <p className="text-white text-[clamp(0.65rem,1.2vw,0.85rem)] font-medium leading-[1.6] tracking-wide opacity-90 max-w-[10rem]">
-                        {t("hero.floatingText", "Bringing world-class textbooks to every learner in Bihar.")}
+                        {t("hero.floatingText", "Ensuring access to quality textbooks for learners across Bihar.")}
                     </p>
                 </div>
 
