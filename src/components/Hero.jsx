@@ -1,55 +1,64 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import React, { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import MoltenMetal from './MoltenMetal';
+import Threads from './Threads';
 
-const Star = () => (
-    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path d="M12 0c.6 5.7 5.7 10.8 12 12-6.3 1.2-11.4 6.3-12 12-.6-5.7-5.7-10.8-12-12C6.3 10.8 11.4 5.7 12 0z" />
-    </svg>
-);
+// #124d9c, the brand mid-blue, as the shader's 0–1 colour channels
+const THREAD_COLOR = [0.071, 0.302, 0.612];
 
 const Hero = () => {
     const { t } = useTranslation();
+    const heroRef = useRef(null);
 
-    const books = [
-        { key: 'textbooks', label: t("hero.book1", "TEXTBOOKS") },
-        { key: 'audiobooks', label: t("hero.book2", "AUDIO BOOKS") },
-        { key: 'workbooks', label: t("hero.book3", "WORKBOOKS") },
+    const features = [
+        `${t("hero.feat1Line1", "QUALITY")} ${t("hero.feat1Line2", "CONTENT")}`,
+        `${t("hero.feat2Line1", "LEARNING")} ${t("hero.feat2Line2", "FOR ALL")}`,
+        `${t("hero.feat3Line1", "INCLUSIVE")} ${t("hero.feat3Line2", "EDUCATION")}`,
+        `${t("hero.feat4Line1", "EMPOWERING")} ${t("hero.feat4Line2", "BIHAR")}`,
     ];
 
+    // Publishing leads; the eight sections of the site follow as what else we offer
+    const marqueeLines = [
+        t("hero.marquee1", "Publishing the textbooks that reach every Bihar Board classroom, from Class 1 to Class 12."),
+        t("hero.marquee2", "Beyond the printed page: virtual reality labs, audiobooks, sign language, AI, cyber safety, heritage and life skills."),
+    ];
+
+    // Two identical copies make the loop seamless; only the first is read out
+    const marqueeCopy = (hidden) => (
+        <div className="hv1-marquee-copy" aria-hidden={hidden || undefined}>
+            {marqueeLines.map((line, i) => (
+                <React.Fragment key={i}>
+                    <span>{line}</span>
+                    <span className="hv1-marquee-sep">✦</span>
+                </React.Fragment>
+            ))}
+        </div>
+    );
+
     return (
-        <section className="hv1 font-manrope" id="top" aria-labelledby="hv1-title">
-            <div className="hv1-molten" aria-hidden="true">
-                <MoltenMetal
-                    color1="#eaf1fb"
-                    color2="#3b82f6"
-                    color3="#0b2b4f"
-                    speed={0.22}
-                    scale={4}
-                    detail={3}
-                    glow={1.15}
-                    coreSize={0.1}
-                    swirl={1}
-                    fold={-0.2}
-                    blackPoint={0.03}
-                    brightness={1.1}
-                    colorMode="molten"
-                    grain
-                    grainIntensity={0.04}
-                    mouseInteraction
-                    mouseStrength={0.25}
-                    opacity={0.5}
-                    lightMode
-                    backgroundColor="#f7f4ee"
+        <section className="hv1 font-manrope" id="top" aria-labelledby="hv1-title" ref={heroRef}>
+            {/* Decorative WebGL backdrop, behind the grid and the text */}
+            <div className="hv1-threads" aria-hidden="true">
+                <Threads
+                    color={THREAD_COLOR}
+                    amplitude={1}
+                    distance={0}
+                    enableMouseInteraction
+                    interactionTarget={heroRef}
                 />
             </div>
 
-            <div className="hv1-shell hv1-layout">
-                {/* LEFT: copy */}
-                <div className="hv1-copy">
-                    <p className="hv1-eyebrow">{t("hero.tagline", "Empowering minds. Enriching futures.")}</p>
+            <div className="hv1-shell hv1-inner">
+                {/* Masthead band */}
+                <div className="hv1-masthead">
+                    <div className="hv1-movement">
+                        <span>{t("hero.tagline", "Empowering minds. Enriching futures.")}</span>
+                        <strong>{t("hero.floatingText", "Ensuring access to quality textbooks for learners across Bihar.")}</strong>
+                    </div>
+                </div>
+
+                {/* Title band */}
+                <div className="hv1-title-block">
+                    <p className="hv1-eyebrow">{features.join(" · ")}</p>
 
                     <h1 id="hv1-title" className="hv1-heading">
                         {t("hero.titlePart1", "Bihar State")}{" "}
@@ -58,37 +67,16 @@ const Hero = () => {
                         {t("hero.titlePart2", "Publishing")}{" "}
                         {t("hero.titlePart3", "Corporation Ltd.")}
                     </h1>
-
-                    <div className="hv1-cta-row">
-                        <Link to="/#missions-grid" className="hv1-cta">
-                            <span>{t("hero.exploreNow", "Explore Now")}</span>
-                            <i aria-hidden="true"><ArrowRight size={18} /></i>
-                        </Link>
-                    </div>
-
-                    <p className="hv1-provide">
-                        <span className="hv1-provide-lead">{t("hero.provideLead", "BSTBPC provides")}</span>
-                        <span className="hv1-drop">
-                            <span>{t("hero.word1", "Textbooks")}</span>
-                            <span>{t("hero.word2", "Audiobooks")}</span>
-                            <span>{t("hero.word3", "Workbooks")}</span>
-                            <span>{t("hero.word4", "EVERYTHING!")}</span>
-                        </span>
-                    </p>
                 </div>
+            </div>
 
-                {/* RIGHT: book shelf */}
-                <div className="hv1-shelf" aria-hidden="true">
-                    {books.map((book, i) => (
-                        // The slot is the hover target and never moves, so straightening
-                        // the book can't pull it out from under the cursor
-                        <div key={book.key} className={`hv1-book-slot hv1-book-slot--${i + 1}`}>
-                            <div className={`hv1-book hv1-book--${i + 1}`}>
-                                <span className="hv1-book-star"><Star /></span>
-                                <span className="hv1-book-label">{book.label}</span>
-                            </div>
-                        </div>
-                    ))}
+            {/* Running strip along the bottom edge */}
+            <div className="hv1-marquee-wrap">
+                <div className="hv1-marquee-track">
+                    <div className="hv1-marquee">
+                        {marqueeCopy(false)}
+                        {marqueeCopy(true)}
+                    </div>
                 </div>
             </div>
         </section>
