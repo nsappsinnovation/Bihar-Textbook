@@ -351,3 +351,536 @@ html.lenis body {
 body { top: 0px !important; }
 .goog-te-balloon-frame { display: none !important; }
 .goog-text-highlight { background-color: transparent !important; border: none !important; box-shadow: none !important; }
+
+/* =========================================================
+   HOME HERO + NAVBAR (design adapted from startup-bihar-hackathon HeroV1)
+   Reference palette kept (ivory, ink, muted); orange accent swapped for Bihar blue.
+========================================================= */
+
+.font-sora { font-family: "Sora", "Nunito", sans-serif; }
+.font-manrope { font-family: "Manrope", "Nunito", sans-serif; }
+
+.hv1-shell { width: min(1400px, calc(100% - 96px)); margin-inline: auto; }
+
+/* ---------- Hero ---------- */
+.hv1 {
+  position: relative;
+  min-height: min(1040px, 100svh);
+  overflow: hidden;
+  background: #f7f4ee;
+  color: #111111;
+}
+
+.hv1::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  opacity: 0.24;
+  background-image:
+    linear-gradient(rgba(17, 17, 17, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(17, 17, 17, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 76%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 22%, #000 76%, transparent 100%);
+  z-index: 1;
+}
+
+/* Molten Metal shader background (components/MoltenMetal.jsx) */
+.hv1-molten {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hv1-layout {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  min-height: min(1040px, 100svh);
+  grid-template-columns: minmax(0, 1.04fr) minmax(0, 0.96fr);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  padding-top: 7rem;
+  padding-bottom: 3rem;
+}
+
+/* LEFT: copy */
+.hv1-copy { display: flex; flex-direction: column; }
+
+.hv1-eyebrow {
+  margin: 0;
+  color: #124d9c;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* The site's original hero heading: heavy Nunito, navy, with the highlight word in blue */
+.hv1-heading {
+  margin: clamp(0.6rem, 1.2vw, 1rem) 0 0;
+  color: #0b2b4f;
+  font-family: "Nunito", sans-serif;
+  /* Sized so "Publishing Corporation Ltd." stays on one line next to the books */
+  font-size: clamp(1.85rem, 3.5vw, 2.9rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.hv1-heading-accent { color: #2563eb; }
+
+.hv1-cta-row { margin-top: clamp(1.5rem, 3vw, 2.6rem); }
+
+.hv1-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(1.2rem, 2.4vw, 2.6rem);
+  border: 1px solid rgba(17, 17, 17, 0.22);
+  border-radius: 999px;
+  padding: 6px 6px 6px clamp(20px, 2.4vw, 30px);
+  color: #111111;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: border-color 250ms ease, color 250ms ease;
+}
+
+.hv1-cta:hover { border-color: #124d9c; color: #124d9c; }
+
+.hv1-cta i {
+  display: grid;
+  width: clamp(40px, 3.4vw, 48px);
+  height: clamp(40px, 3.4vw, 48px);
+  place-items: center;
+  border-radius: 50%;
+  color: #ffffff;
+  background: linear-gradient(135deg, #124d9c 0%, #1e63d6 55%, #3b82f6 100%);
+  transition: transform 250ms ease;
+}
+
+.hv1-cta:hover i { transform: translateX(3px); }
+
+/* "BSTBPC provides <word>" — dropping-text animation, brand colours, no background cycling */
+.hv1-provide {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  max-width: 54ch;
+  margin: clamp(2.4rem, 6vw, 5.5rem) 0 0;
+  color: #4a5561;
+  font-family: "Sora", "Nunito", sans-serif;
+  font-size: clamp(0.95rem, 1.5vw, 1.3rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.hv1-drop {
+  position: relative;
+  display: inline-block;
+  width: 9.4em;
+  height: 1.25em;
+  text-align: left;
+}
+
+/* The words are absolutely positioned, so the box has no text of its own to sit on.
+   A zero-width space gives it a baseline that lines up with "BSTBPC provides". */
+.hv1-drop::before { content: "\200B"; }
+
+.hv1-provide-lead { white-space: nowrap; }
+
+/* Every word gets the same case, weight and tracking, so the line keeps
+   one size as they cycle */
+.hv1-drop > span {
+  position: absolute;
+  margin-left: -30px;
+  font-size: 0;
+  font-weight: 800;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+}
+
+.hv1-drop > span:nth-child(1) {
+  color: #0b2b4f;
+  text-shadow: 0 10px 26px rgba(11, 43, 79, 0.18);
+  animation: hv1-roll 4s linear infinite 0s;
+}
+
+.hv1-drop > span:nth-child(2) {
+  color: #124d9c;
+  text-shadow: 0 10px 26px rgba(18, 77, 156, 0.2);
+  animation: hv1-roll 4s linear infinite 1s;
+}
+
+.hv1-drop > span:nth-child(3) {
+  color: #1e63d6;
+  text-shadow: 0 10px 26px rgba(30, 99, 214, 0.22);
+  animation: hv1-roll 4s linear infinite 2s;
+}
+
+.hv1-drop > span:nth-child(4) {
+  color: #3b82f6;
+  text-shadow: 0 10px 26px rgba(59, 130, 246, 0.24);
+  animation: hv1-roll 4s linear infinite 3s;
+}
+
+@keyframes hv1-roll {
+  0% { font-size: 0; opacity: 0; margin-left: -30px; margin-top: 0; transform: rotate(-25deg); }
+  3% { opacity: 1; transform: rotate(0deg); }
+  5% { font-size: inherit; opacity: 1; margin-left: 0; margin-top: 0; }
+  20% { font-size: inherit; opacity: 1; margin-left: 0; margin-top: 0; transform: rotate(0deg); }
+  27% { font-size: 0; opacity: 0.5; margin-left: 20px; margin-top: 100px; }
+  100% { font-size: 0; opacity: 0; margin-left: -30px; margin-top: 0; transform: rotate(15deg); }
+}
+
+/* Without motion, show the first word only, standing still */
+@media (prefers-reduced-motion: reduce) {
+  .hv1-drop > span { animation: none; }
+  .hv1-drop > span:nth-child(1) {
+    font-size: inherit;
+    opacity: 1;
+    margin-left: 0;
+    transform: none;
+  }
+}
+
+/* RIGHT: tilted books */
+.hv1-shelf {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: clamp(12px, 2vw, 34px);
+  height: clamp(340px, 50vw, 660px);
+  padding-right: clamp(6px, 2vw, 34px);
+}
+
+/* Fixed-size hover area; it holds still while the book inside it turns */
+.hv1-book-slot {
+  position: relative;
+  width: clamp(56px, 7.2vw, 116px);
+  flex: none;
+}
+
+/* Only the slot reacts to the cursor. The leaning book overhangs its slot, and
+   hovering that overhang would also count as hovering the slot, so the book
+   would straighten, slide away, fall back and flicker. */
+.hv1-book { pointer-events: none; }
+
+.hv1-book-slot--1 { height: 74%; }
+.hv1-book-slot--2 { height: 88%; }
+.hv1-book-slot--3 { height: 100%; }
+
+.hv1-book {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: clamp(16px, 2.2vw, 32px);
+  border-radius: 3px;
+  box-shadow: clamp(8px, 1vw, 15px) clamp(7px, 0.9vw, 13px) 0 0 #111111;
+  /* Rotating about the foot keeps the book planted while it straightens */
+  transform-origin: bottom center;
+  transition:
+    transform 520ms cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 520ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+}
+
+/* Hover: the book stands upright, lifts a little and comes in front of its neighbours */
+@media (hover: hover) and (pointer: fine) {
+  .hv1-book-slot:hover { z-index: 2; }
+
+  .hv1-book-slot:hover .hv1-book {
+    box-shadow: clamp(5px, 0.5vw, 8px) clamp(9px, 1.1vw, 16px) 0 0 #111111;
+    transform: rotate(0deg) translateY(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hv1-book { transition: none; }
+}
+
+.hv1-book--1 {
+  background: linear-gradient(170deg, #3b82f6 0%, #1e63d6 55%, #124d9c 100%);
+  transform: rotate(9deg);
+}
+
+.hv1-book--2 {
+  background: linear-gradient(170deg, #1e63d6 0%, #124d9c 55%, #0b2b4f 100%);
+  transform: rotate(6deg);
+}
+
+.hv1-book--3 {
+  background: linear-gradient(170deg, #93c5fd 0%, #60a5fa 55%, #3b82f6 100%);
+  transform: rotate(3.5deg);
+}
+
+.hv1-book-star {
+  position: absolute;
+  top: clamp(14px, 1.9vw, 26px);
+  left: 50%;
+  display: grid;
+  width: clamp(26px, 3vw, 44px);
+  height: clamp(26px, 3vw, 44px);
+  place-items: center;
+  border-radius: 50%;
+  background: #ffffff;
+  transform: translateX(-50%);
+}
+
+.hv1-book-star svg { width: 56%; height: 56%; fill: #111111; }
+
+.hv1-book-label {
+  color: #ffffff;
+  font-family: "Sora", "Nunito", sans-serif;
+  font-size: clamp(0.7rem, 0.95vw, 0.98rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* ---------- Navbar ---------- */
+.bnav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  transition: background 300ms ease, box-shadow 300ms ease;
+}
+
+.bnav--solid {
+  background: rgba(247, 244, 238, 0.9);
+  box-shadow: 0 1px 0 rgba(17, 17, 17, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* backdrop-filter would make the header the containing block of the fixed mobile menu,
+   so it is switched off while the menu is open (the ivory menu covers the page anyway) */
+.bnav.bnav--open {
+  background: #f7f4ee;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.bnav-inner {
+  display: grid;
+  min-height: 92px;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+  transition: min-height 300ms ease;
+}
+
+.bnav--scrolled .bnav-inner { min-height: 72px; }
+
+.bnav-links {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.3vw, 32px);
+}
+
+.bnav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: #111111;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 250ms ease;
+}
+
+.bnav-link::after {
+  position: absolute;
+  right: 0;
+  bottom: -6px;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  content: "";
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 250ms ease;
+}
+
+.bnav-link:hover::after,
+.bnav-link:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.bnav-link--active { color: #124d9c; }
+.bnav-link--active::after { transform: scaleX(1); }
+
+.bnav-dropdown {
+  border: 1px solid rgba(17, 17, 17, 0.1);
+  border-radius: 12px;
+  background: #f7f4ee;
+  box-shadow: 0 18px 40px rgba(17, 17, 17, 0.1);
+}
+
+.bnav-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.bnav-lang {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(17, 17, 17, 0.18);
+  border-radius: 999px;
+  padding: 0 16px;
+  background: transparent;
+  cursor: pointer;
+  transition: border-color 250ms ease;
+}
+
+.bnav-lang:hover { border-color: #124d9c; }
+
+.bnav-button {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 22px;
+  color: #ffffff;
+  background: #124d9c;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 250ms ease, background-color 250ms ease;
+}
+
+.bnav-button:hover { transform: translateY(-2px); background: #0b2b4f; }
+.bnav-button svg { transition: transform 250ms ease; }
+.bnav-button:hover svg { transform: translate(2px, -2px); }
+
+.bnav-menu-button {
+  display: inline-flex;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  color: #111111;
+  background: transparent;
+  cursor: pointer;
+}
+
+.bnav-mobile {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow-y: auto;
+  padding: 105px 20px 24px;
+  background: #f7f4ee;
+}
+
+.bnav-mobile-inner {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+}
+
+.bnav-mobile-link {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.12);
+  padding: 1.15rem 0;
+  color: #111111;
+  font-family: "Sora", "Nunito", sans-serif;
+  font-size: 1.7rem;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  text-align: left;
+  background: transparent;
+  cursor: pointer;
+}
+
+.bnav-mobile-link--active { color: #124d9c; }
+
+.bnav-mobile-sub {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 0.9rem 0 1rem 0.2rem;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.12);
+}
+
+.bnav-mobile-sub a {
+  color: #3f3d38;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.bnav-mobile-sub a.bnav-mobile-sub--active { color: #124d9c; }
+
+.bnav-mobile .bnav-button { width: 100%; margin-top: 2rem; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+  .hv1-shell { width: min(100% - 64px, 1400px); }
+  .hv1-layout { gap: clamp(1rem, 3vw, 2.5rem); }
+}
+
+@media (max-width: 980px) {
+  /* Stack the copy above the books */
+  .hv1-layout { grid-template-columns: 1fr; align-content: center; gap: clamp(2rem, 6vw, 3rem); }
+  .hv1-shelf { height: clamp(260px, 56vw, 420px); padding-right: 0; }
+  .hv1-provide { margin-top: clamp(1.6rem, 4vw, 2.4rem); }
+}
+
+/* Desktop vs mobile navigation (kept in plain CSS so it isn't overridden by the display rules above) */
+@media (min-width: 1024px) {
+  .bnav-menu-button,
+  .bnav-mobile { display: none; }
+}
+
+@media (max-width: 1023px) {
+  .bnav-links,
+  .bnav-desktop-only { display: none; }
+  .bnav-inner { min-height: 76px; grid-template-columns: 1fr auto; }
+  .bnav--scrolled .bnav-inner { min-height: 66px; }
+}
+
+@media (max-width: 780px) {
+  .hv1-shell { width: calc(100% - 40px); }
+  .hv1 { min-height: 100svh; }
+  .hv1-layout { min-height: 100svh; padding-top: 5.6rem; padding-bottom: 2rem; }
+  .hv1-cta { font-size: 0.88rem; }
+}
+
+@media (max-width: 640px) {
+  .hv1-book-slot { width: clamp(48px, 15vw, 70px); }
+}
+
+/* Wide letter-spacing breaks Devanagari letter joins, so drop it in Hindi */
+html.lang-hi .hv1-eyebrow,
+html.lang-hi .hv1-book-label {
+  letter-spacing: normal;
+}
+
+html.lang-hi .hv1-eyebrow {
+  font-size: 0.8rem;
+}

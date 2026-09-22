@@ -1,9 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, Languages } from "lucide-react";
+import { Menu, X, ChevronDown, ArrowUpRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Knowconfig } from './knowus/Knowconfig';
 import { Galleryconfig } from './gallery/Galleryconfig';
+
+const dropdownPanelClass =
+  "dropdown-menu bnav-dropdown absolute left-0 top-full mt-3 w-64 opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50 max-h-96 overflow-y-auto scrollbar-hide py-2";
+
+const dropdownItemClass = (subActive) =>
+  `block px-4 py-2.5 text-sm transition-all ${
+    subActive
+      ? "bg-[#124d9c]/[0.08] text-[#124d9c] font-bold border-l-4 border-[#124d9c]"
+      : "text-[#111111] hover:bg-black/[0.03] hover:text-[#124d9c]"
+  }`;
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
@@ -11,9 +21,25 @@ const Navbar = () => {
   const isHomePage = location.pathname === "/";
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
 
   const currentLang = (i18n.language || 'en').toLowerCase();
   const isHindi = currentLang.startsWith('hi');
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 28);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") setIsOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, []);
 
   const handleToggleLanguage = () => {
     const nextLang = isHindi ? 'en' : 'hi';
@@ -43,75 +69,75 @@ const Navbar = () => {
     return location.pathname.startsWith(path);
   };
 
-  const getLinkClass = (path) => {
-    const active = isActive(path);
-    return active
-      ? "text-blue-600 font-bold relative pb-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-blue-600 after:rounded-full transition-all flex items-center gap-1 cursor-pointer"
-      : "text-gray-900 hover:text-blue-600 transition-colors flex items-center gap-1 cursor-pointer";
-  };
+  const getLinkClass = (path) => `bnav-link ${isActive(path) ? "bnav-link--active" : ""}`;
+
+  const getMobileLinkClass = (path) => `bnav-mobile-link ${isActive(path) ? "bnav-mobile-link--active" : ""}`;
+
+  // "Notifications" groups Notice and Tenders, so it stays highlighted on either page
+  const notificationsLinks = [
+    { to: "/notice", label: t("nav.notice") },
+    { to: "/tenders", label: t("nav.tenders") },
+  ];
+  const isNotificationsActive = isActive("/notice") || isActive("/tenders");
+
+  // "Policy" groups CSR Policy and RTI
+  const policyLinks = [
+    { to: "/csr-policy", label: t("nav.csrPolicy") },
+    { to: "/rti", label: t("nav.documentsLinks.rti", "RTI") },
+  ];
+  const isPolicyActive = isActive("/csr-policy") || isActive("/rti");
+
+  // Transparent over the home hero until the page scrolls; frosted ivory everywhere else
+  const isSolid = !isHomePage || scrolled || isOpen;
 
   return (
-    <header className={`absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-6 py-4 w-full transition-all duration-300 ${
-      isHomePage ? "bg-transparent" : "bg-white shadow-sm border-b border-gray-100"
-    }`}>
+    <header className={`bnav font-manrope ${isSolid ? "bnav--solid" : ""} ${scrolled ? "bnav--scrolled" : ""} ${isOpen ? "bnav--open" : ""}`}>
 
-      <div className="flex h-16 w-full items-center justify-between px-2 md:px-6">
+      <div className="hv1-shell bnav-inner">
         {/* LEFT: Logo */}
         <div className="flex items-center shrink-0">
           <Link to="/">
             <img loading="eager" decoding="async"
               src="/logo.webp"
               alt="BSTBPC Logo"
-              className="h-10 sm:h-12 md:h-16 w-auto object-contain"
+              className="h-11 md:h-14 w-auto object-contain"
             />
           </Link>
         </div>
 
         {/* CENTER: Navigation (Desktop) */}
-        <nav className="hidden lg:flex mx-auto items-center gap-6 xl:gap-10 text-[14px] font-medium transition-colors duration-300 text-gray-700">
+        <nav className="bnav-links" aria-label="Primary navigation">
           <Link to="/" className={getLinkClass("/")}>{t("nav.home")}</Link>
 
           <div className="relative group">
             <span className={getLinkClass("/know-us")}>
-              {t("nav.knowUs")} <ChevronDown size={14} className={isActive("/know-us") ? "text-blue-600" : ""} />
+              {t("nav.knowUs")} <ChevronDown size={13} />
             </span>
-            <div data-lenis-prevent="true" className="dropdown-menu absolute left-0 top-full mt-3 w-64 rounded-md bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50 max-h-96 overflow-y-auto scrollbar-hide border border-slate-100 py-1">
-              {Knowconfig.map(item => {
-                const subActive = location.pathname === `/know-us/${item.id}`;
-                return (
-                  <Link
-                    key={item.id}
-                    to={`/know-us/${item.id}`}
-                    className={`block px-4 py-2.5 text-sm transition-all ${
-                      subActive
-                        ? "bg-blue-50 text-blue-600 font-bold border-l-4 border-blue-600"
-                        : "text-slate-800 hover:bg-slate-50 hover:text-blue-600"
-                    }`}
-                  >
-                    {t(`nav.knowUsLinks.${item.id}`, item.label)}
-                  </Link>
-                );
-              })}
+            <div data-lenis-prevent="true" className={dropdownPanelClass}>
+              {Knowconfig.map(item => (
+                <Link
+                  key={item.id}
+                  to={`/know-us/${item.id}`}
+                  className={dropdownItemClass(location.pathname === `/know-us/${item.id}`)}
+                >
+                  {t(`nav.knowUsLinks.${item.id}`, item.label)}
+                </Link>
+              ))}
             </div>
           </div>
 
           <div className="relative group">
             <span className={getLinkClass("/books")}>
-              {t("nav.books")} <ChevronDown size={14} className={isActive("/books") ? "text-blue-600" : ""} />
+              {t("nav.books")} <ChevronDown size={13} />
             </span>
-            <div data-lenis-prevent="true" className="dropdown-menu absolute left-0 top-full mt-3 w-64 rounded-md bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50 max-h-96 overflow-y-auto scrollbar-hide border border-slate-100 py-1">
+            <div data-lenis-prevent="true" className={dropdownPanelClass}>
               {[...Array(12)].map((_, index) => {
                 const classId = index + 1;
-                const subActive = location.pathname === `/books/${classId}`;
                 return (
                   <Link
                     key={classId}
                     to={`/books/${classId}`}
-                    className={`block px-4 py-2.5 text-sm transition-all ${
-                      subActive
-                        ? "bg-blue-50 text-blue-600 font-bold border-l-4 border-blue-600"
-                        : "text-slate-800 hover:bg-slate-50 hover:text-blue-600"
-                    }`}
+                    className={dropdownItemClass(location.pathname === `/books/${classId}`)}
                   >
                     {t("nav.classN", { classId })}
                   </Link>
@@ -122,149 +148,126 @@ const Navbar = () => {
 
           <div className="relative group">
             <span className={getLinkClass("/gallery")}>
-              {t("nav.gallery")} <ChevronDown size={14} className={isActive("/gallery") ? "text-blue-600" : ""} />
+              {t("nav.gallery")} <ChevronDown size={13} />
             </span>
-            <div data-lenis-prevent="true" className="dropdown-menu absolute left-0 top-full mt-3 w-64 rounded-md bg-white shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50 max-h-96 overflow-y-auto scrollbar-hide border border-slate-100 py-1">
-              {Galleryconfig.map(item => {
-                const subActive = location.pathname === `/gallery/${item.id}`;
-                return (
-                  <Link
-                    key={item.id}
-                    to={`/gallery/${item.id}`}
-                    className={`block px-4 py-2.5 text-sm transition-all ${
-                      subActive
-                        ? "bg-blue-50 text-blue-600 font-bold border-l-4 border-blue-600"
-                        : "text-slate-800 hover:bg-slate-50 hover:text-blue-600"
-                    }`}
-                  >
-                    {t(`nav.galleryLinks.${item.id}`, item.label)}
-                  </Link>
-                );
-              })}
+            <div data-lenis-prevent="true" className={dropdownPanelClass}>
+              {Galleryconfig.map(item => (
+                <Link
+                  key={item.id}
+                  to={`/gallery/${item.id}`}
+                  className={dropdownItemClass(location.pathname === `/gallery/${item.id}`)}
+                >
+                  {t(`nav.galleryLinks.${item.id}`, item.label)}
+                </Link>
+              ))}
             </div>
           </div>
 
           <Link to="/blog" className={getLinkClass("/blog")}>{t("nav.gyanKendra")}</Link>
-          <Link to="/notice" className={getLinkClass("/notice")}>{t("nav.notice")}</Link>
-          <Link to="/tenders" className={getLinkClass("/tenders")}>{t("nav.tenders")}</Link>
-          <Link to="/csr-policy" className={`whitespace-nowrap ${getLinkClass("/csr-policy")}`}>{t("nav.csrPolicy")}</Link>
-          <Link to="/rti" className={getLinkClass("/rti")}>{t("nav.documentsLinks.rti", "RTI")}</Link>
+          <div className="relative group">
+            <span className={`bnav-link ${isNotificationsActive ? "bnav-link--active" : ""}`}>
+              {t("nav.notifications", "Notifications")} <ChevronDown size={13} />
+            </span>
+            <div data-lenis-prevent="true" className={dropdownPanelClass}>
+              {notificationsLinks.map(item => (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className={dropdownItemClass(isActive(item.to))}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div className="relative group">
+            <span className={`bnav-link ${isPolicyActive ? "bnav-link--active" : ""}`}>
+              {t("nav.policy", "Policy")} <ChevronDown size={13} />
+            </span>
+            <div data-lenis-prevent="true" className={dropdownPanelClass}>
+              {policyLinks.map(item => (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className={dropdownItemClass(isActive(item.to))}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </div>
           <Link to="/contact" className={getLinkClass("/contact")}>{t("nav.contact")}</Link>
         </nav>
 
-        {/* RIGHT: Translate, Login & Hamburger (Desktop/Mobile) */}
-        <div className="flex items-center gap-2 md:gap-4">
-          
-          {/* Translate Button */}
-          <button 
+        {/* RIGHT: Translate, Login & Hamburger */}
+        <div className="bnav-actions">
+          <button
             onClick={handleToggleLanguage}
-            className={`flex items-center gap-1.5 px-4 py-2 rounded-full border transition-all cursor-pointer group shadow-sm text-slate-700 border-slate-200 hover:bg-slate-50 hover:border-slate-300 ${
-              isHomePage ? "bg-white/50 backdrop-blur-sm" : "bg-white"
-            }`}
+            className="bnav-lang"
             title="Change Language / भाषा बदलें"
           >
-            <span className="text-blue-600 font-bold transition-transform group-hover:scale-105 flex items-center gap-1.5 leading-none">
-              <span className={`text-[16px] -mt-0.5 ${isHindi ? 'text-blue-700 font-extrabold' : 'text-slate-500'}`}>अ</span>
-              <span className="text-slate-300 font-normal text-sm">/</span>
-              <span className={`text-[13px] tracking-wide ${!isHindi ? 'text-blue-700 font-extrabold' : 'text-slate-500'}`}>EN</span>
-            </span>
+            <span className={`text-[16px] -mt-0.5 leading-none ${isHindi ? 'text-[#124d9c] font-extrabold' : 'text-[#66645f]'}`}>अ</span>
+            <span className="text-[rgba(17,17,17,0.25)] text-sm leading-none">/</span>
+            <span className={`text-[13px] tracking-wide leading-none ${!isHindi ? 'text-[#124d9c] font-extrabold' : 'text-[#66645f]'}`}>EN</span>
           </button>
 
-          <div className="hidden lg:block">
-            <Link to="/login">
-              <button className="relative px-8 py-2.5 rounded-full text-sm font-bold tracking-wide transition-all duration-300 overflow-hidden group shadow-md bg-gradient-to-br from-[#0b2b4f] to-[#124d9c] hover:opacity-90 text-white shadow-blue-500/20 hover:shadow-blue-500/40 hover:-translate-y-0.5 active:scale-95">
-                <span className="relative z-10 flex items-center gap-2">
-                  {t("nav.login")}
-                  <svg className="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-              </button>
-            </Link>
-          </div>
+          <Link to="/login" className="bnav-button bnav-desktop-only">
+            {t("nav.login")} <ArrowUpRight size={17} aria-hidden="true" />
+          </Link>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className={`lg:hidden p-2 rounded-xl border transition-all cursor-pointer text-slate-700 border-slate-200 hover:bg-slate-100 ${
-              isHomePage ? "bg-white/50 backdrop-blur-sm" : "bg-slate-50"
-            }`}
+            className="bnav-menu-button"
+            aria-expanded={isOpen}
+            aria-label={isOpen ? "Close navigation" : "Open navigation"}
           >
             {isOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Slide-out Menu Overlay */}
+      {/* Mobile full-screen menu */}
       {isOpen && (
-        <div data-lenis-prevent="true" className="fixed inset-0 top-[80px] z-40 bg-white border-t border-slate-100 lg:hidden flex flex-col overflow-y-auto scrollbar-hide px-6 py-6 space-y-4 animate-fade-in shadow-2xl h-[calc(100vh-80px)]">
-          <Link
-            to="/"
-            onClick={() => setIsOpen(false)}
-            className={`text-base font-bold py-2 border-b border-slate-50 transition-colors ${
-              isActive("/") ? "text-blue-600 font-extrabold" : "text-slate-800 hover:text-blue-600"
-            }`}
-          >
-            {t("nav.home")}
-          </Link>
-          
-          {/* Dropdown 1 */}
-          <div className="flex flex-col border-b border-slate-50 py-2">
-            <button
-              onClick={() => toggleDropdown('know')}
-              className={`flex items-center justify-between text-base font-bold w-full text-left transition-colors ${
-                isActive("/know-us") ? "text-blue-600 font-extrabold" : "text-slate-800 hover:text-blue-600"
-              }`}
-            >
+        <div data-lenis-prevent="true" className="bnav-mobile">
+          <div className="bnav-mobile-inner">
+            <Link to="/" onClick={() => setIsOpen(false)} className={getMobileLinkClass("/")}>
+              {t("nav.home")}
+            </Link>
+
+            <button onClick={() => toggleDropdown('know')} className={getMobileLinkClass("/know-us")}>
               <span>{t("nav.knowUs")}</span>
-              <ChevronDown size={16} className={`transition-transform duration-200 ${activeDropdown === 'know' ? 'rotate-180 text-blue-600' : isActive("/know-us") ? "text-blue-600" : "text-slate-400"}`} />
+              <ChevronDown size={20} className={`transition-transform duration-200 ${activeDropdown === 'know' ? 'rotate-180' : ''}`} />
             </button>
             {activeDropdown === 'know' && (
-              <div className="flex flex-col pl-4 mt-2 gap-2 border-l-2 border-blue-100">
-                {Knowconfig.map(item => {
-                  const subActive = location.pathname === `/know-us/${item.id}`;
-                  return (
-                    <Link
-                      key={item.id}
-                      to={`/know-us/${item.id}`}
-                      onClick={() => setIsOpen(false)}
-                      className={`text-sm font-semibold py-1 transition-colors ${
-                        subActive ? "text-blue-600 font-bold" : "text-slate-600 hover:text-blue-600"
-                      }`}
-                    >
-                      {t(`nav.knowUsLinks.${item.id}`, item.label)}
-                    </Link>
-                  );
-                })}
+              <div className="bnav-mobile-sub">
+                {Knowconfig.map(item => (
+                  <Link
+                    key={item.id}
+                    to={`/know-us/${item.id}`}
+                    onClick={() => setIsOpen(false)}
+                    className={location.pathname === `/know-us/${item.id}` ? "bnav-mobile-sub--active" : ""}
+                  >
+                    {t(`nav.knowUsLinks.${item.id}`, item.label)}
+                  </Link>
+                ))}
               </div>
             )}
-          </div>
 
-          {/* Dropdown 2 */}
-          <div className="flex flex-col border-b border-slate-50 py-2">
-            <button
-              onClick={() => toggleDropdown('books')}
-              className={`flex items-center justify-between text-base font-bold w-full text-left transition-colors ${
-                isActive("/books") ? "text-blue-600 font-extrabold" : "text-slate-800 hover:text-blue-600"
-              }`}
-            >
+            <button onClick={() => toggleDropdown('books')} className={getMobileLinkClass("/books")}>
               <span>{t("nav.books")}</span>
-              <ChevronDown size={16} className={`transition-transform duration-200 ${activeDropdown === 'books' ? 'rotate-180 text-blue-600' : isActive("/books") ? "text-blue-600" : "text-slate-400"}`} />
+              <ChevronDown size={20} className={`transition-transform duration-200 ${activeDropdown === 'books' ? 'rotate-180' : ''}`} />
             </button>
             {activeDropdown === 'books' && (
-              <div className="flex flex-col pl-4 mt-2 gap-2 border-l-2 border-blue-100">
+              <div className="bnav-mobile-sub">
                 {[...Array(12)].map((_, index) => {
                   const classId = index + 1;
-                  const subActive = location.pathname === `/books/${classId}`;
                   return (
                     <Link
                       key={classId}
                       to={`/books/${classId}`}
                       onClick={() => setIsOpen(false)}
-                      className={`text-sm font-semibold py-1 transition-colors ${
-                        subActive ? "text-blue-600 font-bold" : "text-slate-600 hover:text-blue-600"
-                      }`}
+                      className={location.pathname === `/books/${classId}` ? "bnav-mobile-sub--active" : ""}
                     >
                       {t("nav.classN", { classId })}
                     </Link>
@@ -272,73 +275,75 @@ const Navbar = () => {
                 })}
               </div>
             )}
-          </div>
 
-          {/* Dropdown 3 */}
-          <div className="flex flex-col border-b border-slate-50 py-2">
-            <button
-              onClick={() => toggleDropdown('gallery')}
-              className={`flex items-center justify-between text-base font-bold w-full text-left transition-colors ${
-                isActive("/gallery") ? "text-blue-600 font-extrabold" : "text-slate-800 hover:text-blue-600"
-              }`}
-            >
+            <button onClick={() => toggleDropdown('gallery')} className={getMobileLinkClass("/gallery")}>
               <span>{t("nav.gallery")}</span>
-              <ChevronDown size={16} className={`transition-transform duration-200 ${activeDropdown === 'gallery' ? 'rotate-180 text-blue-600' : isActive("/gallery") ? "text-blue-600" : "text-slate-400"}`} />
+              <ChevronDown size={20} className={`transition-transform duration-200 ${activeDropdown === 'gallery' ? 'rotate-180' : ''}`} />
             </button>
             {activeDropdown === 'gallery' && (
-              <div className="flex flex-col pl-4 mt-2 gap-2 border-l-2 border-blue-100">
-                {Galleryconfig.map(item => {
-                  const subActive = location.pathname === `/gallery/${item.id}`;
-                  return (
-                    <Link
-                      key={item.id}
-                      to={`/gallery/${item.id}`}
-                      onClick={() => setIsOpen(false)}
-                      className={`text-sm font-semibold py-1 transition-colors ${
-                        subActive ? "text-blue-600 font-bold" : "text-slate-600 hover:text-blue-600"
-                      }`}
-                    >
-                      {t(`nav.galleryLinks.${item.id}`, item.label)}
-                    </Link>
-                  );
-                })}
+              <div className="bnav-mobile-sub">
+                {Galleryconfig.map(item => (
+                  <Link
+                    key={item.id}
+                    to={`/gallery/${item.id}`}
+                    onClick={() => setIsOpen(false)}
+                    className={location.pathname === `/gallery/${item.id}` ? "bnav-mobile-sub--active" : ""}
+                  >
+                    {t(`nav.galleryLinks.${item.id}`, item.label)}
+                  </Link>
+                ))}
               </div>
             )}
-          </div>
 
-          <Link
-            to="/csr-policy"
-            onClick={() => setIsOpen(false)}
-            className={`text-base font-bold py-2 border-b border-slate-50 transition-colors ${
-              isActive("/csr-policy") ? "text-blue-600 font-extrabold" : "text-slate-800 hover:text-blue-600"
-            }`}
-          >
-            {t("nav.csrPolicy")}
-          </Link>
-          <Link
-            to="/rti"
-            onClick={() => setIsOpen(false)}
-            className={`text-base font-bold py-2 border-b border-slate-50 transition-colors ${
-              isActive("/rti") ? "text-blue-600 font-extrabold" : "text-slate-800 hover:text-blue-600"
-            }`}
-          >
-            RTI
-          </Link>
-          <Link
-            to="/contact"
-            onClick={() => setIsOpen(false)}
-            className={`text-base font-bold py-2 border-b border-slate-50 transition-colors ${
-              isActive("/contact") ? "text-blue-600 font-extrabold" : "text-slate-800 hover:text-blue-600"
-            }`}
-          >
-            {t("nav.contact")}
-          </Link>
-          
-          <div className="pt-4">
-            <Link to="/login" onClick={() => setIsOpen(false)} className="block w-full">
-              <button className="w-full py-3 bg-gradient-to-br from-[#0b2b4f] to-[#124d9c] text-white rounded-full font-bold text-sm text-center shadow-lg active:scale-98">
-                {t("nav.login")}
-              </button>
+            <button
+              onClick={() => toggleDropdown('notifications')}
+              className={`bnav-mobile-link ${isNotificationsActive ? "bnav-mobile-link--active" : ""}`}
+            >
+              <span>{t("nav.notifications", "Notifications")}</span>
+              <ChevronDown size={20} className={`transition-transform duration-200 ${activeDropdown === 'notifications' ? 'rotate-180' : ''}`} />
+            </button>
+            {activeDropdown === 'notifications' && (
+              <div className="bnav-mobile-sub">
+                {notificationsLinks.map(item => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    onClick={() => setIsOpen(false)}
+                    className={isActive(item.to) ? "bnav-mobile-sub--active" : ""}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+
+            <button
+              onClick={() => toggleDropdown('policy')}
+              className={`bnav-mobile-link ${isPolicyActive ? "bnav-mobile-link--active" : ""}`}
+            >
+              <span>{t("nav.policy", "Policy")}</span>
+              <ChevronDown size={20} className={`transition-transform duration-200 ${activeDropdown === 'policy' ? 'rotate-180' : ''}`} />
+            </button>
+            {activeDropdown === 'policy' && (
+              <div className="bnav-mobile-sub">
+                {policyLinks.map(item => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    onClick={() => setIsOpen(false)}
+                    className={isActive(item.to) ? "bnav-mobile-sub--active" : ""}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            )}
+            <Link to="/contact" onClick={() => setIsOpen(false)} className={getMobileLinkClass("/contact")}>
+              {t("nav.contact")}
+            </Link>
+
+            <Link to="/login" onClick={() => setIsOpen(false)} className="bnav-button">
+              {t("nav.login")} <ArrowUpRight size={18} aria-hidden="true" />
             </Link>
           </div>
         </div>
