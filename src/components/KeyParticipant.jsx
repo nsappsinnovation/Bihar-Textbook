@@ -36,10 +36,10 @@ export default function KeyParticipant() {
         </div>
 
         <div className="max-w-[1280px] mx-auto">
-          {/* Grid View */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 pb-6">
+          {/* A swipeable row on phones, a grid from sm up */}
+          <div className="no-scrollbar flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-4 -mx-4 px-4 pb-6 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 lg:grid-cols-4">
             {data.map((item, i) => (
-              <div key={i} className="w-full">
+              <div key={i} className="w-[78%] shrink-0 snap-start sm:w-full sm:shrink">
                 <ParticipantCard item={item} />
               </div>
             ))}

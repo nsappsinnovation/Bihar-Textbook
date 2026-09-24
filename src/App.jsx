@@ -97,8 +97,11 @@ function App() {
       {!isNoNavPage && <Nav />}
 
       <div className="min-h-screen flex flex-col">
+        {/* The padding under the fixed navbar is transparent, so the decorative
+            body gradient used to show through it as a coloured band. Pages with
+            a navbar paint their own white base over it. */}
         <main
-          className={`flex-grow ${location.pathname !== "/" && !isNoNavPage ? "pt-24" : ""
+          className={`flex-grow ${location.pathname !== "/" && !isNoNavPage ? "pt-24 bg-white" : ""
             }`}
         >
           <Suspense fallback={<LoadingFallback />}>

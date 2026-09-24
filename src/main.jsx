@@ -1,5 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import "./apiLogger.js"; // TEMP: API call logger — delete this line and src/apiLogger.js to remove
 import "./i18n.js";
 import "./index.css";
 import App from "./App.jsx";

@@ -430,7 +430,7 @@ const HeritageDashboard = () => {
       </button>
       
       {/* Main Content */}
-      <main className="flex-1 min-h-screen pb-4 overflow-y-auto overflow-x-hidden scrollbar-hide">
+      <main className="flex-1 min-w-0 min-h-screen pb-4 overflow-y-auto overflow-x-hidden scrollbar-hide">
         <div className="px-4 sm:px-6 md:px-12 2xl:px-20 space-y-6 md:space-y-8 pt-8 md:pt-6 2xl:max-w-[1600px] 2xl:mx-auto">
           
           {/* Hero Section */}
@@ -478,7 +478,7 @@ const HeritageDashboard = () => {
                    </div>
                    <div>
                       <h4 className={`text-[11px] md:text-[13px] font-bold leading-tight transition-colors ${isActive ? heritageTheme.activeTitleText : heritageTheme.inactiveTitleHover}`}>{cat.label}</h4>
-                      <p className={`text-[9px] md:text-[11px] font-medium mt-0.5 ${isActive ? heritageTheme.activeSubtitleText : heritageTheme.inactiveSubtitleText}`}>{valueText}</p>
+                      <p className={`text-[11px] font-medium mt-0.5 ${isActive ? heritageTheme.activeSubtitleText : heritageTheme.inactiveSubtitleText}`}>{valueText}</p>
                    </div>
                 </div>
               );
@@ -557,7 +557,7 @@ const HeritageDashboard = () => {
                         {/* Content when collapsed (Circle) */}
                         <div className="absolute inset-0 flex flex-col items-center justify-end pb-6 md:pb-8 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
                           <h3 className="text-white font-black text-lg md:text-2xl mb-1 text-center px-4 drop-shadow-md">{card.title}</h3>
-                          <p className="text-white/80 text-[9px] md:text-xs font-bold uppercase tracking-widest">{card.categoryDisplay || card.category}</p>
+                          <p className="text-white/80 text-[11px] md:text-xs font-bold uppercase tracking-widest">{card.categoryDisplay || card.category}</p>
                           {isCenter && (
                             <button 
                               onClick={(e) => {

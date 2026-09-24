@@ -292,30 +292,23 @@
     "subheading": "A structured framework guiding BSTBPC’s mission to strengthen learning outcomes across Bihar.",
     "description": "A structured framework guiding BSTBPC’s mission to strengthen learning outcomes across Bihar.",
     "items": {
-  "title0": "Accessible Learning Resources",
-  "desc0": "Making textbooks and learning resources accessible to learners across Bihar.",
-
-  "title1": "Curriculum-Based Content",
-  "desc1": "Publishing textbooks prepared in accordance with the curriculum and academic framework of Bihar.",
-
-  "title2": "Local Language & Context",
-  "desc2": "Providing learning materials across subjects and languages relevant to learners in Bihar.",
-
-  "title3": "Statewide Textbook Supply",
-  "desc3": "Supporting the printing and distribution of textbooks to destinations across Bihar.",
-
-  "title4": "Affordable Textbooks",
-  "desc4": "Supporting access to textbooks for school students through the state's textbook publishing system.",
-
-  "title5": "Learning Support Materials",
-  "desc5": "Providing textbooks, workbooks, handbooks and other educational materials for students and educators.",
-
-  "title6": "Digital Access",
-  "desc6": "Making textbooks available online for students to access learning materials digitally.",
-
-  "title7": "Efficient Publishing",
-  "desc7": "Coordinating textbook printing, publishing and supply to support timely availability of learning materials."
-},
+      "title0": "Accessible Learning Resources",
+      "desc0": "Making textbooks and learning resources accessible to learners across Bihar.",
+      "title1": "Curriculum-Based Content",
+      "desc1": "Publishing textbooks prepared in accordance with the curriculum and academic framework of Bihar.",
+      "title2": "Local Language & Context",
+      "desc2": "Providing learning materials across subjects and languages relevant to learners in Bihar.",
+      "title3": "Statewide Textbook Supply",
+      "desc3": "Supporting the printing and distribution of textbooks to destinations across Bihar.",
+      "title4": "Affordable Textbooks",
+      "desc4": "Supporting access to textbooks for school students through the state's textbook publishing system.",
+      "title5": "Learning Support Materials",
+      "desc5": "Providing textbooks, workbooks, handbooks and other educational materials for students and educators.",
+      "title6": "Digital Access",
+      "desc6": "Making textbooks available online for students to access learning materials digitally.",
+      "title7": "Efficient Publishing",
+      "desc7": "Coordinating textbook printing, publishing and supply to support timely availability of learning materials."
+    },
     "missions": {
       "title0": "Inclusive & Equitable Learning",
       "desc0": "Ensuring every learner across Bihar has equal access to high-quality resources.",
@@ -1449,6 +1442,7 @@
     "tools_sad_tag": "Emotion",
     "tools_sad_desc": "Place both hands in front of your face and pull them down while making a sad face.",
     "hoverToFlip": "Hover to flip",
+    "tapToView": "Tap to view",
     "clickToPlay": "Click to play GIF",
     "signAnimation": "Sign Animation",
     "gotIt": "Got it!",
@@ -6873,5 +6867,14 @@
     "walkInTheirShoesDesc": "Try to look at situations from the other person's eyes to build deep respect.",
     "needsHeader": "Needs",
     "wantsHeader": "Wants"
+  },
+  "developer": {
+    "badge": "About the creators",
+    "titleLine1": "A Startup Product",
+    "titleLine2": "Born in Bihar",
+    "intro": "NS Apps Innovations, a startup recognised by the Government of Bihar, builds with React.js, Node.js and Flutter. Across more than 28 projects — among them ASPIRE and the Samadhan apps — the team has used technology to make governance and learning work better for people.",
+    "teamLead": "Team Lead",
+    "teamHeads": "Team Heads",
+    "teamMembers": "Team Members"
   }
 }

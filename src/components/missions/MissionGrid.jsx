@@ -117,7 +117,7 @@ const MissionGrid = () => {
     return (
         <section id="missions-grid" className="pt-28 lg:pt-36 pb-16 px-4 md:px-8 bg-white font-sans">
             <div className="max-w-[1200px] mx-auto overflow-hidden">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 -mt-px -ml-px">
+                <div className="grid grid-cols-2 md:grid-cols-4 -mt-px -ml-px">
                     {missions.map((mission) => {
                         const title = mission.titleKey ? t(mission.titleKey, mission.defaultTitle) : mission.title;
                         const desc = mission.descKey ? t(mission.descKey, mission.defaultDesc) : mission.desc;
@@ -126,7 +126,7 @@ const MissionGrid = () => {
                             <Link 
                                 key={mission.id} 
                                 to={mission.link || '#'}
-                                className="flex flex-col items-center group text-center py-12 px-6 border-t border-l border-gray-100 hover:bg-slate-50/40 transition-colors duration-300"
+                                className="flex flex-col items-center group text-center py-8 px-3 sm:py-12 sm:px-6 border-t border-l border-gray-100 hover:bg-slate-50/40 transition-colors duration-300"
                             >
                                 {/* Icon Container */}
                                 <div className="w-14 h-14 mb-5 flex items-center justify-center relative transition-transform duration-300 group-hover:-translate-y-1">

@@ -65,8 +65,10 @@ const ExploreSignsComponent = () => {
                 </div>
                 <h4 className="text-lg font-extrabold text-slate-700 leading-tight">{tool.name}</h4>
                 <p className="text-[11px] text-slate-500 mt-3 line-clamp-2 font-medium">{tool.desc}</p>
-                <div className="mt-auto text-[9px] text-slate-600 font-bold uppercase tracking-widest bg-slate-50 px-3 py-1.5 rounded-full w-full">
-                  {t('signLearn.hoverToFlip', 'Hover to flip')}
+                <div className="mt-auto text-[11px] sm:text-[9px] text-slate-600 font-bold uppercase tracking-widest bg-slate-50 px-3 py-1.5 rounded-full w-full">
+                  {/* phones and tablets have no hover; a tap opens the sign straight away */}
+                  <span className="lg:hidden">{t('signLearn.tapToView', 'Tap to view')}</span>
+                  <span className="hidden lg:inline">{t('signLearn.hoverToFlip', 'Hover to flip')}</span>
                 </div>
               </div>
 
@@ -82,7 +84,7 @@ const ExploreSignsComponent = () => {
                 <span className="text-[11px] font-black text-slate-700 bg-slate-50 px-3 py-1 rounded-full uppercase tracking-wider mt-2">
                   {tool.name}
                 </span>
-                <span className="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-1.5">
+                <span className="text-[11px] sm:text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-1.5">
                   {t('signLearn.clickToPlay', 'Click to play GIF')}
                 </span>
               </div>
@@ -1371,7 +1373,7 @@ const SignLearn = () => {
 
 
       {/* Main Content */}
-      <main className="flex-1 min-h-screen pb-4 overflow-y-auto">
+      <main className="flex-1 min-w-0 min-h-screen pb-4 overflow-y-auto">
         <button
           onClick={() => navigate("/#missions-grid")}
           className={`absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 ${signTheme.backButtonHover} hover:shadow-lg transition-all border border-slate-100 group`}

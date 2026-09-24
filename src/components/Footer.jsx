@@ -121,7 +121,7 @@ const Footer = () => {
             <span className="hidden md:inline text-white/10">|</span>
             <p>
               {t("footer.designedBy", "Designed by")}{" "}
-              <Link to="/" className="font-semibold text-white hover:text-blue-400 transition-colors duration-300">
+              <Link to="/developer" className="font-semibold text-white hover:text-blue-400 transition-colors duration-300">
                  <span style={{ fontFamily: 'italics', letterSpacing: '1px' }}>{t("footer.designerName", "NS Apps Innovations")}</span> - A Product of Startup Bihar
               </Link>
             </p>

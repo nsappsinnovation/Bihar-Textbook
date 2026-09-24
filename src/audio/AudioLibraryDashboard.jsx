@@ -422,7 +422,7 @@ const AudioLibraryDashboard = () => {
       )}
 
       {/* Main Content */}
-      <main className="flex-1 min-h-screen pb-0">
+      <main className="flex-1 min-w-0 min-h-screen pb-0">
         <button
           onClick={() => navigate("/#missions-grid")}
           className={`absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 ${audioTheme.backButtonHover} hover:shadow-lg transition-all border border-slate-100 group cursor-pointer`}

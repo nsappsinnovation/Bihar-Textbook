@@ -86,7 +86,7 @@ export default function LinguisticApp() {
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden">
       
       {/* Main Content */}
-      <main className="flex-1 min-h-screen pb-4 overflow-y-auto">
+      <main className="flex-1 min-w-0 min-h-screen pb-4 overflow-y-auto">
         <button
           onClick={() => navigate("/#missions-grid")}
           className={`absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 ${lingTheme.backButtonHover} hover:shadow-lg transition-all border border-slate-100 group`}

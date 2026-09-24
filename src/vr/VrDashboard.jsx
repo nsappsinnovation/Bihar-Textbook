@@ -88,7 +88,7 @@ const VrDashboard = () => {
 
       
       {/* Main Content */}
-      <main className="flex-1 min-h-screen pb-12 overflow-y-auto">
+      <main className="flex-1 min-w-0 min-h-screen pb-12 overflow-y-auto">
         <div className="px-4 sm:px-6 md:px-12 2xl:px-20 space-y-6 md:space-y-8 pt-4 2xl:max-w-[1600px] 2xl:mx-auto">
 
           {/* Hero & Stats Section */}
