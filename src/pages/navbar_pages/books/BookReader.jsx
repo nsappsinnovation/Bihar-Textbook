@@ -55,7 +55,8 @@ const BookReader = () => {
                 const bookFromApi = await findBook(classId, bookSubject);
                 setBook(bookFromApi);
 
-                if (bookFromApi && bookFromApi.chapters.length > 0) {
+                // Books managed in the admin panel: show exactly their chapters (possibly none yet)
+                if (bookFromApi) {
                     setChapters(bookFromApi.chapters);
                     setLoading(false);
                     return;
@@ -212,7 +213,9 @@ const BookReader = () => {
                                         ))
                                     ) : (
                                         <div className="text-center py-12 text-slate-500 font-medium text-sm">
-                                            {t("booksPage.reader.noChaptersFound", "No chapters found matching")} "{searchQuery}"
+                                            {searchQuery
+                                                ? <>{t("booksPage.reader.noChaptersFound", "No chapters found matching")} "{searchQuery}"</>
+                                                : t("booksPage.reader.noChaptersYet", "Chapters for this book have not been uploaded yet.")}
                                         </div>
                                     )}
                                 </div>

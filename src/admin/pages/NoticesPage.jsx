@@ -4,7 +4,9 @@ import { Search, Plus, Edit3, Trash2, Pin, Paperclip, Calendar, Bell } from 'luc
 import Modal, { FormInput, ToggleSwitch } from '../components/Modal';
 import { useDebounce, useActivityLog } from '../hooks/useCustomHooks';
 import { getNotices, createNotice, updateNotice, deleteNotice } from '../../services/noticeService';
-import { uploadFile, noticeUploadFolder } from '../../services/uploadService';
+import { noticeUploadFolder } from '../../services/uploadService';
+import UploadProgress from '../components/UploadProgress';
+import { useFileUpload } from '../hooks/useFileUpload';
 import { errorMessage } from '../../services/api';
 
 const today = () => new Date().toISOString().slice(0, 10);
@@ -20,7 +22,7 @@ export default function NoticesPage({ addToast, forcedCategory }) {
   const [editingNotice, setEditingNotice] = useState(null);
   
   const [noticeList, setNoticeList] = useState([]);
-  const [isUploading, setIsUploading] = useState(false);
+  const { upload, progressOf, isUploading } = useFileUpload();
 
   const noticeOptions = ["Recruitment", "Financial", "Technical", "Circular", "Corrigendum", "Other"];
   const tenderOptions = ["Active", "E-Tender", "Procurement", "Services", "Other"];
@@ -102,15 +104,12 @@ export default function NoticesPage({ addToast, forcedCategory }) {
   const handleDocumentChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    setIsUploading(true);
     try {
-      const path = await uploadFile(file, 'document', noticeUploadFolder(formData.type, formData.category));
+      const path = await upload('document', file, 'document', noticeUploadFolder(formData.type, formData.category));
       setFormData(prev => ({ ...prev, document: path }));
       addToast('Document uploaded', 'success');
     } catch (error) {
       addToast(errorMessage(error, 'Upload failed'), 'error');
-    } finally {
-      setIsUploading(false);
     }
   };
 
@@ -330,7 +329,11 @@ export default function NoticesPage({ addToast, forcedCategory }) {
               disabled={isUploading}
               className="w-full px-4 py-2 rounded-xl border border-gray-200 text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 transition-all bg-white"
             />
-            {isUploading && <p className="mt-2 text-xs text-gray-500">Uploading…</p>}
+            {isUploading && (
+              <div className="mt-2">
+                <UploadProgress percent={progressOf('document') ?? 0} />
+              </div>
+            )}
             {formData.document && !isUploading && (
               <p className="mt-2 text-xs text-emerald-600 font-medium flex items-center gap-1">
                 <Paperclip className="w-3 h-3" /> {formData.document.split('/').pop()}
@@ -349,11 +352,11 @@ export default function NoticesPage({ addToast, forcedCategory }) {
             <motion.button
               onClick={handleSaveNotice}
               disabled={isUploading}
-              className="px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold shadow-lg shadow-blue-500/20"
+              className="px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-semibold shadow-lg shadow-blue-500/20 disabled:opacity-60 disabled:cursor-not-allowed"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              {editingNotice ? `Update ${itemType}` : `Publish ${itemType}`}
+              {isUploading ? 'Uploading…' : editingNotice ? `Update ${itemType}` : `Publish ${itemType}`}
             </motion.button>
           </div>
         </div>

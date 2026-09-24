@@ -41,8 +41,16 @@ export const noticeUploadFolder = (type, category) => {
 // Uploads one file to the backend and returns its stored path ("/api/uploads/<folder>/...").
 // kind: "image" (JPG/PNG/WEBP, max 2 MB) | "document" (PDF/DOC/DOCX, max 20 MB) | "video" (MP4, max 50 MB)
 // folder: one of the folders above; the backend puts files without one in "others".
-export const uploadFile = (file, kind, folder) => {
+// onProgress (optional): called with 0–100 while the file is being sent.
+export const uploadFile = (file, kind, folder, onProgress) => {
     const form = new FormData();
     form.append('file', file);
-    return api.post(`/api/uploads/${kind}`, form, { params: { folder } }).then((res) => res.data.data.url);
+    return api
+        .post(`/api/uploads/${kind}`, form, {
+            params: { folder },
+            onUploadProgress: onProgress
+                ? (e) => onProgress(e.total ? Math.min(100, Math.round((e.loaded * 100) / e.total)) : 0)
+                : undefined,
+        })
+        .then((res) => res.data.data.url);
 };

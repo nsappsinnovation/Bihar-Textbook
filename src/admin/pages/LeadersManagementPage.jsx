@@ -4,7 +4,9 @@ import { Plus, Trash2, Edit2, User, Image as ImageIcon } from 'lucide-react';
 import Modal, { FormInput } from '../components/Modal';
 import { useActivityLog } from '../hooks/useCustomHooks';
 import { getDirectory, createDirectoryRow, updateDirectoryRow, deleteDirectoryRow } from '../../services/directoryService';
-import { uploadFile, UPLOAD_FOLDERS } from '../../services/uploadService';
+import { UPLOAD_FOLDERS } from '../../services/uploadService';
+import UploadProgress from '../components/UploadProgress';
+import { useFileUpload } from '../hooks/useFileUpload';
 import { fileUrl, errorMessage } from '../../services/api';
 
 const TYPE = 'leader';
@@ -29,11 +31,13 @@ export default function LeadersManagementPage({ addToast }) {
     loadLeaders();
   }, [loadLeaders]);
 
+  const { upload, progressOf, isUploading } = useFileUpload();
+
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
     try {
-      const path = await uploadFile(file, 'image', UPLOAD_FOLDERS.leaders);
+      const path = await upload('photo', file, 'image', UPLOAD_FOLDERS.leaders);
       setFormData(prev => ({ ...prev, image: path }));
     } catch (error) {
       addToast?.(errorMessage(error, 'Image upload failed'), 'error');
@@ -204,7 +208,8 @@ export default function LeadersManagementPage({ addToast }) {
           <div>
             <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-3">Portrait Photo (Max 2MB)</label>
             <div className="flex flex-col items-center justify-center w-full">
-              <label className="flex flex-col items-center justify-center w-full h-44 border-2 border-dashed border-gray-200 rounded-3xl cursor-pointer bg-gray-50/50 hover:bg-gray-50 transition-all overflow-hidden">
+              <label className="relative flex flex-col items-center justify-center w-full h-44 border-2 border-dashed border-gray-200 rounded-3xl cursor-pointer bg-gray-50/50 hover:bg-gray-50 transition-all overflow-hidden">
+                {progressOf('photo') !== undefined && <UploadProgress variant="overlay" percent={progressOf('photo')} />}
                 {formData.image ? (
                   <img loading="lazy" decoding="async" src={fileUrl(formData.image)} alt="Preview" className="w-full h-full object-cover" />
                 ) : (
@@ -213,7 +218,7 @@ export default function LeadersManagementPage({ addToast }) {
                     <p className="text-xs font-bold text-gray-400 uppercase">Upload Photo</p>
                   </div>
                 )}
-                <input type="file" className="hidden" accept="image/*" onChange={handleImageChange} />
+                <input type="file" className="hidden" accept="image/*" onChange={handleImageChange} disabled={isUploading} />
               </label>
             </div>
           </div>
@@ -227,9 +232,10 @@ export default function LeadersManagementPage({ addToast }) {
             </button>
             <button
               onClick={handleSave}
-              className="px-6 py-3 rounded-2xl bg-indigo-600 text-white text-sm font-black shadow-xl shadow-indigo-600/20 hover:bg-indigo-700 transition-all"
+              disabled={isUploading}
+              className="px-6 py-3 rounded-2xl bg-indigo-600 text-white text-sm font-black shadow-xl shadow-indigo-600/20 hover:bg-indigo-700 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {editingItem ? "Update Profile" : "Add Profile"}
+              {isUploading ? 'Uploading…' : editingItem ? "Update Profile" : "Add Profile"}
             </button>
           </div>
         </div>

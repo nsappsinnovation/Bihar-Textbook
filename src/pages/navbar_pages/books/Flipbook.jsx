@@ -82,9 +82,9 @@ function Flipbook({ pdfFile: propPdfFile }) {
                 const currentBook = await findBook(classId, bookSubject);
                 setBookInfo(currentBook);
 
-                // Fetch chapters list
-                if (currentBook && currentBook.chapters && currentBook.chapters.length > 0) {
-                    setChapters(currentBook.chapters);
+                // Fetch chapters list (books from the admin panel use exactly their own chapters)
+                if (currentBook) {
+                    setChapters(currentBook.chapters || []);
                 } else {
                     const subjectSlug = (bookSubject || "Hindi").toLowerCase().replace(/[^a-z0-9]/g, '_');
                     const manifestUrl = `/PDFs/Class_${classId}/${subjectSlug}_manifest.json`;
@@ -133,13 +133,12 @@ function Flipbook({ pdfFile: propPdfFile }) {
                 // First check if the book has a chapter with an uploaded PDF
                 const book = await findBook(classId, bookSubject);
 
-                if (book && book.chapters) {
-                    const chapterData = book.chapters.find(c => String(c.id) === String(chapterId));
-                    if (chapterData && chapterData.pdfUrl) {
-                        setPdfPath(chapterData.pdfUrl);
-                        setLoading(false);
-                        return;
-                    }
+                // Books from the admin panel: use the chapter's uploaded PDF, or show "not uploaded yet"
+                if (book) {
+                    const chapterData = (book.chapters || []).find(c => String(c.id) === String(chapterId));
+                    setPdfPath(chapterData?.pdfUrl || null);
+                    setLoading(false);
+                    return;
                 }
 
                 // Sanitize slug to match scraper logic: replace non-alphanumeric with '_'
@@ -330,6 +329,20 @@ function Flipbook({ pdfFile: propPdfFile }) {
                                     <div className="flex flex-col items-center gap-3 bg-white p-8 rounded-2xl shadow-lg border border-slate-100">
                                         <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
                                         <div className="text-slate-600 font-bold text-sm">Loading Chapter Document...</div>
+                                    </div>
+                                }
+                                noData={
+                                    <div className="flex flex-col items-center gap-4 text-center bg-white p-8 rounded-2xl shadow-xl border border-slate-100 max-w-sm">
+                                        <div className="text-slate-800 font-extrabold text-lg">PDF Not Uploaded Yet</div>
+                                        <p className="text-slate-500 text-xs leading-relaxed">
+                                            The PDF for <strong>{currentChapterTitle}</strong> has not been uploaded yet. Please check back later.
+                                        </p>
+                                        <button
+                                            onClick={() => navigate(-1)}
+                                            className="w-full mt-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-xl text-xs transition-colors shadow-sm"
+                                        >
+                                            Back to Chapters
+                                        </button>
                                     </div>
                                 }
                                 error={

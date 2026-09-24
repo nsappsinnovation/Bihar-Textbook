@@ -724,6 +724,7 @@
       "tableOfContents": "Table of Contents",
       "searchChapters": "Search chapters...",
       "noChaptersFound": "No chapters found matching",
+      "noChaptersYet": "Chapters for this book have not been uploaded yet.",
       "readNow": "READ NOW",
       "chapter": "Chapter",
       "chapterLabel": "Chapter {{n}}"
@@ -735,6 +736,7 @@
       "chapters": "Chapters",
       "searchChapters": "Search chapters...",
       "noChaptersFound": "No chapters found matching",
+      "noChaptersYet": "Chapters for this book have not been uploaded yet.",
       "reading": "Reading:",
       "hideToc": "Hide TOC",
       "showToc": "Show TOC",

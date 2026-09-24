@@ -9,7 +9,9 @@ import {
   csrPolicyDefaults, csrPolicyContents, romanize, loadCsrPolicy
 } from '../../data/csrPolicyData';
 import { saveSetting } from '../../services/settingService';
-import { uploadFile, UPLOAD_FOLDERS } from '../../services/uploadService';
+import { UPLOAD_FOLDERS } from '../../services/uploadService';
+import UploadProgress from '../components/UploadProgress';
+import { useFileUpload } from '../hooks/useFileUpload';
 import { fileUrl, errorMessage } from '../../services/api';
 
 const sectionIcons = {
@@ -116,11 +118,13 @@ export default function CSRPolicyPage({ addToast }) {
     }
   };
 
+  const { upload, progressOf, isUploading } = useFileUpload();
+
   const handlePdfUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
     try {
-      const path = await uploadFile(file, 'document', UPLOAD_FOLDERS.csrPolicy);
+      const path = await upload('pdf', file, 'document', UPLOAD_FOLDERS.csrPolicy);
       setFormData((prev) => ({
         ...prev,
         pdfUrl: path,
@@ -221,15 +225,15 @@ export default function CSRPolicyPage({ addToast }) {
             </button>
             <button
               onClick={handleSave}
-              disabled={!isDirty}
+              disabled={!isDirty || isUploading}
               className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-bold text-sm transition-all ${
-                isDirty
+                isDirty && !isUploading
                   ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20 hover:bg-blue-700'
                   : 'bg-gray-100 text-gray-400 cursor-not-allowed'
               }`}
             >
               <Save className="w-4 h-4" />
-              <span>{isDirty ? 'Save Changes' : 'Saved'}</span>
+              <span>{isUploading ? 'Uploading…' : isDirty ? 'Save Changes' : 'Saved'}</span>
             </button>
           </div>
         </div>
@@ -285,15 +289,20 @@ export default function CSRPolicyPage({ addToast }) {
                   className="w-full px-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-sm font-bold text-slate-900 placeholder-slate-400 outline-none focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all"
                 />
                 <div className="flex items-center gap-3 ml-1">
-                  <label className="cursor-pointer inline-flex items-center gap-2 px-3.5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-bold text-xs transition-all">
+                  <label className={`inline-flex items-center gap-2 px-3.5 py-2 bg-blue-600 text-white rounded-xl font-bold text-xs transition-all ${isUploading ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer hover:bg-blue-700'}`}>
                     <Download className="w-3.5 h-3.5 rotate-180" />
-                    <span>Upload PDF</span>
-                    <input type="file" accept="application/pdf" className="hidden" onChange={handlePdfUpload} />
+                    <span>{isUploading ? 'Uploading…' : 'Upload PDF'}</span>
+                    <input type="file" accept="application/pdf" className="hidden" onChange={handlePdfUpload} disabled={isUploading} />
                   </label>
                   <p className="text-[11px] text-slate-500 font-medium">
                     Upload a PDF (max 20 MB), or paste a full https:// link above.
                   </p>
                 </div>
+                {progressOf('pdf') !== undefined && (
+                  <div className="max-w-sm ml-1">
+                    <UploadProgress percent={progressOf('pdf')} />
+                  </div>
+                )}
               </div>
               <div className="md:col-span-2 space-y-2">
                 <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1 block">

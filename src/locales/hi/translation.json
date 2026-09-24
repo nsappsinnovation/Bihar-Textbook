@@ -729,6 +729,7 @@
       "tableOfContents": "विषय-सूची",
       "searchChapters": "अध्याय खोजें...",
       "noChaptersFound": "कोई अध्याय नहीं मिला",
+      "noChaptersYet": "इस पुस्तक के अध्याय अभी अपलोड नहीं किए गए हैं।",
       "readNow": "अभी पढ़ें",
       "chapter": "अध्याय",
       "chapterLabel": "अध्याय {{n}}"
@@ -740,6 +741,7 @@
       "chapters": "अध्याय",
       "searchChapters": "अध्याय खोजें...",
       "noChaptersFound": "कोई अध्याय नहीं मिला",
+      "noChaptersYet": "इस पुस्तक के अध्याय अभी अपलोड नहीं किए गए हैं।",
       "reading": "पढ़ रहे हैं:",
       "hideToc": "विषय-सूची छिपाएँ",
       "showToc": "विषय-सूची दिखाएँ",

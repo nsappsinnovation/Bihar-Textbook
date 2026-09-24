@@ -4,7 +4,9 @@ import { Plus, Trash2, Edit2, Save, X, LayoutGrid } from 'lucide-react';
 import Modal, { FormInput } from '../components/Modal';
 import { useActivityLog } from '../hooks/useCustomHooks';
 import { getSections, createSection, updateSection, deleteSection } from '../../services/sectionService';
-import { uploadFile, moduleUploadFolder } from '../../services/uploadService';
+import { moduleUploadFolder } from '../../services/uploadService';
+import UploadProgress from '../components/UploadProgress';
+import { useFileUpload } from '../hooks/useFileUpload';
 import { fileUrl, errorMessage } from '../../services/api';
 
 // module: section list to edit — "tr" (Tools & Resources) or "cl" (Latest Initiatives)
@@ -33,11 +35,13 @@ export default function EducationExcellencePage({ addToast, title = "Tools & Res
     loadMissions();
   }, [loadMissions]);
 
+  const { upload, progressOf, isUploading } = useFileUpload();
+
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
     try {
-      const path = await uploadFile(file, 'image', moduleUploadFolder(module));
+      const path = await upload('photo', file, 'image', moduleUploadFolder(module));
       setFormData(prev => ({ ...prev, image: path }));
     } catch (error) {
       addToast?.(errorMessage(error, 'Image upload failed'), 'error');
@@ -224,7 +228,8 @@ export default function EducationExcellencePage({ addToast, title = "Tools & Res
           <div>
             <label className="block text-[11px] font-black text-gray-400 uppercase tracking-widest mb-3">Upload Image</label>
             <div className="flex flex-col items-center justify-center w-full">
-              <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-200 rounded-3xl cursor-pointer bg-gray-50/50 hover:bg-gray-50 transition-all overflow-hidden">
+              <label className="relative flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-gray-200 rounded-3xl cursor-pointer bg-gray-50/50 hover:bg-gray-50 transition-all overflow-hidden">
+                {progressOf('photo') !== undefined && <UploadProgress variant="overlay" percent={progressOf('photo')} />}
                 {formData.image ? (
                   <img loading="lazy" decoding="async" src={fileUrl(formData.image)} alt="Preview" className="w-full h-full object-cover" />
                 ) : (
@@ -233,7 +238,7 @@ export default function EducationExcellencePage({ addToast, title = "Tools & Res
                     <p className="text-xs font-bold text-gray-400 uppercase">Select File</p>
                   </div>
                 )}
-                <input type="file" className="hidden" accept="image/*" onChange={handleImageChange} />
+                <input type="file" className="hidden" accept="image/*" onChange={handleImageChange} disabled={isUploading} />
               </label>
             </div>
           </div>
@@ -247,9 +252,10 @@ export default function EducationExcellencePage({ addToast, title = "Tools & Res
             </button>
             <button
               onClick={handleSave}
-              className="px-6 py-3 rounded-2xl bg-blue-600 text-white text-sm font-black shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-all"
+              disabled={isUploading}
+              className="px-6 py-3 rounded-2xl bg-blue-600 text-white text-sm font-black shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              Save Entry
+              {isUploading ? 'Uploading…' : 'Save Entry'}
             </button>
           </div>
         </div>

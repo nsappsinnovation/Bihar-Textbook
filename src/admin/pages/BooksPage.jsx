@@ -5,9 +5,11 @@ import {
   ChevronDown, BookOpen, X, Upload,
 } from 'lucide-react';
 import Modal, { FormInput, ToggleSwitch } from '../components/Modal';
+import UploadProgress from '../components/UploadProgress';
+import { useFileUpload } from '../hooks/useFileUpload';
 import { useDebounce } from '../hooks/useCustomHooks';
 import { getBooks, getBook, createBook, updateBook, deleteBook, saveChapters } from '../../services/bookService';
-import { uploadFile, UPLOAD_FOLDERS } from '../../services/uploadService';
+import { UPLOAD_FOLDERS } from '../../services/uploadService';
 import { fileUrl, errorMessage } from '../../services/api';
 
 const ResolvedImage = ({ src, alt, className, onError, placeholder = '/bookcover.webp' }) => (
@@ -99,6 +101,46 @@ export default function BooksPage({ addToast, forcedClass }) {
     setChaptersList(prev => prev.filter((_, idx) => idx !== index));
   };
 
+  // Uploads in progress (cover image and chapter PDFs). Saving waits until they finish,
+  // otherwise a chapter would be stored without its PDF and the reader could not open it.
+  const { upload, progressOf, isUploading } = useFileUpload();
+
+  const handleChapterPdfUpload = async (chapterId, file) => {
+    if (!file) return;
+    try {
+      const path = await upload(`chapter-${chapterId}`, file, 'document', UPLOAD_FOLDERS.bookChapters);
+      setChaptersList(prev => prev.map(c => (c.id === chapterId ? { ...c, pdfUrl: path } : c)));
+      addToast('Chapter PDF uploaded successfully!', 'success');
+    } catch (err) {
+      addToast(errorMessage(err, 'Failed to upload PDF'), 'error');
+    }
+  };
+
+  const handleCoverUpload = async (file, setImage) => {
+    if (!file) return;
+    try {
+      setImage(await upload('cover', file, 'image', UPLOAD_FOLDERS.bookCovers));
+      addToast('Cover image uploaded successfully!', 'success');
+    } catch (err) {
+      addToast(errorMessage(err, 'Failed to upload cover image'), 'error');
+    }
+  };
+
+  // Every chapter needs its PDF before the book can be saved
+  const chaptersReadyToSave = () => {
+    if (isUploading) {
+      addToast('Please wait for the upload to finish', 'error');
+      return false;
+    }
+    const missing = chaptersList.findIndex(c => !c.pdfUrl);
+    if (missing !== -1) {
+      const chapter = chaptersList[missing];
+      addToast(`Upload a PDF for chapter ${missing + 1}${chapter.title ? ` ("${chapter.title}")` : ''} before saving`, 'error');
+      return false;
+    }
+    return true;
+  };
+
   const handleOpenAdd = () => {
     setAddTitle('');
     setAddClassId('');
@@ -179,6 +221,7 @@ export default function BooksPage({ addToast, forcedClass }) {
       addToast('Please enter a subject', 'error');
       return;
     }
+    if (!chaptersReadyToSave()) return;
 
     try {
       const newBook = await createBook({
@@ -213,6 +256,7 @@ export default function BooksPage({ addToast, forcedClass }) {
       addToast('Please enter a valid book title', 'error');
       return;
     }
+    if (!chaptersReadyToSave()) return;
     try {
       await updateBook(editingBook.id, {
         title: editTitle.trim(),
@@ -603,6 +647,7 @@ export default function BooksPage({ addToast, forcedClass }) {
               </div>
             ) : (
               <div className="relative border-2 border-dashed border-gray-300 rounded-2xl p-6 bg-gray-50/50 hover:bg-gray-100/50 transition-colors flex flex-col items-center justify-center text-center cursor-pointer group min-h-[120px]">
+                {progressOf('cover') !== undefined && <UploadProgress variant="overlay" percent={progressOf('cover')} />}
                 <Upload className="w-8 h-8 text-gray-400 mb-2 group-hover:text-blue-500 transition-colors" />
                 <span className="text-xs font-bold text-gray-700 mb-1">Click to upload cover image</span>
                 <span className="text-[10px] text-gray-400 font-medium">JPEG, PNG, WEBP up to 2MB</span>
@@ -611,17 +656,8 @@ export default function BooksPage({ addToast, forcedClass }) {
                   accept="image/*"
                   id="upload-add-cover-image"
                   className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-                  onChange={async (e) => {
-                    const file = e.target.files?.[0];
-                    if (file) {
-                      try {
-                        setAddImage(await uploadFile(file, 'image', UPLOAD_FOLDERS.bookCovers));
-                        addToast('Cover image uploaded successfully!', 'success');
-                      } catch (err) {
-                        addToast(errorMessage(err, 'Failed to upload cover image'), 'error');
-                      }
-                    }
-                  }}
+                  disabled={isUploading}
+                  onChange={(e) => handleCoverUpload(e.target.files?.[0], setAddImage)}
                 />
               </div>
             )}
@@ -681,7 +717,9 @@ export default function BooksPage({ addToast, forcedClass }) {
                       className="px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     />
                       <div className="relative flex items-center h-full min-h-[34px]">
-                        {chap.pdfUrl ? (
+                        {progressOf(`chapter-${chap.id}`) !== undefined ? (
+                          <UploadProgress percent={progressOf(`chapter-${chap.id}`)} />
+                        ) : chap.pdfUrl ? (
                           <div className="flex items-center justify-between gap-2 px-3 py-1.5 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-700 text-xs font-bold w-full h-full">
                             <span className="truncate flex-1">PDF Uploaded</span>
                             <button
@@ -702,17 +740,7 @@ export default function BooksPage({ addToast, forcedClass }) {
                                 type="file"
                                 accept="application/pdf"
                                 className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-                                onChange={async (e) => {
-                                  const file = e.target.files?.[0];
-                                  if (file) {
-                                    try {
-                                      handleUpdateChapterRow(idx, 'pdfUrl', await uploadFile(file, 'document', UPLOAD_FOLDERS.bookChapters));
-                                      addToast('Chapter PDF uploaded successfully!', 'success');
-                                    } catch (err) {
-                                      addToast(errorMessage(err, 'Failed to upload PDF'), 'error');
-                                    }
-                                  }
-                                }}
+                                onChange={(e) => handleChapterPdfUpload(chap.id, e.target.files?.[0])}
                               />
                             </label>
                           </div>
@@ -749,11 +777,12 @@ export default function BooksPage({ addToast, forcedClass }) {
           </button>
           <motion.button
             onClick={handleSaveAdd}
-            className="px-5 py-2.5 rounded-xl gradient-primary text-white text-sm font-semibold shadow-lg shadow-blue-500/20"
+            disabled={isUploading}
+            className="px-5 py-2.5 rounded-xl gradient-primary text-white text-sm font-semibold shadow-lg shadow-blue-500/20 disabled:opacity-60 disabled:cursor-not-allowed"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            Add Textbook
+            {isUploading ? 'Uploading…' : 'Add Textbook'}
           </motion.button>
         </div>
       </Modal>
@@ -813,6 +842,7 @@ export default function BooksPage({ addToast, forcedClass }) {
               </div>
             ) : (
               <div className="relative border-2 border-dashed border-gray-300 rounded-2xl p-6 bg-gray-50/50 hover:bg-gray-100/50 transition-colors flex flex-col items-center justify-center text-center cursor-pointer group min-h-[120px]">
+                {progressOf('cover') !== undefined && <UploadProgress variant="overlay" percent={progressOf('cover')} />}
                 <Upload className="w-8 h-8 text-gray-400 mb-2 group-hover:text-blue-500 transition-colors" />
                 <span className="text-xs font-bold text-gray-700 mb-1">Click to upload cover image</span>
                 <span className="text-[10px] text-gray-400 font-medium">JPEG, PNG, WEBP up to 2MB</span>
@@ -821,17 +851,8 @@ export default function BooksPage({ addToast, forcedClass }) {
                   accept="image/*"
                   id="upload-edit-cover-image"
                   className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-                  onChange={async (e) => {
-                    const file = e.target.files?.[0];
-                    if (file) {
-                      try {
-                        setEditImage(await uploadFile(file, 'image', UPLOAD_FOLDERS.bookCovers));
-                        addToast('Cover image uploaded successfully!', 'success');
-                      } catch (err) {
-                        addToast(errorMessage(err, 'Failed to upload cover image'), 'error');
-                      }
-                    }
-                  }}
+                  disabled={isUploading}
+                  onChange={(e) => handleCoverUpload(e.target.files?.[0], setEditImage)}
                 />
               </div>
             )}
@@ -891,7 +912,9 @@ export default function BooksPage({ addToast, forcedClass }) {
                       className="px-3 py-2 text-sm bg-white border border-gray-200 rounded-lg text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     />
                       <div className="relative flex items-center h-full min-h-[34px]">
-                        {chap.pdfUrl ? (
+                        {progressOf(`chapter-${chap.id}`) !== undefined ? (
+                          <UploadProgress percent={progressOf(`chapter-${chap.id}`)} />
+                        ) : chap.pdfUrl ? (
                           <div className="flex items-center justify-between gap-2 px-3 py-1.5 bg-emerald-50 border border-emerald-200 rounded-lg text-emerald-700 text-xs font-bold w-full h-full">
                             <span className="truncate flex-1">PDF Uploaded</span>
                             <button
@@ -912,17 +935,7 @@ export default function BooksPage({ addToast, forcedClass }) {
                                 type="file"
                                 accept="application/pdf"
                                 className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-                                onChange={async (e) => {
-                                  const file = e.target.files?.[0];
-                                  if (file) {
-                                    try {
-                                      handleUpdateChapterRow(idx, 'pdfUrl', await uploadFile(file, 'document', UPLOAD_FOLDERS.bookChapters));
-                                      addToast('Chapter PDF uploaded successfully!', 'success');
-                                    } catch (err) {
-                                      addToast(errorMessage(err, 'Failed to upload PDF'), 'error');
-                                    }
-                                  }
-                                }}
+                                onChange={(e) => handleChapterPdfUpload(chap.id, e.target.files?.[0])}
                               />
                             </label>
                           </div>
@@ -959,11 +972,12 @@ export default function BooksPage({ addToast, forcedClass }) {
           </button>
           <motion.button
             onClick={handleSaveEdit}
-            className="px-5 py-2.5 rounded-xl gradient-primary text-white text-sm font-semibold shadow-lg shadow-blue-500/20"
+            disabled={isUploading}
+            className="px-5 py-2.5 rounded-xl gradient-primary text-white text-sm font-semibold shadow-lg shadow-blue-500/20 disabled:opacity-60 disabled:cursor-not-allowed"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            Save Changes
+            {isUploading ? 'Uploading…' : 'Save Changes'}
           </motion.button>
         </div>
       </Modal>
