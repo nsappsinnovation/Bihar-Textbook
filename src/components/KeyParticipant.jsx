@@ -3,6 +3,7 @@ import { getDirectory } from "../services/directoryService";
 import { fileUrl } from "../services/api";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Topography from "./Topography";
 
 export default function KeyParticipant() {
   const { t } = useTranslation();
@@ -16,20 +17,32 @@ export default function KeyParticipant() {
   }, []);
 
   return (
-    <section id="key-participants" className="bg-[#f8f9fa] py-14 px-6 font-sans">
-      <div className="max-w-[1400px] mx-auto">
+    <section id="key-participants" className="relative isolate overflow-hidden bg-[#0b2b4f] py-16 md:py-24 px-6 font-sans">
+      {/* Animated contour lines, masked to fade out toward the top-left */}
+      <Topography className="absolute z-0 -right-[10%] -bottom-[18%] w-[78%] h-[112%] opacity-90 [mask-image:radial-gradient(ellipse_at_62%_58%,#000_0%,rgba(0,0,0,0.92)_44%,transparent_76%)]" />
+      {/* Brand-blue glow, depth gradient and a faint 64px grid */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-[1]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 82% 78%, rgba(96,165,250,0.14), transparent 34%), linear-gradient(180deg, rgba(13,14,35,0.24), rgba(13,14,35,0.62)), linear-gradient(rgba(248,250,252,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(248,250,252,0.035) 1px, transparent 1px)",
+          backgroundSize: "auto, auto, 64px 64px, 64px 64px",
+        }}
+      />
+      <div className="relative z-[2] max-w-[1400px] mx-auto">
         {/* --- Minimalist Header (Matching FlagshipEvents) --- */}
         <div className="max-w-[1280px] mx-auto mb-12">
           <div className="max-w-3xl">
             <div className="flex items-center gap-2 mb-4">
-              <div className="h-px w-6 bg-blue-600"></div>
-              <span className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em]">{t("keyParticipant.badge", "Leadership")}</span>
+              <div className="h-px w-6 bg-[#60a5fa]"></div>
+              <span className="text-[10px] font-bold text-[#60a5fa] uppercase tracking-[0.2em]">{t("keyParticipant.badge", "Leadership")}</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4 leading-tight">
               {t("keyParticipant.heading", "Leading The Way")} <br />
-              <span className="text-slate-400 font-medium">{t("keyParticipant.headingHighlight", "In Educational Excellence")}</span>
+              <span className="text-white/50 font-medium">{t("keyParticipant.headingHighlight", "In Educational Excellence")}</span>
             </h2>
-            <p className="text-sm text-slate-500 font-medium leading-relaxed mb-4">
+            <p className="text-sm text-white/60 font-medium leading-relaxed mb-4">
               {t("keyParticipant.description", "Meet the visionary leaders shaping the future of learning in Bihar.")}
             </p>
           </div>
@@ -51,7 +64,6 @@ export default function KeyParticipant() {
 }
 function ParticipantCard({ item }) {
   const { t } = useTranslation();
-  const isMithilesh = item.name === "Sri Mithilesh Tiwari" || item.name === "Shri Mithilesh Tiwari";
 
   const getTranslatedInfo = (name, role) => {
     const nameLower = name ? String(name).toLowerCase() : "";
@@ -115,8 +127,9 @@ function ParticipantCard({ item }) {
       </div>
 
       {/* IMAGE FIXED TO CARD BOTTOM */}
-      <div className={`absolute bottom-0 left-0 right-0 z-20 flex ${isMithilesh ? 'h-[320px]' : 'h-[385px]'} items-end justify-center px-0`}>
-        <img loading="lazy" decoding="async"
+      <div className="absolute bottom-0 left-0 right-0 z-20 flex items-end justify-center">
+        <LeaderPhoto
+          key={item.image}
           src={item.image || (item.name?.includes("Yatendra") ? "/images/KeyParticipants/shri_yatendra_pal.webp" : "")}
           alt={item.name}
           onError={(e) => {
@@ -124,16 +137,102 @@ function ParticipantCard({ item }) {
               e.target.src = "/images/KeyParticipants/shri_yatendra_pal.webp";
             }
           }}
-          className={`
-            block ${isMithilesh ? 'h-[265px] lg:h-[235px]' : 'h-[300px] lg:h-[265px]'} max-w-full object-contain object-bottom drop-shadow-2xl
-            transition-transform duration-[1500ms]
-            ease-in-out
-            group-hover:scale-105
-            group-hover:translate-y-0
-            origin-bottom
-          `}
         />
       </div>
+    </div>
+  );
+}
+
+// Leader photos are transparent cut-outs uploaded at different sizes and crops (some tight on the head,
+// some with headroom and more torso). Every photo gets the same frame, and once loaded we read its alpha
+// channel to find the head, then scale and place the photo so every head is the same width and starts at
+// the same height. If the pixels can't be read (e.g. a cross-origin upload in local dev) it falls back to
+// filling the frame from the top.
+const FRAME_ASPECT = 23 / 27; // width / height, matches aspect-[23/27] on the frame
+const HEAD_WIDTH = 0.34; // head width as a fraction of the frame width
+const HEAD_TOP = 0.08; // gap above the head as a fraction of the frame height
+
+function measureHead(img) {
+  const w = 120;
+  const h = Math.max(1, Math.round((img.naturalHeight / img.naturalWidth) * w));
+  const canvas = document.createElement("canvas");
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext("2d", { willReadFrequently: true });
+  ctx.drawImage(img, 0, 0, w, h);
+  const { data } = ctx.getImageData(0, 0, w, h); // throws on a cross-origin image
+
+  const rowSpan = (y) => {
+    let left = -1;
+    let right = -1;
+    for (let x = 0; x < w; x++) {
+      if (data[(y * w + x) * 4 + 3] > 128) {
+        if (left < 0) left = x;
+        right = x;
+      }
+    }
+    return left < 0 ? null : [left, right + 1];
+  };
+
+  let top = 0;
+  while (top < h && !rowSpan(top)) top++;
+  if (top >= h) return null;
+
+  // Head width: median span across rows 8-16% down the figure (forehead to eyes)
+  const spans = [];
+  for (let y = Math.round(top + 0.08 * (h - top)); y <= Math.round(top + 0.16 * (h - top)) && y < h; y++) {
+    const span = rowSpan(y);
+    if (span) spans.push(span);
+  }
+  if (!spans.length) return null;
+  spans.sort((a, b) => a[1] - a[0] - (b[1] - b[0]));
+  const [left, right] = spans[Math.floor(spans.length / 2)];
+  // A span as wide as the photo means the crop is so tight there's no clear head outline
+  if (right - left > 0.9 * w) return null;
+
+  return { top: top / h, headWidth: (right - left) / w, headCenter: (left + right) / 2 / w, ratio: img.naturalHeight / img.naturalWidth };
+}
+
+function LeaderPhoto({ src, alt, onError }) {
+  const [layout, setLayout] = useState(null); // null = measuring, false = fallback, object = placement
+
+  const place = (img) => {
+    try {
+      const m = measureHead(img);
+      if (!m) return setLayout(false);
+      const frameHeight = 1 / FRAME_ASPECT; // in frame widths
+      const headTop = HEAD_TOP * frameHeight;
+      // Rendered image width in frame widths; grow it if needed so the photo still reaches the frame's bottom edge
+      const minScale = (frameHeight - headTop) / ((1 - m.top) * m.ratio);
+      const scale = Math.max(HEAD_WIDTH / m.headWidth, minScale);
+      const y = headTop - m.top * scale * m.ratio;
+      setLayout({
+        width: `${scale * 100}%`,
+        left: `${(0.5 - m.headCenter * scale) * 100}%`,
+        top: `${(y / frameHeight) * 100}%`,
+      });
+    } catch {
+      setLayout(false);
+    }
+  };
+
+  return (
+    <div className="relative w-[230px] max-w-[88%] lg:w-[210px] aspect-[23/27] overflow-hidden origin-bottom transition-transform duration-[1500ms] ease-in-out group-hover:scale-105">
+      <img
+        loading="lazy"
+        decoding="async"
+        src={src}
+        alt={alt}
+        onLoad={(e) => place(e.currentTarget)}
+        onError={(e) => {
+          setLayout(false);
+          onError?.(e);
+        }}
+        style={layout ? { position: "absolute", maxWidth: "none", height: "auto", ...layout } : undefined}
+        className={`drop-shadow-2xl transition-opacity duration-300 ${layout === null ? "opacity-0" : "opacity-100"} ${
+          layout ? "" : "absolute inset-0 w-full h-full object-cover object-top"
+        }`}
+      />
     </div>
   );
 }

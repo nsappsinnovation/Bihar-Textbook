@@ -6,11 +6,16 @@ import { useTranslation } from "react-i18next";
 const Footer = () => {
   const { t } = useTranslation();
   return (
-    <footer className="relative bg-gradient-to-b from-[#0a0f1c] to-[#060913] text-white/70 pt-16 pb-8 px-6 md:px-12 font-sans border-t border-white/5 overflow-hidden">
+    <footer
+      className="relative bg-[#021e41] bg-no-repeat bg-bottom bg-[length:100%_auto] lg:bg-cover text-white/70 pt-16 pb-8 px-6 md:px-12 font-sans border-t border-white/5 overflow-hidden"
+      style={{ backgroundImage: "url('/images/footer/footer_bg.webp')" }}
+    >
       {/* Decorative Background Elements */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
-      <div className="absolute top-[-20%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-600/10 blur-[120px] pointer-events-none"></div>
-      <div className="absolute bottom-[-20%] right-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/10 blur-[120px] pointer-events-none"></div>
+      {/* Darkens the upper part so the columns stay readable over the skyline; the map, wave and books stay clear */}
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[#021e41]/60 via-[#021e41]/25 via-45% to-transparent to-70%"></div>
+      {/* Below lg the image is a 3:1 strip along the bottom; fade its top edge into the base colour */}
+      <div className="lg:hidden absolute inset-x-0 bottom-0 h-[33.4vw] pointer-events-none bg-gradient-to-b from-[#021e41] to-transparent to-50%"></div>
 
       <div className="max-w-[1280px] mx-auto relative z-10">
         

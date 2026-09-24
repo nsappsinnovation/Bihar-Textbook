@@ -100,8 +100,8 @@ const Contact = () => {
                     <div>
                       <h4 className="text-[15px] font-black text-slate-900 mb-1">{t("contact.serviceHours", "Service Hours")}</h4>
                       <div className="flex items-center gap-3">
-                        <span className="text-[13px] text-slate-500 font-medium italic">{t("contact.monToSat", "Mon to Sat")}</span>
-                        <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-[11px] font-bold tracking-wide">{t("contact.serviceTime", "10 AM — 5 PM")}</span>
+                        <span className="text-[13px] text-slate-500 font-medium italic">{t("contact.monToFri", "Mon to Fri")}</span>
+                        <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-[11px] font-bold tracking-wide">{t("contact.serviceTime", "09:30 AM — 06:00 PM")}</span>
                       </div>
                     </div>
                   </div>

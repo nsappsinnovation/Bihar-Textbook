@@ -55,6 +55,10 @@ function Flipbook({ pdfFile: propPdfFile }) {
     const [pageNumber, setPageNumber] = useState(1);
     const [zoom, setZoom] = useState(1);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+    // Size of the reading area (between header, toolbar and table of contents)
+    const viewerRef = useRef(null);
+    const [viewerSize, setViewerSize] = useState({ width: 0, height: 0 });
 
     // State for dynamic PDF path
     const [pdfPath, setPdfPath] = useState(null);
@@ -68,11 +72,27 @@ function Flipbook({ pdfFile: propPdfFile }) {
 
     useEffect(() => {
         const handleResize = () => {
-            const width = window.innerWidth;
-            setWindowWidth(width);
+            setWindowWidth(window.innerWidth);
+            setWindowHeight(window.innerHeight);
         };
         window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
+        window.addEventListener("orientationchange", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+            window.removeEventListener("orientationchange", handleResize);
+        };
+    }, []);
+
+    // Track the reading area so the page always fits it (phones, rotation, TOC open/closed)
+    useEffect(() => {
+        const el = viewerRef.current;
+        if (!el) return;
+        const observer = new ResizeObserver(([entry]) => {
+            const { width, height } = entry.contentRect;
+            setViewerSize({ width: Math.round(width), height: Math.round(height) });
+        });
+        observer.observe(el);
+        return () => observer.disconnect();
     }, []);
 
     // Fetch chapters list and active book data
@@ -117,6 +137,11 @@ function Flipbook({ pdfFile: propPdfFile }) {
 
         fetchBookDetailsAndChapters();
     }, [classId, bookSubject]);
+
+    // A new chapter starts on its first page
+    useEffect(() => {
+        setPageNumber(1);
+    }, [chapterId]);
 
     // Fetch active PDF file path
     useEffect(() => {
@@ -233,20 +258,26 @@ function Flipbook({ pdfFile: propPdfFile }) {
     const pagesArray = numPages ? Array.from({ length: numPages }, (_, i) => i + 1) : [];
 
     const isMobile = windowWidth < 768;
-    const isTablet = windowWidth >= 768 && windowWidth < 1024;
-    
-    // Adjust flipbook page size dynamically depending on whether sidebar is shown
-    const sidebarWidth = showRightPanel ? (isMobile ? windowWidth : 360) : 0;
-    const availableWidth = windowWidth - sidebarWidth;
-    
-    // Calculate page size to fit A4 ratio inside available space
-    const bookWidth = isMobile 
-        ? availableWidth * 0.9 
-        : isTablet 
-            ? Math.min(400, availableWidth * 0.42)
-            : Math.min(460, availableWidth * 0.44);
-            
-    const bookHeight = bookWidth * 1.414;
+    // Phones held sideways: little height, so keep the chrome compact and show one page
+    const isShortScreen = windowHeight < 560;
+    const compact = isMobile || isShortScreen;
+    const singlePage = compact;
+
+    // Fit an A4 page (1 : 1.414) into the reading area; zoom enlarges it and the area scrolls
+    const PAGE_RATIO = 1.414;
+    // Wrapper padding + the page's white frame (+ side arrows on larger screens)
+    const padX = compact ? 36 : 190;
+    const padY = compact ? 36 : 84;
+    const areaWidth = viewerSize.width || (windowWidth - (showRightPanel && !isMobile ? 360 : 0));
+    const areaHeight = viewerSize.height || windowHeight - 140;
+    const fitWidth = Math.min(
+        (areaWidth - padX) / (singlePage ? 1 : 2),
+        (areaHeight - padY) / PAGE_RATIO,
+        singlePage ? 900 : 560,
+    );
+    // Rounded so small resizes don't rebuild the book on every pixel
+    const bookWidth = Math.max(140, Math.floor((fitWidth * zoom) / 4) * 4);
+    const bookHeight = Math.round(bookWidth * PAGE_RATIO);
 
     const filteredChapters = chapters.filter(c => 
         (c.title && c.title.toLowerCase().includes(searchQuery.toLowerCase())) ||
@@ -261,29 +292,31 @@ function Flipbook({ pdfFile: propPdfFile }) {
     cleanedDescription = cleanedDescription.replace(/[\s\.]*Complete digital reading material\s*&\s*chapters\.?/gi, "");
 
     return (
-        <div className="h-screen w-full flex flex-col bg-[#f8fafc] overflow-hidden relative font-sans select-none">
+        <div className="h-screen h-[100dvh] w-full flex flex-col bg-[#f8fafc] overflow-hidden relative font-sans select-none">
 
             {/* Top Header Bar */}
-            <header className="w-full bg-white border-b border-slate-200 px-4 py-3 flex items-center justify-between z-30 shrink-0 shadow-sm">
-                <div className="flex items-center gap-3">
+            <header className={`w-full bg-white border-b border-slate-200 px-3 sm:px-4 ${isShortScreen ? "py-1.5" : "py-2.5 sm:py-3"} flex items-center justify-between gap-3 z-30 shrink-0 shadow-sm`}>
+                <div className="flex items-center gap-3 min-w-0">
                     <button
                         onClick={() => navigate(`/class/${classId}/read/${bookSubject || "Hindi"}`)}
-                        className="w-9 h-9 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-700 transition-colors shadow-sm cursor-pointer"
+                        className="w-9 h-9 shrink-0 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-700 transition-colors shadow-sm cursor-pointer"
                         title="Close Reader"
                     >
                         <X size={16} />
                     </button>
-                    <div>
-                        <h1 className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
-                            <span>Class {classId} &bull; {bookTitle}</span>
+                    <div className="min-w-0">
+                        <h1 className="text-sm sm:text-base font-extrabold text-slate-900 tracking-tight truncate">
+                            Class {classId} &bull; {bookTitle}
                         </h1>
-                        <p className="text-[11px] text-slate-500 font-semibold tracking-wide uppercase mt-0.5">
-                            Reading: {currentChapterTitle}
-                        </p>
+                        {!isShortScreen && (
+                            <p className="text-[11px] text-slate-500 font-semibold tracking-wide uppercase mt-0.5 truncate">
+                                Reading: {currentChapterTitle}
+                            </p>
+                        )}
                     </div>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 shrink-0">
                     {/* Sidebar Toggle Button */}
                     <button
                         onClick={() => setShowRightPanel(!showRightPanel)}
@@ -304,23 +337,20 @@ function Flipbook({ pdfFile: propPdfFile }) {
                 
                 {/* Left Area: Flipbook Viewer */}
                 <div className="flex-1 flex flex-col bg-[#f1f5f9] relative overflow-hidden">
-                    <div className="flex-1 flex items-center justify-center relative p-6 sm:p-8 md:p-12 overflow-auto" data-lenis-prevent>
-                        
+                    <div className="flex-1 min-h-0 relative">
                         {/* Large Left Arrow */}
-                        {!isMobile && (
+                        {!compact && (
                             <button
                                 onClick={() => bookRef.current?.pageFlip?.().flipPrev()}
-                                className="absolute left-6 z-20 p-3 rounded-full bg-white/80 border border-slate-200 hover:bg-white text-slate-700 hover:text-black hover:scale-105 shadow-md transition-all cursor-pointer"
+                                className="absolute left-6 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/80 border border-slate-200 hover:bg-white text-slate-700 hover:text-black hover:scale-105 shadow-md transition-all cursor-pointer"
                             >
                                 <ChevronLeft size={24} strokeWidth={2} />
                             </button>
                         )}
+                    <div ref={viewerRef} className="absolute inset-0 flex overflow-auto overscroll-contain" data-lenis-prevent>
 
                         {/* Book Container with zoom */}
-                        <div
-                            className="transition-transform duration-300 ease-out origin-center z-10 my-auto"
-                            style={{ transform: `scale(${zoom})` }}
-                        >
+                        <div className={`m-auto z-10 ${compact ? "p-2" : "p-8"}`}>
                             <Document
                                 file={pdfFile}
                                 onLoadSuccess={onDocumentLoadSuccess}
@@ -364,13 +394,14 @@ function Flipbook({ pdfFile: propPdfFile }) {
                                 {/* White border container as seen in reference */}
                                 <div className="bg-white p-1.5 shadow-2xl rounded-sm border border-slate-200">
                                     <HTMLFlipBook
+                                        key={`${pdfFile}-${bookWidth}-${singlePage}-${zoom > 1}`}
                                         width={bookWidth}
                                         height={bookHeight}
                                         size="fixed"
-                                        minWidth={200}
-                                        maxWidth={800}
-                                        minHeight={300}
-                                        maxHeight={1200}
+                                        minWidth={140}
+                                        maxWidth={2000}
+                                        minHeight={200}
+                                        maxHeight={2800}
                                         maxShadowOpacity={0.4}
                                         showCover={false}
                                         mobileScrollSupport={true}
@@ -380,9 +411,9 @@ function Flipbook({ pdfFile: propPdfFile }) {
                                         style={{ backgroundColor: "#fff" }}
                                         drawShadow={true}
                                         flippingTime={800}
-                                        useMouseEvents={true}
-                                        usePortrait={isMobile}
-                                        startPage={0}
+                                        useMouseEvents={zoom <= 1}
+                                        usePortrait={singlePage}
+                                        startPage={Math.max(0, pageNumber - 1)}
                                     >
                                         {pagesArray.map((pageNum) => (
                                             <Pages key={pageNum}>
@@ -402,11 +433,12 @@ function Flipbook({ pdfFile: propPdfFile }) {
                             </Document>
                         </div>
 
+                    </div>
                         {/* Large Right Arrow */}
-                        {!isMobile && (
+                        {!compact && (
                             <button
                                 onClick={() => bookRef.current?.pageFlip?.().flipNext()}
-                                className="absolute right-6 z-20 p-3 rounded-full bg-white/80 border border-slate-200 hover:bg-white text-slate-700 hover:text-black hover:scale-105 shadow-md transition-all cursor-pointer"
+                                className="absolute right-6 top-1/2 -translate-y-1/2 z-20 p-3 rounded-full bg-white/80 border border-slate-200 hover:bg-white text-slate-700 hover:text-black hover:scale-105 shadow-md transition-all cursor-pointer"
                             >
                                 <ChevronRight size={24} strokeWidth={2} />
                             </button>
@@ -414,20 +446,20 @@ function Flipbook({ pdfFile: propPdfFile }) {
                     </div>
 
                     {/* Bottom Toolbar centered at the bottom of the viewer */}
-                    <div className="w-full bg-white/85 backdrop-blur-sm border-t border-slate-200 p-2.5 flex justify-center z-25 shrink-0 shadow-[0_-2px_10px_rgba(0,0,0,0.02)]">
-                        <div className="flex items-center gap-3 bg-slate-900 text-white px-4 py-2 rounded-full shadow-lg">
+                    <div className={`w-full bg-white/85 backdrop-blur-sm border-t border-slate-200 ${isShortScreen ? "p-1.5" : "p-2.5"} flex justify-center z-25 shrink-0 shadow-[0_-2px_10px_rgba(0,0,0,0.02)] pb-[max(0.625rem,env(safe-area-inset-bottom))]`}>
+                        <div className={`flex items-center ${compact ? "gap-2 px-3" : "gap-3 px-4"} ${isShortScreen ? "py-1.5" : "py-2"} bg-slate-900 text-white rounded-full shadow-lg max-w-full`}>
 
                             {/* Zoom Controls */}
                             <div className="flex items-center gap-1">
                                 <button 
-                                    onClick={() => setZoom(Math.max(0.6, zoom - 0.1))} 
+                                    onClick={() => setZoom(z => Math.max(0.6, Math.round((z - 0.2) * 10) / 10))} 
                                     className="p-1 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
                                     title="Zoom Out"
                                 >
                                     <ZoomOut size={16} />
                                 </button>
                                 <button 
-                                    onClick={() => setZoom(Math.min(1.8, zoom + 0.1))} 
+                                    onClick={() => setZoom(z => Math.min(3, Math.round((z + 0.2) * 10) / 10))} 
                                     className="p-1 text-slate-400 hover:text-white hover:bg-white/10 rounded-full transition-colors cursor-pointer"
                                     title="Zoom In"
                                 >
@@ -509,7 +541,7 @@ function Flipbook({ pdfFile: propPdfFile }) {
 
                 {/* Right Side: Chapter List & Text Panel */}
                 {showRightPanel && (
-                    <aside className="w-full md:w-[360px] border-l border-slate-200 bg-white flex flex-col shrink-0 z-20 shadow-[-4px_0_12px_rgba(0,0,0,0.015)] relative h-full">
+                    <aside className="absolute inset-0 md:static md:inset-auto w-full md:w-[360px] border-l border-slate-200 bg-white flex flex-col shrink-0 z-30 md:z-20 shadow-[-4px_0_12px_rgba(0,0,0,0.015)] h-full">
                         
                         {/* Book Metadata Cover Card */}
                         <div className="p-4 border-b border-slate-100 bg-slate-50/50">
@@ -569,6 +601,7 @@ function Flipbook({ pdfFile: propPdfFile }) {
                                             data-active={isActive ? "true" : "false"}
                                             key={chap.id || idx}
                                             to={`/book/${classId}/${bookSubject}/${chap.id}/flip`}
+                                            onClick={() => { if (isMobile) setShowRightPanel(false); }}
                                             className={`w-full flex items-center gap-3 p-3 rounded-xl border transition-all text-left group ${
                                                 isActive
                                                     ? "bg-gradient-to-r from-blue-50 to-indigo-50/50 border-blue-200 shadow-sm"

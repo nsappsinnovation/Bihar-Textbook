@@ -188,7 +188,18 @@ export default function NoticeBoard() {
   const totalTenders = tenders.length;
 
   return (
-    <section className="w-full bg-[#fcfcfd] py-16 px-6 md:px-12 lg:px-24 font-sans text-slate-900 border-t border-slate-100 overflow-hidden relative">
+    <section className="w-full bg-[#0a1d4f] py-16 px-6 md:px-12 lg:px-24 font-sans text-white overflow-hidden relative isolate">
+      {/* Royal blue with a single warm gold accent, so it reads apart from the navy Leaders section and footer:
+          gold glow top-right, blue light bottom-left, depth gradient and a faint dot texture */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at 88% 8%, rgba(242,196,109,0.08), transparent 30%), radial-gradient(circle at 6% 96%, rgba(59,130,246,0.12), transparent 38%), linear-gradient(180deg, rgba(6,14,40,0.2), rgba(6,14,40,0.6)), radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1.2px)",
+          backgroundSize: "auto, auto, auto, 22px 22px",
+        }}
+      />
       <style>
         {`
           @keyframes marquee-y {
@@ -230,56 +241,56 @@ export default function NoticeBoard() {
                   whileInView={{ width: 24 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.3 }}
-                  className="h-px bg-blue-600"
+                  className="h-px bg-[#d4b27a]"
                 ></motion.div>
-                <span className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em]">{t("noticeBoard.badge", "Updates & Tenders")}</span>
+                <span className="text-[10px] font-bold text-[#d4b27a] uppercase tracking-[0.2em]">{t("noticeBoard.badge", "Updates & Tenders")}</span>
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
-                {t("noticeBoard.heading", "Official Notices")} <br /> <span className="text-slate-400 font-medium">{t("noticeBoard.headingHighlight", "& Circulars")}</span>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4 leading-tight">
+                {t("noticeBoard.heading", "Official Notices")} <br /> <span className="text-[#d4b27a] font-medium">{t("noticeBoard.headingHighlight", "& Circulars")}</span>
               </h2>
-              <p className="text-sm text-slate-500 font-medium leading-relaxed mb-4">
+              <p className="text-sm text-blue-100/80 font-medium leading-relaxed mb-4">
                 {t("noticeBoard.description", "Stay updated with the latest administrative announcements, tenders, and educational circulars from the Bihar State Text Book Publishing Corporation Ltd.")}
               </p>
 
               {/* Premium Stats Overview Widget */}
               <div className="flex flex-col gap-4 mt-6 mb-8">
                 {/* Tenders Card */}
-                <div className="bg-white/80 backdrop-blur-xl p-5 rounded-2xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex items-center justify-between group hover:shadow-md transition-all duration-300">
+                <div className="bg-[#f7f0e4] p-5 rounded-2xl border border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.18)] flex items-center justify-between group hover:shadow-md transition-all duration-300">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center border border-amber-500/20 shadow-[0_0_15px_rgba(245,158,11,0.1)] group-hover:scale-110 transition-transform">
                       <FileText className="text-amber-500" size={22} />
                     </div>
                     <div>
                       <h4 className="text-xs font-black text-slate-800 tracking-wider">{t("noticeBoard.tendersLabel", "Tenders")}</h4>
-                      <p className="text-[11px] text-slate-400 mt-0.5 font-medium">{t("noticeBoard.tendersSub", "E-procurement & contracts")}</p>
+                      <p className="text-[11px] text-slate-500 mt-0.5 font-medium">{t("noticeBoard.tendersSub", "E-procurement & contracts")}</p>
                     </div>
                   </div>
                   <span className="text-2xl font-black text-amber-500 tracking-tight">{totalTenders}</span>
                 </div>
 
                 {/* Live Notices Card */}
-                <div className="bg-white/80 backdrop-blur-xl p-5 rounded-2xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex items-center justify-between group hover:shadow-md transition-all duration-300">
+                <div className="bg-[#f5ecee] p-5 rounded-2xl border border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.18)] flex items-center justify-between group hover:shadow-md transition-all duration-300">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-xl bg-rose-500/10 flex items-center justify-center border border-rose-500/20 shadow-[0_0_15px_rgba(244,63,94,0.1)] group-hover:scale-110 transition-transform">
                       <Bell className="text-rose-500" size={22} />
                     </div>
                     <div>
                       <h4 className="text-xs font-black text-slate-800 tracking-wider">{t("noticeBoard.noticesLabel", "Official Notices")}</h4>
-                      <p className="text-[11px] text-slate-400 mt-0.5 font-medium">{t("noticeBoard.noticesSub", "Administrative announcements")}</p>
+                      <p className="text-[11px] text-slate-500 mt-0.5 font-medium">{t("noticeBoard.noticesSub", "Administrative announcements")}</p>
                     </div>
                   </div>
                   <span className="text-2xl font-black text-rose-500 tracking-tight">{totalNotices}</span>
                 </div>
 
                 {/* Academic Circulars Card */}
-                <div className="bg-white/80 backdrop-blur-xl p-5 rounded-2xl border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] flex items-center justify-between group hover:shadow-md transition-all duration-300">
+                <div className="bg-[#e6ecf3] p-5 rounded-2xl border border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.18)] flex items-center justify-between group hover:shadow-md transition-all duration-300">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.1)] group-hover:scale-110 transition-transform">
                       <Award className="text-blue-500" size={22} />
                     </div>
                     <div>
                       <h4 className="text-xs font-black text-slate-800 tracking-wider">{t("noticeBoard.circularsLabel", "Academic Circulars")}</h4>
-                      <p className="text-[11px] text-slate-400 mt-0.5 font-medium">{t("noticeBoard.circularsSub", "Curriculum & syllabus updates")}</p>
+                      <p className="text-[11px] text-slate-500 mt-0.5 font-medium">{t("noticeBoard.circularsSub", "Curriculum & syllabus updates")}</p>
                     </div>
                   </div>
                   <span className="text-2xl font-black text-blue-500 tracking-tight">{totalCirculars}</span>
@@ -289,7 +300,7 @@ export default function NoticeBoard() {
 
             {/* View All Button */}
             <div className="hidden lg:block">
-               <Link to="/notice" className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 rounded-full text-sm font-bold text-slate-700 hover:text-blue-600 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-500/10 transition-all group">
+               <Link to="/notice" className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-white rounded-full text-sm font-bold text-[#124d9c] hover:bg-blue-50 hover:shadow-lg hover:shadow-black/20 transition-all group">
                  {t("noticeBoard.viewArchive", "View Document Archive")}
                  <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                </Link>
@@ -299,20 +310,20 @@ export default function NoticeBoard() {
           {/* Right Column: Interactive List */}
           <div className="lg:w-2/3 flex flex-col">
             {/* Tabs */}
-            <div className="flex gap-2 mb-6 border-b border-slate-200 pb-px overflow-x-auto scrollbar-hide shrink-0">
+            <div className="flex gap-2 mb-6 border-b border-white/20 pb-px overflow-x-auto scrollbar-hide shrink-0">
               {["All", "Circular", "Tender", "Notice"].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={`px-5 py-2.5 text-xs font-bold uppercase tracking-wider transition-all relative whitespace-nowrap ${
-                    activeTab === tab ? "text-blue-600" : "text-slate-400 hover:text-slate-600"
+                    activeTab === tab ? "text-white" : "text-blue-200/70 hover:text-white"
                   }`}
                 >
                   {t(`noticeBoard.tab.${tab.toLowerCase()}`, tab)}
                   {activeTab === tab && (
                     <motion.span 
                       layoutId="activeTab"
-                      className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-600 rounded-t-full"
+                      className="absolute bottom-0 left-0 w-full h-0.5 bg-[#d4b27a] rounded-t-full"
                     />
                   )}
                 </button>
@@ -349,7 +360,7 @@ export default function NoticeBoard() {
               </div>
             )}
 
-            <Link to="/notice" className="lg:hidden mt-8 flex items-center justify-center w-full gap-2 px-6 py-3 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 hover:text-blue-600 transition-all group">
+            <Link to="/notice" className="lg:hidden mt-8 flex items-center justify-center w-full gap-2 px-6 py-3 bg-white border border-white rounded-xl text-sm font-bold text-[#124d9c] hover:bg-blue-50 transition-all group">
                  {t("noticeBoard.viewArchive", "View Document Archive")}
                  <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
