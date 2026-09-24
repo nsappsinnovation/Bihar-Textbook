@@ -69,70 +69,81 @@ const teamMembers = [
   },
 ];
 
-/* Brand blues in place of the multi-colour accents, cycled by index so a row
-   of cards still has some rhythm. */
-const ACCENTS = ["#0b2b4f", "#124d9c", "#1e63d6", "#3b82f6"];
+/* Brand tints for the avatar disc, cycled by index so a row keeps some rhythm.
+   They also stand in for the photo wherever it fails to load. */
+const ACCENTS = ["#dbe6f6", "#d7e6fb", "#e3edfd", "#cddffa"];
 
 function TeamCard({ name, role, image, accent, linkedin, technologies }) {
   return (
-    <div className="group flex flex-col">
-      {/* Portrait block: the accent square shows through wherever the photo does not */}
-      <div className="relative w-full aspect-square overflow-hidden rounded-[14px] sm:rounded-[18px]">
-        <div className="absolute inset-0 transition-transform duration-500 group-hover:scale-105" style={{ backgroundColor: accent }} />
+    <div className="group flex flex-col items-center text-center px-1">
+      {/* Circular portrait on a tinted disc */}
+      <div
+        className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden shrink-0"
+        style={{ backgroundColor: accent }}
+      >
         <img
           loading="lazy"
           decoding="async"
           src={image}
-          alt={name}
+          /* the name sits directly below, so the photo is decorative to a
+             screen reader — and an empty alt keeps a failed load from painting
+             the name across the disc */
+          alt=""
+          onError={(e) => { e.currentTarget.style.display = "none"; }}
           className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
         />
       </div>
 
-      <div className="flex flex-col mt-3 sm:mt-4">
-        <h3 className="text-[15px] sm:text-[18px] lg:text-[20px] font-extrabold tracking-tight text-[#0b2b4f] leading-snug">
-          {name}
-        </h3>
+      <h3 className="mt-4 text-[14px] sm:text-[16px] lg:text-[17px] font-extrabold tracking-tight text-[#0b2b4f] leading-snug">
+        {name}
+      </h3>
 
-        <div className="flex items-start justify-between gap-2 mt-1.5">
-          <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.1em] text-slate-500 leading-relaxed">
-            {role}
-          </p>
-          {linkedin && (
-            <a
-              href={linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="shrink-0 text-slate-400 hover:text-[#124d9c] transition-colors"
-              aria-label={`${name} on LinkedIn`}
-            >
-              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-              </svg>
-            </a>
-          )}
+      <p className="mt-0.5 text-[12px] sm:text-[14px] font-semibold text-[#124d9c] leading-snug">
+        {role}
+      </p>
+
+      {technologies && (
+        <p className="mt-2 text-[11px] sm:text-[13px] font-medium text-slate-500 leading-relaxed max-w-[15rem]">
+          {technologies}
+        </p>
+      )}
+
+      {linkedin && (
+        <div className="flex items-center justify-center gap-3 mt-3">
+          <a
+            href={linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-slate-400 hover:text-[#124d9c] transition-colors"
+            aria-label={`${name} on LinkedIn`}
+          >
+            <svg className="w-[18px] h-[18px] sm:w-5 sm:h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+            </svg>
+          </a>
         </div>
-
-        {technologies && (
-          <p className="text-[10px] sm:text-[11px] font-medium text-slate-400 mt-1.5 leading-relaxed">
-            {technologies}
-          </p>
-        )}
-      </div>
+      )}
     </div>
   );
 }
 
 function TeamGroup({ title, people, startIndex = 0 }) {
   return (
-    <section className="mb-14 md:mb-20">
-      <div className="flex items-center gap-4 mb-6 md:mb-8">
-        <h2 className="text-[18px] md:text-[24px] font-extrabold tracking-tight text-[#0b2b4f] shrink-0">{title}</h2>
-        <span className="h-px flex-1 bg-slate-200" />
-      </div>
+    <section className="mb-16 md:mb-24">
+      <h2 className="text-center text-[16px] md:text-[20px] font-extrabold tracking-tight text-[#0b2b4f] mb-8 md:mb-12">
+        {title}
+      </h2>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10">
+      {/* a wrapping flex row rather than a grid, so a group that does not fill
+          the last row stays centred instead of hanging on the left */}
+      <div className="flex flex-wrap justify-center gap-x-5 gap-y-12 sm:gap-x-8 sm:gap-y-16">
         {people.map((member, i) => (
-          <TeamCard key={member.name} {...member} accent={ACCENTS[(startIndex + i) % ACCENTS.length]} />
+          <div
+            key={member.name}
+            className="basis-[calc(50%-0.625rem)] sm:basis-[calc(50%-1rem)] lg:basis-[calc(25%-1.5rem)]"
+          >
+            <TeamCard {...member} accent={ACCENTS[(startIndex + i) % ACCENTS.length]} />
+          </div>
         ))}
       </div>
     </section>
