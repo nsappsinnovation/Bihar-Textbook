@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaPlay } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { getSections } from '../../../services/sectionService';
-import { fileUrl } from '../../../services/api';
+import { fileUrl, isUploadedFile } from '../../../services/api';
 
 const getYouTubeId = (url) => {
   if (!url) return null;
@@ -19,11 +19,11 @@ const Videogallery = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   // Videos are managed in Admin → Gallery → Video Gallery.
-  // videoUrl holds either a YouTube link or an uploaded "/uploads/videos/..." file.
+  // videoUrl holds either a YouTube link or an uploaded "/api/uploads/videos/..." file.
   useEffect(() => {
     getSections('gl-video')
       .then((rows) => setItems(rows.map((row) => {
-        const isUploaded = (row.videoUrl || '').startsWith('/uploads/');
+        const isUploaded = isUploadedFile(row.videoUrl);
         const ytId = isUploaded ? null : getYouTubeId(row.videoUrl);
         const autoThumbnail = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : "";
         return {

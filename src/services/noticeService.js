@@ -10,7 +10,7 @@ const toNotice = (n) => ({
     pinned: Boolean(n.isPinned),
     isUrgent: Boolean(n.isPinned),
     date: n.publishDate ? n.publishDate.slice(0, 10) : '', // "YYYY-MM-DD", empty when the notice has no date
-    document: n.documentUrl || '', // stored path, e.g. "/uploads/documents/x.pdf" or an external URL
+    document: n.documentUrl || '', // stored path, e.g. "/api/uploads/documents/x.pdf" or an external URL
     link: fileUrl(n.documentUrl) || '', // ready to use in <a href>
     updatedAt: n.updatedAt,
 });

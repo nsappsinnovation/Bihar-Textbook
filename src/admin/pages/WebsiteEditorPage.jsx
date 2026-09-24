@@ -7,7 +7,7 @@ import { getSetting, saveSetting } from '../../services/settingService';
 import { getDirectory, createDirectoryRow, updateDirectoryRow, deleteDirectoryRow } from '../../services/directoryService';
 import { getSections, createSection, updateSection, deleteSection } from '../../services/sectionService';
 import { uploadFile } from '../../services/uploadService';
-import { fileUrl, errorMessage } from '../../services/api';
+import { fileUrl, errorMessage, isUploadedFile } from '../../services/api';
 
 // Where each module's content is stored in the backend.
 // Modules not listed here are section lists (gl-photo, gl-video, gl-press, ...).
@@ -31,7 +31,7 @@ const toDirectoryRow = (module, item) =>
 
 // Section row <-> editor item. One videoUrl column holds either an uploaded file or a YouTube link.
 const fromSection = (row) => {
-  const isUploadedVideo = (row.videoUrl || '').startsWith('/uploads/');
+  const isUploadedVideo = isUploadedFile(row.videoUrl);
   return {
     id: row.id,
     title: row.title,

@@ -21,10 +21,17 @@ api.interceptors.request.use((config) => {
     return config;
 });
 
-// Files uploaded to the backend come back as "/uploads/...". Other paths
-// (e.g. "/images/..." bundled with the frontend) are returned unchanged.
-export const fileUrl = (path) =>
-    typeof path === 'string' && path.startsWith('/uploads/') ? `${API_BASE_URL}${path}` : path;
+// Files uploaded to the backend come back as "/api/uploads/..." (older rows may still hold
+// "/uploads/..."; the backend only serves them under /api, so those are rewritten).
+export const isUploadedFile = (path) =>
+    typeof path === 'string' && (path.startsWith('/api/uploads/') || path.startsWith('/uploads/'));
+
+// Full URL for an uploaded file. Other paths (e.g. "/images/..." bundled with the frontend)
+// and external URLs are returned unchanged.
+export const fileUrl = (path) => {
+    if (!isUploadedFile(path)) return path;
+    return `${API_BASE_URL}${path.startsWith('/api/') ? path : `/api${path}`}`;
+};
 
 // Readable error message from a failed request
 export const errorMessage = (error, fallback = 'Something went wrong') =>
