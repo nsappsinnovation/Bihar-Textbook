@@ -4,7 +4,7 @@ import { Plus, Trash2, Edit2, User, Image as ImageIcon } from 'lucide-react';
 import Modal, { FormInput } from '../components/Modal';
 import { useActivityLog } from '../hooks/useCustomHooks';
 import { getDirectory, createDirectoryRow, updateDirectoryRow, deleteDirectoryRow } from '../../services/directoryService';
-import { uploadFile } from '../../services/uploadService';
+import { uploadFile, UPLOAD_FOLDERS } from '../../services/uploadService';
 import { fileUrl, errorMessage } from '../../services/api';
 
 const TYPE = 'leader';
@@ -33,7 +33,7 @@ export default function LeadersManagementPage({ addToast }) {
     const file = e.target.files[0];
     if (!file) return;
     try {
-      const path = await uploadFile(file, 'image');
+      const path = await uploadFile(file, 'image', UPLOAD_FOLDERS.leaders);
       setFormData(prev => ({ ...prev, image: path }));
     } catch (error) {
       addToast?.(errorMessage(error, 'Image upload failed'), 'error');

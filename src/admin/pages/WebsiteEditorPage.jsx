@@ -6,7 +6,7 @@ import { useActivityLog } from '../hooks/useCustomHooks';
 import { getSetting, saveSetting } from '../../services/settingService';
 import { getDirectory, createDirectoryRow, updateDirectoryRow, deleteDirectoryRow } from '../../services/directoryService';
 import { getSections, createSection, updateSection, deleteSection } from '../../services/sectionService';
-import { uploadFile } from '../../services/uploadService';
+import { uploadFile, moduleUploadFolder, UPLOAD_FOLDERS } from '../../services/uploadService';
 import { fileUrl, errorMessage, isUploadedFile } from '../../services/api';
 
 // Where each module's content is stored in the backend.
@@ -160,7 +160,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
     if (!file) return;
     const kind = field === 'uploadedVideo' ? 'video' : module.startsWith('gl-') ? 'image' : 'document';
     try {
-      const path = await uploadFile(file, kind);
+      const path = await uploadFile(file, kind, moduleUploadFolder(module));
       setFormData(prev => ({ ...prev, [field]: path }));
       addToast?.('File uploaded', 'success');
     } catch (error) {
@@ -172,7 +172,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
     const file = e.target.files[0];
     if (!file) return;
     try {
-      const path = await uploadFile(file, 'image');
+      const path = await uploadFile(file, 'image', UPLOAD_FOLDERS.mdMessage);
       setMdData(prev => ({ ...prev, photo: path }));
       addToast?.('Photo uploaded — click Save to publish', 'success');
     } catch (error) {
@@ -502,7 +502,10 @@ export default function WebsiteEditorPage({ module, addToast }) {
                     <th className="py-3.5 px-4 text-center w-12">S.No.</th>
                     <th className="py-3.5 px-5">{module === 'ku-list-md' ? 'Managing Director' : module === 'ku-board' ? 'Board Member' : 'Employee'}</th>
                     <th className="py-3.5 px-5 text-center">{module === 'ku-list-md' ? 'From' : 'Designation'}</th>
-                    <th className="py-3.5 px-5 text-center">{module === 'ku-list-md' ? 'To' : module === 'ku-board' ? 'Since' : 'Department & ID'}</th>
+                    {/* Board of Directors shows only name and designation */}
+                    {module !== 'ku-board' && (
+                      <th className="py-3.5 px-5 text-center">{module === 'ku-list-md' ? 'To' : 'Department & ID'}</th>
+                    )}
                     <th className="py-3.5 px-4 text-center">Actions</th>
                   </tr>
                 </thead>
@@ -530,6 +533,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
                           <span className="font-bold text-slate-700 text-[15px]">{item.designation || 'N/A'}</span>
                         )}
                       </td>
+                      {module !== 'ku-board' && (
                       <td className="py-4 px-5 text-center">
                         {module === 'ku-list-md' ? (
                           <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl font-bold border text-[13px] justify-center w-full max-w-[130px] ${
@@ -540,10 +544,6 @@ export default function WebsiteEditorPage({ module, addToast }) {
                             <Calendar className="w-4 h-4 text-slate-400 shrink-0" />
                             <span>{item.to || 'Present'}</span>
                           </div>
-                        ) : module === 'ku-board' ? (
-                          <div className="flex flex-col gap-1.5 text-left">
-                             <span className="text-[15px] text-slate-800 font-bold">{item.since || 'Current'}</span>
-                          </div>
                         ) : (
                           <div className="flex flex-col gap-1.5 text-left">
                              <span className="text-xs text-slate-600 font-medium">Dept: <span className="font-bold">{item.department || 'N/A'}</span></span>
@@ -551,6 +551,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
                           </div>
                         )}
                       </td>
+                      )}
                       <td className="py-4 px-4 text-center">
                         <div className="flex items-center justify-center gap-2">
                           <button 
@@ -787,14 +788,6 @@ export default function WebsiteEditorPage({ module, addToast }) {
                 placeholder="e.g. Managing Director" 
                 value={formData.designation}
                 onChange={(val) => setFormData(prev => ({ ...prev, designation: val }))}
-              />
-              <FormInput 
-                label="Since / From" 
-                type="select"
-                options={["Current", ...Array.from({length: 50}, (_, i) => String(new Date().getFullYear() - 1 - i))]}
-                placeholder="Select Year" 
-                value={formData.since}
-                onChange={(val) => setFormData(prev => ({ ...prev, since: val }))}
               />
             </>
           )}

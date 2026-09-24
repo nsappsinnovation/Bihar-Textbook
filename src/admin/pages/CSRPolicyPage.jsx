@@ -9,7 +9,7 @@ import {
   csrPolicyDefaults, csrPolicyContents, romanize, loadCsrPolicy
 } from '../../data/csrPolicyData';
 import { saveSetting } from '../../services/settingService';
-import { uploadFile } from '../../services/uploadService';
+import { uploadFile, UPLOAD_FOLDERS } from '../../services/uploadService';
 import { fileUrl, errorMessage } from '../../services/api';
 
 const sectionIcons = {
@@ -120,7 +120,7 @@ export default function CSRPolicyPage({ addToast }) {
     const file = e.target.files[0];
     if (!file) return;
     try {
-      const path = await uploadFile(file, 'document');
+      const path = await uploadFile(file, 'document', UPLOAD_FOLDERS.csrPolicy);
       setFormData((prev) => ({
         ...prev,
         pdfUrl: path,

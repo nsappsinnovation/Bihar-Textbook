@@ -37,7 +37,7 @@ export default function KeyParticipant() {
 
         <div className="max-w-[1280px] mx-auto">
           {/* A swipeable row on phones, a grid from sm up */}
-          <div className="no-scrollbar flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-4 -mx-4 px-4 pb-6 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 lg:grid-cols-4">
+          <div className="no-scrollbar flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-4 -mx-4 px-4 pb-6 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 md:grid-cols-3 lg:grid-cols-5 lg:gap-4">
             {data.map((item, i) => (
               <div key={i} className="w-[78%] shrink-0 snap-start sm:w-full sm:shrink">
                 <ParticipantCard item={item} />
@@ -92,10 +92,10 @@ function ParticipantCard({ item }) {
       />
 
       {/* TEXT */}
-      <div className="relative z-20 p-5">
+      <div className="relative z-20 p-5 lg:p-4">
         <h3
           className="
-            text-lg font-bold text-[#1a1a1a] leading-snug
+            text-lg lg:text-base font-bold text-[#1a1a1a] leading-snug
             transition-colors duration-[1800ms] ease-in-out
             group-hover:text-white
           "
@@ -105,7 +105,7 @@ function ParticipantCard({ item }) {
 
         <p
           className="
-            mt-2 text-[13px] leading-relaxed text-gray-500 font-medium
+            mt-2 lg:mt-1.5 text-[13px] lg:text-xs leading-relaxed text-gray-500 font-medium
             transition-colors duration-[1800ms] ease-in-out
             group-hover:text-indigo-100
           "
@@ -125,7 +125,7 @@ function ParticipantCard({ item }) {
             }
           }}
           className={`
-            block ${isMithilesh ? 'h-[265px]' : 'h-[300px]'} max-w-full object-contain object-bottom drop-shadow-2xl
+            block ${isMithilesh ? 'h-[265px] lg:h-[235px]' : 'h-[300px] lg:h-[265px]'} max-w-full object-contain object-bottom drop-shadow-2xl
             transition-transform duration-[1500ms]
             ease-in-out
             group-hover:scale-105

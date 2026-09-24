@@ -4,7 +4,7 @@ import { Search, Plus, Edit3, Trash2, Pin, Paperclip, Calendar, Bell } from 'luc
 import Modal, { FormInput, ToggleSwitch } from '../components/Modal';
 import { useDebounce, useActivityLog } from '../hooks/useCustomHooks';
 import { getNotices, createNotice, updateNotice, deleteNotice } from '../../services/noticeService';
-import { uploadFile } from '../../services/uploadService';
+import { uploadFile, noticeUploadFolder } from '../../services/uploadService';
 import { errorMessage } from '../../services/api';
 
 const today = () => new Date().toISOString().slice(0, 10);
@@ -104,7 +104,7 @@ export default function NoticesPage({ addToast, forcedCategory }) {
     if (!file) return;
     setIsUploading(true);
     try {
-      const path = await uploadFile(file, 'document');
+      const path = await uploadFile(file, 'document', noticeUploadFolder(formData.type, formData.category));
       setFormData(prev => ({ ...prev, document: path }));
       addToast('Document uploaded', 'success');
     } catch (error) {

@@ -13,15 +13,13 @@ const OurEmployee = () => {
   useEffect(() => {
     getDirectory('employee')
       .then((rows) => setEmployees(
-        rows
-          .filter((row) => row.tag !== 'Outsource')
-          .map((row) => ({
-            id: row.id,
-            name: row.name,
-            designation: row.designation || '',
-            type: row.tag || 'Regular',
-            department: row.department || '',
-          }))
+        rows.map((row) => ({
+          id: row.id,
+          name: row.name,
+          designation: row.designation || '',
+          type: row.tag || 'Regular',
+          department: row.department || '',
+        }))
       ))
       .catch(() => setEmployees([]));
   }, []);

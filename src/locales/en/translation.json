@@ -392,6 +392,17 @@
       }
     },
     "viewArchive": "View Document Archive",
+    "empty": {
+      "allTitle": "No notices or tenders published yet",
+      "allDesc": "New notices, circulars and tenders will appear here as soon as they are published.",
+      "tabTitle": {
+        "circular": "No circulars right now",
+        "tender": "No tenders right now",
+        "notice": "No notices right now"
+      },
+      "tabDesc": "Check back soon, or view all the latest updates.",
+      "showAll": "View all updates"
+    },
     "tab": {
       "all": "All",
       "circular": "Circular",
@@ -6385,7 +6396,22 @@
       "opsTitle": "Operations",
       "opsDesc": "Structured into specialized wings: Academic, Sales, Accounts, and Printing.",
       "transTitle": "Transparency",
-      "transDesc": "Standard protocols for decision making and administrative flows."
+      "transDesc": "Standard protocols for decision making and administrative flows.",
+      "chart": {
+        "board": "Board of Directors",
+        "secretary": "Secretary,",
+        "educationDepartment": "Education Department",
+        "managingDirector": "Managing Director",
+        "publicationUnit": "Publication Unit",
+        "pressUnit": "Press Unit (Godown)",
+        "companySecretary": "Company Secretary",
+        "cao": "CAO cum Financial Advisor",
+        "accountsOfficer": "Accounts Officer",
+        "managerPA": "Manager (P & A)",
+        "managerMS": "Manager (M & S)",
+        "total": "Total",
+        "sanctionedPost": "Sanctioned Post"
+      }
     },
     "empanalledPrinters": {
       "titlePart1": "Empanalled",

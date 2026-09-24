@@ -4,7 +4,7 @@ import { Plus, Trash2, Edit2, Save, X, LayoutGrid } from 'lucide-react';
 import Modal, { FormInput } from '../components/Modal';
 import { useActivityLog } from '../hooks/useCustomHooks';
 import { getSections, createSection, updateSection, deleteSection } from '../../services/sectionService';
-import { uploadFile } from '../../services/uploadService';
+import { uploadFile, moduleUploadFolder } from '../../services/uploadService';
 import { fileUrl, errorMessage } from '../../services/api';
 
 // module: section list to edit — "tr" (Tools & Resources) or "cl" (Latest Initiatives)
@@ -37,7 +37,7 @@ export default function EducationExcellencePage({ addToast, title = "Tools & Res
     const file = e.target.files[0];
     if (!file) return;
     try {
-      const path = await uploadFile(file, 'image');
+      const path = await uploadFile(file, 'image', moduleUploadFolder(module));
       setFormData(prev => ({ ...prev, image: path }));
     } catch (error) {
       addToast?.(errorMessage(error, 'Image upload failed'), 'error');

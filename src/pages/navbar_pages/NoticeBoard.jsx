@@ -104,20 +104,82 @@ const NoticeCard = ({ notice }) => {
   );
 };
 
+// Grey placeholder shown while the list is loading
+const NoticeCardSkeleton = () => (
+  <div className="bg-white border border-slate-100 rounded-xl p-5 md:p-6 shadow-sm mx-1 flex items-center justify-between gap-4 animate-pulse">
+    <div className="flex-1 space-y-3">
+      <div className="flex gap-3">
+        <div className="h-4 w-16 rounded bg-slate-100"></div>
+        <div className="h-4 w-20 rounded bg-slate-100"></div>
+      </div>
+      <div className="h-4 w-3/4 rounded bg-slate-100"></div>
+      <div className="h-5 w-24 rounded-md bg-slate-100"></div>
+    </div>
+    <div className="hidden md:block h-10 w-28 rounded-full bg-slate-100"></div>
+  </div>
+);
+
+// Icon and colours per tab, matching the stats cards
+const EMPTY_STYLES = {
+  All: { Icon: Bell, color: "text-rose-500", bg: "bg-rose-500/10 border-rose-500/20" },
+  Notice: { Icon: Bell, color: "text-rose-500", bg: "bg-rose-500/10 border-rose-500/20" },
+  Circular: { Icon: Award, color: "text-blue-500", bg: "bg-blue-500/10 border-blue-500/20" },
+  Tender: { Icon: FileText, color: "text-amber-500", bg: "bg-amber-500/10 border-amber-500/20" },
+};
+
+// Shown instead of the list when the selected tab has nothing to show
+const EmptyState = ({ tab, onShowAll }) => {
+  const { t } = useTranslation();
+  const { Icon, color, bg } = EMPTY_STYLES[tab];
+  const isAll = tab === "All";
+  const key = tab.toLowerCase();
+  const title = isAll
+    ? t("noticeBoard.empty.allTitle", "No notices or tenders published yet")
+    : t(`noticeBoard.empty.tabTitle.${key}`, `No ${key}s right now`);
+  const description = isAll
+    ? t("noticeBoard.empty.allDesc", "New notices, circulars and tenders will appear here as soon as they are published.")
+    : t("noticeBoard.empty.tabDesc", "Check back soon, or view all the latest updates.");
+
+  return (
+    <div className="bg-white border border-slate-100 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] px-6 py-12 md:py-16 mx-1 flex flex-col items-center text-center">
+      <div className={`w-14 h-14 rounded-2xl border flex items-center justify-center mb-5 ${bg}`}>
+        <Icon className={color} size={26} />
+      </div>
+      <h3 className="text-lg font-bold text-slate-800 mb-2">{title}</h3>
+      <p className="text-sm text-slate-500 font-medium leading-relaxed max-w-sm">{description}</p>
+      {/* The archive link already sits beside the list, so the card only offers going back to "All" */}
+      {onShowAll && (
+        <button
+          type="button"
+          onClick={onShowAll}
+          className="mt-6 px-5 py-2.5 rounded-full bg-blue-600 text-white text-sm font-bold hover:bg-blue-700 transition-colors"
+        >
+          {t("noticeBoard.empty.showAll", "View all updates")}
+        </button>
+      )}
+    </div>
+  );
+};
+
+// The list only scrolls endlessly when there are enough items to fill the box
+const MARQUEE_MIN_ITEMS = 4;
+
 export default function NoticeBoard() {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("All");
   const [notices, setNotices] = useState([]);
   const [tenders, setTenders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getNotices().then((all) => {
       setNotices(all.filter((n) => n.type === 'Notice'));
       setTenders(all.filter((n) => n.type === 'Tender'));
-    }).catch(() => {});
+    }).catch(() => {}).finally(() => setLoading(false));
   }, []);
 
-  const filteredNotices = buildBoardItems(notices, tenders).filter(notice => 
+  const boardItems = buildBoardItems(notices, tenders);
+  const filteredNotices = boardItems.filter(notice =>
     activeTab === "All" ? true : notice.category === activeTab
   ).slice(0, 8); // Showing 8 for a better mix view
 
@@ -257,18 +319,35 @@ export default function NoticeBoard() {
               ))}
             </div>
 
-            {/* Marquee List Container */}
-            <div className="marquee-container">
-              <div className="flex flex-col gap-4 py-2 animate-marquee-y">
-                {/* Duplicate list for infinite scroll effect */}
-                {filteredNotices.map((notice, idx) => (
-                  <NoticeCard key={`${notice.id}-1`} notice={notice} />
-                ))}
-                {filteredNotices.map((notice, idx) => (
-                  <NoticeCard key={`${notice.id}-2`} notice={notice} />
+            {loading ? (
+              <div className="flex flex-col gap-4 py-2">
+                {[0, 1, 2].map((i) => <NoticeCardSkeleton key={i} />)}
+              </div>
+            ) : filteredNotices.length === 0 ? (
+              <EmptyState
+                tab={activeTab}
+                onShowAll={activeTab !== "All" && boardItems.length > 0 ? () => setActiveTab("All") : null}
+              />
+            ) : filteredNotices.length < MARQUEE_MIN_ITEMS ? (
+              <div className="flex flex-col gap-4 py-2">
+                {filteredNotices.map((notice) => (
+                  <NoticeCard key={notice.id} notice={notice} />
                 ))}
               </div>
-            </div>
+            ) : (
+              /* Marquee List Container */
+              <div className="marquee-container">
+                <div className="flex flex-col gap-4 py-2 animate-marquee-y">
+                  {/* Duplicate list for infinite scroll effect */}
+                  {filteredNotices.map((notice) => (
+                    <NoticeCard key={`${notice.id}-1`} notice={notice} />
+                  ))}
+                  {filteredNotices.map((notice) => (
+                    <NoticeCard key={`${notice.id}-2`} notice={notice} />
+                  ))}
+                </div>
+              </div>
+            )}
 
             <Link to="/notice" className="lg:hidden mt-8 flex items-center justify-center w-full gap-2 px-6 py-3 bg-white border border-slate-200 rounded-xl text-sm font-bold text-slate-700 hover:text-blue-600 transition-all group">
                  {t("noticeBoard.viewArchive", "View Document Archive")}

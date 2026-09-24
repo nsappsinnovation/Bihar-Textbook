@@ -7,7 +7,7 @@ import {
 import Modal, { FormInput, ToggleSwitch } from '../components/Modal';
 import { useDebounce } from '../hooks/useCustomHooks';
 import { getBooks, getBook, createBook, updateBook, deleteBook, saveChapters } from '../../services/bookService';
-import { uploadFile } from '../../services/uploadService';
+import { uploadFile, UPLOAD_FOLDERS } from '../../services/uploadService';
 import { fileUrl, errorMessage } from '../../services/api';
 
 const ResolvedImage = ({ src, alt, className, onError, placeholder = '/bookcover.webp' }) => (
@@ -615,7 +615,7 @@ export default function BooksPage({ addToast, forcedClass }) {
                     const file = e.target.files?.[0];
                     if (file) {
                       try {
-                        setAddImage(await uploadFile(file, 'image'));
+                        setAddImage(await uploadFile(file, 'image', UPLOAD_FOLDERS.bookCovers));
                         addToast('Cover image uploaded successfully!', 'success');
                       } catch (err) {
                         addToast(errorMessage(err, 'Failed to upload cover image'), 'error');
@@ -706,7 +706,7 @@ export default function BooksPage({ addToast, forcedClass }) {
                                   const file = e.target.files?.[0];
                                   if (file) {
                                     try {
-                                      handleUpdateChapterRow(idx, 'pdfUrl', await uploadFile(file, 'document'));
+                                      handleUpdateChapterRow(idx, 'pdfUrl', await uploadFile(file, 'document', UPLOAD_FOLDERS.bookChapters));
                                       addToast('Chapter PDF uploaded successfully!', 'success');
                                     } catch (err) {
                                       addToast(errorMessage(err, 'Failed to upload PDF'), 'error');
@@ -825,7 +825,7 @@ export default function BooksPage({ addToast, forcedClass }) {
                     const file = e.target.files?.[0];
                     if (file) {
                       try {
-                        setEditImage(await uploadFile(file, 'image'));
+                        setEditImage(await uploadFile(file, 'image', UPLOAD_FOLDERS.bookCovers));
                         addToast('Cover image uploaded successfully!', 'success');
                       } catch (err) {
                         addToast(errorMessage(err, 'Failed to upload cover image'), 'error');
@@ -916,7 +916,7 @@ export default function BooksPage({ addToast, forcedClass }) {
                                   const file = e.target.files?.[0];
                                   if (file) {
                                     try {
-                                      handleUpdateChapterRow(idx, 'pdfUrl', await uploadFile(file, 'document'));
+                                      handleUpdateChapterRow(idx, 'pdfUrl', await uploadFile(file, 'document', UPLOAD_FOLDERS.bookChapters));
                                       addToast('Chapter PDF uploaded successfully!', 'success');
                                     } catch (err) {
                                       addToast(errorMessage(err, 'Failed to upload PDF'), 'error');

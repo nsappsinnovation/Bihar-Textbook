@@ -272,6 +272,7 @@ export default function EmployeesManagementPage({ addToast }) {
               >
                 <option value="Regular">Regular</option>
                 <option value="Contract">Contract</option>
+                <option value="Outsource">Outsource</option>
               </select>
             </div>
           </div>

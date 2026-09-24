@@ -4,8 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { getDirectory } from '../../../services/directoryService';
 
 const BoardOfDirectors = () => {
-  const { t, i18n } = useTranslation();
-  const isHindi = i18n.language === 'hi';
+  const { t } = useTranslation();
   const [items, setItems] = React.useState([]);
 
   // Board members are managed in Admin → Know Us → Board of Directors
@@ -15,11 +14,9 @@ const BoardOfDirectors = () => {
         id: row.id,
         name: row.name,
         designation: row.designation,
-        from: row.tenureFrom || (isHindi ? "वर्तमान" : "Current"),
-        status: row.status || "Active",
       }))))
       .catch(() => setItems([]));
-  }, [isHindi]);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#f8fafc] py-12">
@@ -46,16 +43,14 @@ const BoardOfDirectors = () => {
               <thead>
                 <tr className="bg-slate-200 border-b border-slate-300 text-[#0d0e23]">
                   <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">{t("knowUsPage.boardOfDirectors.colName", "Name")}</th>
-                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">{t("knowUsPage.boardOfDirectors.colDesignation", "Designation")}</th>
-                  <th className="px-6 py-4 text-sm font-bold">{t("knowUsPage.boardOfDirectors.colSince", "Since")}</th>
+                  <th className="px-6 py-4 text-sm font-bold">{t("knowUsPage.boardOfDirectors.colDesignation", "Designation")}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-300">
                 {items.map((member) => (
                   <tr key={member.id} className="text-[#0d0e23]">
                     <td className="px-6 py-4 text-sm border-r border-slate-300 font-semibold">{member.name}</td>
-                    <td className="px-6 py-4 text-sm border-r border-slate-300">{member.designation}</td>
-                    <td className="px-6 py-4 text-sm">{member.from}</td>
+                    <td className="px-6 py-4 text-sm">{member.designation}</td>
                   </tr>
                 ))}
               </tbody>
