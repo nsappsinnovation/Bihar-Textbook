@@ -62,7 +62,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
 
   // Over the home page hero the bar is see-through, so it sits on the hero's canvas; it frosts once the page scrolls
-  const isHome = ["/", "/v1", "/v2"].includes(location.pathname);
+  const isHome = location.pathname === "/";
   const solid = !isHome || scrolled || isOpen;
 
   useEffect(() => {

@@ -11,7 +11,6 @@ import { Toaster } from "react-hot-toast";
 /* Lazily loaded Pages & Components */
 const Blog = lazy(() => import("./pages/navbar_pages/Blog.jsx"));
 const HomeV1 = lazy(() => import("./pages/home/HomeV1.jsx"));
-const HomeV2 = lazy(() => import("./pages/home/HomeV2.jsx"));
 const Tenders = lazy(() => import("./pages/Tenders"));
 const CsrPolicy = lazy(() => import("./pages/CsrPolicy"));
 const KnowUs = lazy(() => import("./pages/Know"));
@@ -47,9 +46,6 @@ const LoadingFallback = () => (
     <div className="w-12 h-12 border-4 border-slate-200 border-t-emerald-500 rounded-full animate-spin"></div>
   </div>
 );
-
-// The home page and its trial versions sit under a transparent navbar with no top padding
-const HOME_PATHS = ["/", "/v1", "/v2"];
 
 function App() {
   const location = useLocation();
@@ -105,7 +101,7 @@ function App() {
             body gradient used to show through it as a coloured band. Pages with
             a navbar paint their own white base over it. */}
         <main
-          className={`flex-grow ${!HOME_PATHS.includes(location.pathname) && !isNoNavPage ? "pt-24 bg-white" : ""
+          className={`flex-grow ${location.pathname !== "/" && !isNoNavPage ? "pt-24 bg-white" : ""
             }`}
         >
           <Suspense fallback={<LoadingFallback />}>
@@ -113,7 +109,6 @@ function App() {
               {/* The home page (formerly the /v1 trial); /v1 stays as an alias for links already shared */}
               <Route path="/" element={<HomeV1 />} />
               <Route path="/v1" element={<Navigate to="/" replace />} />
-              <Route path="/v2" element={<HomeV2 />} />
               <Route path="/admin/*" element={<AdminPortal />} />
 
               {/* Core */}

@@ -126,10 +126,7 @@ const EmptyState = ({ tab, onShowAll }) => {
 // The list only scrolls endlessly when there are enough items to fill the box
 const MARQUEE_MIN_ITEMS = 4;
 
-// tone swaps the (dark) section background so other home page versions can reuse this section
-const TONES = { default: "bg-[#0a1d4f]", blue: "bg-[#124d9c]" };
-
-export default function NoticeBoard({ tone = "default" }) {
+export default function NoticeBoard() {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("All");
   const [notices, setNotices] = useState([]);
@@ -153,7 +150,7 @@ export default function NoticeBoard({ tone = "default" }) {
   const totalTenders = tenders.length;
 
   return (
-    <section className={`w-full ${TONES[tone] || TONES.default} py-16 px-6 md:px-12 lg:px-24 font-sans text-white overflow-hidden relative isolate`}>
+    <section className="w-full bg-[#0a1d4f] py-16 px-6 md:px-12 lg:px-24 font-sans text-white overflow-hidden relative isolate">
       {/* Royal blue with a single warm gold accent, so it reads apart from the navy Leaders section and footer:
           gold glow top-right, blue light bottom-left, depth gradient and a faint dot texture */}
       <div

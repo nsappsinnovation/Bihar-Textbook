@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import useMissions from "../home-shared/useMissions";
 import ProgrammeIcon from "./ProgrammeIcon";
 import SectionHeader from "./SectionHeader";
-import { LOOK, FALLBACK } from "../../data/programmeLook";
+import { LOOK, FALLBACK } from "../../data/programmeLabels";
 
 // Sky section: the programmes as bordered icon cards. Every icon is brand blue at rest;
 // on hover the card warms to mango, with the icon in navy.
