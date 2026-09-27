@@ -148,7 +148,10 @@ const connections = [
   ['rohtas', 'gaya']
 ];
 
-const EvolutionMap = () => {
+// tone swaps the section background so other home page versions can reuse this section
+const TONES = { default: "bg-[#fcfcfd]", cream: "bg-[#f7f4ec]", sky: "bg-[#e9f1fc]" };
+
+const EvolutionMap = ({ tone = "default" }) => {
   const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(0);
   const [hoveredDistrict, setHoveredDistrict] = useState(null);
@@ -162,7 +165,7 @@ const EvolutionMap = () => {
   }, []);
 
   return (
-    <section className="w-full bg-[#fcfcfd] py-16 px-6 md:px-12 lg:px-24 font-sans text-slate-900 overflow-hidden relative border-y border-slate-100">
+    <section className={`w-full ${TONES[tone] || TONES.default} py-16 px-6 md:px-12 lg:px-24 font-sans text-slate-900 overflow-hidden relative border-y border-slate-100`}>
       
       
 

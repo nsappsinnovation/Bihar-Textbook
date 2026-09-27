@@ -3,93 +3,12 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getSections } from '../../services/sectionService';
 import { fileUrl } from '../../services/api';
+import { defaultMissions } from '../../data/homeContent';
 
 // Built-in icons have a hover variant named "<name>hov.webp"; uploaded icons reuse the same image
 const hoverImageFor = (image) =>
     image?.startsWith('/images/missions/') ? image.replace(/\.webp$/, 'hov.webp') : fileUrl(image);
 
-const defaultMissions = [
-    {
-        id: 1,
-        titleKey: "missionGrid.vr.title",
-        defaultTitle: "Virtual Reality Lab",
-        descKey: "missionGrid.vr.desc",
-        defaultDesc: "Immersive Learning Experiences",
-        image: "/images/missions/headset.webp",
-        hoverImage: "/images/missions/headsethov.webp",
-        link: "/vr-dashboard",
-    },
-    {
-        id: 2,
-        titleKey: "missionGrid.audio.title",
-        defaultTitle: "Audio Library",
-        descKey: "missionGrid.audio.desc",
-        defaultDesc: "Accessible Digital Content",
-        image: "/images/missions/audio-book.webp",
-        hoverImage: "/images/missions/audio-bookhov.webp",
-        link: "/audio-library-dashboard",
-    },
-    {
-        id: 3,
-        titleKey: "missionGrid.sign.title",
-        defaultTitle: "Sign Language",
-        descKey: "missionGrid.sign.desc",
-        defaultDesc: "Inclusive Educational Tools",
-        image: "/images/missions/friend.webp",
-        hoverImage: "/images/missions/friendhov.webp",
-        link: "/sign-learn",
-    },
-    {
-        id: 4,
-        titleKey: "missionGrid.diverse.title",
-        defaultTitle: "Diverse Language",
-        descKey: "missionGrid.diverse.desc",
-        defaultDesc: "Universal Digital Access",
-        image: "/images/missions/diverse.webp",
-        hoverImage: "/images/missions/diversehov.webp",
-        link: "/ling",
-    },
-    {
-        id: 5,
-        titleKey: "missionGrid.ai.title",
-        defaultTitle: "AI Intelligence",
-        descKey: "missionGrid.ai.desc",
-        defaultDesc: "Smart Adaptive Tutoring",
-        image: "/images/missions/ai.webp",
-        hoverImage: "/images/missions/aihov.webp",
-        link: "/ai-intelligence-dashboard",
-    },
-    {
-        id: 7,
-        titleKey: "missionGrid.cyber.title",
-        defaultTitle: "Cyber Security",
-        descKey: "missionGrid.cyber.desc",
-        defaultDesc: "Digital Safety & Ethics",
-        image: "/images/missions/cyber-security.webp",
-        hoverImage: "/images/missions/cyber-securityhov.webp",
-        link: "/cyber-security-dashboard",
-    },
-    {
-        id: 8,
-        titleKey: "missionGrid.heritage.title",
-        defaultTitle: "Heritage Archive",
-        descKey: "missionGrid.heritage.desc",
-        defaultDesc: "Cultural Document Preservation",
-        image: "/images/missions/history.webp",
-        hoverImage: "/images/missions/historyhov.webp",
-        link: "/heritage-dashboard",
-    },
-    {
-        id: 10,
-        titleKey: "missionGrid.skills.title",
-        defaultTitle: "Basic Learning Skills",
-        descKey: "missionGrid.skills.desc",
-        defaultDesc: "Communication & Life Skills",
-        image: "/images/missions/abilities.webp",
-        hoverImage: "/images/missions/abilitieshov.webp",
-        link: "/life-skills",
-    }
-];
 
 const MissionGrid = () => {
     const { t } = useTranslation();

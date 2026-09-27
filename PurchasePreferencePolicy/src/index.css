@@ -1,0 +1,133 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Noto+Serif+Devanagari:wght@600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Noto Sans Devanagari", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-display: "DM Serif Display", "Noto Serif Devanagari", Georgia, serif;
+  /* Portal theme: Department of Industries navy (seal colour, brand) + gold on a cool
+     off-white. Green is avoided (political association). */
+  --color-brand-50: #eef3fb;
+  --color-brand-100: #dbe4f5;
+  --color-brand-200: #b7c8ea;
+  --color-brand-300: #8aa5da;
+  --color-brand-400: #5d80c6;
+  --color-brand-500: #3d62ad;
+  --color-brand-600: #2d4d93;
+  --color-brand-700: #213c7a;
+  --color-brand-800: #1b3165;
+  --color-brand-900: #152650;
+  --color-brand-950: #0c1733;
+  --color-gold-50: #fbf7e9;
+  --color-gold-100: #f4e9c6;
+  --color-gold-200: #ead58f;
+  --color-gold-300: #dfc15c;
+  --color-gold-400: #d4b03b;
+  --color-gold-500: #c9a227;
+  --color-gold-600: #a8841a;
+  --color-gold-700: #836617;
+  --color-gold-800: #5e4a12;
+  --color-gold-900: #3d300c;
+  --color-cream: #f3f5fa;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background-color: #f3f5fa;
+  color: #1e293b;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html[lang="hi"] body {
+  font-family: "Noto Sans Devanagari", "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Sleek custom scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+*::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+@keyframes bppp-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes bppp-scale-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-fade-up {
+  animation: bppp-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.animate-scale-in {
+  animation: bppp-scale-in 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Landing-page backdrops, reused across the portal. */
+.bg-grid {
+  background-image: linear-gradient(rgba(21, 38, 80, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(21, 38, 80, 0.045) 1px, transparent 1px);
+  background-size: 62px 62px;
+}
+.bg-contours {
+  background-image: repeating-radial-gradient(
+    ellipse at 62% 48%,
+    transparent 0 22px,
+    rgba(33, 60, 122, 0.16) 23px 24px,
+    transparent 25px 46px
+  );
+}
+.bg-contours-gold {
+  background-image: repeating-radial-gradient(
+    ellipse at 70% 40%,
+    transparent 0 22px,
+    rgba(201, 162, 39, 0.22) 23px 24px,
+    transparent 25px 46px
+  );
+}
+
+.print-only {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: A4;
+    margin: 12mm;
+  }
+  body {
+    background: #fff !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  /* When an acknowledgement is portalled to <body>, print only that. */
+  body:has(> .print-only) > #root {
+    display: none !important;
+  }
+  .print-plain {
+    box-shadow: none !important;
+    border-color: #e2e8f0 !important;
+  }
+}

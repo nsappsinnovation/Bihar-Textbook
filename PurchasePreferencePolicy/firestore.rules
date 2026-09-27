@@ -1,0 +1,282 @@
+// ---------------------------------------------------------------------------
+// IMPORTANT: Firestore rules are shared by every app in the Firebase project
+// (carbonfootprint-69ba7). This file = the BRLPP rules (unchanged) + the
+// PurchasePolicy block. Keep both repositories' firestore.rules identical, or
+// the last deploy will silently remove the other portal's access.
+// ---------------------------------------------------------------------------
+rules_version = '2';
+
+// Identity comes from Firebase Auth:
+//   citizen: email/password account "<mobile>@citizen.brlpp.local"
+//   admin:   custom claims { role: "state" } | { role: "district", district } — set by createAdmin
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function role() { return signedIn() ? request.auth.token.get('role', '') : ''; }
+    // Citizens sign in with email/password on "<mobile>@citizen.brlpp.local".
+    function citizenMobile() {
+      return signedIn()
+          && request.auth.token.get('email', '') is string
+          && request.auth.token.get('email', '').matches('^[6-9][0-9]{9}@citizen[.]brlpp[.]local$')
+        ? request.auth.token.email.split('@')[0] : '';
+    }
+    function isCitizen() { return citizenMobile() != ''; }
+    function isApplicant(mobile) { return isCitizen() && citizenMobile() == mobile; }
+    function isState() { return role() == 'state'; }
+    function isDistrictAdmin(district) { return role() == 'district' && request.auth.token.district == district; }
+
+    function str(v, min, max) { return v is string && v.size() >= min && v.size() <= max; }
+    function optStr(d, k, max) { return !(k in d) || (d[k] is string && d[k].size() <= max); }
+
+    function validApplicant(d, mobile) {
+      return d.keys().hasOnly(['name', 'fatherHusbandName', 'aadhaar', 'mobile', 'email', 'address', 'createdAt', 'updatedAt'])
+        && d.mobile == mobile
+        && d.aadhaar is string && d.aadhaar.matches('^[0-9]{12}$')
+        && str(d.name, 2, 100) && str(d.fatherHusbandName, 2, 100)
+        && str(d.address, 5, 300) && optStr(d, 'email', 120)
+        && d.updatedAt == request.time;
+    }
+
+
+    // Chauhaddi and Revenue Thana No. are optional (may be empty strings).
+    function validChauhaddi(c) {
+      return c is map && c.keys().hasOnly(['north', 'south', 'east', 'west'])
+        && optStr(c, 'north', 120) && optStr(c, 'south', 120) && optStr(c, 'east', 120) && optStr(c, 'west', 120);
+    }
+
+    function validApplication(d) {
+      return d.keys().hasOnly(['applicationId', 'mobile', 'applicant', 'district', 'anchal', 'mauja', 'maujaOther', 'thanaNo',
+                               'plots', 'plotCount', 'khataNo', 'khesraNo', 'areaAcres', 'landType',
+                               'chauhaddi', 'latitude', 'longitude', 'mapLink', 'photos', 'submittedAt',
+                               'submittedDate', 'searchText', 'declarations'])
+        && str(d.applicant.name, 2, 100) && str(d.applicant.fatherHusbandName, 2, 100) && str(d.applicant.address, 5, 300)
+        && d.applicant.aadhaar is string && d.applicant.aadhaar.matches('^[0-9]{12}$')
+        // Both declarations must be accepted (truth + no pending title suit).
+        && d.declarations.keys().hasOnly(['truthful', 'noTitleSuit'])
+        && d.declarations.truthful == true && d.declarations.noTitleSuit == true
+        && str(d.district, 2, 60) && str(d.anchal, 2, 80) && str(d.mauja, 1, 80)
+        && (!('maujaOther' in d) || d.maujaOther is bool)
+        && optStr(d, 'thanaNo', 40)
+        // 1–20 Khata/Khesra rows under one Mauja. Rows are validated in the app; the rules
+        // check shape and the first row (per-row loops exceed the 1000-expression limit).
+        && d.plots is list && d.plots.size() >= 1 && d.plots.size() <= 20
+        && d.plotCount == d.plots.size()
+        && d.plots[0] is map && str(d.plots[0].khataNo, 1, 40) && str(d.plots[0].khesraNo, 1, 40)
+        && d.plots[0].khataNo.matches('^[A-Za-z0-9]+$') && d.plots[0].khesraNo.matches('^[A-Za-z0-9]+$')
+        && d.plots[0].area is number && d.plots[0].area > 0
+        && str(d.khataNo, 1, 500) && str(d.khesraNo, 1, 500)
+        && d.areaAcres is number && d.areaAcres > 0
+        // Comma-joined land types of all plots.
+        && str(d.landType, 2, 200)
+        && validChauhaddi(d.chauhaddi)
+        && (d.latitude == null || (d.latitude is number && d.latitude >= -90 && d.latitude <= 90))
+        && (d.longitude == null || (d.longitude is number && d.longitude >= -180 && d.longitude <= 180))
+        && optStr(d, 'mapLink', 500)
+        && d.photos is list && d.photos.size() <= 5
+        && d.submittedAt == request.time;
+    }
+
+    match /applicants/{mobile} {
+      allow get: if isApplicant(mobile) || isState();
+      allow create: if isApplicant(mobile) && validApplicant(request.resource.data, mobile)
+        && request.resource.data.createdAt == request.time;
+      allow update: if isApplicant(mobile) && validApplicant(request.resource.data, mobile)
+        && request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if false;
+    }
+
+    match /applications/{applicationId} {
+      allow read: if isApplicant(resource.data.mobile) || isState() || isDistrictAdmin(resource.data.district);
+      // The ID must be the one reserved by incrementing the counter in the same transaction.
+      allow create: if isApplicant(request.resource.data.mobile)
+        && request.resource.data.applicationId == applicationId
+        && validApplication(request.resource.data)
+        && int(applicationId.split('-')[2]) == getAfter(/databases/$(database)/documents/counters/applications).data.year
+        && int(applicationId.split('-')[3]) == getAfter(/databases/$(database)/documents/counters/applications).data.seq
+        && applicationId.matches('^IDA-RLP-[0-9]{4}-[0-9]{6}$');
+      // Submissions are immutable.
+      allow update, delete: if false;
+    }
+
+    match /counters/applications {
+      allow get: if isCitizen();
+      allow create: if isCitizen() && request.resource.data.keys().hasOnly(['year', 'seq'])
+        && request.resource.data.seq == 1;
+      allow update: if isCitizen() && request.resource.data.keys().hasOnly(['year', 'seq'])
+        && ((request.resource.data.year == resource.data.year && request.resource.data.seq == resource.data.seq + 1)
+            || (request.resource.data.year > resource.data.year && request.resource.data.seq == 1));
+      allow delete: if false;
+    }
+
+    // Server-only (Cloud Functions / Admin SDK).
+    match /resetThrottle/{key} {
+      allow read, write: if false;
+    }
+
+    // =====================================================================
+    // Bihar Purchase Preference Policy portal (Department of Industries).
+    // All data lives under PurchasePolicy/main/…, separate from BRLPP.
+    // Identities are separate too:
+    //   citizen: email/password account "<mobile>@citizen.bppp.local"
+    //   admin:   custom claims { ppRole: "state" } | { ppRole: "district", ppDistrict }
+    //            (set by ppCreateAdmin; BRLPP's "role" claim grants nothing here)
+    // =====================================================================
+    function ppRole() { return signedIn() ? request.auth.token.get('ppRole', '') : ''; }
+    function ppCitizenMobile() {
+      return signedIn()
+          && request.auth.token.get('email', '') is string
+          && request.auth.token.get('email', '').matches('^[6-9][0-9]{9}@citizen[.]bppp[.]local$')
+        ? request.auth.token.email.split('@')[0] : '';
+    }
+    function ppIsCitizen() { return ppCitizenMobile() != ''; }
+    function ppIsState() { return ppRole() == 'state'; }
+    function ppIsDistrict(district) { return ppRole() == 'district' && request.auth.token.get('ppDistrict', '') == district; }
+
+    function ppValidProduct(p) {
+      return p is map && str(p.productName, 2, 120)
+        && p.productionCapacity is number && p.productionCapacity > 0
+        && str(p.capacityUnit, 1, 40);
+    }
+
+    function ppValidEnterprise(d) {
+      return d.keys().hasOnly(['registrationId', 'ownerUid', 'mobile', 'name', 'email', 'address',
+                               'unitName', 'unitLocation', 'district', 'city', 'block', 'blockOther',
+                               'sector', 'sectorOther', 'projectCost', 'directEmployees', 'indirectEmployees',
+                               'udyamRegistrationNo', 'productList', 'productCount', 'productNames',
+                               'photos', 'boundary', 'directEmployeesBihar',
+                               'searchText', 'createdAt', 'createdDate', 'updatedAt'])
+        && str(d.name, 3, 100) && optStr(d, 'email', 120) && str(d.address, 10, 300)
+        && str(d.unitName, 2, 150) && str(d.unitLocation, 5, 300)
+        && str(d.district, 2, 60) && str(d.city, 2, 80) && str(d.block, 2, 80) && d.blockOther is bool
+        && d.sector in ['general_manufacturing', 'food_processing', 'plastic_rubber', 'textile_leather',
+                        'healthcare', 'it_ites', 'renewable_energy', 'others']
+        && ((d.sector == 'others' && str(d.sectorOther, 2, 80)) || (d.sector != 'others' && d.sectorOther == ''))
+        && d.projectCost is number && d.projectCost > 0 && d.projectCost <= 10000000
+        && d.directEmployees is int && d.directEmployees >= 0 && d.directEmployees <= 1000000
+        && d.indirectEmployees is int && d.indirectEmployees >= 0 && d.indirectEmployees <= 1000000
+        // Of the direct employees, how many are from Bihar (required on create, see below).
+        && (!('directEmployeesBihar' in d)
+            || (d.directEmployeesBihar is int && d.directEmployeesBihar >= 0 && d.directEmployeesBihar <= d.directEmployees))
+        && d.udyamRegistrationNo is string && d.udyamRegistrationNo.matches('^UDYAM-[A-Z]{2}-[0-9]{2}-[0-9]{7}$')
+        // Summary of the products subcollection (kept in sync in the same write) used by the
+        // directory table, filters and exports. Rows are validated in the app; the rules
+        // check shape and the first row (per-row loops exceed the expression limit).
+        && d.productList is list && d.productList.size() >= 1 && d.productList.size() <= 50
+        && d.productCount == d.productList.size()
+        && ppValidProduct(d.productList[0])
+        && str(d.productNames, 2, 6500) && str(d.searchText, 1, 10000)
+        // Optional unit photos stored in Firebase Storage: [{ url, path, name }], at most 5.
+        && (!('photos' in d) || (d.photos is list && d.photos.size() <= 5))
+        // Optional GIS boundary: unit corners [{ lat, lng }], either none or 3–20 points.
+        && (!('boundary' in d) || (d.boundary is list && d.boundary.size() <= 20
+            && (d.boundary.size() == 0
+                || (d.boundary.size() >= 3 && d.boundary[0].lat is number && d.boundary[0].lng is number))))
+        && d.createdDate is string
+        && d.updatedAt == request.time;
+    }
+
+    match /PurchasePolicy/main {
+      allow read, write: if false;
+
+      match /enterprises/{id} {
+        allow read: if (ppIsCitizen() && resource.data.ownerUid == request.auth.uid)
+          || ppIsState() || ppIsDistrict(resource.data.district);
+        // The ID must be the one reserved by incrementing the counter in the same
+        // transaction, and the user map + Udyam index must point at it.
+        allow create: if ppIsCitizen()
+          && request.resource.data.ownerUid == request.auth.uid
+          && request.resource.data.mobile == ppCitizenMobile()
+          && request.resource.data.registrationId == id
+          && id.matches('^BPPP-[0-9]{4}-[0-9]{6}$')
+          && ppValidEnterprise(request.resource.data)
+          && 'directEmployeesBihar' in request.resource.data
+          && request.resource.data.createdAt == request.time
+          && int(id.split('-')[1]) == getAfter(/databases/$(database)/documents/PurchasePolicy/main/counters/enterprises).data.year
+          && int(id.split('-')[2]) == getAfter(/databases/$(database)/documents/PurchasePolicy/main/counters/enterprises).data.seq
+          && getAfter(/databases/$(database)/documents/PurchasePolicy/main/users/$(request.auth.uid)).data.enterpriseId == id
+          && getAfter(/databases/$(database)/documents/PurchasePolicy/main/udyam/$(request.resource.data.udyamRegistrationNo)).data.enterpriseId == id;
+        // Registered details can be updated by the owner; identity fields are fixed.
+        allow update: if ppIsCitizen()
+          && resource.data.ownerUid == request.auth.uid
+          && request.resource.data.ownerUid == resource.data.ownerUid
+          && request.resource.data.mobile == resource.data.mobile
+          && request.resource.data.registrationId == resource.data.registrationId
+          && request.resource.data.createdAt == resource.data.createdAt
+          && request.resource.data.createdDate == resource.data.createdDate
+          && ppValidEnterprise(request.resource.data)
+          && getAfter(/databases/$(database)/documents/PurchasePolicy/main/udyam/$(request.resource.data.udyamRegistrationNo)).data.enterpriseId == id;
+        allow delete: if false;
+
+        match /products/{productId} {
+          allow read: if (ppIsCitizen() && get(/databases/$(database)/documents/PurchasePolicy/main/enterprises/$(id)).data.ownerUid == request.auth.uid)
+            || ppIsState()
+            || ppIsDistrict(get(/databases/$(database)/documents/PurchasePolicy/main/enterprises/$(id)).data.district);
+          allow create: if ppIsCitizen()
+            && getAfter(/databases/$(database)/documents/PurchasePolicy/main/enterprises/$(id)).data.ownerUid == request.auth.uid
+            && request.resource.data.keys().hasOnly(['productName', 'productionCapacity', 'capacityUnit', 'createdAt', 'updatedAt'])
+            && ppValidProduct(request.resource.data)
+            && request.resource.data.createdAt == request.time
+            && request.resource.data.updatedAt == request.time;
+          allow update: if ppIsCitizen()
+            && getAfter(/databases/$(database)/documents/PurchasePolicy/main/enterprises/$(id)).data.ownerUid == request.auth.uid
+            && request.resource.data.keys().hasOnly(['productName', 'productionCapacity', 'capacityUnit', 'createdAt', 'updatedAt'])
+            && ppValidProduct(request.resource.data)
+            && request.resource.data.createdAt == resource.data.createdAt
+            && request.resource.data.updatedAt == request.time;
+          allow delete: if ppIsCitizen()
+            && get(/databases/$(database)/documents/PurchasePolicy/main/enterprises/$(id)).data.ownerUid == request.auth.uid;
+        }
+      }
+
+      // uid → the enterprise registered by that citizen (one per account).
+      match /users/{uid} {
+        allow get: if (ppIsCitizen() && request.auth.uid == uid) || ppIsState();
+        allow create: if ppIsCitizen() && request.auth.uid == uid
+          && request.resource.data.keys().hasOnly(['enterpriseId', 'mobile', 'createdAt'])
+          && request.resource.data.mobile == ppCitizenMobile()
+          && request.resource.data.createdAt == request.time
+          && getAfter(/databases/$(database)/documents/PurchasePolicy/main/enterprises/$(request.resource.data.enterpriseId)).data.ownerUid == uid;
+        allow update, delete: if false;
+      }
+
+      // Udyam Registration No. → enterprise, so a Udyam number is registered only once.
+      match /udyam/{udyamNo} {
+        allow get: if ppIsCitizen();
+        allow create: if ppIsCitizen()
+          && request.resource.data.keys().hasOnly(['enterpriseId'])
+          && getAfter(/databases/$(database)/documents/PurchasePolicy/main/enterprises/$(request.resource.data.enterpriseId)).data.ownerUid == request.auth.uid
+          && getAfter(/databases/$(database)/documents/PurchasePolicy/main/enterprises/$(request.resource.data.enterpriseId)).data.udyamRegistrationNo == udyamNo;
+        // Released only when the owner changes the enterprise's Udyam number.
+        allow delete: if ppIsCitizen()
+          && get(/databases/$(database)/documents/PurchasePolicy/main/enterprises/$(resource.data.enterpriseId)).data.ownerUid == request.auth.uid
+          && getAfter(/databases/$(database)/documents/PurchasePolicy/main/enterprises/$(resource.data.enterpriseId)).data.udyamRegistrationNo != udyamNo;
+        allow update: if false;
+      }
+
+      match /counters/enterprises {
+        allow get: if ppIsCitizen();
+        allow create: if ppIsCitizen() && request.resource.data.keys().hasOnly(['year', 'seq'])
+          && request.resource.data.seq == 1;
+        allow update: if ppIsCitizen() && request.resource.data.keys().hasOnly(['year', 'seq'])
+          && ((request.resource.data.year == resource.data.year && request.resource.data.seq == resource.data.seq + 1)
+              || (request.resource.data.year > resource.data.year && request.resource.data.seq == 1));
+        allow delete: if false;
+      }
+
+      // Admin registry mirrored by the ppCreateAdmin / ppUpdateAdmin / ppListAdmins functions.
+      match /admins/{uid} {
+        allow get: if request.auth != null && (request.auth.uid == uid || ppIsState());
+        allow list: if ppIsState();
+        allow write: if false;
+      }
+
+      // resetThrottle/* and anything else under PurchasePolicy/main: server-only
+      // (falls through to the deny-all rule below).
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

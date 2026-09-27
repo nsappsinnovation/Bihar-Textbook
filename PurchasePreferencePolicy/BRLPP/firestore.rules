@@ -1,0 +1,115 @@
+rules_version = '2';
+
+// Identity comes from Firebase Auth:
+//   citizen: email/password account "<mobile>@citizen.brlpp.local"
+//   admin:   custom claims { role: "state" } | { role: "district", district } — set by createAdmin
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function role() { return signedIn() ? request.auth.token.get('role', '') : ''; }
+    // Citizens sign in with email/password on "<mobile>@citizen.brlpp.local".
+    function citizenMobile() {
+      return signedIn()
+          && request.auth.token.get('email', '') is string
+          && request.auth.token.get('email', '').matches('^[6-9][0-9]{9}@citizen[.]brlpp[.]local$')
+        ? request.auth.token.email.split('@')[0] : '';
+    }
+    function isCitizen() { return citizenMobile() != ''; }
+    function isApplicant(mobile) { return isCitizen() && citizenMobile() == mobile; }
+    function isState() { return role() == 'state'; }
+    function isDistrictAdmin(district) { return role() == 'district' && request.auth.token.district == district; }
+
+    function str(v, min, max) { return v is string && v.size() >= min && v.size() <= max; }
+    function optStr(d, k, max) { return !(k in d) || (d[k] is string && d[k].size() <= max); }
+
+    function validApplicant(d, mobile) {
+      return d.keys().hasOnly(['name', 'fatherHusbandName', 'aadhaar', 'mobile', 'email', 'address', 'createdAt', 'updatedAt'])
+        && d.mobile == mobile
+        && d.aadhaar is string && d.aadhaar.matches('^[0-9]{12}$')
+        && str(d.name, 2, 100) && str(d.fatherHusbandName, 2, 100)
+        && str(d.address, 5, 300) && optStr(d, 'email', 120)
+        && d.updatedAt == request.time;
+    }
+
+
+    // Chauhaddi and Revenue Thana No. are optional (may be empty strings).
+    function validChauhaddi(c) {
+      return c is map && c.keys().hasOnly(['north', 'south', 'east', 'west'])
+        && optStr(c, 'north', 120) && optStr(c, 'south', 120) && optStr(c, 'east', 120) && optStr(c, 'west', 120);
+    }
+
+    function validApplication(d) {
+      return d.keys().hasOnly(['applicationId', 'mobile', 'applicant', 'district', 'anchal', 'mauja', 'maujaOther', 'thanaNo',
+                               'plots', 'plotCount', 'khataNo', 'khesraNo', 'areaAcres', 'landType',
+                               'chauhaddi', 'latitude', 'longitude', 'mapLink', 'photos', 'submittedAt',
+                               'submittedDate', 'searchText', 'declarations'])
+        && str(d.applicant.name, 2, 100) && str(d.applicant.fatherHusbandName, 2, 100) && str(d.applicant.address, 5, 300)
+        && d.applicant.aadhaar is string && d.applicant.aadhaar.matches('^[0-9]{12}$')
+        // Both declarations must be accepted (truth + no pending title suit).
+        && d.declarations.keys().hasOnly(['truthful', 'noTitleSuit'])
+        && d.declarations.truthful == true && d.declarations.noTitleSuit == true
+        && str(d.district, 2, 60) && str(d.anchal, 2, 80) && str(d.mauja, 1, 80)
+        && (!('maujaOther' in d) || d.maujaOther is bool)
+        && optStr(d, 'thanaNo', 40)
+        // 1–20 Khata/Khesra rows under one Mauja. Rows are validated in the app; the rules
+        // check shape and the first row (per-row loops exceed the 1000-expression limit).
+        && d.plots is list && d.plots.size() >= 1 && d.plots.size() <= 20
+        && d.plotCount == d.plots.size()
+        && d.plots[0] is map && str(d.plots[0].khataNo, 1, 40) && str(d.plots[0].khesraNo, 1, 40)
+        && d.plots[0].khataNo.matches('^[A-Za-z0-9]+$') && d.plots[0].khesraNo.matches('^[A-Za-z0-9]+$')
+        && d.plots[0].area is number && d.plots[0].area > 0
+        && str(d.khataNo, 1, 500) && str(d.khesraNo, 1, 500)
+        && d.areaAcres is number && d.areaAcres > 0
+        // Comma-joined land types of all plots.
+        && str(d.landType, 2, 200)
+        && validChauhaddi(d.chauhaddi)
+        && (d.latitude == null || (d.latitude is number && d.latitude >= -90 && d.latitude <= 90))
+        && (d.longitude == null || (d.longitude is number && d.longitude >= -180 && d.longitude <= 180))
+        && optStr(d, 'mapLink', 500)
+        && d.photos is list && d.photos.size() <= 5
+        && d.submittedAt == request.time;
+    }
+
+    match /applicants/{mobile} {
+      allow get: if isApplicant(mobile) || isState();
+      allow create: if isApplicant(mobile) && validApplicant(request.resource.data, mobile)
+        && request.resource.data.createdAt == request.time;
+      allow update: if isApplicant(mobile) && validApplicant(request.resource.data, mobile)
+        && request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if false;
+    }
+
+    match /applications/{applicationId} {
+      allow read: if isApplicant(resource.data.mobile) || isState() || isDistrictAdmin(resource.data.district);
+      // The ID must be the one reserved by incrementing the counter in the same transaction.
+      allow create: if isApplicant(request.resource.data.mobile)
+        && request.resource.data.applicationId == applicationId
+        && validApplication(request.resource.data)
+        && int(applicationId.split('-')[2]) == getAfter(/databases/$(database)/documents/counters/applications).data.year
+        && int(applicationId.split('-')[3]) == getAfter(/databases/$(database)/documents/counters/applications).data.seq
+        && applicationId.matches('^IDA-RLP-[0-9]{4}-[0-9]{6}$');
+      // Submissions are immutable.
+      allow update, delete: if false;
+    }
+
+    match /counters/applications {
+      allow get: if isCitizen();
+      allow create: if isCitizen() && request.resource.data.keys().hasOnly(['year', 'seq'])
+        && request.resource.data.seq == 1;
+      allow update: if isCitizen() && request.resource.data.keys().hasOnly(['year', 'seq'])
+        && ((request.resource.data.year == resource.data.year && request.resource.data.seq == resource.data.seq + 1)
+            || (request.resource.data.year > resource.data.year && request.resource.data.seq == 1));
+      allow delete: if false;
+    }
+
+    // Server-only (Cloud Functions / Admin SDK).
+    match /resetThrottle/{key} {
+      allow read, write: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

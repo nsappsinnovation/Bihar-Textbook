@@ -5,45 +5,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 import { getNotices } from '../../services/noticeService';
-
-// "2026-06-22" -> "22/06/2026" ("Recent" when the item has no date)
-const toDisplayDate = (isoDate) => (isoDate ? (isoDate.includes('/') ? isoDate : isoDate.split('-').reverse().join('/')) : 'Recent');
-
-// Alternate notices and tenders so the board shows a mix of both
-const buildBoardItems = (notices, tenders) => {
-  const items = [];
-  for (let i = 0; i < Math.max(notices.length, tenders.length); i++) {
-    const n = notices[i];
-    if (n) {
-      items.push({
-        id: `notice-${n.id}`,
-        category: n.category === 'Circular' ? 'Circular' : 'Notice',
-        title: n.title,
-        date: toDisplayDate(n.date),
-        deadline: null,
-        ref: `NTC-${n.id}`,
-        isUrgent: n.isUrgent,
-        fileSize: 'PDF',
-        link: n.link,
-      });
-    }
-    const t = tenders[i];
-    if (t) {
-      items.push({
-        id: `tender-${t.id}`,
-        category: 'Tender',
-        title: t.title,
-        date: toDisplayDate(t.date),
-        deadline: null,
-        ref: `TND-${t.id}`,
-        isUrgent: t.isUrgent,
-        fileSize: 'PDF',
-        link: t.link,
-      });
-    }
-  }
-  return items;
-};
+import { buildBoardItems } from '../../data/noticeBoardItems';
 
 const NoticeCard = ({ notice }) => {
   const { t } = useTranslation();
@@ -164,7 +126,10 @@ const EmptyState = ({ tab, onShowAll }) => {
 // The list only scrolls endlessly when there are enough items to fill the box
 const MARQUEE_MIN_ITEMS = 4;
 
-export default function NoticeBoard() {
+// tone swaps the (dark) section background so other home page versions can reuse this section
+const TONES = { default: "bg-[#0a1d4f]", blue: "bg-[#124d9c]" };
+
+export default function NoticeBoard({ tone = "default" }) {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("All");
   const [notices, setNotices] = useState([]);
@@ -188,7 +153,7 @@ export default function NoticeBoard() {
   const totalTenders = tenders.length;
 
   return (
-    <section className="w-full bg-[#0a1d4f] py-16 px-6 md:px-12 lg:px-24 font-sans text-white overflow-hidden relative isolate">
+    <section className={`w-full ${TONES[tone] || TONES.default} py-16 px-6 md:px-12 lg:px-24 font-sans text-white overflow-hidden relative isolate`}>
       {/* Royal blue with a single warm gold accent, so it reads apart from the navy Leaders section and footer:
           gold glow top-right, blue light bottom-left, depth gradient and a faint dot texture */}
       <div

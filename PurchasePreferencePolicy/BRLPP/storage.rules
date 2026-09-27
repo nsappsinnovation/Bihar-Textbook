@@ -1,0 +1,25 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    function role() { return request.auth != null ? request.auth.token.get('role', '') : ''; }
+    function citizenMobile() {
+      return request.auth != null
+          && request.auth.token.get('email', '').matches('^[6-9][0-9]{9}@citizen[.]brlpp[.]local$')
+        ? request.auth.token.email.split('@')[0] : '';
+    }
+
+    match /land-photos/{mobile}/{batch}/{file} {
+      allow read: if citizenMobile() == mobile
+        || role() == 'state' || role() == 'district';
+      allow create: if citizenMobile() == mobile
+        && request.resource.size < 5 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+      allow update, delete: if false;
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

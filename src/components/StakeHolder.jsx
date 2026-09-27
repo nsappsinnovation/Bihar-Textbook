@@ -1,43 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-
-const testimonials = [
-  { id: 1, quote: "\"Education must build character, discipline, and a spirit of service to the nation.\"", name: "Dr. Rajendra Prasad", role: "FIRST PRESIDENT OF INDIA | FROM BIHAR" },
-  { id: 2, quote: "\"The purpose of education is not only employment, but the awakening of social responsibility.\"", name: "Jayaprakash Narayan", role: "LOKNAYAK | SOCIAL REFORMER" },
-  { id: 3, quote: "\"Education is the strongest foundation on which a modern and progressive Bihar can be built.\"", name: "Satyendra Narayan Sinha", role: "FORMER CHIEF MINISTER | EDUCATION REFORMER" },
-  { id: 4, quote: "\"The progress of Bihar depends on schools, colleges, good governance, and equal opportunity for all.\"", name: "Shri Krishna Sinha", role: "FIRST CHIEF MINISTER OF BIHAR" },
-  { id: 5, quote: "\"Knowledge becomes meaningful when it is used for public service and social development.\"", name: "Anugrah Narayan Sinha", role: "BIHAR VIBHUTI | EDUCATIONIST" },
-  { id: 6, quote: "\"Education should not remain a privilege of a few; it must become the strength of every common student.\"", name: "Karpoori Thakur", role: "JAN NAYAK | FORMER CHIEF MINISTER" },
-  { id: 7, quote: "\"The doors of education must remain open for the poor, the backward, and the marginalized.\"", name: "Karpoori Thakur", role: "JAN NAYAK | FORMER CHIEF MINISTER" },
-  { id: 8, quote: "\"Educating children, especially girls, is the most powerful way to change the future of Bihar.\"", name: "Shri Nitish Kumar", role: "Ex-CHIEF MINISTER, BIHAR" },
-  { id: 9, quote: "\"A society moves forward when every child receives education, dignity, and opportunity.\"", name: "Jagjivan Ram", role: "NATIONAL LEADER | SOCIAL JUSTICE LEADER" },
-  { id: 10, quote: "\"Education gives confidence to the weak, dignity to the poor, and strength to democracy.\"", name: "Jagjivan Ram", role: "NATIONAL LEADER | SOCIAL JUSTICE LEADER" },
-  { id: 11, quote: "\"Education creates the intellectual strength required for public life, self-governance, and national progress.\"", name: "Dr. Sachchidananda Sinha", role: "EDUCATIONIST | CONSTITUENT ASSEMBLY PRESIDENT" },
-  { id: 12, quote: "\"The real power of learning lies in creating responsible citizens and a just society.\"", name: "Dr. Sachchidananda Sinha", role: "EDUCATIONIST | CONSTITUENT ASSEMBLY PRESIDENT" },
-  { id: 13, quote: "\"Good education must reach the village, the poor household, and the first-generation learner.\"", name: "Ramdhari Singh Dinkar", role: "RASHTRAKAVI | EDUCATIONAL THINKER" },
-  { id: 14, quote: "\"Learning is the light that removes fear, inequality, and darkness from society.\"", name: "Ramdhari Singh Dinkar", role: "RASHTRAKAVI | EDUCATIONAL THINKER" },
-  { id: 15, quote: "\"A strong education system is the path to a strong Bihar, a strong society, and a strong India.\"", name: "Shri Nitish Kumar", role: "Ex-CHIEF MINISTER, BIHAR" }
-];
-
-const getInitials = (name) => {
-  const map = {
-    "Dr. Rajendra Prasad": "RP",
-    "Jayaprakash Narayan": "JN",
-    "Satyendra Narayan Sinha": "SS",
-    "Shri Krishna Sinha": "SK",
-    "Anugrah Narayan Sinha": "AS",
-    "Karpoori Thakur": "KT",
-    "Shri Nitish Kumar": "NK",
-    "Jagjivan Ram": "JR",
-    "Dr. Sachchidananda Sinha": "DS",
-    "Ramdhari Singh Dinkar": "RS"
-  };
-  if (map[name]) return map[name];
-  const words = name.replace(/^(Dr\.\s*)/i, '').trim().split(' ');
-  if (words.length >= 2) return (words[0][0] + words[words.length - 1][0]).toUpperCase();
-  return name.substring(0, 2).toUpperCase();
-};
+import { testimonials, getInitials } from "../data/homeContent";
 
 const avatarColors = [
   "bg-[#1e293b]",

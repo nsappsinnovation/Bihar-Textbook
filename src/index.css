@@ -45,6 +45,18 @@
 
   --shadow-soft: 0 18px 45px rgba(66, 83, 100, 0.14);
 
+  /* Home page versions (/v1, /v2): the site's brand blues plus soft section tints */
+  --font-serif: "DM Serif Display", "Noto Serif Devanagari", Georgia, serif;
+  --color-bt-blue: #124d9c;
+  --color-bt-navy: #0b2b4f;
+  --color-bt-bright: #2563eb;
+  --color-bt-ink: #0d0e23;
+  --color-bt-sky: #e9f1fc;
+  --color-bt-cream: #f7f4ec;
+  --color-bt-peach: #fdeee4;
+  --color-bt-lilac: #efeafb;
+  --color-bt-mint: #e6f4ef;
+
   --animate-bob: bob 2.4s ease-in-out infinite;
   --animate-flap: flap 1.8s ease-in-out infinite;
   --animate-pop: pop 360ms ease both;
@@ -353,7 +365,7 @@ body { top: 0px !important; }
 .goog-text-highlight { background-color: transparent !important; border: none !important; box-shadow: none !important; }
 
 /* =========================================================
-   HOME HERO + NAVBAR (design adapted from startup-bihar-hackathon HeroV1)
+   HOME HERO (design adapted from startup-bihar-hackathon HeroV1)
    Reference palette kept (ivory, ink, muted); orange accent swapped for Bihar blue.
 ========================================================= */
 
@@ -530,212 +542,9 @@ body { top: 0px !important; }
 
 .hv1-heading-accent { color: #2563eb; }
 
-/* ---------- Navbar ---------- */
-.bnav {
-  position: fixed;
-  inset: 0 0 auto;
-  z-index: 50;
-  transition: background 300ms ease, box-shadow 300ms ease;
-}
-
-.bnav--solid {
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 1px 0 rgba(17, 17, 17, 0.08);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-/* backdrop-filter would make the header the containing block of the fixed mobile menu,
-   so it is switched off while the menu is open (the menu covers the page anyway) */
-.bnav.bnav--open {
-  background: #ffffff;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-}
-
-.bnav-inner {
-  display: grid;
-  min-height: 92px;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 1rem;
-  transition: min-height 300ms ease;
-}
-
-.bnav--scrolled .bnav-inner { min-height: 72px; }
-
-.bnav-links {
-  display: flex;
-  align-items: center;
-  gap: clamp(10px, 1.3vw, 32px);
-}
-
-.bnav-link {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  color: #111111;
-  font-size: 14px;
-  font-weight: 600;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: color 250ms ease;
-}
-
-.bnav-link::after {
-  position: absolute;
-  right: 0;
-  bottom: -6px;
-  left: 0;
-  height: 1px;
-  background: currentColor;
-  content: "";
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 250ms ease;
-}
-
-.bnav-link:hover::after,
-.bnav-link:focus-visible::after {
-  transform: scaleX(1);
-  transform-origin: left;
-}
-
-.bnav-link--active { color: #124d9c; }
-.bnav-link--active::after { transform: scaleX(1); }
-
-.bnav-dropdown {
-  border: 1px solid rgba(17, 17, 17, 0.1);
-  border-radius: 12px;
-  background: #ffffff;
-  box-shadow: 0 18px 40px rgba(17, 17, 17, 0.1);
-}
-
-.bnav-actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-.bnav-lang {
-  display: inline-flex;
-  min-height: 44px;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid rgba(17, 17, 17, 0.18);
-  border-radius: 999px;
-  padding: 0 16px;
-  background: transparent;
-  cursor: pointer;
-  transition: border-color 250ms ease;
-}
-
-.bnav-lang:hover { border-color: #124d9c; }
-
-.bnav-button {
-  display: inline-flex;
-  min-height: 48px;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  border: 0;
-  border-radius: 999px;
-  padding: 0 22px;
-  color: #ffffff;
-  background: #124d9c;
-  font-size: 14px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: transform 250ms ease, background-color 250ms ease;
-}
-
-.bnav-button:hover { transform: translateY(-2px); background: #0b2b4f; }
-.bnav-button svg { transition: transform 250ms ease; }
-.bnav-button:hover svg { transform: translate(2px, -2px); }
-
-.bnav-menu-button {
-  display: inline-flex;
-  width: 44px;
-  height: 44px;
-  align-items: center;
-  justify-content: center;
-  border: 0;
-  border-radius: 50%;
-  color: #111111;
-  background: transparent;
-  cursor: pointer;
-}
-
-.bnav-mobile {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  overflow-y: auto;
-  padding: 105px 20px 24px;
-  background: #ffffff;
-}
-
-.bnav-mobile-inner {
-  display: flex;
-  min-height: 100%;
-  flex-direction: column;
-}
-
-.bnav-mobile-link {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(17, 17, 17, 0.12);
-  padding: 1.15rem 0;
-  color: #111111;
-  font-family: "Sora", "Nunito", sans-serif;
-  font-size: 1.7rem;
-  font-weight: 600;
-  letter-spacing: -0.04em;
-  text-align: left;
-  background: transparent;
-  cursor: pointer;
-}
-
-.bnav-mobile-link--active { color: #124d9c; }
-
-.bnav-mobile-sub {
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-  padding: 0.9rem 0 1rem 0.2rem;
-  border-bottom: 1px solid rgba(17, 17, 17, 0.12);
-}
-
-.bnav-mobile-sub a {
-  color: #3f3d38;
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-.bnav-mobile-sub a.bnav-mobile-sub--active { color: #124d9c; }
-
-.bnav-mobile .bnav-button { width: 100%; margin-top: 2rem; }
-
 /* ---------- Responsive ---------- */
 @media (max-width: 1100px) {
   .hv1-shell { width: min(100% - 64px, 1400px); }
-}
-
-/* Desktop vs mobile navigation (kept in plain CSS so it isn't overridden by the display rules above) */
-@media (min-width: 1024px) {
-  .bnav-menu-button,
-  .bnav-mobile { display: none; }
-}
-
-@media (max-width: 1023px) {
-  .bnav-links,
-  .bnav-desktop-only { display: none; }
-  .bnav-inner { min-height: 76px; grid-template-columns: 1fr auto; }
-  .bnav--scrolled .bnav-inner { min-height: 66px; }
 }
 
 @media (max-width: 780px) {

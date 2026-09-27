@@ -1,110 +1,12 @@
-import React, { useMemo } from "react";
-import {
-  FiUsers,
-  FiBookOpen,
-  FiMonitor,
-  FiTruck,
-  FiCreditCard,
-  FiZap,
-  FiSun,
-} from "react-icons/fi";
-import {
-  RiGraduationCapLine,
-  RiFlaskLine,
-  RiBookmarkLine,
-  RiLeafLine,
-} from "react-icons/ri";
+import React from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { coreMissions } from "../../data/homeContent";
 
 const CoreMissions = () => {
   const { t } = useTranslation();
 
-  const missions = useMemo(
-    () => [
-      {
-        id: 1,
-        titleKey: "coreMissions.items.title0",
-        descKey: "coreMissions.items.desc0",
-        title: "Accessible Learning Resources",
-        icon: <FiUsers />,
-        color: "#6366f1",
-        description:
-          "Making textbooks and learning resources accessible to learners across Bihar.",
-      },
-      {
-        id: 2,
-        titleKey: "coreMissions.items.title1",
-        descKey: "coreMissions.items.desc1",
-        title: "Curriculum-Based Content",
-        icon: <FiBookOpen />,
-        color: "#eab308",
-        description:
-          "Publishing textbooks prepared in accordance with the curriculum and academic framework of Bihar.",
-      },
-      {
-        id: 3,
-        titleKey: "coreMissions.items.title2",
-        descKey: "coreMissions.items.desc2",
-        title: "Local Language & Context",
-        icon: <FiSun />,
-        color: "#22c55e",
-        description:
-          "Providing learning materials across subjects and languages relevant to learners in Bihar.",
-      },
-      {
-        id: 4,
-        titleKey: "coreMissions.items.title3",
-        descKey: "coreMissions.items.desc3",
-        title: "Statewide Textbook Supply",
-        icon: <FiTruck />,
-        color: "#3b82f6",
-        description:
-          "Supporting the printing and distribution of textbooks to destinations across Bihar.",
-      },
-      {
-        id: 5,
-        titleKey: "coreMissions.items.title4",
-        descKey: "coreMissions.items.desc4",
-        title: "Affordable Textbooks",
-        icon: <FiCreditCard />,
-        color: "#ef4444",
-        description:
-          "Supporting access to textbooks for school students through the state's textbook publishing system.",
-      },
-      {
-        id: 6,
-        titleKey: "coreMissions.items.title5",
-        descKey: "coreMissions.items.desc5",
-        title: "Learning Support Materials",
-        icon: <FiZap />,
-        color: "#f97316",
-        description:
-          "Providing textbooks, workbooks, handbooks and other educational materials for students and educators.",
-      },
-      {
-        id: 7,
-        titleKey: "coreMissions.items.title6",
-        descKey: "coreMissions.items.desc6",
-        title: "Digital Access",
-        icon: <RiGraduationCapLine />,
-        color: "#a855f7",
-        description:
-          "Making textbooks available online for students to access learning materials digitally.",
-      },
-      {
-        id: 8,
-        titleKey: "coreMissions.items.title7",
-        descKey: "coreMissions.items.desc7",
-        title: "Efficient Publishing",
-        icon: <RiLeafLine />,
-        color: "#db2777",
-        description:
-          "Coordinating textbook printing, publishing and supply to support timely availability of learning materials.",
-      },
-    ],
-    [t],
-  );
+  const missions = coreMissions;
 
   const CentralBook = () => (
     <motion.div
@@ -175,7 +77,7 @@ const CoreMissions = () => {
                 className="w-10 h-10 shrink-0 rounded-full bg-gray-50 flex items-center justify-center text-[14px]"
                 style={{ color: mission.color }}
               >
-                {mission.icon}
+                <mission.icon />
               </div>
               <div>
                 <h3 className="font-semibold text-sm text-[#0d0e23] mb-1">
@@ -227,7 +129,7 @@ const CoreMissions = () => {
                         className="w-16 h-16 shrink-0 rounded-full bg-white border border-gray-100 flex items-center justify-center text-2xl shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:border-blue-200 group-hover:shadow-lg cursor-pointer relative z-20"
                         style={{ color: mission.color }}
                       >
-                        {mission.icon}
+                        <mission.icon />
                       </div>
 
                       {/* MAIN TEXT (Title) - Attached Permanent Below */}

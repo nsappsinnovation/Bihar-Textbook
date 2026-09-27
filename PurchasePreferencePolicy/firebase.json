@@ -1,0 +1,126 @@
+{
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "hosting": {
+    "public": "dist",
+    "site": "bihar-purchase-preference",
+    "rewrites": [
+      {
+        "source": "/api/ppResetPassword",
+        "function": {
+          "functionId": "ppResetPassword",
+          "region": "asia-south1"
+        }
+      },
+      {
+        "source": "/api/ppListAdmins",
+        "function": {
+          "functionId": "ppListAdmins",
+          "region": "asia-south1"
+        }
+      },
+      {
+        "source": "/api/ppCreateAdmin",
+        "function": {
+          "functionId": "ppCreateAdmin",
+          "region": "asia-south1"
+        }
+      },
+      {
+        "source": "/api/ppUpdateAdmin",
+        "function": {
+          "functionId": "ppUpdateAdmin",
+          "region": "asia-south1"
+        }
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "headers": [
+      {
+        "source": "**",
+        "headers": [
+          {
+            "key": "X-Content-Type-Options",
+            "value": "nosniff"
+          },
+          {
+            "key": "X-Frame-Options",
+            "value": "DENY"
+          },
+          {
+            "key": "Referrer-Policy",
+            "value": "strict-origin-when-cross-origin"
+          },
+          {
+            "key": "Permissions-Policy",
+            "value": "geolocation=(self), camera=(self), microphone=()"
+          },
+          {
+            "key": "Strict-Transport-Security",
+            "value": "max-age=31536000; includeSubDomains"
+          }
+        ]
+      },
+      {
+        "source": "/assets/**",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=31536000, immutable"
+          }
+        ]
+      },
+      {
+        "source": "/index.html",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "no-cache"
+          }
+        ]
+      }
+    ]
+  },
+  "emulators": {
+    "auth": {
+      "port": 9099
+    },
+    "functions": {
+      "port": 5001
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "ui": {
+      "enabled": true,
+      "port": 4000
+    },
+    "storage": {
+      "port": 9199
+    }
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "bppp",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "*.local",
+        "firebase-debug.log"
+      ]
+    }
+  ]
+}
