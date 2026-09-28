@@ -3,69 +3,62 @@ import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
 /* The people who built the site. Static credit content, so it lives here rather
-   than coming from directoryService the way the employee directory does. */
-const teamLead = [
+   than coming from directoryService the way the employee directory does.
+   Photos are in public/images/developers/. */
+const team = [
   {
     name: "Nishant Shekhar",
     role: "Founder, NS Apps Innovations",
-    image: "https://media.licdn.com/dms/image/v2/D4D03AQFUD3EMJW-SMQ/profile-displayphoto-shrink_800_800/B4DZR_Z.U3HkAg-/0/1737304303571?e=1756339200&v=beta&t=8hP8IgMBOmmkcwGtdACuWoSxnXgkgFZSlmS6AnHFYIc",
     linkedin: "https://www.linkedin.com/in/nishantshekhar28/",
-    technologies: "React, Node.js, Prisma, AWS",
   },
-];
-
-const teamHeads = [
   {
-    name: "Amit Kumar Verma",
+    name: "Manish Kumar",
+    role: "Team Lead",
+    image: "/images/developers/manishkumar9.webp",
+    linkedin: "https://www.linkedin.com/in/manish-kumar-b158b4252/",
+    technologies: "React.js, Tailwind, GitHub",
+  },
+  {
+    name: "Anushka Nandan",
     role: "Frontend Developer",
-    image: "https://media.licdn.com/dms/image/v2/D5603AQHQTREGjm6ZAA/profile-displayphoto-shrink_800_800/B56ZSmkK1qHQAc-/0/1737961290080?e=1743638400&v=beta&t=O5TVqp4NyTesLiLhHc6gLbryEYfAILbI5w589Lkmip0",
-    linkedin: "https://www.linkedin.com/in/amit-kumar-verma-50b236266/",
-    technologies: "React.js, Tailwind CSS",
+    image: "/images/developers/anushkanandan9.webp",
+    linkedin: "https://www.linkedin.com/in/anushkanandan57/",
+    technologies: "React.js, Tailwind, CSS",
   },
   {
-    name: "Pratush Sinha",
-    role: "Backend Developer",
-    image: "https://media.licdn.com/dms/image/v2/D4D03AQFPUBM0kfxCiQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1683793618979?e=1741824000&v=beta&t=dIlHrKeILM-IQt_TZCv7NvZH-vgmj-Q6LQ3wu8FSp3M",
-    linkedin: "https://www.linkedin.com/in/ps613/",
-    technologies: "Node.js, Prisma, MySql",
-  },
-  {
-    name: "Abhishek Anand",
-    role: "React Developer",
-    image: "https://media.licdn.com/dms/image/v2/D4D03AQHgdEA3WVAhNQ/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1692214950711?e=1741824000&v=beta&t=be2Z8_hBGBwZXdsw04PNePEMU8gEhw2NQdlJ2nbtksw",
-    linkedin: "https://www.linkedin.com/in/abhishek-anand-094799251/",
-    technologies: "React.js, Tailwind CSS, Node.js",
+    name: "Pranav Kumar",
+    role: "Frontend Developer",
+    image: "/images/developers/pranavkumar9.webp",
+    linkedin: "https://www.linkedin.com/in/pranav-kumar-27723a295/",
+    technologies: "React.js, Tailwind, CSS",
   },
   {
     name: "Aditya Kumar",
-    role: "React Developer",
-    image: "https://media.licdn.com/dms/image/v2/D4E03AQGnU48IpbDc5A/profile-displayphoto-shrink_800_800/B4EZSroiAxHoAg-/0/1738046317285?e=1743638400&v=beta&t=uMhHI7ZUI2pzRiIHNj3EGP17AxqLieHmoCaLur-9Oc0",
+    role: "DevOps Engineer",
+    image: "/images/developers/adityakumar9.webp",
     linkedin: "https://www.linkedin.com/in/aditya-kumar-780709320/",
-    technologies: "React.js, Tailwind CSS",
+    technologies: "CI/CD, Optimisation",
   },
   {
-    name: "Yuvika Kumari",
+    name: "Mansi Meha",
     role: "Frontend Developer",
-    image: "https://media.licdn.com/dms/image/v2/D4D03AQGYzOZRw7Rb_w/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1704482269132?e=1741824000&v=beta&t=ZsiD16JWJfiHKGQOVnhHYwGMbt9qSlGK80Vd9D1nRwY",
-    linkedin: "https://www.linkedin.com/in/yuvika-singh14/",
-    technologies: "React.js, Tailwind CSS",
-  },
-];
-
-const teamMembers = [
-  {
-    name: "Priyanshu Shankar",
-    role: "QA Specialist",
-    image: "https://media.licdn.com/dms/image/v2/D4D03AQFXF8LraML_hw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1714559521498?e=1741824000&v=beta&t=l2GYDKqEuBuPcp2sKXbaQBYn1FRV2x44Ph5T2BZ2N5s",
-    linkedin: "https://www.linkedin.com/in/priyanshu-shankar-067831256/",
-    technologies: "Test Automation, Bug Tracking",
+    image: "/images/developers/mansimeha9.webp",
+    linkedin: "https://www.linkedin.com/in/mansi-meha-2438283a0/",
+    technologies: "React.js, Node, Express",
   },
   {
-    name: "Abhinav Kumar",
-    role: "QA Specialist",
-    image: "https://firebasestorage.googleapis.com/v0/b/gatishaktibihar.firebasestorage.app/o/startup_bihar%2FWhatsApp%20Image%202024-12-09%20at%2015.42.22.jpeg?alt=media&token=dbcda014-652b-4951-8331-fa7f923aee37",
-    linkedin: "https://www.linkedin.com/in/abhinab-kumar-546753279/",
-    technologies: "Manual Testing, Bug Tracking",
+    name: "Akash Kumar",
+    role: "Frontend Developer",
+    image: "/images/developers/akashkumar9.webp",
+    linkedin: "https://www.linkedin.com/in/akash-kumar-a58a3b2a9/",
+    technologies: "React.js, Node, Express",
+  },
+  {
+    name: "Aman Kumar",
+    role: "Backend Engineer",
+    image: "/images/developers/amankumar9.webp",
+    linkedin: "https://www.linkedin.com/in/amankumar49/",
+    technologies: "React.js, Node, Express, CI/CD",
   },
 ];
 
@@ -81,6 +74,11 @@ function TeamCard({ name, role, image, accent, linkedin, technologies }) {
         className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden shrink-0"
         style={{ backgroundColor: accent }}
       >
+        {/* No photo: initials on the tinted disc (no stand-in image is requested) */}
+        <span className="absolute inset-0 grid place-items-center text-xl sm:text-2xl font-extrabold text-[#124d9c]/70">
+          {name.split(" ").map((part) => part[0]).join("").slice(0, 2)}
+        </span>
+        {image && (
         <img
           loading="lazy"
           decoding="async"
@@ -92,6 +90,7 @@ function TeamCard({ name, role, image, accent, linkedin, technologies }) {
           onError={(e) => { e.currentTarget.style.display = "none"; }}
           className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
         />
+        )}
       </div>
 
       <h3 className="mt-4 text-[14px] sm:text-[16px] lg:text-[17px] font-extrabold tracking-tight text-[#0b2b4f] leading-snug">
@@ -184,9 +183,7 @@ const Developer = () => {
 
       {/* ================= TEAM ================= */}
       <div className="max-w-6xl mx-auto px-5 sm:px-6 py-14 md:py-20">
-        <TeamGroup title={t("developer.teamLead", "Team Lead")} people={teamLead} startIndex={0} />
-        <TeamGroup title={t("developer.teamHeads", "Team Heads")} people={teamHeads} startIndex={1} />
-        <TeamGroup title={t("developer.teamMembers", "Team Members")} people={teamMembers} startIndex={2} />
+        <TeamGroup title={t("developer.teamMembers", "Team Members")} people={team} />
       </div>
     </div>
   );
