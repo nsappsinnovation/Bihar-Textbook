@@ -34,16 +34,14 @@ const RealisticCar = ({
     >
       {/* Headlight Beam Projection */}
       {isHeadlightsOn && (
-        <div className="absolute top-1/2 -left-28 -translate-y-1/2 w-32 h-16 bg-gradient-to-l from-yellow-200/40 via-yellow-100/15 to-transparent blur-md pointer-events-none rounded-l-full -z-10" />
+        <div className="absolute top-1/2 -left-12 sm:-left-24 -translate-y-1/2 w-14 h-7 sm:w-28 sm:h-14 bg-gradient-to-l from-yellow-200/40 via-yellow-100/15 to-transparent blur-md pointer-events-none rounded-l-full -z-10" />
       )}
 
       <svg
-        width="110"
-        height="52"
         viewBox="0 0 110 52"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="relative z-10 drop-shadow-2xl"
+        className="relative z-10 drop-shadow-2xl w-[54px] h-[26px] sm:w-[100px] sm:h-[48px]"
       >
         {/* Car Body Shadow */}
         <ellipse
@@ -143,15 +141,13 @@ const RealisticTruck = ({ scaleX = 1 }) => {
       className={`relative inline-block ${scaleX === -1 ? "scale-x-[-1]" : ""}`}
     >
       {/* Headlight Beams */}
-      <div className="absolute top-1/2 -left-36 -translate-y-1/2 w-40 h-24 bg-gradient-to-l from-amber-100/50 via-amber-100/20 to-transparent blur-lg pointer-events-none rounded-l-full -z-10" />
+      <div className="absolute top-1/2 -left-14 sm:-left-30 -translate-y-1/2 w-16 h-10 sm:w-36 sm:h-20 bg-gradient-to-l from-amber-100/50 via-amber-100/20 to-transparent blur-lg pointer-events-none rounded-l-full -z-10" />
 
       <svg
-        width="140"
-        height="60"
         viewBox="0 0 140 60"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="relative z-10 drop-shadow-2xl"
+        className="relative z-10 drop-shadow-2xl w-[68px] h-[29px] sm:w-[130px] sm:h-[56px]"
       >
         {/* Shadow */}
         <rect
@@ -257,18 +253,16 @@ const RealisticPoliceCar = ({ scaleX = 1 }) => {
       className={`relative inline-block ${scaleX === -1 ? "scale-x-[-1]" : ""}`}
     >
       {/* Flashing Emergency Light Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-28 h-20 bg-blue-500/25 rounded-full blur-xl pointer-events-none animate-pulse" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-14 h-9 sm:w-26 sm:h-18 bg-blue-500/25 rounded-full blur-xl pointer-events-none animate-pulse" />
 
       {/* Headlight Beam */}
-      <div className="absolute top-1/2 -left-28 -translate-y-1/2 w-32 h-16 bg-gradient-to-l from-yellow-200/40 via-yellow-100/15 to-transparent blur-md pointer-events-none rounded-l-full -z-10" />
+      <div className="absolute top-1/2 -left-12 sm:-left-24 -translate-y-1/2 w-14 h-7 sm:w-28 sm:h-14 bg-gradient-to-l from-yellow-200/40 via-yellow-100/15 to-transparent blur-md pointer-events-none rounded-l-full -z-10" />
 
       <svg
-        width="115"
-        height="54"
         viewBox="0 0 115 54"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="relative z-10 drop-shadow-2xl"
+        className="relative z-10 drop-shadow-2xl w-[56px] h-[26px] sm:w-[105px] sm:h-[50px]"
       >
         <ellipse
           cx="57"
@@ -353,15 +347,13 @@ const RealisticBus = ({ color = "#ea580c", scaleX = 1 }) => {
     <div
       className={`relative inline-block ${scaleX === -1 ? "scale-x-[-1]" : ""}`}
     >
-      <div className="absolute top-1/2 -left-32 -translate-y-1/2 w-36 h-20 bg-gradient-to-l from-yellow-200/40 via-yellow-100/15 to-transparent blur-md pointer-events-none rounded-l-full -z-10" />
+      <div className="absolute top-1/2 -left-14 sm:-left-28 -translate-y-1/2 w-16 h-10 sm:w-32 sm:h-18 bg-gradient-to-l from-yellow-200/40 via-yellow-100/15 to-transparent blur-md pointer-events-none rounded-l-full -z-10" />
 
       <svg
-        width="150"
-        height="58"
         viewBox="0 0 150 58"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="relative z-10 drop-shadow-2xl"
+        className="relative z-10 drop-shadow-2xl w-[74px] h-[28px] sm:w-[138px] sm:h-[53px]"
       >
         <ellipse
           cx="75"
@@ -474,17 +466,15 @@ const RealisticPedestrian = ({ isCrashed = false, isCrossing = false }) => {
   return (
     <div className="relative flex flex-col items-center justify-center pointer-events-none">
       {/* High-Visibility Ground Target Glow Aura */}
-      <div className={`absolute bottom-0 w-22 h-8 rounded-full blur-md animate-pulse ${isCrashed ? "bg-rose-500/50 shadow-[0_0_15px_#f43f5e]" : "bg-teal-400/40"}`} />
+      <div className={`absolute bottom-0 w-10 h-3 sm:w-18 sm:h-6 rounded-full blur-md animate-pulse ${isCrashed ? "bg-rose-500/50 shadow-[0_0_15px_#f43f5e]" : "bg-teal-400/40"}`} />
 
       {isCrashed && (
         <div className="absolute inset-0 flex items-center justify-center z-50 pointer-events-none">
           <svg
-            width="90"
-            height="90"
             viewBox="0 0 100 100"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="drop-shadow-[0_0_20px_#f59e0b]"
+            className="drop-shadow-[0_0_20px_#f59e0b] w-[42px] h-[42px] sm:w-[80px] sm:h-[80px]"
           >
             <path
               d="M50 0 L58 33 L90 15 L73 45 L100 60 L68 68 L80 95 L50 78 L20 95 L32 68 L0 60 L27 45 L10 15 L42 33 Z"
@@ -511,15 +501,13 @@ const RealisticPedestrian = ({ isCrashed = false, isCrossing = false }) => {
             ? { duration: 0.35, repeat: Infinity, ease: "easeInOut" }
             : { duration: 0.2 }
         }
-        className="relative w-24 h-28 flex items-center justify-center"
+        className="relative w-10 h-12 sm:w-20 sm:h-24 flex items-center justify-center"
       >
         <svg
-          width="84"
-          height="92"
           viewBox="0 0 84 92"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className={`drop-shadow-2xl transition-all duration-300 ${isCrashed ? "brightness-75 saturate-150 hue-rotate-[330deg]" : ""}`}
+          className={`drop-shadow-2xl transition-all duration-300 w-[36px] h-[40px] sm:w-[72px] sm:h-[78px] ${isCrashed ? "brightness-75 saturate-150 hue-rotate-[330deg]" : ""}`}
         >
           {/* Soft Ground Contact Shadow */}
           <ellipse
@@ -733,27 +721,27 @@ const AnimatedRoad = ({
   return (
     <div className="absolute inset-0 bg-[#1e293b] flex flex-col justify-center overflow-hidden">
       {/* Top Curb & Grass */}
-      <div className="absolute top-0 inset-x-0 h-[25%] bg-gradient-to-b from-teal-900 to-teal-800 border-b-4 border-slate-600 shadow-[inset_0_4px_10px_rgba(0,0,0,0.4)]" />
+      <div className="absolute top-0 inset-x-0 h-[22%] bg-gradient-to-b from-teal-900 to-teal-800 border-b-2 sm:border-b-4 border-slate-600 shadow-[inset_0_4px_10px_rgba(0,0,0,0.4)]" />
 
       {/* Asphalt Texture overlay */}
       <div className="absolute inset-0 opacity-30 bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
 
-      {/* Center Dashed Yellow Divider */}
+      {/* Center Dashed White Divider */}
       {showDivider && (
-        <div className="absolute inset-x-0 h-2 top-1/2 -translate-y-1/2 flex overflow-hidden opacity-90">
+        <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 h-2.5 sm:h-3.5 flex items-center overflow-hidden z-20 pointer-events-none">
           <motion.div
-            animate={isMoving ? { x: [0, -120] } : { x: 0 }}
+            animate={isMoving ? { x: [0, -112] } : { x: 0 }}
             transition={{
               repeat: isMoving ? Infinity : 0,
               duration: speed,
               ease: "linear",
             }}
-            className="flex w-[200%]"
+            className="flex w-[250%] items-center"
           >
-            {[...Array(35)].map((_, i) => (
+            {[...Array(60)].map((_, i) => (
               <div
                 key={i}
-                className="w-14 h-2 bg-amber-400 mx-8 rounded-full shadow-[0_0_10px_rgba(251,191,36,0.8)]"
+                className="w-7 sm:w-14 h-2 sm:h-3 bg-white mx-3 sm:mx-6 rounded-full shadow-[0_0_10px_#ffffff] shrink-0"
               />
             ))}
           </motion.div>
@@ -762,20 +750,18 @@ const AnimatedRoad = ({
 
       {/* Realistic White Zebra Crosswalk */}
       {showCrosswalk && (
-        <div className="absolute left-1/2 -translate-x-1/2 top-[25%] bottom-[25%] w-32 flex flex-col justify-between py-2 z-10 shadow-lg">
+        <div className="absolute left-1/2 -translate-x-1/2 top-[22%] bottom-[22%] w-16 sm:w-28 flex flex-col justify-between py-1 z-10 shadow-lg">
           {[...Array(8)].map((_, i) => (
             <div
               key={i}
-              className="w-full h-5 bg-slate-100 rounded-sm border-y border-slate-300 shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
+              className="w-full h-2 sm:h-4 bg-slate-100 rounded-sm border-y border-slate-300 shadow-[0_2px_4px_rgba(0,0,0,0.3)]"
             />
           ))}
         </div>
       )}
 
-
-
       {/* Bottom Curb & Grass */}
-      <div className="absolute bottom-0 inset-x-0 h-[25%] bg-gradient-to-t from-teal-900 to-teal-800 border-t-4 border-slate-600 shadow-[inset_0_-4px_10px_rgba(0,0,0,0.4)]" />
+      <div className="absolute bottom-0 inset-x-0 h-[22%] bg-gradient-to-t from-teal-900 to-teal-800 border-t-2 sm:border-t-4 border-slate-600 shadow-[inset_0_-4px_10px_rgba(0,0,0,0.4)]" />
     </div>
   );
 };
@@ -1004,11 +990,11 @@ const CrossingSimulator = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3.5">
       {/* Game Objective Banner */}
-      <div className="bg-gradient-to-r from-teal-900/10 via-slate-900/10 to-teal-900/10 border border-teal-500/30 p-4 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-4 text-xs shadow-sm">
-        <div className="flex items-center gap-3">
-          <span className="px-2.5 py-1 bg-teal-600 text-white rounded-lg font-black text-[10px] uppercase tracking-wider shadow">
+      <div className="bg-gradient-to-r from-teal-900/10 via-slate-900/10 to-teal-900/10 border border-teal-500/30 p-2.5 sm:p-3.5 rounded-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-2.5 text-[11px] sm:text-xs shadow-sm">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <span className="px-2 py-0.5 sm:px-2.5 sm:py-1 bg-teal-600 text-white rounded-md sm:rounded-lg font-black text-[9px] sm:text-[10px] uppercase tracking-wider shadow shrink-0">
             {t("basicskills.traffic_mission", "MISSION")}
           </span>
           <span className="font-semibold text-slate-700 leading-snug">
@@ -1019,17 +1005,17 @@ const CrossingSimulator = () => {
       </div>
 
       {/* Dashboard Top HUD */}
-      <div className="flex flex-wrap items-center justify-between gap-4 bg-slate-100/90 p-4 rounded-2xl border border-slate-200">
+      <div className="flex flex-wrap items-center justify-between gap-2.5 sm:gap-3 bg-slate-100/90 p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl border border-slate-200">
         {/* Signal Light Status Indicator (Read-Only) */}
-        <div className="flex items-center gap-3">
-          <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <span className="text-[10px] sm:text-xs font-bold text-slate-500 uppercase tracking-widest">
             {t("basicskills.traffic_light_state", "Traffic Light State:")}
           </span>
-          <div className="flex bg-slate-900 p-2 rounded-xl border border-slate-700 shadow-md gap-2">
+          <div className="flex bg-slate-900 p-1 sm:p-1.5 rounded-lg sm:rounded-xl border border-slate-700 shadow-md gap-1.5 sm:gap-2">
             {["red", "yellow", "green"].map((c) => (
               <div
                 key={c}
-                className={`w-7 h-7 rounded-full transition-all border-2 ${
+                className={`w-5 h-5 sm:w-6.5 sm:h-6.5 rounded-full transition-all border-2 ${
                   trafficLight === c
                     ? c === "red"
                       ? "bg-rose-500 border-rose-300 shadow-[0_0_12px_#f43f5e] scale-110"
@@ -1044,18 +1030,18 @@ const CrossingSimulator = () => {
         </div>
 
         {/* Auto Timer & Reset */}
-        <div className="flex items-center justify-end gap-3">
-          <div className="text-xs font-mono font-bold tracking-widest text-teal-700 bg-teal-50 px-3.5 py-2.5 rounded-xl border border-teal-200">
+        <div className="flex items-center justify-end gap-2 sm:gap-3">
+          <div className="text-[10px] sm:text-xs font-mono font-bold tracking-wider text-teal-700 bg-teal-50 px-2.5 py-1.5 sm:px-3.5 sm:py-2 rounded-lg sm:rounded-xl border border-teal-200">
             {trafficLight === "red"
               ? `${t("basicskills.traffic_walk_safe_timer", "WALK SAFE:")} 00:0${trafficTimer}s`
               : `${t("basicskills.traffic_auto_timer", "AUTO TIMER:")} 00:0${trafficTimer}s`}
           </div>
           <button
             onClick={reset}
-            className="p-2.5 bg-white hover:bg-slate-100 text-slate-600 rounded-xl border border-slate-200 transition-colors cursor-pointer shadow-sm"
+            className="p-1.5 sm:p-2 bg-white hover:bg-slate-100 text-slate-600 rounded-lg sm:rounded-xl border border-slate-200 transition-colors cursor-pointer shadow-sm"
             title="Reset Scenario"
           >
-            <RefreshCw size={16} />
+            <RefreshCw size={15} />
           </button>
         </div>
       </div>
@@ -1068,15 +1054,15 @@ const CrossingSimulator = () => {
             : {}
         }
         transition={{ duration: 0.5 }}
-        className={isFullScreen ? "fixed inset-0 z-50 bg-slate-900 border-none rounded-none overflow-hidden flex flex-col justify-between select-none" : "relative rounded-3xl h-[450px] w-full border-8 border-slate-800 overflow-hidden shadow-xl flex flex-col justify-between select-none"}
+        className={isFullScreen ? "fixed inset-0 z-50 bg-slate-900 border-none rounded-none overflow-hidden flex flex-col justify-between select-none" : "relative rounded-2xl sm:rounded-3xl h-[340px] sm:h-[420px] md:h-[460px] w-full border-4 sm:border-8 border-slate-800 overflow-hidden shadow-xl flex flex-col justify-between select-none"}
       >
         {/* Full Screen Toggle Button */}
         <button
           onClick={() => setIsFullScreen(!isFullScreen)}
-          className="absolute top-4 left-4 z-50 p-2.5 bg-slate-800/80 hover:bg-slate-700/90 text-white rounded-xl border border-slate-700/50 backdrop-blur-sm transition-all cursor-pointer shadow-lg active:scale-95 flex items-center justify-center"
+          className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 z-30 p-1.5 sm:p-2.5 bg-slate-800/80 hover:bg-slate-700/90 text-white rounded-lg sm:rounded-xl border border-slate-700/50 backdrop-blur-sm transition-all cursor-pointer shadow-lg active:scale-95 flex items-center justify-center"
           title={isFullScreen ? "Exit Full Screen" : "Play Full Screen"}
         >
-          {isFullScreen ? <Minimize size={18} /> : <Maximize size={18} />}
+          {isFullScreen ? <Minimize size={16} /> : <Maximize size={16} />}
         </button>
 
         {/* Full Screen Traffic Signal Bar (Top Center) */}
@@ -1117,28 +1103,28 @@ const CrossingSimulator = () => {
         <AnimatedRoad speed={0} isMoving={false} showCrosswalk={true} />
 
         {/* Dynamic Pedestrian Signal & Pole Unit */}
-        <div className="absolute top-4 right-4 z-30 bg-slate-900/90 backdrop-blur-md p-3 rounded-2xl border border-slate-700 flex flex-col items-center gap-2 shadow-2xl">
+        <div className="absolute top-2 right-2 sm:top-3 sm:right-3 z-30 bg-slate-900/90 backdrop-blur-md p-1.5 sm:p-2.5 rounded-xl sm:rounded-2xl border border-slate-700 flex flex-col items-center gap-1 sm:gap-1.5 shadow-2xl">
           {/* Dual Dynamic LED Lens Box */}
-          <div className="flex gap-2 bg-slate-950 px-3 py-1.5 rounded-xl border border-slate-800 items-center">
+          <div className="flex gap-1.5 sm:gap-2 bg-slate-950 px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl border border-slate-800 items-center">
             {/* Red LED: Glows when traffic is moving */}
             <div className="flex items-center gap-1">
               <div
-                className={`w-3.5 h-3.5 rounded-full transition-all duration-300 ${trafficLight !== "red" ? "bg-rose-500 shadow-[0_0_12px_#f43f5e] animate-pulse" : "bg-slate-800 opacity-30"}`}
+                className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${trafficLight !== "red" ? "bg-rose-500 shadow-[0_0_12px_#f43f5e] animate-pulse" : "bg-slate-800 opacity-30"}`}
               />
               <span
-                className={`text-[9px] font-black tracking-wider ${trafficLight !== "red" ? "text-rose-400" : "text-slate-600"}`}
+                className={`text-[8px] sm:text-[9px] font-black tracking-wider ${trafficLight !== "red" ? "text-rose-400" : "text-slate-600"}`}
               >
                 STOP
               </span>
             </div>
-            <div className="w-px h-3 bg-slate-800" />
+            <div className="w-px h-2.5 sm:h-3 bg-slate-800" />
             {/* Green LED: Glows when road is available to cross */}
             <div className="flex items-center gap-1">
               <div
-                className={`w-3.5 h-3.5 rounded-full transition-all duration-300 ${trafficLight === "red" ? "bg-teal-400 shadow-[0_0_14px_#10b981] animate-pulse" : "bg-slate-800 opacity-30"}`}
+                className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${trafficLight === "red" ? "bg-teal-400 shadow-[0_0_14px_#10b981] animate-pulse" : "bg-slate-800 opacity-30"}`}
               />
               <span
-                className={`text-[9px] font-black tracking-wider ${trafficLight === "red" ? "text-teal-400" : "text-slate-600"}`}
+                className={`text-[8px] sm:text-[9px] font-black tracking-wider ${trafficLight === "red" ? "text-teal-400" : "text-slate-600"}`}
               >
                 WALK
               </span>
@@ -1149,7 +1135,7 @@ const CrossingSimulator = () => {
           <button
             onClick={handleRequestPedestrianWalk}
             disabled={isButtonRequested || trafficLight === "red"}
-            className={`px-3.5 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1.5 ${
+            className={`px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-lg sm:rounded-xl text-[8.5px] sm:text-[10px] font-black uppercase tracking-wider transition-all cursor-pointer flex items-center gap-1 sm:gap-1.5 ${
               isButtonRequested
                 ? "bg-amber-500 text-slate-950 animate-pulse shadow-md"
                 : trafficLight === "red"
@@ -1158,9 +1144,9 @@ const CrossingSimulator = () => {
             }`}
           >
             {trafficLight === "red" ? (
-              <ShieldCheck size={14} />
+              <ShieldCheck size={12} className="sm:w-3.5 sm:h-3.5" />
             ) : (
-              <ShieldAlert size={14} />
+              <ShieldAlert size={12} className="sm:w-3.5 sm:h-3.5" />
             )}
             {isButtonRequested && trafficLight !== "red"
               ? t("basicskills.traffic_signal_requested", "SIGNAL REQUESTED...")
@@ -1187,7 +1173,7 @@ const CrossingSimulator = () => {
         {/* Top Lane Vehicle 1: Yellow Taxi/Sedan (Drives Right to Left) */}
         <div
           key="top-car1-stable"
-          className="absolute top-[35%] z-20 pointer-events-none"
+          className="absolute top-[29%] z-20 pointer-events-none"
           style={{ left: `${topCar1Pos}%`, willChange: "left" }}
         >
           <RealisticCar
@@ -1200,7 +1186,7 @@ const CrossingSimulator = () => {
         {/* Top Lane Vehicle 2: Heavy Cargo Truck (Follows behind Sedan) */}
         <div
           key="top-car2-stable"
-          className="absolute top-[35%] z-20 pointer-events-none"
+          className="absolute top-[29%] z-20 pointer-events-none"
           style={{ left: `${topCar2Pos}%`, willChange: "left" }}
         >
           <RealisticTruck scaleX={1} />
@@ -1209,7 +1195,7 @@ const CrossingSimulator = () => {
         {/* Bottom Lane Vehicle 1: Red Sports Car (Drives Left to Right) */}
         <div
           key="bottom-car1-stable"
-          className="absolute bottom-[35%] z-20 pointer-events-none"
+          className="absolute bottom-[29%] z-20 pointer-events-none"
           style={{ left: `${bottomCar1Pos}%`, willChange: "left" }}
         >
           <RealisticCar
@@ -1222,7 +1208,7 @@ const CrossingSimulator = () => {
         {/* Bottom Lane Vehicle 2: Police Cruiser (Follows behind Sports Car) */}
         <div
           key="bottom-car2-stable"
-          className="absolute bottom-[35%] z-20 pointer-events-none"
+          className="absolute bottom-[29%] z-20 pointer-events-none"
           style={{ left: `${bottomCar2Pos}%`, willChange: "left" }}
         >
           <RealisticPoliceCar scaleX={-1} />
@@ -1232,10 +1218,10 @@ const CrossingSimulator = () => {
         <motion.div
           key={`pedestrian-${resetKey}`}
           initial={{
-            bottom: `${20 + (crashStep ?? crossStep) * 13.75}%`,
+            bottom: `${16 + (crashStep ?? crossStep) * 16}%`,
           }}
           animate={{
-            bottom: `${20 + (crashStep ?? crossStep) * 13.75}%`,
+            bottom: `${16 + (crashStep ?? crossStep) * 16}%`,
           }}
           transition={{ duration: 2.2, ease: "easeInOut" }}
           className="absolute left-1/2 -translate-x-1/2 z-30 pointer-events-none"
@@ -1252,20 +1238,20 @@ const CrossingSimulator = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="absolute inset-0 bg-rose-950/90 z-40 flex flex-col items-center justify-center text-white backdrop-blur-sm border-8 border-rose-600 p-6"
+              className="absolute inset-0 bg-rose-950/90 z-40 flex flex-col items-center justify-center text-white backdrop-blur-sm border-4 sm:border-8 border-rose-600 p-3 sm:p-6"
             >
-              <div className="w-16 h-16 rounded-full bg-rose-500/20 text-rose-400 border-2 border-rose-500/50 flex items-center justify-center mb-4 animate-bounce">
-                <AlertOctagon size={36} />
+              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-rose-500/20 text-rose-400 border-2 border-rose-500/50 flex items-center justify-center mb-1.5 sm:mb-3 animate-bounce shrink-0">
+                <AlertOctagon className="w-6 h-6 sm:w-8 sm:h-8" />
               </div>
-              <span className="text-3xl md:text-5xl font-black uppercase tracking-widest text-rose-400 drop-shadow-[0_0_20px_rgba(244,63,94,0.8)]">
+              <span className="text-lg sm:text-2xl md:text-3xl font-black uppercase tracking-wider text-rose-400 drop-shadow-[0_0_15px_rgba(244,63,94,0.8)] text-center">
                 {t("basicskills.traffic_crashed", "CRASHED!")}
               </span>
-              <p className="text-sm md:text-base font-semibold leading-relaxed mt-3 text-rose-100 bg-rose-900/60 px-6 py-3 rounded-2xl border border-rose-700/50 text-center max-w-md">
+              <p className="text-[11px] sm:text-xs md:text-sm font-semibold leading-relaxed mt-1.5 sm:mt-3 text-rose-100 bg-rose-900/60 px-3 py-2 sm:px-5 sm:py-3 rounded-xl sm:rounded-2xl border border-rose-700/50 text-center max-w-[260px] sm:max-w-xs">
                 {t("basicskills.traffic_crossing_crash_msg", "Never cross on {{signal}} light! Vehicles cannot stop in time.", { signal: crashedSignal.toUpperCase() })}
               </p>
               <button
                 onClick={reset}
-                className="mt-6 px-8 py-3 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all shadow-lg cursor-pointer"
+                className="mt-3 sm:mt-4 px-5 py-2 sm:px-6 sm:py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold text-[10px] sm:text-xs uppercase tracking-widest rounded-xl transition-all shadow-lg cursor-pointer"
               >
                 Try Again
               </button>
@@ -1277,20 +1263,20 @@ const CrossingSimulator = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-teal-950/90 z-40 flex flex-col items-center justify-center text-white backdrop-blur-sm border-8 border-teal-500 p-6"
+              className="absolute inset-0 bg-teal-950/90 z-40 flex flex-col items-center justify-center text-white backdrop-blur-sm border-4 sm:border-8 border-teal-500 p-3 sm:p-6"
             >
-              <div className="w-16 h-16 rounded-full bg-teal-500/20 text-teal-400 border-2 border-teal-500/50 flex items-center justify-center mb-4 animate-pulse">
-                <ShieldCheck size={36} />
+              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-teal-500/20 text-teal-400 border-2 border-teal-500/50 flex items-center justify-center mb-1.5 sm:mb-3 animate-pulse shrink-0">
+                <ShieldCheck className="w-6 h-6 sm:w-8 sm:h-8" />
               </div>
-              <span className="text-3xl md:text-5xl font-black uppercase tracking-widest text-teal-400 drop-shadow-[0_0_20px_rgba(45,212,191,0.8)]">
+              <span className="text-lg sm:text-2xl md:text-3xl font-black uppercase tracking-wider text-teal-400 drop-shadow-[0_0_15px_rgba(45,212,191,0.8)] text-center">
                 {t("basicskills.traffic_safe_passage", "SAFE PASSAGE")}
               </span>
-              <p className="text-sm md:text-base font-semibold leading-relaxed mt-3 text-teal-100 bg-teal-900/60 px-6 py-3 rounded-2xl border border-teal-700/50 text-center max-w-md">
+              <p className="text-[11px] sm:text-xs md:text-sm font-semibold leading-relaxed mt-1.5 sm:mt-3 text-teal-100 bg-teal-900/60 px-3 py-2 sm:px-5 sm:py-3 rounded-xl sm:rounded-2xl border border-teal-700/50 text-center max-w-[260px] sm:max-w-xs">
                 {t("basicskills.traffic_safe_passage_desc", "Perfect! You crossed safely while cars were stopped on Red.")}
               </p>
               <button
                 onClick={reset}
-                className="mt-6 px-8 py-3 bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all shadow-lg cursor-pointer"
+                className="mt-3 sm:mt-4 px-5 py-2 sm:px-6 sm:py-2.5 bg-teal-600 hover:bg-teal-500 text-white font-bold text-[10px] sm:text-xs uppercase tracking-widest rounded-xl transition-all shadow-lg cursor-pointer"
               >
                 {t("basicskills.traffic_done", "DONE")}
               </button>
@@ -1322,24 +1308,24 @@ const CrossingSimulator = () => {
 
       {/* Interactive Action Control Panel */}
       {!isFullScreen && (
-        <div className="flex flex-wrap items-center justify-center gap-3">
+        <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
           {/* Single Unified Cross The Road Button */}
           <button
             onClick={handleCrossRoad}
             disabled={isCrossing || crossingResult !== ""}
-            className="px-8 py-4 bg-teal-600 hover:bg-teal-500 text-white font-black text-xs md:text-sm tracking-widest uppercase rounded-2xl transition-all cursor-pointer flex items-center gap-2 shadow-teal-500/30 shadow-xl active:scale-95 disabled:opacity-50"
+            className="px-5 py-2.5 sm:px-8 sm:py-3.5 bg-teal-600 hover:bg-teal-500 text-white font-black text-xs md:text-sm tracking-widest uppercase rounded-xl sm:rounded-2xl transition-all cursor-pointer flex items-center gap-2 shadow-teal-500/30 shadow-xl active:scale-95 disabled:opacity-50"
           >
-            <Navigation size={18} />
+            <Navigation size={16} className="sm:w-4 sm:h-4" />
             {t("basicskills.traffic_btn_cross_road", "CROSS THE ROAD")}
           </button>
 
           {/* Reset Scenario Button */}
           <button
             onClick={reset}
-            className="p-4 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-2xl border border-slate-300 transition-all cursor-pointer shadow-sm"
+            className="p-2.5 sm:p-3.5 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl sm:rounded-2xl border border-slate-300 transition-all cursor-pointer shadow-sm"
             title="Reset"
           >
-            <RefreshCw size={18} />
+            <RefreshCw size={16} className="sm:w-4.5 sm:h-4.5" />
           </button>
         </div>
       )}
@@ -1355,10 +1341,10 @@ const SpeedLimitSign = ({ limit }) => {
       initial={{ scale: 0, rotate: -45 }}
       animate={{ scale: 1, rotate: 0 }}
       exit={{ scale: 0, rotate: 45 }}
-      className="w-16 h-16 rounded-full bg-white border-[6px] border-rose-600 flex flex-col items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.15)] select-none border-solid"
+      className="w-11 h-11 sm:w-16 sm:h-16 rounded-full bg-white border-4 sm:border-[6px] border-rose-600 flex flex-col items-center justify-center shadow-[0_4px_12px_rgba(0,0,0,0.15)] select-none border-solid"
     >
-      <span className="text-lg font-black text-slate-900 leading-none">SPEED</span>
-      <span className="text-xl font-black text-slate-950 font-sans tracking-tight leading-none">{limit}</span>
+      <span className="text-[9px] sm:text-lg font-black text-slate-900 leading-none">SPEED</span>
+      <span className="text-xs sm:text-xl font-black text-slate-950 font-sans tracking-tight leading-none">{limit}</span>
     </motion.div>
   );
 };
@@ -1404,11 +1390,11 @@ const Speedometer = ({ value }) => {
       />
       
       {/* Digital Readout */}
-      <div className="absolute bottom-1 text-center z-10 bg-white/90 px-3 py-1 rounded-full backdrop-blur-sm shadow-md border border-slate-100 border-solid">
-        <span className={`text-xl font-black font-mono tracking-tight ${isSpeeding ? "text-rose-600 animate-pulse" : "text-teal-600"}`}>
+      <div className="absolute bottom-1 text-center z-10 bg-white/90 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full backdrop-blur-sm shadow-md border border-slate-100 border-solid">
+        <span className={`text-base sm:text-xl font-black font-mono tracking-tight ${isSpeeding ? "text-rose-600 animate-pulse" : "text-teal-600"}`}>
           {value}
         </span>
-        <span className="text-[7px] font-black text-slate-400 block uppercase tracking-widest leading-none">km/h</span>
+        <span className="text-[6.5px] sm:text-[7px] font-black text-slate-400 block uppercase tracking-widest leading-none">km/h</span>
       </div>
     </div>
   );
@@ -1532,23 +1518,23 @@ const SpeedingSimulator = () => {
   }, []);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3.5">
       {/* Simulator Viewport */}
       <motion.div
         animate={status === "crash" ? { x: [0, -15, 15, -10, 10, 0] } : {}}
-        className={isFullScreen ? "fixed inset-0 z-50 bg-slate-900 border-none rounded-none overflow-hidden flex items-center select-none" : "relative rounded-3xl h-[450px] w-full border-8 border-slate-800 overflow-hidden shadow-xl flex items-center select-none"}
+        className={isFullScreen ? "fixed inset-0 z-50 bg-slate-900 border-none rounded-none overflow-hidden flex items-center select-none" : "relative rounded-2xl sm:rounded-3xl h-[340px] sm:h-[420px] md:h-[460px] w-full border-4 sm:border-8 border-slate-800 overflow-hidden shadow-xl flex items-center select-none"}
       >
         {/* Full Screen Toggle Button */}
         <button
           onClick={() => setIsFullScreen(!isFullScreen)}
-          className="absolute top-4 right-4 z-50 p-2.5 bg-slate-800/80 hover:bg-slate-700/90 text-white rounded-xl border border-slate-700/50 backdrop-blur-sm transition-all cursor-pointer shadow-lg active:scale-95 flex items-center justify-center"
+          className="absolute top-2.5 right-2.5 sm:top-4 sm:right-4 z-30 p-1.5 sm:p-2.5 bg-slate-800/80 hover:bg-slate-700/90 text-white rounded-lg sm:rounded-xl border border-slate-700/50 backdrop-blur-sm transition-all cursor-pointer shadow-lg active:scale-95 flex items-center justify-center"
           title={isFullScreen ? "Exit Full Screen" : "Play Full Screen"}
         >
-          {isFullScreen ? <Minimize size={18} /> : <Maximize size={18} />}
+          {isFullScreen ? <Minimize size={16} /> : <Maximize size={16} />}
         </button>
 
         {/* Dynamic HUD Current Target Overlay (Top Left) */}
-        <div className="absolute top-4 left-4 z-40 bg-slate-950/85 backdrop-blur-md px-4 py-3 rounded-2xl border border-slate-700/40 shadow-2xl flex flex-col min-w-[140px] pointer-events-none select-none text-white">
+        <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 z-40 bg-slate-950/85 backdrop-blur-md px-3 py-2 sm:px-4 sm:py-3 rounded-xl sm:rounded-2xl border border-slate-700/40 shadow-2xl flex flex-col min-w-[120px] sm:min-w-[140px] pointer-events-none select-none text-white">
           <span className="text-[9px] uppercase font-black text-teal-400 tracking-wider mb-1">
             Current Target
           </span>
@@ -1571,13 +1557,13 @@ const SpeedingSimulator = () => {
 
         {/* Dynamic HUD Speedometer Overlay (Central Bottom) */}
         {stage !== "idle" && (
-          <div className={`absolute ${isFullScreen ? "bottom-28" : "bottom-4"} left-1/2 -translate-x-1/2 z-40 bg-slate-950/85 backdrop-blur-md px-5 py-2.5 rounded-3xl border border-slate-700/40 shadow-2xl flex flex-col items-center select-none`}>
+          <div className={`absolute ${isFullScreen ? "bottom-24" : "bottom-1 sm:bottom-4"} left-1/2 -translate-x-1/2 z-40 bg-slate-950/85 backdrop-blur-md px-2 py-1 sm:px-5 sm:py-2.5 rounded-2xl sm:rounded-3xl border border-slate-700/40 shadow-2xl flex flex-col items-center select-none scale-50 sm:scale-100 origin-bottom`}>
             <Speedometer value={currentSpeed} />
           </div>
         )}
 
         <AnimatedRoad
-          isMoving={stage === "accel" || stage === "decel"}
+          isMoving={stage === "accel" || stage === "decel" || status === "driving" || status === "braking"}
           speed={currentSpeed > 0 ? (48 / currentSpeed) : 1.2}
           showBuildings={stage === "decel"}
         />
@@ -1591,10 +1577,10 @@ const SpeedingSimulator = () => {
               animate={{ right: "30%" }}
               exit={{ right: "120%" }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              className="absolute top-[22%] z-25 flex flex-col items-center gap-1"
+              className="absolute top-[10%] sm:top-[22%] z-25 flex flex-col items-center gap-0.5 sm:gap-1 scale-70 sm:scale-100 origin-top"
             >
               <SpeedLimitSign limit={80} />
-              <div className="w-2.5 h-16 bg-slate-600 rounded-full shadow" />
+              <div className="w-1.5 h-10 sm:w-2.5 sm:h-16 bg-slate-600 rounded-full shadow" />
             </motion.div>
           )}
         </AnimatePresence>
@@ -1607,10 +1593,10 @@ const SpeedingSimulator = () => {
               animate={{ right: "30%" }}
               exit={{ right: "120%" }}
               transition={{ duration: 1.2, ease: "easeOut" }}
-              className="absolute top-[22%] z-25 flex flex-col items-center gap-1"
+              className="absolute top-[10%] sm:top-[22%] z-25 flex flex-col items-center gap-0.5 sm:gap-1 scale-70 sm:scale-100 origin-top"
             >
               <SpeedLimitSign limit={40} />
-              <div className="w-2.5 h-16 bg-slate-600 rounded-full shadow" />
+              <div className="w-1.5 h-10 sm:w-2.5 sm:h-16 bg-slate-600 rounded-full shadow" />
             </motion.div>
           )}
         </AnimatePresence>
@@ -1669,22 +1655,22 @@ const SpeedingSimulator = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="absolute inset-0 bg-rose-950/90 z-45 flex flex-col items-center justify-center text-white backdrop-blur-sm border-8 border-rose-600 p-6 overflow-y-auto"
+              className="absolute inset-0 bg-rose-950/90 z-45 flex flex-col items-center justify-center text-white backdrop-blur-sm border-4 sm:border-8 border-rose-600 p-3 sm:p-6 overflow-y-auto"
             >
-              <div className="w-14 h-14 rounded-full bg-rose-500/20 text-rose-400 border-2 border-rose-500/50 flex items-center justify-center mb-2 animate-bounce">
-                <AlertOctagon size={30} />
+              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-rose-500/20 text-rose-400 border-2 border-rose-500/50 flex items-center justify-center mb-1.5 sm:mb-2 animate-bounce shrink-0">
+                <AlertOctagon className="w-6 h-6 sm:w-8 sm:h-8" />
               </div>
-              <span className="text-xl md:text-3xl font-black uppercase tracking-wider text-center text-rose-400 drop-shadow-[0_0_15px_rgba(244,63,94,0.8)]">
+              <span className="text-base sm:text-xl md:text-2xl font-black uppercase tracking-wider text-center text-rose-400 drop-shadow-[0_0_15px_rgba(244,63,94,0.8)]">
                 {failReason === "overspeeding" ? t("basicskills.traffic_speed_limit_exceeded", "SPEED LIMIT EXCEEDED!") : t("basicskills.traffic_speeding_crash_violation", "SPEEDING CRASH & VIOLATION!")}
               </span>
-              <p className="text-xs md:text-sm font-semibold leading-relaxed mt-3 text-center bg-rose-900/60 p-4 rounded-2xl border border-rose-700/50 text-rose-100 max-w-md">
+              <p className="text-[10px] sm:text-xs md:text-sm font-semibold leading-relaxed mt-1.5 sm:mt-3 text-center bg-rose-900/60 p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border border-rose-700/50 text-rose-100 max-w-[260px] sm:max-w-md">
                 {failReason === "overspeeding"
                   ? "You exceeded the road speed limit of 80 km/h! driving above designated limits severely reduces steering control, shortens reaction windows, and increases fatal crash risks."
                   : "You failed to brake to 40 km/h in time! At high speeds (like 80 km/h), the vehicle's kinetic energy increases four-fold, expanding stopping distances exponentially and making safe control impossible."}
               </p>
               <button
                 onClick={handleReset}
-                className="mt-4 px-6 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all shadow-lg cursor-pointer"
+                className="mt-3 sm:mt-4 px-5 py-2 sm:px-6 sm:py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold text-[10px] sm:text-xs uppercase tracking-widest rounded-xl transition-all shadow-lg cursor-pointer"
               >
                 Try Again
               </button>
@@ -1695,20 +1681,20 @@ const SpeedingSimulator = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="absolute inset-0 bg-teal-950/90 z-45 flex flex-col items-center justify-center text-white backdrop-blur-sm border-8 border-teal-500 p-6"
+              className="absolute inset-0 bg-teal-950/90 z-45 flex flex-col items-center justify-center text-white backdrop-blur-sm border-4 sm:border-8 border-teal-500 p-3 sm:p-6"
             >
-              <div className="w-14 h-14 rounded-full bg-teal-500/20 text-teal-400 border-2 border-teal-500/50 flex items-center justify-center mb-2 animate-pulse">
-                <ShieldCheck size={30} />
+              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-teal-500/20 text-teal-400 border-2 border-teal-500/50 flex items-center justify-center mb-1.5 sm:mb-2 animate-pulse shrink-0">
+                <ShieldCheck className="w-6 h-6 sm:w-8 sm:h-8" />
               </div>
-              <span className="text-xl md:text-3xl font-black uppercase tracking-wider text-center text-teal-400 drop-shadow-[0_0_15px_rgba(45,212,191,0.8)]">
+              <span className="text-base sm:text-xl md:text-2xl font-black uppercase tracking-wider text-center text-teal-400 drop-shadow-[0_0_15px_rgba(45,212,191,0.8)]">
                 SAFE SPEED COMPLIANCE
               </span>
-              <p className="text-xs md:text-sm font-semibold leading-relaxed mt-3 text-center bg-teal-900/60 p-4 rounded-2xl border border-teal-700/50 text-teal-100 max-w-md">
+              <p className="text-[10px] sm:text-xs md:text-sm font-semibold leading-relaxed mt-1.5 sm:mt-3 text-center bg-teal-900/60 p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border border-teal-700/50 text-teal-100 max-w-[260px] sm:max-w-md">
                 Excellent! By decelerating to 40 km/h before the checkpoint, you demonstrated standard speed adaptation, ensuring maximum braking margin and pedestrian safety.
               </p>
               <button
                 onClick={handleReset}
-                className="mt-4 px-6 py-2.5 bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all shadow-lg cursor-pointer"
+                className="mt-3 sm:mt-4 px-5 py-2 sm:px-6 sm:py-2.5 bg-teal-600 hover:bg-teal-500 text-white font-bold text-[10px] sm:text-xs uppercase tracking-widest rounded-xl transition-all shadow-lg cursor-pointer"
               >
                 Restart Lab
               </button>
@@ -1760,11 +1746,11 @@ const SpeedingSimulator = () => {
 
       {/* Controller Buttons: Accelerate & Brake */}
       {!isFullScreen && (
-        <div className="flex flex-wrap justify-center items-center gap-4">
+        <div className="flex items-center justify-center gap-2 sm:gap-4 w-full max-w-md mx-auto">
           {stage === "idle" ? (
             <button
               onClick={startScenario}
-              className="px-10 py-4 bg-teal-600 hover:bg-teal-500 text-white font-black text-xs md:text-sm tracking-widest uppercase rounded-2xl transition-all cursor-pointer flex items-center gap-2 shadow-teal-500/30 shadow-xl active:scale-95"
+              className="w-full sm:w-auto px-6 py-3.5 sm:px-10 sm:py-4 bg-teal-600 hover:bg-teal-500 text-white font-black text-xs md:text-sm tracking-widest uppercase rounded-xl sm:rounded-2xl transition-all cursor-pointer flex items-center justify-center gap-2 shadow-teal-500/30 shadow-xl active:scale-95"
             >
               <Navigation size={18} />
               Start Simulation
@@ -1775,29 +1761,29 @@ const SpeedingSimulator = () => {
               <button
                 onClick={handleAccelerate}
                 disabled={stage !== "accel" && stage !== "decel"}
-                className="px-8 py-4 bg-teal-600 hover:bg-teal-500 disabled:opacity-50 text-white font-black text-xs md:text-sm tracking-widest uppercase rounded-2xl transition-all cursor-pointer flex items-center gap-2 shadow-lg active:scale-95"
+                className="flex-1 min-w-0 px-3 py-3 sm:px-8 sm:py-4 bg-teal-600 hover:bg-teal-500 disabled:opacity-50 text-white font-black text-[10px] sm:text-xs md:text-sm tracking-wider uppercase rounded-xl sm:rounded-2xl transition-all cursor-pointer flex items-center justify-center gap-1.5 sm:gap-2 shadow-lg active:scale-95 shrink-0"
               >
-                <Zap size={18} />
-                Accelerate
+                <Zap size={15} className="sm:w-4.5 sm:h-4.5 shrink-0" />
+                <span className="truncate">Accelerate</span>
               </button>
 
               {/* Brake Button */}
               <button
                 onClick={handleBrake}
                 disabled={stage !== "accel" && stage !== "decel"}
-                className="px-8 py-4 bg-rose-600 hover:bg-rose-500 disabled:opacity-50 text-white font-black text-xs md:text-sm tracking-widest uppercase rounded-2xl transition-all cursor-pointer flex items-center gap-2 shadow-lg active:scale-95"
+                className="flex-1 min-w-0 px-3 py-3 sm:px-8 sm:py-4 bg-rose-600 hover:bg-rose-500 disabled:opacity-50 text-white font-black text-[10px] sm:text-xs md:text-sm tracking-wider uppercase rounded-xl sm:rounded-2xl transition-all cursor-pointer flex items-center justify-center gap-1.5 sm:gap-2 shadow-lg active:scale-95 shrink-0"
               >
-                <ShieldAlert size={18} />
-                Brake
+                <ShieldAlert size={15} className="sm:w-4.5 sm:h-4.5 shrink-0" />
+                <span className="truncate">Brake</span>
               </button>
 
               {/* Reset Button */}
               <button
                 onClick={handleReset}
-                className="p-4 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-2xl border border-slate-300 transition-all cursor-pointer shadow-sm"
+                className="p-3 sm:p-4 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl sm:rounded-2xl border border-slate-300 transition-all cursor-pointer shadow-sm shrink-0 flex items-center justify-center"
                 title="Reset"
               >
-                <RefreshCw size={18} />
+                <RefreshCw size={15} className="sm:w-4.5 sm:h-4.5" />
               </button>
             </>
           )}
@@ -1835,23 +1821,44 @@ const WrongSideSimulator = () => {
   const policeRef = useRef(129);
   const sportsRef = useRef(147);
 
-  // Audio ref for honk sound
-  const honkAudioRef = useRef(new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_2b28e7e5a6.mp3?filename=car-horn-12345.mp3'));
+// --- WEB AUDIO CAR HORN SYNTHESIZER (No external network requests, 0 HTTP 403 errors) ---
+const playCarHornSound = () => {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    const ctx = new AudioCtx();
+    const osc1 = ctx.createOscillator();
+    const osc2 = ctx.createOscillator();
+    const gain = ctx.createGain();
 
-  // Play honk sound when showHonk becomes true
-  useEffect(() => {
-    if (showHonk) {
-      honkAudioRef.current.currentTime = 0;
-      honkAudioRef.current.play().catch((err) => {
-        console.warn("Audio play blocked or failed:", err);
-      });
-    }
-  }, [showHonk]);
+    osc1.type = "sawtooth";
+    osc2.type = "sawtooth";
+    osc1.frequency.setValueAtTime(415, ctx.currentTime);
+    osc2.frequency.setValueAtTime(518, ctx.currentTime);
+
+    gain.gain.setValueAtTime(0.12, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
+
+    osc1.connect(gain);
+    osc2.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc1.start();
+    osc2.start();
+    osc1.stop(ctx.currentTime + 0.3);
+    osc2.stop(ctx.currentTime + 0.3);
+  } catch (e) {
+    // Ignore audio context errors
+  }
+};
+
+  const showHonkRef = useRef(false);
 
   // Force showHonk to false if status changes to anything other than "running"
   useEffect(() => {
     if (status !== "running") {
       setShowHonk(false);
+      showHonkRef.current = false;
     }
   }, [status]);
 
@@ -1993,13 +2000,18 @@ const WrongSideSimulator = () => {
         if (side === "wrong") {
           // Honk warning significantly before contact
           if (t - (p + 11.75) < 32 && t - (p + 11.75) > 0) {
-            setShowHonk(true);
+            if (!showHonkRef.current) {
+              showHonkRef.current = true;
+              setShowHonk(true);
+              playCarHornSound();
+            }
           }
 
           // Contact collision detection
           if (p + 11.75 >= t) {
             hasCollidedRef.current = true;
             setHasCollided(true);
+            showHonkRef.current = false;
             setShowHonk(false);
 
             // Visual crash overlap correction
@@ -2078,24 +2090,24 @@ const WrongSideSimulator = () => {
   }, []);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3.5">
       {/* Simulator Viewport */}
       <motion.div
         animate={(hasCollided || status === "jam") ? { x: [0, -22, 22, -16, 16, -10, 10, -4, 4, 0], y: [0, 10, -10, 6, -6, 0] } : {}}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className={isFullScreen ? "fixed inset-0 z-50 bg-slate-900 border-none rounded-none overflow-hidden flex flex-col justify-center select-none" : "relative rounded-3xl h-[450px] w-full border-8 border-slate-800 overflow-hidden shadow-xl flex flex-col justify-center select-none"}
+        className={isFullScreen ? "fixed inset-0 z-50 bg-slate-900 border-none rounded-none overflow-hidden flex flex-col justify-center select-none" : "relative rounded-2xl sm:rounded-3xl h-[340px] sm:h-[420px] md:h-[460px] w-full border-4 sm:border-8 border-slate-800 overflow-hidden shadow-xl flex flex-col justify-center select-none"}
       >
         {/* Full Screen Toggle Button */}
         <button
           onClick={() => setIsFullScreen(!isFullScreen)}
-          className="absolute top-4 right-4 z-50 p-2.5 bg-slate-800/80 hover:bg-slate-700/90 text-white rounded-xl border border-slate-700/50 backdrop-blur-sm transition-all cursor-pointer shadow-lg active:scale-95 flex items-center justify-center"
+          className="absolute top-2.5 right-2.5 sm:top-4 sm:right-4 z-30 p-1.5 sm:p-2.5 bg-slate-800/80 hover:bg-slate-700/90 text-white rounded-lg sm:rounded-xl border border-slate-700/50 backdrop-blur-sm transition-all cursor-pointer shadow-lg active:scale-95 flex items-center justify-center"
           title={isFullScreen ? "Exit Full Screen" : "Play Full Screen"}
         >
-          {isFullScreen ? <Minimize size={18} /> : <Maximize size={18} />}
+          {isFullScreen ? <Minimize size={16} /> : <Maximize size={16} />}
         </button>
 
         <AnimatedRoad
-          isMoving={status === "running" || status === "safe"}
+          isMoving={false}
           speed={side === "wrong" ? 0.4 : 0.3}
         />
 
@@ -2446,42 +2458,30 @@ const WrongSideSimulator = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="absolute inset-0 bg-rose-950/90 z-45 flex flex-col items-center justify-center text-white backdrop-blur-sm border-8 border-rose-600 p-6 overflow-y-auto"
+              className="absolute inset-0 bg-rose-950/95 z-50 flex flex-col items-center justify-center text-white backdrop-blur-sm border-4 sm:border-8 border-rose-600 p-2.5 sm:p-5"
             >
-              <div className="w-14 h-14 rounded-full bg-rose-500/20 text-rose-400 border-2 border-rose-500/50 flex items-center justify-center mb-2 animate-bounce">
-                <AlertTriangle size={30} className="text-rose-500 animate-pulse" />
+              <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-rose-500/20 text-rose-400 border-2 border-rose-500/50 flex items-center justify-center mb-1 shrink-0">
+                <AlertTriangle className="w-5 h-5 sm:w-7 sm:h-7 text-rose-500 animate-pulse" />
               </div>
-              <span className="text-xl md:text-3xl font-black uppercase tracking-wider text-center text-rose-400 drop-shadow-[0_0_15px_rgba(244,63,94,0.8)]">
+              <span className="text-xs sm:text-lg md:text-xl font-black uppercase tracking-wider text-center text-rose-400 drop-shadow-[0_0_15px_rgba(244,63,94,0.8)] px-2">
                 {t("basicskills.traffic_head_on_collision", "💥 HEAD-ON COLLISION DETECTED!")}
               </span>
 
               {/* Advisory Message Container */}
-              <div className="mt-3 text-xs md:text-sm font-semibold leading-relaxed bg-rose-900/60 p-4 rounded-2xl border border-rose-700/50 text-rose-100 max-w-lg space-y-2">
-                <p className="text-center font-bold text-yellow-300">
-                  {t("basicskills.traffic_wrong_lane_warning", "WRONG LANE COLLISION WARNING & ADVISORY:")}
+              <div className="mt-1 sm:mt-2 text-[9px] sm:text-xs md:text-sm font-semibold leading-tight bg-rose-900/70 p-2 sm:p-3 rounded-xl border border-rose-700/50 text-rose-100 max-w-[260px] sm:max-w-md max-h-[135px] sm:max-h-none overflow-y-auto space-y-0.5">
+                <p className="text-center font-bold text-yellow-300 text-[9.5px] sm:text-xs">
+                  {t("basicskills.traffic_wrong_lane_warning", "WRONG LANE COLLISION ADVISORY:")}
                 </p>
-                <ul className="list-disc pl-4 space-y-1 text-left">
-                  <li>
-                    {t("basicskills.traffic_wrong_side_rule1", "Driving on the wrong side has caused a direct head-on collision and hindered all vehicle movement.")}
-                  </li>
-                  <li>
-                    In left-hand drive countries (like India), always stick to
-                    the left lane of the road.
-                  </li>
-                  <li>
-                    Driving on the right lane (wrong side) blocks oncoming
-                    vehicles, creates congested traffic jams, and leads to severe accidents.
-                  </li>
-                  <li>
-                    Driving on the wrong side is a strict traffic offense
-                    punishable by heavy penalties and licenses cancellation.
-                  </li>
+                <ul className="list-disc pl-3 space-y-0.5 text-left text-[8.5px] sm:text-[11px]">
+                  <li>Driving on wrong side caused a head-on collision.</li>
+                  <li>Always stick to left lane in left-hand drive regions (India).</li>
+                  <li>Wrong lane driving blocks traffic & risks heavy penalties.</li>
                 </ul>
               </div>
 
               <button
                 onClick={handleReset}
-                className="mt-4 px-6 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all shadow-lg cursor-pointer"
+                className="mt-2 sm:mt-3 px-4 py-1.5 sm:px-6 sm:py-2 bg-rose-600 hover:bg-rose-500 text-white font-bold text-[10px] sm:text-xs uppercase tracking-widest rounded-lg sm:rounded-xl transition-all shadow-lg cursor-pointer shrink-0"
               >
                 Try Again
               </button>
@@ -2493,27 +2493,25 @@ const WrongSideSimulator = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="absolute inset-0 bg-teal-950/90 z-45 flex flex-col items-center justify-center text-white backdrop-blur-sm border-8 border-teal-500 p-6"
+              className="absolute inset-0 bg-teal-950/95 z-50 flex flex-col items-center justify-center text-white backdrop-blur-sm border-4 sm:border-8 border-teal-500 p-2.5 sm:p-5"
             >
-              <div className="w-14 h-14 rounded-full bg-teal-500/20 text-teal-400 border-2 border-teal-500/50 flex items-center justify-center mb-2 animate-pulse">
-                <ShieldCheck size={30} />
+              <div className="w-8 h-8 sm:w-12 sm:h-12 rounded-full bg-teal-500/20 text-teal-400 border-2 border-teal-500/50 flex items-center justify-center mb-1 shrink-0">
+                <ShieldCheck className="w-5 h-5 sm:w-7 sm:h-7" />
               </div>
-              <span className="text-xl md:text-3xl font-black uppercase tracking-wider text-center text-teal-400 drop-shadow-[0_0_15px_rgba(45,212,191,0.8)]">
+              <span className="text-xs sm:text-lg md:text-xl font-black uppercase tracking-wider text-center text-teal-400 drop-shadow-[0_0_15px_rgba(45,212,191,0.8)] px-2">
                 SAFE & SMOOTH JOURNEY
               </span>
-              <div className="mt-3 text-xs md:text-sm font-semibold leading-relaxed bg-teal-900/60 p-4 rounded-2xl border border-teal-700/50 text-teal-100 max-w-md space-y-1.5 text-center">
-                <p className="font-bold text-teal-350">
+              <div className="mt-1 sm:mt-2 text-[9px] sm:text-xs md:text-sm font-semibold leading-tight bg-teal-900/70 p-2 sm:p-3 rounded-xl border border-teal-700/50 text-teal-100 max-w-[260px] sm:max-w-md text-center">
+                <p className="font-bold text-teal-350 text-[9.5px] sm:text-xs mb-0.5">
                   {t("basicskills.traffic_excellent_discipline", "EXCELLENT ROAD DISCIPLINE:")}
                 </p>
-                <p>
-                  Sticking to the left lane ensures optimal traffic flow, avoids
-                  conflict with oncoming vehicles, and reduces travel stress for
-                  everyone!
+                <p className="text-[8.5px] sm:text-[11px]">
+                  Sticking to the left lane ensures optimal traffic flow and keeps everyone safe!
                 </p>
               </div>
               <button
                 onClick={handleReset}
-                className="mt-4 px-6 py-2.5 bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs uppercase tracking-widest rounded-xl transition-all shadow-lg cursor-pointer"
+                className="mt-2 sm:mt-3 px-4 py-1.5 sm:px-6 sm:py-2 bg-teal-600 hover:bg-teal-500 text-white font-bold text-[10px] sm:text-xs uppercase tracking-widest rounded-lg sm:rounded-xl transition-all shadow-lg cursor-pointer shrink-0"
               >
                 Restart Lab
               </button>
@@ -2599,13 +2597,13 @@ const DistractedSimulator = () => {
   const isSuccess = phase === "success";
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-3.5">
       {/* Instruction Banner */}
-      <div className="bg-gradient-to-r from-slate-50 to-teal-50 rounded-2xl px-5 py-3 border border-teal-100 flex items-center gap-3">
-        <div className="w-9 h-9 bg-teal-100 rounded-xl flex items-center justify-center shrink-0">
-          <Smartphone size={18} className="text-teal-600" />
+      <div className="bg-gradient-to-r from-slate-50 to-teal-50 rounded-xl sm:rounded-2xl px-3.5 py-2.5 sm:px-5 sm:py-3 border border-teal-100 flex items-center gap-2.5 sm:gap-3">
+        <div className="w-7 h-7 sm:w-9 sm:h-9 bg-teal-100 rounded-lg sm:rounded-xl flex items-center justify-center shrink-0">
+          <Smartphone size={16} className="text-teal-600 sm:w-4.5 sm:h-4.5" />
         </div>
-        <p className="text-xs md:text-sm text-slate-600 font-semibold leading-snug">
+        <p className="text-[11px] sm:text-xs md:text-sm text-slate-600 font-semibold leading-snug">
           {t("basicskills.traffic_distracted_intro", "Start driving. A notification will appear — will you ignore it or get distracted? Your choice decides the outcome!")}
         </p>
       </div>
@@ -2614,15 +2612,15 @@ const DistractedSimulator = () => {
       <motion.div
         animate={isCrash ? { x: [0, -18, 18, -10, 10, -6, 6, 0] } : {}}
         transition={{ duration: 0.5 }}
-        className={isFullScreen ? "fixed inset-0 z-50 bg-slate-900 border-none rounded-none overflow-hidden flex items-center justify-center select-none" : "relative rounded-3xl h-[450px] w-full border-8 border-slate-800 overflow-hidden shadow-xl flex items-center justify-center select-none"}
+        className={isFullScreen ? "fixed inset-0 z-50 bg-slate-900 border-none rounded-none overflow-hidden flex items-center justify-center select-none" : "relative rounded-2xl sm:rounded-3xl h-[340px] sm:h-[420px] md:h-[460px] w-full border-4 sm:border-8 border-slate-800 overflow-hidden shadow-xl flex items-center justify-center select-none"}
       >
         {/* Full Screen Toggle Button */}
         <button
           onClick={() => setIsFullScreen(!isFullScreen)}
-          className="absolute top-4 right-4 z-50 p-2.5 bg-slate-800/80 hover:bg-slate-700/90 text-white rounded-xl border border-slate-700/50 backdrop-blur-sm transition-all cursor-pointer shadow-lg active:scale-95 flex items-center justify-center"
+          className="absolute top-2.5 right-2.5 sm:top-4 sm:right-4 z-30 p-1.5 sm:p-2.5 bg-slate-800/80 hover:bg-slate-700/90 text-white rounded-lg sm:rounded-xl border border-slate-700/50 backdrop-blur-sm transition-all cursor-pointer shadow-lg active:scale-95 flex items-center justify-center"
           title={isFullScreen ? "Exit Full Screen" : "Play Full Screen"}
         >
-          {isFullScreen ? <Minimize size={18} /> : <Maximize size={18} />}
+          {isFullScreen ? <Minimize size={16} /> : <Maximize size={16} />}
         </button>
 
         {/* Road */}
@@ -2688,34 +2686,34 @@ const DistractedSimulator = () => {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -60, scale: 0.85 }}
               transition={{ type: "spring", stiffness: 260, damping: 20 }}
-              className="absolute top-10 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-xs"
+              className="absolute top-3 sm:top-8 left-1/2 -translate-x-1/2 z-50 w-[88%] max-w-[250px] sm:max-w-xs"
             >
-              <div className="bg-white rounded-2xl shadow-2xl border-2 border-slate-200 overflow-hidden">
+              <div className="bg-white/95 backdrop-blur-md rounded-xl sm:rounded-2xl shadow-2xl border-2 border-slate-200 overflow-hidden">
                 {/* Notification header */}
-                <div className="flex items-center gap-2.5 px-4 py-3 border-b border-slate-100 bg-slate-50">
-                  <div className="w-7 h-7 rounded-lg bg-rose-100 flex items-center justify-center">
-                    <Smartphone size={15} className="text-rose-600" />
+                <div className="flex items-center gap-1.5 sm:gap-2.5 px-2.5 py-2 sm:px-4 sm:py-3 bg-slate-50/90">
+                  <div className="w-5 h-5 sm:w-7 sm:h-7 rounded-md sm:rounded-lg bg-rose-100 flex items-center justify-center shrink-0">
+                    <Smartphone size={12} className="text-rose-600 sm:w-4 sm:h-4" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-[11px] font-black text-slate-800 truncate">
+                    <p className="text-[9px] sm:text-[11px] font-black text-slate-800 truncate">
                       {t("basicskills.traffic_messages_now", "Messages • now")}
                     </p>
-                    <p className="text-[10px] text-slate-500 font-medium">
+                    <p className="text-[8px] sm:text-[10px] text-slate-500 font-medium truncate">
                       {t("basicskills.traffic_msg_content", "Rahul: \"Hey! Are you there? 😄\"")}
                     </p>
                   </div>
-                  <div className="flex gap-1.5 shrink-0">
+                  <div className="flex gap-1 shrink-0">
                     {/* IGNORE button */}
                     <button
                       onClick={handleIgnoreNotification}
-                      className="px-3 py-1.5 rounded-lg bg-teal-500 hover:bg-teal-600 active:scale-95 text-white text-[10px] font-black uppercase tracking-wide transition-all cursor-pointer"
+                      className="px-2 py-1 sm:px-3 sm:py-1.5 rounded-md sm:rounded-lg bg-teal-500 hover:bg-teal-600 active:scale-95 text-white text-[8px] sm:text-[10px] font-black uppercase tracking-wide transition-all cursor-pointer"
                     >
                       Ignore
                     </button>
                     {/* REPLY button */}
                     <button
                       onClick={handleRespondToNotification}
-                      className="px-3 py-1.5 rounded-lg bg-slate-200 hover:bg-rose-100 active:scale-95 text-slate-700 hover:text-rose-700 text-[10px] font-black uppercase tracking-wide transition-all cursor-pointer border border-slate-300"
+                      className="px-2 py-1 sm:px-3 sm:py-1.5 rounded-md sm:rounded-lg bg-slate-200 hover:bg-rose-100 active:scale-95 text-slate-700 hover:text-rose-700 text-[8px] sm:text-[10px] font-black uppercase tracking-wide transition-all cursor-pointer border border-slate-300"
                     >
                       Reply
                     </button>
@@ -2723,8 +2721,8 @@ const DistractedSimulator = () => {
                 </div>
               </div>
               {/* Pulse ring to draw attention */}
-              <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-rose-500 flex items-center justify-center animate-bounce">
-                <span className="text-white text-[9px] font-black">!</span>
+              <div className="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-rose-500 flex items-center justify-center animate-bounce">
+                <span className="text-white text-[8px] sm:text-[9px] font-black">!</span>
               </div>
             </motion.div>
           )}
@@ -2736,15 +2734,15 @@ const DistractedSimulator = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="absolute inset-0 bg-rose-950/90 z-40 flex flex-col items-center justify-center text-white backdrop-blur-sm border-8 border-rose-600 p-6"
+              className="absolute inset-0 bg-rose-950/90 z-40 flex flex-col items-center justify-center text-white backdrop-blur-sm border-4 sm:border-8 border-rose-600 p-3 sm:p-6"
             >
-              <div className="w-16 h-16 rounded-full bg-rose-500/20 text-rose-400 border-2 border-rose-500/50 flex items-center justify-center mb-3 animate-bounce">
-                <AlertOctagon size={36} />
+              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-rose-500/20 text-rose-400 border-2 border-rose-500/50 flex items-center justify-center mb-1.5 sm:mb-3 animate-bounce shrink-0">
+                <AlertOctagon className="w-6 h-6 sm:w-8 sm:h-8" />
               </div>
-              <span className="text-2xl md:text-4xl font-black uppercase tracking-widest text-center text-rose-400 drop-shadow-[0_0_20px_rgba(244,63,94,0.8)]">
+              <span className="text-lg sm:text-2xl md:text-3xl font-black uppercase tracking-wider text-center text-rose-400 drop-shadow-[0_0_15px_rgba(244,63,94,0.8)]">
                 {t("basicskills.traffic_distracted_crash_title", "💥 CRASH!")}
               </span>
-              <p className="text-sm font-semibold leading-relaxed mt-3 text-center bg-rose-900/60 px-5 py-3 rounded-2xl border border-rose-700/50 text-rose-100 max-w-xs">
+              <p className="text-[11px] sm:text-xs md:text-sm font-semibold leading-relaxed mt-1.5 sm:mt-3 text-center bg-rose-900/60 px-3 py-2 sm:px-5 sm:py-3 rounded-xl sm:rounded-2xl border border-rose-700/50 text-rose-100 max-w-[260px] sm:max-w-xs">
                 {t("basicskills.traffic_distracted_crash_desc", "You replied to the notification while driving. Just 2 seconds of distraction was enough to cause an accident.")}
               </p>
             </motion.div>
@@ -2757,15 +2755,15 @@ const DistractedSimulator = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="absolute inset-0 bg-teal-950/88 z-40 flex flex-col items-center justify-center text-white backdrop-blur-sm border-8 border-teal-500 p-6"
+              className="absolute inset-0 bg-teal-950/88 z-40 flex flex-col items-center justify-center text-white backdrop-blur-sm border-4 sm:border-8 border-teal-500 p-3 sm:p-6"
             >
-              <div className="w-16 h-16 rounded-full bg-teal-500/20 text-teal-400 border-2 border-teal-500/50 flex items-center justify-center mb-3 animate-pulse">
-                <ShieldCheck size={36} />
+              <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-teal-500/20 text-teal-400 border-2 border-teal-500/50 flex items-center justify-center mb-1.5 sm:mb-3 animate-pulse shrink-0">
+                <ShieldCheck className="w-6 h-6 sm:w-8 sm:h-8" />
               </div>
-              <span className="text-2xl md:text-4xl font-black uppercase tracking-widest text-center text-teal-400 drop-shadow-[0_0_20px_rgba(45,212,191,0.8)]">
+              <span className="text-lg sm:text-2xl md:text-3xl font-black uppercase tracking-wider text-center text-teal-400 drop-shadow-[0_0_15px_rgba(45,212,191,0.8)]">
                 {t("basicskills.traffic_focused_drive_title", "✅ FOCUSED DRIVE!")}
               </span>
-              <p className="text-sm font-semibold leading-relaxed mt-3 text-center bg-teal-900/60 px-5 py-3 rounded-2xl border border-teal-700/50 text-teal-100 max-w-xs">
+              <p className="text-[11px] sm:text-xs md:text-sm font-semibold leading-relaxed mt-1.5 sm:mt-3 text-center bg-teal-900/60 px-3 py-2 sm:px-5 sm:py-3 rounded-xl sm:rounded-2xl border border-teal-700/50 text-teal-100 max-w-[260px] sm:max-w-xs">
                 {t("basicskills.traffic_focused_drive_desc", "Great call! You ignored the notification and kept everyone safe. That message can wait — your life cannot.")}
               </p>
             </motion.div>

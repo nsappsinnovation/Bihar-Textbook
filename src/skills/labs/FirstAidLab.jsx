@@ -231,14 +231,14 @@ const FirstAidLab = () => {
       <div className="w-full text-left space-y-8">
         
         {/* Header */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-5">
-          <div>
+        <div className="flex justify-between items-start gap-4 border-b border-slate-100 pb-5">
+          <div className="flex-1 min-w-0">
             <h2 className="text-2xl md:text-3xl font-display font-bold text-slate-800 tracking-tight">First Aid Protocol Guide</h2>
             <p className="text-[13px] text-slate-500 font-medium mt-1">Learn the correct medical procedures and supplies for common emergencies.</p>
           </div>
           <button
             onClick={handleReset}
-            className="p-2.5 bg-white hover:bg-slate-50 rounded-xl text-slate-500 border border-slate-200 hover:border-slate-350 transition-all cursor-pointer shadow-sm flex items-center justify-center shrink-0"
+            className="p-2.5 bg-white hover:bg-slate-50 rounded-xl text-slate-500 border border-slate-200 hover:border-slate-350 transition-all cursor-pointer shadow-sm flex items-center justify-center shrink-0 mt-1"
             title="Reset Protocol"
           >
             <RefreshCw size={15} />
