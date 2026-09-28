@@ -15,7 +15,6 @@ import {
 import { Menu, Search } from "lucide-react";
 import Sidebar from "../../../components/Sidebar";
 import { CLASSES, findBook } from "../../../services/bookService";
-import { fileUrl } from "../../../services/api";
 import { useTranslation } from "react-i18next";
 import { useBookTranslation } from "../../../utils/useBookTranslation";
 
@@ -26,11 +25,14 @@ const BookReader = () => {
     const [openSection, setOpenSection] = useState(null);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-    const [chapters, setChapters] = useState([]);
-    const [loading, setLoading] = useState(true);
+    // Book lookup result, tagged with the book it belongs to; anything else counts as loading
+    const bookKey = `${classId}/${bookSubject}`;
+    const [result, setResult] = useState({ key: null, status: "loading", book: null });
+    const status = result.key === bookKey ? result.status : "loading"; // "loading" | "ready" | "notFound" | "error"
+    const book = result.key === bookKey ? result.book : null;
+    const chapters = book?.chapters || [];
     const [searchQuery, setSearchQuery] = useState("");
 
-    const [book, setBook] = useState(null);
 
     const toggleSection = (index) => {
         setOpenSection(openSection === index ? null : index);
@@ -41,64 +43,22 @@ const BookReader = () => {
         (c.hindiTitle && c.hindiTitle.toLowerCase().includes(searchQuery.toLowerCase()))
     );
 
-    const bookImage = fileUrl(book?.image) || "/images/placeholders/no-cover.webp";
-    const bookTitle = book?.title || bookSubject || "Hindi";
+    const bookTitle = book?.title || bookSubject || "";
 
     useEffect(() => {
         setIsSidebarOpen(false);
     }, [classId, bookSubject]);
 
-    // Fetch the book and its chapters from the API (manifest / static list as fallback)
+    // The book and its chapters come only from the API (Admin → Books)
     useEffect(() => {
-        const fetchChapters = async () => {
-            try {
-                const bookFromApi = await findBook(classId, bookSubject);
-                setBook(bookFromApi);
-
-                // Books managed in the admin panel: show exactly their chapters (possibly none yet)
-                if (bookFromApi) {
-                    setChapters(bookFromApi.chapters);
-                    setLoading(false);
-                    return;
-                }
-
-                // Sanitize slug to match scraper logic: replace non-alphanumeric with '_'
-                const subjectSlug = (bookSubject || "Hindi").toLowerCase().replace(/[^a-z0-9]/g, '_');
-                const manifestUrl = `/PDFs/Class_${classId}/${subjectSlug}_manifest.json`;
-
-                const response = await fetch(manifestUrl);
-                if (response.ok) {
-                    const manifestData = await response.json();
-                    // Transform manifest chapters to BookReader format
-                    const mappedChapters = manifestData.chapters.map(c => ({
-                        id: c.id,
-                        title: c.title,
-                        hindiTitle: c.hindiTitle || c.title,
-                        type: "chapter"
-                    }));
-                    setChapters(mappedChapters);
-                } else {
-                    // Fallback static list only if fetch fails (e.g. for demo)
-                    console.warn("Manifest not found, using fallback chapters");
-                    setChapters([
-                        { id: 1, title: "Chapter 1", hindiTitle: "हँसते-खेलते", type: "chapter" },
-                        { id: 2, title: "Chapter 2", hindiTitle: "हमारा गाँव (चित्रपठन)", type: "chapter" },
-                    ]);
-                }
-            } catch (err) {
-                console.error("Error fetching chapters:", err);
-                // Fallback on error
-                setChapters([
-                    { id: 1, title: "Chapter 1", hindiTitle: "हँसते-खेलते", type: "chapter" },
-                    { id: 2, title: "Chapter 2", hindiTitle: "हमारा गाँव (चित्रपठन)", type: "chapter" },
-                    { id: 3, title: "Chapter 3 (Fallback)", hindiTitle: "...", type: "chapter" },
-                ]);
-            } finally {
-                setLoading(false);
-            }
+        let active = true;
+        const key = `${classId}/${bookSubject}`;
+        findBook(classId, bookSubject)
+            .then((bookFromApi) => active && setResult({ key, status: bookFromApi ? "ready" : "notFound", book: bookFromApi }))
+            .catch(() => active && setResult({ key, status: "error", book: null }));
+        return () => {
+            active = false;
         };
-
-        fetchChapters();
     }, [classId, bookSubject]);
 
     return (
@@ -212,11 +172,21 @@ const BookReader = () => {
                                             </Link>
                                         ))
                                     ) : (
-                                        <div className="text-center py-12 text-slate-500 font-medium text-sm">
-                                            {searchQuery
-                                                ? <>{t("booksPage.reader.noChaptersFound", "No chapters found matching")} "{searchQuery}"</>
-                                                : t("booksPage.reader.noChaptersYet", "Chapters for this book have not been uploaded yet.")}
-                                        </div>
+                                        status === "loading" ? (
+                                            <div className="p-4 space-y-3" aria-hidden>
+                                                {[0, 1, 2, 3].map((i) => <div key={i} className="h-12 rounded-xl bg-slate-100 animate-pulse" />)}
+                                            </div>
+                                        ) : (
+                                            <div className="text-center py-12 text-slate-500 font-medium text-sm">
+                                                {status === "notFound"
+                                                    ? t("booksPage.reader.bookNotFound", "This book is not available.")
+                                                    : status === "error"
+                                                        ? t("booksPage.reader.loadError", "Could not load this book. Please try again later.")
+                                                        : searchQuery
+                                                            ? <>{t("booksPage.reader.noChaptersFound", "No chapters found matching")} "{searchQuery}"</>
+                                                            : t("booksPage.reader.noChaptersYet", "Chapters for this book have not been uploaded yet.")}
+                                            </div>
+                                        )
                                     )}
                                 </div>
                             </div>

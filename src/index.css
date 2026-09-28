@@ -1,4 +1,6 @@
-@import "tailwindcss";
+/* Only scan this app's code (not other folders in the repo) for class names */
+@import "tailwindcss" source("./");
+@source "../index.html";
 
 @layer base {
   /* Make sure html and body are scrollable */

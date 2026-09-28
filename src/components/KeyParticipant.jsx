@@ -1,20 +1,13 @@
-import { useState, useEffect } from "react";
-import { getDirectory } from "../services/directoryService";
-import { fileUrl } from "../services/api";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Topography from "./Topography";
+import useLeaders, { initialsOf } from "./home-shared/useLeaders";
 
 export default function KeyParticipant() {
   const { t } = useTranslation();
-  // Leaders are managed in Admin → Leaders
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    getDirectory("leader")
-      .then((rows) => setData(rows.map((r) => ({ name: r.name, role: r.designation, image: fileUrl(r.photoUrl) }))))
-      .catch(() => setData([]));
-  }, []);
+  // Leaders are managed in Admin → Leaders (same request as the home hero)
+  const data = useLeaders();
 
   return (
     <section id="key-participants" className="relative isolate overflow-hidden bg-[#0b2b4f] py-16 md:py-24 px-6 font-sans">
@@ -51,12 +44,23 @@ export default function KeyParticipant() {
         <div className="max-w-[1280px] mx-auto">
           {/* A swipeable row on phones, a grid from sm up */}
           <div className="no-scrollbar flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-4 -mx-4 px-4 pb-6 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 md:grid-cols-3 lg:grid-cols-5 lg:gap-4">
-            {data.map((item, i) => (
-              <div key={i} className="w-[78%] shrink-0 snap-start sm:w-full sm:shrink">
-                <ParticipantCard item={item} />
-              </div>
-            ))}
+            {data === null
+              ? [0, 1, 2, 3, 4].map((i) => (
+                  <div key={i} className="w-[78%] shrink-0 snap-start sm:w-full sm:shrink">
+                    <div className="h-[390px] rounded-2xl bg-white/[0.06] animate-pulse" />
+                  </div>
+                ))
+              : data.map((item) => (
+                  <div key={item.id ?? item.name} className="w-[78%] shrink-0 snap-start sm:w-full sm:shrink">
+                    <ParticipantCard item={item} />
+                  </div>
+                ))}
           </div>
+          {data?.length === 0 && (
+            <p className="rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-10 text-center text-sm font-medium text-white/60">
+              {t("keyParticipant.empty", "Leadership details will be published here soon.")}
+            </p>
+          )}
         </div>
       </div>
     </section>
@@ -128,16 +132,14 @@ function ParticipantCard({ item }) {
 
       {/* IMAGE FIXED TO CARD BOTTOM */}
       <div className="absolute bottom-0 left-0 right-0 z-20 flex items-end justify-center">
-        <LeaderPhoto
-          key={item.image}
-          src={item.image || (item.name?.includes("Yatendra") ? "/images/KeyParticipants/shri_yatendra_pal.webp" : "")}
-          alt={item.name}
-          onError={(e) => {
-            if (item.name?.includes("Yatendra") && !e.target.src.endsWith('/images/KeyParticipants/shri_yatendra_pal.webp')) {
-              e.target.src = "/images/KeyParticipants/shri_yatendra_pal.webp";
-            }
-          }}
-        />
+        {item.image ? (
+          <LeaderPhoto key={item.image} src={item.image} alt={item.name} />
+        ) : (
+          // No photo uploaded: show initials instead of requesting a stand-in image
+          <div className="mb-10 grid h-32 w-32 place-items-center rounded-full bg-slate-100 text-4xl font-bold text-slate-400 transition-colors duration-[1800ms] group-hover:bg-white/15 group-hover:text-white/80">
+            {initialsOf(item.name)}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -4,8 +4,9 @@ import { getSections } from "../../services/sectionService";
 import { fileUrl } from "../../services/api";
 import { defaultMissions } from "../../data/homeContent";
 
-// The learning programmes (VR lab, audio library, ...) as managed in the CMS,
-// falling back to the built-in list. Returns translated { id, title, desc, image, hoverImage, link }.
+// The learning programmes (VR lab, audio library, ...) as managed in the CMS (Tools & Resources),
+// falling back to the built-in list when none are published. Returns null while loading,
+// then translated { id, title, desc, image, link } items.
 export default function useMissions() {
   const { t } = useTranslation();
   const [rows, setRows] = useState(null);
@@ -16,13 +17,13 @@ export default function useMissions() {
       .catch(() => setRows([]));
   }, []);
 
-  if (rows && rows.length) {
+  if (rows === null) return null;
+  if (rows.length) {
     return rows.map((row) => ({
       id: row.id,
       title: row.title,
       desc: row.description,
       image: fileUrl(row.imageUrl),
-      hoverImage: row.imageUrl?.startsWith("/images/missions/") ? row.imageUrl.replace(/\.webp$/, "hov.webp") : fileUrl(row.imageUrl),
       link: row.link,
     }));
   }
@@ -31,7 +32,6 @@ export default function useMissions() {
     title: t(m.titleKey, m.defaultTitle),
     desc: t(m.descKey, m.defaultDesc),
     image: m.image,
-    hoverImage: m.hoverImage,
     link: m.link,
   }));
 }

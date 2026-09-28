@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { getSuggestions } from '../services/wikipedia';
 
 const SearchBar = ({ onSearch, isLoading }) => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [term, setTerm] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
@@ -79,7 +79,9 @@ const SearchBar = ({ onSearch, isLoading }) => {
     }, [t]);
 
     // Debounce effect for fetching suggestions
+    // Suggestions come from the Wikipedia of the current language; a newer keystroke cancels the older request
     useEffect(() => {
+        const controller = new AbortController();
         const timer = setTimeout(async () => {
             if (isSelection.current) {
                 isSelection.current = false;
@@ -87,7 +89,8 @@ const SearchBar = ({ onSearch, isLoading }) => {
             }
 
             if (term.trim().length > 0) {
-                const results = await getSuggestions(term);
+                const results = await getSuggestions(term, i18n.language, controller.signal);
+                if (controller.signal.aborted) return;
                 setSuggestions(results);
                 setShowSuggestions(true);
             } else {
@@ -96,8 +99,11 @@ const SearchBar = ({ onSearch, isLoading }) => {
             }
         }, 300);
 
-        return () => clearTimeout(timer);
-    }, [term]);
+        return () => {
+            clearTimeout(timer);
+            controller.abort();
+        };
+    }, [term, i18n.language]);
 
     // Close suggestions when clicking outside
     useEffect(() => {

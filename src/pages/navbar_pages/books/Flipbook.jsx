@@ -1,8 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import HTMLFlipBook from "react-pageflip";
 import { Document, Page, pdfjs } from "react-pdf";
-import "react-pdf/dist/Page/AnnotationLayer.css";
-import "react-pdf/dist/Page/TextLayer.css";
+// PDF.js worker served from this site (same version as react-pdf's pdfjs-dist), not a third-party CDN
+import pdfWorkerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 import {
     Search,
     ZoomIn,
@@ -30,8 +30,7 @@ import { fileUrl } from "../../../services/api";
 import { useTranslation } from "react-i18next";
 import { useBookTranslation } from "../../../utils/useBookTranslation";
 
-// Use CDN worker
-pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+pdfjs.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
 
 const Pages = React.forwardRef((props, ref) => {
     return (
@@ -52,7 +51,9 @@ function Flipbook({ pdfFile: propPdfFile }) {
     const scrollContainerRef = useRef(null);
 
     const [numPages, setNumPages] = useState(null);
-    const [pageNumber, setPageNumber] = useState(1);
+    // Current page, remembered per chapter: a newly opened chapter starts on page 1
+    const [pageInfo, setPageInfo] = useState({ chapterId, page: 1 });
+    const pageNumber = pageInfo.chapterId === chapterId ? pageInfo.page : 1;
     const [zoom, setZoom] = useState(1);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [windowHeight, setWindowHeight] = useState(window.innerHeight);
@@ -60,13 +61,14 @@ function Flipbook({ pdfFile: propPdfFile }) {
     const viewerRef = useRef(null);
     const [viewerSize, setViewerSize] = useState({ width: 0, height: 0 });
 
-    // State for dynamic PDF path
-    const [pdfPath, setPdfPath] = useState(null);
-    const [loading, setLoading] = useState(true);
 
     // Right Sidebar States
-    const [chapters, setChapters] = useState([]);
-    const [bookInfo, setBookInfo] = useState(null);
+    // Book lookup result, tagged with the book it belongs to; anything else counts as loading
+    const bookKey = `${classId}/${bookSubject}`;
+    const [bookResult, setBookResult] = useState({ key: null, status: "loading", book: null });
+    const bookStatus = bookResult.key === bookKey ? bookResult.status : "loading"; // "loading" | "ready" | "notFound" | "error"
+    const bookInfo = bookResult.key === bookKey ? bookResult.book : null;
+    const chapters = useMemo(() => bookInfo?.chapters || [], [bookInfo]);
     const [searchQuery, setSearchQuery] = useState("");
     const [showRightPanel, setShowRightPanel] = useState(window.innerWidth >= 1024);
 
@@ -95,114 +97,19 @@ function Flipbook({ pdfFile: propPdfFile }) {
         return () => observer.disconnect();
     }, []);
 
-    // Fetch chapters list and active book data
+    // One lookup per book (Admin → Books); the chapter's PDF is then read from it, no further requests
     useEffect(() => {
-        const fetchBookDetailsAndChapters = async () => {
-            try {
-                const currentBook = await findBook(classId, bookSubject);
-                setBookInfo(currentBook);
-
-                // Fetch chapters list (books from the admin panel use exactly their own chapters)
-                if (currentBook) {
-                    setChapters(currentBook.chapters || []);
-                } else {
-                    const subjectSlug = (bookSubject || "Hindi").toLowerCase().replace(/[^a-z0-9]/g, '_');
-                    const manifestUrl = `/PDFs/Class_${classId}/${subjectSlug}_manifest.json`;
-                    const response = await fetch(manifestUrl);
-                    if (response.ok) {
-                        const manifestData = await response.json();
-                        const mappedChapters = manifestData.chapters.map(c => ({
-                            id: c.id,
-                            title: c.title,
-                            hindiTitle: c.hindiTitle || c.title,
-                            type: "chapter"
-                        }));
-                        setChapters(mappedChapters);
-                    } else {
-                        // Fallback chapters
-                        setChapters([
-                            { id: 1, title: "Chapter 1", hindiTitle: "हँसते-खेलते", type: "chapter" },
-                            { id: 2, title: "Chapter 2", hindiTitle: "हमारा गाँव (चित्रपठन)", type: "chapter" },
-                        ]);
-                    }
-                }
-            } catch (err) {
-                console.error("Error fetching book chapters:", err);
-                setChapters([
-                    { id: 1, title: "Chapter 1", hindiTitle: "हँसते-खेलते", type: "chapter" },
-                    { id: 2, title: "Chapter 2", hindiTitle: "हमारा गाँव (चित्रपठन)", type: "chapter" },
-                ]);
-            }
+        let active = true;
+        const key = `${classId}/${bookSubject}`;
+        findBook(classId, bookSubject)
+            .then((currentBook) => active && setBookResult({ key, status: currentBook ? "ready" : "notFound", book: currentBook }))
+            .catch(() => active && setBookResult({ key, status: "error", book: null }));
+        return () => {
+            active = false;
         };
-
-        fetchBookDetailsAndChapters();
     }, [classId, bookSubject]);
 
-    // A new chapter starts on its first page
-    useEffect(() => {
-        setPageNumber(1);
-    }, [chapterId]);
 
-    // Fetch active PDF file path
-    useEffect(() => {
-        const fetchManifestAndPath = async () => {
-            if (propPdfFile) {
-                setPdfPath(propPdfFile);
-                setLoading(false);
-                return;
-            }
-
-            try {
-                setLoading(true);
-
-                // First check if the book has a chapter with an uploaded PDF
-                const book = await findBook(classId, bookSubject);
-
-                // Books from the admin panel: use the chapter's uploaded PDF, or show "not uploaded yet"
-                if (book) {
-                    const chapterData = (book.chapters || []).find(c => String(c.id) === String(chapterId));
-                    setPdfPath(chapterData?.pdfUrl || null);
-                    setLoading(false);
-                    return;
-                }
-
-                // Sanitize slug to match scraper logic: replace non-alphanumeric with '_'
-                const subjectSlug = (bookSubject || "Hindi").toLowerCase().replace(/[^a-z0-9]/g, '_');
-                const manifestUrl = `/PDFs/Class_${classId}/${subjectSlug}_manifest.json`;
-
-                const response = await fetch(manifestUrl);
-                if (!response.ok) {
-                    // Fallback to old pattern if manifest missing
-                    console.warn("Manifest not found, using fallback path");
-                    setPdfPath(`/PDFs/Class_${classId}/${chapterId}_${subjectSlug}.pdf`);
-                    return;
-                }
-
-                const manifest = await response.json();
-                const chapterData = manifest.chapters.find(c => c.id == chapterId); // strict vs loose equality
-
-                if (chapterData) {
-                    setPdfPath(`/PDFs/Class_${classId}/${chapterData.fileName}`);
-                } else {
-                    console.error("Chapter not found in manifest");
-                    if (chapterId === "preface" || chapterId === "contents") {
-                        setPdfPath(null); // Will trigger error state
-                    } else {
-                        setPdfPath(`/PDFs/Class_${classId}/${chapterId}_${subjectSlug}.pdf`); // Final fallback attempt
-                    }
-                }
-
-            } catch (err) {
-                console.error("Error loading manifest:", err);
-                // Fallback
-                setPdfPath(`/PDFs/Class_${classId}/${chapterId}_${(bookSubject || "Hindi").toLowerCase()}.pdf`);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchManifestAndPath();
-    }, [classId, bookSubject, chapterId, propPdfFile]);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -223,17 +130,18 @@ function Flipbook({ pdfFile: propPdfFile }) {
         return () => clearTimeout(timer);
     }, [chapterId, chapters]);
 
+    // PDF of the open chapter (null when not uploaded yet)
+    const pdfPath = propPdfFile || chapters.find((c) => String(c.id) === String(chapterId))?.pdfUrl || null;
     const resolvedPdf = fileUrl(pdfPath);
     const resolvedCoverImage = fileUrl(bookInfo?.image);
     const pdfFile = resolvedPdf;
 
     function onDocumentLoadSuccess({ numPages }) {
         setNumPages(numPages);
-        setLoading(false);
     }
 
     const onFlip = (e) => {
-        setPageNumber(e.data + 1);
+        setPageInfo({ chapterId, page: e.data + 1 });
     };
 
     const toggleFullScreen = () => {
@@ -284,11 +192,11 @@ function Flipbook({ pdfFile: propPdfFile }) {
         (c.hindiTitle && c.hindiTitle.toLowerCase().includes(searchQuery.toLowerCase()))
     );
 
-    const bookTitle = bookInfo?.title || bookSubject || "Hindi";
+    const bookTitle = bookInfo?.title || bookSubject || "";
     const currentChapter = chapters.find(c => String(c.id) === String(chapterId));
     const currentChapterTitle = currentChapter ? (currentChapter.hindiTitle || currentChapter.title) : `Chapter ${chapterId}`;
     
-    let cleanedDescription = bookInfo?.description || `Official Bihar Board Class ${classId} textbook for '${bookTitle}'.`;
+    let cleanedDescription = bookInfo?.description || "";
     cleanedDescription = cleanedDescription.replace(/[\s\.]*Complete digital reading material\s*&\s*chapters\.?/gi, "");
 
     return (
@@ -362,10 +270,22 @@ function Flipbook({ pdfFile: propPdfFile }) {
                                     </div>
                                 }
                                 noData={
+                                    bookStatus === "loading" ? (
+                                        <div className="flex flex-col items-center gap-3 bg-white p-8 rounded-2xl shadow-lg border border-slate-100">
+                                            <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+                                            <div className="text-slate-600 font-bold text-sm">Loading Chapter Document...</div>
+                                        </div>
+                                    ) : (
                                     <div className="flex flex-col items-center gap-4 text-center bg-white p-8 rounded-2xl shadow-xl border border-slate-100 max-w-sm">
-                                        <div className="text-slate-800 font-extrabold text-lg">PDF Not Uploaded Yet</div>
+                                        <div className="text-slate-800 font-extrabold text-lg">
+                                            {bookStatus === "notFound" ? "Book Not Available" : bookStatus === "error" ? "Could Not Load Book" : "PDF Not Uploaded Yet"}
+                                        </div>
                                         <p className="text-slate-500 text-xs leading-relaxed">
-                                            The PDF for <strong>{currentChapterTitle}</strong> has not been uploaded yet. Please check back later.
+                                            {bookStatus === "notFound"
+                                                ? "This book is not available."
+                                                : bookStatus === "error"
+                                                    ? "Please check your connection and try again."
+                                                    : <>The PDF for <strong>{currentChapterTitle}</strong> has not been uploaded yet. Please check back later.</>}
                                         </p>
                                         <button
                                             onClick={() => navigate(-1)}
@@ -374,6 +294,7 @@ function Flipbook({ pdfFile: propPdfFile }) {
                                             Back to Chapters
                                         </button>
                                     </div>
+                                    )
                                 }
                                 error={
                                     <div className="flex flex-col items-center gap-4 text-center bg-white p-8 rounded-2xl shadow-xl border border-slate-100 max-w-sm">
@@ -550,7 +471,7 @@ function Flipbook({ pdfFile: propPdfFile }) {
                                     <img loading="lazy" decoding="async" 
                                         src={resolvedCoverImage || "/bookcover.webp"} 
                                         alt={bookTitle}
-                                        onError={(e) => { e.target.src = "/bookcover.webp"; }}
+                                        onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = "/bookcover.webp"; }}
                                         className="w-full h-full object-cover"
                                     />
                                 </div>

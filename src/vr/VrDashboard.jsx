@@ -1,10 +1,18 @@
-import React, { useState, cloneElement } from 'react';
+import React, { useState, cloneElement, lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, ArrowRight, Globe, Rocket, FlaskConical } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import VrSimulators from './VrSimulators';
 import VrTechLearning from './VrTechLearning';
-import VrVirtualLab from './VrVirtualLab';
+
+// 3D tabs (three.js) are downloaded only when opened
+const VrSimulators = lazy(() => import('./VrSimulators'));
+const VrVirtualLab = lazy(() => import('./VrVirtualLab'));
+
+const TabLoading = () => (
+  <div className="flex items-center justify-center py-24">
+    <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
+  </div>
+);
 
 const VrHeadsetIcon = ({ className }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
@@ -145,11 +153,11 @@ const VrDashboard = () => {
           {/* Bottom Interactive Section (Toggled between Simulators, Tech Learning, and Virtual Lab) */}
           {activeSection === 'simulators' ? (
             <div className="px-4 sm:px-10 md:px-12 lg:px-14 xl:px-14 max-w-[1380px] mx-auto pt-4 pb-12" id="simulators-section">
-              <VrSimulators />
+              <Suspense fallback={<TabLoading />}><VrSimulators /></Suspense>
             </div>
           ) : activeSection === 'virtual-lab' ? (
             <div className="px-4 sm:px-10 md:px-12 lg:px-14 xl:px-14 max-w-[1380px] mx-auto pt-4 pb-12" id="simulators-section">
-              <VrVirtualLab />
+              <Suspense fallback={<TabLoading />}><VrVirtualLab /></Suspense>
             </div>
           ) : (
             <div id="tech-learning-section" className="pt-4 pb-12">

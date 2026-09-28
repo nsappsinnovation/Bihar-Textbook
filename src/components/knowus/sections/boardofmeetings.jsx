@@ -5,7 +5,7 @@ import { getDirectory } from '../../../services/directoryService';
 
 const BoardOfDirectors = () => {
   const { t } = useTranslation();
-  const [items, setItems] = React.useState([]);
+  const [items, setItems] = React.useState(null); // null while loading
 
   // Board members are managed in Admin → Know Us → Board of Directors
   React.useEffect(() => {
@@ -47,7 +47,7 @@ const BoardOfDirectors = () => {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-300">
-                {items.map((member) => (
+                {(items || []).map((member) => (
                   <tr key={member.id} className="text-[#0d0e23]">
                     <td className="px-6 py-4 text-sm border-r border-slate-300 font-semibold">{member.name}</td>
                     <td className="px-6 py-4 text-sm">{member.designation}</td>
@@ -55,6 +55,10 @@ const BoardOfDirectors = () => {
                 ))}
               </tbody>
             </table>
+            {items === null && <div className="flex justify-center gap-1.5 py-10" aria-label="Loading">{[0, 1, 2].map((i) => <span key={i} className="w-2 h-2 rounded-full bg-slate-300 animate-pulse" style={{ animationDelay: `${i * 150}ms` }} />)}</div>}
+            {items?.length === 0 && (
+              <p className="text-center py-10 text-slate-500 text-sm">{t("knowUsPage.boardOfDirectors.empty", "Board of Directors details will be published here soon.")}</p>
+            )}
          </div>
       </section>
     </div>

@@ -1,29 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { getArticleExtract } from '../../services/wikipedia';
 
-const BlogPost = ({ title, pageid, snippet, timestamp }) => {
+// extract/thumbnail arrive with the search results (one request for all cards).
+// lang is the Wikipedia the result came from, so its link stays correct after a language switch.
+const BlogPost = ({ title, pageid, snippet, timestamp, extract, thumbnail, lang }) => {
     const { t, i18n } = useTranslation();
-    const [details, setDetails] = useState({ extract: '', thumbnail: null });
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        let isMounted = true;
-        getArticleExtract(pageid, i18n.language).then(data => {
-            if (isMounted) {
-                setDetails(data);
-                setLoading(false);
-            }
-        });
-        return () => { isMounted = false; };
-    }, [pageid, i18n.language]);
+    const details = { extract, thumbnail };
 
     const dateLocale = i18n.language === 'hi' ? 'hi-IN' : 'en-US';
     const date = new Date(timestamp).toLocaleDateString(dateLocale, {
         year: 'numeric', month: 'long', day: 'numeric'
     });
 
-    const wikiLang = i18n.language === 'hi' ? 'hi' : 'en';
+    const wikiLang = lang || (i18n.language === 'hi' ? 'hi' : 'en');
 
     const ArticleCard = ({ details, title, snippet, pageid }) => {
         return (

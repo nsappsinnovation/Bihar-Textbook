@@ -18,7 +18,7 @@ export default function V1Programmes() {
   const onTheme = useCallback((link, color) => setSpot({ link, color }), []);
 
   return (
-    <section className="relative isolate overflow-hidden bg-bt-sky px-6 py-20 font-sans text-slate-900 md:px-12 lg:px-24 lg:py-24">
+    <section id="missions-grid" className="relative isolate overflow-hidden bg-bt-sky px-6 py-20 font-sans text-slate-900 md:px-12 lg:px-24 lg:py-24">
       <ProgrammeBackdrop onChange={onTheme} />
       <div className="mx-auto max-w-[1280px]">
         <SectionHeader
@@ -29,7 +29,11 @@ export default function V1Programmes() {
         />
 
         <ul className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-          {missions.map((m) => {
+          {missions === null &&
+            Array.from({ length: 8 }, (_, i) => (
+              <li key={i} aria-hidden className="h-56 rounded-3xl border border-slate-200 bg-slate-50 animate-pulse" />
+            ))}
+          {(missions || []).map((m) => {
             const look = LOOK[m.link] || FALLBACK;
             const lit = spot.link === m.link;
             return (
@@ -44,7 +48,7 @@ export default function V1Programmes() {
                       className="grid h-14 w-14 place-items-center rounded-2xl bg-bt-sky text-bt-blue transition duration-700 group-hover:bg-mango group-hover:text-bt-navy group-focus-visible:bg-mango group-focus-visible:text-bt-navy">
                       <ProgrammeIcon
                         link={m.link}
-                        fallback={<img src={m.image} alt="" loading="lazy" className="h-8 w-8 object-contain" />}
+                        fallback={m.image ? <img src={m.image} alt="" loading="lazy" className="h-8 w-8 object-contain" /> : null}
                       />
                     </span>
                     <span className="grid h-9 w-9 place-items-center rounded-full border border-slate-200 text-slate-500 transition group-hover:border-transparent group-hover:bg-mango group-hover:text-bt-navy group-focus-visible:bg-mango group-focus-visible:text-bt-navy">

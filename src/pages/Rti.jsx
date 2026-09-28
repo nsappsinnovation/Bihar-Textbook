@@ -17,26 +17,23 @@ const disclosureItems = [
 
 const RTI = () => {
   const { t } = useTranslation();
-  const [rtiData, setRtiData] = React.useState({ 
-    officer: 'Shri. Rajesh Kumar', 
-    phone: '06122221975', 
-    email: 'rti.bstbpc@bihar.gov.in', 
-    address: 'Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001' 
-  });
+  // Managed in Admin → RTI. null = loading, {} = not published yet.
+  const [rtiData, setRtiData] = React.useState(null);
 
-  // Managed in Admin → RTI; the values above are shown until it loads
   React.useEffect(() => {
     getSetting('dc-rti')
-      .then((value) => value && setRtiData(value))
-      .catch(() => {});
+      .then((value) => setRtiData(value && typeof value === 'object' ? value : {}))
+      .catch(() => setRtiData({}));
   }, []);
 
-  const displayOfficer = (rtiData.officer === 'Shri. Rajesh Kumar' || !rtiData.officer) 
-    ? t('rtiPage.defaultOfficer', 'Shri. Rajesh Kumar') 
-    : rtiData.officer;
+  const loading = rtiData === null;
+  const notAvailable = t('rtiPage.notAvailable', 'Not available yet');
+  const show = (value) => (loading ? null : value || notAvailable);
 
-  const displayAddress = (rtiData.address === 'Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001' || !rtiData.address)
-    ? t('rtiPage.defaultAddress', 'Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001')
+  // The corporation's office address is fixed; the RTI officer's details come only from the admin panel
+  const OFFICE_ADDRESS = 'Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001';
+  const displayAddress = !rtiData?.address || rtiData.address === OFFICE_ADDRESS
+    ? t('rtiPage.defaultAddress', OFFICE_ADDRESS)
     : rtiData.address;
 
   return (
@@ -95,10 +92,10 @@ const RTI = () => {
                 <h3 className="text-lg font-black text-[#0d0e23] mb-8">{t('rtiPage.nodalOfficer', 'Nodal Officer')}</h3>
                 
                 <div className="space-y-6">
-                  <ContactItem icon={<FiUser />} label={t('rtiPage.pioLabel', 'Public Information Officer')} value={displayOfficer} />
-                  <ContactItem icon={<FiPhone />} label={t('rtiPage.phoneLabel', 'Contact Number')} value={rtiData.phone} />
-                  <ContactItem icon={<FiMail />} label={t('rtiPage.emailLabel', 'Email Address')} value={rtiData.email} />
-                  <ContactItem icon={<FiMapPin />} label={t('rtiPage.addressLabel', 'Office Address')} value={displayAddress} />
+                  <ContactItem icon={<FiUser />} label={t('rtiPage.pioLabel', 'Public Information Officer')} value={show(rtiData?.officer)} />
+                  <ContactItem icon={<FiPhone />} label={t('rtiPage.phoneLabel', 'Contact Number')} value={show(rtiData?.phone)} />
+                  <ContactItem icon={<FiMail />} label={t('rtiPage.emailLabel', 'Email Address')} value={show(rtiData?.email)} />
+                  <ContactItem icon={<FiMapPin />} label={t('rtiPage.addressLabel', 'Office Address')} value={loading ? null : displayAddress} />
                 </div>
 
                 <div className="mt-auto pt-8 border-t border-slate-100">
@@ -148,7 +145,11 @@ const ContactItem = ({ icon, label, value }) => (
     </div>
     <div>
       <div className="text-[10px] md:text-xs font-black text-slate-500 uppercase tracking-widest leading-none mb-1">{label}</div>
-      <div className="text-sm md:text-base font-bold text-slate-800 leading-tight">{value}</div>
+      {value == null ? (
+        <div className="h-4 w-40 mt-1 rounded bg-slate-200/70 animate-pulse" aria-hidden />
+      ) : (
+        <div className="text-sm md:text-base font-bold text-slate-800 leading-tight">{value}</div>
+      )}
     </div>
   </div>
 );

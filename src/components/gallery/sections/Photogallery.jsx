@@ -3,23 +3,29 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { getSections } from '../../../services/sectionService';
 import { fileUrl } from '../../../services/api';
+import GalleryStatus from './GalleryStatus';
 
 const Photogallery = () => {
   const { t } = useTranslation();
   const [selectedImage, setSelectedImage] = useState(null);
-  const [items, setItems] = useState([]);
+  const [rows, setRows] = useState(null); // null while loading
   const [currentPage, setCurrentPage] = useState(0);
 
-  // Photos are managed in Admin → Gallery → Photo Gallery
+  // Photos are managed in Admin → Gallery → Photo Gallery. Fetched once; labels are translated when rendering.
   useEffect(() => {
     getSections('gl-photo')
-      .then((rows) => setItems(rows.map((row) => ({
-        type: "image",
-        src: fileUrl(row.imageUrl) || "",
-        alt: row.title || t("galleryPage.photo.fallbackAlt"),
-      }))))
-      .catch(() => setItems([]));
-  }, [t]);
+      .then(setRows)
+      .catch(() => setRows([]));
+  }, []);
+
+  // Only rows that actually have a photo are shown (no empty <img> requests)
+  const items = (rows || [])
+    .filter((row) => row.imageUrl)
+    .map((row) => ({
+      type: "image",
+      src: fileUrl(row.imageUrl),
+      alt: row.title || t("galleryPage.photo.fallbackAlt"),
+    }));
 
   const itemsPerPage = 6;
   const totalPages = Math.ceil(items.length / itemsPerPage);
@@ -74,6 +80,9 @@ const Photogallery = () => {
         </div>
 
         {/* --- 6-Card Asymmetric Collage Grid (Reference Image Layout) --- */}
+        {rows === null || items.length === 0 ? (
+          <GalleryStatus loading={rows === null} />
+        ) : (
         <AnimatePresence mode="wait">
           <motion.div
             key={currentPage}
@@ -210,6 +219,7 @@ const Photogallery = () => {
 
           </motion.div>
         </AnimatePresence>
+        )}
 
         {/* Custom Pagination Controls */}
         {totalPages > 1 && (

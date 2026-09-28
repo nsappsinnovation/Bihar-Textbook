@@ -1,11 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./apiLogger.js"; // TEMP: API call logger — delete this line and src/apiLogger.js to remove
-import "./i18n.js";
+import { i18nReady } from "./i18n.js";
 import "./index.css";
 import App from "./App.jsx";
 
 import { BrowserRouter } from "react-router-dom";
+
+// Debug logger for API calls: development only (it prints request bodies, incl. passwords)
+if (import.meta.env.DEV) import("./apiLogger.js");
 
 // After a new deploy, a tab opened earlier still asks for the old code files, which no
 // longer exist, and the page goes blank. Reload to get the new files
@@ -18,10 +20,13 @@ window.addEventListener("vite:preloadError", () => {
   }
 });
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </StrictMode>
-);
+// Render once the starting language has loaded (or failed, then keys fall back to built-in text)
+i18nReady.finally(() => {
+  createRoot(document.getElementById("root")).render(
+    <StrictMode>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </StrictMode>
+  );
+});

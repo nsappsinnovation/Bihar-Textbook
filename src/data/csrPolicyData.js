@@ -182,6 +182,12 @@ export const csrPolicyContents = [
 
 export const romanize = (n) => ['i', 'ii', 'iii', 'iv', 'v', 'vi', 'vii', 'viii', 'ix', 'x'][n] || n + 1;
 
+// The admin-saved content (setting "csr_policy_content"), or null when nothing is saved / on error
+export const loadSavedCsrPolicy = () =>
+  getSetting('csr_policy_content')
+    .then((saved) => (saved && typeof saved === 'object' ? saved : null))
+    .catch(() => null);
+
 // Admin-saved content (setting "csr_policy_content") merged over the document defaults,
 // so sections added to the defaults later still appear for older saved content.
 export const loadCsrPolicy = (lang = 'en') =>

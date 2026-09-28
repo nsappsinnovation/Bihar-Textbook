@@ -206,15 +206,9 @@ export default function WebsiteEditorPage({ module, addToast }) {
   };
 
   const saveItem = async () => {
+    // Items without an image are saved without one: the public gallery shows YouTube's own
+    // thumbnail for videos and never substitutes stock pictures.
     const item = { ...formData };
-
-    // Default thumbnail for gallery items without an image
-    if (module.startsWith('gl-') && !item.document) {
-      const ytId = (item.videoUrl || '').match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/)?.[2];
-      item.document = module === 'gl-video'
-        ? (ytId?.length === 11 ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : '/images/hero/audio.webp')
-        : '/images/hero/classroom.webp';
-    }
 
     try {
       const directoryType = DIRECTORY_MODULES[module];
@@ -622,10 +616,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
                         src={fileUrl(item.document)} 
                         alt="Gallery" 
                         className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" 
-                        onError={(e) => {
-                          e.target.onerror = null; 
-                          e.target.src = module === 'gl-video' ? "/images/hero/audio.webp" : "/images/hero/classroom.webp";
-                        }}
+                        onError={(e) => { e.currentTarget.style.visibility = 'hidden'; }}
                       />
                     ) : (
                       <div className="w-full h-full flex flex-col items-center justify-center bg-gray-50 text-gray-400">

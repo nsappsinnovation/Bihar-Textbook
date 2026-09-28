@@ -6,7 +6,7 @@ import {
   Target, LineChart, Info, BookMarked, ScrollText,
   Download, Printer, ArrowUp, List, ChevronDown, FileDown
 } from "lucide-react";
-import { csrPolicyDefaults, csrPolicyContents, romanize, loadCsrPolicy } from "../data/csrPolicyData";
+import { csrPolicyDefaults, csrPolicyDefaultsHi, csrPolicyContents, romanize, loadSavedCsrPolicy } from "../data/csrPolicyData";
 import { fileUrl } from "../services/api";
 
 const sectionIcons = {
@@ -139,16 +139,18 @@ const CsrPolicy = () => {
   const { t, i18n } = useTranslation();
   const isHindi = i18n.language === 'hi';
 
-  const [csr, setCsr] = useState(csrPolicyDefaults);
+  // Admin-saved content (fetched once) over the official text in the current language
+  const [saved, setSaved] = useState(null);
+  const csr = { ...(isHindi ? csrPolicyDefaultsHi : csrPolicyDefaults), ...(saved || {}) };
   const [activeSection, setActiveSection] = useState("introduction");
   const [progress, setProgress] = useState(0);
   const [showTop, setShowTop] = useState(false);
   const [mobileTocOpen, setMobileTocOpen] = useState(false);
 
-  /* Content is managed in Admin → CSR Policy */
+  /* Content is managed in Admin → CSR Policy; switching language needs no new request */
   useEffect(() => {
-    loadCsrPolicy(i18n.language).then(setCsr);
-  }, [i18n.language]);
+    loadSavedCsrPolicy().then(setSaved);
+  }, []);
 
   /* Reading progress + back-to-top visibility */
   useEffect(() => {

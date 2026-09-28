@@ -7,7 +7,7 @@ import { getDirectory } from '../../../services/directoryService';
 const OurEmployee = () => {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
-  const [employees, setEmployees] = useState([]);
+  const [employees, setEmployees] = useState(null); // null while loading
 
   // Employees are managed in Admin → Our Employee (employment type is stored in `tag`)
   useEffect(() => {
@@ -17,14 +17,14 @@ const OurEmployee = () => {
           id: row.id,
           name: row.name,
           designation: row.designation || '',
-          type: row.tag || 'Regular',
+          type: row.tag || '',
           department: row.department || '',
         }))
       ))
       .catch(() => setEmployees([]));
   }, []);
 
-  const filteredEmployees = employees.filter(emp => 
+  const filteredEmployees = (employees || []).filter(emp => 
     emp.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
     emp.designation.toLowerCase().includes(searchTerm.toLowerCase()) ||
     (emp.type || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -106,9 +106,13 @@ const OurEmployee = () => {
             </table>
           </div>
 
-          {filteredEmployees.length === 0 && (
+          {employees === null ? <div className="flex justify-center gap-1.5 py-10" aria-label="Loading">{[0, 1, 2].map((i) => <span key={i} className="w-2 h-2 rounded-full bg-slate-300 animate-pulse" style={{ animationDelay: `${i * 150}ms` }} />)}</div> : filteredEmployees.length === 0 && (
             <div className="py-10 text-center text-slate-500">
-               <p className="text-sm">{t("knowUsPage.ourEmployee.noResults", "No employees found matching your search.")}</p>
+               <p className="text-sm">
+                 {employees.length === 0
+                   ? t("knowUsPage.ourEmployee.empty", "The employee list will be published here soon.")
+                   : t("knowUsPage.ourEmployee.noResults", "No employees found matching your search.")}
+               </p>
             </div>
           )}
         </div>

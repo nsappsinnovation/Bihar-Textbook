@@ -41,7 +41,24 @@ const toPayload = (form) => ({
 
 export const getBooks = () => api.get('/api/books', { params: { limit: 1000 } }).then((res) => res.data.data.map(toBook));
 
-export const getBooksByClass = (classId) => api.get(`/api/books/class/${classId}`).then((res) => res.data.data.map(toBook));
+// Public pages (book list → chapter list → reader) reuse answers for a minute instead of
+// asking again on every page. Admin screens call getBook directly and always get fresh data.
+const CACHE_MS = 60 * 1000;
+const cache = new Map();
+const cached = (key, load) => {
+    const hit = cache.get(key);
+    if (hit && Date.now() - hit.at < CACHE_MS) return hit.promise;
+    const promise = load().catch((error) => {
+        cache.delete(key);
+        throw error;
+    });
+    cache.set(key, { at: Date.now(), promise });
+    return promise;
+};
+const clearBookCache = () => cache.clear();
+
+export const getBooksByClass = (classId) =>
+    cached(`class:${classId}`, () => api.get(`/api/books/class/${classId}`).then((res) => res.data.data.map(toBook)));
 
 // One book including its chapters
 export const getBook = (id) => api.get(`/api/books/${id}`).then((res) => toBook(res.data.data));
@@ -50,18 +67,23 @@ export const getBook = (id) => api.get(`/api/books/${id}`).then((res) => toBook(
 export const findBook = async (classId, subjectOrTitle) => {
     const books = await getBooksByClass(classId);
     const match = books.find((b) => b.subject === subjectOrTitle || b.title === subjectOrTitle);
-    return match ? getBook(match.id) : null;
+    return match ? cached(`book:${match.id}`, () => getBook(match.id)) : null;
 };
 
-export const createBook = (form) => api.post('/api/books', toPayload(form)).then((res) => res.data.data);
+export const createBook = (form) =>
+    api.post('/api/books', toPayload(form)).then((res) => {
+        clearBookCache();
+        return res.data.data;
+    });
 
-export const updateBook = (id, form) => api.put(`/api/books/${id}`, toPayload(form));
+export const updateBook = (id, form) => api.put(`/api/books/${id}`, toPayload(form)).finally(clearBookCache);
 
-export const deleteBook = (id) => api.delete(`/api/books/${id}`);
+export const deleteBook = (id) => api.delete(`/api/books/${id}`).finally(clearBookCache);
 
 // Saves the chapter rows edited in the admin form against what is stored.
 // Existing rows (numeric id) are updated, new rows are created, missing rows are deleted.
 export const saveChapters = async (bookId, rows, storedChapters = []) => {
+    clearBookCache();
     const keptIds = rows.filter((r) => typeof r.id === 'number').map((r) => r.id);
     const removed = storedChapters.filter((c) => !keptIds.includes(c.id));
     let nextNumber = Math.max(0, ...storedChapters.map((c) => c.chapterNumber)) + 1;

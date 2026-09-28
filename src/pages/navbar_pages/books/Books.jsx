@@ -24,18 +24,19 @@ const Books = () => {
 
   useEffect(() => {
     getBooksByClass(classId)
-      .then((books) => setLoaded({ classId, books }))
-      .catch(() => setLoaded({ classId, books: [] }));
+      .then((books) => setLoaded({ classId, books, error: false }))
+      .catch(() => setLoaded({ classId, books: [], error: true }));
   }, [classId]);
 
   // null while the current class is still loading
   const books = loaded.classId === classId ? loaded.books : null;
+  const loadFailed = loaded.classId === classId && loaded.error;
 
   // Find the class data
   const classData = CLASSES.find((cls) => cls.id === Number(classId));
 
-  // Placeholder image URL
-  const PLACEHOLDER_IMG = "/images/placeholders/no-cover.webp";
+  // Local cover shown when a book has no cover image (or it fails to load)
+  const PLACEHOLDER_IMG = "/bookcover.webp";
 
   if (!classData || !books) {
     return (
@@ -132,8 +133,14 @@ const Books = () => {
           ) : (
             <div className="flex flex-col items-center justify-center py-20 bg-white rounded-2xl border border-dashed border-slate-300">
               <BookOpen className="w-12 h-12 text-slate-300 mb-4" />
-              <h3 className="text-lg font-bold text-slate-700">{t("booksPage.noBooksFound", "No books found")}</h3>
-              <p className="text-slate-400 text-sm">{t("booksPage.comingSoon", "Content for this class is coming soon.")}</p>
+              <h3 className="text-lg font-bold text-slate-700">
+                {loadFailed ? t("booksPage.loadError", "Could not load books") : t("booksPage.noBooksFound", "No books found")}
+              </h3>
+              <p className="text-slate-400 text-sm">
+                {loadFailed
+                  ? t("booksPage.loadErrorHint", "Please check your connection and try again.")
+                  : t("booksPage.comingSoon", "Content for this class is coming soon.")}
+              </p>
             </div>
           )}
         </div>
@@ -146,21 +153,7 @@ const Books = () => {
 const BookCard = ({ book, placeholder, classId, translateBookTitle, t }) => {
   const resolvedImage = fileUrl(book.image);
 
-  // Map subjects to beautiful audiobook covers to replace the plain placeholder
-  const getFallbackCover = (subject) => {
-    const sub = (subject || "").toLowerCase();
-    if (sub.includes("hindi") || sub.includes("sarangi") || sub.includes("kompal") || sub.includes("kislay")) return "https://ciet.ncert.gov.in/storage/app/public/photos/17/ahsr1cc.jpg";
-    if (sub.includes("ganit") || sub.includes("math") || sub.includes("hisab")) return "https://ciet.ncert.gov.in/storage/app/public/photos/17/aejm1cc.jpg";
-    if (sub.includes("english") || sub.includes("mridang") || sub.includes("radiance") || sub.includes("blossom")) return "https://ciet.ncert.gov.in/storage/app/public/photos/17/Audios/Class%201/mridang.jpg";
-    if (sub.includes("science") || sub.includes("paryawaran") || sub.includes("mahauliat") || sub.includes("duniya")) return "https://ciet.ncert.gov.in/storage/app/public/photos/19/Bookcover/chve1cc.jpg";
-    if (sub.includes("urdu") || sub.includes("gulshan") || sub.includes("farozan") || sub.includes("misbahul")) return "https://ciet.ncert.gov.in/storage/app/public/photos/19/Bookcover/cesa1cc.jpg";
-    if (sub.includes("sanskrit") || sub.includes("amrita")) return "https://ciet.ncert.gov.in/storage/app/public/photos/17/Class%202/bhsr1cc.jpg";
-    return "https://ciet.ncert.gov.in/storage/app/public/photos/19/Bookcover/cemm1cc.jpg"; // default fallback
-  };
-
-  const finalImage = (!resolvedImage || resolvedImage.includes("bookcover") || resolvedImage.includes("no-cover")) 
-    ? getFallbackCover(book.subject) 
-    : resolvedImage;
+  const finalImage = resolvedImage || placeholder;
 
   const displayTitle = translateBookTitle ? translateBookTitle(book.title, book.subject) : book.title;
 
@@ -178,7 +171,7 @@ const BookCard = ({ book, placeholder, classId, translateBookTitle, t }) => {
       <img loading="lazy" decoding="async"
         src={finalImage}
         alt={displayTitle}
-        onError={(e) => { e.target.src = getFallbackCover(book.subject); }}
+        onError={(e) => { e.currentTarget.onerror = null; e.currentTarget.src = placeholder; }}
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
       />
 

@@ -204,16 +204,6 @@
     "viewAll": "View All",
     "tabLeadership": "Leadership",
     "tabVisionaries": "Visionaries & Educators",
-    "industry": {
-      "name0": "Shri Samrat Choudhary",
-      "role0": "Hon'ble Chief Minister, Bihar",
-      "name1": "Shri Mithilesh Tiwari",
-      "role1": "Hon'ble Education Minister, Bihar",
-      "name2": "Shri Vinod Singh Gunjiyal",
-      "role2": "Secretary, Education Department",
-      "name3": "Shri Yatendra Kumar Pal, IAS",
-      "role3": "Managing Director, Bihar State Text Book Publishing Corporation (BSTBPC)"
-    },
     "academia": {
       "name0": "Anand Kumar",
       "role0": "Founder, Super 30 & Mathematician",
@@ -241,7 +231,8 @@
         "name": "Shri Yatendra Kumar Pal, IAS",
         "role": "Managing Director, BSTBPC"
       }
-    }
+    },
+    "empty": "Leadership details will be published here soon."
   },
   "evolution": {
     "badge": "Our Evolution",
@@ -727,7 +718,9 @@
       "noChaptersYet": "Chapters for this book have not been uploaded yet.",
       "readNow": "READ NOW",
       "chapter": "Chapter",
-      "chapterLabel": "Chapter {{n}}"
+      "chapterLabel": "Chapter {{n}}",
+      "bookNotFound": "This book is not available.",
+      "loadError": "Could not load this book. Please try again later."
     },
     "flipbook": {
       "classTextbook": "Class {{classId}} textbook",
@@ -745,7 +738,9 @@
       "documentUnavailableDesc": "The PDF for this chapter is not loaded or is currently unavailable.",
       "backToChapters": "Back to Chapters",
       "of": "OF"
-    }
+    },
+    "loadError": "Could not load books",
+    "loadErrorHint": "Please check your connection and try again."
   },
   "about": {
     "mdMessage": {
@@ -888,40 +883,21 @@
       "headingPrefix": "Photo",
       "headingHighlight": "Gallery",
       "description": "Explore our state-wide initiatives, active classrooms, teacher conferences, and key moments in digital education.",
-      "fallbackAlt": "Gallery Image",
-      "items": {
-        "classroom": "Primary Classroom Learning Environment",
-        "audio": "E-Learning & Digital Books Portal",
-        "vr": "Mobile VR Lab Tour Experience",
-        "sign": "Inclusive Sign Language Training Class",
-        "linguistic": "Diverse Regional Dialects Learning Program",
-        "csr": "Corporate Social Responsibility Initiatives",
-        "campaigns": "Educational Campaigns"
-      }
+      "fallbackAlt": "Gallery Image"
     },
     "video": {
       "headingPrefix": "Video",
       "headingHighlight": "Gallery",
       "description": "Watch our academic programs, smart textbook launches, and rural distribution initiatives unfold in real time.",
-      "fallbackAlt": "Video Highlight",
-      "items": {
-        "classroom": "Bihar Digital Classrooms Launch Highlights",
-        "outreach": "Rural Literacy Outreach & Community Distribution Drives",
-        "training": "Teacher Training Workshop on Interactive Smart Textbooks",
-        "inauguration": "Academic Session 2026-27 High-Level Inauguration Ceremony",
-        "inclusive": "Accessible Audio Books and Inclusive Pedagogy Program",
-        "ai": "Smart AI Revision Modules Student Pilot Feedback"
-      }
+      "fallbackAlt": "Video Highlight"
     },
     "press": {
       "headingPrefix": "Press",
       "headingHighlight": "Releases",
       "description": "Stay updated with our latest organizational statements, curriculum reforms, policy alignments, and strategic reviews.",
       "fallbackTitle": "Press Release",
-      "fallbackExcerpt": "Official press release.",
       "officialExcerpt": "Official Excerpt",
       "modalNote": "This is an official media briefing published by the Bihar State Text Book Publishing Corporation (BSTBPC). You can download the complete press kit including images and statements below.",
-      "sizeLabel": "Size: {{size}}",
       "download": "Download Press Release",
       "categories": {
         "initiatives": "Initiatives",
@@ -930,29 +906,11 @@
         "corporate": "Corporate",
         "reform": "Reform",
         "general": "General"
-      },
-      "items": {
-        "digital": {
-          "title": "Launch of Digital Learning Initiatives Across 500 Schools",
-          "excerpt": "The State Text Book Publishing Corporation today announced a major rollout of VR and AR educational tools, aiming to modernize learning infrastructure in rural districts."
-        },
-        "curriculum": {
-          "title": "New Curriculum Guidelines Released for Upcoming Academic Year",
-          "excerpt": "Updated guidelines emphasize regional history, environmental awareness, and foundational literacy skills. All textbooks have been revised accordingly."
-        },
-        "partnership": {
-          "title": "Partnership Announced with National Digital Library",
-          "excerpt": "To expand access to supplementary reading materials across remote districts, a strategic partnership has been formalized."
-        },
-        "board": {
-          "title": "Annual Board Meeting Summary and Future Outlook",
-          "excerpt": "Key stakeholders convened to discuss the previous quarter's achievements and outline strategic directions for upcoming distributions."
-        },
-        "nep": {
-          "title": "NEP 2020 Textbook Alignment Milestone Completed",
-          "excerpt": "The corporation has successfully completed the alignment of all primary and secondary level textbooks with the New Education Policy 2020 standards."
-        }
       }
+    },
+    "empty": {
+      "title": "Nothing published yet",
+      "desc": "New items will appear here as soon as they are published."
     }
   },
   "common": {
@@ -6317,7 +6275,6 @@
     "phoneLabel": "Contact Number",
     "emailLabel": "Email Address",
     "addressLabel": "Office Address",
-    "defaultOfficer": "Shri. Rajesh Kumar",
     "defaultAddress": "Pathya Pustak Bhawan, Buddh Marg, Budh Vihar, Fraser Road Area, Patna - 800001",
     "fileOnline": "File Online RTI",
     "proactiveDisclosures": "Proactive Disclosures",
@@ -6331,7 +6288,8 @@
       "budget": "Budget Allocation",
       "subsidy": "Execution of Subsidy Programs",
       "licenses": "Grant of Licenses"
-    }
+    },
+    "notAvailable": "Not available yet"
   },
   "knowUsPage": {
     "mdMessage": {
@@ -6352,7 +6310,8 @@
       "qualityTitle": "QUALITY FIRST",
       "qualityDesc": "Every stage is carefully supervised to deliver excellence.",
       "movingForwardTitle": "MOVING FORWARD",
-      "movingForwardDesc": "Committed to timely delivery and better learning outcomes for every student."
+      "movingForwardDesc": "Committed to timely delivery and better learning outcomes for every student.",
+      "notAvailable": "The Managing Director's message will be published here soon."
     },
     "boardOfDirectors": {
       "titlePart1": "Board of",
@@ -6360,7 +6319,8 @@
       "subtitle": "The governing body responsible for strategic decision making and oversight of the Corporation's operations.",
       "colName": "Name",
       "colDesignation": "Designation",
-      "colSince": "Since"
+      "colSince": "Since",
+      "empty": "Board of Directors details will be published here soon."
     },
     "listOfMd": {
       "titlePart1": "Legacy of",
@@ -6373,7 +6333,8 @@
       "colFrom": "From",
       "colTo": "To",
       "noResults": "No records matching \"{{term}}\"",
-      "totalRecords": "Total Records: {{count}}"
+      "totalRecords": "Total Records: {{count}}",
+      "empty": "The list of Managing Directors will be published here soon."
     },
     "ourEmployee": {
       "titlePart1": "Our",
@@ -6387,7 +6348,8 @@
       "colDesignation": "Designation",
       "colType": "Type",
       "colDept": "Department",
-      "noResults": "No employees found matching your search."
+      "noResults": "No employees found matching your search.",
+      "empty": "The employee list will be published here soon."
     },
     "orgStructure": {
       "titlePart1": "Organisational",

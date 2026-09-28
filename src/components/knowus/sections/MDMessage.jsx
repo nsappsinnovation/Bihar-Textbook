@@ -12,20 +12,19 @@ const MdMessage = () => {
   const { t, i18n } = useTranslation();
   const isHindi = i18n.language === 'hi';
 
-  const [mdData, setMdData] = useState({
-    name: 'Shri Yatendra Kumar Pal',
-    photo: '/images/KeyParticipants/shri_yatendra_pal.webp',
-    welcomeNote: 'It gives me immense pleasure to connect with all stakeholders through this platform. The Bihar State Text Book Publishing Corporation Ltd. plays a pivotal role in strengthening the foundation of education by ensuring the timely production and distribution of quality textbooks across the state.'
-  });
+  // Managed in Admin → Know Us → MD Message. null = loading, {} = not published yet.
+  const [mdData, setMdData] = useState(null);
 
-  // Managed in Admin → Know Us → MD Message; the values above are shown until it loads
   useEffect(() => {
     getSetting('md_message')
-      .then((value) => value && setMdData((prev) => ({ ...prev, ...value, photo: fileUrl(value.photo) || prev.photo })))
-      .catch(() => {});
+      .then((value) => setMdData(value && typeof value === 'object' ? { ...value, photo: fileUrl(value.photo) || '' } : {}))
+      .catch(() => setMdData({}));
   }, []);
 
-  const displayName = isHindi && mdData.name === 'Shri Yatendra Kumar Pal' ? 'श्री यतेंद्र कुमार पाल' : mdData.name;
+  const loading = mdData === null;
+  const name = mdData?.name || '';
+  const displayName = isHindi && name === 'Shri Yatendra Kumar Pal' ? 'श्री यतेंद्र कुमार पाल' : name;
+  const initials = name.replace(/^(shri|smt|sri|dr)\.?\s+/i, '').split(/\s+/).filter(Boolean).slice(0, 2).map((p) => p[0].toUpperCase()).join('');
 
   return (
     <div className="bg-white text-slate-800 pb-8">
@@ -42,22 +41,22 @@ const MdMessage = () => {
               
               {/* MD Photo */}
               <div className="relative z-10 w-64 lg:w-full max-w-[280px] aspect-[4/5] rounded-[32px] overflow-hidden bg-slate-100 shadow-sm border border-slate-100">
-                <img loading="lazy" decoding="async" 
-                  src={mdData.photo || '/images/KeyParticipants/shri_yatendra_pal.webp'} 
-                  alt={displayName} 
-                  className="w-full h-full object-cover"
-                  onError={(e) => {
-                    if (!e.target.src.endsWith('/images/KeyParticipants/shri_yatendra_pal.webp')) {
-                      e.target.src = '/images/KeyParticipants/shri_yatendra_pal.webp';
-                    } else {
-                      e.target.src = 'https://ui-avatars.com/api/?name=Yatendra+Kumar+Pal&background=f1f5f9&color=0f172a&size=512';
-                    }
-                  }}
-                />
+                {loading ? (
+                  <div className="w-full h-full animate-pulse bg-slate-200/70" />
+                ) : mdData.photo ? (
+                  <img loading="lazy" decoding="async" src={mdData.photo} alt={displayName} className="w-full h-full object-cover" />
+                ) : (
+                  // No photo published: show initials instead of requesting a stand-in image
+                  <div className="w-full h-full grid place-items-center text-6xl font-black text-slate-300">{initials}</div>
+                )}
               </div>
             </div>
 
-            <h2 className="text-2xl font-black text-slate-900 mb-1">{displayName}</h2>
+            {loading ? (
+              <div className="h-7 w-56 mb-2 rounded-lg bg-slate-200/70 animate-pulse" />
+            ) : (
+              displayName && <h2 className="text-2xl font-black text-slate-900 mb-1">{displayName}</h2>
+            )}
             <p className="text-sm font-bold text-blue-600 tracking-wide uppercase mb-2">
               {t("knowUsPage.mdMessage.designation", "Managing Director")}
             </p>
@@ -92,9 +91,21 @@ const MdMessage = () => {
               <h3 className="text-[13px] font-black text-slate-800 tracking-[0.2em] uppercase mb-5">
                 {t("knowUsPage.mdMessage.welcomeNoteHeader", "Welcome Note")}
               </h3>
-              <div className="prose prose-slate prose-lg max-w-none text-slate-600 whitespace-pre-wrap font-medium leading-relaxed">
-                {mdData.welcomeNote}
-              </div>
+              {loading ? (
+                <div className="space-y-3" aria-hidden>
+                  {[100, 95, 98, 70].map((w) => (
+                    <div key={w} className="h-4 rounded bg-slate-200/70 animate-pulse" style={{ width: `${w}%` }} />
+                  ))}
+                </div>
+              ) : mdData.welcomeNote ? (
+                <div className="prose prose-slate prose-lg max-w-none text-slate-600 whitespace-pre-wrap font-medium leading-relaxed">
+                  {mdData.welcomeNote}
+                </div>
+              ) : (
+                <p className="text-slate-500 font-medium">
+                  {t("knowUsPage.mdMessage.notAvailable", "The Managing Director's message will be published here soon.")}
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -204,7 +215,7 @@ const MdMessage = () => {
               <Award className="text-blue-600 w-6 h-6" />
             </div>
             <div>
-              <h4 className="text-[16px] font-black text-slate-900 leading-tight">{displayName}</h4>
+              {displayName && <h4 className="text-[16px] font-black text-slate-900 leading-tight">{displayName}</h4>}
               <p className="text-[11px] font-bold text-blue-600 uppercase tracking-wide mt-1">
                 {t("knowUsPage.mdMessage.designation", "MANAGING DIRECTOR")}, BSTBPC
               </p>

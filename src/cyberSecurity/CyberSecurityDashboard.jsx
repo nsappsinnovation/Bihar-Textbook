@@ -149,8 +149,7 @@ const CyberSecurityQuiz = () => {
       {/* High-Tech Cyber Background Picture with Gradient & Mesh Overlay */}
       <div className="absolute inset-0 z-0">
         <img loading="lazy" decoding="async" 
-          src="/images/cybersecurity/cs_quiz_background.webp" 
-          onError={(e) => { e.target.src = '/images/cybersecurity/rhs.webp'; }}
+          src="/images/cybersecurity/rhs.webp" 
           alt="Cyber Security Background" 
           className="w-full h-full object-cover object-center scale-105 transition-transform duration-1000"
         />

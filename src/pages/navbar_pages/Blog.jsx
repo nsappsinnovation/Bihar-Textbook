@@ -77,6 +77,9 @@ function Blog() {
                                     snippet={result.snippet}
                                     timestamp={result.timestamp}
                                     pageid={result.pageid}
+                                    extract={result.extract}
+                                    thumbnail={result.thumbnail}
+                                    lang={result.lang}
                                 />
                             ))}
                         </div>

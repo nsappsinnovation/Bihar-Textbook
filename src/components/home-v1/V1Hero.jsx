@@ -2,7 +2,7 @@ import { lazy, Suspense, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { ArrowRight } from "lucide-react";
-import useLeaders, { prefersReducedMotion } from "../home-shared/useLeaders";
+import useLeaders, { initialsOf, prefersReducedMotion } from "../home-shared/useLeaders";
 
 // WebGL contours are decorative: loaded lazily and skipped for reduced motion
 const Topography = lazy(() => import("../Topography"));
@@ -13,6 +13,9 @@ function Leader({ leader, align = "left", zoom = 1, className = "" }) {
   return (
     <figure className={`m-0 w-[136px] sm:w-[164px] lg:w-[196px] ${right ? "justify-self-end text-right" : ""} ${className}`}>
       <div className="relative h-[168px] overflow-hidden rounded-[20px] border border-bt-navy/10 bg-gradient-to-b from-white to-bt-sky shadow-[0_24px_55px_rgba(11,43,79,0.16)] sm:h-[200px] lg:h-[238px]">
+        {!leader.image ? (
+          <span className="grid h-full w-full place-items-center text-4xl font-bold text-bt-navy/40">{initialsOf(leader.name)}</span>
+        ) : (
         <img
           src={leader.image}
           alt={leader.name}
@@ -28,6 +31,7 @@ function Leader({ leader, align = "left", zoom = 1, className = "" }) {
               : undefined
           }
         />
+        )}
         <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-bt-navy/25 to-transparent" />
       </div>
       <figcaption className={`grid gap-1 pt-3 ${right ? "justify-items-end" : ""}`}>
@@ -37,6 +41,20 @@ function Leader({ leader, align = "left", zoom = 1, className = "" }) {
         </strong>
       </figcaption>
     </figure>
+  );
+}
+
+// Same footprint as a leader card, shown while the leaders are loading
+function LeaderSkeleton({ align = "left", className = "" }) {
+  const right = align === "right";
+  return (
+    <div aria-hidden className={`w-[136px] sm:w-[164px] lg:w-[196px] ${right ? "justify-self-end" : ""} ${className}`}>
+      <div className="h-[168px] animate-pulse rounded-[20px] bg-bt-navy/[0.06] sm:h-[200px] lg:h-[238px]" />
+      <div className={`grid gap-2 pt-3 ${right ? "justify-items-end" : ""}`}>
+        <span className="h-3.5 w-28 animate-pulse rounded bg-bt-navy/[0.06]" />
+        <span className="h-2.5 w-20 animate-pulse rounded bg-bt-navy/[0.06]" />
+      </div>
+    </div>
   );
 }
 
@@ -85,7 +103,11 @@ export default function V1Hero() {
 
         {/* Stage: leader, title, leader */}
         <div className="grid grid-cols-2 items-center gap-x-4 gap-y-10 pt-8 lg:grid-cols-[196px_minmax(0,1fr)_196px] lg:gap-12 lg:pt-10">
-          {leaders[0] && <Leader leader={leaders[0]} className="row-start-2 lg:row-start-1" />}
+          {leaders === null ? (
+            <LeaderSkeleton className="row-start-2 lg:row-start-1" />
+          ) : (
+            leaders[0] && <Leader leader={leaders[0]} className="row-start-2 lg:row-start-1" />
+          )}
 
           <div className="relative col-span-2 row-start-1 text-center lg:col-span-1 lg:col-start-2">
             <div aria-hidden className="absolute -inset-x-[8%] -inset-y-[12%] -z-10 bg-[radial-gradient(ellipse_at_center,rgba(244,248,254,0.95)_0%,rgba(244,248,254,0.75)_50%,transparent_80%)]" />
@@ -118,7 +140,11 @@ export default function V1Hero() {
             </div>
           </div>
 
-          {leaders[1] && <Leader leader={leaders[1]} align="right" zoom={0.78} className="row-start-2 lg:col-start-3 lg:row-start-1" />}
+          {leaders === null ? (
+            <LeaderSkeleton align="right" className="row-start-2 lg:col-start-3 lg:row-start-1" />
+          ) : (
+            leaders[1] && <Leader leader={leaders[1]} align="right" zoom={0.78} className="row-start-2 lg:col-start-3 lg:row-start-1" />
+          )}
         </div>
       </div>
       </div>

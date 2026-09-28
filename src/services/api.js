@@ -15,9 +15,14 @@ const TOKEN_KEY = 'authToken';
 export const saveAuthToken = (token) => localStorage.setItem(TOKEN_KEY, token);
 export const clearAuthToken = () => localStorage.removeItem(TOKEN_KEY);
 
+// Only admin, auth and upload requests need the token. Public GETs stay header-free,
+// so they don't trigger an extra CORS preflight request for logged-in admins.
+const NEEDS_AUTH = /^\/api\/(admin|auth|uploads)(\/|$)/;
+const needsAuth = (config) => NEEDS_AUTH.test(config.url || '') || (config.method && config.method !== 'get');
+
 api.interceptors.request.use((config) => {
     const token = localStorage.getItem(TOKEN_KEY);
-    if (token) config.headers.Authorization = `Bearer ${token}`;
+    if (token && needsAuth(config)) config.headers.Authorization = `Bearer ${token}`;
     return config;
 });
 

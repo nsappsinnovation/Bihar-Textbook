@@ -7,7 +7,7 @@ import { getDirectory } from '../../../services/directoryService';
 const ListOfMD = () => {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(null); // null while loading
 
   // Past MDs are managed in Admin → Know Us → List of MD
   useEffect(() => {
@@ -21,7 +21,7 @@ const ListOfMD = () => {
       .catch(() => setList([]));
   }, []);
 
-  const filteredList = list.filter(md => 
+  const filteredList = (list || []).filter(md => 
     md.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -103,16 +103,20 @@ const ListOfMD = () => {
               </tbody>
             </table>
 
-            {filteredList.length === 0 && (
+            {list === null ? <div className="flex justify-center gap-1.5 py-10" aria-label="Loading">{[0, 1, 2].map((i) => <span key={i} className="w-2 h-2 rounded-full bg-slate-300 animate-pulse" style={{ animationDelay: `${i * 150}ms` }} />)}</div> : filteredList.length === 0 && (
                <div className="text-center py-10">
-                  <p className="text-slate-500 text-sm">{t("knowUsPage.listOfMd.noResults", { term: searchTerm, defaultValue: `No records matching "${searchTerm}"` })}</p>
+                  <p className="text-slate-500 text-sm">
+                    {list.length === 0
+                      ? t("knowUsPage.listOfMd.empty", "The list of Managing Directors will be published here soon.")
+                      : t("knowUsPage.listOfMd.noResults", { term: searchTerm, defaultValue: `No records matching "${searchTerm}"` })}
+                  </p>
                </div>
             )}
           </div>
 
           <div className="p-4 border-t border-slate-300 flex justify-end">
              <span className="text-sm text-slate-600">
-                {t("knowUsPage.listOfMd.totalRecords", { count: list.length, defaultValue: `Total Records: ${list.length}` })}
+                {t("knowUsPage.listOfMd.totalRecords", { count: (list || []).length, defaultValue: `Total Records: ${(list || []).length}` })}
              </span>
           </div>
         </div>

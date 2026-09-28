@@ -4,43 +4,39 @@ import { Calendar, FileText, FileDown, X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { getSections } from '../../../services/sectionService';
 import { fileUrl } from '../../../services/api';
+import GalleryStatus from './GalleryStatus';
 
 const Pressrelease = () => {
   const { t, i18n } = useTranslation();
   const [selectedRelease, setSelectedRelease] = useState(null);
-  const [items, setItems] = useState([]);
+  const [rows, setRows] = useState(null); // null while loading
 
-  // Press releases are managed in Admin → Gallery → Press Release
+  // Press releases are managed in Admin → Gallery → Press Release. Fetched once; dates and labels
+  // are formatted for the current language when rendering.
   useEffect(() => {
-    const formatDate = (date) => {
-      const dateLocale = i18n.language === "hi" ? "hi-IN" : "en-US";
-      return (date ? new Date(date) : new Date()).toLocaleDateString(dateLocale, { month: 'long', day: 'numeric', year: 'numeric' });
-    };
-
     getSections('gl-press')
-      .then((rows) => setItems(rows.map((row, index) => ({
-        id: row.id,
-        date: formatDate(row.publishDate),
-        title: row.title || t("galleryPage.press.fallbackTitle"),
-        excerpt: row.description || t("galleryPage.press.fallbackExcerpt"),
-        category: row.category || t("galleryPage.press.categories.general"),
-        fileSize: "1.2 MB",
-        cardStyle: index % 3 === 0 ? "gradient" : index % 3 === 1 ? "image" : "glass",
-        image: fileUrl(row.imageUrl) || null,
-        fileUrl: fileUrl(row.imageUrl),
-      }))))
-      .catch(() => setItems([]));
-  }, [t, i18n.language]);
+      .then(setRows)
+      .catch(() => setRows([]));
+  }, []);
+
+  const dateLocale = i18n.language === "hi" ? "hi-IN" : "en-US";
+  const items = (rows || []).map((row, index) => ({
+    id: row.id,
+    // Only a real publish date is shown (never today's date as a stand-in)
+    date: row.publishDate ? new Date(row.publishDate).toLocaleDateString(dateLocale, { month: 'long', day: 'numeric', year: 'numeric' }) : "",
+    title: row.title,
+    excerpt: row.description || "",
+    category: row.category || t("galleryPage.press.categories.general"),
+    cardStyle: index % 3 === 0 ? "gradient" : index % 3 === 1 ? "image" : "glass",
+    image: fileUrl(row.imageUrl) || null,
+    // The release's own document (or its image); no download button when there is neither
+    fileUrl: fileUrl(row.documentUrl) || fileUrl(row.imageUrl) || "",
+  }));
 
   const handleDownload = (e, release) => {
     e.stopPropagation();
-    // Simulate file download
-    const link = document.createElement("a");
-    link.href = "/printer.pdf";
-    link.download = `BSTBPC_PressRelease_${release.id}.pdf`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    if (!release.fileUrl) return;
+    window.open(release.fileUrl, "_blank", "noopener,noreferrer");
   };
 
   const RenderCard = ({ item, aspectClass }) => {
@@ -137,13 +133,17 @@ const Pressrelease = () => {
         </div>
 
         {/* --- Simple Card Grid --- */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {items.map((item) => (
-            <div key={item.id} className="flex flex-col">
-              <RenderCard item={item} aspectClass="aspect-[4/3]" />
-            </div>
-          ))}
-        </div>
+        {rows === null || items.length === 0 ? (
+          <GalleryStatus loading={rows === null} tiles={3} />
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {items.map((item) => (
+              <div key={item.id} className="flex flex-col">
+                <RenderCard item={item} aspectClass="aspect-[4/3]" />
+              </div>
+            ))}
+          </div>
+        )}
 
       </div>
 
@@ -185,10 +185,12 @@ const Pressrelease = () => {
                   <h2 className="text-2xl md:text-3xl font-black text-white leading-snug drop-shadow-md">
                     {selectedRelease.title}
                   </h2>
-                  <div className="flex items-center gap-2 mt-4 text-xs font-bold text-slate-300">
-                    <Calendar size={14} className="text-blue-400" />
-                    <span className="uppercase">{selectedRelease.date}</span>
-                  </div>
+                  {selectedRelease.date && (
+                    <div className="flex items-center gap-2 mt-4 text-xs font-bold text-slate-300">
+                      <Calendar size={14} className="text-blue-400" />
+                      <span className="uppercase">{selectedRelease.date}</span>
+                    </div>
+                  )}
                 </div>
               </div>
 
@@ -211,14 +213,16 @@ const Pressrelease = () => {
               <div className="p-6 md:p-8 border-t border-slate-100 flex items-center justify-between bg-slate-50">
                 <div className="flex items-center gap-1.5 text-xs text-slate-400 font-semibold">
                   <FileText size={14} className="text-blue-500" />
-                  <span>{t("galleryPage.press.sizeLabel", { size: selectedRelease.fileSize })}</span>
+                  <span>{t("galleryPage.press.fallbackTitle", "Press Release")}</span>
                 </div>
-                <button
-                  onClick={(e) => handleDownload(e, selectedRelease)}
-                  className="px-6 py-3 bg-blue-600 text-white rounded-full text-xs font-extrabold uppercase tracking-widest hover:bg-blue-700 transition-all shadow-md shadow-blue-500/10 flex items-center gap-2"
-                >
-                  <FileDown size={14} /> {t("galleryPage.press.download")}
-                </button>
+                {selectedRelease.fileUrl && (
+                  <button
+                    onClick={(e) => handleDownload(e, selectedRelease)}
+                    className="px-6 py-3 bg-blue-600 text-white rounded-full text-xs font-extrabold uppercase tracking-widest hover:bg-blue-700 transition-all shadow-md shadow-blue-500/10 flex items-center gap-2"
+                  >
+                    <FileDown size={14} /> {t("galleryPage.press.download")}
+                  </button>
+                )}
               </div>
 
             </motion.div>

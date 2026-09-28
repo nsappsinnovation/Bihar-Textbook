@@ -4,6 +4,7 @@ import { FaPlay } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 import { getSections } from '../../../services/sectionService';
 import { fileUrl, isUploadedFile } from '../../../services/api';
+import GalleryStatus from './GalleryStatus';
 
 const getYouTubeId = (url) => {
   if (!url) return null;
@@ -15,27 +16,34 @@ const getYouTubeId = (url) => {
 const Videogallery = () => {
   const { t } = useTranslation();
   const [selectedVideo, setSelectedVideo] = useState(null);
-  const [items, setItems] = useState([]);
+  const [rows, setRows] = useState(null); // null while loading
   const [currentPage, setCurrentPage] = useState(0);
 
   // Videos are managed in Admin → Gallery → Video Gallery.
   // videoUrl holds either a YouTube link or an uploaded "/api/uploads/videos/..." file.
+  // Fetched once; labels are translated when rendering.
   useEffect(() => {
     getSections('gl-video')
-      .then((rows) => setItems(rows.map((row) => {
-        const isUploaded = isUploadedFile(row.videoUrl);
-        const ytId = isUploaded ? null : getYouTubeId(row.videoUrl);
-        const autoThumbnail = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : "";
-        return {
-          type: "video",
-          src: fileUrl(row.imageUrl) || autoThumbnail,
-          videoUrl: isUploaded ? "" : row.videoUrl || "",
-          uploadedVideo: isUploaded ? fileUrl(row.videoUrl) : "",
-          alt: row.title || t("galleryPage.video.fallbackAlt"),
-        };
-      })))
-      .catch(() => setItems([]));
-  }, [t]);
+      .then(setRows)
+      .catch(() => setRows([]));
+  }, []);
+
+  // Only rows that have a video are shown
+  const items = (rows || [])
+    .filter((row) => row.videoUrl)
+    .map((row) => {
+      const isUploaded = isUploadedFile(row.videoUrl);
+      const ytId = isUploaded ? null : getYouTubeId(row.videoUrl);
+      // hqdefault exists for every YouTube video (maxresdefault is large and missing for non-HD uploads)
+      const autoThumbnail = ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : "";
+      return {
+        type: "video",
+        src: fileUrl(row.imageUrl) || autoThumbnail,
+        videoUrl: isUploaded ? "" : row.videoUrl,
+        uploadedVideo: isUploaded ? fileUrl(row.videoUrl) : "",
+        alt: row.title || t("galleryPage.video.fallbackAlt"),
+      };
+    });
 
   const itemsPerPage = 6;
   const totalPages = Math.ceil(items.length / itemsPerPage);
@@ -105,6 +113,9 @@ const Videogallery = () => {
         </div>
 
         {/* --- 6-Card Asymmetric Collage Grid (Video Version) --- */}
+        {rows === null || items.length === 0 ? (
+          <GalleryStatus loading={rows === null} />
+        ) : (
         <AnimatePresence mode="wait">
           <motion.div
             key={currentPage}
@@ -123,7 +134,7 @@ const Videogallery = () => {
                   className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-slate-100 aspect-[4/3] w-full"
                 >
                   <img loading="lazy" decoding="async"
-                    src={pageItems[0].src}
+                    src={pageItems[0].src || undefined}
                     alt={pageItems[0].alt}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
                   />
@@ -150,7 +161,7 @@ const Videogallery = () => {
                   className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-slate-100 aspect-[3/4] w-full"
                 >
                   <img loading="lazy" decoding="async"
-                    src={pageItems[1].src}
+                    src={pageItems[1].src || undefined}
                     alt={pageItems[1].alt}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
                   />
@@ -174,7 +185,7 @@ const Videogallery = () => {
                   className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-slate-100 aspect-square w-full"
                 >
                   <img loading="lazy" decoding="async"
-                    src={pageItems[3].src}
+                    src={pageItems[3].src || undefined}
                     alt={pageItems[3].alt}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
                   />
@@ -201,7 +212,7 @@ const Videogallery = () => {
                   className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-slate-100 aspect-[4/3] w-full"
                 >
                   <img loading="lazy" decoding="async"
-                    src={pageItems[2].src}
+                    src={pageItems[2].src || undefined}
                     alt={pageItems[2].alt}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
                   />
@@ -225,7 +236,7 @@ const Videogallery = () => {
                   className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-slate-100 aspect-[4/3] w-full"
                 >
                   <img loading="lazy" decoding="async"
-                    src={pageItems[4].src}
+                    src={pageItems[4].src || undefined}
                     alt={pageItems[4].alt}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
                   />
@@ -251,7 +262,7 @@ const Videogallery = () => {
                   className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 cursor-pointer border border-slate-100 aspect-[4/3] w-full"
                 >
                   <img loading="lazy" decoding="async"
-                    src={pageItems[5].src}
+                    src={pageItems[5].src || undefined}
                     alt={pageItems[5].alt}
                     className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out"
                   />
@@ -276,6 +287,7 @@ const Videogallery = () => {
 
           </motion.div>
         </AnimatePresence>
+        )}
 
         {/* Custom Pagination Controls */}
         {totalPages > 1 && (
