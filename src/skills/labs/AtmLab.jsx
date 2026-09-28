@@ -74,31 +74,31 @@ const AtmLab = () => {
   };
 
   return (
-    <div className="bg-white rounded-[32px] border border-slate-100 shadow-[0_12px_40px_rgba(0,0,0,0.03)] p-6 md:p-8">
-      <div className="w-full text-left space-y-8">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-100 pb-5">
+    <div className="bg-white rounded-[32px] border border-slate-100 shadow-[0_12px_40px_rgba(0,0,0,0.03)] p-4 sm:p-6 md:p-8">
+      <div className="w-full text-left space-y-3.5">
+        <div className="flex flex-row justify-between items-center gap-3 border-b border-slate-100 pb-3">
           <div>
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-slate-800 tracking-tight">{t("basicskills.atm_title", "ATM Simulator")}</h2>
-            <p className="text-[13px] text-slate-500 font-semibold mt-1">{t("basicskills.atm_subtitle", "Practice withdrawing cash safely.")}</p>
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-slate-800 tracking-tight">{t("basicskills.atm_title", "ATM Simulator")}</h2>
+            <p className="text-[12px] sm:text-[13px] text-slate-500 font-semibold mt-0.5">{t("basicskills.atm_subtitle", "Practice withdrawing cash safely.")}</p>
           </div>
           <button
             onClick={resetAtm}
-            className="p-2.5 bg-white hover:bg-slate-50 rounded-xl text-slate-500 border border-slate-200 hover:border-slate-350 transition-all cursor-pointer shadow-sm flex items-center justify-center"
+            className="p-2 sm:p-2.5 bg-white hover:bg-slate-50 rounded-xl text-slate-500 border border-slate-200 hover:border-slate-350 transition-all cursor-pointer shadow-sm flex items-center justify-center shrink-0"
             title={t("basicskills.atm_reset_tooltip", "Reset ATM Simulator")}
           >
             <RefreshCw size={15} />
           </button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-2 items-start mt-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-start mt-2">
           {/* LEFT COLUMN: ATM GUIDE & INSTRUCTIONS */}
-          <div className="lg:col-span-5 space-y-5 pl-18">
-            <div className="bg-slate-50 rounded-2xl py-5 pl-7 pr-5 border border-slate-200/60 shadow-sm space-y-4">
-              <h3 className="text-sm font-black text-slate-800 uppercase tracking-wider flex items-center gap-2 -ml-2">
-                <Shield size={16} className="text-teal-600" /> {t("basicskills.atm_op_guide", "ATM Operation Guide")}
+          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3.5 w-full">
+            <div className="bg-slate-50 rounded-2xl p-3.5 sm:p-4 border border-slate-200/60 shadow-sm space-y-3">
+              <h3 className="text-xs sm:text-sm font-black text-slate-800 uppercase tracking-wider">
+                {t("basicskills.atm_op_guide", "ATM Operation Guide")}
               </h3>
 
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 {[
                   { key: 'insert', label: t('basicskills.atm_step_insert_label', 'Insert Debit Card'), desc: t('basicskills.atm_step_insert_desc', 'Place your card into the card reader slot.') },
                   { key: 'language', label: t('basicskills.atm_step_lang_label', 'Choose Language'), desc: t('basicskills.atm_step_lang_desc', 'Select English or Hindi for instruction.') },
@@ -118,14 +118,14 @@ const AtmLab = () => {
                   return (
                     <div
                       key={step.key}
-                      className={`flex items-start gap-3.5 p-3 rounded-xl border transition-all ${isActive
+                      className={`flex items-start gap-2.5 p-2 rounded-xl border transition-all ${isActive
                         ? 'bg-teal-50 border-teal-300 text-teal-800 shadow-sm ring-1 ring-teal-300/30'
                         : isCompleted
                           ? 'bg-slate-100/80 border-slate-200 text-slate-400 opacity-75'
                           : 'bg-white border-slate-150 text-slate-400'
                         }`}
                     >
-                      <div className={`w-5.5 h-5.5 rounded-full flex items-center justify-center text-[10.5px] font-black shrink-0 ${isActive
+                      <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-black shrink-0 ${isActive
                         ? 'bg-teal-600 text-white'
                         : isCompleted
                           ? 'bg-slate-400 text-white'
@@ -134,8 +134,8 @@ const AtmLab = () => {
                         {isCompleted ? '✓' : idx + 1}
                       </div>
                       <div className="space-y-0.5 text-left font-semibold">
-                        <div className="text-[12px] font-black leading-tight text-slate-700">{step.label}</div>
-                        <div className="text-[10px] opacity-90 leading-tight font-medium text-slate-500">{step.desc}</div>
+                        <div className="text-[11.5px] font-black leading-tight text-slate-700">{step.label}</div>
+                        <div className="text-[9.5px] opacity-90 leading-tight font-medium text-slate-500">{step.desc}</div>
                       </div>
                     </div>
                   );
@@ -143,11 +143,11 @@ const AtmLab = () => {
               </div>
             </div>
 
-            <div className="bg-amber-50/70 rounded-2xl py-5 pl-7 pr-5 border border-amber-200/50 space-y-3">
-              <h4 className="text-[12px] font-black uppercase text-amber-700 tracking-wider flex items-center gap-1.5 -ml-2">
-                <Shield size={14} className="text-amber-600 animate-pulse" /> {t("basicskills.atm_sec_guidelines", "Security Guidelines")}
+            <div className="bg-amber-50/70 rounded-2xl p-3.5 sm:p-4 border border-amber-200/50 space-y-2.5">
+              <h4 className="text-xs font-black uppercase text-amber-700 tracking-wider">
+                {t("basicskills.atm_sec_guidelines", "Security Guidelines")}
               </h4>
-              <ul className="text-[11.5px] text-amber-900/90 space-y-2.5 list-disc list-outside pl-4 font-bold leading-relaxed">
+              <ul className="text-[11px] sm:text-[11.5px] text-amber-900/90 space-y-2 list-disc list-outside pl-4 font-bold leading-snug">
                 <li>{t("basicskills.atm_sec_rule1", "Always cover the keypad with your free hand while typing your secret PIN.")}</li>
                 <li>{t("basicskills.atm_sec_rule2", "Ensure no one else is standing close to you inside the ATM room.")}</li>
                 <li>{t("basicskills.atm_sec_rule3", "Inspect the card reader slot for any extra attachments (skimmers) before inserting card.")}</li>
@@ -160,17 +160,17 @@ const AtmLab = () => {
           {/* RIGHT COLUMN: INTERACTIVE ATM MACHINE */}
           <div className="lg:col-span-7 flex justify-center w-full">
             {/* PHYSICAL ATM CABINET CASING */}
-            <div className="bg-gradient-to-b from-[#1e293b] via-[#334155] to-[#0f172a] border-[12px] border-[#94a3b8] rounded-[32px] p-5 shadow-[0_20px_50px_rgba(0,0,0,0.25)] space-y-4 w-full max-w-[530px] relative border-double">
+            <div className="bg-gradient-to-b from-[#1e293b] via-[#334155] to-[#0f172a] border-4 sm:border-8 border-[#94a3b8] rounded-2xl sm:rounded-[32px] p-2.5 sm:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.25)] space-y-2.5 sm:space-y-3.5 w-full max-w-[500px] relative">
               {/* Top Banner/Engraving */}
-              <div className="bg-[#003b80] text-white py-2 px-3 rounded-xl text-center shadow-inner border border-[#002a60] flex flex-col items-center select-none">
-                <span className="text-[13px] font-black tracking-widest">{t("basicskills.atm_bihar_bank", "BIHAR GRAMIN BANK")}</span>
-                <span className="text-[9px] text-sky-200 font-bold uppercase tracking-wider">{t("basicskills.atm_auto_teller", "Automated Teller Machine")}</span>
+              <div className="bg-[#003b80] text-white py-1.5 px-3 rounded-lg sm:rounded-xl text-center shadow-inner border border-[#002a60] flex flex-col items-center select-none">
+                <span className="text-xs sm:text-[13px] font-black tracking-widest">{t("basicskills.atm_bihar_bank", "BIHAR GRAMIN BANK")}</span>
+                <span className="text-[8.5px] sm:text-[9px] text-sky-200 font-bold uppercase tracking-wider">{t("basicskills.atm_auto_teller", "Automated Teller Machine")}</span>
               </div>
 
               {/* ATM Screen and Side Buttons Group */}
-              <div className="flex items-center gap-3.5 bg-[#111827] p-4 rounded-[24px] shadow-inner border border-slate-800">
+              <div className="flex items-center gap-2 sm:gap-3.5 bg-[#111827] p-2 sm:p-3.5 rounded-xl sm:rounded-[24px] shadow-inner border border-slate-800">
                 {/* LEFT SIDE PHYSICAL BUTTONS */}
-                <div className="flex flex-col justify-around h-[240px] py-4 shrink-0">
+                <div className="flex flex-col justify-around h-[210px] sm:h-[240px] py-2 shrink-0">
                   {[1, 2, 3].map(btnIdx => (
                     <button
                       key={`left-btn-${btnIdx}`}
@@ -184,33 +184,33 @@ const AtmLab = () => {
                           setSelectedAmount('');
                         }
                       }}
-                      className="w-5 h-5 bg-gradient-to-r from-slate-300 via-slate-200 to-slate-400 hover:from-slate-200 hover:to-slate-350 rounded-full border border-slate-500 shadow-[0_2px_4px_rgba(0,0,0,0.3)] active:scale-90 transition-all cursor-pointer"
+                      className="w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-r from-slate-300 via-slate-200 to-slate-400 hover:from-slate-200 hover:to-slate-350 rounded-full border border-slate-500 shadow-[0_2px_4px_rgba(0,0,0,0.3)] active:scale-90 transition-all cursor-pointer"
                     />
                   ))}
                 </div>
 
                 {/* DIGITAL DISPLAY SCREEN */}
-                <div className="flex-1 bg-gradient-to-b from-[#0284c7] to-[#0369a1] border border-slate-900 rounded-xl h-[240px] p-3.5 flex flex-col justify-between relative overflow-hidden font-sans shadow-inner text-white select-none">
+                <div className="flex-1 bg-gradient-to-b from-[#0284c7] to-[#0369a1] border border-slate-900 rounded-lg sm:rounded-xl h-[210px] sm:h-[240px] p-2.5 sm:p-3.5 flex flex-col justify-between relative overflow-hidden font-sans shadow-inner text-white select-none">
                   {/* Glass Glare Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none z-10" />
 
                   {/* Screen Header */}
-                  <div className="border-b border-white/20 pb-1 flex justify-between items-center text-[9px] font-bold tracking-wide">
-                    <span className="flex items-center gap-1">🏦 {t("basicskills.atm_bihar_bank", "BIHAR GRAMIN BANK")}</span>
-                    <span className="text-[8px] text-sky-200">{t("basicskills.atm_bihar_bank", "BIHAR GRAMIN BANK")}</span>
+                  <div className="border-b border-white/20 pb-1 flex justify-between items-center text-[8.5px] sm:text-[9px] font-bold tracking-wide">
+                    <span className="flex items-center gap-1 text-white">🏦 {t("basicskills.atm_bihar_bank", "BIHAR GRAMIN BANK")}</span>
+                    <span className="text-[7.5px] sm:text-[8px] text-sky-200 uppercase tracking-wider">{t("basicskills.atm_auto_teller", "ATM")}</span>
                   </div>
 
                   {/* SCREEN CONTENT */}
                   {atmStep === 'insert' && (
-                    <div className="flex-1 flex flex-col items-center justify-center text-center space-y-3 py-1 z-20">
-                      <CreditCard className="w-12 h-12 text-sky-200 animate-bounce" />
+                    <div className="flex-1 flex flex-col items-center justify-center text-center space-y-2 sm:space-y-3 py-1 z-20">
+                      <CreditCard className="w-9 h-9 sm:w-11 sm:h-11 text-sky-200 animate-bounce" />
                       <div className="space-y-0.5">
-                        <h4 className="text-xs font-black tracking-wide text-white">{t("basicskills.atm_screen_welcome_title", "WELCOME TO BIHAR GRAMIN BANK")}</h4>
-                        <p className="text-[9px] text-sky-100 font-bold">{t("basicskills.atm_screen_welcome_sub", "Please insert your card")}</p>
+                        <h4 className="text-[11px] sm:text-xs font-black tracking-wide text-white">{t("basicskills.atm_screen_welcome_title", "WELCOME TO BIHAR GRAMIN BANK")}</h4>
+                        <p className="text-[8.5px] sm:text-[9px] text-sky-100 font-bold">{t("basicskills.atm_screen_welcome_sub", "Please insert your card")}</p>
                       </div>
                       <button
                         onClick={() => setAtmStep('language')}
-                        className="px-5 py-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-450 text-slate-950 rounded-xl text-[10px] font-black uppercase transition-all shadow-md cursor-pointer active:scale-95"
+                        className="px-4 py-1.5 sm:px-5 sm:py-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-450 text-slate-950 rounded-lg sm:rounded-xl text-[9px] sm:text-[10px] font-black uppercase transition-all shadow-md cursor-pointer active:scale-95"
                       >
                         Insert Card
                       </button>
@@ -218,18 +218,18 @@ const AtmLab = () => {
                   )}
 
                   {atmStep === 'language' && (
-                    <div className="flex-1 flex flex-col justify-between py-2 text-right z-20">
+                    <div className="flex-1 flex flex-col justify-between py-1.5 sm:py-2 text-right z-20">
                       <div className="text-center">
-                        <h4 className="text-xs font-black text-white">{t("basicskills.atm_screen_select_lang_title", "PLEASE SELECT LANGUAGE")}</h4>
-                        <p className="text-[9px] text-sky-100">{t("basicskills.atm_screen_select_lang_sub", "Select an option below")}</p>
+                        <h4 className="text-[11px] sm:text-xs font-black text-white">{t("basicskills.atm_screen_select_lang_title", "PLEASE SELECT LANGUAGE")}</h4>
+                        <p className="text-[8.5px] sm:text-[9px] text-sky-100">{t("basicskills.atm_screen_select_lang_sub", "Select an option below")}</p>
                       </div>
-                      <div className="space-y-3.5 pr-0.5 text-right flex flex-col items-end">
+                      <div className="space-y-2 sm:space-y-3 pr-0.5 text-right flex flex-col items-end">
                         <button
                           onClick={() => {
                             setSelectedLanguage('English');
                             setAtmStep('option');
                           }}
-                          className="w-[120px] py-1.5 bg-sky-950/70 hover:bg-sky-600 border border-sky-400/35 hover:border-sky-300 text-white rounded-lg text-[10px] font-black text-center cursor-pointer shadow-sm"
+                          className="w-full max-w-[110px] sm:max-w-[120px] py-1.5 bg-sky-950/70 hover:bg-sky-600 border border-sky-400/35 hover:border-sky-300 text-white rounded-lg text-[8.5px] sm:text-[10px] font-black text-center cursor-pointer shadow-sm whitespace-nowrap truncate"
                         >
                           ENGLISH ➔
                         </button>
@@ -238,7 +238,7 @@ const AtmLab = () => {
                             setSelectedLanguage('Hindi');
                             setAtmStep('option');
                           }}
-                          className="w-[120px] py-1.5 bg-sky-950/70 hover:bg-sky-600 border border-sky-400/35 hover:border-sky-300 text-white rounded-lg text-[10px] font-black text-center cursor-pointer shadow-sm"
+                          className="w-full max-w-[110px] sm:max-w-[120px] py-1.5 bg-sky-950/70 hover:bg-sky-600 border border-sky-400/35 hover:border-sky-300 text-white rounded-lg text-[8.5px] sm:text-[10px] font-black text-center cursor-pointer shadow-sm whitespace-nowrap truncate"
                         >
                           HINDI ➔
                         </button>
@@ -247,33 +247,33 @@ const AtmLab = () => {
                   )}
 
                   {atmStep === 'option' && (
-                    <div className="flex-1 flex flex-col justify-between py-1.5 z-20">
-                      <h4 className="text-xs font-black text-center text-white">{t("basicskills.atm_screen_select_tx_title", "SELECT TRANSACTION")}</h4>
-                      <div className="grid grid-cols-2 gap-x-2 gap-y-3 mt-1.5">
-                        <div className="space-y-2 text-left">
+                    <div className="flex-1 flex flex-col justify-between py-1 sm:py-1.5 z-20">
+                      <h4 className="text-[11px] sm:text-xs font-black text-center text-white">{t("basicskills.atm_screen_select_tx_title", "SELECT TRANSACTION")}</h4>
+                      <div className="grid grid-cols-2 gap-x-1.5 gap-y-2 mt-1">
+                        <div className="space-y-1.5 text-left flex flex-col items-start">
                           <button
                             onClick={() => toast.error("Simulation: Fast Cash is disabled. Please choose Cash Withdrawal.")}
-                            className="w-full text-left pl-1.5 py-1 bg-sky-950/45 text-[9px] font-black rounded border border-transparent hover:border-sky-300 cursor-pointer"
+                            className="w-full text-left px-1.5 py-1 bg-sky-950/45 text-[8px] sm:text-[9px] font-black rounded border border-transparent hover:border-sky-300 cursor-pointer whitespace-nowrap truncate"
                           >
                             {t("basicskills.atm_fast_cash", "⬳ FAST CASH")}
                           </button>
                           <button
                             onClick={() => toast.error("Simulation: Balance Inquiry is disabled. Please choose Cash Withdrawal.")}
-                            className="w-full text-left pl-1.5 py-1 bg-sky-950/45 text-[9px] font-black rounded border border-transparent hover:border-sky-300 cursor-pointer"
+                            className="w-full text-left px-1.5 py-1 bg-sky-950/45 text-[8px] sm:text-[9px] font-black rounded border border-transparent hover:border-sky-300 cursor-pointer whitespace-nowrap truncate"
                           >
                             {t("basicskills.atm_balance_inq", "⬳ BALANCE INQUIRY")}
                           </button>
                         </div>
-                        <div className="space-y-2 text-right flex flex-col items-end">
+                        <div className="space-y-1.5 text-right flex flex-col items-end">
                           <button
                             onClick={() => setAtmStep('accountType')}
-                            className="w-[125px] py-1 bg-amber-400 text-slate-900 text-[9px] font-black rounded-lg text-center shadow-md hover:bg-amber-300 cursor-pointer"
+                            className="w-full max-w-[120px] py-1 px-1 bg-amber-400 text-slate-900 text-[8px] sm:text-[9px] font-black rounded-lg text-center shadow-md hover:bg-amber-300 cursor-pointer whitespace-nowrap truncate"
                           >
                             {t("basicskills.atm_withdrawal_btn", "CASH WITHDRAWAL ➔")}
                           </button>
                           <button
                             onClick={() => toast.error("Simulation: PIN Change is disabled.")}
-                            className="w-[125px] py-1 bg-sky-950/45 text-white text-[9px] font-black rounded-lg border border-sky-400/20 text-center cursor-pointer"
+                            className="w-full max-w-[120px] py-1 px-1 bg-sky-950/45 text-white text-[8px] sm:text-[9px] font-black rounded-lg border border-sky-400/20 text-center cursor-pointer whitespace-nowrap truncate"
                           >
                             {t("basicskills.atm_pin_change_btn", "PIN CHANGE ➔")}
                           </button>
@@ -283,19 +283,19 @@ const AtmLab = () => {
                   )}
 
                   {atmStep === 'accountType' && (
-                    <div className="flex-1 flex flex-col justify-between py-2 z-20">
+                    <div className="flex-1 flex flex-col justify-between py-1.5 sm:py-2 z-20">
                       <div className="text-center">
-                        <h4 className="text-xs font-black text-white">{t("basicskills.atm_select_acct_title", "SELECT ACCOUNT TYPE")}</h4>
-                        <p className="text-[9px] text-sky-100">{t("basicskills.atm_select_acct_sub", "Choose an account type")}</p>
+                        <h4 className="text-[11px] sm:text-xs font-black text-white">{t("basicskills.atm_select_acct_title", "SELECT ACCOUNT TYPE")}</h4>
+                        <p className="text-[8.5px] sm:text-[9px] text-sky-100">{t("basicskills.atm_select_acct_sub", "Choose an account type")}</p>
                       </div>
-                      <div className="grid grid-cols-2 gap-2 mt-2">
+                      <div className="grid grid-cols-2 gap-1.5 mt-1.5">
                         <div className="text-left">
                           <button
                             onClick={() => {
                               setSelectedAccountType('Current');
                               setAtmStep('amountInput');
                             }}
-                            className="w-full text-left pl-1.5 py-1.5 bg-sky-950/50 text-[9px] font-black rounded border border-sky-400/20 hover:border-sky-300 cursor-pointer"
+                            className="w-full text-left px-1.5 py-1.5 bg-sky-950/50 text-[8px] sm:text-[9px] font-black rounded border border-sky-400/20 hover:border-sky-300 cursor-pointer whitespace-nowrap truncate"
                           >
                             {t("basicskills.atm_current_acct", "⬳ CURRENT A/C")}
                           </button>
@@ -306,7 +306,7 @@ const AtmLab = () => {
                               setSelectedAccountType('Savings');
                               setAtmStep('amountInput');
                             }}
-                            className="w-[110px] py-1.5 bg-amber-400 text-slate-900 text-[9px] font-black rounded-lg text-center shadow-md hover:bg-amber-300 cursor-pointer"
+                            className="w-full max-w-[110px] py-1.5 px-1 bg-amber-400 text-slate-900 text-[8px] sm:text-[9px] font-black rounded-lg text-center shadow-md hover:bg-amber-300 cursor-pointer whitespace-nowrap truncate"
                           >
                             {t("basicskills.atm_savings_acct", "SAVINGS A/C ➔")}
                           </button>
@@ -316,29 +316,29 @@ const AtmLab = () => {
                   )}
 
                   {atmStep === 'amountInput' && (
-                    <div className="flex-1 flex flex-col justify-between py-1.5 z-20">
+                    <div className="flex-1 flex flex-col justify-between py-1 sm:py-1.5 z-20">
                       <div className="text-center space-y-0.5">
-                        <h4 className="text-xs font-black text-white">{t("basicskills.atm_enter_amt_title", "ENTER AMOUNT TO WITHDRAW")}</h4>
-                        <p className="text-[8px] text-sky-105 font-bold">{t("basicskills.atm_enter_amt_sub", "Multiples of ₹100 | Maximum ₹10,000")}</p>
+                        <h4 className="text-[11px] sm:text-xs font-black text-white">{t("basicskills.atm_enter_amt_title", "ENTER AMOUNT TO WITHDRAW")}</h4>
+                        <p className="text-[7.5px] sm:text-[8px] text-sky-100 font-bold">{t("basicskills.atm_enter_amt_sub", "Multiples of ₹100 | Maximum ₹10,000")}</p>
                       </div>
 
                       <div className="flex flex-col items-center">
-                        <div className="w-[150px] bg-slate-950/90 border-2 border-sky-400 rounded-xl p-2 text-center text-yellow-400 text-base font-black font-mono tracking-wider relative shadow-inner">
+                        <div className="w-[130px] sm:w-[150px] bg-slate-950/90 border-2 border-sky-400 rounded-xl p-1.5 sm:p-2 text-center text-yellow-400 text-sm sm:text-base font-black font-mono tracking-wider relative shadow-inner">
                           ₹ {selectedAmount || '0'}
                           <span className="animate-ping absolute right-3">|</span>
                         </div>
                         {atmError && (
-                          <p className="text-[9px] text-red-200 font-bold mt-1.5 flex items-center gap-1 bg-red-950/65 px-2.5 py-1 rounded border border-red-800/40">
+                          <p className="text-[8.5px] text-red-200 font-bold mt-1 flex items-center gap-1 bg-red-950/65 px-2 py-0.5 rounded border border-red-800/40">
                             <AlertCircle size={9} /> {atmError}
                           </p>
                         )}
                       </div>
 
-                      <div className="grid grid-cols-2 gap-2 mt-1">
+                      <div className="grid grid-cols-2 gap-1.5 mt-1">
                         <div className="text-left">
                           <button
                             onClick={() => setSelectedAmount('')}
-                            className="w-full text-left pl-1.5 py-1.5 bg-sky-950/50 text-[9px] font-black rounded border border-sky-400/20 hover:bg-sky-850 cursor-pointer"
+                            className="w-full text-left px-1.5 py-1.5 bg-sky-950/50 text-[8px] sm:text-[9px] font-black rounded border border-sky-400/20 hover:bg-sky-850 cursor-pointer whitespace-nowrap truncate"
                           >
                             {t("basicskills.atm_btn_clear", "⬳ CLEAR")}
                           </button>
@@ -346,7 +346,7 @@ const AtmLab = () => {
                         <div className="text-right flex flex-col items-end">
                           <button
                             onClick={handlePinSubmit}
-                            className="w-[110px] py-1.5 bg-amber-400 text-slate-900 text-[9px] font-black rounded-lg text-center shadow-md hover:bg-amber-300 cursor-pointer"
+                            className="w-full max-w-[110px] py-1.5 px-1 bg-amber-400 text-slate-900 text-[8px] sm:text-[9px] font-black rounded-lg text-center shadow-md hover:bg-amber-300 cursor-pointer whitespace-nowrap truncate"
                           >
                             {t("basicskills.atm_btn_confirm", "CONFIRM ➔")}
                           </button>
@@ -356,25 +356,25 @@ const AtmLab = () => {
                   )}
 
                   {atmStep === 'pin' && (
-                    <div className="flex-1 flex flex-col justify-between py-1.5 z-20">
+                    <div className="flex-1 flex flex-col justify-between py-1 sm:py-1.5 z-20">
                       <div className="text-center space-y-0.5">
-                        <h4 className="text-xs font-black text-white">{t("basicskills.atm_enter_pin_title", "ENTER YOUR SECRET PIN")}</h4>
-                        <p className="text-[8px] text-sky-200 font-bold">{t("basicskills.atm_enter_pin_sub", "Keep your PIN secret for security")}</p>
+                        <h4 className="text-[11px] sm:text-xs font-black text-white">{t("basicskills.atm_enter_pin_title", "ENTER YOUR SECRET PIN")}</h4>
+                        <p className="text-[7.5px] sm:text-[8px] text-sky-200 font-bold">{t("basicskills.atm_enter_pin_sub", "Keep your PIN secret for security")}</p>
                       </div>
 
-                      <div className="flex flex-col items-center py-1.5">
-                        <div className="flex gap-2">
+                      <div className="flex flex-col items-center py-1">
+                        <div className="flex gap-1.5 sm:gap-2">
                           {[0, 1, 2, 3].map(idx => (
                             <div
                               key={idx}
-                              className="w-9 h-9 border-2 border-sky-400/80 rounded-xl flex items-center justify-center text-base text-yellow-400 font-black bg-[#061e38] shadow-inner"
+                              className="w-7 h-7 sm:w-9 sm:h-9 border-2 border-sky-400/80 rounded-lg sm:rounded-xl flex items-center justify-center text-sm sm:text-base text-yellow-400 font-black bg-[#061e38] shadow-inner"
                             >
                               {pinInput[idx] ? '●' : ''}
                             </div>
                           ))}
                         </div>
                         {atmError && (
-                          <p className="text-[9px] text-red-200 font-bold mt-1.5 flex items-center gap-1 bg-red-950/65 px-2.5 py-1 rounded border border-red-800/40">
+                          <p className="text-[8.5px] text-red-200 font-bold mt-1 flex items-center gap-1 bg-red-950/65 px-2 py-0.5 rounded border border-red-800/40">
                             <AlertCircle size={9} /> {atmError}
                           </p>
                         )}
@@ -383,7 +383,7 @@ const AtmLab = () => {
                       <div className="text-right flex flex-col items-end mt-0.5">
                         <button
                           onClick={handlePinSubmit}
-                          className="w-[110px] py-1.5 bg-amber-400 text-slate-900 text-[9px] font-black rounded-lg text-center shadow-md hover:bg-amber-350 cursor-pointer"
+                          className="w-full max-w-[110px] py-1.5 px-1 bg-amber-400 text-slate-900 text-[8px] sm:text-[9px] font-black rounded-lg text-center shadow-md hover:bg-amber-350 cursor-pointer whitespace-nowrap truncate"
                         >
                           {t("basicskills.atm_btn_enter", "ENTER ➔")}
                         </button>
@@ -392,39 +392,39 @@ const AtmLab = () => {
                   )}
 
                   {atmStep === 'processing' && (
-                    <div className="flex-1 flex flex-col items-center justify-center text-center space-y-3 py-1.5 z-20">
-                      <div className="w-10 h-10 rounded-full border-4 border-t-yellow-400 border-r-transparent border-b-transparent border-l-transparent animate-spin" />
+                    <div className="flex-1 flex flex-col items-center justify-center text-center space-y-2 py-1.5 z-20">
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-4 border-t-yellow-400 border-r-transparent border-b-transparent border-l-transparent animate-spin" />
                       <div className="space-y-0.5">
-                        <h4 className="text-xs font-bold text-sky-100">{t("basicskills.atm_tx_processing_title", "TRANSACTION PROCESSING")}</h4>
-                        <p className="text-[9px] text-sky-250 font-bold">{t("basicskills.atm_please_wait", "Please wait...")}</p>
+                        <h4 className="text-[11px] sm:text-xs font-bold text-sky-100">{t("basicskills.atm_tx_processing_title", "TRANSACTION PROCESSING")}</h4>
+                        <p className="text-[8.5px] sm:text-[9px] text-sky-250 font-bold">{t("basicskills.atm_please_wait", "Please wait...")}</p>
                       </div>
                     </div>
                   )}
 
                   {atmStep === 'dispensing' && (
-                    <div className="flex-1 flex flex-col items-center justify-center text-center space-y-3 py-1.5 z-20">
+                    <div className="flex-1 flex flex-col items-center justify-center text-center space-y-2 py-1.5 z-20">
                       <motion.div
                         animate={{ y: [0, 8, 0] }}
                         transition={{ repeat: Infinity, duration: 1.2 }}
-                        className="text-4xl"
+                        className="text-3xl sm:text-4xl"
                       >
                         💵
                       </motion.div>
                       <div className="space-y-0.5">
-                        <h4 className="text-xs font-black text-yellow-300">{t("basicskills.atm_cash_dispensing_title", "CASH DISPENSING")}</h4>
-                        <p className="text-[9px] text-white font-bold">Please collect your ₹ {selectedAmount} cash</p>
+                        <h4 className="text-[11px] sm:text-xs font-black text-yellow-300">{t("basicskills.atm_cash_dispensing_title", "CASH DISPENSING")}</h4>
+                        <p className="text-[8.5px] sm:text-[9px] text-white font-bold">Please collect your ₹ {selectedAmount} cash</p>
                       </div>
                     </div>
                   )}
 
                   {atmStep === 'success' && (
-                    <div className="flex-1 flex flex-col justify-between py-2 text-center font-bold z-20">
+                    <div className="flex-1 flex flex-col justify-between py-1.5 sm:py-2 text-center font-bold z-20">
                       <div className="flex flex-col items-center space-y-1">
-                        <div className="w-10 h-10 bg-teal-500/10 rounded-full flex items-center justify-center text-teal-300 border border-teal-500/30">
-                          <CheckCircle2 size={24} />
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-teal-500/10 rounded-full flex items-center justify-center text-teal-300 border border-teal-500/30">
+                          <CheckCircle2 size={20} />
                         </div>
-                        <h4 className="text-xs font-black text-teal-300">{t("basicskills.atm_tx_success_title", "TRANSACTION SUCCESS")}</h4>
-                        <p className="text-[8.5px] text-sky-100 leading-normal">
+                        <h4 className="text-[11px] sm:text-xs font-black text-teal-300">{t("basicskills.atm_tx_success_title", "TRANSACTION SUCCESS")}</h4>
+                        <p className="text-[8px] sm:text-[8.5px] text-sky-100 leading-normal">
                           Please remove your card.<br />
                           Thank you for banking with State Bank.
                         </p>
@@ -432,7 +432,7 @@ const AtmLab = () => {
                       <div className="text-right flex flex-col items-end">
                         <button
                           onClick={resetAtm}
-                          className="w-[110px] py-1.5 bg-amber-400 text-slate-900 text-[9px] font-black rounded-lg text-center shadow-md hover:bg-amber-350 cursor-pointer"
+                          className="w-full max-w-[110px] py-1.5 px-1 bg-amber-400 text-slate-900 text-[8px] sm:text-[9px] font-black rounded-lg text-center shadow-md hover:bg-amber-350 cursor-pointer whitespace-nowrap truncate"
                         >
                           {t("basicskills.atm_btn_complete", "COMPLETE ➔")}
                         </button>
@@ -441,14 +441,14 @@ const AtmLab = () => {
                   )}
 
                   {/* Screen Footer */}
-                  <div className="border-t border-white/10 pt-1 flex justify-between text-[7.5px] text-sky-200 font-medium">
+                  <div className="border-t border-white/10 pt-1 flex justify-between text-[7px] sm:text-[7.5px] text-sky-200 font-medium">
                     <span>{selectedLanguage ? `Lang: ${selectedLanguage}` : 'Choose Language'}</span>
                     <span>{selectedAccountType ? `A/C: ${selectedAccountType}` : 'Secure Session'}</span>
                   </div>
                 </div>
 
                 {/* RIGHT SIDE PHYSICAL BUTTONS */}
-                <div className="flex flex-col justify-around h-[240px] py-4 shrink-0">
+                <div className="flex flex-col justify-around h-[210px] sm:h-[240px] py-2 shrink-0">
                   {[1, 2, 3].map(btnIdx => (
                     <button
                       key={`right-btn-${btnIdx}`}
@@ -473,7 +473,7 @@ const AtmLab = () => {
                           resetAtm();
                         }
                       }}
-                      className="w-5 h-5 bg-gradient-to-r from-slate-300 via-slate-200 to-slate-400 hover:from-slate-200 hover:to-slate-350 rounded-full border border-slate-500 shadow-[0_2px_4px_rgba(0,0,0,0.3)] active:scale-90 transition-all cursor-pointer"
+                      className="w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-r from-slate-300 via-slate-200 to-slate-400 hover:from-slate-200 hover:to-slate-350 rounded-full border border-slate-500 shadow-[0_2px_4px_rgba(0,0,0,0.3)] active:scale-90 transition-all cursor-pointer"
                     />
                   ))}
                 </div>

@@ -311,7 +311,7 @@ const FingerspellComponent = () => {
           {t('signLearn.fingerSpellDesc', 'Type your name or any English word to instantly see how to spell it using sign language alphabet (Fingerspelling).')}
         </p>
 
-        <div className="w-full relative mb-12">
+        <div className="w-full relative mb-8 sm:mb-10">
           <input
             type="text"
             value={text}
@@ -320,17 +320,18 @@ const FingerspellComponent = () => {
             onBlur={() => setTimeout(() => setIsFocused(false), 200)}
             maxLength={15}
             placeholder={t('signLearn.typeWord', 'TYPE A WORD...')}
-            className="w-full px-8 py-5 rounded-full bg-white border-2 border-slate-200 text-center text-2xl font-black text-slate-800 placeholder-slate-300 focus:outline-none focus:border-teal-500 focus:ring-4 ring-teal-100 transition-all tracking-[0.2em] shadow-sm"
+            className="w-full px-6 sm:px-8 py-4 sm:py-5 rounded-full bg-white border-2 border-slate-200 text-center text-xl sm:text-2xl font-black text-slate-800 placeholder-slate-300 focus:outline-none focus:border-teal-500 focus:ring-4 ring-teal-100 transition-all tracking-[0.15em] sm:tracking-[0.2em] shadow-sm"
           />
-          <div className="absolute -bottom-7 left-0 right-0 flex justify-between items-center px-4">
-            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+          <div className="mt-3 flex flex-row items-center justify-between gap-2 px-2 sm:px-4">
+            <span className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider whitespace-nowrap">
               {t('signLearn.maxChars', 'Max 15 characters')}
-            </div>
+            </span>
             <button 
+              type="button"
               onClick={() => setShowDictionary(true)}
-              className="text-[10px] font-bold text-teal-600 uppercase tracking-widest flex items-center gap-1 hover:text-teal-700 cursor-pointer transition-colors bg-teal-50 px-3 py-1 rounded-full"
+              className="text-[10px] sm:text-[11px] font-bold text-teal-600 uppercase tracking-wider flex items-center gap-1.5 hover:text-teal-700 cursor-pointer transition-colors bg-teal-50 hover:bg-teal-100 px-3 py-1 sm:py-1.5 rounded-full whitespace-nowrap shadow-xs"
             >
-              <BookOpen size={12} /> {t('signLearn.dictionaryList', 'Dictionary List')}
+              <BookOpen size={13} /> {t('signLearn.dictionaryList', 'Dictionary List')}
             </button>
           </div>
 
