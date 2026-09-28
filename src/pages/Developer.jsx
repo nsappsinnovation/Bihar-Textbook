@@ -5,12 +5,13 @@ import { useTranslation } from 'react-i18next';
 /* The people who built the site. Static credit content, so it lives here rather
    than coming from directoryService the way the employee directory does.
    Photos are in public/images/developers/. */
+const founder = {
+  name: "Nishant Shekhar",
+  role: "Founder, NS Apps Innovations",
+  linkedin: "https://www.linkedin.com/in/nishantshekhar28/",
+};
+
 const team = [
-  {
-    name: "Nishant Shekhar",
-    role: "Founder, NS Apps Innovations",
-    linkedin: "https://www.linkedin.com/in/nishantshekhar28/",
-  },
   {
     name: "Manish Kumar",
     role: "Team Lead",
@@ -126,6 +127,68 @@ function TeamCard({ name, role, image, accent, linkedin, technologies }) {
   );
 }
 
+const LinkedInIcon = ({ className }) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+  </svg>
+);
+
+/* The founder, featured on his own above the team */
+function FounderCard({ name, role, image, linkedin, t }) {
+  const initials = name.split(" ").map((part) => part[0]).join("").slice(0, 2);
+  return (
+    <section className="mb-16 md:mb-24 flex justify-center">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="relative w-full max-w-md overflow-hidden rounded-[28px] bg-white px-6 pt-10 pb-8 text-center border border-[#124d9c]/10 shadow-[0_24px_60px_-24px_rgba(18,77,156,0.45)]"
+      >
+        {/* Soft brand glow behind the portrait */}
+        <div aria-hidden className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#124d9c]/[0.08] to-transparent" />
+        <div aria-hidden className="absolute -top-16 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full bg-[#60a5fa]/20 blur-3xl" />
+
+        {/* Portrait with a gradient ring */}
+        <div className="relative mx-auto w-32 h-32 sm:w-36 sm:h-36 rounded-full p-1 bg-gradient-to-br from-[#124d9c] via-[#3b82f6] to-[#0b2b4f] shadow-lg shadow-[#124d9c]/25">
+          <div className="w-full h-full rounded-full bg-white p-1">
+          <div className="relative w-full h-full rounded-full overflow-hidden bg-[#e3edfd]">
+            <span className="absolute inset-0 grid place-items-center text-4xl sm:text-5xl font-black text-[#124d9c]">{initials}</span>
+            {image && (
+              <img
+                src={image}
+                alt=""
+                onError={(e) => { e.currentTarget.style.display = "none"; }}
+                className="absolute inset-0 w-full h-full object-cover object-top"
+              />
+            )}
+          </div>
+          </div>
+        </div>
+
+        <span className="relative mt-5 inline-flex items-center gap-1.5 rounded-full bg-[#124d9c] px-3.5 py-1 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.18em] text-white">
+          {t("developer.founderBadge", "Founder")}
+        </span>
+
+        <h2 className="relative mt-3 text-2xl sm:text-3xl font-black tracking-tight text-[#0b2b4f]">{name}</h2>
+        <p className="relative mt-1 text-sm sm:text-base font-semibold text-[#124d9c]">{role}</p>
+
+        {linkedin && (
+          <a
+            href={linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="relative mt-6 inline-flex items-center gap-2 rounded-full border border-[#124d9c]/20 bg-[#124d9c]/[0.04] px-5 py-2.5 text-sm font-bold text-[#124d9c] transition hover:bg-[#124d9c] hover:text-white"
+          >
+            <LinkedInIcon className="w-4 h-4" />
+            {t("developer.connectLinkedIn", "Connect on LinkedIn")}
+          </a>
+        )}
+      </motion.div>
+    </section>
+  );
+}
+
 function TeamGroup({ title, people, startIndex = 0 }) {
   return (
     <section className="mb-16 md:mb-24">
@@ -183,6 +246,7 @@ const Developer = () => {
 
       {/* ================= TEAM ================= */}
       <div className="max-w-6xl mx-auto px-5 sm:px-6 py-14 md:py-20">
+        <FounderCard {...founder} t={t} />
         <TeamGroup title={t("developer.teamMembers", "Team Members")} people={team} />
       </div>
     </div>

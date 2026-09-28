@@ -7103,7 +7103,9 @@
     "intro": "NS Apps Innovations, बिहार सरकार द्वारा मान्यता प्राप्त एक स्टार्टअप, React.js, Node.js और Flutter पर काम करता है। ASPIRE और समाधान ऐप समेत 28 से अधिक परियोजनाओं में टीम ने तकनीक के जरिए शासन और शिक्षा को लोगों के लिए बेहतर बनाया है।",
     "teamLead": "टीम लीड",
     "teamHeads": "टीम प्रमुख",
-    "teamMembers": "टीम सदस्य"
+    "teamMembers": "टीम सदस्य",
+    "founderBadge": "संस्थापक",
+    "connectLinkedIn": "LinkedIn पर जुड़ें"
   },
   "homeV1": {
     "flipTitle": "कार्ड पलटकर जानें",
