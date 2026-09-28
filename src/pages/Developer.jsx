@@ -137,23 +137,22 @@ const LinkedInIcon = ({ className }) => (
 function FounderCard({ name, role, image, linkedin, t }) {
   const initials = name.split(" ").map((part) => part[0]).join("").slice(0, 2);
   return (
-    <section className="mb-16 md:mb-24 flex justify-center">
+    <section className="mb-14 md:mb-20 flex justify-center">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
-        className="relative w-full max-w-md overflow-hidden rounded-[28px] bg-white px-6 pt-10 pb-8 text-center border border-[#124d9c]/10 shadow-[0_24px_60px_-24px_rgba(18,77,156,0.45)]"
+        className="relative w-full max-w-sm overflow-hidden rounded-3xl bg-white px-6 pt-8 pb-6 text-center border border-slate-200/80 shadow-[0_12px_32px_-22px_rgba(18,77,156,0.35)]"
       >
-        {/* Soft brand glow behind the portrait */}
-        <div aria-hidden className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#124d9c]/[0.08] to-transparent" />
-        <div aria-hidden className="absolute -top-16 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full bg-[#60a5fa]/20 blur-3xl" />
+        {/* Light brand tint behind the portrait */}
+        <div aria-hidden className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#124d9c]/[0.05] to-transparent" />
 
         {/* Portrait with a gradient ring */}
-        <div className="relative mx-auto w-32 h-32 sm:w-36 sm:h-36 rounded-full p-1 bg-gradient-to-br from-[#124d9c] via-[#3b82f6] to-[#0b2b4f] shadow-lg shadow-[#124d9c]/25">
-          <div className="w-full h-full rounded-full bg-white p-1">
+        <div className="relative mx-auto w-24 h-24 sm:w-28 sm:h-28 rounded-full p-[2px] bg-gradient-to-br from-[#124d9c] via-[#3b82f6] to-[#0b2b4f]">
+          <div className="w-full h-full rounded-full bg-white p-[3px]">
           <div className="relative w-full h-full rounded-full overflow-hidden bg-[#e3edfd]">
-            <span className="absolute inset-0 grid place-items-center text-4xl sm:text-5xl font-black text-[#124d9c]">{initials}</span>
+            <span className="absolute inset-0 grid place-items-center text-3xl sm:text-4xl font-extrabold text-[#124d9c]">{initials}</span>
             {image && (
               <img
                 src={image}
@@ -166,19 +165,19 @@ function FounderCard({ name, role, image, linkedin, t }) {
           </div>
         </div>
 
-        <span className="relative mt-5 inline-flex items-center gap-1.5 rounded-full bg-[#124d9c] px-3.5 py-1 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.18em] text-white">
+        <span className="relative mt-4 inline-flex items-center rounded-full bg-[#124d9c]/[0.08] px-3 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.14em] text-[#124d9c]">
           {t("developer.founderBadge", "Founder")}
         </span>
 
-        <h2 className="relative mt-3 text-2xl sm:text-3xl font-black tracking-tight text-[#0b2b4f]">{name}</h2>
-        <p className="relative mt-1 text-sm sm:text-base font-semibold text-[#124d9c]">{role}</p>
+        <h2 className="relative mt-2.5 text-xl sm:text-2xl font-extrabold tracking-tight text-[#0b2b4f]">{name}</h2>
+        <p className="relative mt-0.5 text-[13px] sm:text-sm font-semibold text-[#124d9c]">{role}</p>
 
         {linkedin && (
           <a
             href={linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative mt-6 inline-flex items-center gap-2 rounded-full border border-[#124d9c]/20 bg-[#124d9c]/[0.04] px-5 py-2.5 text-sm font-bold text-[#124d9c] transition hover:bg-[#124d9c] hover:text-white"
+            className="relative mt-4 inline-flex items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-[13px] font-semibold text-slate-600 transition hover:border-[#124d9c]/40 hover:text-[#124d9c]"
           >
             <LinkedInIcon className="w-4 h-4" />
             {t("developer.connectLinkedIn", "Connect on LinkedIn")}
@@ -233,8 +232,8 @@ const Developer = () => {
             </span>
 
             <h1 className="text-[30px] md:text-[52px] font-display font-black tracking-tight leading-[1.1] text-white mb-5">
-              {t("developer.titleLine1", "A Startup Product")} <br />
-              <span className="text-[#60a5fa]">{t("developer.titleLine2", "Born in Bihar")}</span>
+              {t("developer.taglineStart", "Imagine, Build,")}{" "}
+              <span className="text-[#60a5fa]">{t("developer.taglineEnd", "Become")}</span>
             </h1>
 
             <p className="text-[14px] md:text-[17px] text-blue-100/90 leading-relaxed font-medium">

@@ -6860,14 +6860,14 @@
   },
   "developer": {
     "badge": "About the creators",
-    "titleLine1": "A Startup Product",
-    "titleLine2": "Born in Bihar",
     "intro": "NS Apps Innovations, a startup recognised by the Government of Bihar, builds with React.js, Node.js and Flutter. Across more than 28 projects — among them ASPIRE and the Samadhan apps — the team has used technology to make governance and learning work better for people.",
     "teamLead": "Team Lead",
     "teamHeads": "Team Heads",
     "teamMembers": "Team Members",
     "founderBadge": "Founder",
-    "connectLinkedIn": "Connect on LinkedIn"
+    "connectLinkedIn": "Connect on LinkedIn",
+    "taglineStart": "Imagine, Build,",
+    "taglineEnd": "Become"
   },
   "homeV1": {
     "flipTitle": "Hover to discover",
