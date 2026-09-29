@@ -89,12 +89,22 @@ const RTI = () => {
                 className="bg-white rounded-3xl p-8 shadow-xl border border-slate-100 h-full flex flex-col"
               >
                 
-                <h3 className="text-lg font-black text-[#0d0e23] mb-8">{t('rtiPage.nodalOfficer', 'Nodal Officer')}</h3>
-                
-                <div className="space-y-6">
+                <h3 className="text-lg font-black text-[#0d0e23] mb-2">{t('rtiPage.nodalOfficer', 'Nodal Officer')}</h3>
+
+                <div className="divide-y divide-slate-100">
                   <ContactItem icon={<FiUser />} label={t('rtiPage.pioLabel', 'Public Information Officer')} value={show(rtiData?.officer)} />
-                  <ContactItem icon={<FiPhone />} label={t('rtiPage.phoneLabel', 'Contact Number')} value={show(rtiData?.phone)} />
-                  <ContactItem icon={<FiMail />} label={t('rtiPage.emailLabel', 'Email Address')} value={show(rtiData?.email)} />
+                  <ContactItem
+                    icon={<FiPhone />}
+                    label={t('rtiPage.phoneLabel', 'Contact Number')}
+                    value={show(rtiData?.phone)}
+                    href={rtiData?.phone ? `tel:${rtiData.phone.replace(/[^\d+]/g, '')}` : undefined}
+                  />
+                  <ContactItem
+                    icon={<FiMail />}
+                    label={t('rtiPage.emailLabel', 'Email Address')}
+                    value={show(rtiData?.email)}
+                    href={rtiData?.email ? `mailto:${rtiData.email}` : undefined}
+                  />
                   <ContactItem icon={<FiMapPin />} label={t('rtiPage.addressLabel', 'Office Address')} value={loading ? null : displayAddress} />
                 </div>
 
@@ -138,17 +148,22 @@ const RTI = () => {
 };
 
 /* Helper Components */
-const ContactItem = ({ icon, label, value }) => (
-  <div className="flex items-start gap-4">
-    <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400 mt-1">
+// One row of the Nodal Officer card: fixed-size icon tile, then label and value (long values wrap cleanly)
+const ContactItem = ({ icon, label, value, href }) => (
+  <div className="flex items-start gap-4 py-4">
+    <div className="w-10 h-10 shrink-0 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-[17px]">
       {icon}
     </div>
-    <div>
-      <div className="text-[10px] md:text-xs font-black text-slate-500 uppercase tracking-widest leading-none mb-1">{label}</div>
+    <div className="min-w-0 flex-1 pt-0.5">
+      <div className="text-[10px] md:text-[11px] font-bold text-slate-400 uppercase tracking-[0.14em] leading-none mb-1.5">{label}</div>
       {value == null ? (
-        <div className="h-4 w-40 mt-1 rounded bg-slate-200/70 animate-pulse" aria-hidden />
+        <div className="h-4 w-40 rounded bg-slate-200/70 animate-pulse" aria-hidden />
+      ) : href ? (
+        <a href={href} className="block text-sm md:text-[15px] font-semibold text-slate-800 leading-relaxed break-words hover:text-blue-600 transition-colors">
+          {value}
+        </a>
       ) : (
-        <div className="text-sm md:text-base font-bold text-slate-800 leading-tight">{value}</div>
+        <div className="text-sm md:text-[15px] font-semibold text-slate-800 leading-relaxed break-words">{value}</div>
       )}
     </div>
   </div>
