@@ -14,7 +14,9 @@ export const buildBoardItems = (notices, tenders) => {
         category: n.category === 'Circular' ? 'Circular' : 'Notice',
         title: n.title,
         date: toDisplayDate(n.date),
-        deadline: null,
+        dateLabel: 'published', // "Published" on the boards
+        hasDate: Boolean(n.date),
+        deadline: n.closingDate ? toDisplayDate(n.closingDate) : null, // closing date, when a notice has one
         ref: `NTC-${n.id}`,
         isUrgent: n.isUrgent,
         fileSize: 'PDF',
@@ -28,7 +30,10 @@ export const buildBoardItems = (notices, tenders) => {
         category: 'Tender',
         title: t.title,
         date: toDisplayDate(t.date),
-        deadline: null,
+        dateLabel: 'opens', // tenders show both "Opens" and "Closes"
+        hasDate: Boolean(t.date),
+        deadline: t.closingDate ? toDisplayDate(t.closingDate) : null,
+        isOpen: t.isActive,
         ref: `TND-${t.id}`,
         isUrgent: t.isUrgent,
         fileSize: 'PDF',

@@ -1,5 +1,15 @@
 import api, { fileUrl } from './api';
 
+// Today in India as "YYYY-MM-DD" (dates are stored without a time)
+const todayInIndia = () => new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+
+// A tender is open until its closing date has passed. The backend sends isActive; if it
+// doesn't (older API), the same rule is applied here.
+const tenderIsOpen = (n) =>
+    typeof n.isActive === 'boolean'
+        ? n.isActive
+        : n.type === 'Tender' && !!n.closingDate && n.closingDate.slice(0, 10) >= todayInIndia();
+
 // Backend notice → shape used by the pages
 const toNotice = (n) => ({
     id: n.id,
@@ -10,6 +20,8 @@ const toNotice = (n) => ({
     pinned: Boolean(n.isPinned),
     isUrgent: Boolean(n.isPinned),
     date: n.publishDate ? n.publishDate.slice(0, 10) : '', // "YYYY-MM-DD", empty when the notice has no date
+    closingDate: n.closingDate ? n.closingDate.slice(0, 10) : '', // tenders only
+    isActive: tenderIsOpen(n), // open until the closing date has passed
     document: n.documentUrl || '', // stored path, e.g. "/api/uploads/documents/x.pdf" or an external URL
     link: fileUrl(n.documentUrl) || '', // ready to use in <a href>
     updatedAt: n.updatedAt,
@@ -23,6 +35,7 @@ const toPayload = (form) => ({
     category: form.category,
     isPinned: Boolean(form.pinned),
     publishDate: form.date ? form.date.slice(0, 10) : undefined,
+    closingDate: form.closingDate ? form.closingDate.slice(0, 10) : null,
     documentUrl: form.document || '',
 });
 

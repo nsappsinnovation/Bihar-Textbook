@@ -44,9 +44,21 @@ export default function V1Notices() {
                     href={n.link || undefined}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group grid gap-1 py-5 sm:grid-cols-[110px_110px_1fr_auto] sm:items-center sm:gap-6"
+                    className="group grid gap-1 py-5 sm:grid-cols-[150px_110px_1fr_auto] sm:items-center sm:gap-6"
                   >
-                    <span className="text-sm font-medium text-slate-500">{n.date}</span>
+                    {/* Labelled dates: "Published" for notices, "Opens" + "Closes" for tenders */}
+                    <span className="grid gap-0.5 text-xs font-medium text-slate-500">
+                      <span>
+                        {n.dateLabel === "opens" ? t("noticeBoard.opens", "Opens") : t("noticeBoard.published", "Published")}:{" "}
+                        <span className="font-semibold text-slate-700">{n.hasDate ? n.date : t("noticeBoard.notSpecified", "Not specified")}</span>
+                      </span>
+                      {(n.category === "Tender" || n.deadline) && (
+                        <span>
+                          {t("noticeBoard.closes", "Closes")}:{" "}
+                          <span className="font-semibold text-slate-700">{n.deadline || t("noticeBoard.notSpecified", "Not specified")}</span>
+                        </span>
+                      )}
+                    </span>
                     <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-600 [html.lang-hi_&]:text-xs [html.lang-hi_&]:tracking-normal">
                       {t(`noticeBoard.tab.${n.category.toLowerCase()}`, n.category)}
                     </span>

@@ -13,6 +13,7 @@ const BoardOfDirectors = () => {
       .then((rows) => setItems(rows.map((row) => ({
         id: row.id,
         name: row.name,
+        position: row.boardPosition || '',
         designation: row.designation,
       }))))
       .catch(() => setItems([]));
@@ -43,6 +44,7 @@ const BoardOfDirectors = () => {
               <thead>
                 <tr className="bg-slate-200 border-b border-slate-300 text-[#0d0e23]">
                   <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">{t("knowUsPage.boardOfDirectors.colName", "Name")}</th>
+                  <th className="px-6 py-4 text-sm font-bold border-r border-slate-300">{t("knowUsPage.boardOfDirectors.colPosition", "Position in the Board")}</th>
                   <th className="px-6 py-4 text-sm font-bold">{t("knowUsPage.boardOfDirectors.colDesignation", "Designation")}</th>
                 </tr>
               </thead>
@@ -50,6 +52,13 @@ const BoardOfDirectors = () => {
                 {(items || []).map((member) => (
                   <tr key={member.id} className="text-[#0d0e23]">
                     <td className="px-6 py-4 text-sm border-r border-slate-300 font-semibold">{member.name}</td>
+                    <td className="px-6 py-4 text-sm border-r border-slate-300">
+                      {member.position ? (
+                        <span className="inline-block px-2.5 py-1 rounded-md bg-blue-50 text-blue-700 text-xs font-bold">{member.position}</span>
+                      ) : (
+                        <span className="text-slate-400">—</span>
+                      )}
+                    </td>
                     <td className="px-6 py-4 text-sm">{member.designation}</td>
                   </tr>
                 ))}

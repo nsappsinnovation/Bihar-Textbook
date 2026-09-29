@@ -25,7 +25,7 @@ export default function NoticesPage({ addToast, forcedCategory }) {
   const { upload, progressOf, isUploading } = useFileUpload();
 
   const noticeOptions = ["Recruitment", "Financial", "Technical", "Circular", "Corrigendum", "Other"];
-  const tenderOptions = ["Active", "E-Tender", "Procurement", "Services", "Other"];
+  const tenderOptions = ["E-Tender", "Procurement", "Services", "Other"];
   const categoryOptions = forcedCategory === 'Tender' ? tenderOptions : noticeOptions;
   const itemType = forcedCategory === 'Tender' ? 'Tender' : 'Notice';
 
@@ -36,6 +36,7 @@ export default function NoticesPage({ addToast, forcedCategory }) {
     category: categoryOptions[0],
     pinned: false,
     date: today(),
+    closingDate: '',
     document: '',
   });
   const [formData, setFormData] = useState(emptyForm);
@@ -221,8 +222,16 @@ export default function NoticesPage({ addToast, forcedCategory }) {
                   <div className="flex items-center flex-wrap gap-3">
                     <span className="text-xs text-gray-400 flex items-center gap-1">
                       <Calendar className="w-3 h-3" />
-                      {formatDate(notice.date)}
+                      {notice.type === 'Tender' ? 'Opening' : 'Published'}: {formatDate(notice.date) || 'Not specified'}
                     </span>
+                    {(notice.type === 'Tender' || notice.closingDate) && (
+                      <span className="text-xs text-gray-400">Closing: {formatDate(notice.closingDate) || 'Not specified'}</span>
+                    )}
+                    {notice.type === 'Tender' && (
+                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${notice.isActive ? 'bg-green-50 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
+                        {notice.isActive ? 'Active' : 'Closed'}
+                      </span>
+                    )}
                     <span className="text-xs text-gray-400 bg-gray-100 px-2 py-0.5 rounded-full">
                       {notice.category}
                     </span>
@@ -292,7 +301,7 @@ export default function NoticesPage({ addToast, forcedCategory }) {
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4">
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-1.5">Date</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1.5">{itemType === 'Tender' ? 'Opening Date' : 'Published On'}</label>
               <input 
                 type="date"
                 value={formData.date}
@@ -301,6 +310,19 @@ export default function NoticesPage({ addToast, forcedCategory }) {
                 id="notice-date"
               />
             </div>
+            {itemType === 'Tender' && (
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-1.5">Closing Date</label>
+                <input
+                  type="date"
+                  value={formData.closingDate || ''}
+                  min={formData.date || undefined}
+                  onChange={(e) => setFormData(prev => ({ ...prev, closingDate: e.target.value }))}
+                  className="w-full px-4 py-2.5 rounded-xl border border-gray-200 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-300 transition-all bg-white"
+                  id="notice-closing-date"
+                />
+              </div>
+            )}
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-1.5">Category</label>
               <select 

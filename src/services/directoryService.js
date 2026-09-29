@@ -2,7 +2,7 @@ import api from './api';
 
 // People lists stored in the backend "directory" table.
 // type: "leader" | "board_member" | "past_md" | "employee"
-// Row fields: id, name, designation, department, tag, email, phone, photoUrl, tenureFrom, tenureTo, status, sortOrder
+// Row fields: id, name, designation, boardPosition (board_member), department, tag, email, phone, photoUrl, tenureFrom, tenureTo, status, sortOrder
 
 export const getDirectory = (type) => api.get(`/api/getDirectory/${type}`).then((res) => res.data.data);
 

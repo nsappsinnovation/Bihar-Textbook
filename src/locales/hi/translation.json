@@ -404,7 +404,13 @@
       "circular": "परिपत्र",
       "tender": "निविदा",
       "notice": "सूचना"
-    }
+    },
+    "published": "प्रकाशित",
+    "opens": "खुलती है",
+    "closes": "बंद होती है",
+    "notSpecified": "निर्दिष्ट नहीं",
+    "open": "खुली",
+    "closed": "बंद"
   },
   "noticePage": {
     "title": "सूचना पट्ट",
@@ -449,7 +455,10 @@
       "showing": "{{total}} सूचनाओं में से {{start}} से {{end}} दिखाई जा रही हैं",
       "prev": "पिछला",
       "next": "अगला"
-    }
+    },
+    "publishedOn": "प्रकाशन तिथि",
+    "closingDate": "अंतिम तिथि",
+    "notSpecified": "निर्दिष्ट नहीं"
   },
   "contact": {
     "title": "संपर्क",
@@ -522,15 +531,21 @@
       "sNo": "क्र.सं.",
       "details": "निविदा विवरण",
       "date": "तिथि",
-      "action": "कार्रवाई"
+      "action": "कार्रवाई",
+      "dates": "तिथियाँ"
     },
     "pagination": {
       "showing": "{{total}} अवसरों में से {{start}} से {{end}} दिखाए जा रहे हैं",
       "prev": "पिछला",
       "next": "अगला"
     },
-    "activeOpportunity": "सक्रिय अवसर",
-    "ongoing": "जारी"
+    "dateNotSpecified": "—",
+    "lastDate": "अंतिम तिथि",
+    "openingDate": "खुलने की तिथि",
+    "closingDate": "बंद होने की तिथि",
+    "notSpecified": "निर्दिष्ट नहीं",
+    "statusOpen": "खुली",
+    "statusClosed": "बंद"
   },
   "csr": {
     "heroTitle1": "समुदायों को सशक्त बनाना",
@@ -6556,7 +6571,8 @@
       "colName": "नाम",
       "colDesignation": "पदनाम",
       "colSince": "कार्यकाल से",
-      "empty": "निदेशक मंडल का विवरण जल्द ही यहां प्रकाशित किया जाएगा।"
+      "empty": "निदेशक मंडल का विवरण जल्द ही यहां प्रकाशित किया जाएगा।",
+      "colPosition": "बोर्ड में पद"
     },
     "listOfMd": {
       "titlePart1": "नेतृत्व की",

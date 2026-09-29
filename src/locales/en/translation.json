@@ -399,7 +399,13 @@
       "circular": "Circular",
       "tender": "Tender",
       "notice": "Notice"
-    }
+    },
+    "published": "Published",
+    "opens": "Opens",
+    "closes": "Closes",
+    "notSpecified": "Not specified",
+    "open": "Open",
+    "closed": "Closed"
   },
   "noticePage": {
     "title": "Notice Board",
@@ -444,7 +450,10 @@
       "showing": "Showing {{start}} to {{end}} of {{total}} notices",
       "prev": "Prev",
       "next": "Next"
-    }
+    },
+    "publishedOn": "Published on",
+    "closingDate": "Closing date",
+    "notSpecified": "Not specified"
   },
   "contact": {
     "title": "Contact",
@@ -517,15 +526,21 @@
       "sNo": "S.No",
       "details": "Tender Details",
       "date": "Date",
-      "action": "Action"
+      "action": "Action",
+      "dates": "Dates"
     },
     "pagination": {
       "showing": "Showing {{start}} to {{end}} of {{total}} opportunities",
       "prev": "Prev",
       "next": "Next"
     },
-    "activeOpportunity": "Active Opportunity",
-    "ongoing": "Ongoing"
+    "dateNotSpecified": "—",
+    "lastDate": "Last date",
+    "openingDate": "Opening date",
+    "closingDate": "Closing date",
+    "notSpecified": "Not specified",
+    "statusOpen": "Open",
+    "statusClosed": "Closed"
   },
   "csr": {
     "heroTitle1": "Empowering Communities",
@@ -6320,7 +6335,8 @@
       "colName": "Name",
       "colDesignation": "Designation",
       "colSince": "Since",
-      "empty": "Board of Directors details will be published here soon."
+      "empty": "Board of Directors details will be published here soon.",
+      "colPosition": "Position in the Board"
     },
     "listOfMd": {
       "titlePart1": "Legacy of",

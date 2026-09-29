@@ -273,9 +273,7 @@ const Notice = () => {
                               </div>
                             </td>
                             <td className="px-8 py-8 whitespace-nowrap">
-                              <div className="flex flex-col">
-                                <span className="text-slate-700 font-bold bg-slate-100 px-3 py-1 rounded-lg text-sm">{formatDate(notice.date)}</span>
-                              </div>
+                              <NoticeDates notice={notice} formatDate={formatDate} t={t} />
                             </td>
                             <td className="px-8 py-8 text-right">
                               <motion.a
@@ -324,10 +322,7 @@ const Notice = () => {
                           <span className="text-slate-400 font-bold text-xs">{(currentPage - 1) * noticesPerPage + index + 1}</span>
                         </div>
                         <h4 className="font-bold text-slate-800 text-lg leading-tight">{notice.title}</h4>
-                        <div className="flex items-center gap-2 text-slate-500 text-sm">
-                          <FiCalendar />
-                          {formatDate(notice.date)}
-                        </div>
+                        <NoticeDates notice={notice} formatDate={formatDate} t={t} />
                         <a 
                           href={notice.link || notice.document}
                           target="_blank" rel="noopener noreferrer"
@@ -390,5 +385,26 @@ const Notice = () => {
     </div>
   );
 };
+
+/* A notice's publish date (and closing date when it has one), each labelled */
+function NoticeDates({ notice, formatDate, t }) {
+  const notSpecified = t("noticePage.notSpecified", "Not specified");
+  return (
+    <div className="flex flex-col gap-1.5 text-xs">
+      <div className="flex items-center gap-2">
+        <span className="text-slate-400"><FiCalendar /></span>
+        <span className="font-semibold text-slate-500">{t("noticePage.publishedOn", "Published on")}</span>
+        <span className={`font-bold ${notice.date ? "text-slate-800" : "text-slate-400"}`}>{formatDate(notice.date) || notSpecified}</span>
+      </div>
+      {notice.closingDate && (
+        <div className="flex items-center gap-2">
+          <span className="text-slate-400"><FiClock /></span>
+          <span className="font-semibold text-slate-500">{t("noticePage.closingDate", "Closing date")}</span>
+          <span className="font-bold text-slate-800">{formatDate(notice.closingDate)}</span>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export default Notice;

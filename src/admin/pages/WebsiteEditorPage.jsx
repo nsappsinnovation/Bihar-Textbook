@@ -21,6 +21,7 @@ const fromDirectoryRow = (row) => ({
   id: row.id,
   title: row.name,
   designation: row.designation || '',
+  boardPosition: row.boardPosition || '',
   since: row.tenureFrom || '',
   from: row.tenureFrom || '',
   to: row.tenureTo || '',
@@ -29,7 +30,7 @@ const fromDirectoryRow = (row) => ({
 const toDirectoryRow = (module, item) =>
   module === 'ku-list-md'
     ? { name: item.title, tenureFrom: item.from, tenureTo: item.to }
-    : { name: item.title, designation: item.designation, tenureFrom: item.since || 'Current', status: item.status || 'Active' };
+    : { name: item.title, designation: item.designation, boardPosition: item.boardPosition || null, tenureFrom: item.since || 'Current', status: item.status || 'Active' };
 
 // Section row <-> editor item. One videoUrl column holds either an uploaded file or a YouTube link.
 const fromSection = (row) => {
@@ -197,6 +198,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
       uploadedVideo: item.uploadedVideo || '',
       date: item.date || '',
       designation: item.designation || '',
+      boardPosition: item.boardPosition || '',
       since: item.since || '',
       status: item.status || 'Active',
       from: item.from || '',
@@ -537,7 +539,12 @@ export default function WebsiteEditorPage({ module, addToast }) {
                             <span>{item.from || 'N/A'}</span>
                           </div>
                         ) : (
-                          <span className="font-bold text-slate-700 text-[15px]">{item.designation || 'N/A'}</span>
+                          <>
+                            <span className="font-bold text-slate-700 text-[15px]">{item.designation || 'N/A'}</span>
+                            {module === 'ku-board' && item.boardPosition && (
+                              <p className="text-xs text-slate-400 font-medium mt-0.5">{item.boardPosition}</p>
+                            )}
+                          </>
                         )}
                       </td>
                       {module !== 'ku-board' && (
@@ -792,6 +799,12 @@ export default function WebsiteEditorPage({ module, addToast }) {
                 placeholder="e.g. Managing Director" 
                 value={formData.designation}
                 onChange={(val) => setFormData(prev => ({ ...prev, designation: val }))}
+              />
+              <FormInput 
+                label="Position in the Board" 
+                placeholder="e.g. Chairman, Member Secretary" 
+                value={formData.boardPosition}
+                onChange={(val) => setFormData(prev => ({ ...prev, boardPosition: val.slice(0, 255) }))}
               />
             </>
           )}

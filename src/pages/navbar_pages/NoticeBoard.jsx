@@ -34,7 +34,9 @@ const NoticeCard = ({ notice }) => {
             </span>
           )}
           <span className="text-[10px] text-slate-400 font-medium flex items-center gap-1 ml-auto md:ml-0">
-             <Calendar size={10} /> {notice.date}
+             <Calendar size={10} />
+             {notice.dateLabel === 'opens' ? t("noticeBoard.opens", "Opens") : t("noticeBoard.published", "Published")}:{" "}
+             <span className="text-slate-600 font-semibold">{notice.hasDate ? notice.date : t("noticeBoard.notSpecified", "Not specified")}</span>
           </span>
         </div>
 
@@ -46,9 +48,14 @@ const NoticeCard = ({ notice }) => {
           <span className="flex items-center gap-1.5 bg-slate-50 px-2 py-1 rounded-md border border-slate-100">
             {t("noticeBoard.ref", "Ref:")} {notice.ref}
           </span>
-          {notice.deadline && (
-            <span className="flex items-center gap-1.5 text-amber-600 bg-amber-50 px-2 py-1 rounded-md border border-amber-100">
-              {t("noticeBoard.deadline", "Deadline:")} {notice.deadline}
+          {(notice.category === 'Tender' || notice.deadline) && (
+            <span className={`flex items-center gap-1.5 px-2 py-1 rounded-md border ${
+              notice.deadline && notice.isOpen !== false ? 'text-amber-700 bg-amber-50 border-amber-100' : 'text-slate-500 bg-slate-50 border-slate-100'
+            }`}>
+              {t("noticeBoard.closes", "Closes")}: {notice.deadline || t("noticeBoard.notSpecified", "Not specified")}
+              {notice.category === 'Tender' && notice.deadline && (
+                <span className="font-bold">· {notice.isOpen ? t("noticeBoard.open", "Open") : t("noticeBoard.closed", "Closed")}</span>
+              )}
             </span>
           )}
         </div>

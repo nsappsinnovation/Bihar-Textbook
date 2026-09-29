@@ -66,9 +66,8 @@ const Tenders = () => {
   const filteredTenders = useMemo(() => {
     const filtered = liveTenders.filter((tItem) => {
       const matchesSearch = (tItem.title || '').toLowerCase().includes(search.toLowerCase());
-      const matchesFilter = activeFilter === "All" || 
-                           (activeFilter === "E-Tender" && (tItem.title || '').toLowerCase().includes("e-tender")) ||
-                           (activeFilter === "Services" && (tItem.title || '').toLowerCase().includes("service"));
+      const matchesFilter = activeFilter === "All" ||
+                           (activeFilter === "Active" ? tItem.isActive : tItem.category === activeFilter);
       return matchesSearch && matchesFilter;
     });
 
@@ -151,7 +150,7 @@ const Tenders = () => {
           >
             <div className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 flex items-center gap-2 backdrop-blur-sm">
               <span className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-              <span className="text-white/80">{t("tendersPage.activeOpportunities", { count: liveTenders.length })}</span>
+              <span className="text-white/80">{t("tendersPage.activeOpportunities", { count: liveTenders.filter((x) => x.isActive).length })}</span>
             </div>
             <div className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 flex items-center gap-2 backdrop-blur-sm">
               <FiClock className="text-blue-400" />
@@ -247,7 +246,7 @@ const Tenders = () => {
                         <tr className="border-b border-slate-200">
                           <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">{t("tendersPage.table.sNo")}</th>
                           <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">{t("tendersPage.table.details")}</th>
-                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">{t("tendersPage.table.date")}</th>
+                          <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400">{t("tendersPage.table.dates", "Dates")}</th>
                           <th className="px-8 py-6 font-bold text-xs uppercase tracking-widest text-slate-400 text-right">{t("tendersPage.table.action")}</th>
                         </tr>
                       </thead>
@@ -286,11 +285,7 @@ const Tenders = () => {
                                 </div>
                              </td>
                             <td className="px-8 py-10 whitespace-nowrap">
-                              <div className="flex flex-col">
-                                <span className="text-slate-700 font-bold bg-slate-100 px-3 py-1 rounded-lg text-sm">
-                                  {formatDate(tender.date) || t("tendersPage.activeOpportunity")}
-                                </span>
-                              </div>
+                              <TenderDates tender={tender} formatDate={formatDate} t={t} />
                             </td>
                             <td className="px-8 py-10 text-right">
                               <motion.a
@@ -340,9 +335,7 @@ const Tenders = () => {
                           <span className="text-slate-400 font-bold text-xs">{(currentPage - 1) * tendersPerPage + index + 1}</span>
                         </div>
                         <h4 className="font-bold text-slate-800 text-base leading-tight">{tender.title}</h4>
-                        <div className="flex items-center gap-2 text-slate-500 text-xs">
-                          <FiCalendar /> {formatDate(tender.date) || t("tendersPage.ongoing")}
-                        </div>
+                        <TenderDates tender={tender} formatDate={formatDate} t={t} compact />
                         <a 
                           href={tender.link || tender.document}
                           target="_blank" rel="noopener noreferrer"
@@ -405,5 +398,34 @@ const Tenders = () => {
     </div>
   );
 };
+
+/* Opening and closing dates of a tender, each labelled, plus whether it is still open */
+function TenderDates({ tender, formatDate, t, compact = false }) {
+  const notSpecified = t("tendersPage.notSpecified", "Not specified");
+  const rows = [
+    { key: "opening", icon: <FiCalendar />, label: t("tendersPage.openingDate", "Opening date"), value: formatDate(tender.date) },
+    { key: "closing", icon: <FiClock />, label: t("tendersPage.closingDate", "Closing date"), value: formatDate(tender.closingDate) },
+  ];
+  return (
+    <div className={`flex flex-col ${compact ? "gap-1.5" : "gap-2 min-w-[190px]"}`}>
+      {rows.map((row) => (
+        <div key={row.key} className="flex items-center gap-2 text-xs">
+          <span className="text-slate-400">{row.icon}</span>
+          <span className="font-semibold text-slate-500 w-[5.5rem] shrink-0">{row.label}</span>
+          <span className={`font-bold ${row.value ? "text-slate-800" : "text-slate-400"}`}>{row.value || notSpecified}</span>
+        </div>
+      ))}
+      {tender.closingDate && (
+        <span
+          className={`self-start mt-0.5 px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider ${
+            tender.isActive ? "bg-green-50 text-green-700 border border-green-200" : "bg-slate-100 text-slate-500 border border-slate-200"
+          }`}
+        >
+          {tender.isActive ? t("tendersPage.statusOpen", "Open") : t("tendersPage.statusClosed", "Closed")}
+        </span>
+      )}
+    </div>
+  );
+}
 
 export default Tenders;
