@@ -53,6 +53,12 @@ const Tenders = () => {
     } catch { return false; }
   };
 
+  // Badge text: the category chosen for the tender in the admin panel (E-Tender, Procurement, Services, ...)
+  const categoryLabel = (tender) =>
+    tender.category && tender.category !== "Tender"
+      ? t(`tendersPage.filters.${tender.category}`, tender.category)
+      : t("tendersPage.badges.tender");
+
   const formatDate = (dateStr) => {
     try {
       if (!dateStr) return '';
@@ -276,7 +282,7 @@ const Tenders = () => {
                                     </span>
                                   )}
                                   <span className="px-2 py-0.5 rounded-md bg-blue-50 text-blue-600 text-[10px] font-bold uppercase tracking-wider">
-                                    {tender.title.toLowerCase().includes("e-tender") ? t("tendersPage.badges.electronic") : t("tendersPage.badges.physical")}
+                                    {categoryLabel(tender)}
                                   </span>
                                 </div>
                                 <h4 className="text-base font-bold text-slate-800 leading-tight group-hover:text-blue-700 transition-colors">
@@ -329,7 +335,7 @@ const Tenders = () => {
                                 </span>
                              )}
                              <span className="px-2 py-0.5 rounded-md bg-blue-100 text-blue-700 text-[10px] font-black uppercase">
-                               {t("tendersPage.badges.tender")}
+                               {categoryLabel(tender)}
                              </span>
                           </div>
                           <span className="text-slate-400 font-bold text-xs">{(currentPage - 1) * tendersPerPage + index + 1}</span>

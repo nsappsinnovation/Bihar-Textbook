@@ -28,6 +28,13 @@ const team = [
     technologies: "React.js, Tailwind, CSS",
   },
   {
+    name: "Aditya Kumar",
+    role: "DevOps Engineer",
+    image: "/images/developers/adityakumar9.webp",
+    linkedin: "https://www.linkedin.com/in/aditya-kumar-780709320/",
+    technologies: "CI/CD, Optimisation",
+  },
+  {
     name: "Pranav Kumar",
     role: "Frontend Developer",
     image: "/images/developers/pranavkumar9.webp",
@@ -35,11 +42,18 @@ const team = [
     technologies: "React.js, Tailwind, CSS",
   },
   {
-    name: "Aditya Kumar",
-    role: "DevOps Engineer",
-    image: "/images/developers/adityakumar9.webp",
-    linkedin: "https://www.linkedin.com/in/aditya-kumar-780709320/",
-    technologies: "CI/CD, Optimisation",
+    name: "Pooja Singh",
+    role: "Content Designer",
+    image: "/images/developers/poojasingh9.webp",
+    linkedin: "https://www.linkedin.com/in/pooja-singh-40b448150/",
+    technologies: "Figma, Framer",
+  },
+  {
+    name: "Yuvika Singh",
+    role: "Frontend Developer",
+    image: "/images/developers/yuvikasingh9.webp",
+    linkedin: "https://www.linkedin.com/in/yuvika-singh14/",
+    technologies: "React.js, CSS",
   },
   {
     name: "Akash Kumar",
@@ -63,6 +77,9 @@ const team = [
     technologies: "React.js, Node, Express, CI/CD",
   },
 ];
+
+// On large screens the first row holds 4 profiles and the row after it holds 5, all the same width
+const FIRST_ROW = 4;
 
 /* Brand tints for the avatar disc, cycled by index so a row keeps some rhythm.
    They also stand in for the photo wherever it fails to load. */
@@ -134,62 +151,51 @@ const LinkedInIcon = ({ className }) => (
   </svg>
 );
 
-/* The founder, featured on his own above the team */
+/* The founder, set on his own above the team: minimal and quiet */
 function FounderCard({ name, role, image, linkedin, t }) {
   const initials = name.split(" ").map((part) => part[0]).join("").slice(0, 2);
   // Photos can be transparent cut-outs, so the initials show only when there is no photo (or it fails)
   const [photoFailed, setPhotoFailed] = React.useState(false);
   const showPhoto = image && !photoFailed;
+
   return (
-    <section className="mb-14 md:mb-20 flex justify-center">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="relative w-full max-w-[19rem] overflow-hidden rounded-3xl bg-white px-5 pt-7 pb-6 text-center border border-[#124d9c]/10 shadow-[0_24px_60px_-24px_rgba(18,77,156,0.5)]"
-      >
-        {/* Soft brand glow behind the portrait */}
-        <div aria-hidden className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#124d9c]/[0.09] to-transparent" />
-        <div aria-hidden className="absolute -top-14 left-1/2 -translate-x-1/2 w-52 h-52 rounded-full bg-[#60a5fa]/25 blur-3xl" />
-
-        {/* Portrait with a gradient ring */}
-        <div className="relative mx-auto w-24 h-24 sm:w-28 sm:h-28 rounded-full p-1 bg-gradient-to-br from-[#124d9c] via-[#3b82f6] to-[#0b2b4f] shadow-lg shadow-[#124d9c]/30">
-          <div className="w-full h-full rounded-full bg-white p-1">
-          <div className="relative w-full h-full rounded-full overflow-hidden bg-[#e3edfd]">
-            {showPhoto ? (
-              <img
-                src={image}
-                alt=""
-                onError={() => setPhotoFailed(true)}
-                className="absolute inset-0 w-full h-full object-cover object-top"
-              />
-            ) : (
-              <span className="absolute inset-0 grid place-items-center text-3xl sm:text-4xl font-black text-[#124d9c]">{initials}</span>
-            )}
-          </div>
-          </div>
+    <section className="mb-14 md:mb-20 flex flex-col items-center text-center">
+      {/* Portrait with a single hairline ring */}
+      <div className="rounded-full p-1 ring-1 ring-[#124d9c]/25">
+        <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden bg-[#eef3fb]">
+          {showPhoto ? (
+            <img
+              src={image}
+              alt=""
+              onError={() => setPhotoFailed(true)}
+              className="absolute inset-0 w-full h-full object-cover object-top"
+            />
+          ) : (
+            <span className="absolute inset-0 grid place-items-center text-2xl sm:text-3xl font-bold text-[#124d9c]/70">{initials}</span>
+          )}
         </div>
+      </div>
 
-        <span className="relative mt-4 inline-flex items-center rounded-full bg-[#124d9c] px-3 py-0.5 text-[10px] font-bold uppercase tracking-[0.18em] text-white shadow-sm shadow-[#124d9c]/30">
-          {t("developer.founderBadge", "Founder")}
-        </span>
+      <p className="mt-5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.32em] text-[#124d9c]/70">
+        {t("developer.founderBadge", "Founder")}
+      </p>
+      <h2 className="mt-1.5 text-xl sm:text-[22px] font-bold tracking-tight text-[#0b2b4f]">{name}</h2>
+      <p className="mt-0.5 text-[13px] sm:text-sm font-medium text-slate-500">{role}</p>
 
-        <h2 className="relative mt-2.5 text-xl sm:text-2xl font-black tracking-tight text-[#0b2b4f]">{name}</h2>
-        <p className="relative mt-0.5 text-[13px] sm:text-sm font-semibold text-[#124d9c]">{role}</p>
+      {linkedin && (
+        <a
+          href={linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 text-slate-400 hover:text-[#124d9c] transition-colors"
+          aria-label={`${name} on LinkedIn`}
+        >
+          <LinkedInIcon className="w-[18px] h-[18px]" />
+        </a>
+      )}
 
-        {linkedin && (
-          <a
-            href={linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative mt-4 inline-flex items-center gap-2 rounded-full border border-[#124d9c]/20 bg-[#124d9c]/[0.05] px-4 py-2 text-[13px] font-bold text-[#124d9c] transition hover:bg-[#124d9c] hover:text-white"
-          >
-            <LinkedInIcon className="w-4 h-4" />
-            {t("developer.connectLinkedIn", "Connect on LinkedIn")}
-          </a>
-        )}
-      </motion.div>
+      {/* Hairline separating the founder from the team */}
+      <span aria-hidden className="mt-10 md:mt-14 h-px w-16 bg-slate-300" />
     </section>
   );
 }
@@ -201,15 +207,19 @@ function TeamGroup({ title, people, startIndex = 0 }) {
         {title}
       </h2>
 
-      {/* a wrapping flex row rather than a grid, so a group that does not fill
-          the last row stays centred instead of hanging on the left */}
-      <div className="flex flex-wrap justify-center gap-x-5 gap-y-12 sm:gap-x-8 sm:gap-y-16">
-        {people.map((member, i) => (
-          <div
-            key={member.name}
-            className="basis-[calc(50%-0.625rem)] sm:basis-[calc(50%-1rem)] lg:basis-[calc(25%-1.5rem)]"
-          >
-            <TeamCard {...member} accent={ACCENTS[(startIndex + i) % ACCENTS.length]} />
+      {/* Rows of equal-width profiles: 4 in the first row (centred), 5 in the rows after.
+          Below lg every row simply wraps two per row. */}
+      <div className="flex flex-col gap-y-12 sm:gap-y-16">
+        {[people.slice(0, FIRST_ROW), people.slice(FIRST_ROW)].filter((row) => row.length).map((row, r) => (
+          <div key={r} className="flex flex-wrap justify-center gap-x-5 gap-y-12 sm:gap-x-8 sm:gap-y-16">
+            {row.map((member, i) => (
+              <div
+                key={member.name}
+                className="basis-[calc(50%-0.625rem)] sm:basis-[calc(50%-1rem)] lg:basis-[calc(20%-1.6rem)]"
+              >
+                <TeamCard {...member} accent={ACCENTS[(startIndex + (r ? FIRST_ROW : 0) + i) % ACCENTS.length]} />
+              </div>
+            ))}
           </div>
         ))}
       </div>
@@ -250,7 +260,7 @@ const Developer = () => {
       </section>
 
       {/* ================= TEAM ================= */}
-      <div className="max-w-6xl mx-auto px-5 sm:px-6 py-14 md:py-20">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 py-14 md:py-20">
         <FounderCard {...founder} t={t} />
         <TeamGroup title={t("developer.teamMembers", "Team Members")} people={team} />
       </div>

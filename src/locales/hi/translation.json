@@ -523,9 +523,7 @@
     "badges": {
       "pinned": "पिन किया गया",
       "new": "नया",
-      "tender": "निविदा",
-      "electronic": "इलेक्ट्रॉनिक",
-      "physical": "भौतिक"
+      "tender": "निविदा"
     },
     "table": {
       "sNo": "क्र.सं.",

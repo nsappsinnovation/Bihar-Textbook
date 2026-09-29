@@ -518,9 +518,7 @@
     "badges": {
       "pinned": "PINNED",
       "new": "NEW",
-      "tender": "TENDER",
-      "electronic": "Electronic",
-      "physical": "Physical"
+      "tender": "TENDER"
     },
     "table": {
       "sNo": "S.No",

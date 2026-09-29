@@ -37,7 +37,7 @@ const RTI = () => {
     : rtiData.address;
 
   return (
-    <div className="min-h-screen bg-[#f8fafc] -mt-24">
+    <div className="min-h-screen bg-[#f8fafc] -mt-[81px]">
       {/* ================= HERO SECTION ================= */}
       <section className="relative pt-48 pb-56 text-center text-white overflow-hidden bg-gradient-to-br from-[#0b2b4f] to-[#124d9c]">
         {/* Subtle Background Pattern */}
