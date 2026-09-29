@@ -326,18 +326,18 @@ const CashierLab = () => {
 
         {/* HEADER WITH STREAK, SCORE & PROGRESSIVE RANK */}
         <div className="flex flex-col gap-6 border-b border-slate-100 pb-5">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <div>
+          <div className="flex justify-between items-start gap-4">
+            <div className="flex-1 min-w-0">
               {/* Badge Removed */}
               <h2 className="text-[26px] md:text-[34px] font-display font-bold text-slate-900 mt-2">Smart Cashier Lab</h2>
               <p className="text-[14px] text-slate-500 font-bold mt-1">Calculate and build correct change using Indian Rupee notes & coins.</p>
             </div>
-            <div className="flex flex-wrap items-center gap-2.5 self-stretch sm:self-auto justify-end">
+            <div className="flex items-center gap-2.5 shrink-0 mt-1">
               {/* Removed Badges */}
               {/* Reset */}
               <button
                 onClick={resetCashierLab}
-                className="p-2 bg-white hover:bg-slate-50 rounded-xl text-slate-500 border border-slate-200 transition-colors cursor-pointer self-stretch flex items-center justify-center shrink-0 shadow-sm"
+                className="p-2 bg-white hover:bg-slate-50 rounded-xl text-slate-500 border border-slate-200 transition-colors cursor-pointer flex items-center justify-center shrink-0 shadow-sm"
                 title="Reset Cashier Game"
               >
                 <RefreshCw size={15} />
