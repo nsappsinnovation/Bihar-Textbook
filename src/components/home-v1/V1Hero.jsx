@@ -114,8 +114,10 @@ export default function V1Hero() {
             <p className="font-sora text-2xl font-semibold leading-tight tracking-[-0.02em] text-bt-blue sm:text-3xl lg:text-[2.1rem]">
               {t("homeV1.lead", "Every child, every classroom")}
             </p>
-            <h1 id="v1-title" className="mt-6 text-[2.5rem] font-bold leading-[1.02] tracking-tight text-slate-900 sm:text-6xl lg:text-[4.4rem] [html.lang-hi_&]:leading-tight">
-              {t("homeV1.title", "Bihar State Textbook Publishing Corporation")}
+            {/* Two set lines: "Bihar State Textbook" / "Publishing Corporation Ltd." (kept whole from sm up) */}
+            <h1 id="v1-title" className="mt-6 text-[2.5rem] font-bold leading-[1.04] tracking-tight text-slate-900 sm:text-[clamp(2.5rem,5.2vw,3.4rem)] lg:text-[clamp(2.6rem,4vw,4rem)] [html.lang-hi_&]:leading-tight">
+              <span className="block">{t("homeV1.titleLine1", "Bihar State Textbook")}</span>{" "}
+              <span className="block sm:whitespace-nowrap">{t("homeV1.titleLine2", "Publishing Corporation Ltd.")}</span>
             </h1>
             <p className="mx-auto mt-7 max-w-xl text-[15px] font-medium leading-relaxed text-slate-500">
               {t("homeV1.statement", "From Class 1 to Class 12, we publish the textbooks that Bihar Board schools learn from, and put them online for every learner.")}
