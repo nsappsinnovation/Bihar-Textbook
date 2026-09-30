@@ -218,7 +218,7 @@ export default function NoticeBoard() {
                 {t("noticeBoard.heading", "Official Notices")} <br /> <span className="text-[#d4b27a] font-medium">{t("noticeBoard.headingHighlight", "& Circulars")}</span>
               </h2>
               <p className="text-sm text-blue-100/80 font-medium leading-relaxed mb-4">
-                {t("noticeBoard.description", "Stay updated with the latest administrative announcements, tenders, and educational circulars from the Bihar State Text Book Publishing Corporation Ltd.")}
+                {t("noticeBoard.description", "Stay updated with the latest administrative announcements, tenders, and educational circulars from the Bihar State Textbook Publishing Corporation Ltd.")}
               </p>
 
               {/* Premium Stats Overview Widget */}

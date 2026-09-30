@@ -30,12 +30,12 @@ const Footer = () => {
                   <div className="absolute inset-0 bg-blue-500 rounded-xl blur opacity-50 group-hover:opacity-80 transition-opacity"></div>
                   <img loading="lazy" decoding="async"
                     src="/logo.webp"
-                    alt={t("footer.logoAlt", "BSTBPC Logo")}
+                    alt={t("footer.logoAlt", "BSTBPCL Logo")}
                     className="relative h-14 w-auto object-contain bg-white/10 rounded-xl p-1.5 border border-white/20 backdrop-blur-sm"
                   />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-white font-bold text-xl leading-tight tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">{t("footer.brandName", "BSTBPC")}</span>
+                  <span className="text-white font-bold text-xl leading-tight tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">{t("footer.brandName", "BSTBPCL")}</span>
                   <span className="text-[10px] uppercase tracking-[0.2em] text-blue-400 font-bold">{t("footer.biharGovt", "Bihar Government")}</span>
                 </div>
               </div>
@@ -122,12 +122,12 @@ const Footer = () => {
         {/* BOTTOM BAR */}
         <div className="mt-16 pt-8 border-t border-white/5 flex flex-col items-center justify-center gap-4 text-xs md:text-sm text-white/40 text-center">
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6 text-center">
-            <p className="font-medium tracking-wide">{t("footer.copyright", "© 2026 BSTBPC. All rights reserved.")}</p>
+            <p className="font-medium tracking-wide">{t("footer.copyright", "© 2026 BSTBPCL. All rights reserved.")}</p>
             <span className="hidden md:inline text-white/10">|</span>
             <p>
               {t("footer.designedBy", "Designed by")}{" "}
               <Link to="/developer" className="font-semibold text-white hover:text-blue-400 transition-colors duration-300">
-                 <span style={{ fontFamily: 'italics', letterSpacing: '1px' }}>{t("footer.designerName", "NS Apps Innovations")}</span> - A Product of Startup Bihar
+                 <span className="tracking-wide">{t("footer.designerName", "NS Apps Innovations")}</span>
               </Link>
             </p>
           </div>

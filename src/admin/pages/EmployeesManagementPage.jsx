@@ -202,7 +202,7 @@ export default function EmployeesManagementPage({ addToast }) {
                       <td className="py-4 px-5">
                         <div>
                           <p className="font-bold text-slate-800 text-base">{emp.name}</p>
-                          <p className="text-xs text-slate-400 font-medium">Employee, BSTBPC</p>
+                          <p className="text-xs text-slate-400 font-medium">Employee, BSTBPCL</p>
                         </div>
                       </td>
                       <td className="py-4 px-5">

@@ -33,10 +33,10 @@
     },
     "tagline": "Empowering minds. Enriching futures.",
     "particleText": "Publishing Books Across Bihar",
-    "provideLead": "BSTBPC brings you",
+    "provideLead": "BSTBPCL brings you",
     "marquee1": "Publishing the textbooks that reach every Bihar Board classroom, from Class 1 to Class 12.",
     "marquee2": "Beyond the printed page: virtual reality labs, audiobooks, sign language, AI, cyber safety, heritage and life skills.",
-    "shortName": "BSTBPC",
+    "shortName": "BSTBPCL",
     "word1": "Textbooks",
     "word2": "Audiobooks",
     "word3": "Workbooks",
@@ -99,8 +99,8 @@
     }
   },
   "footer": {
-    "logoAlt": "BSTBPC Logo",
-    "brandName": "BSTBPC",
+    "logoAlt": "BSTBPCL Logo",
+    "brandName": "BSTBPCL",
     "biharGovt": "Bihar Government",
     "description": "Empowering the future of Bihar through accessible, high-quality, and modern educational resources for every student.",
     "quickNav": "Quick Navigation",
@@ -110,7 +110,7 @@
     "registeredOffice": "Registered Office:",
     "address": "Pathya Pustak Bhawan, Buddh Marg, Fraser Road Area",
     "addressRegion": "Patna - 800001, Bihar, India",
-    "copyright": "© 2026 BSTBPC. All rights reserved.",
+    "copyright": "© 2026 BSTBPCL. All rights reserved.",
     "designedBy": "Designed by",
     "designerName": "NS Apps Innovations",
     "privacyPolicy": "Privacy Policy",
@@ -229,7 +229,7 @@
       },
       "yatendra": {
         "name": "Shri Yatendra Kumar Pal, IAS",
-        "role": "Managing Director, BSTBPC"
+        "role": "Managing Director, BSTBPCL"
       }
     },
     "empty": "Leadership details will be published here soon."
@@ -245,7 +245,7 @@
     "biharRegion": "Bihar Region",
     "milestones": {
       "title0": "Foundation",
-      "desc0": "BSTBPC was established with a vision to provide quality and accessible textbooks across Bihar.",
+      "desc0": "BSTBPCL was established with a vision to provide quality and accessible textbooks across Bihar.",
       "title1": "GDR Printing Project",
       "desc1": "VEB Polygraph (GDR) printing project selected to modernize and standardize textbook production.",
       "title2": "Production Started",
@@ -280,8 +280,8 @@
     "headingHighlight": "Core Pillars",
     "headingLine1": "The Eight",
     "headingLine2": "Core Pillars",
-    "subheading": "A structured framework guiding BSTBPC’s mission to strengthen learning outcomes across Bihar.",
-    "description": "A structured framework guiding BSTBPC’s mission to strengthen learning outcomes across Bihar.",
+    "subheading": "A structured framework guiding BSTBPCL’s mission to strengthen learning outcomes across Bihar.",
+    "description": "A structured framework guiding BSTBPCL’s mission to strengthen learning outcomes across Bihar.",
     "items": {
       "title0": "Accessible Learning Resources",
       "desc0": "Making textbooks and learning resources accessible to learners across Bihar.",
@@ -361,7 +361,7 @@
     "badge": "Updates & Tenders",
     "heading": "Official Notices",
     "headingHighlight": "& Circulars",
-    "description": "Stay updated with the latest notifications, tender releases, and educational announcements from BSTBPC.",
+    "description": "Stay updated with the latest notifications, tender releases, and educational announcements from BSTBPCL.",
     "tendersLabel": "Tenders",
     "tendersSub": "E-procurement & contracts",
     "noticesLabel": "Official Notices",
@@ -409,7 +409,7 @@
   },
   "noticePage": {
     "title": "Notice Board",
-    "subtitle": "Stay updated with official notices, circulars, tenders & important announcements from the Bihar State Text Book Publishing Corporation Ltd.",
+    "subtitle": "Stay updated with official notices, circulars, tenders & important announcements from the Bihar State Textbook Publishing Corporation Ltd.",
     "totalNotices": "{{count}} Total Notices",
     "lastUpdated": "Last Updated: {{date}}",
     "directivesTitle": "Directives & Results",
@@ -497,7 +497,7 @@
   },
   "tendersPage": {
     "title": "Tenders & Bids",
-    "subtitle": "Explore current procurement opportunities, e-tenders, and strategic partnership proposals at BSTBPC.",
+    "subtitle": "Explore current procurement opportunities, e-tenders, and strategic partnership proposals at BSTBPCL.",
     "activeOpportunities": "{{count}} Active Opportunities",
     "lastUpdatedToday": "Last Updated Today",
     "procurementDesk": "Procurement Desk",
@@ -543,10 +543,10 @@
   "csr": {
     "heroTitle1": "Empowering Communities",
     "heroTitle2": "Transforming Futures",
-    "heroDescription": "BSTBPC is committed to building a knowledge-driven society by advancing educational equity and social responsibility across the heart of Bihar.",
+    "heroDescription": "BSTBPCL is committed to building a knowledge-driven society by advancing educational equity and social responsibility across the heart of Bihar.",
     "aboutHeading": "About Our",
     "aboutHighlight": "CSR Commitment",
-    "aboutDescription": "Bihar State Text Book Publishing Corporation Ltd. (BSTBPC) is committed to advancing social responsibility beyond educational publishing. Our CSR initiatives are designed to contribute meaningfully to inclusive growth, environmental sustainability, and community development across Bihar.",
+    "aboutDescription": "Bihar State Textbook Publishing Corporation Ltd. (BSTBPCL) is committed to advancing social responsibility beyond educational publishing. Our CSR initiatives are designed to contribute meaningfully to inclusive growth, environmental sustainability, and community development across Bihar.",
     "aboutSecondaryDesc": "We believe that education is a powerful catalyst for change. Through our CSR programs, we aim to support underserved communities, promote equitable access to learning resources, and strengthen institutional capacities at the grassroots level.",
     "visionTitle": "Our CSR Vision",
     "visionQuote": "\"To build an inclusive and knowledge-driven society by supporting initiatives that promote education, sustainability, and community well-being.\"",
@@ -774,11 +774,11 @@
       "qualityFirstDesc": "Every stage is carefully supervised to deliver excellence.",
       "movingForward": "MOVING FORWARD",
       "role": "Managing Director",
-      "fullName": "BIHAR STATE TEXT BOOK PUBLISHING CORPORATION",
+      "fullName": "BIHAR STATE TEXTBOOK PUBLISHING CORPORATION LTD.",
       "name": "Shri Yatendra Kumar Pal",
-      "subtext": "Bihar State Text Book Publishing Corporation Ltd.",
-      "companyAbbr": "BSTBPC",
-      "welcomeNoteText": "It gives me immense pleasure to connect with all stakeholders through this platform. The Bihar State Text Book Publishing Corporation Ltd. plays a pivotal role in strengthening the foundation of education by ensuring the timely production and distribution of quality textbooks across the state."
+      "subtext": "Bihar State Textbook Publishing Corporation Ltd.",
+      "companyAbbr": "BSTBPCL",
+      "welcomeNoteText": "It gives me immense pleasure to connect with all stakeholders through this platform. The Bihar State Textbook Publishing Corporation Ltd. plays a pivotal role in strengthening the foundation of education by ensuring the timely production and distribution of quality textbooks across the state."
     },
     "board": {
       "title": "Board of Directors",
@@ -812,7 +812,7 @@
     },
     "listOfMd": {
       "title": "Legacy of Leadership",
-      "desc": "Honoring the Managing Directors who have shaped the journey and success of Bihar State Text Book Publishing Corporation.",
+      "desc": "Honoring the Managing Directors who have shaped the journey and success of Bihar State Textbook Publishing Corporation Ltd.",
       "directory": "Official Directory",
       "search": "Search by name...",
       "sno": "S.No.",
@@ -825,7 +825,7 @@
     "orgStructure": {
       "title": "Organisational Structure",
       "desc": "Our hierarchical framework designed to ensure transparency, accountability, and excellence in the educational publishing ecosystem of Bihar.",
-      "imgAlt": "BSTBPC Organisational Hierarchy",
+      "imgAlt": "BSTBPCL Organisational Hierarchy",
       "feat0": {
         "title": "Governance",
         "desc": "Headed by the Managing Director under the Department of Education, Bihar."
@@ -874,9 +874,9 @@
     },
     "employee": {
       "title": "Our Employee Pride",
-      "desc": "The heartbeat of BSTBPC. Meet the dedicated team working tirelessly behind the scenes to educate the future of Bihar.",
+      "desc": "The heartbeat of BSTBPCL. Meet the dedicated team working tirelessly behind the scenes to educate the future of Bihar.",
       "registry": "Employee Directory",
-      "registrySubtitle": "Official registry of BSTBPC staff members",
+      "registrySubtitle": "Official registry of BSTBPCL staff members",
       "searchPlaceholder": "Search by name, role or dept...",
       "empId": "Employee ID",
       "name": "Name",
@@ -910,7 +910,7 @@
       "description": "Stay updated with our latest organizational statements, curriculum reforms, policy alignments, and strategic reviews.",
       "fallbackTitle": "Press Release",
       "officialExcerpt": "Official Excerpt",
-      "modalNote": "This is an official media briefing published by the Bihar State Text Book Publishing Corporation (BSTBPC). You can download the complete press kit including images and statements below.",
+      "modalNote": "This is an official media briefing published by the Bihar State Textbook Publishing Corporation Ltd. (BSTBPCL). You can download the complete press kit including images and statements below.",
       "download": "Download Press Release",
       "categories": {
         "initiatives": "Initiatives",
@@ -3160,7 +3160,7 @@
         "titlePrefix": "Organisational ",
         "titleHighlight": "Structure",
         "subtitle": "Our hierarchical framework designed to ensure transparency, accountability, and excellence in the educational publishing ecosystem of Bihar.",
-        "imageAlt": "BSTBPC Organisational Hierarchy",
+        "imageAlt": "BSTBPCL Organisational Hierarchy",
         "governanceTitle": "Governance",
         "governanceDesc": "Headed by the Managing Director under the Department of Education, Bihar.",
         "operationsTitle": "Operations",
@@ -3462,7 +3462,7 @@
       "heroTitlePrefix": "Resource & ",
       "heroTitleHighlight": "Registration",
       "heroTitleSuffix": " Forms",
-      "heroSubtitle": "Download official registration forms, applications, and requisition documents for all BSTBPC stakeholders.",
+      "heroSubtitle": "Download official registration forms, applications, and requisition documents for all BSTBPCL stakeholders.",
       "searchPlaceholder": "Search forms by name...",
       "categories": {
         "all": "All",
@@ -6309,7 +6309,7 @@
       "titlePart1": "Managing Director's",
       "titlePart2": "Message",
       "designation": "Managing Director",
-      "corporation": "Bihar State Text Book Publishing Corporation Ltd.",
+      "corporation": "Bihar State Textbook Publishing Corporation Ltd.",
       "visionText": "A vision for excellence in educational resources and equitable access across Bihar.",
       "welcomeNoteHeader": "Welcome Note",
       "ourCommitment": "OUR COMMITMENT",
@@ -6339,7 +6339,7 @@
     "listOfMd": {
       "titlePart1": "Legacy of",
       "titleHighlight": "Leadership",
-      "subtitle": "Honoring the Managing Directors who have shaped the journey and success of Bihar State Text Book Publishing Corporation Ltd.",
+      "subtitle": "Honoring the Managing Directors who have shaped the journey and success of Bihar State Textbook Publishing Corporation Ltd.",
       "cardTitle": "Official Directory",
       "searchPlaceholder": "Search by name...",
       "colSNo": "S.No.",
@@ -6355,7 +6355,7 @@
       "titleHighlight": "Employees",
       "subtitle": "Our team of educators, professionals, and innovators works together to make quality education accessible, inclusive, and impactful for every learner in Bihar.",
       "directoryTitle": "Employee Directory",
-      "directorySubtitle": "Official registry of BSTBPC staff members",
+      "directorySubtitle": "Official registry of BSTBPCL staff members",
       "searchPlaceholder": "Search by name, role or dept...",
       "colSNo": "S.No.",
       "colName": "Name",
@@ -6874,14 +6874,16 @@
   },
   "developer": {
     "badge": "About the creators",
-    "intro": "NS Apps Innovations, a startup recognised by the Government of Bihar, builds with React.js, Node.js and Flutter. Across more than 28 projects — among them ASPIRE and the Samadhan apps — the team has used technology to make governance and learning work better for people.",
+    "intro": "NS Apps Innovations is a technology startup recognised by the Government of Bihar under Startup Bihar. The team designs and builds web and mobile applications with React.js, Node.js and Flutter, turning public services into simple digital experiences for citizens and departments. With more than 28 projects delivered, including ASPIRE and the Samadhan apps, it uses technology to make governance and learning more accessible and efficient. This website for the Bihar State Textbook Publishing Corporation Ltd. was designed and built by the team below.",
     "teamLead": "Team Lead",
     "teamHeads": "Team Heads",
     "teamMembers": "Team Members",
     "founderBadge": "Founder",
     "connectLinkedIn": "Connect on LinkedIn",
     "taglineStart": "Imagine, Build,",
-    "taglineEnd": "Become"
+    "taglineEnd": "Become",
+    "eyebrow": "NS Apps Innovations",
+    "title": "Developer's Team"
   },
   "homeV1": {
     "flipTitle": "Hover to discover",
@@ -6915,7 +6917,7 @@
   },
   "homeV2": {
     "estd": "Est. 1965",
-    "aboutLead": "BSTBPC publishes the textbooks of Bihar Board schools.",
+    "aboutLead": "BSTBPCL publishes the textbooks of Bihar Board schools.",
     "aboutRest": "Since 1965, from Patna, we have printed and supplied the books that children in every district learn from, and today we are taking them online, into audio, sign language and virtual reality.",
     "aboutFigure": "Since 1965",
     "aboutFigureText": "A Government of Bihar undertaking serving the state's schools for six decades.",

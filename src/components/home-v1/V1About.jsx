@@ -10,7 +10,7 @@ export default function V1About() {
     <section className="bg-bt-navy px-6 py-20 font-sans text-white md:px-12 lg:px-24 lg:py-24">
       <div className="mx-auto grid max-w-[1280px] items-end gap-12 lg:grid-cols-[1.5fr_1fr] lg:gap-20">
         <div>
-          <SectionHeader dark eyebrow={t("homeV1.aboutEyebrow", "About us")} title={t("homeV2.aboutLead", "BSTBPC publishes the textbooks of Bihar Board schools.")} />
+          <SectionHeader dark eyebrow={t("homeV1.aboutEyebrow", "About us")} title={t("homeV2.aboutLead", "BSTBPCL publishes the textbooks of Bihar Board schools.")} />
           <p className="max-w-2xl text-lg font-medium leading-relaxed text-white/55">
             {t("homeV2.aboutRest", "Since 1965, from Patna, we have printed and supplied the books that children in every district learn from, and today we are taking them online, into audio, sign language and virtual reality.")}
           </p>

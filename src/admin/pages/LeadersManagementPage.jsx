@@ -200,7 +200,7 @@ export default function LeadersManagementPage({ addToast }) {
           
           <FormInput 
             label="Role / Designation" 
-            placeholder="e.g. Managing Director, BSTBPC" 
+            placeholder="e.g. Managing Director, BSTBPCL" 
             value={formData.role}
             onChange={(val) => setFormData(prev => ({ ...prev, role: val }))}
           />

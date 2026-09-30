@@ -528,7 +528,7 @@ export default function WebsiteEditorPage({ module, addToast }) {
                         <div>
                           <p className="font-bold text-slate-800 text-base">{item.title || item.name}</p>
                           <p className="text-xs text-slate-400 font-medium">
-                             {module === 'ku-list-md' ? 'Managing Director, BSTBPC' : module === 'ku-board' ? 'Board Member, BSTBPC' : 'Employee, BSTBPC'}
+                             {module === 'ku-list-md' ? 'Managing Director, BSTBPCL' : module === 'ku-board' ? 'Board Member, BSTBPCL' : 'Employee, BSTBPCL'}
                           </p>
                         </div>
                       </td>

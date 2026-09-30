@@ -5,7 +5,7 @@ import { getSetting } from '../services/settingService';
 
 export const csrPolicyDefaults = {
   documentTitle: 'Corporate Social Responsibility Policy',
-  organisation: 'Bihar State Text Book Publishing Corporation Limited',
+  organisation: 'Bihar State Textbook Publishing Corporation Ltd.',
 
   // Downloadable copy of the signed policy document
   pdfUrl: '/csr-policy.pdf',
@@ -14,7 +14,7 @@ export const csrPolicyDefaults = {
 
   // 1. Introduction & Background
   introParagraphs: [
-    'Bihar State Text Book Publishing Corporation Limited ("BSTBPCL"), formed about 53 years ago started as a "Government Company", and has been carrying out its social responsibility through the various projects. Corporate Social Responsibility ("CSR") is not only a significant part of BSTBPCL as a corporate entity, but is a part of its DNA which has been imbued into the existence of each human being working in the organization.',
+    'Bihar State Textbook Publishing Corporation Ltd. ("BSTBPCL"), formed about 53 years ago started as a "Government Company", and has been carrying out its social responsibility through the various projects. Corporate Social Responsibility ("CSR") is not only a significant part of BSTBPCL as a corporate entity, but is a part of its DNA which has been imbued into the existence of each human being working in the organization.',
     'This Policy lays the formal framework for the CSR activities that will be carried out by BSTBPCL.'
   ],
 

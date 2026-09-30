@@ -113,7 +113,7 @@ export default function Sidebar({ activePage, setActivePage, isMobileOpen, setIs
           <div className="w-8 h-8 flex items-center justify-center">
             <img loading="lazy" decoding="async" src="/logo.webp" alt="Logo" className="w-full h-full object-contain" />
           </div>
-          <span className="text-lg font-extrabold text-[#064E3B] tracking-tight">BSTBPC</span>
+          <span className="text-lg font-extrabold text-[#064E3B] tracking-tight">BSTBPCL</span>
         </div>
 
       </div>

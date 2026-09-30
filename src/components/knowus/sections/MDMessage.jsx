@@ -61,7 +61,7 @@ const MdMessage = () => {
               {t("knowUsPage.mdMessage.designation", "Managing Director")}
             </p>
             <p className="text-sm text-slate-600 leading-snug mb-6">
-              {t("knowUsPage.mdMessage.corporation", "Bihar State Text Book Publishing Corporation Ltd.")}
+              {t("knowUsPage.mdMessage.corporation", "Bihar State Textbook Publishing Corporation Ltd.")}
             </p>
             <div className="w-12 h-1 bg-blue-600 rounded-full mb-8 lg:mx-0 mx-auto"></div>
 
@@ -217,7 +217,7 @@ const MdMessage = () => {
             <div>
               {displayName && <h4 className="text-[16px] font-black text-slate-900 leading-tight">{displayName}</h4>}
               <p className="text-[11px] font-bold text-blue-600 uppercase tracking-wide mt-1">
-                {t("knowUsPage.mdMessage.designation", "MANAGING DIRECTOR")}, BSTBPC
+                {t("knowUsPage.mdMessage.designation", "MANAGING DIRECTOR")}, BSTBPCL
               </p>
             </div>
           </div>
@@ -226,7 +226,7 @@ const MdMessage = () => {
             <p 
               className="text-[18px] md:text-[20px] text-blue-700 font-serif italic font-semibold leading-relaxed text-center md:text-left"
             >
-              {t("knowUsPage.mdMessage.corporation", "Bihar State Text Book Publishing Corporation Ltd.")}
+              {t("knowUsPage.mdMessage.corporation", "Bihar State Textbook Publishing Corporation Ltd.")}
             </p>
           </div>
         </div>

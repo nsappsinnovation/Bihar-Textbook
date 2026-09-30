@@ -61,7 +61,7 @@ const CoreMissions = () => {
           <p className="max-w-3xl mx-auto text-gray-500 text-lg font-light leading-relaxed">
             {t(
               "coreMissions.subheading",
-              "A structured framework guiding BSTBPC’s mission to strengthen learning outcomes across Bihar.",
+              "A structured framework guiding BSTBPCL’s mission to strengthen learning outcomes across Bihar.",
             )}
           </p>
         </div>

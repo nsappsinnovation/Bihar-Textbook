@@ -55,7 +55,7 @@ const OurEmployee = () => {
           <div className="p-6 border-b border-slate-300 flex flex-col md:flex-row justify-between items-center gap-6 bg-transparent">
             <div>
               <h3 className="text-lg font-bold text-[#0d0e23]">{t("knowUsPage.ourEmployee.directoryTitle", "Employee Directory")}</h3>
-              <p className="text-xs text-slate-500">{t("knowUsPage.ourEmployee.directorySubtitle", "Official registry of BSTBPC staff members")}</p>
+              <p className="text-xs text-slate-500">{t("knowUsPage.ourEmployee.directorySubtitle", "Official registry of BSTBPCL staff members")}</p>
             </div>
             <div className="relative w-full md:w-80">
               <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />

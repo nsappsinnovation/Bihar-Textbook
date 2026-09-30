@@ -47,7 +47,7 @@ export default function DashboardPage({ addToast }) {
             Good {new Date().getHours() < 12 ? 'Morning' : new Date().getHours() < 17 ? 'Afternoon' : 'Evening'}, Admin!
           </h1>
           <p className="text-sm text-gray-500 mt-3 max-w-2xl leading-relaxed font-medium">
-            Manage the Bihar State Text Book Publishing Corporation ecosystem. Monitor real-time activities, update content, and oversee department performance from your central hub.
+            Manage the Bihar State Textbook Publishing Corporation Ltd. ecosystem. Monitor real-time activities, update content, and oversee department performance from your central hub.
           </p>
         </div>
 

@@ -9,7 +9,7 @@ const milestones = [
     titleKey: 'evolution.milestones.title0',
     descKey: 'evolution.milestones.desc0',
     title: 'Foundation',
-    description: 'BSTBPC was established with a vision to provide quality and accessible textbooks across Bihar.',
+    description: 'BSTBPCL was established with a vision to provide quality and accessible textbooks across Bihar.',
     icon: BookOpen,
     color: 'from-amber-400 to-orange-500',
     glow: 'rgba(245, 158, 11, 0.4)',
