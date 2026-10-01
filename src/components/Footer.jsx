@@ -7,15 +7,16 @@ const Footer = () => {
   const { t } = useTranslation();
   return (
     <footer
-      className="relative bg-[#021e41] bg-no-repeat bg-bottom bg-[length:100%_auto] lg:bg-cover text-white/70 pt-16 pb-8 px-6 md:px-12 font-sans border-t border-white/5 overflow-hidden"
+      className="relative bg-[#021e41] bg-no-repeat bg-[position:right_bottom] bg-[length:max(100%,720px)_auto] md:bg-[length:max(100%,900px)_auto] xl:bg-cover xl:bg-bottom text-white/70 pt-16 pb-[110px] md:pb-24 lg:pb-[11vw] xl:pb-8 px-6 md:px-12 font-sans border-t border-white/5 overflow-hidden"
       style={{ backgroundImage: "url('/images/footer/footer_bg.webp')" }}
     >
       {/* Decorative Background Elements */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
       {/* Darkens the upper part so the columns stay readable over the skyline; the map, wave and books stay clear */}
       <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[#021e41]/60 via-[#021e41]/25 via-45% to-transparent to-70%"></div>
-      {/* Below lg the image is a 3:1 strip along the bottom; fade its top edge into the base colour */}
-      <div className="lg:hidden absolute inset-x-0 bottom-0 h-[33.4vw] pointer-events-none bg-gradient-to-b from-[#021e41] to-transparent to-50%"></div>
+      {/* Below xl the image is a full-width 3:1 band along the bottom (never narrower than 720/900px, cropped from the left),
+          with the copyright lifted above its wave; fade the band's top edge into the base colour */}
+      <div className="xl:hidden absolute inset-x-0 bottom-0 h-[max(33.4vw,240px)] md:h-[max(33.4vw,300px)] pointer-events-none bg-gradient-to-b from-[#021e41] to-transparent to-50%"></div>
 
       <div className="max-w-[1280px] mx-auto relative z-10">
         
