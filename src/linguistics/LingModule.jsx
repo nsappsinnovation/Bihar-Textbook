@@ -1516,13 +1516,17 @@ export default function LingModule({ type }) {
   if (!currentItem) return null;
 
   return (
-    <div className={`min-h-screen font-sans text-[#1A1C2E] flex flex-col overflow-hidden transition-all duration-700 ${type === 'conversations' ? 'bg-black' : 'bg-[#F9FBFF]'}`}>
+    <div className={`relative min-h-screen font-sans text-[#1A1C2E] flex flex-col overflow-hidden transition-all duration-700 ${type === 'conversations' ? 'bg-black' : 'bg-[#F9FBFF]'}`}>
       <style>{`
         @keyframes bounce-subtle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
         .animate-bounce-subtle { animation: bounce-subtle 3s ease-in-out infinite; }
         @keyframes fade-in-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .animate-fade-in-up { animation: fade-in-up 0.4s ease-out forwards; }
-        .convo-bg { background-image: url('/images/linguistic/convo.webp'); background-size: cover; background-position: center; position: absolute; inset: 0; opacity: 0.9; }
+        .convo-bg { position: absolute; inset: 0; overflow: hidden; opacity: 0.9; background: url('/images/linguistic/convo.webp') center / cover no-repeat; }
+        /* Phones: a portrait version of the same scene, fitted to the screen width and anchored to the bottom so both characters always show */
+        @media (max-width: 767px) {
+          .convo-bg { background: #805630 url('/images/linguistic/convo-mobile.webp') center bottom / 100% auto no-repeat; }
+        }
         .bubble-glow { box-shadow: 0 0 40px rgba(255, 255, 255, 0.4), 0 10px 20px rgba(0, 0, 0, 0.1); }
       `}</style>
       
@@ -1573,10 +1577,10 @@ export default function LingModule({ type }) {
              <div className="flex-1 relative flex flex-col justify-center px-4 md:pl-[40%] md:pr-[18%] pb-48 gap-4">
                 
                 <div key={step} className={`flex w-full ${currentItem.speaker === 'boy' ? 'justify-start' : 'justify-end'} animate-fade-in-up`}>
-                   <div className={`relative max-w-[260px] p-4 rounded-[30px] shadow-[0_8px_30px_rgba(0,0,0,0.05)] border-2 transition-all duration-500
+                   <div className={`relative max-w-[85%] md:max-w-[260px] p-3 md:p-4 rounded-[30px] shadow-[0_8px_30px_rgba(0,0,0,0.05)] border-2 transition-all duration-500
                       ${currentItem.speaker === 'boy' 
                         ? 'bg-[#EFF6FF] border-blue-50 rounded-bl-none' 
-                        : 'bg-[#FFFDF9] border-orange-50 rounded-br-none mr-48'}`}>
+                        : 'bg-[#FFFDF9] border-orange-50 rounded-br-none md:mr-48'}`}>
                       
                       <div className="flex items-center gap-3 py-1">
                          <div 
@@ -1621,11 +1625,11 @@ export default function LingModule({ type }) {
                 </div>
              </div>
 
-             <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-40 flex items-center gap-4">
+             <div className="absolute bottom-6 md:bottom-12 left-1/2 -translate-x-1/2 z-40 flex items-center gap-3 md:gap-4 w-max max-w-[94%] justify-center">
                 {step > 0 && (
                    <button 
                      onClick={handleBack}
-                     className="px-6 md:px-8 py-3.5 bg-white text-slate-400 rounded-2xl font-black text-[15px] md:text-[17px] shadow-lg border-b-4 border-slate-200 hover:translate-y-[-2px] active:border-b-0 active:translate-y-[2px] transition-all flex items-center gap-2 group"
+                     className="px-5 md:px-8 py-3 md:py-3.5 bg-white text-slate-400 rounded-2xl font-black text-[15px] md:text-[17px] shadow-lg border-b-4 border-slate-200 hover:translate-y-[-2px] active:border-b-0 active:translate-y-[2px] transition-all flex items-center gap-2 group"
                    >
                      <ArrowLeft size={20} strokeWidth={3} className="group-hover:-translate-x-1.5 transition-transform" /> Back
                    </button>
@@ -1634,7 +1638,7 @@ export default function LingModule({ type }) {
                 <button 
                   onClick={handleNext}
                   disabled={isAudioPlaying}
-                  className={`px-10 md:px-14 py-3.5 rounded-2xl font-black text-[16px] md:text-[18px] transition-all flex items-center gap-3 group ${
+                  className={`px-8 md:px-14 py-3 md:py-3.5 rounded-2xl font-black text-[16px] md:text-[18px] transition-all flex items-center gap-3 group ${
                     isAudioPlaying
                       ? 'bg-slate-300 text-slate-500 border-b-4 border-slate-400 cursor-not-allowed opacity-75'
                       : 'bg-[#2563EB] text-white shadow-xl shadow-blue-100 border-b-4 border-blue-700 hover:translate-y-[-2px] active:border-b-0 active:translate-y-[2px] cursor-pointer'

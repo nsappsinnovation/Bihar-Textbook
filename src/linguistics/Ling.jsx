@@ -154,7 +154,7 @@ export default function LinguisticApp() {
                    </div>
                  </div>
 
-                 <div className="grid grid-cols-2 gap-3">
+                 <div className="grid grid-cols-2 gap-2 sm:gap-3">
                     {SOURCE_LANGUAGES.map(lang => (
                       <LanguagePill 
                         key={`src-${lang.id}`} 
@@ -205,7 +205,7 @@ export default function LinguisticApp() {
                    </div>
                  </div>
 
-                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 relative z-10">
+                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 relative z-10">
                     {TARGET_LANGUAGES.map(lang => (
                       <LanguagePill 
                         key={`tgt-${lang.id}`} 
@@ -250,24 +250,24 @@ function LanguagePill({ lang, selected, disabled, title, isTarget, onClick, t })
       onClick={!disabled ? onClick : undefined}
       disabled={disabled}
       title={title}
-      className={`flex items-center p-2 pr-4 rounded-2xl border-2 transition-all relative overflow-hidden group outline-none
+      className={`flex items-center w-full min-w-0 p-1.5 pr-2.5 sm:p-2 sm:pr-4 rounded-xl sm:rounded-2xl border-2 transition-all relative overflow-hidden group outline-none
         ${disabled ? "opacity-50 cursor-not-allowed bg-slate-50/50 border-slate-100" : ""}
         ${selected 
           ? `border-${activeColor}-500 bg-gradient-to-r from-${activeColor}-50 to-white shadow-sm ring-4 ring-${activeColor}-500/10` 
           : `border-slate-100 bg-white hover:border-${activeColor}-300 hover:shadow-md hover:-translate-y-0.5`}`}
     >
-      <div className={`w-9 h-9 rounded-xl flex items-center justify-center text-[11px] font-bold mr-3 shrink-0 transition-colors
+      <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg sm:rounded-xl flex items-center justify-center text-[10px] sm:text-[11px] font-bold mr-2 sm:mr-3 shrink-0 transition-colors
         ${selected ? `bg-${activeColor}-500 text-white shadow-sm` : disabled ? "bg-slate-200 text-slate-400" : `bg-slate-50 text-slate-500 group-hover:bg-${activeColor}-50 group-hover:text-${activeColor}-600`}`}>
         {lang.id.toUpperCase()}
       </div>
       
-      <span className={`text-[13.5px] font-bold tracking-wide flex-1 text-left
+      <span className={`text-[12.5px] sm:text-[13.5px] font-bold tracking-normal sm:tracking-wide flex-1 min-w-0 truncate text-left
         ${selected ? `text-${activeColor}-900` : disabled ? "text-slate-400" : `text-slate-700 group-hover:text-${activeColor}-800`}`}>
         {displayName}
       </span>
       
       {selected && (
-        <div className={`w-5 h-5 bg-${activeColor}-500 rounded-full flex items-center justify-center text-white shrink-0 shadow-sm ml-2`}>
+        <div className={`w-5 h-5 bg-${activeColor}-500 rounded-full flex items-center justify-center text-white shrink-0 shadow-sm ml-1.5 sm:ml-2`}>
           <Check size={12} strokeWidth={3} />
         </div>
       )}

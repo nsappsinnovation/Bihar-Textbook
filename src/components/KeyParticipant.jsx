@@ -133,7 +133,7 @@ function ParticipantCard({ item }) {
       {/* IMAGE FIXED TO CARD BOTTOM */}
       <div className="absolute bottom-0 left-0 right-0 z-20 flex items-end justify-center">
         {item.image ? (
-          <LeaderPhoto key={item.image} src={item.image} alt={item.name} boost={/samrat/i.test(item.name) ? CM_PHOTO_BOOST : 1} />
+          <LeaderPhoto key={item.image} src={item.image} alt={item.name} />
         ) : (
           // No photo uploaded: show initials instead of requesting a stand-in image
           <div className="mb-10 grid h-32 w-32 place-items-center rounded-full bg-slate-100 text-4xl font-bold text-slate-400 transition-colors duration-[1800ms] group-hover:bg-white/15 group-hover:text-white/80">
@@ -151,8 +151,7 @@ function ParticipantCard({ item }) {
 // the same height. If the pixels can't be read (e.g. a cross-origin upload in local dev) it falls back to
 // filling the frame from the top.
 const FRAME_ASPECT = 23 / 27; // width / height, matches aspect-[23/27] on the frame
-const HEAD_WIDTH = 0.42; // head width as a fraction of the frame width
-const CM_PHOTO_BOOST = 1.18; // the Chief Minister's photo is shown a bit larger than the rest
+const HEAD_WIDTH = 0.34; // head width as a fraction of the frame width
 const HEAD_TOP = 0.08; // gap above the head as a fraction of the frame height
 
 function measureHead(img) {
@@ -196,7 +195,7 @@ function measureHead(img) {
   return { top: top / h, headWidth: (right - left) / w, headCenter: (left + right) / 2 / w, ratio: img.naturalHeight / img.naturalWidth };
 }
 
-function LeaderPhoto({ src, alt, boost = 1, onError }) {
+function LeaderPhoto({ src, alt, onError }) {
   const [layout, setLayout] = useState(null); // null = measuring, false = fallback, object = placement
 
   const place = (img) => {
@@ -207,7 +206,7 @@ function LeaderPhoto({ src, alt, boost = 1, onError }) {
       const headTop = HEAD_TOP * frameHeight;
       // Rendered image width in frame widths; grow it if needed so the photo still reaches the frame's bottom edge
       const minScale = (frameHeight - headTop) / ((1 - m.top) * m.ratio);
-      const scale = Math.max(HEAD_WIDTH / m.headWidth, minScale) * boost;
+      const scale = Math.max(HEAD_WIDTH / m.headWidth, minScale);
       const y = headTop - m.top * scale * m.ratio;
       setLayout({
         width: `${scale * 100}%`,
