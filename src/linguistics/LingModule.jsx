@@ -873,7 +873,7 @@ const SYLLABLE_MAP = {
   "yo también estoy bien qué haces hoy": "Yo tam-bién es-toy bien. ¿Qué ha-ces hoy",
   "私も元気です今日は何をしていますか": "Wa-ta-shi mo gen-ki de-su. Kyō wa na-ni o shi-te-i-ma-su ka",
   "anche io sto bene cosa fai oggi": "An-che io sto be-ne. Co-sa fai og-gi",
-  "mai ek nayi bhasha seekh rha hu": "mai ek na-yi bha-sha seekh rha hu",
+  "मैं एक नई भाषा सीख रहा हूँ": "मैं एक न-ई भा-षा सीख र-हा हूँ",
   "i am learning a new language": "I am learn-ing a new lan-guage",
   "ich lerne eine neue sprache": "Ich ler-ne ei-ne neu-e Spra-che",
   "j'apprends une nouvelle langue": "J'ap-prends u-ne nou-vel-le lan-gue",
@@ -927,10 +927,17 @@ const cleanForLookup = (str) => {
     .toLowerCase();
 };
 
+// Syllable breaks are shown as "·" so a hint like "Bon·jour" isn't mistaken for a hyphenated spelling.
+// Hyphens that belong to the word itself (e.g. "fais-tu", "t'appelles-tu") are kept.
 const getSyllables = (str) => {
   if (!str) return "";
-  const cleaned = cleanForLookup(str);
-  return SYLLABLE_MAP[cleaned] || "";
+  const syllables = SYLLABLE_MAP[cleanForLookup(str)];
+  if (!syllables) return "";
+  const realWords = new Set(str.toLowerCase().split(/\s+/).map((w) => w.replace(/[?.,!¿¡":;।？、。]/g, '')));
+  return syllables
+    .split(' ')
+    .map((w) => (realWords.has(w.toLowerCase().replace(/[?.,!¿¡":;।？、。]/g, '')) ? w : w.replace(/-/g, '·')))
+    .join(' ');
 };
 
 // Curated Multi-language Data Structure with Intelligent Distractors
@@ -1185,7 +1192,7 @@ const CONVERSATION_FLOW = [
   { speaker: 'girl', audioFile: '2_Girl_Hello_Rahul_how_are_you', hi: "नमस्ते राहुल, आप कैसे हैं?", en: "Hello Rahul, how are you?", de: "Hallo Rahul, wie geht es dir?", fr: "Bonjour Rahul, comment ça va ?", es: "Hola Rahul, ¿cómo estás?", ja: "こんにちは、ラフルさん。お元気ですか？ (Konnichiwa, Rafuru-san. Ogenki desu ka?)", it: "Ciao Rahul, come stai?" },
   { speaker: 'boy', audioFile: '3_Boy_Im_fine_thank_you_And_you', hi: "मैं ठीक हूँ, धन्यवाद। और आप?", en: "I'm fine, thank you. And you?", de: "Mir geht es gut, danke. Und dir?", fr: "Ça va bien, merci. Et toi ?", es: "Estoy bien, gracias. ¿Y tú?", ja: "元気です、ありがとう。あなたは？ (Genki desu, arigatō. Anata wa?)", it: "Sto bene, grazie. E tu?" },
   { speaker: 'girl', audioFile: '4_Girl_Im_fine_too_What_are_you_doing', hi: "मैं भी ठीक हूँ। आज आप क्या कर रहे हैं?", en: "I'm fine too. What are you doing today?", de: "Mir geht es auch gut. Was machst du heute?", fr: "Ça va bien aussi. Que fais-tu aujourd'hui ?", es: "Yo también estoy bien. ¿Qué haces hoy?", ja: "私も元気です。今日は何をしていますか？ (Watashi mo genki desu. Kyō wa nani o shiteimasu ka?)", it: "Anche io sto bene. Cosa fai oggi?" },
-  { speaker: 'boy', audioFile: '5_Boy_I_am_learning_a_new_language', hi: "mai ek nayi bhasha seekh rha hu", en: "I am learning a new language.", de: "Ich lerne eine neue Sprache.", fr: "J'apprends une nouvelle langue.", es: "Estoy aprendiendo un nuevo idioma.", ja: "新しい言語を勉強しています。 (Atarashii gengo o benkyō shiteimasu.)", it: "Sto imparando una nuova lingua." },
+  { speaker: 'boy', audioFile: '5_Boy_I_am_learning_a_new_language', hi: "मैं एक नई भाषा सीख रहा हूँ।", en: "I am learning a new language.", de: "Ich lerne eine neue Sprache.", fr: "J'apprends une nouvelle langue.", es: "Estoy aprendiendo un nuevo idioma.", ja: "新しい言語を勉強しています。 (Atarashii gengo o benkyō shiteimasu.)", it: "Sto imparando una nuova lingua." },
   { speaker: 'girl', audioFile: '6_Girl_Thats_great_Which_language', hi: "यह बहुत अच्छा है! कौन सी भाषा?", en: "That's great! Which language?", de: "Das ist toll! Welche Sprache?", fr: "C'est super ! Quelle langue ?", es: "¡Eso es genial! ¿Qué idioma?", ja: "それは素晴らしいですね！どの言語ですか？ (Sore wa subarashii desu ne! Dono gengo desu ka?)", it: "È fantastico! Quale lingua?" },
   { speaker: 'boy', audioFile: '7_Boy_I_am_learning_German_right_now', hi: "मैं अभी जर्मन सीख रहा हूँ।", en: "I am learning German right now.", de: "Ich lerne gerade Deutsch.", fr: "J'apprends l'allemand en ce moment.", es: "Estoy aprendiendo alemán ahora mismo.", ja: "今、ドイツ語 を勉強しています。 (Ima, Doitsugo o benkyō shiteimasu.)", it: "Adesso sto imparando il tedesco." },
   { speaker: 'girl', audioFile: '8_Girl_German_is_a_beautiful_language', hi: "जर्मन एक सुंदर भाषा है।", en: "German is a beautiful language.", de: "Deutsch ist eine schöne Sprache.", fr: "L'allemand est une belle langue.", es: "El alemán es un idioma hermoso.", ja: "ドイツ語は美しい言語です。 (Doitsugo wa utsukushii gengo desu.)", it: "Il tedesco è una lingua bellissima." },
@@ -1299,6 +1306,8 @@ export default function LingModule({ type }) {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [showSyllables, setShowSyllables] = useState(false);
   const currentAudioRef = useRef(null);
+  const playIdRef = useRef(0);
+  const autoPlayTimerRef = useRef(null);
   
   const currentItem = items[step];
   const dailyTotal = type === 'conversations' ? 10 : 20;
@@ -1328,16 +1337,8 @@ export default function LingModule({ type }) {
     setStreak(currentStreak);
     setDailyProgress(currentProgress);
     
-    const timer = setTimeout(() => {
-      if (currentItem) {
-        if (type !== 'conversations') {
-          handleSpeak(currentItem.target, targetLang, currentItem.audioFile);
-        } else {
-          handleSpeak(currentItem.text, targetLang, currentItem.audioFile);
-        }
-      }
-    }, 500);
-    return () => clearTimeout(timer);
+    if (currentItem) queueSpeak(currentItem);
+    return stopAll;
   }, []);
 
   useEffect(() => {
@@ -1357,64 +1358,73 @@ export default function LingModule({ type }) {
     return () => clearTimeout(timer);
   }, [isCorrect]);
 
-  const fallbackTTS = (text, langCode) => {
-    setIsAudioPlaying(true);
-    const shortLang = langCode.split('-')[0];
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = langCode;
-    utterance.rate = 0.9;
-    
-    utterance.onend = () => {
-      setIsAudioPlaying(false);
-    };
-    utterance.onerror = () => {
-      setIsAudioPlaying(false);
-    };
-
-    const voices = window.speechSynthesis.getVoices();
-    const targetVoices = voices.filter(v => v.lang.startsWith(shortLang));
-    if (targetVoices.length > 0) {
-      const preferredVoice = targetVoices.find(v => 
-        v.name.includes("Google") || v.name.includes("Natural") || v.name.includes("Premium")
-      ) || targetVoices[0];
-      utterance.voice = preferredVoice;
-    }
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(utterance);
-
-    setTimeout(() => {
-      setIsAudioPlaying(false);
-    }, 7000);
-  };
-
-  const handleSpeak = (text, langCode, audioFileName) => {
+  // Stop whatever is playing (mp3 or browser speech) and any queued auto-play,
+  // so only one voice is ever heard.
+  const stopAll = () => {
+    playIdRef.current += 1;
+    clearTimeout(autoPlayTimerRef.current);
     if (currentAudioRef.current) {
+      currentAudioRef.current.onended = null;
+      currentAudioRef.current.onerror = null;
       currentAudioRef.current.pause();
       currentAudioRef.current = null;
     }
+    window.speechSynthesis?.cancel();
+  };
+
+  const queueSpeak = (item) => {
+    clearTimeout(autoPlayTimerRef.current);
+    autoPlayTimerRef.current = setTimeout(() => {
+      handleSpeak(type === 'conversations' ? item.text : item.target, targetLang, item.audioFile, item.speaker);
+    }, 500);
+  };
+
+  // Browser speech, used only when the recorded mp3 can't be loaded
+  const fallbackTTS = (text, langCode, playId, speaker = 'girl') => {
+    if (!window.speechSynthesis) return setIsAudioPlaying(false);
+    const done = () => playId === playIdRef.current && setIsAudioPlaying(false);
+    // Japanese entries carry romaji in brackets, which must not be read out
+    const utterance = new SpeechSynthesisUtterance(text.replace(/\s*\([^)]*\)\s*/g, ' ').trim());
+    utterance.lang = langCode;
+    utterance.rate = 0.9;
+    utterance.onend = done;
+    utterance.onerror = done;
+
+    const voices = window.speechSynthesis.getVoices().filter(v => v.lang.startsWith(langCode.split('-')[0]));
+    const wantFemale = speaker === 'girl';
+    const preferred = voices.find(v => /female/i.test(v.name) === wantFemale && /google|natural|premium|neural/i.test(v.name))
+      || voices.find(v => /female/i.test(v.name) === wantFemale)
+      || voices[0];
+    if (preferred) utterance.voice = preferred;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(utterance);
+  };
+
+  const handleSpeak = (text, langCode, audioFileName, speaker = 'girl') => {
+    stopAll();
+    const playId = playIdRef.current;
     setIsAudioPlaying(true);
 
-    if (audioFileName) {
-      const folderName = type === 'conversations' ? 'conversation' : type;
-      const audioUrl = `/audio/${folderName}/${langCode}/${audioFileName}.mp3`;
-      const audio = new Audio(audioUrl);
-      currentAudioRef.current = audio;
+    if (!audioFileName) return fallbackTTS(text, langCode, playId, speaker);
 
-      audio.onended = () => {
-        setIsAudioPlaying(false);
-      };
-      audio.onerror = () => {
-        console.warn("Failed to play local audio, falling back to TTS");
-        fallbackTTS(text, langCode);
-      };
+    const folderName = type === 'conversations' ? 'conversation' : type;
+    const audio = new Audio(`/audio/${folderName}/${langCode}/${audioFileName}.mp3`);
+    currentAudioRef.current = audio;
+    let fellBack = false;
+    const fallBack = () => {
+      if (fellBack || playId !== playIdRef.current) return;
+      fellBack = true;
+      fallbackTTS(text, langCode, playId, speaker);
+    };
 
-      audio.play().catch((err) => {
-        console.warn("Failed to play local audio, falling back to TTS:", err);
-        fallbackTTS(text, langCode);
-      });
-    } else {
-      fallbackTTS(text, langCode);
-    }
+    audio.onended = () => playId === playIdRef.current && setIsAudioPlaying(false);
+    audio.onerror = fallBack; // the file is missing or can't be decoded
+    audio.play().catch((err) => {
+      if (playId !== playIdRef.current) return;
+      // Autoplay blocked (no tap yet): wait for the user to press the speaker instead of switching to another voice
+      if (err?.name === 'NotAllowedError' || err?.name === 'AbortError') setIsAudioPlaying(false);
+      else fallBack();
+    });
   };
 
   const handleNext = () => {
@@ -1437,10 +1447,9 @@ export default function LingModule({ type }) {
         if (currentModVal < maxLimit) {
           localStorage.setItem(moduleKey, currentModVal + 1);
         }
-        setTimeout(() => handleSpeak(items[nextStep].text, targetLang, items[nextStep].audioFile), 500);
-      } else {
-        setTimeout(() => handleSpeak(items[nextStep].target, targetLang, items[nextStep].audioFile), 500);
       }
+      stopAll();
+      queueSpeak(items[nextStep]);
     } else setIsCompleted(true);
   };
 
@@ -1462,10 +1471,7 @@ export default function LingModule({ type }) {
 
   const handleBack = () => {
     if (step > 0) {
-      if (currentAudioRef.current) {
-        currentAudioRef.current.pause();
-      }
-      window.speechSynthesis.cancel();
+      stopAll();
       setStep(step - 1);
       setInputValue("");
       setShowFeedback(false);
@@ -1584,7 +1590,7 @@ export default function LingModule({ type }) {
                       
                       <div className="flex items-center gap-3 py-1">
                          <div 
-                           onClick={() => handleSpeak(currentItem.text, targetLang, currentItem.audioFile)} 
+                           onClick={() => handleSpeak(currentItem.text, targetLang, currentItem.audioFile, currentItem.speaker)} 
                            className={`w-9 h-9 rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform shadow-sm flex-shrink-0
                               ${currentItem.speaker === 'boy' ? 'bg-white text-[#2563EB]' : 'bg-white text-orange-400'}`}
                          >
