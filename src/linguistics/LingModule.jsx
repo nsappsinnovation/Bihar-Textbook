@@ -851,6 +851,42 @@ const SYLLABLE_MAP = {
   "buona giornata": "Buo-na gior-na-ta",
   "buonasera": "Buo-na-se-ra",
 
+  // --- WORDING THAT MATCHES THE ORIGINAL RECORDINGS ---
+  "quel est ton nom": "Quel est ton nom",
+  "d'où venez-vous": "D'où ve-nez-vous",
+  "je vais bien": "Je vais bien",
+  "s'il te plaît": "S'il te plaît",
+  "passe une bonne journée": "Pas-se u-ne bon-ne jour-née",
+  "parles-tu anglais": "Par-les-tu an-glais",
+  "où se trouvent les toilettes": "Où se trou-vent les toi-let-tes",
+  "bonjour rahul comment vas-tu": "Bon-jour Ra-hul, com-ment vas-tu",
+  "je vais bien merci et toi": "Je vais bien, mer-ci. Et toi",
+  "disculpe": "Dis-cul-pe",
+  "nos vemos mañana": "Nos ve-mos ma-ña-na",
+  "qué estás haciendo": "¿Qué es-tás ha-cien-do",
+  "buen día": "Buen dí-a",
+  "genial qué idioma": "¡Ge-nial! ¿Qué i-dio-ma",
+  "verzeihung": "Ver-zei-hung",
+  "haben sie einen guten tag": "Ha-ben Sie ei-nen gu-ten Tag",
+  "das ist großartig welche sprache": "Das ist groß-ar-tig! Wel-che Spra-che",
+  "ja es gefällt mir": "Ja, es ge-fällt mir",
+  "mi scusi": "Mi scu-si",
+  "ci vediamo domani": "Ci ve-dia-mo do-ma-ni",
+  "lei parla inglese": "Lei par-la in-gle-se",
+  "anch'io sto bene cosa stai facendo oggi": "Anch'io sto be-ne. Co-sa stai fa-cen-do og-gi",
+  "sto imparando il tedesco proprio adesso": "Sto im-pa-ran-do il te-de-sco pro-prio a-des-so",
+  "buona fortuna arrivederci": "Buo-na for-tu-na! Ar-ri-ve-der-ci",
+  "あなたの名前は何ですか": "A-na-ta no na-ma-e wa nan de-su ka",
+  "どこの出身ですか": "Do-ko no shus-shin de-su ka",
+  "私は元気です": "Wa-ta-shi wa gen-ki de-su",
+  "あなたは英語を話しますか": "A-na-ta wa ei-go o ha-na-shi-ma-su ka",
+  "化粧室はどこですか": "Ke-shō-shi-tsu wa do-ko de-su ka",
+  "また明日ね": "Ma-ta a-shi-ta ne",
+  "何してるの": "Na-ni shi-te-ru no",
+  "理解できない": "Ri-kai de-ki-nai",
+  "おかげさまで元気ですあなたも": "O-ka-ge-sa-ma de gen-ki de-su. A-na-ta mo",
+  "新しい言語を学んでいます": "A-ta-ra-shii gen-go o ma-nan-de i-ma-su",
+  "幸運を！また後で": "Kō-un o! Ma-ta a-to de",
   // --- CONVERSATION FLOW EXTRA SENTENCES ---
   "नमस्ते राहुल आप कैसे हैं": "न-म-स्ते रा-हुल, आप कै-से हैं",
   "hello rahul how are you": "Hel-lo Ra-hul, how are you",
@@ -992,7 +1028,7 @@ const WORD_CONCEPTS = [
   },
   { 
     id: 9, 
-    translations: { hi: "गाड़ी", en: "Car", de: "Auto", fr: "Voiture", es: "Coche", ja: "車 (Kuruma)", it: "Auto" }, 
+    translations: { hi: "गाड़ी", en: "Car", de: "Auto", fr: "Voiture", es: "Auto", ja: "車 (Kuruma)", it: "Auto" }, 
     distractors: { hi: ["बस", "ट्रेन", "साइकिल"], en: ["Bus", "Train", "Bicycle"], de: ["Bus", "Zug", "Fahrrad"], fr: ["Bus", "Train", "Vélo"], es: ["Autobús", "Tren", "Bicicleta"], ja: ["バス (Basu)", "電車 (Densha)", "自転車 (Jitensha)"], it: ["Autobus", "Treno", "Bicicletta"] },
     icon: "🚗" 
   },
@@ -1067,14 +1103,14 @@ const WORD_CONCEPTS = [
 const PHRASE_CONCEPTS = [
   { 
     id: 1, 
-    translations: { hi: "आपका क्या नाम है?", en: "What is your name?", de: "Wie heißt du?", fr: "Comment t'appelles-tu ?", es: "¿Cómo te llamas?", ja: "名前は何ですか？ (Namae wa nan desu ka?)", it: "Come ti chiami?" }, 
+    translations: { hi: "आपका क्या नाम है?", en: "What is your name?", de: "Wie heißt du?", fr: "Quel est ton nom ?", es: "¿Cómo te llamas?", ja: "あなたの名前は何ですか？ (Anata no namae wa nan desu ka?)", it: "Come ti chiami?" }, 
     distractors: { hi: ["आप कैसे हैं?", "कहाँ हैं?", "कौन हैं?"], en: ["How are you?", "Where are you?", "Who are you?"], de: ["Wie geht es dir?", "Wo bist du?", "Wer bist du?"], fr: ["Comment ça va ?", "Où es-tu ?", "Qui es-tu ?"], es: ["¿Cómo estás?", "¿Dónde estás?", "¿Quién eres?"], ja: ["お元気ですか？ (Ogenki desu ka?)", "どこですか？ (Doko desu ka?)", "誰ですか？ (Dare desu ka?)"], it: ["Come stai?", "Dove sei?", "Chi sei?"] },
     icon: "👋" 
   },
   { 
     id: 2, 
-    translations: { hi: "शुभ प्रभात", en: "Good morning", de: "Guten Morgen", fr: "Bonjour", es: "Buenos días", ja: "おはようございます (Ohayō gozaimasu)", it: "Buongiorno" }, 
-    distractors: { hi: ["शुभ रात्रि", "नमस्ते", "अलविदा"], en: ["Good night", "Hello", "Goodbye"], de: ["Gute Nacht", "Hallo", "Auf Wiedersehen"], fr: ["Bonne nuit", "Bonjour", "Au revoir"], es: ["Buenas noches", "Hola", "Adiós"], ja: ["おやすみなさい (Oyasuminasai)", "こんにちは (Konnichiwa)", "さようなら (Sayōnara)"], it: ["Buonanotte", "Ciao", "Arrivederci"] },
+    translations: { hi: "शुभ प्रभात", en: "Good morning", de: "Guten Morgen", fr: "Bonjour", es: "Buen día", ja: "おはよう (Ohayō)", it: "Buongiorno" }, 
+    distractors: { hi: ["शुभ रात्रि", "नमस्ते", "अलविदा"], en: ["Good night", "Hello", "Goodbye"], de: ["Gute Nacht", "Hallo", "Auf Wiedersehen"], fr: ["Bonne nuit", "Bonsoir", "Au revoir"], es: ["Buenas noches", "Hola", "Adiós"], ja: ["おやすみなさい (Oyasuminasai)", "こんにちは (Konnichiwa)", "さようなら (Sayōnara)"], it: ["Buonanotte", "Ciao", "Arrivederci"] },
     icon: "🌅" 
   },
   { 
@@ -1097,7 +1133,7 @@ const PHRASE_CONCEPTS = [
   },
   { 
     id: 6, 
-    translations: { hi: "माफ़ करें", en: "Excuse me", de: "Entschuldigen Sie", fr: "Excusez-moi", es: "Perdone", ja: "すみません (Sumimasen)", it: "Scusami" }, 
+    translations: { hi: "माफ़ करें", en: "Excuse me", de: "Verzeihung", fr: "Excusez-moi", es: "Disculpe", ja: "すみません (Sumimasen)", it: "Mi scusi" }, 
     distractors: { hi: ["धन्यवाद", "अलविदा", "नमस्ते"], en: ["Thank you", "Goodbye", "Hello"], de: ["Danke", "Auf Wiedersehen", "Hallo"], fr: ["Merci", "Au revoir", "Bonjour"], es: ["Gracias", "Adiós", "Hola"], ja: ["ありがとう (Arigatō)", "さようなら (Sayōnara)", "こんにちは (Konnichiwa)"], it: ["Grazie", "Arrivederci", "Ciao"] },
     icon: "🙋" 
   },
@@ -1115,7 +1151,7 @@ const PHRASE_CONCEPTS = [
   },
   { 
     id: 9, 
-    translations: { hi: "कृपया", en: "Please", de: "Bitte", fr: "S'il vous plaît", es: "Por favor", ja: "お願いします (Onegai shimasu)", it: "Per favore" }, 
+    translations: { hi: "कृपया", en: "Please", de: "Bitte", fr: "S'il te plaît", es: "Por favor", ja: "お願いします (Onegai shimasu)", it: "Per favore" }, 
     distractors: { hi: ["धन्यवाद", "हाँ", "नहीं"], en: ["Thank you", "Yes", "No"], de: ["Danke", "Ja", "Nein"], fr: ["Merci", "Oui", "Non"], es: ["Gracias", "Sí", "No"], ja: ["ありがとう (Arigatō)", "はい (Hai)", "いいえ (Iie)"], it: ["Grazie", "Sì", "No"] },
     icon: "🥺" 
   },
@@ -1127,19 +1163,19 @@ const PHRASE_CONCEPTS = [
   },
   { 
     id: 11, 
-    translations: { hi: "मैं नहीं समझता", en: "I don't understand", de: "Ich verstehe nicht", fr: "Je ne comprends pas", es: "No entiendo", ja: "わかりません (Wakarimasen)", it: "Non capisco" }, 
+    translations: { hi: "मैं नहीं समझता", en: "I don't understand", de: "Ich verstehe nicht", fr: "Je ne comprends pas", es: "No entiendo", ja: "理解できない (Rikai dekinai)", it: "Non capisco" }, 
     distractors: { hi: ["मुझे पता है", "मैंने देखा", "मैंने सुना"], en: ["I know", "I saw", "I heard"], de: ["Ich weiß", "Ich sah", "Ich hörte"], fr: ["Je sais", "J'ai vu", "J'ai entendu"], es: ["Lo sé", "Vi", "Escuché"], ja: ["知っています (Shitte imasu)", "見ました (Mimashita)", "聞きました (Kikimashita)"], it: ["Lo so", "Ho visto", "Ho sentito"] },
     icon: "🤷" 
   },
   { 
     id: 12, 
-    translations: { hi: "क्या आप अंग्रेज़ी बोलते हैं?", en: "Do you speak English?", de: "Sprechen Sie Englisch?", fr: "Parlez-vous anglais ?", es: "¿Habla inglés?", ja: "英語を話しますか？ (Eigo o hanashimasu ka?)", it: "Parli inglese?" }, 
+    translations: { hi: "क्या आप अंग्रेज़ी बोलते हैं?", en: "Do you speak English?", de: "Sprechen Sie Englisch?", fr: "Parles-tu anglais ?", es: "¿Habla inglés?", ja: "あなたは英語を話しますか？ (Anata wa eigo o hanashimasu ka?)", it: "Lei parla inglese?" }, 
     distractors: { hi: ["आप कैसे हैं?", "आपका क्या नाम है?", "आप कहाँ हैं?"], en: ["How are you?", "What is your name?", "Where are you?"], de: ["Wie geht es dir?", "Wie heißt du?", "Wo bist du?"], fr: ["Comment ça va ?", "Comment t'appelles-tu ?", "Où es-tu ?"], es: ["¿Cómo estás?", "¿Cómo te llamas?", "¿Dónde estás?"], ja: ["お元気ですか？ (Ogenki desu ka?)", "名前は何ですか？ (Namae wa nan desu ka?)", "どこですか？ (Doko desu ka?)"], it: ["Come stai?", "Come ti chiami?", "Dove sei?"] },
     icon: "🗣️" 
   },
   { 
     id: 13, 
-    translations: { hi: "शौचालय कहाँ है?", en: "Where is the bathroom?", de: "Wo ist die Toilette?", fr: "Où sont les toilettes ?", es: "¿Dónde está el baño?", ja: "トイレはどこですか？ (Toire wa doko desu ka?)", it: "Dov'è il bagno?" }, 
+    translations: { hi: "शौचालय कहाँ है?", en: "Where is the bathroom?", de: "Wo ist die Toilette?", fr: "Où se trouvent les toilettes ?", es: "¿Dónde está el baño?", ja: "化粧室はどこですか？ (Keshōshitsu wa doko desu ka?)", it: "Dov'è il bagno?" }, 
     distractors: { hi: ["स्टेशन कहाँ है?", "होटल कहाँ है?", "अस्पताल कहाँ है?"], en: ["Where is the station?", "Where is the hotel?", "Where is the hospital?"], de: ["Wo ist der Bahnhof?", "Wo ist das Hotel?", "Wo ist das Krankenhaus?"], fr: ["Où est la gare ?", "Où est l'hôtel ?", "Où est l'hôpital ?"], es: ["¿Dónde está la estación?", "¿Dónde está el hotel?", "¿Dónde está el hospital?"], ja: ["駅はどこですか？ (Eki wa doko desu ka?)", "ホテルはどこですか？ (Hoteru wa doko desu ka?)", "病院はどこですか？ (Byōin wa doko desu ka?)"], it: ["Dov'è la stazione?", "Dov'è l'hotel?", "Dov'è l'ospedale?"] },
     icon: "🚻" 
   },
@@ -1157,31 +1193,31 @@ const PHRASE_CONCEPTS = [
   },
   { 
     id: 16, 
-    translations: { hi: "आप कहाँ से हैं?", en: "Where are you from?", de: "Woher kommst du?", fr: "D'où viens-tu ?", es: "¿De dónde eres?", ja: "どこから来ましたか？ (Doko kara kimashita ka?)", it: "Di dove sei?" }, 
+    translations: { hi: "आप कहाँ से हैं?", en: "Where are you from?", de: "Woher kommst du?", fr: "D'où venez-vous ?", es: "¿De dónde eres?", ja: "どこの出身ですか？ (Doko no shusshin desu ka?)", it: "Di dove sei?" }, 
     distractors: { hi: ["आप कहाँ जा रहे हैं?", "आप क्या कर रहे हो?", "आप कौन हैं?"], en: ["Where are you going?", "What are you doing?", "Who are you?"], de: ["Wohin gehst du?", "Was machst du?", "Wer bist du?"], fr: ["Où vas-tu ?", "Que fais-tu ?", "Qui es-tu ?"], es: ["¿A dónde vas?", "¿Qué haces?", "¿Quién eres?"], ja: ["どこに行きますか？ (Doko ni ikimasu ka?)", "何をしていますか？ (Nani o shiteimasu ka?)", "誰ですか？ (Dare desu ka?)"], it: ["Dove vai?", "Cosa fai?", "Chi sei?"] },
     icon: "🗺️" 
   },
   { 
     id: 17, 
-    translations: { hi: "मैं ठीक हूँ", en: "I am fine", de: "Mir geht es gut", fr: "Ça va bien", es: "Estoy bien", ja: "元気です (Genki desu)", it: "Sto bene" }, 
+    translations: { hi: "मैं ठीक हूँ", en: "I am fine", de: "Mir geht es gut", fr: "Je vais bien", es: "Estoy bien", ja: "私は元気です (Watashi wa genki desu)", it: "Sto bene" }, 
     distractors: { hi: ["मैं बीमार हूँ", "मैं दुखी हूँ", "मैं व्यस्त हूँ"], en: ["I am sick", "I am sad", "I am busy"], de: ["Ich bin krank", "Ich bin traurig", "Ich bin beschäftigt"], fr: ["Je suis malade", "Je suis triste", "Je suis occupé"], es: ["Estoy enfermo", "Estoy triste", "Estoy ocupado"], ja: ["病気です (Byōki desu)", "悲しいです (Kanashii desu)", "忙しいです (Isogashii desu)"], it: ["Sono malato", "Sono triste", "Sono occupato"] },
     icon: "👍" 
   },
   { 
     id: 18, 
-    translations: { hi: "आप क्या कर रहे हैं?", en: "What are you doing?", de: "Was machst du?", fr: "Que fais-tu ?", es: "¿Qué haces?", ja: "何をしていますか？ (Nani o shiteimasu ka?)", it: "Cosa stai facendo?" }, 
+    translations: { hi: "आप क्या कर रहे हैं?", en: "What are you doing?", de: "Was machst du?", fr: "Que fais-tu ?", es: "¿Qué estás haciendo?", ja: "何してるの？ (Nani shiteru no?)", it: "Cosa fai?" }, 
     distractors: { hi: ["आप कहाँ हैं?", "आप कब आएंगे?", "यह क्या है?"], en: ["Where are you?", "When will you come?", "What is this?"], de: ["Wo bist du?", "Wann kommst du?", "Was ist das?"], fr: ["Où es-tu ?", "Quand viens-tu ?", "Qu'est-ce que c'est ?"], es: ["¿Dónde estás?", "¿Cuándo vendrás?", "¿Qué es esto?"], ja: ["どこにいますか？ (Doko ni imasu ka?)", "いつ来ますか？ (Itsu kimasu ka?)", "これは何ですか？ (Kore wa nan desu ka?)"], it: ["Dove sei?", "Quando vieni?", "Cos'è questo?"] },
     icon: "🤔" 
   },
   { 
     id: 19, 
-    translations: { hi: "कल मिलते हैं", en: "See you tomorrow", de: "Bis morgen", fr: "À demain", es: "Hasta mañana", ja: "また明日 (Mata ashita)", it: "A domani" }, 
+    translations: { hi: "कल मिलते हैं", en: "See you tomorrow", de: "Bis morgen", fr: "À demain", es: "Nos vemos mañana", ja: "また明日ね (Mata ashita ne)", it: "Ci vediamo domani" }, 
     distractors: { hi: ["बाद में मिलते हैं", "शुभ रात्रि", "अलविदा"], en: ["See you later", "Good night", "Goodbye"], de: ["Bis später", "Gute Nacht", "Auf Wiedersehen"], fr: ["À plus tard", "Bonne nuit", "Au revoir"], es: ["Hasta luego", "Buenas noches", "Adiós"], ja: ["また後で", "おやすみなさい (Oyasuminasai)", "さようなら (Sayōnara)"], it: ["A dopo", "Buonanotte", "Arrivederci"] },
     icon: "📅" 
   },
   { 
     id: 20, 
-    translations: { hi: "आपका दिन शुभ हो", en: "Have a good day", de: "Einen schönen Tag noch", fr: "Bonne journée", es: "Que tengas un buen día", ja: "良い一日を (Yoi ichinichi o)", it: "Buona giornata" }, 
+    translations: { hi: "आपका दिन शुभ हो", en: "Have a good day", de: "Haben Sie einen guten Tag!", fr: "Passe une bonne journée", es: "Que tengas un buen día", ja: "良い一日を (Yoi ichinichi o)", it: "Buona giornata" }, 
     distractors: { hi: ["शुभ प्रभात", "शुभ संध्या", "शुभ रात्रि"], en: ["Good morning", "Good evening", "Good night"], de: ["Guten Morgen", "Guten Abend", "Gute Nacht"], fr: ["Bonjour", "Bonsoir", "Bonne nuit"], es: ["Buenos días", "Buenas tardes", "Buenas noches"], ja: ["おはよう (Ohayō)", "こんばんは (Konbanwa)", "おやすみ (Oyasumi)"], it: ["Buongiorno", "Buonasera", "Buonanotte"] },
     icon: "✨" 
   }
@@ -1189,15 +1225,15 @@ const PHRASE_CONCEPTS = [
 
 const CONVERSATION_FLOW = [
   { speaker: 'boy', audioFile: '1_Boy_Hello', hi: "नमस्ते", en: "Hello", de: "Hallo", fr: "Bonjour", es: "Hola", ja: "こんにちは (Konnichiwa)", it: "Ciao" },
-  { speaker: 'girl', audioFile: '2_Girl_Hello_Rahul_how_are_you', hi: "नमस्ते राहुल, आप कैसे हैं?", en: "Hello Rahul, how are you?", de: "Hallo Rahul, wie geht es dir?", fr: "Bonjour Rahul, comment ça va ?", es: "Hola Rahul, ¿cómo estás?", ja: "こんにちは、ラフルさん。お元気ですか？ (Konnichiwa, Rafuru-san. Ogenki desu ka?)", it: "Ciao Rahul, come stai?" },
-  { speaker: 'boy', audioFile: '3_Boy_Im_fine_thank_you_And_you', hi: "मैं ठीक हूँ, धन्यवाद। और आप?", en: "I'm fine, thank you. And you?", de: "Mir geht es gut, danke. Und dir?", fr: "Ça va bien, merci. Et toi ?", es: "Estoy bien, gracias. ¿Y tú?", ja: "元気です、ありがとう。あなたは？ (Genki desu, arigatō. Anata wa?)", it: "Sto bene, grazie. E tu?" },
-  { speaker: 'girl', audioFile: '4_Girl_Im_fine_too_What_are_you_doing', hi: "मैं भी ठीक हूँ। आज आप क्या कर रहे हैं?", en: "I'm fine too. What are you doing today?", de: "Mir geht es auch gut. Was machst du heute?", fr: "Ça va bien aussi. Que fais-tu aujourd'hui ?", es: "Yo también estoy bien. ¿Qué haces hoy?", ja: "私も元気です。今日は何をしていますか？ (Watashi mo genki desu. Kyō wa nani o shiteimasu ka?)", it: "Anche io sto bene. Cosa fai oggi?" },
-  { speaker: 'boy', audioFile: '5_Boy_I_am_learning_a_new_language', hi: "मैं एक नई भाषा सीख रहा हूँ।", en: "I am learning a new language.", de: "Ich lerne eine neue Sprache.", fr: "J'apprends une nouvelle langue.", es: "Estoy aprendiendo un nuevo idioma.", ja: "新しい言語を勉強しています。 (Atarashii gengo o benkyō shiteimasu.)", it: "Sto imparando una nuova lingua." },
-  { speaker: 'girl', audioFile: '6_Girl_Thats_great_Which_language', hi: "यह बहुत अच्छा है! कौन सी भाषा?", en: "That's great! Which language?", de: "Das ist toll! Welche Sprache?", fr: "C'est super ! Quelle langue ?", es: "¡Eso es genial! ¿Qué idioma?", ja: "それは素晴らしいですね！どの言語ですか？ (Sore wa subarashii desu ne! Dono gengo desu ka?)", it: "È fantastico! Quale lingua?" },
-  { speaker: 'boy', audioFile: '7_Boy_I_am_learning_German_right_now', hi: "मैं अभी जर्मन सीख रहा हूँ।", en: "I am learning German right now.", de: "Ich lerne gerade Deutsch.", fr: "J'apprends l'allemand en ce moment.", es: "Estoy aprendiendo alemán ahora mismo.", ja: "今、ドイツ語 を勉強しています。 (Ima, Doitsugo o benkyō shiteimasu.)", it: "Adesso sto imparando il tedesco." },
+  { speaker: 'girl', audioFile: '2_Girl_Hello_Rahul_how_are_you', hi: "नमस्ते राहुल, आप कैसे हैं?", en: "Hello Rahul, how are you?", de: "Hallo Rahul, wie geht es dir?", fr: "Bonjour Rahul, comment vas-tu ?", es: "Hola Rahul, ¿cómo estás?", ja: "こんにちは、ラフルさん。お元気ですか？ (Konnichiwa, Rafuru-san. Ogenki desu ka?)", it: "Ciao Rahul, come stai?" },
+  { speaker: 'boy', audioFile: '3_Boy_Im_fine_thank_you_And_you', hi: "मैं ठीक हूँ, धन्यवाद। और आप?", en: "I'm fine, thank you. And you?", de: "Mir geht es gut, danke. Und dir?", fr: "Je vais bien, merci. Et toi ?", es: "Estoy bien, gracias. ¿Y tú?", ja: "おかげさまで元気です。あなたも？ (Okagesama de genki desu. Anata mo?)", it: "Sto bene, grazie. E tu?" },
+  { speaker: 'girl', audioFile: '4_Girl_Im_fine_too_What_are_you_doing', hi: "मैं भी ठीक हूँ। आज आप क्या कर रहे हैं?", en: "I'm fine too. What are you doing today?", de: "Mir geht es auch gut. Was machst du heute?", fr: "Ça va bien aussi. Que fais-tu aujourd'hui ?", es: "Yo también estoy bien. ¿Qué haces hoy?", ja: "私も元気です。今日は何をしていますか？ (Watashi mo genki desu. Kyō wa nani o shiteimasu ka?)", it: "Anch'io sto bene. Cosa stai facendo oggi?" },
+  { speaker: 'boy', audioFile: '5_Boy_I_am_learning_a_new_language', hi: "मैं एक नई भाषा सीख रहा हूँ।", en: "I am learning a new language.", de: "Ich lerne eine neue Sprache.", fr: "J'apprends une nouvelle langue.", es: "Estoy aprendiendo un nuevo idioma.", ja: "新しい言語を学んでいます。 (Atarashii gengo o manande imasu.)", it: "Sto imparando una nuova lingua." },
+  { speaker: 'girl', audioFile: '6_Girl_Thats_great_Which_language', hi: "यह बहुत अच्छा है! कौन सी भाषा?", en: "That's great! Which language?", de: "Das ist großartig! Welche Sprache?", fr: "C'est super ! Quelle langue ?", es: "¡Genial! ¿Qué idioma?", ja: "それは素晴らしいですね！どの言語ですか？ (Sore wa subarashii desu ne! Dono gengo desu ka?)", it: "È fantastico! Quale lingua?" },
+  { speaker: 'boy', audioFile: '7_Boy_I_am_learning_German_right_now', hi: "मैं अभी जर्मन सीख रहा हूँ।", en: "I am learning German right now.", de: "Ich lerne gerade Deutsch.", fr: "J'apprends l'allemand en ce moment.", es: "Estoy aprendiendo alemán ahora mismo.", ja: "今、ドイツ語 を勉強しています。 (Ima, Doitsugo o benkyō shiteimasu.)", it: "Sto imparando il tedesco proprio adesso." },
   { speaker: 'girl', audioFile: '8_Girl_German_is_a_beautiful_language', hi: "जर्मन एक सुंदर भाषा है।", en: "German is a beautiful language.", de: "Deutsch ist eine schöne Sprache.", fr: "L'allemand est une belle langue.", es: "El alemán es un idioma hermoso.", ja: "ドイツ語は美しい言語です。 (Doitsugo wa utsukushii gengo desu.)", it: "Il tedesco è una lingua bellissima." },
-  { speaker: 'boy', audioFile: '9_Boy_Yes_I_like_it_very_much', hi: "हाँ, मुझे यह बहुत पसंद है।", en: "Yes, I like it very much.", de: "Ja, ich mag es sehr.", fr: "Oui, j'aime beaucoup ça.", es: "Sí, me gusta mucho.", ja: "はい、とても気に入っています。 (Hai, totemo ki ni itteimasu.)", it: "Sì, mi piace molto." },
-  { speaker: 'girl', audioFile: '10_Girl_Good_luck_See_you_later', hi: "शुभकामनाएं! बाद में मिलते हैं।", en: "Good luck! See you later.", de: "Viel Glück! Bis später.", fr: "Bonne chance ! À plus tard.", es: "¡Buena suerte! Hasta luego.", ja: "頑張ってください！また後で。 (Ganbatte kudasai! Mata ato de.)", it: "Buona fortuna! A dopo." }
+  { speaker: 'boy', audioFile: '9_Boy_Yes_I_like_it_very_much', hi: "हाँ, मुझे यह बहुत पसंद है।", en: "Yes, I like it very much.", de: "Ja, es gefällt mir.", fr: "Oui, j'aime beaucoup ça.", es: "Sí, me gusta mucho.", ja: "はい、とても気に入っています。 (Hai, totemo ki ni itteimasu.)", it: "Sì, mi piace molto." },
+  { speaker: 'girl', audioFile: '10_Girl_Good_luck_See_you_later', hi: "शुभकामनाएं! बाद में मिलते हैं।", en: "Good luck! See you later.", de: "Viel Glück! Bis später.", fr: "Bonne chance ! À plus tard.", es: "¡Buena suerte! Hasta luego.", ja: "幸運を！また後で。 (Kōun o! Mata ato de.)", it: "Buona fortuna! Arrivederci!" }
 ];
 
 const LANG_NAMES = {
