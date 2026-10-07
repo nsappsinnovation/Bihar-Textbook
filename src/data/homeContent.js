@@ -83,7 +83,7 @@ export const defaultMissions = [
     {
         id: 5,
         titleKey: "missionGrid.ai.title",
-        defaultTitle: "AI Intelligence",
+        defaultTitle: "AI Learning",
         descKey: "missionGrid.ai.desc",
         defaultDesc: "Smart Adaptive Tutoring",
         image: "/images/missions/ai.webp",

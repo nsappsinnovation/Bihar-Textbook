@@ -337,7 +337,7 @@
       "desc": "Universal Digital Access"
     },
     "ai": {
-      "title": "AI Intelligence",
+      "title": "AI Learning",
       "desc": "Smart Adaptive Tutoring"
     },
     "cyber": {
@@ -2632,7 +2632,7 @@
   },
   "aiDashboard": {
     "heroTitle": "Build. Learn. & Think Smarter with",
-    "heroTitleHighlight": "AI Intelligence",
+    "heroTitleHighlight": "AI Learning",
     "heroSubtitle": "Your hub to master AI concepts, learn prompt engineering, and explore smart tools.",
     "stats": {
       "learnConcepts": {
