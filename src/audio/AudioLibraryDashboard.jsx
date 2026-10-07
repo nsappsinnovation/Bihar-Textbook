@@ -427,7 +427,7 @@ const AudioLibraryDashboard = () => {
           
           {/* HERO & QUICK STATS SECTION */}
           <div className="relative">
-            <section className="bg-white rounded-[16px] md:rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[200px] sm:min-h-[260px] md:min-h-[300px] lg:h-[387px] lg:min-h-[387px] pb-4 md:pb-6 lg:pb-0">
+            <section className="bg-white rounded-[16px] md:rounded-[24px] overflow-hidden relative border border-slate-100 flex flex-col lg:flex-row items-stretch lg:items-center min-h-[200px] sm:min-h-[260px] md:min-h-[300px] lg:h-[387px] lg:min-h-[387px] pb-4 md:pb-6 lg:pb-0">
               <div className="relative z-10 p-5 sm:p-8 md:p-10 lg:w-1/2 space-y-3 md:space-y-4">
                  <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
                     {t('audio.ui_Listenlearn_49c2', 'Listen, learn &')} <br /> {t('audio.ui_growwith_9563', 'grow with')} <br />
@@ -452,6 +452,10 @@ const AudioLibraryDashboard = () => {
                    ))}
                  </div>
               </div>
+            {/* Banner for screens below lg: shown whole under the text instead of being hidden */}
+            <div className="lg:hidden relative w-full pb-8 md:pb-10 px-4 md:px-0">
+              <img loading="lazy" decoding="async" src="/images/audio/rhs.webp" onError={(e) => { e.currentTarget.src = "/images/audio/rhs.png"; }} alt="" aria-hidden="true" className="block w-full max-w-[520px] aspect-video object-cover object-center mx-auto rounded-xl" />
+            </div>
             </section>
 
             <section className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4 relative z-20 -mt-8 px-4 md:px-12">

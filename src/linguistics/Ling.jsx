@@ -93,7 +93,7 @@ export default function LinguisticApp() {
           {/* Hero & Stats Section */}
           <div className="relative">
             {/* Hero Section */}
-            <section className="bg-white rounded-[16px] md:rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[200px] sm:min-h-[260px] md:min-h-[300px] lg:h-[387px] lg:min-h-[387px] pb-4 md:pb-6 lg:pb-0">
+            <section className="bg-white rounded-[16px] md:rounded-[24px] overflow-hidden relative border border-slate-100 flex flex-col lg:flex-row items-stretch lg:items-center min-h-[200px] sm:min-h-[260px] md:min-h-[300px] lg:h-[387px] lg:min-h-[387px] pb-4 md:pb-6 lg:pb-0">
               <div className="relative z-10 p-5 sm:p-8 md:p-10 lg:w-1/2 space-y-3 md:space-y-4">
                  <h1 className="text-[22px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
                     {t('ling.letsLearn', "Let's learn")} <br />
@@ -109,6 +109,10 @@ export default function LinguisticApp() {
                  <div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
                  <img loading="lazy" decoding="async" src="/images/linguistic/rhs.webp" alt="Language Learning" className="w-full h-full object-cover object-right-top" />
               </div>
+            {/* Banner for screens below lg: shown whole under the text instead of being hidden */}
+            <div className="lg:hidden relative w-full pb-8 md:pb-10 px-4 md:px-0">
+              <img loading="lazy" decoding="async" src="/images/linguistic/rhs.webp" alt="" aria-hidden="true" className="block w-full max-w-[520px] aspect-video object-cover object-center mx-auto rounded-xl" />
+            </div>
             </section>
 
             {/* Quick Stats Row */}

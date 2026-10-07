@@ -426,7 +426,7 @@ const HeritageDashboard = () => {
         <div className="px-4 sm:px-6 md:px-12 2xl:px-20 space-y-6 md:space-y-8 pt-8 md:pt-6 2xl:max-w-[1600px] 2xl:mx-auto">
           
           {/* Hero Section */}
-          <section className="bg-white rounded-[16px] md:rounded-[24px] overflow-hidden relative border border-slate-100 flex items-center min-h-[200px] sm:min-h-[260px] md:min-h-[300px] lg:h-[387px] lg:min-h-[387px] shadow-[0_4px_20px_rgba(0,0,0,0.04)] pb-4 md:pb-6 lg:pb-0">
+          <section className="bg-white rounded-[16px] md:rounded-[24px] overflow-hidden relative border border-slate-100 flex flex-col lg:flex-row items-stretch lg:items-center min-h-[200px] sm:min-h-[260px] md:min-h-[300px] lg:h-[387px] lg:min-h-[387px] shadow-[0_4px_20px_rgba(0,0,0,0.04)] pb-4 md:pb-6 lg:pb-0">
             <div className="relative z-10 p-5 sm:p-8 md:p-10 lg:w-1/2 space-y-3 md:space-y-4">
               <h1 className="text-[24px] sm:text-[28px] md:text-[36px] lg:text-[42px] 2xl:text-[52px] font-extrabold leading-[1.05] tracking-tight text-[#1e293b]">
                 {t("heritage.letsExplore", { defaultValue: "Let's explore" })} <br /> {t("heritage.ourRich", { defaultValue: "our rich" })} <br />
@@ -442,10 +442,10 @@ const HeritageDashboard = () => {
               <img loading="lazy" decoding="async" src="/images/heritage/rhs.webp" alt="Heritage Explorers" className="w-full h-full object-cover object-[center_20%]" />
             </div>
             
-            {/* Mobile Image */}
-            <div className="lg:hidden absolute bottom-0 right-0 w-[40%] h-[80%] opacity-10 pointer-events-none">
-              <img loading="lazy" decoding="async" src="/images/heritage/rhs.webp" alt="Heritage Explorers" className="w-full h-full object-contain object-bottom" />
-            </div>
+          {/* Banner for screens below lg: shown whole under the text instead of being hidden */}
+          <div className="lg:hidden relative w-full pb-8 md:pb-10 px-4 md:px-0">
+            <img loading="lazy" decoding="async" src="/images/heritage/rhs.webp" alt="" aria-hidden="true" className="block w-full max-w-[520px] aspect-video object-cover object-center mx-auto rounded-xl" />
+          </div>
           </section>
 
           {/* Category Selection */}
