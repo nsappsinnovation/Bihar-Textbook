@@ -26,19 +26,19 @@ export default function StakeHolder() {
     const avatarBg = avatarColors[index % avatarColors.length];
 
     return (
-      <div className="w-[280px] sm:w-[320px] h-[210px] shrink-0 bg-white border border-slate-200 rounded-2xl p-5 md:p-6 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between whitespace-normal">
+      <div className="w-[260px] sm:w-[320px] h-auto sm:h-[210px] shrink-0 bg-white border border-slate-200 rounded-xl sm:rounded-2xl p-4 md:p-6 shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col justify-between whitespace-normal">
         <div>
-          <div className="text-4xl text-blue-300/80 font-serif leading-none mb-2 select-none">
+          <div className="text-3xl sm:text-4xl text-blue-300/80 font-serif leading-none mb-1 sm:mb-2 select-none">
             “
           </div>
-          <p className="text-slate-800 font-serif text-[14px] sm:text-[15px] leading-snug line-clamp-3">
+          <p className="text-slate-800 font-serif text-[13px] sm:text-[15px] leading-relaxed sm:leading-snug sm:line-clamp-3">
             {cleanQuote}
           </p>
         </div>
 
-        <div className="border-t border-slate-100 pt-4 mt-auto">
+        <div className="border-t border-slate-100 pt-3 sm:pt-4 mt-3 sm:mt-auto">
           <div className="flex items-center gap-3">
-            <div className={`w-10 h-10 rounded-full ${avatarBg} flex items-center justify-center text-white font-medium text-[14px] shrink-0`}>
+            <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full ${avatarBg} flex items-center justify-center text-white font-medium text-[14px] shrink-0`}>
               {getInitials(item.name)}
             </div>
             <div>
@@ -56,10 +56,10 @@ export default function StakeHolder() {
   };
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#fcfcfd] py-20 border-t border-slate-100 font-sans text-slate-900">
+    <section className="relative w-full overflow-hidden bg-[#fcfcfd] py-12 sm:py-20 border-t border-slate-100 font-sans text-slate-900">
       
       {/* Header */}
-      <div className="max-w-[1280px] mx-auto mb-12 px-6 md:px-10 lg:px-12">
+      <div className="max-w-[1280px] mx-auto mb-8 sm:mb-12 px-4 sm:px-6 md:px-10 lg:px-12">
         <motion.div 
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -77,7 +77,7 @@ export default function StakeHolder() {
              ></motion.div>
              <span className="text-[10px] font-bold text-blue-600 uppercase tracking-[0.2em]">{t("stakeholder.badge", "Our Inspiration")}</span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-4 leading-tight">
             {t("stakeholder.heading", "Voices For An")} <br />
             <span className="text-slate-400 font-medium">{t("stakeholder.headingHighlight", "Educated & Empowered Bihar")}</span>
           </h2>
@@ -90,16 +90,12 @@ export default function StakeHolder() {
 
       {/* Marquee Rows Container */}
       <div 
-        className="w-full flex flex-col gap-6"
-        style={{
-          maskImage: 'linear-gradient(to right, transparent, black 25%, black 75%, transparent)',
-          WebkitMaskImage: 'linear-gradient(to right, transparent, black 25%, black 75%, transparent)'
-        }}
+        className="w-full flex flex-col gap-3 sm:gap-6 [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)] sm:[mask-image:linear-gradient(to_right,transparent,black_25%,black_75%,transparent)] sm:[-webkit-mask-image:linear-gradient(to_right,transparent,black_25%,black_75%,transparent)]"
       >
 
         {/* ROW 1 - Right to Left */}
         <div className="flex overflow-hidden">
-          <div className="flex gap-5 animate-marquee hover:[animation-play-state:paused] whitespace-nowrap">
+          <div className="flex gap-5 max-sm:[animation-duration:90s] animate-marquee hover:[animation-play-state:paused] whitespace-nowrap">
             {[...row1, ...row1].map((item, i) => (
               <TestimonialCard 
                 key={`row1-${item.id}-${i}`} 
@@ -112,7 +108,7 @@ export default function StakeHolder() {
 
         {/* ROW 2 - Left to Right */}
         <div className="flex overflow-hidden">
-          <div className="flex gap-5 animate-marquee-reverse hover:[animation-play-state:paused] whitespace-nowrap">
+          <div className="flex gap-5 max-sm:[animation-duration:90s] animate-marquee-reverse hover:[animation-play-state:paused] whitespace-nowrap">
             {[...row2, ...row2].map((item, i) => (
               <TestimonialCard 
                 key={`row2-${item.id}-${i}`} 
