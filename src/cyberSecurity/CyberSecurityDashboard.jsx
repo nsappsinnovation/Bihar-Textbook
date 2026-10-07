@@ -2,10 +2,9 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  ArrowLeft, ArrowRight, BookOpen, Shield, Trophy, Play, Clock, GraduationCap, FileText, ChevronRight, CheckCircle2, XCircle, Gamepad2, Key,
+  ArrowRight, BookOpen, Shield, Trophy, Play, Clock, GraduationCap, FileText, ChevronRight, CheckCircle2, XCircle, Gamepad2, Key,
   Bot, CreditCard, Ban, Zap, Sparkles, User, AlertOctagon, Smartphone, Rocket, Lock, Unlock, Search, Package, Hammer, Skull, Globe, Ghost, UserX, Volume2, Award, Star, RefreshCw, Target, Bell, HelpCircle, MessageSquare, LayoutGrid, RotateCcw
 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 
 const getQuizQuestions = (t) => [
   {
@@ -1865,7 +1864,6 @@ const getArticles = (t) => [
 
 const CyberSecurityDashboard = () => {
   const { t, i18n } = useTranslation();
-  const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState('playzone');
   const [selectedItem, setSelectedItem] = useState(null);
 
@@ -2186,12 +2184,6 @@ const CyberSecurityDashboard = () => {
 
   return (
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden">
-      <button
-        onClick={() => navigate("/#missions-grid")}
-        className={`absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 ${cyberTheme.backButtonHover} hover:shadow-lg transition-all border border-slate-100 group`}
-      >
-        <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
-      </button>
       <main className={`flex-1 min-w-0 min-h-screen pb-16 cyber-scrollbar ${selectedItem ? 'overflow-hidden' : 'overflow-y-auto'}`}>
         <div className="px-4 sm:px-6 md:px-12 2xl:px-20 space-y-6 md:space-y-8 pt-4 2xl:max-w-[1600px] 2xl:mx-auto">
 

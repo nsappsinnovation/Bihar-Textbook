@@ -74,7 +74,7 @@ class ModelErrorBoundary extends React.Component {
     if (this.state.hasError) {
       return (
         <Html center>
-          <div className="bg-slate-900/90 backdrop-blur-md p-6 rounded-2xl border border-slate-700 shadow-2xl text-center w-80">
+          <div className="bg-slate-900/90 backdrop-blur-md p-4 sm:p-6 rounded-2xl border border-slate-700 shadow-2xl text-center w-64 sm:w-80 max-w-[90%]">
             <h3 className="text-white font-bold text-lg mb-2">3D Model Missing</h3>
             <p className="text-slate-300 text-sm">
               Heart model load nahi ho paya.
@@ -94,8 +94,8 @@ const Real3DHeart = () => {
   return (
     <div className="w-full h-full rounded-3xl overflow-hidden relative shadow-2xl border border-blue-900/30" style={{ backgroundColor: '#020617' }}>
       
-      <div className="absolute top-6 left-6 z-10 pointer-events-none">
-        <h2 className="text-2xl font-black text-blue-400 drop-shadow-md tracking-wider">
+      <div className="absolute top-3 left-3 sm:top-6 sm:left-6 z-10 pointer-events-none">
+        <h2 className="text-base sm:text-2xl font-black text-blue-400 drop-shadow-md tracking-wider">
           {t('vrModels.heart.title', 'Human Anatomy: 3D Heart')}
         </h2>
         <p className="text-blue-200/70 text-sm font-bold mt-1">

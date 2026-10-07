@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import toast from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  ArrowLeft, ArrowRight, Clock,
+  ArrowRight, Clock,
   Brain, Lightbulb, CheckCircle2, Trophy,
   XCircle, Target, Heart,
   ChefHat, Wallet, Shield, MessageCircle, Wrench,
@@ -10,7 +10,6 @@ import {
   RefreshCw, CreditCard, AlertCircle, Eye
 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
 import AtmLab from './labs/AtmLab';
 import TrafficLab from './labs/TrafficLab';
 import CashierLab from './labs/CashierLab';
@@ -783,7 +782,6 @@ const lifeTheme = {
 };
 
 const LifeSkills = () => {
-  const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [activeFilter, setActiveFilter] = useState('Learn Skills');
   const [selectedLab, setSelectedLab] = useState('atm'); // 'atm', 'traffic', 'cashier', 'firstaid'
@@ -876,12 +874,6 @@ const LifeSkills = () => {
 
   return (
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden">
-      <button
-        onClick={() => navigate("/#missions-grid")}
-        className={`absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 ${lifeTheme.backButtonHover} hover:shadow-lg transition-all border border-slate-100 group cursor-pointer`}
-      >
-        <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
-      </button>
 
       {/* Main Content */}
       <main className="flex-1 min-w-0 min-h-screen pb-4 overflow-y-auto">

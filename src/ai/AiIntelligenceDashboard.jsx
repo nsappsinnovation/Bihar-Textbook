@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 import {   
-  ArrowLeft, ArrowRight, BookOpen, Clock,
+  ArrowRight, BookOpen, Clock,
   Brain, Lightbulb, Cpu, Trophy, CheckCircle2,
   Play, GraduationCap, XCircle,
   MessageSquare, Sparkles, Palette, Bot, Volume2, Globe,
@@ -1795,12 +1795,6 @@ const AiIntelligenceDashboard = () => {
 
   return (
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden">
-      <button
-        onClick={() => navigate("/#missions-grid")}
-        className={`absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-8 h-8 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 ${aiTheme.backButtonHover} hover:shadow-lg transition-all border border-slate-100 group`}
-      >
-        <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
-      </button>
       
       {/* Main Content */}
       <main className="flex-1 min-w-0 min-h-screen pb-4 overflow-y-auto">

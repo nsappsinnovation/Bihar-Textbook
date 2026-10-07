@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { 
-  ArrowLeft, ArrowRight, ChevronLeft, ChevronRight,
+  ArrowRight, ChevronLeft, ChevronRight,
   Landmark, MapPin, Globe, Box, BookOpen, Flag, Palette,
   X, Calendar
 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 
@@ -23,7 +22,6 @@ const heritageTheme = {
 };
 
 const HeritageDashboard = () => {
-  const navigate = useNavigate();
   const { t } = useTranslation();
   const [selectedFactCard, setSelectedFactCard] = useState(null);
 
@@ -422,12 +420,6 @@ const HeritageDashboard = () => {
 
   return (
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-hidden scrollbar-hide">
-      <button
-        onClick={() => navigate("/#missions-grid")}
-        className={`absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 ${heritageTheme.backButtonHover} hover:shadow-lg transition-all border border-slate-100 group`}
-      >
-        <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
-      </button>
       
       {/* Main Content */}
       <main className="flex-1 min-w-0 min-h-screen pb-4 overflow-y-auto overflow-x-hidden scrollbar-hide">

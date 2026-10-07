@@ -269,8 +269,8 @@ const Generic3DViewer = ({ activeModel = 'dna' }) => {
   return (
     <div className="w-full h-full rounded-3xl overflow-hidden relative shadow-2xl bg-[#020617] border border-blue-900/30">
       
-      <div className="absolute top-6 left-6 z-10 pointer-events-none">
-        <h2 className="text-2xl font-black text-blue-400 drop-shadow-md tracking-wider">
+      <div className="absolute top-3 left-3 sm:top-6 sm:left-6 z-10 pointer-events-none">
+        <h2 className="text-base sm:text-2xl font-black text-blue-400 drop-shadow-md tracking-wider">
           {info.title}
         </h2>
         <p className="text-blue-200/70 text-sm font-bold mt-1">

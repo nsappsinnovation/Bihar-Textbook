@@ -1,7 +1,6 @@
 import React, { useState, cloneElement, lazy, Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, ArrowRight, Globe, Rocket, FlaskConical } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { ArrowRight, Globe, Rocket, FlaskConical } from 'lucide-react';
 import VrTechLearning from './VrTechLearning';
 
 // 3D tabs (three.js) are downloaded only when opened
@@ -47,7 +46,6 @@ const vrTheme = {
 
 const VrDashboard = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const [activeSection, setActiveSection] = useState('tech-learning'); // 'simulators' | 'tech-learning' | 'virtual-lab'
 
   const handleSectionSwitch = (section) => {
@@ -87,12 +85,6 @@ const VrDashboard = () => {
 
   return (
     <div className="min-h-screen bg-[#FDFDFF] flex font-sans text-slate-900 overflow-x-hidden">
-      <button
-        onClick={() => navigate("/#missions-grid")}
-        className={`absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 ${vrTheme.backButtonHover} hover:shadow-lg transition-all border border-slate-100 group`}
-      >
-        <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
-      </button>
 
       
       {/* Main Content */}
@@ -156,7 +148,7 @@ const VrDashboard = () => {
               <Suspense fallback={<TabLoading />}><VrSimulators /></Suspense>
             </div>
           ) : activeSection === 'virtual-lab' ? (
-            <div className="px-4 sm:px-10 md:px-12 lg:px-14 xl:px-14 max-w-[1380px] mx-auto pt-4 pb-12" id="simulators-section">
+            <div className="px-2 sm:px-10 md:px-12 lg:px-14 xl:px-14 max-w-[1380px] mx-auto pt-2 sm:pt-4 pb-6 sm:pb-12" id="simulators-section">
               <Suspense fallback={<TabLoading />}><VrVirtualLab /></Suspense>
             </div>
           ) : (

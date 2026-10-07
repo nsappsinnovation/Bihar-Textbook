@@ -1,12 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  ArrowLeft, ArrowRight, BookOpen, Clock,
+  ArrowRight, BookOpen, Clock,
   Hand, Play, GraduationCap, XCircle, Keyboard,
   HeartHandshake, Heart, Smile, Frown, Utensils, Users, ChevronRight,
   ExternalLink, Search, Landmark, Video
 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const getToolsDataList = (t) => [
@@ -663,7 +662,6 @@ const signTheme = {
 
 const SignLearn = () => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState('Explore Signs');
   const [activeVideo, setActiveVideo] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -1375,12 +1373,6 @@ const SignLearn = () => {
 
       {/* Main Content */}
       <main className="flex-1 min-w-0 min-h-screen pb-4 overflow-y-auto">
-        <button
-          onClick={() => navigate("/#missions-grid")}
-          className={`absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 ${signTheme.backButtonHover} hover:shadow-lg transition-all border border-slate-100 group`}
-        >
-          <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
-        </button>
         <div className="px-4 sm:px-6 md:px-12 2xl:px-20 space-y-6 md:space-y-8 pt-4 2xl:max-w-[1600px] 2xl:mx-auto">
 
           {/* Hero & Stats Section */}

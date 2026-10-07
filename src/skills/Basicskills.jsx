@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { 
-  ArrowLeft, 
   ArrowRight, 
   Shield, 
   Award, 
@@ -323,12 +322,6 @@ const Basicskills = () => {
       <div className="absolute top-0 right-0 -z-10 w-[700px] h-[700px] rounded-full bg-gradient-to-br from-teal-500/5 to-teal-500/5 blur-[120px]" />
       <div className="absolute bottom-0 left-0 -z-10 w-[600px] h-[600px] rounded-full bg-gradient-to-tr from-teal-500/5 to-teal-500/5 blur-[120px]" />
 
-      <button
-        onClick={() => navigate("/#missions-grid")}
-        className="absolute top-[96px] md:top-[112px] left-[24px] md:left-[48px] z-50 w-9 h-9 md:w-10 md:h-10 bg-white rounded-full shadow-md flex items-center justify-center text-slate-400 hover:text-teal-600 hover:shadow-lg transition-all border border-slate-100 group cursor-pointer"
-      >
-        <ArrowLeft size={20} strokeWidth={2.5} className="group-hover:-translate-x-0.5 transition-transform" />
-      </button>
 
       {/* Container */}
       <div className="max-w-[1140px] mx-auto px-6 sm:px-8 pt-4">
