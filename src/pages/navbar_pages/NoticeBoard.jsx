@@ -224,7 +224,12 @@ export default function NoticeBoard() {
               {/* Premium Stats Overview Widget */}
               <div className="flex flex-col gap-4 mt-6 mb-8">
                 {/* Tenders Card */}
-                <div className="bg-[#f7f0e4] p-5 rounded-2xl border border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.18)] flex items-center justify-between group hover:shadow-md transition-all duration-300">
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("Tender")}
+                  aria-pressed={activeTab === "Tender"}
+                  className={`bg-[#f7f0e4] p-5 rounded-2xl border border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.18)] flex items-center justify-between group text-left w-full cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 focus:outline-none focus-visible:ring-4 ring-amber-400 ${activeTab === "Tender" ? "ring-4 ring-amber-400" : ""}`}
+                >
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-xl bg-amber-500/10 flex items-center justify-center border border-amber-500/20 shadow-[0_0_15px_rgba(245,158,11,0.1)] group-hover:scale-110 transition-transform">
                       <FileText className="text-amber-500" size={22} />
@@ -235,10 +240,15 @@ export default function NoticeBoard() {
                     </div>
                   </div>
                   <span className="text-2xl font-black text-amber-500 tracking-tight">{totalTenders}</span>
-                </div>
+                </button>
 
                 {/* Live Notices Card */}
-                <div className="bg-[#f5ecee] p-5 rounded-2xl border border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.18)] flex items-center justify-between group hover:shadow-md transition-all duration-300">
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("Notice")}
+                  aria-pressed={activeTab === "Notice"}
+                  className={`bg-[#f5ecee] p-5 rounded-2xl border border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.18)] flex items-center justify-between group text-left w-full cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 focus:outline-none focus-visible:ring-4 ring-rose-400 ${activeTab === "Notice" ? "ring-4 ring-rose-400" : ""}`}
+                >
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-xl bg-rose-500/10 flex items-center justify-center border border-rose-500/20 shadow-[0_0_15px_rgba(244,63,94,0.1)] group-hover:scale-110 transition-transform">
                       <Bell className="text-rose-500" size={22} />
@@ -249,10 +259,15 @@ export default function NoticeBoard() {
                     </div>
                   </div>
                   <span className="text-2xl font-black text-rose-500 tracking-tight">{totalNotices}</span>
-                </div>
+                </button>
 
                 {/* Academic Circulars Card */}
-                <div className="bg-[#e6ecf3] p-5 rounded-2xl border border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.18)] flex items-center justify-between group hover:shadow-md transition-all duration-300">
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("Circular")}
+                  aria-pressed={activeTab === "Circular"}
+                  className={`bg-[#e6ecf3] p-5 rounded-2xl border border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.18)] flex items-center justify-between group text-left w-full cursor-pointer hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 focus:outline-none focus-visible:ring-4 ring-blue-400 ${activeTab === "Circular" ? "ring-4 ring-blue-400" : ""}`}
+                >
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center border border-blue-500/20 shadow-[0_0_15px_rgba(59,130,246,0.1)] group-hover:scale-110 transition-transform">
                       <Award className="text-blue-500" size={22} />
@@ -263,7 +278,7 @@ export default function NoticeBoard() {
                     </div>
                   </div>
                   <span className="text-2xl font-black text-blue-500 tracking-tight">{totalCirculars}</span>
-                </div>
+                </button>
               </div>
             </div>
 

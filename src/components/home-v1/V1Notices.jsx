@@ -10,6 +10,7 @@ import SectionHeader from "./SectionHeader";
 export default function V1Notices() {
   const { t } = useTranslation();
   const [items, setItems] = useState(null);
+  const [filter, setFilter] = useState("All");
 
   useEffect(() => {
     getNotices()
@@ -19,7 +20,8 @@ export default function V1Notices() {
 
   // Newest first; items without a date ("Recent") go to the top
   const sortKey = (d) => (d && d.includes("/") ? d.split("/").reverse().join("") : "99999999");
-  const list = [...(items || [])].sort((x, y) => sortKey(y.date).localeCompare(sortKey(x.date))).slice(0, 5);
+  const countOf = (cat) => (items || []).filter((n) => n.category === cat).length;
+  const list = (items || []).filter((n) => filter === "All" || n.category === filter).sort((x, y) => sortKey(y.date).localeCompare(sortKey(x.date))).slice(0, 5);
 
   return (
     <section className="bg-[#f3f7fd] px-6 py-20 font-sans text-slate-900 md:px-12 lg:px-24 lg:py-24">
@@ -30,10 +32,26 @@ export default function V1Notices() {
           highlight={t("noticeBoard.headingHighlight", "& Circulars")}
         />
 
-        <p className="mt-8 flex items-baseline gap-3 border-b border-slate-300 pb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 [html.lang-hi_&]:text-sm [html.lang-hi_&]:normal-case [html.lang-hi_&]:tracking-normal">
-          <span className="text-base font-bold normal-case tracking-normal text-slate-900">{items ? items.length : "–"}</span>
-          {t("homeV1.updatesCount", "Notices, circulars and tenders")}
-        </p>
+        {/* The count line doubles as the filter: tap a category to list only those */}
+        <div className="mt-8 flex flex-wrap items-baseline gap-x-6 gap-y-2 border-b border-slate-300 pb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-slate-500 [html.lang-hi_&]:text-sm [html.lang-hi_&]:normal-case [html.lang-hi_&]:tracking-normal">
+          {[
+            ["All", items ? items.length : "–", t("noticeBoard.tab.all", "All")],
+            ["Notice", countOf("Notice"), t("noticeBoard.tab.notice", "Notice")],
+            ["Circular", countOf("Circular"), t("noticeBoard.tab.circular", "Circular")],
+            ["Tender", countOf("Tender"), t("noticeBoard.tab.tender", "Tender")],
+          ].map(([key, count, label]) => (
+            <button
+              key={key}
+              type="button"
+              onClick={() => setFilter(key)}
+              aria-pressed={filter === key}
+              className={`flex items-baseline gap-2 border-b-2 pb-1 transition hover:text-blue-600 ${filter === key ? "border-blue-600 text-blue-600" : "border-transparent"}`}
+            >
+              <span className={`text-base font-bold normal-case tracking-normal ${filter === key ? "text-blue-600" : "text-slate-900"}`}>{count}</span>
+              {label}
+            </button>
+          ))}
+        </div>
 
         <ul>
           {items === null
@@ -67,7 +85,7 @@ export default function V1Notices() {
                   </a>
                 </li>
               ))}
-          {items && items.length === 0 && (
+          {items && list.length === 0 && (
             <li className="border-b border-slate-200 py-6 text-sm font-medium text-slate-500">
               {t("noticeBoard.empty.allDesc", "New notices, circulars and tenders will appear here as soon as they are published.")}
             </li>
