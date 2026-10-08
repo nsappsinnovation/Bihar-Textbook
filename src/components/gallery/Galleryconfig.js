@@ -10,10 +10,11 @@ export const Galleryconfig = [
     label: "Video Gallery",
     component: "VideoGallery"
   },
-  {
-    id: "press",
-    label: "Press Release",
-    component: "PressRelease"
-  },
+  // Press Release is hidden from the public site (nav menu and /gallery/press); re-enable by uncommenting
+  // {
+  //   id: "press",
+  //   label: "Press Release",
+  //   component: "PressRelease"
+  // },
   
 ];
