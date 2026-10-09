@@ -206,7 +206,7 @@ const Developer = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-[17px] md:text-[20px] font-bold uppercase text-[#2e3065]">
+          <p className="text-[26px] md:text-[36px] font-bold uppercase text-[#2e3065]">
             {t("developer.eyebrow", "NS Apps Innovations")}
           </p>
 
