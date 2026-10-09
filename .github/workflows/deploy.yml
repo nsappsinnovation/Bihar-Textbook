@@ -1,50 +1,50 @@
-name: Deploy Frontend to Production
+name: Deploy Frontend
 
 on:
   push:
     branches:
-      - master
+      - main
+
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: self-hosted
 
-    env:
-      # TODO: set these to the real paths on the Windows server
-      ENV_FILE: E:\Bihar-Textbook-Frontend\.env   # holds VITE_API_URL (not stored in Git)
-      WEB_ROOT: E:\inetpub\wwwroot\bihar-textbook  # folder the web server (IIS/nginx) serves
-
     steps:
-
-      # 1. Get latest code from master
-      - name: Checkout production code
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. Restore production-only .env (Vite bakes VITE_* values in at build time)
-      - name: Restore production .env
-        shell: powershell
-        run: |
-          Copy-Item "$env:ENV_FILE" ".\.env" -Force
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
 
-      # 3. Install dependencies
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm ci
 
-      # 4. Build the static site into dist/
-      - name: Build
+      - name: Build Frontend
         run: npm run build
 
-      # 5. Publish dist/ to the folder the web server serves.
-      #    No purge (/MIR) on purpose: gitignored content such as public/PDFs and
-      #    public/images/classes may live on the server, and web.config must survive.
-      - name: Deploy to web root
+      - name: Deploy to IIS
         shell: powershell
         run: |
-          robocopy ".\dist" "$env:WEB_ROOT" /E /XF web.config
+          $source = "$env:GITHUB_WORKSPACE\dist"
+          $destination = "C:\Users\bstbpcweb\Desktop\my-react-test\dist"
 
-          # robocopy exit codes 0-7 mean success
-          if ($LASTEXITCODE -gt 7) {
-            exit $LASTEXITCODE
+          if (!(Test-Path $source)) {
+            throw "Build output folder not found: $source"
           }
 
-          exit 0
+          if (!(Test-Path $destination)) {
+            throw "IIS destination folder not found: $destination"
+          }
+
+          robocopy $source $destination /E /XF web.config
+
+          if ($LASTEXITCODE -gt 7) {
+            throw "Deployment failed with robocopy exit code $LASTEXITCODE"
+          }
+
+          Write-Host "Frontend deployment completed successfully. Existing web.config preserved."
