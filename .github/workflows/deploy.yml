@@ -43,8 +43,10 @@ jobs:
 
           robocopy $source $destination /E /XF web.config
 
-          if ($LASTEXITCODE -gt 7) {
-            throw "Deployment failed with robocopy exit code $LASTEXITCODE"
+          $robocopyExitCode = $LASTEXITCODE
+
+          if ($robocopyExitCode -ge 8) {
+            throw "Deployment failed with robocopy exit code $robocopyExitCode"
           }
 
           Write-Host "Frontend deployment completed successfully. Existing web.config preserved."
