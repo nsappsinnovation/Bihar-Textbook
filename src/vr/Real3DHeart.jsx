@@ -75,9 +75,9 @@ class ModelErrorBoundary extends React.Component {
       return (
         <Html center>
           <div className="bg-slate-900/90 backdrop-blur-md p-4 sm:p-6 rounded-2xl border border-slate-700 shadow-2xl text-center w-64 sm:w-80 max-w-[90%]">
-            <h3 className="text-white font-bold text-lg mb-2">3D Model Missing</h3>
+            <h3 className="text-white font-bold text-lg mb-2">{this.props.title}</h3>
             <p className="text-slate-300 text-sm">
-              Heart model load nahi ho paya.
+              {this.props.message}
             </p>
           </div>
         </Html>
@@ -112,7 +112,10 @@ const Real3DHeart = () => {
             </div>
           </Html>
         }>
-          <ModelErrorBoundary>
+          <ModelErrorBoundary
+            title={t('vrModels.missingTitle', '3D Model Missing')}
+            message={t('vrModels.heart.missing', 'Heart model could not be loaded.')}
+          >
             <ambientLight intensity={1.5} />
             <spotLight position={[10, 10, 10]} angle={0.2} penumbra={1} intensity={2} />
             <pointLight position={[-10, -10, -10]} intensity={1} color="#ffcccc" />
