@@ -1305,9 +1305,13 @@ export default function LingModule({ type }) {
   const [isCompleted, setIsCompleted] = useState(false);
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [showSyllables, setShowSyllables] = useState(false);
+  // True for the 2.5s the correct option is highlighted after "I don't know" — blocks
+  // further input and skips the right/wrong modal (unlike a normal checked answer).
+  const [dontKnowActive, setDontKnowActive] = useState(false);
   const currentAudioRef = useRef(null);
   const playIdRef = useRef(0);
   const autoPlayTimerRef = useRef(null);
+  const dontKnowTimerRef = useRef(null);
   
   const currentItem = items[step];
   const dailyTotal = type === 'conversations' ? 10 : 20;
@@ -1363,6 +1367,7 @@ export default function LingModule({ type }) {
   const stopAll = () => {
     playIdRef.current += 1;
     clearTimeout(autoPlayTimerRef.current);
+    clearTimeout(dontKnowTimerRef.current);
     if (currentAudioRef.current) {
       currentAudioRef.current.onended = null;
       currentAudioRef.current.onerror = null;
@@ -1430,6 +1435,7 @@ export default function LingModule({ type }) {
 
   const handleNext = () => {
     if (isAudioPlaying) return;
+    clearTimeout(dontKnowTimerRef.current);
     if (step < items.length - 1) {
       const nextStep = step + 1;
       setStep(nextStep);
@@ -1437,6 +1443,7 @@ export default function LingModule({ type }) {
       setShowFeedback(false);
       setIsCorrect(null);
       setShowSyllables(false);
+      setDontKnowActive(false);
       setIsAudioPlaying(true);
       if (type === 'conversations') {
         const newDailyProgress = Math.min(dailyProgress + 1, dailyTotal);
@@ -1472,6 +1479,7 @@ export default function LingModule({ type }) {
 
   const handleBack = () => {
     if (step > 0) {
+      clearTimeout(dontKnowTimerRef.current);
       stopAll();
       setStep(step - 1);
       setInputValue("");
@@ -1479,7 +1487,21 @@ export default function LingModule({ type }) {
       setIsCorrect(null);
       setShowSyllables(false);
       setIsAudioPlaying(false);
+      setDontKnowActive(false);
     }
+  };
+
+  // Reveal the correct option, then move on automatically — no pass/fail modal, since the
+  // learner is being shown the answer rather than being graded on one.
+  const handleDontKnow = () => {
+    if (dontKnowActive || showFeedback) return;
+    setInputValue(currentItem.target);
+    setDontKnowActive(true);
+    clearTimeout(dontKnowTimerRef.current);
+    dontKnowTimerRef.current = setTimeout(() => {
+      setDontKnowActive(false);
+      handleNext();
+    }, 2500);
   };
 
   const shuffledOptions = useMemo(() => {
@@ -1679,7 +1701,7 @@ export default function LingModule({ type }) {
                     return (
                       <button 
                         key={idx} 
-                        onClick={() => !showFeedback && setInputValue(option)} 
+                        onClick={() => !showFeedback && !dontKnowActive && setInputValue(option)}
                         className={`px-3 py-2.5 rounded-2xl font-black transition-all border-2 active:scale-95 flex flex-col items-center justify-center min-w-[100px] ${
                           inputValue === option 
                             ? "bg-[#2563EB] text-white border-[#2563EB] shadow-lg shadow-blue-100" 
@@ -1703,8 +1725,8 @@ export default function LingModule({ type }) {
               {/* Action Buttons */}
               <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-3 text-center mt-10 z-20 w-full max-w-[480px]">
                 {step > 0 && (<button onClick={handleBack} className="flex-1 min-w-[80px] py-2.5 bg-white border border-slate-300 rounded-[16px] text-[13px] font-black text-slate-400 hover:text-slate-600 flex items-center justify-center gap-1.5 shadow-sm"><ArrowLeft size={16} strokeWidth={3} /> {t.back}</button>)}
-                <button onClick={() => setInputValue(currentItem.target)} className="flex-1 min-w-[100px] py-2.5 bg-white border border-slate-300 rounded-[16px] text-[13px] font-black text-slate-500 hover:text-slate-700 shadow-sm">{t.dont_know}</button>
-                <button onClick={handleCheck} disabled={!inputValue || showFeedback} className={`flex-[1.5] min-w-[120px] justify-center py-2.5 rounded-[16px] font-black text-[14px] flex items-center gap-2 shadow-lg transition-all active:scale-95 ${!inputValue || showFeedback ? 'bg-slate-100 text-slate-300' : 'bg-[#2563EB] text-white shadow-blue-200'}`}>{t.check} <ArrowRight size={16} strokeWidth={3} /></button>
+                <button onClick={handleDontKnow} disabled={dontKnowActive || showFeedback} className="flex-1 min-w-[100px] py-2.5 bg-white border border-slate-300 rounded-[16px] text-[13px] font-black text-slate-500 hover:text-slate-700 shadow-sm disabled:opacity-50">{t.dont_know}</button>
+                <button onClick={handleCheck} disabled={!inputValue || showFeedback || dontKnowActive} className={`flex-[1.5] min-w-[120px] justify-center py-2.5 rounded-[16px] font-black text-[14px] flex items-center gap-2 shadow-lg transition-all active:scale-95 ${!inputValue || showFeedback || dontKnowActive ? 'bg-slate-100 text-slate-300' : 'bg-[#2563EB] text-white shadow-blue-200'}`}>{t.check} <ArrowRight size={16} strokeWidth={3} /></button>
               </div>
             </div>
             <div className="hidden lg:flex relative h-full flex-col justify-end items-center pb-4">

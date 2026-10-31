@@ -11,6 +11,56 @@ import { fileUrl, errorMessage } from '../../services/api';
 
 const TYPE = 'leader';
 
+// Must match the card frame's aspect-[23/27] in src/components/KeyParticipant.jsx. Cropping every
+// photo to this exact ratio on upload — instead of letting the card's object-cover crop whatever
+// shape was uploaded — is what actually fixes inconsistent head sizes: a square photo and a tall
+// portrait used to get cropped on different axes (one trimmed top/bottom, the other left/right),
+// leaving very different amounts of headroom and making some faces read smaller than others.
+const LEADER_PHOTO_RATIO = 23 / 27;
+const LEADER_PHOTO_ZOOM = 1.12; // crops a bit off every photo so leftover headroom doesn't vary by source shape
+const LEADER_PHOTO_MAX_WIDTH = 600; // plenty for a card photo; keeps the uploaded file small
+
+// Crops a photo to the frame's ratio before it's uploaded, anchored to the top (where a head
+// normally is) so the crop trims body/shoulders rather than the top of the head.
+function cropLeaderPhoto(file) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const objectUrl = URL.createObjectURL(file);
+    img.onload = () => {
+      URL.revokeObjectURL(objectUrl);
+      let cropHeight = img.height / LEADER_PHOTO_ZOOM;
+      let cropWidth = cropHeight * LEADER_PHOTO_RATIO;
+      if (cropWidth > img.width) {
+        // Source too narrow for that much zoom at this ratio — fall back to the widest crop it allows
+        cropWidth = img.width;
+        cropHeight = cropWidth / LEADER_PHOTO_RATIO;
+      }
+      const cropX = (img.width - cropWidth) / 2;
+      const cropY = 0;
+
+      const outWidth = Math.min(LEADER_PHOTO_MAX_WIDTH, Math.round(cropWidth));
+      const outHeight = Math.round(outWidth / LEADER_PHOTO_RATIO);
+      const canvas = document.createElement('canvas');
+      canvas.width = outWidth;
+      canvas.height = outHeight;
+      canvas.getContext('2d').drawImage(img, cropX, cropY, cropWidth, cropHeight, 0, 0, outWidth, outHeight);
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) return reject(new Error('Could not process the image'));
+          resolve(new File([blob], file.name.replace(/\.\w+$/, '.jpg'), { type: 'image/jpeg' }));
+        },
+        'image/jpeg',
+        0.9,
+      );
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      reject(new Error('Could not read the image'));
+    };
+    img.src = objectUrl;
+  });
+}
+
 /**
  * Leaders Management Page
  */
@@ -37,7 +87,8 @@ export default function LeadersManagementPage({ addToast }) {
     const file = e.target.files[0];
     if (!file) return;
     try {
-      const path = await upload('photo', file, 'image', UPLOAD_FOLDERS.leaders);
+      const cropped = await cropLeaderPhoto(file);
+      const path = await upload('photo', cropped, 'image', UPLOAD_FOLDERS.leaders);
       setFormData(prev => ({ ...prev, image: path }));
     } catch (error) {
       addToast?.(errorMessage(error, 'Image upload failed'), 'error');
