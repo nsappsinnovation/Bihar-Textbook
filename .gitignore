@@ -31,5 +31,5 @@ public/PDFs/
 .mcp.json
 .env.example
 
-
-
+# Production build config (public API URL only, no secrets) is committed
+!.env.production
