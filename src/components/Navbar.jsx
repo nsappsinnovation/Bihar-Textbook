@@ -10,7 +10,7 @@ import { Galleryconfig } from './gallery/Galleryconfig';
 // bar, the logo with the corporation's name, a segmented language switch and a Login pill.
 
 const NAME_EN = "Bihar State Textbook Publishing Corporation Ltd.";
-const NAME_HI = "बिहार राज्य पाठ्यपुस्तक प्रकाशन निगम लि.";
+const NAME_HI = "बिहार स्टेट टेक्स्टबुक पब्लिशिंग कॉरपोरेशन लि.";
 
 const dropdownPanelClass =
   "dropdown-menu absolute left-0 top-full mt-3 w-64 opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-all duration-200 z-50 max-h-96 overflow-y-auto scrollbar-hide rounded-xl border border-[#0b2b4f]/10 bg-white py-2 shadow-[0_20px_45px_-18px_rgba(11,43,79,0.35)]";

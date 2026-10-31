@@ -85,7 +85,7 @@ const Login = () => {
               <span>Bihar Digital Library</span>
             </h3>
             <p className="text-gray-500 text-sm mt-2 max-w-[280px] mx-auto">
-              बिहार राज्य पाठ्यपुस्तक प्रकाशन निगम लिमिटेड में आपका स्वागत है।
+              बिहार स्टेट टेक्स्टबुक पब्लिशिंग कॉरपोरेशन लि. में आपका स्वागत है।
             </p>
            
           </div>

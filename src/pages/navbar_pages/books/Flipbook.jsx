@@ -140,8 +140,12 @@ function Flipbook({ pdfFile: propPdfFile }) {
         setNumPages(numPages);
     }
 
+    // In two-page spread mode, e.data is the left leaf's raw index and jumps by 2 per flip
+    // (0, 2, 4, ...), so the displayed count would skip straight from 1 to 3. Divide down to
+    // a steady 1-per-flip spread count instead; in single-page mode the step is 1 either way.
     const onFlip = (e) => {
-        setPageInfo({ chapterId, page: e.data + 1 });
+        const step = singlePage ? 1 : 2;
+        setPageInfo({ chapterId, page: Math.floor(e.data / step) + 1 });
     };
 
     const toggleFullScreen = () => {
@@ -334,7 +338,7 @@ function Flipbook({ pdfFile: propPdfFile }) {
                                         flippingTime={800}
                                         useMouseEvents={zoom <= 1}
                                         usePortrait={singlePage}
-                                        startPage={Math.max(0, pageNumber - 1)}
+                                        startPage={Math.max(0, (pageNumber - 1) * (singlePage ? 1 : 2))}
                                     >
                                         {pagesArray.map((pageNum) => (
                                             <Pages key={pageNum}>
