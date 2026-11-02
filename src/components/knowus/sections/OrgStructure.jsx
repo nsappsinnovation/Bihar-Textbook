@@ -6,7 +6,6 @@ import {
   BookOpen,
   Calculator,
   ChartColumnIncreasing,
-  FileText,
   Settings,
   UserRound,
   Users,
@@ -67,14 +66,6 @@ const OrgStructure = () => {
                 title={k("board", "Board of Directors")}
                 className="bg-gradient-to-br from-[#124d9c] to-[#0b2b4f] text-white border-transparent shadow-[0_12px_30px_-12px_rgba(18,77,156,0.7)]"
                 iconClass="bg-white/15 text-white ring-1 ring-white/25"
-              />
-              <VLine />
-              <TopNode
-                icon={<FileText size={22} strokeWidth={2} />}
-                title={k("secretary", "Secretary,")}
-                subtitle={k("educationDepartment", "Education Department")}
-                className="bg-white border-[#124d9c]/20 text-[#0d0e23]"
-                iconClass="bg-[#124d9c]/10 text-[#124d9c]"
               />
               <VLine />
               <TopNode

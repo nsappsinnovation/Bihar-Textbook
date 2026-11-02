@@ -43,9 +43,9 @@ export default function KeyParticipant() {
 
         <div className="max-w-[1280px] mx-auto">
           {/* A swipeable row on phones, a grid from sm up */}
-          <div className="no-scrollbar flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-4 -mx-4 px-4 pb-6 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 md:grid-cols-3 lg:grid-cols-5 lg:gap-4">
+          <div className="no-scrollbar flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-4 -mx-4 px-4 pb-6 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 md:grid-cols-3 lg:grid-cols-6 lg:gap-4">
             {data === null
-              ? [0, 1, 2, 3, 4].map((i) => (
+              ? [0, 1, 2, 3, 4, 5].map((i) => (
                   <div key={i} className="w-[78%] shrink-0 snap-start sm:w-full sm:shrink">
                     <div className="h-[390px] rounded-2xl bg-white/[0.06] animate-pulse" />
                   </div>
@@ -93,6 +93,9 @@ function ParticipantCard({ item }) {
   };
 
   const info = getTranslatedInfo(item.name, item.role);
+  const isCM = item.name ? String(item.name).toLowerCase().includes("samrat") : false;
+  const isEducationMinister = item.name ? String(item.name).toLowerCase().includes("mithilesh") : false;
+  const isACS = item.name ? String(item.name).toLowerCase().includes("anil") : false;
 
   return (
     <div
@@ -139,7 +142,7 @@ function ParticipantCard({ item }) {
       {/* IMAGE FIXED TO CARD BOTTOM */}
       <div className="absolute bottom-0 left-0 right-0 z-20 flex items-end justify-center">
         {item.image ? (
-          <LeaderPhoto key={item.image} src={item.image} alt={item.name} />
+          <LeaderPhoto key={item.image} src={item.image} alt={item.name} large={isCM} small={isEducationMinister} slightlySmall={isACS} />
         ) : (
           // No photo uploaded: show initials instead of requesting a stand-in image
           <div className="mb-10 grid h-32 w-32 place-items-center rounded-full bg-slate-100 text-4xl font-bold text-slate-400 transition-colors duration-[1800ms] group-hover:bg-white/15 group-hover:text-white/80">
@@ -160,11 +163,21 @@ function ParticipantCard({ item }) {
 // top/bottom instead, trimming that same headroom, so the face reads bigger. The small extra
 // zoom below crops a bit off every photo on both axes — square or tall — instead of leaving one
 // axis completely uncropped, so heads come out a much closer size across different photo shapes.
-function LeaderPhoto({ src, alt, onError }) {
+function LeaderPhoto({ src, alt, onError, large, small, slightlySmall }) {
   const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className="relative w-[230px] max-w-[88%] lg:w-[210px] aspect-[23/27] overflow-hidden origin-bottom transition-transform duration-[1500ms] ease-in-out group-hover:scale-105">
+    <div
+      className={`relative aspect-[23/27] overflow-hidden origin-bottom transition-transform duration-[1500ms] ease-in-out group-hover:scale-105 ${
+        large
+          ? "w-[135%]"
+          : slightlySmall
+          ? "w-[160px] max-w-[65%] lg:w-[145px]"
+          : small
+          ? "w-[80%]"
+          : "w-[230px] max-w-[88%] lg:w-[210px]"
+      }`}
+    >
       <img
         loading="lazy"
         decoding="async"
