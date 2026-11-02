@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect, useMemo } from "react";
 import HTMLFlipBook from "react-pageflip";
 import { Document, Page, pdfjs } from "react-pdf";
-// PDF.js worker served from this site (same version as react-pdf's pdfjs-dist), not a third-party CDN
-import pdfWorkerUrl from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+// PDF.js worker served from this site (same version as react-pdf's pdfjs-dist), not a third-party CDN.
+// Copied into public/ and loaded from there (not via a Vite "?url" import) because Vite's asset
+// pipeline was not reliably emitting this .mjs worker file into the production build, which made
+// the flipbook fail with "Document Not Available" in production while working fine in dev.
 import {
     Search,
     ZoomIn,
@@ -30,7 +32,7 @@ import { fileUrl } from "../../../services/api";
 import { useTranslation } from "react-i18next";
 import { useBookTranslation } from "../../../utils/useBookTranslation";
 
-pdfjs.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
+pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
 const Pages = React.forwardRef((props, ref) => {
     return (
