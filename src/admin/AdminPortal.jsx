@@ -22,6 +22,7 @@ import CSRPolicyPage from './pages/CSRPolicyPage';
 import WebsiteManagementHub from './pages/WebsiteManagementHub';
 import NotificationsPage from './pages/NotificationsPage';
 import BookDistributionPage from './pages/BookDistributionPage';
+import AnalyticsPage from './pages/AnalyticsPage';
 import { useToast } from './hooks/useCustomHooks';
 import { getMe, logout } from '../services/authService';
 
@@ -50,6 +51,8 @@ function App() {
         return <DashboardPage addToast={addToast} setActivePage={setActivePage} />;
       case 'distribution':
         return <BookDistributionPage addToast={addToast} />;
+      case 'analytics':
+        return <AnalyticsPage addToast={addToast} />;
       case 'books':
         return <BooksPage addToast={addToast} />;
       case 'website-management':

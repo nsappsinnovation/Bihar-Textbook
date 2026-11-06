@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import Nav from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import ScrollToTop from "./components/ScrollToTop";
+import TrackVisit from "./components/TrackVisit";
 import { Toaster } from "react-hot-toast";
 
 /* Lazily loaded Pages & Components */
@@ -122,31 +123,31 @@ function App() {
 
               {/* Learning Modules */}
               <Route path="/sign" element={<Sign />} />
-              <Route path="/sign-learn" element={<SignLearn />} />
+              <Route path="/sign-learn" element={<TrackVisit itemKey="/sign-learn"><SignLearn /></TrackVisit>} />
 
               {/* AI */}
-              
-              <Route path="/ai-intelligence-dashboard" element={<AiIntelligenceDashboard />} />
-              
+
+              <Route path="/ai-intelligence-dashboard" element={<TrackVisit itemKey="/ai-intelligence-dashboard"><AiIntelligenceDashboard /></TrackVisit>} />
+
               {/* VR */}
-              <Route path="/vr-dashboard" element={<VrDashboard />} />
-              
+              <Route path="/vr-dashboard" element={<TrackVisit itemKey="/vr-dashboard"><VrDashboard /></TrackVisit>} />
+
 
               {/* Cyber */}
-             
-              <Route path="/cyber-security-dashboard" element={<CyberSecurityDashboard />} />
+
+              <Route path="/cyber-security-dashboard" element={<TrackVisit itemKey="/cyber-security-dashboard"><CyberSecurityDashboard /></TrackVisit>} />
 
               {/* Heritage */}
-             
-              <Route path="/heritage-dashboard" element={<HeritageDashboard />} />
+
+              <Route path="/heritage-dashboard" element={<TrackVisit itemKey="/heritage-dashboard"><HeritageDashboard /></TrackVisit>} />
 
               {/* Audio */}
               <Route path="/audio-books" element={<Audio />} />
-              <Route path="/audio-library-dashboard" element={<AudioLibraryDashboard />} />
+              <Route path="/audio-library-dashboard" element={<TrackVisit itemKey="/audio-library-dashboard"><AudioLibraryDashboard /></TrackVisit>} />
               <Route path="/my-audio-library" element={<AudioLibraryDashboard />} />
 
               {/* Linguistics */}
-              <Route path="/ling" element={<Ling />} />
+              <Route path="/ling" element={<TrackVisit itemKey="/ling"><Ling /></TrackVisit>} />
               <Route path="/ling/words" element={<LingModule type="words" />} />
               <Route path="/ling/phrases" element={<LingModule type="phrases" />} />
               <Route path="/ling/conversations" element={<LingModule type="conversations" />} />
@@ -159,7 +160,7 @@ function App() {
 
               {/* Skills */}
               <Route path="/basic-skills" element={<Basicskill />} />
-              <Route path="/life-skills" element={<LifeSkills />} />
+              <Route path="/life-skills" element={<TrackVisit itemKey="/life-skills"><LifeSkills /></TrackVisit>} />
 
 
               {/* Books */}

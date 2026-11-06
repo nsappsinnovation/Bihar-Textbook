@@ -31,6 +31,7 @@ import { findBook } from "../../../services/bookService";
 import { fileUrl } from "../../../services/api";
 import { useTranslation } from "react-i18next";
 import { useBookTranslation } from "../../../utils/useBookTranslation";
+import useTrackVisit from "../../../hooks/useTrackVisit";
 
 pdfjs.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 
@@ -46,6 +47,7 @@ Pages.displayName = "Pages";
 
 function Flipbook({ pdfFile: propPdfFile }) {
     const { classId, bookSubject, chapterId } = useParams();
+    useTrackVisit("book", classId && bookSubject ? `${classId}:${bookSubject}` : null);
     const navigate = useNavigate();
     const { t, i18n } = useTranslation();
     const { translateBookTitle, translateClassName } = useBookTranslation();
