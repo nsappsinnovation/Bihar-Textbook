@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import DashboardCards from '../components/DashboardCards';
 import AnalyticsCharts from '../components/AnalyticsCharts';
 import RecentActivities from '../components/RecentActivities';
+import FeatureEngagement from '../components/FeatureEngagement';
 import { getDashboard } from '../../services/dashboardService';
 
 /**
@@ -57,6 +58,9 @@ export default function DashboardPage({ addToast }) {
 
       {/* Statistics Cards */}
       <DashboardCards stats={stats} />
+
+      {/* Feature Engagement — per-card visit counts for the 8 Learning Playground features */}
+      <FeatureEngagement />
 
       {/* Charts */}
       {dashboard && (

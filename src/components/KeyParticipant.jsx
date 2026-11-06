@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Topography from "./Topography";
 import useLeaders, { initialsOf } from "./home-shared/useLeaders";
 
@@ -8,6 +9,10 @@ export default function KeyParticipant() {
   const { t } = useTranslation();
   // Leaders are managed in Admin → Leaders (same request as the home hero)
   const data = useLeaders();
+  const trackRef = useRef(null);
+  const scrollByCard = (dir) => {
+    trackRef.current?.scrollBy({ left: dir * 320, behavior: "smooth" });
+  };
 
   return (
     <section id="key-participants" className="relative isolate overflow-hidden bg-[#0b2b4f] py-16 md:py-24 px-6 font-sans">
@@ -41,21 +46,45 @@ export default function KeyParticipant() {
           </div>
         </div>
 
-        <div className="max-w-[1280px] mx-auto">
-          {/* A swipeable row on phones, a grid from sm up */}
-          <div className="no-scrollbar flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-4 -mx-4 px-4 pb-6 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 md:grid-cols-3 lg:grid-cols-6 lg:gap-4">
+        <div className="max-w-[1280px] mx-auto relative">
+          {/* A swipeable row on phones, a grid from sm up. At lg, once there are more than 6
+              leaders, the row becomes a horizontal carousel (6 per view) instead of wrapping. */}
+          <div
+            ref={trackRef}
+            className="no-scrollbar flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-px-4 -mx-4 px-4 pb-6 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 md:grid-cols-3 lg:flex lg:gap-4 lg:overflow-x-auto lg:snap-x lg:snap-mandatory"
+          >
             {data === null
               ? [0, 1, 2, 3, 4, 5].map((i) => (
-                  <div key={i} className="w-[78%] shrink-0 snap-start sm:w-full sm:shrink">
+                  <div key={i} className="w-[78%] shrink-0 snap-start sm:w-full sm:shrink lg:w-[calc((100%-5*1rem)/6)] lg:shrink-0">
                     <div className="h-[390px] rounded-2xl bg-white/[0.06] animate-pulse" />
                   </div>
                 ))
               : data.map((item) => (
-                  <div key={item.id ?? item.name} className="w-[78%] shrink-0 snap-start sm:w-full sm:shrink">
+                  <div key={item.id ?? item.name} className="w-[78%] shrink-0 snap-start sm:w-full sm:shrink lg:w-[calc((100%-5*1rem)/6)] lg:shrink-0">
                     <ParticipantCard item={item} />
                   </div>
                 ))}
           </div>
+          {data?.length > 6 && (
+            <div className="hidden lg:flex items-center justify-end gap-2 mt-2">
+              <button
+                type="button"
+                onClick={() => scrollByCard(-1)}
+                aria-label="Previous"
+                className="grid h-9 w-9 place-items-center rounded-full border border-white/15 text-white/70 transition hover:border-white/30 hover:text-white"
+              >
+                <ChevronLeft size={18} />
+              </button>
+              <button
+                type="button"
+                onClick={() => scrollByCard(1)}
+                aria-label="Next"
+                className="grid h-9 w-9 place-items-center rounded-full border border-white/15 text-white/70 transition hover:border-white/30 hover:text-white"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
+          )}
           {data?.length === 0 && (
             <p className="rounded-2xl border border-white/10 bg-white/[0.04] px-6 py-10 text-center text-sm font-medium text-white/60">
               {t("keyParticipant.empty", "Leadership details will be published here soon.")}
@@ -80,12 +109,6 @@ function ParticipantCard({ item }) {
     if (nameLower.includes("vinod")) {
       return { name: t("keyParticipant.leaders.vinod.name", name), role: t("keyParticipant.leaders.vinod.role", role) };
     }
-    if (nameLower.includes("rajiv")) {
-      return { name: t("keyParticipant.leaders.rajiv.name", name), role: t("keyParticipant.leaders.rajiv.role", role) };
-    }
-    if (nameLower.includes("dharmendra")) {
-      return { name: t("keyParticipant.leaders.dharmendra.name", name), role: t("keyParticipant.leaders.dharmendra.role", role) };
-    }
     if (nameLower.includes("yatendra")) {
       return { name: t("keyParticipant.leaders.yatendra.name", name), role: t("keyParticipant.leaders.yatendra.role", role) };
     }
@@ -93,9 +116,6 @@ function ParticipantCard({ item }) {
   };
 
   const info = getTranslatedInfo(item.name, item.role);
-  const isCM = item.name ? String(item.name).toLowerCase().includes("samrat") : false;
-  const isEducationMinister = item.name ? String(item.name).toLowerCase().includes("mithilesh") : false;
-  const isACS = item.name ? String(item.name).toLowerCase().includes("anil") : false;
 
   return (
     <div
@@ -142,7 +162,7 @@ function ParticipantCard({ item }) {
       {/* IMAGE FIXED TO CARD BOTTOM */}
       <div className="absolute bottom-0 left-0 right-0 z-20 flex items-end justify-center">
         {item.image ? (
-          <LeaderPhoto key={item.image} src={item.image} alt={item.name} large={isCM} small={isEducationMinister} slightlySmall={isACS} />
+          <LeaderPhoto key={item.image} src={item.image} alt={item.name} large={item.name ? String(item.name).toLowerCase().includes("samrat") : false} />
         ) : (
           // No photo uploaded: show initials instead of requesting a stand-in image
           <div className="mb-10 grid h-32 w-32 place-items-center rounded-full bg-slate-100 text-4xl font-bold text-slate-400 transition-colors duration-[1800ms] group-hover:bg-white/15 group-hover:text-white/80">
@@ -154,28 +174,83 @@ function ParticipantCard({ item }) {
   );
 }
 
-// Leader photos are uploaded at different widths and heights. Every photo gets the same fixed
-// frame, and object-cover fills that frame from the image regardless of its original size — so
-// every card shows the same frame size no matter what dimensions were uploaded. object-cover
-// alone only crops the one axis that doesn't already match the frame's shape: a square photo
-// (e.g. 438x438) crops left/right but keeps its full height, so whatever headroom/shoulders was
-// in that photo stays fully visible and the face reads small; a tall photo (e.g. 750x938) crops
-// top/bottom instead, trimming that same headroom, so the face reads bigger. The small extra
-// zoom below crops a bit off every photo on both axes — square or tall — instead of leaving one
-// axis completely uncropped, so heads come out a much closer size across different photo shapes.
-function LeaderPhoto({ src, alt, onError, large, small, slightlySmall }) {
-  const [loaded, setLoaded] = useState(false);
+// Leader photos are transparent cut-outs uploaded at different sizes and crops (some tight on the head,
+// some with headroom and more torso). Every photo gets the same frame, and once loaded we read its alpha
+// channel to find the head, then scale and place the photo so every head is the same width and starts at
+// the same height. If the pixels can't be read (e.g. a cross-origin upload in local dev) it falls back to
+// filling the frame from the top.
+const FRAME_ASPECT = 23 / 27; // width / height, matches aspect-[23/27] on the frame
+const HEAD_WIDTH = 0.34; // head width as a fraction of the frame width
+const HEAD_TOP = 0.08; // gap above the head as a fraction of the frame height
+
+function measureHead(img) {
+  const w = 120;
+  const h = Math.max(1, Math.round((img.naturalHeight / img.naturalWidth) * w));
+  const canvas = document.createElement("canvas");
+  canvas.width = w;
+  canvas.height = h;
+  const ctx = canvas.getContext("2d", { willReadFrequently: true });
+  ctx.drawImage(img, 0, 0, w, h);
+  const { data } = ctx.getImageData(0, 0, w, h); // throws on a cross-origin image
+
+  const rowSpan = (y) => {
+    let left = -1;
+    let right = -1;
+    for (let x = 0; x < w; x++) {
+      if (data[(y * w + x) * 4 + 3] > 128) {
+        if (left < 0) left = x;
+        right = x;
+      }
+    }
+    return left < 0 ? null : [left, right + 1];
+  };
+
+  let top = 0;
+  while (top < h && !rowSpan(top)) top++;
+  if (top >= h) return null;
+
+  // Head width: median span across rows 8-16% down the figure (forehead to eyes)
+  const spans = [];
+  for (let y = Math.round(top + 0.08 * (h - top)); y <= Math.round(top + 0.16 * (h - top)) && y < h; y++) {
+    const span = rowSpan(y);
+    if (span) spans.push(span);
+  }
+  if (!spans.length) return null;
+  spans.sort((a, b) => a[1] - a[0] - (b[1] - b[0]));
+  const [left, right] = spans[Math.floor(spans.length / 2)];
+  // A span as wide as the photo means the crop is so tight there's no clear head outline
+  if (right - left > 0.9 * w) return null;
+
+  return { top: top / h, headWidth: (right - left) / w, headCenter: (left + right) / 2 / w, ratio: img.naturalHeight / img.naturalWidth };
+}
+
+function LeaderPhoto({ src, alt, onError, large }) {
+  const [layout, setLayout] = useState(null); // null = measuring, false = fallback, object = placement
+
+  const place = (img) => {
+    try {
+      const m = measureHead(img);
+      if (!m) return setLayout(false);
+      const frameHeight = 1 / FRAME_ASPECT; // in frame widths
+      const headTop = HEAD_TOP * frameHeight;
+      // Rendered image width in frame widths; grow it if needed so the photo still reaches the frame's bottom edge
+      const minScale = (frameHeight - headTop) / ((1 - m.top) * m.ratio);
+      const scale = Math.max(HEAD_WIDTH / m.headWidth, minScale);
+      const y = headTop - m.top * scale * m.ratio;
+      setLayout({
+        width: `${scale * 100}%`,
+        left: `${(0.5 - m.headCenter * scale) * 100}%`,
+        top: `${(y / frameHeight) * 100}%`,
+      });
+    } catch {
+      setLayout(false);
+    }
+  };
 
   return (
     <div
       className={`relative aspect-[23/27] overflow-hidden origin-bottom transition-transform duration-[1500ms] ease-in-out group-hover:scale-105 ${
-        large
-          ? "w-[135%]"
-          : slightlySmall
-          ? "w-[160px] max-w-[65%] lg:w-[145px]"
-          : small
-          ? "w-[80%]"
-          : "w-[230px] max-w-[88%] lg:w-[210px]"
+        large ? "w-[135%]" : "w-[230px] max-w-[88%] lg:w-[210px]"
       }`}
     >
       <img
@@ -183,13 +258,14 @@ function LeaderPhoto({ src, alt, onError, large, small, slightlySmall }) {
         decoding="async"
         src={src}
         alt={alt}
-        onLoad={() => setLoaded(true)}
+        onLoad={(e) => place(e.currentTarget)}
         onError={(e) => {
-          setLoaded(true);
+          setLayout(false);
           onError?.(e);
         }}
-        className={`absolute inset-0 w-full h-full object-cover object-top origin-top scale-110 drop-shadow-2xl transition-opacity duration-300 ${
-          loaded ? "opacity-100" : "opacity-0"
+        style={layout ? { position: "absolute", maxWidth: "none", height: "auto", ...layout } : undefined}
+        className={`drop-shadow-2xl transition-opacity duration-300 ${layout === null ? "opacity-0" : "opacity-100"} ${
+          layout ? "" : "absolute inset-0 w-full h-full object-cover object-top"
         }`}
       />
     </div>

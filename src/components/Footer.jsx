@@ -131,6 +131,10 @@ const Footer = () => {
                  <span className="tracking-wide">{t("footer.designerName", "NS Apps Innovations")}</span>
               </Link>
             </p>
+            <span className="hidden md:inline text-white/10">|</span>
+            <Link to="/login" className="text-white/40 hover:text-white/70 transition-colors duration-300">
+              {t("nav.login", "Login")}
+            </Link>
           </div>
         </div>
       </div>

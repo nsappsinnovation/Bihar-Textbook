@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, ArrowUpRight } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { HiOutlineLanguage } from "react-icons/hi2";
 import { useTranslation } from "react-i18next";
 import { Knowconfig } from './knowus/Knowconfig';
@@ -217,15 +217,9 @@ const Navbar = () => {
             <Link to="/contact" className={linkClass(isActive("/contact"))}>{t("nav.contact")}</Link>
           </nav>
 
-          {/* RIGHT: language, login, menu */}
+          {/* RIGHT: language, menu */}
           <div className="flex shrink-0 items-center gap-2">
             <LanguageToggle isHindi={isHindi} onChange={changeLanguage} className="hidden sm:inline-flex" />
-            <Link
-              to="/login"
-              className="hidden items-center gap-1.5 rounded-full border border-[#0b2b4f]/20 bg-white/60 px-4 py-2 text-sm font-semibold text-[#0b2b4f] backdrop-blur transition hover:border-[#124d9c] hover:bg-white lg:inline-flex"
-            >
-              {t("nav.login")} <ArrowUpRight size={16} aria-hidden="true" />
-            </Link>
             <button
               type="button"
               onClick={() => setIsOpen(!isOpen)}
@@ -254,13 +248,6 @@ const Navbar = () => {
           {trailingDropdowns.map(renderMobileDropdown)}
           <Link to="/contact" onClick={() => setIsOpen(false)} className={mobileLinkClass(isActive("/contact"))}>
             {t("nav.contact")}
-          </Link>
-          <Link
-            to="/login"
-            onClick={() => setIsOpen(false)}
-            className="mt-6 flex items-center justify-center gap-2 rounded-full bg-[#124d9c] px-6 py-3.5 text-sm font-bold text-white"
-          >
-            {t("nav.login")} <ArrowUpRight size={17} aria-hidden="true" />
           </Link>
         </div>
       )}

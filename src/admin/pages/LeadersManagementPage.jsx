@@ -44,13 +44,14 @@ function cropLeaderPhoto(file) {
       canvas.width = outWidth;
       canvas.height = outHeight;
       canvas.getContext('2d').drawImage(img, cropX, cropY, cropWidth, cropHeight, 0, 0, outWidth, outHeight);
+      // PNG keeps transparency (a cut-out photo's "no background" stays that way) — JPEG has
+      // no alpha channel, so it would flatten any transparent area to solid black or white.
       canvas.toBlob(
         (blob) => {
           if (!blob) return reject(new Error('Could not process the image'));
-          resolve(new File([blob], file.name.replace(/\.\w+$/, '.jpg'), { type: 'image/jpeg' }));
+          resolve(new File([blob], file.name.replace(/\.\w+$/, '.png'), { type: 'image/png' }));
         },
-        'image/jpeg',
-        0.9,
+        'image/png',
       );
     };
     img.onerror = () => {
