@@ -6,6 +6,7 @@ import { fileUrl } from "../../../services/api";
 import Sidebar from "../../../components/Sidebar";
 import { Menu, X, Filter, Download, Search, BookOpen } from "lucide-react";
 import { useBookTranslation } from "../../../utils/useBookTranslation";
+import LearningBanner from "./LearningBanner";
 
 const Books = () => {
   const { t } = useTranslation();
@@ -70,7 +71,7 @@ const Books = () => {
       {/* Sidebar Container */}
       <aside
         className={`
-          fixed top-0 bottom-0 left-0 w-64 z-20 bg-white border-r border-slate-200 transform transition-transform duration-300 ease-in-out md:translate-x-0 md:sticky md:top-0 md:h-[calc(100vh-6rem)] md:flex md:flex-col
+          fixed top-0 bottom-0 left-0 w-64 z-50 bg-white border-r border-slate-200 transform transition-transform duration-300 ease-in-out md:translate-x-0 md:sticky md:top-0 md:h-[calc(100vh-6rem)] md:flex md:flex-col
           ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
         `}
       >
@@ -91,6 +92,9 @@ const Books = () => {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-4 pb-16">
+
+          {/* --- Learning Playground promo banner --- */}
+          <LearningBanner />
 
           {/* --- Hero Section --- */}
           <div className="mb-5 flex flex-col lg:flex-row items-center justify-between gap-4">

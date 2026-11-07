@@ -1,16 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
-import { Users, UserCheck, CalendarDays, TrendingUp, Smartphone, Tablet, Monitor, BarChart3, BookOpen } from 'lucide-react';
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, BarChart, Bar, XAxis, YAxis } from 'recharts';
+import { Users, UserCheck, CalendarDays, TrendingUp, Smartphone, Tablet, Monitor, BookOpen, ChevronDown, LayoutGrid } from 'lucide-react';
 import { useAnimatedCounter } from '../hooks/useCustomHooks';
 import { getVisitSummary } from '../../services/visitService';
 import useMissions from '../../components/home-shared/useMissions';
-import ProgrammeIcon from '../../components/home-v1/ProgrammeIcon';
 
+// Flat colors on purpose — not gradients. Testing showed recharts can render a gradient-filled
+// Pie slice (combined with paddingAngle) as a corrupted, detached shape on some paints; flat
+// fills never reproduced that in any test, so they're the reliable choice here.
 const DEVICE_META = {
-  phone: { label: 'Phone', icon: Smartphone, color: '#3B82F6' },
+  phone: { label: 'Phone', icon: Smartphone, color: '#7C3AED' },
   tablet: { label: 'Tablet', icon: Tablet, color: '#F59E0B' },
-  desktop: { label: 'Desktop', icon: Monitor, color: '#10B981' },
+  desktop: { label: 'Desktop', icon: Monitor, color: '#22C55E' },
 };
 
 const CustomTooltip = ({ active, payload }) => {
@@ -52,6 +54,7 @@ function DeviceSplit({ byDevice }) {
     fill: DEVICE_META[key].color,
   }));
   const total = rows.reduce((sum, r) => sum + r.value, 0);
+  const animatedTotal = useAnimatedCounter(total, 1200);
 
   return (
     <motion.div
@@ -60,60 +63,93 @@ function DeviceSplit({ byDevice }) {
       transition={{ duration: 0.35, delay: 0.2 }}
       className="bg-white rounded-2xl p-6 shadow-card border border-gray-100/50"
     >
-      <h3 className="text-sm font-bold text-gray-800 flex items-center gap-2 mb-6">
+      <h3 className="text-sm font-bold text-gray-800 flex items-center gap-2 mb-1">
         <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center">
           <Smartphone className="w-4 h-4 text-gray-500" />
         </div>
         Visits by Device
       </h3>
+      <p className="text-xs text-gray-400 ml-10 mb-4">All-time, by device type</p>
 
       {total === 0 ? (
         <p className="text-xs text-gray-400 text-center py-10">No visits recorded yet.</p>
       ) : (
-        <div className="flex flex-col sm:flex-row items-center gap-6">
-          <div className="w-full sm:w-1/2 h-[180px] shrink-0">
-            <ResponsiveContainer width="100%" height="100%">
+        <>
+          <div className="relative w-full aspect-square max-w-[220px] mx-auto">
+            <ResponsiveContainer width="100%" height="100%" minWidth={0}>
               <PieChart>
-                <Pie data={rows} cx="50%" cy="50%" innerRadius={52} outerRadius={75} paddingAngle={4} dataKey="value" animationDuration={1200}>
+                {/* Fixed pixel radii on purpose, not percentages — percentage radii paired
+                    with paddingAngle reproduced a corrupted/detached slice on some paints
+                    during testing; plain numbers never did. Sized to fit the 220px box above. */}
+                <Pie data={rows} cx="50%" cy="50%" innerRadius={66} outerRadius={100} paddingAngle={3} dataKey="value">
                   {rows.map((r) => (
-                    <Cell key={r.key} fill={r.fill} />
+                    <Cell key={r.key} fill={r.fill} stroke="none" />
                   ))}
                 </Pie>
                 <Tooltip content={<CustomTooltip />} />
               </PieChart>
             </ResponsiveContainer>
+
+            {/* Total, centered in the donut's hole */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+              <p className="text-2xl font-black text-gray-900 tabular-nums">{animatedTotal.toLocaleString()}</p>
+              <p className="text-[11px] text-gray-400 font-medium">Total</p>
+            </div>
           </div>
-          <div className="w-full sm:w-1/2 space-y-3">
+
+          {/* Legend — icon, label, and that device's share of total visits */}
+          <div className="flex justify-center gap-8 mt-6">
             {rows.map((r) => {
               const Icon = DEVICE_META[r.key].icon;
-              const pct = total ? Math.round((r.value / total) * 100) : 0;
               return (
-                <div key={r.key} className="flex items-center gap-3">
-                  <span className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0 bg-gray-100 text-gray-500">
-                    <Icon className="w-3.5 h-3.5" />
+                <div key={r.key} className="flex flex-col items-center">
+                  <span className="w-9 h-9 rounded-xl flex items-center justify-center mb-1.5" style={{ backgroundColor: `${r.fill}1a`, color: r.fill }}>
+                    <Icon className="w-4 h-4" />
                   </span>
-                  <span className="text-xs font-semibold text-gray-600 flex-1">{r.name}</span>
-                  <span className="text-xs font-bold text-gray-800 tabular-nums">{r.value.toLocaleString()}</span>
-                  <span className="text-[11px] font-medium text-gray-400 tabular-nums w-9 text-right">{pct}%</span>
+                  <p className="text-xs text-gray-500">{r.name}</p>
+                  <p className="text-sm font-bold text-gray-900 mt-0.5">{total ? Math.round((r.value / total) * 100) : 0}%</p>
                 </div>
               );
             })}
           </div>
-        </div>
+        </>
       )}
     </motion.div>
   );
 }
 
-// A book's itemKey is "<classId>:<subject>" — shown as "Class 2 · Ganit" instead of the raw key.
-function formatBookLabel(itemKey) {
-  const [classId, subject] = itemKey.split(':');
-  const niceSubject = subject ? subject.replace(/[_-]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()) : itemKey;
-  return classId ? `Class ${classId} · ${niceSubject}` : itemKey;
-}
+// A book's itemKey is "<classId>:<subject>" — the subject shown as "Ganit" instead of "ganit".
+const subjectLabel = (itemKey) => itemKey.split(':')[1]?.replace(/[_-]/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()) || itemKey;
 
-function Leaderboard({ title, icon: Icon, rows, renderIcon, renderLabel, delay }) {
-  const maxVisits = Math.max(1, ...rows.map((r) => r.visits));
+// Books traffic grouped by class instead of one row per book — a school with 20+ books across
+// 12 classes would otherwise turn "Books" into an ever-growing wall of rows. Shows a ranked bar
+// chart across classes (at a glance: which classes get the most traffic), and each class expands
+// to show the book-by-book breakdown underneath it on demand.
+function ClassTraffic({ rows, delay }) {
+  const [expanded, setExpanded] = useState(() => new Set());
+
+  const classRows = useMemo(() => {
+    const byClass = new Map();
+    for (const r of rows) {
+      const classId = r.itemKey.split(':')[0];
+      if (!byClass.has(classId)) byClass.set(classId, { classId, visits: 0, books: [] });
+      const entry = byClass.get(classId);
+      entry.visits += r.visits;
+      entry.books.push(r);
+    }
+    return [...byClass.values()]
+      .map((c) => ({ ...c, books: c.books.sort((a, b) => b.visits - a.visits) }))
+      .sort((a, b) => b.visits - a.visits);
+  }, [rows]);
+
+  const chartData = classRows.map((c) => ({ name: `Class ${c.classId}`, visits: c.visits, classId: c.classId, fill: '#6366F1' }));
+
+  const toggle = (classId) =>
+    setExpanded((prev) => {
+      const next = new Set(prev);
+      next.has(classId) ? next.delete(classId) : next.add(classId);
+      return next;
+    });
 
   return (
     <motion.div
@@ -124,36 +160,134 @@ function Leaderboard({ title, icon: Icon, rows, renderIcon, renderLabel, delay }
     >
       <h3 className="text-sm font-bold text-gray-800 flex items-center gap-2 mb-5">
         <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center">
-          <Icon className="w-4 h-4 text-gray-500" />
+          <BookOpen className="w-4 h-4 text-gray-500" />
         </div>
-        {title}
+        Books — by Class
       </h3>
 
-      {rows.length === 0 ? (
+      {classRows.length === 0 ? (
         <p className="text-xs text-gray-400 text-center py-10">No visits recorded yet.</p>
       ) : (
-        <div className="space-y-4">
-          {rows.map((r) => (
-            <div key={r.itemKey} className="flex items-center gap-3.5">
-              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gray-100 text-gray-500">
-                {renderIcon(r)}
-              </span>
+        <>
+          <ResponsiveContainer width="100%" height={Math.max(140, classRows.length * 32)}>
+            <BarChart data={chartData} layout="vertical" margin={{ top: 0, right: 16, bottom: 0, left: 0 }}>
+              <XAxis type="number" hide />
+              <YAxis type="category" dataKey="name" width={62} tick={{ fontSize: 11, fill: '#64748B' }} axisLine={false} tickLine={false} />
+              <Tooltip content={<CustomTooltip />} cursor={{ fill: '#F8FAFC' }} />
+              <Bar dataKey="visits" name="Visits" fill="#6366F1" radius={[0, 6, 6, 0]} barSize={14} />
+            </BarChart>
+          </ResponsiveContainer>
 
-              <div className="min-w-0 flex-1">
-                <div className="flex items-center justify-between gap-2">
-                  <p className="text-xs font-semibold text-gray-700 truncate">{renderLabel(r)}</p>
-                  <div className="flex items-center gap-3 shrink-0">
-                    <span className="text-[11px] text-gray-400 tabular-nums">{r.unique.toLocaleString()} unique</span>
-                    <span className="text-xs font-bold text-gray-800 tabular-nums w-10 text-right">{r.visits.toLocaleString()}</span>
-                  </div>
+          {/* Expandable detail — click a class to see its book-by-book breakdown */}
+          <div className="mt-5 space-y-2 max-h-[18rem] overflow-y-auto pr-1">
+            {classRows.map((c) => {
+              const isOpen = expanded.has(c.classId);
+              return (
+                <div key={c.classId} className="border border-gray-100 rounded-xl overflow-hidden">
+                  <button
+                    type="button"
+                    onClick={() => toggle(c.classId)}
+                    className="w-full flex items-center justify-between gap-2 px-3.5 py-2.5 text-left hover:bg-gray-50/80 transition-colors"
+                  >
+                    <span className="text-xs font-semibold text-gray-700">Class {c.classId}</span>
+                    <span className="flex items-center gap-2 shrink-0">
+                      <span className="text-xs font-bold text-gray-800 tabular-nums">{c.visits.toLocaleString()} visits</span>
+                      <ChevronDown className={`w-3.5 h-3.5 text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+                    </span>
+                  </button>
+                  {isOpen && (
+                    <div className="px-3.5 pb-3 pt-1 space-y-2 border-t border-gray-100">
+                      {c.books.map((b) => (
+                        <div key={b.itemKey} className="flex items-center justify-between gap-2 text-[11px]">
+                          <span className="text-gray-500 truncate">{subjectLabel(b.itemKey)}</span>
+                          <span className="text-gray-700 font-semibold tabular-nums shrink-0">
+                            {b.visits.toLocaleString()} visits · {b.unique.toLocaleString()} unique
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
-                <div className="mt-1.5 h-1.5 rounded-full bg-gray-100 overflow-hidden">
-                  <div className="h-full rounded-full bg-indigo-500" style={{ width: `${(r.visits / maxVisits) * 100}%` }} />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+              );
+            })}
+          </div>
+        </>
+      )}
+    </motion.div>
+  );
+}
+
+// One color per feature so the 8 bars are easy to tell apart at a glance, instead of one flat
+// colour. Flat fills, not gradients — see the note above DEVICE_META on why.
+const PLAYGROUND_PALETTE = ['#7C3AED', '#F59E0B', '#22C55E', '#3B82F6', '#EC4899', '#14B8A6', '#F97316', '#6366F1'];
+
+const PlaygroundTooltip = ({ active, payload }) => {
+  if (!active || !payload?.length) return null;
+  const d = payload[0].payload;
+  return (
+    <div className="bg-gray-900 text-white rounded-full pl-2.5 pr-3.5 py-1.5 shadow-xl flex items-center gap-2 whitespace-nowrap">
+      <span className="w-1.5 h-1.5 rounded-full shrink-0" style={{ backgroundColor: d.fill }} />
+      <span className="text-xs font-semibold tabular-nums">{d.visits.toLocaleString()} visits</span>
+    </div>
+  );
+};
+
+// Rounded-top bar in that feature's own color, with a slightly brighter "cap" line at the top.
+function ColorBar({ x, y, width, height, fill }) {
+  if (!(height > 0)) return null;
+  const capHeight = 3;
+  return (
+    <g>
+      <rect x={x} y={y} width={width} height={height} fill={fill} fillOpacity={0.8} rx={3} />
+      <rect x={x} y={y} width={width} height={capHeight} fill={fill} />
+    </g>
+  );
+}
+
+// Learning Playground traffic as a bar chart, one color per feature.
+function PlaygroundTraffic({ rows, getLabel, delay }) {
+  const data = rows
+    .map((r, i) => ({ name: getLabel(r), visits: r.visits, unique: r.unique, itemKey: r.itemKey, fill: PLAYGROUND_PALETTE[i % PLAYGROUND_PALETTE.length] }))
+    .sort((a, b) => b.visits - a.visits);
+  const total = data.reduce((sum, d) => sum + d.visits, 0);
+  const animatedTotal = useAnimatedCounter(total, 1200);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 14 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, delay }}
+      className="bg-white rounded-2xl p-6 shadow-card border border-gray-100/50"
+    >
+      <div className="flex items-start justify-between mb-1">
+        <h3 className="text-sm font-bold text-gray-800 flex items-center gap-2">
+          <div className="w-8 h-8 rounded-lg bg-gray-100 flex items-center justify-center">
+            <LayoutGrid className="w-4 h-4 text-gray-500" />
+          </div>
+          Learning Playground
+        </h3>
+      </div>
+      <p className="text-xs text-gray-400 ml-10 mb-4">All-time, across the 8 features</p>
+
+      {data.length === 0 ? (
+        <p className="text-xs text-gray-400 text-center py-10">No visits recorded yet.</p>
+      ) : (
+        <>
+          <p className="text-3xl font-black text-gray-900 tabular-nums mb-4">{animatedTotal.toLocaleString()}</p>
+
+          <ResponsiveContainer width="100%" height={240} minWidth={0}>
+            <BarChart data={data} barCategoryGap="12%">
+              <XAxis dataKey="name" tick={{ fontSize: 10, fill: '#94A3B8' }} axisLine={false} tickLine={false} interval={0} />
+              <YAxis hide />
+              <Tooltip content={<PlaygroundTooltip />} cursor={false} />
+              <Bar dataKey="visits" shape={ColorBar}>
+                {data.map((d) => (
+                  <Cell key={d.itemKey} fill={d.fill} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </>
       )}
     </motion.div>
   );
@@ -197,23 +331,13 @@ export default function AnalyticsPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
         <DeviceSplit byDevice={summary?.byDevice || []} />
 
-        <Leaderboard
-          title="Books"
-          icon={BookOpen}
-          rows={summary?.books || []}
-          delay={0.25}
-          renderIcon={() => <BookOpen className="w-4 h-4" />}
-          renderLabel={(r) => formatBookLabel(r.itemKey)}
-        />
+        <ClassTraffic rows={summary?.books || []} delay={0.25} />
       </div>
 
-      <Leaderboard
-        title="Learning Playground"
-        icon={BarChart3}
+      <PlaygroundTraffic
         rows={summary?.playground || []}
+        getLabel={(r) => missionByLink[r.itemKey]?.title || r.itemKey}
         delay={0.3}
-        renderIcon={(r) => <ProgrammeIcon link={r.itemKey} className="w-4 h-4" />}
-        renderLabel={(r) => missionByLink[r.itemKey]?.title || r.itemKey}
       />
     </motion.div>
   );
